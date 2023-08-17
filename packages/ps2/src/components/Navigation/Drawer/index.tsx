@@ -6,23 +6,23 @@ import {
 } from '@mui/icons-material';
 import {
   Box,
+  Collapse,
   Divider,
+  Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-  Drawer,
-  Collapse,
   ListItemIcon,
-  IconButton,
+  ListItemText,
 } from '@mui/material';
 import {
   Avatar,
-  ZigUserIcon,
   ZigButton,
-  ZigTypography,
   ZigGlobeLanguages,
   ZigPlusIcon,
+  ZigTypography,
+  ZigUserIcon,
 } from '@zignaly-open/ui';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
@@ -34,14 +34,14 @@ import {
 import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link, useLocation } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import {
+  ROUTE_BECOME_TRADER,
   ROUTE_LOGIN,
+  ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
-  ROUTE_BECOME_TRADER,
   ROUTE_WALLET,
-  ROUTE_PROFIT_SHARING,
 } from 'routes';
 import theme from 'theme';
 import { HELP_URL } from 'util/constants';
@@ -54,6 +54,8 @@ import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DropdownExchangeAccount } from './atoms';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { isMobile, useGoToMobileVersion } from '../../../util/mobile';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 const drawerWidth = 250;
 
@@ -68,7 +70,6 @@ const ZigDrawer = () => {
   const { showModal } = useZModal();
   const service = useFirstOwnedService();
   const { exchanges, email, imageUrl } = useCurrentUser();
-  const location = useLocation();
   const changeLocale = useChangeLocale();
 
   const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
@@ -140,7 +141,7 @@ const ZigDrawer = () => {
                 gap={2}
                 onClick={handleDrawerToggle}
               >
-                <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
+                <Link to={ROUTE_LOGIN}>
                   <ZigButton
                     id={'drawer__login'}
                     variant='text'
@@ -156,7 +157,7 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+                <Link to={ROUTE_SIGNUP}>
                   <ZigButton id={'drawer__signup'} variant='contained'>
                     {t('account-menu.isAuth-button-signUp')}
                   </ZigButton>
@@ -167,17 +168,21 @@ const ZigDrawer = () => {
             <List>
               {isAuthenticated ? (
                 <>
-                  <ListItem disablePadding onClick={handleDrawerToggle}>
-                    <ListItemButton
-                      id='drawer__wallet'
-                      to={ROUTE_WALLET}
-                      component={Link}
-                    >
-                      <ListItemText
-                        primary={t('account-menu.notAuth-dropdown-link-wallet')}
-                      />
-                    </ListItemButton>
-                  </ListItem>
+                  {isFeatureOn(Features.ZigWallet) && (
+                    <ListItem disablePadding onClick={handleDrawerToggle}>
+                      <ListItemButton
+                        id='drawer__wallet'
+                        to={ROUTE_WALLET}
+                        component={Link}
+                      >
+                        <ListItemText
+                          primary={t(
+                            'account-menu.notAuth-dropdown-link-wallet',
+                          )}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
                   <ListItemButton
                     onClick={() => setSettingsOpen(!settingsOpen)}
                   >
@@ -212,17 +217,19 @@ const ZigDrawer = () => {
                       </ListItemButton>
                     </List>
                   </Collapse>
-                  <ListItem disablePadding onClick={handleDrawerToggle}>
-                    <ListItemButton
-                      id='drawer__become-trader'
-                      to={ROUTE_BECOME_TRADER}
-                      component={Link}
-                    >
-                      <ListItemText
-                        primary={t('navigation-menu.become-trader')}
-                      />
-                    </ListItemButton>
-                  </ListItem>
+                  {isFeatureOn(Features.Trader) && (
+                    <ListItem disablePadding onClick={handleDrawerToggle}>
+                      <ListItemButton
+                        id='drawer__become-trader'
+                        to={ROUTE_BECOME_TRADER}
+                        component={Link}
+                      >
+                        <ListItemText
+                          primary={t('navigation-menu.become-trader')}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
                   {service && (
                     <ListItem disablePadding onClick={handleDrawerToggle}>
                       <ListItemButton

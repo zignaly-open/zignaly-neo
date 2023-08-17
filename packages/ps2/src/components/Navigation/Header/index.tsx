@@ -15,6 +15,8 @@ import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import { MAIN_APP_URL } from '../../../util/constants';
 import HeaderWidgetButtons from '../HeaderWidgetButtons';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from 'whitelabel/type';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
@@ -45,7 +47,7 @@ const Header: React.FC = () => {
                   >
                     {t('navigation-menu.profit-sharing')}
                   </NavigationLink>
-                  {md && (
+                  {isFeatureOn(Features.Trader) && md && (
                     <NavigationLink
                       id='menu__become-trader'
                       to={ROUTE_BECOME_TRADER}

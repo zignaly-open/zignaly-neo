@@ -1,7 +1,11 @@
-import { ZigDotsHorizontalIcon, ZigDropdown } from '@zignaly-open/ui';
+import {
+  ZigDotsHorizontalIcon,
+  ZigDropdown,
+  ZigDropdownHandleType,
+} from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { NavLink, Networks } from './styles';
+import { GlobeLanguagesStyled, LabelButton, NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
@@ -15,8 +19,6 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import { ZigDropdownHandleType } from '@zignaly-open/ui';
-import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
 import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
