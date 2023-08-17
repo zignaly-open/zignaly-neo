@@ -1,6 +1,7 @@
 export type SubscriptionPlan = {
   id: string;
-  price: number;
+  priceYear: number;
+  priceLifetime: number;
   duration: string;
   name: string;
   successFeePct: number;

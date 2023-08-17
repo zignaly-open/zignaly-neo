@@ -1,3 +1,5 @@
+import { SubscriptionPlan } from '../subscription/types';
+
 export interface UserState {
   accessToken?: string;
   sessionExpiryDate?: Date;
@@ -51,6 +53,8 @@ export type UserData = {
   refRewardType: RefRewardType;
   refCode: string;
   bio?: string;
+  subscriptionFinishesAt?: string;
+  subscriptionPlan?: SubscriptionPlan;
   wall?: {
     banned: boolean;
   };

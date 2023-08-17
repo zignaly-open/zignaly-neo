@@ -13,6 +13,7 @@ const SubscriptionCard = ({
   price,
   successFeePct,
   status,
+  subscriptionFinishesAt,
 }: SubscriptionCardProps) => {
   const { t } = useTranslation('subscriptions');
   return (
@@ -20,7 +21,7 @@ const SubscriptionCard = ({
       {status === 1 && (
         <Wrapper>
           <ZigTypography variant={'body1'} color={'neutral000'}>
-            {t('quantwise.renewal-date', { date: 'July 18th, 2024' })}
+            {t('quantwise.renewal-date', { date: subscriptionFinishesAt })}
           </ZigTypography>
         </Wrapper>
       )}

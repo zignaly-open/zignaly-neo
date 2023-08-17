@@ -8,6 +8,8 @@ import { useTitle } from 'react-use';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { SubscriptionPlan } from '../../apis/subscription/types';
 import { useSubscriptionsQuery } from '../../apis/subscription/api';
+import { useCurrentUser } from '../../apis/user/use';
+import { format, parseISO } from 'date-fns';
 
 const Subscriptions: React.FC = () => {
   const { t } = useTranslation(['subscriptions', 'pages']);
@@ -15,6 +17,7 @@ const Subscriptions: React.FC = () => {
   const [code, setCode] = useState<string>('');
   const [activeTab, setActiveTab] = useState<number>(0);
   const subscriptionsEndpoint = useSubscriptionsQuery();
+  const currentUser = useCurrentUser();
   const isInputValid = (input: string) => {
     return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
   };
@@ -36,13 +39,13 @@ const Subscriptions: React.FC = () => {
           <Layout>
             <ZigTypography
               variant='h1'
-              mb={'70px'}
+              mb={'50px'}
               align={'center'}
               id={'subscriptions__title'}
             >
               {t('title')}
             </ZigTypography>
-            <Box mb={3}>
+            <Box mb={4}>
               <StyledTabs value={activeTab} onChange={handleTabChange}>
                 <StyledTab active={activeTab === 0} label='Price Annually' />
                 <StyledTab active={activeTab === 1} label='Lifetime License' />
@@ -50,7 +53,23 @@ const Subscriptions: React.FC = () => {
             </Box>
             <Box display={'flex'} gap={4} mb={15}>
               {subscriptions?.map((el) => (
-                <SubscriptionCard key={el.id} {...el} status={2} />
+                <SubscriptionCard
+                  key={el.id}
+                  successFeePct={el.successFeePct}
+                  name={el.name}
+                  price={activeTab === 0 ? el.priceYear : el.priceLifetime}
+                  status={
+                    currentUser?.subscriptionPlan.id > el.id
+                      ? 0
+                      : currentUser?.subscriptionPlan.id === el.id
+                      ? 1
+                      : 2
+                  }
+                  subscriptionFinishesAt={format(
+                    parseISO(currentUser?.subscriptionFinishesAt),
+                    'MMMM do, yyyy',
+                  )}
+                />
               ))}
             </Box>
             <Box
