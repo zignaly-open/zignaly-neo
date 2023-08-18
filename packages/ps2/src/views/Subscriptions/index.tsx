@@ -71,16 +71,18 @@ const Subscriptions: React.FC = () => {
                   price={activeTab === 0 ? el.priceYear : el.priceLifetime}
                   status={
                     (currentUser?.subscriptionPlan?.id > el.id &&
-                      ((activeTab === 0 && currentUser?.duration === 'year') ||
+                      ((activeTab === 0 &&
+                        currentUser?.subscriptionDuration === 'year') ||
                         (activeTab === 1 &&
-                          currentUser?.duration === 'lifetime'))) ||
-                    (currentUser?.duration === 'lifetime' && activeTab === 0)
+                          currentUser?.subscriptionDuration === 'lifetime'))) ||
+                    (currentUser?.subscriptionDuration === 'lifetime' &&
+                      activeTab === 0)
                       ? 0
                       : currentUser?.subscriptionPlan?.id === el.id &&
                         ((activeTab === 0 &&
-                          currentUser?.duration === 'year') ||
+                          currentUser?.subscriptionDuration === 'year') ||
                           (activeTab === 1 &&
-                            currentUser?.duration === 'lifetime'))
+                            currentUser?.subscriptionDuration === 'lifetime'))
                       ? 1
                       : 2
                   }

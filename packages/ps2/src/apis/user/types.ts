@@ -55,7 +55,7 @@ export type UserData = {
   bio?: string;
   subscriptionFinishesAt?: string;
   subscriptionPlan?: SubscriptionPlan;
-  duration?: 'lifetime' | 'year';
+  subscriptionDuration?: 'lifetime' | 'year';
   wall?: {
     banned: boolean;
   };
