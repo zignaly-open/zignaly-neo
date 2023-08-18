@@ -41,6 +41,7 @@ const Subscriptions: React.FC = () => {
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setActiveTab(newTab);
   };
+
   return (
     <LayoutContentWrapper
       endpoint={[subscriptionsEndpoint]}
@@ -69,9 +70,17 @@ const Subscriptions: React.FC = () => {
                   name={el.name}
                   price={activeTab === 0 ? el.priceYear : el.priceLifetime}
                   status={
-                    currentUser?.subscriptionPlan?.id > el.id
+                    (currentUser?.subscriptionPlan?.id > el.id &&
+                      ((activeTab === 0 && currentUser?.duration === 'year') ||
+                        (activeTab === 1 &&
+                          currentUser?.duration === 'lifetime'))) ||
+                    (currentUser?.duration === 'lifetime' && activeTab === 0)
                       ? 0
-                      : currentUser?.subscriptionPlan?.id === el.id
+                      : currentUser?.subscriptionPlan?.id === el.id &&
+                        ((activeTab === 0 &&
+                          currentUser?.duration === 'year') ||
+                          (activeTab === 1 &&
+                            currentUser?.duration === 'lifetime'))
                       ? 1
                       : 2
                   }
