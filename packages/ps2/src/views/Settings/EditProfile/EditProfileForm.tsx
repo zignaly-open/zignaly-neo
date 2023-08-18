@@ -42,6 +42,7 @@ const EditProfileForm = () => {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
       bio: user.bio || '',
+      country: user.country || '',
     },
   });
 
