@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { KYC_CHECK_INTERVAL } from './constants';
 import { useToast } from '../../../util/hooks/useToast';
 import { useTranslation } from 'react-i18next';
@@ -12,23 +12,28 @@ const UserKycChecker: React.FC = () => {
   const { t } = useTranslation('common');
   const [loadUser] = useLazyUserQuery();
   const [interval, setIntervalValue] = useState(null as NodeJS.Timer);
-
   const shouldCheck = isAuthenticated && isPending;
+
+  const pollKyc = useCallback(() => {
+    loadUser()
+      .unwrap()
+      .then(({ KYCMonitoring: needsKyc }) =>
+        !needsKyc
+          ? toast.info(t('kyc-updated'))
+          : setTimeout(pollKyc, KYC_CHECK_INTERVAL),
+      );
+  }, []);
+
+  useEffect(() => {
+    shouldCheck && pollKyc();
+  }, [shouldCheck]);
 
   useEffect(() => {
     if (shouldCheck) {
-      setIntervalValue(
-        setInterval(() => {
-          loadUser()
-            .unwrap()
-            .then(
-              (user) => !user.KYCMonitoring && toast.info(t('kyc-updated')),
-            );
-        }, KYC_CHECK_INTERVAL),
-      );
+      setIntervalValue(setInterval(() => {}, KYC_CHECK_INTERVAL));
     }
     return () => clearInterval(interval);
-  }, [shouldCheck]);
+  }, [shouldCheck, interval]);
 
   return null;
 };
