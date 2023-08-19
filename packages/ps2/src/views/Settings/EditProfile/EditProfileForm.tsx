@@ -104,7 +104,7 @@ const EditProfileForm = () => {
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-          <Box sx={{ pt: 3, pr: '50px' }}>
+          <Box sx={{ pt: 3, pr: '50px', flex: '0 0 200px' }}>
             <Controller
               name='imageUrl'
               control={control}
