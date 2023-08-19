@@ -1,9 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { KYC_CHECK_INTERVAL } from './constants';
 import { useToast } from '../../../util/hooks/useToast';
 import { useTranslation } from 'react-i18next';
 import { useCurrentUser, useIsAuthenticated } from '../../../apis/user/use';
-import { useLazyUserQuery } from '../../../apis/user/api';
+import {
+  useLazyKycStatusesQuery,
+  useLazyUserQuery,
+} from '../../../apis/user/api';
 
 const UserKycChecker: React.FC = () => {
   const toast = useToast();
@@ -11,21 +14,37 @@ const UserKycChecker: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation('common');
   const [loadUser] = useLazyUserQuery();
+  const [loadKyc] = useLazyKycStatusesQuery();
   const [interval, setIntervalValue] = useState(null as NodeJS.Timer);
   const shouldCheck = isAuthenticated && isPending;
 
-  const pollKyc = useCallback(() => {
-    loadUser()
+  const oldStatus = useRef<string>();
+
+  const getStatuses = useCallback(() => {
+    return loadKyc()
       .unwrap()
-      .then(({ KYCMonitoring: needsKyc }) =>
-        !needsKyc
-          ? toast.info(t('kyc-updated'))
-          : setTimeout(pollKyc, KYC_CHECK_INTERVAL),
-      );
+      .then(({ status }) => status.map((x) => x.status || '').join(''));
   }, []);
 
+  const pollKyc = useCallback(async () => {
+    setTimeout(async () => {
+      const newStatus = await getStatuses();
+      if (newStatus === oldStatus.current) {
+        pollKyc();
+      } else {
+        oldStatus.current = newStatus;
+        toast.info(t('kyc-updated'));
+        loadUser();
+      }
+    }, KYC_CHECK_INTERVAL);
+  }, [oldStatus]);
+
   useEffect(() => {
-    shouldCheck && pollKyc();
+    shouldCheck &&
+      getStatuses().then((s) => {
+        oldStatus.current = s;
+        pollKyc();
+      });
   }, [shouldCheck]);
 
   useEffect(() => {

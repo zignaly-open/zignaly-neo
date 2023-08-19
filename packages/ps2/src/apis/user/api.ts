@@ -282,6 +282,7 @@ export const {
   useLazyEnable2FAInfoQuery,
   useLazyKycLinkQuery,
   useKycStatusesQuery,
+  useLazyKycStatusesQuery,
   useKycStatusQuery,
   useEnable2FAMutation,
   useBalanceQuery,
