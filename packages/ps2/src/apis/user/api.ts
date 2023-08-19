@@ -122,7 +122,10 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
-  kycStatuses: builder.query<{ status: KycResponse[] }, void>({
+  kycStatuses: builder.query<
+    { status: KycResponse[]; KYCMonitoring: boolean },
+    void
+  >({
     query: () => ({
       url: `user/kyc`,
     }),

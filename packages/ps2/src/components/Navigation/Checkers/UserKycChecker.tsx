@@ -8,6 +8,8 @@ import {
   useLazyUserQuery,
 } from '../../../apis/user/api';
 
+type StatusType = { statusSerialized: string; shouldCheck: boolean };
+
 const UserKycChecker: React.FC = () => {
   const toast = useToast();
   const { KYCMonitoring: isPending } = useCurrentUser();
@@ -18,20 +20,25 @@ const UserKycChecker: React.FC = () => {
   const [interval, setIntervalValue] = useState(null as NodeJS.Timer);
   const shouldCheck = isAuthenticated && isPending;
 
-  const oldStatus = useRef<string>();
+  const oldStatus = useRef<StatusType>();
 
   const getStatuses = useCallback(() => {
     return loadKyc()
       .unwrap()
-      .then(({ status }) => status.map((x) => x.status || '').join(''));
+      .then(({ status, KYCMonitoring }) => ({
+        statusSerialized: status.map((x) => x.status || '').join(''),
+        shouldCheck: KYCMonitoring,
+      }));
   }, []);
 
   const pollKyc = useCallback(async () => {
     setTimeout(async () => {
       const newStatus = await getStatuses();
-      if (newStatus === oldStatus.current) {
+      if (newStatus.shouldCheck) {
         pollKyc();
-      } else {
+      }
+
+      if (newStatus.statusSerialized !== oldStatus.current.statusSerialized) {
         oldStatus.current = newStatus;
         toast.info(t('kyc-updated'));
         loadUser();
