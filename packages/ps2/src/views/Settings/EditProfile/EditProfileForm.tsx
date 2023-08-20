@@ -7,8 +7,12 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLazyUserQuery, useUpdateUserMutation } from 'apis/user/api';
-import { useForm, Controller } from 'react-hook-form';
+import {
+  useKycStatusesQuery,
+  useLazyUserQuery,
+  useUpdateUserMutation,
+} from 'apis/user/api';
+import { Controller, useForm } from 'react-hook-form';
 import Countries from 'i18n-iso-countries';
 import { EditProfileValidation } from './validations';
 import { EditProfileFormType } from './types';
@@ -24,13 +28,17 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
-import { UserAccessLevel } from '../../../apis/user/types';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
   const user = useCurrentUser();
   const navigate = useNavigate();
   const [loadUser, userReloadStatus] = useLazyUserQuery();
+  const { data: kycStatuses } = useKycStatusesQuery(undefined, {
+    skip: !isFeatureOn(Features.Kyc),
+  });
+  const hasKyc = kycStatuses?.status?.some((x) => x.status === 'approved');
+
   const {
     handleSubmit,
     control,
@@ -104,7 +112,7 @@ const EditProfileForm = () => {
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-          <Box sx={{ pt: 3, pr: '50px' }}>
+          <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
             <Controller
               name='imageUrl'
               control={control}
@@ -130,14 +138,14 @@ const EditProfileForm = () => {
                 )}
               />
 
-              {isFeatureOn(Features.Kyc) && (
+              {isFeatureOn(Features.Kyc) && !!kycStatuses && (
                 <ProfileStatusBox
-                  isSuccess={user.accessLevel >= UserAccessLevel.Normal}
+                  isSuccess={hasKyc}
                   ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
                   label={t('edit-profile.status-box.kyc')}
                   status={t(
-                    user.accessLevel >= UserAccessLevel.Normal
+                    hasKyc
                       ? 'edit-profile.status-box.verified'
                       : 'edit-profile.status-box.not-verified',
                   )}
