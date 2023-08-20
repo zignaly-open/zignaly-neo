@@ -59,7 +59,7 @@ const UserKycChecker: React.FC = () => {
       setIntervalValue(setInterval(() => {}, KYC_CHECK_INTERVAL));
     }
     return () => clearInterval(interval);
-  }, [shouldCheck, interval]);
+  }, [shouldCheck]);
 
   return null;
 };
