@@ -28,7 +28,7 @@ const KycBox: React.FC<{
   level: string;
   labelColor: string;
   balanceRestriction?: string;
-  isMissingPreviousLevel?: boolean;
+  disabledMessage?: string;
   title: string;
   icon: JSX.Element;
   response: KycResponse;
@@ -41,7 +41,7 @@ const KycBox: React.FC<{
   level,
   response,
   balanceRestriction,
-  isMissingPreviousLevel,
+  disabledMessage,
   items,
   labelColor,
   title,
@@ -86,7 +86,7 @@ const KycBox: React.FC<{
       sx={{
         mt: 3,
         mb: 6,
-        opacity: isMissingPreviousLevel ? 0.5 : 1,
+        opacity: disabledMessage ? 0.5 : 1,
         minHeight: 200,
       }}
     >
@@ -180,7 +180,8 @@ const KycBox: React.FC<{
             <ZigButton
               sx={{ mt: 2.5, ...iconWrapStyle }}
               variant={'contained'}
-              disabled={isMissingPreviousLevel}
+              tooltip={disabledMessage || undefined}
+              disabled={!!disabledMessage}
               loading={loadingVerification}
               onClick={openKyc}
               size={'large'}

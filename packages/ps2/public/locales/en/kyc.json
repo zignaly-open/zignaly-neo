@@ -8,6 +8,9 @@
   "balance-range-from": "Over {{from}} {{coin}}",
   "name-level-1": "Silver Level",
   "name-level-2": "Gold Level",
+  "complete-previous-level-first": "Please complete the previous level first",
+  "different-type-started-KYC": "You have already started the KYC process as an individual",
+  "different-type-started-KYB": "You have already started the KYB process as a business",
   "progress-explainer": "We're working tirelessly on it, please hold tight. Usually it takes only a few minutes",
   "tabs": {
     "kyc": "KYC",

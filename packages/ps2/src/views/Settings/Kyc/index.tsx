@@ -72,25 +72,41 @@ const Kyc: React.FC = () => {
                 <ZigTab label={t('tabs.kyc')} value={'KYC'} />
                 <ZigTab label={t('tabs.kyb')} value={'KYB'} />
               </ZigTabs>
-              {kycConfig[tab]?.map((c, i) => (
-                <KycBox
-                  isMissingPreviousLevel={
-                    correctOrder[i - 1] &&
-                    correctOrder[i - 1].status !== 'approved'
-                  }
-                  labelColor={c.color}
-                  balanceRestriction={t(
-                    `balance-range-from${c.restriction.to ? '-to' : ''}`,
-                    c.restriction,
-                  )}
-                  response={correctOrder[i]}
-                  items={t(c.requirements, { returnObjects: true })}
-                  title={t(c.label)}
-                  key={correctOrder[i].level}
-                  icon={c.icon}
-                  level={correctOrder[i].level}
-                />
-              )) || false}
+              {kycConfig[tab]?.map((c, i) => {
+                const previousLevelMissing =
+                  correctOrder[i - 1] &&
+                  correctOrder[i - 1].status !== 'approved';
+                const differentTypeStarted = status.some(
+                  (x) =>
+                    x.category === (tab === 'KYC' ? 'KYB' : 'KYC') &&
+                    ((x.status === 'rejected' && x.canBeRetried) ||
+                      ['approved', 'pending'].includes(x.status)),
+                );
+                return (
+                  <KycBox
+                    disabledMessage={
+                      (differentTypeStarted &&
+                        t(
+                          'different-type-started-' +
+                            (tab === 'KYC' ? 'KYB' : 'KYC'),
+                        )) ||
+                      (previousLevelMissing &&
+                        t('complete-previous-level-first'))
+                    }
+                    labelColor={c.color}
+                    balanceRestriction={t(
+                      `balance-range-from${c.restriction.to ? '-to' : ''}`,
+                      c.restriction,
+                    )}
+                    response={correctOrder[i]}
+                    items={t(c.requirements, { returnObjects: true })}
+                    title={t(c.label)}
+                    key={correctOrder[i].level}
+                    icon={c.icon}
+                    level={correctOrder[i].level}
+                  />
+                );
+              }) || false}
             </PageWithHeaderContainer>
           </PageContainer>
         );
