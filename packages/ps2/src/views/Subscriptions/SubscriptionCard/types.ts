@@ -3,5 +3,5 @@ export type SubscriptionCardProps = {
   price: number;
   successFeePct: number;
   subscriptionFinishesAt?: string;
-  status: number;
+  status: 'blocked' | 'active' | 'accessible';
 };

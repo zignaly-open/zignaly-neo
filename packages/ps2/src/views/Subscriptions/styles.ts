@@ -7,6 +7,7 @@ export const Layout = styled(PageContainer)`
   align-items: center;
   flex-direction: column;
 `;
+
 export const StyledTab = styled(ZigTab)<{ active: boolean }>`
   position: relative;
   background-color: ${({ theme, active }) =>
@@ -21,6 +22,7 @@ export const StyledTab = styled(ZigTab)<{ active: boolean }>`
   z-index: ${({ active }) => (active ? 2 : 1)};
   margin-left: -30px;
 `;
+
 export const StyledTabs = styled(ZigTabs)`
   margin-left: -30px;
   justify-content: unset;

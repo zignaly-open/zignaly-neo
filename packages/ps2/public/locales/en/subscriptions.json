@@ -1,7 +1,7 @@
 {
   "title": "Subscriptions",
-  "quantwise": {
-    "quantwise": "Quantwise",
+  "cards": {
+    "title": "Quantwise",
     "packages": {
       "plus": "PLUS",
       "pro": "PRO",
@@ -13,6 +13,10 @@
     "renewal-date": "Renewal date: {{ date }}",
     "get-started": "Get Started",
     "your-subscription": "Your subscription"
+  },
+  "tabs": {
+    "annually": "Price Annually",
+    "lifetime": "Lifetime License"
   },
   "redeem-code": "Redeem your subscription code:",
   "platform-renew": "*: Platform Yearly Renew {{amount}}€",

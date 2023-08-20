@@ -16,21 +16,19 @@ const SubscriptionCard = ({
   const { t } = useTranslation('subscriptions');
   return (
     <Box position={'relative'}>
-      {status === 1 && subscriptionFinishesAt && (
+      {status === 'active' && subscriptionFinishesAt && (
         <Wrapper>
           <ZigTypography variant={'body1'} color={'neutral000'}>
-            {t('quantwise.renewal-date', { date: subscriptionFinishesAt })}
+            {t('cards.renewal-date', { date: subscriptionFinishesAt })}
           </ZigTypography>
         </Wrapper>
       )}
       <Card status={status}>
         <Box display={'flex'} mb={'26px'} mt={'19px'}>
-          <ZigTypography color={'neutral000'}>
-            {t('quantwise.quantwise')}
-          </ZigTypography>
+          <ZigTypography color={'neutral000'}>{t('cards.title')}</ZigTypography>
           &nbsp;
           <ZigTypography fontWeight={700} color={'neutral000'}>
-            {t(`quantwise.packages.${name.split(' ')[1].toLowerCase()}`)}
+            {t(`cards.packages.${name.split(' ')[1].toLowerCase()}`)}
           </ZigTypography>
         </Box>
         <ZigTypography
@@ -45,7 +43,7 @@ const SubscriptionCard = ({
           {price}&#8364;
         </ZigTypography>
         <ZigTypography mt={'-4px'} variant={'body1'} mb={'30px'}>
-          {t('quantwise.license')}
+          {t('cards.license')}
         </ZigTypography>
         <Box display={'flex'} gap={'3px'}>
           <CheckCircleOutlineIcon
@@ -53,18 +51,22 @@ const SubscriptionCard = ({
             sx={{ marginTop: '1px' }}
           />
           <ZigTypography mb={'25px'} color={'neutral000'}>
-            {t('quantwise.fees', { fee: successFeePct })}
+            {t('cards.fees', { fee: successFeePct })}
           </ZigTypography>
         </Box>
         <ZigLink
-          href={process.env.QUANTWISE_URL}
+          href={process.env.SUBSCRIBE_URL}
           target={'_blank'}
           sx={{ width: '100%' }}
         >
-          <ZigButton size={'large'} fullWidth disabled={status !== 2}>
-            {status === 1
-              ? t('quantwise.your-subscription')
-              : t('quantwise.get-started')}
+          <ZigButton
+            size={'large'}
+            fullWidth
+            disabled={status !== 'accessible'}
+          >
+            {status === 'active'
+              ? t('cards.your-subscription')
+              : t('cards.get-started')}
           </ZigButton>
         </ZigLink>
       </Card>

@@ -62,43 +62,57 @@ const Subscriptions: React.FC = () => {
             </ZigTypography>
             <Box mb={4}>
               <StyledTabs value={activeTab} onChange={handleTabChange}>
-                <StyledTab active={activeTab === 0} label='Price Annually' />
-                <StyledTab active={activeTab === 1} label='Lifetime License' />
+                <StyledTab
+                  active={activeTab === 0}
+                  label={t('tabs.annually')}
+                />
+                <StyledTab
+                  active={activeTab === 1}
+                  label={t('tabs.lifetime')}
+                />
               </StyledTabs>
             </Box>
             <Box display={'flex'} gap={4} mb={15}>
-              {subscriptions?.map((el) => (
-                <SubscriptionCard
-                  key={el.id}
-                  successFeePct={el.successFeePct}
-                  name={el.name}
-                  price={activeTab === 0 ? el.priceYear : el.priceLifetime}
-                  status={
-                    (currentUser?.subscriptionPlan?.id > el.id &&
-                      ((activeTab === 0 &&
-                        currentUser?.subscriptionDuration === 'year') ||
-                        (activeTab === 1 &&
-                          currentUser?.subscriptionDuration === 'lifetime'))) ||
-                    (currentUser?.subscriptionDuration === 'lifetime' &&
-                      activeTab === 0)
-                      ? 0
-                      : currentUser?.subscriptionPlan?.id === el.id &&
-                        ((activeTab === 0 &&
-                          currentUser?.subscriptionDuration === 'year') ||
-                          (activeTab === 1 &&
-                            currentUser?.subscriptionDuration === 'lifetime'))
-                      ? 1
-                      : 2
-                  }
-                  subscriptionFinishesAt={
-                    currentUser?.subscriptionFinishesAt &&
-                    format(
-                      parseISO(currentUser?.subscriptionFinishesAt),
-                      'MMMM do, yyyy',
-                    )
-                  }
-                />
-              ))}
+              {subscriptions?.map((el) => {
+                const isBlockedSubscription =
+                  currentUser?.subscriptionPlan?.id > el.id;
+                const isEqualSubscription =
+                  currentUser?.subscriptionPlan?.id === el.id;
+                const isActiveLifetimeSubscription =
+                  currentUser?.subscriptionDuration === 'lifetime';
+                const isActiveLifetimeTab = activeTab === 1;
+                const isActiveLifetimeTabAndSubscription =
+                  isActiveLifetimeTab && isActiveLifetimeSubscription;
+                const isActiveAnnuallyTabAndSubscription =
+                  !isActiveLifetimeTab && !isActiveLifetimeSubscription;
+                return (
+                  <SubscriptionCard
+                    key={el.id}
+                    successFeePct={el.successFeePct}
+                    name={el.name}
+                    price={activeTab === 0 ? el.priceYear : el.priceLifetime}
+                    status={
+                      (isBlockedSubscription &&
+                        (isActiveAnnuallyTabAndSubscription ||
+                          isActiveLifetimeTabAndSubscription)) ||
+                      (isActiveLifetimeSubscription && !isActiveLifetimeTab)
+                        ? 'blocked'
+                        : isEqualSubscription &&
+                          (isActiveAnnuallyTabAndSubscription ||
+                            isActiveLifetimeTabAndSubscription)
+                        ? 'active'
+                        : 'accessible'
+                    }
+                    subscriptionFinishesAt={
+                      currentUser?.subscriptionFinishesAt &&
+                      format(
+                        parseISO(currentUser?.subscriptionFinishesAt),
+                        'MMMM do, yyyy',
+                      )
+                    }
+                  />
+                );
+              })}
             </Box>
             <Box
               display={'flex'}

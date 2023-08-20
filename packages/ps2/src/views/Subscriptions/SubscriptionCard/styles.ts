@@ -18,20 +18,20 @@ export const Wrapper = styled(Box)`
 
 export const Card = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'status',
-})<{ status: number }>`
+})<{ status: 'blocked' | 'active' | 'accessible' }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: ${({ status }) => (status === 0 ? 0.5 : 1)};
+  opacity: ${({ status }) => (status === 'blocked' ? 0.5 : 1)};
   background-color: ${({ status, theme }) =>
-    status === 1
+    status === 'active'
       ? `${theme.palette.neutral600}`
       : `${theme.palette.neutral700}`};
   border-radius: 10px;
   padding: 16px 20px;
   border: ${({ status, theme }) =>
-    status === 1 ? `2px solid ${theme.palette.neutral500}` : 'unset'};
+    status === 'active' ? `2px solid ${theme.palette.neutral500}` : 'unset'};
 
-  transform: ${({ status }) => (status === 1 ? 'scale(1.05)' : 'unset')};
+  transform: ${({ status }) => (status === 'active' ? 'scale(1.05)' : 'unset')};
   position: relative;
 `;
