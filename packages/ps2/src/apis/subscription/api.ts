@@ -8,11 +8,11 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       url: `subscriptions`,
     }),
   }),
-  subscribe: builder.mutation<never, { subscriptionCode: string }>({
-    query: ({ subscriptionCode }) => ({
+  subscribe: builder.mutation<never, { code: string }>({
+    query: ({ code }) => ({
       method: 'POST',
       url: `subscriptions`,
-      body: { code: subscriptionCode },
+      body: { code },
     }),
   }),
 }));

@@ -242,10 +242,12 @@ function AccountMenu(): React.ReactElement | null {
           separator: true,
         },
         isFeatureOn(Features.Subscriptions) && {
-          label: t('account-menu.subscription'),
+          label: t('account-menu.subscriptions'),
           id: 'account-menu-dropdown__balance',
           href: generatePath(ROUTE_SUBSCRIPTIONS),
           onClick: () => navigate(ROUTE_SUBSCRIPTIONS),
+        },
+        isFeatureOn(Features.Subscriptions) && {
           separator: true,
         },
         {

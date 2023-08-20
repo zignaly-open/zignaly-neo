@@ -92,7 +92,9 @@ const Router: React.FC = () => (
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
       />
-      <Route path={Routes.ROUTE_SUBSCRIPTIONS} element={<Subscriptions />} />
+      {isFeatureOn(Features.Subscriptions) && (
+        <Route path={Routes.ROUTE_SUBSCRIPTIONS} element={<Subscriptions />} />
+      )}
       {isFeatureOn(Features.Referrals) && (
         <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
       )}

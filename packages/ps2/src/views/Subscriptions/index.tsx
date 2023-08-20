@@ -7,21 +7,25 @@ import SubscriptionCard from './SubscriptionCard';
 import { useTitle } from 'react-use';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { SubscriptionPlan } from '../../apis/subscription/types';
-import { useSubscriptionsQuery } from '../../apis/subscription/api';
+import {
+  useSubscribeMutation,
+  useSubscriptionsQuery,
+} from '../../apis/subscription/api';
 import { useCurrentUser } from '../../apis/user/use';
 import { format, parseISO } from 'date-fns';
-import { useSubscribe } from '../../apis/subscription/use';
 import { useToast } from '../../util/hooks/useToast';
 
 const Subscriptions: React.FC = () => {
+  const SUBSCRIPTION_CODE_LENGTH = 17;
   const { t } = useTranslation(['subscriptions', 'pages']);
   useTitle(t('pages:subscriptions'));
   const [code, setCode] = useState<string>('');
   const [activeTab, setActiveTab] = useState<number>(0);
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
-  const { isLoading, subscribe } = useSubscribe();
+  const [subscribe, { isLoading }] = useSubscribeMutation();
   const toast = useToast();
+
   const isInputValid = (input: string) => {
     return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
   };
@@ -33,10 +37,10 @@ const Subscriptions: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (code.length === 17)
-      subscribe({ subscriptionCode: code }).then(() =>
-        toast.success(t('toast-success')),
-      );
+    if (code.length === SUBSCRIPTION_CODE_LENGTH)
+      subscribe({ code })
+        .unwrap()
+        .then(() => toast.success(t('toast-success')));
   }, [code]);
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setActiveTab(newTab);
