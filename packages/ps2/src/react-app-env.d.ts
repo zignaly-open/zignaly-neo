@@ -47,7 +47,7 @@ declare module '@mui/material/styles' {
     neutral150: string;
     neutral100: string;
     neutral000: string;
-    active: string;
+    secondary: string;
     highlighted: string;
     redGraphOrError: string;
     greenGraph: string;
@@ -69,6 +69,7 @@ declare module '@mui/material/styles' {
       | 'withdrawalHighlight'
       | 'secondaryBackground'
       | 'selectInputFill'
+      | 'activeTab'
       | 'manageServiceMenuHover',
       string
     >;
@@ -99,7 +100,7 @@ declare module '@mui/material/Button' {
     neutral150: true;
     neutral100: true;
     neutral000: true;
-    active: true;
+    secondary: true;
     highlighted: true;
     redGraphOrError: true;
     greenGraph: true;
@@ -130,7 +131,7 @@ declare module '@mui/material/SvgIcon' {
     neutral150: true;
     neutral100: true;
     neutral000: true;
-    active: true;
+    secondary: true;
     highlighted: true;
     redGraphOrError: true;
     greenGraph: true;
@@ -163,7 +164,7 @@ declare module '@emotion/react' {
     neutral150: string;
     neutral100: string;
     neutral000: string;
-    active: string;
+    secondary: string;
     highlighted: string;
     redGraphOrError: string;
     greenGraph: string;

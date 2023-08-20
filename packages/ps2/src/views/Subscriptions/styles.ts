@@ -1,5 +1,5 @@
-import { styled, Tab, Tabs } from '@mui/material';
-import { PageContainer } from '@zignaly-open/ui';
+import { styled } from '@mui/material';
+import { PageContainer, ZigTab, ZigTabs } from '@zignaly-open/ui';
 
 export const Layout = styled(PageContainer)`
   padding: 120px 52px 0 52px;
@@ -7,29 +7,26 @@ export const Layout = styled(PageContainer)`
   align-items: center;
   flex-direction: column;
 `;
-export const StyledTab = styled(Tab)<{ active: boolean }>`
+export const StyledTab = styled(ZigTab)<{ active: boolean }>`
   position: relative;
   background-color: ${({ theme, active }) =>
-    !active
-      ? theme.palette.backgrounds.secondaryBackground
+    active
+      ? theme.palette.backgrounds.activeTab
       : theme.palette.backgrounds.modal};
   border-radius: 5px;
   border: 1px solid
-    ${({ theme, active }) =>
-      active ? theme.palette.active : theme.palette.neutral600};
-  padding: 19px 65px 17px 65px;
+    ${({ theme, active }) => !active && theme.palette.neutral600};
+  padding: 19px 65px 17px 65px !important;
+  font-weight: 500 !important;
   z-index: ${({ active }) => (active ? 2 : 1)};
-  margin-left: -10px;
-  color: ${({ theme, active }) =>
-    active ? theme.palette.highlighted : theme.palette.neutral400};
-  .MuiTabs-indicator {
-    visibility: hidden;
-  }
+  margin-left: -30px;
 `;
-export const StyledTabs = styled(Tabs)`
-  margin-left: -10px;
+export const StyledTabs = styled(ZigTabs)`
+  margin-left: -30px;
+  justify-content: unset;
+  gap: unset;
   .MuiTabs-flexContainer {
-    margin-left: 10px;
+    margin-left: 45px;
   }
   .MuiTabs-indicator {
     display: none;

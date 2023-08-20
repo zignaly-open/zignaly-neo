@@ -16,7 +16,7 @@ declare module "@mui/material/styles" {
     neutral150: string;
     neutral100: string;
     neutral000: string;
-    active: string;
+    secondary: string;
     highlighted: string;
     redGraphOrError: string;
     greenGraph: string;
@@ -35,6 +35,7 @@ declare module "@mui/material/styles" {
       | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
       | "socialNetworksTab" // why have a dedicated color used only once? because fuck me, that's why
       | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
+      | "activeTab" // why have a dedicated color used only once? because fuck me, that's why
       | "modal"
       | "secondaryBackground"
       | "sliderMark"
@@ -104,7 +105,7 @@ declare module "@mui/material/Button" {
     neutral150: true;
     neutral100: true;
     neutral000: true;
-    active: true;
+    secondary: true;
     highlighted: true;
     redGraphOrError: true;
     greenGraph: true;
@@ -132,7 +133,7 @@ declare module "@mui/material/SvgIcon" {
     neutral150: true;
     neutral100: true;
     neutral000: true;
-    active: true;
+    secondary: true;
     highlighted: true;
     redGraphOrError: true;
     greenGraph: true;
@@ -159,7 +160,7 @@ declare module "@emotion/react" {
     neutral150: string;
     neutral100: string;
     neutral000: string;
-    active: string;
+    secondary: string;
     highlighted: string;
     redGraphOrError: string;
     greenGraph: string;

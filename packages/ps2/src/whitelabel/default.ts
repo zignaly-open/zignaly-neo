@@ -7,7 +7,7 @@ const defaultFeatureState: Record<Features, boolean> = {
   [Features.Trader]: true,
   [Features.NewSignup]: true,
   [Features.Subscriptions]: true,
-  [Features.Kyc]: false,
+  [Features.Kyc]: true,
 };
 
 export default defaultFeatureState;

@@ -15,7 +15,10 @@ export const Wrapper = styled(Box)`
   padding: 0 10px 7px 10px;
   transform: scale(1.05);
 `;
-export const Card = styled(Box)<{ status: number }>`
+
+export const Card = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'status',
+})<{ status: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
