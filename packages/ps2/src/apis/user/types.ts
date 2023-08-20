@@ -52,6 +52,7 @@ export type UserData = {
   payFeeWithZig: boolean;
   refRewardType: RefRewardType;
   refCode: string;
+  country: string;
   bio?: string;
   subscriptionFinishesAt?: string;
   subscriptionPlan?: SubscriptionPlan;

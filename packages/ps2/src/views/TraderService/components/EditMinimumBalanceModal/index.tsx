@@ -64,8 +64,10 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
 
   return (
     <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
-      <Box sx={{ marginBottom: 3 }}>
-        <ZigTypography>{t('minBalanceModal.desc')}</ZigTypography>
+      <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
+        <ZigTypography textAlign={'center'}>
+          {t('minBalanceModal.desc')}
+        </ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <InputAmountAdvanced

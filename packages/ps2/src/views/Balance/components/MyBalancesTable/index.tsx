@@ -106,7 +106,7 @@ const MyBalancesTable = (): JSX.Element => {
           />
         ),
       }),
-      columnHelper.accessor((row) => row.balance.balanceTotal, {
+      columnHelper.accessor((row) => +row.balance.balanceTotal, {
         id: 'totalBalance',
         header: t('tableHeader.totalBalance'),
         cell: ({ getValue, row }) => (
@@ -118,7 +118,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceFree, {
+      columnHelper.accessor((row) => +row.balance.balanceFree, {
         id: 'balanceFree',
         header: t('tableHeader.availableBalance'),
         cell: ({ getValue, row }) => (
@@ -130,7 +130,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceLocked, {
+      columnHelper.accessor((row) => +row.balance.balanceLocked, {
         id: 'balanceLocked',
         header: t('tableHeader.lockedBalance'),
         cell: ({ getValue, row }) => (
@@ -142,7 +142,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
+      columnHelper.accessor((row) => +row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
         cell: ({ getValue, row }) => (
@@ -154,7 +154,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
+      columnHelper.accessor((row) => +row.balance.balanceTotalUSDT, {
         id: 'balanceTotalUSDT',
         header: t('tableHeader.valueUSD'),
         cell: ({ getValue, row }) => (
