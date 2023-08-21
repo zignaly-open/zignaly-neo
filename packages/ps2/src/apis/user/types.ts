@@ -51,7 +51,7 @@ export type UserData = {
   refRewardType: RefRewardType;
   refCode: string;
   country: string;
-  bio?: string;
+  about?: string;
   wall?: {
     banned: boolean;
   };
