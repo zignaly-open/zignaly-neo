@@ -15,6 +15,7 @@ import { TiersTableProps } from './types';
 import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
+import { Table } from './styles';
 
 const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   const currentTier = tiers[tierIndex];
@@ -145,13 +146,7 @@ const TiersTable = ({
   };
 
   return (
-    <table
-      style={{
-        marginTop: '16px',
-        backgroundImage:
-          'radial-gradient(circle at center, rgba(16, 13, 70, 0.4) 0%, rgba(16, 25, 70, 0.4) 27%, transparent 51%)',
-      }}
-    >
+    <Table>
       <tr>
         {composeCellTierLabels()}
         {tiers?.map((tier, tierIndex) => (
@@ -171,7 +166,7 @@ const TiersTable = ({
         ))}
       </tr>
       <tr>
-        <td height='36px'>
+        <td height='34px'>
           <Box
             display={'flex'}
             alignItems={'center'}
@@ -180,7 +175,7 @@ const TiersTable = ({
           >
             <ZigUserFilledIcon color='#979ce0' height={19.5} width={16.5} />
             <ZigTypography
-              fontWeight={400}
+              fontWeight={500}
               variant='h3'
               textAlign='end'
               lineHeight='24px'
@@ -201,7 +196,12 @@ const TiersTable = ({
               gap='9px'
               justifyContent='center'
             >
-              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+              <ZigTypography
+                fontWeight={600}
+                fontSize={16}
+                color='#999fe1'
+                mt={'5px'}
+              >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
               <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
@@ -217,7 +217,7 @@ const TiersTable = ({
             mt='2px'
             mr='16px'
             textAlign='end'
-            lineHeight='24px'
+            lineHeight='18px'
             whiteSpace='pre-line'
             color={'neutral200'}
           >
@@ -249,7 +249,7 @@ const TiersTable = ({
           </td>
         ))}
       </tr>
-    </table>
+    </Table>
   );
 };
 

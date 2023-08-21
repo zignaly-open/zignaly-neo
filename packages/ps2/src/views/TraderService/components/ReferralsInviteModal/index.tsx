@@ -117,7 +117,12 @@ const ReferralsInviteModal = ({
               flexDirection={'column'}
               alignItems={'center'}
             >
-              <Box display={'flex'} width={1} justifyContent={'space-evenly'}>
+              <Box
+                display={'flex'}
+                width={1}
+                justifyContent={'space-evenly'}
+                mb={'15px'}
+              >
                 <Box
                   display='flex'
                   flexDirection={'column'}
@@ -135,7 +140,7 @@ const ReferralsInviteModal = ({
                     letterSpacing='1.49px'
                     fontSize={50}
                     fontWeight={600}
-                    py='15px'
+                    pt='20px'
                     lineHeight='50px'
                     position={'relative'}
                   >
@@ -162,7 +167,12 @@ const ReferralsInviteModal = ({
                     <ZigTypography textTransform='uppercase' variant='h4'>
                       {t('my-invites')}
                     </ZigTypography>
-                    <Box display={'flex'} alignItems={'center'} flex={1}>
+                    <Box
+                      display={'flex'}
+                      alignItems={'center'}
+                      flex={1}
+                      pt={'5px'}
+                    >
                       <ZigUserFilledIcon
                         color='#999fe1'
                         width={18}
@@ -302,17 +312,20 @@ const ReferralsInviteModal = ({
               </Box>
             </Box>
           )}
-          <Tiers
-            tiers={tiers}
-            referral={referral}
-            serviceCommission={serviceCommission.commission}
-            zignalyCommission={service?.zglySuccessFee || 5}
-            boost={boost}
-            boostRunning={boostRunning}
-          />
+          <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+            <Tiers
+              tiers={tiers}
+              referral={referral}
+              serviceCommission={serviceCommission.commission}
+              zignalyCommission={service?.zglySuccessFee || 5}
+              boost={boost}
+              boostRunning={boostRunning}
+            />
+          </Box>
+
           <ZigButton
             variant={'text'}
-            sx={{ fontSize: '16px !important', marginTop: '31px' }}
+            sx={{ fontSize: '16px !important', marginTop: '61px' }}
             endIcon={
               <ChevronRight
                 sx={{ color: 'links', fill: 'currentColor !important' }}
