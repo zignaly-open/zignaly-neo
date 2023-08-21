@@ -14,6 +14,8 @@ import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
 import { Box } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
+import { useCanInvestIn } from '../../../../util/walls/util';
+import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 
 function InvestDepositModal({
   serviceId,
@@ -22,6 +24,13 @@ function InvestDepositModal({
   serviceId: string;
   close: () => void;
 } & DialogProps): React.ReactElement {
+  const checkCanInvest = useCanInvestIn();
+  useEffect(() => {
+    if (!checkCanInvest(true)) {
+      props.close();
+    }
+  }, []);
+
   const {
     isLoading: isLoadingService,
     isFetching,
@@ -99,5 +108,22 @@ function InvestDepositModal({
 
 // We should not do this because the logic inside this InvestDeposit makes sure we call the right track
 // InvestDepositModal.trackId = 'invest-deposit';
+
+export const useOpenInvestDepositModal = (
+  modalRoute?: string,
+): ((serviceId: string) => void) => {
+  const showInvestModal = useZRouteModal(modalRoute);
+  const checkCanInvest = useCanInvestIn();
+  const { showModal } = useZModal({ disableAutoDestroy: true });
+  return (serviceId) => {
+    if (checkCanInvest()) {
+      if (modalRoute) {
+        showInvestModal({ serviceId });
+      } else {
+        showModal(InvestDepositModal, { serviceId });
+      }
+    }
+  };
+};
 
 export default InvestDepositModal;

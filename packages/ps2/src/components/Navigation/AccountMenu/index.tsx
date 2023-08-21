@@ -25,19 +25,20 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import {
+  ROUTE_2FA,
   ROUTE_DASHBOARD,
+  ROUTE_EDIT_PROFILE,
+  ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_MY_BALANCES,
+  ROUTE_PASSWORD,
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
   ROUTE_SIGNUP,
 } from '../../../routes';
 import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
-import { useZModal } from 'components/ZModal/use';
-import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
-import Enable2FAModal from 'views/Settings/Enable2FAModal';
-import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
 import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
@@ -54,16 +55,12 @@ function AccountMenu(): React.ReactElement | null {
   const navigate = useNavigate();
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
-  const { showModal } = useZModal();
+  const openDepositModal = useOpenDepositModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
-
-  const setActiveExchange = (exchangeInternalId: string) => {
-    selectExchange(exchangeInternalId);
-  };
 
   if (!isAuthenticated) {
     return (
@@ -127,7 +124,7 @@ function AccountMenu(): React.ReactElement | null {
           customStyle: `background: ${theme.palette.neutral750}; margin-top: -11px;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
-              onClick: () => setActiveExchange(exchange.internalId),
+              onClick: () => selectExchange(exchange.internalId),
               id: `account-switcher-dropdown__account-${index}`,
               label: (
                 <>
@@ -164,16 +161,30 @@ function AccountMenu(): React.ReactElement | null {
           label: t('account-menu.notAuth-dropdown-link-settings'),
           children: [
             {
-              id: `menu-dropdown-settings__password`,
-              label: t('account-menu.notAuth-dropdown-link-password'),
-              onClick: () => showModal(UpdatePasswordModal),
+              id: `menu-dropdown-settings__profile`,
+              label: t('account-menu.notAuth-dropdown-link-profile'),
+              href: generatePath(ROUTE_EDIT_PROFILE),
+              onClick: () => navigate(generatePath(ROUTE_EDIT_PROFILE)),
             },
             {
               id: `menu-dropdown-settings__2fa`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
-              onClick: () => showModal(Enable2FAModal),
+              href: generatePath(ROUTE_2FA),
+              onClick: () => navigate(generatePath(ROUTE_2FA)),
             },
-          ],
+            {
+              id: `menu-dropdown-settings__password`,
+              label: t('account-menu.notAuth-dropdown-link-password'),
+              href: generatePath(ROUTE_PASSWORD),
+              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
+            },
+            isFeatureOn(Features.Kyc) && {
+              id: `menu-dropdown-settings__kyc`,
+              label: t('account-menu.dropdown-link-kyc'),
+              href: generatePath(ROUTE_KYC),
+              onClick: () => navigate(generatePath(ROUTE_KYC)),
+            },
+          ].filter(Boolean),
         },
         {
           element: (
@@ -185,7 +196,7 @@ function AccountMenu(): React.ReactElement | null {
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
                 onClose();
-                showModal(DepositModal);
+                openDepositModal();
               }}
             >
               {t('action:deposit')}

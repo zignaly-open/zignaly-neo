@@ -7,6 +7,6 @@ export type EditInvestmentFormProps = {
 };
 
 export type EditFormData = {
-  profitPercentage?: string | number;
+  profitPercentage?: number;
   amountTransfer?: string;
 };

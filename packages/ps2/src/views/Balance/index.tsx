@@ -22,7 +22,9 @@ import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
 import { CSSObject } from '@emotion/react';
 import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
-import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
+import DepositModal, {
+  useOpenDepositModal,
+} from '../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { usePrefetchTranslation } from 'util/i18nextHelpers';
 import { ROUTE_MY_BALANCES, ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { Link, generatePath, matchPath } from 'react-router-dom';
@@ -47,6 +49,7 @@ const MyBalances: React.FC = () => {
   }, [location.pathname]);
 
   const [tab, setTab] = useState(matchRoute());
+  const openDepositModal = useOpenDepositModal();
   const [type, setType] = useState('all');
   const { showModal } = useZModal();
 
@@ -73,7 +76,7 @@ const MyBalances: React.FC = () => {
               startIcon={<ZigPlusIcon width={10} height={10} />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}
-              onClick={() => showModal(DepositModal)}
+              onClick={() => openDepositModal()}
             >
               {t('action:deposit')}
             </ZigButton>

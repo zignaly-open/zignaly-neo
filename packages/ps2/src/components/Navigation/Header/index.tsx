@@ -8,9 +8,6 @@ import AccountMenu from '../AccountMenu';
 import { useIsAuthenticated } from '../../../apis/user/use';
 import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
-// FIXME
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import { MAIN_APP_URL } from '../../../util/constants';
@@ -26,7 +23,7 @@ const Header: React.FC = () => {
   const logoRoute = whitelabel.mainAppLink || MAIN_APP_URL;
 
   const logo = whitelabel.logo ? (
-    <img src={whitelabel.logo} id='menu__logo' height='32' width='32' />
+    <img src={whitelabel.logo} id='menu__logo' height='32' />
   ) : (
     <BrandImage id='menu__logo' height='32px' type='isotype' width='32px' />
   );

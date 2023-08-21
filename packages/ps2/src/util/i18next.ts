@@ -24,8 +24,8 @@ Countries.registerLocale(CountriesRu);
 Countries.registerLocale(CountriesVi);
 
 // mishka vodka balalayka
-if (CountriesEn.countries.RU)
-  CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
+// if (CountriesEn.countries.RU)
+//   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
 export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
 
@@ -43,7 +43,7 @@ export const dateFnsLocaleMapping = {
 const getFallbackLanguage = (locale: string): string | string[] => {
   const getFamily = (x: string) => x.split(/[_-]/)[0];
   return supportedLanguages.includes(locale)
-    ? locale
+    ? [locale, 'en']
     : [
         ...supportedLanguages.filter((x) => getFamily(x) === getFamily(locale)),
         'en',

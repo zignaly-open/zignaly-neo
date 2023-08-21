@@ -20,11 +20,8 @@ functioning brain and basic dev skills can reverse-engineer the code to get this
 * `REACT_APP_SENTRY_DNS` - Sentry DNS
 * `REACT_APP_ENABLE_TRACKING` - Enables tracking, but individual keys need to be configured anyways. Omit it from the
   .env to disable
-* `REACT_APP_SEGMENT_KEY` - Segment write key
-* `REACT_APP_SEGMENT_NAME` - Segment app name
 * `REACT_APP_LIVE_SESSION_TRACK_ID` - Live session track ID
 * `REACT_APP_BASE_API` - base API, as you may have guessed from the name lol
-* `REACT_APP_GTM_ID` - Google Tag Manager id
 * `REACT_APP_ENABLE_TEST_LANGUAGE` - pass truthy value to enable the test language to verify that all strings are
   externalized
 

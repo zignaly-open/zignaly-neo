@@ -20,13 +20,14 @@ import {
   CoinDetails,
 } from 'apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
-import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
-import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import { useOpenWithdrawModal } from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
+import { useZModal } from '../../../../components/ZModal/use';
 import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
 import SwapCoinsModal from '../SwapCoinsModal';
+import { useOpenDepositModal } from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -34,7 +35,8 @@ const MyBalancesTable = (): JSX.Element => {
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType, internalId } = useActiveExchange();
   const { showModal } = useZModal();
-  const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
+  const openWithdrawModal = useOpenWithdrawModal();
+  const showDepositModal = useOpenDepositModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
   // Trigger balance update to be sure that balance widget matches coins data
   useBalanceQuery(
     {
@@ -104,7 +106,7 @@ const MyBalancesTable = (): JSX.Element => {
           />
         ),
       }),
-      columnHelper.accessor((row) => row.balance.balanceTotal, {
+      columnHelper.accessor((row) => +row.balance.balanceTotal, {
         id: 'totalBalance',
         header: t('tableHeader.totalBalance'),
         cell: ({ getValue, row }) => (
@@ -116,7 +118,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceFree, {
+      columnHelper.accessor((row) => +row.balance.balanceFree, {
         id: 'balanceFree',
         header: t('tableHeader.availableBalance'),
         cell: ({ getValue, row }) => (
@@ -128,7 +130,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceLocked, {
+      columnHelper.accessor((row) => +row.balance.balanceLocked, {
         id: 'balanceLocked',
         header: t('tableHeader.lockedBalance'),
         cell: ({ getValue, row }) => (
@@ -140,7 +142,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
+      columnHelper.accessor((row) => +row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
         cell: ({ getValue, row }) => (
@@ -152,7 +154,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
+      columnHelper.accessor((row) => +row.balance.balanceTotalUSDT, {
         id: 'balanceTotalUSDT',
         header: t('tableHeader.valueUSD'),
         cell: ({ getValue, row }) => (
@@ -197,11 +199,11 @@ const MyBalancesTable = (): JSX.Element => {
                 narrow
                 tooltip={t('withdraw')}
                 id={`balance-row__withdrawal-${row.original.coin}`}
-                onClick={() => {
-                  showModal(WithdrawModal, {
+                onClick={() =>
+                  openWithdrawModal({
                     selectedCoin: row.original.coin,
-                  });
-                }}
+                  })
+                }
                 sx={{ maxHeight: '20px', mr: 1 }}
                 variant='outlined'
               >

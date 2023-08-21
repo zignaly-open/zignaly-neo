@@ -6,6 +6,7 @@ import {
   LoginResponse,
   SessionsTypes,
   SignupPayload,
+  UserAccessLevel,
   UserData,
 } from './types';
 import {
@@ -34,7 +35,7 @@ import {
   setUser,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
-import { trackConversion, trackNewSession } from '../../util/analytics';
+import { trackNewSession } from '../../util/analytics';
 import { startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
@@ -111,7 +112,6 @@ export const useSignup = (): [
       try {
         const user = await signup(payload).unwrap();
         await startSession({ ...user, emailUnconfirmed: true });
-        trackConversion();
       } finally {
         setLoading(false);
       }
@@ -165,6 +165,10 @@ export function useLogout(performRequest = true): () => void {
 export function useIsAuthenticated(): boolean {
   const user = useSelector((state: RootState) => state.user)?.user;
   return !!user;
+}
+
+export function useUserAccessLevel(): UserAccessLevel {
+  return useSelector((state: RootState) => state.user)?.user?.accessLevel;
 }
 
 export function useCurrentUser(): UserData | Partial<UserData> {

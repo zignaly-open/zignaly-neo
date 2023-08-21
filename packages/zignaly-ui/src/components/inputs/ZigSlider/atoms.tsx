@@ -48,9 +48,9 @@ export const SliderLabelValue = ({
         variant="body2"
         sx={{
           position: "absolute",
-          top: 0,
           left: side === "start" ? 0 : "auto",
           right: side === "start" ? "auto" : 0,
+          ...(labels.labelsAbove !== false ? { top: 0 } : { bottom: 0 }),
         }}
         id={prefixId && `${prefixId}-label`}
       >

@@ -33,7 +33,10 @@
     ]
   },
   "dependencies": {
-    "@analytics/segment": "^1.1.3",
+    "@analytics/customerio": "^0.2.2",
+    "@analytics/google-analytics": "^1.0.7",
+    "@analytics/google-tag-manager": "^0.5.5",
+    "@analytics/intercom": "^1.0.2",
     "@emotion/babel-plugin": "^11.11.0",
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
@@ -55,10 +58,9 @@
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
     "@types/react-share": "^4.0.0",
-    "@types/segment-analytics": "^0.0.34",
     "@zignaly-open/tracker": "^0.1.3",
     "@zignaly-open/ui": "^0.6.18",
-    "analytics": "^0.8.1",
+    "analytics": "^0.8.9",
     "async-mutex": "^0.3.2",
     "bignumber.js": "^9.1.0",
     "copy-to-clipboard": "^3.3.2",

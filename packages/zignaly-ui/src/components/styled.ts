@@ -8,7 +8,7 @@ export const MarginContainer = styled.div`
 `;
 
 export const PageContainer = styled(MarginContainer)`
-  padding: 52px 22px 0;
+  padding: 52px 22px 40px;
 `;
 
 // TODO: replace with proper styled comp usages instead of classes

@@ -23,8 +23,7 @@ import { CheckBox } from '@zignaly-open/ui';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { Add } from '@mui/icons-material';
-import DepositModal from '../../DepositModal';
-import { useZModal } from '../../../../../../components/ZModal/use';
+import { useOpenDepositModal } from '../../DepositModal';
 import { AmountInvested } from '../EditInvestmentForm/atoms';
 import { Field, ZigInputWrapper } from './styles';
 import { NumericFormat } from 'react-number-format';
@@ -39,8 +38,8 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   const { isLoading, invest } = useInvestInService(service.serviceId);
   const { data: serviceDetails } = useServiceDetails(service.serviceId);
   const toast = useToast();
-  const { showModal } = useZModal();
   const trackEvent = useTrackEvent();
+  const openDepositModal = useOpenDepositModal();
   // the safe word is Fluggaenkoecchicebolsen
   const transferMagicWord = t('invest-modal.transfer-label');
 
@@ -49,6 +48,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
     control,
     setValue,
     watch,
+    trigger,
     formState: { isValid, errors },
   } = useForm<InvestFormData>({
     mode: 'onChange',
@@ -71,6 +71,9 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
       }),
     ),
   });
+  useEffect(() => {
+    if (watch('amountTransfer')) trigger('amountTransfer');
+  }, [view]);
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
@@ -123,7 +126,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
       }}
       variant={'text'}
       onClick={() =>
-        showModal(DepositModal, {
+        openDepositModal({
           selectedCoin: coin.id,
           // Callback to close the modal if user navigates to history from the deposit modal
           onClose: close,

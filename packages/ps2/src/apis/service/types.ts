@@ -151,6 +151,7 @@ export type Service = {
   pnlSsc90t: string;
   pnlSsc180t: string;
   pnlSsc365t: string;
+  zglySuccessFee: number;
 };
 
 export type TraderServiceChart = {

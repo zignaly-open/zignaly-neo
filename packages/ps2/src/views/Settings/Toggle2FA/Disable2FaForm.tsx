@@ -51,7 +51,12 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
+      <ZigTypography
+        color='neutral300'
+        sx={{ pb: 4 }}
+        component='p'
+        textAlign={'center'}
+      >
         {t('disable-2fa.description')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +80,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             id={'disable-2fa__submit'}
             type='submit'
             variant='contained'
-            size='large'
+            size='xlarge'
             loading={disable2FAStatus.isLoading}
             disabled={!isValid}
           >

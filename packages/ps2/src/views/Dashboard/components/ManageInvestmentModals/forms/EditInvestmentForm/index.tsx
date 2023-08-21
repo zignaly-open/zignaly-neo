@@ -27,11 +27,11 @@ import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { useDebounce } from 'react-use';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import DepositModal from '../../DepositModal';
-import { useZModal } from 'components/ZModal/use';
+import { useOpenDepositModal } from '../../DepositModal';
 import { Add } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
+import { useCanInvestIn } from '../../../../../../util/walls/util';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -39,13 +39,13 @@ function EditInvestmentForm({
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
+  const openDepositModal = useOpenDepositModal();
   const { serviceId, serviceName } = useSelectedInvestment();
   const { edit: editPercent } = useUpdateTakeProfitPercentage(serviceId);
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
   const { data: service } = useServiceDetails(serviceId);
-  const { showModal } = useZModal();
 
   const {
     handleSubmit,
@@ -71,21 +71,24 @@ function EditInvestmentForm({
   });
 
   const toast = useToast();
+  const checkCanInvest = useCanInvestIn();
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
-    await editInvestment({
-      amount: values?.amountTransfer,
-    });
-    toast.success(
-      t('edit-investment:addMoreInvestmentSuccess', {
+    if (checkCanInvest()) {
+      await editInvestment({
         amount: values?.amountTransfer,
-        currency: service.ssc,
-        serviceName,
-      }),
-    );
-    setView(EditInvestmentViews.EditInvestmentSuccess);
+      });
+      toast.success(
+        t('edit-investment:addMoreInvestmentSuccess', {
+          amount: values?.amountTransfer,
+          currency: service.ssc,
+          serviceName,
+        }),
+      );
+      setView(EditInvestmentViews.EditInvestmentSuccess);
+    }
   };
 
   const profitPercent = watch('profitPercentage');
@@ -116,7 +119,7 @@ function EditInvestmentForm({
       }}
       variant={'text'}
       onClick={() =>
-        showModal(DepositModal, {
+        openDepositModal({
           selectedCoin: coin.id,
         })
       }

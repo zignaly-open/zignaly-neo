@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  ZigAlertMessage,
-  ZigButton,
-  ZigInput,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ZigAlertMessage, ZigButton, ZigInput } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUpdatePasswordMutation } from 'apis/user/api';
@@ -15,7 +10,7 @@ import { Form, ModalActions } from 'components/ZModal';
 import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 
-const UpdatePasswordForm = ({ close }: { close: () => void }) => {
+const UpdatePasswordForm = () => {
   const { t } = useTranslation('settings');
   const {
     handleSubmit,
@@ -40,7 +35,6 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
         .then(() => {
           toast.success(t('update-password.success'));
           logout();
-          close();
         })
         .catch((e) => {
           if (e.data.error?.code === 7) {
@@ -55,9 +49,6 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
-        {t('update-password.description')}
-      </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='password'
@@ -100,7 +91,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
             id={'update-password__submit'}
             type='submit'
             variant='contained'
-            size='large'
+            size='xlarge'
             loading={updatePasswordStatus.isLoading}
             disabled={!isValid}
           >

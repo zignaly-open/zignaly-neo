@@ -17,14 +17,14 @@ export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete"
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
-export { default as ZigSlider } from "components/inputs/ZigSlider";
-export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
+export { default as ZigSlider } from "./components/inputs/ZigSlider";
+export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
 
 // TODO: fix storybook & refactor
-export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
-export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
+export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";
+export type { InputAmountAdvancedValueType } from "./components/inputs/InputAmountAdvanced";
 
-export { default as ZigInputAmount } from "components/inputs/ZigInputAmount";
+export { default as ZigInputAmount } from "./components/inputs/ZigInputAmount";
 
 // Basic display components
 export { Loader, CenteredLoader } from "./components/display/Loader";
@@ -35,7 +35,7 @@ export { default as ZigAlertMessage, ErrorMessage } from "./components/display/Z
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigCopyText } from "./components/display/ZigCopyText";
 export { default as ZigProgressBar } from "./components/display/ZigProgressBar";
-export { default as ZigCoinIcon } from "components/display/ZigCoinIcon";
+export { default as ZigCoinIcon } from "./components/display/ZigCoinIcon";
 export { default as ZigQrCode } from "./components/display/ZigQrCode";
 export { default as ZigTabs, ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
 export { default as ZigDropdown } from "./components/display/ZigDropdown";
@@ -66,7 +66,7 @@ export * from "./icons";
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
-export { getPrecisionForCoin, shortenNumber } from "components/display/ZigPriceLabel/util";
+export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this
 export { styledIf } from "utils/styled";
@@ -80,4 +80,4 @@ export { MarginContainer, PageContainer } from "./components/styled";
 export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
-export { HeaderLinksContainer } from "components/navigation/Header/styles";
+export { HeaderLinksContainer } from "./components/navigation/Header/styles";

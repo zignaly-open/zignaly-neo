@@ -24,12 +24,13 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { Box, IconButton, Tooltip, useTheme } from '@mui/material';
-import { TraderServicePageContainer } from '../styles';
+import { PageWithHeaderContainer } from '../styles';
 import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
 import { useToast } from '../../../../util/hooks/useToast';
 import { useActiveExchange } from '../../../../apis/user/use';
+import { ConnectionStateLabelId } from '../ConnectionStateLabel/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -118,63 +119,72 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           </>
         ),
       }),
-      columnHelper.accessor('pnlNetAt', {
+      columnHelper.accessor((row) => +row.pnlNetAt, {
         header: t('tableHeader.P&LTotal'),
+        id: 'pnlNetAt',
         cell: (props) => (
           <ZigTablePriceLabel
             coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
+            value={props.getValue()}
           />
         ),
       }),
-      columnHelper.accessor('sfOwnerAt', {
+      columnHelper.accessor((row) => +row.sfOwnerAt, {
         header: t('tableHeader.totalFeesPaid'),
+        id: 'totalFeesPaid',
         cell: (props) => (
           <ZigTablePriceLabel
             coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
+            value={props.getValue()}
           />
         ),
       }),
-      columnHelper.accessor('ownerSuccessFee', {
-        header: t('tableHeader.successFee'),
-        cell: ({
-          row: {
-            original: {
-              ownerSuccessFee,
-              ownerSfDiscount,
-              account_id: accountId,
-            },
-          },
-        }) => (
-          <Tooltip
-            title={
-              accountId === exchange.internalId
-                ? t('it-is-you-0-fee')
-                : t(
-                    `success-fee-explainer${
-                      ownerSfDiscount ? '-with-discount' : ''
-                    }`,
-                    {
-                      discounted: ownerSuccessFee,
-                      owner: ownerSuccessFee + ownerSfDiscount,
-                      zignalyFee: getServiceZignalyFee(ownerSuccessFee),
-                      discount: ownerSfDiscount,
-                    },
-                  )
-            }
-          >
-            <ZigTypography>
-              {getServiceTotalFee(
+      columnHelper.accessor(
+        (row) =>
+          getServiceTotalFee(
+            row.ownerSuccessFee,
+            row.account_id === exchange.internalId ||
+              row.accountType === 'owner',
+          ),
+        {
+          header: t('tableHeader.successFee'),
+          id: 'ownerSuccessFee',
+          cell: ({
+            getValue,
+            row: {
+              original: {
                 ownerSuccessFee,
-                accountId === exchange.internalId,
-              )}
-              {/* eslint-disable-next-line i18next/no-literal-string */}
-              {'%'}
-            </ZigTypography>
-          </Tooltip>
-        ),
-      }),
+                ownerSfDiscount,
+                account_id: accountId,
+              },
+            },
+          }) => (
+            <Tooltip
+              title={
+                accountId === exchange.internalId
+                  ? t('it-is-you-0-fee')
+                  : t(
+                      `success-fee-explainer${
+                        ownerSfDiscount ? '-with-discount' : ''
+                      }`,
+                      {
+                        discounted: ownerSuccessFee,
+                        owner: ownerSuccessFee + ownerSfDiscount,
+                        zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                        discount: ownerSfDiscount,
+                      },
+                    )
+              }
+            >
+              <ZigTypography>
+                {getValue()}
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                {'%'}
+              </ZigTypography>
+            </Tooltip>
+          ),
+        },
+      ),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
         cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
@@ -188,10 +198,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               account_id: accountId,
               ownerSfDiscount,
               ownerSuccessFee,
+              accountType,
             },
           },
         }) =>
-          accountId !== exchange.internalId && (
+          accountId !== exchange.internalId &&
+          accountType !== ConnectionStateLabelId.DISCONNECTED &&
+          accountType !== 'owner' && (
             <ZigDropdown
               component={() => (
                 <IconButton sx={{ mr: '-4px' }}>
@@ -233,7 +246,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Investor[],
         TraderServiceManagement,
       ]) => (
-        <TraderServicePageContainer>
+        <PageWithHeaderContainer>
           <InvestorCounts>
             <ZigUserIcon
               width={'17px'}
@@ -258,7 +271,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             emptyMessage={t('no-investors')}
             enableSortingRemoval={false}
           />
-        </TraderServicePageContainer>
+        </PageWithHeaderContainer>
       )}
     />
   );

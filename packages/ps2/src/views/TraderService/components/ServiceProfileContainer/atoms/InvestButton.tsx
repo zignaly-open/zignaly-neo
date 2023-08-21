@@ -3,10 +3,6 @@ import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { useIsAuthenticated } from '../../../../../apis/user/use';
 import {
-  useZModal,
-  useZRouteModal,
-} from '../../../../../components/ZModal/use';
-import {
   useCurrentBalance,
   useInvestedAccountsCount,
 } from '../../../../../apis/investment/use';
@@ -15,7 +11,7 @@ import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
-import InvestDepositModal from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
+import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 
 const InvestButton: React.FC<{
   prefixId?: string;
@@ -31,8 +27,7 @@ const InvestButton: React.FC<{
     'edit-investment',
   ]);
   const isAuthenticated = useIsAuthenticated();
-  const { showModal } = useZModal({ disableAutoDestroy: true });
-  const showInvestModal = useZRouteModal(modalRoute);
+  const openInvestModal = useOpenInvestDepositModal(modalRoute);
   const navigate = useNavigate();
   useCurrentBalance(service.ssc);
   const location = useLocation();
@@ -42,11 +37,7 @@ const InvestButton: React.FC<{
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
-      if (modalRoute) {
-        showInvestModal({ serviceId: service.id });
-      } else {
-        showModal(InvestDepositModal, { serviceId: service.id });
-      }
+      openInvestModal(service.id);
     } else {
       const newUser = !localStorage.getItem('hasLoggedIn');
       navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {
@@ -62,7 +53,7 @@ const InvestButton: React.FC<{
   const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   return (
-    <>
+    <Box display={'flex'} flexDirection={'column'} position={'relative'}>
       <ZigButton
         id={prefixId && `${prefixId}__invest-${service.id}`}
         onClick={onClickMakeInvestment}
@@ -102,11 +93,19 @@ const InvestButton: React.FC<{
       </ZigButton>
 
       {showOtherAccounts && (
-        <Box sx={{ pt: 0.5, textAlign: 'center' }}>
+        <Box
+          sx={{
+            pt: 0.5,
+            textAlign: 'center',
+            position: 'absolute',
+            bottom: '-25px',
+            right: '50px',
+          }}
+        >
           <OtherAccountsButton service={service} />
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

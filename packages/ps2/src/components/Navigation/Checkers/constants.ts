@@ -1,1 +1,2 @@
 export const VERSION_CHECK_INTERVAL = 10 * 60_000;
+export const KYC_CHECK_INTERVAL = 5 * 60_000;
