@@ -19,7 +19,7 @@
   "status": {
     "completed": "Completed",
     "pending": "Pending",
-    "failed": "Failed"
+    "rejected": "Rejected"
   },
   "requirements-level-1": {
     "identity": "Identity Document",
@@ -33,7 +33,7 @@
     "selfie": "Selfie/Liveness Verification",
     "residence": "Proof of Residence",
     "questionnaire": {
-      "title":"Questionnaire",
+      "title": "Questionnaire",
       "items": {
         "profession": "Current Profession",
         "proof-of-funds": "Proof of Funds Document <span>(Employment Certificate or Bank statement showing sources of income. Please make sure that the document proves a net worth of at least from 100.000 to USD 250,000)</span>"
