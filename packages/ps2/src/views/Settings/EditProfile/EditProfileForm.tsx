@@ -78,7 +78,7 @@ const EditProfileForm = () => {
 
   const countryOptions = useMemo(
     () =>
-      Object.entries(Countries.getNames(i18n.language)).map(
+      Object.entries(Countries.getNames(i18n.language.split('_')[0])).map(
         ([value, label]) => ({
           value,
           text: label,
