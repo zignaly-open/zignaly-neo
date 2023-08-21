@@ -49,7 +49,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: user.bio || '',
+      bio: user.about || '',
       country: user.country || '',
     },
   });
