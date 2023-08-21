@@ -94,10 +94,6 @@
         "SUCCESS_FEE_REWARD": "Success Fee earning",
         "REBATE_COMMISSION_REWARD": "Rebate Fee earning"
     },
-    "header": {
-        "title": "Earn 20%",
-        "description": "Invite Friends"
-    },
     "create-invite": {
         "create-invite": "Share Invite",
         "invite-friends": "Invite Friends",
@@ -108,12 +104,11 @@
         "trader-cta": "Want to earn $20\nand a stream\nof investors?",
         "scan-qr": "Scan the QR code and join me on Zignaly!",
         "customize-text": "Customize your invitation:",
-        "invite-text-friend": "Let's earn together! Join me at Zignaly and invest with your favourite Crypto Fund Managers! Get a ${{reward}} Fee Voucher on your first deposit!",
+        "invite-text-friend": "Let's earn together! Join me at Zignaly and invest with your favourite Crypto Fund Managers!",
         "invite-text-trader": "Let's earn together! Join me at Zignaly and create your own Crypto Fund!",
         "scan-join": "Scan the QR code and join me on <0>app.zignaly.com</0>",
         "invite-code": "Code: <0>{{code}}</0>",
-
-        "ugly-friend-cta": "Get a <0>${{reward}}</0> fee Voucher on your first deposit",
+        "ugly-friend-cta": "Invest in a vetted and curated marketplace of crypto fund managers",
         "ugly-trader-cta": "Become a Crypto <0>Fund Manager</0> at Zignaly!"
     },
     "share": {

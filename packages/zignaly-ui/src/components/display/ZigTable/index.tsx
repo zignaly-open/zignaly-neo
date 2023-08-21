@@ -8,22 +8,17 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
 } from "@tanstack/react-table";
-import {
-  TableContainer,
-  HeaderIconButton,
-  PageNumberContainer,
-  SmallSelectWrapper,
-  SortBox,
-} from "./styles";
+import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import { Box, IconButton } from "@mui/material";
-import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
+import { Box, IconButton, useTheme } from "@mui/material";
+import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
+import { ZigDotsVerticalIcon } from "../../../icons";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -38,6 +33,7 @@ export default function ZigTable<T extends object>({
   emptyMessage,
   ...rest
 }: ZigTableProps<T>) {
+  const theme = useTheme();
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
   const [columnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
@@ -59,6 +55,7 @@ export default function ZigTable<T extends object>({
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderSubComponent,
     debugTable: false,
+    sortDescFirst: true, // or let it be overriden next line
     ...rest,
   });
 
@@ -71,7 +68,7 @@ export default function ZigTable<T extends object>({
           <thead>
             {table.getHeaderGroups().map((headerGroup, groupIndex) => (
               <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header, index) => {
+                {headerGroup.headers.map((header) => {
                   return (
                     <th
                       key={header.id}
@@ -86,8 +83,8 @@ export default function ZigTable<T extends object>({
                             `${prefixId}-table__header-${header.column.columnDef.id}`
                       }
                     >
-                      {header.isPlaceholder ? null : (
-                        <Box display="flex" justifyContent="center" alignItems="center">
+                      {!header.isPlaceholder && (
+                        <HeaderBox>
                           <SortBox
                             canSort={header.column.getCanSort()}
                             onClick={header.column.getToggleSortingHandler()}
@@ -113,47 +110,50 @@ export default function ZigTable<T extends object>({
                               />
                             )}
                           </SortBox>
-                          {enableColumnVisibility &&
-                            table.getHeaderGroups().length === groupIndex + 1 &&
-                            headerGroup.headers.length === index + 1 && (
-                              <ZigDropdown
-                                component={() => (
-                                  <HeaderIconButton
-                                    id={prefixId && `${prefixId}-table__popover-filter`}
-                                  >
-                                    <MoreVert sx={{ color: "neutral200" }} />
-                                  </HeaderIconButton>
-                                )}
-                                options={table
-                                  .getAllLeafColumns()
-                                  .filter(
-                                    (c) =>
-                                      c.columnDef.header &&
-                                      typeof c.columnDef.header === "string" &&
-                                      c.getCanHide(),
-                                  )
-                                  .map((column) => {
-                                    return {
-                                      element: (
-                                        <CheckBox
-                                          value={column.getIsVisible()}
-                                          label={column.columnDef.header as string}
-                                          onChange={(v) => {
-                                            if (v || table.getVisibleLeafColumns().length > 2) {
-                                              column.toggleVisibility(v);
-                                            }
-                                          }}
-                                        />
-                                      ),
-                                    };
-                                  })}
-                              />
-                            )}
-                        </Box>
+                        </HeaderBox>
                       )}
                     </th>
                   );
                 })}
+
+                {enableColumnVisibility && table.getHeaderGroups().length === groupIndex + 1 && (
+                  <th style={{ width: "50px" }}>
+                    <ZigDropdown
+                      component={() => (
+                        <HeaderIconButton id={prefixId && `${prefixId}-table__popover-filter`}>
+                          <ZigDotsVerticalIcon
+                            color={theme.palette.neutral200}
+                            height={16}
+                            width={16}
+                          />
+                        </HeaderIconButton>
+                      )}
+                      options={table
+                        .getAllLeafColumns()
+                        .filter(
+                          (c) =>
+                            c.columnDef.header &&
+                            typeof c.columnDef.header === "string" &&
+                            c.getCanHide(),
+                        )
+                        .map((column) => {
+                          return {
+                            element: (
+                              <CheckBox
+                                value={column.getIsVisible()}
+                                label={column.columnDef.header as string}
+                                onChange={(v) => {
+                                  if (v || table.getVisibleLeafColumns().length > 2) {
+                                    column.toggleVisibility(v);
+                                  }
+                                }}
+                              />
+                            ),
+                          };
+                        })}
+                    />
+                  </th>
+                )}
               </tr>
             ))}
           </thead>
@@ -167,9 +167,16 @@ export default function ZigTable<T extends object>({
                       style: { cursor: "pointer" },
                     })}
                   >
-                    {row.getVisibleCells().map((cell) => {
+                    {row.getVisibleCells().map((cell, index) => {
                       return (
-                        <td key={cell.id}>
+                        <td
+                          key={cell.id}
+                          colSpan={
+                            enableColumnVisibility && row.getVisibleCells().length === index + 1
+                              ? 2
+                              : undefined
+                          }
+                        >
                           <ZigTypography fontWeight="medium" color="neutral200">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </ZigTypography>
@@ -227,11 +234,11 @@ export default function ZigTable<T extends object>({
               id={prefixId && `${prefixId}-table__pages`}
             >
               <ZigTypography color="neutral300">Page</ZigTypography>
-              <PageNumberContainer>
-                <ZigTypography variant="h3" color="neutral100">
-                  {table.getState().pagination.pageIndex + 1}
-                </ZigTypography>
-              </PageNumberContainer>
+
+              <ZigTypography variant="h3" color="neutral100">
+                {table.getState().pagination.pageIndex + 1}
+              </ZigTypography>
+
               {table.getPageCount() !== -1 && (
                 <>
                   <ZigTypography whiteSpace="nowrap" color="neutral300">
@@ -271,14 +278,13 @@ export default function ZigTable<T extends object>({
             display="flex"
             gap={2}
             alignItems="center"
-            mx={2}
-            flexBasis={["100%", "auto"]}
             justifyContent={["center", "flex-end"]}
             marginTop={[1, 0]}
           >
             <ZigTypography color="neutral300">Displaying</ZigTypography>
             <SmallSelectWrapper>
               <ZigSelect
+                menuPlacement={"top"}
                 id={prefixId && `${prefixId}-table__items-per-page`}
                 options={pageSizeOptions}
                 value={table.getState().pagination.pageSize}

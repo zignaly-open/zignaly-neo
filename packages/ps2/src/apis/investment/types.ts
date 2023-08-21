@@ -49,6 +49,7 @@ export type Investment = InvestmentServiceDetails & {
   accountId: string;
   sparklines: ZigChartAxisFormatType[] | number[];
   createdAt: string;
+  ownerSfDiscount: string;
   updatedAt: string;
   periodsLc: string;
   pnlSumLc: string;

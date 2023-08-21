@@ -2,7 +2,7 @@ import { styled } from '@mui/material';
 import { ZigGlobeLanguages, styledIf, ZigTypography } from '@zignaly-open/ui';
 
 export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
-  color: #706f82;
+  color: ${({ theme }) => theme.palette.neutral400};
   font-weight: 500;
   font-size: 14px;
   line-height: 28px;
@@ -12,14 +12,14 @@ export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
 
   svg {
     transition: 0.15s linear;
-    fill: #706f82;
+    fill: ${({ theme }) => theme.palette.neutral400};
   }
 
-  ${({ active }) => `
+  ${({ active, theme }) => `
     ${styledIf(
       active,
       `
-      color: #7682f7;
+      color: ${theme.palette.highlighted};
     `,
       `
 
@@ -27,10 +27,10 @@ export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
         cursor: pointer;
 
         &:hover {
-          color: #fff;
+          color: ${theme.palette.neutral000};
           
           svg {
-            fill: #fff;
+            fill: ${theme.palette.neutral000};
           }
         }
       }
@@ -40,8 +40,8 @@ export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
 
   &:hover {
     span svg {
-      fill: #fff;
-      color: #fff;
+      fill: ${({ theme }) => theme.palette.neutral000};
+      color: ${({ theme }) => theme.palette.neutral000};
     }
   }
 `;
@@ -66,12 +66,17 @@ export const NavList = styled('div')`
 
 export const Networks = styled('div')`
   display: grid;
-  max-width: 185px;
   grid-template-columns: repeat(5, minmax(0%, 100%));
   justify-content: center;
   align-items: center;
   gap: 16px;
-  padding-top: 8px;
+  background: ${({ theme }) => theme.palette.backgrounds.socialNetworksTab};
+  padding: 19px 32px;
+  margin: 6px -32px -12px;
+
+  > a {
+    line-height: 0;
+  }
 
   span svg {
     fill: #707185;

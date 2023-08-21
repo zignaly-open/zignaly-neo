@@ -1,27 +1,35 @@
-import { styled, css } from '@mui/material';
+import styled from '@emotion/styled';
+import { css, Box, IconButton } from '@mui/material';
 import { styledIf, ZigTypography } from '@zignaly-open/ui';
+import { withAttrs } from 'util/styles';
 
-export const Layout = styled('div')<{ width: number }>`
+export const Layout = styled(Box)<{ width: number }>`
   display: flex;
   position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background: #101225;
-  border: 1px solid #35334a;
+  background: ${({ theme }) =>
+    theme.palette.backgrounds.modal || theme.palette.neutral800};
+  border: 1px solid ${(props) => props.theme.palette.neutral600};
   border-radius: 16px;
   padding: 40px 56px;
+
+  &:focus-visible {
+    outline: none;
+  }
+
   ${({ width }) =>
     width &&
     css`
       width: ${width}px; // TODO: responsiveness
     `};
-  user-select: none;
 `;
 
 export const Title = styled(ZigTypography)`
   display: flex;
   justify-content: space-between;
+  text-transform: capitalize;
 `;
 
 export const Body = styled('div')`
@@ -38,9 +46,14 @@ export const Body = styled('div')`
   width: calc(100% + 80px);
   padding-left: 40px;
   padding-right: 40px;
+
+  /* Style Description  */
+  > .MuiTypography-root:first-child {
+    margin-bottom: 24px;
+  }
 `;
 
-export const Header = styled('div')<{ compact: boolean }>`
+export const Header = styled(Box)<{ compact: boolean }>`
   display: flex;
   z-index: 999;
   position: relative;
@@ -48,7 +61,7 @@ export const Header = styled('div')<{ compact: boolean }>`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   ${({ compact }) =>
     compact &&
     `
@@ -56,22 +69,6 @@ export const Header = styled('div')<{ compact: boolean }>`
     position: absolute;
     right: 56px;
     top: 40px;
-  `}
-`;
-
-export const HeaderButton = styled('button')`
-  border: 0;
-  padding: 0;
-  margin: 0;
-  height: 32px;
-  width: 32px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  ${({ theme }) => `
-    svg { 
-      fill: ${theme.palette.neutral300};
-    }
   `}
 `;
 
@@ -91,24 +88,19 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 56px;
-  gap: 32px;
-`;
-
-// todo: check if it can replace ModalActions
-export const ModalActionsNew = styled('div')<{
+export const ModalActions = styled(
+  withAttrs(Box, {
+    /* Will be overwritten to a smaller margin when inside Form */
+    mt: '35px',
+  }),
+)<{
   align?: 'left' | 'center' | 'right';
+  direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
-  margin-top: 56px;
-  gap: 14px;
-  flex-direction: row;
+  gap: 32px;
+  flex-direction: ${({ direction }) => direction};
   width: 100%;
   justify-content: ${({ align }) =>
     align === 'left'
@@ -118,7 +110,27 @@ export const ModalActionsNew = styled('div')<{
       : 'center'};
 `;
 
-export const AlertBlock = styled('div')`
-  display: flex;
-  margin-top: 15px;
+export const Form = styled(
+  withAttrs(Box, {
+    component: 'form',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 3,
+  }),
+)`
+  > ${ModalActions} {
+    margin-top: 11px;
+  }
+`;
+
+export const BackIconButton = styled(IconButton)`
+  position: absolute;
+  left: 22px;
+  top: 16px;
+`;
+
+export const CloseIconButton = styled(IconButton)`
+  position: absolute;
+  right: 22px;
+  top: 16px;
 `;

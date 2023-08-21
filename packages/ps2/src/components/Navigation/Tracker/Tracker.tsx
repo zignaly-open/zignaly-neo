@@ -1,28 +1,33 @@
 import React, { useEffect } from 'react';
 import { useCurrentUser } from '../../../apis/user/use';
-import { track, trackCta } from '@zignaly-open/tracker';
+import { track } from '@zignaly-open/tracker';
 import { useLocation } from 'react-router-dom';
 import { trackPage } from 'util/analytics';
+import useTrackEvent from './use';
 
 const Tracker: React.FC = () => {
   const { userId } = useCurrentUser();
   const location = useLocation();
+  const trackEvent = useTrackEvent();
 
   useEffect(() => {
     const clickListener = (e: MouseEvent) => {
-      const node = e.target as HTMLElement;
-      if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
-        const ctaId =
-          node.getAttribute('data-track-cta') || node.getAttribute('id');
-        ctaId &&
-          trackCta({
-            userId,
-            ctaId,
-          });
-      }
+      let node = e.target as HTMLElement;
+      // the target could be a child event of a button
+      do {
+        if (['a', 'button'].includes(node?.tagName?.toLocaleLowerCase())) {
+          const ctaId =
+            node.getAttribute('data-track-cta') || node.getAttribute('id');
+          const noAutoTrack = node.getAttribute('data-no-auto-track');
+          ctaId && !noAutoTrack && trackEvent(ctaId);
+          break;
+        } else {
+          node = node.parentNode as HTMLElement;
+        }
+      } while (node);
     };
-    document.addEventListener('click', clickListener);
-    return () => document.removeEventListener('click', clickListener);
+    document.addEventListener('mouseup', clickListener);
+    return () => document.removeEventListener('mouseup', clickListener);
   }, [userId]);
 
   useEffect(() => {

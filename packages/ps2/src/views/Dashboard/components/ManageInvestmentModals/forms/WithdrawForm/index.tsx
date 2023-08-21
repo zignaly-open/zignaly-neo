@@ -1,33 +1,39 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
   ErrorMessage,
   ZigSelect,
-  InputAmountAdvanced,
   ZigButton,
   ZigInput,
-  ZigTypography,
-  InputAmountAdvancedValueType,
   CenteredLoader,
+  ZigInputAmount,
+  ZigListIcon,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   useCoinBalances,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { WithdrawValidation } from './validations';
-import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { withdrawAmountValidation } from './validations';
+import { Form, ModalActions } from 'components/ZModal';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
-import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
-import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { useActiveExchange, useCheckWithdraw } from 'apis/user/use';
+import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
+import { useNavigate } from 'react-router-dom';
 
-function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
+function WithdrawForm({
+  setStep,
+  selectedCoin,
+  close,
+  step,
+}: WithdrawModalProps) {
+  const navigate = useNavigate();
   const { t } = useTranslation('withdraw-crypto');
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
@@ -37,19 +43,19 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { internalId } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
 
-  const check2FA = useCheck2FA({
+  const checkWithdraw = useCheckWithdraw({
     status: withdrawStatus,
   });
 
   const handleWithdraw = async () => {
-    check2FA(async (code) => {
+    checkWithdraw(async (code) => {
       await withdraw({
         asset: coin,
         network: confirmationData.network,
         exchangeInternalId: internalId,
         address: confirmationData.address,
         tag: confirmationData.tag,
-        amount: confirmationData.amount.value.toString(),
+        amount: confirmationData.amount,
         code,
       }).unwrap();
 
@@ -71,9 +77,16 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
     defaultValues: {
       address: '',
       tag: '',
+      amount: '',
     },
     resolver: (data, context, options) =>
-      yupResolver(WithdrawValidation(networkObject))(data, context, options),
+      yupResolver(
+        withdrawAmountValidation(
+          coin,
+          coinObject?.available.toString(),
+          networkObject,
+        ),
+      )(data, context, options),
   });
 
   const coin = watch('coin') as string;
@@ -93,7 +106,14 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         return {
           value: c,
           name,
-          label: <CoinOption key={c} coin={c} name={name} />,
+          label: (
+            <CoinOption
+              key={c}
+              coin={c}
+              name={name}
+              prefixId={'withdraw-modal'}
+            />
+          ),
           available: balance?.maxWithdrawAmount || 0,
           networks: coins[c].networks?.map((n) => ({
             label: n.name,
@@ -129,7 +149,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
 
   useEffect(() => {
     const { amount, address } = getValues();
-    if (amount && amount.value !== '') {
+    if (amount) {
       trigger('amount');
     }
 
@@ -144,19 +164,15 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
     return <CenteredLoader />;
   }
 
-  if (confirmationData) {
+  if (confirmationData && ['confirm', 'success'].includes(step)) {
     return (
       <WithdrawConfirmForm
         action={handleWithdraw}
         status={withdrawStatus}
-        back={() => {
-          setConfirmationData(null);
-          setStep('');
-        }}
         {...confirmationData}
-        amount={Number(confirmationData.amount.value)}
+        amount={Number(confirmationData.amount)}
         networkName={networkObject.name}
-        networkCoin={networkObject.coin}
+        networkCoin={networkObject.network}
         coin={coin}
         fee={parseFloat(networkObject.withdrawFee)}
         close={close}
@@ -165,89 +181,79 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   }
 
   return (
-    <form
+    <Form
       onSubmit={handleSubmit((data) => {
         setStep('confirm');
         setConfirmationData(data);
       })}
       autoComplete='off'
     >
-      <Box mt={1} mb={1}>
-        <ZigTypography id={'withdraw-modal-description'}>
-          {t('description')}
-        </ZigTypography>
-      </Box>
-
-      <Grid container>
-        <Grid item xs={12} pt={3}>
-          <Controller
-            name='coin'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                id={'withdraw-modal__select-coin'}
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('coinSelector.label')}
-                placeholder={t('coinSelector.placeholder')}
-                options={coinOptions}
-                filterOption={filterOptions}
-                {...field}
-              />
-            )}
+      <Controller
+        name='coin'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigSelect
+            id={'withdraw-modal__select-coin'}
+            menuPlacement='auto'
+            menuShouldScrollIntoView={false}
+            menuPosition='fixed'
+            menuShouldBlockScroll
+            label={t('coinSelector.label')}
+            placeholder={t('coinSelector.placeholder')}
+            options={coinOptions}
+            filterOption={filterOptions}
+            width={260}
+            {...field}
           />
-        </Grid>
+        )}
+      />
 
-        <Grid item xs={12} pt={3}>
-          <Controller
-            name='network'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                id={'withdraw-modal__select-network'}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                menuShouldScrollIntoView={false}
-                label={t('networkSelector.label')}
-                placeholder={t('networkSelector.placeholder')}
-                options={coinObject?.networks}
-                {...field}
-              />
-            )}
+      <Controller
+        name='network'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigSelect
+            id={'withdraw-modal__select-network'}
+            menuPosition='fixed'
+            menuShouldBlockScroll
+            menuShouldScrollIntoView={false}
+            label={t('networkSelector.label')}
+            placeholder={t('networkSelector.placeholder')}
+            options={coinObject?.networks}
+            width={260}
+            {...field}
           />
-        </Grid>
+        )}
+      />
 
-        {!!network && !networkObject?.withdrawEnable ? (
-          <Box mt={2}>
-            <ErrorMessage text={networkObject?.withdrawDesc} />
-          </Box>
-        ) : (
-          <>
-            <Grid item xs={12} pt={3}>
-              <Controller
-                name='address'
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <ZigInput
-                    fullWidth
-                    id={'withdraw-modal__input-address'}
-                    label={t('withdrawAddress.label')}
-                    placeholder={t('withdrawAddress.placeholder')}
-                    error={t(errors.address?.message)}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-
+      {!!network && !networkObject?.withdrawEnable ? (
+        <Box mt='-21px'>
+          <ErrorMessage text={networkObject?.withdrawDesc} />
+        </Box>
+      ) : (
+        <>
+          <div>
+            <Controller
+              name='address'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  fullWidth
+                  id={'withdraw-modal__input-address'}
+                  label={t('withdrawAddress.label')}
+                  placeholder={t('withdrawAddress.placeholder')}
+                  error={t(errors.address?.message)}
+                  {...field}
+                />
+              )}
+            />
             {networkObject?.label && (
               <Box>
                 <ErrorMessage
+                  id={'withdraw-modal__input-address-warning'}
                   text={t('withdrawAddress.warning', {
                     network: networkObject?.label,
                     coin: coinObject?.name,
@@ -255,100 +261,88 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                 />
               </Box>
             )}
+          </div>
 
-            {!!networkObject?.memoRegex && (
-              <Grid item xs={12} pt={3}>
-                <Controller
-                  name='tag'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <ZigInput
-                      fullWidth
-                      id={'withdraw-modal__input-memo'}
-                      label={t('withdrawMemo.label')}
-                      placeholder={t('withdrawMemo.placeholder')}
-                      error={t(errors.tag?.message)}
-                      {...field}
-                    />
-                  )}
+          {!!networkObject?.memoRegex && (
+            <Controller
+              name='tag'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  fullWidth
+                  id={'withdraw-modal__input-memo'}
+                  label={t('withdrawMemo.label')}
+                  placeholder={t('withdrawMemo.placeholder')}
+                  error={t(errors.tag?.message)}
+                  {...field}
                 />
-              </Grid>
-            )}
+              )}
+            />
+          )}
 
+          <Box sx={{ minHeight: 134 }}>
             {coinObject && (
-              <Grid item xs={12} mt={3}>
-                <InputAmountAdvanced
-                  name='amount'
-                  id={'withdraw-modal__input-amount'}
-                  control={control}
-                  label={t('amountToWithdraw.label')}
-                  showUnit={true}
-                  showBalance={false}
-                  placeholder='0.0'
-                  tokens={[
-                    {
-                      id: coin,
-                      balance: coinObject.available,
-                    },
-                  ]}
-                  error={t(
-                    (
-                      errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
-                    )?.value?.message,
-                  )}
-                />
-                <Box mt={1}>
-                  <LabelValueLine
-                    prefixId={'withdraw-modal-balance'}
-                    label={t('amountToWithdraw.labelBalance')}
-                    value={coinObject.available.toString()}
+              <Controller
+                name={'amount'}
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <ZigInputAmount
+                    id={'withdraw-modal__input-amount'}
+                    label={t('amountToWithdraw.label')}
+                    wide={true}
                     coin={coin}
+                    balance={coinObject.available}
+                    min={networkObject?.withdrawMin}
+                    extraInfo={{
+                      wrapExtraInfo: 3,
+                      others: networkObject?.withdrawFee && [
+                        {
+                          label: t('amountToWithdraw.fee'),
+                          value: networkObject?.withdrawFee,
+                        },
+                      ],
+                    }}
+                    error={t(errors?.amount?.message)}
+                    {...field}
                   />
-                </Box>
-                {networkObject && (
-                  <>
-                    <LabelValueLine
-                      prefixId={'withdraw-modal-minimum'}
-                      label={t('amountToWithdraw.minimum')}
-                      value={networkObject.withdrawMin}
-                      coin={coin}
-                    />
-                    <LabelValueLine
-                      prefixId={'withdraw-modal-fee'}
-                      label={t('amountToWithdraw.fee')}
-                      value={networkObject.withdrawFee}
-                      coin={coin}
-                    />
-                  </>
                 )}
-              </Grid>
+              />
             )}
+          </Box>
 
-            <ModalActions align='right'>
-              <ZigButton
-                id={'withdraw-modal__close'}
-                size={'large'}
-                type={'button'}
-                variant={'outlined'}
-                onClick={close}
-              >
-                {t('common:close')}
-              </ZigButton>
-
-              <ZigButton
-                id={'withdraw-modal__continue'}
-                size={'large'}
-                type={'submit'}
-                disabled={!canSubmit}
-              >
-                {t('confirmation.continue')}
-              </ZigButton>
-            </ModalActions>
-          </>
-        )}
-      </Grid>
-    </form>
+          <ModalActions position='relative'>
+            <ZigButton
+              id={'withdraw-modal__continue'}
+              size={'large'}
+              type={'submit'}
+              disabled={!canSubmit}
+            >
+              {t('confirmation.continue')}
+            </ZigButton>
+            <ZigButton
+              sx={{ position: 'absolute', right: '-22px', bottom: 0 }}
+              id={'withdraw-modal__history'}
+              startIcon={
+                <ZigListIcon
+                  width={'24px'}
+                  height={'24px'}
+                  color={'neutral100'}
+                  style={{
+                    verticalAlign: 'middle',
+                  }}
+                />
+              }
+              variant='text'
+              onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}
+            >
+              {t('history')}
+            </ZigButton>
+          </ModalActions>
+        </>
+      )}
+    </Form>
   );
 }
 

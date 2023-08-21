@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Box } from '@mui/material';
 import {
   useActiveExchange,
@@ -13,6 +13,12 @@ import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
 import { CenteredLoader } from '@zignaly-open/ui';
+
+const loadingSpinner = (
+  <LoaderWrapper>
+    <CenteredLoader width={155} height={40} />
+  </LoaderWrapper>
+);
 
 const MarketplaceAction = ({
   service,
@@ -35,29 +41,24 @@ const MarketplaceAction = ({
     : 0;
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Box sx={{ minWidth: 195 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ minWidth: 165 }}>
         {isLoading ? (
-          <LoaderWrapper>
-            <CenteredLoader width={195} height={40} />
-          </LoaderWrapper>
+          loadingSpinner
         ) : (
-          <>
-            {isAuthenticated && investedAmount ? (
-              <InvestedButtonBase
-                prefixId={prefixId}
-                ctaId={'marketplace-invested-button'}
-                service={traderService}
-                investedAmount={investedAmount.toString()}
-              />
-            ) : (
-              <InvestButton
-                prefixId={prefixId}
-                service={traderService}
-                ctaId={'marketplace-invest-button'}
-              />
-            )}
-          </>
+          <Suspense fallback={loadingSpinner}>
+            <>
+              {isAuthenticated && investedAmount ? (
+                <InvestedButtonBase
+                  prefixId={prefixId}
+                  service={traderService}
+                  investedAmount={investedAmount.toString()}
+                />
+              ) : (
+                <InvestButton prefixId={prefixId} service={traderService} />
+              )}
+            </>
+          </Suspense>
         )}
       </Box>
     </Box>

@@ -9,35 +9,48 @@ export const ZigButtonGroupInputWrapper = styled(Box)`
 export const SuccessFieldWrapper = styled(Box)`
   display: flex;
   position: relative;
-  flex-direction: row;
+  flex-direction: column;
+
   .MuiFormControl-root {
-    min-width: 100px;
-    width: 50%;
-    margin-top: 0;
-    &,
-    & > label {
-      overflow: visible;
-    }
+    z-index: 1;
+    width: 135px;
 
     .MuiInput-root {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      margin-top: 0;
+
+      input {
+        text-align: center;
+        margin-left: 18px;
+        width: 100%;
+      }
+
+      .MuiTypography-root,
+      input {
+        color: ${({ theme }) => theme.palette.neutral200} !important;
+        -webkit-text-fill-color: ${({ theme }) =>
+          theme.palette.neutral200} !important;
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    p {
+      white-space: nowrap;
     }
   }
 `;
 
-export const SuccessFieldWrapperShit = styled(Box)`
-  min-width: 200px;
-  width: 50%;
+export const SuccessFieldReceive = styled(Box)`
+  min-width: 135px;
   height: 60px;
-  padding-top: 17px;
   text-align: center;
-  margin-top: 48px;
-  border: 1px solid #35334a;
-  border-left-width: 0;
   position: relative;
-  /* border-left-width: 0; */
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: #090a15;
+  background: ${({ theme }) => theme.palette.neutral750};
+  margin-left: -4px;
 `;

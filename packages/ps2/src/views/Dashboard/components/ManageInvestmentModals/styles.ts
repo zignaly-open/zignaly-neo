@@ -6,13 +6,14 @@ export const Investor = styled('div')`
   flex-direction: row;
   gap: 22px;
   align-items: center;
-  margin-bottom: 32px;
-  margin-top: 18px;
+  justify-content: center;
+  margin-bottom: 36px;
 `;
 
 export const InvestorData = styled('div')`
   display: flex;
   flex-direction: column;
+  gap: 2px;
 `;
 
 export const InvestorName = styled(ZigTypography)``;
@@ -60,29 +61,6 @@ export const Grid = styled('div')`
   margin-top: 12px;
 `;
 
-export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
-  flex-direction: column;
-  display: flex;
-
-  height: 100%;
-`;
-
-export const WithdrawFundsButtonWrapper = styled('div')`
-  text-align: center;
-  margin-top: 56px;
-
-  button {
-    min-width: 170px;
-  }
-`;
-
 export const TransactionContainer = styled('div')`
-  margin-top: 42px;
-`;
-
-export const WithdrawActions = styled('div')`
-  margin-top: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 42px -54px 0;
 `;

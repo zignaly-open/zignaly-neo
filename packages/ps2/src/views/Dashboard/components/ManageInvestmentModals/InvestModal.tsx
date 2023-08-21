@@ -1,44 +1,54 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DialogProps } from '@mui/material/Dialog';
 import { useSelectedInvestment } from '../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import ZModal from '../../../../components/ZModal';
 import InvestView from './views/Invest';
+import { InvestmentViews, UseModalReturn } from './types';
+import { useUpdateEffect } from 'react-use';
+import { track } from '@zignaly-open/tracker';
+import { useCurrentUser } from '../../../../apis/user/use';
 
-function InvestModal({
+export function useInvestModalContent({
   close,
-  ...props
 }: {
   close: () => void;
-} & DialogProps): React.ReactElement {
+}): UseModalReturn {
   const service = useSelectedInvestment();
-  const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
-  const { isLoading: isLoadingCoins } = useCoinBalances();
-  const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
-  const isLoading = isLoadingService || isLoadingCoins;
-  const [isInvested, setIsInvested] = useState(false);
-
-  return (
-    <ZModal
-      wide
-      {...props}
-      close={close}
-      title={t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with')}
-      isLoading={isLoading}
-    >
-      {!isLoading && (
-        <InvestView
-          close={close}
-          isInvested={isInvested}
-          setIsInvested={setIsInvested}
-        />
-      )}
-    </ZModal>
+  const { isLoading: isLoadingService } = useServiceDetails(
+    service?.serviceId,
+    { skip: !service },
   );
+  const { userId } = useCurrentUser();
+  const { isLoading: isLoadingCoins } = useCoinBalances();
+  const { t } = useTranslation('edit-investment');
+  const isLoading = isLoadingService || isLoadingCoins || !service;
+  const [view, setView] = useState(InvestmentViews.Investment);
+
+  // poor man's router
+  useUpdateEffect(() => {
+    track({
+      hash: {
+        [InvestmentViews.InvestmentConfirm]: 'invest-confirm',
+        [InvestmentViews.Investment]: 'invest',
+        [InvestmentViews.InvestmentSuccess]: 'invest-success',
+      }[view],
+      userId,
+    });
+  }, [view]);
+
+  return {
+    title: t(
+      view === InvestmentViews.InvestmentSuccess
+        ? 'modalSuccess.title'
+        : 'invest-modal.invest-with',
+    ),
+    onGoBack:
+      view === InvestmentViews.InvestmentConfirm
+        ? () => setView(InvestmentViews.Investment)
+        : undefined,
+    view,
+    component: () =>
+      !isLoading && <InvestView close={close} view={view} setView={setView} />,
+  };
 }
-
-InvestModal.trackId = 'invest';
-
-export default InvestModal;

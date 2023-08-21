@@ -11,6 +11,7 @@ function CheckBox({
   label,
   disabled = false,
   onChange,
+  id,
 }: CheckBoxProps) {
   const isControlled = useRef(value !== undefined);
   const [internalValue, setInternalValue] = useState(defaultValue);
@@ -29,9 +30,9 @@ function CheckBox({
   }, [disabled, isChecked]);
 
   return (
-    <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled}>
-      <Box>{isChecked && <Icon />}</Box>
-      <Label variant={"body2"} color={"neutral300"}>
+    <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled} id={id}>
+      <Box id={id && `${id}-checkbox`}>{isChecked && <Icon />}</Box>
+      <Label variant={"body2"} color={"neutral300"} id={id && `${id}-label`}>
         {label}
       </Label>
     </Layout>

@@ -6,7 +6,6 @@ export type ModalContainerProps = {
   titleAlign?: 'center' | 'left';
   width?: number;
   padding?: number;
-  customHeaderAction?: null | React.ReactElement;
   onClickClose?: () => void;
   onGoBack?: () => void;
 };

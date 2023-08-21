@@ -8,15 +8,19 @@ export const transactionStateName: {
   [TransactionStateType.SENT]: 'status.completed',
   [TransactionStateType.TRANSFER]: 'status.pending',
   [TransactionStateType.PENDING]: 'status.pending',
+  [TransactionStateType.REVIEWING]: 'status.reviewing',
+  [TransactionStateType.PENDING_TO_APPROVE]: 'status.reviewing',
   [TransactionStateType.ERROR]: 'status.error',
 };
 
 export const transactionStateColor: {
-  [key in TransactionStateType]: keyof ThemeType;
+  [key in TransactionStateType]: keyof ThemeType['palette'];
 } = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
   [TransactionStateType.SENT]: 'greenGraph',
   [TransactionStateType.TRANSFER]: 'yellow',
   [TransactionStateType.PENDING]: 'yellow',
+  [TransactionStateType.REVIEWING]: 'yellow',
+  [TransactionStateType.PENDING_TO_APPROVE]: 'yellow',
   [TransactionStateType.ERROR]: 'red',
 };

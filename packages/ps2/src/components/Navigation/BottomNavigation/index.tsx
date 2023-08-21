@@ -1,26 +1,27 @@
 import {
-  BottomNavigationAction,
   BottomNavigation,
-  Paper,
+  BottomNavigationAction,
   Box,
+  Paper,
   useMediaQuery,
 } from '@mui/material';
 import { useIsAuthenticated } from 'apis/user/use';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, useLocation, matchPath } from 'react-router-dom';
+import { generatePath, Link, matchPath, useLocation } from 'react-router-dom';
 import {
-  ROUTE_PROFIT_SHARING,
   ROUTE_DASHBOARD,
-  ROUTE_REFERRALS,
   ROUTE_MY_BALANCES,
+  ROUTE_PROFIT_SHARING,
+  ROUTE_REFERRALS,
 } from 'routes';
 import theme from 'theme';
 import { ReactComponent as BalanceIcon } from 'images/tab-balance.svg';
 import { ReactComponent as MarketplaceIcon } from 'images/tab-marketplace.svg';
 import { ReactComponent as PortfolioIcon } from 'images/tab-portfolio.svg';
 import { ReactComponent as RewardsIcon } from 'images/tab-rewards.svg';
-import { Link } from 'react-router-dom';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 const tabs = [
   ROUTE_DASHBOARD,
@@ -62,7 +63,7 @@ const ZigBottomNavigation = () => {
         elevation={3}
       >
         <BottomNavigation
-          sx={{ backgroundColor: 'neutral800' }}
+          sx={{ backgroundColor: 'neutral900' }}
           showLabels
           value={tabValue}
           onChange={(event, newValue) => {
@@ -83,13 +84,15 @@ const ZigBottomNavigation = () => {
             component={Link}
             value={ROUTE_DASHBOARD}
           />
-          <BottomNavigationAction
-            label={t('account-menu.referrals')}
-            icon={<RewardsIcon />}
-            to={generatePath(ROUTE_REFERRALS)}
-            component={Link}
-            value={ROUTE_REFERRALS}
-          />
+          {isFeatureOn(Features.Referrals) && (
+            <BottomNavigationAction
+              label={t('account-menu.referrals')}
+              icon={<RewardsIcon />}
+              to={generatePath(ROUTE_REFERRALS)}
+              component={Link}
+              value={ROUTE_REFERRALS}
+            />
+          )}
           <BottomNavigationAction
             label={t('account-menu.balance')}
             icon={<BalanceIcon />}

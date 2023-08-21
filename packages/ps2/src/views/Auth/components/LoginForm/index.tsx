@@ -16,14 +16,21 @@ const LoginForm: React.FC = () => {
   const {
     handleSubmit,
     control,
+    watch,
     setError,
     formState: { errors },
   } = useForm<LoginPayload>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     defaultValues: {
-      email: process.env.REACT_APP_TESTING_DEFAULT_EMAIL || '',
-      password: process.env.REACT_APP_TESTING_DEFAULT_PASSWORD || '',
+      email:
+        (process.env.NODE_ENV === 'development' &&
+          process.env.REACT_APP_TESTING_DEFAULT_EMAIL) ||
+        '',
+      password:
+        (process.env.NODE_ENV === 'development' &&
+          process.env.REACT_APP_TESTING_DEFAULT_PASSWORD) ||
+        '',
     },
     resolver: yupResolver(LoginValidation),
   });
@@ -72,7 +79,10 @@ const LoginForm: React.FC = () => {
               labelAction={{
                 tabIndex: -1,
                 text: t('login-form.inputText.password.labelForgot'),
-                onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
+                onClick: () =>
+                  navigate(ROUTE_FORGOT_PASSWORD, {
+                    state: { email: watch('email') },
+                  }),
                 id: 'login__forgot-password',
               }}
               label={t('login-form.inputText.password.label') + ':'}
@@ -89,6 +99,7 @@ const LoginForm: React.FC = () => {
         <Action>
           <ZigButton
             type={'submit'}
+            variant={'contained'}
             id={'login__submit'}
             size={'xlarge'}
             loading={loggingIn}

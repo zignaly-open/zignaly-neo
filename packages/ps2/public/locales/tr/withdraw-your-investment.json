@@ -2,7 +2,7 @@
 	"title": "Çekim Talebi",
 	"success": {
 		"title": "Çekim Talep Edildi",
-		"description": "Trader açık pozisyona bağlı fonları serbest bıraktığında fonlarınız kullanılabilir hale gelecektir. Bu işlemin tamamlanması birkaç gün veya daha uzun sürebilir. Bu zaman dilimini Zignaly kontrol etmemektedir, lütfen sabırlı olun.",
+		"description": "Fon yöneticisi fonları serbest bıraktıktan ve günlük muhasebe yapıldıktan sonra fonlarınızı alacaksınız. Lütfen bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Fon yöneticisine bağlı olarak bu işlem genellikle birkaç gün sürer ancak tamamlanması daha uzun sürebilir. Zignaly bu zaman dilimini kontrol etmez, lütfen sabırlı olun.",
 		"button": "Kapat"
 	}
 }

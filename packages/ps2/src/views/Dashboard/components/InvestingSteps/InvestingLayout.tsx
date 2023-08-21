@@ -1,7 +1,7 @@
 import React from 'react';
 import InvestingStep from './InvestingStep';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ROUTE_PROFIT_SHARING } from '../../../../routes';
@@ -47,18 +47,6 @@ const InvestingLayout: React.FC = () => {
             {t('how-to-invest-steps.start-investing')}
           </ZigButton>
         </Link>
-      </Box>
-      <Box
-        sx={{ display: 'flex', mt: 5, flexDirection: 'column', width: '100%' }}
-      >
-        <ZigTypography variant={'h2'} sx={{ mb: 2 }}>
-          {t('how-to-invest-steps.bottom-title')}
-        </ZigTypography>
-        <Paper sx={{ p: 2, mb: '22px' }}>
-          <ZigTypography>
-            {t('how-to-invest-steps.bottom-description')}
-          </ZigTypography>
-        </Paper>
       </Box>
     </Box>
   );

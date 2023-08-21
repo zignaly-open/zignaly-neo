@@ -24,8 +24,8 @@ Countries.registerLocale(CountriesRu);
 Countries.registerLocale(CountriesVi);
 
 // mishka vodka balalayka
-if (CountriesEn.countries.RU)
-  CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
+// if (CountriesEn.countries.RU)
+//   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
 export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
 
@@ -40,9 +40,30 @@ export const dateFnsLocaleMapping = {
   vi: dateLocaleVi,
 };
 
+const getFallbackLanguage = (locale: string): string | string[] => {
+  const getFamily = (x: string) => x.split(/[_-]/)[0];
+  return supportedLanguages.includes(locale)
+    ? [locale, 'en']
+    : [
+        ...supportedLanguages.filter((x) => getFamily(x) === getFamily(locale)),
+        'en',
+      ];
+};
+
+const simpleBrowserDetector = new LanguageDetector();
+simpleBrowserDetector.addDetector({
+  name: 'simpleBrowserDetector',
+  lookup() {
+    return getFallbackLanguage(
+      navigator?.languages?.[0] || navigator?.language || '',
+    );
+  },
+});
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
+  .use(simpleBrowserDetector)
   .use(initReactI18next)
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
@@ -50,32 +71,20 @@ i18n
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     debug: false,
-    ns: [
-      'action',
-      'auth',
-      'common',
-      'deposit-crypto',
-      'edit-investment',
-      'error',
-      'investors',
-      'management',
-      'my-balances',
-      'my-dashboard',
-      'transactions-history',
-      'pages',
-      'service',
-      'service-header',
-      'table',
-      'withdraw',
-      'withdraw-crypto',
-      'withdraw-your-investment',
-      'settings',
-      'purchase-deposit-crypto',
-    ],
+    ns: ['common', 'error'],
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
     fallbackNS: 'common',
-    fallbackLng: 'en',
+    fallbackLng: getFallbackLanguage,
+    detection: {
+      order: ['cookie', 'querystring', 'simpleBrowserDetector', 'navigator'],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next-lng',
+      lookupFromPathIndex: 0,
+      lookupFromSubdomainIndex: 0,
+      caches: ['cookie'],
+      cookieOptions: { path: '/', sameSite: 'strict' },
+    },
     interpolation: {
       escapeValue: false,
       format: (value: string | number, format?: string): string => {

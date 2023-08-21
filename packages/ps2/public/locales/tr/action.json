@@ -3,8 +3,6 @@
 	"edit": "Düzenle",
 	"save": "Sakla",
 	"withdraw": "Çekim",
-	"read-more": "Daha fazla",
-	"read-less": "Daha az",
 	"cancel": "İptal",
 	"proceed": "Devam et",
 	"export": "Aktar",
@@ -16,5 +14,7 @@
 	"hide": "Gizle",
 	"show": "Göster",
 	"claim": "Hakediş",
-	"deposit-coin": "{{coin}} yatırın"
+	"deposit-coin": "{{coin}} yatırın",
+	"more": "daha yüksek",
+	"less": "daha düşük"
 }

@@ -16,10 +16,14 @@ export const Action = styled('div')`
   justify-content: center;
 `;
 
-export const Wrapper = styled(Box)`
+export const WrapperPlain = styled(Box)`
   width: 100%;
-  padding: 12px 10px;
+  padding: 32px 0 12px;
   max-width: 500px;
+`;
+
+export const Wrapper = styled(WrapperPlain)`
+  padding: 12px 10px;
   background: linear-gradient(
     90deg,
     rgb(16 18 37) 0%,

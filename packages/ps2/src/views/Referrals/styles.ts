@@ -1,6 +1,5 @@
-import { Grid, Paper, styled } from '@mui/material';
+import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
-import Box from '@mui/system/Box/Box';
 
 export const TotalBoxBox = styled(Paper)`
   width: 250px;
@@ -111,7 +110,7 @@ export const ShareIconsContainer = styled(Box)`
     fill: url(#shareIconGradient);
     transition: fill 0.2s;
     &:hover {
-      fill: #7682f7;
+      fill: ${({ theme }) => theme.palette.highlighted};
     }
   }
 `;

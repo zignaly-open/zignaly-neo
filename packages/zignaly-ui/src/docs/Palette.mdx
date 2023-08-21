@@ -12,8 +12,6 @@ Please be advised that if you work on Zignaly projects and start implementing yo
 
 <ColorPalette>
     {['primary', 'secondary', 'success', 'danger', ...Object.keys(dark)].map(x => {
-
-        console.error(x, darkMui.palette[x]);
         return <ColorItem
             key={x}
             title={"theme.palette." + x}

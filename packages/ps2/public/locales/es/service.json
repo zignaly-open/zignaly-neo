@@ -36,8 +36,8 @@
 		"180d-full": "6 Meses",
 		"365d-full": "1 Año",
 		"all-full": "Todo el tiempo",
-		"7d": "1 Semana",
-		"30d": "1 Mes",
+		"7d": "Semana",
+		"30d": "Mes",
 		"90d": "3 Meses",
 		"180d": "6 Meses",
 		"365d": "1 Año",
@@ -92,14 +92,13 @@
 			"success-fee-range": "Debe ser 0 o un número entero entre 10 y 75"
 		}
 	},
-	"you-get-x": "Obtienes {{number}}%",
 	"create": {
 		"invest-in-your-service": "Invierte en tu servicio",
 		"select-type-first": "Seleccione primero un tipo de servicio",
 		"title": "Crear nuevo servicio",
 		"action": "Crear servicio",
 		"next-step": "Siguiente",
-		"service-type": "Tipo de servicio",
+		"service-type": "Tipo de servicio:",
 		"service-name": "Nombre del Servicio",
 		"base-currency": "Moneda Base",
 		"types": {
@@ -108,7 +107,9 @@
 		},
 		"minimum-balance": "Para operar y permitir que los inversores inviertan, necesitas invertir al menos {{ minValue }} {{ minValueCoin }} en tu servicio",
 		"profits-explainer": "Decide cuánto de tus beneficios provenientes de trading y del success fee deseas solicitar que se retiren automáticamente.",
-		"please-verify": "Por favor revisa tu información. El tipo y la base no se pueden cambiar más adelante",
-		"zero-fee": "Si eliges success fee = 0, Zignaly tampoco cobrará ninguna comisión"
-	}
+		"zero-fee": "Si eliges success fee = 0, Zignaly tampoco cobrará ninguna comisión",
+		"total-fee": "Tasa total",
+		"you-receive": "Recibes"
+	},
+	"you-receive": "Recibes"
 }

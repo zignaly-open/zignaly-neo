@@ -3,10 +3,10 @@ import {
   ChangeIndicator,
   ZigTable,
   ZigTypography,
-  ZigChartMini,
   ZigTablePriceLabel,
   ZigButton,
   ZigPlusIcon,
+  getPrecisionForCoin,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -20,18 +20,25 @@ import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import { useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
-import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
-import DepositModal from '../ManageInvestmentModals/DepositModal';
-import { Box } from '@mui/material';
+import {
+  ROUTE_DASHBOARD_EDIT_INVESTMENT,
+  ROUTE_TRADING_SERVICE,
+} from '../../../../routes';
+import { useOpenDepositModal } from '../ManageInvestmentModals/DepositModal';
+import { Box, useTheme } from '@mui/material';
+import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
+import { generatePath, Link } from 'react-router-dom';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
-  const { showModal } = useZModal();
+  const theme = useTheme();
   const exchange = useActiveExchange();
+  const openDepositModal = useOpenDepositModal();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
     // Force refresh on mount otherwise it will use cached value from balance button
@@ -88,8 +95,9 @@ const MyDashboard: React.FC = () => {
           <ServiceName prefixId={'portfolio-table'} service={original} />
         ),
       }),
-      columnHelper.accessor('pnl30dPct', {
+      columnHelper.accessor((row) => +row.pnl30dPct, {
         header: t('tableHeader.1-mo.title'),
+        id: 'pnl30dPct',
         cell: ({ row: { original } }) => (
           <Box
             minHeight={'125px'}
@@ -100,10 +108,11 @@ const MyDashboard: React.FC = () => {
             {original.pnl30dPct ||
             Object.keys(original.sparklines).length > 1 ? (
               <>
-                <ZigChartMini
+                <ZigChartMiniSuspensed
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
                   data={[0, ...(original.sparklines as number[])]}
+                  precision={getPrecisionForCoin(original.ssc)}
                 />
                 <ChangeIndicator
                   id={`portfolio-table__chart-percentage-${original.serviceId}`}
@@ -119,7 +128,7 @@ const MyDashboard: React.FC = () => {
             )}
           </Box>
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
         enableHiding: false,
       }),
       columnHelper.accessor('pnlDailyMeanLc', {
@@ -136,8 +145,9 @@ const MyDashboard: React.FC = () => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor('pnl90dPct', {
+      columnHelper.accessor((row) => +row.pnl90dPct, {
         header: t('tableHeader.3-mos-title'),
+        id: 'pnl90dPct',
         cell: ({ getValue, row: { original } }) => (
           <ChangeIndicator
             id={`portfolio-table__pnl90dPct-${original.serviceId}`}
@@ -146,10 +156,11 @@ const MyDashboard: React.FC = () => {
             value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
       }),
-      columnHelper.accessor('pnl180dPct', {
+      columnHelper.accessor((row) => +row.pnl180dPct, {
         header: t('tableHeader.6-mos-title'),
+        id: 'pnl180dPct',
         cell: ({ getValue, row: { original } }) => (
           <ChangeIndicator
             id={`portfolio-table__pnl180dPct-${original.serviceId}`}
@@ -158,10 +169,11 @@ const MyDashboard: React.FC = () => {
             value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
       }),
-      columnHelper.accessor('pnlPctLc', {
+      columnHelper.accessor((row) => +row.pnlPctLc, {
         header: t('tableHeader.all.title'),
+        id: 'pnlPctLc',
         meta: { subtitle: t('tableHeader.all.subtitle') },
         cell: ({ getValue, row: { original } }) => (
           <ChangeIndicator
@@ -175,7 +187,35 @@ const MyDashboard: React.FC = () => {
             })}
           />
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
+      }),
+      columnHelper.display({
+        id: 'link',
+        cell: ({ row }) => (
+          <Box
+            component={Link}
+            to={generatePath(ROUTE_TRADING_SERVICE, {
+              serviceId: row?.original?.serviceId?.toString(),
+            })}
+            sx={{
+              cursor: 'pointer',
+              alignItems: 'center',
+              flexDirection: 'row',
+              display: 'flex',
+              textAlign: 'start',
+              width: '0px',
+            }}
+            id={`portfolio-table__link-${row.original.serviceId}`}
+          >
+            <ArrowForwardIosIcon
+              sx={{
+                color: theme.palette.links,
+                width: '20px',
+                height: '20px',
+              }}
+            />
+          </Box>
+        ),
       }),
     ],
     [t],
@@ -202,14 +242,10 @@ const MyDashboard: React.FC = () => {
                 <Box sx={{ flex: '0 0 100px' }}>
                   <ZigButton
                     id={'my-portfolio__deposit'}
-                    startIcon={<ZigPlusIcon />}
+                    startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
-                    onClick={() =>
-                      showModal(DepositModal, {
-                        ctaId: 'account-menu-deposit',
-                      })
-                    }
+                    onClick={() => openDepositModal()}
                   >
                     {t('action:deposit')}
                   </ZigButton>

@@ -6,6 +6,7 @@ import {
   LoginResponse,
   SessionsTypes,
   SignupPayload,
+  UserAccessLevel,
   UserData,
 } from './types';
 import {
@@ -23,6 +24,7 @@ import {
   useVerify2FAMutation,
   useVerifyCodeMutation,
   useVerifyCodeNewUserMutation,
+  useSendCodeWithdrawMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
 import {
@@ -33,11 +35,11 @@ import {
   setUser,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
-import { trackConversion, trackNewSession } from '../../util/analytics';
+import { trackNewSession } from '../../util/analytics';
 import { startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import { ShowFnOutput } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
@@ -47,9 +49,11 @@ import Check2FAModal from 'views/Auth/components/Check2FAModal';
 import { useNavigate } from 'react-router-dom';
 import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
+import { junkyard } from '../../util/junkyard';
+import EmailVerifyWithdrawModal from 'views/Auth/components/EmailVerifyWithdrawModal';
 
 const useStartSession = () => {
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
   const dispatch = useDispatch();
   const [loadSession] = useLazySessionQuery();
   const [loadTraderServices] = useLazyTraderServicesQuery();
@@ -89,7 +93,7 @@ const useStartSession = () => {
     dispatch(setUser(userData));
     startLiveSession(userData);
     trackNewSession(userData, SessionsTypes.Login);
-    localStorage.setItem('hasLoggedIn', 'true');
+    junkyard.set('hasLoggedIn', 'true');
   };
 };
 
@@ -108,7 +112,6 @@ export const useSignup = (): [
       try {
         const user = await signup(payload).unwrap();
         await startSession({ ...user, emailUnconfirmed: true });
-        trackConversion();
       } finally {
         setLoading(false);
       }
@@ -164,6 +167,10 @@ export function useIsAuthenticated(): boolean {
   return !!user;
 }
 
+export function useUserAccessLevel(): UserAccessLevel {
+  return useSelector((state: RootState) => state.user)?.user?.accessLevel;
+}
+
 export function useCurrentUser(): UserData | Partial<UserData> {
   return (
     useSelector((state: RootState) => state.user)?.user || ({} as UserData)
@@ -175,6 +182,8 @@ export const useVerifyEmailNewUser: typeof useVerifyCodeNewUserMutation =
   useVerifyCodeNewUserMutation;
 export const useVerifyEmail: typeof useVerifyCodeMutation =
   useVerifyCodeMutation;
+export const useSendCodeWithdraw: typeof useSendCodeWithdrawMutation =
+  useSendCodeWithdrawMutation;
 export const useVerifyEmailKnownDevice: typeof useVerifyKnownDeviceMutation =
   useVerifyKnownDeviceMutation;
 export const useResendCode: typeof useResendCodeMutation =
@@ -295,6 +304,36 @@ export function useMaybeMakeSureSessionIsAlive(makeSure: boolean): void {
     // we do not want to check that is the app is already aware that the user has been logged out
     skip: !makeSure || !isAuthenticated,
   });
+}
+
+export function useCheckWithdraw({
+  status,
+}: {
+  status: QueryReturnTypeBasic<unknown>;
+}): (action: (code?: string) => void) => void {
+  const { showModal, updateModal } = useZModal();
+  const modalId = useRef<null | string>(null);
+  const { ask2FA } = useCurrentUser();
+  useEffect(() => {
+    if (modalId.current) {
+      updateModal(modalId.current, {
+        status,
+      });
+    }
+  }, [status]);
+  return (action) => {
+    const modal = showModal(ask2FA ? Check2FAModal : EmailVerifyWithdrawModal, {
+      status,
+      action,
+      TransitionProps: {
+        onClose: () => {
+          modalId.current = null;
+        },
+      },
+    });
+
+    modalId.current = modal.id;
+  };
 }
 
 export function useCheck2FA({

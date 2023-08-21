@@ -4,17 +4,21 @@
   "private": true,
   "scripts": {
     "precommit": "yarn lint-staged",
-    "start": "react-scripts start",
+    "start": "react-app-rewired start",
     "analyze": "rm -rf ./build/*; lerna run build --scope=@zignaly-open/ps2 --include-dependencies; source-map-explorer 'build/static/js/*.js'",
-    "build": "react-scripts build && generate-version",
-    "test": "react-scripts test --passWithNoTests",
-    "release": "export REACT_APP_SENTRY_RELEASE=$(git rev-parse --short HEAD); react-scripts build && node scripts/sentry.js",
+    "build": "react-app-rewired build && generate-version",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint:eslint-ci": "eslint --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
+    ]
   },
   "browserslist": {
     "production": [
@@ -29,7 +33,11 @@
     ]
   },
   "dependencies": {
-    "@analytics/segment": "^1.1.3",
+    "@analytics/customerio": "^0.2.2",
+    "@analytics/google-analytics": "^1.0.7",
+    "@analytics/google-tag-manager": "^0.5.5",
+    "@analytics/intercom": "^1.0.2",
+    "@emotion/babel-plugin": "^11.11.0",
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
     "@hookform/resolvers": "^2.9.7",
@@ -43,17 +51,16 @@
     "@sentry/cli": "^2.5.0",
     "@tanstack/react-table": "^8.7.3",
     "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "13.4.0",
-    "@testing-library/user-event": "12.1.5",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/user-event": "14.4.3",
     "@types/jest": "27.5.2",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
     "@types/react-share": "^4.0.0",
-    "@types/segment-analytics": "^0.0.34",
     "@zignaly-open/tracker": "^0.1.3",
     "@zignaly-open/ui": "^0.6.18",
-    "analytics": "^0.8.1",
+    "analytics": "^0.8.9",
     "async-mutex": "^0.3.2",
     "bignumber.js": "^9.1.0",
     "copy-to-clipboard": "^3.3.2",
@@ -64,11 +71,13 @@
     "i18next-http-backend": "^1.4.1",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
-    "mui-modal-provider": "^2.0.0",
+    "msw": "^1.2.1",
+    "mui-modal-provider": "2.2.0",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "18.2.0",
+    "react-google-font-loader": "^1.1.0",
     "react-hook-form": "^7.32.0",
     "react-i18next": "^11.16.9",
     "react-image-webp": "^0.8.0",
@@ -81,6 +90,7 @@
     "react-scripts": "5.1.0-next.14",
     "react-share": "^4.4.1",
     "react-spring": "^9.5.2",
+    "react-test-renderer": "^18.2.0",
     "react-toastify": "^9.0.8",
     "react-update-notification": "^1.1.1",
     "react-use": "^17.4.0",
@@ -94,13 +104,16 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
-    "@types/react": "^17",
     "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
+    "customize-cra": "^1.0.0",
     "eslint": "^8.16.0",
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
+    "lodash": "^4.17.21",
+    "msw": "^1.2.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
+    "react-app-rewired": "^2.2.1",
     "webpack": "^5.73.0"
   }
 }

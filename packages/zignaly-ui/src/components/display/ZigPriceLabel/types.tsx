@@ -1,7 +1,6 @@
 import { Typography, TypographyProps } from "@mui/material";
 
 export type ZigPriceLabelProps = Partial<TypographyProps> & {
-  idd?: string;
   value: string | number;
   coin?: string;
   precision?: number;
@@ -15,4 +14,5 @@ export type ZigPriceLabelProps = Partial<TypographyProps> & {
   alwaysShowSign?: boolean;
   id?: string;
   showApproximate?: boolean;
+  showCoinIcon?: boolean;
 };

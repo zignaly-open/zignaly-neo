@@ -12,8 +12,9 @@ const ZigChartMini = ({
   width,
   gradientVariant = "mini",
   chartProps = {},
+  precision,
 }: ChartMiniProps) => {
-  const { data: processedData, color, gradient } = useChartData(data, gradientVariant);
+  const { data: processedData, color, gradient } = useChartData(data, gradientVariant, precision);
 
   return (
     <ChartLayoutMini height={height} id={id}>

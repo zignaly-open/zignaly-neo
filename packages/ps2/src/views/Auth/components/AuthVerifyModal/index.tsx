@@ -17,6 +17,7 @@ import {
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
+import useTrackEvent from '../../../../components/Navigation/Tracker/use';
 
 function AuthVerifyModal({
   user,
@@ -34,6 +35,7 @@ function AuthVerifyModal({
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
   const resendEmail = useResendCode();
   const resendEmailNewUser = useResendCodeNewUser();
+  const trackEvent = useTrackEvent();
   const resendDevice = useResendKnownDeviceCode();
   const verifyEmail = useVerifyEmail();
   const verifyEmailNewUser = useVerifyEmailNewUser();
@@ -65,6 +67,8 @@ function AuthVerifyModal({
         description = t(
           'auth-verify-modal.isDisabled.isNotVerifyEmailValid.description',
         );
+      } else {
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       }
     } else if (ask2FA) {
       if (verifyStatus.isSuccess) {
@@ -101,8 +105,8 @@ function AuthVerifyModal({
 
       return errorCode === 13
         ? t('error:error.login-session-expired')
-        : [37, 108].includes(errorCode)
-        ? t('error:error.wrong-code')
+        : [37, 108, 1086].includes(errorCode)
+        ? t(`error:error.${errorCode}`)
         : null;
     },
     [t],
@@ -120,6 +124,7 @@ function AuthVerifyModal({
 
   useEffect(() => {
     if (allGood) {
+      trackEvent('verify-success');
       onSuccess();
       close();
     }
@@ -127,20 +132,33 @@ function AuthVerifyModal({
 
   return (
     <ZModal
+      wide
       allowUnauth
+      disableBackdropClose
       {...props}
       close={emailUnconfirmed ? null : onClickClose}
       title={texts.title}
       titleAlign='center'
     >
-      <Title>
+      <Title data-testid={'auth-verify-modal__title'}>
         {texts.description && (
-          <ZigTypography id={'auth-verify-modal__description'}>
+          <ZigTypography
+            whiteSpace='pre-line'
+            id={'auth-verify-modal__description'}
+            textAlign={'center'}
+          >
             {texts.description}
           </ZigTypography>
         )}
       </Title>
-      <Container>
+      <Container
+        isSeveralCodes={
+          (isUnknownDevice || disabled || emailUnconfirmed) &&
+          !verifyStatus.isSuccess &&
+          ask2FA &&
+          !status2FA.isSuccess
+        }
+      >
         {(isUnknownDevice || disabled || emailUnconfirmed) &&
           !verifyStatus.isSuccess && (
             <EmailVerifyForm
@@ -165,5 +183,7 @@ function AuthVerifyModal({
     </ZModal>
   );
 }
+
+AuthVerifyModal.trackId = '2fa-verify';
 
 export default AuthVerifyModal;

@@ -10,11 +10,12 @@ import {
   NavLink,
   NavList,
   SpaceTaker,
+  ComponentSeparator,
+  SubNavList,
 } from "./styles";
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
 
-// TODO rename to ZigDropdown, add stories
 const ZigDropdown: (
   props: ZigDropdownProps,
   innerRef: React.Ref<ZigDropdownHandle>,
@@ -92,7 +93,7 @@ const ZigDropdown: (
           PaperProps={{
             sx: {
               minWidth: "220px",
-              backgroundColor: "#12152c",
+              backgroundColor: theme.palette.neutral800,
               whiteSpace: "nowrap",
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",
@@ -107,20 +108,33 @@ const ZigDropdown: (
         >
           <ZigDropdownContainer id={id}>
             <NavList>
-              {options.map((option, i) => {
+              {options.map((entry, i) => {
                 // this is a design requirement
                 if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
 
                 const key =
-                  option && "label" in option && typeof option.label === "string"
-                    ? option.label
-                    : Math.random().toString();
+                  (entry && "label" in entry && typeof entry.label === "string" && entry.label) ||
+                  entry.id ||
+                  Math.random().toString();
+
+                if ("separator" in entry) {
+                  return (
+                    <ComponentSeparator
+                      id={entry.id || `dropdown-element-${i}`}
+                      separator={entry.separator}
+                      customStyle={entry.customStyle}
+                      key={key}
+                    />
+                  );
+                }
+
+                const option = entry as ZigDropdownOption;
 
                 if (option.element)
                   return (
                     <ComponentWrapper
                       id={option.id || `dropdown-element-${i}`}
-                      separator={option.separator}
+                      customStyle={option.customStyle}
                       key={key}
                     >
                       {option.element}
@@ -132,9 +146,9 @@ const ZigDropdown: (
                     <NavLink
                       id={option.id}
                       key={key}
-                      separator={option.separator}
                       target={option?.target}
                       active={option?.active}
+                      customStyle={option.customStyle}
                       as={"a"}
                       href={option.href}
                       onClick={option.onClick && onClick(option.onClick)}
@@ -145,14 +159,11 @@ const ZigDropdown: (
 
                 if (option.children)
                   return (
-                    <ChildContainer
-                      separator={option.separator}
-                      key={key}
-                      active={childDropdownShow === option}
-                    >
+                    <ChildContainer key={key} active={childDropdownShow === option}>
                       <NavLink
                         active={option?.active}
                         id={option.id}
+                        customStyle={option.customStyle}
                         notClickable={!option.children?.length}
                         onClick={() =>
                           option.children?.length &&
@@ -161,25 +172,34 @@ const ZigDropdown: (
                       >
                         {option.label}
                         <SpaceTaker />
+
                         {!!option.children?.length && (
                           <ArrowBottomIconStyled
-                            color={theme.neutral300}
-                            width={"22px"}
-                            height={"22px"}
+                            color={theme.palette.neutral300}
+                            rotated={childDropdownShow === option}
+                            width={"10.5px"}
                           />
                         )}
                       </NavLink>
-                      {childDropdownShow === option &&
-                        option.children.map((c) => (
-                          <NavLink
-                            id={c.id}
-                            active={c?.active}
-                            key={"--sub-" + key + "--" + c.label}
-                            onClick={onClick(c.onClick!)}
-                          >
-                            {c.label}
-                          </NavLink>
-                        ))}
+                      {childDropdownShow === option && (
+                        <SubNavList>
+                          {option.children.map((c, index) => (
+                            <NavLink
+                              id={c.id}
+                              active={c?.active || undefined}
+                              key={
+                                "--sub-" +
+                                key +
+                                "--" +
+                                (typeof c.label === "string" ? c.label : `-child-${index}`)
+                              }
+                              onClick={onClick(c.onClick!)}
+                            >
+                              {c.label}
+                            </NavLink>
+                          ))}
+                        </SubNavList>
+                      )}
                     </ChildContainer>
                   );
               })}

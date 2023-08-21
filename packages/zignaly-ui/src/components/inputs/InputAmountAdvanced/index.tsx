@@ -26,6 +26,9 @@ import { ErrorMessage } from "../../display/ZigAlertMessage";
 // FIXME this component still needs Jesus
 // TODO: rename to ZigInoutAmount, add stories
 // TODO: Wrap stories inside a form
+/**
+ * @deprecated
+ */
 function InputAmount({
   tokens = [],
   name = "amountValue",
@@ -105,7 +108,12 @@ function InputAmount({
         <InputContainer>
           <Side>
             {value?.token?.id && tokens.length < 2 && (
-              <ZigCoinIcon size={COIN_SIZES.Small} coin={value?.token.id} bucket={iconBucket} />
+              <ZigCoinIcon
+                size={COIN_SIZES.Small}
+                coin={value?.token.id}
+                bucket={iconBucket}
+                id={id && `${id}-coin-icon`}
+              />
             )}
             <InputField>
               <InputValue
@@ -126,7 +134,7 @@ function InputAmount({
 
             {tokens?.length === 1 && showUnit && value?.value.length !== 0 && (
               <>
-                {/*TODO: calculate wiotdth properly*/}
+                {/*TODO: calculate width properly*/}
                 <Unit widthCharacters={String(value?.value)?.length ?? 1}>
                   <ZigTypography color="neutral300" variant="h3">
                     {value?.token?.id.toUpperCase()}
@@ -180,6 +188,9 @@ function InputAmount({
   );
 }
 
+/**
+ * @deprecated
+ */
 export type { InputAmountAdvancedValue as InputAmountAdvancedValueType } from "./types";
 
 export default InputAmount;

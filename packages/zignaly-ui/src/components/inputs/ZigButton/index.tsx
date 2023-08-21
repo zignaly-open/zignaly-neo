@@ -47,9 +47,13 @@ const ZigButton = ({
             target: linkTarget ?? "_blank",
           }
         : {})}
+      // @ts-ignore
+      data-testid={
+        props["data-testid"] || (process.env.NODE_ENV === "test" && props.id) || undefined
+      }
       // hack to preserve old behavior but allow for normal mui theming
       color={variant === "outlined" && !color ? "secondary" : color}
-      className={active ? "MuiButton-active" : ""}
+      className={active ? `${props.className} MuiButton-active` : props.className}
     />
   );
   return tooltip ? (
@@ -67,11 +71,16 @@ export const ZigButtonGroup = styled(ButtonGroup)`
   outline-offset: -1px;
 
   .MuiButton-root {
+    font-weight: 400;
+    text-transform: capitalize !important;
+
     &:hover,
     &.MuiButton-active {
       z-index: 3;
-      border-color: #464a85 !important;
+      border-color: ${({ theme }) => theme.palette.backgrounds.greyedOutBorder} !important;
       border-radius: 5px;
+      background: ${({ theme }) => theme.palette.neutral750};
+      color: ${({ theme }) => theme.palette.highlighted};
 
       + button,
       + span button {
@@ -85,7 +94,7 @@ export const ZigButtonGroup = styled(ButtonGroup)`
 
     &.Mui-disabled {
       border-color: ${({ theme }) => theme.palette.neutral600};
-      color: rgba(255, 255, 255, 0.2);
+      color: ${({ theme }) => theme.palette.contrasting}33;
     }
   }
 

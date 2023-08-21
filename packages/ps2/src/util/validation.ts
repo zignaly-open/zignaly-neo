@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import BigNumber from 'bignumber.js';
+import i18n from 'i18next';
 
 export const checkDecimals = (val: string | number, maxDecimals: number) => {
   if (!val) return true;
@@ -114,3 +115,63 @@ export const inputAmountTokenMinValidation = yup.object().shape({
 export const inputAmountTokenDecimalsValidation = yup.object().shape({
   value: decimalsValidation(8),
 });
+
+export const inputAmountValidation = ({
+  min,
+  max,
+  balance,
+  maxDecimals = 8,
+  coin,
+}: {
+  min?: number | string;
+  max?: number | string;
+  balance?: number | string;
+  maxDecimals?: number;
+  coin?: string;
+}) => {
+  let validation = yup
+    .string()
+    .typeError('common:validation.invalid-value')
+    .concat(inputAmountNumberValidation)
+    .concat(inputAmountNumberValidationGt0);
+
+  if (balance !== undefined) {
+    validation = validation.test(
+      'number',
+      'common:validation.insufficient-amount',
+      (val) => !new BigNumber(val).isGreaterThan(new BigNumber(balance)),
+    );
+  }
+
+  if (min !== undefined) {
+    validation = validation.test(
+      'number',
+      i18n.t('common:validation.insufficient-amount-min', {
+        minValue: min,
+        minValueCoin: coin,
+      }),
+      (val) => !new BigNumber(val).isLessThan(new BigNumber(min)),
+    );
+  }
+
+  if (max !== undefined) {
+    validation = validation.test(
+      'number',
+      i18n.t('common:validation.insufficient-amount-max', {
+        maxValue: max,
+        coin,
+      }),
+      (val) => !new BigNumber(val).isGreaterThan(new BigNumber(max)),
+    );
+  }
+
+  if (maxDecimals !== undefined) {
+    validation = validation.test(
+      'number',
+      i18n.t('common:validation.max-decimals', { maxDecimals }),
+      (val) => checkDecimals(val, maxDecimals),
+    );
+  }
+
+  return validation;
+};

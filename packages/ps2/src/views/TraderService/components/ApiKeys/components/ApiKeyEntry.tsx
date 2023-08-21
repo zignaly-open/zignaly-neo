@@ -2,7 +2,6 @@ import React from 'react';
 import { ZigButton, ZigCopyText, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PencilIcon from '@mui/icons-material/Create';
 import { useTranslation } from 'react-i18next';
 import { ApiKey, TextWrapperRow } from '../atoms';
 import { useParams } from 'react-router-dom';
@@ -21,11 +20,12 @@ import {
 } from '../../../../../apis/serviceApiKey/types';
 import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
+import EditIcon from '@mui/icons-material/Edit';
 
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const { t, i18n } = useTranslation(['management', 'action']);
   const { serviceId } = useParams();
-  const refetchIfDesyncronized = useRefetchIfDesynchronizedState();
+  const refetchIfDesynchronized = useRefetchIfDesynchronizedState();
   const { showModal } = useZModal();
   const askConfirm = useZTypeWordConfirm();
   const toast = useToast();
@@ -36,7 +36,9 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
 
   const handleDeleteWrapper = async (args: ServiceApiKeyDeletePayload) => {
     const result = await deleteKey(args);
-    'error' in result && refetchIfDesyncronized(result as BackendErrorResponse);
+    'error' in result
+      ? refetchIfDesynchronized(result as BackendErrorResponse)
+      : toast.success(t('management:api-keys.delete-api-key-toast'));
   };
 
   return (
@@ -78,12 +80,16 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             </ZigTypography>
           </TextWrapperRow>
         </Box>
-        <Box sx={{ alignSelf: 'center' }}>
+        <Box
+          sx={{
+            alignSelf: 'center',
+          }}
+        >
           <ZigButton
             id={'trader-api__edit-key'}
             sx={{ mr: 2 }}
             onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
-            startIcon={<PencilIcon />}
+            startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
             variant={'outlined'}
           >
             {t('action:edit')}
@@ -96,13 +102,13 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                 title: t('api-keys.delete-title', {
                   title: apiKey.alias,
                 }),
-                safeWord: t('action:delete'),
-                yesLabel: t('action:delete'),
+                safeWord: t('action:delete').toUpperCase(),
+                yesLabel: t('action:delete').toUpperCase(),
                 yesButtonProps: {
                   color: 'danger',
-                  variant: 'outlined',
                 },
                 description: t('api-keys.delete-description'),
+                cancelButton: false,
                 yesAction: () => {
                   delete2FA((code) =>
                     handleDeleteWrapper({ serviceId, keyId: apiKey.id, code }),
@@ -111,7 +117,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
               })
             }
             color={'danger'}
-            startIcon={<DeleteIcon />}
+            startIcon={<DeleteIcon sx={{ width: '12px', height: '12px' }} />}
             variant={'outlined'}
           >
             {t('action:delete')}

@@ -32,5 +32,15 @@
 		"memo": "{{coin}} MEMO\/Etiket"
 	},
 	"no-network": "Bu ağda yatırma işlemi yapılamıyor",
-	"buy-crypto": "Kripto Satın Al"
+	"buy-crypto": "Kripto Satın Al",
+	"service-deposit": {
+		"title": "Bu Hizmete Yatırım Yapmak İçin {{coin}} Yatırın",
+		"description": "Bu hizmetin trader'ı {{coin}} ile işlem yapıyor, bu nedenle kullanıcılarla kar paylaşımından yararlanmak için kullandığı kripto cinsinden yatırmalısınız. Lütfen hesabınıza {{coin}} yatırın.",
+		"transfer-crypto": "Harici bir cüzdandan {{coin}} aktarın",
+		"buy-crypto": "Herhangi bir {{coin}} sahibi değilim",
+		"buttons": {
+			"deposit": "{{coin}} yatırın",
+			"purchase": "Satın Al {{coin}}"
+		}
+	}
 }

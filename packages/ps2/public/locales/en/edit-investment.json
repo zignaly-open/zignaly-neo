@@ -3,18 +3,17 @@
   "addMoreInvestmentSuccess": "You invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
   "withdrawInvestmentSuccess": "Withdrawal requested successfully.",
   "validation-indicateAnAmount": "You must indicate an amount.",
-  "error-blockedInvestment": "All your funds are pending to be transferred out of the service.",
   "form": {
     "title": "Amount Invested:",
     "profits": {
       "title": "What to do with profits:",
-      "title-confirmation": "Percentage of profits to Withdraw:",
+      "pct-withdraw": "% of Profits to Withdraw:",
       "left": "Reinvest",
       "right": "Withdraw"
     },
     "inputAmount": {
-      "label": "Amount to Invest:",
-      "labelBalance": "Available:"
+      "label": "Amount to Invest",
+      "labelMinDeposit": "Min. deposit:"
     },
     "link": {
       "investMore": "Invest more",
@@ -22,9 +21,11 @@
     },
     "button": {
       "invest-now": "Invest {{amount}} {{coin}} now",
+      "transfer-now": "Transfer now",
       "addInvestment": "Add to Investment",
       "continue-to-confirmation": "Continue to Confirmation"
-    }
+    },
+    "transferOutAll": "Your entire investment is pending withdrawal and will be processed shortly during daily accounting, once the trader releases the funds."
   },
   "pendingMajorThan": {
     "type": "New investment",
@@ -45,6 +46,7 @@
     "link-label": "View"
   },
   "investorDetail-successFee": "{{fee}}% Success fee",
+  "investorDetail-successFee-discounted": "<0>{{oldFee}}%</0> {{fee}}% Success fee",
   "modal": {
     "withdrawInvestment": {
       "title": "Withdrawal Request",
@@ -59,10 +61,12 @@
         "type": "Type",
         "status": "Status"
       },
-      "button": "Back"
+      "button": "Back",
+      "hoverTooltip": "Hover over the amount to see the full decimals",
+      "waiting-for-next-accounting-tooltip": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please consider that your investment is at risk until the balance is transferred to you. Depending on the fund manager and his strategy, this usually takes a few days but may take longer to complete."
     },
     "editInvestments": {
-      "title": "Edit Investment",
+      "title": "Edit Investment With",
       "loading": "Loading edit investment"
     }
   },
@@ -73,13 +77,19 @@
   },
   "invest-modal": {
     "invest-with": "Invest with",
-    "amount-to-invest": "Amount to Invest",
-    "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
+    "amount-to-invest": "Amount to Invest:",
+    "type-transfer": "Type the word <0>“{{word}}”</0> in the field below to agree with the transfer:",
+    "type-transfer-placeholder": "Type “{{word}}” in here",
     "transfer-error": "Invalid value. Please type the correct word.",
     "max-funds": "Exceeds maximum funds allowed in this service. Invest max. {{max}} {{coin}}.",
     "max-reached": "Cannot invest in this service because it has reached Maximum Funds limit.",
     "transfer-label": "Transfer",
-    "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
-    "i-understand-money-transferred": "I understand and confirm that my funds will be transferred to the trader's pool and will no longer appear in my available balance"
+    "i-understand-risk": "I understand and accept that my funds will be transferred to the Service Pool account and that my funds are at risk"
+  },
+  "withdrawal-request": "Withdrawal Request",
+  "withdrawal-success": {
+    "title": "Withdrawal Requested",
+    "description": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please, take into account that your investment is at risk until the balance is transferred to you. Depending on the fund manager, this usually takes a few days but may take longer to complete. Zignaly does not control this time frame, so please be patient.",
+    "button": "Close"
   }
 }

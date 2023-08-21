@@ -1,10 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  LoginButton,
   AccountDropdown,
   AccountName,
   HeaderDropdownButton,
+  LoginButton,
 } from './styles';
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -16,33 +16,38 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  ZigDropdown,
-  ZigTypography,
-  ZigUserIcon,
+  ZigArrowBottomIcon,
   ZigButton,
+  ZigDropdown,
+  ZigDropdownHandleType,
+  ZigLoginUserIcon,
   ZigPlusIcon,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import {
+  ROUTE_2FA,
   ROUTE_DASHBOARD,
+  ROUTE_EDIT_PROFILE,
+  ROUTE_KYC,
   ROUTE_LOGIN,
-  ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
-  ROUTE_WALLET,
+  ROUTE_PASSWORD,
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
+  ROUTE_SIGNUP,
 } from '../../../routes';
-import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
+import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
-import { useZModal } from 'components/ZModal/use';
-import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
-import Enable2FAModal from 'views/Settings/Enable2FAModal';
-import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { ZigDropdownHandleType, ZigArrowBottomIcon } from '@zignaly-open/ui';
+import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
+import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
+  usePrefetchTranslation('settings');
   const logout = useLogout();
   const { t } = useTranslation(['common', 'action']);
   const isAuthenticated = useIsAuthenticated();
@@ -50,24 +55,19 @@ function AccountMenu(): React.ReactElement | null {
   const navigate = useNavigate();
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
-  const location = useLocation();
-  const { showModal } = useZModal();
+  const openDepositModal = useOpenDepositModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
 
-  const setActiveExchange = (exchangeInternalId: string) => {
-    selectExchange(exchangeInternalId);
-  };
-
   if (!isAuthenticated) {
     return (
       <>
-        <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
+        <Link to={ROUTE_LOGIN}>
           <LoginButton id={'menu__login'}>
-            <ZigUserIcon
+            <ZigLoginUserIcon
               color={theme.palette.neutral300}
               width={'16px'}
               height={'16px'}
@@ -77,7 +77,7 @@ function AccountMenu(): React.ReactElement | null {
             </ZigTypography>
           </LoginButton>
         </Link>
-        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+        <Link to={ROUTE_SIGNUP}>
           <ZigButton id={'menu__signup'} variant={'contained'}>
             {t('account-menu.isAuth-button-signUp')}
           </ZigButton>
@@ -115,15 +115,16 @@ function AccountMenu(): React.ReactElement | null {
           label: (
             <AccountDropdown>
               <Avatar size={'medium'} image={activeExchange?.image} />
-              <AccountName variant={'body1'} color={'neutral100'}>
+              <AccountName variant={'body1'} color={'neutral200'}>
                 {activeExchange?.internalName}
               </AccountName>
             </AccountDropdown>
           ),
           id: 'account-menu-dropdown__account-switcher',
+          customStyle: `background: ${theme.palette.neutral750}; margin-top: -11px;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
-              onClick: () => setActiveExchange(exchange.internalId),
+              onClick: () => selectExchange(exchange.internalId),
               id: `account-switcher-dropdown__account-${index}`,
               label: (
                 <>
@@ -156,53 +157,61 @@ function AccountMenu(): React.ReactElement | null {
           onClick: () => navigate(ROUTE_MY_BALANCES),
         },
         {
-          label: t('account-menu.notAuth-dropdown-link-wallet'),
-          id: 'account-menu-dropdown__wallet',
-          href: generatePath(ROUTE_WALLET),
-          onClick: () => navigate(ROUTE_WALLET),
-        },
-        {
           id: 'account-menu-dropdown__settings',
           label: t('account-menu.notAuth-dropdown-link-settings'),
           children: [
             {
-              id: `menu-dropdown-settings__password`,
-              label: t('account-menu.notAuth-dropdown-link-password'),
-              onClick: () => showModal(UpdatePasswordModal),
+              id: `menu-dropdown-settings__profile`,
+              label: t('account-menu.notAuth-dropdown-link-profile'),
+              href: generatePath(ROUTE_EDIT_PROFILE),
+              onClick: () => navigate(generatePath(ROUTE_EDIT_PROFILE)),
             },
             {
               id: `menu-dropdown-settings__2fa`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
-              onClick: () => showModal(Enable2FAModal),
+              href: generatePath(ROUTE_2FA),
+              onClick: () => navigate(generatePath(ROUTE_2FA)),
             },
-          ],
+            {
+              id: `menu-dropdown-settings__password`,
+              label: t('account-menu.notAuth-dropdown-link-password'),
+              href: generatePath(ROUTE_PASSWORD),
+              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
+            },
+            isFeatureOn(Features.Kyc) && {
+              id: `menu-dropdown-settings__kyc`,
+              label: t('account-menu.dropdown-link-kyc'),
+              href: generatePath(ROUTE_KYC),
+              onClick: () => navigate(generatePath(ROUTE_KYC)),
+            },
+          ].filter(Boolean),
         },
         {
           element: (
             <ZigButton
-              id={'invest-form__deposit'}
-              startIcon={<ZigPlusIcon />}
-              sx={{ fontWeight: 600, mb: 1.5, mt: 1.5 }}
+              id={'account-menu-deposit'}
+              startIcon={<ZigPlusIcon width={10} height={10} />}
+              sx={{ fontWeight: 600, mt: '10px', mb: '12px' }}
               variant={'contained'}
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
                 onClose();
-                showModal(DepositModal, {
-                  ctaId: 'account-menu-deposit',
-                });
+                openDepositModal();
               }}
             >
               {t('action:deposit')}
             </ZigButton>
           ),
         },
-        {
-          separator: true,
+        { separator: true },
+        isFeatureOn(Features.Rewards) && {
+          customStyle: `margin-top: 4px;`,
           label: (
             <>
               <GiftIcon
                 width={24}
                 height={24}
+                style={{ marginTop: -1 }}
                 color={theme.palette.neutral175}
               />
               {t('account-menu.rewards')}
@@ -212,12 +221,13 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REWARDS),
           onClick: () => navigate(ROUTE_REWARDS),
         },
-        {
+        isFeatureOn(Features.Referrals) && {
           label: (
             <>
               <InviteIcon
                 width={24}
                 height={24}
+                style={{ marginTop: -1 }}
                 color={theme.palette.neutral175}
               />
               {t('account-menu.referrals')}
@@ -227,12 +237,19 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REFERRALS),
           onClick: () => navigate(ROUTE_REFERRALS),
         },
-        {
+        (isFeatureOn(Features.Referrals) || isFeatureOn(Features.Rewards)) && {
           separator: true,
+        },
+        {
           label: (
             <ZigTypography
               component={'p'}
-              sx={{ textAlign: 'center', p: 0.5, width: '100%' }}
+              sx={{
+                textAlign: 'center',
+                p: '4px 9px 3px',
+                fontSize: '14px',
+                width: '100%',
+              }}
               color={'links'}
             >
               {t('account-menu.notAuth-button-logOut')}
@@ -241,7 +258,7 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__logout',
           onClick: logout,
         },
-      ]}
+      ].filter(Boolean)}
     />
   );
 }

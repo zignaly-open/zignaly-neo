@@ -4,8 +4,7 @@ import { ZigLink, ZigTypography } from '@zignaly-open/ui';
 import { StepBox, StepCounter } from './styles';
 import { Trans, useTranslation } from 'react-i18next';
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
-import { useZModal } from '../../../../components/ZModal/use';
-import DepositModal from '../ManageInvestmentModals/DepositModal';
+import { useOpenDepositModal } from '../ManageInvestmentModals/DepositModal';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PROFIT_SHARING } from '../../../../routes';
 import { BUY_CRYPTO_URL } from '../../../../util/constants';
@@ -13,7 +12,7 @@ import NorthEastIcon from '@mui/icons-material/NorthEast';
 
 const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
   const { t } = useTranslation('my-dashboard');
-  const { showModal } = useZModal();
+  const openDepositModal = useOpenDepositModal();
   const navigate = useNavigate();
 
   return (
@@ -50,12 +49,12 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
               }
               onClick={() => {
                 step === 1 && navigate(ROUTE_PROFIT_SHARING);
-                step === 2 && showModal(DepositModal);
+                step === 2 && openDepositModal();
               }}
             />
             {step === 2 && (
               <ZigLink
-                id={'my-portfolio-steps__step-purchase'}
+                id={'my-portfolio-steps__purchase'}
                 href={BUY_CRYPTO_URL}
                 underline={'hover'}
                 target={'_blank'}

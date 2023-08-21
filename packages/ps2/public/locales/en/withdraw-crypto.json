@@ -21,7 +21,7 @@
     "invalid": "MEMO/Tag is invalid, please review your target wallet network details"
   },
   "amountToWithdraw": {
-    "label": "Amount to Withdraw:",
+    "label": "Amount:",
     "labelBalance": "Available:",
     "minimum": "Minimum:",
     "fee": "Fee:"
@@ -35,15 +35,16 @@
     "title": "Confirm Withdrawal",
     "description": "Please confirm the information is correct and submit your withdrawal.",
     "receive": "You’ll Receive:",
-    "network": "Withdrawal Network",
-    "address": "Withdraw to Address",
-    "amount": "Withdrawal Amount",
-    "networkFee": "Network Fee",
-    "continue": "Continue to Confirmation",
-    "withdrawNow": "Withdraw now!"
+    "network": "Withdrawal Network:",
+    "address": "Withdrawal Address:",
+    "amount": "Withdrawal Amount:",
+    "networkFee": "Network Fee:",
+    "continue": "Continue",
+    "withdrawNow": "Withdraw now"
   },
   "success": {
     "title": "Withdrawal Success",
     "description": "Your withdrawal request has been sent and should be processed shortly."
-  }
+  },
+  "history": "History"
 }

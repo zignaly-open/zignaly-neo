@@ -1,6 +1,11 @@
 import { styled } from '@mui/material';
 import { MenuDropDown } from '@zignaly-open/ui';
 import { Link } from 'react-router-dom';
+import { Theme } from '@mui/system';
+
+const secondaryBackground = ({ theme }: { theme: Theme }) => `
+  background: ${theme.palette.backgrounds.secondaryBackground};
+`;
 
 export const Layout = styled('div')`
   flex-direction: row;
@@ -9,7 +14,7 @@ export const Layout = styled('div')`
   width: 100%;
   right: 0;
   left: 0;
-  background: #0f0f25;
+  ${secondaryBackground};
   z-index: 50;
 `;
 
@@ -34,24 +39,25 @@ type OptionType = {
   active: boolean;
 };
 
-export const Option = styled('a')<OptionType>`
+export const Option = styled('span', {
+  shouldForwardProp: (p) => p !== 'active',
+})<OptionType>`
   cursor: pointer;
   user-select: none;
-  ${({ theme, active }) =>
-    active
-      ? `
-        color: ${theme.palette.highlighted};
-      `
-      : `
-        color: ${theme.palette.neutral300};
+  transition: background-color 0.2s;
 
-        &:hover {
-          color: ${theme.palette.neutral100};
-        }
-      `}
+  & > * {
+    transition: color 0.2s;
+    color: ${({ theme, active }) =>
+      active ? theme.palette.highlighted : theme.palette.neutral300};
+  }
 
   &:hover {
-    background: #1b213d;
+    background: ${({ theme }) =>
+      theme.palette.backgrounds.manageServiceMenuHover};
+    & > * {
+      color: ${({ theme }) => theme.palette.neutral100};
+    }
   }
 `;
 
@@ -66,13 +72,13 @@ export const HeadOption = styled(Option)<
   display: flex;
   align-items: center;
   height: 56px;
-  background: #0f0f25;
+  ${secondaryBackground};
 
-  ${({ isSubOption }) =>
+  ${({ isSubOption, theme }) =>
     isSubOption
       ? `
         padding: 0 10%;
-        background: #11152B;
+        background: ${theme.palette.neutral800};
       `
       : `
         justify-content: center;

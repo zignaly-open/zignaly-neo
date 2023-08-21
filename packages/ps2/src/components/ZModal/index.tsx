@@ -15,6 +15,7 @@ const ZModal: React.FC<ZModalProps> = ({
   close,
   isLoading,
   allowUnauth,
+  disableBackdropClose,
   children,
   onGoBack,
   title,
@@ -34,15 +35,20 @@ const ZModal: React.FC<ZModalProps> = ({
   return (
     <MuiModal
       {...props}
-      onClose={close}
-      style={{
+      onClose={(event, reason) => {
+        if (disableBackdropClose && reason === 'backdropClick') {
+          return;
+        }
+        close();
+      }}
+      sx={{
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
       }}
     >
       <ModalContainer
-        width={(wide && 784) || width}
+        width={(wide && 620) || width}
         title={title}
         onClickClose={close}
         onGoBack={onGoBack}
@@ -63,3 +69,4 @@ const ZModal: React.FC<ZModalProps> = ({
 };
 
 export default ZModal;
+export { Form, ModalActions } from './ModalContainer/styles';

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { AxisFormat, ChartColor, ChartGradientColor, GradientVariant } from "./types";
+import { AxisFormat, ChartGradientColor, GradientVariant } from "./types";
+import { useChartColor } from "./ZigChart/util";
 
 const deltaToShowSecondChart = 0.2;
 
@@ -21,11 +22,19 @@ const getYDomain = (data: AxisFormat[]) => {
   const values = data.map((s) => s.y);
   // Add 0 to min values to show chart under 0 axis
   const ranges = [Math.min(0, ...values), Math.max(...values)];
-  if (ranges[0] < 0 && ranges[1] > 0)
+  if (ranges[0] < 0 && ranges[1] > 0) {
     ranges[0] = Math.min(
       ranges[0],
       (ranges[1] * -1 * deltaToShowSecondChart) / (1 - deltaToShowSecondChart),
     );
+  } else if (ranges[1] <= 0) {
+    // If all values are negative, we need to force the upper value to be slightly above 0 to
+    // avoid the x axis being on top.
+    // This doesn't work: https://stackoverflow.com/a/53396988/1494428
+
+    // Calculate the data range, then set the upper limit to a small fraction of that range
+    ranges[1] = Math.abs(ranges[1] - ranges[0]) * 0.01;
+  }
 
   return ranges as [number, number];
 };
@@ -36,17 +45,18 @@ export function useChartData(
   precision?: number,
 ): {
   data: AxisFormat[];
-  color: ChartColor;
+  color: string;
   gradient: ChartGradientColor;
   yDomain: [number, number];
 } {
+  const chartColors = useChartColor();
   const [processedData, yDomain] = useMemo(() => {
     const chart = data.map((value, index) => {
       const { x, y, ...rest } = typeof value === "object" ? value : { x: index, y: value };
       return {
         x,
         // Remove extra decimals to normalize range (e.g. avoiding 0 to 0.0001%)
-        y: +y.toFixed(precision),
+        y: precision ? +y.toFixed(precision) : y,
         // Keep rest of properties that may be useful for tooltip
         ...rest,
       };
@@ -61,7 +71,7 @@ export function useChartData(
 
   return {
     data: processedData,
-    color: isGreen ? ChartColor.Green : ChartColor.Red,
+    color: isGreen ? chartColors.green : chartColors.red,
     gradient: getGradient(gradientVariant, isGreen),
     yDomain,
   };

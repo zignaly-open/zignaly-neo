@@ -1,59 +1,62 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useTheme } from '@mui/material';
-import { Layout, Header, Title, Body, HeaderButton, Inline } from './styles';
-import { ZigCloseIcon, ZigArrowLeftIcon } from '@zignaly-open/ui';
+import {
+  Layout,
+  Header,
+  Title,
+  Body,
+  Inline,
+  CloseIconButton,
+  BackIconButton,
+} from './styles';
+import { ZigBackIcon, ZigCrossCircleIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
 
-function ModalContainer({
-  children,
-  title = null,
-  titleAlign = 'left',
-  onGoBack = null,
-  width,
-  onClickClose = null,
-  customHeaderAction = null,
-}: ModalContainerProps) {
+const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
+  const {
+    children,
+    title = null,
+    titleAlign = 'center',
+    onGoBack = null,
+    width,
+    onClickClose = null,
+  } = props;
   const theme = useTheme();
 
   return (
-    <Layout width={width}>
+    <Layout width={width} ref={ref} tabIndex={-1}>
+      {onGoBack && typeof onGoBack === 'function' && (
+        <BackIconButton onClick={onGoBack}>
+          <ZigBackIcon
+            width={'32px'}
+            height={'32px'}
+            color={theme.palette.neutral100}
+            id={'modal__back'}
+          />
+        </BackIconButton>
+      )}
       <Header compact={!title && !onGoBack}>
         <Inline align={titleAlign}>
-          {onGoBack && typeof onGoBack === 'function' && (
-            <HeaderButton onClick={onGoBack}>
-              <ZigArrowLeftIcon
-                width={'32px'}
-                height={'32px'}
-                color={theme.palette.neutral300}
-              />
-            </HeaderButton>
-          )}
           {!!title && (
-            <Title
-              variant='h1'
-              sx={{ paddingRight: '20px' }}
-              color='neutral100'
-              id={'modal__title'}
-            >
+            <Title variant='h1' mb={0} color='neutral100' id={'modal__title'}>
               {title}
             </Title>
           )}
         </Inline>
-        {!customHeaderAction
-          ? onClickClose &&
-            typeof onClickClose === 'function' && (
-              <HeaderButton onClick={onClickClose}>
-                <ZigCloseIcon
-                  color={theme.palette.neutral300}
-                  id={'modal__close'}
-                />
-              </HeaderButton>
-            )
-          : customHeaderAction}
       </Header>
+      {onClickClose && typeof onClickClose === 'function' && (
+        <CloseIconButton onClick={onClickClose}>
+          <ZigCrossCircleIcon
+            width={'32px'}
+            height={'32px'}
+            color={theme.palette.neutral100}
+            id={'modal__close'}
+          />
+        </CloseIconButton>
+      )}
       <Body>{children}</Body>
     </Layout>
   );
-}
+});
 
 export default ModalContainer;

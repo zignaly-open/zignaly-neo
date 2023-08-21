@@ -5,24 +5,28 @@ import { NavigationLink } from './atoms';
 import { ROUTE_BECOME_TRADER, ROUTE_PROFIT_SHARING } from '../../../routes';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
-import ReferralButton from '../ReferralButton';
-import RewardsButton from '../RewardsButton';
 import { useIsAuthenticated } from '../../../apis/user/use';
-import BalanceButton from '../BalanceButton';
 import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
-// FIXME
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import { MAIN_APP_URL } from '../../../util/constants';
+import HeaderWidgetButtons from '../HeaderWidgetButtons';
+import { isFeatureOn, whitelabel } from '../../../whitelabel';
+import { Features } from 'whitelabel/type';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const logoRoute = whitelabel.mainAppLink || MAIN_APP_URL;
+
+  const logo = whitelabel.logo ? (
+    <img src={whitelabel.logo} id='menu__logo' height='32' />
+  ) : (
+    <BrandImage id='menu__logo' height='32px' type='isotype' width='32px' />
+  );
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -31,14 +35,25 @@ const Header: React.FC = () => {
           <Container>
             {sm ? (
               <Box display='flex' alignItems='center' gap='28px'>
-                <a href={MAIN_APP_URL} key='logo' rel={'noopener'}>
-                  <BrandImage
+                {!logoRoute.startsWith('http') ? (
+                  <NavigationLink
                     id='menu__logo'
-                    height='32px'
-                    type='isotype'
-                    width='32px'
-                  />
-                </a>
+                    style={{ display: 'flex' }}
+                    to={logoRoute}
+                    key='--route-main'
+                  >
+                    {logo}
+                  </NavigationLink>
+                ) : (
+                  <a
+                    style={{ display: 'flex' }}
+                    href={logoRoute}
+                    key='logo'
+                    rel={'noopener'}
+                  >
+                    {logo}
+                  </a>
+                )}
                 <HeaderLinksContainer key='links'>
                   <NavigationLink
                     id='menu__marketplace'
@@ -47,7 +62,7 @@ const Header: React.FC = () => {
                   >
                     {t('navigation-menu.profit-sharing')}
                   </NavigationLink>
-                  {md && (
+                  {isFeatureOn(Features.Trader) && md && (
                     <NavigationLink
                       id='menu__become-trader'
                       to={ROUTE_BECOME_TRADER}
@@ -57,9 +72,7 @@ const Header: React.FC = () => {
                     </NavigationLink>
                   )}
                 </HeaderLinksContainer>
-                <Suspense fallback={null}>
-                  <ExtraNavigationDropdown />
-                </Suspense>
+                <ExtraNavigationDropdown />
               </Box>
             ) : (
               <Drawer />
@@ -74,14 +87,8 @@ const Header: React.FC = () => {
                   !sm && { flex: 1, justifyContent: 'center' }),
               }}
             >
-              <Suspense fallback={null}>
-                {isAuthenticated && (
-                  <>
-                    <BalanceButton key={'balance'} />
-                    <RewardsButton key={'rewards'} />
-                    {md && <ReferralButton key={'referral'} />}
-                  </>
-                )}
+              <Suspense>
+                {isAuthenticated && <HeaderWidgetButtons />}
                 <AccountMenu />
               </Suspense>
             </Box>

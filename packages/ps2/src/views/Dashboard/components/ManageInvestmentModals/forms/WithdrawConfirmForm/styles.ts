@@ -1,15 +1,14 @@
 import { css, styled } from '@mui/material';
 
 export const AmountContainer = styled('div')<{
-  coloredBorder?: boolean;
+  coloredBackground?: boolean;
+  noBorders?: boolean;
 }>`
   position: relative;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: #101225;
-  box-shadow: inset 0px 0px 0px 1px #35334a;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px 18px;
@@ -31,11 +30,17 @@ export const AmountContainer = styled('div')<{
     mask-composite: exclude;
   }
 
-  ${({ coloredBorder }) =>
-    coloredBorder &&
+  ${({ noBorders }) =>
+    noBorders &&
     css`
-      &:before {
-        background: linear-gradient(#8671f7, #7ec9f9);
-      }
+      margin: 0 10px;
+      padding: 0;
+      box-shadow: unset;
+    `}
+
+  ${({ coloredBackground, theme }) =>
+    coloredBackground &&
+    css`
+      background: ${theme.palette.backgrounds.withdrawalHighlight};
     `}
 `;

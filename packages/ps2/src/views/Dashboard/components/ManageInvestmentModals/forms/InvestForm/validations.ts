@@ -2,46 +2,43 @@ import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
 import i18n from 'util/i18next';
 import * as yup from 'yup';
-import {
-  inputAmountTokenMaxValidation,
-  inputAmountTokenDecimalsValidation,
-} from '../../../../../../util/validation';
+import { inputAmountValidation } from 'util/validation';
 
-export const investAmountValidation = (max: string, coin: string) =>
-  inputAmountTokenMaxValidation
-    .concat(inputAmountTokenDecimalsValidation)
-    .concat(
-      yup.object().shape({
-        value: yup
-          .string()
-          .test(
-            'sbt',
-            i18n.t('edit-investment:invest-modal.max-reached'),
-            () => parseFloat(max) > 0,
-          )
-          .test(
-            'sbt-limit',
-            i18n.t('edit-investment:invest-modal.max-funds', {
-              max: numericFormatter(max.toString(), {
-                thousandSeparator: true,
-              }),
-              coin,
-            }),
-            (val) => new BigNumber(val).isLessThanOrEqualTo(max),
-          ),
+export const investAmountValidation = (
+  max: string,
+  coin: string,
+  balance: string,
+) =>
+  inputAmountValidation({ balance, max, coin })
+    .test(
+      'sbt',
+      i18n.t('edit-investment:invest-modal.max-reached'),
+      () => parseFloat(max) > 0,
+    )
+    .test(
+      'sbt-limit',
+      i18n.t('edit-investment:invest-modal.max-funds', {
+        max: numericFormatter(max.toString(), {
+          thousandSeparator: true,
+        }),
+        coin,
       }),
+      (val) => new BigNumber(val).isLessThanOrEqualTo(max),
     );
 
-export const EditInvestmentValidation = ({
+export const editInvestmentValidation = ({
   max,
   coin,
+  balance,
+  checkTransferInput = false,
 }: {
   max: string;
   coin: string;
+  balance: string;
+  checkTransferInput?: boolean;
 }) =>
   yup.object().shape({
-    amountTransfer: investAmountValidation(max, coin),
-    understandMargin: yup.boolean().oneOf([true], 'error:error.required'),
+    amountTransfer: investAmountValidation(max, coin, balance),
     transferConfirm: yup
       .string()
       .test(
@@ -49,13 +46,11 @@ export const EditInvestmentValidation = ({
         'edit-investment:invest-modal.transfer-error',
         function (value) {
           return (
+            !checkTransferInput ||
             value.toLocaleLowerCase() ===
-              this.parent.transferLabelForValidation?.toLocaleLowerCase() ||
-            this.parent.step === 1
+              this.parent.transferLabelForValidation?.toLocaleLowerCase()
           );
         },
       ),
-    understandMoneyTransferred: yup
-      .boolean()
-      .oneOf([true], 'error:error.required'),
+    understandRisk: yup.boolean().oneOf([true], 'error:error.required'),
   });

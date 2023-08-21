@@ -11,7 +11,8 @@ import {
 
 const PendingTransactions: React.FC<{
   setView: ChangeViewFn;
-}> = ({ setView }) => {
+  prefixId?: string;
+}> = ({ setView, prefixId }) => {
   const { serviceId } = useSelectedInvestment();
   const { data: details } = useInvestmentDetails(serviceId);
   const { t } = useTranslation('edit-investment');
@@ -25,8 +26,12 @@ const PendingTransactions: React.FC<{
   return pendingTransactionsCount > 0 ? (
     <PendingTransaction>
       <Inline>
-        <ZigRefreshIcon />
-        <ZigTypography variant={'body1'} color={'yellow'}>
+        <ZigRefreshIcon id={prefixId && `${prefixId}__refresh-icon`} />
+        <ZigTypography
+          variant={'body1'}
+          color={'yellow'}
+          id={prefixId && `${prefixId}__pending-label`}
+        >
           {t('pendingTransactions.status', {
             count: pendingTransactionsCount,
           })}
@@ -35,9 +40,14 @@ const PendingTransactions: React.FC<{
       <div>
         <ZigButton
           variant={'text'}
+          id={prefixId && `${prefixId}__show-pending-transactions`}
           endIcon={
             <KeyboardArrowRightIcon
-              sx={{ width: '22px !important', height: '22px !important' }}
+              sx={{
+                width: '22px !important',
+                height: '22px !important',
+                fill: 'currentcolor !important',
+              }}
             />
           }
           onClick={() => setView(EditInvestmentViews.PendingTransactions)}

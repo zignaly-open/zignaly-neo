@@ -3,6 +3,7 @@ import React from "react";
 
 declare module "@mui/material/styles" {
   interface CustomPalette {
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -22,8 +23,47 @@ declare module "@mui/material/styles" {
     links: string;
     yellow: string;
     red: string;
+    contrasting: string;
 
-    almostWhite: string;
+    backgrounds: Record<
+      | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
+      | "selectInputFill"
+      | "inputTextFill"
+      | "toastSuccess"
+      | "toastError"
+      | "greyedOutBorder"
+      | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
+      | "socialNetworksTab" // why have a dedicated color used only once? because fuck me, that's why
+      | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
+      | "modal"
+      | "secondaryBackground"
+      | "sliderMark"
+      | "tableRow"
+      | "sliderThumb"
+      | "tableHeader"
+      | "input2fa"
+      | "input2faGradient"
+      | "input2faGradientBorder"
+      | "buttonPrimary"
+      | "loader"
+      | "header"
+      | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
+      | "input",
+      string
+    >;
+
+    boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;
+
+    chart: Record<
+      | "greenGradient"
+      | "greenMiniGradient"
+      | "redGradient"
+      | "redMiniGradient"
+      | "greenCard"
+      | "redCard",
+      string[]
+    > &
+      Record<"red" | "green", string>;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -51,6 +91,7 @@ declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     danger: true;
     success: true;
+    neutral900: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
@@ -71,7 +112,7 @@ declare module "@mui/material/Button" {
     yellow: true;
     red: true;
 
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -79,8 +120,8 @@ declare module "@mui/material/SvgIcon" {
   export interface SvgIconPropsColorOverrides {
     danger: true;
     success: true;
+    neutral900: true;
     neutral800: true;
-    neutral750: true;
     neutral700: true;
     neutral600: true;
     neutral500: true;
@@ -99,12 +140,13 @@ declare module "@mui/material/SvgIcon" {
     yellow: true;
     red: true;
 
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
 declare module "@emotion/react" {
   export interface Theme extends MuiTheme {
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -125,6 +167,6 @@ declare module "@emotion/react" {
     yellow: string;
     red: string;
 
-    almostWhite: string;
+    contrasting: string;
   }
 }

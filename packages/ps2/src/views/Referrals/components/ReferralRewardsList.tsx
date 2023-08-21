@@ -196,20 +196,23 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   );
 
   const elementsThem = useMemo(
-    () => [
-      config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
-        <Trans
-          i18nKey='referrals:they-get-invest'
-          t={t}
-          values={hardcodedInviteeReward}
-        >
-          {/*desparate times call for desperate measures*/}
-          <ZigTypography sx={{ opacity: 0 }} />
-          <TotalBoxValue />
-          <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
-        </Trans>
-      ),
-    ],
+    () =>
+      [
+        config.enableSuccessFeeReward &&
+          !!config.zignalySuccessFee &&
+          hardcodedInviteeReward && (
+            <Trans
+              i18nKey='referrals:they-get-invest'
+              t={t}
+              values={hardcodedInviteeReward}
+            >
+              {/*desparate times call for desperate measures*/}
+              <ZigTypography sx={{ opacity: 0 }} />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
+      ].filter(Boolean),
     [config, t],
   );
 
@@ -376,16 +379,19 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   );
 
   const modalThemElements = useMemo(
-    () => [
-      <Trans
-        key='they-get-invest-modal'
-        i18nKey='they-get-invest-modal'
-        t={t}
-        values={hardcodedInviteeReward}
-      >
-        <ZigTypography fontWeight={600} color={'neutral100'} />
-      </Trans>,
-    ],
+    () =>
+      [
+        hardcodedInviteeReward && (
+          <Trans
+            key='they-get-invest-modal'
+            i18nKey='they-get-invest-modal'
+            t={t}
+            values={hardcodedInviteeReward}
+          >
+            <ZigTypography fontWeight={600} color={'neutral100'} />
+          </Trans>
+        ),
+      ].filter(Boolean),
     [config, t],
   );
 
@@ -432,7 +438,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             </Box>
           )}
 
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: 0 }}>
             <ZigTypography variant={'h3'}>{t('terms.title')}</ZigTypography>
             <OlList>
               <li>{t('terms.1')}</li>
@@ -448,6 +454,8 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     });
   }, [elementsYou]);
 
+  elementsYou.splice(1);
+
   const cols =
     elementsYou.slice(0, 2).length + elementsThem.slice(0, 1).length + 1;
   return (
@@ -462,7 +470,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       <Grid
         item
         xs={12}
-        md={Math.min(4, 12 / cols) * elementsYou.slice(0, 2).length}
+        md={Math.min(6, 12 / cols) * elementsYou.slice(0, 2).length}
       >
         <ZigTypography
           variant={'h1'}
@@ -474,20 +482,22 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         </ZigTypography>
       </Grid>
 
-      <Grid
-        item
-        xs={12}
-        md={Math.min(4, 12 / cols) * elementsThem.slice(0, 1).length}
-      >
-        <ZigTypography
-          variant={'h1'}
-          textAlign={'center'}
-          fontWeight={600}
-          sx={{ mt: 2, mb: 2.5 }}
+      {elementsThem?.length > 0 && (
+        <Grid
+          item
+          xs={12}
+          md={Math.min(6, 12 / cols) * elementsThem.slice(0, 1).length}
         >
-          {t('what-they-get')}
-        </ZigTypography>
-      </Grid>
+          <ZigTypography
+            variant={'h1'}
+            textAlign={'center'}
+            fontWeight={600}
+            sx={{ mt: 2, mb: 2.5 }}
+          >
+            {t('what-they-get')}
+          </ZigTypography>
+        </Grid>
+      )}
 
       <Grid item xs={12} />
 
@@ -498,7 +508,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           xs={12}
           pl={3}
           pr={3}
-          md={Math.min(4, 12 / cols)}
+          md={Math.min(6, 12 / cols)}
         >
           <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
         </Grid>
@@ -514,7 +524,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           sx={{
             borderLeft: (theme) => `1px solid ${theme.palette.neutral700}`,
           }}
-          md={Math.min(4, 12 / cols)}
+          md={Math.min(6, 12 / cols)}
         >
           <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
         </Grid>
@@ -523,7 +533,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       <Grid
         item
         xs={12}
-        md={Math.min(4, 12 / cols)}
+        md={Math.min(6, 12 / cols)}
         pl={3}
         pr={3}
         sx={{

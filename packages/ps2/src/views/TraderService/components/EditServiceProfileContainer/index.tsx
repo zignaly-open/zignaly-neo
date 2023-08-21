@@ -141,7 +141,9 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
           <Controller
             name='logo'
             control={control}
-            render={({ field }) => <ServiceLogo service={service} {...field} />}
+            render={({ field }) => (
+              <ServiceLogo label={t('edit.logo')} {...field} />
+            )}
           />
         </Grid>
         <Grid container sm={12} md={7} pb={2} alignItems='flex-start' gap={6}>
@@ -177,22 +179,18 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 name='successFee'
                 control={control}
                 render={({ field }) => (
-                  <SuccessFeeInputWrapper value={watch('successFee') || 0}>
+                  <SuccessFeeInputWrapper
+                    value={watch('successFee') || 0}
+                    showZeroFeeExplainer
+                  >
                     <ZigInput
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position='end'>%</InputAdornment>
                         ),
                       }}
-                      fullWidth
-                      label={
-                        <div>
-                          {t('summary.success-fee')}
-                          <ZigTypography variant='h4' color='neutral400'>
-                            {t('edit.success-fee-desc')}
-                          </ZigTypography>
-                        </div>
-                      }
+                      label={t('create.total-fee')}
+                      labelInline
                       error={t(errors.successFee?.message)}
                       {...field}
                     />

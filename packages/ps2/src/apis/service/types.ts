@@ -56,6 +56,7 @@ export type ServiceTypesInfo = Record<
 
 export type TraderServiceManagement = {
   createdAt: string;
+  claims: number;
   dfa: string;
   dfaMqDebt: string;
   invested: string;
@@ -86,6 +87,7 @@ export type TraderServiceBalance = {
 };
 
 export type Investor = {
+  account_id: string;
   accountType: string;
   email: string;
   invested: string;
@@ -94,9 +96,13 @@ export type Investor = {
   pnlNetAt: string;
   pnlNetLc: string;
   pnlPctLc: string;
+  ownerSuccessFee: number;
+  ownerSfDiscount: number;
   sfOwnerAt: string;
   sfOwnerLc: string;
   userId: string;
+
+  actions: string;
 };
 
 export type InternalAccountType = 'STA' | 'SCA';
@@ -145,6 +151,7 @@ export type Service = {
   pnlSsc90t: string;
   pnlSsc180t: string;
   pnlSsc365t: string;
+  zglySuccessFee: number;
 };
 
 export type TraderServiceChart = {
@@ -164,7 +171,6 @@ export type TraderServiceChartProcessed = {
 };
 
 export enum GraphTimeframe {
-  '7d' = '7d',
   '30d' = '30d',
   '90d' = '90d',
   '180d' = '180d',
@@ -173,7 +179,6 @@ export enum GraphTimeframe {
 }
 
 export const GraphTimeframeDayLength = {
-  [GraphTimeframe['7d']]: 7,
   [GraphTimeframe['30d']]: 30,
   [GraphTimeframe['90d']]: 90,
   [GraphTimeframe['180d']]: 180,

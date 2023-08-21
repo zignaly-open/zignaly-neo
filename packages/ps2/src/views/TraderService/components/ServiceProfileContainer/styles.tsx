@@ -1,9 +1,10 @@
-import { styled, css, Grid } from '@mui/material';
+import { styled, css, Grid, Divider } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
+import { isSafari } from 'react-device-detect';
 import { Box } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 
@@ -69,34 +70,39 @@ export const Separator = styled('span')`
 `;
 
 export const InvestButtonContainer = styled('div')`
+  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
+  border-top: none;
+  align-items: center;
+  padding: 15px 25px;
+  position: relative;
+  border-radius: 5px;
   text-align: center;
   height: 88px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
-export const BigNumberWrapperInvested = styled('div')`
-  span {
-    font-weight: 500;
-    font-size: 22px !important;
-    line-height: 36px !important;
+export const TopDivider = styled(Divider)`
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0 3px;
+  transform: translateY(-50%);
+
+  &:before,
+  &:after {
+    border-color: ${({ theme }) => theme.palette.neutral600};
+    border-top-style: dotted;
   }
 `;
 
 export const BigNumberWrapper = styled('div')`
   & > div span {
     font-weight: 500;
-    font-size: 22px !important;
-    line-height: 36px !important;
   }
-`;
-
-export const CountryFlag = styled('img')`
-  width: 21px;
-  height: 14px;
-  line-height: 1;
-  margin-left: 6px;
 `;
 
 export const HideReadMoreEffects = styled('div')<{
@@ -105,13 +111,19 @@ export const HideReadMoreEffects = styled('div')<{
   transition: all 0.3s;
   margin-bottom: 7px;
 
+  & ol {
+    padding-inline-start: 20px !important;
+  }
+
   ${({ truncate }) =>
     truncate &&
     css`
       -webkit-line-clamp: 5;
+      ${isSafari ? `max-height: 150px;` : ''};
+      height: 100%;
       -webkit-box-orient: vertical;
-      display: -webkit-box;
-      overflow: hidden;
+      display: ${isSafari ? 'block' : '-webkit-box'};
+      overflow-y: hidden;
       overflow-wrap: break-word;
       text-overflow: ellipsis;
     `}
@@ -135,6 +147,14 @@ export const MarkdownContainer = styled('div')`
 
   li {
     list-style-type: disc;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    margin-bottom: 16px;
   }
 `;
 

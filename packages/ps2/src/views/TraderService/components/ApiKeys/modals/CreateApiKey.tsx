@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../../components/ZModal';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
-import { Box } from '@mui/system';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateKeyValidation } from '../validations';
@@ -11,6 +10,7 @@ import { useServiceApiKeyCreateMutation } from '../../../../../apis/serviceApiKe
 import { CreateApiKeyFormType } from '../types';
 import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
 import { useCheck2FA } from '../../../../../apis/user/use';
+import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function CreateApiKeysModal({
   close,
@@ -56,18 +56,16 @@ function CreateApiKeysModal({
 
   return (
     <ZModal wide {...props} close={close} title={t('api-keys.create-new-key')}>
-      <ZigTypography>{t('api-keys.create-new-key-description')}</ZigTypography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <ZigTypography textAlign={'center'}>
+        {t('api-keys.create-new-key-description')}
+      </ZigTypography>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='alias'
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
-              sx={{
-                mt: 2,
-                mb: 4,
-              }}
               wide
               label={t('common:name') + ':'}
               placeholder={t('common:name') + ':'}
@@ -78,7 +76,7 @@ function CreateApiKeysModal({
           )}
         />
 
-        <Box sx={{ textAlign: 'center' }}>
+        <ModalActions>
           <ZigButton
             id={'api-key__create-key'}
             disabled={isCreating}
@@ -88,8 +86,8 @@ function CreateApiKeysModal({
           >
             {t('api-keys.create-key')}
           </ZigButton>
-        </Box>
-      </form>
+        </ModalActions>
+      </Form>
     </ZModal>
   );
 }

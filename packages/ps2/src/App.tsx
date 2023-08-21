@@ -1,11 +1,9 @@
 import React, { Suspense } from 'react';
 import Router from './Router';
-import theme from './theme';
+import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import * as Sentry from '@sentry/browser';
 import {
-  CenteredLoader,
   ChartGradients,
-  dark,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
 } from '@zignaly-open/ui';
@@ -18,11 +16,15 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import Header from './components/Navigation/Header';
-import UpdateChecker from './components/Navigation/UpdateChecker';
+import UpdateChecker from './components/Navigation/Checkers/UpdateChecker';
+import UserKycChecker from './components/Navigation/Checkers/UserKycChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
+import { zigSuspenseFallback } from './util/suspense';
+import ZModal from './components/ZModal';
+import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -36,14 +38,14 @@ if (
   });
 }
 
-function App() {
-  useReferralCookie();
-
-  return (
+export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
+  children,
+}) => (
+  <ChunkLoadErrorBoundary>
     <Provider store={store}>
-      <ThemeInheritorStyled theme={dark}>
-        <ThemeInheritorMui theme={theme}>
-          <ThemeProviderMui theme={theme}>
+      <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+        <ThemeInheritorMui theme={themeMui}>
+          <ThemeProviderMui theme={themeMui}>
             <GlobalStyle />
             <ToastContainer
               position='top-right'
@@ -56,27 +58,44 @@ function App() {
               pauseOnHover
               theme='dark'
             />
-            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+            <PersistGate persistor={persistor}>
               <BrowserRouter>
-                <ModalProvider>
-                  <Header />
-                  <Suspense fallback={<CenteredLoader />}>
-                    <>
-                      <Tracker />
-                      <UpdateChecker />
-                      <DateLocaleFixer />
-                      <ChartGradients />
-                      <Router />
-                      <BottomNavigation />
-                    </>
-                  </Suspense>
-                </ModalProvider>
+                <Suspense fallback={zigSuspenseFallback}>
+                  <ModalProvider
+                    fallback={<ZModal allowUnauth wide open isLoading />}
+                  >
+                    {children}
+                  </ModalProvider>
+                </Suspense>
               </BrowserRouter>
             </PersistGate>
           </ThemeProviderMui>
         </ThemeInheritorMui>
       </ThemeInheritorStyled>
     </Provider>
+  </ChunkLoadErrorBoundary>
+);
+
+function App() {
+  useReferralCookie();
+
+  return (
+    <WrappedInProviders>
+      <>
+        <Header />
+        <Suspense fallback={zigSuspenseFallback}>
+          <>
+            <Tracker />
+            <UpdateChecker />
+            <UserKycChecker />
+            <DateLocaleFixer />
+            <ChartGradients />
+            <Router />
+            <BottomNavigation />
+          </>
+        </Suspense>
+      </>
+    </WrappedInProviders>
   );
 }
 

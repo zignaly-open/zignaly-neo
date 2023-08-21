@@ -5,35 +5,37 @@ import { css } from "@emotion/react";
 import { StyledComponent } from "@emotion/styled";
 import { BoxTypeMap } from "@mui/system";
 
-type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
+type Props = {
+  error?: string | boolean;
+  width?: number;
+  small?: boolean;
+  outlined?: boolean;
+  showBorder?: boolean;
+  hoverBackground?: boolean;
+};
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+
   .zig-react-select {
     &__control {
       border: 1px solid
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
+      ${({ showBorder }) => !showBorder && "border: none;"};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
-      margin-top: 4px;
       min-height: ${({ small }) => (small ? "0" : "60px")};
       border-radius: 5px;
       display: flex;
       align-items: center;
       cursor: pointer;
       flex-wrap: nowrap;
-      ${({ outlined }) =>
+      ${({ outlined, theme }) =>
         css`
-          background: ${outlined ? "transparent" : "rgba(16, 18, 37)"};
-          background: ${outlined
-            ? "transparent"
-            : `linear-gradient(
-            90deg,
-            rgb(16 18 37) 0%,
-            rgb(16 18 37) 35%,
-            rgb(16 18 37) 100%
-          );`};
+          background: ${outlined ? "transparent" : theme.palette.backgrounds.selectInputFill};
         `}
       transition: border-color 0.2s;
-      margin-bottom: 3px;
 
       ${({ width }) => width && `width: ${width}${width?.toString().includes("%") ? "" : "px"}`};
 
@@ -42,8 +44,9 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       &:hover {
         border-color: ${({ theme, error }) =>
           error ? theme.palette?.redGraphOrError : theme.palette.neutral400};
-        ${({ outlined }) =>
+        ${({ outlined, hoverBackground }) =>
           outlined &&
+          hoverBackground &&
           css`
             background-color: rgba(118, 130, 247, 0.08);
           `}
@@ -61,6 +64,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
           ${({ theme, error }) =>
             error ? theme.palette.redGraphOrError : theme.palette.neutral400};
         box-shadow: none !important;
+        ${({ showBorder }) => !showBorder && "border: none;"};
       }
     }
 
@@ -106,7 +110,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     .zig-react-select__menu {
       border: 1px solid ${({ theme }) => theme.palette.neutral600} !important;
       color: ${({ theme }) => theme.palette.neutral200} !important;
-      background: rgba(16, 18, 37) !important;
+      background: ${({ theme }) => theme.palette.neutral800} !important;
     }
 
     &__placeholder {
@@ -118,6 +122,8 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     }
 
     &__indicator {
+      color: ${({ theme }) => theme.palette.neutral400};
+      padding-top: 6px;
       ${({ width }) =>
         width &&
         width <= 100 &&

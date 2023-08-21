@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { UserState, UserData } from './types';
+import { api } from './api';
 
 const initialState: UserState = {};
 
@@ -35,6 +36,11 @@ export const userSlice = createSlice({
     enable2FA: (state, action: PayloadAction<boolean>) => {
       state.user.ask2FA = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(api.endpoints.user.matchFulfilled, (state, action) => {
+      state.user = action.payload;
+    });
   },
 });
 

@@ -21,10 +21,14 @@ export const ROUTE_TRADING_SERVICE_SIGNALS = ROUTE_TRADING_SERVICE + '/signals';
 export const ROUTE_TRADING_SERVICE_MANUAL = ROUTE_TRADING_SERVICE + '/manual';
 export const ROUTE_TRADING_SERVICE_EDIT = ROUTE_TRADING_SERVICE + '/edit';
 export const ROUTE_MY_BALANCES = '/my-balances';
+export const ROUTE_KYC = '/settings/kyc'; // KYC? more like KFC
+export const ROUTE_EDIT_PROFILE = '/settings/profile';
+export const ROUTE_PASSWORD = '/settings/password';
+export const ROUTE_2FA = '/settings/2fa';
+export const ROUTE_MY_BALANCES_TRANSACTIONS = '/my-balances/transactions';
 export const ROUTE_MY_BALANCES_DEPOSIT_COIN =
   '/my-balances/deposit/:selectedCoin';
 export const ROUTE_MY_BALANCES_DEPOSIT = '/my-balances/deposit';
-export const ROUTE_WALLET = '/zigwallet';
 export const ROUTE_REFERRALS = '/referrals';
 export const ROUTE_REWARDS = '/rewards';
 export const ROUTE_REFERRALS_INVITE = '/invite/:key';

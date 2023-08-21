@@ -22,7 +22,8 @@
 		},
 		"button": {
 			"continue-to-confirmation": "Onay aşamasına geçin",
-			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın"
+			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın",
+			"addInvestment": "Yatırıma Ekleme Yap"
 		}
 	},
 	"pendingMajorThan": {
@@ -48,7 +49,7 @@
 		"withdrawInvestment": {
 			"title": "Çekim Talebi",
 			"freeWithdrawal": {
-				"description": "Fon yöneticisi bakiyenizi serbest bıraktıktan sonra paranızı alacaksınız. Bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Bu işlem genellikle birkaç gün sürer ancak fon yöneticisine bağlı olarak tamamlanması daha uzun sürebilir."
+				"description": "Fon yöneticisi fonları serbest bıraktıktan ve günlük muhasebe yapıldıktan sonra fonlarınızı alacaksınız. Lütfen bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Fon yöneticisine bağlı olarak bu işlem genellikle birkaç gün sürer ancak tamamlanması daha uzun sürebilir."
 			}
 		},
 		"pendingTransaction": {
@@ -73,12 +74,18 @@
 	"invest-modal": {
 		"invest-with": "İle yatırım yapın",
 		"amount-to-invest": "Yatırılacak tutarı girin",
-		"type-transfer": "Transferi tamamlamak için aşağıdaki alana “ {{word}} ” kelimesini yazın:",
+		"type-transfer": "Transferi tamamlamak için aşağıdaki alana <0>“ {{word}} ”</0> kelimesini yazın:",
 		"transfer-error": "Geçersiz giriş. Lütfen doğru kelimeyi yazın.",
 		"transfer-label": "Transfer",
 		"i-understand-margin": "{{coin}} bakiyemin tamamının artık marjın bir parçası olduğunu ve risk altında olduğunu anlıyorum",
 		"i-understand-money-transferred": "Paramın trader'ın havuzuna aktarılacağını ve artık mevcut bakiyemde görünmeyeceğini anlıyor ve onaylıyorum.",
 		"max-funds": "Bu tutar hizmette izin verilen maksimum fon miktarını aşıyor. Maksimum yatırabiliceğiniz miktar  {{max}} {{coin}}.",
 		"max-reached": "Maksimum Fon sınırına ulaştığı için bu hizmete yatırım yapılamıyor."
+	},
+	"withdrawal-request": "Çekim Talebi",
+	"withdrawal-success": {
+		"title": "Çekim Talep Edildi",
+		"description": "Fon yöneticisi fonları serbest bıraktıktan ve günlük hesaplama işlemi yapıldıktan sonra fonlarınızı alabileceksiniz. Lütfen bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Fon yöneticisine bağlı olarak,  genellikle bu durum birkaç gün sürer ancak tamamlanması daha uzun sürebilir. Zignaly bu zaman dilimini kontrol etmez, bu yüzden lütfen sabırlı olun.",
+		"button": "Kapat"
 	}
 }

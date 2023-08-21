@@ -1,30 +1,37 @@
 import { styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
-export const HeaderDropdownButton = styled('button')<{ active: boolean }>`
+export const HeaderDropdownButton = styled('button', {
+  shouldForwardProp: (p) => p !== 'active',
+})<{ active?: boolean }>`
   appearance: none;
   cursor: pointer;
   border: none;
-  height: 54px;
+  height: 49px;
+  padding-bottom: 4px;
+  padding-top: 4px;
   padding-left: 15px;
   padding-right: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  background: ${(props) => (props.active ? '#12152c' : 'transparent')};
+  background: ${(props) =>
+    props.active ? props.theme.palette.neutral800 : 'transparent'};
+
   &:hover {
-    background: #12152c;
+    background: ${({ theme }) => theme.palette.neutral800};
   }
+
   transition: background-color 0.2s;
-  border-radius: 0;
+  border-radius: ${(props) => (props.active ? '5px 5px 0 0' : '5px')};
 `;
 
 export const LoginButton = styled('span')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-top: 4px;
   gap: 4px;
   cursor: pointer;
 
@@ -38,6 +45,7 @@ export const LoginButton = styled('span')`
 export const AccountName = styled(ZigTypography)`
   max-width: 155px;
   overflow: hidden;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
@@ -48,8 +56,8 @@ export const AccountDropdown = styled('div')`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 16px;
+  padding-bottom: 11px;
   overflow: hidden;
 
   span {

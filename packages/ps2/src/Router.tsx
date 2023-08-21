@@ -1,9 +1,9 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
-  Routes as RouterRoutes,
-  Route,
   Navigate,
   Outlet,
+  Route,
+  Routes as RouterRoutes,
 } from 'react-router-dom';
 import { lazily } from 'react-lazily';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall';
@@ -14,8 +14,12 @@ import * as Routes from './routes';
 // views we load unconditionally
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
+import SignupPlain from './views/Auth/SignupPlain';
+import ServiceHeader from './views/TraderService/components/ServiceHeader';
+import { zigSuspenseFallback } from 'util/suspense';
+import { isFeatureOn } from './whitelabel';
+import { Features } from './whitelabel/type';
 
-const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
@@ -41,6 +45,10 @@ const {
   Manual,
 } = lazily(() => import('./views/TraderService/routes'));
 
+const { Kyc, SettingsHeader, UpdatePassword, Toggle2FA, EditProfile } = lazily(
+  () => import('./views/Settings/routes'),
+);
+
 const { default: MyBalances, MyBalancesDeposit } = lazily(
   () => import('./views/Balance'),
 );
@@ -51,7 +59,9 @@ const { default: ServiceProfile, ServiceProfileInvestment } = lazily(
 const outleted = (Component: JSX.Element) => (
   <>
     {Component}
-    <Outlet />
+    <Suspense fallback={zigSuspenseFallback}>
+      <Outlet />
+    </Suspense>
   </>
 );
 
@@ -76,57 +86,89 @@ const Router: React.FC = () => (
           element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
         />
       </Route>
-      <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
-      <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
-      <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
+
+      <Route
+        path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
+        element={outleted(<MyBalances />)}
+      />
+      {isFeatureOn(Features.Referrals) && (
+        <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
+      )}
+      {isFeatureOn(Features.Rewards) && (
+        <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
+      )}
     </Route>
 
-    <Route
-      path={Routes.ROUTE_TRADING_SERVICE}
-      element={outleted(<ServiceProfile />)}
-    >
+    <Route element={outleted(<ServiceHeader />)}>
       <Route
-        path={Routes.ROUTE_PROFIT_SHARING_SERVICE_INVEST}
-        element={
-          <ServiceProfileInvestment bgRoute={Routes.ROUTE_TRADING_SERVICE} />
-        }
-      />
+        path={Routes.ROUTE_TRADING_SERVICE}
+        element={outleted(<ServiceProfile />)}
+      >
+        <Route
+          path={Routes.ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+          element={
+            <ServiceProfileInvestment bgRoute={Routes.ROUTE_TRADING_SERVICE} />
+          }
+        />
+      </Route>
+      <Route element={<ServiceOwnerWall />}>
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
+          element={<Management />}
+        />
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_INVESTORS}
+          element={<Investors />}
+        />
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_POSITIONS}
+          element={<Positions />}
+        />
+        <Route path={Routes.ROUTE_TRADING_SERVICE_COINS} element={<Coins />} />
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_MANUAL}
+          element={<Manual />}
+        />
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_API}
+          element={<ServiceApi />}
+        />
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_SIGNALS}
+          element={<Signals />}
+        />
+        <Route
+          path={Routes.ROUTE_TRADING_SERVICE_EDIT}
+          element={<EditService />}
+        />
+      </Route>
     </Route>
 
-    <Route element={<ServiceOwnerWall />}>
-      <Route
-        path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
-        element={<Management />}
-      />
-      <Route
-        path={Routes.ROUTE_TRADING_SERVICE_INVESTORS}
-        element={<Investors />}
-      />
-      <Route
-        path={Routes.ROUTE_TRADING_SERVICE_POSITIONS}
-        element={<Positions />}
-      />
-      <Route path={Routes.ROUTE_TRADING_SERVICE_COINS} element={<Coins />} />
-      <Route path={Routes.ROUTE_TRADING_SERVICE_MANUAL} element={<Manual />} />
-      <Route path={Routes.ROUTE_TRADING_SERVICE_API} element={<ServiceApi />} />
-      <Route
-        path={Routes.ROUTE_TRADING_SERVICE_SIGNALS}
-        element={<Signals />}
-      />
-      <Route
-        path={Routes.ROUTE_TRADING_SERVICE_EDIT}
-        element={<EditService />}
-      />
+    <Route element={outleted(<SettingsHeader />)}>
+      <Route element={<AuthenticatedWall />}>
+        {isFeatureOn(Features.Kyc) && (
+          <Route path={Routes.ROUTE_KYC} element={<Kyc />} />
+        )}
+        <Route path={Routes.ROUTE_2FA} element={<Toggle2FA />} />
+        <Route path={Routes.ROUTE_EDIT_PROFILE} element={<EditProfile />} />
+        <Route path={Routes.ROUTE_PASSWORD} element={<UpdatePassword />} />
+      </Route>
     </Route>
 
-    <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+    {isFeatureOn(Features.Trader) && (
+      <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+    )}
+
     <Route path={Routes.ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={Routes.ROUTE_REFERRALS_INVITE} element={<Invite />} />
       <Route path={Routes.ROUTE_REFERRALS_INVITE_SHORT} element={<Invite />} />
       <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
-      <Route path={Routes.ROUTE_SIGNUP} element={<Signup />} />
+      <Route
+        path={Routes.ROUTE_SIGNUP}
+        element={isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />}
+      />
       <Route path={Routes.ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
     </Route>

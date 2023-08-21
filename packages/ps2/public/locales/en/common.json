@@ -41,8 +41,20 @@
     "rewards": "Rewards",
     "notAuth-dropdown-link-settings": "Settings",
     "notAuth-dropdown-link-password": "Password",
+    "notAuth-dropdown-link-profile": "Profile",
     "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
-    "notAuth-button-logOut": "Logout"
+    "dropdown-link-kyc": "KYC",
+    "notAuth-button-logOut": "Log out"
+  },
+  "header": {
+    "rewards": {
+      "title": "Get $20",
+      "description": "On 1st deposit"
+    },
+    "referrals": {
+      "title": "Earn 20%",
+      "description": "Invite Friends"
+    }
   },
   "account-selector": {
     "type": {
@@ -64,26 +76,28 @@
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
   "type-to-confirm": "Type \"{{word}}\" to confirm",
   "balance": {
-    "total": "Total",
-    "available": "Available",
+    "available": "Available:",
     "deposit-funds": "Deposit Funds",
     "find-traders": "Find traders to invest in",
-    "my-portfolio": "My Portfolio"
+    "my-portfolio": "My Portfolio",
+    "portfolio": "Portfolio:"
   },
   "validation": {
-    "insufficient-amount": "Insufficient funds",
+    "insufficient-amount": "Exceeds available balance",
     "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
+    "insufficient-amount-max": "Max amount: {{ maxValue }} {{ coin }}",
     "invalid-value": "Invalid value",
-    "negative-amount": "Should be >= 0",
+    "negative-amount": "Should be > 0",
     "max-allowed-length": "Should be under {{ maxLength }} characters",
-    "negative-zeroable-amount": "Should be > 0",
+    "negative-zeroable-amount": "Should be >= 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
-    "max-decimals": "Please enter numbers with no more than 8 decimal places.",
+    "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places.",
     "invalid-characters": "Invalid characters",
     "letter-number": "Should contain at least one letter or number",
     "min-invest-amount-for-owner": "Owner balance must be above {{minAmount}} {{minAmountCoin}}"
   },
   "follow-us": "Follow us",
-  "portfolio": "Portfolio"
+  "portfolio": "Portfolio",
+  "kyc-updated": "KYC status updated!"
 }

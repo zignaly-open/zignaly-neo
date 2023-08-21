@@ -7,9 +7,8 @@ import {
   ZigTypography,
   ZigTable,
   createColumnHelper,
-  ZigChartMini,
 } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { Investment } from '../../../../apis/investment/types';
@@ -18,12 +17,16 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
+import { generatePath, Link } from 'react-router-dom';
+import { ROUTE_TRADING_SERVICE } from '../../../../routes';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
   const { t } = useTranslation('marketplace');
-
+  const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
   const columns = useMemo(
     () => [
@@ -122,7 +125,7 @@ const Marketplace: React.FC = () => {
             {+props.getValue() ||
             Object.keys(props.row.original.sparklines).length > 1 ? (
               <>
-                <ZigChartMini
+                <ZigChartMiniSuspensed
                   id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
                   midLine
                   data={[0, ...(props.row.original.sparklines as number[])]}
@@ -145,6 +148,30 @@ const Marketplace: React.FC = () => {
         header: '',
         id: 'action',
         cell: (props) => <MarketplaceAction service={props.row.original} />,
+      }),
+      columnHelper.display({
+        id: 'link',
+        cell: ({ row }) => (
+          <Box
+            component={Link}
+            to={generatePath(ROUTE_TRADING_SERVICE, {
+              serviceId: row?.original?.id?.toString(),
+            })}
+            sx={{
+              cursor: 'pointer',
+              alignItems: 'center',
+              flexDirection: 'row',
+              display: 'flex',
+              textAlign: 'start',
+              width: '10px',
+            }}
+            id={`marketplace-table__link-${row.original.id}`}
+          >
+            <ArrowForwardIosIcon
+              sx={{ color: theme.palette.links, width: '20px', height: '20px' }}
+            />
+          </Box>
+        ),
       }),
     ],
     [t],

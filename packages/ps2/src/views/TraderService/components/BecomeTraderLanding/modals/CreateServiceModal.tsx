@@ -12,6 +12,7 @@ import {
   useTraderServiceTypesInfoQuery,
 } from '../../../../../apis/service/api';
 import { CenteredLoader } from '@zignaly-open/ui';
+import { Box } from '@mui/material';
 
 function CreateServiceModal({
   close,
@@ -43,12 +44,12 @@ function CreateServiceModal({
         e.stopPropagation();
         return false;
       }}
-      wide
       {...props}
       close={close}
       title={
         step === 1 ? t('create.invest-in-your-service') : t('create.title')
       }
+      wide
     >
       {isLoading && <CenteredLoader />}
       {!isLoading && step === 0 && (
@@ -61,10 +62,9 @@ function CreateServiceModal({
         />
       )}
       {!isLoading && step === 1 && (
-        <InvestInYourServiceForm
-          goBack={goBack}
-          service={service as ServiceFormData}
-        />
+        <Box paddingX='30px'>
+          <InvestInYourServiceForm service={service as ServiceFormData} />
+        </Box>
       )}
     </ZModal>
   );

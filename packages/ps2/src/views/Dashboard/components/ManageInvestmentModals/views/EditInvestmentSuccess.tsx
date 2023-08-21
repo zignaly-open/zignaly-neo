@@ -2,20 +2,28 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Box } from '@mui/material';
 
 function EditInvestmentSuccessModal({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
   return (
-    <>
-      <ZigTypography color={'neutral200'}>
+    <Box textAlign={'center'}>
+      <ZigTypography
+        color={'neutral200'}
+        id={'edit-investment-success-modal__description'}
+      >
         {t('modalSuccess.description')}
       </ZigTypography>
       <ModalActions>
-        <ZigButton id={'invest-success__close'} onClick={close} size={'large'}>
+        <ZigButton
+          id={'edit-investment-success-modal__close'}
+          onClick={close}
+          size={'large'}
+        >
           {t('modalSuccess.button')}
         </ZigButton>
       </ModalActions>
-    </>
+    </Box>
   );
 }
 

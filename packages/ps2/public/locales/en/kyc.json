@@ -1,0 +1,80 @@
+{
+  "title": "Verify your account",
+  "verify": "Verify",
+  "description": "Complete the verification process to access all services.",
+  "description-explainer": "Verification only takes 1-2 minutes.",
+  "balance-limit": "Balance Limit:",
+  "balance-range-from-to": "{{from}} - {{to}} {{coin}}",
+  "balance-range-from": "Over {{from}} {{coin}}",
+  "name-level-1": "Silver Level",
+  "name-level-2": "Gold Level",
+  "complete-previous-level-first": "Please complete the previous level first",
+  "different-type-started-KYC": "You have already started the KYC process as an individual",
+  "different-type-started-KYB": "You have already started the KYB process as a business",
+  "progress-explainer": "We're working tirelessly on it, please hold tight. Usually it takes only a few minutes",
+  "tabs": {
+    "kyc": "KYC",
+    "kyb": "KYB"
+  },
+  "status": {
+    "completed": "Completed",
+    "pending": "Pending",
+    "failed": "Failed"
+  },
+  "requirements-level-1": {
+    "identity": "Identity Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification"
+  },
+  "requirements-level-2": {
+    "identity": "Identity Document",
+    "identity-2": "Secondary Identification Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification",
+    "residence": "Proof of Residence",
+    "questionnaire": {
+      "title":"Questionnaire",
+      "items": {
+        "profession": "Current Profession",
+        "proof-of-funds": "Proof of Funds Document <span>(Employment Certificate or Bank statement showing sources of income. Please make sure that the document proves a net worth of at least from 100.000 to USD 250,000)</span>"
+      }
+    }
+  },
+  "requirements-level-1-corp": {
+    "email": "Email Verification",
+    "questionnaire": "Questionnaire",
+    "company-docs": {
+      "title": "Company Documents",
+      "items": {
+        "cert-of-incorporation": "Certificate of Incorporation",
+        "licence": "Trade License",
+        "cert-of-incumbency": "Register of Members or Certificate of Incumbency <span>(should be issued within the last 12 months)</span>",
+        "shareholders": "Shareholder Registry",
+        "director": "Director Registry"
+      }
+    }
+  },
+  "requirements-level-2-corp": {
+    "company-docs": {
+      "title": "Company Documents",
+      "items": {
+        "cert-of-incorporation": "Certificate of Incorporation or a Trade License",
+        "cert-of-incumbency": "Register of Members or Certificate of Incumbency (should be issued within the last 12 months)",
+        "shareholders": "Shareholder Registry",
+        "director": "Director Registry"
+      }
+    },
+    "questionnaire": {
+      "title": "Questionnaire",
+      "items": {
+        "type-of-business": "Type of Business / Nature of Business"
+      }
+    },
+    "source-of-funds": "Source of Funds <span>(Source of Funds Verification can be copies of latest audited Company Accounts, proof of digital asset balances on other exchanges, or Bank statements showing sources of business revenue. Ensure the uploaded document covers the last 12 months)</span>"
+  },
+  "modal": {
+    "title": "Start your account verification",
+    "description": "Start the verification process clicking on the button. You will be redirected to an external page to complete the process.",
+    "ok": "Get Verified"
+  }
+}

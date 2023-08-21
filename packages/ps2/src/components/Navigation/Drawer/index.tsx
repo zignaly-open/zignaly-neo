@@ -6,23 +6,23 @@ import {
 } from '@mui/icons-material';
 import {
   Box,
+  Collapse,
   Divider,
+  Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-  Drawer,
-  Collapse,
   ListItemIcon,
-  IconButton,
+  ListItemText,
 } from '@mui/material';
 import {
   Avatar,
-  ZigUserIcon,
   ZigButton,
-  ZigTypography,
   ZigGlobeLanguages,
   ZigPlusIcon,
+  ZigTypography,
+  ZigUserIcon,
 } from '@zignaly-open/ui';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
@@ -31,28 +31,30 @@ import {
   useIsAuthenticated,
   useLogout,
 } from 'apis/user/use';
-import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link, useLocation } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import {
+  ROUTE_2FA,
+  ROUTE_BECOME_TRADER,
+  ROUTE_EDIT_PROFILE,
+  ROUTE_KYC,
   ROUTE_LOGIN,
+  ROUTE_PASSWORD,
+  ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
-  ROUTE_BECOME_TRADER,
-  ROUTE_WALLET,
-  ROUTE_PROFIT_SHARING,
 } from 'routes';
 import theme from 'theme';
 import { HELP_URL } from 'util/constants';
 import { supportedLanguages } from 'util/i18next';
 import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
-import Enable2FAModal from 'views/Settings/Enable2FAModal';
-import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
-import { DropdownExchangeAccount } from './atoms';
-import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { DrawerMenuItem, DropdownExchangeAccount } from './atoms';
+import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 const drawerWidth = 250;
 
@@ -67,10 +69,9 @@ const ZigDrawer = () => {
   const isAuthenticated = useIsAuthenticated();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const { showModal } = useZModal();
   const service = useFirstOwnedService();
   const { exchanges, email, imageUrl } = useCurrentUser();
-  const location = useLocation();
+  const openDepositModal = useOpenDepositModal();
   const changeLocale = useChangeLocale();
 
   const languageMap = supportedLanguages
@@ -140,7 +141,7 @@ const ZigDrawer = () => {
                 gap={2}
                 onClick={handleDrawerToggle}
               >
-                <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
+                <Link to={ROUTE_LOGIN}>
                   <ZigButton
                     id={'drawer__login'}
                     variant='text'
@@ -156,7 +157,7 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+                <Link to={ROUTE_SIGNUP}>
                   <ZigButton id={'drawer__signup'} variant='contained'>
                     {t('account-menu.isAuth-button-signUp')}
                   </ZigButton>
@@ -167,17 +168,6 @@ const ZigDrawer = () => {
             <List>
               {isAuthenticated ? (
                 <>
-                  <ListItem disablePadding onClick={handleDrawerToggle}>
-                    <ListItemButton
-                      id='drawer__wallet'
-                      to={ROUTE_WALLET}
-                      component={Link}
-                    >
-                      <ListItemText
-                        primary={t('account-menu.notAuth-dropdown-link-wallet')}
-                      />
-                    </ListItemButton>
-                  </ListItem>
                   <ListItemButton
                     onClick={() => setSettingsOpen(!settingsOpen)}
                   >
@@ -192,37 +182,47 @@ const ZigDrawer = () => {
                       disablePadding
                       onClick={handleDrawerToggle}
                     >
-                      <ListItemButton
-                        sx={{ pl: 4 }}
-                        onClick={() => showModal(UpdatePasswordModal)}
-                      >
-                        <ListItemText
-                          primary={t(
-                            'account-menu.notAuth-dropdown-link-password',
-                          )}
+                      <DrawerMenuItem
+                        id='drawer__profile'
+                        path={generatePath(ROUTE_EDIT_PROFILE)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-profile')}
+                      />
+                      <DrawerMenuItem
+                        id='drawer__2fa'
+                        path={generatePath(ROUTE_2FA)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-2fa')}
+                      />
+                      <DrawerMenuItem
+                        id='drawer__update-password'
+                        path={generatePath(ROUTE_PASSWORD)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-password')}
+                      />
+                      {isFeatureOn(Features.Kyc) && (
+                        <DrawerMenuItem
+                          id='drawer__kyc'
+                          path={generatePath(ROUTE_KYC)}
+                          closeDrawer={handleDrawerToggle}
+                          label={t('account-menu.dropdown-link-kyc')}
                         />
-                      </ListItemButton>
-                      <ListItemButton
-                        onClick={() => showModal(Enable2FAModal)}
-                        sx={{ pl: 4 }}
-                      >
-                        <ListItemText
-                          primary={t('account-menu.notAuth-dropdown-link-2fa')}
-                        />
-                      </ListItemButton>
+                      )}
                     </List>
                   </Collapse>
-                  <ListItem disablePadding onClick={handleDrawerToggle}>
-                    <ListItemButton
-                      id='drawer__become-trader'
-                      to={ROUTE_BECOME_TRADER}
-                      component={Link}
-                    >
-                      <ListItemText
-                        primary={t('navigation-menu.become-trader')}
-                      />
-                    </ListItemButton>
-                  </ListItem>
+                  {isFeatureOn(Features.Trader) && (
+                    <ListItem disablePadding onClick={handleDrawerToggle}>
+                      <ListItemButton
+                        id='drawer__become-trader'
+                        to={ROUTE_BECOME_TRADER}
+                        component={Link}
+                      >
+                        <ListItemText
+                          primary={t('navigation-menu.become-trader')}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
                   {service && (
                     <ListItem disablePadding onClick={handleDrawerToggle}>
                       <ListItemButton
@@ -260,21 +260,19 @@ const ZigDrawer = () => {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem>
-                <ZigButton
-                  id={'my-portfolio__deposit'}
-                  startIcon={<ZigPlusIcon />}
-                  sx={{ fontWeight: 600, mb: 1 }}
-                  variant={'contained'}
-                  onClick={() =>
-                    showModal(DepositModal, {
-                      ctaId: 'account-menu-deposit',
-                    })
-                  }
-                >
-                  {t('action:deposit')}
-                </ZigButton>
-              </ListItem>
+              {isAuthenticated && (
+                <ListItem>
+                  <ZigButton
+                    id={'account-menu-deposit'}
+                    startIcon={<ZigPlusIcon width={10} height={10} />}
+                    sx={{ fontWeight: 600, mb: 1 }}
+                    variant={'contained'}
+                    onClick={() => openDepositModal()}
+                  >
+                    {t('action:deposit')}
+                  </ZigButton>
+                </ListItem>
+              )}
             </List>
 
             <List>

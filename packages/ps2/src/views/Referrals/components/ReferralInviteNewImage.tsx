@@ -20,6 +20,8 @@ const ReferralInviteNewImage: React.FC<{
   const { t } = useTranslation(['referrals', 'pages']);
   const { refCode } = useCurrentUser();
 
+  // note that we do not need custom fonts here
+  // referrals are for the main app only, not the whitelabels
   return (
     <svg height={389} width={300} viewBox={`0 0 ${imageWidth} ${imageHeight}`}>
       <defs>
@@ -49,7 +51,7 @@ const ReferralInviteNewImage: React.FC<{
 
       <InviteTemplate x={0} y={0} height={imageHeight} width={imageWidth} />
 
-      <foreignObject x={sidePadding} y={130} width={423} height={150}>
+      <foreignObject x={sidePadding} y={130} width={423} height={220}>
         <div
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -66,8 +68,8 @@ const ReferralInviteNewImage: React.FC<{
             i18nKey={'create-invite.ugly-' + mode + '-cta'}
             t={t}
             values={{
-              depositAmount: hardcodedInviteeReward.threshold,
-              reward: hardcodedInviteeReward.value,
+              depositAmount: hardcodedInviteeReward?.threshold || 0,
+              reward: hardcodedInviteeReward?.value || 0,
             }}
           >
             <span style={{ color: '#ACB6FF' }} />
@@ -92,7 +94,7 @@ const ReferralInviteNewImage: React.FC<{
             i18nKey={`create-invite.deposit-${mode}-cta`}
             t={t}
             values={{
-              depositAmount: hardcodedInviteeReward.threshold,
+              depositAmount: hardcodedInviteeReward?.threshold || 0,
             }}
           >
             <span style={{ fontWeight: 700 }} />

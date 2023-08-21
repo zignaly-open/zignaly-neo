@@ -1,4 +1,6 @@
 import {
+  KycLinkResponse,
+  KycResponse,
   LoginPayload,
   LoginResponse,
   SessionResponse,
@@ -9,6 +11,8 @@ import {
 } from './types';
 import baseApiPs2 from '../baseApiPs2';
 import { injectEndpoints } from 'apis/util';
+
+let lastUsdBalance = null as number;
 
 export const api = injectEndpoints(baseApiPs2, (builder) => ({
   signup: builder.mutation<SignupResponse, SignupPayload>({
@@ -43,6 +47,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
   resendCodeNewUser: builder.mutation<void, void>({
     query: () => ({
       url: `user/resend_code/verify_email`,
+      method: 'POST',
+    }),
+  }),
+  sendCodeWithdraw: builder.mutation<void, void>({
+    query: () => ({
+      url: `user/resend_code/withdraw`,
       method: 'POST',
     }),
   }),
@@ -106,6 +116,27 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
+  kycStatus: builder.query<KycResponse, string>({
+    query: (level) => ({
+      url: `user/kyc/${level}`,
+    }),
+  }),
+
+  kycStatuses: builder.query<
+    { status: KycResponse[]; KYCMonitoring: boolean },
+    void
+  >({
+    query: () => ({
+      url: `user/kyc`,
+    }),
+  }),
+
+  kycLink: builder.query<KycLinkResponse, string>({
+    query: (level) => ({
+      url: `user/kyc/${level}/link`,
+    }),
+  }),
+
   activateExchange: builder.mutation<void, { exchangeInternalId: string }>({
     query: ({ exchangeInternalId }) => ({
       url: `/user/exchanges/${exchangeInternalId}/activate`,
@@ -121,6 +152,9 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       payFeeWithZig?: boolean;
       tradingFeeDiscount?: boolean;
       refRewardType?: string;
+      email?: string;
+      about?: string;
+      countryCode: string;
     }
   >({
     query: (params) => ({
@@ -214,6 +248,15 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       params: { force },
     }),
     providesTags: ['Balance'],
+    async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      const { data } = await queryFulfilled;
+      // Invalidate assets if USD balance changed
+      const usdBalance = (data as UserBalance)?.totalFreeUSDT;
+      if (lastUsdBalance && usdBalance !== lastUsdBalance) {
+        dispatch(api.util.invalidateTags(['Assets']));
+      }
+      lastUsdBalance = usdBalance;
+    },
   }),
 }));
 
@@ -240,7 +283,12 @@ export const {
   useDisable2FAMutation,
   useEnable2FAInfoQuery,
   useLazyEnable2FAInfoQuery,
+  useLazyKycLinkQuery,
+  useKycStatusesQuery,
+  useLazyKycStatusesQuery,
+  useKycStatusQuery,
   useEnable2FAMutation,
   useBalanceQuery,
   useLazyBalanceQuery,
+  useSendCodeWithdrawMutation,
 } = api;

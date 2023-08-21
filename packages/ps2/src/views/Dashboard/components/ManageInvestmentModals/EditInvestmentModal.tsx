@@ -16,6 +16,8 @@ import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
+import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
+import { Box } from '@mui/material';
 
 function EditInvestmentModal({
   close,
@@ -38,19 +40,20 @@ function EditInvestmentModal({
     EditInvestmentViews.EditInvestment,
   );
 
-  const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
+  const { t } = useTranslation(['edit-investment']);
+  usePrefetchTranslation('withdraw');
 
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {
-      title: t('withdraw-your-investment:title'),
+      title: t('withdrawal-request'),
       component: () => <WithdrawInvestment setView={setView} />,
     },
     [EditInvestmentViews.WithdrawSuccess]: {
-      title: t('withdraw-your-investment:success.title'),
+      title: t('withdrawal-success.title'),
       component: () => <WithdrawModalSuccess close={close} />,
     },
     [EditInvestmentViews.WithdrawPerform]: {
-      title: t('withdraw-your-investment:title'),
+      title: t('withdrawal-request'),
       component: () => (
         <WithdrawWithdrawInvestmentSuccessPerform setView={setView} />
       ),
@@ -80,8 +83,8 @@ function EditInvestmentModal({
 
   return (
     <ZModal
-      wide
       {...props}
+      wide
       close={close}
       title={title}
       onGoBack={
@@ -89,13 +92,14 @@ function EditInvestmentModal({
           EditInvestmentViews.EditInvestment,
           EditInvestmentViews.EditInvestmentSuccess,
           EditInvestmentViews.WithdrawSuccess,
+          EditInvestmentViews.PendingTransactions,
         ].includes(view)
           ? () => setView(EditInvestmentViews.EditInvestment)
           : undefined
       }
       isLoading={isLoading}
     >
-      {!isLoading && component()}
+      <Box paddingX='30px'>{!isLoading && component()}</Box>
     </ZModal>
   );
 }

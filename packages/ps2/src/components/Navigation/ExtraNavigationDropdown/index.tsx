@@ -1,7 +1,11 @@
-import { ZigDropdown, ZigOptionHorizontalDotsIcon } from '@zignaly-open/ui';
+import {
+  ZigDotsHorizontalIcon,
+  ZigDropdown,
+  ZigDropdownHandleType,
+} from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { NavLink, Networks } from './styles';
+import { GlobeLanguagesStyled, LabelButton, NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
@@ -15,10 +19,9 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import { ZigDropdownHandleType, ZigDropdownOptionType } from '@zignaly-open/ui';
-import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
+import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
@@ -48,7 +51,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     onClose();
   };
 
-  let options: ZigDropdownOptionType[] = [
+  let options: ZigDropdownProps['options'] = [
     {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
@@ -57,10 +60,14 @@ const ExtraNavigationDropdown: React.FC = () => {
     },
     {
       separator: true,
+      customStyle: `margin-top: 11px; margin-bottom: 12px;`,
+    },
+    {
       id: 'menu-dropdown__language-switcher',
       label: (
         <>
           <GlobeLanguagesStyled
+            // yeah, why not change the icon to a shade slightly different from the text
             color={theme.palette.neutral300}
             width={'26px'}
             height={'26px'}
@@ -142,8 +149,8 @@ const ExtraNavigationDropdown: React.FC = () => {
     <ZigDropdown
       component={({ open }) => (
         <HeaderDropdownButton id={'menu__dropdown-trading'} active={open}>
-          <ZigOptionHorizontalDotsIcon
-            width={14}
+          <ZigDotsHorizontalIcon
+            width={20}
             height={4}
             color={open ? theme.palette.neutral100 : theme.palette.neutral300}
           />

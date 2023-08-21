@@ -36,7 +36,7 @@
     "34": "Order would trigger immediately",
     "35": "Position closed",
     "36": "Error enabling 2FA",
-    "37": "Wrong Code",
+    "37": "2FA code incorrect",
     "38": "The take profit price has already been reached",
     "39": "Take Profit value has to be greater than 1",
     "40": "Selling price would be below allowed minimum order value.",
@@ -155,6 +155,7 @@
     "1072": "Service owner not found",
     "1073": "Service is private",
     "1074": "User is not the owner of the service",
+    "1086": "Email code incorrect",
     "2001": "Wallet not found",
     "2004": "Withdraw data error",
     "9000": "Missing exchange account in your account, please contact with support.",
@@ -174,6 +175,49 @@
     "wrong-code": "Wrong Code",
     "login-session-expired": "Session expired, please log in again",
     "XX": "Transaction error. Please try again."
+  },
+  "access": {
+    "banned": {
+      "title": "You're banned",
+      "description": "Your naughty actions resulted in a ban. Santa has been informed as well.",
+      "action": "I am so sorry"
+    },
+    "mail-not-verified": {
+      "title": "Verify your email address",
+      "description": "Before you're able to log in, you will need to verify your email address",
+      "action": "Got it"
+    },
+    "kyc-pending": {
+      "title": "Verify your account (KYC/KYB)",
+      "description": "Verify your account to start accessing all the services. Process is easy and fast and it will take you approximately 2 minutes.",
+      "action": "Start Verification"
+    },
+    "no-subscription": {
+      "title": "Activate your Subscription",
+      "description": "To start investing in a service you need a subscription code first.",
+      "explainer-1": "Redeem subscription code",
+      "explainer-2": "I don’t have any subscription code",
+      "cta-1": "Redeem",
+      "cta-2": "Purchase"
+    },
+    "expired-subscription": {
+      "title": "Subscription Expired",
+      "description": "Your subscription has expired, please purchase the renewal code to continue.",
+      "explainer-1": "Redeem subscription code",
+      "explainer-2": "I don’t have any subscription code",
+      "cta-1": "Redeem",
+      "cta-2": "Purchase"
+    },
+    "frozen": {
+      "title": "Frozen Account",
+      "description": "We are verifying a recent transfer in your account that requires manual approval. As soon as everything has been verified and approved by our team you will be able to manage your account normally.",
+      "action": "OK :("
+    },
+    "kyc-expired": {
+      "title": "Verification (KYC/KYB) Expired",
+      "description": "Your verification (KYC/KYB) has expired and you need to resubmit it to continue accessing all the services.",
+      "action": "Review KYC"
+    }
   },
   "something-went-wrong": "Something went wrong",
   "404": {

@@ -3,7 +3,6 @@
 ### [View Storybook](https://zignaly-open.github.io/zignaly-neo)
 
 
-
 Welcome to Zignaly. You will need node 16, I suggest you use nvm. Just run `nvm use`. This app also
 uses [Lerna](https://lerna.js.org) and Yarn, so `package-lock.json`'s were gitignored.
 
@@ -12,17 +11,15 @@ switch to 16.
 
 ## How to run
 
-In order to use Lerna easily, run `npm i -g lerna`.
-
 Now, in order to install top-level dependencies, run `yarn`. And here's where the fun begins. Run:
 
 ```
-lerna bootstrap
+yarn lerna bootstrap
 ```
 
 This will install all dependencies and link projects together. Next, run instructions vary by the package:
 
-* `yarn bootstrap` is a shorthand for `lerna bootstrap`. Send regards and boxes of whiskey to @strrife who saved you
+* `yarn bootstrap` is a shorthand for `yarn lerna bootstrap`. Send regards and boxes of whiskey to @strrife who saved you
   from typing 1 extra character. Jokes aside, plays well with IDEs.
 * `yarn test` - you guessed it - runs `yarn test` for all packages.
 * `yarn storybook` runs zignaly-ui (`@zignaly-open/ui`) storybook. More on that later.
@@ -31,8 +28,8 @@ This will install all dependencies and link projects together. Next, run instruc
 
 ### More FYIs
 
-* you do not need to re-run `lerna bootstrap` unless some package relations changed or you need to do `yarn install`
-* run `lerna clean --yes && lerna bootstrap` if you're desparate for `node_modules` removal
+* you do not need to re-run `yarn lerna bootstrap` unless some package relations changed or you need to do `yarn install`
+* run `yarn lerna clean --yes && yarn lerna bootstrap` if you're desparate for `node_modules` removal
 * to pin 3rd-party dependency versions, do it in the root-level `package.json` (`"resolutions"`).
 
 Also, now to install dependencies you should use:
@@ -49,7 +46,7 @@ mathematical expectation of the length of my life is TOO SHORT to type out `@zig
 this makes two of us:
 
 ```
-lerna add package-name --scope=*/ui 
+yarn lerna add package-name --scope=*/ps2 
 ```
 
 
@@ -70,43 +67,36 @@ npx husky install
 
 ### Storybook
 
-**TODO 1**: We still need to move Storybook to the top level.
-
 So far we should be using the zignaly-ui storybook. Run it by running the following code in the root folder:
 
 ```
 yarn storybook
 ```
 
-We also will have this very storybook deployed to GH pages once the repo issues are fixed.
+### Themes
 
-**TODO 2**: Fix repo issues.
+If you'd like to re change the color palette, please modify corresponding values in `packages/zignaly-ui/src/theme/example.ts`. Feel free to use `packages/zignaly-ui/src/theme/dark.ts` (the theme we use for the Zignaly Profit Sharing app) as reference. 
 
-### Publishing
+So, to play with the colors:
 
-We actually do not do that anymore.
+```
+yarn && yarn lerna bootstrap
+yarn ps2 
+```
+
+A tab with [localhost:3000](http://localhost:3000) will open. Now feel free to modify the color scheme to your heart's desire. The changes will be picked up automatically and the app will auto-refresh.
+
+Customizable fonts will be implemented over the next 2 days.
 
 ## How to deploy
 
-### Deploy to `test`
-
-* Open a PR to master
-* Have it approved
-* The Auto-merge to test action will kick in and merge to test
-
-If it fails and we have conflicts, you'll have to manually resolve them and opush to `test` branch directly.
-
-Or you can circumvent all this and push to `test`. This is also an option. Just remember: `test` is a throwaway branch and it will NEVER be merged to `master`. If you open a `test` -> `master` PR, I will find you and ~break your legs~ explain that this is not the right thing to do.
-
-This applies only to the PS2 project.
-
 ### Deploy to master
 
-An auto-deploy would trigger when you merge to master. 
+An auto-deploy would trigger when you merge to `master`. 
 
 ### Deploy to prod
 
-Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2. Like, `release-ps2-20121222-prevent-apocalypse`. Alternatively you can just push that tag directly but that would be considered *NOT COOL*.
+Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2. Like, `release-ps2-20121222-prevent-apocalypse`. 
 
 
 ## Packages
@@ -136,5 +126,6 @@ and [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for State manag
 
 ## TODO items
 
-* Move storybook up, i.e. gather stories from all projects
+* Upgrade Lerna
+* As of July 10th 2023, we've not yet completed the support of multiple themes but this is about to be done shortly. We should add thje multi-theme support.
 * Figure out what to do with the tables, either add i18n to zignaly-ui, create a sub-project with tables or move into ps2 

@@ -6,9 +6,10 @@ export type ZModalProps = {
   wide?: boolean;
   allowUnauth?: boolean;
   isLoading?: boolean;
+  disableBackdropClose?: boolean;
   onGoBack?: () => void;
   width?: number;
-  close: () => void;
+  close?: () => void;
   titleAlign?: 'center' | 'left';
 } & DialogProps;
 

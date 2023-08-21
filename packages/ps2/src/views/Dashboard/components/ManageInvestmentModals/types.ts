@@ -7,6 +7,12 @@ export enum EditInvestmentViews {
   WithdrawPerform = 'withdraw-investment-perform',
 }
 
+export enum InvestmentViews {
+  Investment = 'investment',
+  InvestmentConfirm = 'investment-confirm',
+  InvestmentSuccess = 'investment-success',
+}
+
 export type ChangeViewFn = (view: EditInvestmentViews) => void;
 
 export type PendingTransactionListItemType = {
@@ -18,9 +24,11 @@ export type PendingTransactionListItemType = {
 export type DepositModalProps = {
   selectedCoin?: string;
   allowedCoins?: string[];
+  close: () => void;
 };
 
 export type WithdrawModalProps = {
+  step: string;
   selectedCoin?: string;
   setStep: (value: '' | 'confirm' | 'success') => void;
   close: () => void;
@@ -28,5 +36,12 @@ export type WithdrawModalProps = {
 
 export enum ChooseDepositTypeViews {
   DepositView = 'deposit',
-  ChooseDepositTypeView = 'choose-deposit-type',
+  ChooseDepositTypeView = 'deposit_or_buy',
 }
+
+export type UseModalReturn = {
+  title: string;
+  component: () => JSX.Element;
+  onGoBack?: () => void;
+  view?: string;
+};

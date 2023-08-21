@@ -5,19 +5,34 @@ export interface UserState {
   activeExchangeInternalId?: string;
 }
 
+export enum UserAccessLevel {
+  Banned = -100,
+  NotVerified = 100,
+  KycPending = 350,
+  NoSubscription = 375,
+  Frozen = 400,
+  KycExpired = 450,
+  SubscriptionExpired = 475,
+  Normal = 500,
+  Support = 700,
+  Admin = 900,
+}
+
 export type UserData = {
   userId: string;
   firstName: string;
   email: string;
   createdAt: string;
   locale: UserLocale;
+  accessLevel: UserAccessLevel;
+  KYCMonitoring: boolean;
   intercomHash: string;
   isTrader?: {
     profit_sharing: boolean;
     copy_trading: boolean;
     signal_providers: boolean;
   };
-  imageUrl: false | string;
+  imageUrl?: string;
   providerEnable: boolean;
   '2FAEnable': boolean;
   ask2FA: boolean;
@@ -35,6 +50,8 @@ export type UserData = {
   payFeeWithZig: boolean;
   refRewardType: RefRewardType;
   refCode: string;
+  country: string;
+  bio?: string;
   wall?: {
     banned: boolean;
   };
@@ -102,6 +119,19 @@ export type LoginPayload = {
 export type SessionResponse = {
   validUntil: number;
   userId: string;
+};
+
+export type KycResponse = {
+  status?: 'rejected' | 'pending' | 'approved' | 'init' | null;
+  reason?: string;
+  canBeRetried?: boolean;
+  category: 'KYC' | 'KYB';
+  level: string;
+  order: number;
+};
+
+export type KycLinkResponse = {
+  link: string;
 };
 
 export type UserLocale = string;

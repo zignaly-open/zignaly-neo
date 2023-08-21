@@ -1,6 +1,16 @@
 {
   "title": "Deposit Crypto",
-  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0></0> Binance Broker. Your funds will be safe on Binance. <1>More info</1>.",
+  "service-deposit": {
+    "title": "Deposit {{coin}} to Invest in this Service",
+    "description": "The trader of this service is trading with {{coin}}, so you must deposit the same crypto the trader is using in order to share profits with them. Please deposit {{coin}} to your account.",
+    "transfer-crypto": "Transfer {{coin}} from an external wallet",
+    "buy-crypto": "I don't own any {{coin}}",
+    "buttons": {
+      "deposit": "Deposit {{coin}}",
+      "purchase": "Purchase {{coin}}"
+    }
+  },
+  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"
@@ -8,7 +18,7 @@
   "balances": {
     "loadingAriaLabel": "Loading coin balances",
     "total": "Balance:",
-    "balanceLocked": "In Orders:",
+    "balanceLocked": "In orders:",
     "balanceFree": "Available:"
   },
   "networkSelector": {
@@ -16,6 +26,7 @@
     "placeholder": "Choose the network"
   },
   "no-network": "Deposit is not available on this network",
+  "network-unavailable": "Network unavailable",
   "depositAddress": {
     "copied": "Deposit address copied to clipboard!",
     "label": "Deposit Address:",
@@ -30,7 +41,9 @@
   },
   "depositQR": {
     "address": "{{coin}} Address",
-    "memo": "{{coin}} MEMO/Tag"
+    "memo": "{{coin}} MEMO/Tag",
+    "scan": "Scan for mobile deposits"
   },
-  "buy-crypto": "Buy Crypto"
+  "buy-crypto": "Buy Crypto",
+  "history": "History"
 }

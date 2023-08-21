@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 
 export const Layout = styled(ZigTypography)`
   text-align: center;
@@ -7,6 +7,11 @@ export const Layout = styled(ZigTypography)`
   gap: 8px;
 `;
 
-export const Symbol = styled(ZigTypography)`
-  padding-left: 4px;
+export const DottedButton = styled(ZigButton)`
+  border: dotted 1px ${(props) => props.theme.palette.neutral600};
+  width: 68px;
+  height: 25px;
+  border-radius: 5px;
+  font-size: 11px !important;
+  margin: 0 auto;
 `;

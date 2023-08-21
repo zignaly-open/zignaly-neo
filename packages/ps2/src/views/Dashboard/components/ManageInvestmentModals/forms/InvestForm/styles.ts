@@ -1,21 +1,17 @@
-import { styled } from '@mui/material';
+import { styled } from '@mui/system';
+import { Field as EditField } from '../EditInvestmentForm/styles';
 
-export const Field = styled('div')`
-  display: grid;
+export const Field = styled(EditField)`
   grid-template-columns: 1fr 1fr;
-  user-select: none;
-  gap: 42px;
-  align-items: flex-start;
-
-  & > div {
-    min-height: 110px;
-    ${({ theme }) => `
-    &:first-child {
-      padding-right: 42px;
-      border-right: 1px solid ${theme.palette.neutral500};
-    }
-  `};
-  }
 `;
 
-export const Form = styled('form')``;
+export const ZigInputWrapper = styled('div')`
+  .MuiInput-root {
+    &:not(:hover):not(:has(input:focus)) {
+      &,
+      .MuiInput-input {
+        background: ${({ theme }) => theme.palette.neutral750};
+      }
+    }
+  }
+`;

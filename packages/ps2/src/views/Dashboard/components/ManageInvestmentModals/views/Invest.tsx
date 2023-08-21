@@ -2,18 +2,19 @@ import React from 'react';
 import InvestForm from '../forms/InvestForm';
 import InvestorDetails from './InvestorDetails';
 import EditInvestmentSuccess from './EditInvestmentSuccess';
+import { InvestmentViews } from '../types';
 
 const Invest: React.FC<{
   close: () => void;
-  isInvested: boolean;
-  setIsInvested: (v: boolean) => void;
-}> = ({ close, isInvested, setIsInvested }) => {
-  return isInvested ? (
+  view: InvestmentViews;
+  setView: (view: InvestmentViews) => void;
+}> = ({ close, view, setView }) => {
+  return view === InvestmentViews.InvestmentSuccess ? (
     <EditInvestmentSuccess close={close} />
   ) : (
     <>
-      <InvestorDetails />
-      <InvestForm close={close} onInvested={() => setIsInvested(true)} />
+      <InvestorDetails prefixId={'invest-modal'} />
+      <InvestForm close={close} view={view} setView={setView} />
     </>
   );
 };

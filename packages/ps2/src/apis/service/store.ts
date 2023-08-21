@@ -3,7 +3,7 @@ import { GraphChartType, GraphTimeframe, ServiceState } from './types';
 
 const initialState: ServiceState = {
   chartType: GraphChartType.pnl_pct_compound,
-  chartTimeframe: GraphTimeframe['30d'],
+  chartTimeframe: GraphTimeframe['180d'],
 };
 
 export const serviceSlice = createSlice({

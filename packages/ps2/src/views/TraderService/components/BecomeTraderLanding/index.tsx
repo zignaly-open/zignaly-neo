@@ -29,16 +29,16 @@ import {
 } from './styles';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 import { useIsAuthenticated } from '../../../../apis/user/use';
-import { ROUTE_SIGNUP } from '../../../../routes';
-import { useNavigate } from 'react-router-dom';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
+import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
+import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
 
 const BecomeTraderLanding: React.FC = () => {
-  const { t } = useTranslation('offer-your-trading-service');
+  const { t } = useTranslation(['offer-your-trading-service', 'service']);
   const { showModal } = useZModal();
   const isAuthenticated = useIsAuthenticated();
-  const navigate = useNavigate();
+  const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
 
   const infoBarItems: InfoBarItem[] = useMemo(
     () => [
@@ -98,7 +98,9 @@ const BecomeTraderLanding: React.FC = () => {
       },
       {
         title: t('howWorks.list.item3.title'),
-        description: t('howWorks.list.item3.description'),
+        description: t('howWorks.list.item3.description', {
+          zignalyFee: ZIGNALY_PROFIT_FEE,
+        }),
         image: 'split-profits.png',
       },
     ],
@@ -107,11 +109,9 @@ const BecomeTraderLanding: React.FC = () => {
 
   const onClickCreateService = () => {
     if (isAuthenticated) {
-      showModal(CreateServiceModal, {
-        ctaId: 'create-service',
-      });
+      showModal(CreateServiceModal);
     } else {
-      navigate(ROUTE_SIGNUP);
+      navigateIfNotLoggedIn();
     }
   };
 
@@ -155,7 +155,6 @@ const BecomeTraderLanding: React.FC = () => {
               </WrapperList>
               <WrapperAction>
                 <ZigButton
-                  ctaId={'offer-service__create-service'}
                   id={'offer-service__create-service'}
                   size={'large'}
                   variant={'contained'}

@@ -7,7 +7,7 @@ import { CoinLabelProps } from './types';
 
 const CoinLabel = ({ name, coin, bucket, id }: CoinLabelProps) => (
   <Layout id={id}>
-    <Icon coin={coin} name={name} bucket={bucket} className={`icon__${coin}`} />
+    <Icon coin={coin} bucket={bucket} className={`icon__${coin}`} />
     <WrapCoin>
       <Coin className={`name__${coin}`}>{coin}</Coin>
       <ZigTypography

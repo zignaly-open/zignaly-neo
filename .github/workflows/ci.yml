@@ -1,6 +1,7 @@
 name: Run CI checks
 
-on: [ pull_request ]
+on:
+  pull_request:
 
 jobs:
   lint_and_test:
@@ -9,7 +10,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        node: [ 16.x ]
+        node: [18.x]
 
     steps:
       - name: Checkout code
@@ -24,17 +25,29 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: 'yarn'
       - name: Install Lerna
-        run: yarn global add lerna
+        run: yarn global add lerna@6.6.2
       - name: Bootstrap modified packages
-        run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
-      - name: Build modified packages
+        run: lerna bootstrap
+      - name: Build
         run: lerna run build
-      - name: Lint modified packages
-        run: lerna run lint-ci --since=origin/${{ github.base_ref }}
-      - name: Test modified packages
-        run: lerna run test --since=origin/${{ github.base_ref }}
+      - name: Lint
+        run: lerna run lint-ci
+      - name: Test .env
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_EXTEND_ESLINT: true
+          envkey_DISABLE_ESLINT_PLUGIN: true
+          envkey_ESLINT_NO_DEV_ERRORS: true
+          envkey_REACT_APP_ENABLE_TRACKING: false
+          envkey_REACT_APP_BASE_API: https://test.zignaly.com/new_api
+          envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
+          envkey_REACT_APP_REFERRALS_API: https://test-referrals.zignaly.com/
+          directory: packages/ps2
+          file_name: .env
+      - name: Test
+        run: lerna run test
       - name: Headpat yourself ^_^
         run: echo "Great job <3"
