@@ -235,7 +235,7 @@ const EditProfileForm = () => {
                   <ZigInput
                     wide
                     multiline
-                    rows={3}
+                    rows={12}
                     label={
                       <ZigTypography>
                         {t('edit-profile.about-you')}
