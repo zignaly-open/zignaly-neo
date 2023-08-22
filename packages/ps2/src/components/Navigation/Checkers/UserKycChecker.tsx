@@ -30,27 +30,37 @@ const UserKycChecker: React.FC = () => {
       }));
   }, []);
 
-  const pollKyc = useCallback(async () => {
-    setTimeout(async () => {
-      const newStatus = await getStatuses();
-      if (newStatus.shouldCheck) {
-        pollKyc();
-      }
-
-      if (newStatus.statusSerialized !== oldStatus.current.statusSerialized) {
-        oldStatus.current = newStatus;
-        toast.info(t('kyc-updated'));
-        loadUser();
-      }
-    }, KYC_CHECK_INTERVAL);
-  }, [oldStatus]);
-
   useEffect(() => {
-    shouldCheck &&
-      getStatuses().then((s) => {
-        oldStatus.current = s;
+    let timeoutId: NodeJS.Timeout = null;
+
+    (async () => {
+      const pollKyc = () => {
+        timeoutId = setTimeout(async () => {
+          const newStatus = await getStatuses();
+
+          if (
+            newStatus.statusSerialized !== oldStatus.current.statusSerialized
+          ) {
+            oldStatus.current = newStatus;
+            toast.info(t('kyc-updated'));
+            loadUser();
+          }
+
+          if (newStatus.shouldCheck) {
+            pollKyc();
+          }
+        }, KYC_CHECK_INTERVAL);
+      };
+
+      if (shouldCheck) {
+        oldStatus.current = await getStatuses();
         pollKyc();
-      });
+      }
+    })();
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [shouldCheck]);
 
   return null;
