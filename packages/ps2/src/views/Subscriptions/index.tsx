@@ -19,10 +19,6 @@ const Subscriptions: React.FC = () => {
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
 
-  // const isInputValid = (input: string) => {
-  //   return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
-  // };
-
   const handleTabChange = (_: any, newTab: number) => {
     setActiveTab(newTab);
   };
