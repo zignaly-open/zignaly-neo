@@ -19,10 +19,6 @@ const Subscriptions: React.FC = () => {
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
 
-  const handleTabChange = (_, newTab: number) => {
-    setActiveTab(newTab);
-  };
-
   return (
     <LayoutContentWrapper
       endpoint={[subscriptionsEndpoint]}
@@ -38,7 +34,12 @@ const Subscriptions: React.FC = () => {
               {t('title')}
             </ZigTypography>
             <Box mb={4}>
-              <StyledTabs value={activeTab} onChange={handleTabChange}>
+              <StyledTabs
+                value={activeTab}
+                onChange={(_, newTab: number) => {
+                  setActiveTab(newTab);
+                }}
+              >
                 <StyledTab
                   active={activeTab === 0}
                   label={t('tabs.annually')}
