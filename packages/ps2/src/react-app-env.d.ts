@@ -69,6 +69,7 @@ declare module '@mui/material/styles' {
       | 'withdrawalHighlight'
       | 'secondaryBackground'
       | 'selectInputFill'
+      | 'activeTab'
       | 'manageServiceMenuHover',
       string
     >;

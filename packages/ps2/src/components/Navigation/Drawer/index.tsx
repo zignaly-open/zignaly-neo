@@ -43,6 +43,7 @@ import {
   ROUTE_PASSWORD,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
+  ROUTE_SUBSCRIPTIONS,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from 'routes';
 import theme from 'theme';
@@ -234,6 +235,19 @@ const ZigDrawer = () => {
                       >
                         <ListItemText
                           primary={t('main-menu.dropdown-link-forTrading')}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
+                  {isFeatureOn(Features.Subscriptions) && (
+                    <ListItem disablePadding onClick={handleDrawerToggle}>
+                      <ListItemButton
+                        to={generatePath(ROUTE_SUBSCRIPTIONS)}
+                        component={Link}
+                        id={'drawer__subscriptions'}
+                      >
+                        <ListItemText
+                          primary={t('account-menu.subscriptions')}
                         />
                       </ListItemButton>
                     </ListItem>

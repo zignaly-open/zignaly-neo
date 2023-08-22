@@ -1,0 +1,30 @@
+{
+  "title": "Subscriptions",
+  "cards": {
+    "title": "Quantwise",
+    "packages": {
+      "plus": "PLUS",
+      "pro": "PRO",
+      "expert": "EXPERT",
+      "master": "MASTER"
+    },
+    "fees": "Performance Fees: {{ fee }}%***",
+    "license": "Yearly license*",
+    "renewal-date": "Renewal date: {{ date }}",
+    "get-started": "Get Started",
+    "your-subscription": "Your subscription"
+  },
+  "tabs": {
+    "annually": "Price Annually",
+    "lifetime": "Lifetime License"
+  },
+  "redeem-code": "Redeem your subscription code:",
+  "platform-renew": "*: Platform Yearly Renew {{amount}}€",
+  "prelaunch-price": "**: Prelaunch Price",
+  "performance-fees": "***: For more information about Performance fees check FAQ area",
+  "warning": "Remember, trading bots, while powerful, are not perfect. As markets are volatile and unpredictable, bots may make mistakes or face unforeseen conditions, leading to losses. Stay vigilant, monitor performance, and adjust settings to keep your bot in sync with with your goals and risk tolerance.",
+  "toast-success": "Subscription activated",
+  "validation": {
+    "invalid-code-format": "Should be AA-XXXX-XXXX-XXXX"
+  }
+}

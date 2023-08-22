@@ -42,6 +42,7 @@ const dark: Theme = {
     tableRow: "#13122566",
     modal: "#101225",
     loader: "#fff",
+    activeTab: "#181B2F",
     greyedOutBorder: "#464a85",
     sliderMark: "#888999",
     sliderThumb: "#999ee0",
