@@ -25,7 +25,7 @@ const Toggle2FA: React.FC = () => {
           </ZigTypography>
         </Box>
 
-        {user.ask2FA ? (
+        {user['2FAEnable'] ? (
           <Disable2FAForm
             close={() => {
               // Do nothing
