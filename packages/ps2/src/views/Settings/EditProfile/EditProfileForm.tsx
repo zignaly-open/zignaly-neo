@@ -49,7 +49,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: user.bio || '',
+      bio: user.about || '',
       country: user.country || '',
     },
   });
@@ -78,7 +78,7 @@ const EditProfileForm = () => {
 
   const countryOptions = useMemo(
     () =>
-      Object.entries(Countries.getNames(i18n.language)).map(
+      Object.entries(Countries.getNames(i18n.language.split('_')[0])).map(
         ([value, label]) => ({
           value,
           text: label,
@@ -235,7 +235,7 @@ const EditProfileForm = () => {
                   <ZigInput
                     wide
                     multiline
-                    rows={3}
+                    rows={12}
                     label={
                       <ZigTypography>
                         {t('edit-profile.about-you')}

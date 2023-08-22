@@ -53,7 +53,7 @@ export type UserData = {
   refRewardType: RefRewardType;
   refCode: string;
   country: string;
-  bio?: string;
+  about?: string;
   subscriptionFinishesAt?: string;
   subscriptionPlan?: SubscriptionPlan;
   subscriptionDuration?: 'lifetime' | 'year';
