@@ -6,7 +6,6 @@ export default {
     [Features.Rewards]: false,
     [Features.Trader]: false,
     [Features.NewSignup]: false,
-    [Features.Subscriptions]: true,
   },
   endpointOverrides: {
     'marketplace/': 'market',
