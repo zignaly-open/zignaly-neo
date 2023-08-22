@@ -156,6 +156,8 @@
     "1073": "Service is private",
     "1074": "User is not the owner of the service",
     "1086": "Email code incorrect",
+    "1095": "Invalid subscription code",
+    "1097": "Invalid code format: must be AA-XXXX-XXXX-XXXX",
     "2001": "Wallet not found",
     "2004": "Withdraw data error",
     "9000": "Missing exchange account in your account, please contact with support.",

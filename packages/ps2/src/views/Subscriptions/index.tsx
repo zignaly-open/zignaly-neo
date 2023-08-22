@@ -1,48 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Layout, StyledTab, StyledTabs } from './styles';
 import { useTranslation } from 'react-i18next';
-import { ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import SubscriptionCard from './SubscriptionCard';
 import { useTitle } from 'react-use';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { SubscriptionPlan } from '../../apis/subscription/types';
-import {
-  useSubscribeMutation,
-  useSubscriptionsQuery,
-} from '../../apis/subscription/api';
+import { useSubscriptionsQuery } from '../../apis/subscription/api';
 import { useCurrentUser } from '../../apis/user/use';
 import { format, parseISO } from 'date-fns';
-import { useToast } from '../../util/hooks/useToast';
+import SubscribeForm from './SubscribeForm';
 
 const Subscriptions: React.FC = () => {
-  const SUBSCRIPTION_CODE_LENGTH = 17;
   const { t } = useTranslation(['subscriptions', 'pages']);
   useTitle(t('pages:subscriptions'));
-  const [code, setCode] = useState<string>('');
   const [activeTab, setActiveTab] = useState<number>(0);
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
-  const [subscribe, { isLoading }] = useSubscribeMutation();
-  const toast = useToast();
 
-  const isInputValid = (input: string) => {
-    return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
-  };
+  // const isInputValid = (input: string) => {
+  //   return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
+  // };
 
-  const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value.toUpperCase();
-    if (isInputValid(inputValue)) {
-      setCode(inputValue);
-    }
-  };
-  useEffect(() => {
-    if (code.length === SUBSCRIPTION_CODE_LENGTH)
-      subscribe({ code })
-        .unwrap()
-        .then(() => toast.success(t('toast-success')));
-  }, [code]);
-  const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
+  const handleTabChange = (_: any, newTab: number) => {
     setActiveTab(newTab);
   };
 
@@ -124,12 +105,7 @@ const Subscriptions: React.FC = () => {
                 {t('redeem-code')}
               </ZigTypography>
               <Box width={'60%'} mb={9}>
-                <ZigInput
-                  disabled={isLoading}
-                  value={code}
-                  fullWidth
-                  onChange={handleCodeChange}
-                />
+                <SubscribeForm />
               </Box>
               <ZigTypography color={'neutral000'} variant={'h2'}>
                 {t('platform-renew', { amount: 29 })}
