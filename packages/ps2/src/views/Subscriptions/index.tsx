@@ -19,7 +19,7 @@ const Subscriptions: React.FC = () => {
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
 
-  const handleTabChange = (_: any, newTab: number) => {
+  const handleTabChange = (_, newTab: number) => {
     setActiveTab(newTab);
   };
 
