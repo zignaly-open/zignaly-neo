@@ -127,12 +127,12 @@ const EditProfileForm = () => {
 
             <Box sx={{ pt: 2 }}>
               <ProfileStatusBox
-                isSuccess={user.ask2FA}
+                isSuccess={user['2FAEnable']}
                 label={t('edit-profile.status-box.2fa')}
                 ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
                 cta={() => navigate(generatePath(ROUTE_2FA))}
                 status={t(
-                  user.ask2FA
+                  user['2FAEnable']
                     ? 'edit-profile.status-box.enabled'
                     : 'edit-profile.status-box.disabled',
                 )}
