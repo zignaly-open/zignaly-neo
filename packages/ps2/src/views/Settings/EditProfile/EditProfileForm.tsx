@@ -39,21 +39,6 @@ const EditProfileForm = () => {
     skip: !isFeatureOn(Features.Kyc),
   });
 
-  // const kycStarted = useMemo(() => {
-  //   // const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
-  //   const res = kycStatuses.status.find (x) => {
-  //     console.log(x);
-  //     return x.some(
-  //       (kyc) =>
-  //         (kyc.status === 'rejected' && kyc.canBeRetried) ||
-  //         ['approved', 'pending'].includes(kyc.status),
-  //     );
-  //   });
-  //   if (!res) {
-  //     return kycStatusesCateg[kycStatuses?.status[0].category];
-  //   }
-  // }, [kycStatuses?.status]);
-
   const kycStarted = useMemo(() => {
     const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
     const res = find(kycStatusesCateg, (x) => {
