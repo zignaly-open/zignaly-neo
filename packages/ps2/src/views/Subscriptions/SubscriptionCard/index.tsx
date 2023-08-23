@@ -56,7 +56,7 @@ const SubscriptionCard = ({
         </Box>
         {status === 'accessible' ? (
           <ZigLink
-            href={`${process.env.REACT_APP_SUBSCRIBTIONS_SHOP_URL}`}
+            href={`${process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL}`}
             target={'_blank'}
             sx={{ width: '100%' }}
             underline={'none'}
