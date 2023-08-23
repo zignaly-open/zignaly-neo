@@ -112,7 +112,7 @@ const Subscriptions: React.FC = () => {
               <ZigTypography color={'neutral300'} variant={'h3'} mb={2}>
                 {t('performance-fees')}
               </ZigTypography>
-              <ZigTypography color={'neutral100'} variant={'body2'}>
+              <ZigTypography color={'neutral300'} variant={'body2'}>
                 {t('warning')}
               </ZigTypography>
             </Box>
