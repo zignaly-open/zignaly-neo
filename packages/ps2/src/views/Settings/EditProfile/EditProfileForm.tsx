@@ -159,7 +159,7 @@ const EditProfileForm = () => {
 
               {isFeatureOn(Features.Kyc) && !!kycStatuses && kycProgress && (
                 <KYCStatusBox
-                  kycStatuses={kycProgress || []}
+                  kycStatuses={kycProgress}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
                 />
               )}
