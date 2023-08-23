@@ -61,21 +61,24 @@ const SubscriptionCard = ({
             {t('cards.fees', { fee: successFeePct })}
           </ZigTypography>
         </Box>
-        <ZigLink
-          href={process.env.SUBSCRIBE_URL}
-          target={'_blank'}
-          sx={{ width: '100%' }}
-        >
-          <ZigButton
-            size={'large'}
-            fullWidth
-            disabled={status !== 'accessible'}
+        {status === 'accessible' ? (
+          <ZigLink
+            href={`${process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL}`}
+            target={'_blank'}
+            sx={{ width: '100%' }}
+            underline={'none'}
           >
+            <ZigButton size={'large'} fullWidth>
+              {t('cards.get-started')}
+            </ZigButton>
+          </ZigLink>
+        ) : (
+          <ZigButton size={'large'} fullWidth disabled>
             {status === 'active'
               ? t('cards.your-subscription')
               : t('cards.get-started')}
           </ZigButton>
-        </ZigLink>
+        )}
       </Card>
     </Box>
   );
