@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { SubscriptionCardProps } from './types';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Card, Wrapper } from './styles';
@@ -61,24 +61,28 @@ const SubscriptionCard = ({
             {t('cards.fees', { fee: successFeePct })}
           </ZigTypography>
         </Box>
-        {status === 'accessible' ? (
-          <ZigLink
-            href={`${process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL}`}
-            target={'_blank'}
-            sx={{ width: '100%' }}
-            underline={'none'}
-          >
-            <ZigButton size={'large'} fullWidth>
-              {t('cards.get-started')}
-            </ZigButton>
-          </ZigLink>
-        ) : (
-          <ZigButton size={'large'} fullWidth disabled>
-            {status === 'active'
-              ? t('cards.your-subscription')
-              : t('cards.get-started')}
-          </ZigButton>
-        )}
+        <Tooltip title={status === 'blocked' ? t('cards.blocked-tooltip') : ''}>
+          <Box width={'100%'}>
+            {status === 'accessible' ? (
+              <ZigLink
+                href={`${process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL}`}
+                target={'_blank'}
+                sx={{ width: '100%' }}
+                underline={'none'}
+              >
+                <ZigButton size={'large'} fullWidth>
+                  {t('cards.get-started')}
+                </ZigButton>
+              </ZigLink>
+            ) : (
+              <ZigButton size={'large'} fullWidth disabled>
+                {status === 'active'
+                  ? t('cards.your-subscription')
+                  : t('cards.get-started')}
+              </ZigButton>
+            )}
+          </Box>
+        </Tooltip>
       </Card>
     </Box>
   );
