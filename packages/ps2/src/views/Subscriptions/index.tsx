@@ -81,6 +81,7 @@ const Subscriptions: React.FC = () => {
                         ? 'active'
                         : 'accessible'
                     }
+                    subscriptionDuration={currentUser?.subscriptionDuration}
                     durationTab={activeTab === 0 ? 'year' : 'lifetime'}
                     subscriptionFinishesAt={
                       currentUser?.subscriptionFinishesAt &&

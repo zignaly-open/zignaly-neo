@@ -13,6 +13,7 @@ const SubscriptionCard = ({
   status,
   subscriptionFinishesAt,
   durationTab,
+  subscriptionDuration,
 }: SubscriptionCardProps) => {
   const { t } = useTranslation('subscriptions');
   return (
@@ -69,7 +70,9 @@ const SubscriptionCard = ({
             underline={'none'}
           >
             <ZigButton size={'large'} fullWidth>
-              {t('cards.get-started')}
+              {subscriptionDuration === durationTab
+                ? t('cards.upgrade')
+                : t('cards.get-started')}
             </ZigButton>
           </ZigLink>
         ) : (

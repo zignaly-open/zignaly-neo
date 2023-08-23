@@ -13,6 +13,7 @@
     "lifetime-price": "Lifetime Price*",
     "renewal-date": "Renewal date: {{ date }}",
     "get-started": "Get Started",
+    "upgrade": "Upgrade",
     "your-subscription": "Your subscription"
   },
   "tabs": {
