@@ -5,4 +5,5 @@ export type SubscriptionCardProps = {
   subscriptionFinishesAt?: string;
   status: 'blocked' | 'active' | 'accessible';
   durationTab?: 'lifetime' | 'year';
+  subscriptionDuration?: 'lifetime' | 'year';
 };
