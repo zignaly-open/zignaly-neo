@@ -35,6 +35,7 @@ export const userSlice = createSlice({
     },
     enable2FA: (state, action: PayloadAction<boolean>) => {
       state.user.ask2FA = action.payload;
+      state.user['2FAEnable'] = action.payload;
     },
   },
   extraReducers: (builder) => {

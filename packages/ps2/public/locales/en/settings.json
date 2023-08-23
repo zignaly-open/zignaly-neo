@@ -30,7 +30,9 @@
       "disabled": "Disabled",
       "pass-kyc-cta": "Verify",
       "verified": "Verified",
-      "not-verified": "Not verified"
+      "not-verified": "Not verified",
+      "pending": "Pending",
+      "rejected": "Rejected"
     }
   },
   "update-password": {
