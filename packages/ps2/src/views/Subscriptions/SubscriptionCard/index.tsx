@@ -12,13 +12,18 @@ const SubscriptionCard = ({
   successFeePct,
   status,
   subscriptionFinishesAt,
+  durationTab,
 }: SubscriptionCardProps) => {
   const { t } = useTranslation('subscriptions');
   return (
     <Box position={'relative'}>
       {status === 'active' && subscriptionFinishesAt && (
         <Wrapper>
-          <ZigTypography variant={'body1'} color={'neutral000'}>
+          <ZigTypography
+            variant={'body1'}
+            color={'neutral000'}
+            whiteSpace={'nowrap'}
+          >
             {t('cards.renewal-date', { date: subscriptionFinishesAt })}
           </ZigTypography>
         </Wrapper>
@@ -43,7 +48,9 @@ const SubscriptionCard = ({
           {price}&#8364;
         </ZigTypography>
         <ZigTypography mt={'-4px'} variant={'body1'} mb={'30px'}>
-          {t('cards.license')}
+          {durationTab === 'lifetime'
+            ? t('cards.lifetime-price')
+            : t('cards.yearly-license')}
         </ZigTypography>
         <Box display={'flex'} gap={'3px'}>
           <CheckCircleOutlineIcon

@@ -27,7 +27,7 @@ const Subscriptions: React.FC = () => {
           <Layout>
             <ZigTypography
               variant='h1'
-              mb={'50px'}
+              m={'32px 0 63px 0'}
               align={'center'}
               id={'subscriptions__title'}
             >
@@ -81,6 +81,7 @@ const Subscriptions: React.FC = () => {
                         ? 'active'
                         : 'accessible'
                     }
+                    durationTab={activeTab === 0 ? 'year' : 'lifetime'}
                     subscriptionFinishesAt={
                       currentUser?.subscriptionFinishesAt &&
                       format(
@@ -98,19 +99,16 @@ const Subscriptions: React.FC = () => {
               width={'62%'}
               gap={0.5}
             >
-              <ZigTypography mb={2.5} variant={'h1'} color={'neutral000'}>
+              <ZigTypography mb={1} variant={'h1'} color={'neutral100'}>
                 {t('redeem-code')}
               </ZigTypography>
               <Box width={'60%'} mb={9}>
                 <SubscribeForm />
               </Box>
-              <ZigTypography color={'neutral000'} variant={'h2'}>
+              <ZigTypography color={'neutral300'} variant={'h3'}>
                 {t('platform-renew', { amount: 29 })}
               </ZigTypography>
-              <ZigTypography color={'neutral000'} variant={'h2'}>
-                {t('prelaunch-price')}
-              </ZigTypography>
-              <ZigTypography color={'neutral000'} variant={'h2'} mb={2}>
+              <ZigTypography color={'neutral300'} variant={'h3'} mb={2}>
                 {t('performance-fees')}
               </ZigTypography>
               <ZigTypography color={'neutral100'} variant={'body2'}>

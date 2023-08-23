@@ -14,6 +14,7 @@ export const Wrapper = styled(Box)`
   border-radius: 10px;
   padding: 0 10px 7px 10px;
   transform: scale(1.05);
+  white-space: nowrap;
 `;
 
 export const Card = styled(Box, {
