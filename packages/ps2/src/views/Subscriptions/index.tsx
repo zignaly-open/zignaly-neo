@@ -99,7 +99,7 @@ const Subscriptions: React.FC = () => {
               width={'62%'}
               gap={0.5}
             >
-              <ZigTypography mb={1} variant={'h1'} color={'neutral100'}>
+              <ZigTypography mb={1} variant={'h1'} color={'neutral200'}>
                 {t('redeem-code')}
               </ZigTypography>
               <Box width={'60%'} mb={9}>
