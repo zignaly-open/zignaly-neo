@@ -19,7 +19,11 @@ const SubscriptionCard = ({
     <Box position={'relative'}>
       {status === 'active' && subscriptionFinishesAt && (
         <Wrapper>
-          <ZigTypography variant={'body1'} color={'neutral000'}>
+          <ZigTypography
+            variant={'body1'}
+            color={'neutral000'}
+            whiteSpace={'nowrap'}
+          >
             {t('cards.renewal-date', { date: subscriptionFinishesAt })}
           </ZigTypography>
         </Wrapper>
