@@ -8,6 +8,7 @@
       "expert": "EXPERT",
       "master": "MASTER"
     },
+    "blocked-tooltip": "Your current active subscription has more advantages than this subscription",
     "fees": "Performance Fees: {{ fee }}%**",
     "yearly-license": "Yearly Price",
     "lifetime-price": "Lifetime Price*",
