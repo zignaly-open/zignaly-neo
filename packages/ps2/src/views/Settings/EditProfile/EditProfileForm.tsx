@@ -160,9 +160,7 @@ const EditProfileForm = () => {
               {isFeatureOn(Features.Kyc) && !!kycStatuses && (
                 <KYCStatusBox
                   kycStatuses={kycProgress}
-                  ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
-                  label={t('edit-profile.status-box.kyc')}
                 />
               )}
             </Box>

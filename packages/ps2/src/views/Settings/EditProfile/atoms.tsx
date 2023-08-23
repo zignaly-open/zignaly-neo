@@ -33,15 +33,11 @@ export const ProfileStatusBox: React.FC<{
 };
 
 export const KYCStatusBox = ({
-  label,
-  cta,
-  ctaLabel,
   kycStatuses,
+  cta,
 }: {
-  label: string;
-  ctaLabel: string;
-  cta: () => void;
   kycStatuses: KycResponse[];
+  cta: () => void;
 }) => {
   const { t } = useTranslation(['settings', 'kyc']);
 
@@ -85,7 +81,7 @@ export const KYCStatusBox = ({
   return (
     <ProfileStatusBoxContainer color={color}>
       <ZigTypography mb='4px' color={'neutral200'} component={'div'}>
-        {label}
+        {t('edit-profile.status-box.kyc')}
       </ZigTypography>
       {kycConfig[kycStatuses[0].category].map((x, i) => {
         const { status, reason } = kycStatuses[i];
@@ -136,7 +132,7 @@ export const KYCStatusBox = ({
       })}
       {isNotStarted && (
         <ZigButton variant={'text'} onClick={cta}>
-          {ctaLabel}
+          {t('edit-profile.status-box.pass-kyc-cta')}
         </ZigButton>
       )}
     </ProfileStatusBoxContainer>
