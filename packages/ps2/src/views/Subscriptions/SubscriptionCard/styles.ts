@@ -12,7 +12,7 @@ export const Wrapper = styled(Box)`
   background-color: ${({ theme }) => theme.palette.neutral400};
   z-index: -10;
   border-radius: 10px;
-  padding: 0 10px 7px 10px;
+  padding: 0 10px 8px 10px;
   transform: scale(1.05);
   white-space: nowrap;
 `;
