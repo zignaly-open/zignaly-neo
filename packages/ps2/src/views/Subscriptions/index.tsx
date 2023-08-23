@@ -81,6 +81,7 @@ const Subscriptions: React.FC = () => {
                         ? 'active'
                         : 'accessible'
                     }
+                    durationTab={activeTab === 0 ? 'year' : 'lifetime'}
                     subscriptionFinishesAt={
                       currentUser?.subscriptionFinishesAt &&
                       format(
@@ -106,9 +107,6 @@ const Subscriptions: React.FC = () => {
               </Box>
               <ZigTypography color={'neutral000'} variant={'h2'}>
                 {t('platform-renew', { amount: 29 })}
-              </ZigTypography>
-              <ZigTypography color={'neutral000'} variant={'h2'}>
-                {t('prelaunch-price')}
               </ZigTypography>
               <ZigTypography color={'neutral000'} variant={'h2'} mb={2}>
                 {t('performance-fees')}
