@@ -4,4 +4,5 @@ export type SubscriptionCardProps = {
   successFeePct: number;
   subscriptionFinishesAt?: string;
   status: 'blocked' | 'active' | 'accessible';
+  durationTab?: 'lifetime' | 'year';
 };

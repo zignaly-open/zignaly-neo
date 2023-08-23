@@ -12,6 +12,7 @@ const SubscriptionCard = ({
   successFeePct,
   status,
   subscriptionFinishesAt,
+  durationTab,
 }: SubscriptionCardProps) => {
   const { t } = useTranslation('subscriptions');
   return (
@@ -43,7 +44,9 @@ const SubscriptionCard = ({
           {price}&#8364;
         </ZigTypography>
         <ZigTypography mt={'-4px'} variant={'body1'} mb={'30px'}>
-          {t('cards.license')}
+          {durationTab === 'lifetime'
+            ? t('cards.lifetime-price')
+            : t('cards.yearly-license')}
         </ZigTypography>
         <Box display={'flex'} gap={'3px'}>
           <CheckCircleOutlineIcon
