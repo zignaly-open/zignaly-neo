@@ -49,13 +49,13 @@ const EditProfileForm = () => {
       const approvedCount = filter(kycStatusesCateg[category], {
         status: 'approved',
       }).length;
-      if (approvedCount > maxApprovedCount) {
+      if (!maxApprovedCount || approvedCount > maxApprovedCount) {
         maxApprovedCount = approvedCount;
         maxCategory = category;
       }
     }
 
-    return kycStatusesCateg[maxCategory] || [];
+    return kycStatusesCateg[maxCategory];
   }, [kycStatuses?.status]);
 
   const {
@@ -157,9 +157,9 @@ const EditProfileForm = () => {
                 )}
               />
 
-              {isFeatureOn(Features.Kyc) && !!kycStatuses && (
+              {isFeatureOn(Features.Kyc) && !!kycStatuses && kycProgress && (
                 <KYCStatusBox
-                  kycStatuses={kycProgress}
+                  kycStatuses={kycProgress || []}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
                 />
               )}
