@@ -65,39 +65,39 @@ const usePerformLevelCheck = (
           okAction: () => navigate(generatePath(ROUTE_KYC)),
         },
       },
-      [Level.NoSubscription]: subscriptionsEnabled && {
-        modal: SubscriptionLevelAccessErrorModal,
-        props: {
-          title: t('access.no-subscription.title'),
-          description: t('access.no-subscription.description'),
-          cta1: t('access.no-subscription.cta-1'),
-          cta2: t('access.no-subscription.cta-2'),
-          explainer1: t('access.no-subscription.explainer-1'),
-          explainer2: t('access.no-subscription.explainer-2'),
-          button1Props: {
-            id: 'modal-access.no-subscription__redeem',
-            onClick: () => {
-              // TODO
-              alert('Not implemented');
-              return window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-            },
-          },
-          button2Props: {
-            // if we have the scubscription feature on but we don't have this configured...
-            // too bad
-            href: whitelabel.subscriptionPurchaseLink,
-            id: 'modal-access.no-subscription__purchase',
-            endIcon: (
-              <ZigArrowOutIcon
-                width={'9px'}
-                height={'9px'}
-                style={{ marginBottom: '4px' }}
-              />
-            ),
-            sx: { padding: '8px 20px' },
-          },
-        },
-      },
+      // [Level.NoSubscription]: subscriptionsEnabled && {
+      //   modal: SubscriptionLevelAccessErrorModal,
+      //   props: {
+      //     title: t('access.no-subscription.title'),
+      //     description: t('access.no-subscription.description'),
+      //     cta1: t('access.no-subscription.cta-1'),
+      //     cta2: t('access.no-subscription.cta-2'),
+      //     explainer1: t('access.no-subscription.explainer-1'),
+      //     explainer2: t('access.no-subscription.explainer-2'),
+      //     button1Props: {
+      //       id: 'modal-access.no-subscription__redeem',
+      //       onClick: () => {
+      //         // TODO
+      //         alert('Not implemented');
+      //         return window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+      //       },
+      //     },
+      //     button2Props: {
+      //       // if we have the scubscription feature on but we don't have this configured...
+      //       // too bad
+      //       href: whitelabel.subscriptionPurchaseLink,
+      //       id: 'modal-access.no-subscription__purchase',
+      //       endIcon: (
+      //         <ZigArrowOutIcon
+      //           width={'9px'}
+      //           height={'9px'}
+      //           style={{ marginBottom: '4px' }}
+      //         />
+      //       ),
+      //       sx: { padding: '8px 20px' },
+      //     },
+      //   },
+      // },
       [Level.Frozen]: {
         modal: AlertModal,
         props: {
@@ -153,13 +153,14 @@ const usePerformLevelCheck = (
   );
 
   return (onlyCheck = false) => {
+    // debugger;
     if (!isFeatureOn(Features.AccessLevels)) return true;
     for (const l of Object.keys(Level)) {
       if (!isAuthenticated || !accessLevel) {
         // Do nothing here
       } else if (levelThreshold <= +l) {
         // Do nothing, means we do not need so high of a level
-      } else if (accessLevel < +l && errorLevelMapping[l]) {
+      } else if (accessLevel <= +l && errorLevelMapping[l]) {
         !onlyCheck &&
           showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
         return false;
