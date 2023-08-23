@@ -20,7 +20,7 @@ const SubscriptionCard = ({
       {status === 'active' && subscriptionFinishesAt && (
         <Wrapper>
           <ZigTypography
-            variant={'body1'}
+            variant={'body2'}
             color={'neutral000'}
             whiteSpace={'nowrap'}
           >
