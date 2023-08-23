@@ -28,7 +28,7 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
-import { filter, groupBy } from 'lodash-es';
+import { find, groupBy } from 'lodash-es';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -39,23 +39,19 @@ const EditProfileForm = () => {
     skip: !isFeatureOn(Features.Kyc),
   });
 
-  const kycProgress = useMemo(() => {
+  const kycStarted = useMemo(() => {
     const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
-
-    let maxApprovedCount = 0;
-    let maxCategory = null;
-
-    for (const category in kycStatusesCateg) {
-      const approvedCount = filter(kycStatusesCateg[category], {
-        status: 'approved',
-      }).length;
-      if (approvedCount > maxApprovedCount) {
-        maxApprovedCount = approvedCount;
-        maxCategory = category;
-      }
+    const res = find(kycStatusesCateg, (x) => {
+      return x.some(
+        (kyc) =>
+          (kyc.status === 'rejected' && kyc.canBeRetried) ||
+          ['approved', 'pending'].includes(kyc.status),
+      );
+    });
+    if (!res) {
+      return kycStatusesCateg[kycStatuses?.status[0].category];
     }
-
-    return kycStatusesCateg[maxCategory] || [];
+    return res;
   }, [kycStatuses?.status]);
 
   const {
@@ -157,9 +153,9 @@ const EditProfileForm = () => {
                 )}
               />
 
-              {isFeatureOn(Features.Kyc) && !!kycStatuses && (
+              {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
                 <KYCStatusBox
-                  kycStatuses={kycProgress}
+                  kycStatuses={kycStarted}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
                 />
               )}
