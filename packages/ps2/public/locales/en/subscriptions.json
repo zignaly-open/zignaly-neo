@@ -9,14 +9,14 @@
       "master": "MASTER"
     },
     "fees": "Performance Fees: {{ fee }}%**",
-    "yearly-license": "Yearly license*",
+    "yearly-license": "Yearly Price*",
     "lifetime-price": "Lifetime Price*",
     "renewal-date": "Renewal date: {{ date }}",
     "get-started": "Get Started",
     "your-subscription": "Your subscription"
   },
   "tabs": {
-    "annually": "Price Annually",
+    "annually": "Annual License",
     "lifetime": "Lifetime License"
   },
   "redeem-code": "Redeem your subscription code:",
