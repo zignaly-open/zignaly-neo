@@ -27,7 +27,7 @@ const Subscriptions: React.FC = () => {
           <Layout>
             <ZigTypography
               variant='h1'
-              mb={'50px'}
+              m={'32px 0 63px 0'}
               align={'center'}
               id={'subscriptions__title'}
             >
