@@ -9,7 +9,7 @@
       "master": "MASTER"
     },
     "fees": "Performance Fees: {{ fee }}%**",
-    "yearly-license": "Yearly Price*",
+    "yearly-license": "Yearly Price",
     "lifetime-price": "Lifetime Price*",
     "renewal-date": "Renewal date: {{ date }}",
     "get-started": "Get Started",
