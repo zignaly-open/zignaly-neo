@@ -8,11 +8,13 @@ import { useSubscribeMutation } from '../../apis/subscription/api';
 import { useToast } from '../../util/hooks/useToast';
 import { Form } from '../../components/ZModal';
 import { Box } from '@mui/system';
+import { useLazyUserQuery } from '../../apis/user/api';
 
 const SubscribeForm = () => {
   const { t } = useTranslation(['subscriptions', 'error']);
   const [subscribe, { isLoading }] = useSubscribeMutation();
   const toast = useToast();
+  const [loadUser] = useLazyUserQuery();
 
   const {
     handleSubmit,
@@ -30,7 +32,10 @@ const SubscribeForm = () => {
   const onSubmit = ({ code }: { code: string }) => {
     subscribe({ code: code.toUpperCase() })
       .unwrap()
-      .then(() => toast.success(t('toast-success')));
+      .then(() => {
+        toast.success(t('toast-success'));
+        loadUser();
+      });
   };
 
   return (
