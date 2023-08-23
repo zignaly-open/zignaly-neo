@@ -2,11 +2,12 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { ZigInput } from '@zignaly-open/ui';
+import { ZigButton, ZigInput } from '@zignaly-open/ui';
 import { SubscriptionCodeValidation } from './validation';
 import { useSubscribeMutation } from '../../apis/subscription/api';
 import { useToast } from '../../util/hooks/useToast';
 import { Form } from '../../components/ZModal';
+import { Box } from '@mui/system';
 
 const SubscribeForm = () => {
   const { t } = useTranslation(['subscriptions', 'error']);
@@ -16,7 +17,7 @@ const SubscribeForm = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<{ code: string }>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -34,19 +35,30 @@ const SubscribeForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name={'code'}
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <ZigInput
-            error={t(errors?.code?.message)}
-            disabled={isLoading}
-            fullWidth
-            {...field}
-          />
-        )}
-      />
+      <Box display={'flex'} gap={3} minHeight={'87px'}>
+        <Controller
+          name={'code'}
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <ZigInput
+              error={t(errors?.code?.message)}
+              disabled={isLoading}
+              fullWidth
+              {...field}
+            />
+          )}
+        />
+        <ZigButton
+          disabled={!isValid}
+          size={'xlarge'}
+          sx={{ maxHeight: '60px' }}
+          type={'submit'}
+          loading={isLoading}
+        >
+          {t('redeem-code')}
+        </ZigButton>
+      </Box>
     </Form>
   );
 };

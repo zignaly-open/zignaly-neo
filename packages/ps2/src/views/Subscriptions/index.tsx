@@ -100,9 +100,9 @@ const Subscriptions: React.FC = () => {
               gap={0.5}
             >
               <ZigTypography mb={1} variant={'h1'} color={'neutral200'}>
-                {t('redeem-code')}
+                {t('redeem-code-label')}
               </ZigTypography>
-              <Box width={'60%'} mb={9}>
+              <Box width={'60%'} mb={7.5}>
                 <SubscribeForm />
               </Box>
               <ZigTypography color={'neutral300'} variant={'h3'}>
