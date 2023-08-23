@@ -23,11 +23,12 @@ import { Grid } from '@mui/material';
 import Flag from '../../../components/Flag';
 import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
-import { ProfileStatusBox } from './atoms';
+import { KYCStatusBox, ProfileStatusBox } from './atoms';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
+import { filter, groupBy } from 'lodash-es';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -37,7 +38,25 @@ const EditProfileForm = () => {
   const { data: kycStatuses } = useKycStatusesQuery(undefined, {
     skip: !isFeatureOn(Features.Kyc),
   });
-  const hasKyc = kycStatuses?.status?.some((x) => x.status === 'approved');
+
+  const kycProgress = useMemo(() => {
+    const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
+
+    let maxApprovedCount = 0;
+    let maxCategory = null;
+
+    for (const category in kycStatusesCateg) {
+      const approvedCount = filter(kycStatusesCateg[category], {
+        status: 'approved',
+      }).length;
+      if (approvedCount > maxApprovedCount) {
+        maxApprovedCount = approvedCount;
+        maxCategory = category;
+      }
+    }
+
+    return kycStatusesCateg[maxCategory] || [];
+  }, [kycStatuses?.status]);
 
   const {
     handleSubmit,
@@ -139,16 +158,11 @@ const EditProfileForm = () => {
               />
 
               {isFeatureOn(Features.Kyc) && !!kycStatuses && (
-                <ProfileStatusBox
-                  isSuccess={hasKyc}
+                <KYCStatusBox
+                  kycStatuses={kycProgress}
                   ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
                   label={t('edit-profile.status-box.kyc')}
-                  status={t(
-                    hasKyc
-                      ? 'edit-profile.status-box.verified'
-                      : 'edit-profile.status-box.not-verified',
-                  )}
                 />
               )}
             </Box>
