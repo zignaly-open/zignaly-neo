@@ -15,7 +15,7 @@ export default {
   },
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
-  subscriptionPurchaseLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  subscriptionPurchaseLink: process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL,
   // background: '#fcdcdc',
   // backgroundImage: null,
   // theme: 'example',
