@@ -56,6 +56,9 @@ export const KYCStatusBox = ({
     );
   const isNotStarted =
     !kycStatuses[0].status || kycStatuses[0].status === 'init';
+  const retry = kycStatuses.some(
+    (x) => x.status === 'rejected' && x.canBeRetried,
+  );
 
   let color = theme.palette.red;
   if (isSuccess) color = theme.palette.greenGraph;
@@ -81,10 +84,10 @@ export const KYCStatusBox = ({
   return (
     <ProfileStatusBoxContainer color={color}>
       <ZigTypography mb='4px' color={'neutral200'} component={'div'}>
-        {t('edit-profile.status-box.kyc')}
+        {t(`header.verification-${kycStatuses[0].category.toLowerCase()}`)}
       </ZigTypography>
       {kycConfig[kycStatuses[0].category].map((x, i) => {
-        const { status, reason } = kycStatuses[i];
+        const { status, reason, canBeRetried } = kycStatuses[i];
         if (i > 0 && (!status || status === 'init')) return null;
         return (
           <Box
@@ -122,7 +125,15 @@ export const KYCStatusBox = ({
                 </Tooltip>
               )}
               {status === 'rejected' && (
-                <Tooltip title={reason}>
+                <Tooltip
+                  title={
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {`${reason}\n${
+                        canBeRetried ? t('resubmit-issues', { ns: 'kyc' }) : ''
+                      }`}
+                    </span>
+                  }
+                >
                   <InfoOutlined sx={infoIconStyle} />
                 </Tooltip>
               )}
@@ -130,7 +141,7 @@ export const KYCStatusBox = ({
           </Box>
         );
       })}
-      {isNotStarted && (
+      {(isNotStarted || retry) && (
         <ZigButton variant={'text'} onClick={cta}>
           {t('edit-profile.status-box.pass-kyc-cta')}
         </ZigButton>
