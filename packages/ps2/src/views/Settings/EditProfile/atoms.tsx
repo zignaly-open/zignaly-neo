@@ -104,7 +104,7 @@ export const KYCStatusBox = ({
             )}
             {!isNotStarted && (
               <Box sx={{ '> svg': { width: '16px', height: '16px' } }}>
-                {x.icon}
+                <Tooltip title={t(x.label, { ns: 'kyc' })}>{x.icon}</Tooltip>
               </Box>
             )}
             <ZigTypography
