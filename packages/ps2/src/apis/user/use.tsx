@@ -51,7 +51,7 @@ import { clearUserSession } from './util';
 import { junkyard } from '../../util/junkyard';
 import EmailVerifyWithdrawModal from 'views/Auth/components/EmailVerifyWithdrawModal';
 
-const useStartSession = () => {
+const useStartSession = (eventType: SessionsTypes) => {
   const { showModal } = useZModal();
   const dispatch = useDispatch();
   const [loadSession] = useLazySessionQuery();
@@ -91,7 +91,7 @@ const useStartSession = () => {
 
     dispatch(setUser(userData));
     startLiveSession(userData);
-    trackNewSession(userData, SessionsTypes.Login);
+    trackNewSession(userData, eventType);
     junkyard.set('hasLoggedIn', 'true');
   };
 };
@@ -102,7 +102,7 @@ export const useSignup = (): [
 ] => {
   const [loading, setLoading] = useState(false);
   const [signup] = useSignupMutation();
-  const startSession = useStartSession();
+  const startSession = useStartSession(SessionsTypes.Signup);
 
   return [
     { loading },
@@ -124,7 +124,7 @@ export const useAuthenticate = (): [
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
-  const startSession = useStartSession();
+  const startSession = useStartSession(SessionsTypes.Login);
 
   const [loading, setLoading] = useState(false);
 
