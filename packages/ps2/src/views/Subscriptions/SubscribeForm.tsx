@@ -7,8 +7,8 @@ import { SubscriptionCodeValidation } from './validation';
 import { useSubscribeMutation } from '../../apis/subscription/api';
 import { useToast } from '../../util/hooks/useToast';
 import { Form } from '../../components/ZModal';
-import { Box } from '@mui/system';
 import { useLazyUserQuery } from '../../apis/user/api';
+import { Grid } from '@mui/material';
 
 const SubscribeForm = () => {
   const { t } = useTranslation(['subscriptions', 'error']);
@@ -40,30 +40,40 @@ const SubscribeForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Box display={'flex'} gap={3} minHeight={'87px'}>
-        <Controller
-          name={'code'}
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <ZigInput
-              error={t(errors?.code?.message)}
-              disabled={isLoading}
-              fullWidth
-              {...field}
-            />
-          )}
-        />
-        <ZigButton
-          disabled={!isValid}
-          size={'xlarge'}
-          sx={{ maxHeight: '60px' }}
-          type={'submit'}
-          loading={isLoading}
-        >
-          {t('redeem-code')}
-        </ZigButton>
-      </Box>
+      <Grid
+        container
+        alignItems='center'
+        spacing={3}
+        style={{ minHeight: '87px' }}
+      >
+        <Grid item xs>
+          <Controller
+            name='code'
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ZigInput
+                error={t(errors?.code?.message)}
+                disabled={isLoading}
+                fullWidth
+                sx={{ minWidth: '190px' }}
+                {...field}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item>
+          <ZigButton
+            disabled={!isValid}
+            size='xlarge'
+            sx={{ maxHeight: '60px' }}
+            type='submit'
+            loading={isLoading}
+          >
+            {t('redeem-code')}
+          </ZigButton>
+        </Grid>
+      </Grid>
     </Form>
   );
 };

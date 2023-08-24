@@ -22,12 +22,13 @@ export const StyledTab = styled(ZigTab)<{ active: boolean }>`
   margin-left: -30px;
 `;
 
-export const StyledTabs = styled(ZigTabs)`
+export const StyledTabs = styled(ZigTabs)<{ md?: boolean }>`
   margin-left: -30px;
   justify-content: unset;
   gap: unset;
   .MuiTabs-flexContainer {
     margin-left: 45px;
+    flex-direction: ${({ md }) => (!md ? 'column' : 'row')};
   }
   .MuiTabs-indicator {
     display: none;
