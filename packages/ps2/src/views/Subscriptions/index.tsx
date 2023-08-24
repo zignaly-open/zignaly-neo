@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, StyledTab, StyledTabs } from './styles';
 import { useTranslation } from 'react-i18next';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -15,9 +15,12 @@ import SubscribeForm from './SubscribeForm';
 const Subscriptions: React.FC = () => {
   const { t } = useTranslation(['subscriptions', 'pages']);
   useTitle(t('pages:subscriptions'));
-  const [activeTab, setActiveTab] = useState<number>(0);
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
+  const [activeTab, setActiveTab] = useState<number>(0);
+  useEffect(() => {
+    setActiveTab(currentUser?.subscriptionDuration === 'lifetime' ? 1 : 0);
+  }, [currentUser?.subscriptionDuration]);
 
   return (
     <LayoutContentWrapper
