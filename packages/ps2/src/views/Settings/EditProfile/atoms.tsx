@@ -56,6 +56,9 @@ export const KYCStatusBox = ({
     );
   const isNotStarted =
     !kycStatuses[0].status || kycStatuses[0].status === 'init';
+  const retry = kycStatuses.some(
+    (x) => x.status === 'rejected' && x.canBeRetried,
+  );
 
   let color = theme.palette.red;
   if (isSuccess) color = theme.palette.greenGraph;
@@ -138,7 +141,7 @@ export const KYCStatusBox = ({
           </Box>
         );
       })}
-      {isNotStarted && (
+      {(isNotStarted || retry) && (
         <ZigButton variant={'text'} onClick={cta}>
           {t('edit-profile.status-box.pass-kyc-cta')}
         </ZigButton>
