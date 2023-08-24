@@ -84,7 +84,7 @@ export const KYCStatusBox = ({
   return (
     <ProfileStatusBoxContainer color={color}>
       <ZigTypography mb='4px' color={'neutral200'} component={'div'}>
-        {t('edit-profile.status-box.kyc')}
+        {t(`header.verification-${kycStatuses[0].category.toLowerCase()}`)}
       </ZigTypography>
       {kycConfig[kycStatuses[0].category].map((x, i) => {
         const { status, reason, canBeRetried } = kycStatuses[i];
