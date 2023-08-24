@@ -8,6 +8,7 @@ declare global {
       push: (payload: unknown) => void;
     };
     safari?: unknown;
+    twq?: (e: string, eventKey: string, eventData: unknown) => void;
     intercomSettings?: { user_hash?: string };
   }
 }
