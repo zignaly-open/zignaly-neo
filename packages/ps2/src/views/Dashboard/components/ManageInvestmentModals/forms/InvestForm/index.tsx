@@ -30,6 +30,8 @@ import { NumericFormat } from 'react-number-format';
 import { useDebounce } from 'react-use';
 import { InvestmentViews } from '../../types';
 import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
+import { twq } from 'util/analytics';
+import { useCurrentUser } from 'apis/user/use';
 
 function InvestForm({ view, setView, close }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -42,6 +44,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   const openDepositModal = useOpenDepositModal();
   // the safe word is Fluggaenkoecchicebolsen
   const transferMagicWord = t('invest-modal.transfer-label');
+  const { userId } = useCurrentUser();
 
   const {
     handleSubmit,
@@ -113,6 +116,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         serviceName: service.serviceName,
       }),
     );
+    twq(userId).trackAllocation();
     setView(InvestmentViews.InvestmentSuccess);
   };
 
