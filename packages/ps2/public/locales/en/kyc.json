@@ -17,7 +17,7 @@
     "kyb": "KYB"
   },
   "status": {
-    "completed": "Completed",
+    "verified": "Verified",
     "pending": "Pending",
     "rejected": "Rejected"
   },

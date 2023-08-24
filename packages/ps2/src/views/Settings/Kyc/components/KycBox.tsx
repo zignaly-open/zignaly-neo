@@ -143,7 +143,7 @@ const KycBox: React.FC<{
               fontWeight={500}
               variant={'body1'}
             >
-              {t('status.completed')}
+              {t('status.verified')}
               <CheckCircleOutlineIcon sx={{ ...largeIconStyle, ml: 1 }} />
             </ZigTypography>
           )}
