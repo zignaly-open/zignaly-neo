@@ -56,7 +56,7 @@ const SubscriptionCard = ({
         <Box display={'flex'} gap={'3px'}>
           <CheckCircleOutlineIcon
             fontSize={'inherit'}
-            sx={{ marginTop: '1px' }}
+            sx={{ marginTop: '2px' }}
           />
           <ZigTypography mb={'25px'} color={'neutral000'}>
             {t('cards.fees', { fee: successFeePct })}
