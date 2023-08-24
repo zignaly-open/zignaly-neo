@@ -78,7 +78,12 @@ const SubscriptionCard = ({
                 </ZigButton>
               </ZigLink>
             ) : (
-              <ZigButton size={'large'} fullWidth disabled>
+              <ZigButton
+                size={'large'}
+                fullWidth
+                disabled
+                sx={{ padding: '0 0' }}
+              >
                 {status === 'active'
                   ? t('cards.your-subscription')
                   : t('cards.get-started')}

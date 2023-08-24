@@ -10,10 +10,9 @@ export const Wrapper = styled(Box)`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.palette.neutral400};
-  z-index: -10;
+  z-index: -1;
   border-radius: 10px;
   padding: 0 10px 8px 10px;
-  transform: scale(1.05);
   white-space: nowrap;
 `;
 
@@ -31,8 +30,7 @@ export const Card = styled(Box, {
   border-radius: 10px;
   padding: 16px 20px;
   border: ${({ status, theme }) =>
-    status === 'active' ? `2px solid ${theme.palette.neutral500}` : 'unset'};
-
-  transform: ${({ status }) => (status === 'active' ? 'scale(1.05)' : 'unset')};
-  position: relative;
+    status === 'active'
+      ? `2px solid ${theme.palette.neutral500}`
+      : '2px solid transparent'};
 `;
