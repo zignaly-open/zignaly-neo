@@ -175,7 +175,15 @@ const KycBox: React.FC<{
               <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
               {t('status.rejected')}
               {!!response?.reason && (
-                <Tooltip title={response?.reason}>
+                <Tooltip
+                  title={
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {`${response?.reason}\n${
+                        response.canBeRetried ? t('resubmit-issues') : ''
+                      }`}
+                    </span>
+                  }
+                >
                   <InfoOutlinedIcon sx={infoIconStyle} />
                 </Tooltip>
               )}
