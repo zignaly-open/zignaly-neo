@@ -69,3 +69,24 @@ export const trackEndSession = () => {
 export const trackPage = () => {
   analytics?.page();
 };
+
+export const twq = (userId: string) => {
+  const twqWrapper = (eventKey: string, eventData: object = {}) => {
+    if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
+      window.twq?.('event', eventKey, {
+        user_id: userId,
+        ...eventData,
+      });
+    }
+  };
+
+  const trackVerify = () => {
+    twqWrapper('tw-og0cu-og0hv');
+  };
+
+  const trackAllocation = () => {
+    twqWrapper('tw-og0cu-og0hz');
+  };
+
+  return { trackVerify, trackAllocation };
+};
