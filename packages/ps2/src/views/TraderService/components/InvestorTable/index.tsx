@@ -11,6 +11,7 @@ import {
   ZigTablePriceLabel,
   ZigDropdown,
   ZigDotsVerticalIcon,
+  ZigSearch,
 } from '@zignaly-open/ui';
 import {
   useTraderServiceInvestors,
@@ -42,6 +43,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   const { data: service } = serviceDetailsEndpoint;
 
+  const [searchFilter, setSearchFilter] = React.useState('');
+  console.log('searchFilter', searchFilter);
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
@@ -64,6 +67,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           ) : (
             getValue()
           ),
+        enableColumnFilter: false,
       }),
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
@@ -81,6 +85,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             getValue()
           ),
       }),
+      // {
+      //   accessorKey: 'matches',
+      //   header: 'Matches',
+      //   cell: () => 'bb',
+      //   // accessorFn: (originalRow) => originalRow.matches.toString(), // matches is a number
+      //   // accessorKey: 'matches', // this worked before
+      // },
       columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
           <Box display={'flex'} flexDirection={'column'}>
@@ -106,6 +117,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             />
           </Box>
         ),
+        enableColumnFilter: false,
       }),
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
@@ -118,6 +130,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             <ChangeIndicator value={props.row.original.pnlPctLc} />
           </>
         ),
+        enableColumnFilter: false,
       }),
       columnHelper.accessor((row) => +row.pnlNetAt, {
         header: t('tableHeader.P&LTotal'),
@@ -128,6 +141,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             value={props.getValue()}
           />
         ),
+        enableColumnFilter: false,
       }),
       columnHelper.accessor((row) => +row.sfOwnerAt, {
         header: t('tableHeader.totalFeesPaid'),
@@ -138,6 +152,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             value={props.getValue()}
           />
         ),
+        enableColumnFilter: false,
       }),
       columnHelper.accessor(
         (row) =>
@@ -183,11 +198,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               </ZigTypography>
             </Tooltip>
           ),
+          enableColumnFilter: false,
         },
       ),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
         cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
+        enableColumnFilter: false,
       }),
       columnHelper.accessor('actions', {
         header: '',
@@ -219,7 +236,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 {
                   label: t('change-fee'),
                   onClick: () => {
-                    if ((service?.successFee || 0) > 0) {
+                    if ((+service?.successFee || 0) > 0) {
                       showModal(InvestorEditFee, {
                         serviceId,
                         accountId,
@@ -234,6 +251,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               ]}
             />
           ),
+        enableColumnFilter: false,
       }),
     ];
   }, [service]);
@@ -258,6 +276,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 count: investors?.length,
               })}
             </ZigTypography>
+            <ZigSearch value={searchFilter} onChange={setSearchFilter} />
           </InvestorCounts>
 
           <ZigTable
@@ -270,6 +289,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             }))}
             emptyMessage={t('no-investors')}
             enableSortingRemoval={false}
+            state={{ globalFilter: searchFilter }}
           />
         </PageWithHeaderContainer>
       )}

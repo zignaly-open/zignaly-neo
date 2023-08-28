@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import "@mui/system";
 import { Meta, StoryObj } from "@storybook/react";
 import ZigInputAmount from "./index";
-import "@mui/system";
 import ZigTypography from "components/display/ZigTypography";
 import { ZigInputAmountProps } from "./types";
 

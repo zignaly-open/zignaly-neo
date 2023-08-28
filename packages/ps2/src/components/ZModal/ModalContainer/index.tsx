@@ -9,7 +9,7 @@ import {
   CloseIconButton,
   BackIconButton,
 } from './styles';
-import { ZigBackIcon, ZigCrossCircleIcon } from '@zignaly-open/ui';
+import { ZigBackIcon, ZigCrossIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
 
 const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
@@ -46,7 +46,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
       </Header>
       {onClickClose && typeof onClickClose === 'function' && (
         <CloseIconButton onClick={onClickClose}>
-          <ZigCrossCircleIcon
+          <ZigCrossIcon
             width={'32px'}
             height={'32px'}
             color={theme.palette.neutral100}

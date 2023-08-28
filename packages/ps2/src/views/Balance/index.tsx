@@ -4,6 +4,7 @@ import {
   PageContainer,
   ZigButton,
   ZigPlusIcon,
+  ZigSearchIcon,
   ZigTab,
   ZigTabPanel,
   ZigTabs,
@@ -14,10 +15,10 @@ import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header, StyledZigSelect } from './styles';
 import { useTitle, useUpdateEffect } from 'react-use';
 import { useTranslation } from 'react-i18next';
-import { OpenInNew } from '@mui/icons-material';
+import { OpenInNew, Search } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
 import { useZModal } from 'components/ZModal/use';
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
 import { CSSObject } from '@emotion/react';
@@ -97,6 +98,11 @@ const MyBalances: React.FC = () => {
               // @ts-ignore
               to={generatePath(ROUTE_MY_BALANCES)}
               component={Link}
+              asideComponent={
+                <IconButton>
+                  <Search />
+                </IconButton>
+              }
             />
             <ZigTab
               id={'balance__deposits-withdrawals'}
@@ -138,7 +144,6 @@ const MyBalances: React.FC = () => {
                           ? 'none'
                           : 'inline-block',
                         textAlign: 'center',
-
                         ':after': {
                           content: `'\\A ${t(
                             'transactions-history:filter.max',

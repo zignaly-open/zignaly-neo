@@ -44,7 +44,7 @@ export { ReactComponent as ZignalyCaretDownIcon } from "assets/icons/caret-down.
 export { ReactComponent as ZigCaretRightIcon } from "assets/icons/caret-right.svg";
 export { ReactComponent as ZigDotsVerticalIcon } from "assets/icons/dots-vertical.svg";
 export { ReactComponent as ZigDotsHorizontalIcon } from "assets/icons/dots-horizontal.svg";
-export { ReactComponent as ZigCrossCircleIcon } from "assets/icons/cross-circle-icon.svg";
+export { ReactComponent as ZigCrossIcon } from "assets/icons/cross-icon.svg";
 export { ReactComponent as ZigBackIcon } from "assets/icons/back-icon.svg";
 export { ReactComponent as ZigListIcon } from "assets/icons/list-icon.svg";
 export { ReactComponent as ZigTransferIcon } from "assets/icons/transfer-icon.svg";
