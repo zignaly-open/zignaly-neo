@@ -84,6 +84,7 @@ export const twq = (userId: string) => {
   const twqWrapper = (eventKey: string, eventData: object = {}) => {
     if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
       window.twq?.('event', eventKey, {
+        conversion_id: `${userId}_${Date.now()}`,
         contents: [{ content_id: userId }],
         ...eventData,
       });
