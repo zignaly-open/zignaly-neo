@@ -20,12 +20,12 @@ const Toggle2FA: React.FC = () => {
             textAlign: 'center',
           }}
         >
-          <ZigTypography variant={'h1'} id={'update-password__title'}>
+          <ZigTypography variant={'h1'} id={'enable-2fa__title'}>
             {t('enable-2fa.title')}
           </ZigTypography>
         </Box>
 
-        {user.ask2FA ? (
+        {user['2FAEnable'] ? (
           <Disable2FAForm
             close={() => {
               // Do nothing

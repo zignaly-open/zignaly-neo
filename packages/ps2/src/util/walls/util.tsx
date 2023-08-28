@@ -14,7 +14,7 @@ import AlertModal, {
   AlertModalProps,
 } from '../../components/ZModal/modals/AlertModal';
 import { useZModal } from '../../components/ZModal/use';
-import { ROUTE_KYC } from '../../routes';
+import { ROUTE_KYC, ROUTE_SUBSCRIPTIONS } from '../../routes';
 import SubscriptionLevelAccessErrorModal from './SubscriptionLevelAccessErrorModal';
 
 type LevelMapping =
@@ -77,9 +77,7 @@ const usePerformLevelCheck = (
           button1Props: {
             id: 'modal-access.no-subscription__redeem',
             onClick: () => {
-              // TODO
-              alert('Not implemented');
-              return window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+              navigate(generatePath(ROUTE_SUBSCRIPTIONS));
             },
           },
           button2Props: {
@@ -127,9 +125,7 @@ const usePerformLevelCheck = (
           button1Props: {
             id: 'modal-access.expired-subscription__redeem',
             onClick: () => {
-              // TODO
-              alert('Not implemented');
-              return window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+              navigate(generatePath(ROUTE_SUBSCRIPTIONS));
             },
           },
           button2Props: {
@@ -159,7 +155,7 @@ const usePerformLevelCheck = (
         // Do nothing here
       } else if (levelThreshold <= +l) {
         // Do nothing, means we do not need so high of a level
-      } else if (accessLevel < +l && errorLevelMapping[l]) {
+      } else if (accessLevel <= +l && errorLevelMapping[l]) {
         !onlyCheck &&
           showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
         return false;

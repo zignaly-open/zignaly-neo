@@ -35,6 +35,7 @@ declare module "@mui/material/styles" {
       | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
       | "socialNetworksTab" // why have a dedicated color used only once? because fuck me, that's why
       | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
+      | "activeTab" // why have a dedicated color used only once? because fuck me, that's why
       | "modal"
       | "secondaryBackground"
       | "sliderMark"

@@ -23,11 +23,12 @@ import { Grid } from '@mui/material';
 import Flag from '../../../components/Flag';
 import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
-import { ProfileStatusBox } from './atoms';
+import { KYCStatusBox, ProfileStatusBox } from './atoms';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
+import { find, groupBy } from 'lodash-es';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -37,7 +38,21 @@ const EditProfileForm = () => {
   const { data: kycStatuses } = useKycStatusesQuery(undefined, {
     skip: !isFeatureOn(Features.Kyc),
   });
-  const hasKyc = kycStatuses?.status?.some((x) => x.status === 'approved');
+
+  const kycStarted = useMemo(() => {
+    const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
+    const res = find(kycStatusesCateg, (x) => {
+      return x.some(
+        (kyc) =>
+          (kyc.status === 'rejected' && kyc.canBeRetried) ||
+          ['approved', 'pending'].includes(kyc.status),
+      );
+    });
+    if (!res) {
+      return kycStatusesCateg[kycStatuses?.status[0].category];
+    }
+    return res;
+  }, [kycStatuses?.status]);
 
   const {
     handleSubmit,
@@ -49,7 +64,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: user.bio || '',
+      bio: user.about || '',
       country: user.country || '',
     },
   });
@@ -78,7 +93,7 @@ const EditProfileForm = () => {
 
   const countryOptions = useMemo(
     () =>
-      Object.entries(Countries.getNames(i18n.language)).map(
+      Object.entries(Countries.getNames(i18n.language.split('_')[0])).map(
         ([value, label]) => ({
           value,
           text: label,
@@ -127,28 +142,21 @@ const EditProfileForm = () => {
 
             <Box sx={{ pt: 2 }}>
               <ProfileStatusBox
-                isSuccess={user.ask2FA}
+                isSuccess={user['2FAEnable']}
                 label={t('edit-profile.status-box.2fa')}
                 ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
                 cta={() => navigate(generatePath(ROUTE_2FA))}
                 status={t(
-                  user.ask2FA
+                  user['2FAEnable']
                     ? 'edit-profile.status-box.enabled'
                     : 'edit-profile.status-box.disabled',
                 )}
               />
 
-              {isFeatureOn(Features.Kyc) && !!kycStatuses && (
-                <ProfileStatusBox
-                  isSuccess={hasKyc}
-                  ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}
+              {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
+                <KYCStatusBox
+                  kycStatuses={kycStarted}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
-                  label={t('edit-profile.status-box.kyc')}
-                  status={t(
-                    hasKyc
-                      ? 'edit-profile.status-box.verified'
-                      : 'edit-profile.status-box.not-verified',
-                  )}
                 />
               )}
             </Box>
@@ -235,7 +243,7 @@ const EditProfileForm = () => {
                   <ZigInput
                     wide
                     multiline
-                    rows={3}
+                    rows={12}
                     label={
                       <ZigTypography>
                         {t('edit-profile.about-you')}
