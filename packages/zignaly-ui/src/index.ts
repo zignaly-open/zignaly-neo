@@ -20,6 +20,8 @@ export { default as InputCode } from "./components/inputs/InputCode";
 export { default as ZigSlider } from "./components/inputs/ZigSlider";
 export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
 
+export { default as ZigSearch } from "./components/filters/ZigSearch";
+
 // TODO: fix storybook & refactor
 export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";
 export type { InputAmountAdvancedValueType } from "./components/inputs/InputAmountAdvanced";
