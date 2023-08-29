@@ -4,6 +4,7 @@ on:
     branches:
       - feat/whitelabel
     tags:
+      - 'release-ps2-*'
       - 'release-ps2_cm-*'
 
 jobs:
