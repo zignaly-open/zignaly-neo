@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "@mui/system";
 import { Meta, StoryObj } from "@storybook/react";
 import ZigSearch from "./index";
-import { ZigSearchProps } from "./types";
 import { Box } from "@mui/material";
 
 const meta = {
