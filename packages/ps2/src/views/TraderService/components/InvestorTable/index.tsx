@@ -44,7 +44,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const { data: service } = serviceDetailsEndpoint;
 
   const [searchFilter, setSearchFilter] = React.useState('');
-  console.log('searchFilter', searchFilter);
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();

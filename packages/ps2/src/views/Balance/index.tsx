@@ -4,7 +4,6 @@ import {
   PageContainer,
   ZigButton,
   ZigPlusIcon,
-  ZigSearchIcon,
   ZigTab,
   ZigTabPanel,
   ZigTabs,
