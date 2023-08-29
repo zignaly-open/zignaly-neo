@@ -55,6 +55,7 @@ export const trackNewSession = (
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
+      twq(userId).trackVerify();
     }
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -84,7 +85,6 @@ export const twq = (userId: string) => {
   const twqWrapper = (eventKey: string, eventData: object = {}) => {
     if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
       window.twq?.('event', eventKey, {
-        conversion_id: `${userId}_${Date.now()}`,
         contents: [{ content_id: userId }],
         ...eventData,
       });

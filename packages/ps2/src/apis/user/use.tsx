@@ -91,7 +91,10 @@ const useStartSession = (eventType: SessionsTypes) => {
 
     dispatch(setUser(userData));
     startLiveSession(userData);
-    trackNewSession(userData, eventType);
+    trackNewSession(
+      userData,
+      user.emailUnconfirmed ? SessionsTypes.Signup : eventType,
+    );
     junkyard.set('hasLoggedIn', 'true');
   };
 };
