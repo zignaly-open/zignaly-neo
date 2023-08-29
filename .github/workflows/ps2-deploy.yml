@@ -73,6 +73,7 @@ jobs:
           SOURCE_DIR: 'packages/ps2/build'
 
       - name: Invalidate Cloudflare
+        if: ${{ secrets.CF_ZONE != '' }}
         uses: strrife/cloudflare-chunked-purge-action@master
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
