@@ -85,13 +85,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             getValue()
           ),
       }),
-      // {
-      //   accessorKey: 'matches',
-      //   header: 'Matches',
-      //   cell: () => 'bb',
-      //   // accessorFn: (originalRow) => originalRow.matches.toString(), // matches is a number
-      //   // accessorKey: 'matches', // this worked before
-      // },
       columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
           <Box display={'flex'} flexDirection={'column'}>
