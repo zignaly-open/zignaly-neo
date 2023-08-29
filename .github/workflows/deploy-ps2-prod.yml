@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'release-ps2-*'
+      - 'release-ps2_zig-*'
 
 jobs:
   deploy:
