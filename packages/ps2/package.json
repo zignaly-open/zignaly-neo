@@ -49,7 +49,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "@sentry/browser": "^7.10.0",
     "@sentry/cli": "^2.5.0",
-    "@tanstack/react-table": "^8.7.3",
+    "@tanstack/react-table": "^8.9.3",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
