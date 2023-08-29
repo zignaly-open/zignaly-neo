@@ -1,40 +1,81 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ZigSearchProps } from "./types";
-import { Box, Fade, IconButton, InputAdornment, Slide, Zoom } from "@mui/material";
-import { Replay, Search } from "@mui/icons-material";
-import { ZigCrossIcon } from "../../../icons";
-import { CollapseBox, ZigInputStyled } from "./styles";
+import { Box, Collapse, Fade, IconButton, InputAdornment, useTheme } from "@mui/material";
+import { Search } from "@mui/icons-material";
+import { ZigCrossIcon, ZigResetIcon } from "../../../icons";
+import { ZigInputStyled } from "./styles";
 
 const ZigSearch = ({ value, onChange }: ZigSearchProps) => {
   const [expanded, setExpanded] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const theme = useTheme();
 
   return (
-    <Box display="flex" gap={2} position={"relative"} alignItems={"center"}>
-      <Slide direction="left" in={expanded} gap={2}>
-        <Box display="flex" gap={2} bgcolor="pink" zIndex={2} alignItems={"center"}>
-          <ZigInputStyled
-            value={value}
-            onChange={(e) => {
-              onChange?.(e.target.value);
+    <Box display="flex" gap={2} position={"relative"} alignItems={"center"} m="0 10px 0 auto">
+      <Collapse orientation="horizontal" in={expanded} timeout={expanded ? 150 : 0}>
+        <Box
+          display="flex"
+          gap={2}
+          bgcolor={theme.palette.backgrounds.selectInputFill}
+          zIndex={2}
+          alignItems={"center"}
+          width="309px"
+          height="56px"
+          position={"relative"}
+          borderRadius="6px"
+          paddingRight={"6px"}
+        >
+          <Box position="absolute" width={"100%"} height={"100%"} p="6px 45px 6px 6px">
+            <ZigInputStyled
+              ref={inputRef}
+              wide
+              value={value}
+              onChange={(e) => {
+                onChange(e.target.value);
+              }}
+              placeholder={"Search"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      sx={{
+                        padding: 0,
+                        height: "24px",
+                        width: "24px",
+                      }}
+                    >
+                      <ZigResetIcon onClick={() => onChange("")} />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+          <IconButton
+            onClick={() => {
+              setExpanded(false);
+              onChange("");
             }}
-            InputPropss={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    <Replay onClick={() => onChange("")} width={40} height={40} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <IconButton onClick={() => setExpanded(false)} sx={{ height: "48px" }}>
-            <ZigCrossIcon width={"32px"} height={"32px"} />
+            sx={{ height: "32px", width: "32px", marginLeft: "auto" }}
+          >
+            <ZigCrossIcon
+              width={"24px"}
+              height={"24px"}
+              style={{ minHeight: "24px", minWidth: "24px" }}
+            />
           </IconButton>
         </Box>
-      </Slide>
+      </Collapse>
       <Box position="absolute" right={0}>
         <Fade in={!expanded}>
-          <IconButton onClick={() => setExpanded(true)}>
+          <IconButton
+            onClick={() => {
+              setExpanded(true);
+              setTimeout(() => {
+                inputRef.current?.focus();
+              }, 100);
+            }}
+          >
             <Search />
           </IconButton>
         </Fade>

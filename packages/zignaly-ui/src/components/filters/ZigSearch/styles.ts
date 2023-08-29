@@ -4,13 +4,19 @@ import ZigInput from "components/inputs/ZigInput";
 export const ZigInputStyled = styled(ZigInput)`
   .MuiInput-root {
     border: none;
+    padding: 4px 14px;
+    min-height: 46px;
+    border-radius: 4px;
+    &,
+    .MuiInput-input {
+      background: ${({ theme }) => theme.palette.neutral750};
+    }
   }
 `;
 
 export const CollapseBox = styled(Box)<{ expanded: boolean }>`
   display: flex;
   align-items: center;
-  /* transition: width 0.3s ease-in-out; */
   transform: translateX(100%);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   position: absolute;
