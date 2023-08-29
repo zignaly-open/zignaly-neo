@@ -11,6 +11,7 @@ export const DescriptionLine = ({ text }: { text: string }) => {
         color='rgba(255, 255, 255, 0.6)'
         fontSize={16}
         textAlign={'left'}
+        lineHeight={'28px'}
       >
         {text}
       </ZigTypography>
