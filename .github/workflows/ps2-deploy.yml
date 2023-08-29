@@ -12,6 +12,8 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
+    env:
+      HAS_CLOUDFLARE: ${{ secrets.CF_ZONE != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -73,7 +75,7 @@ jobs:
           SOURCE_DIR: 'packages/ps2/build'
 
       - name: Invalidate Cloudflare
-        if: ${{ secrets.CF_ZONE != '' }}
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
         uses: strrife/cloudflare-chunked-purge-action@master
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
