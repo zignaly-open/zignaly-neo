@@ -87,6 +87,7 @@ function App() {
           <>
             <Tracker />
             <UpdateChecker />
+            <UserKycChecker />
             <DateLocaleFixer />
             <ChartGradients />
             <Router />
