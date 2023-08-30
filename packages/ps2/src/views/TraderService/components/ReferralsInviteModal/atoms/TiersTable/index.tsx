@@ -44,7 +44,7 @@ const CellLabelBaseCommission = () => {
       color={'neutral200'}
     >
       {t('base-commission')}
-      <Tooltip title={t('zig-held-tooltip')}>
+      <Tooltip title={t('tooltips.base-commission')}>
         <TooltipIcon />
       </Tooltip>
     </ZigTypography>
@@ -72,7 +72,9 @@ const CellLabelBoost = ({
         color={activated ? '#24b68d' : '#e93ea7'}
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip title={t('zig-held-tooltip')}>
+        <Tooltip
+          title={t(activated ? 'zig-held-tooltip' : 'tooltips.within-1-week')}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -98,7 +100,7 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
         color='#24b68d'
       >
         {t('trader-boost')}
-        <Tooltip title={t('zig-held-tooltip')}>
+        <Tooltip title={t('tooltips.trader-boost', { fee: boost })}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -182,7 +184,7 @@ const TiersTable = ({
               color='#979ce0'
             >
               {t('invites')}
-              <Tooltip title={t('zig-held-tooltip')}>
+              <Tooltip title={t('tooltips.invites')}>
                 <TooltipIcon />
               </Tooltip>
             </ZigTypography>

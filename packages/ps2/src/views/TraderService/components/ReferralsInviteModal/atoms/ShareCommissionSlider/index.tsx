@@ -5,6 +5,7 @@ import { SliderContainer, ContainerArrow, StyledZigSlider } from './styles';
 import { useDebounce } from 'react-use';
 import { useUpdateDiscountMutation } from 'apis/referrals/api';
 import { useToast } from 'util/hooks/useToast';
+import { Box, Tooltip } from '@mui/material';
 
 export const ShareCommissionSlider = ({
   discountPct,
@@ -37,13 +38,29 @@ export const ShareCommissionSlider = ({
   return (
     <SliderContainer>
       <ContainerArrow />
-      <ZigTypography
-        fontSize={16}
-        letterSpacing={'0.48px'}
-        textAlign={'center'}
-      >
-        {t('split-commission')}
-      </ZigTypography>
+      <Box position={'relative'}>
+        <ZigTypography
+          fontSize={16}
+          letterSpacing={'0.48px'}
+          textAlign={'center'}
+        >
+          {t('split-commission')}
+        </ZigTypography>
+        <Tooltip title={t('tooltips.split-commission')}>
+          <Box
+            component='img'
+            sx={{
+              position: 'absolute',
+              width: '10px',
+              right: -13,
+              top: -5,
+              zIndex: 1,
+            }}
+            src={`/images/portfolio/info-icon.svg`}
+          />
+        </Tooltip>
+      </Box>
+
       <StyledZigSlider
         labels={{
           start: t('for-me'),
