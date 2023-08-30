@@ -1,10 +1,3 @@
-<style>
-req { color: Red; font-weight: bold }
-opt { color: grey; }
-opt2 { color: darkorange; font-weight: bold }
-g { color: Green }
-</style>
-
 # New Environment
 
 First, define an environment [here](https://github.com/zignaly-open/zignaly-neo/settings/environments). if we ever get more repos, please use prefixes like `ps2-staging`, etc. You can't rename an env - only re-create it, so choose names wisely and keep in mind you will not be able to view the secrets unless you run some sketchy shenanigans (please DON'T, you will never get a blessing from our SecOps for this).
@@ -16,14 +9,14 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 
 | Name     | Type     |                                                     Description                                                     |                                         Optional |
 |----------|----------|:-------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------:|
-| `AWS_S3_BUCKET` | Secret   |                                                 AWS S3 Bucket name                                                  |                              <req>Required</req> |
-| `AWS_ACCESS_KEY` | Secret   |                                                  AWS S3 Access key                                                  |                              <req>Required</req> |
-| `AWS_SECRET_KEY` | Secret   |                                                  AWS S3 Secret key                                                  |                              <req>Required</req> |
-| `CF_ZONE` | Secret   |                                                   CloudFlare Zone                                                   | <opt2>Optional*</opt2> |
-| `CF_TOKEN` | Secret   |                                                   CloudFlare Zone                                                   |                            <opt2>Optional*</opt2> |
-| `PS2_BASE_API` | Variable |                              Base API path, e.g. `https://staging.zignaly.com/new_api`                              |                              <req>Required</req> |
-| `PS2_WALLET_API` | Variable |                               Wallet API path, e.g. `https://wallet.zignaly.com/api`                                |                              <req>Required</req> |
-| `PS2_REFERRAL_API` | Variable |    Wallet API path, e.g. `https://test-referrals.zignaly.com/`. Yes, the api path names are pretty inconsistent.    |                              <opt2>Optional*</opt2> |
+| `AWS_S3_BUCKET` | Secret   |                                                 AWS S3 Bucket name                                                  |                              **Required** |
+| `AWS_ACCESS_KEY` | Secret   |                                                  AWS S3 Access key                                                  |                              **Required** |
+| `AWS_SECRET_KEY` | Secret   |                                                  AWS S3 Secret key                                                  |                              **Required** |
+| `CF_ZONE` | Secret   |                                                   CloudFlare Zone                                                   | **Optional*** |
+| `CF_TOKEN` | Secret   |                                                   CloudFlare Zone                                                   |                            **Optional*** |
+| `PS2_BASE_API` | Variable |                              Base API path, e.g. `https://staging.zignaly.com/new_api`                              |                              **Required** |
+| `PS2_WALLET_API` | Variable |                               Wallet API path, e.g. `https://wallet.zignaly.com/api`                                |                              **Required** |
+| `PS2_REFERRAL_API` | Variable |    Wallet API path, e.g. `https://test-referrals.zignaly.com/`. Yes, the api path names are pretty inconsistent.    |                              **Optional*** |
 | `WHITELABEL` | Variable | The name of the whitelabnel config for the deployment. Whitelabel configs can be defined [here](../src/whitelabel). |                              <opt>Optional</opt> |
 | `ENABLE_TRACKING` | Variable |                            Whether or not to enable tracking systems. `true` to enable.                             |                              <opt>Optional</opt> |
 | `GTM_ID` | Variable |                                                Google Tag Manager ID                                                |                              <opt>Optional</opt> |
