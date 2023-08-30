@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { SxProps } from '@mui/system';
 
 export type ModalContainerProps = {
   children: React.ReactElement[] | React.ReactElement;
@@ -8,4 +9,5 @@ export type ModalContainerProps = {
   padding?: number;
   onClickClose?: () => void;
   onGoBack?: () => void;
+  titleStyles?: SxProps;
 };
