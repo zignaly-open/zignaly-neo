@@ -5,6 +5,7 @@ import { Box, Tooltip } from '@mui/material';
 import { SubscriptionCardProps } from './types';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Card, Wrapper } from './styles';
+import { whitelabel } from '../../../whitelabel';
 
 const SubscriptionCard = ({
   name,
@@ -66,7 +67,7 @@ const SubscriptionCard = ({
           <Box width={'100%'}>
             {status === 'accessible' ? (
               <ZigLink
-                href={`${process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL}`}
+                href={`${whitelabel.subscriptionPurchaseLink}`}
                 target={'_blank'}
                 sx={{ width: '100%' }}
                 underline={'none'}
