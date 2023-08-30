@@ -33,4 +33,7 @@ export const StyledTabs = styled(ZigTabs)<{ md?: boolean }>`
   .MuiTabs-indicator {
     display: none;
   }
+  .Mui-selected {
+    color: ${({ theme }) => theme.palette.highlighted} !important;
+  }
 `;
