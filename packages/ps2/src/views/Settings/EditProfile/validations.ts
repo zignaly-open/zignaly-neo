@@ -8,7 +8,7 @@ export const EditProfileValidation = yup
         'maxlength',
         'common:validation.max-allowed-length',
         function (val) {
-          return val.length <= 60;
+          return val.length <= 15;
         },
       ),
     bio: yup
