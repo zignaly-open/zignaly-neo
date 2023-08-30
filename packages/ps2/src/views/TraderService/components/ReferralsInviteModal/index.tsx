@@ -85,6 +85,7 @@ const ReferralsInviteModal = ({
 
   return (
     <ZModal
+      titleStyles={{ fontSize: '26px', textTransform: 'unset !important' }}
       width={838}
       {...props}
       close={close}

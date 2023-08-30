@@ -1,5 +1,6 @@
 import { DialogProps } from '@mui/material/Dialog';
 import { ShowFnOutput, UseModalOptions } from 'mui-modal-provider';
+import { SxProps } from '@mui/system';
 
 export type ZModalProps = {
   title?: string;
@@ -11,6 +12,7 @@ export type ZModalProps = {
   width?: number;
   close?: () => void;
   titleAlign?: 'center' | 'left';
+  titleStyles?: SxProps;
 } & DialogProps;
 
 export type UseZModalOptions = UseModalOptions & {

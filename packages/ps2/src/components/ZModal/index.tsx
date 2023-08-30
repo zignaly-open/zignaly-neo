@@ -22,6 +22,7 @@ const ZModal: React.FC<ZModalProps> = ({
   width,
   wide,
   titleAlign,
+  titleStyles,
   ...props
 }): React.ReactElement => {
   const isAuthenticated = useIsAuthenticated();
@@ -53,6 +54,7 @@ const ZModal: React.FC<ZModalProps> = ({
         onClickClose={close}
         onGoBack={onGoBack}
         titleAlign={titleAlign}
+        titleStyles={titleStyles}
       >
         {isLoading ? (
           <LoaderContainer>

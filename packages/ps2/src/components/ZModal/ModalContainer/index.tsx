@@ -20,6 +20,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
     onGoBack = null,
     width,
     onClickClose = null,
+    titleStyles,
   } = props;
   const theme = useTheme();
 
@@ -38,7 +39,13 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
       <Header compact={!title && !onGoBack}>
         <Inline align={titleAlign}>
           {!!title && (
-            <Title variant='h1' mb={0} color='neutral100' id={'modal__title'}>
+            <Title
+              variant='h1'
+              mb={0}
+              color='neutral100'
+              id={'modal__title'}
+              sx={titleStyles}
+            >
               {title}
             </Title>
           )}
