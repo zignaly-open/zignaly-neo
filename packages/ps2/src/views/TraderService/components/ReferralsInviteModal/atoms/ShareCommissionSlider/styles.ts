@@ -54,6 +54,7 @@ export const StyledZigSlider = styled(ZigSlider)`
       font-weight: 600;
       color: #999fe1;
       position: relative;
+      width: 100%;
 
       &::after {
         content: '%';
