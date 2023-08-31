@@ -16,6 +16,7 @@ import ReferralsInviteModal from '../../ReferralsInviteModal';
 import { useTranslation } from 'react-i18next';
 import { isFeatureOn } from '../../../../../whitelabel';
 import { Features } from '../../../../../whitelabel/type';
+import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
 
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
@@ -23,6 +24,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const { showModal } = useZModal();
   const { t } = useTranslation('service');
+  const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
 
   return (
     <RightSideActionWrapper>
@@ -39,15 +41,19 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           gap={3}
           alignItems={'center'}
         >
-          {isAuthenticated && isFeatureOn(Features.Referrals) && (
+          {isFeatureOn(Features.Referrals) && (
             <ZigButton
               ctaId={'service-profile-invite-button'}
-              onClick={() =>
-                showModal(ReferralsInviteModal, {
-                  service,
-                  serviceId: service.id,
-                })
-              }
+              onClick={() => {
+                if (isAuthenticated) {
+                  showModal(ReferralsInviteModal, {
+                    service,
+                    serviceId: service.id,
+                  });
+                } else {
+                  navigateIfNotLoggedIn();
+                }
+              }}
               sx={{
                 height: '54px',
                 minWidth: '63px',
