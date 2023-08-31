@@ -53,3 +53,4 @@ export { ReactComponent as ZigUserFilledIcon } from "assets/icons/user-filled-ic
 export { ReactComponent as ZigInviteIcon } from "assets/icons/invite-icon.svg";
 export { ReactComponent as ZigSwapCircleIcon } from "assets/icons/swap-circle-icon.svg";
 export { ReactComponent as ZigResetIcon } from "assets/icons/reset-icon.svg";
+export { ReactComponent as ZigArrowDescIcon } from "assets/icons/arrow-desc-icon.svg";

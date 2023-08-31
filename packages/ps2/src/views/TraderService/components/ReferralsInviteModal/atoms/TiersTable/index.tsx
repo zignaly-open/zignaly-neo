@@ -183,8 +183,8 @@ const TiersTable = ({
               lineHeight='24px'
               color='#979ce0'
             >
-              {t('invites')}
-              <Tooltip title={t('tooltips.invites')}>
+              {t('referrals')}
+              <Tooltip title={t('tooltips.number-referrals')}>
                 <TooltipIcon />
               </Tooltip>
             </ZigTypography>
@@ -195,15 +195,10 @@ const TiersTable = ({
             <Box
               display={'flex'}
               alignItems={'center'}
-              gap='9px'
+              gap='6px'
               justifyContent='center'
             >
-              <ZigTypography
-                fontWeight={600}
-                fontSize={16}
-                color='#999fe1'
-                mt={'5px'}
-              >
+              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
               <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
