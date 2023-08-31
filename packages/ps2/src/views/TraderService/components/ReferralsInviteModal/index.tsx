@@ -14,7 +14,7 @@ import {
   useServiceCommissionQuery,
   useTierLevelsQuery,
 } from 'apis/referrals/api';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Tooltip } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
 import { ChevronRight, Verified } from '@mui/icons-material';
@@ -144,13 +144,34 @@ const ReferralsInviteModal = ({
                   flexDirection={'column'}
                   alignItems={'center'}
                 >
-                  <ZigTypography textTransform='uppercase' variant='h4'>
-                    {t(
-                      referral.investorsCount > 0 && inviteLeft > 0
-                        ? 'max-commission'
-                        : 'commission-rate',
-                    )}
-                  </ZigTypography>
+                  <Box position={'relative'}>
+                    <ZigTypography textTransform='uppercase' variant='h4'>
+                      {t(
+                        referral.investorsCount > 0 && inviteLeft > 0
+                          ? 'max-commission'
+                          : 'commission-rate',
+                      )}
+                    </ZigTypography>
+                    <Tooltip
+                      title={t(
+                        referral.investorsCount > 0 && inviteLeft > 0
+                          ? 'tooltips.max-commission'
+                          : 'tooltips.commission-rate',
+                      )}
+                    >
+                      <Box
+                        component='img'
+                        sx={{
+                          position: 'absolute',
+                          width: '10px',
+                          right: -13,
+                          top: -5,
+                          zIndex: 1,
+                        }}
+                        src={`/images/portfolio/info-icon.svg`}
+                      />
+                    </Tooltip>
+                  </Box>
                   <ZigTypography
                     color='#28ba62'
                     letterSpacing='1.49px'
@@ -180,9 +201,25 @@ const ReferralsInviteModal = ({
                 </Box>
                 {referral.investorsCount > 0 && (
                   <Box display='flex' flexDirection={'column'}>
-                    <ZigTypography textTransform='uppercase' variant='h4'>
-                      {t('my-invites')}
-                    </ZigTypography>
+                    <Box position={'relative'}>
+                      <ZigTypography textTransform='uppercase' variant='h4'>
+                        {t('my-invites')}
+                      </ZigTypography>
+                      <Tooltip title={t('tooltips.my-invites')}>
+                        <Box
+                          component='img'
+                          sx={{
+                            position: 'absolute',
+                            width: '10px',
+                            right: -13,
+                            top: -5,
+                            zIndex: 1,
+                          }}
+                          src={`/images/portfolio/info-icon.svg`}
+                        />
+                      </Tooltip>
+                    </Box>
+
                     <Box
                       display={'flex'}
                       alignItems={'center'}
@@ -294,13 +331,17 @@ const ReferralsInviteModal = ({
                   </ZigTypography>
                 ) : (
                   <>
-                    <DescriptionLine text={t('earn-success-fees')} />
+                    <DescriptionLine
+                      text={t('earn-success-fees')}
+                      tooltip={t('tooltips.earn-success-fee')}
+                    />
                     {!boostRunning && !serviceCommission.commission && (
                       <DescriptionLine
                         text={t('invite-and-earn', {
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
+                        tooltip={t('tooltips.invite-and-earn')}
                       />
                     )}
                     {boostRunning && (
@@ -309,6 +350,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommissionWithoutTraderBoost,
                         })}
+                        tooltip={t('tooltips.invite-and-earn-1-week')}
                       />
                     )}
                     {serviceCommission.commission > 0 && (
