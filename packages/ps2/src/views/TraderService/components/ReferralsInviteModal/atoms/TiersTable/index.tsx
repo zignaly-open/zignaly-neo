@@ -183,8 +183,8 @@ const TiersTable = ({
               lineHeight='24px'
               color='#979ce0'
             >
-              {t('invites')}
-              <Tooltip title={t('tooltips.invites')}>
+              {t('referrals')}
+              <Tooltip title={t('tooltips.number-referrals')}>
                 <TooltipIcon />
               </Tooltip>
             </ZigTypography>

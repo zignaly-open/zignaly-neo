@@ -203,9 +203,9 @@ const ReferralsInviteModal = ({
                   <Box display='flex' flexDirection={'column'}>
                     <Box position={'relative'}>
                       <ZigTypography textTransform='uppercase' variant='h4'>
-                        {t('my-invites')}
+                        {t('my-referrals')}
                       </ZigTypography>
-                      <Tooltip title={t('tooltips.my-invites')}>
+                      <Tooltip title={t('tooltips.number-referrals')}>
                         <Box
                           component='img'
                           sx={{
