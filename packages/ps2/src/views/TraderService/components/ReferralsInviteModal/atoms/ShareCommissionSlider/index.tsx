@@ -15,7 +15,7 @@ export const ShareCommissionSlider = ({
   max: number;
 }) => {
   const { t } = useTranslation(['referrals-trader', 'common']);
-  const [value, setValue] = useState(Math.round((discountPct / max) * 100));
+  const [value, setValue] = useState(Math.round((discountPct * max) / 100));
   const [updateDiscount] = useUpdateDiscountMutation();
   const toast = useToast();
   const isFirstRun = useRef(true);
@@ -31,7 +31,7 @@ export const ShareCommissionSlider = ({
       }).unwrap();
       toast.success(t('changes-saved'));
     },
-    750,
+    1000,
     [value],
   );
 
