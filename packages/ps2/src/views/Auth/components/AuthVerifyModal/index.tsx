@@ -26,7 +26,7 @@ function AuthVerifyModal({
   onFailure,
   ...props
 }: {
-  user: { token: string; userId: string } & Partial<LoginResponse>;
+  user: { token: string } & Partial<LoginResponse>;
   close: () => void;
   onSuccess: () => void;
   onFailure: ({ message }: { message: string }) => void;
