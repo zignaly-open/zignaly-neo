@@ -6,12 +6,11 @@ import {
   useCurrentBalance,
   useInvestedAccountsCount,
 } from '../../../../../apis/investment/use';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
+import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
 
 const InvestButton: React.FC<{
   prefixId?: string;
@@ -28,23 +27,17 @@ const InvestButton: React.FC<{
   ]);
   const isAuthenticated = useIsAuthenticated();
   const openInvestModal = useOpenInvestDepositModal(modalRoute);
-  const navigate = useNavigate();
   useCurrentBalance(service.ssc);
-  const location = useLocation();
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
     skip: !showMultipleAccountButton,
   });
+  const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       openInvestModal(service.id);
     } else {
-      const newUser = !localStorage.getItem('hasLoggedIn');
-      navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {
-        state: {
-          redirectTo: location,
-        },
-      });
+      navigateIfNotLoggedIn();
     }
   };
 
