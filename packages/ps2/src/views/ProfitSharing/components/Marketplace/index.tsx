@@ -103,6 +103,20 @@ const Marketplace: React.FC = () => {
         ),
         sortingFn: 'alphanumeric',
       }),
+      columnHelper.accessor((row) => Number(row.pnlPercent180t), {
+        id: 'pnlPercent180t',
+        header: t('table.n-months-pnl', { count: 6 }),
+        cell: (props) => (
+          <ChangeIndicator
+            id={`marketplace-table__pnl180t-${props.row.original.id}`}
+            style={{
+              fontSize: '18px',
+              lineHeight: '28px',
+            }}
+            value={props.getValue()}
+          />
+        ),
+      }),
       columnHelper.accessor((row) => Number(row.pnlPercent90t), {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
