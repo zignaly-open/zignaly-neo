@@ -1,6 +1,5 @@
-import { ArrowForward } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, ZigArrowDescIcon } from '@zignaly-open/ui';
 import React from 'react';
 
 export const DescriptionLine = ({
@@ -12,7 +11,7 @@ export const DescriptionLine = ({
 }) => {
   return (
     <Box display='flex' alignItems={'center'} gap='15px'>
-      <ArrowForward sx={{ color: 'greenGraph', width: '15px' }} />
+      <ZigArrowDescIcon />
       <Box position={'relative'}>
         <ZigTypography
           color='rgba(255, 255, 255, 0.6)'
