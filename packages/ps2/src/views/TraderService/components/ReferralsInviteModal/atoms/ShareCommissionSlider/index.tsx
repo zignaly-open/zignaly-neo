@@ -43,6 +43,7 @@ export const ShareCommissionSlider = ({
           fontSize={16}
           letterSpacing={'0.48px'}
           textAlign={'center'}
+          color={'neutral100'}
         >
           {t('split-commission')}
         </ZigTypography>

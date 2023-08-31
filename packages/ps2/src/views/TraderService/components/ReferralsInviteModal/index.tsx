@@ -93,10 +93,25 @@ const ReferralsInviteModal = ({
         commission: maxCommission,
       })}
       isLoading={loading}
+      sx={{
+        // Hack to make the box shadow visible beyond the container
+        // despite the staking context created by the scrollbar
+        '> div': {
+          paddingTop: '28px',
+        },
+        '> div > div:first-child': {
+          marginBottom: '2px',
+        },
+        '> div > div:last-child': {
+          m: '0px -48px 0',
+          p: '0px 48px 0',
+          width: 'calc(100% + 96px)',
+        },
+      }}
     >
       {!loading && (
         <>
-          <Grid container mt={'22px'}>
+          <Grid container mt={'38px'}>
             <Grid
               item
               sm={12}
