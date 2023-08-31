@@ -46,6 +46,7 @@ const ZModal: React.FC<ZModalProps> = ({
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
+        ...(props.sx ?? {}),
       }}
     >
       <ModalContainer
