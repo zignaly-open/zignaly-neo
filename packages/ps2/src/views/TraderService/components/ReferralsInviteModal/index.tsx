@@ -333,7 +333,7 @@ const ReferralsInviteModal = ({
                   <>
                     <DescriptionLine
                       text={t('earn-success-fees')}
-                      tooltip={t('tooltips.earn-success-fee')}
+                      tooltip={t('tooltips.earn-success-fees')}
                     />
                     {!boostRunning && !serviceCommission.commission && (
                       <DescriptionLine
