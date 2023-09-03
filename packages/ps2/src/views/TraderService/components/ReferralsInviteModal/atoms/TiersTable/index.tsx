@@ -198,7 +198,12 @@ const TiersTable = ({
               gap='6px'
               justifyContent='center'
             >
-              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+              <ZigTypography
+                fontWeight={600}
+                fontSize={16}
+                color='#999fe1'
+                lineHeight={'23px'}
+              >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
               <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
