@@ -19,7 +19,7 @@ const ReferralLinkInvite = ({
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
   const url = `${window.origin}${generatePath(ROUTE_TRADING_SERVICE, {
     serviceId: serviceId,
-  })}?r=${referralCode}&subtrack=${serviceId.slice(-8)}`;
+  })}?invite=${referralCode}&subtrack=${serviceId.slice(-8)}`;
 
   return (
     <>
