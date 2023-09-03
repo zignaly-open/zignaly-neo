@@ -224,10 +224,15 @@ const TiersTable = ({
             color={'neutral200'}
           >
             {t('max-earnings-from-fees', {
-              amount: numericFormatter(MAX_FEES_AMOUNT.toString(), {
-                thousandSeparator: true,
-                prefix: '$',
-              }),
+              amount: numericFormatter(
+                (
+                  Math.round(MAX_FEES_AMOUNT * zignalyCommission) / 100
+                ).toString(),
+                {
+                  thousandSeparator: true,
+                  prefix: '$',
+                },
+              ),
             })}
           </ZigTypography>
         </td>
