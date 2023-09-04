@@ -100,7 +100,7 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
         color='#24b68d'
       >
         {t('trader-boost')}
-        <Tooltip title={t('tooltips.trader-boost', { fee: boost })}>
+        <Tooltip title={t('tooltips.trader-boost', { commission: boost })}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>

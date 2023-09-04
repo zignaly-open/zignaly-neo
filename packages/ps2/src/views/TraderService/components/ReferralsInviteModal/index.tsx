@@ -341,7 +341,10 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
-                        tooltip={t('tooltips.invite-and-earn')}
+                        tooltip={t('tooltips.invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
                       />
                     )}
                     {boostRunning && (
@@ -350,7 +353,10 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommissionWithoutTraderBoost,
                         })}
-                        tooltip={t('tooltips.invite-and-earn-1-week')}
+                        tooltip={t('tooltips.invite-and-earn-1-week', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
                       />
                     )}
                     {serviceCommission.commission > 0 && (
@@ -362,6 +368,10 @@ const ReferralsInviteModal = ({
                           ),
                           commission: maxCommission,
                           multiplier: traderBoostMultiplier,
+                        })}
+                        tooltip={t('tooltips.invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
                         })}
                       />
                     )}
