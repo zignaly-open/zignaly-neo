@@ -75,7 +75,9 @@ const TierBar = ({
           emphasis={showArrow}
         >
           <BarContent>
-            {serviceCommission > 0 && <BoltIcon />}
+            {serviceCommission > 0 && (
+              <BoltIcon width={'10px'} height={'16px'} />
+            )}
             <ZigTypography
               color={
                 layersCount > 1
