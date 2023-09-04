@@ -65,6 +65,7 @@ const CellLabelBoost = ({
       <BoostChip boost={boost} />
       {!activated && <ZigClockIcon color='#e93ea7' />}
       <ZigTypography
+        whiteSpace={'nowrap'}
         fontWeight={500}
         variant='h4'
         textAlign='end'
@@ -72,9 +73,7 @@ const CellLabelBoost = ({
         color={activated ? '#24b68d' : '#e93ea7'}
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip
-          title={t(activated ? 'zig-held-tooltip' : 'tooltips.within-1-week')}
-        >
+        <Tooltip title={t('tooltips.within-1-week')}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -100,7 +99,7 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
         color='#24b68d'
       >
         {t('trader-boost')}
-        <Tooltip title={t('tooltips.trader-boost', { fee: boost })}>
+        <Tooltip title={t('tooltips.trader-boost', { feePct: boost })}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
