@@ -26,7 +26,7 @@
     "invite-more": "Invite {{invite}} More People and Get {{commission}}%",
     "invite-and-earn-1-week": "Invite {{invite}}+ people within 1 week and earn {{commission}}%",
     "invite-and-earn-trader-boost": "Invite {{invite}}+ people and earn {{commission}}% ({{commissionBefore}}% + {{multiplier}}x trader boost)",
-    "max-earnings-from-fees": "Max earnings\nfrom {{amount}} of fees:",
+    "max-earnings-from-fees": "Earnings example\nfrom {{amount}} of fees:",
     "base-commission": "Base commission:",
     "within-1-week": "within 1 week:",
     "welcome-boost": "Welcome Boost:",
