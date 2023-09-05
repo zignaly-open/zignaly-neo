@@ -17,6 +17,7 @@
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
     "storybook": "lerna run storybook --scope=*/ui",
+    "backoffice": "lerna run start --scope=@zignaly-open/backoffice --include-dependencies --stream --parallel",
     "ps2": "lerna run start --scope=@zignaly-open/ps2 --include-dependencies --stream --parallel",
     "ps2-analyze": "lerna run analyze --scope=@zignaly-open/ps2",
     "ps2-build": "lerna run build --scope=@zignaly-open/ps2 --include-dependencies",

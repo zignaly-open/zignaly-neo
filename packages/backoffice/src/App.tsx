@@ -1,25 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import Router from './Router';
+import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
+import {
+  ThemeProvider as ThemeInheritorStyled,
+  ThemeProviderMui as ThemeInheritorMui,
+} from '@zignaly-open/ui';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
+import ModalProvider from 'mui-modal-provider';
+import { ToastContainer } from 'react-toastify';
+import { BrowserRouter } from 'react-router-dom';
+import { persistor, store } from './apis/store';
+import { Provider } from 'react-redux';
+import GlobalStyle from './styles';
+import { PersistGate } from 'redux-persist/integration/react';
+import useReferralCookie from 'util/hooks/useReferralCookie';
+import { zigSuspenseFallback } from './util/suspense';
+import ZModal from './components/ZModal';
+
+export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
+  children,
+}) => (
+  <Provider store={store}>
+    <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+      <ThemeInheritorMui theme={themeMui}>
+        <ThemeProviderMui theme={themeMui}>
+          <GlobalStyle />
+          <ToastContainer
+            position='top-right'
+            autoClose={5000}
+            hideProgressBar
+            closeOnClick
+            pauseOnFocusLoss
+            draggable
+            closeButton={false}
+            pauseOnHover
+            theme='dark'
+          />
+          <PersistGate persistor={persistor}>
+            <BrowserRouter>
+              <Suspense fallback={zigSuspenseFallback}>
+                <ModalProvider
+                  fallback={<ZModal allowUnauth wide open isLoading />}
+                >
+                  {children}
+                </ModalProvider>
+              </Suspense>
+            </BrowserRouter>
+          </PersistGate>
+        </ThemeProviderMui>
+      </ThemeInheritorMui>
+    </ThemeInheritorStyled>
+  </Provider>
+);
 
 function App() {
+  useReferralCookie();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WrappedInProviders>
+      <Suspense fallback={zigSuspenseFallback}>
+        <Router />
+      </Suspense>
+    </WrappedInProviders>
   );
 }
 
