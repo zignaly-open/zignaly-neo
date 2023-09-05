@@ -56,6 +56,7 @@ export const StyledZigSlider = styled(ZigSlider)`
       position: relative;
       width: 100%;
       text-align: center;
+      min-width: 53px;
 
       &::after {
         content: '%';
@@ -68,7 +69,9 @@ export const StyledZigSlider = styled(ZigSlider)`
       color: #c6c6d1;
       font-size: 13px;
       font-weight: 400;
-      margin-right: -7px;
+      margin-right: -3px;
+      margin-bottom: 10px;
+      margin-left: 2px;
     }
   }
 `;
