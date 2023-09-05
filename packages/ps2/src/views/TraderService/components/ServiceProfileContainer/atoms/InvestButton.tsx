@@ -42,7 +42,7 @@ const InvestButton: React.FC<{
   };
 
   const showOtherAccounts =
-    investedFromAccounts > 1 && showMultipleAccountButton;
+    investedFromAccounts >= 1 && showMultipleAccountButton;
   const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   return (
