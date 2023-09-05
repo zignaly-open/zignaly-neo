@@ -126,7 +126,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
                         decimalScale: 2,
                       },
                     ),
-                  )} ${service?.ssc}`
+                  )} ${service?.ssc || 'USDT'}`
                 : t('common:percent', {
                     value: trimZeros(
                       numericFormatter(service?.fundsAllocated, {
