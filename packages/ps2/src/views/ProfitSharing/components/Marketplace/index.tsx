@@ -227,7 +227,7 @@ const Marketplace: React.FC = () => {
                 initialState={{
                   sorting: [
                     {
-                      id: 'pnlPercent90t',
+                      id: 'pnlPercent180t',
                       desc: true,
                     },
                   ],

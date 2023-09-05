@@ -136,10 +136,7 @@ export const BarContent = styled(Box)<{ subLayer?: boolean }>`
     `}
 
   svg {
-    height: 12px;
-    min-height: 12px;
-    width: 7.5px;
-    min-width: 7.5px;
+    opacity: 0.7;
   }
 `;
 const growAnimation = keyframes`

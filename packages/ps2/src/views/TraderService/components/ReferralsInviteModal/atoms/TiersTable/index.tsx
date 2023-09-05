@@ -65,6 +65,7 @@ const CellLabelBoost = ({
       <BoostChip boost={boost} />
       {!activated && <ZigClockIcon color='#e93ea7' />}
       <ZigTypography
+        whiteSpace={'nowrap'}
         fontWeight={500}
         variant='h4'
         textAlign='end'
@@ -72,9 +73,7 @@ const CellLabelBoost = ({
         color={activated ? '#24b68d' : '#e93ea7'}
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip
-          title={t(activated ? 'zig-held-tooltip' : 'tooltips.within-1-week')}
-        >
+        <Tooltip title={t('tooltips.within-1-week')}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -198,7 +197,12 @@ const TiersTable = ({
               gap='6px'
               justifyContent='center'
             >
-              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+              <ZigTypography
+                fontWeight={600}
+                fontSize={16}
+                color='#999fe1'
+                lineHeight={'23px'}
+              >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
               <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
@@ -219,10 +223,15 @@ const TiersTable = ({
             color={'neutral200'}
           >
             {t('max-earnings-from-fees', {
-              amount: numericFormatter(MAX_FEES_AMOUNT.toString(), {
-                thousandSeparator: true,
-                prefix: '$',
-              }),
+              amount: numericFormatter(
+                (
+                  Math.round(MAX_FEES_AMOUNT * zignalyCommission) / 100
+                ).toString(),
+                {
+                  thousandSeparator: true,
+                  prefix: '$',
+                },
+              ),
             })}
           </ZigTypography>
         </td>
