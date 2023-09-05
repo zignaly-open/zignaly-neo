@@ -25,7 +25,6 @@
 	"summary": {
 		"base-currency": "Базовая валюта:",
 		"funds-allocated": "Выделенные средства:",
-		"no-max-limit": "Без ограничения максимального объема средств",
 		"success-fee": "Success fee:",
 		"tags": "Теги:"
 	},
