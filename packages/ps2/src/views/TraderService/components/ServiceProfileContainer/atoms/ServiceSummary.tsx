@@ -121,10 +121,13 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               {service.maximumSbt >= SBT_UNLIMITED
                 ? t('summary.no-max-limit')
                 : t('common:percent', {
-                    value: numericFormatter(service.fundsAllocated, {
-                      thousandSeparator: true,
-                      decimalScale: 2,
-                    }),
+                    value: numericFormatter(
+                      (100 - +service.fundsAllocated).toString(),
+                      {
+                        thousandSeparator: true,
+                        decimalScale: 2,
+                      },
+                    ),
                   })}
             </ZigTypography>
           </ZigTypography>
