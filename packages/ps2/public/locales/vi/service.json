@@ -25,7 +25,6 @@
 	"summary": {
 		"base-currency": "Đồng tiền yết giá:",
 		"funds-allocated": "Số tiền phân bổ:",
-		"no-max-limit": "Không giới hạn số tiền tối đa",
 		"success-fee": "Phí thành công:",
 		"tags": "Tags:"
 	},
