@@ -42,5 +42,9 @@
     "for-me": "for me",
     "for-friends": "for friends",
     "trader-boost-value": "{{boost}}x Boost",
-    "terms": "Full terms & FAQs"
+    "terms": "Full terms & FAQs",
+    "invite": "Invite",
+    "invite-count": "Invite {{count}} people and get {{pct}}% of success fees",
+    "invite-generic": "From everyone you invite to my trading service",
+    "invite-commission": "{{pct}}% Commission"
 }

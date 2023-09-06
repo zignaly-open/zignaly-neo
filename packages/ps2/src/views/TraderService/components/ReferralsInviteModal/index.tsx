@@ -1,36 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import {
   ZigButton,
-  ZigClockIcon,
   ZigTypography,
   ZigUserFilledIcon,
   trimZeros,
 } from '@zignaly-open/ui';
 import { ReferralsInviteModalProps } from './types';
 import ZModal from 'components/ZModal';
-import {
-  useReferralRewardsQuery,
-  useServiceCommissionQuery,
-  useTierLevelsQuery,
-} from 'apis/referrals/api';
 import { Box, Grid, Tooltip } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
 import { ChevronRight, Verified } from '@mui/icons-material';
-import {
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  isFuture,
-} from 'date-fns';
-import { getBoostedCommissionPct } from './util';
-import { useInterval } from 'react-use';
 import BoostChip from './atoms/BoostChip';
 import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
+import BoostTimer from './atoms/BoostTimer';
+import { useTiersData } from 'apis/referrals/use';
 
 const ReferralsInviteModal = ({
   service,
@@ -38,48 +26,19 @@ const ReferralsInviteModal = ({
   ...props
 }: ReferralsInviteModalProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
-  const { data: tiers } = useTierLevelsQuery();
-  const { data: serviceCommission } = useServiceCommissionQuery({
-    serviceId: service.id,
-  });
-  const { data: referral } = useReferralRewardsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
-
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const lastTier = tiers?.[tiers?.length - 1];
-  const inviteLeft =
-    // in case it reached last tier but invites is increased afterwards
-    referral?.tierId === lastTier?.id
-      ? 0
-      : lastTier?.invitees - referral?.investorsCount;
-  const boostEndsDate = new Date(referral?.boostEndsAt);
-  const boostRunning = isFuture(boostEndsDate);
-  const boost = boostRunning ? 2 : referral?.boost;
-  const days = differenceInDays(boostEndsDate, currentDate);
-  const hours = differenceInHours(boostEndsDate, currentDate) % 24;
-  const minutes = differenceInMinutes(boostEndsDate, currentDate) % 60;
-  useInterval(
-    () => {
-      setCurrentDate(new Date());
-    },
-    boostRunning ? 10000 : null,
-  );
-
-  const maxCommission = Math.floor(
-    getBoostedCommissionPct(
-      tiers?.[tiers?.length - 1]?.commissionPct,
-      boost,
-      serviceCommission?.commission,
-      service.zglySuccessFee,
-    ),
-  );
-  const maxCommissionWithoutTraderBoost = getBoostedCommissionPct(
-    tiers?.[tiers?.length - 1]?.commissionPct,
+  const {
+    tiers,
+    referral,
+    serviceCommission,
+    boostEndsDate,
+    currentDate,
+    boostRunning,
     boost,
-    0,
-  );
-  const traderBoostMultiplier = maxCommission / maxCommissionWithoutTraderBoost;
+    maxCommission,
+    maxCommissionWithoutTraderBoost,
+    traderBoostMultiplier,
+    inviteLeft,
+  } = useTiersData(service.id, service.zglySuccessFee);
 
   const loading = !referral || !tiers || !serviceCommission;
 
@@ -274,23 +233,10 @@ const ReferralsInviteModal = ({
                     </Trans>
                   </ZigTypography>
                   {boostRunning && (
-                    <Box
-                      display={'flex'}
-                      alignItems={'center'}
-                      gap='9px'
-                      mt='11px'
-                    >
-                      <ZigClockIcon color='#e93ea7' />
-                      <ZigTypography
-                        color='#e93ea7'
-                        variant='h4'
-                        fontWeight={400}
-                      >
-                        {`${t('day', { count: days })}, ${t('hour', {
-                          count: hours,
-                        })}, ${t('minute', { count: minutes })}`}
-                      </ZigTypography>
-                    </Box>
+                    <BoostTimer
+                      boostEndsDate={boostEndsDate}
+                      currentDate={currentDate}
+                    />
                   )}
                 </>
               )}
