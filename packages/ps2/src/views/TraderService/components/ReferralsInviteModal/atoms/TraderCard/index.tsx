@@ -32,7 +32,7 @@ const TraderCard = ({
       )}
       <ZigTypography
         variant='h1'
-        fontWeight='600'
+        fontWeight='500'
         textAlign={'center'}
         lineHeight={'28px'}
         sx={{
