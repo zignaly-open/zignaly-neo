@@ -81,3 +81,7 @@ export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";
+
+// hooks
+export { useToast } from "./hooks/useToast";
+export { getGlobalAppStyle } from "./theme/globalAppStyle";
