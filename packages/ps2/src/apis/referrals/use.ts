@@ -13,7 +13,10 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
   const { data: serviceCommission } = useServiceCommissionQuery({
     serviceId: serviceId,
   });
-  const { data: referral } = useReferralRewardsQuery();
+  const { data: referral } = useReferralRewardsQuery(undefined, {
+    // todo: reset referral state in clearUserSession
+    refetchOnMountOrArgChange: true,
+  });
 
   const boostEndsDate = new Date(referral?.boostEndsAt);
   const boostRunning = isFuture(boostEndsDate);

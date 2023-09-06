@@ -58,6 +58,15 @@ export const api = createApi({
         method: 'PUT',
         body: payload,
       }),
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        // Update discountPct data
+        dispatch(
+          api.util.updateQueryData('referralRewards', undefined, (data) => {
+            Object.assign(data, { discountPct: payload.discount });
+          }),
+        );
+      },
     }),
   }),
 });
