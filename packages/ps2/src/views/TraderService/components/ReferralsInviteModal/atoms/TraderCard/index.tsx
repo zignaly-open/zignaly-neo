@@ -16,7 +16,7 @@ const TraderCard = ({
 }) => {
   return (
     <CardBox
-      width='234px'
+      width='230px'
       height='288px'
       display='flex'
       flexDirection={'column'}
