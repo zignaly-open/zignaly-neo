@@ -32,6 +32,11 @@ export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
 export { default as Avatar } from "./components/display/Avatar";
 export { default as ZigAlertMessage, ErrorMessage } from "./components/display/ZigAlertMessage";
+export {
+  default as ZigModalContainer,
+  ZigModalActions,
+  ZigModalForm,
+} from "./components/display/ZigModalContainer";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigCopyText } from "./components/display/ZigCopyText";
 export { default as ZigProgressBar } from "./components/display/ZigProgressBar";
@@ -69,7 +74,7 @@ export { NiceScrollbar } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this
-export { styledIf } from "utils/styled";
+export { styledIf, withAttrs } from "utils/styled";
 
 // Layouts
 // TODO: questionable, probably should move to ps2

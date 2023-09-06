@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import Router from './Router';
 import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import {
@@ -13,13 +13,9 @@ import { persistor, store } from './apis/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
-import useReferralCookie from 'util/hooks/useReferralCookie';
-import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
 
-export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
-  children,
-}) => (
+export const App: React.FC = () => (
   <Provider store={store}>
     <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
       <ThemeInheritorMui theme={themeMui}>
@@ -38,13 +34,11 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
           />
           <PersistGate persistor={persistor}>
             <BrowserRouter>
-              <Suspense fallback={zigSuspenseFallback}>
-                <ModalProvider
-                  fallback={<ZModal allowUnauth wide open isLoading />}
-                >
-                  {children}
-                </ModalProvider>
-              </Suspense>
+              <ModalProvider
+                fallback={<ZModal allowUnauth wide open isLoading />}
+              >
+                <Router />
+              </ModalProvider>
             </BrowserRouter>
           </PersistGate>
         </ThemeProviderMui>
@@ -52,17 +46,5 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
     </ThemeInheritorStyled>
   </Provider>
 );
-
-function App() {
-  useReferralCookie();
-
-  return (
-    <WrappedInProviders>
-      <Suspense fallback={zigSuspenseFallback}>
-        <Router />
-      </Suspense>
-    </WrappedInProviders>
-  );
-}
 
 export default App;

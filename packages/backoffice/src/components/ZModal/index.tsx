@@ -5,10 +5,7 @@ import { Loader } from '@zignaly-open/ui';
 import ModalContainer from './ModalContainer';
 import { ZModalProps } from './types';
 import AuthenticatedWall from '../../util/walls/AuthenticatedWall';
-import {
-  useIsAuthenticated,
-  useMaybeMakeSureSessionIsAlive,
-} from '../../apis/user/use';
+import { useIsAuthenticated } from '../../apis/user/use';
 
 // TODO: move to zignaly-ui
 const ZModal: React.FC<ZModalProps> = ({
@@ -25,7 +22,6 @@ const ZModal: React.FC<ZModalProps> = ({
   ...props
 }): React.ReactElement => {
   const isAuthenticated = useIsAuthenticated();
-  useMaybeMakeSureSessionIsAlive(!allowUnauth);
   const notLoggedInWhenNeeded = !allowUnauth && !isAuthenticated;
 
   useEffect(() => {

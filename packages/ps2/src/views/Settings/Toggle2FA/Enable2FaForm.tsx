@@ -5,6 +5,8 @@ import {
   ZigCopyText,
   ZigInput,
   ZigLink,
+  ZigModalActions,
+  ZigModalForm,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
@@ -14,7 +16,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { QRCode } from './styles';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
-import { Form, ModalActions } from 'components/ZModal';
 import { useToast } from 'util/hooks/useToast';
 import { useLogout } from 'apis/user/use';
 import {
@@ -61,7 +62,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
   if (!load2FAInfoResult.isFetching && load2FAInfoResult.data) {
     return (
       <>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
           <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
               <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
@@ -100,7 +101,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             )}
           />
 
-          <ModalActions>
+          <ZigModalActions>
             <ZigButton
               id={'enable-2fa__submit'}
               type='submit'
@@ -111,14 +112,14 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             >
               {t('enable-2fa.enable-2fa')}
             </ZigButton>
-          </ModalActions>
-        </Form>
+          </ZigModalActions>
+        </ZigModalForm>
       </>
     );
   }
 
   return (
-    <Form>
+    <ZigModalForm>
       <ZigTypography color='neutral300' textAlign={'center'}>
         <Trans i18nKey='enable-2fa.description' t={t}>
           <Link
@@ -130,7 +131,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         </Trans>
       </ZigTypography>
 
-      <ModalActions align='center'>
+      <ZigModalActions align='center'>
         <ZigButton
           onClick={() => load2FAInfo()}
           loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}
@@ -140,8 +141,8 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         >
           {t('enable-2fa.setup-2fa')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 };
 

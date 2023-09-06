@@ -13,7 +13,6 @@ import { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
 import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
-import { junkyard } from '../../util/junkyard';
 
 const useStartSession = () => {
   // const { showModal } = useZModal();
@@ -32,7 +31,6 @@ const useStartSession = () => {
     ]);
 
     dispatch(setUser(userData));
-    junkyard.set('hasLoggedIn', 'true');
   };
 };
 

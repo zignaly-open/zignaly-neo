@@ -1,14 +1,15 @@
 import { EndpointDefinitions } from '@reduxjs/toolkit/dist/query';
-import baseApiPs2 from './baseApiPs2';
+import baseApiBackoffice from './baseApiBackoffice';
 
 /**
  * Extend api endpoints, and throw error if endpoint already exists
  * @param base Base api
  * @param endpoints New endpoints
  * @returns Extended api
+ * TODO: make it reusable
  */
 export const injectEndpoints = <
-  T extends typeof baseApiPs2,
+  T extends typeof baseApiBackoffice,
   E extends EndpointDefinitions,
 >(
   base: T,

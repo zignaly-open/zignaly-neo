@@ -4,6 +4,7 @@ import {
   getPrecisionForCoin,
   ZigButton,
   ZigInputAmount,
+  ZigModalActions,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Controller, useForm } from 'react-hook-form';
@@ -21,7 +22,6 @@ import {
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { Add } from '@mui/icons-material';
 import DepositModal from '../../../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { useZModal } from '../../../../../../components/ZModal/use';
@@ -152,7 +152,7 @@ const InvestInYourServiceForm: React.FC<{
         </Grid>
       </Grid>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           variant='contained'
           type='submit'
@@ -163,7 +163,7 @@ const InvestInYourServiceForm: React.FC<{
         >
           {t('create.action')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
     </form>
   );
 };

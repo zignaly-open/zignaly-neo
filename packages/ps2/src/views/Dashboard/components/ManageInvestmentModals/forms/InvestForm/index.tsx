@@ -8,6 +8,8 @@ import {
   ZigInput,
   ZigInputAmount,
   ZigSlider,
+  ZigModalActions,
+  ZigModalForm,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
 import {
@@ -17,7 +19,6 @@ import {
 } from '../../../../../../apis/investment/use';
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Form, ModalActions } from 'components/ZModal';
 import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { useServiceDetails } from 'apis/service/use';
@@ -224,7 +225,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
             )}
           />
         </Box>
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'invest-modal__confirm'}
             size={'large'}
@@ -234,13 +235,13 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
           >
             {t('form.button.transfer-now')}
           </ZigButton>
-        </ModalActions>
+        </ZigModalActions>
       </form>
     );
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmitFirstStep)}>
+    <ZigModalForm onSubmit={handleSubmit(onSubmitFirstStep)}>
       <Controller
         name={'amountTransfer'}
         control={control}
@@ -315,7 +316,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         />
       </Box>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'invest-modal__continue'}
           size={'large'}
@@ -325,8 +326,8 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         >
           {t('continue')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 }
 

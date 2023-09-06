@@ -13,6 +13,7 @@ import {
   ZigButton,
   ZigListIcon,
   trimZeros,
+  ZigModalForm,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { DepositFormData } from './types';
@@ -32,7 +33,6 @@ import {
   BUY_CRYPTO_URL,
   DEPOSIT_INFO_URL,
 } from '../../../../../../util/constants';
-import { Form } from 'components/ZModal';
 import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { useNavigate } from 'react-router-dom';
 import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
@@ -155,7 +155,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(() => {})}>
+    <ZigModalForm onSubmit={handleSubmit(() => {})}>
       <ZigTypography id={'deposit-modal__description'} textAlign='center'>
         <Trans t={t} i18nKey={'description'}>
           <BinanceBroker />
@@ -435,7 +435,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           </ZigButton>
         </Grid>
       </Grid>
-    </Form>
+    </ZigModalForm>
   );
 }
 

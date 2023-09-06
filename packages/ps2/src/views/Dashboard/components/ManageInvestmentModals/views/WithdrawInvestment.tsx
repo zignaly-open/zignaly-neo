@@ -1,9 +1,13 @@
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigTypography,
+  ZigModalForm,
+  ZigModalActions,
+} from '@zignaly-open/ui';
 import React from 'react';
 import InvestorDetails from './InvestorDetails';
 import { useTranslation } from 'react-i18next';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
-import { Form, ModalActions } from 'components/ZModal';
 
 const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -11,7 +15,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
   const { t } = useTranslation('edit-investment');
 
   return (
-    <Form component='div'>
+    <ZigModalForm component='div'>
       <InvestorDetails prefixId={'withdraw-modal'} />
       <ZigTypography
         textAlign={'center'}
@@ -23,7 +27,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
         {t('modal.withdrawInvestment.freeWithdrawal.description')}
       </ZigTypography>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'withdraw-modal__confirm-withdraw'}
           onClick={() => setView(EditInvestmentViews.WithdrawPerform)}
@@ -32,8 +36,8 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
         >
           {t('action:withdraw')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 };
 

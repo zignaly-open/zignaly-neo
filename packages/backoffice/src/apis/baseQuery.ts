@@ -5,10 +5,7 @@ import {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/dist/query/react';
 import { RootState } from './store';
-import i18next from '../util/i18next';
-import { backendError } from 'util/hooks/useToast';
-import { BackendError } from '../util/errors';
-import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import { useToast } from 'util/hooks/useToast';
 import { clearUserSession } from './user/util';
 
 const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
@@ -28,16 +25,10 @@ const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
 
 const endpointsWhitelistedFor401 = [`login`, `logout`];
 
-const maybeReportError = (
-  error: FetchBaseQueryError,
-  requestType: BaseQueryApi['type'],
-) => {
+const maybeReportError = (error: FetchBaseQueryError) => {
   if (!error) return;
-  backendError(
-    i18next.t,
-    error as unknown as BackendError,
-    requestType === 'mutation',
-  );
+  // @ts-ignore
+  useToast().error(error?.data?.error || 'Something went wrong');
 };
 
 const customFetchBase: (
@@ -49,7 +40,7 @@ const customFetchBase: (
   { silent?: boolean }
 > = (baseUrl) => async (args, api, extraOptions) => {
   const result = await baseQuery(baseUrl)(args, api, extraOptions);
-  extraOptions?.silent || maybeReportError(result?.error, api?.type);
+  extraOptions?.silent || maybeReportError(result?.error);
 
   if (
     result?.error?.status === 401 &&

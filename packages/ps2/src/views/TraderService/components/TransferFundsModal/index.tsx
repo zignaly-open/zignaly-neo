@@ -9,6 +9,8 @@ import {
   ZigButton,
   ZigInputAmount,
   ZigTransferIcon,
+  ZigModalActions,
+  ZigModalForm,
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
 import { transferModalValidation } from './validation';
@@ -18,7 +20,7 @@ import {
   useTraderServiceTransferFunds,
 } from '../../../../apis/service/use';
 import { useToast } from '../../../../util/hooks/useToast';
-import ZModal, { Form, ModalActions } from 'components/ZModal';
+import ZModal from 'components/ZModal';
 import { useUpdateEffect } from 'react-use';
 import { Box, useTheme } from '@mui/material';
 
@@ -96,7 +98,7 @@ function TransferModal({
       title={t('transferFunds.title')}
       isLoading={!balance || isTransferring}
     >
-      <Form onSubmit={handleSubmit(onSubmit)} alignItems='center'>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)} alignItems='center'>
         <ZigTypography textAlign='center' component='div'>
           {t('transferFunds.description')}
         </ZigTypography>
@@ -180,7 +182,7 @@ function TransferModal({
               </ZigTypography>
             </Box>
 
-            <ModalActions>
+            <ZigModalActions>
               <ZigButton
                 id={'transfer__transfer-now'}
                 disabled={!isValid}
@@ -189,10 +191,10 @@ function TransferModal({
               >
                 {t('transfer.now')}
               </ZigButton>
-            </ModalActions>
+            </ZigModalActions>
           </>
         )}
-      </Form>
+      </ZigModalForm>
     </ZModal>
   );
 }

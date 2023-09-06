@@ -48,6 +48,7 @@ export const Body = styled('div')`
   padding-right: 40px;
 
   /* Style Description  */
+
   > .MuiTypography-root:first-child {
     margin-bottom: 24px;
   }
@@ -88,18 +89,14 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled(
-  withAttrs(Box, {
-    /* Will be overwritten to a smaller margin when inside Form */
-    mt: '35px',
-  }),
-)<{
+export const ModalActions = styled(Box)<{
   align?: 'left' | 'center' | 'right';
   direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
   gap: 32px;
+  margin-top: 35px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
   justify-content: ${({ align }) =>
@@ -110,14 +107,9 @@ export const ModalActions = styled(
       : 'center'};
 `;
 
-export const Form = styled(
-  withAttrs(Box, {
-    component: 'form',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 3,
-  }),
-)`
+export const Form = styled(() => (
+  <Box component='form' display='flex' flexDirection='column' gap={3} />
+))`
   > ${ModalActions} {
     margin-top: 11px;
   }

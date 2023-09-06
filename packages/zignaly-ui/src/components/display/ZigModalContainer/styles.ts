@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import { css, Box, IconButton } from '@mui/material';
-import { styledIf, ZigTypography } from '@zignaly-open/ui';
-import { withAttrs } from 'util/styles';
+import styled from "@emotion/styled";
+import { css, Box, IconButton } from "@mui/material";
+import ZigTypography from "../ZigTypography";
+import { styledIf, withAttrs } from "../../../utils/styled";
 
 export const Layout = styled(Box)<{ width: number }>`
   display: flex;
@@ -9,8 +9,7 @@ export const Layout = styled(Box)<{ width: number }>`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background: ${({ theme }) =>
-    theme.palette.backgrounds.modal || theme.palette.neutral800};
+  background: ${({ theme }) => theme.palette.backgrounds.modal || theme.palette.neutral800};
   border: 1px solid ${(props) => props.theme.palette.neutral600};
   border-radius: 16px;
   padding: 40px 56px;
@@ -32,7 +31,7 @@ export const Title = styled(ZigTypography)`
   text-transform: capitalize;
 `;
 
-export const Body = styled('div')`
+export const Body = styled("div")`
   font-size: 14px;
   text-align: left;
   display: flex;
@@ -72,10 +71,10 @@ export const Header = styled(Box)<{ compact: boolean }>`
   `}
 `;
 
-export const Inline = styled('div')<{ align?: string }>`
+export const Inline = styled("div")<{ align?: string }>`
   ${({ align }) => `
     ${styledIf(
-      align === 'center',
+      align === "center",
       `
        flex: 1;
        `,
@@ -88,14 +87,14 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled(
+export const ZigModalActions = styled(
   withAttrs(Box, {
     /* Will be overwritten to a smaller margin when inside Form */
-    mt: '35px',
+    mt: "35px",
   }),
 )<{
-  align?: 'left' | 'center' | 'right';
-  direction?: 'row' | 'column';
+  align?: "left" | "center" | "right";
+  direction?: "row" | "column";
 }>`
   display: flex;
   align-items: center;
@@ -103,22 +102,18 @@ export const ModalActions = styled(
   flex-direction: ${({ direction }) => direction};
   width: 100%;
   justify-content: ${({ align }) =>
-    align === 'left'
-      ? 'flex-start'
-      : align === 'right'
-      ? 'flex-end'
-      : 'center'};
+    align === "left" ? "flex-start" : align === "right" ? "flex-end" : "center"};
 `;
 
-export const Form = styled(
+export const ZigModalForm = styled(
   withAttrs(Box, {
-    component: 'form',
-    display: 'flex',
-    flexDirection: 'column',
+    component: "form",
+    display: "flex",
+    flexDirection: "column",
     gap: 3,
   }),
 )`
-  > ${ModalActions} {
+  > ${ZigModalActions} {
     margin-top: 11px;
   }
 `;
