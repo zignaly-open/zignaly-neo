@@ -1,8 +1,9 @@
 import { toast, ToastOptions } from "react-toastify";
 import React from "react";
 import Toaster from "components/display/Toaster";
+export { ToastContainer } from "react-toastify";
 
-const showToast =
+export const showZigToast =
   (type: "success" | "error" | "info") => (message: string, options?: ToastOptions) =>
     toast(<Toaster variant={type} caption={message} id={type && `toast__${type}`} />, {
       type: type,
@@ -16,8 +17,8 @@ export function useToast(): {
   info: (message: string, options?: ToastOptions) => number | string;
 } {
   return {
-    success: showToast("success"),
-    error: showToast("error"),
-    info: showToast("info"),
+    success: showZigToast("success"),
+    error: showZigToast("error"),
+    info: showZigToast("info"),
   };
 }

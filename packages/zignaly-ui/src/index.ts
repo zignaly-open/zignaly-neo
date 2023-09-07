@@ -88,5 +88,5 @@ export { default as BrandImage } from "./components/navigation/Header/components
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";
 
 // hooks
-export { useToast } from "./hooks/useToast";
+export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
 export { getGlobalAppStyle } from "./theme/globalAppStyle";
