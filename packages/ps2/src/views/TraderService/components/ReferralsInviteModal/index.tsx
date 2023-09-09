@@ -14,7 +14,7 @@ import {
   useServiceCommissionQuery,
   useTierLevelsQuery,
 } from 'apis/referrals/api';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Tooltip } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
 import { ChevronRight, Verified } from '@mui/icons-material';
@@ -85,6 +85,7 @@ const ReferralsInviteModal = ({
 
   return (
     <ZModal
+      titleStyles={{ fontSize: '26px', textTransform: 'unset !important' }}
       width={838}
       {...props}
       close={close}
@@ -92,10 +93,25 @@ const ReferralsInviteModal = ({
         commission: maxCommission,
       })}
       isLoading={loading}
+      sx={{
+        // Hack to make the box shadow visible beyond the container
+        // despite the staking context created by the scrollbar
+        '> div': {
+          paddingTop: '28px',
+        },
+        '> div > div:first-child': {
+          marginBottom: '2px',
+        },
+        '> div > div:last-child': {
+          m: '0px -48px 0',
+          p: '0px 48px 0',
+          width: 'calc(100% + 96px)',
+        },
+      }}
     >
       {!loading && (
         <>
-          <Grid container mt={'22px'}>
+          <Grid container mt={'38px'}>
             <Grid
               item
               sm={12}
@@ -117,25 +133,51 @@ const ReferralsInviteModal = ({
               flexDirection={'column'}
               alignItems={'center'}
             >
-              <Box display={'flex'} width={1} justifyContent={'space-evenly'}>
+              <Box
+                display={'flex'}
+                width={1}
+                justifyContent={'space-evenly'}
+                mb={'15px'}
+              >
                 <Box
                   display='flex'
                   flexDirection={'column'}
                   alignItems={'center'}
                 >
-                  <ZigTypography textTransform='uppercase' variant='h4'>
-                    {t(
-                      referral.investorsCount > 0 && inviteLeft > 0
-                        ? 'max-commission'
-                        : 'commission-rate',
-                    )}
-                  </ZigTypography>
+                  <Box position={'relative'}>
+                    <ZigTypography textTransform='uppercase' variant='h4'>
+                      {t(
+                        referral.investorsCount > 0 && inviteLeft > 0
+                          ? 'max-commission'
+                          : 'commission-rate',
+                      )}
+                    </ZigTypography>
+                    <Tooltip
+                      title={t(
+                        referral.investorsCount > 0 && inviteLeft > 0
+                          ? 'tooltips.max-commission'
+                          : 'tooltips.commission-rate',
+                      )}
+                    >
+                      <Box
+                        component='img'
+                        sx={{
+                          position: 'absolute',
+                          width: '10px',
+                          right: -13,
+                          top: -5,
+                          zIndex: 1,
+                        }}
+                        src={`/images/portfolio/info-icon.svg`}
+                      />
+                    </Tooltip>
+                  </Box>
                   <ZigTypography
                     color='#28ba62'
                     letterSpacing='1.49px'
                     fontSize={50}
                     fontWeight={600}
-                    py='15px'
+                    pt='20px'
                     lineHeight='50px'
                     position={'relative'}
                   >
@@ -159,10 +201,31 @@ const ReferralsInviteModal = ({
                 </Box>
                 {referral.investorsCount > 0 && (
                   <Box display='flex' flexDirection={'column'}>
-                    <ZigTypography textTransform='uppercase' variant='h4'>
-                      {t('my-invites')}
-                    </ZigTypography>
-                    <Box display={'flex'} alignItems={'center'} flex={1}>
+                    <Box position={'relative'}>
+                      <ZigTypography textTransform='uppercase' variant='h4'>
+                        {t('my-referrals')}
+                      </ZigTypography>
+                      <Tooltip title={t('tooltips.number-referrals')}>
+                        <Box
+                          component='img'
+                          sx={{
+                            position: 'absolute',
+                            width: '10px',
+                            right: -13,
+                            top: -5,
+                            zIndex: 1,
+                          }}
+                          src={`/images/portfolio/info-icon.svg`}
+                        />
+                      </Tooltip>
+                    </Box>
+
+                    <Box
+                      display={'flex'}
+                      alignItems={'center'}
+                      flex={1}
+                      pt={'5px'}
+                    >
                       <ZigUserFilledIcon
                         color='#999fe1'
                         width={18}
@@ -268,10 +331,17 @@ const ReferralsInviteModal = ({
                   </ZigTypography>
                 ) : (
                   <>
-                    <DescriptionLine text={t('earn-success-fees')} />
+                    <DescriptionLine
+                      text={t('earn-success-fees')}
+                      tooltip={t('tooltips.earn-success-fees')}
+                    />
                     {!boostRunning && !serviceCommission.commission && (
                       <DescriptionLine
                         text={t('invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
+                        tooltip={t('tooltips.invite-and-earn', {
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
@@ -282,6 +352,10 @@ const ReferralsInviteModal = ({
                         text={t('invite-and-earn-1-week', {
                           invite: inviteLeft,
                           commission: maxCommissionWithoutTraderBoost,
+                        })}
+                        tooltip={t('tooltips.invite-and-earn-1-week', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
                         })}
                       />
                     )}
@@ -295,6 +369,10 @@ const ReferralsInviteModal = ({
                           commission: maxCommission,
                           multiplier: traderBoostMultiplier,
                         })}
+                        tooltip={t('tooltips.invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
                       />
                     )}
                   </>
@@ -302,17 +380,20 @@ const ReferralsInviteModal = ({
               </Box>
             </Box>
           )}
-          <Tiers
-            tiers={tiers}
-            referral={referral}
-            serviceCommission={serviceCommission.commission}
-            zignalyCommission={service?.zglySuccessFee || 5}
-            boost={boost}
-            boostRunning={boostRunning}
-          />
+          <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+            <Tiers
+              tiers={tiers}
+              referral={referral}
+              serviceCommission={serviceCommission.commission}
+              zignalyCommission={service?.zglySuccessFee || 5}
+              boost={boost}
+              boostRunning={boostRunning}
+            />
+          </Box>
+
           <ZigButton
             variant={'text'}
-            sx={{ fontSize: '16px !important', marginTop: '31px' }}
+            sx={{ fontSize: '16px !important', marginTop: '61px' }}
             endIcon={
               <ChevronRight
                 sx={{ color: 'links', fill: 'currentColor !important' }}

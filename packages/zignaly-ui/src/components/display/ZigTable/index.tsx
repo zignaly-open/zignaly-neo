@@ -7,6 +7,7 @@ import {
   SortingState,
   getSortedRowModel,
   getExpandedRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
@@ -31,6 +32,7 @@ export default function ZigTable<T extends object>({
   pagination,
   loading,
   emptyMessage,
+  state = {},
   ...rest
 }: ZigTableProps<T>) {
   const theme = useTheme();
@@ -46,6 +48,7 @@ export default function ZigTable<T extends object>({
       sorting,
       columnVisibility,
       ...(pagination && { pagination }),
+      ...state,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
@@ -54,8 +57,14 @@ export default function ZigTable<T extends object>({
     ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderSubComponent,
-    debugTable: false,
-    sortDescFirst: true, // or let it be overriden next line
+    getFilteredRowModel: getFilteredRowModel(),
+    sortDescFirst: true,
+    globalFilterFn: (row, columnId, filterValue) => {
+      const value = row.getValue(columnId);
+      const safeValue = typeof value === "number" ? String(value) : value;
+
+      return (safeValue as string)?.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase());
+    },
     ...rest,
   });
 
@@ -295,6 +304,7 @@ export default function ZigTable<T extends object>({
           </Box>
         </Box>
       )}
+      {rest.debugTable && <pre>{JSON.stringify(table.getState(), null, 2)}</pre>}
     </>
   );
 }

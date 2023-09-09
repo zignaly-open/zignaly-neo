@@ -9,7 +9,7 @@ export const CardBox = styled(Box)`
     #090824 57%,
     transparent 100%
   );
-  box-shadow: 0 0 40px 1px rgba(90, 81, 245, 0.15);
+  box-shadow: 0 0 60px -2px rgba(90, 81, 245, 0.17);
 `;
 
 export const CommissionBoostChip = styled(Box)`

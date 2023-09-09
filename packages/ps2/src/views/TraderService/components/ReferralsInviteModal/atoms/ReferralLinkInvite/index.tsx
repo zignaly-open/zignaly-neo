@@ -17,12 +17,9 @@ const ReferralLinkInvite = ({
 }) => {
   const toast = useToast();
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
-  const url = `https://zignaly.com/app${
-    (generatePath(ROUTE_TRADING_SERVICE, {
-      serviceId: serviceId,
-    }),
-    serviceId)
-  }?=${referralCode}`;
+  const url = `${window.origin}${generatePath(ROUTE_TRADING_SERVICE, {
+    serviceId: serviceId,
+  })}?invite=${referralCode}&subtrack=${serviceId.slice(-8)}`;
 
   return (
     <>

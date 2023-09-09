@@ -15,7 +15,7 @@ export default {
   },
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
-  subscriptionPurchaseLink: process.env.REACT_APP_SUBSCRIPTIONS_SHOP_URL,
+  subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',
   // backgroundImage: null,
   // theme: 'example',

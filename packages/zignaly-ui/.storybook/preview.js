@@ -4,10 +4,9 @@ import { DocsContainer } from "@storybook/addon-docs/blocks";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
 import { ChartGradients } from "../src";
 import theme from "./theme";
-// Testing Results
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
-import darkMui from "../src/theme/dark";
+import { themes } from '@zignaly-open/ui';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,8 +16,8 @@ const GlobalStyle = createGlobalStyle`
 
 const withStyledTheme = (storyFn) => {
   return (
-    <ThemeProvider theme={dark}>
-      <ThemeProviderMui theme={darkMui}>
+    <ThemeProvider theme={themes.dark.legacyStyledComponentsDoNotUse}>
+      <ThemeProviderMui theme={themes.dark.mui}>
         <GlobalStyle darkMode />
         <ChartGradients />
         {storyFn()}

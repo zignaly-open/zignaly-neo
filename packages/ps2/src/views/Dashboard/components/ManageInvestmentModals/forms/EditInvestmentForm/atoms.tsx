@@ -17,7 +17,7 @@ export const AmountInvested = ({
     <ZigTypography
       variant={'body2'}
       color='neutral300'
-      id={`${idPrefix}__title`}
+      id={idPrefix && `${idPrefix}__invested-label`}
       textAlign='center'
     >
       {label}
@@ -38,7 +38,7 @@ export const AmountInvested = ({
         color={'neutral200'}
         lineHeight='30px'
         flexDirection='column'
-        id={idPrefix}
+        id={idPrefix && `${idPrefix}__invested-amount`}
       />
     </Box>
   </Box>

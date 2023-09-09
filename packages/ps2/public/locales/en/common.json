@@ -90,7 +90,7 @@
     "invalid-value": "Invalid value",
     "2fa-invalid-format": "The code should be a 6 digit number",
     "negative-amount": "Should be > 0",
-    "max-allowed-length": "Should be under {{ maxLength }} characters",
+    "max-allowed-length": "Should not exceed {{ maxLength }} characters",
     "negative-zeroable-amount": "Should be >= 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",

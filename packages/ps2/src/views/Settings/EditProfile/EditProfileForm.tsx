@@ -200,7 +200,7 @@ const EditProfileForm = () => {
                     wide
                     label={t('edit-profile.username')}
                     placeholder={t('edit-profile.username')}
-                    error={t(errors.username?.message)}
+                    error={t(errors.username?.message, { maxLength: 15 })}
                     {...field}
                   />
                 )}

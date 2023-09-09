@@ -25,8 +25,8 @@ const TierBar = ({
   maxHeight,
   width = 60,
   showArrow = true,
-  minOpacity = 0.2,
-  maxOpacity = 0.8,
+  minOpacity = 0.1,
+  maxOpacity = 0.4,
   minFontSize = 12,
   maxFontSize = 15.5,
 }: TierBarProps) => {
@@ -75,7 +75,9 @@ const TierBar = ({
           emphasis={showArrow}
         >
           <BarContent>
-            {serviceCommission > 0 && <BoltIcon />}
+            {serviceCommission > 0 && (
+              <BoltIcon width={'10px'} height={'16px'} />
+            )}
             <ZigTypography
               color={
                 layersCount > 1

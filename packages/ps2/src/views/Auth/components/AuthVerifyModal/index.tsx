@@ -18,7 +18,6 @@ import {
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
 import useTrackEvent from '../../../../components/Navigation/Tracker/use';
-import { twq } from 'util/analytics';
 
 function AuthVerifyModal({
   user,
@@ -27,13 +26,13 @@ function AuthVerifyModal({
   onFailure,
   ...props
 }: {
-  user: { token: string; userId: string } & Partial<LoginResponse>;
+  user: { token: string } & Partial<LoginResponse>;
   close: () => void;
   onSuccess: () => void;
   onFailure: ({ message }: { message: string }) => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['auth', 'error']);
-  const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice, userId } = user;
+  const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
   const resendEmail = useResendCode();
   const resendEmailNewUser = useResendCodeNewUser();
   const trackEvent = useTrackEvent();
@@ -126,7 +125,6 @@ function AuthVerifyModal({
   useEffect(() => {
     if (allGood) {
       trackEvent('verify-success');
-      twq(userId).trackVerify();
       onSuccess();
       close();
     }

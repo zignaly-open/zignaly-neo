@@ -10,6 +10,7 @@ export const InviteBox = styled(Box)`
   align-content: space-between;
   padding: 7px 12px;
   height: 68px;
+  max-width: 476px;
 `;
 
 export const StyledInviteIcon = styled(ZigInviteIcon)`
@@ -23,7 +24,7 @@ export const StyledInviteIcon = styled(ZigInviteIcon)`
 
 export const InviteUrlInput = styled('input')`
   font-family: inherit;
-  width: 390px;
+  width: 370px;
   overflow: hidden;
   text-overflow: ellipsis;
   border: none;

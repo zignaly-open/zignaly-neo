@@ -1,8 +1,16 @@
 import React, { forwardRef } from "react";
 import { useTheme } from "@mui/material";
-import { Layout, Header, Title, Body, Inline, CloseIconButton, BackIconButton } from "./styles";
+import {
+  Layout,
+  Header,
+  Title,
+  Body,
+  Inline,
+  CloseIconButton,
+  BackIconButton,
+} from './styles';
 import { ModalContainerProps } from "./types";
-import { ZigBackIcon, ZigCrossCircleIcon } from "../../../icons";
+import { ZigBackIcon, ZigCrossIcon } from "../../../icons";
 
 const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
   const {
@@ -12,6 +20,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
     onGoBack = null,
     width,
     onClickClose = null,
+    titleStyles,
   } = props;
   const theme = useTheme();
 
@@ -30,7 +39,13 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
       <Header compact={!title && !onGoBack}>
         <Inline align={titleAlign}>
           {!!title && (
-            <Title variant="h1" mb={0} color="neutral100" id={"modal__title"}>
+            <Title
+              variant="h1"
+              mb={0}
+              color="neutral100"
+              id={"modal__title"}
+              sx={titleStyles}
+            >
               {title}
             </Title>
           )}
@@ -38,7 +53,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
       </Header>
       {onClickClose && typeof onClickClose === "function" && (
         <CloseIconButton onClick={onClickClose}>
-          <ZigCrossCircleIcon
+          <ZigCrossIcon
             width={"32px"}
             height={"32px"}
             color={theme.palette.neutral100}

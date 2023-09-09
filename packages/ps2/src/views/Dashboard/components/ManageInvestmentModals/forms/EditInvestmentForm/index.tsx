@@ -146,7 +146,7 @@ function EditInvestmentForm({
           <ZigTypography
             variant={'body2'}
             color='neutral300'
-            id='edit-investment-modal__title'
+            id='edit-investment-modal__profit-manage-title'
           >
             {t('form.profits.title')}
           </ZigTypography>

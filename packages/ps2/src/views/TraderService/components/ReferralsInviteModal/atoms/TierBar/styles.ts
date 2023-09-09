@@ -42,6 +42,7 @@ export const TierBarContainer = styled(Box)<{
       ${emphasis ? '#2ab168' : `rgba(0, 145, 121, ${opacity})`},
       rgba(33, 81, 78, ${opacity})
     )`};
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 95%);
   }
 
   ${({ subLayer }) =>
@@ -135,10 +136,7 @@ export const BarContent = styled(Box)<{ subLayer?: boolean }>`
     `}
 
   svg {
-    height: 12px;
-    min-height: 12px;
-    width: 7.5px;
-    min-width: 7.5px;
+    opacity: 0.7;
   }
 `;
 const growAnimation = keyframes`

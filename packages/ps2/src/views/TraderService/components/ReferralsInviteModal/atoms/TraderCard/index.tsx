@@ -16,14 +16,14 @@ const TraderCard = ({
 }) => {
   return (
     <CardBox
-      width='228px'
+      width='234px'
       height='288px'
       display='flex'
       flexDirection={'column'}
       alignItems={'center'}
       position='relative'
       gap='12px'
-      padding='42px 32px 30px'
+      padding='42px 6px 30px'
     >
       {traderBoost > 1 && (
         <CommissionBoostChip>
@@ -35,9 +35,14 @@ const TraderCard = ({
         fontWeight='600'
         textAlign={'center'}
         lineHeight={'28px'}
-        noWrap
-        textOverflow={'ellipsis'}
-        maxWidth={'170px'}
+        sx={{
+          display: '-webkit-box',
+          overflow: 'hidden',
+          textOverflow: 'clip',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+        }}
       >
         {service.name}
       </ZigTypography>

@@ -4,10 +4,10 @@ import { ZigSlider } from '@zignaly-open/ui';
 export const SliderContainer = styled(Box)`
   position: relative;
   width: 100%;
-  height: 114px;
-  border: 1px solid #1a1d35;
+  height: 121px;
+  border: 1.6px solid #202735;
   border-radius: 15px;
-  padding: 16px;
+  padding: 22px 16px 16px 16px;
   width: 428px;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@ export const ContainerArrow = styled('div')`
   height: 0;
   border-left: 22px solid transparent;
   border-right: 22px solid transparent;
-  border-bottom: 20px solid #1a1d35;
+  border-bottom: 20px solid #202735;
 
   &:after {
     content: '';
@@ -54,6 +54,9 @@ export const StyledZigSlider = styled(ZigSlider)`
       font-weight: 600;
       color: #999fe1;
       position: relative;
+      width: 100%;
+      text-align: center;
+      min-width: 53px;
 
       &::after {
         content: '%';
@@ -66,6 +69,9 @@ export const StyledZigSlider = styled(ZigSlider)`
       color: #c6c6d1;
       font-size: 13px;
       font-weight: 400;
+      margin-right: -3px;
+      margin-bottom: 10px;
+      margin-left: 2px;
     }
   }
 `;

@@ -25,7 +25,6 @@
 	"summary": {
 		"base-currency": "Temel birim:",
 		"funds-allocated": "Tahsis edilen fonlar:",
-		"no-max-limit": "Maksimum fon sınırlaması yok",
 		"success-fee": "Başarı ücreti",
 		"tags": "Etiketler:"
 	},
