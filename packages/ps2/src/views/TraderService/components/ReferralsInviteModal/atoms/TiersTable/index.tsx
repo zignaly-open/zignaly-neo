@@ -73,7 +73,13 @@ const CellLabelBoost = ({
         color={activated ? '#24b68d' : '#e93ea7'}
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip title={t('tooltips.within-1-week', { boost })}>
+        <Tooltip
+          title={t(
+            activated
+              ? 'tooltips.within-1-week-unlocked'
+              : 'tooltips.within-1-week',
+          )}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
