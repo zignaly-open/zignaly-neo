@@ -39,7 +39,7 @@ export const TierBarContainer = styled(Box)<{
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
     background-image: ${({ emphasis, opacity }) => `linear-gradient(
-      ${emphasis ? '#2ab168' : `rgba(0, 145, 121, ${opacity})`},
+      ${emphasis ? `rgba(42, 177, 104, 0.7)` : `rgba(0, 145, 121, ${opacity})`},
       rgba(33, 81, 78, ${opacity})
     )`};
     clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 95%);
