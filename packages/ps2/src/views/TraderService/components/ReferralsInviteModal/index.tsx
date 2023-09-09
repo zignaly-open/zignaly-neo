@@ -301,7 +301,7 @@ const ReferralsInviteModal = ({
                         })}
                         tooltip={t('tooltips.invite-and-earn-1-week', {
                           invite: inviteLeft,
-                          commission: maxCommission,
+                          commission: maxCommissionWithoutTraderBoost,
                         })}
                       />
                     )}
