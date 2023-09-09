@@ -8,8 +8,8 @@ const initialState: UserState = {};
 // doesn't actually mutate the state because it uses the Immer library,
 // which detects changes to a "draft state" and produces a brand new
 // immutable state based off those changes
-export const userSlice = createSlice({
-  name: 'user',
+export const sessionSlice = createSlice({
+  name: 'session',
   initialState,
   reducers: {
     logout: () => {
@@ -22,6 +22,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { logout, setAccessToken } = userSlice.actions;
+export const { logout, setAccessToken } = sessionSlice.actions;
 
-export default userSlice.reducer;
+export default sessionSlice.reducer;

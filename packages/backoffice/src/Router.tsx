@@ -11,7 +11,9 @@ const Router: React.FC = () => (
   <RouterRoutes>
     <Route element={<AuthenticatedWall />}>
       <Route path={Routes.ROUTE_USERS} element={<Users />} />
-      <Route path={Routes.ROUTE_TRANSACTIONS} element={<Transactions />} />
+      <Route path={Routes.ROUTE_DEPOSITS} element={<Transactions />} />
+      <Route path={Routes.ROUTE_WITHDRAWALS} element={<Transactions />} />
+      <Route path={Routes.ROUTE_LOGS} element={<Transactions />} />
     </Route>
 
     <Route element={<UnauthenticatedWall />}>

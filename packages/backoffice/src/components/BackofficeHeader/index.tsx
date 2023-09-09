@@ -3,7 +3,13 @@ import React from 'react';
 import { NavigationLink } from './atoms';
 import { Box, Toolbar } from '@mui/material';
 import { Container, StyledAppBar } from './styles';
-import { ROUTE_LOGIN, ROUTE_TRANSACTIONS, ROUTE_USERS } from '../../routes';
+import {
+  ROUTE_DEPOSITS,
+  ROUTE_LOGIN,
+  ROUTE_LOGS,
+  ROUTE_USERS,
+  ROUTE_WITHDRAWALS,
+} from '../../routes';
 import { useIsAuthenticated, useLogout } from '../../apis/session/use';
 import { useTranslation } from 'react-i18next';
 
@@ -32,8 +38,17 @@ const BackofficeHeader: React.FC = () => {
                     <NavigationLink to={ROUTE_USERS} key='--route-users'>
                       {t('navigation.users')}
                     </NavigationLink>
-                    <NavigationLink to={ROUTE_TRANSACTIONS} key='--route-users'>
-                      {t('navigation.transactions')}
+                    <NavigationLink to={ROUTE_DEPOSITS} key='--route-deposits'>
+                      {t('navigation.deposits')}
+                    </NavigationLink>
+                    <NavigationLink
+                      to={ROUTE_WITHDRAWALS}
+                      key='--route-withdrawals'
+                    >
+                      {t('navigation.withdrawals')}
+                    </NavigationLink>
+                    <NavigationLink to={ROUTE_LOGS} key='--route-logs'>
+                      {t('navigation.logs')}
                     </NavigationLink>
                   </>
                 ) : (

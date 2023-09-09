@@ -21,6 +21,8 @@ export const useAuthenticate = (): [
         }).unwrap();
         dispatch(setAccessToken(user.token));
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
         throw e;
       }
     },
@@ -43,6 +45,6 @@ export function useLogout(performRequest = true): () => void {
 }
 
 export function useIsAuthenticated(): boolean {
-  const user = useSelector((state: RootState) => state.user)?.accessToken;
+  const user = useSelector((state: RootState) => state.session)?.accessToken;
   return !!user;
 }

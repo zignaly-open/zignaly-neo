@@ -1,9 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './user/store';
+import sessionReducer from './session/store';
+import usersReducer from './users/store';
+import logsReducer from './logs/store';
+import transfersReducer from './transfers/store';
 import backofficeApi from './baseApiBackoffice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import { UserState } from './user/types';
+import { UserState } from './session/types';
 
 const persistConfig = {
   key: 'root',
@@ -13,7 +16,10 @@ const persistConfig = {
 
 const appReducer = combineReducers({
   [backofficeApi.reducerPath]: backofficeApi.reducer,
-  user: userReducer,
+  transfers: transfersReducer,
+  session: sessionReducer,
+  logs: logsReducer,
+  users: usersReducer,
 });
 
 export const store = configureStore({
@@ -28,7 +34,7 @@ export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = {
-  user: UserState;
+  session: UserState;
 };
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

@@ -2,7 +2,9 @@
   "navigation": {
     "login": "Login",
     "logout": "Logout",
-    "transactions": "Transactions",
+    "withdrawals": "Withdrawals",
+    "logs": "Logs",
+    "deposits": "Deposits",
     "users": "Users"
   }
 }

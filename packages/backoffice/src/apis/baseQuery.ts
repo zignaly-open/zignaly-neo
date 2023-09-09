@@ -6,13 +6,13 @@ import {
 } from '@reduxjs/toolkit/dist/query/react';
 import { showZigToast } from '@zignaly-open/ui';
 import { RootState } from './store';
-import { clearUserSession } from './user/util';
+import { clearUserSession } from './session/util';
 
 const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
   fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers, { getState, endpoint }) => {
-      const token = (getState() as RootState).user?.accessToken;
+      const token = (getState() as RootState).session?.accessToken;
       if (token && !['login', 'signup'].includes(endpoint)) {
         headers.set('authorization', `Bearer ${token}`);
       }

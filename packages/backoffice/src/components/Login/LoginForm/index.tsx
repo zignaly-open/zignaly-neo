@@ -7,7 +7,7 @@ import { LoginValidation } from './validations';
 import { ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from './types';
-import { useAuthenticate } from '../../../apis/user/use';
+import { useAuthenticate } from '../../../apis/session/use';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
