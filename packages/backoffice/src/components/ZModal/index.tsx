@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Modal as MuiModal } from '@mui/material';
 import { LoaderContainer } from './styles';
 import { Loader, ZigModalContainer } from '@zignaly-open/ui';
 import { ZModalProps } from './types';
-import AuthenticatedWall from '../../util/walls/AuthenticatedWall';
-import { useIsAuthenticated } from '../../apis/user/use';
 
 // TODO: move to zignaly-ui
 const ZModal: React.FC<ZModalProps> = ({
   close,
   isLoading,
-  allowUnauth,
   disableBackdropClose,
   children,
   onGoBack,
@@ -20,13 +17,6 @@ const ZModal: React.FC<ZModalProps> = ({
   titleAlign,
   ...props
 }): React.ReactElement => {
-  const isAuthenticated = useIsAuthenticated();
-  const notLoggedInWhenNeeded = !allowUnauth && !isAuthenticated;
-
-  useEffect(() => {
-    notLoggedInWhenNeeded && setTimeout(close);
-  }, [notLoggedInWhenNeeded]);
-
   return (
     <MuiModal
       {...props}
@@ -53,8 +43,6 @@ const ZModal: React.FC<ZModalProps> = ({
           <LoaderContainer>
             <Loader />
           </LoaderContainer>
-        ) : notLoggedInWhenNeeded ? (
-          <AuthenticatedWall />
         ) : (
           <>{children}</>
         )}

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { UserState, UserData } from './types';
+import { UserState } from './types';
 
 const initialState: UserState = {};
 
@@ -18,13 +18,10 @@ export const userSlice = createSlice({
     setAccessToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
     },
-    setUser: (state, action: PayloadAction<UserData>) => {
-      state.user = action.payload;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { logout, setAccessToken, setUser } = userSlice.actions;
+export const { logout, setAccessToken } = userSlice.actions;
 
 export default userSlice.reducer;

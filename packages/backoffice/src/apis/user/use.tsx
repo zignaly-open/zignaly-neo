@@ -1,72 +1,31 @@
-import { useState } from 'react';
-import { LoginPayload, LoginResponse, UserData } from './types';
-import {
-  useLazySessionQuery,
-  useLazyUserQuery,
-  useLoginMutation,
-  useLogoutMutation,
-} from './api';
-import { setAccessToken, setUser } from './store';
+import { LoginPayload } from './types';
+import { useLoginMutation, useLogoutMutation } from './api';
+import { setAccessToken } from './store';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
 import { clearUserSession } from './util';
-
-const useStartSession = () => {
-  const dispatch = useDispatch();
-  const [loadSession] = useLazySessionQuery();
-  const [loadUser] = useLazyUserQuery();
-
-  return async (
-    user: { token: string; userId?: string } & Partial<LoginResponse>,
-  ) => {
-    dispatch(setAccessToken(user.token));
-    const needsModal =
-      user.ask2FA ||
-      user.isUnknownDevice ||
-      user.disabled ||
-      user.emailUnconfirmed;
-
-    if (needsModal) {
-      // eslint-disable-next-line no-console
-      console.error('Sucks to be you');
-    }
-    const [, userData] = await Promise.all([
-      loadSession().unwrap(),
-      loadUser().unwrap(),
-    ]);
-
-    dispatch(setUser(userData));
-  };
-};
+import { useAsyncFn } from 'react-use';
 
 export const useAuthenticate = (): [
   { loading: boolean },
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
-  const startSession = useStartSession();
-
-  const [loading, setLoading] = useState(false);
-
-  // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
-  return [
-    { loading },
+  const dispatch = useDispatch();
+  return useAsyncFn(
     async (payload: LoginPayload) => {
-      setLoading(true);
-
       try {
         const user = await login({
           ...payload,
         }).unwrap();
-        await startSession(user);
-        setLoading(false);
+        dispatch(setAccessToken(user.token));
       } catch (e) {
-        setLoading(false);
         throw e;
       }
     },
-  ];
+    [dispatch, login],
+  );
 };
 
 export function useLogout(performRequest = true): () => void {
@@ -84,12 +43,6 @@ export function useLogout(performRequest = true): () => void {
 }
 
 export function useIsAuthenticated(): boolean {
-  const user = useSelector((state: RootState) => state.user)?.user;
+  const user = useSelector((state: RootState) => state.user)?.accessToken;
   return !!user;
-}
-
-export function useCurrentUser(): UserData | Partial<UserData> {
-  return (
-    useSelector((state: RootState) => state.user)?.user || ({} as UserData)
-  );
 }

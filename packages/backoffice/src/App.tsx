@@ -36,9 +36,7 @@ export const App: React.FC = () => (
           />
           <PersistGate persistor={persistor}>
             <BrowserRouter>
-              <ModalProvider
-                fallback={<ZModal allowUnauth wide open isLoading />}
-              >
+              <ModalProvider fallback={<ZModal wide open isLoading />}>
                 <BackofficeHeader />
                 <Router />
               </ModalProvider>

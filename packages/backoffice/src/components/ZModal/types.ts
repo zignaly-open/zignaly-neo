@@ -4,7 +4,6 @@ import { ShowFnOutput, UseModalOptions } from 'mui-modal-provider';
 export type ZModalProps = {
   title?: string;
   wide?: boolean;
-  allowUnauth?: boolean;
   isLoading?: boolean;
   disableBackdropClose?: boolean;
   onGoBack?: () => void;
@@ -16,5 +15,3 @@ export type ZModalProps = {
 export type UseZModalOptions = UseModalOptions & {
   customClose?: (modal?: ShowFnOutput<void>) => void;
 };
-
-export type ZDialogProps = DialogProps & { close: () => void };

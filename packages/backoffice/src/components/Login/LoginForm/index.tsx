@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Form, Action } from './styles';
 import { LoginValidation } from './validations';
-// import { useAuthenticate } from '../../../../apis/user/use';
 import { ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from './types';

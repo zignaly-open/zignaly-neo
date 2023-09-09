@@ -33,7 +33,7 @@ function ConfirmModal({
   const { t } = useTranslation('action');
 
   return (
-    <ZModal wide allowUnauth {...props} close={close} title={title}>
+    <ZModal wide {...props} close={close} title={title}>
       {!!description && <ZigTypography>{description}</ZigTypography>}
 
       <Box sx={{ mt: 2, textAlign: 'center' }}>
