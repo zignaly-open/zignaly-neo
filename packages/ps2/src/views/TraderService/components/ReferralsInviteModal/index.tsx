@@ -116,6 +116,7 @@ const ReferralsInviteModal = ({
                         referral.investorsCount > 0 && inviteLeft > 0
                           ? 'tooltips.max-commission'
                           : 'tooltips.commission-rate',
+                        { commission: maxCommission },
                       )}
                     >
                       <Box
