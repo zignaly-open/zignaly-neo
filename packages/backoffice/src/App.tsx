@@ -4,10 +4,11 @@ import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import {
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
+  // has to be imported from the same module from where we call the show toast
+  ToastContainer,
 } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
-import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';
 import { persistor, store } from './apis/store';
 import { Provider } from 'react-redux';
