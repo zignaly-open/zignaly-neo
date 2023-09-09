@@ -8,10 +8,10 @@
         "max-commission": "Maximum potential earnings from the platform fee generated through your referrals (this will be applicable for the first six months of the referral's lifetime).",
         "split-commission": "Adjust the slider to pass on a portion of your referral earnings to your referrals. This value will affect only to new referrals.",
         "earn-success-fees": "Earn a percentage of the platform fee generated through your referrals.",
-        "invite-and-earn": "Have 5 referrals sign up and invest in any service(s) of their choice, and earn 100% of the platform fee generated in the first 6 months of the referral's lifetime.",
-        "invite-and-earn-1-week": "Have 5 referrals sign up and invest in any service(s) within 1 week, to earn 200% of the platform fee generated in the first 6 months of the referral's lifetime.",
+        "invite-and-earn": "Have {{referrals}} referrals sign up and invest in any service(s) of their choice, and earn {{commission}}% of the platform fee generated in the first 6 months of the referral's lifetime.",
+        "invite-and-earn-1-week": "Have {{referrals}} referrals sign up and invest in any service(s) within 1 week, to earn {{commission}}% of the platform fee generated in the first 6 months of the referral's lifetime.",
         "trader-boost": "The trader shares {{ feePct }}% of the success fee paid by your referrals in the first 6 months of the referral lifetime",
-        "within-1-week": "Multiply your rewards by 2 referring friends who invest in a service during your first week.",
+        "within-1-week": "Multiply your rewards by {{boost}} referring friends who invest in a service during your first week.",
         "base-commission": "Base percentage of the referral commission from the platform fee generated through your referrals. More referrals = higher commission percentage!",
         "number-referrals": "Number of referrals that invested in a service(s)"
     },
