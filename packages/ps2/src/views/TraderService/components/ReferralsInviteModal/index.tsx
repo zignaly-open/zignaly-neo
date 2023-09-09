@@ -11,7 +11,7 @@ import ZModal from 'components/ZModal';
 import { Box, Grid, Tooltip } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
-import { ChevronRight, Verified } from '@mui/icons-material';
+import { ChevronRight, NorthEast, Verified } from '@mui/icons-material';
 import BoostChip from './atoms/BoostChip';
 import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
@@ -341,7 +341,7 @@ const ReferralsInviteModal = ({
             variant={'text'}
             sx={{ fontSize: '16px !important', marginTop: '61px' }}
             endIcon={
-              <ChevronRight
+              <NorthEast
                 sx={{ color: 'links', fill: 'currentColor !important' }}
               />
             }
