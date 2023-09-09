@@ -1,1 +1,6 @@
-{}
+{
+  "navigation": {
+    "login": "Login",
+    "users": "Users"
+  }
+}

@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import ZModal from './components/ZModal';
+import BackofficeHeader from './components/BackofficeHeader';
 
 export const App: React.FC = () => (
   <Provider store={store}>
@@ -38,6 +39,7 @@ export const App: React.FC = () => (
               <ModalProvider
                 fallback={<ZModal allowUnauth wide open isLoading />}
               >
+                <BackofficeHeader />
                 <Router />
               </ModalProvider>
             </BrowserRouter>

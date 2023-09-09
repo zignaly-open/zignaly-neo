@@ -4,8 +4,8 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/dist/query/react';
+import { showZigToast } from '@zignaly-open/ui';
 import { RootState } from './store';
-import { useToast } from 'util/hooks/useToast';
 import { clearUserSession } from './user/util';
 
 const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
@@ -27,31 +27,28 @@ const endpointsWhitelistedFor401 = [`login`, `logout`];
 
 const maybeReportError = (error: FetchBaseQueryError) => {
   if (!error) return;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  useToast().error(error?.data?.error || 'Something went wrong');
+  showZigToast('error')(error?.data?.error?.msg || 'Something went wrong');
 };
 
 const customFetchBase: (
   baseUrl?: string,
-) => BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError,
-  { silent?: boolean }
-> = (baseUrl) => async (args, api, extraOptions) => {
-  const result = await baseQuery(baseUrl)(args, api, extraOptions);
-  extraOptions?.silent || maybeReportError(result?.error);
+) => BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =
+  (baseUrl) => async (args, api, extraOptions) => {
+    const result = await baseQuery(baseUrl)(args, api, extraOptions);
+    maybeReportError(result?.error);
 
-  if (
-    result?.error?.status === 401 &&
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    !endpointsWhitelistedFor401.includes(args.url)
-  ) {
-    clearUserSession(api.dispatch);
-  }
+    if (
+      result?.error?.status === 401 &&
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      !endpointsWhitelistedFor401.includes(args.url)
+    ) {
+      clearUserSession(api.dispatch);
+    }
 
-  return result;
-};
+    return result;
+  };
 
 export default customFetchBase;
