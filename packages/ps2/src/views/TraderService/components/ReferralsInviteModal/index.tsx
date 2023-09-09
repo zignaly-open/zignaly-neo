@@ -11,7 +11,7 @@ import ZModal from 'components/ZModal';
 import { Box, Grid, Tooltip } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
-import { ChevronRight, NorthEast, Verified } from '@mui/icons-material';
+import { NorthEast, Verified } from '@mui/icons-material';
 import BoostChip from './atoms/BoostChip';
 import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
