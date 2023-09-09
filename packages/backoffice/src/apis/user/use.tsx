@@ -9,13 +9,10 @@ import {
 import { setAccessToken, setUser } from './store';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
-// import { useZModal } from 'components/ZModal/use';
 import { useNavigate } from 'react-router-dom';
-import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
 
 const useStartSession = () => {
-  // const { showModal } = useZModal();
   const dispatch = useDispatch();
   const [loadSession] = useLazySessionQuery();
   const [loadUser] = useLazyUserQuery();
@@ -24,7 +21,16 @@ const useStartSession = () => {
     user: { token: string; userId?: string } & Partial<LoginResponse>,
   ) => {
     dispatch(setAccessToken(user.token));
-    user.userId && track({ userId: user.userId });
+    const needsModal =
+      user.ask2FA ||
+      user.isUnknownDevice ||
+      user.disabled ||
+      user.emailUnconfirmed;
+
+    if (needsModal) {
+      // eslint-disable-next-line no-console
+      console.error('Sucks to be you');
+    }
     const [, userData] = await Promise.all([
       loadSession().unwrap(),
       loadUser().unwrap(),

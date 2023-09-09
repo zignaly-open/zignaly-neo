@@ -4,12 +4,14 @@ import AuthenticatedWall from 'util/walls/AuthenticatedWall';
 import Login from 'components/Login';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import * as Routes from './routes';
+import Users from './components/Users';
+import Transactions from './components/Transactions';
 
 const Router: React.FC = () => (
   <RouterRoutes>
     <Route element={<AuthenticatedWall />}>
-      <Route path={Routes.ROUTE_USERS} element={<>USERS</>} />
-      <Route path={Routes.ROUTE_TRANSFERS} element={<>TRANSFERS</>} />
+      <Route path={Routes.ROUTE_USERS} element={<Users />} />
+      <Route path={Routes.ROUTE_TRANSACTIONS} element={<Transactions />} />
     </Route>
 
     <Route element={<UnauthenticatedWall />}>

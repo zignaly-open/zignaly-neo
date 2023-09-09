@@ -21,8 +21,14 @@ const LoginForm: React.FC = () => {
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     defaultValues: {
-      email: '',
-      password: '',
+      email:
+        (process.env.NODE_ENV === 'development' &&
+          process.env.REACT_APP_TESTING_DEFAULT_EMAIL) ||
+        '',
+      password:
+        (process.env.NODE_ENV === 'development' &&
+          process.env.REACT_APP_TESTING_DEFAULT_PASSWORD) ||
+        '',
     },
     resolver: yupResolver(LoginValidation),
   });

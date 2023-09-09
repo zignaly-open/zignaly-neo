@@ -3,13 +3,15 @@ import React from 'react';
 import { NavigationLink } from './atoms';
 import { Box, Toolbar } from '@mui/material';
 import { Container, StyledAppBar } from './styles';
-import { ROUTE_USERS } from '../../routes';
-import { useIsAuthenticated } from '../../apis/user/use';
+import { ROUTE_LOGIN, ROUTE_TRANSACTIONS, ROUTE_USERS } from '../../routes';
+import { useIsAuthenticated, useLogout } from '../../apis/user/use';
 import { useTranslation } from 'react-i18next';
 
 const BackofficeHeader: React.FC = () => {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
+  const logout = useLogout();
+
   return (
     <Box sx={{ display: 'flex' }}>
       <StyledAppBar>
@@ -33,20 +35,22 @@ const BackofficeHeader: React.FC = () => {
               <HeaderLinksContainer key='links'>
                 {isAuthenticated ? (
                   <>
-                    <NavigationLink
-                      id='menu__marketplace'
-                      to={ROUTE_USERS}
-                      key='--route-ps'
-                    >
+                    <NavigationLink to={ROUTE_USERS} key='--route-users'>
                       {t('navigation.users')}
                     </NavigationLink>
+                    <NavigationLink to={ROUTE_TRANSACTIONS} key='--route-users'>
+                      {t('navigation.transactions')}
+                    </NavigationLink>
+                    <a
+                      id='logout'
+                      onClick={() => logout()}
+                      key='--route-logout'
+                    >
+                      {t('navigation.logout')}
+                    </a>
                   </>
                 ) : (
-                  <NavigationLink
-                    id='menu__marketplace'
-                    to={ROUTE_USERS}
-                    key='--route-ps'
-                  >
+                  <NavigationLink to={ROUTE_LOGIN} key='--route-ps'>
                     {t('navigation.login')}
                   </NavigationLink>
                 )}

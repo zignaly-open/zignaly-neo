@@ -1,6 +1,8 @@
 {
   "navigation": {
     "login": "Login",
+    "logout": "Logout",
+    "transactions": "Transactions",
     "users": "Users"
   }
 }
