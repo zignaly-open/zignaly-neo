@@ -1,15 +1,13 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
+import { trimZeros, ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
 import { Box, Grid, useTheme } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
 import { numericFormatter } from 'react-number-format';
-
-const SBT_UNLIMITED = 1000000000;
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
@@ -117,14 +115,25 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               fontSize={12}
               color={'neutral200'}
               id={'service-profile__funds-allocated'}
+              whiteSpace={'nowrap'}
             >
-              {service.maximumSbt >= SBT_UNLIMITED
-                ? t('summary.no-max-limit')
+              {Number(service?.fundsAllocated) < 10
+                ? `${trimZeros(
+                    numericFormatter(
+                      (+service?.invested + service?.pending).toString(),
+                      {
+                        thousandSeparator: true,
+                        decimalScale: 2,
+                      },
+                    ),
+                  )} ${service?.ssc || 'USDT'}`
                 : t('common:percent', {
-                    value: numericFormatter(service.fundsAllocated, {
-                      thousandSeparator: true,
-                      decimalScale: 2,
-                    }),
+                    value: trimZeros(
+                      numericFormatter(service?.fundsAllocated, {
+                        thousandSeparator: true,
+                        decimalScale: 2,
+                      }),
+                    ),
                   })}
             </ZigTypography>
           </ZigTypography>

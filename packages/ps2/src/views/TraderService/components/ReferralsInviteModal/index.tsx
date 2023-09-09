@@ -288,8 +288,8 @@ const ReferralsInviteModal = ({
                           commission: maxCommission,
                         })}
                         tooltip={t('tooltips.invite-and-earn', {
-                          referrals: inviteLeft,
-                          commission: maxCommissionWithoutTraderBoost,
+                          invite: inviteLeft,
+                          commission: maxCommission,
                         })}
                       />
                     )}
@@ -300,8 +300,8 @@ const ReferralsInviteModal = ({
                           commission: maxCommissionWithoutTraderBoost,
                         })}
                         tooltip={t('tooltips.invite-and-earn-1-week', {
-                          referrals: inviteLeft,
-                          commission: maxCommissionWithoutTraderBoost,
+                          invite: inviteLeft,
+                          commission: maxCommission,
                         })}
                       />
                     )}
@@ -314,6 +314,10 @@ const ReferralsInviteModal = ({
                           ),
                           commission: maxCommission,
                           multiplier: traderBoostMultiplier,
+                        })}
+                        tooltip={t('tooltips.invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
                         })}
                       />
                     )}
