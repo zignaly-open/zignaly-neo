@@ -79,7 +79,7 @@ const InviteButton = ({ service }: { service: Service }) => {
           <Box
             position='absolute'
             top={0}
-            left={15}
+            left={12.5}
             bottom={0}
             display={'flex'}
             alignItems={'center'}
@@ -89,11 +89,15 @@ const InviteButton = ({ service }: { service: Service }) => {
             </Box>
             <Box
               position={'absolute'}
-              left={0}
+              left={'5px'}
               top={24}
-              width={'42px'}
+              width={'32px'}
+              height={'32px'}
               display={'flex'}
               justifyContent={'center'}
+              bgcolor={'#bc7725b3'}
+              borderRadius={'50%'}
+              alignItems={'center'}
             >
               <ZigTypography fontWeight={700} fontSize={'18px'} color='#fffc19'>
                 {traderBoostMultiplier > 1 ? `${traderBoostMultiplier}x` : '%'}
@@ -133,6 +137,8 @@ const InviteButton = ({ service }: { service: Service }) => {
                   position: 'absolute',
                   bottom: 0,
                   marginLeft: '-2px',
+                  fontSize: '19px',
+                  marginBottom: '2px',
                 }}
               />
             </ZigTypography>
