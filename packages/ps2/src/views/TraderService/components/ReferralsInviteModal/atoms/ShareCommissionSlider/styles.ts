@@ -71,7 +71,7 @@ export const StyledZigSlider = styled(ZigSlider)`
       font-weight: 400;
       margin-right: -3px;
       margin-bottom: 10px;
-      margin-left: 2px;
+      margin-left: 7px;
     }
   }
 `;
