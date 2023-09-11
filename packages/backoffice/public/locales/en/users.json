@@ -1,6 +1,8 @@
 {
   "actions": {
     "disable2FA": "Disable 2FA",
+    "ban-confirm": "Ban {{email}}",
+    "unban-confirm": "Unban {{email}}",
     "ban": "Ban",
     "unban": "Unban"
   },

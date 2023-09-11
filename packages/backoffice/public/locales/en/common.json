@@ -3,6 +3,7 @@
   "yes": "Yes",
   "no": "No",
   "off": "Off",
+  "generic-confirm": "Please confirm you'd like to perform this action",
   "navigation": {
     "login": "Login",
     "logout": "Logout",
