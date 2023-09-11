@@ -5,9 +5,9 @@ export const InviteBox = styled(Box)`
   z-index: 2;
   margin-left: 8px;
   position: relative;
-  width: 250px;
+  width: 229px;
   height: 66px;
-  padding: 5px 15px 5px 76px;
+  padding: 4px 11px 4px 68px;
   border-radius: 5px;
   border: 1px solid rgba(111, 111, 111, 0.99);
   background: ${({ theme }) => theme.palette.backgrounds.tableHeader};
