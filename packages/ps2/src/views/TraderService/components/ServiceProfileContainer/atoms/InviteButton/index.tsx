@@ -49,30 +49,6 @@ const InviteButton = ({ service }: { service: Service }) => {
       alignItems={'center'}
       mb={sm && boostRunning ? '10px' : 0}
     >
-      <ZigButton
-        ctaId={'service-profile-invite-button'}
-        onClick={handleClick}
-        sx={{
-          height: '54px',
-          minWidth: '63px',
-          maxWidth: '63px',
-          padding: '0',
-          overflow: 'visible',
-        }}
-      >
-        <Box
-          display={'flex'}
-          flexDirection={'column'}
-          gap={0.5}
-          alignItems={'center'}
-          justifyContent={'center'}
-          mt={'-10px'}
-          textTransform={'capitalize'}
-        >
-          <ZigInviteIcon width={35} height={'100%'} />
-          {t('invite')}
-        </Box>
-      </ZigButton>
       {(serviceCommission?.commission || boostRunning) && (
         <InviteBox>
           <InviteBoxArrow />
@@ -160,6 +136,30 @@ const InviteButton = ({ service }: { service: Service }) => {
           )}
         </InviteBox>
       )}
+      <ZigButton
+        ctaId={'service-profile-invite-button'}
+        onClick={handleClick}
+        sx={{
+          height: '54px',
+          minWidth: '63px',
+          maxWidth: '63px',
+          padding: '0',
+          overflow: 'visible',
+        }}
+      >
+        <Box
+          display={'flex'}
+          flexDirection={'column'}
+          gap={0.5}
+          alignItems={'center'}
+          justifyContent={'center'}
+          mt={'-10px'}
+          textTransform={'capitalize'}
+        >
+          <ZigInviteIcon width={35} height={'100%'} />
+          {t('invite')}
+        </Box>
+      </ZigButton>
     </Box>
   );
 };

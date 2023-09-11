@@ -3,7 +3,7 @@ import { ZigTypography } from '@zignaly-open/ui';
 
 export const InviteBox = styled(Box)`
   z-index: 2;
-  margin-left: 8px;
+  margin-right: 8px;
   position: relative;
   width: 229px;
   height: 66px;
@@ -18,12 +18,12 @@ export const InviteBox = styled(Box)`
 export const InviteBoxArrow = styled('div')`
   position: absolute;
   top: calc(50% - 12px);
-  left: -16px;
+  right: -16px;
   width: 0;
   height: 0;
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
-  border-right: 16px solid rgba(111, 111, 111, 0.99);
+  border-left: 16px solid rgba(111, 111, 111, 0.99);
 
   &:after {
     content: '';
@@ -31,10 +31,10 @@ export const InviteBoxArrow = styled('div')`
     height: 0;
     border-top: 11px solid transparent;
     border-bottom: 11px solid transparent;
-    border-right: 15px solid
+    border-left: 15px solid
       ${({ theme }) => theme.palette.backgrounds.tableHeader};
     position: absolute;
-    left: 1px;
+    right: 1px;
     top: calc(50% - 11px);
   }
 `;
