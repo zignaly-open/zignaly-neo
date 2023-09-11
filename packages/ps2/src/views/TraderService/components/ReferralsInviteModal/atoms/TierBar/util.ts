@@ -90,7 +90,7 @@ export const useTierLayers = (
   tierId: number,
   boost: number,
   serviceCommission: number,
-  zignalyCommission?: number,
+  zignalyCommission = 5,
   options: { minHeight?: number; maxHeight?: number } = {},
 ) => {
   const { minHeight = DEFAULT_MIN_HEIGHT, maxHeight = DEFAULT_MAX_HEIGHT } =
