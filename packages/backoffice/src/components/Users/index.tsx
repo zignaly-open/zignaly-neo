@@ -72,12 +72,30 @@ export default function Users() {
       }),
       columnHelper.accessor('2faEnabled', {
         header: t('table.2faEnabled'),
-        cell: ({ getValue }) => (
+        cell: ({ getValue, row }) => (
           <TogglerButton
             text={getValue() ? t('common:on') : t('common:off')}
             isPositive={getValue()}
             buttonText={t('actions.disable2FA')}
-            action={getValue() ? () => {} : undefined}
+            action={
+              getValue()
+                ? () => {
+                    showConfirmAction({
+                      title: t(`actions.disable2FA-confirm`, {
+                        email: row.original.email,
+                      }),
+                      description: t('common:generic-confirm'),
+                      yesLabel: t(`actions.disable2FA-confirm`),
+                      action: async () => {
+                        await disable2fa({
+                          userId: row.original.userId,
+                        }).unwrap();
+                        await fetchUsers(filters);
+                      },
+                    });
+                  }
+                : undefined
+            }
           />
         ),
       }),
