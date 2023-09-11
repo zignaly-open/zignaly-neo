@@ -27,6 +27,8 @@ const TogglerButton: React.FC<{
       <ZigTypography
         sx={{
           transition: '.3s',
+          textAlign: 'center',
+          width: '100%',
           ...(isHover || !action ? {} : { transform: 'translateY(12px)' }),
         }}
         component={'p'}

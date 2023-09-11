@@ -3,10 +3,11 @@ import baseApiBackoffice from '../baseApiBackoffice';
 import { injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  users: builder.query<UserData[], void>({
-    query: () => ({
+  users: builder.query<UserData[], Record<string, string>>({
+    query: (filters) => ({
       url: 'users',
       method: 'GET',
+      params: filters,
     }),
   }),
   disable2FA: builder.mutation<void, { userId: string }>({
@@ -30,7 +31,7 @@ export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
 }));
 
 export const {
-  useUsersQuery,
+  useLazyUsersQuery,
   useDisable2FAMutation,
   useBanMutation,
   useUnbanMutation,

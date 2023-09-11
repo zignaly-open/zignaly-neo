@@ -1,20 +1,38 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   createColumnHelper,
   Loader,
   PageContainer,
+  ZigInput,
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { useUsersQuery } from '../../apis/users/api';
+import { useLazyUsersQuery } from '../../apis/users/api';
 import { useTranslation } from 'react-i18next';
 import { UserData } from '../../apis/users/types';
-import TogglerButton from '../TogglerButton';
-import { ValueOrDash } from './atoms';
+import TogglerButton from '../TableUtils/TogglerButton';
+import { ValueOrDash } from '../TableUtils/ValueOrDash';
+import { Box } from '@mui/material';
+import { useDebounce } from 'react-use';
 
 export default function Users() {
   const { t } = useTranslation('users');
-  const { data: users } = useUsersQuery();
+  const [filters, setFilters] = useState({
+    userId: '',
+    email: '',
+    accessLevel: '',
+    subscriptionCode: '',
+  });
+  const [fetchUsers, { data: users, isFetching }] = useLazyUsersQuery();
+
+  useDebounce(
+    async () => {
+      fetchUsers(filters);
+    },
+    500,
+    [filters],
+  );
+
   const columnHelper = createColumnHelper<UserData>();
   const columns = useMemo(() => {
     return [
@@ -66,7 +84,7 @@ export default function Users() {
         ),
       }),
     ];
-  }, []);
+  }, [filters]);
 
   return (
     <PageContainer
@@ -81,22 +99,83 @@ export default function Users() {
         {t('navigation.users')}
       </ZigTypography>
 
-      {users ? (
-        <ZigTable
-          initialState={{
-            sorting: [
-              {
-                id: 'userId',
-                desc: true,
-              },
-            ],
-          }}
-          columns={columns}
-          data={users}
-          columnVisibility={false}
-          enableSortingRemoval={false}
-          emptyMessage={t('no-data')}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: 2,
+          mb: 4,
+          width: 1000,
+          '& > *': {
+            flex: 1,
+          },
+        }}
+      >
+        <ZigInput
+          label={t('table.userId')}
+          placeholder={t('table.userId')}
+          value={filters.userId}
+          onChange={(e) =>
+            setFilters((old) => ({ ...old, userId: e.target.value }))
+          }
         />
+        <ZigInput
+          label={t('table.email')}
+          placeholder={t('table.email')}
+          value={filters.email}
+          onChange={(e) =>
+            setFilters((old) => ({ ...old, email: e.target.value }))
+          }
+        />
+        <ZigInput
+          label={t('table.accessLevel')}
+          placeholder={t('table.accessLevel')}
+          value={filters.accessLevel}
+          onChange={(e) =>
+            setFilters((old) => ({ ...old, accessLevel: e.target.value }))
+          }
+        />
+        <ZigInput
+          label={t('table.subscriptionCode')}
+          placeholder={t('table.subscriptionCode')}
+          value={filters.subscriptionCode}
+          onChange={(e) =>
+            setFilters((old) => ({ ...old, subscriptionCode: e.target.value }))
+          }
+        />
+      </Box>
+
+      {users ? (
+        <Box
+          sx={{
+            '& table': {
+              minWidth: '1000px',
+            },
+            ...(isFetching
+              ? {
+                  opacity: 0.5,
+                  cursor: 'not-allowed',
+                  pointerEvents: 'none',
+                }
+              : {}),
+          }}
+        >
+          <ZigTable
+            initialState={{
+              sorting: [
+                {
+                  id: 'userId',
+                  desc: true,
+                },
+              ],
+            }}
+            columns={columns}
+            data={users}
+            columnVisibility={false}
+            enableSortingRemoval={false}
+            emptyMessage={t('no-data')}
+          />
+        </Box>
       ) : (
         <Loader />
       )}
