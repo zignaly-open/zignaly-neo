@@ -24,7 +24,7 @@ test('switches tabs when clicking', async () => {
 
   fireEvent.click(lifetimeTab);
   await waitFor(() => {
-    // Now, the KYB tab should be active
+    // Now, the lifetime tab should be active
     expect(lifetimeTab).toHaveClass('active');
     expect(annuallyTab).not.toHaveClass('active');
   });
@@ -32,7 +32,7 @@ test('switches tabs when clicking', async () => {
   fireEvent.click(annuallyTab);
 
   await waitFor(() => {
-    // Now, the KYB tab should be active
+    // Now, the annually tab should be active
     expect(annuallyTab).toHaveClass('active');
     expect(lifetimeTab).not.toHaveClass('active');
   });
@@ -62,12 +62,13 @@ test('handles form submission', async () => {
   const codeInput = screen.getByRole('textbox', { name: 'code' });
   const submitButton = screen.getByRole('button', { name: 'submit' });
 
-  // Fill in the code input
+  // Fill in the wrong code input
   fireEvent.change(codeInput, { target: { value: 'example-code' } });
 
   // Submit the form
   fireEvent.click(submitButton);
 
+  // Fill in the right code input
   await waitFor(() => {
     expect(screen.queryByText('error')).toBeInTheDocument();
   });
