@@ -1,4 +1,8 @@
 {
+  "on": "On",
+  "yes": "Yes",
+  "no": "No",
+  "off": "Off",
   "navigation": {
     "login": "Login",
     "logout": "Logout",
@@ -6,5 +10,6 @@
     "logs": "Logs",
     "deposits": "Deposits",
     "users": "Users"
-  }
+  },
+  "no-data": "No data to show"
 }

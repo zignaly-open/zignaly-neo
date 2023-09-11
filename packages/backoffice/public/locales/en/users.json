@@ -1,0 +1,17 @@
+{
+  "actions": {
+    "disable2FA": "Disable 2FA",
+    "ban": "Ban",
+    "unban": "Unban"
+  },
+  "table": {
+    "subscriptionCode": "Code",
+    "subscriptionLevel": "Subscription",
+    "kycLevels": "KYC",
+    "isBanned": "Banned",
+    "userId": "ID",
+    "email": "E-mail",
+    "2faEnabled": "2FA",
+    "accessLevel": "Access Level"
+  }
+}

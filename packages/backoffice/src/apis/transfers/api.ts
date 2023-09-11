@@ -3,13 +3,13 @@ import baseApiBackoffice from '../baseApiBackoffice';
 import { injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  deposits: builder.query<void, UserData[]>({
+  deposits: builder.query<UserData[], void>({
     query: () => ({
       url: 'deposits',
       method: 'GET',
     }),
   }),
-  withdrawals: builder.query<void, UserData[]>({
+  withdrawals: builder.query<UserData[], void>({
     query: () => ({
       url: 'withdrawals',
       method: 'GET',
