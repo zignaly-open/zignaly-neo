@@ -8,7 +8,12 @@ import { useZModal } from 'components/ZModal/use';
 import { Service } from 'apis/service/types';
 import { useIsAuthenticated } from 'apis/user/use';
 import { useTranslation } from 'react-i18next';
-import { ComissionTypography, InviteBox, InviteBoxArrow } from './styles';
+import {
+  ComissionTypography,
+  InviteBox,
+  InviteBoxArrow,
+  ZigTypographyTest,
+} from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ChevronRight } from '@mui/icons-material';
 import { useTiersData } from 'apis/referrals/use';
@@ -101,6 +106,7 @@ const InviteButton = ({ service }: { service: Service }) => {
                 cursor: 'pointer',
               }}
               onClick={handleClick}
+              id='service-profile__invite-widget-text'
             >
               {t(inviteLeft ? 'invite-count' : 'invite-generic', {
                 count: inviteLeft,
@@ -137,6 +143,7 @@ const InviteButton = ({ service }: { service: Service }) => {
         </InviteBox>
       )}
       <ZigButton
+        id='service-profile__invite-button'
         ctaId={'service-profile-invite-button'}
         onClick={handleClick}
         sx={{
