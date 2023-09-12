@@ -343,7 +343,11 @@ const ReferralsInviteModal = ({
             sx={{ fontSize: '16px !important', marginTop: '61px' }}
             endIcon={
               <NorthEast
-                sx={{ color: 'links', fill: 'currentColor !important' }}
+                sx={{
+                  color: 'links',
+                  fill: 'currentColor !important',
+                  fontSize: '16px',
+                }}
               />
             }
           >
