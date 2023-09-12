@@ -8,12 +8,7 @@ import { useZModal } from 'components/ZModal/use';
 import { Service } from 'apis/service/types';
 import { useIsAuthenticated } from 'apis/user/use';
 import { useTranslation } from 'react-i18next';
-import {
-  ComissionTypography,
-  InviteBox,
-  InviteBoxArrow,
-  ZigTypographyTest,
-} from './styles';
+import { ComissionTypography, InviteBox, InviteBoxArrow } from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ChevronRight } from '@mui/icons-material';
 import { useTiersData } from 'apis/referrals/use';

@@ -51,32 +51,3 @@ export const ComissionTypography = styled(ZigTypography)`
   font-size: 14.5px;
   font-weight: 600;
 `;
-
-export const ZigTypographyTest = styled(ZigTypography)`
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  /* overflow: hidden;
-  position: relative;
-  line-height: 1.2em;
-  max-height: 2.4em;
-  text-align: justify;
-  margin-right: -1em;
-  padding-right: 1em;
-  &:before {
-    content: '...';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: red;
-  } */
-`;
