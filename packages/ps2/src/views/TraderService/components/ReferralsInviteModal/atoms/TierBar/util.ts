@@ -22,7 +22,8 @@ export const calculateLayerValue = (
       zignalyCommission,
     );
   } else if (layer === 2) {
-    if (boost === 1 && serviceCommission === 0) return 0;
+    if ((boost === 1 && serviceCommission === 0) || !zignalyCommission)
+      return 0;
 
     // User boost without trader boost OR trader boost
     return getBoostedCommissionPct(
@@ -31,7 +32,9 @@ export const calculateLayerValue = (
     );
   } else if (layer === 3) {
     // Only used to show the base commission when there is a boost and service commission
-    return boost > 1 && serviceCommission > 0 ? tierCommission : 0;
+    return boost > 1 && serviceCommission > 0 && zignalyCommission > 0
+      ? tierCommission
+      : 0;
   }
 
   return 0;
@@ -87,7 +90,7 @@ export const useTierLayers = (
   tierId: number,
   boost: number,
   serviceCommission: number,
-  zignalyCommission?: number,
+  zignalyCommission = 5,
   options: { minHeight?: number; maxHeight?: number } = {},
 ) => {
   const { minHeight = DEFAULT_MIN_HEIGHT, maxHeight = DEFAULT_MAX_HEIGHT } =

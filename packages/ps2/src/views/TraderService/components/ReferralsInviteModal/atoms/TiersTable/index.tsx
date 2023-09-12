@@ -73,7 +73,13 @@ const CellLabelBoost = ({
         color={activated ? '#24b68d' : '#e93ea7'}
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip title={t('tooltips.within-1-week')}>
+        <Tooltip
+          title={t(
+            activated
+              ? 'tooltips.within-1-week-unlocked'
+              : 'tooltips.within-1-week',
+          )}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -81,7 +87,13 @@ const CellLabelBoost = ({
   );
 };
 
-const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
+const CellLabelTraderBoost = ({
+  commission,
+  multiplier,
+}: {
+  commission: number;
+  multiplier: number;
+}) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
@@ -91,7 +103,7 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
       gap='10px'
       justifyContent='flex-end'
     >
-      <BoostChip boost={boost} showBolt />
+      <BoostChip boost={multiplier} showBolt />
       <ZigTypography
         fontWeight={500}
         variant='h4'
@@ -99,7 +111,7 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
         color='#24b68d'
       >
         {t('trader-boost')}
-        <Tooltip title={t('tooltips.trader-boost', { commission: boost })}>
+        <Tooltip title={t('tooltips.trader-boost', { commission })}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -129,7 +141,10 @@ const TiersTable = ({
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
         {serviceCommission > 0 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost boost={layers[0].value / layers[1].value} />
+            <CellLabelTraderBoost
+              commission={serviceCommission}
+              multiplier={layers[0].value / layers[1].value}
+            />
           </Box>
         )}
         {boost > 1 && (

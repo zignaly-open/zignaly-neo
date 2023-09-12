@@ -16,7 +16,7 @@ const TraderCard = ({
 }) => {
   return (
     <CardBox
-      width='234px'
+      width='230px'
       height='288px'
       display='flex'
       flexDirection={'column'}
@@ -32,7 +32,7 @@ const TraderCard = ({
       )}
       <ZigTypography
         variant='h1'
-        fontWeight='600'
+        fontWeight='500'
         textAlign={'center'}
         lineHeight={'28px'}
         sx={{

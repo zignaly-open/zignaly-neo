@@ -27,11 +27,11 @@ export const ShareCommissionSlider = ({
         return;
       }
       await updateDiscount({
-        discount: (value / max) * 100,
+        discount: Math.round((value / max) * 100),
       }).unwrap();
       toast.success(t('changes-saved'));
     },
-    1000,
+    600,
     [value],
   );
 
