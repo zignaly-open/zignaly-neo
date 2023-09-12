@@ -261,7 +261,7 @@ const TiersTable = ({
               {formatCompactNumber(
                 getMaxEarnings(
                   tier.commissionPct,
-                  referral.boost,
+                  boost,
                   serviceCommission,
                   zignalyCommission,
                 ).toFixed(),
