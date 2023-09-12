@@ -3,13 +3,39 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '../../util/test';
 import Subscriptions from './index';
 import SubscribeForm from './SubscribeForm';
+// jest.mock('react-i18next', () => ({
+//   useTranslation: () => ({
+//     t: (key: string) => key, // Mock translation function
+//   }),
+// }));
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key, // Mock translation function
+jest.mock('../../apis/subscription/api', () => ({
+  useSubscriptionsQuery: () => ({
+    data: [
+      {
+        id: '64dc95250f375e86440f6808',
+        priceYear: 397,
+        priceLifetime: 797,
+        name: 'Quantwise Plus',
+        successFeePct: 50,
+      },
+      {
+        priceYear: 1497,
+        priceLifetime: 3997,
+        name: 'Quantwise Pro',
+        successFeePct: 40,
+        id: '64dc95250f375e86440f6809',
+      },
+      {
+        id: '64dc95250f375e86440f680a',
+        priceYear: 3997,
+        priceLifetime: 5997,
+        name: 'Quantwise Expert',
+        successFeePct: 30,
+      },
+    ],
   }),
 }));
-
 test('renders Subscriptions component', () => {
   renderWithProviders(<Subscriptions />);
   expect(screen.getByText('title')).toBeInTheDocument();
