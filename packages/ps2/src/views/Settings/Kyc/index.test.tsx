@@ -1,21 +1,21 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
-import { default as KycComponent } from './index'; // Import your Kyc component
+import { default as KycComponent } from './index';
 import { renderWithProviders } from '../../../util/test';
 import { mockKycStatuses } from '../../../test/mocks/kyc';
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key, // Mock translation function
-  }),
-}));
+// jest.mock('react-i18next', () => ({
+//   useTranslation: () => ({
+//     t: (key: string) => key, // Mock translation function
+//   }),
+// }));
 
 // Mock the currentUser and related functions
 const mockCurrentUser = {
-  KYCMonitoring: true, // Adjust as needed based on your component's logic
+  KYCMonitoring: true,
 };
 
-const mockLoadUser = jest.fn(); // Mock the loadUser function
+const mockLoadUser = jest.fn();
 
 jest.mock('../../../apis/user/api', () => ({
   useCurrentUser: () => mockCurrentUser,
