@@ -4,10 +4,10 @@ import { ZigSlider } from '@zignaly-open/ui';
 export const SliderContainer = styled(Box)`
   position: relative;
   width: 100%;
-  height: 121px;
+  height: 111px;
   border: 1.6px solid #202735;
   border-radius: 15px;
-  padding: 22px 16px 16px 16px;
+  padding: 22px 16px 6px 16px;
   width: 428px;
   display: flex;
   flex-direction: column;
