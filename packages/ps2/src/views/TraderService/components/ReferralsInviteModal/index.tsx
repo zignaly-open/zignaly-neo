@@ -256,104 +256,99 @@ const ReferralsInviteModal = ({
               referralCode={referral.referralCode}
             />
           </Box>
-
-          {service?.zglySuccessFee > 0 && (
-            <>
-              {inviteLeft > 0 && (
-                <Box
-                  display='flex'
-                  flexDirection={'column'}
-                  alignItems={'center'}
-                  mt='40px'
-                >
-                  <Box display='flex' flexDirection={'column'}>
-                    {referral.investorsCount > 0 ? (
-                      <ZigTypography
-                        fontSize={19}
-                        textAlign={'left'}
-                        fontWeight={500}
-                        color={'neutral100'}
-                      >
-                        {t('invite-more', {
+          {inviteLeft > 0 && (
+            <Box
+              display='flex'
+              flexDirection={'column'}
+              alignItems={'center'}
+              mt='40px'
+            >
+              <Box display='flex' flexDirection={'column'}>
+                {referral.investorsCount > 0 ? (
+                  <ZigTypography
+                    fontSize={19}
+                    textAlign={'left'}
+                    fontWeight={500}
+                    color={'neutral100'}
+                  >
+                    {t('invite-more', {
+                      invite: inviteLeft,
+                      commission: maxCommission,
+                    })}
+                  </ZigTypography>
+                ) : (
+                  <>
+                    <DescriptionLine
+                      text={t('earn-success-fees')}
+                      tooltip={t('tooltips.earn-success-fees')}
+                    />
+                    {!boostRunning && !serviceCommission.commission && (
+                      <DescriptionLine
+                        text={t('invite-and-earn', {
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
-                      </ZigTypography>
-                    ) : (
-                      <>
-                        <DescriptionLine
-                          text={t('earn-success-fees')}
-                          tooltip={t('tooltips.earn-success-fees')}
-                        />
-                        {!boostRunning && !serviceCommission.commission && (
-                          <DescriptionLine
-                            text={t('invite-and-earn', {
-                              invite: inviteLeft,
-                              commission: maxCommission,
-                            })}
-                            tooltip={t('tooltips.invite-and-earn', {
-                              invite: inviteLeft,
-                              commission: maxCommission,
-                            })}
-                          />
-                        )}
-                        {boostRunning && (
-                          <DescriptionLine
-                            text={t('invite-and-earn-1-week', {
-                              invite: inviteLeft,
-                              commission: maxCommissionWithoutTraderBoost,
-                            })}
-                            tooltip={t('tooltips.invite-and-earn-1-week', {
-                              invite: inviteLeft,
-                              commission: maxCommissionWithoutTraderBoost,
-                            })}
-                          />
-                        )}
-                        {serviceCommission.commission > 0 && (
-                          <DescriptionLine
-                            text={t('invite-and-earn-trader-boost', {
-                              invite: inviteLeft,
-                              commissionBefore: trimZeros(
-                                maxCommissionWithoutTraderBoost,
-                              ),
-                              commission: maxCommission,
-                              multiplier: traderBoostMultiplier,
-                            })}
-                            tooltip={t('tooltips.invite-and-earn', {
-                              invite: inviteLeft,
-                              commission: maxCommission,
-                            })}
-                          />
-                        )}
-                      </>
+                        tooltip={t('tooltips.invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
+                      />
                     )}
-                  </Box>
-                </Box>
-              )}
-              <Box width={'100%'} display={'flex'} justifyContent={'center'}>
-                <Tiers
-                  tiers={tiers}
-                  referral={referral}
-                  serviceCommission={serviceCommission.commission}
-                  zignalyCommission={service?.zglySuccessFee}
-                  boost={boost}
-                  boostRunning={boostRunning}
-                />
+                    {boostRunning && (
+                      <DescriptionLine
+                        text={t('invite-and-earn-1-week', {
+                          invite: inviteLeft,
+                          commission: maxCommissionWithoutTraderBoost,
+                        })}
+                        tooltip={t('tooltips.invite-and-earn-1-week', {
+                          invite: inviteLeft,
+                          commission: maxCommissionWithoutTraderBoost,
+                        })}
+                      />
+                    )}
+                    {serviceCommission.commission > 0 && (
+                      <DescriptionLine
+                        text={t('invite-and-earn-trader-boost', {
+                          invite: inviteLeft,
+                          commissionBefore: trimZeros(
+                            maxCommissionWithoutTraderBoost,
+                          ),
+                          commission: maxCommission,
+                          multiplier: traderBoostMultiplier,
+                        })}
+                        tooltip={t('tooltips.invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
+                      />
+                    )}
+                  </>
+                )}
               </Box>
-
-              <ZigButton
-                variant={'text'}
-                sx={{ fontSize: '16px !important', marginTop: '61px' }}
-                endIcon={
-                  <NorthEast
-                    sx={{ color: 'links', fill: 'currentColor !important' }}
-                  />
-                }
-              >
-                {t('terms')}
-              </ZigButton>
-            </>
+            </Box>
           )}
+          <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+            <Tiers
+              tiers={tiers}
+              referral={referral}
+              serviceCommission={serviceCommission.commission}
+              zignalyCommission={service?.zglySuccessFee}
+              boost={boost}
+              boostRunning={boostRunning}
+            />
+          </Box>
+
+          <ZigButton
+            variant={'text'}
+            sx={{ fontSize: '16px !important', marginTop: '61px' }}
+            endIcon={
+              <NorthEast
+                sx={{ color: 'links', fill: 'currentColor !important' }}
+              />
+            }
+          >
+            {t('terms')}
+          </ZigButton>
         </>
       )}
     </ZModal>
