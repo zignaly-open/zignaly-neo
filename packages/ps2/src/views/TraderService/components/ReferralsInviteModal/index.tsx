@@ -348,7 +348,7 @@ const ReferralsInviteModal = ({
                 sx={{
                   color: 'links',
                   fill: 'currentColor !important',
-                  fontSize: '16px',
+                  fontSize: '16px !important',
                 }}
               />
             }
