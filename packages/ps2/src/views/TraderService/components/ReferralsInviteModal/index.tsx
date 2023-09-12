@@ -140,6 +140,7 @@ const ReferralsInviteModal = ({
                     pt='20px'
                     lineHeight='50px'
                     position={'relative'}
+                    className='referrals-invite-modal__max-commission'
                   >
                     {maxCommission}
                     <ZigTypography
@@ -198,6 +199,7 @@ const ReferralsInviteModal = ({
                         fontSize={35}
                         pl='9px'
                         pr='7px'
+                        className='referrals-invite-modal__referrals-count'
                       >
                         {referral.investorsCount}
                       </ZigTypography>
@@ -346,7 +348,7 @@ const ReferralsInviteModal = ({
                 sx={{
                   color: 'links',
                   fill: 'currentColor !important',
-                  fontSize: '16px',
+                  fontSize: '16px !important',
                 }}
               />
             }

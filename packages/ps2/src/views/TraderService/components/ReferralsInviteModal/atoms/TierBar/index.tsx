@@ -88,6 +88,7 @@ const TierBar = ({
               }
               fontSize={fontSize}
               fontWeight={showArrow ? 600 : 500}
+              className='tier-bar__value'
             >
               {Math.floor(layer1.value)}
               {'%'}
