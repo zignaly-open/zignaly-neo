@@ -66,6 +66,7 @@ function InvestDepositModal({
 
   const depositModal = useDepositModalContent({
     coin: service?.ssc,
+    refetchBalance,
     close: trackAwareClose,
   });
   const investModal = useInvestModalContent({ close: trackAwareClose });
@@ -102,6 +103,7 @@ function InvestDepositModal({
       isLoading={!ready}
       onGoBack={onGoBack}
       wide
+      width={showDeposit && 720}
     >
       <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
     </ZModal>
