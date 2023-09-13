@@ -291,6 +291,7 @@ const ReferralsInviteModal = ({
                     <DescriptionLine
                       text={t('earn-success-fees')}
                       tooltip={t('tooltips.earn-success-fees')}
+                      id='referrals-invite-modal__earn-success-fees'
                     />
                     {!boostRunning && !serviceCommission.commission && (
                       <DescriptionLine
@@ -302,6 +303,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
+                        id='referrals-invite-modal__invite-and-earn'
                       />
                     )}
                     {boostRunning && (
@@ -314,6 +316,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommissionWithoutTraderBoost,
                         })}
+                        id='referrals-invite-modal__invite-and-earn-1-week'
                       />
                     )}
                     {serviceCommission.commission > 0 && (
@@ -330,6 +333,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
+                        id='referrals-invite-modal__invite-and-earn-trader-boost'
                       />
                     )}
                   </>
