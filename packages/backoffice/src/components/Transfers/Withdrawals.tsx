@@ -11,8 +11,9 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import {
-  useDepositApproveMutation,
-  useLazyDepositsQuery,
+  useLazyWithdrawalsQuery,
+  useWithdrawalApproveMutation,
+  useWithdrawalRejectMutation,
 } from '../../apis/transfers/api';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
@@ -21,11 +22,12 @@ import { Box, Tooltip } from '@mui/material';
 import { useDebounce } from 'react-use';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import {
-  DepositData,
   DepositStatuses,
   TransferFilterType,
+  WithdrawalData,
 } from '../../apis/transfers/types';
 import { withdrawalStatusColorMap } from './constants';
+import { useOperatorOptions, useWithdrawalStatusOptions } from './use';
 
 export default function Withdrawals() {
   const { t } = useTranslation('transfers');
@@ -36,41 +38,13 @@ export default function Withdrawals() {
     status: '',
   });
 
-  const operators = useMemo<
-    { value: TransferFilterType['operator']; label: string }[]
-  >(
-    () => [
-      { value: 'eq', label: '=' },
-      { value: 'gt', label: '>' },
-      { value: 'lt', label: '<' },
-      { value: 'gte', label: '>=' },
-      { value: 'lte', label: '<=' },
-    ],
-    [],
-  );
+  const operators = useOperatorOptions();
+  const statusOptions = useWithdrawalStatusOptions();
 
-  const statusOptions = useMemo<
-    { value: DepositStatuses | ''; label: JSX.Element }[]
-  >(
-    () => [
-      { value: '', label: t('common:all') },
-      ...Object.entries(t('statuses', { returnObjects: true })).map(
-        ([value, label]) => ({
-          value: value as unknown as DepositStatuses,
-          label: (
-            <ZigTypography color={withdrawalStatusColorMap[value]}>
-              {label}
-            </ZigTypography>
-          ),
-        }),
-      ),
-    ],
-    [t],
-  );
-
-  const [fetchDeposits, { data: deposits, isFetching }] =
-    useLazyDepositsQuery();
-  const [approve] = useDepositApproveMutation();
+  const [fetchDeposits, { data: withdrawals, isFetching }] =
+    useLazyWithdrawalsQuery();
+  const [approve] = useWithdrawalApproveMutation();
+  const [reject] = useWithdrawalRejectMutation();
   const showConfirmAction = useConfirmActionModal();
 
   useDebounce(
@@ -81,7 +55,7 @@ export default function Withdrawals() {
     [filters],
   );
 
-  const columnHelper = createColumnHelper<DepositData>();
+  const columnHelper = createColumnHelper<WithdrawalData>();
   const columns = useMemo(() => {
     return [
       columnHelper.accessor('id', {
@@ -102,7 +76,10 @@ export default function Withdrawals() {
       columnHelper.accessor('amount', {
         header: t('table.amount'),
         cell: ({ row }) => (
-          <ZigPriceLabel value={row.original.amount} coin={row.original.coin} />
+          <ZigPriceLabel
+            value={row.original.amount}
+            coin={row.original.currency}
+          />
         ),
       }),
       columnHelper.accessor('status', {
@@ -115,6 +92,23 @@ export default function Withdrawals() {
       }),
       columnHelper.accessor('transactionId', {
         header: t('table.transactionId'),
+        cell: ({ getValue }) => (
+          <Tooltip title={getValue()}>
+            <ZigTypography
+              sx={{
+                display: 'block',
+                maxWidth: 220,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {getValue()}
+            </ZigTypography>
+          </Tooltip>
+        ),
+      }),
+      columnHelper.accessor('title', {
+        header: t('table.title'),
         cell: ({ getValue }) => (
           <Tooltip title={getValue()}>
             <ZigTypography
@@ -149,26 +143,48 @@ export default function Withdrawals() {
         header: t('table.actions'),
         cell: ({ row }) =>
           row.original.status !== DepositStatuses.STATUS_COMPLETED && (
-            <ZigButton
-              onClick={() =>
-                showConfirmAction({
-                  title: t(`actions.approve-confirm`),
-                  description: t(`actions.approve-confirm-description`, {
-                    email: row.original.email,
-                    amount: row.original.amount,
-                    coin: row.original.coin,
-                  }),
-                  yesLabel: t('actions.approve'),
-                  action: async () => {
-                    await approve({ id: row.original.id }).unwrap();
-                    await fetchDeposits(filters);
-                  },
-                })
-              }
-              variant={'text'}
-            >
-              {t('actions.approve')}
-            </ZigButton>
+            <>
+              <ZigButton
+                onClick={() =>
+                  showConfirmAction({
+                    title: t(`actions.approve-confirm`),
+                    description: t(`actions.approve-confirm-description`, {
+                      email: row.original.email,
+                      amount: row.original.amount,
+                      coin: row.original.currency,
+                    }),
+                    yesLabel: t('actions.approve'),
+                    action: async () => {
+                      await approve({ id: row.original.id }).unwrap();
+                      await fetchDeposits(filters);
+                    },
+                  })
+                }
+                variant={'text'}
+              >
+                {t('actions.approve')}
+              </ZigButton>
+              <ZigButton
+                onClick={() =>
+                  showConfirmAction({
+                    title: t(`actions.reject-confirm`),
+                    description: t(`actions.reject-confirm-description`, {
+                      email: row.original.email,
+                      amount: row.original.amount,
+                      coin: row.original.currency,
+                    }),
+                    yesLabel: t('actions.reject'),
+                    action: async () => {
+                      await reject({ id: row.original.id }).unwrap();
+                      await fetchDeposits(filters);
+                    },
+                  })
+                }
+                variant={'text'}
+              >
+                {t('actions.reject')}
+              </ZigButton>
+            </>
           ),
       }),
     ];
@@ -242,7 +258,7 @@ export default function Withdrawals() {
         />
       </Box>
 
-      {deposits ? (
+      {withdrawals ? (
         <Box
           sx={{
             '& table': {
@@ -267,7 +283,7 @@ export default function Withdrawals() {
               ],
             }}
             columns={columns}
-            data={deposits}
+            data={withdrawals}
             columnVisibility={false}
             enableSortingRemoval={false}
             emptyMessage={t('no-data')}

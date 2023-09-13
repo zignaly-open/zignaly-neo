@@ -26,6 +26,7 @@ import {
   TransferFilterType,
 } from '../../apis/transfers/types';
 import { depositStatusColorMap } from './constants';
+import { useDepositStatusOptions, useOperatorOptions } from './use';
 
 export default function Deposits() {
   const { t } = useTranslation('transfers');
@@ -36,37 +37,9 @@ export default function Deposits() {
     status: '',
   });
 
-  const operators = useMemo<
-    { value: TransferFilterType['operator']; label: string }[]
-  >(
-    () => [
-      { value: 'eq', label: '=' },
-      { value: 'gt', label: '>' },
-      { value: 'lt', label: '<' },
-      { value: 'gte', label: '>=' },
-      { value: 'lte', label: '<=' },
-    ],
-    [],
-  );
+  const operators = useOperatorOptions();
 
-  const statusOptions = useMemo<
-    { value: DepositStatuses | ''; label: JSX.Element }[]
-  >(
-    () => [
-      { value: '', label: t('common:all') },
-      ...Object.entries(t('statuses', { returnObjects: true })).map(
-        ([value, label]) => ({
-          value: value as unknown as DepositStatuses,
-          label: (
-            <ZigTypography color={depositStatusColorMap[value]}>
-              {label}
-            </ZigTypography>
-          ),
-        }),
-      ),
-    ],
-    [t],
-  );
+  const statusOptions = useDepositStatusOptions();
 
   const [fetchDeposits, { data: deposits, isFetching }] =
     useLazyDepositsQuery();
@@ -109,7 +82,7 @@ export default function Deposits() {
         header: t('table.status'),
         cell: ({ getValue }) => (
           <ValueOrDash color={depositStatusColorMap[getValue()]}>
-            {getValue() && t('statuses.' + getValue())}
+            {getValue() && t('depositStatuses.' + getValue())}
           </ValueOrDash>
         ),
       }),
