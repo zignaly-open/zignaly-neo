@@ -11,3 +11,13 @@ export type UserData = {
   subscriptionCode: string | null;
   subscriptionLevel: string | null;
 };
+
+export type UserFilterType = {
+  userId: string;
+  email: string;
+  accessLevel: string;
+  subscriptionCode: string;
+};
+export type UserActionPayloadType = {
+  userId: string;
+};

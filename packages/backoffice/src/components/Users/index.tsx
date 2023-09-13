@@ -14,7 +14,7 @@ import {
   useUnbanMutation,
 } from '../../apis/users/api';
 import { useTranslation } from 'react-i18next';
-import { UserData } from '../../apis/users/types';
+import { UserData, UserFilterType } from '../../apis/users/types';
 import TogglerButton from '../TableUtils/TogglerButton';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
@@ -23,7 +23,7 @@ import useConfirmActionModal from '../TableUtils/useConfirmAction';
 
 export default function Users() {
   const { t } = useTranslation('users');
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<UserFilterType>({
     userId: '',
     email: '',
     accessLevel: '',
