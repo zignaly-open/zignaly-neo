@@ -32,11 +32,19 @@ export type DepositData = {
 
 export type TransferFilterType = {
   userId: string;
-  user: string;
   amount: number;
-  operator: 'gte' | 'lte' | 'gt' | 'lt';
+  operator: 'gte' | 'lte' | 'gt' | 'lt' | 'eq';
+  status: string;
 };
 
 export type TransferActionPayloadType = {
   id: string;
 };
+
+export enum DepositStatuses {
+  STATUS_IN_REVIEW = 'reviewing',
+  STATUS_BLOCKED_BY_RISK = 'blocked_by_risk',
+  STATUS_BLOCKED_BY_LIMIT = 'blocked_by_limit',
+  STATUS_BLOCKED_BY_ERROR = 'blocked_by_error',
+  STATUS_COMPLETED = 'completed',
+}

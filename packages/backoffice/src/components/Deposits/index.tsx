@@ -6,6 +6,7 @@ import {
   ZigButton,
   ZigInput,
   ZigPriceLabel,
+  ZigSelect,
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -19,16 +20,50 @@ import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, Tooltip } from '@mui/material';
 import { useDebounce } from 'react-use';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
-import { DepositData, TransferFilterType } from '../../apis/transfers/types';
+import {
+  DepositData,
+  DepositStatuses,
+  TransferFilterType,
+} from '../../apis/transfers/types';
+import { statusColorMap } from './constants';
 
 export default function Deposits() {
   const { t } = useTranslation('deposits');
   const [filters, setFilters] = useState<TransferFilterType>({
     userId: '',
-    user: '',
     amount: 0,
-    operator: 'gt',
+    operator: 'eq',
+    status: '',
   });
+
+  const operators = useMemo<
+    { value: TransferFilterType['operator']; label: string }[]
+  >(
+    () => [
+      { value: 'eq', label: '=' },
+      { value: 'gt', label: '>' },
+      { value: 'lt', label: '<' },
+      { value: 'gte', label: '>=' },
+      { value: 'lte', label: '<=' },
+    ],
+    [],
+  );
+
+  const statusOptions = useMemo<
+    { value: DepositStatuses; label: JSX.Element }[]
+  >(
+    () =>
+      Object.entries(t('statuses', { returnObjects: true })).map(
+        ([value, label]) => ({
+          value: value as unknown as DepositStatuses,
+          label: (
+            <ZigTypography color={statusColorMap[value]}>{label}</ZigTypography>
+          ),
+        }),
+      ),
+    [t],
+  );
+
   const [fetchDeposits, { data: deposits, isFetching }] =
     useLazyDepositsQuery();
   const [approve] = useDepositApproveMutation();
@@ -68,7 +103,11 @@ export default function Deposits() {
       }),
       columnHelper.accessor('status', {
         header: t('table.status'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <ValueOrDash color={statusColorMap[getValue()]}>
+            {getValue() && t('statuses.' + getValue())}
+          </ValueOrDash>
+        ),
       }),
       columnHelper.accessor('transactionId', {
         header: t('table.transactionId'),
@@ -163,29 +202,38 @@ export default function Deposits() {
             setFilters((old) => ({ ...old, userId: e.target.value }))
           }
         />
-        <ZigInput
-          label={t('table.email')}
-          placeholder={t('table.email')}
-          value={filters.email}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, email: e.target.value }))
-          }
-        />
-        <ZigInput
-          label={t('table.accessLevel')}
-          placeholder={t('table.accessLevel')}
-          value={filters.accessLevel}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, accessLevel: e.target.value }))
-          }
-        />
-        <ZigInput
-          label={t('table.subscriptionCode')}
-          placeholder={t('table.subscriptionCode')}
-          value={filters.subscriptionCode}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, subscriptionCode: e.target.value }))
-          }
+        <Box>
+          <ZigTypography>{t('table.amount')}</ZigTypography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              mt: '10px',
+              gap: '10px',
+            }}
+          >
+            <ZigSelect
+              width={100}
+              value={filters.operator}
+              onChange={(operator) =>
+                setFilters((old) => ({ ...old, operator }))
+              }
+              options={operators}
+            />
+            <ZigInput
+              placeholder={t('table.amount')}
+              value={filters.amount}
+              onChange={(e) =>
+                setFilters((old) => ({ ...old, amount: +e.target.value }))
+              }
+            />
+          </Box>
+        </Box>
+        <ZigSelect
+          label={t('table.status')}
+          value={filters.status}
+          onChange={(status) => setFilters((old) => ({ ...old, status }))}
+          options={statusOptions}
         />
       </Box>
 

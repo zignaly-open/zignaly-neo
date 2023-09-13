@@ -9,7 +9,16 @@
     "ban": "Ban",
     "unban": "Unban"
   },
+  "operator": "Operator",
+  "statuses": {
+    "reviewing": "Reviewing",
+    "blocked_by_risk": "Blocked by Risk",
+    "blocked_by_limit": "Blocked by Limit",
+    "blocked_by_error": "Blocked by Error",
+    "completed": "Completed"
+  },
   "table": {
+    "userId": "User ID",
     "id": "ID",
     "user": "User",
     "email": "E-mail",
