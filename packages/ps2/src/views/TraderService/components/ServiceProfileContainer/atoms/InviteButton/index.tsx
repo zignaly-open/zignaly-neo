@@ -75,13 +75,18 @@ const InviteButton = ({ service }: { service: Service }) => {
               borderRadius={'50%'}
               alignItems={'center'}
             >
-              <ZigTypography fontWeight={700} fontSize={'18px'} color='#fffc19'>
+              <ZigTypography
+                fontWeight={700}
+                fontSize={'18px'}
+                color='#fffc19'
+                id='service-profile__comission-multiplier'
+              >
                 {traderBoostMultiplier > 1 ? `${traderBoostMultiplier}x` : '%'}
               </ZigTypography>
             </Box>
           </Box>
           <Box>
-            <ComissionTypography>
+            <ComissionTypography id='service-profile__comission-text'>
               {serviceCommission?.commission > 0 && (
                 <BoltIcon
                   width={'10px'}
