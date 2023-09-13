@@ -1,5 +1,4 @@
 import { CoinBalance, CoinDetail } from '../../../../apis/coin/types';
-import { QueryReturnTypeBasic } from '../../../../util/queryReturnType';
 
 export type SwapCoinsModalProps = {
   step: string;
@@ -13,6 +12,7 @@ export type CoinsSelect = {
   coin: string;
   available: string | number;
   label: JSX.Element;
+  availableInUsd?: string | number;
 };
 
 export type SwapCoinsConfirmFormProps = {
