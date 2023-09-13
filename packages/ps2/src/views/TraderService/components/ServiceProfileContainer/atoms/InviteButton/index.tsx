@@ -20,7 +20,7 @@ const InviteButton = ({ service }: { service: Service }) => {
   const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation('referrals-trader');
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.down('md'));
 
   const {
     serviceCommission,
@@ -101,6 +101,7 @@ const InviteButton = ({ service }: { service: Service }) => {
                 cursor: 'pointer',
               }}
               onClick={handleClick}
+              id='service-profile__invite-widget-text'
             >
               {t(inviteLeft ? 'invite-count' : 'invite-generic', {
                 count: inviteLeft,
@@ -114,7 +115,7 @@ const InviteButton = ({ service }: { service: Service }) => {
                   bottom: 0,
                   marginLeft: '-2px',
                   fontSize: '19px',
-                  marginBottom: '2px',
+                  marginBottom: '4.5px',
                 }}
               />
             </ZigTypography>
@@ -137,6 +138,7 @@ const InviteButton = ({ service }: { service: Service }) => {
         </InviteBox>
       )}
       <ZigButton
+        id='service-profile__invite-button'
         ctaId={'service-profile-invite-button'}
         onClick={handleClick}
         sx={{

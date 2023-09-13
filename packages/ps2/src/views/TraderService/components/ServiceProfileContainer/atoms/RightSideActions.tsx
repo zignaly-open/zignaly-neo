@@ -37,7 +37,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           gap={3}
           alignItems={'center'}
         >
-          {isFeatureOn(Features.Referrals) && (
+          {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
             <InviteButton service={service} />
           )}
           {isAuthenticated && isInvested.thisAccount ? (
