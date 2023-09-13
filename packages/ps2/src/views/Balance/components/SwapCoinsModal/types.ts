@@ -16,13 +16,13 @@ export type CoinsSelect = {
 };
 
 export type SwapCoinsConfirmFormProps = {
-  action: () => void;
   close: () => void;
-  status: QueryReturnTypeBasic<unknown>;
+  closeDepositSwap?: () => void;
   toCoin: string;
   fromCoin: string;
   toCoinAmount: number;
   fromCoinAmount: number;
   refetchBalance: () => void;
   rate: number;
+  internalId?: string;
 };

@@ -11,10 +11,9 @@ import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/s
 import { useTranslation } from 'react-i18next';
 import { SwapCoinsConfirmFormProps } from './types';
 import { useToast } from '../../../../util/hooks/useToast';
+import { useConvertMutation } from '../../../../apis/coin/api';
 
 const SwapCoinsConfirmForm = ({
-  action,
-  status,
   toCoin,
   fromCoin,
   toCoinAmount,
@@ -22,12 +21,24 @@ const SwapCoinsConfirmForm = ({
   refetchBalance,
   close,
   rate,
+  internalId,
+  closeDepositSwap = () => {},
 }: SwapCoinsConfirmFormProps) => {
   const { t } = useTranslation('swap-coins');
+  const [convert, convertStatus] = useConvertMutation();
+  const handleConvert = async () => {
+    await convert({
+      exchangeInternalId: internalId,
+      from: fromCoin,
+      qty: fromCoinAmount,
+      to: toCoin,
+    });
+  };
   const toast = useToast();
-  if (status.isSuccess) {
+  if (convertStatus?.isSuccess) {
     toast.success(t('toast-success'));
     refetchBalance();
+    closeDepositSwap();
     close();
   }
 
@@ -137,10 +148,10 @@ const SwapCoinsConfirmForm = ({
       <ModalActions>
         <ZigButton
           id={'withdraw-modal-confirmation__confirm-withdraw'}
-          onClick={action}
+          onClick={handleConvert}
           variant='contained'
           size='xlarge'
-          loading={status.isLoading}
+          loading={convertStatus?.isLoading}
           type='submit'
         >
           {t('confirmation.confirm')}
