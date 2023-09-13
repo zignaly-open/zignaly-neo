@@ -139,7 +139,7 @@ export const useTierLayers = (
       layer1.height - minAdditionalHeight,
       // If there is a 3rd layer, the 2nd layer should be at least half of the 1st layer
       layers > 2
-        ? Math.max(layer2minHeight, 0.5 * (layer1.height - minAdditionalHeight))
+        ? Math.max(layer2minHeight, 0.5 * layer1.height)
         : layer2minHeight,
     );
 
@@ -162,10 +162,7 @@ export const useTierLayers = (
       value,
       layer1.value,
       layer1.height,
-      Math.max(
-        minHeight * (layers - 2),
-        0.25 * (layer1.height - minAdditionalHeight),
-      ),
+      Math.max(minHeight * (layers - 2), 0.25 * layer1.height),
     );
 
     return {
