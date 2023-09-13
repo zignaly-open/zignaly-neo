@@ -16,7 +16,7 @@ import {
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
-import { Box } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { useDebounce } from 'react-use';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import { DepositData, TransferFilterType } from '../../apis/transfers/types';
@@ -72,7 +72,20 @@ export default function Deposits() {
       }),
       columnHelper.accessor('transactionId', {
         header: t('table.transactionId'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <Tooltip title={getValue()}>
+            <ZigTypography
+              sx={{
+                display: 'block',
+                maxWidth: 220,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {getValue()}
+            </ZigTypography>
+          </Tooltip>
+        ),
       }),
       columnHelper.accessor('createdAt', {
         header: t('table.date'),
