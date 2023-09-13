@@ -145,7 +145,7 @@ export const useTierLayers = (
 
     return {
       value: value !== layer1.value ? value : 0,
-      height,
+      height: value ? height : 0,
     };
   }, [serviceCommission, tierCommission, boost, layer1]);
 
@@ -170,7 +170,7 @@ export const useTierLayers = (
 
     return {
       value,
-      height,
+      height: value ? height : 0,
     };
   }, [serviceCommission, tierCommission, boost, layer1, layer2]);
 
