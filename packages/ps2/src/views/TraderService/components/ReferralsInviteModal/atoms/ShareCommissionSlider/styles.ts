@@ -42,10 +42,19 @@ export const ContainerArrow = styled('div')`
 export const StyledZigSlider = styled(ZigSlider)`
   margin-top: 13px;
   padding: 0 24px;
-  width: 350px;
+  width: 370px;
 
   div:has(> .MuiTypography-root) {
     min-width: 64px;
+  }
+
+  .MuiSlider-root {
+    height: 5px;
+  }
+
+  .MuiSlider-thumb {
+    width: 21px;
+    height: 21px;
   }
 
   .MuiTypography-root {
@@ -57,6 +66,7 @@ export const StyledZigSlider = styled(ZigSlider)`
       width: 100%;
       text-align: center;
       min-width: 53px;
+      padding-bottom: 2px;
 
       &::after {
         content: '%';
