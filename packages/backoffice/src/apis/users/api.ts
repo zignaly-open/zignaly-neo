@@ -1,13 +1,13 @@
 import { UserActionPayloadType, UserData, UserFilterType } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { injectEndpoints } from 'apis/util';
+import { fixSearchParams, injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
   users: builder.query<UserData[], UserFilterType>({
-    query: (filters) => ({
+    query: (params) => ({
       url: 'users',
       method: 'GET',
-      params: filters,
+      params: fixSearchParams(params),
     }),
   }),
   disable2FA: builder.mutation<void, UserActionPayloadType>({

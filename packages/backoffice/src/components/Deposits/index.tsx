@@ -32,7 +32,7 @@ export default function Deposits() {
   const [filters, setFilters] = useState<TransferFilterType>({
     userId: '',
     amount: 0,
-    operator: 'eq',
+    operator: 'gte',
     status: '',
   });
 

@@ -5,19 +5,21 @@ import {
   WithdrawalData,
 } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { injectEndpoints } from 'apis/util';
+import { fixSearchParams, injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
   deposits: builder.query<DepositData[], TransferFilterType>({
-    query: () => ({
+    query: (params) => ({
       url: 'deposits',
       method: 'GET',
+      params: fixSearchParams(params),
     }),
   }),
   withdrawals: builder.query<WithdrawalData[], TransferFilterType>({
-    query: () => ({
+    query: (params) => ({
       url: 'withdrawals',
       method: 'GET',
+      params: fixSearchParams(params),
     }),
   }),
   withdrawalReject: builder.mutation<void, TransferActionPayloadType>({
