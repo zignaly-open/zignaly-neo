@@ -37,9 +37,11 @@ function InvestDepositModal({
     data: service,
   } = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
-  const { balance, isFetching: isLoadingBalance } = useCurrentBalance(
-    service?.ssc,
-  );
+  const {
+    balance,
+    isFetching: isLoadingBalance,
+    refetch: refetchBalance,
+  } = useCurrentBalance(service?.ssc);
 
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
   const selectedInvestment = useSelectedInvestment();
