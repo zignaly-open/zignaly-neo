@@ -50,10 +50,11 @@ export default function Deposits() {
   );
 
   const statusOptions = useMemo<
-    { value: DepositStatuses; label: JSX.Element }[]
+    { value: DepositStatuses | ''; label: JSX.Element }[]
   >(
-    () =>
-      Object.entries(t('statuses', { returnObjects: true })).map(
+    () => [
+      { value: '', label: t('common:all') },
+      ...Object.entries(t('statuses', { returnObjects: true })).map(
         ([value, label]) => ({
           value: value as unknown as DepositStatuses,
           label: (
@@ -61,6 +62,7 @@ export default function Deposits() {
           ),
         }),
       ),
+    ],
     [t],
   );
 
@@ -143,28 +145,29 @@ export default function Deposits() {
       columnHelper.accessor((v) => 'actions' + v.id, {
         id: 'actions',
         header: t('table.actions'),
-        cell: ({ row }) => (
-          <ZigButton
-            onClick={() =>
-              showConfirmAction({
-                title: t(`actions.approve-confirm`),
-                description: t(`actions.approve-confirm-description`, {
-                  email: row.original.email,
-                  amount: row.original.amount,
-                  coin: row.original.coin,
-                }),
-                yesLabel: t('actions.approve'),
-                action: async () => {
-                  await approve({ id: row.original.id }).unwrap();
-                  await fetchDeposits(filters);
-                },
-              })
-            }
-            variant={'text'}
-          >
-            {t('actions.approve')}
-          </ZigButton>
-        ),
+        cell: ({ row }) =>
+          row.original.status !== DepositStatuses.STATUS_COMPLETED && (
+            <ZigButton
+              onClick={() =>
+                showConfirmAction({
+                  title: t(`actions.approve-confirm`),
+                  description: t(`actions.approve-confirm-description`, {
+                    email: row.original.email,
+                    amount: row.original.amount,
+                    coin: row.original.coin,
+                  }),
+                  yesLabel: t('actions.approve'),
+                  action: async () => {
+                    await approve({ id: row.original.id }).unwrap();
+                    await fetchDeposits(filters);
+                  },
+                })
+              }
+              variant={'text'}
+            >
+              {t('actions.approve')}
+            </ZigButton>
+          ),
       }),
     ];
   }, [filters]);

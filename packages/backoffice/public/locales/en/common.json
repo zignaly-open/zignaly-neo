@@ -3,6 +3,7 @@
   "yes": "Yes",
   "no": "No",
   "off": "Off",
+  "all": "All",
   "generic-confirm": "Please confirm you'd like to perform this action",
   "navigation": {
     "login": "Login",
