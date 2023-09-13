@@ -1,35 +1,40 @@
-import { UserData } from './types';
+import {
+  DepositData,
+  TransferActionPayloadType,
+  TransferFilterType,
+  WithdrawalData,
+} from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
 import { injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  deposits: builder.query<UserData[], void>({
+  deposits: builder.query<DepositData[], TransferFilterType>({
     query: () => ({
       url: 'deposits',
       method: 'GET',
     }),
   }),
-  withdrawals: builder.query<UserData[], void>({
+  withdrawals: builder.query<WithdrawalData[], TransferFilterType>({
     query: () => ({
       url: 'withdrawals',
       method: 'GET',
     }),
   }),
-  withdrawalReject: builder.mutation<void, { withdrawalId: string }>({
-    query: ({ withdrawalId }) => ({
-      url: `withdrawals/${withdrawalId}/reject`,
+  withdrawalReject: builder.mutation<void, TransferActionPayloadType>({
+    query: ({ id }) => ({
+      url: `withdrawals/${id}/reject`,
       method: 'POST',
     }),
   }),
-  withdrawalApprove: builder.mutation<void, { withdrawalId: string }>({
-    query: ({ withdrawalId }) => ({
-      url: `withdrawals/${withdrawalId}/approve`,
+  withdrawalApprove: builder.mutation<void, TransferActionPayloadType>({
+    query: ({ id }) => ({
+      url: `withdrawals/${id}/approve`,
       method: 'POST',
     }),
   }),
-  depositApprove: builder.mutation<void, { withdrawalId: string }>({
-    query: ({ withdrawalId }) => ({
-      url: `deposits/${withdrawalId}/approve`,
+  depositApprove: builder.mutation<void, TransferActionPayloadType>({
+    query: ({ id }) => ({
+      url: `deposits/${id}/approve`,
       method: 'POST',
     }),
   }),
@@ -40,5 +45,7 @@ export const {
   useDepositsQuery,
   useWithdrawalApproveMutation,
   useWithdrawalsQuery,
+  useLazyDepositsQuery,
+  useLazyWithdrawalsQuery,
   useWithdrawalRejectMutation,
 } = api;

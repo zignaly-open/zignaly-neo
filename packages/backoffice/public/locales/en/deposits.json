@@ -1,0 +1,24 @@
+{
+  "actions": {
+    "approve": "Approve",
+    "approve-confirm": "Approve Deposit",
+    "approve-confirm-description": "Approve Deposit for {{amount}} {{coin}} for user {{email}}",
+
+    "ban-confirm": "Ban {{email}}",
+    "unban-confirm": "Unban {{email}}",
+    "ban": "Ban",
+    "unban": "Unban"
+  },
+  "table": {
+    "id": "ID",
+    "user": "User",
+    "email": "E-mail",
+    "amount": "Amount",
+    "date": "Date",
+    "transactionId": "Transaction ID",
+    "status": "Status",
+    "exposureType": "Exposure",
+    "riskLevel": "Risk Level",
+    "actions": "Actions"
+  }
+}

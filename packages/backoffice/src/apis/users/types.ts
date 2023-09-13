@@ -18,6 +18,7 @@ export type UserFilterType = {
   accessLevel: string;
   subscriptionCode: string;
 };
+
 export type UserActionPayloadType = {
   userId: string;
 };
