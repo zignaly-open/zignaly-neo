@@ -20,7 +20,7 @@ const InviteButton = ({ service }: { service: Service }) => {
   const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation('referrals-trader');
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.down('md'));
 
   const {
     serviceCommission,
@@ -115,7 +115,7 @@ const InviteButton = ({ service }: { service: Service }) => {
                   bottom: 0,
                   marginLeft: '-2px',
                   fontSize: '19px',
-                  marginBottom: '2px',
+                  marginBottom: '4.5px',
                 }}
               />
             </ZigTypography>
