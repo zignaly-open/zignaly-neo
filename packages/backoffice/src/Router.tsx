@@ -5,8 +5,8 @@ import Login from 'components/Login';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import * as Routes from './routes';
 import Users from './components/Users';
-import Withdrawals from './components/Withdrawals';
-import Deposits from './components/Deposits';
+import Withdrawals from './components/Transfers/Withdrawals';
+import Deposits from './components/Transfers/Deposits';
 import Logs from './components/Logs';
 
 const Router: React.FC = () => (

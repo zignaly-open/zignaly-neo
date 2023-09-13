@@ -48,3 +48,15 @@ export enum DepositStatuses {
   STATUS_BLOCKED_BY_ERROR = 'blocked_by_error',
   STATUS_COMPLETED = 'completed',
 }
+
+export enum WithdrawalStatuses {
+  STATUS_PENDING = 'pending',
+  STATUS_TRANSFER = 'transfer',
+  STATUS_SENT = 'sent',
+  STATUS_CLOSED = 'closed',
+  STATUS_ERROR = 'error',
+  STATUS_PENDING_TO_APPROVE = 'pending_to_approve',
+  STATUS_APPROVED = 'approved',
+  STATUS_REVIEWING = 'reviewing',
+  STATUS_REJECTED = 'rejected',
+}

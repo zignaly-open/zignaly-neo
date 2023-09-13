@@ -25,10 +25,10 @@ import {
   DepositStatuses,
   TransferFilterType,
 } from '../../apis/transfers/types';
-import { statusColorMap } from './constants';
+import { depositStatusColorMap } from './constants';
 
 export default function Deposits() {
-  const { t } = useTranslation('deposits');
+  const { t } = useTranslation('transfers');
   const [filters, setFilters] = useState<TransferFilterType>({
     userId: '',
     amount: 0,
@@ -58,7 +58,9 @@ export default function Deposits() {
         ([value, label]) => ({
           value: value as unknown as DepositStatuses,
           label: (
-            <ZigTypography color={statusColorMap[value]}>{label}</ZigTypography>
+            <ZigTypography color={depositStatusColorMap[value]}>
+              {label}
+            </ZigTypography>
           ),
         }),
       ),
@@ -106,7 +108,7 @@ export default function Deposits() {
       columnHelper.accessor('status', {
         header: t('table.status'),
         cell: ({ getValue }) => (
-          <ValueOrDash color={statusColorMap[getValue()]}>
+          <ValueOrDash color={depositStatusColorMap[getValue()]}>
             {getValue() && t('statuses.' + getValue())}
           </ValueOrDash>
         ),
