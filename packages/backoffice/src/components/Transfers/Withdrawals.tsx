@@ -41,7 +41,7 @@ export default function Withdrawals() {
   const operators = useOperatorOptions();
   const statusOptions = useWithdrawalStatusOptions();
 
-  const [fetchDeposits, { data: withdrawals, isFetching }] =
+  const [fetchWithdrawals, { data: withdrawals, isFetching }] =
     useLazyWithdrawalsQuery();
   const [approve] = useWithdrawalApproveMutation();
   const [reject] = useWithdrawalRejectMutation();
@@ -49,7 +49,7 @@ export default function Withdrawals() {
 
   useDebounce(
     async () => {
-      fetchDeposits(filters);
+      fetchWithdrawals(filters);
     },
     500,
     [filters],
@@ -156,7 +156,7 @@ export default function Withdrawals() {
                     yesLabel: t('actions.approve'),
                     action: async () => {
                       await approve({ id: row.original.id }).unwrap();
-                      await fetchDeposits(filters);
+                      await fetchWithdrawals(filters);
                     },
                   })
                 }
@@ -176,7 +176,7 @@ export default function Withdrawals() {
                     yesLabel: t('actions.reject'),
                     action: async () => {
                       await reject({ id: row.original.id }).unwrap();
-                      await fetchDeposits(filters);
+                      await fetchWithdrawals(filters);
                     },
                   })
                 }
