@@ -13,6 +13,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   tokenOptions?: any;
   onTokenChange?: (token: any) => void;
   showMaxButton?: boolean;
+  selectWidth?: number;
   /**
    * Extra info to show under the input.
    * By default it will show the balance, min and max, if those values are provided.
