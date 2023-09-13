@@ -6,9 +6,11 @@ import { ChooseDepositTypeViews, UseModalReturn } from './types';
 
 export function useDepositModalContent({
   coin,
+  refetchBalance,
   close,
 }: {
   coin: string;
+  refetchBalance: () => void;
   close: () => void;
 }): UseModalReturn {
   const { t } = useTranslation('deposit-crypto');
@@ -20,7 +22,14 @@ export function useDepositModalContent({
   const views = {
     [ChooseDepositTypeViews.ChooseDepositTypeView]: {
       title: t('service-deposit.title', { coin }),
-      component: () => <ChooseDepositType setView={setView} coin={coin} />,
+      component: () => (
+        <ChooseDepositType
+          setView={setView}
+          coin={coin}
+          close={close}
+          refetchBalance={refetchBalance}
+        />
+      ),
     },
     [ChooseDepositTypeViews.DepositView]: {
       title: t('deposit-crypto:title'),
