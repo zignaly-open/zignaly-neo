@@ -95,7 +95,7 @@ const ChooseDepositType: React.FC<{
                 gap: 3,
               }}
             >
-              <ZigTypography whiteSpace={'nowrap'}>
+              <ZigTypography whiteSpace={'nowrap'} variant={'h3'}>
                 {t('service-swap.deposit-purchase', { coin })}
               </ZigTypography>
               <ZigButton
@@ -103,12 +103,12 @@ const ChooseDepositType: React.FC<{
                 id={'modal-choose-deposit-type__deposit'}
                 variant={'outlined'}
                 sx={{ minWidth: '133px' }}
-                size={'large'}
+                size={'medium'}
                 startIcon={
                   <ZigPlusIcon
-                    width={'9px'}
-                    height={'9px'}
-                    style={{ marginBottom: '4px' }}
+                    width={'7px'}
+                    height={'7px'}
+                    style={{ marginBottom: '2px' }}
                     color={theme.palette.neutral300}
                   />
                 }
@@ -116,15 +116,15 @@ const ChooseDepositType: React.FC<{
                 {t('service-deposit.buttons.deposit', { coin })}
               </ZigButton>
               <ZigButton
-                size={'large'}
+                size={'medium'}
                 variant={'outlined'}
                 href={BUY_CRYPTO_URL}
                 id={'modal-choose-deposit-type__purchase'}
                 endIcon={
                   <ZigArrowOutIcon
-                    width={'9px'}
-                    height={'9px'}
-                    style={{ marginBottom: '4px' }}
+                    width={'7px'}
+                    height={'7px'}
+                    style={{ marginBottom: '1px' }}
                     color={theme.palette.neutral300}
                   />
                 }
