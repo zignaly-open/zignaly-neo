@@ -50,7 +50,7 @@ const InviteButton = ({ service }: { service: Service }) => {
       mb={sm && boostRunning ? '10px' : 0}
     >
       {(serviceCommission?.commission || boostRunning) && (
-        <InviteBox>
+        <InviteBox id='service-profile__invite-widget'>
           <InviteBoxArrow />
           <Box
             position='absolute'
@@ -61,7 +61,11 @@ const InviteButton = ({ service }: { service: Service }) => {
             alignItems={'center'}
           >
             <Box mt={'-9px'}>
-              <FireIcon width={42} height={64} />
+              <FireIcon
+                width={42}
+                height={64}
+                id='service-profile__fire-icon'
+              />
             </Box>
             <Box
               position={'absolute'}
@@ -92,6 +96,7 @@ const InviteButton = ({ service }: { service: Service }) => {
                   width={'10px'}
                   height={'16px'}
                   style={{ margin: '0 4px 0 -6px' }}
+                  id='service-profile__bolt-icon'
                 />
               )}
               {t('invite-commission', { pct: maxCommission })}
@@ -120,7 +125,7 @@ const InviteButton = ({ service }: { service: Service }) => {
                   bottom: 0,
                   marginLeft: '-2px',
                   fontSize: '19px',
-                  marginBottom: '4.5px',
+                  marginBottom: '3px',
                 }}
               />
             </ZigTypography>

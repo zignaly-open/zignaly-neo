@@ -222,6 +222,7 @@ const ReferralsInviteModal = ({
                     color='neutral200'
                     variant='h3'
                     fontWeight={400}
+                    id='referrals-invite-modal__when-you-invite'
                   >
                     <Trans
                       i18nKey={
@@ -364,6 +365,7 @@ const ReferralsInviteModal = ({
                 }}
               />
             }
+            id='referrals-invite-modal__terms-link'
           >
             {t('terms')}
           </ZigButton>
