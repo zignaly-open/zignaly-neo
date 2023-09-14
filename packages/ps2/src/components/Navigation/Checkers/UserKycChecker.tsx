@@ -7,6 +7,8 @@ import {
   useLazyKycStatusesQuery,
   useLazyUserQuery,
 } from '../../../apis/user/api';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 type StatusType = { statusSerialized: string; shouldCheck: boolean };
 
@@ -17,7 +19,7 @@ const UserKycChecker: React.FC = () => {
   const { t } = useTranslation('common');
   const [loadUser] = useLazyUserQuery();
   const [loadKyc] = useLazyKycStatusesQuery();
-  const shouldCheck = isAuthenticated && isPending;
+  const shouldCheck = isAuthenticated && isPending && isFeatureOn(Features.Kyc);
 
   const oldStatus = useRef<StatusType>();
 
