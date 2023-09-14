@@ -1,0 +1,27 @@
+{"operator": "Operator",
+  "depositStatuses": {
+    "reviewing": "Reviewing",
+    "blocked_by_risk": "Blocked by Risk",
+    "blocked_by_limit": "Blocked by Limit",
+    "blocked_by_error": "Blocked by Error",
+    "completed": "Completed"
+  },
+  "withdrawalStatuses": {
+    "pending": "Pending",
+    "transfer": "Transfer",
+    "sent":  "Sent",
+    "closed": "Closed",
+    "error":  "Error",
+    "pending_to_approve": "Pending Approval",
+    "approved":  "Approved",
+    "reviewing": "Revieweing",
+    "rejected":  "Rejected"
+  },
+  "table": {
+    "userId": "User ID",
+    "agentId": "Agent ID",
+    "user": "User email",
+    "agent": "Agent email",
+    "action": "Action"
+  }
+}

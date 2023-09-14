@@ -1,14 +1,15 @@
-import { LogEntry } from './types';
+import { LogEntry, LogFilterType } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { injectEndpoints } from 'apis/util';
+import { fixSearchParams, injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  logs: builder.query<LogEntry[], void>({
-    query: () => ({
+  logs: builder.query<LogEntry[], LogFilterType>({
+    query: (params) => ({
       url: 'logs',
       method: 'GET',
+      params: fixSearchParams(params),
     }),
   }),
 }));
 
-export const { useLogsQuery } = api;
+export const { useLazyLogsQuery } = api;
