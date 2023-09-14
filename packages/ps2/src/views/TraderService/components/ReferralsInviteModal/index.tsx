@@ -104,7 +104,11 @@ const ReferralsInviteModal = ({
                   alignItems={'center'}
                 >
                   <Box position={'relative'}>
-                    <ZigTypography textTransform='uppercase' variant='h4'>
+                    <ZigTypography
+                      textTransform='uppercase'
+                      variant='h4'
+                      id='referrals-invite-modal__commission-label'
+                    >
                       {t(
                         referral.investorsCount > 0 && inviteLeft > 0
                           ? 'max-commission'
@@ -140,7 +144,7 @@ const ReferralsInviteModal = ({
                     pt='20px'
                     lineHeight='50px'
                     position={'relative'}
-                    className='referrals-invite-modal__max-commission'
+                    id='referrals-invite-modal__max-commission'
                   >
                     {maxCommission}
                     <ZigTypography
@@ -163,7 +167,11 @@ const ReferralsInviteModal = ({
                 {referral.investorsCount > 0 && (
                   <Box display='flex' flexDirection={'column'}>
                     <Box position={'relative'}>
-                      <ZigTypography textTransform='uppercase' variant='h4'>
+                      <ZigTypography
+                        textTransform='uppercase'
+                        variant='h4'
+                        id='referrals-invite-modal__referrals-label'
+                      >
                         {t('my-referrals')}
                       </ZigTypography>
                       <Tooltip title={t('tooltips.number-referrals')}>
@@ -199,7 +207,7 @@ const ReferralsInviteModal = ({
                         fontSize={35}
                         pl='9px'
                         pr='7px'
-                        className='referrals-invite-modal__referrals-count'
+                        id='referrals-invite-modal__referrals-count'
                       >
                         {referral.investorsCount}
                       </ZigTypography>
@@ -283,6 +291,7 @@ const ReferralsInviteModal = ({
                     <DescriptionLine
                       text={t('earn-success-fees')}
                       tooltip={t('tooltips.earn-success-fees')}
+                      id='referrals-invite-modal__earn-success-fees'
                     />
                     {!boostRunning && !serviceCommission.commission && (
                       <DescriptionLine
@@ -294,6 +303,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
+                        id='referrals-invite-modal__invite-and-earn'
                       />
                     )}
                     {boostRunning && (
@@ -306,6 +316,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommissionWithoutTraderBoost,
                         })}
+                        id='referrals-invite-modal__invite-and-earn-1-week'
                       />
                     )}
                     {serviceCommission.commission > 0 && (
@@ -322,6 +333,7 @@ const ReferralsInviteModal = ({
                           invite: inviteLeft,
                           commission: maxCommission,
                         })}
+                        id='referrals-invite-modal__invite-and-earn-trader-boost'
                       />
                     )}
                   </>

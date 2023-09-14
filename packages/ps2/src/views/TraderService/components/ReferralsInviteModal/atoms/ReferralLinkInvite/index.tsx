@@ -26,7 +26,12 @@ const ReferralLinkInvite = ({
       <InviteBox>
         <StyledInviteIcon />
         <Box display='flex' flexDirection={'column'}>
-          <ZigTypography color='neutral300' variant='h3' fontWeight={400}>
+          <ZigTypography
+            color='neutral300'
+            variant='h3'
+            fontWeight={400}
+            id='referrals-invite-referral-link-label'
+          >
             {t('trader-referral-link')}
           </ZigTypography>
           <InviteUrlInput

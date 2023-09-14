@@ -10,7 +10,12 @@ const ServiceBoostChip = ({ boost }: { boost: number }) => {
   return (
     <BoostBox>
       <BoltIcon width={10} height={19} />
-      <ZigTypography fontSize={14} fontWeight={600} color='#eede75'>
+      <ZigTypography
+        fontSize={14}
+        fontWeight={600}
+        color='#eede75'
+        className='boost-multiplier'
+      >
         {t('trader-boost-value', { boost: prettyFloat(boost) })}
       </ZigTypography>
     </BoostBox>

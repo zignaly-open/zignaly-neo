@@ -44,6 +44,7 @@ export const ShareCommissionSlider = ({
           letterSpacing={'0.48px'}
           textAlign={'center'}
           color={'neutral100'}
+          id='referrals-invite-modal__slider-label'
         >
           {t('split-commission')}
         </ZigTypography>
