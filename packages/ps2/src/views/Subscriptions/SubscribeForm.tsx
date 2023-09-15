@@ -40,13 +40,8 @@ const SubscribeForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Grid
-        container
-        alignItems='center'
-        spacing={3}
-        style={{ minHeight: '87px' }}
-      >
-        <Grid item xs>
+      <Grid container spacing={3} style={{ minHeight: '87px' }}>
+        <Grid item xs minHeight={'111px'}>
           <Controller
             name='code'
             control={control}
