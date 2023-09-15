@@ -157,7 +157,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
                 menuShouldBlockScroll
                 error={!!error}
                 hoverBackground={false}
-                placeholder={"Select coin"}
+                placeholder={"Select"}
                 showBorder={false}
                 outlined
                 width={selectWidth}
