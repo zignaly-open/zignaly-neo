@@ -346,7 +346,7 @@ const ReferralsInviteModal = ({
             <Tiers
               tiers={tiers}
               referral={referral}
-              serviceCommission={serviceCommission.commission}
+              serviceCommission={serviceCommission}
               zignalyCommission={service?.zglySuccessFee}
               boost={boost}
               boostRunning={boostRunning}

@@ -9,12 +9,18 @@ import {
 import { getBoostedCommissionPct } from 'views/TraderService/components/ReferralsInviteModal/util';
 import { useIsAuthenticated } from 'apis/user/use';
 
-export function useTiersData(serviceId: string, zglySuccessFee: number) {
+export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
   const isAuthenticated = useIsAuthenticated();
   const { data: tiers } = useTierLevelsQuery();
-  const { data: serviceCommission } = useServiceCommissionQuery({
-    serviceId: serviceId,
-  });
+  const { data: serviceCommissionData } = useServiceCommissionQuery(
+    {
+      serviceId: serviceId,
+    },
+    {
+      skip: !serviceId,
+    },
+  );
+  const serviceCommission = serviceId ? serviceCommissionData?.commission : 10;
   const { data: referral, isLoading: referralLoading } =
     useReferralRewardsQuery(undefined, {
       skip: !isAuthenticated,
@@ -38,7 +44,7 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
     getBoostedCommissionPct(
       lastTier?.commissionPct,
       boost,
-      serviceCommission?.commission,
+      serviceCommission,
       zglySuccessFee,
     ),
   );
@@ -53,7 +59,7 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
     getBoostedCommissionPct(
       currentTier?.commissionPct,
       boost,
-      serviceCommission?.commission,
+      serviceCommission,
       zglySuccessFee,
     ),
   );
@@ -71,7 +77,7 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
     currentDate,
     boostEndsDate,
     boostRunning,
-    isLoading: !tiers || !serviceCommission || referralLoading,
+    isLoading: !tiers || !serviceCommissionData || referralLoading,
     tiers,
     serviceCommission,
     referral,

@@ -49,7 +49,7 @@ const InviteButton = ({ service }: { service: Service }) => {
       alignItems={'center'}
       mb={sm && boostRunning ? '10px' : 0}
     >
-      {(serviceCommission?.commission || boostRunning) && (
+      {(serviceCommission || boostRunning) && (
         <InviteBox id='service-profile__invite-widget'>
           <InviteBoxArrow />
           <Box
@@ -91,7 +91,7 @@ const InviteButton = ({ service }: { service: Service }) => {
           </Box>
           <Box>
             <ComissionTypography id='service-profile__comission-text'>
-              {serviceCommission?.commission > 0 && (
+              {serviceCommission > 0 && (
                 <BoltIcon
                   width={'10px'}
                   height={'16px'}
