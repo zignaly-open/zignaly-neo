@@ -37,11 +37,27 @@ export type WithdrawModalProps = {
 export enum ChooseDepositTypeViews {
   DepositView = 'deposit',
   ChooseDepositTypeView = 'deposit_or_buy',
+  SwapDepositView = 'swap-deposit',
+  SwapConfirmView = 'swap-confirm',
 }
 
 export type UseModalReturn = {
   title: string;
   component: () => JSX.Element;
   onGoBack?: () => void;
+  modalWidth?: number;
   view?: string;
+};
+
+export type ConvertPreviewType = {
+  side: string;
+  lastPrice: number;
+  estimatedAmount: number;
+  min: number;
+};
+
+export type ConfirmSwapDataType = {
+  fromCoinAmount: number;
+  toCoinAmount: number;
+  fromCoin: string;
 };
