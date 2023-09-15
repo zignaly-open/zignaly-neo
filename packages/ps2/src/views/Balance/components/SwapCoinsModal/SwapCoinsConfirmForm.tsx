@@ -22,7 +22,6 @@ const SwapCoinsConfirmForm = ({
   close,
   rate,
   internalId,
-  closeDepositSwap = () => {},
 }: SwapCoinsConfirmFormProps) => {
   const { t } = useTranslation('swap-coins');
   const [convert, convertStatus] = useConvertMutation();
@@ -38,7 +37,6 @@ const SwapCoinsConfirmForm = ({
   if (convertStatus?.isSuccess) {
     toast.success(t('toast-success'));
     refetchBalance();
-    closeDepositSwap();
     close();
   }
 

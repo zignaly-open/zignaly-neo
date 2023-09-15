@@ -17,7 +17,6 @@ export type CoinsSelect = {
 
 export type SwapCoinsConfirmFormProps = {
   close: () => void;
-  closeDepositSwap?: () => void;
   toCoin: string;
   fromCoin: string;
   toCoinAmount: number;

@@ -47,12 +47,12 @@ export function useDepositModalContent({
   }, [balances]);
   const showSwap =
     exchangeType === 'spot' &&
-    coinOptionsAllowedSwapFrom.some((el) => el.availableInUsd < 10);
+    !coinOptionsAllowedSwapFrom.some((el) => el.availableInUsd < 10);
 
   const [view, setView] = useState<ChooseDepositTypeViews>(
     showSwap
-      ? ChooseDepositTypeViews.ChooseDepositTypeView
-      : ChooseDepositTypeViews.SwapDepositView,
+      ? ChooseDepositTypeViews.SwapDepositView
+      : ChooseDepositTypeViews.ChooseDepositTypeView,
   );
 
   type ViewDefinition = {
