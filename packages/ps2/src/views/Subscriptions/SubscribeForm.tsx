@@ -19,6 +19,7 @@ const SubscribeForm = () => {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors, isValid },
   } = useForm<{ code: string }>({
     mode: 'onChange',
@@ -35,7 +36,8 @@ const SubscribeForm = () => {
       .then(() => {
         toast.success(t('toast-success'));
         loadUser();
-      });
+      })
+      .finally(reset);
   };
 
   return (
