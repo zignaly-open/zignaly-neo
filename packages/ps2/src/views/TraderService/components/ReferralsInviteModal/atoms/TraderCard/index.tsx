@@ -43,6 +43,7 @@ const TraderCard = ({
           lineClamp: 2,
           WebkitBoxOrient: 'vertical',
         }}
+        id='referrals-invite-modal__service-name'
       >
         {service.name}
       </ZigTypography>

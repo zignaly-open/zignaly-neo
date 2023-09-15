@@ -14,6 +14,7 @@ export const UserRate = () => {
       alignItems={'center'}
       gap='6px'
       mb='13px'
+      id='referrals-invite-modal__your-rate'
     >
       <ZigTypography variant='h3' color='#999fe1'>
         {t('your-rate')}
