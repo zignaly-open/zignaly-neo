@@ -59,7 +59,7 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
               gap: 3,
             }}
           >
-            <ZigTypography whiteSpace={'nowrap'} variant={'h3'}>
+            <ZigTypography whiteSpace={'nowrap'}>
               {t('service-swap.deposit-purchase', { coin })}
             </ZigTypography>
             <ZigButton

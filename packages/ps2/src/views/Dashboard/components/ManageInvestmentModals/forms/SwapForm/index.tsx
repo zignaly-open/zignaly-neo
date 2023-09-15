@@ -109,7 +109,6 @@ function SwapForm({
         rules={{ required: true }}
         render={({ field: fromField }) => (
           <ZigInputAmount
-            size={'small'}
             error={t(errors.fromCoinAmount?.message)}
             labelInline={false}
             withCoinSelector
