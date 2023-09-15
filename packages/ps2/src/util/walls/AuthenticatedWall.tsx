@@ -8,7 +8,6 @@ const AuthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const checkCanLogin = useCanLogIn();
   const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
-  // const location = useLocation();
 
   useEffect(() => {
     isAuthenticated && checkCanLogin();
