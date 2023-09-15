@@ -4,21 +4,22 @@ import {
   Loader,
   PageContainer,
   ZigInput,
-  ZigPriceLabel,
+  ZigSelect,
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import { useDebounce } from 'react-use';
-import { WithdrawalData } from '../../apis/transfers/types';
 import { useLazyLogsQuery } from '../../apis/logs/api';
-import { LogFilterType } from '../../apis/logs/types';
+import { LogEntry, LogFilterType } from '../../apis/logs/types';
+import { useLogActionOptions } from './use';
 
 export default function Withdrawals() {
   const { t } = useTranslation('logs');
+  const actionOptions = useLogActionOptions();
   const [filters, setFilters] = useState<LogFilterType>({
     userId: '',
     agentId: '',
@@ -37,71 +38,29 @@ export default function Withdrawals() {
     [filters],
   );
 
-  const columnHelper = createColumnHelper<WithdrawalData>();
+  const columnHelper = createColumnHelper<LogEntry>();
   const columns = useMemo(() => {
     return [
-      columnHelper.accessor('id', {
-        header: t('table.id'),
+      columnHelper.accessor('userId', {
+        header: t('table.userId'),
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
-      columnHelper.accessor('email', {
+      columnHelper.accessor('agentId', {
+        header: t('table.agentId'),
+        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+      }),
+      columnHelper.accessor('userEmail', {
         header: t('table.user'),
-        cell: ({ getValue, row }) => (
-          <Box>
-            <ZigTypography component={'p'}>{getValue()}</ZigTypography>
-            <ZigTypography component={'p'} variant={'body2'}>
-              {row.original.userId}
-            </ZigTypography>
-          </Box>
-        ),
+        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
-      columnHelper.accessor('amount', {
-        header: t('table.amount'),
-        cell: ({ row }) => (
-          <ZigPriceLabel
-            value={row.original.amount}
-            coin={row.original.currency}
-          />
-        ),
+      columnHelper.accessor('agentEmail', {
+        header: t('table.agent'),
+        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
-      columnHelper.accessor('status', {
-        header: t('table.status'),
+      columnHelper.accessor('action', {
+        header: t('table.action'),
         cell: ({ getValue }) => (
           <ValueOrDash>{getValue() && t('statuses.' + getValue())}</ValueOrDash>
-        ),
-      }),
-      columnHelper.accessor('transactionId', {
-        header: t('table.transactionId'),
-        cell: ({ getValue }) => (
-          <Tooltip title={getValue()}>
-            <ZigTypography
-              sx={{
-                display: 'block',
-                maxWidth: 220,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {getValue()}
-            </ZigTypography>
-          </Tooltip>
-        ),
-      }),
-      columnHelper.accessor('title', {
-        header: t('table.title'),
-        cell: ({ getValue }) => (
-          <Tooltip title={getValue()}>
-            <ZigTypography
-              sx={{
-                display: 'block',
-                maxWidth: 220,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {getValue()}
-            </ZigTypography>
-          </Tooltip>
         ),
       }),
       columnHelper.accessor('createdAt', {
@@ -109,14 +68,6 @@ export default function Withdrawals() {
         cell: ({ getValue }) => (
           <ZigTypography>{format(new Date(getValue()), 'PP p')}</ZigTypography>
         ),
-      }),
-      columnHelper.accessor('exposureType', {
-        header: t('table.exposureType'),
-        cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
-      }),
-      columnHelper.accessor('riskLevel', {
-        header: t('table.riskLevel'),
-        cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
       }),
     ];
   }, [filters]);
@@ -178,13 +129,11 @@ export default function Withdrawals() {
             setFilters((old) => ({ ...old, agent: e.target.value }))
           }
         />
-        <ZigInput
+        <ZigSelect
           label={t('table.action')}
-          placeholder={t('table.action')}
-          value={filters.agent}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, action: e.target.value }))
-          }
+          value={filters.action}
+          onChange={(action) => setFilters((old) => ({ ...old, action }))}
+          options={actionOptions}
         />
       </Box>
 

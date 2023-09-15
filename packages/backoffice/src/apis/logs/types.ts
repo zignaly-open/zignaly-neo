@@ -1,8 +1,20 @@
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type LogsState = {};
 
+export enum LogEntryActions {
+  DISABLE_2FA = 'disable_2fa',
+  BAN_USER = 'ban_user',
+  UNBAN_USER = 'unban_user',
+}
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type LogEntry = {};
+export type LogEntry = {
+  action: LogEntryActions;
+  agentEmail: string;
+  agentId: string;
+  createdAt: string;
+  userId: string;
+  userEmail: string;
+};
 
 export type LogFilterType = {
   userId: string;
