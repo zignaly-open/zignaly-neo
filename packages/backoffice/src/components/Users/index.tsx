@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   createColumnHelper,
   Loader,
   PageContainer,
+  ZigButton,
   ZigInput,
   ZigTable,
   ZigTypography,
@@ -18,8 +19,8 @@ import { UserData, UserFilterType } from '../../apis/users/types';
 import TogglerButton from '../TableUtils/TogglerButton';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
-import { useDebounce } from 'react-use';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Users() {
   const { t } = useTranslation('users');
@@ -35,13 +36,9 @@ export default function Users() {
   const [disable2fa] = useDisable2FAMutation();
   const showConfirmAction = useConfirmActionModal();
 
-  useDebounce(
-    async () => {
-      fetchUsers(filters);
-    },
-    500,
-    [filters],
-  );
+  useEffect(() => {
+    fetchUsers(filters);
+  }, []);
 
   const columnHelper = createColumnHelper<UserData>();
   const columns = useMemo(() => {
@@ -189,6 +186,16 @@ export default function Users() {
             setFilters((old) => ({ ...old, subscriptionCode: e.target.value }))
           }
         />
+        <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
+          <ZigButton
+            size='xlarge'
+            onClick={() => fetchUsers(filters)}
+            startIcon={<SearchIcon />}
+            loading={isFetching}
+          >
+            {t('common:filter')}
+          </ZigButton>
+        </Box>
       </Box>
 
       {users ? (

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   createColumnHelper,
   Loader,
@@ -19,7 +19,6 @@ import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, Tooltip } from '@mui/material';
-import { useDebounce } from 'react-use';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import {
   DepositStatuses,
@@ -28,6 +27,7 @@ import {
 } from '../../apis/transfers/types';
 import { withdrawalStatusColorMap } from './constants';
 import { useOperatorOptions, useWithdrawalStatusOptions } from './use';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Withdrawals() {
   const { t } = useTranslation('transfers');
@@ -47,13 +47,9 @@ export default function Withdrawals() {
   const [reject] = useWithdrawalRejectMutation();
   const showConfirmAction = useConfirmActionModal();
 
-  useDebounce(
-    async () => {
-      fetchWithdrawals(filters);
-    },
-    500,
-    [filters],
-  );
+  useEffect(() => {
+    fetchWithdrawals(filters);
+  }, []);
 
   const columnHelper = createColumnHelper<WithdrawalData>();
   const columns = useMemo(() => {
@@ -256,6 +252,16 @@ export default function Withdrawals() {
           onChange={(status) => setFilters((old) => ({ ...old, status }))}
           options={statusOptions}
         />
+        <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
+          <ZigButton
+            size='xlarge'
+            onClick={() => fetchWithdrawals(filters)}
+            startIcon={<SearchIcon />}
+            loading={isFetching}
+          >
+            {t('common:filter')}
+          </ZigButton>
+        </Box>
       </Box>
 
       {withdrawals ? (
