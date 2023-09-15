@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react';
 import { useIsAuthenticated } from '../../apis/user/use';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { ROUTE_LOGIN } from '../../routes';
+import { Outlet } from 'react-router-dom';
 import { useCanLogIn } from './util';
+import useMaybeNavigateNotLoggedIn from '../hooks/useMaybeNavigateNotLoggedIn';
 
 const AuthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const checkCanLogin = useCanLogIn();
-  const location = useLocation();
+  const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
+  // const location = useLocation();
 
   useEffect(() => {
     isAuthenticated && checkCanLogin();
+    navigateIfNotLoggedIn();
   }, [isAuthenticated]);
 
-  return isAuthenticated ? (
-    <Outlet />
-  ) : (
-    <Navigate to={ROUTE_LOGIN} replace state={{ redirectTo: location }} />
-  );
+  return <Outlet />;
 };
 
 export default AuthenticatedWall;
