@@ -13,7 +13,7 @@ import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBo
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
-import { ZigTableProps } from "./types";
+import { ZigTablePropsData } from "./types";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
@@ -21,7 +21,7 @@ import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
 
-export default function ZigTable<T extends object>({
+export default function ZigTableData<T extends object>({
   prefixId,
   data,
   columns,
@@ -34,7 +34,7 @@ export default function ZigTable<T extends object>({
   emptyMessage,
   state = {},
   ...rest
-}: ZigTableProps<T>) {
+}: ZigTablePropsData<T>) {
   const theme = useTheme();
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
   const [columnVisibility, setColumnVisibility] = React.useState(
