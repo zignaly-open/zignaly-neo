@@ -38,9 +38,8 @@ const ReferralsInviteModal = ({
     maxCommissionWithoutTraderBoost,
     traderBoostMultiplier,
     inviteLeft,
+    isLoading,
   } = useTiersData(service.id, service.zglySuccessFee);
-
-  const loading = !referral || !tiers || !serviceCommission;
 
   return (
     <ZModal
@@ -48,10 +47,10 @@ const ReferralsInviteModal = ({
       width={838}
       {...props}
       close={close}
-      title={t(loading || inviteLeft <= 0 ? 'invite-earn' : 'title', {
+      title={t(isLoading || inviteLeft <= 0 ? 'invite-earn' : 'title', {
         commission: maxCommission,
       })}
-      isLoading={loading}
+      isLoading={isLoading}
       sx={{
         // Hack to make the box shadow visible beyond the container
         // despite the staking context created by the scrollbar
@@ -68,7 +67,7 @@ const ReferralsInviteModal = ({
         },
       }}
     >
-      {!loading && (
+      {!isLoading && (
         <>
           <Grid container mt={'38px'}>
             <Grid
@@ -157,7 +156,7 @@ const ReferralsInviteModal = ({
                     >
                       {'%'}
                     </ZigTypography>
-                    {serviceCommission.commission > 0 && (
+                    {serviceCommission > 0 && (
                       <CommissionBoostChip>
                         <BoostChip boost={traderBoostMultiplier} showBolt />
                       </CommissionBoostChip>
@@ -196,14 +195,14 @@ const ReferralsInviteModal = ({
                       pt={'5px'}
                     >
                       <ZigUserFilledIcon
-                        color='#999fe1'
+                        color='paleBlue'
                         width={18}
                         height={21.5}
                       />
                       <ZigTypography
                         fontWeight={600}
                         variant='h4'
-                        color='#999fe1'
+                        color='paleBlue'
                         fontSize={35}
                         pl='9px'
                         pr='7px'
@@ -294,7 +293,7 @@ const ReferralsInviteModal = ({
                       tooltip={t('tooltips.earn-success-fees')}
                       id='referrals-invite-modal__earn-success-fees'
                     />
-                    {!boostRunning && !serviceCommission.commission && (
+                    {!boostRunning && !serviceCommission && (
                       <DescriptionLine
                         text={t('invite-and-earn', {
                           invite: inviteLeft,
@@ -320,7 +319,7 @@ const ReferralsInviteModal = ({
                         id='referrals-invite-modal__invite-and-earn-1-week'
                       />
                     )}
-                    {serviceCommission.commission > 0 && (
+                    {serviceCommission > 0 && (
                       <DescriptionLine
                         text={t('invite-and-earn-trader-boost', {
                           invite: inviteLeft,

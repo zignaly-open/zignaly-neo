@@ -17,17 +17,19 @@ const LayoutContentWrapper = <TData, TError>({
   error,
   hasHeader,
   unmountOnRefetch = false,
+  forceIsLoading,
 }: {
   endpoint: EndpointEsque | EndpointEsque[];
   content: (data: TData) => ReactElement;
   error?: (error: TError) => ReactElement;
   unmountOnRefetch?: boolean;
   hasHeader?: boolean;
+  forceIsLoading?: boolean;
 }): ReactElement => {
   const isArray = Array.isArray(endpoint);
   const endpoints: EndpointEsque[] = isArray ? endpoint : [endpoint];
   const someError = endpoints.find((x) => x.error)?.error;
-  const isLoading = endpoints.some((x) => x.isLoading);
+  const isLoading = endpoints.some((x) => x.isLoading) || forceIsLoading;
   const isFetching = endpoints.some((x) => x.isFetching);
   const padded = (innerContent: JSX.Element) =>
     hasHeader ? <Box sx={{ mt: 7 }}>{innerContent}</Box> : innerContent;

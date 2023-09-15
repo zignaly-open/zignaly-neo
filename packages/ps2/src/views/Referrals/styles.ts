@@ -1,6 +1,13 @@
 import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
+export const CommissionBox = styled(Paper)`
+  border-radius: 17px;
+  background-image: linear-gradient(to top, #18194b, #12374e);
+  width: 849px;
+  height: 354px;
+`;
+
 export const TotalBoxBox = styled(Paper)`
   width: 250px;
   min-height: 160px;

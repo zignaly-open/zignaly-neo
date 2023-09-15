@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
   useReferralHistoryQuery,
@@ -29,6 +29,8 @@ import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useZModal } from 'components/ZModal/use';
 import ReferralInviteModal from './components/ReferralInviteModal';
+import { useTiersData } from 'apis/referrals/use';
+import { CommissionBox } from './styles';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -58,10 +60,26 @@ const Referrals: React.FC = () => {
   const openInviteModal = () =>
     showModal(ReferralInviteModal, { url: link, urlShort: shortLink });
 
+  const {
+    tiers,
+    referral,
+    serviceCommission,
+    boostEndsDate,
+    currentDate,
+    boostRunning,
+    boost,
+    maxCommission,
+    maxCommissionWithoutTraderBoost,
+    traderBoostMultiplier,
+    inviteLeft,
+    isLoading,
+  } = useTiersData();
+
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
         endpoint={[rewards, history]}
+        forceIsLoading={isLoading}
         content={([rewardsData, referrals]: [
           ReferralRewards,
           ReferralHistory,
@@ -70,12 +88,43 @@ const Referrals: React.FC = () => {
             <Box
               sx={{
                 mt: 5,
-                justifyContent: 'center',
+                alignItems: 'center',
                 mb: 6,
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
               }}
             >
+              <ZigTypography
+                sx={{
+                  mb: '19px',
+                }}
+                variant={'h1'}
+                fontSize={'35px'}
+                fontWeight={600}
+              >
+                {t('title', { commission: maxCommission })}
+              </ZigTypography>
+              <ZigTypography
+                sx={{
+                  mb: 1,
+                }}
+                variant={'h2'}
+                fontWeight={400}
+                color='neutral300'
+              >
+                <Trans
+                  i18nKey={'description'}
+                  values={{
+                    commission: maxCommissionWithoutTraderBoost,
+                    maxCommission: maxCommission,
+                    multiplier: traderBoostMultiplier,
+                  }}
+                  t={t}
+                >
+                  <ZigTypography color='paleBlue' />
+                </Trans>
+              </ZigTypography>
+              <CommissionBox></CommissionBox>
               <Box
                 sx={{
                   mr: 4,
@@ -99,15 +148,6 @@ const Referrals: React.FC = () => {
                   flexDirection: 'column',
                 }}
               >
-                <ZigTypography
-                  sx={{
-                    mb: 1,
-                  }}
-                  variant={'h1'}
-                >
-                  {t('title')}
-                </ZigTypography>
-
                 <Box
                   sx={{
                     display: 'flex',

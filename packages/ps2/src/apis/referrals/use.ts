@@ -77,7 +77,7 @@ export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
     currentDate,
     boostEndsDate,
     boostRunning,
-    isLoading: !tiers || !serviceCommissionData || referralLoading,
+    isLoading: !tiers || serviceCommission === undefined || referralLoading,
     tiers,
     serviceCommission,
     referral,

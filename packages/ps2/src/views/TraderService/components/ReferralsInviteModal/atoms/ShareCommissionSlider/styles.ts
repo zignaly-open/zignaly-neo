@@ -61,7 +61,7 @@ export const StyledZigSlider = styled(ZigSlider)`
     &:nth-of-type(2) {
       font-size: 24px;
       font-weight: 600;
-      color: #999fe1;
+      color: ${({ theme }) => theme.palette.paleBlue};
       position: relative;
       width: 100%;
       text-align: center;

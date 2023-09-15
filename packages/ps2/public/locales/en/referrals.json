@@ -1,6 +1,6 @@
 {
-    "title": "Invite Friends and Earn a Lifetime Income",
-    "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors of the trader's service when you invite a trader to Zignaly",
+    "title": "{{commission}}% Zignaly Referral Program",
+    "description": "Earn up to <0>{{commission}}% of Zignaly’s success fees</0> PLUS a trader match <0>up to {{multiplier}}x.</0> That’s {{maxCommission}}%!!",
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
     "what-they-get": "What they get",
