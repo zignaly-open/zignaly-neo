@@ -24,7 +24,7 @@ export function useDepositModalContent({
   refetchBalance: () => void;
   close: () => void;
 }): UseModalReturn {
-  const { t } = useTranslation('deposit-crypto');
+  const { t } = useTranslation(['deposit-crypto', 'swap-coins']);
   const { exchangeType, internalId } = useActiveExchange();
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,

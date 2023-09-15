@@ -64,7 +64,7 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
             </ZigTypography>
             <ZigButton
               onClick={() => setView(ChooseDepositTypeViews.DepositView)}
-              id={'modal-choose-deposit-type__deposit'}
+              id={'modal-swap-deposit-purchase__deposit'}
               variant={'outlined'}
               sx={{ minWidth: '133px' }}
               size={'medium'}
@@ -83,7 +83,7 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
               size={'medium'}
               variant={'outlined'}
               href={BUY_CRYPTO_URL}
-              id={'modal-choose-deposit-type__purchase'}
+              id={'modal-swap-deposit-purchase__purchase'}
               endIcon={
                 <ZigArrowOutIcon
                   width={'7px'}
@@ -99,7 +99,7 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
           </Box>
         }
         description={t('service-swap.description', { coin })}
-        descriptionProps={{ id: 'modal-choose-deposit-type__description' }}
+        descriptionProps={{ id: 'modal-swap-deposit-purchase__description' }}
       />
     </>
   );
