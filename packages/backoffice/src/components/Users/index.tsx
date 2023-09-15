@@ -4,6 +4,8 @@ import {
   Loader,
   PageContainer,
   ZigButton,
+  ZigDotsVerticalIcon,
+  ZigDropdown,
   ZigInput,
   ZigTable,
   ZigTypography,
@@ -16,9 +18,8 @@ import {
 } from '../../apis/users/api';
 import { useTranslation } from 'react-i18next';
 import { UserData, UserFilterType } from '../../apis/users/types';
-import TogglerButton from '../TableUtils/TogglerButton';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
-import { Box } from '@mui/material';
+import { Box, IconButton, useTheme } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -35,6 +36,7 @@ export default function Users() {
   const [unbanUser] = useUnbanMutation();
   const [disable2fa] = useDisable2FAMutation();
   const showConfirmAction = useConfirmActionModal();
+  const theme = useTheme();
 
   useEffect(() => {
     fetchUsers(filters);
@@ -69,62 +71,90 @@ export default function Users() {
       }),
       columnHelper.accessor('2faEnabled', {
         header: t('table.2faEnabled'),
-        cell: ({ getValue, row }) => (
-          <TogglerButton
-            text={getValue() ? t('common:on') : t('common:off')}
-            isPositive={getValue()}
-            buttonText={t('actions.disable2FA')}
-            action={
-              getValue()
-                ? () => {
-                    showConfirmAction({
-                      title: t(`actions.disable2FA-confirm`, {
-                        email: row.original.email,
-                      }),
-                      description: t('common:generic-confirm'),
-                      yesLabel: t(`actions.disable2FA-confirm`),
-                      action: async () => {
-                        await disable2fa({
-                          userId: row.original.userId,
-                        }).unwrap();
-                        await fetchUsers(filters);
-                      },
-                    });
-                  }
-                : undefined
-            }
-          />
+        cell: ({ getValue }) => (
+          <ZigTypography color={getValue() ? 'greenGraph' : 'redGraphOrError'}>
+            {getValue() ? t('common:on') : t('common:off')}
+          </ZigTypography>
         ),
       }),
       columnHelper.accessor((v) => v.accessLevel === -100, {
         id: 'isBanned',
         header: t('table.isBanned'),
-        cell: ({ getValue, row }) => {
-          const value = getValue();
+
+        cell: ({ getValue }) => (
+          <ZigTypography color={!getValue() ? 'greenGraph' : 'redGraphOrError'}>
+            {getValue() ? t('common:yes') : t('common:no')}
+          </ZigTypography>
+        ),
+      }),
+      columnHelper.accessor(({ userId }) => userId, {
+        header: '',
+        id: 'actions',
+        enableSorting: false,
+        cell: ({ row: { original } }) => {
+          const isBanned = original.accessLevel === -100;
           return (
-            <TogglerButton
-              text={getValue() ? t('common:yes') : t('common:no')}
-              isPositive={!getValue()}
-              buttonText={getValue() ? t('actions.unban') : t('actions.ban')}
-              action={() =>
-                showConfirmAction({
-                  title: t(`actions.${value ? 'unban' : 'ban'}-confirm`, {
-                    email: row.original.email,
-                  }),
-                  description: t('common:generic-confirm'),
-                  yesLabel: value ? t('actions.unban') : t('actions.ban'),
-                  action: async () => {
-                    await (value
-                      ? unbanUser({ userId: row.original.userId })
-                      : banUser({ userId: row.original.userId })
-                    ).unwrap();
-                    await fetchUsers(filters);
-                  },
-                })
-              }
+            <ZigDropdown
+              component={() => (
+                <IconButton sx={{ mr: '-4px' }}>
+                  <ZigDotsVerticalIcon
+                    color={theme.palette.neutral200}
+                    height={16}
+                    width={16}
+                  />
+                </IconButton>
+              )}
+              options={[
+                {
+                  label: t(isBanned ? 'actions.unban' : 'actions.ban'),
+                  onClick: () =>
+                    showConfirmAction({
+                      title: t(
+                        `actions.${isBanned ? 'unban' : 'ban'}-confirm`,
+                        {
+                          email: original.email,
+                        },
+                      ),
+                      description: t('common:generic-confirm'),
+                      yesLabel: isBanned
+                        ? t('actions.unban')
+                        : t('actions.ban'),
+                      action: async () => {
+                        await (isBanned
+                          ? unbanUser({ userId: original.userId })
+                          : banUser({ userId: original.userId })
+                        ).unwrap();
+                        await fetchUsers(filters);
+                      },
+                    }),
+                },
+              ].concat(
+                original['2faEnabled']
+                  ? {
+                      label: t('actions.disable2FA'),
+                      onClick: () =>
+                        showConfirmAction({
+                          title: t(`actions.disable2FA-confirm`, {
+                            email: original.email,
+                          }),
+                          description: t('common:generic-confirm'),
+                          yesLabel: t(`actions.disable2FA-confirm`, {
+                            email: original.email,
+                          }),
+                          action: async () => {
+                            await disable2fa({
+                              userId: original.userId,
+                            }).unwrap();
+                            await fetchUsers(filters);
+                          },
+                        }),
+                    }
+                  : [],
+              )}
             />
           );
         },
+        enableColumnFilter: false,
       }),
     ];
   }, [filters]);
