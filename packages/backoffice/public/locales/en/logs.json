@@ -1,22 +1,4 @@
-{"operator": "Operator",
-  "depositStatuses": {
-    "reviewing": "Reviewing",
-    "blocked_by_risk": "Blocked by Risk",
-    "blocked_by_limit": "Blocked by Limit",
-    "blocked_by_error": "Blocked by Error",
-    "completed": "Completed"
-  },
-  "withdrawalStatuses": {
-    "pending": "Pending",
-    "transfer": "Transfer",
-    "sent":  "Sent",
-    "closed": "Closed",
-    "error":  "Error",
-    "pending_to_approve": "Pending Approval",
-    "approved":  "Approved",
-    "reviewing": "Revieweing",
-    "rejected":  "Rejected"
-  },
+{
   "table": {
     "userId": "User ID",
     "agentId": "Agent ID",
@@ -28,6 +10,9 @@
   "statuses": {
     "disable_2fa": "Disable 2FA",
     "unban_user": "Unban user",
-    "ban_user": "Ban user"
+    "ban_user": "Ban user",
+    "approve_deposit": "Approve deposit",
+    "approve_withdrawal": "Approve withdrawal",
+    "reject_withdrawal": "Reject withdrawal"
   }
 }
