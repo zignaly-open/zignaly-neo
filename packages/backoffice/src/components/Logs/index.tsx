@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   createColumnHelper,
   Loader,
   PageContainer,
+  ZigButton,
   ZigInput,
   ZigSelect,
   ZigTable,
@@ -12,7 +13,7 @@ import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
-import { useDebounce } from 'react-use';
+import SearchIcon from '@mui/icons-material/Search';
 import { useLazyLogsQuery } from '../../apis/logs/api';
 import { LogEntry, LogFilterType } from '../../apis/logs/types';
 import { useLogActionOptions } from './use';
@@ -30,13 +31,9 @@ export default function Withdrawals() {
 
   const [fetchLogs, { data: logs, isFetching }] = useLazyLogsQuery();
 
-  useDebounce(
-    async () => {
-      fetchLogs(filters);
-    },
-    500,
-    [filters],
-  );
+  useEffect(() => {
+    fetchLogs(filters);
+  }, []);
 
   const columnHelper = createColumnHelper<LogEntry>();
   const columns = useMemo(() => {
@@ -135,6 +132,16 @@ export default function Withdrawals() {
           onChange={(action) => setFilters((old) => ({ ...old, action }))}
           options={actionOptions}
         />
+        <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
+          <ZigButton
+            size='xlarge'
+            onClick={() => fetchLogs(filters)}
+            startIcon={<SearchIcon />}
+            loading={isFetching}
+          >
+            {t('common:filter')}
+          </ZigButton>
+        </Box>
       </Box>
 
       {logs ? (

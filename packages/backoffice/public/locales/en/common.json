@@ -4,6 +4,7 @@
   "no": "No",
   "off": "Off",
   "all": "All",
+  "filter": "Filter",
   "generic-confirm": "Please confirm you'd like to perform this action",
   "navigation": {
     "login": "Login",
