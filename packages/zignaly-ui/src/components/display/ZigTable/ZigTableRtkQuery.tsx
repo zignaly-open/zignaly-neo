@@ -1,7 +1,8 @@
 import React from "react";
-import { ZigTablePropsData } from "./types";
+import { ZigTablePropsPaginatedQuery } from "./types";
 import ZigTableData from "./ZigTableData";
 
-export default function ZigTableRtkQuery<T extends object>(props: ZigTablePropsData<T>) {
+export default function ZigTableRtkQuery<T extends object>(props: ZigTablePropsPaginatedQuery<T>) {
+  // @ts-ignore
   return <ZigTableData {...props} />;
 }
