@@ -92,7 +92,7 @@ function InvestDepositModal({
     return null;
   }
 
-  const { title, component, onGoBack } =
+  const { title, component, onGoBack, modalWidth } =
     (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
@@ -103,7 +103,7 @@ function InvestDepositModal({
       isLoading={!ready}
       onGoBack={onGoBack}
       wide
-      width={showDeposit && 720}
+      width={modalWidth}
     >
       <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
     </ZModal>
