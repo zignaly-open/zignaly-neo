@@ -17,20 +17,44 @@ export interface ZigTablePropsData<T extends object> extends ZigTablePropsBase<T
   data: TableOptions<T>["data"];
 }
 
-export interface ZigTablePropsPaginatedQuery<T extends object> extends ZigTablePropsBase<T> {
-  query: {
+export type ZigTableQueryParams = Record<string, string | number>;
+
+export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
+  extends ZigTablePropsBase<T> {
+  query: (props: V & { limit: number; from: string | number }) => {
     isFetching: boolean;
     isLoading: boolean;
     isSuccess: boolean;
     isError: boolean;
     error?: unknown;
     refetch: () => void;
-    data?: T[];
+    data?: {
+      items: T[];
+    };
   };
-  queryExtraParams?: Record<string, string | number>;
+  queryExtraParams?: V;
 }
 
-export type ZigTableProps<T extends object> = ZigTablePropsData<T> | ZigTablePropsPaginatedQuery<T>;
+// To be done when wwe actually get a working endpoint
+// export interface ZigTablePropsPaginatedQuery<
+//   T extends object,
+//   V extends Record<string, string | number>,
+// > extends ZigTablePropsBase<T> {
+//   query: (props?: V) => {
+//     isFetching: boolean;
+//     isLoading: boolean;
+//     isSuccess: boolean;
+//     isError: boolean;
+//     error?: unknown;
+//     refetch: () => void;
+//     data?: T[];
+//   };
+//   queryExtraParams?: V;
+// }
+
+export type ZigTableProps<T extends object, V extends ZigTableQueryParams> =
+  | ZigTablePropsData<T>
+  | ZigTablePropsInfiniteQuery<T, V>;
 
 declare module "@tanstack/react-table" {
   // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/59304
