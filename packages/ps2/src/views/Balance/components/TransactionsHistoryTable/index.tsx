@@ -20,6 +20,7 @@ import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
 import { useBalanceQuery } from 'apis/user/api';
+import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -205,33 +206,59 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint, coinsEndpoint]}
       content={() => (
-        <ZigTable
-          prefixId={'transactions'}
-          columns={columns}
-          data={filteredData}
-          initialState={{
-            sorting: [
-              {
-                id: 'datetime',
-                desc: true,
-              },
-            ],
-          }}
-          renderSubComponent={({ row }) => (
-            <TransactionDetails
-              transaction={row.original}
-              txId={row.original.txId}
-            />
-          )}
-          manualPagination={true}
-          pagination={pagination}
-          pageCount={
-            transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
-          }
-          onPaginationChange={setPagination}
-          loading={transactionsEndpoint.isFetching}
-          emptyMessage={t('noData')}
-        />
+        <>
+          <ZigTable
+            prefixId={'transactions'}
+            columns={columns}
+            initialState={{
+              sorting: [
+                {
+                  id: 'datetime',
+                  desc: true,
+                },
+              ],
+            }}
+            renderSubComponent={({ row }) => (
+              <TransactionDetails
+                transaction={row.original}
+                txId={row.original.txId}
+              />
+            )}
+            emptyMessage={t('noData')}
+            query={useTransactionsHistoryQuery}
+            queryExtraParams={{
+              exchangeInternalId: exchange?.internalId,
+            }}
+          />
+
+          <ZigTable
+            prefixId={'transactions'}
+            columns={columns}
+            data={filteredData}
+            initialState={{
+              sorting: [
+                {
+                  id: 'datetime',
+                  desc: true,
+                },
+              ],
+            }}
+            renderSubComponent={({ row }) => (
+              <TransactionDetails
+                transaction={row.original}
+                txId={row.original.txId}
+              />
+            )}
+            manualPagination={true}
+            pagination={pagination}
+            pageCount={
+              transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
+            }
+            onPaginationChange={setPagination}
+            loading={transactionsEndpoint.isFetching}
+            emptyMessage={t('noData')}
+          />
+        </>
       )}
     />
   );

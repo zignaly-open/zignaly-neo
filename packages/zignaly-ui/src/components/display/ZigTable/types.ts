@@ -21,7 +21,7 @@ export type ZigTableQueryParams = Record<string, string | number>;
 
 export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
-  query: (props: V & { limit: number; from: string | number }) => {
+  query: (props: V & { limit: number; from: string }) => {
     isFetching: boolean;
     isLoading: boolean;
     isSuccess: boolean;
@@ -32,6 +32,8 @@ export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTable
       items: T[];
     };
   };
+  // actually it'd be a different type but whatever
+  queryDataMapper?: (data: T) => T;
   queryExtraParams?: V;
 }
 
