@@ -55,7 +55,8 @@ const maybeReportError = (
   requestType: BaseQueryApi['type'],
 ) => {
   if (!error) return;
-  console.log(error);
+  // eslint-disable-next-line no-console
+  console.error(error);
   backendError(
     i18next.t,
     error as unknown as BackendError,
