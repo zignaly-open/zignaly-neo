@@ -116,4 +116,4 @@ export type Transaction = {
   servicePsVersion?: number;
 };
 
-export type Transactions = InfiniteQueryResponse<Transaction[]>;
+export type Transactions = InfiniteQueryResponse<Transaction>;

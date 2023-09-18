@@ -11,21 +11,19 @@ import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
+import { TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
-import { TRANSACTION_TYPE } from 'apis/coin/types';
+import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
 import { useBalanceQuery } from 'apis/user/api';
 import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
-  const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
-    [],
-  );
+  const [, setFilteredData] = useState<Transaction[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 30,
@@ -76,12 +74,6 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     setFilteredData(data);
   };
 
-  useEffect(() => {
-    if (transactionsEndpoint.data && coinsEndpoint.data) {
-      updateData();
-    }
-  }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
-
   useLayoutEffect(() => {
     // Reset pagination when infinite query is refreshed from filter change
     if (transactionsEndpoint.page === 1) {
@@ -89,7 +81,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     }
   }, [transactionsEndpoint.page]);
 
-  const columnHelper = createColumnHelper<TransactionsTableDataType>();
+  const columnHelper = createColumnHelper<Transaction>();
   const columns = useMemo(
     () => [
       columnHelper.accessor('datetime', {
@@ -108,7 +100,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
           <CoinLabel
             id={`balances-table-transaction__coin-${original.txId}`}
             coin={getValue()}
-            name={original.assetName ?? '-'}
+            name={coinsEndpoint.data?.[original.asset]?.name ?? '-'}
           />
         ),
         enableSorting: false,
@@ -199,7 +191,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         enableSorting: false,
       }),
     ],
-    [],
+    [t, coinsEndpoint.data],
   );
 
   return (
@@ -231,33 +223,33 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             }}
           />
 
-          <ZigTable
-            prefixId={'transactions'}
-            columns={columns}
-            data={filteredData}
-            initialState={{
-              sorting: [
-                {
-                  id: 'datetime',
-                  desc: true,
-                },
-              ],
-            }}
-            renderSubComponent={({ row }) => (
-              <TransactionDetails
-                transaction={row.original}
-                txId={row.original.txId}
-              />
-            )}
-            manualPagination={true}
-            pagination={pagination}
-            pageCount={
-              transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
-            }
-            onPaginationChange={setPagination}
-            loading={transactionsEndpoint.isFetching}
-            emptyMessage={t('noData')}
-          />
+          {/*<ZigTable*/}
+          {/*  prefixId={'transactions'}*/}
+          {/*  columns={columns}*/}
+          {/*  data={filteredData}*/}
+          {/*  initialState={{*/}
+          {/*    sorting: [*/}
+          {/*      {*/}
+          {/*        id: 'datetime',*/}
+          {/*        desc: true,*/}
+          {/*      },*/}
+          {/*    ],*/}
+          {/*  }}*/}
+          {/*  renderSubComponent={({ row }) => (*/}
+          {/*    <TransactionDetails*/}
+          {/*      transaction={row.original}*/}
+          {/*      txId={row.original.txId}*/}
+          {/*    />*/}
+          {/*  )}*/}
+          {/*  manualPagination={true}*/}
+          {/*  pagination={pagination}*/}
+          {/*  pageCount={*/}
+          {/*    transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page*/}
+          {/*  }*/}
+          {/*  onPaginationChange={setPagination}*/}
+          {/*  loading={transactionsEndpoint.isFetching}*/}
+          {/*  emptyMessage={t('noData')}*/}
+          {/*/>*/}
         </>
       )}
     />
