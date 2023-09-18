@@ -1,4 +1,5 @@
-import { Box, styled } from '@mui/material';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
 import { ZigSlider } from '@zignaly-open/ui';
 
 export const SliderContainer = styled(Box)`

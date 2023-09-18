@@ -30,7 +30,14 @@ import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useZModal } from 'components/ZModal/use';
 import ReferralInviteModal from './components/ReferralInviteModal';
 import { useTiersData } from 'apis/referrals/use';
-import { CommissionBox } from './styles';
+import {
+  BorderFix,
+  CommissionBox,
+  StyledShareCommissionSlider,
+} from './styles';
+import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
+import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
+import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -124,7 +131,21 @@ const Referrals: React.FC = () => {
                   <ZigTypography color='paleBlue' />
                 </Trans>
               </ZigTypography>
-              <CommissionBox></CommissionBox>
+              <CommissionBox>
+                <Box display='flex' alignItems={'center'} gap='104px'>
+                  <CurrentCommission showReferrals={false} />
+                  <StyledShareCommissionSlider>
+                    <BorderFix />
+                    <ShareCommissionSlider
+                      discountPct={referral.discountPct}
+                      max={maxCommission}
+                    />
+                  </StyledShareCommissionSlider>
+                </Box>
+                <Box display='flex' gap='22px' mt='44px' px='22px'>
+                  <ReferralLinkInvite link={link} />
+                </Box>
+              </CommissionBox>
               <Box
                 sx={{
                   mr: 4,

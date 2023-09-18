@@ -11,15 +11,19 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 const ReferralLinkInvite = ({
   serviceId,
   referralCode,
+  link,
 }: {
-  serviceId: string;
-  referralCode: string;
+  serviceId?: string;
+  referralCode?: string;
+  link?: string;
 }) => {
   const toast = useToast();
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
-  const url = `${window.origin}${generatePath(ROUTE_TRADING_SERVICE, {
-    serviceId: serviceId,
-  })}?invite=${referralCode}&subtrack=${serviceId}`;
+  const url =
+    link ??
+    `${window.origin}${generatePath(ROUTE_TRADING_SERVICE, {
+      serviceId: serviceId,
+    })}?invite=${referralCode}&subtrack=${serviceId}`;
 
   return (
     <>

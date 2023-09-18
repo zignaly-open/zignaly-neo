@@ -1,11 +1,98 @@
 import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
+import {
+  ContainerArrow,
+  SliderContainer,
+} from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider/styles';
 
 export const CommissionBox = styled(Paper)`
   border-radius: 17px;
   background-image: linear-gradient(to top, #18194b, #12374e);
   width: 849px;
   height: 354px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+// Custom borders with left arrow and transparent background
+export const StyledShareCommissionSlider = styled('div')`
+  position: relative;
+
+  ${ContainerArrow} {
+    display: none;
+  }
+
+  ${SliderContainer} {
+    position: relative;
+    width: 356px;
+    height: 160px;
+    margin: 0;
+    border: none;
+    border-right: 1px solid rgba(148, 150, 180, 0.1);
+    border-radius: 15px;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      padding-left: 19px;
+      left: -18px;
+    }
+    &:before {
+      bottom: calc(50% + 11px);
+      transform: skewY(-50deg);
+      border: 1px solid rgba(148, 150, 180, 0.1);
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+
+    &:after {
+      top: calc(50% + 11px);
+      transform: skewY(50deg);
+      border: 1px solid rgba(148, 150, 180, 0.1);
+      border-left: none;
+      border-bottom: none;
+      border-right: none;
+    }
+
+    > div > .MuiTypography-root {
+      font-size: 18.5px;
+      font-weight: 500;
+      display: flex;
+      letter-spacing: 0.56px;
+      padding: 0px 20px 8px;
+    }
+  }
+`;
+
+// Hack for nice rounded borders on the left side between the arrow
+export const BorderFix = styled('div')`
+  &:before,
+  &:after {
+    content: '';
+    width: 100%;
+    border: 1px solid rgba(148, 150, 180, 0.1);
+    height: calc(50% - 23px);
+    position: absolute;
+    border-right: none;
+  }
+
+  &:before {
+    top: 0;
+    border-bottom: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  &:after {
+    bottom: 0;
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
 `;
 
 export const TotalBoxBox = styled(Paper)`
