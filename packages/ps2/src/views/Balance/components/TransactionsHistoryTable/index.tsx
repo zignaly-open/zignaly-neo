@@ -206,6 +206,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
           query={useTransactionsHistoryQuery}
           queryExtraParams={{
             exchangeInternalId: exchange?.internalId,
+            type,
           }}
         />
       )}

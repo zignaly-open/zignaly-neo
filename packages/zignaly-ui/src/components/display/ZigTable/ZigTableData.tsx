@@ -31,6 +31,7 @@ export default function ZigTableData<T extends object>({
   renderSubComponent,
   pagination,
   loading,
+  fetching,
   emptyMessage,
   state = {},
   ...rest
@@ -73,7 +74,7 @@ export default function ZigTableData<T extends object>({
   return (
     <>
       <TableContainer>
-        <Table id={prefixId && `${prefixId}__table`}>
+        <Table id={prefixId && `${prefixId}__table`} fetching={fetching}>
           <thead>
             {table.getHeaderGroups().map((headerGroup, groupIndex) => (
               <tr key={headerGroup.id}>

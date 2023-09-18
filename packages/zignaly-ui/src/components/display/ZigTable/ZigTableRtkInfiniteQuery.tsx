@@ -13,7 +13,7 @@ export default function ZigTableRtkInfiniteQuery<T extends object, V extends Zig
     pageIndex: 0,
     pageSize: 30,
   });
-  const endpoint = query({ ...queryExtraParams, limit: 30, from: "" });
+  const endpoint = query({ ...queryExtraParams, limit: pagination.pageSize, from: "" });
   const [data, setData] = useState<T[]>([]);
   useEffect(() => {
     if (endpoint.data) {
@@ -30,6 +30,7 @@ export default function ZigTableRtkInfiniteQuery<T extends object, V extends Zig
       data={data || []}
       manualPagination
       loading={endpoint.isLoading}
+      fetching={endpoint.isFetching}
       pagination={pagination}
       onPaginationChange={setPagination}
     />

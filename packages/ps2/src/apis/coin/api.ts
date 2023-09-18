@@ -96,6 +96,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     Transactions,
     {
       exchangeInternalId: string;
+      type: string;
       from?: string;
       limit?: number;
     }

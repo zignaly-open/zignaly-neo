@@ -14,6 +14,7 @@ interface ZigTablePropsBase<T extends object>
 export interface ZigTablePropsData<T extends object> extends ZigTablePropsBase<T> {
   pagination?: false | TableState["pagination"];
   loading?: boolean;
+  fetching?: boolean;
   data: TableOptions<T>["data"];
 }
 
