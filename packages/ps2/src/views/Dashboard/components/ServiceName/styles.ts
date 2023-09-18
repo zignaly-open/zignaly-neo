@@ -1,10 +1,11 @@
 import { styled } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const Icon = styled('div')`
   margin-right: 20px;
-  width: 55px;
-  height: 55px;
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledVerifiedIcon = styled(VerifiedIcon)`
@@ -15,4 +16,19 @@ export const StyledVerifiedIcon = styled(VerifiedIcon)`
   vertical-align: sub;
   margin-left: 3px;
   display: inline-block;
+`;
+export const TruncatedServiceName = styled(ZigTypography)<{
+  truncate: boolean;
+}>`
+  ${({ truncate }) =>
+    truncate
+      ? `
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  `
+      : `white-space: normal;`}
 `;
