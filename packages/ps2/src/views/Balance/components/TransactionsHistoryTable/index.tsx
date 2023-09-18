@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   createColumnHelper,
@@ -8,7 +8,11 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
-import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
+import {
+  useExchangeCoinsList,
+  useRefetchBalance,
+  useTransactionsHistory,
+} from 'apis/coin/use';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { TRANSACTION_TYPE_NAME } from './types';
@@ -19,17 +23,15 @@ import { getTransactionSideType, truncateAddress } from './util';
 import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
-import { useBalanceQuery } from 'apis/user/api';
 import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
-  const [, setFilteredData] = useState<Transaction[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 30,
   });
   const { pageIndex, pageSize } = pagination;
-  const { t } = useTranslation('transactions-history');
+
   const transactionsEndpoint = useTransactionsHistory(
     {
       limit: pageSize,
@@ -37,42 +39,6 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     },
     pageIndex,
   );
-  const coinsEndpoint = useExchangeCoinsList();
-  const exchange = useActiveExchange();
-  // Trigger balance update to be sure that balance widget matches transactions data
-  useBalanceQuery(
-    {
-      exchangeInternalId: exchange?.internalId,
-    },
-    {
-      refetchOnMountOrArgChange: true,
-      skip: !exchange?.internalId,
-    },
-  );
-
-  const defineSign = (typeTransaction: string, fromId: string) => {
-    if (
-      [
-        TRANSACTION_TYPE.PS_DEPOSIT,
-        TRANSACTION_TYPE.WITHDRAW,
-        TRANSACTION_TYPE.BUYZIG,
-      ].includes(typeTransaction) ||
-      fromId === exchange?.internalId
-    )
-      return -1;
-    else return 1;
-  };
-
-  const updateData = () => {
-    const data = transactionsEndpoint.data
-      .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-      .sort((a, b) => +new Date(b.datetime) - +new Date(a.datetime))
-      .map((transaction) => ({
-        ...transaction,
-        assetName: coinsEndpoint.data[transaction.asset]?.name,
-      }));
-    setFilteredData(data);
-  };
 
   useLayoutEffect(() => {
     // Reset pagination when infinite query is refreshed from filter change
@@ -80,6 +46,27 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       setPagination((p) => ({ ...p, pageIndex: 0 }));
     }
   }, [transactionsEndpoint.page]);
+
+  const { t } = useTranslation('transactions-history');
+  const coinsEndpoint = useExchangeCoinsList();
+  const exchange = useActiveExchange();
+  useRefetchBalance();
+
+  const defineSign = useCallback(
+    (typeTransaction: string, fromId: string) => {
+      if (
+        [
+          TRANSACTION_TYPE.PS_DEPOSIT,
+          TRANSACTION_TYPE.WITHDRAW,
+          TRANSACTION_TYPE.BUYZIG,
+        ].includes(typeTransaction) ||
+        fromId === exchange?.internalId
+      )
+        return -1;
+      else return 1;
+    },
+    [exchange],
+  );
 
   const columnHelper = createColumnHelper<Transaction>();
   const columns = useMemo(
@@ -198,59 +185,29 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint, coinsEndpoint]}
       content={() => (
-        <>
-          <ZigTable
-            prefixId={'transactions'}
-            columns={columns}
-            initialState={{
-              sorting: [
-                {
-                  id: 'datetime',
-                  desc: true,
-                },
-              ],
-            }}
-            renderSubComponent={({ row }) => (
-              <TransactionDetails
-                transaction={row.original}
-                txId={row.original.txId}
-              />
-            )}
-            emptyMessage={t('noData')}
-            query={useTransactionsHistoryQuery}
-            queryExtraParams={{
-              exchangeInternalId: exchange?.internalId,
-            }}
-          />
-
-          {/*<ZigTable*/}
-          {/*  prefixId={'transactions'}*/}
-          {/*  columns={columns}*/}
-          {/*  data={filteredData}*/}
-          {/*  initialState={{*/}
-          {/*    sorting: [*/}
-          {/*      {*/}
-          {/*        id: 'datetime',*/}
-          {/*        desc: true,*/}
-          {/*      },*/}
-          {/*    ],*/}
-          {/*  }}*/}
-          {/*  renderSubComponent={({ row }) => (*/}
-          {/*    <TransactionDetails*/}
-          {/*      transaction={row.original}*/}
-          {/*      txId={row.original.txId}*/}
-          {/*    />*/}
-          {/*  )}*/}
-          {/*  manualPagination={true}*/}
-          {/*  pagination={pagination}*/}
-          {/*  pageCount={*/}
-          {/*    transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page*/}
-          {/*  }*/}
-          {/*  onPaginationChange={setPagination}*/}
-          {/*  loading={transactionsEndpoint.isFetching}*/}
-          {/*  emptyMessage={t('noData')}*/}
-          {/*/>*/}
-        </>
+        <ZigTable
+          prefixId={'transactions'}
+          columns={columns}
+          initialState={{
+            sorting: [
+              {
+                id: 'datetime',
+                desc: true,
+              },
+            ],
+          }}
+          renderSubComponent={({ row }) => (
+            <TransactionDetails
+              transaction={row.original}
+              txId={row.original.txId}
+            />
+          )}
+          emptyMessage={t('noData')}
+          query={useTransactionsHistoryQuery}
+          queryExtraParams={{
+            exchangeInternalId: exchange?.internalId,
+          }}
+        />
       )}
     />
   );

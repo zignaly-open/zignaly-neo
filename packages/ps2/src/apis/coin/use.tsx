@@ -10,6 +10,7 @@ import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from 'util/queryReturnType';
 import useInfinitePaginatedQuery from 'util/hooks/useInfinitePaginatedQuery';
 import { useActiveExchange } from '../user/use';
+import { useBalanceQuery } from '../user/api';
 
 export function useCoinBalances(options?: {
   convert?: boolean;
@@ -63,6 +64,20 @@ export function useExchangeCoinsList(): QueryReturnType<CoinDetails> {
   return useAllCoinsQuery(exchange?.exchangeType, {
     skip: !exchange?.exchangeType,
   });
+}
+
+export function useRefetchBalance() {
+  const exchange = useActiveExchange();
+  // Trigger balance update to be sure that balance widget matches transactions data
+  useBalanceQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+      skip: !exchange?.internalId,
+    },
+  );
 }
 
 export function useTransactionsHistory(
