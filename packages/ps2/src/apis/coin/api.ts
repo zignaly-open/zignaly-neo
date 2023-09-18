@@ -1,4 +1,3 @@
-import { isString, pickBy } from 'lodash-es';
 import {
   AccountCoinBalances,
   CoinBalances,
@@ -9,6 +8,7 @@ import {
 } from './types';
 import baseApiPs2 from '../baseApiPs2';
 import { injectEndpoints } from 'apis/util';
+import { fixSearchParams } from '@zignaly-open/ui';
 
 export const api = injectEndpoints(baseApiPs2, (builder) => ({
   coins: builder.query<
@@ -101,14 +101,10 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       limit?: number;
     }
   >({
-    query: ({ exchangeInternalId, ...params }) => {
-      const searchParams = new URLSearchParams(
-        pickBy({ ...params, limit: params.limit?.toString() }, isString),
-      );
-      return {
-        url: `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams.toString()}`,
-      };
-    },
+    query: ({ exchangeInternalId, ...params }) => ({
+      url: `user/exchanges/${exchangeInternalId}/transactions_history`,
+      params: fixSearchParams(params),
+    }),
   }),
 
   transactionsHistoryCsv: builder.mutation<

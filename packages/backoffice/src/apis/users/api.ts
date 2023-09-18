@@ -1,6 +1,7 @@
 import { UserActionPayloadType, UserData, UserFilterType } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { fixSearchParams, injectEndpoints } from 'apis/util';
+import { injectEndpoints } from 'apis/util';
+import { fixSearchParams } from '@zignaly-open/ui';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
   users: builder.query<UserData[], UserFilterType>({
