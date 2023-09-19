@@ -1,23 +1,15 @@
 import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import {
-  ZigButton,
-  ZigTypography,
-  ZigUserFilledIcon,
-  trimZeros,
-} from '@zignaly-open/ui';
+import { useTranslation } from 'react-i18next';
+import { ZigButton, ZigTypography, trimZeros } from '@zignaly-open/ui';
 import { ReferralsInviteModalProps } from './types';
 import ZModal from 'components/ZModal';
-import { Box, Grid, Tooltip } from '@mui/material';
-import { CommissionBoostChip } from './styles';
+import { Box, Grid } from '@mui/material';
 import Tiers from './atoms/TiersTable';
-import { NorthEast, Verified } from '@mui/icons-material';
-import BoostChip from './atoms/BoostChip';
+import { NorthEast } from '@mui/icons-material';
 import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
-import BoostTimer from './atoms/BoostTimer';
 import { useTiersData } from 'apis/referrals/use';
 import CurrentCommission from './CurrentCommission';
 
@@ -31,8 +23,6 @@ const ReferralsInviteModal = ({
     tiers,
     referral,
     serviceCommission,
-    boostEndsDate,
-    currentDate,
     boostRunning,
     boost,
     maxCommission,

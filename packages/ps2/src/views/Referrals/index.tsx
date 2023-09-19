@@ -63,7 +63,7 @@ const Referrals: React.FC = () => {
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
         endpoint={[rewards, history]}
-        forceIsLoading={isLoading}
+        loading={isLoading}
         content={([rewardsData, referrals]: [
           ReferralRewards,
           ReferralHistory,
@@ -122,7 +122,7 @@ const Referrals: React.FC = () => {
                   </StyledShareCommissionSlider>
                 </Box>
                 <StyledReferralLinkInvite>
-                  <ReferralLinkInvite link={link} />
+                  <ReferralLinkInvite link={link} title={t('share-link')} />
                 </StyledReferralLinkInvite>
               </CommissionBox>
             </Box>

@@ -8,7 +8,7 @@ import {
 
 export const CommissionBox = styled(Paper)`
   border-radius: 17px;
-  background-image: linear-gradient(to top, #18194b, #12374e);
+  background-image: linear-gradient(to bottom, #18194b, #12374e);
   width: 849px;
   height: 354px;
   display: flex;
@@ -64,7 +64,6 @@ export const StyledShareCommissionSlider = styled('div')`
     > div > .MuiTypography-root {
       font-size: 18.5px;
       font-weight: 500;
-      /* display: flex; */
       letter-spacing: 0.56px;
       padding: 0px 20px 8px;
     }

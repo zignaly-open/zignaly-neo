@@ -12,10 +12,12 @@ const ReferralLinkInvite = ({
   serviceId,
   referralCode,
   link,
+  title,
 }: {
   serviceId?: string;
   referralCode?: string;
   link?: string;
+  title?: string;
 }) => {
   const toast = useToast();
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
@@ -36,7 +38,7 @@ const ReferralLinkInvite = ({
             fontWeight={400}
             id='referrals-invite-referral-link-label'
           >
-            {t('trader-referral-link')}
+            {t(title ?? 'trader-referral-link')}
           </ZigTypography>
           <InviteUrlInput
             value={url}
