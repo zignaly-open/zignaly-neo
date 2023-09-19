@@ -308,13 +308,14 @@ const Marketplace: React.FC = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       zIndex: 3,
-                      gap: 3,
+                      gap: 2,
                     }}
                     width={'100%'}
                     height={'112px'}
                   >
                     <MarketplaceAction service={props.row.original} />
                     <ZigButton
+                      size={'large'}
                       onClick={() =>
                         navigate(
                           generatePath(ROUTE_TRADING_SERVICE, {
