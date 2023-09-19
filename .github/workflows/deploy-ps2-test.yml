@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - test
-      - master
+      - feat/backoffice
 
 jobs:
   deploy:
