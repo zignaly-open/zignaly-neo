@@ -1,7 +1,8 @@
 import { UseQuery } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { isArray } from "lodash-es";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useDeepCompareEffect, useUpdateEffect } from "react-use";
+import { ref } from "yup";
 
 export type PaginationMetadata = {
   from: string;
@@ -58,6 +59,11 @@ const useInfinitePaginatedQuery = (
   const refresh = () => {
     setLocalPage({ page: 1, id: "" });
   };
+
+  useLayoutEffect(() => {
+    // Reset pagination when infinite query the number of entries per page changes
+    refresh();
+  }, [params.limit]);
 
   useUpdateEffect(() => {
     localParams.current = params;
