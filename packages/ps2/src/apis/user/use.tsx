@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Exchange,
   ExtendedExchange,
@@ -264,11 +264,13 @@ export function useActiveExchange(): ExtendedExchange | undefined {
   }, [exchange]);
 
   const result = exchange || defaultExchange || undefined;
-  return (
-    result && {
-      ...result,
-      image: getImageOfAccount(user.exchanges.indexOf(result)),
-    }
+  return useMemo(
+    () =>
+      result && {
+        ...result,
+        image: getImageOfAccount(user.exchanges.indexOf(result)),
+      },
+    [result, user.exchanges],
   );
 }
 
