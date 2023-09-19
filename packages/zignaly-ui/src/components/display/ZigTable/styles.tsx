@@ -9,7 +9,7 @@ export const TableContainer = styled("div")`
 
 export const Table = styled("table", {
   shouldForwardProp: (prop) => prop !== "fetching",
-})<{ fetching: boolean }>`
+})<{ fetching?: boolean }>`
   border-spacing: 0;
   width: 100%;
   border-radius: 16px;

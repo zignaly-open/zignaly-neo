@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   createColumnHelper,
@@ -8,17 +8,12 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
-import {
-  useExchangeCoinsList,
-  useRefetchBalance,
-  useTransactionsHistory,
-} from 'apis/coin/use';
+import { useExchangeCoinsList, useRefetchBalance } from 'apis/coin/use';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
-import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
 import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
@@ -26,27 +21,6 @@ import CoinLabel from 'components/CoinLabel';
 import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 30,
-  });
-  const { pageIndex, pageSize } = pagination;
-
-  const transactionsEndpoint = useTransactionsHistory(
-    {
-      limit: pageSize,
-      type,
-    },
-    pageIndex,
-  );
-
-  useLayoutEffect(() => {
-    // Reset pagination when infinite query is refreshed from filter change
-    if (transactionsEndpoint.page === 1) {
-      setPagination((p) => ({ ...p, pageIndex: 0 }));
-    }
-  }, [transactionsEndpoint.page]);
-
   const { t } = useTranslation('transactions-history');
   const coinsEndpoint = useExchangeCoinsList();
   const exchange = useActiveExchange();
@@ -183,7 +157,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
 
   return (
     <LayoutContentWrapper
-      endpoint={[transactionsEndpoint, coinsEndpoint]}
+      endpoint={[coinsEndpoint]}
       content={() => (
         <ZigTable
           prefixId={'transactions'}
