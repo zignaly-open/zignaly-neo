@@ -2,57 +2,35 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 import { StepBox, StepCounter } from '../styles';
-import { Trans, useTranslation } from 'react-i18next';
-import copy from 'copy-to-clipboard';
-import { useToast } from '../../../util/hooks/useToast';
+import { useTranslation } from 'react-i18next';
 import { useReferralRewardsQuery } from '../../../apis/referrals/api';
 
-const ReferralSuccessStep: React.FC<{ step: number; link?: string }> = ({
-  step,
-  link,
-}) => {
+const ReferralSuccessStep: React.FC<{ step: number }> = ({ step }) => {
   const { t } = useTranslation('referrals');
   const { data } = useReferralRewardsQuery();
-  const toast = useToast();
   return (
-    // help me stepbox, I'm stuck
     <StepBox sx={{ display: 'flex', flexDirection: 'row' }}>
       <StepCounter>
-        <ZigTypography variant='h2' color='highlighted'>
+        <ZigTypography variant='h2' color='highlighted' fontSize={'27px'}>
           {step}
         </ZigTypography>
       </StepCounter>
       <Box>
-        <ZigTypography variant={'h2'}>
-          {t(`how-to-earn-steps.step-${step}.title`)}
+        <ZigTypography variant={'h2'} color={'neutral200'} fontSize={'20px'}>
+          {t(`start-earning-steps.step-${step}.title`)}
         </ZigTypography>
-        <ZigTypography component='p' sx={{ mt: 1, mb: 2, minHeight: '100px' }}>
-          <Trans
-            t={t}
-            i18nKey={`how-to-earn-steps.step-${step}.description`}
-            values={{
-              reward: 20,
-              successFee: data.configuration.zignalySuccessFee,
-            }}
-          >
-            <ZigTypography
-              component='span'
-              onClick={() => {
-                copy(link);
-                toast.success(t('action:copied'));
-              }}
-              color={'links'}
-              sx={{
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-            />
-          </Trans>
+        <ZigTypography
+          component='p'
+          sx={{ mt: '13px', mb: 2 }}
+          color={'neutral300'}
+        >
+          {t(`start-earning-steps.step-${step}.description`, {
+            reward: 20,
+            successFee: data.configuration.zignalySuccessFee,
+          })}
         </ZigTypography>
         <img
-          src={`/images/referrals/referrals_step${step}.png`}
+          src={`/images/referrals/referrals_step${step}.svg`}
           alt={t(`how-to-earn-steps.step-${step}.title`)}
         />
       </Box>

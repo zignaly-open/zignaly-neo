@@ -141,27 +141,26 @@ export const GetWhatYouDeserveLabel = styled(ZigTypography)`
   text-align: center;
 `;
 
-// what are you doing stepbox, what if somebody sees us
 export const StepBox = styled(Box)`
   padding: 16px;
+
   img {
-    margin-top: 24px;
     width: 100%;
-    height: 270px;
+    height: 265px;
     object-fit: contain;
   }
 `;
 
 export const StepCounter = styled(Box)`
-  width: 45px;
-  height: 45px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.palette.neutral600};
-  flex: 0 0 45px;
+  flex: 0 0 56px;
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 19px;
+  margin-right: 26px;
 `;
 
 export const RewardsListContainer = styled(Grid)`
