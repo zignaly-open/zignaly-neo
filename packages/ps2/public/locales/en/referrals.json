@@ -4,6 +4,7 @@
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
     "what-they-get": "What they get",
+    "limited-time": "Limited time",
     "start-earning": "Start Earning Now",
     "start-earning-steps": {
         "step-1": {
@@ -28,6 +29,7 @@
     "table": {
         "title": "Earnings History",
         "no-referrals": "No earnings to show",
+        "no-commission-history": "Earning History is empty. Invite some friends or traders to earn.",
         "time-and-date": "Time & Date",
         "user-trader": "User/Trader",
         "reward-type": "Earning Type",

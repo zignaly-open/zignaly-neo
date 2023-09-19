@@ -33,7 +33,12 @@ const CurrentCommission = ({
   } = useTiersData(service?.id, service?.zglySuccessFee);
 
   return (
-    <Box width={1}>
+    <Box
+      width={1}
+      display={'flex'}
+      flexDirection={'column'}
+      alignItems={'center'}
+    >
       <Box
         display={'flex'}
         width={1}
@@ -148,6 +153,7 @@ const CurrentCommission = ({
             variant='h3'
             fontWeight={400}
             id='referrals-invite-modal__when-you-invite'
+            textAlign={'center'}
           >
             <Trans
               i18nKey={

@@ -21,7 +21,7 @@ const ReferralSuccessStep: React.FC<{ step: number }> = ({ step }) => {
         </ZigTypography>
         <ZigTypography
           component='p'
-          sx={{ mt: '13px', mb: 2 }}
+          sx={{ mt: '13px', mb: '6px', minHeight: '72px' }}
           color={'neutral300'}
         >
           {t(`start-earning-steps.step-${step}.description`, {

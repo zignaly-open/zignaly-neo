@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 import {
   createColumnHelper,
   ZigPriceLabel,
@@ -193,7 +193,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         )}
       </Grid>
 
-      {!!referrals.length && (
+      {referrals.length ? (
         <ZigTable
           initialState={{
             sorting: [
@@ -209,6 +209,10 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
           enableSortingRemoval={false}
           emptyMessage={t('table.no-referrals')}
         />
+      ) : (
+        <Paper sx={{ p: 2 }}>
+          <ZigTypography>{t('table.no-commission-history')}</ZigTypography>
+        </Paper>
       )}
     </Box>
   );

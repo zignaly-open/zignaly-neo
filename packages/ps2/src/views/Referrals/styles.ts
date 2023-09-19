@@ -1,5 +1,6 @@
 import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
+import { InviteBox } from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite/styles';
 import {
   ContainerArrow,
   SliderContainer,
@@ -14,6 +15,8 @@ export const CommissionBox = styled(Paper)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 27px;
+  padding: 10px 50px;
 `;
 
 // Custom borders with left arrow and transparent background
@@ -92,6 +95,33 @@ export const BorderFix = styled('div')`
     border-top: none;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+  }
+`;
+
+export const LimitedTimeChip = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.palette.greenGraph}33;
+  height: 27px;
+  gap: 5px;
+  padding: 5px 13px;
+  position: absolute;
+  top: -35px;
+  right: -19px;
+
+  svg {
+    height: 15px;
+    width: auto;
+  }
+`;
+
+export const StyledReferralLinkInvite = styled('div')`
+  margin-top: 44px;
+
+  ${InviteBox} {
+    background-color: #0d1935;
   }
 `;
 

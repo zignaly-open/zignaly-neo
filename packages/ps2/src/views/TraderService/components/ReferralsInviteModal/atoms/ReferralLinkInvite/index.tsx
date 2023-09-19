@@ -26,7 +26,7 @@ const ReferralLinkInvite = ({
     })}?invite=${referralCode}&subtrack=${serviceId}`;
 
   return (
-    <>
+    <Box display='flex' gap='22px' px='22px'>
       <InviteBox>
         <StyledInviteIcon />
         <Box display='flex' flexDirection={'column'}>
@@ -61,7 +61,7 @@ const ReferralLinkInvite = ({
       >
         {t('copy-link', { ns: 'service' })}
       </ZigButton>
-    </>
+    </Box>
   );
 };
 

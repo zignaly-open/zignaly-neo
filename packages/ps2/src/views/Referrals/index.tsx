@@ -20,11 +20,13 @@ import { useTiersData } from 'apis/referrals/use';
 import {
   BorderFix,
   CommissionBox,
+  StyledReferralLinkInvite,
   StyledShareCommissionSlider,
 } from './styles';
 import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
 import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
 import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
+import ReferralLimitedTime from './components/ReferralLimitedTime';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -53,6 +55,8 @@ const Referrals: React.FC = () => {
     maxCommissionWithoutTraderBoost,
     traderBoostMultiplier,
     isLoading,
+    boostRunning,
+    inviteLeft,
   } = useTiersData();
 
   return (
@@ -67,7 +71,7 @@ const Referrals: React.FC = () => {
           <>
             <Box
               sx={{
-                mt: 5,
+                mt: 6,
                 alignItems: 'center',
                 mb: 6,
                 display: 'flex',
@@ -81,8 +85,10 @@ const Referrals: React.FC = () => {
                 variant={'h1'}
                 fontSize={'35px'}
                 fontWeight={600}
+                position={'relative'}
               >
                 {t('title', { commission: maxCommission })}
+                {inviteLeft > 0 && boostRunning && <ReferralLimitedTime />}
               </ZigTypography>
               <ZigTypography
                 sx={{
@@ -115,13 +121,13 @@ const Referrals: React.FC = () => {
                     />
                   </StyledShareCommissionSlider>
                 </Box>
-                <Box display='flex' gap='22px' mt='44px' px='22px'>
+                <StyledReferralLinkInvite>
                   <ReferralLinkInvite link={link} />
-                </Box>
+                </StyledReferralLinkInvite>
               </CommissionBox>
             </Box>
 
-            {!!rewardsData.invitedCount ? (
+            {!rewardsData.invitedCount ? (
               <>
                 <ZigTypography
                   align={'center'}
@@ -133,7 +139,7 @@ const Referrals: React.FC = () => {
                   {t('start-earning')}
                 </ZigTypography>
 
-                <Grid container sx={{ mb: 8 }}>
+                <Grid container>
                   <Grid item xs={12} md={4}>
                     <ReferralSuccessStep step={1} />
                   </Grid>
@@ -156,7 +162,7 @@ const Referrals: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
-                    pt: 5,
+                    pt: 3,
                     pb: 5,
                   }}
                 >
@@ -193,9 +199,9 @@ const Referrals: React.FC = () => {
                     }
                   />
                 </Box>
+                <ReferralTable referrals={referrals.history} />
               </>
             )}
-            <ReferralTable referrals={referrals.history} />
           </>
         )}
       />

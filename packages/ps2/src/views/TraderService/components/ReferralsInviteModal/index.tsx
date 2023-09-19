@@ -101,7 +101,7 @@ const ReferralsInviteModal = ({
               </Box>
             </Grid>
           </Grid>
-          <Box display='flex' gap='22px' mt='44px' px='22px'>
+          <Box mt='44px'>
             <ReferralLinkInvite
               serviceId={service.id}
               referralCode={referral.referralCode}
