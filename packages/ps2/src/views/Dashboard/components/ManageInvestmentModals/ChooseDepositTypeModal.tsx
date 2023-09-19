@@ -81,8 +81,6 @@ export function useDepositModalContent({
           coinOptionsAllowedSwapFrom={coinOptionsAllowedSwapFrom}
           setView={setView}
           coin={coin}
-          close={close}
-          refetchBalance={refetchBalance}
           setConvertPreviewData={setConvertPreviewData}
           setConfirmSwapData={setConfirmSwapData}
         />

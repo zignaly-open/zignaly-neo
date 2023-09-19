@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
 import ChooseBetweenTwo from './ChooseBetweenTwo';
-import { useActiveExchange } from '../../../../../apis/user/use';
 import SwapForm from '../forms/SwapForm';
 import { Box, useTheme } from '@mui/material';
 import { SwapDepositPurchaseProps } from '../forms/SwapForm/types';
@@ -18,8 +17,6 @@ import { SwapDepositPurchaseProps } from '../forms/SwapForm/types';
 const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
   coin,
   setView,
-  close,
-  refetchBalance,
   isLoadingBalances,
   coinOptionsAllowedSwapFrom,
   setConfirmSwapData,
@@ -27,7 +24,6 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
 }) => {
   const { t } = useTranslation('deposit-crypto');
   const theme = useTheme();
-  const { internalId } = useActiveExchange();
 
   if (isLoadingBalances) {
     return <CenteredLoader />;
@@ -40,11 +36,8 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
         rightOptionSize={4}
         leftOption={
           <SwapForm
-            refetchBalance={refetchBalance}
-            closeDepositSwap={close}
             coinSwapTo={coin}
             coinsAllowedSwapFrom={coinOptionsAllowedSwapFrom}
-            internalId={internalId}
             setView={setView}
             setConfirmSwapData={setConfirmSwapData}
             setConvertPreviewData={setConvertPreviewData}
