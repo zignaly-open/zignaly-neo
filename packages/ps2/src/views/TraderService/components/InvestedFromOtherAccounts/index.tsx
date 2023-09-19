@@ -50,6 +50,7 @@ function InvestedFromOtherAccounts({
       close={close}
       title={t('other-accounts.title')}
       isLoading={isInvested.isLoading}
+      wide
     >
       <Box mt={3}>
         <ZigTable
