@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ZigTypography } from '@zignaly-open/ui';
-import { LimitedTimeChip } from '../styles';
+import { LimitedTimeChip, LimitedTimeChipArrow } from '../styles';
 import { useTranslation } from 'react-i18next';
 
 const ReferralLimitedTime = () => {
@@ -12,6 +12,7 @@ const ReferralLimitedTime = () => {
       <ZigTypography fontSize={14} color={'greenGraph'} fontWeight={500}>
         {t('limited-time')}
       </ZigTypography>
+      <LimitedTimeChipArrow />
     </LimitedTimeChip>
   );
 };

@@ -16,7 +16,7 @@ export const CommissionBox = styled(Paper)`
   justify-content: center;
   align-items: center;
   margin-top: 27px;
-  padding: 10px 50px;
+  padding: 10px 59px;
 `;
 
 // Custom borders with left arrow and transparent background
@@ -64,7 +64,7 @@ export const StyledShareCommissionSlider = styled('div')`
     > div > .MuiTypography-root {
       font-size: 18.5px;
       font-weight: 500;
-      display: flex;
+      /* display: flex; */
       letter-spacing: 0.56px;
       padding: 0px 20px 8px;
     }
@@ -108,13 +108,24 @@ export const LimitedTimeChip = styled(Box)`
   gap: 5px;
   padding: 5px 13px;
   position: absolute;
-  top: -35px;
+  top: -36px;
   right: -19px;
 
   svg {
     height: 15px;
     width: auto;
   }
+`;
+
+export const LimitedTimeChipArrow = styled('div')`
+  position: absolute;
+  bottom: -13px;
+  left: calc(50% + 7px);
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 13px solid ${({ theme }) => theme.palette.greenGraph}33;
 `;
 
 export const StyledReferralLinkInvite = styled('div')`

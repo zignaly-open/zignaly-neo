@@ -1,4 +1,4 @@
-import { Verified } from '@mui/icons-material';
+import { InfoOutlined, Verified } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 import { ZigTypography, ZigUserFilledIcon } from '@zignaly-open/ui';
 import React from 'react';
@@ -18,18 +18,14 @@ const CurrentCommission = ({
 }) => {
   const { t } = useTranslation('referrals-trader');
   const {
-    tiers,
     referral,
     serviceCommission,
     boostEndsDate,
     currentDate,
     boostRunning,
-    boost,
     maxCommission,
-    maxCommissionWithoutTraderBoost,
     traderBoostMultiplier,
     inviteLeft,
-    isLoading,
   } = useTiersData(service?.id, service?.zglySuccessFee);
 
   return (
@@ -62,16 +58,14 @@ const CurrentCommission = ({
                 { commission: maxCommission },
               )}
             >
-              <Box
-                component='img'
+              <InfoOutlined
                 sx={{
+                  color: 'neutral300',
+                  fontSize: '10px',
                   position: 'absolute',
-                  width: '10px',
                   right: -13,
                   top: -5,
-                  zIndex: 1,
                 }}
-                src={`/images/portfolio/info-icon.svg`}
               />
             </Tooltip>
           </Box>
@@ -114,16 +108,14 @@ const CurrentCommission = ({
                 {t('my-referrals')}
               </ZigTypography>
               <Tooltip title={t('tooltips.number-referrals')}>
-                <Box
-                  component='img'
+                <InfoOutlined
                   sx={{
+                    color: 'neutral300',
+                    fontSize: '10px',
                     position: 'absolute',
-                    width: '10px',
                     right: -13,
                     top: -5,
-                    zIndex: 1,
                   }}
-                  src={`/images/portfolio/info-icon.svg`}
                 />
               </Tooltip>
             </Box>

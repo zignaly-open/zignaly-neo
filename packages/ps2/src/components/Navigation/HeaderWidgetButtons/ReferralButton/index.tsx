@@ -9,15 +9,9 @@ import { useTiersData } from 'apis/referrals/use';
 
 const ReferralButton = () => {
   const { t } = useTranslation('common');
-  const {
-    serviceCommission,
-    boostRunning,
-    currentDate,
-    boostEndsDate,
-    inviteLeft,
-    maxCommission,
-    traderBoostMultiplier,
-  } = useTiersData();
+  const { maxCommission } = useTiersData();
+
+  if (!maxCommission) return null;
 
   return (
     <Link to={generatePath(ROUTE_REFERRALS)}>

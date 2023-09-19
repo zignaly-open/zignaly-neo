@@ -7,6 +7,7 @@ import { useUpdateDiscountMutation } from 'apis/referrals/api';
 import { useToast } from 'util/hooks/useToast';
 import { Box, Tooltip } from '@mui/material';
 import { round } from 'lodash-es';
+import { InfoOutlined } from '@mui/icons-material';
 
 export const ShareCommissionSlider = ({
   discountPct,
@@ -46,22 +47,21 @@ export const ShareCommissionSlider = ({
           textAlign={'center'}
           color={'neutral100'}
           id='referrals-invite-modal__slider-label'
+          position={'relative'}
+          component={'div'}
         >
           {t('split-commission')}
+          <Tooltip title={t('tooltips.split-commission')}>
+            <InfoOutlined
+              sx={{
+                color: 'neutral300',
+                fontSize: '10px',
+                marginLeft: '3px',
+                marginBottom: '8px',
+              }}
+            />
+          </Tooltip>
         </ZigTypography>
-        <Tooltip title={t('tooltips.split-commission')}>
-          <Box
-            component='img'
-            sx={{
-              position: 'absolute',
-              width: '10px',
-              right: -13,
-              top: -5,
-              zIndex: 1,
-            }}
-            src={`/images/portfolio/info-icon.svg`}
-          />
-        </Tooltip>
       </Box>
 
       <StyledZigSlider
