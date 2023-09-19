@@ -14,13 +14,16 @@ import { useCoinBalances } from '../../../../apis/coin/use';
 import { ZigTypography } from '@zignaly-open/ui';
 import { allowedDeposits } from '../../../../util/coins';
 import SwapCoinsConfirmForm from '../../../Balance/components/SwapCoinsModal/SwapCoinsConfirmForm';
+import { useOpenInvestDepositModal } from './InvestDepositModal';
 
 export function useDepositModalContent({
   coin,
+  serviceId,
   refetchBalance,
   close,
 }: {
   coin: string;
+  serviceId?: string;
   refetchBalance: () => void;
   close: () => void;
 }): UseModalReturn {
@@ -54,6 +57,7 @@ export function useDepositModalContent({
       ? ChooseDepositTypeViews.SwapDepositView
       : ChooseDepositTypeViews.ChooseDepositTypeView,
   );
+  const openInvestModal = useOpenInvestDepositModal();
 
   type ViewDefinition = {
     title: string;
@@ -97,7 +101,10 @@ export function useDepositModalContent({
               ? 1 / convertPreviewData.lastPrice
               : convertPreviewData.lastPrice
           }
-          close={close}
+          close={() => {
+            close();
+            openInvestModal(serviceId);
+          }}
           internalId={internalId}
           toCoin={coin}
           {...confirmSwapData}

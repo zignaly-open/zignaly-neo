@@ -67,6 +67,7 @@ function InvestDepositModal({
   const depositModal = useDepositModalContent({
     coin: service?.ssc,
     refetchBalance,
+    serviceId,
     close: trackAwareClose,
   });
   const investModal = useInvestModalContent({ close: trackAwareClose });
