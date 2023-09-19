@@ -6,6 +6,7 @@ import { useDebounce } from 'react-use';
 import { useUpdateDiscountMutation } from 'apis/referrals/api';
 import { useToast } from 'util/hooks/useToast';
 import { Box, Tooltip } from '@mui/material';
+import { round } from 'lodash-es';
 
 export const ShareCommissionSlider = ({
   discountPct,
@@ -27,7 +28,7 @@ export const ShareCommissionSlider = ({
         return;
       }
       await updateDiscount({
-        discount: Math.round((value / max) * 100),
+        discount: round((value / max) * 100, 2),
       }).unwrap();
       toast.success(t('changes-saved'));
     },
