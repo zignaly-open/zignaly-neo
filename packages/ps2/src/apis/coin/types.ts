@@ -1,5 +1,3 @@
-import { InfiniteQueryResponse } from 'util/hooks/useInfinitePaginatedQuery';
-
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type CoinState = {};
 
@@ -116,4 +114,12 @@ export type Transaction = {
   servicePsVersion?: number;
 };
 
-export type Transactions = InfiniteQueryResponse<Transaction>;
+export type PaginationMetadata = {
+  from: string;
+  length: number;
+};
+
+export type Transactions = {
+  items: Transaction[];
+  metadata: PaginationMetadata;
+};

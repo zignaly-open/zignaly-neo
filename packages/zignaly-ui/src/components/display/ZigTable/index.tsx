@@ -7,6 +7,6 @@ export default function ZigTable<T extends object, V extends Record<any, any>>(
   props: ZigTableProps<T, V>,
 ) {
   if ("data" in props) return <ZigTableData {...props} />;
-  if ("query" in props) return <ZigTableRtkInfiniteQuery {...props} />;
+  if ("useQuery" in props) return <ZigTableRtkInfiniteQuery {...props} />;
   throw new Error("ZigTable should have either data or query prop");
 }

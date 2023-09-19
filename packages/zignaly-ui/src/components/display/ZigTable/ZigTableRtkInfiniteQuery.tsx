@@ -1,50 +1,25 @@
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import { ZigTablePropsInfiniteQuery, ZigTableQueryParams } from "./types";
 import ZigTableData from "./ZigTableData";
-import { PaginationState } from "@tanstack/react-table";
-import useInfinitePaginatedQuery from "../../../hooks/useInfinitePaginatedQuery";
-import useInfinitePaginatedQuery2 from "../../../hooks/useInfinitePaginatedQuery2";
+import useInfinitePaginatedQuery from "./use/useInfinitePaginatedQuery";
 
 export default function ZigTableRtkInfiniteQuery<T extends object, V extends ZigTableQueryParams>({
-  query,
+  useQuery,
   queryExtraParams,
   queryDataMapper,
   ...props
 }: ZigTablePropsInfiniteQuery<T, V>) {
-  // const [pagination, setPagination] = useState<PaginationState>({
-  //   pageIndex: 0,
-  //   pageSize: 30,
-  // });
-  //
-  // const {isFetching, isLoading, data: items, hasMore} = useInfinitePaginatedQuery(
-  //   query,
-  //   { ...(queryExtraParams || {}), limit: pagination.pageSize },
-  //   pagination.pageIndex,
-  //   true,
-  //   { refetchOnMountOrArgChange: true },
-  // );
+  const { pagination, setPagination, isFetching, isLoading, hasMore, data } =
+    useInfinitePaginatedQuery({
+      useQuery,
+      queryExtraParams,
+    });
 
-  const shit = useInfinitePaginatedQuery2({
-    useQuery: query,
-    queryExtraParams,
-    initialLimit: 10,
-  });
-  const { pagination, setPagination, isFetching, isLoading, hasMore, data } = shit;
-
-  //
-  // console.error(endpoint);
-  //
-  // useLayoutEffect(() => {
-  //   // Reset pagination when infinite query is refreshed from filter change
-  //   if (endpoint.page === 1) {
-  //     setPagination((p) => ({ ...p, pageIndex: 0 }));
-  //   }
-  // }, [endpoint.page]);
-
+  const items = (queryDataMapper ? data?.items?.map(queryDataMapper) : data?.items) || [];
   return (
     <ZigTableData
       {...props}
-      data={data?.items?.map(queryDataMapper || ((x) => x)) || []}
+      data={items}
       pageCount={hasMore ? -1 : pagination.pageIndex + 1}
       manualPagination
       loading={isLoading}

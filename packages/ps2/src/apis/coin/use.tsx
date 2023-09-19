@@ -2,13 +2,11 @@ import {
   useAllCoinsQuery,
   useCoinsQuery,
   useDepositInfoQuery,
-  useTransactionsHistoryQuery,
   useQuoteAssetsCoinQuery,
   useConvertPreviewQuery,
 } from './api';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from 'util/queryReturnType';
-import useInfinitePaginatedQuery from 'util/hooks/useInfinitePaginatedQuery';
 import { useActiveExchange } from '../user/use';
 import { useBalanceQuery } from '../user/api';
 
@@ -78,28 +76,6 @@ export function useRefetchBalance() {
       skip: !exchange?.internalId,
     },
   );
-}
-
-export function useTransactionsHistory(
-  filters: {
-    limit?: number;
-    type?: string;
-  } = {},
-  pageIndex = 0,
-) {
-  const exchange = useActiveExchange();
-  const infinitePaginatedQuery = useInfinitePaginatedQuery(
-    useTransactionsHistoryQuery,
-    {
-      exchangeInternalId: exchange?.internalId,
-      ...filters,
-    },
-    pageIndex,
-    true,
-    { refetchOnMountOrArgChange: true },
-  );
-
-  return infinitePaginatedQuery;
 }
 
 export function useDepositInfo(

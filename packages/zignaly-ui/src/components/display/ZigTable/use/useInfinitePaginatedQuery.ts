@@ -1,21 +1,21 @@
-import { UseQuery } from "@reduxjs/toolkit/dist/query/react/buildHooks";
-import { isArray } from "lodash-es";
-import { useState, useEffect, useRef, useLayoutEffect, useCallback } from "react";
-import { useDeepCompareEffect, useUpdateEffect } from "react-use";
-import { ref } from "yup";
+import { useState, useEffect, useRef, useCallback, SetStateAction, Dispatch } from "react";
+import { useDeepCompareEffect } from "react-use";
 import { PaginationState } from "@tanstack/react-table";
+import { RTkQueryLikeInfinitePagination } from "../types";
 
-export type PaginationMetadata = {
-  from: string;
-  length: number;
-};
-
-export interface InfiniteQueryResponse<T> {
-  items: T[];
-  metadata?: PaginationMetadata;
-}
-
-const useInfinitePaginatedQuery2 = ({ useQuery, queryExtraParams, initialLimit }) => {
+const useInfinitePaginatedQuery = <T extends object, V extends object>({
+  useQuery,
+  queryExtraParams,
+  initialLimit,
+}: {
+  useQuery: RTkQueryLikeInfinitePagination<T, V>;
+  queryExtraParams?: V;
+  initialLimit?: number;
+}): {
+  pagination: PaginationState;
+  setPagination: Dispatch<SetStateAction<PaginationState>>;
+  hasMore: boolean;
+} => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: initialLimit || 30,
@@ -28,7 +28,7 @@ const useInfinitePaginatedQuery2 = ({ useQuery, queryExtraParams, initialLimit }
 
   const queryResponse = useQuery(
     {
-      ...(queryExtraParams || {}),
+      ...(queryExtraParams || ({} as V)),
       limit: pagination.pageSize,
       from: from.current,
     },
@@ -50,4 +50,4 @@ const useInfinitePaginatedQuery2 = ({ useQuery, queryExtraParams, initialLimit }
   };
 };
 
-export default useInfinitePaginatedQuery2;
+export default useInfinitePaginatedQuery;

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Row, TableOptions, TableState } from "@tanstack/react-table";
+import { RTkQueryLike } from "../../../utils/rtk";
 
 interface ZigTablePropsBase<T extends object>
   extends Omit<TableOptions<T>, "getCoreRowModel" | "data"> {
@@ -20,40 +21,21 @@ export interface ZigTablePropsData<T extends object> extends ZigTablePropsBase<T
 
 export type ZigTableQueryParams = Record<string, string | number>;
 
+export type RTkQueryLikeInfinitePagination<
+  TData extends object,
+  TParams extends object,
+> = RTkQueryLike<
+  { metadata: { from: string }; items: TData[] },
+  TParams & { limit: number; from: string }
+>;
+
 export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
-  query: (props: V & { limit: number; from: string }) => {
-    isFetching: boolean;
-    isLoading: boolean;
-    isSuccess: boolean;
-    isError: boolean;
-    error?: unknown;
-    refetch: () => void;
-    data?: {
-      items: T[];
-    };
-  };
+  useQuery: RTkQueryLikeInfinitePagination<T, V>;
   // actually it'd be a different type but whatever
   queryDataMapper?: (data: T) => T;
   queryExtraParams?: V;
 }
-
-// To be done when wwe actually get a working endpoint
-// export interface ZigTablePropsPaginatedQuery<
-//   T extends object,
-//   V extends Record<string, string | number>,
-// > extends ZigTablePropsBase<T> {
-//   query: (props?: V) => {
-//     isFetching: boolean;
-//     isLoading: boolean;
-//     isSuccess: boolean;
-//     isError: boolean;
-//     error?: unknown;
-//     refetch: () => void;
-//     data?: T[];
-//   };
-//   queryExtraParams?: V;
-// }
 
 export type ZigTableProps<T extends object, V extends ZigTableQueryParams> =
   | ZigTablePropsData<T>
