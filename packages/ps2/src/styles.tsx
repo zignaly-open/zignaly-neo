@@ -761,14 +761,16 @@ export default () => {
   return (
     <>
       <GlobalAppStyle />
-      <GoogleFontLoader
-        fonts={[
-          {
-            font: theme.typography.fontFamily.split(',')[0],
-            weights: [400, 700],
-          },
-        ]}
-      />
+      {whitelabel.loadFontsFromGoogle && (
+        <GoogleFontLoader
+          fonts={[
+            {
+              font: theme.typography.fontFamily.split(',')[0],
+              weights: [400, 700],
+            },
+          ]}
+        />
+      )}
       <GlobalStyles
         styles={{ body: { fontFamily: theme.typography.fontFamily } }}
       />
