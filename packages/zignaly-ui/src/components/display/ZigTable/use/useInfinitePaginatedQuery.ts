@@ -20,23 +20,24 @@ const useInfinitePaginatedQuery = <T extends object, V extends object>({
     pageIndex: 0,
     pageSize: initialLimit || 30,
   });
-  const from = useRef("");
+  const from = useRef<Record<number, string>>({});
   const reset = useCallback(() => {
     setPagination((v) => ({ ...v, pageIndex: 0 }));
-    from.current = "";
+    from.current = {};
   }, [from]);
 
   const queryResponse = useQuery(
     {
       ...(queryExtraParams || ({} as V)),
       limit: pagination.pageSize,
-      from: from.current,
+      from: from.current?.[pagination.pageIndex] || "",
     },
     { refetchOnMountOrArgChange: true },
   );
 
   useEffect(() => {
-    from.current = queryResponse.data?.metadata?.from || "";
+    if (from.current && queryResponse.data)
+      from.current[pagination.pageIndex + 1] = queryResponse.data?.metadata?.from || "";
   }, [queryResponse.data]);
 
   useEffect(reset, [pagination.pageSize]);
