@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ZigArrowOutIcon } from '@zignaly-open/ui';
 import { UserAccessLevel as Level } from '../../apis/user/types';
@@ -26,21 +26,28 @@ type LevelMapping =
 
 const usePerformLevelCheck = (
   levelThreshold: Level,
+  onClose?: () => void,
 ): ((onlyCheck?: boolean) => boolean) => {
   const isAuthenticated = useIsAuthenticated();
   const accessLevel = useUserAccessLevel();
   const { t } = useTranslation(['error']);
-  const { showModal, hideModal } = useZModal();
+  const { showModal, destroyModal } = useZModal();
   const logout = useLogout();
   const navigate = useNavigate();
   const kycEnabled = isFeatureOn(Features.Kyc);
   const subscriptionsEnabled = isFeatureOn(Features.Subscriptions);
   const modalId = useRef('');
 
-  const closeAndNavigate = (path: string) => {
-    hideModal(modalId.current);
-    navigate(path);
-  };
+  const closeAndNavigate = useCallback(
+    (path: string) => {
+      // Close modal manually
+      destroyModal(modalId.current);
+      navigate(path);
+      // if we have a modal open, close it (in case disableAutoDestroy is on)
+      onClose?.();
+    },
+    [navigate, destroyModal, onClose],
+  );
 
   const errorLevelMapping = useMemo<Partial<Record<Level, LevelMapping>>>(
     () => ({
@@ -135,7 +142,7 @@ const usePerformLevelCheck = (
             },
           },
           button2Props: {
-            // if we have the scubscription feature on but we don't have this configured...
+            // if we have the subscription feature on but we don't have this configured...
             // too bad
             href: whitelabel.subscriptionPurchaseLink,
             id: 'modal-access.expired-subscription__purchase',
@@ -176,16 +183,12 @@ const usePerformLevelCheck = (
   };
 };
 
-export const useCanLogIn = () => usePerformLevelCheck(Level.KycPending);
+const createUseAccessCheck = (level: Level) => (onClose?: () => void) =>
+  usePerformLevelCheck(level, onClose);
 
-export const useCanInsertCoupon = () =>
-  usePerformLevelCheck(Level.NoSubscription);
-
-export const useCanDeposit = () => usePerformLevelCheck(Level.Normal);
-
-export const useCanInvestIn = () => usePerformLevelCheck(Level.Normal);
-
-export const useCanInvestOut = () => usePerformLevelCheck(Level.KycExpired);
-
-export const useCanWithdraw = () =>
-  usePerformLevelCheck(Level.SubscriptionExpired);
+export const useCanLogIn = createUseAccessCheck(Level.KycPending);
+export const useCanInsertCoupon = createUseAccessCheck(Level.NoSubscription);
+export const useCanDeposit = createUseAccessCheck(Level.Normal);
+export const useCanInvestIn = createUseAccessCheck(Level.Normal);
+export const useCanInvestOut = createUseAccessCheck(Level.KycExpired);
+export const useCanWithdraw = createUseAccessCheck(Level.SubscriptionExpired);
