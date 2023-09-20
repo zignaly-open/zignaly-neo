@@ -120,7 +120,13 @@ const CurrentCommission = ({
               </Tooltip>
             </Box>
 
-            <Box display={'flex'} alignItems={'center'} flex={1} pt={'5px'}>
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              flex={1}
+              pt={'5px'}
+              justifyContent={'center'}
+            >
               <ZigUserFilledIcon color='paleBlue' width={18} height={21.5} />
               <ZigTypography
                 fontWeight={600}
