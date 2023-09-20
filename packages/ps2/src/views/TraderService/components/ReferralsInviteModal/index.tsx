@@ -82,7 +82,7 @@ const ReferralsInviteModal = ({
               flexDirection={'column'}
               alignItems={'center'}
             >
-              <CurrentCommission />
+              <CurrentCommission service={service} />
               <Box px='20px'>
                 <ShareCommissionSlider
                   discountPct={referral.discountPct}
