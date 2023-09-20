@@ -1,4 +1,5 @@
-import { Box, styled } from '@mui/material';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
 import { ZigInviteIcon } from '@zignaly-open/ui';
 
 export const InviteBox = styled(Box)`

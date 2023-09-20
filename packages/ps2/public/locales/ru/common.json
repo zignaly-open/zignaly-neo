@@ -92,7 +92,7 @@
 			"description": "На 1-й депозит"
 		},
 		"referrals": {
-			"title": "Заработайте 20%",
+			"title": "Заработайте {{commission}}%",
 			"description": "Пригласить Друзей"
 		}
 	}

@@ -11,18 +11,24 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 const ReferralLinkInvite = ({
   serviceId,
   referralCode,
+  link,
+  title,
 }: {
-  serviceId: string;
-  referralCode: string;
+  serviceId?: string;
+  referralCode?: string;
+  link?: string;
+  title?: string;
 }) => {
   const toast = useToast();
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
-  const url = `${window.origin}${generatePath(ROUTE_TRADING_SERVICE, {
-    serviceId: serviceId,
-  })}?invite=${referralCode}&subtrack=${serviceId}`;
+  const url =
+    link ??
+    `${window.origin}${generatePath(ROUTE_TRADING_SERVICE, {
+      serviceId: serviceId,
+    })}?invite=${referralCode}&subtrack=${serviceId}`;
 
   return (
-    <>
+    <Box display='flex' gap='22px' px='22px'>
       <InviteBox>
         <StyledInviteIcon />
         <Box display='flex' flexDirection={'column'}>
@@ -32,7 +38,7 @@ const ReferralLinkInvite = ({
             fontWeight={400}
             id='referrals-invite-referral-link-label'
           >
-            {t('trader-referral-link')}
+            {t(title ?? 'trader-referral-link')}
           </ZigTypography>
           <InviteUrlInput
             value={url}
@@ -57,7 +63,7 @@ const ReferralLinkInvite = ({
       >
         {t('copy-link', { ns: 'service' })}
       </ZigButton>
-    </>
+    </Box>
   );
 };
 

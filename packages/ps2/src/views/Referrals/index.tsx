@@ -1,34 +1,32 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
 import { Box, Grid } from '@mui/material';
-import {
-  PageContainer,
-  ZigButton,
-  ZigCopyText,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { PageContainer, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import GroupIcon from '@mui/icons-material/Group';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../apis/user/use';
-import { useToast } from '../../util/hooks/useToast';
 import { generatePath } from 'react-router-dom';
-import {
-  ROUTE_REFERRALS_INVITE,
-  ROUTE_REFERRALS_INVITE_SHORT,
-} from '../../routes';
+import { ROUTE_REFERRALS_INVITE } from '../../routes';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
-import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
-import { useZModal } from 'components/ZModal/use';
-import ReferralInviteModal from './components/ReferralInviteModal';
+import { useTiersData } from 'apis/referrals/use';
+import {
+  BorderFix,
+  CommissionBox,
+  StyledReferralLinkInvite,
+  StyledShareCommissionSlider,
+} from './styles';
+import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
+import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
+import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
+import ReferralLimitedTime from './components/ReferralLimitedTime';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -39,8 +37,6 @@ const Referrals: React.FC = () => {
     refetchOnMountOrArgChange: true,
   });
   const { refCode } = useCurrentUser();
-  const toast = useToast();
-  const { showModal } = useZModal();
 
   useTitle(t('pages:referrals'));
 
@@ -52,16 +48,22 @@ const Referrals: React.FC = () => {
       : window.location.host);
 
   const link = baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
-  const shortLink =
-    baseUrl + generatePath(ROUTE_REFERRALS_INVITE_SHORT, { key: refCode });
 
-  const openInviteModal = () =>
-    showModal(ReferralInviteModal, { url: link, urlShort: shortLink });
+  const {
+    referral,
+    maxCommission,
+    maxCommissionWithoutTraderBoost,
+    traderBoostMultiplier,
+    isLoading,
+    boostRunning,
+    inviteLeft,
+  } = useTiersData();
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
         endpoint={[rewards, history]}
+        loading={isLoading}
         content={([rewardsData, referrals]: [
           ReferralRewards,
           ReferralHistory,
@@ -69,98 +71,77 @@ const Referrals: React.FC = () => {
           <>
             <Box
               sx={{
-                mt: 5,
-                justifyContent: 'center',
+                mt: 6,
+                alignItems: 'center',
                 mb: 6,
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
               }}
             >
-              <Box
+              <ZigTypography
                 sx={{
-                  mr: 4,
-                  ml: 4,
-                  display: 'flex',
-                  alignItems: 'center',
+                  mb: '19px',
                 }}
+                variant={'h1'}
+                fontSize={'35px'}
+                fontWeight={600}
+                position={'relative'}
               >
-                <img
-                  src={'/images/referrals/envelope-main.png'}
-                  style={{ width: 200, marginTop: 17 }}
-                  alt={'referral'}
-                />
-              </Box>
-              <Box
+                {t('title', { commission: maxCommission })}
+                {inviteLeft > 0 && boostRunning && <ReferralLimitedTime />}
+              </ZigTypography>
+              <ZigTypography
                 sx={{
-                  flex: 1,
-                  maxWidth: 700,
-                  justifyContent: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
+                  mb: 1,
                 }}
+                variant={'h2'}
+                fontWeight={400}
+                color='neutral300'
               >
-                <ZigTypography
-                  sx={{
-                    mb: 1,
+                <Trans
+                  i18nKey={'description'}
+                  values={{
+                    commission: maxCommissionWithoutTraderBoost,
+                    maxCommission: maxCommission,
+                    multiplier: traderBoostMultiplier,
                   }}
-                  variant={'h1'}
+                  t={t}
                 >
-                  {t('title')}
-                </ZigTypography>
-
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <Box sx={{ flex: 1 }}>
-                    <ZigCopyText
-                      id={'deposit__deposit-address'}
-                      copyElementId={'referrals__copy-link'}
-                      value={link}
-                      onCopied={() => toast.success(t('action:copied'))}
+                  <ZigTypography color='paleBlue' />
+                </Trans>
+              </ZigTypography>
+              <CommissionBox>
+                <Box display='flex' alignItems={'center'} gap='63px'>
+                  <CurrentCommission showReferrals={false} />
+                  <StyledShareCommissionSlider>
+                    <BorderFix />
+                    <ShareCommissionSlider
+                      discountPct={referral.discountPct}
+                      max={maxCommission}
                     />
-                  </Box>
-                  <ZigButton
-                    variant={'contained'}
-                    id='referrals__open-invite-image-modal'
-                    size={'xlarge'}
-                    sx={{
-                      mb: '10px',
-                      ml: 1,
-                    }}
-                    onClick={openInviteModal}
-                  >
-                    <img
-                      src={'/images/referrals/qrcode.svg'}
-                      width='16'
-                      height='16'
-                      style={{ marginRight: 10 }}
-                      alt={''}
-                    />
-                    {t('create-invite.create-invite')}
-                  </ZigButton>
+                  </StyledShareCommissionSlider>
                 </Box>
-              </Box>
+                <StyledReferralLinkInvite>
+                  <ReferralLinkInvite link={link} title={t('share-link')} />
+                </StyledReferralLinkInvite>
+              </CommissionBox>
             </Box>
-
-            <ReferralRewardsList rewards={rewardsData} />
 
             {!rewardsData.invitedCount ? (
               <>
                 <ZigTypography
                   align={'center'}
                   variant={'h1'}
-                  sx={{ mt: 7, mb: 5 }}
+                  fontSize={'26px'}
+                  fontWeight={600}
+                  sx={{ mt: 7, mb: '29px' }}
                 >
-                  {t('how-to-earn')}
+                  {t('start-earning')}
                 </ZigTypography>
 
-                <Grid container sx={{ mb: 8 }}>
+                <Grid container>
                   <Grid item xs={12} md={4}>
-                    <ReferralSuccessStep step={1} link={link} />
+                    <ReferralSuccessStep step={1} />
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <ReferralSuccessStep step={2} />
@@ -181,7 +162,7 @@ const Referrals: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
-                    pt: 5,
+                    pt: 3,
                     pb: 5,
                   }}
                 >
@@ -218,9 +199,9 @@ const Referrals: React.FC = () => {
                     }
                   />
                 </Box>
+                <ReferralTable referrals={referrals.history} />
               </>
             )}
-            <ReferralTable referrals={referrals.history} />
           </>
         )}
       />

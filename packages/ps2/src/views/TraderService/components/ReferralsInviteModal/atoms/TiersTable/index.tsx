@@ -219,7 +219,7 @@ const TiersTable = ({
               <ZigTypography
                 fontWeight={600}
                 fontSize={16}
-                color='#999fe1'
+                color='paleBlue'
                 lineHeight={'23px'}
                 className='tier-chart__referrals-value'
               >

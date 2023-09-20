@@ -1,4 +1,5 @@
-import { Box, styled } from '@mui/material';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
 import { ZigSlider } from '@zignaly-open/ui';
 
 export const SliderContainer = styled(Box)`
@@ -61,7 +62,7 @@ export const StyledZigSlider = styled(ZigSlider)`
     &:nth-of-type(2) {
       font-size: 24px;
       font-weight: 600;
-      color: #999fe1;
+      color: ${({ theme }) => theme.palette.paleBlue};
       position: relative;
       width: 100%;
       text-align: center;

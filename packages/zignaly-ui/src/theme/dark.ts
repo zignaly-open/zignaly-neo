@@ -26,6 +26,7 @@ const dark: Theme = {
     yellow: "#AE9C5B",
     red: "#CC394E",
     contrasting: "#F3F4F6",
+    paleBlue: "#999fe1",
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
