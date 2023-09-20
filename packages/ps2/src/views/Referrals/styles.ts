@@ -33,7 +33,7 @@ export const StyledShareCommissionSlider = styled('div')`
     height: 160px;
     margin: 0;
     border: none;
-    border-right: 1px solid rgba(148, 150, 180, 0.1);
+    border-right: 1px solid rgba(148, 150, 180, 0.2);
     border-radius: 15px;
 
     &:before,
@@ -46,7 +46,7 @@ export const StyledShareCommissionSlider = styled('div')`
     &:before {
       bottom: calc(50% + 11px);
       transform: skewY(-50deg);
-      border: 1px solid rgba(148, 150, 180, 0.1);
+      border: 1px solid rgba(148, 150, 180, 0.3);
       border-left: none;
       border-right: none;
       border-top: none;
@@ -55,7 +55,7 @@ export const StyledShareCommissionSlider = styled('div')`
     &:after {
       top: calc(50% + 11px);
       transform: skewY(50deg);
-      border: 1px solid rgba(148, 150, 180, 0.1);
+      border: 1px solid rgba(148, 150, 180, 0.3);
       border-left: none;
       border-bottom: none;
       border-right: none;
@@ -104,7 +104,7 @@ export const LimitedTimeChip = styled(Box)`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.palette.greenGraph}33;
   height: 27px;
-  gap: 5px;
+  gap: 7px;
   padding: 5px 13px;
   position: absolute;
   top: -36px;
