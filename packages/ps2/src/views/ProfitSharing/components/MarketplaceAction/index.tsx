@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Box } from '@mui/material';
+import { Box, IconButton, useTheme } from '@mui/material';
 import {
   useActiveExchange,
   useIsAuthenticated,
@@ -12,13 +12,77 @@ import { Service } from '../../../../apis/service/types';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
-import { CenteredLoader } from '@zignaly-open/ui';
+import { CenteredLoader, ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
+import { MarketplaceService } from '../../../../apis/marketplace/types';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTE_TRADING_SERVICE } from '../../../../routes';
+import { useTranslation } from 'react-i18next';
+import { useChangeActiveRowMobile } from '../../../../apis/marketplace/use';
 
 const loadingSpinner = (
   <LoaderWrapper>
     <CenteredLoader width={155} height={40} />
   </LoaderWrapper>
 );
+
+export const MobileMarketplaceAction = ({
+  service,
+  rowId,
+}: {
+  rowId: string;
+  service: MarketplaceService;
+}) => {
+  const { t } = useTranslation('marketplace');
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const { activeRow, setActiveRow } = useChangeActiveRowMobile();
+  return (
+    rowId === activeRow && (
+      <Box
+        position={'absolute'}
+        left={0}
+        top={-2}
+        sx={{
+          backdropFilter: 'blur(7px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 3,
+          gap: 2,
+        }}
+        width={'100%'}
+        height={'100px'}
+      >
+        <MarketplaceAction service={service} />
+        <ZigButton
+          size={'large'}
+          variant={'outlined'}
+          onClick={() =>
+            navigate(
+              generatePath(ROUTE_TRADING_SERVICE, {
+                serviceId: service.id,
+              }),
+            )
+          }
+        >
+          {t('table.view-profile')}
+        </ZigButton>
+        <IconButton
+          onClick={() => {
+            setActiveRow('-1');
+          }}
+          sx={{ marginRight: '15px', marginLeft: '-10px' }}
+        >
+          <ZigCrossIcon
+            width={25}
+            height={25}
+            color={theme.palette.neutral300}
+          />
+        </IconButton>
+      </Box>
+    )
+  );
+};
 
 const MarketplaceAction = ({
   service,

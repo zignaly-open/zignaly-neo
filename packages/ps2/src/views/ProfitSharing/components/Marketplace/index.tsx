@@ -8,20 +8,20 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
-  ZigButton,
-  ZigCloseIcon,
 } from '@zignaly-open/ui';
-import { Box, IconButton, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { Investment } from '../../../../apis/investment/types';
 import { ServiceName } from '../../../Dashboard/components/ServiceName';
 import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace/util';
 import AssetsInPool from '../../../../components/AssetsInPool';
-import MarketplaceAction from '../MarketplaceAction';
+import MarketplaceAction, {
+  MobileMarketplaceAction,
+} from '../MarketplaceAction';
 import { TableWrapper } from './styles';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
-import { generatePath, Link, useNavigate } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // import TopServicesCards from '../TopServicesCards';
@@ -33,7 +33,6 @@ const Marketplace: React.FC = () => {
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [showActionMobileRow, setShowActionMobileRow] = useState<string>('-1');
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  const navigate = useNavigate();
   const columns = useMemo(
     () =>
       md
@@ -296,48 +295,15 @@ const Marketplace: React.FC = () => {
             columnHelper.display({
               header: '',
               id: 'action',
-              cell: (props) =>
-                props.row.id === showActionMobileRow && (
-                  <Box
-                    position={'absolute'}
-                    left={0}
-                    top={-1}
-                    sx={{
-                      backdropFilter: 'blur(7px)',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      zIndex: 3,
-                      gap: 2,
-                    }}
-                    width={'100%'}
-                    height={'112px'}
-                  >
-                    <MarketplaceAction service={props.row.original} />
-                    <ZigButton
-                      size={'large'}
-                      onClick={() =>
-                        navigate(
-                          generatePath(ROUTE_TRADING_SERVICE, {
-                            serviceId: props.row.original.id,
-                          }),
-                        )
-                      }
-                    >
-                      {t('table.view-profile')}
-                    </ZigButton>
-                    <IconButton
-                      onClick={() => {
-                        setShowActionMobileRow('-1');
-                      }}
-                    >
-                      <ZigCloseIcon color={theme.palette.neutral300} />
-                    </IconButton>
-                  </Box>
-                ),
+              cell: (props) => (
+                <MobileMarketplaceAction
+                  service={props.row.original}
+                  rowId={props.row.id}
+                />
+              ),
             }),
           ],
-    [t, md, showActionMobileRow],
+    [t, md],
   );
 
   return (
@@ -374,9 +340,8 @@ const Marketplace: React.FC = () => {
               <ZigTable
                 onRowClick={
                   !md
-                    ? (id) => {
-                        if (id != showActionMobileRow)
-                          setShowActionMobileRow(id);
+                    ? (id: string) => {
+                        if (id !== activeRow) setActiveRow(id);
                       }
                     : undefined
                 }
