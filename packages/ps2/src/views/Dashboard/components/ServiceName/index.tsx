@@ -14,7 +14,7 @@ export const ServiceName = ({
   prefixId,
   service,
   showCoin = true,
-  coinImageSize = 'x-large',
+  size = 'x-large',
   showOwner = true,
   truncateServiceName = false,
   activeLink = true,
@@ -38,12 +38,12 @@ export const ServiceName = ({
         flexDirection: 'row',
         display: 'flex',
         textAlign: 'start',
-        width: coinImageSize === 'x-large' ? 300 : 140,
+        width: size === 'x-large' ? 300 : 140,
       }}
     >
       <Icon>
         <Avatar
-          size={coinImageSize}
+          size={size}
           image={getServiceLogo(service.serviceLogo)}
           id={prefixId && `${prefixId}__logo-${service.serviceId}`}
         />
@@ -59,6 +59,7 @@ export const ServiceName = ({
           id={prefixId && `${prefixId}__name-${service.serviceId}`}
           fontWeight='medium'
           color='neutral100'
+          variant={size === 'x-large' ? 'body1' : 'body2'}
           truncate={truncateServiceName}
         >
           {service.serviceName}
