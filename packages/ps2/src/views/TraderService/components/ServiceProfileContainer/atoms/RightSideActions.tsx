@@ -9,12 +9,13 @@ import { Service } from '../../../../../apis/service/types';
 import { useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';
 import { RightSideActionWrapper } from '../styles';
-import { Loader, ZigButton } from '@zignaly-open/ui';
+import { Loader, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ROUTE_PROFIT_SHARING_SERVICE_INVEST } from '../../../../../routes';
 import { isFeatureOn } from '../../../../../whitelabel';
 import { Features } from '../../../../../whitelabel/type';
 import InviteButton from './InviteButton';
 import { useTiersData } from 'apis/referrals/use';
+import { Trans, useTranslation } from 'react-i18next';
 
 enum RightSideActionStates {
   Loading,
@@ -28,15 +29,17 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
   const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
-  const { isLoading } = useTiersData(service.id, service.zglySuccessFee);
+  const { t } = useTranslation('service');
+  const tiers = useTiersData(service.id, service.zglySuccessFee);
   const state = useMemo<RightSideActionStates>(() => {
-    if (isInvested.isLoading || isLoading) return RightSideActionStates.Loading;
-    if (isInvested.isError) return RightSideActionStates.Error;
+    if (isInvested.isLoading || tiers.isLoading)
+      return RightSideActionStates.Loading;
+    if (isInvested.isError || tiers.isError) return RightSideActionStates.Error;
     if (service.liquidated) return RightSideActionStates.Liquidated;
     if (isAuthenticated && isInvested.thisAccount)
       return RightSideActionStates.Invested;
     return RightSideActionStates.NotInvested;
-  }, [isInvested, service, isLoading, isAuthenticated]);
+  }, [isInvested, service, tiers, isAuthenticated]);
 
   return (
     <RightSideActionWrapper>
@@ -54,7 +57,10 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           >
             <Trans i18nKey={'failed-to-load'} t={t}>
               <ZigButton
-                onClick={isInvested.refetch}
+                onClick={() => {
+                  isInvested.refetch();
+                  tiers.refetch();
+                }}
                 variant={'text'}
               ></ZigButton>
             </Trans>
