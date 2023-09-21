@@ -9,4 +9,5 @@ export interface ChangeIndicatorProps {
   normalized?: boolean;
   stableCoinOperative?: boolean;
   id?: string;
+  decimalScale?: number;
 }
