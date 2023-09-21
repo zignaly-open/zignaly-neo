@@ -15,7 +15,7 @@ const useInfinitePaginatedQuery = <T extends object, V extends object>({
   pagination: PaginationState;
   setPagination: Dispatch<SetStateAction<PaginationState>>;
   hasMore: boolean;
-} => {
+} & ReturnType<RTkQueryLikeInfinitePagination<T, V>> => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: initialLimit || 30,
