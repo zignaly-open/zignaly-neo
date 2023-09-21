@@ -42,6 +42,7 @@ const CellLabelBaseCommission = () => {
       textAlign='end'
       lineHeight='24px'
       color={'neutral200'}
+      className='tier-chart__label-base-commission'
     >
       {t('base-commission')}
       <Tooltip title={t('tooltips.base-commission')}>
@@ -71,9 +72,16 @@ const CellLabelBoost = ({
         textAlign='end'
         lineHeight='24px'
         color={activated ? '#24b68d' : '#e93ea7'}
+        className='tier-chart__label-boost'
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip title={t('tooltips.within-1-week')}>
+        <Tooltip
+          title={t(
+            activated
+              ? 'tooltips.within-1-week-unlocked'
+              : 'tooltips.within-1-week',
+          )}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -81,7 +89,13 @@ const CellLabelBoost = ({
   );
 };
 
-const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
+const CellLabelTraderBoost = ({
+  commission,
+  multiplier,
+}: {
+  commission: number;
+  multiplier: number;
+}) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
@@ -91,15 +105,16 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
       gap='10px'
       justifyContent='flex-end'
     >
-      <BoostChip boost={boost} showBolt />
+      <BoostChip boost={multiplier} showBolt />
       <ZigTypography
         fontWeight={500}
         variant='h4'
         lineHeight='24px'
         color='#24b68d'
+        className='tier-chart__label-trader-commission'
       >
         {t('trader-boost')}
-        <Tooltip title={t('tooltips.trader-boost', { commission: boost })}>
+        <Tooltip title={t('tooltips.trader-boost', { commission })}>
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -129,7 +144,10 @@ const TiersTable = ({
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
         {serviceCommission > 0 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost boost={layers[0].value / layers[1].value} />
+            <CellLabelTraderBoost
+              commission={serviceCommission}
+              multiplier={layers[0].value / layers[1].value}
+            />
           </Box>
         )}
         {boost > 1 && (
@@ -181,6 +199,7 @@ const TiersTable = ({
               textAlign='end'
               lineHeight='24px'
               color='#979ce0'
+              className='tier-chart__label-referrals'
             >
               {t('referrals')}
               <Tooltip title={t('tooltips.number-referrals')}>
@@ -200,8 +219,9 @@ const TiersTable = ({
               <ZigTypography
                 fontWeight={600}
                 fontSize={16}
-                color='#999fe1'
+                color='paleBlue'
                 lineHeight={'23px'}
+                className='tier-chart__referrals-value'
               >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
@@ -221,6 +241,7 @@ const TiersTable = ({
             lineHeight='18px'
             whiteSpace='pre-line'
             color={'neutral200'}
+            className='tier-chart__label-earnings'
           >
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
@@ -241,12 +262,13 @@ const TiersTable = ({
               fontWeight={500}
               fontSize={16}
               color=' rgba(36, 184, 142, 0.9);'
+              className='tier-chart__earnings-value'
             >
               {'$'}
               {formatCompactNumber(
                 getMaxEarnings(
                   tier.commissionPct,
-                  referral.boost,
+                  boost,
                   serviceCommission,
                   zignalyCommission,
                 ).toFixed(),

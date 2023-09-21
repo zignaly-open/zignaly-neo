@@ -30,7 +30,7 @@ import { NumericFormat } from 'react-number-format';
 import { useDebounce } from 'react-use';
 import { InvestmentViews } from '../../types';
 import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
-import { twq } from 'util/analytics';
+import { trackAllocation } from 'util/analytics';
 import { useCurrentUser } from 'apis/user/use';
 
 function InvestForm({ view, setView, close }: InvestFormProps) {
@@ -116,7 +116,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         serviceName: service.serviceName,
       }),
     );
-    twq(userId).trackAllocation();
+    trackAllocation(userId, amountTransfer, service.ssc, service.serviceId);
     setView(InvestmentViews.InvestmentSuccess);
   };
 

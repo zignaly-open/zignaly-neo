@@ -10,7 +10,7 @@ export const getBoostedCommissionPct = (
 ) => {
   const traderBoost = traderCommission / zignalyCommission;
   const boostedCommission = baseCommission * boost;
-  return boostedCommission + boostedCommission * traderBoost;
+  return boostedCommission + boostedCommission * traderBoost || 0;
 };
 
 export const getMaxEarnings = (
@@ -26,6 +26,7 @@ export const getMaxEarnings = (
     zignalyCommission,
   );
   return (
-    MAX_FEES_AMOUNT * (((zignalyCommission / 100) * boostedCommission) / 100)
+    MAX_FEES_AMOUNT * (((zignalyCommission / 100) * boostedCommission) / 100) ||
+    0
   );
 };

@@ -118,7 +118,7 @@ const Subscriptions: React.FC = () => {
                 <ZigTypography mb={1} variant='h1' color='neutral200'>
                   {t('redeem-code-label')}
                 </ZigTypography>
-                <Grid item width='60%' mb={7.5}>
+                <Grid item width='60%' mb={4.5}>
                   <SubscribeForm />
                 </Grid>
                 <ZigTypography color='neutral300' variant='h3'>

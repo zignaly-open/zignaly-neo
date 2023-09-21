@@ -4,14 +4,15 @@
     "commission-rate": "Commission Rate",
     "max-commission": "Max Commission",
     "tooltips": {
-        "commission-rate": "Your share in the platform fee generated through your referrals (payable for the first six months of the referral's lifetime).",
-        "max-commission": "Maximum potential earnings from the platform fee generated through your referrals (this will be applicable for the first six months of the referral's lifetime).",
+        "commission-rate": "You'll earn {{commission}}% of the platform fee generated from your referrals, for the first 6 months from their sign-up date",
+        "max-commission": "Maximum potential earnings from the platform fee generated through your referrals, for the first 6 months from their sign-up date.",
         "split-commission": "Adjust the slider to pass on a portion of your referral earnings to your referrals. This value will affect only to new referrals.",
         "earn-success-fees": "Earn a percentage of the platform fee generated through your referrals.",
         "invite-and-earn": "Have {{ invite }} referrals sign up and invest in any service(s) of their choice, and earn {{ commission }}% of the platform fee generated in the first 6 months of the referral's lifetime.",
         "invite-and-earn-1-week": "Have {{ invite }} referrals sign up and invest in any service(s) within 1 week, to earn {{ commission }}% of the platform fee generated in the first 6 months of the referral's lifetime.",
         "trader-boost": "The trader shares {{ commission }}% of the success fee paid by your referrals in the first 6 months of the referral lifetime",
-        "within-1-week": "Multiply your rewards by 2 referring friends who invest in a service during your first week.",
+        "within-1-week": "Multiply your rewards by 2, referring friends who invest in any service during your first week.",
+        "within-1-week-unlocked": "Boost unlocked! We have doubled your rewards when referring friends who invest in any service. Keep sharing and enjoy!",
         "base-commission": "Base percentage of the referral commission from the platform fee generated through your referrals. More referrals = higher commission percentage!",
         "number-referrals": "Number of referrals that invested in a service(s)"
     },
@@ -42,5 +43,9 @@
     "for-me": "for me",
     "for-friends": "for friends",
     "trader-boost-value": "{{boost}}x Boost",
-    "terms": "Full terms & FAQs"
+    "terms": "Full terms & FAQs",
+    "invite": "Invite",
+    "invite-count": "Invite {{count}} people and get {{pct}}% of success fees",
+    "invite-generic": "From everyone you invite to my trading service",
+    "invite-commission": "{{pct}}% Commission"
 }

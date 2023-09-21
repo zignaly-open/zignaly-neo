@@ -92,7 +92,7 @@
 			"description": "İlk para yatırma işleminde"
 		},
 		"referrals": {
-			"title": "%20 kazanın",
+			"title": "%{{commission}} kazanın",
 			"description": "Arkadaşlarınızı Davet Edin"
 		}
 	}

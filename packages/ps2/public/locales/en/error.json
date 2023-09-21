@@ -157,6 +157,7 @@
     "1074": "User is not the owner of the service",
     "1086": "Email code incorrect",
     "1095": "Invalid subscription code",
+    "1096": "You have already redeemed this code",
     "1097": "Invalid code format: must be AA-XXXX-XXXX-XXXX",
     "2001": "Wallet not found",
     "2004": "Withdraw data error",

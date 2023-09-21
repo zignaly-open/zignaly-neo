@@ -1,5 +1,139 @@
 import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
+import { InviteBox } from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite/styles';
+import {
+  ContainerArrow,
+  SliderContainer,
+} from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider/styles';
+
+export const CommissionBox = styled(Paper)`
+  border-radius: 17px;
+  background-image: linear-gradient(to bottom, #18194b, #12374e);
+  width: 849px;
+  height: 354px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 27px;
+  padding: 10px 59px;
+`;
+
+// Custom borders with left arrow and transparent background
+export const StyledShareCommissionSlider = styled('div')`
+  position: relative;
+
+  ${ContainerArrow} {
+    display: none;
+  }
+
+  ${SliderContainer} {
+    position: relative;
+    width: 356px;
+    height: 160px;
+    margin: 0;
+    border: none;
+    border-right: 1px solid rgba(148, 150, 180, 0.2);
+    border-radius: 15px;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      padding-left: 19px;
+      left: -18px;
+    }
+    &:before {
+      bottom: calc(50% + 11px);
+      transform: skewY(-50deg);
+      border: 1px solid rgba(148, 150, 180, 0.3);
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+
+    &:after {
+      top: calc(50% + 11px);
+      transform: skewY(50deg);
+      border: 1px solid rgba(148, 150, 180, 0.3);
+      border-left: none;
+      border-bottom: none;
+      border-right: none;
+    }
+
+    > div > .MuiTypography-root {
+      font-size: 18.5px;
+      font-weight: 500;
+      letter-spacing: 0.56px;
+      padding: 0px 20px 8px;
+    }
+  }
+`;
+
+// Hack for nice rounded borders on the left side between the arrow
+export const BorderFix = styled('div')`
+  &:before,
+  &:after {
+    content: '';
+    width: 100%;
+    border: 1px solid rgba(148, 150, 180, 0.1);
+    height: calc(50% - 23px);
+    position: absolute;
+    border-right: none;
+  }
+
+  &:before {
+    top: 0;
+    border-bottom: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  &:after {
+    bottom: 0;
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+`;
+
+export const LimitedTimeChip = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.palette.greenGraph}33;
+  height: 27px;
+  gap: 7px;
+  padding: 5px 13px;
+  position: absolute;
+  top: -36px;
+  right: -19px;
+
+  svg {
+    height: 15px;
+    width: auto;
+  }
+`;
+
+export const LimitedTimeChipArrow = styled('div')`
+  position: absolute;
+  bottom: -13px;
+  left: calc(50% + 7px);
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 13px solid ${({ theme }) => theme.palette.greenGraph}33;
+`;
+
+export const StyledReferralLinkInvite = styled('div')`
+  margin-top: 44px;
+
+  ${InviteBox} {
+    background-color: #0d1935;
+  }
+`;
 
 export const TotalBoxBox = styled(Paper)`
   width: 250px;
@@ -47,27 +181,26 @@ export const GetWhatYouDeserveLabel = styled(ZigTypography)`
   text-align: center;
 `;
 
-// what are you doing stepbox, what if somebody sees us
 export const StepBox = styled(Box)`
   padding: 16px;
+
   img {
-    margin-top: 24px;
     width: 100%;
-    height: 270px;
+    height: 265px;
     object-fit: contain;
   }
 `;
 
 export const StepCounter = styled(Box)`
-  width: 45px;
-  height: 45px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.palette.neutral600};
-  flex: 0 0 45px;
+  flex: 0 0 56px;
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 19px;
+  margin-right: 26px;
 `;
 
 export const RewardsListContainer = styled(Grid)`
