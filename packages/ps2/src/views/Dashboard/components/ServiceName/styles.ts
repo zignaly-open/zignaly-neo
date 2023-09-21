@@ -29,6 +29,7 @@ export const TruncatedServiceName = styled(ZigTypography)<{
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis; 
+    word-break: break-word;
   `
       : `white-space: normal;`}
 `;
