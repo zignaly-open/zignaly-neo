@@ -5,7 +5,7 @@
     "max-commission": "Max Commission",
     "tooltips": {
         "commission-rate": "You'll earn {{commission}}% of the platform fee generated from your referrals, for the first 6 months from their sign-up date",
-        "max-commission": "Maximum potential earnings from the platform fee generated through your referrals (this will be applicable for the first six months of the referral's lifetime).",
+        "max-commission": "Maximum potential earnings from the platform fee generated through your referrals, for the first 6 months from their sign-up date.",
         "split-commission": "Adjust the slider to pass on a portion of your referral earnings to your referrals. This value will affect only to new referrals.",
         "earn-success-fees": "Earn a percentage of the platform fee generated through your referrals.",
         "invite-and-earn": "Have {{ invite }} referrals sign up and invest in any service(s) of their choice, and earn {{ commission }}% of the platform fee generated in the first 6 months of the referral's lifetime.",
