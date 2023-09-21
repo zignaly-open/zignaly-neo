@@ -1,6 +1,7 @@
 import { LogEntry, LogFilterType } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { fixSearchParams, injectEndpoints } from 'apis/util';
+import { injectEndpoints } from 'apis/util';
+import { fixSearchParams } from '@zignaly-open/ui';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
   logs: builder.query<LogEntry[], LogFilterType>({
