@@ -1,5 +1,8 @@
-import React, { useMemo, useState } from 'react';
-import { useMarketplace } from '../../../../apis/marketplace/use';
+import React, { useMemo } from 'react';
+import {
+  useChangeActiveRowMobile,
+  useMarketplace,
+} from '../../../../apis/marketplace/use';
 import { useTranslation } from 'react-i18next';
 import {
   PageContainer,
@@ -31,7 +34,7 @@ const Marketplace: React.FC = () => {
   const { t } = useTranslation('marketplace');
   const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
-  const [showActionMobileRow, setShowActionMobileRow] = useState<string>('-1');
+  const { activeRow, setActiveRow } = useChangeActiveRowMobile();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const columns = useMemo(
     () =>
@@ -221,7 +224,7 @@ const Marketplace: React.FC = () => {
                 <ServiceName
                   activeLink={false}
                   truncateServiceName
-                  coinImageSize={'large'}
+                  size={'large'}
                   showCoin={false}
                   showOwner={false}
                   prefixId={`marketplace-table`}
@@ -238,6 +241,7 @@ const Marketplace: React.FC = () => {
               header: t('table.n-months-pnl-mobile', { count: 3 }),
               cell: (props) => (
                 <ChangeIndicator
+                  decimalScale={0}
                   type={'default'}
                   id={`marketplace-table__pnl90t-${props.row.original.id}`}
                   style={{
@@ -252,10 +256,10 @@ const Marketplace: React.FC = () => {
               id: 'pnlPercent30t',
               header: t('table.n-month-pnl-mobile', { count: 1 }),
               cell: (props) => (
-                <>
+                <Box height={'97px'} minWidth={'60px'}>
                   {+props.getValue() ||
                   Object.keys(props.row.original.sparklines).length > 1 ? (
-                    <>
+                    <Box sx={{ transform: 'scale(0.8)' }}>
                       <ZigChartMiniSuspensed
                         id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
                         midLine
@@ -264,13 +268,13 @@ const Marketplace: React.FC = () => {
                           ...(props.row.original.sparklines as number[]),
                         ]}
                       />
-                    </>
+                    </Box>
                   ) : (
                     <ZigTypography variant='body2' color='neutral400'>
                       {t('tableHeader.1-mo.no-data')}
                     </ZigTypography>
                   )}
-                </>
+                </Box>
               ),
             }),
             columnHelper.accessor('invested', {
