@@ -118,7 +118,7 @@ const Referrals: React.FC = () => {
                 </Trans>
               </ZigTypography>
               <CommissionBox>
-                <Box display='flex' alignItems={'center'} gap='63px'>
+                <Box display='flex' alignItems={'center'} gap='30px'>
                   <StyledCurrentCommission>
                     <CurrentCommission
                       showReferrals={false}
