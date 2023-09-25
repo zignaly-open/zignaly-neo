@@ -20,6 +20,7 @@ import { useTiersData } from 'apis/referrals/use';
 import {
   BorderFix,
   CommissionBox,
+  StyledCurrentCommission,
   StyledReferralLinkInvite,
   StyledShareCommissionSlider,
 } from './styles';
@@ -71,7 +72,7 @@ const Referrals: React.FC = () => {
           <>
             <Box
               sx={{
-                mt: 6,
+                mt: 8,
                 alignItems: 'center',
                 mb: 6,
                 display: 'flex',
@@ -107,12 +108,19 @@ const Referrals: React.FC = () => {
                   }}
                   t={t}
                 >
-                  <ZigTypography color='paleBlue' />
+                  <ZigTypography
+                    color='paleBlue'
+                    variant={'h2'}
+                    fontWeight={'inherit'}
+                    component={'span'}
+                  />
                 </Trans>
               </ZigTypography>
               <CommissionBox>
                 <Box display='flex' alignItems={'center'} gap='63px'>
-                  <CurrentCommission showReferrals={false} />
+                  <StyledCurrentCommission>
+                    <CurrentCommission showReferrals={false} />
+                  </StyledCurrentCommission>
                   <StyledShareCommissionSlider>
                     <BorderFix />
                     <ShareCommissionSlider

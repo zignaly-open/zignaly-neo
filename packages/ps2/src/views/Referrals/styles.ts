@@ -4,9 +4,10 @@ import { InviteBox } from 'views/TraderService/components/ReferralsInviteModal/a
 import {
   ContainerArrow,
   SliderContainer,
+  StyledZigSlider,
 } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider/styles';
 
-export const CommissionBox = styled(Paper)`
+export const CommissionBox = styled(Box)`
   border-radius: 17px;
   background-image: linear-gradient(to bottom, #18194b, #12374e);
   width: 849px;
@@ -22,6 +23,7 @@ export const CommissionBox = styled(Paper)`
 // Custom borders with left arrow and transparent background
 export const StyledShareCommissionSlider = styled('div')`
   position: relative;
+  margin-left: 18px;
 
   ${ContainerArrow} {
     display: none;
@@ -63,10 +65,13 @@ export const StyledShareCommissionSlider = styled('div')`
 
     > div > .MuiTypography-root {
       font-size: 18.5px;
-      font-weight: 500;
       letter-spacing: 0.56px;
       padding: 0px 20px 8px;
     }
+  }
+
+  ${StyledZigSlider} {
+    padding: 0 40px;
   }
 `;
 
@@ -128,10 +133,26 @@ export const LimitedTimeChipArrow = styled('div')`
 `;
 
 export const StyledReferralLinkInvite = styled('div')`
-  margin-top: 44px;
+  margin-top: 35px;
 
   ${InviteBox} {
     background-color: #0d1935;
+  }
+`;
+
+export const StyledCurrentCommission = styled('div')`
+  min-width: 180px;
+
+  > div > div {
+    margin-bottom: 8px;
+
+    > div > .MuiTypography-body1 {
+      padding-top: 15px;
+    }
+  }
+
+  .boost-timer {
+    margin-top: 5px;
   }
 `;
 
