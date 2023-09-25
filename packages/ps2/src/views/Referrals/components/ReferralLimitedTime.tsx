@@ -8,7 +8,7 @@ const ReferralLimitedTime = () => {
   return (
     <LimitedTimeChip className='limited-time'>
       <ZigClockAltIcon />
-      <ZigTypography fontSize={14} color={'greenGraph'} fontWeight={500}>
+      <ZigTypography fontSize={14} color={'greenGraph'} fontWeight={400}>
         {t('limited-time')}
       </ZigTypography>
       <LimitedTimeChipArrow />
