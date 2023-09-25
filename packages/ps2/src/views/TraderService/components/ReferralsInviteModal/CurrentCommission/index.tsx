@@ -160,11 +160,11 @@ const CurrentCommission = ({
             textAlign={'center'}
           >
             <Trans
-              i18nKey={
+              i18nKey={`${
                 referral.investorsCount > 0
-                  ? `get-by-inviting${boostRunning ? '-in' : ''}`
+                  ? 'get-by-inviting'
                   : 'when-you-invite'
-              }
+              }${boostRunning ? '-in' : ''}`}
               t={t}
               values={{
                 invite: inviteLeft,
