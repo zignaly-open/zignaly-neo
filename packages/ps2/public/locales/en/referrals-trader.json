@@ -18,6 +18,7 @@
     },
     "my-referrals": "My Referrals",
     "when-you-invite": "when you invite {{invite}}+ people to Zignaly",
+    "when-you-invite-in": "when you invite {{invite}} people in:",
     "get-by-inviting": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly",
     "get-by-inviting-in": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly in:",
     "split-commission": "Split your commission with friends you invite",
