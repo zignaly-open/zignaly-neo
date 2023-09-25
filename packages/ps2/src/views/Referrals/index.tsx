@@ -47,7 +47,8 @@ const Referrals: React.FC = () => {
       ? 'app.zignaly.com'
       : window.location.host);
 
-  const link = baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
+  const link =
+    baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode ?? '' });
 
   const {
     referral,
