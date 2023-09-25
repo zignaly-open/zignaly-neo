@@ -42,9 +42,10 @@ const usePerformLevelCheck = (
     (path: string) => {
       // Close modal manually
       destroyModal(modalId.current);
-      navigate(path);
-      // if we have a modal open, close it (in case disableAutoDestroy is on)
+      // If we have a modal open, close it (in case disableAutoDestroy is on)
       onClose?.();
+      // Navigate to the path
+      navigate(path);
     },
     [navigate, destroyModal, onClose],
   );

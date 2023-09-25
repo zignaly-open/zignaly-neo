@@ -48,7 +48,8 @@ const Referrals: React.FC = () => {
       ? 'app.zignaly.com'
       : window.location.host);
 
-  const link = baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
+  const link =
+    baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode ?? '' });
 
   const {
     referral,
@@ -119,7 +120,10 @@ const Referrals: React.FC = () => {
               <CommissionBox>
                 <Box display='flex' alignItems={'center'} gap='63px'>
                   <StyledCurrentCommission>
-                    <CurrentCommission showReferrals={false} />
+                    <CurrentCommission
+                      showReferrals={false}
+                      showAsMaxCommission={true}
+                    />
                   </StyledCurrentCommission>
                   <StyledShareCommissionSlider>
                     <BorderFix />

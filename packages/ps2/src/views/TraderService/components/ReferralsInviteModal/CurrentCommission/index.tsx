@@ -12,9 +12,11 @@ import { useTiersData } from 'apis/referrals/use';
 const CurrentCommission = ({
   service,
   showReferrals = true,
+  showAsMaxCommission = false,
 }: {
   service?: Service;
   showReferrals?: boolean;
+  showAsMaxCommission?: boolean;
 }) => {
   const { t } = useTranslation('referrals-trader');
   const {
@@ -48,11 +50,15 @@ const CurrentCommission = ({
               variant='h4'
               id='referrals-invite-modal__commission-label'
             >
-              {t(inviteLeft > 0 ? 'max-commission' : 'commission-rate')}
+              {t(
+                inviteLeft > 0 || showAsMaxCommission
+                  ? 'max-commission'
+                  : 'commission-rate',
+              )}
             </ZigTypography>
             <Tooltip
               title={t(
-                inviteLeft > 0
+                inviteLeft > 0 || showAsMaxCommission
                   ? 'tooltips.max-commission'
                   : 'tooltips.commission-rate',
                 { commission: maxCommission },
