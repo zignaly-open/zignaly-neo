@@ -120,7 +120,10 @@ const Referrals: React.FC = () => {
               <CommissionBox>
                 <Box display='flex' alignItems={'center'} gap='63px'>
                   <StyledCurrentCommission>
-                    <CurrentCommission showReferrals={false} />
+                    <CurrentCommission
+                      showReferrals={false}
+                      showAsMaxCommission={true}
+                    />
                   </StyledCurrentCommission>
                   <StyledShareCommissionSlider>
                     <BorderFix />
