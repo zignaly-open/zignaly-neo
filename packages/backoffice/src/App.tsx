@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Router from './Router';
 import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import {
@@ -38,7 +38,9 @@ export const App: React.FC = () => (
             <BrowserRouter>
               <ModalProvider fallback={<ZModal wide open isLoading />}>
                 <BackofficeHeader />
-                <Router />
+                <Suspense fallback={null}>
+                  <Router />
+                </Suspense>
               </ModalProvider>
             </BrowserRouter>
           </PersistGate>
