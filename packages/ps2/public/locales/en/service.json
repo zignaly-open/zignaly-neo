@@ -4,6 +4,7 @@
   "link-copied": "Link copied to clipboard!",
   "logo-alt": "Zignaly - Profit Sharing / Copy Trading Service Profile Logo of {{name}}",
   "liquidated": "Liquidated",
+  "failed-to-load": "Failed to load. <0>Retry</0>",
   "invested-label": "Invested",
   "copy-link": "Copy link",
   "invest-button": {

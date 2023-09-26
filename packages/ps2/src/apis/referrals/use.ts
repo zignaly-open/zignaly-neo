@@ -9,18 +9,36 @@ import {
 import { getBoostedCommissionPct } from 'views/TraderService/components/ReferralsInviteModal/util';
 import { useIsAuthenticated } from 'apis/user/use';
 
-export function useTiersData(serviceId: string, zglySuccessFee: number) {
+export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
   const isAuthenticated = useIsAuthenticated();
-  const { data: tiers } = useTierLevelsQuery();
-  const { data: serviceCommission } = useServiceCommissionQuery({
-    serviceId: serviceId,
+  const {
+    data: tiers,
+    isError: isErrorTiers,
+    refetch: refetchTiers,
+  } = useTierLevelsQuery();
+  const {
+    data: serviceCommissionData,
+    isError: isErrorCommissions,
+    refetch: refetchServiceCommissions,
+  } = useServiceCommissionQuery(
+    {
+      serviceId: serviceId,
+    },
+    {
+      skip: !serviceId,
+    },
+  );
+  const serviceCommission = serviceId ? serviceCommissionData?.commission : 10;
+  const {
+    data: referral,
+    isLoading: referralLoading,
+    isError: isErrorReferrakRewards,
+    refetch: refetchRewards,
+  } = useReferralRewardsQuery(undefined, {
+    skip: !isAuthenticated,
+    // todo: reset referral state in clearUserSession
+    refetchOnMountOrArgChange: true,
   });
-  const { data: referral, isLoading: referralLoading } =
-    useReferralRewardsQuery(undefined, {
-      skip: !isAuthenticated,
-      // todo: reset referral state in clearUserSession
-      refetchOnMountOrArgChange: true,
-    });
 
   const boostEndsDate = new Date(referral?.boostEndsAt);
   const boostRunning = isFuture(boostEndsDate);
@@ -38,7 +56,7 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
     getBoostedCommissionPct(
       lastTier?.commissionPct,
       boost,
-      serviceCommission?.commission,
+      serviceCommission,
       zglySuccessFee,
     ),
   );
@@ -53,7 +71,7 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
     getBoostedCommissionPct(
       currentTier?.commissionPct,
       boost,
-      serviceCommission?.commission,
+      serviceCommission,
       zglySuccessFee,
     ),
   );
@@ -67,16 +85,26 @@ export function useTiersData(serviceId: string, zglySuccessFee: number) {
     boostRunning ? 10000 : null,
   );
 
+  const isError = isErrorCommissions || isErrorTiers || isErrorReferrakRewards;
+
   return {
     currentDate,
     boostEndsDate,
     boostRunning,
-    isLoading: !tiers || !serviceCommission || referralLoading,
+    isError,
+    isLoading:
+      !isError &&
+      (!tiers || serviceCommission === undefined || referralLoading),
     tiers,
     serviceCommission,
     referral,
     boost,
     inviteLeft,
+    refetch: () => {
+      refetchTiers();
+      refetchRewards();
+      refetchServiceCommissions();
+    },
     maxCommission,
     maxCommissionWithoutTraderBoost,
     commission,

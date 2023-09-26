@@ -9,7 +9,8 @@ const EditInvestment: React.FC<{
   setView: ChangeViewFn;
   close: () => void;
 }> = ({ setView, close }) => {
-  const canInvestOut = useCanInvestOut();
+  const canInvestOut = useCanInvestOut(close);
+
   return (
     <>
       <InvestorDetails prefixId={'edit-investment-modal'} />

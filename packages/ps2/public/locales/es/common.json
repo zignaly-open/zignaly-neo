@@ -92,7 +92,7 @@
 			"description": "En el 1er depósito"
 		},
 		"referrals": {
-			"title": "Gana un 20%",
+			"title": "Gana un {{commission}}%",
 			"description": "Invita Amigos"
 		}
 	}

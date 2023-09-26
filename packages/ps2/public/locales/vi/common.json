@@ -92,7 +92,7 @@
 			"description": "Trên khoản tiền gửi thứ 1"
 		},
 		"referrals": {
-			"title": "Kiếm 20%",
+			"title": "Kiếm {{commission}}%",
 			"description": "Mời bạn bè"
 		}
 	}

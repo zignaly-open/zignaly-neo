@@ -13,5 +13,5 @@ export const CommissionBoostChip = styled(Box)`
   position: absolute;
   top: 12px;
   right: 0;
-  transform: translate(100%);
+  transform: translate(115%);
 `;

@@ -53,7 +53,7 @@
       "description": "On 1st deposit"
     },
     "referrals": {
-      "title": "Earn 20%",
+      "title": "Earn {{commission}}%",
       "description": "Invite Friends"
     }
   },
