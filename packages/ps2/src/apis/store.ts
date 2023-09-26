@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  PreloadedState,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit';
 import userReducer from './user/store';
 import ps2Api from './baseApiPs2';
 import investmentReducer from './investment/store';
@@ -45,16 +49,21 @@ const appReducer = combineReducers({
   wallet: walletReducer,
 });
 
-export const store = configureStore({
-  reducer: persistReducer(persistConfig, appReducer),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    })
-      .concat(ps2Api.middleware)
-      .concat(walletApi.middleware)
-      .concat(referralApi.middleware),
-});
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    preloadedState,
+    reducer: persistReducer(persistConfig, appReducer),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      })
+        .concat(ps2Api.middleware)
+        .concat(walletApi.middleware)
+        .concat(referralApi.middleware),
+  });
+};
+
+export const store = setupStore();
 
 export const persistor = persistStore(store);
 
