@@ -4,8 +4,8 @@ export const LoginValidation = yup
   .object({
     email: yup
       .string()
-      .required('error:error.required')
-      .email('error:error.email-invalid'),
-    password: yup.string().required('error:error.required'),
+      .required('auth:error.required')
+      .email('auth:error.email-invalid'),
+    password: yup.string().required('auth:error.required'),
   })
   .required();
