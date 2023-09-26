@@ -141,7 +141,7 @@ export const StyledReferralLinkInvite = styled('div')`
 `;
 
 export const StyledCurrentCommission = styled('div')`
-  min-width: 180px;
+  min-width: 230px;
 
   > div > div {
     margin-bottom: 8px;
