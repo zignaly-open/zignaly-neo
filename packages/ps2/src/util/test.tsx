@@ -5,7 +5,6 @@ import { WrappedInProviders } from '../App';
 import { RootState, setupStore } from '../apis/store';
 import i18n from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
-import { Route, MemoryRouter } from 'react-router-dom';
 import { PreloadedState } from '@reduxjs/toolkit';
 
 // todo: maybe make it a fuly functional smth and use properly
@@ -21,7 +20,7 @@ i18n.use(initReactI18next).init({
 });
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: PreloadedState<RootState>;
+  preloadedState?: Partial<PreloadedState<RootState>>;
 }
 
 export function renderWithProviders(

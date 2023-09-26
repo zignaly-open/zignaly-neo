@@ -1,4 +1,8 @@
-import { ReferralRewards, TierLevels } from 'apis/referrals/types';
+import {
+  ReferralHistory,
+  ReferralRewards,
+  TierLevels,
+} from 'apis/referrals/types';
 
 export const referrerDataResponseMockSuccess: ReferralRewards = {
   referralCode: '617da36fad20d',
@@ -38,7 +42,6 @@ export const referrerDataResponseMockSuccess: ReferralRewards = {
 };
 
 export const referrerHistoryResponseMockSuccess: ReferralHistory = {
-  referrerId: '5f886d29daae9666b1684c9a',
   history: [
     {
       date: '2023-03-01 16:26:15',

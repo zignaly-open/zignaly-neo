@@ -49,7 +49,9 @@ const appReducer = combineReducers({
   wallet: walletReducer,
 });
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+export const setupStore = (
+  preloadedState?: Partial<PreloadedState<RootState>>,
+) => {
   return configureStore({
     preloadedState,
     reducer: persistReducer(persistConfig, appReducer),

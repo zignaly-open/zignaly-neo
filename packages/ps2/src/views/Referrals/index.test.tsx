@@ -1,26 +1,23 @@
 import React from 'react';
-import { screen, fireEvent, waitFor, prettyDOM } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { waitFor, getByText } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ReferralsPage from '.';
 import { renderWithProviders } from 'util/test';
-import {
-  loginMockEmail as email,
-  loginMockPassword as password,
-} from '../../../../test/mocks/login';
-import user from 'test/mocks/user';
+import { userStateMock } from 'test/mocks/user';
 
 test('displays max commission', async () => {
-  const result = renderWithProviders(<ReferralsPage />, {
+  const { container } = renderWithProviders(<ReferralsPage />, {
     preloadedState: {
-      user,
+      user: userStateMock,
     },
   });
-  const someElement = result.container.querySelector(
-    '#referrals-invite-modal__max-commission',
-  );
-  console.log(prettyDOM(result.container));
+
   await waitFor(() => {
-    expect(someElement).toBeInTheDocument();
+    const el = container.querySelector(
+      '#referrals-invite-modal__max-commission',
+    );
+    expect(getByText(container, 'max-commission')).toBeInTheDocument();
+    expect(getByText(el as HTMLElement, '300')).toBeInTheDocument();
+    expect(getByText(el as HTMLElement, '3x')).toBeInTheDocument();
   });
 });
