@@ -18,7 +18,7 @@ import {
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import {
   DepositStatuses,
@@ -28,6 +28,7 @@ import {
 import { withdrawalStatusColorMap } from './constants';
 import { useOperatorOptions, useWithdrawalStatusOptions } from './use';
 import SearchIcon from '@mui/icons-material/Search';
+import Shorten from '../TableUtils/Shorten';
 
 export default function Withdrawals() {
   const { t } = useTranslation('transfers');
@@ -56,7 +57,7 @@ export default function Withdrawals() {
     return [
       columnHelper.accessor('id', {
         header: t('table.id'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => <Shorten text={getValue()} width={150} />,
       }),
       columnHelper.accessor('email', {
         header: t('table.user'),
@@ -82,43 +83,13 @@ export default function Withdrawals() {
         header: t('table.status'),
         cell: ({ getValue }) => (
           <ValueOrDash color={withdrawalStatusColorMap[getValue()]}>
-            {getValue() && t('statuses.' + getValue())}
+            {getValue() && t('withdrawalStatuses.' + getValue())}
           </ValueOrDash>
         ),
       }),
       columnHelper.accessor('transactionId', {
         header: t('table.transactionId'),
-        cell: ({ getValue }) => (
-          <Tooltip title={getValue()}>
-            <ZigTypography
-              sx={{
-                display: 'block',
-                maxWidth: 220,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {getValue()}
-            </ZigTypography>
-          </Tooltip>
-        ),
-      }),
-      columnHelper.accessor('title', {
-        header: t('table.title'),
-        cell: ({ getValue }) => (
-          <Tooltip title={getValue()}>
-            <ZigTypography
-              sx={{
-                display: 'block',
-                maxWidth: 220,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {getValue()}
-            </ZigTypography>
-          </Tooltip>
-        ),
+        cell: ({ getValue }) => <Shorten text={getValue()} width={150} />,
       }),
       columnHelper.accessor('createdAt', {
         header: t('table.date'),
@@ -283,7 +254,7 @@ export default function Withdrawals() {
             initialState={{
               sorting: [
                 {
-                  id: 'userId',
+                  id: 'id',
                   desc: true,
                 },
               ],

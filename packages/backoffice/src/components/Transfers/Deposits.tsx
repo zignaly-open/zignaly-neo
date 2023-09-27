@@ -240,7 +240,7 @@ export default function Deposits() {
             initialState={{
               sorting: [
                 {
-                  id: 'userId',
+                  id: 'id',
                   desc: true,
                 },
               ],
