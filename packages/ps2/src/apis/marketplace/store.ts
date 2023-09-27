@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MarketplaceState } from './types';
 
 const initialState: MarketplaceState = {
-  activeRowMobile: '-1',
+  activeRowMobile: null,
 };
 
 export const serviceSlice = createSlice({

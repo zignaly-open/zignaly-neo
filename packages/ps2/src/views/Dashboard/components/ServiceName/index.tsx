@@ -20,18 +20,18 @@ export const ServiceName = ({
   activeLink = true,
 }: ServiceNameProps) => {
   const { t } = useTranslation('table');
+  const linkProps = activeLink
+    ? {
+        component: Link,
+        to: generatePath(ROUTE_TRADING_SERVICE, {
+          serviceId: service.serviceId?.toString(),
+        }),
+      }
+    : {};
 
   return (
     <Box
       id={prefixId && `${prefixId}__service-${service.serviceId}`}
-      component={activeLink ? Link : Box}
-      to={
-        activeLink
-          ? generatePath(ROUTE_TRADING_SERVICE, {
-              serviceId: service.serviceId?.toString(),
-            })
-          : undefined
-      }
       sx={{
         cursor: 'pointer',
         alignItems: 'center',
@@ -40,6 +40,7 @@ export const ServiceName = ({
         textAlign: 'start',
         width: size === 'x-large' ? 300 : 140,
       }}
+      {...linkProps}
     >
       <Icon>
         <Avatar

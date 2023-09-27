@@ -11,10 +11,10 @@ export const ChartLayoutLarge = styled("div")`
 `;
 
 export const ChartLayoutMini = styled("div")<{ height?: number }>`
-  height: ${(props) => props.height || 110}px;
+  height: ${(props) => props.height || 100}px;
   width: 100%;
-  display: flex;
-  padding-bottom: ${(props) => (props.height ? 0 : 10)}px;
+  display: block;
+  margin-bottom: 10px;
 `;
 
 export const useAxisStyle = () => {

@@ -17,7 +17,7 @@ import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useTranslation } from 'react-i18next';
-import { useChangeActiveRowMobile } from '../../../../apis/marketplace/use';
+import { useMarketplaceActiveRowMobile } from '../../../../apis/marketplace/use';
 
 const loadingSpinner = (
   <LoaderWrapper>
@@ -35,7 +35,7 @@ export const MobileMarketplaceAction = ({
   const { t } = useTranslation('marketplace');
   const navigate = useNavigate();
   const theme = useTheme();
-  const { activeRow, setActiveRow } = useChangeActiveRowMobile();
+  const { activeRow, setActiveRow } = useMarketplaceActiveRowMobile();
   return (
     rowId === activeRow && (
       <Box
@@ -69,7 +69,7 @@ export const MobileMarketplaceAction = ({
         </ZigButton>
         <IconButton
           onClick={() => {
-            setActiveRow('-1');
+            setActiveRow(null);
           }}
           sx={{ marginRight: '15px', marginLeft: '-10px' }}
         >

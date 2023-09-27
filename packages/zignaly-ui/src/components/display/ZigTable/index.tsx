@@ -176,13 +176,7 @@ export default function ZigTable<T extends object>({
                       onClick: row.getToggleExpandedHandler(),
                       style: { cursor: "pointer" },
                     })}
-                    onClick={
-                      onRowClick
-                        ? () => {
-                            onRowClick(row.id);
-                          }
-                        : () => {}
-                    }
+                    onClick={() => onRowClick?.(row.id)}
                     style={{ cursor: onRowClick ? "pointer" : "unset", position: "relative" }}
                   >
                     {row.getVisibleCells().map((cell, index) => {

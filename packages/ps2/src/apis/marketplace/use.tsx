@@ -5,7 +5,7 @@ import { setActiveRowMobile } from './store';
 
 export const useMarketplace = useMarketplaceQuery;
 
-export function useChangeActiveRowMobile(): {
+export function useMarketplaceActiveRowMobile(): {
   activeRow: string;
   setActiveRow: (v: string) => void;
 } {
