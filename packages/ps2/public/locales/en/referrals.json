@@ -21,10 +21,10 @@
         }
     },
     "export": "Export",
-    "total-invitees": "Total Invitees",
-    "total-rewards": "Total Earnings",
+    "signups": "Signups",
+    "invested": "Invested",
+    "total-earned": "Total Earned",
     "my-referrals": "My Referrals",
-    "pending-rewards": "Pending Earnings",
     "filter-any": "Any",
     "table": {
         "title": "Earnings History",

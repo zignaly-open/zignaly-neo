@@ -6,8 +6,12 @@ import {
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
 import { Box, Grid } from '@mui/material';
-import { PageContainer, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
-import GroupIcon from '@mui/icons-material/Group';
+import {
+  PageContainer,
+  ZigPriceLabel,
+  ZigTypography,
+  ZigUserFilledIcon,
+} from '@zignaly-open/ui';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../apis/user/use';
 import { generatePath } from 'react-router-dom';
@@ -28,6 +32,7 @@ import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsI
 import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
 import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
 import ReferralLimitedTime from './components/ReferralLimitedTime';
+import { Verified } from '@mui/icons-material';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -179,34 +184,54 @@ const Referrals: React.FC = () => {
                   }}
                 >
                   <TotalBox
-                    label={t('total-invitees')}
+                    label={t('signups')}
                     value={
-                      <ZigTypography color={'neutral175'}>
-                        {rewardsData.investorsCount} <GroupIcon />
+                      <ZigTypography
+                        color={'yellow'}
+                        display={'flex'}
+                        alignItems={'center'}
+                        gap={1}
+                        lineHeight={'21px'}
+                      >
+                        <ZigUserFilledIcon
+                          style={{
+                            fontSize: '26px',
+                          }}
+                        />
+                        {rewardsData.invitedCount}
                       </ZigTypography>
                     }
                   />
                   <TotalBox
-                    label={t('total-rewards')}
+                    label={t('invested')}
+                    value={
+                      <ZigTypography
+                        color={'paleBlue'}
+                        display={'flex'}
+                        alignItems={'center'}
+                        gap={1}
+                        lineHeight={'21px'}
+                      >
+                        <ZigUserFilledIcon
+                          color={'paleBlue'}
+                          style={{
+                            fontSize: '26px',
+                          }}
+                        />
+                        {rewardsData.investorsCount}{' '}
+                        <Verified sx={{ color: 'greenGraph' }} />
+                      </ZigTypography>
+                    }
+                  />
+                  <TotalBox
+                    label={t('total-earned')}
                     value={
                       <ZigPriceLabel
-                        color={'greenGraph'}
+                        color={'#28ba62'}
                         usd
                         showTooltip
                         variant={'bigNumber'}
                         value={rewardsData.usdtEarned}
-                      />
-                    }
-                  />
-                  <TotalBox
-                    label={t('pending-rewards')}
-                    value={
-                      <ZigPriceLabel
-                        color={'yellow'}
-                        usd
-                        showTooltip
-                        variant={'bigNumber'}
-                        value={rewardsData.usdtPending}
                       />
                     }
                   />
