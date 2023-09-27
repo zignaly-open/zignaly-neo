@@ -17,6 +17,7 @@ export const StyledVerifiedIcon = styled(VerifiedIcon)`
   margin-left: 3px;
   display: inline-block;
 `;
+
 export const TruncatedServiceName = styled(ZigTypography)<{
   truncate: boolean;
 }>`
