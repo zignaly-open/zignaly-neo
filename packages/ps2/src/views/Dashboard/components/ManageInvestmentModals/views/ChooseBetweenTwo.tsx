@@ -94,9 +94,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
           </Grid>
 
           <Grid item xs={12} md={rightOptionSize} marginLeft={'5px'}>
-            {rightOption ? (
-              rightOption
-            ) : (
+            {rightOption || (
               <Box
                 sx={{
                   textAlign: 'center',
