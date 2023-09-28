@@ -26,9 +26,9 @@ import SearchIcon from '@mui/icons-material/Search';
 export default function Users() {
   const { t } = useTranslation('users');
   const [filters, setFilters] = useState<UserFilterType>({
-    userId: '',
+    id: '',
     email: '',
-    accessLevel: '',
+    access: '',
     subscriptionCode: '',
   });
   const [fetchUsers, { data: users, isFetching }] = useLazyUsersQuery();
@@ -187,9 +187,9 @@ export default function Users() {
         <ZigInput
           label={t('table.userId')}
           placeholder={t('table.userId')}
-          value={filters.userId}
+          value={filters.id}
           onChange={(e) =>
-            setFilters((old) => ({ ...old, userId: e.target.value }))
+            setFilters((old) => ({ ...old, id: e.target.value }))
           }
         />
         <ZigInput
@@ -203,9 +203,9 @@ export default function Users() {
         <ZigInput
           label={t('table.accessLevel')}
           placeholder={t('table.accessLevel')}
-          value={filters.accessLevel}
+          value={filters.access}
           onChange={(e) =>
-            setFilters((old) => ({ ...old, accessLevel: e.target.value }))
+            setFilters((old) => ({ ...old, access: e.target.value }))
           }
         />
         <ZigInput
