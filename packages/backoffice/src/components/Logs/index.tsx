@@ -170,7 +170,6 @@ export default function Withdrawals() {
             }}
             columns={columns}
             data={logs}
-            columnVisibility={false}
             enableSortingRemoval={false}
             emptyMessage={t('no-data')}
           />

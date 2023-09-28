@@ -14,7 +14,6 @@ import {
   useDepositApproveMutation,
   useLazyDepositsQuery,
 } from '../../apis/transfers/api';
-import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, Tooltip } from '@mui/material';
@@ -27,6 +26,7 @@ import {
 import { depositStatusColorMap } from './constants';
 import { useDepositStatusOptions, useOperatorOptions } from './use';
 import SearchIcon from '@mui/icons-material/Search';
+import DateDisplay from '../TableUtils/DateDisplay';
 
 export default function Deposits() {
   const { t } = useTranslation('transfers');
@@ -56,6 +56,10 @@ export default function Deposits() {
       columnHelper.accessor('id', {
         header: t('table.id'),
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+      }),
+      columnHelper.accessor('createdAt', {
+        header: t('table.date'),
+        cell: ({ getValue }) => <DateDisplay date={getValue()} />,
       }),
       columnHelper.accessor('email', {
         header: t('table.user'),
@@ -97,12 +101,6 @@ export default function Deposits() {
               {getValue()}
             </ZigTypography>
           </Tooltip>
-        ),
-      }),
-      columnHelper.accessor('createdAt', {
-        header: t('table.date'),
-        cell: ({ getValue }) => (
-          <ZigTypography>{format(new Date(getValue()), 'PP p')}</ZigTypography>
         ),
       }),
       columnHelper.accessor('exposureType', {
@@ -240,14 +238,14 @@ export default function Deposits() {
             initialState={{
               sorting: [
                 {
-                  id: 'id',
+                  id: 'createdAt',
                   desc: true,
                 },
               ],
             }}
             columns={columns}
+            defaultHiddenColumns={['id']}
             data={deposits}
-            columnVisibility={false}
             enableSortingRemoval={false}
             emptyMessage={t('no-data')}
           />

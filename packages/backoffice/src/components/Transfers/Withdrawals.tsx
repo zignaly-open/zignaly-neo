@@ -15,7 +15,6 @@ import {
   useWithdrawalApproveMutation,
   useWithdrawalRejectMutation,
 } from '../../apis/transfers/api';
-import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
@@ -29,6 +28,7 @@ import { withdrawalStatusColorMap } from './constants';
 import { useOperatorOptions, useWithdrawalStatusOptions } from './use';
 import SearchIcon from '@mui/icons-material/Search';
 import Shorten from '../TableUtils/Shorten';
+import DateDisplay from '../TableUtils/DateDisplay';
 
 export default function Withdrawals() {
   const { t } = useTranslation('transfers');
@@ -58,6 +58,10 @@ export default function Withdrawals() {
       columnHelper.accessor('id', {
         header: t('table.id'),
         cell: ({ getValue }) => <Shorten text={getValue()} width={150} />,
+      }),
+      columnHelper.accessor('createdAt', {
+        header: t('table.date'),
+        cell: ({ getValue }) => <DateDisplay date={getValue()} />,
       }),
       columnHelper.accessor('email', {
         header: t('table.user'),
@@ -89,13 +93,7 @@ export default function Withdrawals() {
       }),
       columnHelper.accessor('transactionId', {
         header: t('table.transactionId'),
-        cell: ({ getValue }) => <Shorten text={getValue()} width={150} />,
-      }),
-      columnHelper.accessor('createdAt', {
-        header: t('table.date'),
-        cell: ({ getValue }) => (
-          <ZigTypography>{format(new Date(getValue()), 'PP p')}</ZigTypography>
-        ),
+        cell: ({ getValue }) => <Shorten text={getValue()} width={200} />,
       }),
       columnHelper.accessor('exposureType', {
         header: t('table.exposureType'),
@@ -254,14 +252,14 @@ export default function Withdrawals() {
             initialState={{
               sorting: [
                 {
-                  id: 'id',
+                  id: 'createdAt',
                   desc: true,
                 },
               ],
             }}
             columns={columns}
+            defaultHiddenColumns={['id']}
             data={withdrawals}
-            columnVisibility={false}
             enableSortingRemoval={false}
             emptyMessage={t('no-data')}
           />

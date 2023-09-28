@@ -254,7 +254,6 @@ export default function Users() {
             }}
             columns={columns}
             data={users}
-            columnVisibility={false}
             enableSortingRemoval={false}
             emptyMessage={t('no-data')}
           />
