@@ -7,7 +7,7 @@ export const ValueOrDash = ({
   color,
 }: {
   color?: TypographyProps['color'];
-  children: string | number;
+  children: string | number | JSX.Element;
 }) => {
   return (
     <ZigTypography color={children ? color : 'neutral300'}>

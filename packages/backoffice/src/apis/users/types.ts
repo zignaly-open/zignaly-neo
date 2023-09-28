@@ -7,15 +7,18 @@ export type UserData = {
   accessLevel: number;
   email: string;
   userId: string;
-  kycLevels: string | null;
+  kycLevels: Record<
+    string,
+    'rejected' | 'pending' | 'approved' | 'init'
+  > | null;
   subscriptionCode: string | null;
   subscriptionLevel: string | null;
 };
 
 export type UserFilterType = {
-  userId: string;
+  id: string;
   email: string;
-  accessLevel: string;
+  access: string;
   subscriptionCode: string;
 };
 

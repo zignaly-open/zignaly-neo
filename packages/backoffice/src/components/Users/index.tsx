@@ -59,7 +59,25 @@ export default function Users() {
       }),
       columnHelper.accessor('kycLevels', {
         header: t('table.kycLevels'),
-        cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
+        cell: ({ getValue, row }) => (
+          <ValueOrDash>
+            {getValue() && (
+              <>
+                {Object.entries(getValue())
+                  .map(([name, level]) => `${name}: ${level}`)
+                  .map((x) => (
+                    <ZigTypography
+                      variant={'body2'}
+                      component={'div'}
+                      key={'kyc' + x + row.original.userId}
+                    >
+                      {x}
+                    </ZigTypography>
+                  ))}
+              </>
+            )}
+          </ValueOrDash>
+        ),
       }),
       columnHelper.accessor('subscriptionCode', {
         header: t('table.subscriptionCode'),
