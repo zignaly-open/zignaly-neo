@@ -35,7 +35,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     onTokenChange,
     showMaxButton = true,
     disabled = false,
-    selectWidth = 160,
+    selectSx,
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
@@ -151,6 +151,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               </DividerWrapper>
 
               <ZigSelect
+                sx={selectSx}
                 id={id && `${id}-select`}
                 menuPosition={"fixed"}
                 menuShouldScrollIntoView={false}
@@ -160,7 +161,6 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
                 placeholder={"Select"}
                 showBorder={false}
                 outlined
-                width={selectWidth}
                 value={coin}
                 onChange={(v1, v2) => {
                   onTokenChange?.(v2);

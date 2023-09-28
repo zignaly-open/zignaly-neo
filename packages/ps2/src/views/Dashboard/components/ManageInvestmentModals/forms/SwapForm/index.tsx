@@ -116,7 +116,7 @@ function SwapForm({
             id={'swap-coins-modal__from-input-amount'}
             label={t('service-swap.convert-to-coin', { coin: coinSwapTo })}
             showMaxButton={false}
-            selectWidth={115}
+            selectSx={{ width: '117px' }}
             coin={selectedFromToken}
             onTokenChange={handleTokenChange}
             balance={selectedFromToken.available}
