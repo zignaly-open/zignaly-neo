@@ -12,6 +12,7 @@ export type SwapFormProps = {
   setConfirmSwapData: (data: ConfirmSwapDataType) => void;
   setConvertPreviewData: (data: ConvertPreviewType) => void;
 };
+
 export type SwapDepositPurchaseProps = {
   coin: string;
   setView: (view: ChooseDepositTypeViews) => void;
