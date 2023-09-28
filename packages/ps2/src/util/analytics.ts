@@ -77,7 +77,16 @@ export const trackAllocation = (
   coin: string,
   serviceId: string,
 ) => {
-  analytics?.track('invest', { amount, coin, serviceId });
+  analytics?.track(
+    'invest',
+    { amount, coin, serviceId },
+    {
+      plugins: {
+        all: false,
+        'google-analytics': true,
+      },
+    },
+  );
   twq(userId).trackAllocation();
 };
 

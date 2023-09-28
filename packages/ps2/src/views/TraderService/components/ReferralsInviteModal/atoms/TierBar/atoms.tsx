@@ -16,10 +16,10 @@ export const UserRate = () => {
       mb='13px'
       id='referrals-invite-modal__your-rate'
     >
-      <ZigTypography variant='h3' color='#999fe1'>
+      <ZigTypography variant='h3' color='paleBlue'>
         {t('your-rate')}
       </ZigTypography>
-      <ArrowDownward style={{ color: '#999fe1', height: '20px' }} />
+      <ArrowDownward style={{ color: 'paleBlue', height: '20px' }} />
     </Box>
   );
 };

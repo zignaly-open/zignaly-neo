@@ -24,6 +24,7 @@ declare module "@mui/material/styles" {
     yellow: string;
     red: string;
     contrasting: string;
+    paleBlue: string;
 
     backgrounds: Record<
       | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why

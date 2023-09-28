@@ -7,7 +7,9 @@ export const TotalBox: React.FC<{
   value: string | JSX.Element;
 }> = ({ label, value }) => (
   <TotalBoxBox>
-    <ZigTypography>{label}</ZigTypography>
+    <ZigTypography textTransform={'uppercase'} fontWeight={500}>
+      {label}
+    </ZigTypography>
     <TotalBoxValue>{value}</TotalBoxValue>
   </TotalBoxBox>
 );
