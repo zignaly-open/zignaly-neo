@@ -25,14 +25,14 @@ const SwapCoinsConfirmForm = ({
 }: SwapCoinsConfirmFormProps) => {
   const { t } = useTranslation('swap-coins');
   const [convert, convertStatus] = useConvertMutation();
-  const handleConvert = async () => {
-    await convert({
+  const handleConvert = () => 
+    convert({
       exchangeInternalId: internalId,
       from: fromCoin,
       qty: fromCoinAmount,
       to: toCoin,
     });
-  };
+  
   const toast = useToast();
   if (convertStatus?.isSuccess) {
     toast.success(t('toast-success'));
