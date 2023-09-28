@@ -25,3 +25,17 @@ export type UserFilterType = {
 export type UserActionPayloadType = {
   userId: string;
 };
+
+// yes copypaste from ps2, sorry
+export enum UserAccessLevel {
+  Banned = -100,
+  NotVerified = 100,
+  KycPending = 350,
+  NoSubscription = 375,
+  Frozen = 400,
+  KycExpired = 450,
+  SubscriptionExpired = 475,
+  Normal = 500,
+  Support = 700,
+  Admin = 900,
+}

@@ -15,6 +15,19 @@
     "userId": "ID",
     "email": "E-mail",
     "2faEnabled": "2FA",
-    "accessLevel": "Access Level"
+    "accessLevel": "Access Level",
+    "accessLevel-short": "Level"
+  },
+  "accessLevels": {
+    "Banned": "Banned",
+    "NotVerified": "Not Verified",
+    "KycPending": "Kyc Pending",
+    "NoSubscription": "No Subscription",
+    "Frozen": "Frozen",
+    "KycExpired": "Kyc Expired",
+    "SubscriptionExpired": "Subscription Expired",
+    "Normal": "Normal",
+    "Support": "Support",
+    "Admin0": "Admin"
   }
 }

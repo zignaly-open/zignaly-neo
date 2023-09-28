@@ -7,6 +7,7 @@ import {
   ZigDotsVerticalIcon,
   ZigDropdown,
   ZigInput,
+  ZigSelect,
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -17,7 +18,11 @@ import {
   useUnbanMutation,
 } from '../../apis/users/api';
 import { useTranslation } from 'react-i18next';
-import { UserData, UserFilterType } from '../../apis/users/types';
+import {
+  UserAccessLevel,
+  UserData,
+  UserFilterType,
+} from '../../apis/users/types';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, IconButton, useTheme } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
@@ -38,6 +43,15 @@ export default function Users() {
   const showConfirmAction = useConfirmActionModal();
   const theme = useTheme();
 
+  const accessLevelOptions = useMemo(
+    () =>
+      Object.entries(UserAccessLevel).map(([value, label]) => ({
+        label: t('accessLevels.' + label),
+        value: value,
+      })),
+    [t],
+  );
+
   useEffect(() => {
     fetchUsers(filters);
   }, []);
@@ -55,7 +69,13 @@ export default function Users() {
       }),
       columnHelper.accessor('accessLevel', {
         header: t('table.accessLevel'),
-        cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
+        cell: ({ getValue }) => (
+          <ValueOrDash>
+            {UserAccessLevel[getValue()]
+              ? t('accessLevels.' + UserAccessLevel[getValue()])
+              : getValue()}
+          </ValueOrDash>
+        ),
       }),
       columnHelper.accessor('kycLevels', {
         header: t('table.kycLevels'),
@@ -218,13 +238,18 @@ export default function Users() {
             setFilters((old) => ({ ...old, email: e.target.value }))
           }
         />
+        <ZigSelect
+          label={t('table.accessLevel-short')}
+          value={filters.access}
+          onChange={(access) =>
+            setFilters((old) => ({ ...old, access: access as string }))
+          }
+          options={accessLevelOptions}
+        />
         <ZigInput
           label={t('table.accessLevel')}
           placeholder={t('table.accessLevel')}
           value={filters.access}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, access: e.target.value }))
-          }
         />
         <ZigInput
           label={t('table.subscriptionCode')}
