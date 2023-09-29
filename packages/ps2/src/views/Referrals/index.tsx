@@ -194,7 +194,7 @@ const Referrals: React.FC = () => {
                       >
                         <ZigUserFilledIcon
                           style={{
-                            fontSize: '26px',
+                            fontSize: '19px',
                           }}
                         />
                         {rewardsData.invitedCount}
@@ -209,16 +209,17 @@ const Referrals: React.FC = () => {
                         display={'flex'}
                         alignItems={'center'}
                         gap={1}
-                        lineHeight={'21px'}
                       >
                         <ZigUserFilledIcon
                           color={'paleBlue'}
                           style={{
-                            fontSize: '26px',
+                            fontSize: '19px',
                           }}
                         />
-                        {rewardsData.investorsCount}{' '}
-                        <Verified sx={{ color: 'greenGraph' }} />
+                        {rewardsData.investorsCount}
+                        <Verified
+                          sx={{ color: 'greenGraph', fontSize: '21px' }}
+                        />
                       </ZigTypography>
                     }
                   />
