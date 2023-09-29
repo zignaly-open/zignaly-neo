@@ -18,17 +18,22 @@ export function useZModal(options?: UseZModalOptions) {
     (
       Component: ComponentType & { trackId?: string },
       props?: Record<string, unknown>,
+      opts?: Record<string, unknown>,
     ) => {
       const { ...modalProps } = props || {};
       const trackId = Component.trackId?.toLocaleLowerCase();
       trackId && track({ hash: trackId, userId });
-      const modal: ShowFnOutput<void> = showModal(Component, {
-        ...modalProps,
-        close: () => {
-          trackId && track({ userId });
-          customClose ? customClose(modal) : modal.destroy();
+      const modal: ShowFnOutput<void> = showModal(
+        Component,
+        {
+          ...modalProps,
+          close: () => {
+            trackId && track({ userId });
+            customClose ? customClose(modal) : modal.destroy();
+          },
         },
-      });
+        opts,
+      );
       return modal;
     },
     [showModal, userId],

@@ -73,6 +73,7 @@ export function useIsInvestedInService(
 ): {
   isLoading: boolean;
   thisAccount: boolean;
+  isError: boolean;
   accounts?: InvestedInService;
   refetch: () => void;
   investedAmount: string;
@@ -80,12 +81,10 @@ export function useIsInvestedInService(
   const isAuthenticated = useIsAuthenticated();
   const exchange = useActiveExchange();
 
-  const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
-    serviceId,
-    {
+  const { isLoading, data, refetch, isFetching, isError } =
+    useInvestedAmountQuery(serviceId, {
       skip: !isAuthenticated || !exchange?.internalId || options?.skip,
-    },
-  );
+    });
 
   const invested = isAuthenticated && data?.[exchange?.internalId];
 
@@ -96,6 +95,7 @@ export function useIsInvestedInService(
   return {
     isLoading: isAuthenticated && (isLoading || isFetching),
     refetch,
+    isError,
     thisAccount: investedAmount.gt(0),
     accounts: data,
     investedAmount: investedAmount.toString(),

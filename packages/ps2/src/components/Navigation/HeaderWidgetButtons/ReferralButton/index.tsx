@@ -5,9 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_REFERRALS } from '../../../../routes';
 import { GradientBorderButtonWrapper } from './atoms';
+import { useTiersData } from 'apis/referrals/use';
 
 const ReferralButton = () => {
   const { t } = useTranslation('common');
+  const { maxCommission } = useTiersData();
+
+  if (!maxCommission) return null;
+
   return (
     <Link to={generatePath(ROUTE_REFERRALS)}>
       <GradientBorderButtonWrapper>
@@ -48,7 +53,7 @@ const ReferralButton = () => {
                 textAlign: 'center',
               }}
             >
-              {t('header.referrals.title')}
+              {t('header.referrals.title', { commission: maxCommission })}
             </ZigTypography>
             <ZigTypography
               sx={{

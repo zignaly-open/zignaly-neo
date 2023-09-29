@@ -60,19 +60,9 @@ const calculateSubLayerHeight = (
   value: number,
   fullValue: number,
   fullHeight: number,
-  heightAbove: number,
   minHeight: number,
 ) => {
-  let height = (value / fullValue) * fullHeight;
-
-  const heightMissing = minHeight - (heightAbove - height);
-
-  // Reduce height to respect layer above's min height
-  if (heightMissing > 0) {
-    height -= heightMissing;
-  }
-
-  // Apply current layer minHeight
+  const height = (value / fullValue) * fullHeight;
   return Math.max(height, minHeight);
 };
 
@@ -141,17 +131,21 @@ export const useTierLayers = (
       zignalyCommission,
     );
 
+    const layer2minHeight = minHeight * (layers - 1);
+
     const height = calculateSubLayerHeight(
       value,
       layer1.value,
-      layer1.height,
-      layer1.height,
-      minHeight * (layers - 1),
+      layer1.height - minAdditionalHeight,
+      // If there is a 3rd layer, the 2nd layer should be at least half of the 1st layer
+      layers > 2
+        ? Math.max(layer2minHeight, 0.5 * layer1.height)
+        : layer2minHeight,
     );
 
     return {
       value: value !== layer1.value ? value : 0,
-      height,
+      height: value ? height : 0,
     };
   }, [serviceCommission, tierCommission, boost, layer1]);
 
@@ -168,13 +162,12 @@ export const useTierLayers = (
       value,
       layer1.value,
       layer1.height,
-      layer2.height,
-      minHeight * (layers - 2),
+      Math.max(minHeight * (layers - 2), 0.25 * layer1.height),
     );
 
     return {
       value,
-      height,
+      height: value ? height : 0,
     };
   }, [serviceCommission, tierCommission, boost, layer1, layer2]);
 

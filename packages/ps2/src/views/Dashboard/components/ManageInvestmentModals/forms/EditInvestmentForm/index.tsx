@@ -36,6 +36,7 @@ import { useCanInvestIn } from '../../../../../../util/walls/util';
 function EditInvestmentForm({
   onClickWithdrawInvestment,
   setView,
+  close,
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
@@ -71,7 +72,7 @@ function EditInvestmentForm({
   });
 
   const toast = useToast();
-  const checkCanInvest = useCanInvestIn();
+  const checkCanInvest = useCanInvestIn(close);
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 

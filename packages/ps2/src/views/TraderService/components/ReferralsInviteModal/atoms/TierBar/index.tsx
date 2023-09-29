@@ -64,6 +64,12 @@ const TierBar = ({
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
 
+  /**
+   * Uncomment to debug layers
+   *  */
+  // console.log(`\n---\nTier ${tier.id}:`);
+  // console.table(layers);
+
   return (
     <AnimatedContainer>
       {referral.tierId === tier.id && <UserRate />}
@@ -88,6 +94,7 @@ const TierBar = ({
               }
               fontSize={fontSize}
               fontWeight={showArrow ? 600 : 500}
+              className='tier-bar__value'
             >
               {Math.floor(layer1.value)}
               {'%'}

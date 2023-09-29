@@ -42,6 +42,7 @@ const CellLabelBaseCommission = () => {
       textAlign='end'
       lineHeight='24px'
       color={'neutral200'}
+      className='tier-chart__label-base-commission'
     >
       {t('base-commission')}
       <Tooltip title={t('tooltips.base-commission')}>
@@ -71,6 +72,7 @@ const CellLabelBoost = ({
         textAlign='end'
         lineHeight='24px'
         color={activated ? '#24b68d' : '#e93ea7'}
+        className='tier-chart__label-boost'
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
         <Tooltip
@@ -109,6 +111,7 @@ const CellLabelTraderBoost = ({
         variant='h4'
         lineHeight='24px'
         color='#24b68d'
+        className='tier-chart__label-trader-commission'
       >
         {t('trader-boost')}
         <Tooltip title={t('tooltips.trader-boost', { commission })}>
@@ -196,6 +199,7 @@ const TiersTable = ({
               textAlign='end'
               lineHeight='24px'
               color='#979ce0'
+              className='tier-chart__label-referrals'
             >
               {t('referrals')}
               <Tooltip title={t('tooltips.number-referrals')}>
@@ -215,8 +219,9 @@ const TiersTable = ({
               <ZigTypography
                 fontWeight={600}
                 fontSize={16}
-                color='#999fe1'
+                color='paleBlue'
                 lineHeight={'23px'}
+                className='tier-chart__referrals-value'
               >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
@@ -236,6 +241,7 @@ const TiersTable = ({
             lineHeight='18px'
             whiteSpace='pre-line'
             color={'neutral200'}
+            className='tier-chart__label-earnings'
           >
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
@@ -256,12 +262,13 @@ const TiersTable = ({
               fontWeight={500}
               fontSize={16}
               color=' rgba(36, 184, 142, 0.9);'
+              className='tier-chart__earnings-value'
             >
               {'$'}
               {formatCompactNumber(
                 getMaxEarnings(
                   tier.commissionPct,
-                  referral.boost,
+                  boost,
                   serviceCommission,
                   zignalyCommission,
                 ).toFixed(),

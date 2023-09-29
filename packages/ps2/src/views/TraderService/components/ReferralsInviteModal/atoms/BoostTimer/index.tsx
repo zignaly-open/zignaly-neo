@@ -21,7 +21,13 @@ const BoostTimer = ({
   const { t } = useTranslation('referrals-trader');
 
   return (
-    <Box display={'flex'} alignItems={'center'} gap='9px' mt='11px'>
+    <Box
+      display={'flex'}
+      alignItems={'center'}
+      gap='9px'
+      mt='11px'
+      className='boost-timer'
+    >
       <ZigClockIcon color='#e93ea7' />
       <ZigTypography color='#e93ea7' variant='h4' fontWeight={400}>
         {`${t('day', { count: days })}, ${t('hour', {

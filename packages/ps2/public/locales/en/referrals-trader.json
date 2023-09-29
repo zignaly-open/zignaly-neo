@@ -4,8 +4,8 @@
     "commission-rate": "Commission Rate",
     "max-commission": "Max Commission",
     "tooltips": {
-        "commission-rate": "You'll earn {{commission}}% of the fee generated from your referrals, for the first 6 months from their sign-up date",
-        "max-commission": "Maximum potential earnings from the platform fee generated through your referrals (this will be applicable for the first six months of the referral's lifetime).",
+        "commission-rate": "You'll earn {{commission}}% of the platform fee generated from your referrals, for the first 6 months from their sign-up date",
+        "max-commission": "Maximum potential earnings from the platform fee generated through your referrals, for the first 6 months from their sign-up date.",
         "split-commission": "Adjust the slider to pass on a portion of your referral earnings to your referrals. This value will affect only to new referrals.",
         "earn-success-fees": "Earn a percentage of the platform fee generated through your referrals.",
         "invite-and-earn": "Have {{ invite }} referrals sign up and invest in any service(s) of their choice, and earn {{ commission }}% of the platform fee generated in the first 6 months of the referral's lifetime.",
@@ -18,6 +18,7 @@
     },
     "my-referrals": "My Referrals",
     "when-you-invite": "when you invite {{invite}}+ people to Zignaly",
+    "when-you-invite-in": "when you invite {{invite}} people in:",
     "get-by-inviting": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly",
     "get-by-inviting-in": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly in:",
     "split-commission": "Split your commission with friends you invite",
