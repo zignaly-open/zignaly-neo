@@ -191,7 +191,6 @@ const Referrals: React.FC = () => {
                         display={'flex'}
                         alignItems={'center'}
                         gap={1}
-                        lineHeight={'21px'}
                       >
                         <ZigUserFilledIcon
                           style={{
