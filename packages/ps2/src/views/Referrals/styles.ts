@@ -183,7 +183,7 @@ export const TotalBoxValue = styled(ZigTypography)`
     font-weight: 600;
 
     > svg {
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
   }
 `;
