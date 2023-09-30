@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Row, TableOptions, TableState } from "@tanstack/react-table";
-import { RTkQueryLike } from "../../../utils/rtk";
+import { RtkQueryLike } from "../../../utils/rtk";
 
 interface ZigTablePropsBase<T extends object>
   extends Omit<TableOptions<T>, "getCoreRowModel" | "data"> {
@@ -21,25 +21,43 @@ export interface ZigTablePropsData<T extends object> extends ZigTablePropsBase<T
 
 export type ZigTableQueryParams = Record<string, string | number>;
 
-export type RTkQueryLikeInfinitePagination<
+export type RtkQueryLikeInfinitePagination<
   TData extends object,
   TParams extends object,
-> = RTkQueryLike<
+> = RtkQueryLike<
   { metadata: { from: string }; items: TData[] },
   TParams & { limit: number; from: string }
 >;
 
+export type RtkQueryLikeFinitePagination<
+  TData extends object,
+  TParams extends object,
+> = RtkQueryLike<
+  { metadata: { totalPages: number; currentPage: number; totalLength: number }; data: TData[] },
+  TParams & { limit: number; offset: number }
+>;
+
 export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
-  useQuery: RTkQueryLikeInfinitePagination<T, V>;
+  useQuery: RtkQueryLikeInfinitePagination<T, V>;
   // actually it'd be a different type but whatever
   queryDataMapper?: (data: T) => T;
   queryExtraParams?: V;
+  infinite: true;
+}
+export interface ZigTablePropsFiniteQuery<T extends object, V extends ZigTableQueryParams>
+  extends ZigTablePropsBase<T> {
+  useQuery: RtkQueryLikeFinitePagination<T, V>;
+  // actually it'd be a different type but whatever
+  queryDataMapper?: (data: T) => T;
+  queryExtraParams?: V;
+  infinite: false | undefined;
 }
 
 export type ZigTableProps<T extends object, V extends ZigTableQueryParams> =
   | ZigTablePropsData<T>
-  | ZigTablePropsInfiniteQuery<T, V>;
+  | ZigTablePropsInfiniteQuery<T, V>
+  | ZigTablePropsFiniteQuery<T, V>;
 
 declare module "@tanstack/react-table" {
   // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/59304

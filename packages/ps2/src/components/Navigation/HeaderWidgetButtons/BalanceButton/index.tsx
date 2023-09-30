@@ -28,7 +28,9 @@ const BalanceButton = () => {
     },
     {
       pollingInterval: 60 * 1000,
+      silent: true,
     },
+    { silent: true },
   );
 
   const investedAmount = useMemo(() => {

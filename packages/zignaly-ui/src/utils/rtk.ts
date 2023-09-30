@@ -1,4 +1,4 @@
-export type RTkQueryLike<TData extends object, TParams extends object> = (
+export type RtkQueryLike<TData extends object, TParams extends object> = (
   props: TParams,
   options: Record<string, any>,
 ) => {

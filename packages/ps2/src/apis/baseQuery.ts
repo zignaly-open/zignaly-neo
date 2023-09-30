@@ -72,6 +72,7 @@ const customFetchBase: (
 > = (baseUrl) => async (args, api, extraOptions) => {
   const result = await baseQuery(baseUrl)(args, api, extraOptions);
 
+  console.error(extraOptions?.silent, 'hohoho');
   extraOptions?.silent || maybeReportError(result?.error, api?.type);
 
   if (

@@ -1,43 +1,50 @@
 import { useState, useEffect, useRef, useCallback, SetStateAction, Dispatch } from "react";
 import { useDeepCompareEffect } from "react-use";
 import { PaginationState } from "@tanstack/react-table";
-import { RtkQueryLikeInfinitePagination } from "../types";
+import { RtkQueryLikeFinitePagination } from "../types";
 
-const useInfinitePaginatedQuery = <T extends object, V extends object>({
+const useFinitePaginatedQuery = <T extends object, V extends object>({
   useQuery,
   queryExtraParams,
   initialLimit,
 }: {
-  useQuery: RtkQueryLikeInfinitePagination<T, V>;
+  useQuery: RtkQueryLikeFinitePagination<T, V>;
   queryExtraParams?: V;
   initialLimit?: number;
 }): {
   pagination: PaginationState;
+  totalPages: number;
   setPagination: Dispatch<SetStateAction<PaginationState>>;
   hasMore: boolean;
-} & ReturnType<RtkQueryLikeInfinitePagination<T, V>> => {
-  const [pagination, setPagination] = useState<PaginationState>({
+} & ReturnType<RtkQueryLikeFinitePagination<T, V>> => {
+  const [pagination, setPagination2] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: initialLimit || 30,
   });
-  const from = useRef<Record<number, string>>({});
+  const setPagination: typeof setPagination2 = useCallback(
+    (p) => {
+      // debugger;
+      return setPagination2(p);
+    },
+    [setPagination2],
+  );
+  const from = useRef<number>(0);
   const reset = useCallback(() => {
     setPagination((v) => ({ ...v, pageIndex: 0 }));
-    from.current = {};
+    from.current = 0;
   }, [from]);
 
   const queryResponse = useQuery(
     {
       ...(queryExtraParams || ({} as V)),
       limit: pagination.pageSize,
-      from: from.current?.[pagination.pageIndex] || "",
+      offset: pagination.pageIndex * pagination.pageSize,
     },
     { refetchOnMountOrArgChange: true },
   );
 
   useEffect(() => {
-    if (from.current && queryResponse.data)
-      from.current[pagination.pageIndex + 1] = queryResponse.data?.metadata?.from || "";
+    if (queryResponse.data) from.current = (queryResponse.data?.metadata?.currentPage || 1) - 1;
   }, [queryResponse.data]);
 
   useEffect(reset, [pagination.pageSize]);
@@ -46,9 +53,10 @@ const useInfinitePaginatedQuery = <T extends object, V extends object>({
   return {
     pagination,
     setPagination,
+    totalPages: queryResponse?.data?.metadata?.totalPages || 0,
     ...queryResponse,
-    hasMore: queryResponse?.data?.items?.length === pagination.pageSize,
+    hasMore: true,
   };
 };
 
-export default useInfinitePaginatedQuery;
+export default useFinitePaginatedQuery;
