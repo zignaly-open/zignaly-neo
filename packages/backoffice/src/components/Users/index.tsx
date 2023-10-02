@@ -26,7 +26,7 @@ import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, IconButton, useTheme } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import SearchIcon from '@mui/icons-material/Search';
-import { ZigTableQueryRef } from '@zignaly-open/ui/lib/components/display/ZigTable/types';
+import type { ZigTableQueryRef } from '@zignaly-open/ui';
 import { isEqual as _isEqual } from 'lodash-es';
 
 export default function Users() {

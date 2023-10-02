@@ -56,6 +56,7 @@ export type {
 export { createColumnHelper } from "@tanstack/react-table";
 export type { ColumnDef } from "@tanstack/react-table";
 export { default as ZigTable } from "./components/display/ZigTable";
+export type { ZigTableQueryRef } from "./components/display/ZigTable/types";
 export { downloadTableCsv } from "./components/display/ZigTable/util";
 export { default as DateLabel } from "./components/display/ZigTable/components/DateLabel"; // yes, this is used
 export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
