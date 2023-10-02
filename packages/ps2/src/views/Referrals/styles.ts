@@ -180,8 +180,10 @@ export const TotalBoxValue = styled(ZigTypography)`
   span {
     font-size: 29px;
     line-height: 29px;
+    font-weight: 600;
+
     > svg {
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
   }
 `;
