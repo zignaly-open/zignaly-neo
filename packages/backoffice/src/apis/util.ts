@@ -42,3 +42,12 @@ export type PaginationType = {
   limit: number;
   sort?: string;
 };
+
+export type PaginatedResponse<T> = {
+  data: T[];
+  metadata: {
+    currentPage: number;
+    totalLength: number;
+    totalPages: number;
+  };
+};

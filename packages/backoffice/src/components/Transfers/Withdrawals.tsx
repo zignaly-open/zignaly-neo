@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
-  Loader,
   PageContainer,
   ZigButton,
   ZigInput,
   ZigPriceLabel,
   ZigSelect,
   ZigTable,
+  ZigTableQueryRef,
   ZigTypography,
 } from '@zignaly-open/ui';
 import {
-  useLazyWithdrawalsQuery,
   useWithdrawalApproveMutation,
   useWithdrawalRejectMutation,
+  useWithdrawalsQuery,
 } from '../../apis/transfers/api';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
@@ -29,6 +29,7 @@ import { useOperatorOptions, useWithdrawalStatusOptions } from './use';
 import SearchIcon from '@mui/icons-material/Search';
 import Shorten from '../TableUtils/Shorten';
 import DateDisplay from '../TableUtils/DateDisplay';
+import { isEqual as _isEqual } from 'lodash-es';
 
 export default function Withdrawals() {
   const { t } = useTranslation('transfers');
@@ -38,19 +39,15 @@ export default function Withdrawals() {
     operator: 'gte',
     status: '',
   });
+  const [filtersSubmitted, setFiltersSubmitted] =
+    useState<TransferFilterType>(filters);
 
+  const ref = useRef<ZigTableQueryRef>();
   const operators = useOperatorOptions();
   const statusOptions = useWithdrawalStatusOptions();
-
-  const [fetchWithdrawals, { data: withdrawals, isFetching }] =
-    useLazyWithdrawalsQuery();
   const [approve] = useWithdrawalApproveMutation();
   const [reject] = useWithdrawalRejectMutation();
   const showConfirmAction = useConfirmActionModal();
-
-  useEffect(() => {
-    fetchWithdrawals(filters);
-  }, []);
 
   const columnHelper = createColumnHelper<WithdrawalData>();
   const columns = useMemo(() => {
@@ -121,7 +118,7 @@ export default function Withdrawals() {
                     yesLabel: t('actions.approve'),
                     action: async () => {
                       await approve({ id: row.original.id }).unwrap();
-                      await fetchWithdrawals(filters);
+                      ref.current?.refetch();
                     },
                   })
                 }
@@ -141,7 +138,7 @@ export default function Withdrawals() {
                     yesLabel: t('actions.reject'),
                     action: async () => {
                       await reject({ id: row.original.id }).unwrap();
-                      await fetchWithdrawals(filters);
+                      ref.current?.refetch();
                     },
                   })
                 }
@@ -153,7 +150,7 @@ export default function Withdrawals() {
           ),
       }),
     ];
-  }, [filters]);
+  }, [filters, ref]);
 
   return (
     <PageContainer
@@ -224,49 +221,45 @@ export default function Withdrawals() {
         <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
           <ZigButton
             size='xlarge'
-            onClick={() => fetchWithdrawals(filters)}
+            onClick={() => {
+              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+              else setFiltersSubmitted(filters);
+            }}
             startIcon={<SearchIcon />}
-            loading={isFetching}
           >
             {t('common:filter')}
           </ZigButton>
         </Box>
       </Box>
 
-      {withdrawals ? (
-        <Box
-          sx={{
-            '& table': {
-              minWidth: '1000px',
-            },
-            ...(isFetching
-              ? {
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                  pointerEvents: 'none',
-                }
-              : {}),
+      <Box
+        sx={{
+          '& table': {
+            minWidth: '1000px',
+          },
+        }}
+      >
+        <ZigTable
+          ref={ref}
+          initialState={{
+            sorting: [
+              {
+                id: 'createdAt',
+                desc: true,
+              },
+            ],
           }}
-        >
-          <ZigTable
-            initialState={{
-              sorting: [
-                {
-                  id: 'createdAt',
-                  desc: true,
-                },
-              ],
-            }}
-            columns={columns}
-            defaultHiddenColumns={['id']}
-            data={withdrawals}
-            enableSortingRemoval={false}
-            emptyMessage={t('no-data')}
-          />
-        </Box>
-      ) : (
-        <Loader />
-      )}
+          // https://github.com/zignaly-open/zignaly-neo/issues/1215
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          columns={columns}
+          defaultHiddenColumns={['id']}
+          useQuery={useWithdrawalsQuery}
+          queryExtraParams={filtersSubmitted}
+          enableSortingRemoval={false}
+          emptyMessage={t('no-data')}
+        />
+      </Box>
     </PageContainer>
   );
 }

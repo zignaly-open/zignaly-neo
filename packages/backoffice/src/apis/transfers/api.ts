@@ -5,18 +5,24 @@ import {
   WithdrawalData,
 } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { injectEndpoints } from 'apis/util';
+import { injectEndpoints, PaginatedResponse, PaginationType } from 'apis/util';
 import { fixSearchParams } from '@zignaly-open/ui';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  deposits: builder.query<DepositData[], TransferFilterType>({
+  deposits: builder.query<
+    PaginatedResponse<DepositData>,
+    TransferFilterType & PaginationType
+  >({
     query: (params) => ({
       url: 'deposits',
       method: 'GET',
       params: fixSearchParams(params),
     }),
   }),
-  withdrawals: builder.query<WithdrawalData[], TransferFilterType>({
+  withdrawals: builder.query<
+    PaginatedResponse<WithdrawalData>,
+    TransferFilterType & PaginationType
+  >({
     query: (params) => ({
       url: 'withdrawals',
       method: 'GET',
@@ -48,7 +54,6 @@ export const {
   useDepositsQuery,
   useWithdrawalApproveMutation,
   useWithdrawalsQuery,
-  useLazyDepositsQuery,
   useLazyWithdrawalsQuery,
   useWithdrawalRejectMutation,
 } = api;

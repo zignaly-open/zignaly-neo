@@ -31,10 +31,10 @@ export type DepositData = {
 };
 
 export type TransferFilterType = {
-  userId: string;
-  amount: number;
-  operator: 'gte' | 'lte' | 'gt' | 'lt' | 'eq';
-  status: string;
+  userId?: string;
+  amount?: number;
+  operator?: 'gte' | 'lte' | 'gt' | 'lt' | 'eq';
+  status?: string;
 };
 
 export type TransferActionPayloadType = {

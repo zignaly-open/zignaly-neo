@@ -1,18 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
-  Loader,
   PageContainer,
   ZigButton,
   ZigInput,
   ZigPriceLabel,
   ZigSelect,
   ZigTable,
+  ZigTableQueryRef,
   ZigTypography,
 } from '@zignaly-open/ui';
 import {
   useDepositApproveMutation,
-  useLazyDepositsQuery,
+  useDepositsQuery,
 } from '../../apis/transfers/api';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
@@ -27,6 +27,7 @@ import { depositStatusColorMap } from './constants';
 import { useDepositStatusOptions, useOperatorOptions } from './use';
 import SearchIcon from '@mui/icons-material/Search';
 import DateDisplay from '../TableUtils/DateDisplay';
+import { isEqual as _isEqual } from 'lodash-es';
 
 export default function Deposits() {
   const { t } = useTranslation('transfers');
@@ -36,19 +37,14 @@ export default function Deposits() {
     operator: 'gte',
     status: '',
   });
+  const [filtersSubmitted, setFiltersSubmitted] =
+    useState<TransferFilterType>(filters);
 
-  const operators = useOperatorOptions();
-
-  const statusOptions = useDepositStatusOptions();
-
-  const [fetchDeposits, { data: deposits, isFetching }] =
-    useLazyDepositsQuery();
+  const ref = useRef<ZigTableQueryRef>();
   const [approve] = useDepositApproveMutation();
+  const operators = useOperatorOptions();
+  const statusOptions = useDepositStatusOptions();
   const showConfirmAction = useConfirmActionModal();
-
-  useEffect(() => {
-    fetchDeposits(filters);
-  }, []);
 
   const columnHelper = createColumnHelper<DepositData>();
   const columns = useMemo(() => {
@@ -128,7 +124,7 @@ export default function Deposits() {
                   yesLabel: t('actions.approve'),
                   action: async () => {
                     await approve({ id: row.original.id }).unwrap();
-                    await fetchDeposits(filters);
+                    ref.current?.refetch();
                   },
                 })
               }
@@ -139,7 +135,7 @@ export default function Deposits() {
           ),
       }),
     ];
-  }, [filters]);
+  }, [filters, ref]);
 
   return (
     <PageContainer
@@ -210,49 +206,45 @@ export default function Deposits() {
         <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
           <ZigButton
             size='xlarge'
-            onClick={() => fetchDeposits(filters)}
+            onClick={() => {
+              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+              else setFiltersSubmitted(filters);
+            }}
             startIcon={<SearchIcon />}
-            loading={isFetching}
           >
             {t('common:filter')}
           </ZigButton>
         </Box>
       </Box>
 
-      {deposits ? (
-        <Box
-          sx={{
-            '& table': {
-              minWidth: '1000px',
-            },
-            ...(isFetching
-              ? {
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                  pointerEvents: 'none',
-                }
-              : {}),
+      <Box
+        sx={{
+          '& table': {
+            minWidth: '1000px',
+          },
+        }}
+      >
+        <ZigTable
+          ref={ref}
+          initialState={{
+            sorting: [
+              {
+                id: 'createdAt',
+                desc: true,
+              },
+            ],
           }}
-        >
-          <ZigTable
-            initialState={{
-              sorting: [
-                {
-                  id: 'createdAt',
-                  desc: true,
-                },
-              ],
-            }}
-            columns={columns}
-            defaultHiddenColumns={['id']}
-            data={deposits}
-            enableSortingRemoval={false}
-            emptyMessage={t('no-data')}
-          />
-        </Box>
-      ) : (
-        <Loader />
-      )}
+          // https://github.com/zignaly-open/zignaly-neo/issues/1215
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          columns={columns}
+          defaultHiddenColumns={['id']}
+          useQuery={useDepositsQuery}
+          queryExtraParams={filtersSubmitted}
+          enableSortingRemoval={false}
+          emptyMessage={t('no-data')}
+        />
+      </Box>
     </PageContainer>
   );
 }
