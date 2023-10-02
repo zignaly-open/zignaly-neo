@@ -262,7 +262,6 @@ export default function Users() {
               else setFiltersSubmitted(filters);
             }}
             startIcon={<SearchIcon />}
-            // loading={isFetching}
           >
             {t('common:filter')}
           </ZigButton>
@@ -287,8 +286,16 @@ export default function Users() {
             ],
           }}
           queryExtraParams={filtersSubmitted}
-          useQuery={useUsersQuery}
+          // OK I have spent several hours trying to figure out what the fuck is wrong with this piece of shit
+          // it looks like it pulls the generic for the data from the query somehow incorrectly
+          // because if you useQuery={useUsersQuery} to data={[] as UserData[]} it works just fine
+          // and because of that TS does not see the fields from the UserData in the generic type,
+          // and therefore it's complaining about the accessorFn missing
+          // feel free to investigate, if you fix it, I'll buy you a coffee
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           columns={columns}
+          useQuery={useUsersQuery}
           enableSortingRemoval={false}
           emptyMessage={t('no-data')}
         />

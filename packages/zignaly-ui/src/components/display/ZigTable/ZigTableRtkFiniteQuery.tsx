@@ -29,7 +29,7 @@ const ZigTableRtkFiniteQuery = <T extends object, V extends ZigTableQueryParams>
         sorting,
       }}
       manualPagination
-      data={items}
+      data={items as T[]}
       onSortingChange={setSorting}
       pageCount={totalPages}
       loading={isLoading}
