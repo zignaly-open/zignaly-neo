@@ -9,7 +9,7 @@ export const useLogActionOptions = () => {
   >(
     () => [
       { value: '', label: t('common:all') },
-      ...Object.entries(t('statuses', { returnObjects: true })).map(
+      ...Object.entries<string>(t('statuses', { returnObjects: true })).map(
         ([value, label]) => ({
           value: value as unknown as LogEntryActions,
           label: label,

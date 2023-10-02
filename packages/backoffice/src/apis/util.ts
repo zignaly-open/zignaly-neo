@@ -40,4 +40,5 @@ export const injectEndpoints = <
 export type PaginationType = {
   offset: number;
   limit: number;
+  sort?: string;
 };

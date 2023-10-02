@@ -16,10 +16,10 @@ export type UserData = {
 };
 
 export type UserFilterType = {
-  id: string;
-  email: string;
-  access: string;
-  subscriptionCode: string;
+  id?: string;
+  email?: string;
+  access?: string;
+  subscriptionCode?: string;
 };
 
 export type UserActionPayloadType = {
