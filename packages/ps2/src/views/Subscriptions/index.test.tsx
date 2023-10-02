@@ -2,6 +2,7 @@ import React from 'react';
 import {
   getByText,
   screen /*, fireEvent, waitFor*/,
+  waitFor,
 } from '@testing-library/react';
 import { renderWithProviders } from '../../util/test';
 import Subscriptions from './index';
@@ -14,46 +15,17 @@ import { useSubscribeMutation } from '../../apis/subscription/api';
 // //   }),
 // // }));
 
-jest.mock('../../apis/subscription/api', () => ({
-  // useSubscribeMutation: jest.fn(() => [
-  //   jest.fn(), // Mocked subscribe function
-  //   { isLoading: false }, // Mocked isLoading value
-  // ]),
-  useSubscriptionsQuery: () => ({
-    data: [
-      {
-        id: '64dc95250f375e86440f6808',
-        priceYear: 397,
-        priceLifetime: 797,
-        name: 'Quantwise Plus',
-        successFeePct: 50,
-      },
-      {
-        priceYear: 1497,
-        priceLifetime: 3997,
-        name: 'Quantwise Pro',
-        successFeePct: 40,
-        id: '64dc95250f375e86440f6809',
-      },
-      {
-        id: '64dc95250f375e86440f680a',
-        priceYear: 3997,
-        priceLifetime: 5997,
-        name: 'Quantwise Expert',
-        successFeePct: 30,
-      },
-    ],
-  }),
-}));
-test('renders Subscriptions component', () => {
+test('renders Subscriptions component', async () => {
   const { container } = renderWithProviders(<Subscriptions />, {
     preloadedState: {
       user: userStateMock,
     },
   });
-  expect(getByText(container, 'Subscriptions')).toBeInTheDocument();
-  expect(getByText(container, 'Annual License')).toBeInTheDocument();
-  expect(getByText(container, 'Lifetime License')).toBeInTheDocument();
+  await waitFor(() => {
+    expect(getByText(container, 'Subscriptions')).toBeInTheDocument();
+    expect(getByText(container, 'Annual License')).toBeInTheDocument();
+    expect(getByText(container, 'Lifetime License')).toBeInTheDocument();
+  });
 });
 
 // test('switches tabs when clicking', async () => {

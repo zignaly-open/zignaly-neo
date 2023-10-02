@@ -12,6 +12,7 @@ import {
   tierLevelsResponseMockSuccess,
 } from './mocks/referrals';
 import { userDataResponseMock } from './mocks/user';
+import { subscriptionDataResponseMock } from './mocks/subscriptions';
 
 const ps2 = [
   rest.get(
@@ -41,6 +42,12 @@ const ps2 = [
           ctx.json(loginResponseMockWrongCredentials),
         );
       }
+    },
+  ),
+  rest.get(
+    process.env.REACT_APP_BASE_API + '/subscriptions',
+    async (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(subscriptionDataResponseMock));
     },
   ),
 ];
