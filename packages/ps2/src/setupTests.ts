@@ -12,7 +12,7 @@ import { cleanup } from '@testing-library/react';
 
 // Establish API mocking before all tests.
 beforeAll(() => {
-  server.listen();
+  server.listen({ onUnhandledRequest: 'error' });
 });
 
 // Reset any request handlers that we may add during the tests,
