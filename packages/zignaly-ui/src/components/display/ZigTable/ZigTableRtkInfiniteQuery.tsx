@@ -1,19 +1,26 @@
-import React from "react";
-import { ZigTablePropsInfiniteQuery, ZigTableQueryParams } from "./types";
+import React, { ForwardedRef, forwardRef, useImperativeHandle } from "react";
+import {
+  ZigTablePropsFiniteQuery,
+  ZigTablePropsInfiniteQuery,
+  ZigTableQueryParams,
+  ZigTableQueryRef,
+} from "./types";
 import ZigTableData from "./ZigTableData";
 import useInfinitePaginatedQuery from "./use/useInfinitePaginatedQuery";
 
-export default function ZigTableRtkInfiniteQuery<T extends object, V extends ZigTableQueryParams>({
-  useQuery,
-  queryExtraParams,
-  queryDataMapper,
-  ...props
-}: ZigTablePropsInfiniteQuery<T, V>) {
-  const { pagination, setPagination, isFetching, isLoading, hasMore, data } =
+const ZigTableRtkInfiniteQuery = <T extends object, V extends ZigTableQueryParams>(
+  { useQuery, queryExtraParams, queryDataMapper, ...props }: ZigTablePropsInfiniteQuery<T, V>,
+  ref: ForwardedRef<ZigTableQueryRef>,
+) => {
+  const { pagination, setPagination, isFetching, isLoading, hasMore, data, refetch } =
     useInfinitePaginatedQuery({
       useQuery,
       queryExtraParams,
     });
+
+  useImperativeHandle(ref, () => ({
+    refetch
+  }));
 
   const items = (queryDataMapper ? data?.items?.map(queryDataMapper) : data?.items) || [];
   return (
@@ -28,4 +35,11 @@ export default function ZigTableRtkInfiniteQuery<T extends object, V extends Zig
       onPaginationChange={setPagination}
     />
   );
-}
+};
+
+export default forwardRef(ZigTableRtkInfiniteQuery) as <
+  T extends object,
+  V extends ZigTableQueryParams,
+>(
+  props: ZigTablePropsInfiniteQuery<T, V> & { ref?: ForwardedRef<ZigTableQueryRef> },
+) => ReturnType<typeof ZigTableRtkInfiniteQuery>;

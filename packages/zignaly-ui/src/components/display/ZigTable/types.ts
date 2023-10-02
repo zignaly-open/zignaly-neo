@@ -37,6 +37,10 @@ export type RtkQueryLikeFinitePagination<
   TParams & { limit: number; offset: number }
 >;
 
+export type ZigTableQueryRef = {
+  refetch: () => void;
+};
+
 export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
   useQuery: RtkQueryLikeInfinitePagination<T, V>;
