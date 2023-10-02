@@ -1,10 +1,5 @@
 import React, { ForwardedRef, forwardRef, useImperativeHandle } from "react";
-import {
-  ZigTablePropsFiniteQuery,
-  ZigTablePropsInfiniteQuery,
-  ZigTableQueryParams,
-  ZigTableQueryRef,
-} from "./types";
+import { ZigTablePropsInfiniteQuery, ZigTableQueryParams, ZigTableQueryRef } from "./types";
 import ZigTableData from "./ZigTableData";
 import useInfinitePaginatedQuery from "./use/useInfinitePaginatedQuery";
 
@@ -19,7 +14,7 @@ const ZigTableRtkInfiniteQuery = <T extends object, V extends ZigTableQueryParam
     });
 
   useImperativeHandle(ref, () => ({
-    refetch
+    refetch,
   }));
 
   const items = (queryDataMapper ? data?.items?.map(queryDataMapper) : data?.items) || [];

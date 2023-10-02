@@ -27,6 +27,7 @@ import { Box, IconButton, useTheme } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import SearchIcon from '@mui/icons-material/Search';
 import { ZigTableQueryRef } from '@zignaly-open/ui/lib/components/display/ZigTable/types';
+import { isEqual as _isEqual } from 'lodash-es';
 
 export default function Users() {
   const { t } = useTranslation('users');
@@ -36,6 +37,8 @@ export default function Users() {
     access: '',
     subscriptionCode: '',
   });
+  const [filtersSubmitted, setFiltersSubmitted] =
+    useState<UserFilterType>(filters);
   const [banUser] = useBanMutation();
   const [unbanUser] = useUnbanMutation();
   const [disable2fa] = useDisable2FAMutation();
@@ -236,17 +239,12 @@ export default function Users() {
           }
         />
         <ZigSelect
-          label={t('table.accessLevel-short')}
+          label={t('table.accessLevel')}
           value={filters.access}
           onChange={(access) =>
             setFilters((old) => ({ ...old, access: access as string }))
           }
           options={accessLevelOptions}
-        />
-        <ZigInput
-          label={t('table.accessLevel')}
-          placeholder={t('table.accessLevel')}
-          value={filters.access}
         />
         <ZigInput
           label={t('table.subscriptionCode')}
@@ -259,7 +257,10 @@ export default function Users() {
         <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
           <ZigButton
             size='xlarge'
-            // onClick={() => fetchUsers(filters)}
+            onClick={() => {
+              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+              else setFiltersSubmitted(filters);
+            }}
             startIcon={<SearchIcon />}
             // loading={isFetching}
           >
@@ -285,6 +286,7 @@ export default function Users() {
               },
             ],
           }}
+          queryExtraParams={filtersSubmitted}
           useQuery={useUsersQuery}
           columns={columns}
           enableSortingRemoval={false}
