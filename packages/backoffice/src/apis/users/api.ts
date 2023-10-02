@@ -1,10 +1,20 @@
 import { UserActionPayloadType, UserData, UserFilterType } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
-import { injectEndpoints } from 'apis/util';
+import { injectEndpoints, PaginationType } from 'apis/util';
 import { fixSearchParams } from '@zignaly-open/ui';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  users: builder.query<UserData[], UserFilterType>({
+  users: builder.query<
+    {
+      data: UserData[];
+      metadata: {
+        currentPage: number;
+        totalLength: number;
+        totalPages: number;
+      };
+    },
+    UserFilterType & PaginationType
+  >({
     query: (params) => ({
       url: 'users',
       method: 'GET',
@@ -36,4 +46,5 @@ export const {
   useDisable2FAMutation,
   useBanMutation,
   useUnbanMutation,
+  useUsersQuery,
 } = api;

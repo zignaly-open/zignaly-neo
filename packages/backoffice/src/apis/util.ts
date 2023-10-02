@@ -36,3 +36,8 @@ export const injectEndpoints = <
     endpoints,
   });
 };
+
+export type PaginationType = {
+  offset: number;
+  limit: number;
+};

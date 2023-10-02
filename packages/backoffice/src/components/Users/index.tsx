@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
-  Loader,
   PageContainer,
   ZigButton,
   ZigDotsVerticalIcon,
@@ -14,8 +13,8 @@ import {
 import {
   useBanMutation,
   useDisable2FAMutation,
-  useLazyUsersQuery,
   useUnbanMutation,
+  useUsersQuery,
 } from '../../apis/users/api';
 import { useTranslation } from 'react-i18next';
 import {
@@ -27,6 +26,7 @@ import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, IconButton, useTheme } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import SearchIcon from '@mui/icons-material/Search';
+import { ZigTableQueryRef } from '@zignaly-open/ui/lib/components/display/ZigTable/types';
 
 export default function Users() {
   const { t } = useTranslation('users');
@@ -36,7 +36,6 @@ export default function Users() {
     access: '',
     subscriptionCode: '',
   });
-  const [fetchUsers, { data: users, isFetching }] = useLazyUsersQuery();
   const [banUser] = useBanMutation();
   const [unbanUser] = useUnbanMutation();
   const [disable2fa] = useDisable2FAMutation();
@@ -52,9 +51,7 @@ export default function Users() {
     [t],
   );
 
-  useEffect(() => {
-    fetchUsers(filters);
-  }, []);
+  const ref = useRef<ZigTableQueryRef>();
 
   const columnHelper = createColumnHelper<UserData>();
   const columns = useMemo(() => {
@@ -162,7 +159,7 @@ export default function Users() {
                           ? unbanUser({ userId: original.userId })
                           : banUser({ userId: original.userId })
                         ).unwrap();
-                        await fetchUsers(filters);
+                        ref.current?.refetch();
                       },
                     }),
                 },
@@ -183,7 +180,7 @@ export default function Users() {
                             await disable2fa({
                               userId: original.userId,
                             }).unwrap();
-                            await fetchUsers(filters);
+                            ref.current?.refetch();
                           },
                         }),
                     }
@@ -195,7 +192,7 @@ export default function Users() {
         enableColumnFilter: false,
       }),
     ];
-  }, [filters]);
+  }, [filters, ref]);
 
   return (
     <PageContainer
@@ -262,48 +259,38 @@ export default function Users() {
         <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
           <ZigButton
             size='xlarge'
-            onClick={() => fetchUsers(filters)}
+            // onClick={() => fetchUsers(filters)}
             startIcon={<SearchIcon />}
-            loading={isFetching}
+            // loading={isFetching}
           >
             {t('common:filter')}
           </ZigButton>
         </Box>
       </Box>
 
-      {users ? (
-        <Box
-          sx={{
-            '& table': {
-              minWidth: '1000px',
-            },
-            ...(isFetching
-              ? {
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                  pointerEvents: 'none',
-                }
-              : {}),
+      <Box
+        sx={{
+          '& table': {
+            minWidth: '1000px',
+          },
+        }}
+      >
+        <ZigTable
+          ref={ref}
+          initialState={{
+            sorting: [
+              {
+                id: 'userId',
+                desc: true,
+              },
+            ],
           }}
-        >
-          <ZigTable
-            initialState={{
-              sorting: [
-                {
-                  id: 'userId',
-                  desc: true,
-                },
-              ],
-            }}
-            columns={columns}
-            data={users}
-            enableSortingRemoval={false}
-            emptyMessage={t('no-data')}
-          />
-        </Box>
-      ) : (
-        <Loader />
-      )}
+          useQuery={useUsersQuery}
+          columns={columns}
+          enableSortingRemoval={false}
+          emptyMessage={t('no-data')}
+        />
+      </Box>
     </PageContainer>
   );
 }
