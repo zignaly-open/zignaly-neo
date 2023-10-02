@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, SetStateAction, Dispatch } from "react";
+import { useState, useEffect, useCallback, SetStateAction, Dispatch } from "react";
 import { useDeepCompareEffect } from "react-use";
 import { PaginationState } from "@tanstack/react-table";
 import { RtkQueryLikeFinitePagination } from "../types";
@@ -17,22 +17,13 @@ const useFinitePaginatedQuery = <T extends object, V extends object>({
   setPagination: Dispatch<SetStateAction<PaginationState>>;
   hasMore: boolean;
 } & ReturnType<RtkQueryLikeFinitePagination<T, V>> => {
-  const [pagination, setPagination2] = useState<PaginationState>({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: initialLimit || 30,
   });
-  const setPagination: typeof setPagination2 = useCallback(
-    (p) => {
-      // debugger;
-      return setPagination2(p);
-    },
-    [setPagination2],
-  );
-  const from = useRef<number>(0);
   const reset = useCallback(() => {
     setPagination((v) => ({ ...v, pageIndex: 0 }));
-    from.current = 0;
-  }, [from]);
+  }, []);
 
   const queryResponse = useQuery(
     {
@@ -42,10 +33,6 @@ const useFinitePaginatedQuery = <T extends object, V extends object>({
     },
     { refetchOnMountOrArgChange: true },
   );
-
-  useEffect(() => {
-    if (queryResponse.data) from.current = (queryResponse.data?.metadata?.currentPage || 1) - 1;
-  }, [queryResponse.data]);
 
   useEffect(reset, [pagination.pageSize]);
   useDeepCompareEffect(reset, [queryExtraParams]);
