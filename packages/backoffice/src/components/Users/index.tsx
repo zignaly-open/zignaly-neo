@@ -39,6 +39,7 @@ export default function Users() {
   });
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<UserFilterType>(filters);
+
   const [banUser] = useBanMutation();
   const [unbanUser] = useUnbanMutation();
   const [disable2fa] = useDisable2FAMutation();

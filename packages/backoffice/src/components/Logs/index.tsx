@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
-  Loader,
   PageContainer,
   ZigButton,
   ZigInput,
   ZigSelect,
   ZigTable,
+  ZigTableQueryRef,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { format } from 'date-fns';
@@ -14,9 +14,10 @@ import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useLazyLogsQuery } from '../../apis/logs/api';
 import { LogEntry, LogFilterType } from '../../apis/logs/types';
 import { useLogActionOptions } from './use';
+import { isEqual as _isEqual } from 'lodash-es';
+import { useLogsQuery } from '../../apis/logs/api';
 
 export default function Withdrawals() {
   const { t } = useTranslation('logs');
@@ -28,13 +29,10 @@ export default function Withdrawals() {
     agent: '',
     action: '',
   });
+  const [filtersSubmitted, setFiltersSubmitted] =
+    useState<LogFilterType>(filters);
 
-  const [fetchLogs, { data: logs, isFetching }] = useLazyLogsQuery();
-
-  useEffect(() => {
-    fetchLogs(filters);
-  }, []);
-
+  const ref = useRef<ZigTableQueryRef>();
   const columnHelper = createColumnHelper<LogEntry>();
   const columns = useMemo(() => {
     return [
@@ -135,48 +133,44 @@ export default function Withdrawals() {
         <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
           <ZigButton
             size='xlarge'
-            onClick={() => fetchLogs(filters)}
+            onClick={() => {
+              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+              else setFiltersSubmitted(filters);
+            }}
             startIcon={<SearchIcon />}
-            loading={isFetching}
           >
             {t('common:filter')}
           </ZigButton>
         </Box>
       </Box>
 
-      {logs ? (
-        <Box
-          sx={{
-            '& table': {
-              minWidth: '1000px',
-            },
-            ...(isFetching
-              ? {
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                  pointerEvents: 'none',
-                }
-              : {}),
+      <Box
+        sx={{
+          '& table': {
+            minWidth: '1000px',
+          },
+        }}
+      >
+        <ZigTable
+          ref={ref}
+          initialState={{
+            sorting: [
+              {
+                id: 'userId',
+                desc: true,
+              },
+            ],
           }}
-        >
-          <ZigTable
-            initialState={{
-              sorting: [
-                {
-                  id: 'userId',
-                  desc: true,
-                },
-              ],
-            }}
-            columns={columns}
-            data={logs}
-            enableSortingRemoval={false}
-            emptyMessage={t('no-data')}
-          />
-        </Box>
-      ) : (
-        <Loader />
-      )}
+          queryExtraParams={filtersSubmitted}
+          // https://github.com/zignaly-open/zignaly-neo/issues/1215
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          columns={columns}
+          useQuery={useLogsQuery}
+          enableSortingRemoval={false}
+          emptyMessage={t('no-data')}
+        />
+      </Box>
     </PageContainer>
   );
 }
