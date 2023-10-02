@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Row, TableOptions, TableState } from "@tanstack/react-table";
+import { Row, SortingState, TableOptions, TableState } from "@tanstack/react-table";
 import { RtkQueryLike } from "../../../utils/rtk";
 
 interface ZigTablePropsBase<T extends object>
@@ -34,7 +34,7 @@ export type RtkQueryLikeFinitePagination<
   TParams extends object,
 > = RtkQueryLike<
   { metadata: { totalPages: number; currentPage: number; totalLength: number }; data: TData[] },
-  TParams & { limit: number; offset: number }
+  TParams & { limit: number; offset: number; sort?: string }
 >;
 
 export type ZigTableQueryRef = {

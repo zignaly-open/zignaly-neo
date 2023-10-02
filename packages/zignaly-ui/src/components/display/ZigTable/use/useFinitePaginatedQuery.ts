@@ -1,15 +1,17 @@
 import { useState, useEffect, useCallback, SetStateAction, Dispatch } from "react";
 import { useDeepCompareEffect } from "react-use";
-import { PaginationState } from "@tanstack/react-table";
+import { PaginationState, SortingState } from "@tanstack/react-table";
 import { RtkQueryLikeFinitePagination } from "../types";
 
 const useFinitePaginatedQuery = <T extends object, V extends object>({
   useQuery,
   queryExtraParams,
+  sorting,
   initialLimit,
 }: {
   useQuery: RtkQueryLikeFinitePagination<T, V>;
   queryExtraParams?: V;
+  sorting?: SortingState;
   initialLimit?: number;
 }): {
   pagination: PaginationState;
@@ -28,6 +30,7 @@ const useFinitePaginatedQuery = <T extends object, V extends object>({
   const queryResponse = useQuery(
     {
       ...(queryExtraParams || ({} as V)),
+      ...(sorting?.[0] ? { sort: sorting[0].id + "," + (sorting[0].desc ? "DESC" : "ASC") } : {}),
       limit: pagination.pageSize,
       offset: pagination.pageIndex * pagination.pageSize,
     },
