@@ -13,6 +13,7 @@ import {
 } from './mocks/referrals';
 import { userDataResponseMock } from './mocks/user';
 import { subscriptionDataResponseMock } from './mocks/subscriptions';
+import { kycDataResponseMock } from './mocks/kyc';
 
 const ps2 = [
   rest.get(
@@ -48,6 +49,12 @@ const ps2 = [
     process.env.REACT_APP_BASE_API + '/subscriptions',
     async (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(subscriptionDataResponseMock));
+    },
+  ),
+  rest.get(
+    process.env.REACT_APP_BASE_API + '/user/kyc',
+    async (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(kycDataResponseMock));
     },
   ),
 ];
