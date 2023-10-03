@@ -77,7 +77,7 @@ export const StyledZigSlider = styled(ZigSlider)`
       }
     }
     &:nth-of-type(1) {
-      color: #c6c6d1;
+      color: ${({ theme }) => theme.palette.neutral100};
       font-size: 13px;
       font-weight: 400;
       margin-right: -3px;
