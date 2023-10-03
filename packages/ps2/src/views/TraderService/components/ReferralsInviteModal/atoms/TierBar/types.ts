@@ -11,9 +11,8 @@ export type TierBarProps = {
   minOpacity?: number;
   minFontSize?: number;
   maxFontSize?: number;
-  serviceCommission: number;
-  zignalyCommission: number;
   // specialBoost: boolean;
   referral: ReferralRewards;
   boost: number;
+  traderBoost: number;
 };

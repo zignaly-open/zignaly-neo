@@ -16,8 +16,7 @@ import { UserRate } from './atoms';
 
 const TierBar = ({
   tier,
-  serviceCommission,
-  zignalyCommission,
+  traderBoost,
   referral,
   boost,
   tiers,
@@ -53,14 +52,10 @@ const TierBar = ({
     [min, max, tier],
   );
 
-  const layers = useTierLayers(
-    tiers,
-    tier.id,
-    boost,
-    serviceCommission,
-    zignalyCommission,
-    { minHeight, maxHeight },
-  );
+  const layers = useTierLayers(tiers, tier.id, boost, traderBoost, {
+    minHeight,
+    maxHeight,
+  });
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
 
@@ -81,9 +76,7 @@ const TierBar = ({
           emphasis={showArrow}
         >
           <BarContent>
-            {serviceCommission > 0 && (
-              <BoltIcon width={'10px'} height={'16px'} />
-            )}
+            {traderBoost > 0 && <BoltIcon width={'10px'} height={'16px'} />}
             <ZigTypography
               color={
                 layersCount > 1
