@@ -36,11 +36,8 @@ const Marketplace: React.FC = () => {
   const columnHelper = createColumnHelper<MarketplaceService>();
   const { activeRow, setActiveRow } = useMarketplaceActiveRowMobile();
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  useEffect(() => {
-    return () => {
-      setActiveRow(null);
-    };
-  }, []);
+  useEffect(() => () => 
+      setActiveRow(null), []);
   const columns = useMemo(
     () =>
       md
