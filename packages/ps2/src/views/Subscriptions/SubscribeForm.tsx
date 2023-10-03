@@ -50,6 +50,7 @@ const SubscribeForm = () => {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigInput
+                id={'subscribe-form__input-code'}
                 error={t(errors?.code?.message)}
                 disabled={isLoading}
                 fullWidth
