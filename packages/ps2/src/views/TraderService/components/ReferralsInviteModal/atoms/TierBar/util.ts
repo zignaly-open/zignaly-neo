@@ -16,7 +16,7 @@ export const calculateLayerValue = (
     // User boost + Trader boost
     return getBoostedCommissionPct(tierCommission, boost, traderBoost);
   } else if (layer === 2) {
-    if (boost === 1 && traderBoost) return 0;
+    if (boost === 1 && !traderBoost) return 0;
 
     // User boost or trader boost (but not both)
     return getBoostedCommissionPct(tierCommission, traderBoost ? boost : 1);
