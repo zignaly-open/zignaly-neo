@@ -1,5 +1,5 @@
 export type MarketplaceState = {
-  activeRowMobile?: string | null;
+  mobileActiveRow?: string | null;
 };
 
 export type MarketplaceService = {

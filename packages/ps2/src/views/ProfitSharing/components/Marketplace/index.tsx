@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import {
-  useMarketplaceActiveRowMobile,
+  useMarketplaceMobileActiveRow,
   useMarketplace,
 } from '../../../../apis/marketplace/use';
 import { useTranslation } from 'react-i18next';
@@ -34,10 +34,9 @@ const Marketplace: React.FC = () => {
   const { t } = useTranslation('marketplace');
   const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
-  const { activeRow, setActiveRow } = useMarketplaceActiveRowMobile();
+  const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  useEffect(() => () => 
-      setActiveRow(null), []);
+  useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
     () =>
       md

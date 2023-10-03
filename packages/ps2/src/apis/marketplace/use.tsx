@@ -1,20 +1,14 @@
 import { useMarketplaceQuery } from './api';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { setActiveRowMobile } from './store';
+import { setMobileActiveRow } from './store';
 
 export const useMarketplace = useMarketplaceQuery;
 
-export function useMarketplaceActiveRowMobile(): {
-  activeRow: string;
-  setActiveRow: (v: string) => void;
-} {
-  const { activeRowMobile } = useSelector(
+export function useMarketplaceMobileActiveRow(): [string, (v: string) => void] {
+  const { mobileActiveRow } = useSelector(
     (state: RootState) => state.marketplace,
   );
   const dispatch = useDispatch();
-  return {
-    activeRow: activeRowMobile,
-    setActiveRow: (v: string) => dispatch(setActiveRowMobile(v)),
-  };
+  return [mobileActiveRow, (v: string) => dispatch(setMobileActiveRow(v))];
 }
