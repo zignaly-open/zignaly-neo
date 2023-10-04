@@ -10,6 +10,14 @@
       "purchase": "Purchase {{coin}}"
     }
   },
+  "service-swap": {
+    "title": "Deposit {{coin}} to Invest with Trader",
+    "description": "The trader is trading with {{coin}}, so you must deposit the same crypto the trader is using in order to share profits with them. Please deposit {{coin}} to your account.",
+    "convert-to-coin": "Convert to {{ coin }}",
+    "deposit-purchase": "Deposit or purchase {{ coin }}",
+    "convert": "Convert",
+    "confirm-swap-title": "Confirm Swap"
+  },
   "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
   "coinSelector": {
     "label": "Coin:",

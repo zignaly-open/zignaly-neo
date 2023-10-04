@@ -10,6 +10,7 @@ export interface ZigTableProps<T extends object> extends Omit<TableOptions<T>, "
   defaultHiddenColumns?: string[];
   renderSubComponent?: (props: { row: Row<T> }) => React.ReactElement;
   emptyMessage?: string;
+  onRowClick?: (id: string) => void;
 }
 
 declare module "@tanstack/react-table" {

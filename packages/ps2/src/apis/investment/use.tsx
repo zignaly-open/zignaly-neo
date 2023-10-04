@@ -118,17 +118,19 @@ export function useCurrentBalance(coin?: string): {
   id: string;
   balance: string;
   isFetching: boolean;
+  refetch: () => void;
 } {
   const service = useSelectedInvestment();
-  const { data: coins, isFetching } = useCoinBalances();
+  const { data: coins, isFetching, refetch } = useCoinBalances();
 
   return useMemo(
     () => ({
       isFetching,
       id: coin || service?.ssc,
       balance: coins?.[coin || service?.ssc]?.balanceFree || '0',
+      refetch,
     }),
-    [coin, service?.ssc, coins, isFetching],
+    [coin, service?.ssc, coins, isFetching, refetch],
   );
 }
 

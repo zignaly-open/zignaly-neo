@@ -37,9 +37,11 @@ function InvestDepositModal({
     data: service,
   } = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
-  const { balance, isFetching: isLoadingBalance } = useCurrentBalance(
-    service?.ssc,
-  );
+  const {
+    balance,
+    isFetching: isLoadingBalance,
+    refetch: refetchBalance,
+  } = useCurrentBalance(service?.ssc);
 
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
   const selectedInvestment = useSelectedInvestment();
@@ -64,6 +66,8 @@ function InvestDepositModal({
 
   const depositModal = useDepositModalContent({
     coin: service?.ssc,
+    refetchBalance,
+    serviceId,
     close: trackAwareClose,
   });
   const investModal = useInvestModalContent({ close: trackAwareClose });
@@ -89,7 +93,7 @@ function InvestDepositModal({
     return null;
   }
 
-  const { title, component, onGoBack } =
+  const { title, component, onGoBack, modalWidth } =
     (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
@@ -100,6 +104,7 @@ function InvestDepositModal({
       isLoading={!ready}
       onGoBack={onGoBack}
       wide
+      width={modalWidth}
     >
       <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
     </ZModal>

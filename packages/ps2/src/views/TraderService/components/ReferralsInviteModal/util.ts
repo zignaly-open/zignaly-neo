@@ -4,7 +4,7 @@ export const MAX_FEES_AMOUNT = 100000;
 
 export const getTraderBoost = (
   serviceCommission: number,
-  zignalyCommission: number,
+  zignalyCommission = ZIGNALY_PROFIT_FEE,
 ) => {
   return (
     serviceCommission / ZIGNALY_PROFIT_FEE +
