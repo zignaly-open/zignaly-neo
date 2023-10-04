@@ -11,7 +11,10 @@ export const Inline = styled('div')`
 `;
 
 export const TableWrapper = styled('div')`
-  padding: 0 30px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    padding: 0 30px;
+  }
+  padding: 0;
   td,
   th {
     &:first-of-type {

@@ -33,6 +33,7 @@ export default function ZigTable<T extends object>({
   loading,
   emptyMessage,
   state = {},
+  onRowClick,
   ...rest
 }: ZigTableProps<T>) {
   const theme = useTheme();
@@ -175,6 +176,8 @@ export default function ZigTable<T extends object>({
                       onClick: row.getToggleExpandedHandler(),
                       style: { cursor: "pointer" },
                     })}
+                    onClick={() => onRowClick?.(row.id)}
+                    style={{ cursor: onRowClick ? "pointer" : "unset", position: "relative" }}
                   >
                     {row.getVisibleCells().map((cell, index) => {
                       return (
