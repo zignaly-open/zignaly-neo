@@ -66,7 +66,7 @@ export function useTiersData(serviceId?: string) {
   const boostEndsDate = new Date(referral?.boostEndsAt);
   const boostRunning = isFuture(boostEndsDate);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const boost = boostRunning ? 2 : referral?.boost;
+  const boost = boostRunning ? 2 : referral?.boost ?? 1;
   const lastTier = tiers?.[tiers?.length - 1];
   const currentTier = tiers?.[referral?.tierId];
   const inviteLeft =
