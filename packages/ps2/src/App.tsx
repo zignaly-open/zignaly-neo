@@ -43,37 +43,39 @@ export const WrappedInProviders: React.FC<{
   store: Store;
   children: JSX.Element;
 }> = ({ store: storeProp, children }) => (
-  <Provider store={storeProp}>
-    <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
-      <ThemeInheritorMui theme={themeMui}>
-        <ThemeProviderMui theme={themeMui}>
-          <GlobalStyle />
-          <ToastContainer
-            position='top-right'
-            autoClose={5000}
-            hideProgressBar
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            closeButton={false}
-            pauseOnHover
-            theme='dark'
-          />
-          <PersistGate persistor={persistor}>
-            <BrowserRouter>
-              <Suspense fallback={zigSuspenseFallback}>
-                <ModalProvider
-                  fallback={<ZModal allowUnauth wide open isLoading />}
-                >
-                  {children}
-                </ModalProvider>
-              </Suspense>
-            </BrowserRouter>
-          </PersistGate>
-        </ThemeProviderMui>
-      </ThemeInheritorMui>
-    </ThemeInheritorStyled>
-  </Provider>
+  <ChunkLoadErrorBoundary>
+    <Provider store={storeProp}>
+      <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+        <ThemeInheritorMui theme={themeMui}>
+          <ThemeProviderMui theme={themeMui}>
+            <GlobalStyle />
+            <ToastContainer
+              position='top-right'
+              autoClose={5000}
+              hideProgressBar
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              closeButton={false}
+              pauseOnHover
+              theme='dark'
+            />
+            <PersistGate persistor={persistor}>
+              <BrowserRouter>
+                <Suspense fallback={zigSuspenseFallback}>
+                  <ModalProvider
+                    fallback={<ZModal allowUnauth wide open isLoading />}
+                  >
+                    {children}
+                  </ModalProvider>
+                </Suspense>
+              </BrowserRouter>
+            </PersistGate>
+          </ThemeProviderMui>
+        </ThemeInheritorMui>
+      </ThemeInheritorStyled>
+    </Provider>
+  </ChunkLoadErrorBoundary>
 );
 
 function App() {
