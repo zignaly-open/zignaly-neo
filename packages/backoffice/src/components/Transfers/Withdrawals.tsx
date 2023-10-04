@@ -61,6 +61,7 @@ export default function Withdrawals() {
         cell: ({ getValue }) => <DateDisplay date={getValue()} />,
       }),
       columnHelper.accessor('email', {
+        enableSorting: false,
         header: t('table.user'),
         cell: ({ getValue, row }) => (
           <Box>
@@ -89,18 +90,22 @@ export default function Withdrawals() {
         ),
       }),
       columnHelper.accessor('transactionId', {
+        enableSorting: false,
         header: t('table.transactionId'),
         cell: ({ getValue }) => <Shorten text={getValue()} width={200} />,
       }),
       columnHelper.accessor('exposureType', {
+        enableSorting: false,
         header: t('table.exposureType'),
         cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
       }),
       columnHelper.accessor('riskLevel', {
+        enableSorting: false,
         header: t('table.riskLevel'),
         cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
       }),
       columnHelper.accessor((v) => 'actions' + v.id, {
+        enableSorting: false,
         id: 'actions',
         header: t('table.actions'),
         cell: ({ row }) =>

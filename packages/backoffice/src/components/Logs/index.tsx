@@ -45,10 +45,12 @@ export default function Withdrawals() {
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
       columnHelper.accessor('userEmail', {
+        enableSorting: false,
         header: t('table.user'),
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
       columnHelper.accessor('agentEmail', {
+        enableSorting: false,
         header: t('table.agent'),
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),

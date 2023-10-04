@@ -69,6 +69,7 @@ export default function Users() {
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
       columnHelper.accessor('accessLevel', {
+        enableSorting: false,
         header: t('table.accessLevel'),
         cell: ({ getValue }) => (
           <ValueOrDash>
@@ -79,6 +80,7 @@ export default function Users() {
         ),
       }),
       columnHelper.accessor('kycLevels', {
+        enableSorting: false,
         header: t('table.kycLevels'),
         cell: ({ getValue, row }) => (
           <ValueOrDash>
@@ -101,14 +103,17 @@ export default function Users() {
         ),
       }),
       columnHelper.accessor('subscriptionCode', {
+        enableSorting: false,
         header: t('table.subscriptionCode'),
         cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
       }),
       columnHelper.accessor('subscriptionLevel', {
+        enableSorting: false,
         header: t('table.subscriptionLevel'),
         cell: ({ getValue }) => <ValueOrDash>{getValue()}</ValueOrDash>,
       }),
       columnHelper.accessor('2faEnabled', {
+        enableSorting: false,
         header: t('table.2faEnabled'),
         cell: ({ getValue }) => (
           <ZigTypography color={getValue() ? 'greenGraph' : 'redGraphOrError'}>
@@ -117,6 +122,7 @@ export default function Users() {
         ),
       }),
       columnHelper.accessor((v) => v.accessLevel === -100, {
+        enableSorting: false,
         id: 'isBanned',
         header: t('table.isBanned'),
 
