@@ -21,14 +21,13 @@ const CurrentCommission = ({
   const { t } = useTranslation('referrals-trader');
   const {
     referral,
-    serviceCommission,
     boostEndsDate,
     currentDate,
     boostRunning,
     maxCommission,
-    traderBoostMultiplier,
+    traderBoost,
     inviteLeft,
-  } = useTiersData(service?.id, service?.zglySuccessFee);
+  } = useTiersData(service?.id);
 
   return (
     <Box
@@ -96,9 +95,9 @@ const CurrentCommission = ({
             >
               {'%'}
             </ZigTypography>
-            {serviceCommission > 0 && (
+            {traderBoost > 0 && (
               <CommissionBoostChip>
-                <BoostChip boost={traderBoostMultiplier} showBolt />
+                <BoostChip boost={traderBoost + 1} showBolt />
               </CommissionBoostChip>
             )}
           </ZigTypography>

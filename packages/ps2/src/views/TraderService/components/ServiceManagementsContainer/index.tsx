@@ -31,8 +31,8 @@ import TransferFundsModal from '../TransferFundsModal';
 import ManagementHelper from '../ManagementHelper';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import {
+  Service,
   TraderServiceBalance,
-  TraderServiceFull,
   TraderServiceManagement,
 } from '../../../../apis/service/types';
 import { useZModal } from '../../../../components/ZModal/use';
@@ -65,7 +65,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
     <LayoutContentWrapper
       endpoint={endpoints}
       content={([service, management, balance]: [
-        TraderServiceFull,
+        Service,
         TraderServiceManagement,
         TraderServiceBalance,
       ]) => (
