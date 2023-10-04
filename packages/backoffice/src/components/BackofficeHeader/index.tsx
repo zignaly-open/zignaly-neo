@@ -59,13 +59,15 @@ const BackofficeHeader: React.FC = () => {
               </HeaderLinksContainer>
             </Box>
 
-            <Box display='flex' alignItems='center' gap='28px'>
-              <HeaderLinksContainer>
-                <a id='logout' onClick={() => logout()} key='--route-logout'>
-                  {t('navigation.logout')}
-                </a>
-              </HeaderLinksContainer>
-            </Box>
+            {isAuthenticated && (
+              <Box display='flex' alignItems='center' gap='28px'>
+                <HeaderLinksContainer>
+                  <a id='logout' onClick={() => logout()} key='--route-logout'>
+                    {t('navigation.logout')}
+                  </a>
+                </HeaderLinksContainer>
+              </Box>
+            )}
           </Container>
         </Toolbar>
       </StyledAppBar>
