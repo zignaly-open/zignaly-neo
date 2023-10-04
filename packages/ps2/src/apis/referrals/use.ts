@@ -80,7 +80,7 @@ export function useTiersData(serviceId?: string) {
   );
 
   const maxCommissionWithoutTraderBoost = getBoostedCommissionPct(
-    tiers?.[tiers?.length - 1]?.commissionPct,
+    lastTier?.commissionPct,
     boost,
   );
 
