@@ -19,7 +19,7 @@ export type UserFilterType = {
   id?: string;
   email?: string;
   access?: string;
-  subscriptionCode?: string;
+  code?: string;
 };
 
 export type UserActionPayloadType = {

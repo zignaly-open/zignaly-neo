@@ -35,7 +35,7 @@ export default function Users() {
     id: '',
     email: '',
     access: '',
-    subscriptionCode: '',
+    code: '',
   });
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<UserFilterType>(filters);
@@ -256,9 +256,9 @@ export default function Users() {
         <ZigInput
           label={t('table.subscriptionCode')}
           placeholder={t('table.subscriptionCode')}
-          value={filters.subscriptionCode}
+          value={filters.code}
           onChange={(e) =>
-            setFilters((old) => ({ ...old, subscriptionCode: e.target.value }))
+            setFilters((old) => ({ ...old, code: e.target.value }))
           }
         />
         <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
