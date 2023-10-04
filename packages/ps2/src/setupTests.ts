@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 // Fix for msw not intercepting fetch requests
-import fetch from 'node-fetch';
+import fetch from 'cross-fetch';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 window.fetch = fetch;
