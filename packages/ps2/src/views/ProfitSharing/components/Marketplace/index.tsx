@@ -38,49 +38,54 @@ const Marketplace: React.FC = () => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
-    () =>
-      md
+    () => [
+      columnHelper.accessor('name', {
+        id: 'service-name',
+        header: () => (
+          <div id={'marketplace-table__header-service'}>
+            {t(md ? 'table.service-name' : 'table.service-name-mobile')}
+          </div>
+        ),
+        style: {
+          justifyContent: 'flex-start',
+          paddingLeft: md && '88px',
+        },
+        meta: md && {
+          subtitle: (
+            <>
+              <Box
+                textAlign={'left'}
+                id={'marketplace-table__header-service-manager'}
+              >
+                {t('table.manager')}
+              </Box>
+              <Box
+                textAlign={'left'}
+                id={'marketplace-table__header-service-currency'}
+              >
+                {t('table.currency')}
+              </Box>
+            </>
+          ),
+        },
+        cell: (props) => (
+          <ServiceName
+            activeLink={md}
+            truncateServiceName={!md}
+            size={md ? 'x-large' : 'large'}
+            showCoin={md}
+            showOwner={md}
+            prefixId={`marketplace-table`}
+            service={
+              marketplaceServiceToInvestmentType(
+                props.row.original,
+              ) as Investment
+            }
+          />
+        ),
+      }),
+      ...(md
         ? [
-            columnHelper.accessor('name', {
-              id: 'service-name',
-              header: () => (
-                <div id={'marketplace-table__header-service'}>
-                  {t('table.service-name')}
-                </div>
-              ),
-              style: {
-                justifyContent: 'flex-start',
-                paddingLeft: '88px',
-              },
-              meta: {
-                subtitle: (
-                  <>
-                    <Box
-                      textAlign={'left'}
-                      id={'marketplace-table__header-service-manager'}
-                    >
-                      {t('table.manager')}
-                    </Box>
-                    <Box
-                      textAlign={'left'}
-                      id={'marketplace-table__header-service-currency'}
-                    >
-                      {t('table.currency')}
-                    </Box>
-                  </>
-                ),
-              },
-              cell: (props) => (
-                <ServiceName
-                  prefixId={`marketplace-table`}
-                  service={
-                    marketplaceServiceToInvestmentType(
-                      props.row.original,
-                    ) as Investment
-                  }
-                />
-              ),
-            }),
             columnHelper.accessor('investedUSDT', {
               id: 'investedUSDT',
               header: () => (
@@ -130,57 +135,75 @@ const Marketplace: React.FC = () => {
                 />
               ),
             }),
-            columnHelper.accessor((row) => Number(row.pnlPercent90t), {
-              id: 'pnlPercent90t',
-              header: t('table.n-months-pnl', { count: 3 }),
-              cell: (props) => (
-                <ChangeIndicator
-                  id={`marketplace-table__pnl90t-${props.row.original.id}`}
-                  style={{
-                    fontSize: '18px',
-                    lineHeight: '28px',
-                  }}
-                  value={props.getValue()}
+          ]
+        : []),
+      columnHelper.accessor((row) => Number(row.pnlPercent90t), {
+        id: 'pnlPercent90t',
+        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
+          count: 3,
+        }),
+        cell: (props) => (
+          <ChangeIndicator
+            decimalScale={!md && 0}
+            type={md ? 'graph' : 'default'}
+            id={`marketplace-table__pnl90t-${props.row.original.id}`}
+            style={{
+              fontSize: '18px',
+              lineHeight: '28px',
+            }}
+            value={props.getValue()}
+          />
+        ),
+      }),
+      columnHelper.accessor((row) => Number(row.pnlPercent30t), {
+        id: 'pnlPercent30t',
+        header: t(md ? 'table.n-months-pnl' : 'table.n-month-pnl-mobile', {
+          count: 1,
+        }),
+        cell: (props) => (
+          <Box
+            height={!md ? '97px' : 'unset'}
+            minWidth={!md ? '60px' : 'unset'}
+          >
+            {+props.getValue() ||
+            Object.keys(props.row.original.sparklines).length > 1 ? (
+              <Box sx={!md && { transform: 'scale(0.9)' }}>
+                <ZigChartMiniSuspensed
+                  id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
+                  midLine
+                  data={[0, ...(props.row.original.sparklines as number[])]}
                 />
-              ),
-            }),
-            columnHelper.accessor((row) => Number(row.pnlPercent30t), {
-              id: 'pnlPercent30t',
-              header: t('table.n-months-pnl', { count: 1 }),
-              cell: (props) => (
-                <>
-                  {+props.getValue() ||
-                  Object.keys(props.row.original.sparklines).length > 1 ? (
-                    <>
-                      <ZigChartMiniSuspensed
-                        id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
-                        midLine
-                        data={[
-                          0,
-                          ...(props.row.original.sparklines as number[]),
-                        ]}
-                      />
-                      <ChangeIndicator
-                        value={props.getValue()}
-                        type={'graph'}
-                        id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
-                      />
-                    </>
-                  ) : (
-                    <ZigTypography variant='body2' color='neutral400'>
-                      {t('tableHeader.1-mo.no-data')}
-                    </ZigTypography>
-                  )}
-                </>
-              ),
-            }),
-            columnHelper.display({
-              header: '',
-              id: 'action',
-              cell: (props) => (
-                <MarketplaceAction service={props.row.original} />
-              ),
-            }),
+                {md && (
+                  <ChangeIndicator
+                    value={props.getValue()}
+                    type={'graph'}
+                    id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
+                  />
+                )}
+              </Box>
+            ) : (
+              <ZigTypography variant='body2' color='neutral400'>
+                {t('tableHeader.1-mo.no-data')}
+              </ZigTypography>
+            )}
+          </Box>
+        ),
+      }),
+      columnHelper.display({
+        header: '',
+        id: 'action',
+        cell: (props) =>
+          md ? (
+            <MarketplaceAction service={props.row.original} />
+          ) : (
+            <MobileMarketplaceAction
+              service={props.row.original}
+              rowId={props.row.id}
+            />
+          ),
+      }),
+      ...(md
+        ? [
             columnHelper.display({
               id: 'link',
               cell: ({ row }) => (
@@ -210,74 +233,9 @@ const Marketplace: React.FC = () => {
               ),
             }),
           ]
-        : [
-            columnHelper.accessor('name', {
-              id: 'service-name',
-              header: () => (
-                <div id={'marketplace-table__header-service'}>
-                  {t('table.service-name-mobile')}
-                </div>
-              ),
-              style: {
-                justifyContent: 'flex-start',
-              },
-              cell: (props) => (
-                <ServiceName
-                  activeLink={false}
-                  truncateServiceName
-                  size={'large'}
-                  showCoin={false}
-                  showOwner={false}
-                  prefixId={`marketplace-table`}
-                  service={
-                    marketplaceServiceToInvestmentType(
-                      props.row.original,
-                    ) as Investment
-                  }
-                />
-              ),
-            }),
-            columnHelper.accessor((row) => Number(row.pnlPercent90t), {
-              id: 'pnlPercent90t',
-              header: t('table.n-months-pnl-mobile', { count: 3 }),
-              cell: (props) => (
-                <ChangeIndicator
-                  decimalScale={0}
-                  type={'default'}
-                  id={`marketplace-table__pnl90t-${props.row.original.id}`}
-                  style={{
-                    fontSize: '18px',
-                    lineHeight: '28px',
-                  }}
-                  value={props.getValue()}
-                />
-              ),
-            }),
-            columnHelper.accessor((row) => Number(row.pnlPercent30t), {
-              id: 'pnlPercent30t',
-              header: t('table.n-month-pnl-mobile', { count: 1 }),
-              cell: (props) => (
-                <Box height={'97px'} minWidth={'60px'}>
-                  {+props.getValue() ||
-                  Object.keys(props.row.original.sparklines).length > 1 ? (
-                    <Box sx={{ transform: 'scale(0.8)' }}>
-                      <ZigChartMiniSuspensed
-                        id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
-                        midLine
-                        data={[
-                          0,
-                          ...(props.row.original.sparklines as number[]),
-                        ]}
-                      />
-                    </Box>
-                  ) : (
-                    <ZigTypography variant='body2' color='neutral400'>
-                      {t('tableHeader.1-mo.no-data')}
-                    </ZigTypography>
-                  )}
-                </Box>
-              ),
-            }),
+        : []),
+      ...(!md
+        ? [
             columnHelper.accessor('invested', {
               id: 'invested',
               header: () => (
@@ -297,17 +255,9 @@ const Marketplace: React.FC = () => {
               ),
               sortingFn: 'alphanumeric',
             }),
-            columnHelper.display({
-              header: '',
-              id: 'action',
-              cell: (props) => (
-                <MobileMarketplaceAction
-                  service={props.row.original}
-                  rowId={props.row.id}
-                />
-              ),
-            }),
-          ],
+          ]
+        : []),
+    ],
     [t, md],
   );
 
