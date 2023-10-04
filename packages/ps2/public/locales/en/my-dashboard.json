@@ -3,11 +3,14 @@
     "tableHeader": {
       "summary": {
         "title": "My Current Value",
-        "subtitle": "Returns"
+        "subtitle": "Returns",
+        "title-mobile": "Invested",
+        "subtitle-mobile": "P&L"
       },
       "serviceName": {
         "title": "Service Name",
-        "subtitle": "Manager/Base currency"
+        "subtitle": "Manager/Base currency",
+        "title-mobile": "Service"
       },
       "1-mo": {
         "title": "1 mo.",
