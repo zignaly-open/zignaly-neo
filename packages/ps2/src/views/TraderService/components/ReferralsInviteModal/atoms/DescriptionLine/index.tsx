@@ -5,9 +5,11 @@ import React from 'react';
 export const DescriptionLine = ({
   text,
   tooltip,
+  id,
 }: {
   text: string;
   tooltip?: string;
+  id?: string;
 }) => {
   return (
     <Box display='flex' alignItems={'center'} gap='15px'>
@@ -18,6 +20,7 @@ export const DescriptionLine = ({
           fontSize={16}
           textAlign={'left'}
           lineHeight={'28px'}
+          id={id}
         >
           {text}
         </ZigTypography>

@@ -10,7 +10,7 @@ const BoostChip = ({
   boost: number;
   showBolt?: boolean;
 }) => (
-  <BoostBox>
+  <BoostBox className='boost-chip-multiplier'>
     <ZigTypography fontSize={13}>
       {+boost.toFixed(2)}
       {'x'}

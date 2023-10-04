@@ -20,7 +20,7 @@ export const ProfileStatusBox: React.FC<{
   return (
     <ProfileStatusBoxContainer color={color}>
       <ZigTypography color={'neutral200'}>{label}</ZigTypography>
-      <ZigTypography component={'p'} fontWeight={600} color={color}>
+      <ZigTypography component={'p'} fontWeight={600} color={color} mb='5px'>
         {status}
       </ZigTypography>
       {!isSuccess && (
@@ -83,7 +83,7 @@ export const KYCStatusBox = ({
 
   return (
     <ProfileStatusBoxContainer color={color}>
-      <ZigTypography mb='4px' color={'neutral200'} component={'div'}>
+      <ZigTypography color={'neutral200'} component={'div'}>
         {t(`header.verification-${kycStatuses[0].category.toLowerCase()}`)}
       </ZigTypography>
       {kycConfig[kycStatuses[0].category].map((x, i) => {
@@ -111,12 +111,12 @@ export const KYCStatusBox = ({
               </Box>
             )}
             <ZigTypography
-              mt={'1px'}
               component={'p'}
               fontWeight={600}
               color={getStatusColor(status)}
               display={'flex'}
               alignItems={'center'}
+              mb='5px'
             >
               {t(getStatus(status))}
               {status === 'pending' && (

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ZigArrowOutIcon } from '@zignaly-open/ui';
 import { UserAccessLevel as Level } from '../../apis/user/types';
@@ -26,15 +26,29 @@ type LevelMapping =
 
 const usePerformLevelCheck = (
   levelThreshold: Level,
+  onClose?: () => void,
 ): ((onlyCheck?: boolean) => boolean) => {
   const isAuthenticated = useIsAuthenticated();
   const accessLevel = useUserAccessLevel();
   const { t } = useTranslation(['error']);
-  const { showModal } = useZModal();
+  const { showModal, destroyModal } = useZModal();
   const logout = useLogout();
   const navigate = useNavigate();
   const kycEnabled = isFeatureOn(Features.Kyc);
   const subscriptionsEnabled = isFeatureOn(Features.Subscriptions);
+  const modalId = useRef('');
+
+  const closeAndNavigate = useCallback(
+    (path: string) => {
+      // Close modal manually
+      destroyModal(modalId.current);
+      // If we have a modal open, close it (in case disableAutoDestroy is on)
+      onClose?.();
+      // Navigate to the path
+      navigate(path);
+    },
+    [navigate, destroyModal, onClose],
+  );
 
   const errorLevelMapping = useMemo<Partial<Record<Level, LevelMapping>>>(
     () => ({
@@ -62,7 +76,7 @@ const usePerformLevelCheck = (
           title: t('access.kyc-pending.title'),
           okLabel: t('access.kyc-pending.action'),
           description: t('access.kyc-pending.description'),
-          okAction: () => navigate(generatePath(ROUTE_KYC)),
+          okAction: () => closeAndNavigate(generatePath(ROUTE_KYC)),
         },
       },
       [Level.NoSubscription]: subscriptionsEnabled && {
@@ -77,11 +91,11 @@ const usePerformLevelCheck = (
           button1Props: {
             id: 'modal-access.no-subscription__redeem',
             onClick: () => {
-              navigate(generatePath(ROUTE_SUBSCRIPTIONS));
+              closeAndNavigate(generatePath(ROUTE_SUBSCRIPTIONS));
             },
           },
           button2Props: {
-            // if we have the scubscription feature on but we don't have this configured...
+            // if we have the subscription feature on but we don't have this configured...
             // too bad
             href: whitelabel.subscriptionPurchaseLink,
             id: 'modal-access.no-subscription__purchase',
@@ -110,7 +124,7 @@ const usePerformLevelCheck = (
           title: t('access.kyc-expired.title'),
           description: t('access.kyc-expired.description'),
           okLabel: t('access.kyc-expired.action'),
-          okAction: () => navigate(generatePath(ROUTE_KYC)),
+          okAction: () => closeAndNavigate(generatePath(ROUTE_KYC)),
         },
       },
       [Level.SubscriptionExpired]: subscriptionsEnabled && {
@@ -125,11 +139,11 @@ const usePerformLevelCheck = (
           button1Props: {
             id: 'modal-access.expired-subscription__redeem',
             onClick: () => {
-              navigate(generatePath(ROUTE_SUBSCRIPTIONS));
+              closeAndNavigate(generatePath(ROUTE_SUBSCRIPTIONS));
             },
           },
           button2Props: {
-            // if we have the scubscription feature on but we don't have this configured...
+            // if we have the subscription feature on but we don't have this configured...
             // too bad
             href: whitelabel.subscriptionPurchaseLink,
             id: 'modal-access.expired-subscription__purchase',
@@ -156,8 +170,13 @@ const usePerformLevelCheck = (
       } else if (levelThreshold <= +l) {
         // Do nothing, means we do not need so high of a level
       } else if (accessLevel <= +l && errorLevelMapping[l]) {
-        !onlyCheck &&
-          showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
+        if (!onlyCheck) {
+          const modal = showModal(
+            errorLevelMapping[l].modal,
+            errorLevelMapping[l].props,
+          );
+          modalId.current = modal.id;
+        }
         return false;
       }
     }
@@ -165,16 +184,12 @@ const usePerformLevelCheck = (
   };
 };
 
-export const useCanLogIn = () => usePerformLevelCheck(Level.KycPending);
+const createUseAccessCheck = (level: Level) => (onClose?: () => void) =>
+  usePerformLevelCheck(level, onClose);
 
-export const useCanInsertCoupon = () =>
-  usePerformLevelCheck(Level.NoSubscription);
-
-export const useCanDeposit = () => usePerformLevelCheck(Level.Normal);
-
-export const useCanInvestIn = () => usePerformLevelCheck(Level.Normal);
-
-export const useCanInvestOut = () => usePerformLevelCheck(Level.KycExpired);
-
-export const useCanWithdraw = () =>
-  usePerformLevelCheck(Level.SubscriptionExpired);
+export const useCanLogIn = createUseAccessCheck(Level.KycPending);
+export const useCanInsertCoupon = createUseAccessCheck(Level.NoSubscription);
+export const useCanDeposit = createUseAccessCheck(Level.Normal);
+export const useCanInvestIn = createUseAccessCheck(Level.Normal);
+export const useCanInvestOut = createUseAccessCheck(Level.KycExpired);
+export const useCanWithdraw = createUseAccessCheck(Level.SubscriptionExpired);

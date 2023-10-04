@@ -57,6 +57,7 @@ declare module '@mui/material/styles' {
     red: string;
     avatarBack: string;
     contrasting: string;
+    paleBlue: string;
 
     // I am sorry
     // Here we define some of the "new" colors - only thoise needed in ps2

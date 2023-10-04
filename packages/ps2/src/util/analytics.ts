@@ -71,6 +71,25 @@ export const trackPage = () => {
   analytics?.page();
 };
 
+export const trackAllocation = (
+  userId: string,
+  amount: string,
+  coin: string,
+  serviceId: string,
+) => {
+  analytics?.track(
+    'invest',
+    { amount, coin, serviceId },
+    {
+      plugins: {
+        all: false,
+        'google-analytics': true,
+      },
+    },
+  );
+  twq(userId).trackAllocation();
+};
+
 export const twq = (userId: string) => {
   const twqWrapper = (eventKey: string, eventData: object = {}) => {
     if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
@@ -85,9 +104,9 @@ export const twq = (userId: string) => {
     twqWrapper('tw-og0cu-og0hv');
   };
 
-  const trackAllocation = () => {
+  const trackAllocationFn = () => {
     twqWrapper('tw-og0cu-og0hz');
   };
 
-  return { trackVerify, trackAllocation };
+  return { trackVerify, trackAllocation: trackAllocationFn };
 };

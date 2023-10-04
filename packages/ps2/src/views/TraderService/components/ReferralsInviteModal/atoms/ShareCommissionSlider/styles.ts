@@ -1,13 +1,14 @@
-import { Box, styled } from '@mui/material';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
 import { ZigSlider } from '@zignaly-open/ui';
 
 export const SliderContainer = styled(Box)`
   position: relative;
   width: 100%;
-  height: 121px;
+  height: 111px;
   border: 1.6px solid #202735;
   border-radius: 15px;
-  padding: 22px 16px 16px 16px;
+  padding: 22px 16px 6px 16px;
   width: 428px;
   display: flex;
   flex-direction: column;
@@ -42,21 +43,31 @@ export const ContainerArrow = styled('div')`
 export const StyledZigSlider = styled(ZigSlider)`
   margin-top: 13px;
   padding: 0 24px;
-  width: 350px;
+  width: 370px;
 
   div:has(> .MuiTypography-root) {
     min-width: 64px;
+  }
+
+  .MuiSlider-root {
+    height: 5px;
+  }
+
+  .MuiSlider-thumb {
+    width: 21px;
+    height: 21px;
   }
 
   .MuiTypography-root {
     &:nth-of-type(2) {
       font-size: 24px;
       font-weight: 600;
-      color: #999fe1;
+      color: ${({ theme }) => theme.palette.paleBlue};
       position: relative;
       width: 100%;
       text-align: center;
       min-width: 53px;
+      padding-bottom: 2px;
 
       &::after {
         content: '%';
@@ -66,12 +77,12 @@ export const StyledZigSlider = styled(ZigSlider)`
       }
     }
     &:nth-of-type(1) {
-      color: #c6c6d1;
+      color: ${({ theme }) => theme.palette.neutral100};
       font-size: 13px;
       font-weight: 400;
       margin-right: -3px;
       margin-bottom: 10px;
-      margin-left: 2px;
+      margin-left: 7px;
     }
   }
 `;
