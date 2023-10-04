@@ -27,10 +27,10 @@ const ReferralsInviteModal = ({
     boost,
     maxCommission,
     maxCommissionWithoutTraderBoost,
-    traderBoostMultiplier,
+    traderBoost,
     inviteLeft,
     isLoading,
-  } = useTiersData(service.id, service.zglySuccessFee);
+  } = useTiersData(service.id);
 
   return (
     <ZModal
@@ -69,10 +69,7 @@ const ReferralsInviteModal = ({
               justifyContent={'center'}
               mb={{ sm: 3, md: 0 }}
             >
-              <TraderCard
-                service={service}
-                traderBoost={traderBoostMultiplier}
-              />
+              <TraderCard service={service} traderBoost={traderBoost} />
             </Grid>
             <Grid
               item
@@ -150,7 +147,7 @@ const ReferralsInviteModal = ({
                         id='referrals-invite-modal__invite-and-earn-1-week'
                       />
                     )}
-                    {serviceCommission > 0 && (
+                    {traderBoost > 0 && (
                       <DescriptionLine
                         text={t('invite-and-earn-trader-boost', {
                           invite: inviteLeft,
@@ -158,7 +155,7 @@ const ReferralsInviteModal = ({
                             maxCommissionWithoutTraderBoost,
                           ),
                           commission: maxCommission,
-                          multiplier: traderBoostMultiplier,
+                          multiplier: traderBoost + 1,
                         })}
                         tooltip={t('tooltips.invite-and-earn', {
                           invite: inviteLeft,
@@ -176,8 +173,7 @@ const ReferralsInviteModal = ({
             <Tiers
               tiers={tiers}
               referral={referral}
-              serviceCommission={serviceCommission}
-              zignalyCommission={service?.zglySuccessFee}
+              traderBoost={traderBoost}
               boost={boost}
               boostRunning={boostRunning}
             />

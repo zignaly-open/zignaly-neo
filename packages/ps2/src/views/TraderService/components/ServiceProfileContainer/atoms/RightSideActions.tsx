@@ -30,7 +30,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
-  const tiers = useTiersData(service.id, service.zglySuccessFee);
+  const tiers = useTiersData(service.id);
   const state = useMemo<RightSideActionStates>(() => {
     if (isInvested.isLoading || tiers.isLoading)
       return RightSideActionStates.Loading;

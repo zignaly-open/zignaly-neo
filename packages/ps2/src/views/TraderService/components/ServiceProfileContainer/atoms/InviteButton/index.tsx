@@ -23,14 +23,13 @@ const InviteButton = ({ service }: { service: Service }) => {
   const sm = useMediaQuery(theme.breakpoints.down('md'));
 
   const {
-    serviceCommission,
     boostRunning,
     currentDate,
     boostEndsDate,
     inviteLeft,
     maxCommission,
-    traderBoostMultiplier,
-  } = useTiersData(service.id, service.zglySuccessFee);
+    traderBoost,
+  } = useTiersData(service.id);
 
   const handleClick = () => {
     if (isAuthenticated) {
@@ -49,7 +48,7 @@ const InviteButton = ({ service }: { service: Service }) => {
       alignItems={'center'}
       mb={sm && boostRunning ? '10px' : 0}
     >
-      {(serviceCommission || boostRunning) && (
+      {(traderBoost > 0 || boostRunning) && (
         <InviteBox id='service-profile__invite-widget'>
           <InviteBoxArrow />
           <Box
@@ -85,13 +84,13 @@ const InviteButton = ({ service }: { service: Service }) => {
                 color='#fffc19'
                 id='service-profile__comission-multiplier'
               >
-                {traderBoostMultiplier > 1 ? `${traderBoostMultiplier}x` : '%'}
+                {traderBoost ? `${traderBoost + 1}x` : '%'}
               </ZigTypography>
             </Box>
           </Box>
           <Box>
             <ComissionTypography id='service-profile__comission-text'>
-              {serviceCommission > 0 && (
+              {traderBoost > 0 && (
                 <BoltIcon
                   width={'10px'}
                   height={'16px'}
