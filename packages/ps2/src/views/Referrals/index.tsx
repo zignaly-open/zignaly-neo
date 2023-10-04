@@ -60,7 +60,7 @@ const Referrals: React.FC = () => {
     referral,
     maxCommission,
     maxCommissionWithoutTraderBoost,
-    traderBoostMultiplier,
+    traderBoost,
     isLoading,
     boostRunning,
     inviteLeft,
@@ -110,7 +110,7 @@ const Referrals: React.FC = () => {
                   values={{
                     commission: maxCommissionWithoutTraderBoost,
                     maxCommission: maxCommission,
-                    multiplier: traderBoostMultiplier,
+                    multiplier: traderBoost + 1,
                   }}
                   t={t}
                 >
@@ -191,11 +191,10 @@ const Referrals: React.FC = () => {
                         display={'flex'}
                         alignItems={'center'}
                         gap={1}
-                        lineHeight={'21px'}
                       >
                         <ZigUserFilledIcon
                           style={{
-                            fontSize: '26px',
+                            fontSize: '19px',
                           }}
                         />
                         {rewardsData.invitedCount}
@@ -210,16 +209,17 @@ const Referrals: React.FC = () => {
                         display={'flex'}
                         alignItems={'center'}
                         gap={1}
-                        lineHeight={'21px'}
                       >
                         <ZigUserFilledIcon
                           color={'paleBlue'}
                           style={{
-                            fontSize: '26px',
+                            fontSize: '19px',
                           }}
                         />
-                        {rewardsData.investorsCount}{' '}
-                        <Verified sx={{ color: 'greenGraph' }} />
+                        {rewardsData.investorsCount}
+                        <Verified
+                          sx={{ color: 'greenGraph', fontSize: '21px' }}
+                        />
                       </ZigTypography>
                     }
                   />

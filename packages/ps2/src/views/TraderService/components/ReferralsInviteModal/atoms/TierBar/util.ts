@@ -10,31 +10,19 @@ export const calculateLayerValue = (
   layer: number,
   tierCommission: number,
   boost: number,
-  serviceCommission: number,
-  zignalyCommission: number,
+  traderBoost: number,
 ) => {
   if (layer === 1) {
     // User boost + Trader boost
-    return getBoostedCommissionPct(
-      tierCommission,
-      boost,
-      serviceCommission,
-      zignalyCommission,
-    );
+    return getBoostedCommissionPct(tierCommission, boost, traderBoost);
   } else if (layer === 2) {
-    if ((boost === 1 && serviceCommission === 0) || !zignalyCommission)
-      return 0;
+    if (boost === 1 && !traderBoost) return 0;
 
-    // User boost without trader boost OR trader boost
-    return getBoostedCommissionPct(
-      tierCommission,
-      serviceCommission > 0 ? boost : 1,
-    );
+    // User boost or trader boost (but not both)
+    return getBoostedCommissionPct(tierCommission, traderBoost ? boost : 1);
   } else if (layer === 3) {
     // Only used to show the base commission when there is a boost and service commission
-    return boost > 1 && serviceCommission > 0 && zignalyCommission > 0
-      ? tierCommission
-      : 0;
+    return boost > 1 && traderBoost ? tierCommission : 0;
   }
 
   return 0;
@@ -79,8 +67,7 @@ export const useTierLayers = (
   tiers: TierLevels,
   tierId: number,
   boost: number,
-  serviceCommission: number,
-  zignalyCommission = 5,
+  traderBoost: number,
   options: { minHeight?: number; maxHeight?: number } = {},
 ) => {
   const { minHeight = DEFAULT_MIN_HEIGHT, maxHeight = DEFAULT_MAX_HEIGHT } =
@@ -90,25 +77,16 @@ export const useTierLayers = (
   )?.commissionPct;
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
+  const welcomeBoost = boost > 1;
 
   const layers =
-    serviceCommission > 0 && boost > 1
-      ? 3
-      : serviceCommission > 0 || boost > 1
-      ? 2
-      : 1;
-  const minAdditionalHeight = serviceCommission > 0 ? BOLT_SPACE : 0;
+    traderBoost && welcomeBoost ? 3 : traderBoost || welcomeBoost ? 2 : 1;
+  const minAdditionalHeight = traderBoost ? BOLT_SPACE : 0;
   const minHeightConstraints = layers * minHeight + minAdditionalHeight;
 
   // Layer 1 (Full bar)
   const layer1 = useMemo(() => {
-    const value = calculateLayerValue(
-      1,
-      tierCommission,
-      boost,
-      serviceCommission,
-      zignalyCommission,
-    );
+    const value = calculateLayerValue(1, tierCommission, boost, traderBoost);
 
     return {
       value,
@@ -120,16 +98,10 @@ export const useTierLayers = (
         maxHeight,
       ),
     };
-  }, [min, max, serviceCommission, tierCommission, boost]);
+  }, [min, max, traderBoost, tierCommission, boost]);
 
   const layer2 = useMemo(() => {
-    const value = calculateLayerValue(
-      2,
-      tierCommission,
-      boost,
-      serviceCommission,
-      zignalyCommission,
-    );
+    const value = calculateLayerValue(2, tierCommission, boost, traderBoost);
 
     const layer2minHeight = minHeight * (layers - 1);
 
@@ -147,16 +119,10 @@ export const useTierLayers = (
       value: value !== layer1.value ? value : 0,
       height: value ? height : 0,
     };
-  }, [serviceCommission, tierCommission, boost, layer1]);
+  }, [traderBoost, tierCommission, boost, layer1]);
 
   const layer3 = useMemo(() => {
-    const value = calculateLayerValue(
-      3,
-      tierCommission,
-      boost,
-      serviceCommission,
-      zignalyCommission,
-    );
+    const value = calculateLayerValue(3, tierCommission, boost, traderBoost);
 
     const height = calculateSubLayerHeight(
       value,
@@ -169,7 +135,7 @@ export const useTierLayers = (
       value,
       height: value ? height : 0,
     };
-  }, [serviceCommission, tierCommission, boost, layer1, layer2]);
+  }, [traderBoost, tierCommission, boost, layer1, layer2]);
 
   return [layer1, layer2, layer3];
 };

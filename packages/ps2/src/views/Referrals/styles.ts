@@ -166,6 +166,7 @@ export const TotalBoxBox = styled(Paper)`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  border-radius: 11px;
 `;
 
 export const TotalBoxValue = styled(ZigTypography)`
@@ -177,7 +178,13 @@ export const TotalBoxValue = styled(ZigTypography)`
 
   &,
   span {
-    font-size: 36px;
+    font-size: 29px;
+    line-height: 29px;
+    font-weight: 600;
+
+    > svg {
+      margin-bottom: 3px;
+    }
   }
 `;
 

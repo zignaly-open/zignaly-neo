@@ -107,7 +107,7 @@ const InvestInYourServiceForm: React.FC<{
       <InvestorDetailsForService
         service={{
           serviceLogo: '',
-          successFee: service.successFee?.toString(),
+          successFee: service.successFee,
           serviceName: service.serviceName,
         }}
       />
