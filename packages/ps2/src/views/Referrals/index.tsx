@@ -24,7 +24,7 @@ import {
   StyledReferralLinkInvite,
   StyledShareCommissionSlider,
 } from './styles';
-import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
+import ShareCommissionSlider from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
 import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
 import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
 import ReferralLimitedTime from './components/ReferralLimitedTime';

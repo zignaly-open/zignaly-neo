@@ -61,6 +61,10 @@ const referrals = [
     async (req, res, ctx) =>
       res(ctx.status(200), ctx.json(tierLevelsResponseMockSuccess)),
   ),
+  rest.put(
+    process.env.REACT_APP_REFERRALS_API + '/v1/referrer',
+    async (req, res, ctx) => res(ctx.status(200)),
+  ),
 ];
 
 export const handlers = [...ps2, ...referrals];

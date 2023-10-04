@@ -9,6 +9,7 @@ import ps2Api from './apis/baseApiPs2';
 import { api as walletApi } from './apis/wallet/api';
 import { api as referralApi } from './apis/referrals/api';
 import { cleanup } from '@testing-library/react';
+import React from 'react';
 
 // Establish API mocking before all tests.
 beforeAll(() => {
@@ -32,3 +33,17 @@ afterAll(() => server.close());
 jest.mock('react-image-webp/dist/utils', () => ({
   isWebpSupported: () => () => true,
 }));
+
+jest.mock('@mui/material/Slider', () => (props: any) => {
+  return (
+    <input
+      data-testid={props.testid ?? 'mocked-slider'}
+      type='text'
+      onChange={(event) => {
+        props.onChange(event, event.target.value);
+      }}
+      min={0}
+      {...props}
+    />
+  );
+});
