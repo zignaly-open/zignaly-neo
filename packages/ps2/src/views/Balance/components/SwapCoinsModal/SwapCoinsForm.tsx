@@ -18,7 +18,6 @@ import {
 } from '../../../../apis/coin/use';
 import { Box } from '@mui/material';
 import SwapCoinsConfirmForm from './SwapCoinsConfirmForm';
-import { useConvertMutation } from '../../../../apis/coin/api';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
@@ -39,15 +38,7 @@ function SwapCoinsForm({
     fromCoin: string;
     toCoin: string;
   }>();
-  const [convert, convertStatus] = useConvertMutation();
-  const handleConvert = async () => {
-    await convert({
-      exchangeInternalId: exchange?.internalId,
-      from: confirmationData.fromCoin,
-      qty: confirmationData.fromCoinAmount,
-      to: confirmationData.toCoin,
-    });
-  };
+
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
@@ -165,9 +156,8 @@ function SwapCoinsForm({
             ? 1 / convertPreview.lastPrice
             : convertPreview.lastPrice
         }
-        action={handleConvert}
         close={close}
-        status={convertStatus}
+        internalId={exchange?.internalId}
         {...confirmationData}
       />
     );
