@@ -1,8 +1,8 @@
-import { Service, TraderServiceFull } from '../service/types';
+import { Service } from '../service/types';
 import { InvestmentServiceDetails } from './types';
 
 export function serviceToInvestmentServiceDetail(
-  service: Service | TraderServiceFull,
+  service: Service,
 ): InvestmentServiceDetails {
   return {
     ownerVerified: service.ownerVerified,

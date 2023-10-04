@@ -23,32 +23,6 @@ export enum TraderServiceAccessLevel {
   Marketplace = 500,
 }
 
-export type TraderServiceFull = {
-  createdAt: string;
-  description: string;
-  exchangeInternalId: string;
-  fundsAllocated: string;
-  id: string;
-  invested: string;
-  investors: number;
-  level: number;
-  logo: string;
-  name: string;
-  ownerCountry: string;
-  ownerCreatedAt: string;
-  ownerDescription: string;
-  ownerName: string;
-  ownerVerified: boolean;
-  pending: number;
-  solo: boolean;
-  ssc: string;
-  successFee: string;
-  type: string;
-  investedUSDT: string;
-  userId: string;
-  maximumSbt: number;
-};
-
 export type ServiceTypesInfo = Record<
   ExchangeType,
   Record<string, { minimum_owner_balance: number }>

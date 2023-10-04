@@ -9,7 +9,7 @@ const InvestorDetailsForService: React.FC<{
   service: {
     serviceName: string;
     serviceLogo?: string;
-    successFee: string;
+    successFee: number;
   };
   discount?: string;
   prefixId?: string;

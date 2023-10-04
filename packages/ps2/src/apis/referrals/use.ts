@@ -6,10 +6,15 @@ import {
   useServiceCommissionQuery,
   useTierLevelsQuery,
 } from './api';
-import { getBoostedCommissionPct } from 'views/TraderService/components/ReferralsInviteModal/util';
+import {
+  getBoostedCommissionPct,
+  getServiceCommission,
+  getTraderBoost,
+} from 'views/TraderService/components/ReferralsInviteModal/util';
 import { useIsAuthenticated } from 'apis/user/use';
+import { useServiceDetails } from 'apis/service/use';
 
-export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
+export function useTiersData(serviceId?: string) {
   const isAuthenticated = useIsAuthenticated();
   const {
     data: tiers,
@@ -20,6 +25,7 @@ export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
     data: serviceCommissionData,
     isError: isErrorCommissions,
     refetch: refetchServiceCommissions,
+    isLoading: serviceCommissionLoading,
   } = useServiceCommissionQuery(
     {
       serviceId: serviceId,
@@ -28,7 +34,24 @@ export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
       skip: !serviceId,
     },
   );
-  const serviceCommission = serviceId ? serviceCommissionData?.commission : 10;
+  const { data: serviceData, isLoading: serviceLoading } = useServiceDetails(
+    serviceId,
+    {
+      skip: !serviceId,
+    },
+  );
+
+  const serviceCommissionRaw = serviceId
+    ? serviceCommissionData?.commission
+    : 10;
+  const traderBoost = getTraderBoost(
+    serviceCommissionRaw,
+    serviceData?.zglySuccessFee,
+  );
+  const serviceCommission = getServiceCommission(
+    serviceCommissionRaw,
+    serviceData?.zglySuccessFee,
+  );
   const {
     data: referral,
     isLoading: referralLoading,
@@ -53,30 +76,17 @@ export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
       : lastTier?.invitees - referral?.investorsCount;
 
   const maxCommission = Math.floor(
-    getBoostedCommissionPct(
-      lastTier?.commissionPct,
-      boost,
-      serviceCommission,
-      zglySuccessFee,
-    ),
+    getBoostedCommissionPct(lastTier?.commissionPct, boost, traderBoost),
   );
 
   const maxCommissionWithoutTraderBoost = getBoostedCommissionPct(
-    tiers?.[tiers?.length - 1]?.commissionPct,
+    lastTier?.commissionPct,
     boost,
-    0,
   );
 
   const commission = Math.floor(
-    getBoostedCommissionPct(
-      currentTier?.commissionPct,
-      boost,
-      serviceCommission,
-      zglySuccessFee,
-    ),
+    getBoostedCommissionPct(currentTier?.commissionPct, boost, traderBoost),
   );
-
-  const traderBoostMultiplier = maxCommission / maxCommissionWithoutTraderBoost;
 
   useInterval(
     () => {
@@ -94,9 +104,8 @@ export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
     isError,
     isLoading:
       !isError &&
-      (!tiers || serviceCommission === undefined || referralLoading),
+      (!tiers || serviceCommissionLoading || referralLoading || serviceLoading),
     tiers,
-    serviceCommission,
     referral,
     boost,
     inviteLeft,
@@ -108,6 +117,8 @@ export function useTiersData(serviceId?: string, zglySuccessFee = 5) {
     maxCommission,
     maxCommissionWithoutTraderBoost,
     commission,
-    traderBoostMultiplier,
+    serviceCommission,
+    serviceCommissionRaw,
+    traderBoost,
   };
 }

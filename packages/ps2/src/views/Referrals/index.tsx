@@ -60,7 +60,7 @@ const Referrals: React.FC = () => {
     referral,
     maxCommission,
     maxCommissionWithoutTraderBoost,
-    traderBoostMultiplier,
+    traderBoost,
     isLoading,
     boostRunning,
     inviteLeft,
@@ -110,7 +110,7 @@ const Referrals: React.FC = () => {
                   values={{
                     commission: maxCommissionWithoutTraderBoost,
                     maxCommission: maxCommission,
-                    multiplier: traderBoostMultiplier,
+                    multiplier: traderBoost + 1,
                   }}
                   t={t}
                 >
