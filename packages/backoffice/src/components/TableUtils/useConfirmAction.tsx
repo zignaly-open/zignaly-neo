@@ -30,7 +30,11 @@ function ConfirmActionModal({
   const [{ loading }, performAction] = useAsyncFn(action);
   return (
     <ZModal {...props} close={close} title={title}>
-      {!!description && <ZigTypography>{description}</ZigTypography>}
+      {!!description && (
+        <ZigTypography sx={{ textAlign: 'center' }} component={'p'}>
+          {description}
+        </ZigTypography>
+      )}
 
       <Box sx={{ mt: 2, textAlign: 'center' }}>
         <ZigButton

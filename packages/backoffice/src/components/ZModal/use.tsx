@@ -1,7 +1,6 @@
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import { ComponentType, useCallback } from 'react';
 import AlertModal, { AlertModalProps } from './modals/AlertModal';
-import ConfirmModal, { ConfirmModalProps } from './modals/ConfirmModal';
 import { UseZModalOptions } from './types';
 
 export function useZModal(options?: UseZModalOptions) {
@@ -34,11 +33,4 @@ export function useZModal(options?: UseZModalOptions) {
 export function useZAlert(): (props: AlertModalProps) => ShowFnOutput<void> {
   const { showModal } = useZModal();
   return (props) => showModal(AlertModal, props);
-}
-
-export function useZConfirm(): (
-  props: ConfirmModalProps,
-) => ShowFnOutput<void> {
-  const { showModal } = useZModal();
-  return (props) => showModal(ConfirmModal, props);
 }
