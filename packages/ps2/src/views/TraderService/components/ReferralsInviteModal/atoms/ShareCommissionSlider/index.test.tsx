@@ -2,7 +2,6 @@ import React from 'react';
 import {
   waitFor,
   getByText,
-  getByTestId,
   fireEvent,
   act,
   screen,
@@ -41,15 +40,15 @@ test('updates value', async () => {
     <ShareCommissionSlider discountPct={10} max={300} />,
   );
 
+  const slider = container.querySelector('input[type="range"]');
+
   act(() => {
-    fireEvent.change(getByTestId(container, `mocked-slider`), {
-      target: { value: 50 },
-    });
     jest.runAllTimers();
+    fireEvent.change(slider, { target: { value: 50 } });
   });
 
   await waitFor(() => {
-    expect(getByTestId(container, `mocked-slider`)).toHaveDisplayValue('50');
+    expect(slider).toHaveDisplayValue('50');
     expect(screen.getByText('changes-saved')).toBeInTheDocument();
   });
 });
