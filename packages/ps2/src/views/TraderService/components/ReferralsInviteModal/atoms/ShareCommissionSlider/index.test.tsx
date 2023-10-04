@@ -11,7 +11,14 @@ import '@testing-library/jest-dom';
 import ShareCommissionSlider from '.';
 import { renderWithProviders } from 'util/test';
 
-jest.useFakeTimers();
+beforeEach(() => {
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.runOnlyPendingTimers();
+  jest.useRealTimers();
+});
 
 test('displays correct values', async () => {
   const { container } = renderWithProviders(
