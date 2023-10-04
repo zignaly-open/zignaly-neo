@@ -27,7 +27,7 @@ export const getBoostedCommissionPct = (
   traderBoost = 0,
 ) => {
   const boostedCommission = baseCommission * boost;
-    return boostedCommission + boostedCommission * traderBoost || 0;
+  return boostedCommission + boostedCommission * traderBoost || 0;
 };
 
 export const getMaxEarnings = (
