@@ -74,10 +74,12 @@ function SwapForm({
       trigger('fromCoinAmount');
     }
   }, [convertPreview, isFetchingConvertPreview, trigger, minAmount]);
+  
   const canSubmit = useMemo(
     () => isValid && coinSwapTo && selectedFromToken.coin && amount,
     [isValid, coinSwapTo, selectedFromToken.coin, amount],
   );
+  
   const handleTokenChange = useCallback(
     (token: CoinsSelect) => {
       setSelectedFromToken(token);
