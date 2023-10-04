@@ -5,6 +5,8 @@
 import '@testing-library/jest-dom';
 // Fix for msw not intercepting fetch requests
 import fetch from 'node-fetch';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 window.fetch = fetch;
 import { store } from 'apis/store';
 import { server } from './test/server';
