@@ -4,7 +4,8 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 // Fix for msw not intercepting fetch requests
-import 'whatwg-fetch';
+import { fetch } from 'cross-fetch';
+global.fetch = fetch;
 import { store } from 'apis/store';
 import { server } from './test/server';
 import ps2Api from './apis/baseApiPs2';

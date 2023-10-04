@@ -101,6 +101,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.182",
     "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
+    "cross-fetch": "^4.0.0",
     "customize-cra": "^1.0.0",
     "eslint": "^8.16.0",
     "eslint-loader": "^4.0.2",
@@ -110,7 +111,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "react-app-rewired": "^2.2.1",
-    "webpack": "^5.73.0",
-    "whatwg-fetch": "^3.6.19"
+    "webpack": "^5.73.0"
   }
 }
