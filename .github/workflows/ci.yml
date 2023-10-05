@@ -48,6 +48,6 @@ jobs:
           directory: packages/ps2
           file_name: .env
       - name: Test
-        run: CI=true lerna run test
+        run: NODE_OPTIONS='--no-experimental-fetch' lerna run test
       - name: Headpat yourself ^_^
         run: echo "Great job <3"
