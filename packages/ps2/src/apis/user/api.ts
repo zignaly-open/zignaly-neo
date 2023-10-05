@@ -257,6 +257,9 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       }
       lastUsdBalance = usdBalance;
     },
+    extraOptions: {
+      silent: true,
+    },
   }),
 }));
 
