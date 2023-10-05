@@ -22,7 +22,6 @@ function ConfirmActionModal({
   title,
   description,
   yesLabel,
-  noLabel,
   action,
   ...props
 }: ConfirmActionModalProps & DialogProps): React.ReactElement {
@@ -46,16 +45,6 @@ function ConfirmActionModal({
           onClick={() => performAction().then(close)}
         >
           {yesLabel || t('confirm')}
-        </ZigButton>
-
-        <ZigButton
-          variant={'outlined'}
-          type='submit'
-          size={'large'}
-          disabled={loading}
-          onClick={() => close()}
-        >
-          {noLabel || t('cancel')}
         </ZigButton>
       </Box>
     </ZModal>
