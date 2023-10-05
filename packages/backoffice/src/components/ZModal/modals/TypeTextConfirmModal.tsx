@@ -8,7 +8,7 @@ import { ConfirmModalProps } from './ConfirmModal';
 
 export type TypeTextConfirmModalProps = {
   safeWord: string;
-  cancelButton: boolean;
+  cancelButton?: boolean;
 } & ConfirmModalProps;
 
 // tes this has been copied

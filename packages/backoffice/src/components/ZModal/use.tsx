@@ -42,5 +42,6 @@ export function useZTypeWordConfirm(): (
   props: TypeTextConfirmModalProps,
 ) => ShowFnOutput<void> {
   const { showModal } = useZModal();
-  return (props) => showModal(TypeTextConfirmModal, props);
+  return (props) =>
+    showModal(TypeTextConfirmModal, { cancelButton: false, ...props });
 }

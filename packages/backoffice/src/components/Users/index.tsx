@@ -148,14 +148,15 @@ export default function Users() {
                   label: t(isBanned ? 'actions.unban' : 'actions.ban'),
                   onClick: () =>
                     askConfirm({
-                      title: t(
+                      description: t(
                         `actions.${isBanned ? 'unban' : 'ban'}-confirm`,
                         {
                           email: original.email,
                         },
                       ),
-                      description: t('common:generic-confirm'),
-                      cancelButton: true,
+                      title: t(
+                        isBanned ? 'actions.unban-user' : 'actions.ban-user',
+                      ),
                       safeWord: t(isBanned ? 'actions.unban' : 'actions.ban'),
                       yesLabel: isBanned
                         ? t('actions.unban')
@@ -175,15 +176,13 @@ export default function Users() {
                       label: t('actions.disable2FA'),
                       onClick: () =>
                         askConfirm({
-                          title: t(`actions.disable2FA-confirm`, {
-                            email: original.email,
-                          }),
+                          title: t('actions.disable2FA'),
                           cancelButton: true,
                           safeWord: t('actions.disable2FA-short'),
-                          description: t('common:generic-confirm'),
-                          yesLabel: t(`actions.disable2FA-confirm`, {
+                          description: t(`actions.disable2FA-confirm`, {
                             email: original.email,
                           }),
+                          yesLabel: t('actions.disable2FA'),
                           yesAction: async () => {
                             await disable2fa({
                               userId: original.userId,

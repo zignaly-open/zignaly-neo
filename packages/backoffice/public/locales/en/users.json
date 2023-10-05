@@ -6,7 +6,9 @@
     "ban-confirm": "Ban {{email}}",
     "unban-confirm": "Unban {{email}}",
     "ban": "Ban",
-    "unban": "Unban"
+    "ban-user": "Ban user",
+    "unban": "Unban",
+    "unban-user": "Unban user"
   },
   "table": {
     "subscriptionCode": "Code",
