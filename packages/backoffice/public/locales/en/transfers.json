@@ -14,6 +14,7 @@
   },
   "operator": "Operator",
   "depositStatuses": {
+    "pending": "Pending",
     "reviewing": "Reviewing",
     "blocked_by_risk": "Blocked by Risk",
     "blocked_by_limit": "Blocked by Limit",
