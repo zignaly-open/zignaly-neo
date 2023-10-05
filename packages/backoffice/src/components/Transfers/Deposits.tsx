@@ -25,19 +25,22 @@ import {
 } from '../../apis/transfers/types';
 import { depositStatusColorMap } from './constants';
 import { useDepositStatusOptions, useOperatorOptions } from './use';
-import SearchIcon from '@mui/icons-material/Search';
 import DateDisplay from '../TableUtils/DateDisplay';
 import { isEqual as _isEqual } from 'lodash-es';
 import Shorten from '../TableUtils/Shorten';
+import FilterButtons from '../TableUtils/FilterButtons';
+
+const initialFilter: TransferFilterType = {
+  userId: '',
+  amount: 0,
+  operator: 'gte',
+  status: '',
+};
 
 export default function Deposits() {
   const { t } = useTranslation('transfers');
-  const [filters, setFilters] = useState<TransferFilterType>({
-    userId: '',
-    amount: 0,
-    operator: 'gte',
-    status: '',
-  });
+
+  const [filters, setFilters] = useState<TransferFilterType>(initialFilter);
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<TransferFilterType>(filters);
 
@@ -198,18 +201,16 @@ export default function Deposits() {
           onChange={(status) => setFilters((old) => ({ ...old, status }))}
           options={statusOptions}
         />
-        <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
-          <ZigButton
-            size='xlarge'
-            onClick={() => {
-              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
-              else setFiltersSubmitted(filters);
-            }}
-            startIcon={<SearchIcon />}
-          >
-            {t('common:filter')}
-          </ZigButton>
-        </Box>
+        <FilterButtons
+          onClick={() => {
+            if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+            else setFiltersSubmitted(filters);
+          }}
+          onClear={() => {
+            setFilters({ ...initialFilter });
+            setFiltersSubmitted({ ...initialFilter });
+          }}
+        />
       </Box>
 
       <Box

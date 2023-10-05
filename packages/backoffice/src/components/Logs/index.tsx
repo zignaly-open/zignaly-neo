@@ -2,7 +2,6 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
   PageContainer,
-  ZigButton,
   ZigInput,
   ZigSelect,
   ZigTable,
@@ -13,22 +12,24 @@ import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import { LogEntry, LogFilterType } from '../../apis/logs/types';
 import { useLogActionOptions } from './use';
 import { isEqual as _isEqual } from 'lodash-es';
 import { useLogsQuery } from '../../apis/logs/api';
+import FilterButtons from '../TableUtils/FilterButtons';
+
+const initialFilter: LogFilterType = {
+  userId: '',
+  agentId: '',
+  user: '',
+  agent: '',
+  action: '',
+};
 
 export default function Withdrawals() {
   const { t } = useTranslation('logs');
   const actionOptions = useLogActionOptions();
-  const [filters, setFilters] = useState<LogFilterType>({
-    userId: '',
-    agentId: '',
-    user: '',
-    agent: '',
-    action: '',
-  });
+  const [filters, setFilters] = useState<LogFilterType>(initialFilter);
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<LogFilterType>(filters);
 
@@ -132,18 +133,16 @@ export default function Withdrawals() {
           onChange={(action) => setFilters((old) => ({ ...old, action }))}
           options={actionOptions}
         />
-        <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
-          <ZigButton
-            size='xlarge'
-            onClick={() => {
-              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
-              else setFiltersSubmitted(filters);
-            }}
-            startIcon={<SearchIcon />}
-          >
-            {t('common:filter')}
-          </ZigButton>
-        </Box>
+        <FilterButtons
+          onClick={() => {
+            if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+            else setFiltersSubmitted(filters);
+          }}
+          onClear={() => {
+            setFilters({ ...initialFilter });
+            setFiltersSubmitted({ ...initialFilter });
+          }}
+        />
       </Box>
 
       <Box

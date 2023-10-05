@@ -2,7 +2,6 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
   PageContainer,
-  ZigButton,
   ZigDotsVerticalIcon,
   ZigDropdown,
   ZigInput,
@@ -25,19 +24,21 @@ import {
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, IconButton, useTheme } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
-import SearchIcon from '@mui/icons-material/Search';
 import type { ZigTableQueryRef } from '@zignaly-open/ui';
 import { isEqual as _isEqual } from 'lodash-es';
 import { useAccessLevelOptions } from './use';
+import FilterButtons from '../TableUtils/FilterButtons';
+
+const initialFilter: UserFilterType = {
+  id: '',
+  email: '',
+  access: '',
+  code: '',
+};
 
 export default function Users() {
   const { t } = useTranslation('users');
-  const [filters, setFilters] = useState<UserFilterType>({
-    id: '',
-    email: '',
-    access: '',
-    code: '',
-  });
+  const [filters, setFilters] = useState<UserFilterType>(initialFilter);
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<UserFilterType>(filters);
 
@@ -253,18 +254,16 @@ export default function Users() {
             setFilters((old) => ({ ...old, code: e.target.value }))
           }
         />
-        <Box sx={{ flex: 0, alignSelf: 'flex-end' }}>
-          <ZigButton
-            size='xlarge'
-            onClick={() => {
-              if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
-              else setFiltersSubmitted(filters);
-            }}
-            startIcon={<SearchIcon />}
-          >
-            {t('common:filter')}
-          </ZigButton>
-        </Box>
+        <FilterButtons
+          onClick={() => {
+            if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
+            else setFiltersSubmitted(filters);
+          }}
+          onClear={() => {
+            setFilters({ ...initialFilter });
+            setFiltersSubmitted({ ...initialFilter });
+          }}
+        />
       </Box>
 
       <Box
