@@ -23,11 +23,11 @@ import {
 } from '../../apis/users/types';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box, IconButton, useTheme } from '@mui/material';
-import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import type { ZigTableQueryRef } from '@zignaly-open/ui';
 import { isEqual as _isEqual } from 'lodash-es';
 import { useAccessLevelOptions } from './use';
 import FilterButtons from '../TableUtils/FilterButtons';
+import { useZTypeWordConfirm } from 'components/ZModal/use';
 
 const initialFilter: UserFilterType = {
   id: '',
@@ -45,9 +45,9 @@ export default function Users() {
   const [banUser] = useBanMutation();
   const [unbanUser] = useUnbanMutation();
   const [disable2fa] = useDisable2FAMutation();
-  const showConfirmAction = useConfirmActionModal();
   const theme = useTheme();
   const accessLevelOptions = useAccessLevelOptions();
+  const askConfirm = useZTypeWordConfirm();
 
   const ref = useRef<ZigTableQueryRef>();
   const columnHelper = createColumnHelper<UserData>();
@@ -146,7 +146,7 @@ export default function Users() {
                 {
                   label: t(isBanned ? 'actions.unban' : 'actions.ban'),
                   onClick: () =>
-                    showConfirmAction({
+                    askConfirm({
                       title: t(
                         `actions.${isBanned ? 'unban' : 'ban'}-confirm`,
                         {
@@ -154,10 +154,12 @@ export default function Users() {
                         },
                       ),
                       description: t('common:generic-confirm'),
+                      cancelButton: true,
+                      safeWord: t(isBanned ? 'actions.unban' : 'actions.ban'),
                       yesLabel: isBanned
                         ? t('actions.unban')
                         : t('actions.ban'),
-                      action: async () => {
+                      yesAction: async () => {
                         await (isBanned
                           ? unbanUser({ userId: original.userId })
                           : banUser({ userId: original.userId })
@@ -171,15 +173,17 @@ export default function Users() {
                   ? {
                       label: t('actions.disable2FA'),
                       onClick: () =>
-                        showConfirmAction({
+                        askConfirm({
                           title: t(`actions.disable2FA-confirm`, {
                             email: original.email,
                           }),
+                          cancelButton: true,
+                          safeWord: t('actions.disable2FA-short'),
                           description: t('common:generic-confirm'),
                           yesLabel: t(`actions.disable2FA-confirm`, {
                             email: original.email,
                           }),
-                          action: async () => {
+                          yesAction: async () => {
                             await disable2fa({
                               userId: original.userId,
                             }).unwrap();

@@ -1,6 +1,9 @@
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import { ComponentType, useCallback } from 'react';
 import AlertModal, { AlertModalProps } from './modals/AlertModal';
+import TypeTextConfirmModal, {
+  TypeTextConfirmModalProps,
+} from './modals/TypeTextConfirmModal';
 import { UseZModalOptions } from './types';
 
 export function useZModal(options?: UseZModalOptions) {
@@ -33,4 +36,11 @@ export function useZModal(options?: UseZModalOptions) {
 export function useZAlert(): (props: AlertModalProps) => ShowFnOutput<void> {
   const { showModal } = useZModal();
   return (props) => showModal(AlertModal, props);
+}
+
+export function useZTypeWordConfirm(): (
+  props: TypeTextConfirmModalProps,
+) => ShowFnOutput<void> {
+  const { showModal } = useZModal();
+  return (props) => showModal(TypeTextConfirmModal, props);
 }
