@@ -23,7 +23,6 @@ const initialFilter: LogFilterType = {
   userId: '',
   agentId: '',
   user: '',
-  agent: '',
   action: '',
 };
 
@@ -49,11 +48,6 @@ export default function Withdrawals() {
       columnHelper.accessor('userEmail', {
         enableSorting: false,
         header: t('table.user'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
-      }),
-      columnHelper.accessor('agentEmail', {
-        enableSorting: false,
-        header: t('table.agent'),
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
       columnHelper.accessor('action', {
@@ -118,14 +112,6 @@ export default function Withdrawals() {
           value={filters.user}
           onChange={(e) =>
             setFilters((old) => ({ ...old, user: e.target.value }))
-          }
-        />
-        <ZigInput
-          label={t('table.agent')}
-          placeholder={t('table.agent')}
-          value={filters.agent}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, agent: e.target.value }))
           }
         />
         <ZigSelect

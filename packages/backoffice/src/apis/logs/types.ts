@@ -23,6 +23,5 @@ export type LogFilterType = {
   userId?: string;
   agentId?: string;
   user?: string;
-  agent?: string;
   action?: string;
 };
