@@ -32,7 +32,7 @@ import {
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();
-  return useTraderServicesQuery(null, {
+  return useTraderServicesQuery(undefined, {
     skip: !isAuthenticated,
   });
 }
