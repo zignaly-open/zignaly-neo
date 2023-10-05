@@ -144,9 +144,6 @@ export default function Withdrawals() {
             ],
           }}
           queryExtraParams={filtersSubmitted}
-          // https://github.com/zignaly-open/zignaly-neo/issues/1215
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           columns={columns}
           useQuery={useLogsQuery}
           enableSortingRemoval={false}

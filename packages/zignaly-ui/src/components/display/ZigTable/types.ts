@@ -43,11 +43,10 @@ export type ZigTableQueryRef = {
 
 export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
-  useQuery: RtkQueryLikeInfinitePagination<T, V>;
+  useInfiniteQuery: RtkQueryLikeInfinitePagination<T, V>;
   // actually it'd be a different type but whatever
   queryDataMapper?: (data: T) => T;
   queryExtraParams?: V;
-  infinite: true;
 }
 export interface ZigTablePropsFiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
@@ -55,7 +54,6 @@ export interface ZigTablePropsFiniteQuery<T extends object, V extends ZigTableQu
   // actually it'd be a different type but whatever
   queryDataMapper?: (data: T) => T;
   queryExtraParams?: V;
-  infinite: false | undefined;
 }
 
 export type ZigTableProps<T extends object, V extends ZigTableQueryParams> =

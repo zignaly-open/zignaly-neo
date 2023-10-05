@@ -4,12 +4,17 @@ import ZigTableData from "./ZigTableData";
 import useInfinitePaginatedQuery from "./use/useInfinitePaginatedQuery";
 
 const ZigTableRtkInfiniteQuery = <T extends object, V extends ZigTableQueryParams>(
-  { useQuery, queryExtraParams, queryDataMapper, ...props }: ZigTablePropsInfiniteQuery<T, V>,
+  {
+    useInfiniteQuery,
+    queryExtraParams,
+    queryDataMapper,
+    ...props
+  }: ZigTablePropsInfiniteQuery<T, V>,
   ref: ForwardedRef<ZigTableQueryRef>,
 ) => {
   const { pagination, setPagination, isFetching, isLoading, hasMore, data, refetch } =
     useInfinitePaginatedQuery({
-      useQuery,
+      useInfiniteQuery,
       queryExtraParams,
     });
 

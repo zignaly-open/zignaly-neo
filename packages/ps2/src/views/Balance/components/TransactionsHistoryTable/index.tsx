@@ -177,8 +177,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             />
           )}
           emptyMessage={t('noData')}
-          infinite
-          useQuery={useTransactionsHistoryQuery}
+          useInfiniteQuery={useTransactionsHistoryQuery}
           queryExtraParams={{
             exchangeInternalId: exchange?.internalId,
             type,
