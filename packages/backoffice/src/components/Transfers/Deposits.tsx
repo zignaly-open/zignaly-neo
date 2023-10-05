@@ -30,10 +30,11 @@ import { isEqual as _isEqual } from 'lodash-es';
 import Shorten from '../TableUtils/Shorten';
 import FilterButtons from '../TableUtils/FilterButtons';
 import TableWrap from '../TableUtils/TableWrap';
+import { convertUserInputToNumberFormat } from './utils';
 
 const initialFilter: TransferFilterType = {
   userId: '',
-  amount: 0,
+  amount: '0',
   operator: 'gte',
   status: '',
 };
@@ -191,7 +192,13 @@ export default function Deposits() {
               placeholder={t('table.amount')}
               value={filters.amount}
               onChange={(e) =>
-                setFilters((old) => ({ ...old, amount: +e.target.value }))
+                setFilters((old) => ({
+                  ...old,
+                  amount: convertUserInputToNumberFormat(
+                    e.target.value,
+                    old.amount,
+                  ),
+                }))
               }
             />
           </Box>

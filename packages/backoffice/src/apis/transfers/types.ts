@@ -32,7 +32,7 @@ export type DepositData = {
 
 export type TransferFilterType = {
   userId?: string;
-  amount?: number;
+  amount?: string;
   operator?: 'gte' | 'lte' | 'gt' | 'lt' | 'eq';
   status?: string;
 };
