@@ -16,7 +16,7 @@ import {
 } from '../../apis/transfers/api';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import {
   DepositData,
@@ -28,6 +28,7 @@ import { useDepositStatusOptions, useOperatorOptions } from './use';
 import SearchIcon from '@mui/icons-material/Search';
 import DateDisplay from '../TableUtils/DateDisplay';
 import { isEqual as _isEqual } from 'lodash-es';
+import Shorten from '../TableUtils/Shorten';
 
 export default function Deposits() {
   const { t } = useTranslation('transfers');
@@ -87,18 +88,7 @@ export default function Deposits() {
         enableSorting: false,
         header: t('table.transactionId'),
         cell: ({ getValue }) => (
-          <Tooltip title={getValue()}>
-            <ZigTypography
-              sx={{
-                display: 'block',
-                maxWidth: 220,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {getValue()}
-            </ZigTypography>
-          </Tooltip>
+          <Shorten breakLines text={getValue()} width={210} />
         ),
       }),
       columnHelper.accessor('exposureType', {

@@ -92,7 +92,9 @@ export default function Withdrawals() {
       columnHelper.accessor('transactionId', {
         enableSorting: false,
         header: t('table.transactionId'),
-        cell: ({ getValue }) => <Shorten text={getValue()} width={200} />,
+        cell: ({ getValue }) => (
+          <Shorten breakLines text={getValue()} width={210} />
+        ),
       }),
       columnHelper.accessor('exposureType', {
         enableSorting: false,
