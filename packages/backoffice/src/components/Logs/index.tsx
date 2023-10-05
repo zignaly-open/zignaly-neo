@@ -17,6 +17,7 @@ import { useLogActionOptions } from './use';
 import { isEqual as _isEqual } from 'lodash-es';
 import { useLogsQuery } from '../../apis/logs/api';
 import FilterButtons from '../TableUtils/FilterButtons';
+import TableWrap from '../TableUtils/TableWrap';
 
 const initialFilter: LogFilterType = {
   userId: '',
@@ -145,13 +146,7 @@ export default function Withdrawals() {
         />
       </Box>
 
-      <Box
-        sx={{
-          '& table': {
-            minWidth: '1000px',
-          },
-        }}
-      >
+      <TableWrap>
         <ZigTable
           ref={ref}
           initialState={{
@@ -171,7 +166,7 @@ export default function Withdrawals() {
           enableSortingRemoval={false}
           emptyMessage={t('no-data')}
         />
-      </Box>
+      </TableWrap>
     </PageContainer>
   );
 }

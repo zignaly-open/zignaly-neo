@@ -29,6 +29,7 @@ import DateDisplay from '../TableUtils/DateDisplay';
 import { isEqual as _isEqual } from 'lodash-es';
 import Shorten from '../TableUtils/Shorten';
 import FilterButtons from '../TableUtils/FilterButtons';
+import TableWrap from '../TableUtils/TableWrap';
 
 const initialFilter: TransferFilterType = {
   userId: '',
@@ -213,13 +214,7 @@ export default function Deposits() {
         />
       </Box>
 
-      <Box
-        sx={{
-          '& table': {
-            minWidth: '1000px',
-          },
-        }}
-      >
+      <TableWrap>
         <ZigTable
           ref={ref}
           initialState={{
@@ -240,7 +235,7 @@ export default function Deposits() {
           enableSortingRemoval={false}
           emptyMessage={t('no-data')}
         />
-      </Box>
+      </TableWrap>
     </PageContainer>
   );
 }

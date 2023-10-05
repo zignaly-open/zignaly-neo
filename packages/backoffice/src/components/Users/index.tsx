@@ -28,6 +28,7 @@ import { isEqual as _isEqual } from 'lodash-es';
 import { useAccessLevelOptions } from './use';
 import FilterButtons from '../TableUtils/FilterButtons';
 import { useZTypeWordConfirm } from 'components/ZModal/use';
+import TableWrap from '../TableUtils/TableWrap';
 
 const initialFilter: UserFilterType = {
   id: '',
@@ -270,13 +271,7 @@ export default function Users() {
         />
       </Box>
 
-      <Box
-        sx={{
-          '& table': {
-            minWidth: '1000px',
-          },
-        }}
-      >
+      <TableWrap>
         <ZigTable
           ref={ref}
           initialState={{
@@ -296,7 +291,7 @@ export default function Users() {
           enableSortingRemoval={false}
           emptyMessage={t('no-data')}
         />
-      </Box>
+      </TableWrap>
     </PageContainer>
   );
 }
