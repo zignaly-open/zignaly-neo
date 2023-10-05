@@ -48,10 +48,12 @@ export default function Users() {
 
   const accessLevelOptions = useMemo(
     () =>
-      Object.entries(UserAccessLevel).map(([value, label]) => ({
-        label: t('accessLevels.' + label),
-        value: value,
-      })),
+      Object.entries(UserAccessLevel)
+        .filter(([value]) => !Number.isNaN(+value))
+        .map(([value, label]) => ({
+          label: t('accessLevels.' + label),
+          value: value,
+        })),
     [t],
   );
 
