@@ -41,6 +41,7 @@ export type PaginationType = {
   offset: number;
   limit: number;
   sort?: string;
+  direction?: string;
 };
 
 export type PaginatedResponse<T> = {

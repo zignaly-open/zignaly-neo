@@ -28,6 +28,7 @@ import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import SearchIcon from '@mui/icons-material/Search';
 import type { ZigTableQueryRef } from '@zignaly-open/ui';
 import { isEqual as _isEqual } from 'lodash-es';
+import { useAccessLevelOptions } from './use';
 
 export default function Users() {
   const { t } = useTranslation('users');
@@ -45,20 +46,9 @@ export default function Users() {
   const [disable2fa] = useDisable2FAMutation();
   const showConfirmAction = useConfirmActionModal();
   const theme = useTheme();
-
-  const accessLevelOptions = useMemo(
-    () =>
-      Object.entries(UserAccessLevel)
-        .filter(([value]) => !Number.isNaN(+value))
-        .map(([value, label]) => ({
-          label: t('accessLevels.' + label),
-          value: value,
-        })),
-    [t],
-  );
+  const accessLevelOptions = useAccessLevelOptions();
 
   const ref = useRef<ZigTableQueryRef>();
-
   const columnHelper = createColumnHelper<UserData>();
   const columns = useMemo(() => {
     return [

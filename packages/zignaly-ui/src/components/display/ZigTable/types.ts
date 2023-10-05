@@ -34,7 +34,7 @@ export type RtkQueryLikeFinitePagination<
   TParams extends object,
 > = RtkQueryLike<
   { metadata: { totalPages: number; currentPage: number; totalLength: number }; data: TData[] },
-  TParams & { limit: number; offset: number; sort?: string }
+  TParams & { limit: number; offset: number; sort?: string; direction?: string }
 >;
 
 export type ZigTableQueryRef = {

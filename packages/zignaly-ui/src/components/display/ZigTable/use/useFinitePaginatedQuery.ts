@@ -30,7 +30,12 @@ const useFinitePaginatedQuery = <T extends object, V extends object>({
   const queryResponse = useQuery(
     {
       ...(queryExtraParams || ({} as V)),
-      ...(sorting?.[0] ? { sort: sorting[0].id + "," + (sorting[0].desc ? "DESC" : "ASC") } : {}),
+      ...(sorting?.[0]
+        ? {
+            sort: sorting[0].id,
+            direction: sorting[0].desc ? "DESC" : "ASC",
+          }
+        : {}),
       limit: pagination.pageSize,
       offset: pagination.pageIndex * pagination.pageSize,
     },
