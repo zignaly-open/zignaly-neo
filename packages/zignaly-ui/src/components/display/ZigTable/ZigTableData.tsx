@@ -31,6 +31,7 @@ export default function ZigTableData<T extends object>({
   renderSubComponent,
   pagination,
   loading,
+  onRowClick,
   fetching,
   emptyMessage,
   state = {},
@@ -172,10 +173,14 @@ export default function ZigTableData<T extends object>({
               return (
                 <React.Fragment key={row.id}>
                   <tr
-                    {...(row.getCanExpand() && {
-                      onClick: row.getToggleExpandedHandler(),
-                      style: { cursor: "pointer" },
-                    })}
+                    onClick={() => {
+                      onRowClick?.(row.id);
+                      row.getCanExpand() && row.getToggleExpandedHandler();
+                    }}
+                    style={{
+                      cursor: onRowClick || row.getCanExpand() ? "pointer" : "unset",
+                      position: "relative",
+                    }}
                   >
                     {row.getVisibleCells().map((cell, index) => {
                       return (
