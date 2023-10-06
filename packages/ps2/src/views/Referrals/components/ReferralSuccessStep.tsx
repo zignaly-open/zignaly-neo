@@ -11,18 +11,29 @@ const ReferralSuccessStep: React.FC<{ step: number }> = ({ step }) => {
   return (
     <StepBox sx={{ display: 'flex', flexDirection: 'row' }}>
       <StepCounter>
-        <ZigTypography variant='h2' color='highlighted' fontSize={'27px'}>
+        <ZigTypography
+          variant='h2'
+          color='highlighted'
+          fontSize={'27px'}
+          className={`start-earning-step-${step}__value`}
+        >
           {step}
         </ZigTypography>
       </StepCounter>
       <Box>
-        <ZigTypography variant={'h2'} color={'neutral200'} fontSize={'20px'}>
+        <ZigTypography
+          variant={'h2'}
+          color={'neutral200'}
+          fontSize={'20px'}
+          className={`start-earning-step-${step}__title`}
+        >
           {t(`start-earning-steps.step-${step}.title`)}
         </ZigTypography>
         <ZigTypography
           component='p'
           sx={{ mt: '13px', mb: '6px', minHeight: '72px' }}
           color={'neutral300'}
+          className={`start-earning-step-${step}__start-earning-description`}
         >
           {t(`start-earning-steps.step-${step}.description`, {
             reward: 20,
