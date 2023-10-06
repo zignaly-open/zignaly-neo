@@ -7486,7 +7486,6 @@
     "async-mutex" "^0.3.2"
     "bignumber.js" "^9.1.0"
     "copy-to-clipboard" "^3.3.2"
-    "cross-fetch" "^4.0.0"
     "date-fns" "^2.30.0"
     "i18n-iso-countries" "^7.5.0"
     "i18next" "^21.8.14"
@@ -7523,7 +7522,6 @@
     "styled-components" "^5.3.5"
     "typescript" "4.9.4"
     "web-vitals" "2.1.4"
-    "whatwg-fetch" "^3.6.19"
     "yup" "^0.32.11"
 
 "@zignaly-open/react-verification-code-input@1.2.10":
