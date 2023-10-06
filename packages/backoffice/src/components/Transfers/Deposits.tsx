@@ -93,7 +93,12 @@ export default function Deposits() {
         enableSorting: false,
         header: t('table.transactionId'),
         cell: ({ getValue }) => (
-          <Shorten breakLines text={getValue()} width={210} />
+          <Shorten
+            typographyProps={{ sx: { minWidth: 150 } }}
+            breakLines
+            text={getValue()}
+            width={200}
+          />
         ),
       }),
       columnHelper.accessor('exposureType', {

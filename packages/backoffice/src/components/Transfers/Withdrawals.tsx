@@ -58,7 +58,13 @@ export default function Withdrawals() {
     return [
       columnHelper.accessor('id', {
         header: t('table.id'),
-        cell: ({ getValue }) => <Shorten text={getValue()} width={150} />,
+        cell: ({ getValue }) => (
+          <Shorten
+            typographyProps={{ sx: { minWidth: 150 } }}
+            text={getValue()}
+            width={200}
+          />
+        ),
       }),
       columnHelper.accessor('createdAt', {
         header: t('table.date'),
