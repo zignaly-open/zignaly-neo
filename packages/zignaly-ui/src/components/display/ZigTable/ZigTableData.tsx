@@ -175,7 +175,7 @@ export default function ZigTableData<T extends object>({
                   <tr
                     onClick={() => {
                       onRowClick?.(row.id);
-                      row.getCanExpand() && row.getToggleExpandedHandler();
+                      row.getCanExpand() && row.getToggleExpandedHandler()();
                     }}
                     style={{
                       cursor: onRowClick || row.getCanExpand() ? "pointer" : "unset",
