@@ -20,9 +20,9 @@ import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
 import useConfirmActionModal from '../TableUtils/useConfirmAction';
 import {
-  DepositStatuses,
   TransferFilterType,
   WithdrawalData,
+  WithdrawalStatuses,
 } from '../../apis/transfers/types';
 import { withdrawalStatusColorMap } from './constants';
 import { useOperatorOptions, useWithdrawalStatusOptions } from './use';
@@ -115,7 +115,11 @@ export default function Withdrawals() {
         id: 'actions',
         header: t('table.actions'),
         cell: ({ row }) =>
-          row.original.status !== DepositStatuses.STATUS_COMPLETED && (
+          [
+            WithdrawalStatuses.STATUS_REVIEWING,
+            WithdrawalStatuses.STATUS_PENDING,
+            WithdrawalStatuses.STATUS_PENDING_TO_APPROVE,
+          ].includes(row.original.status as WithdrawalStatuses) && (
             <>
               <ZigButton
                 onClick={() =>
