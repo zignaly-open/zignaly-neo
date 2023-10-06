@@ -195,6 +195,7 @@ function SwapCoinsForm({
             id={'swap-coins-modal__from-input-amount'}
             label={t('from-input.label')}
             wide
+            selectSx={{ width: '150px' }}
             coin={selectedFromToken}
             onTokenChange={(token: CoinsSelect) => {
               setSelectedFromToken(token);
@@ -228,6 +229,7 @@ function SwapCoinsForm({
             id={'swap-coins-modal__to-input-amount'}
             label={t('to-input.label')}
             wide
+            selectSx={{ width: '150px' }}
             labelInline={false}
             coin={selectedToToken}
             onTokenChange={(token: CoinsSelect) => {
