@@ -4,7 +4,7 @@ import { SortDirection } from "@tanstack/react-table";
 import { IconButton } from "@mui/material";
 
 export const TableContainer = styled("div")`
-  overflow: auto;
+  overflow: auto hidden;
 `;
 
 export const Table = styled("table")`
@@ -31,7 +31,7 @@ export const Table = styled("table")`
       height: 95px;
     }
     color: ${({ theme }) => theme.palette.neutral100};
-    padding: 0 4px;
+    padding: 0;
     white-space: nowrap;
     border-bottom: 1px solid ${({ theme }) => theme.palette.neutral700};
     text-align: center;
