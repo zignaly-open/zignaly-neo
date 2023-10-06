@@ -11,7 +11,12 @@ const ReferralSuccessStep: React.FC<{ step: number }> = ({ step }) => {
   return (
     <StepBox sx={{ display: 'flex', flexDirection: 'row' }}>
       <StepCounter>
-        <ZigTypography variant='h2' color='highlighted' fontSize={'27px'}>
+        <ZigTypography
+          variant='h2'
+          color='highlighted'
+          fontSize={'27px'}
+          className={`referral-success-step-${step}__value`}
+        >
           {step}
         </ZigTypography>
       </StepCounter>

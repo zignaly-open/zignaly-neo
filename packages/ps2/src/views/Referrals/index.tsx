@@ -154,6 +154,7 @@ const Referrals: React.FC = () => {
                   fontSize={'26px'}
                   fontWeight={600}
                   sx={{ mt: 7, mb: '29px' }}
+                  className='referral-page__start-earning-title'
                 >
                   {t('start-earning')}
                 </ZigTypography>
