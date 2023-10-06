@@ -32,6 +32,11 @@ const backendErrorText = (t: TFunction, error: BackendError) => {
 
 const lastShownBackendError = { error: '', time: 0, expiry: 10_000 };
 
+const ignoreError = (error: BackendError) => {
+  const { code } = error?.data?.error || {};
+  return code === 1091;
+};
+
 export const backendError = (
   t: TFunction,
   error: BackendError,
@@ -44,6 +49,9 @@ export const backendError = (
     lastShownBackendError.time + lastShownBackendError.expiry > Date.now()
   )
     return;
+
+  if (ignoreError(error)) return;
+
   lastShownBackendError.time = Date.now();
   lastShownBackendError.error = text;
   showToast('error')(text);
