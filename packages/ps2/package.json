@@ -7,18 +7,14 @@
     "start": "react-app-rewired start",
     "analyze": "rm -rf ./build/*; lerna run build --scope=@zignaly-open/ps2 --include-dependencies; source-map-explorer 'build/static/js/*.js'",
     "build": "react-app-rewired build && generate-version",
-    "test": "react-scripts test",
+    "test": "react-app-rewired test --watchAll=false",
+    "test:watch": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint:eslint-ci": "eslint --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
-    ]
   },
   "browserslist": {
     "production": [
@@ -50,10 +46,10 @@
     "@sentry/browser": "^7.10.0",
     "@sentry/cli": "^2.5.0",
     "@tanstack/react-table": "^8.9.3",
-    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/jest-dom": "6.1.3",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
-    "@types/jest": "27.5.2",
+    "@types/jest": "29.5.5",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
@@ -71,7 +67,7 @@
     "i18next-http-backend": "^1.4.1",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
-    "msw": "^1.2.1",
+    "msw": "^0.0.0-fetch.rc-20",
     "mui-modal-provider": "2.2.0",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",
@@ -110,7 +106,6 @@
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
     "lodash": "^4.17.21",
-    "msw": "^1.2.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "react-app-rewired": "^2.2.1",

@@ -25,6 +25,7 @@ import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
 import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
+import { Store } from '@reduxjs/toolkit';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -38,11 +39,12 @@ if (
   });
 }
 
-export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
-  children,
-}) => (
+export const WrappedInProviders: React.FC<{
+  store: Store;
+  children: JSX.Element;
+}> = ({ store: storeProp, children }) => (
   <ChunkLoadErrorBoundary>
-    <Provider store={store}>
+    <Provider store={storeProp}>
       <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
         <ThemeInheritorMui theme={themeMui}>
           <ThemeProviderMui theme={themeMui}>
@@ -80,7 +82,7 @@ function App() {
   useReferralCookie();
 
   return (
-    <WrappedInProviders>
+    <WrappedInProviders store={store}>
       <>
         <Header />
         <Suspense fallback={zigSuspenseFallback}>

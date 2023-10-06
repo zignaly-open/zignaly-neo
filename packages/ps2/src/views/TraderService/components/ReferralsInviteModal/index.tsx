@@ -6,7 +6,7 @@ import ZModal from 'components/ZModal';
 import { Box, Grid } from '@mui/material';
 import Tiers from './atoms/TiersTable';
 import { NorthEast } from '@mui/icons-material';
-import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
+import ShareCommissionSlider from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';

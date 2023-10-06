@@ -9,7 +9,7 @@ import { Box, Tooltip } from '@mui/material';
 import { round } from 'lodash-es';
 import { InfoOutlined } from '@mui/icons-material';
 
-export const ShareCommissionSlider = ({
+const ShareCommissionSlider = ({
   discountPct,
   max,
 }: {
@@ -82,3 +82,5 @@ export const ShareCommissionSlider = ({
     </SliderContainer>
   );
 };
+
+export default ShareCommissionSlider;

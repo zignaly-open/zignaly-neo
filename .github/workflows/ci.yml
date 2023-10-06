@@ -48,6 +48,6 @@ jobs:
           directory: packages/ps2
           file_name: .env
       - name: Test
-        run: lerna run test
+        run: CI=true lerna run test
       - name: Headpat yourself ^_^
         run: echo "Great job <3"
