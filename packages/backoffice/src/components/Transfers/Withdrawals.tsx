@@ -123,7 +123,6 @@ export default function Withdrawals() {
         cell: ({ row }) =>
           [
             WithdrawalStatuses.STATUS_REVIEWING,
-            WithdrawalStatuses.STATUS_PENDING,
             WithdrawalStatuses.STATUS_PENDING_TO_APPROVE,
           ].includes(row.original.status as WithdrawalStatuses) && (
             <>

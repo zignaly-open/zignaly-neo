@@ -116,7 +116,10 @@ export default function Deposits() {
         id: 'actions',
         header: t('table.actions'),
         cell: ({ row }) =>
-          row.original.status !== DepositStatuses.STATUS_COMPLETED && (
+          [
+            DepositStatuses.STATUS_BLOCKED_BY_LIMIT,
+            DepositStatuses.STATUS_BLOCKED_BY_RISK,
+          ].includes(row.original.status as DepositStatuses) && (
             <ZigButton
               onClick={() =>
                 showConfirmAction({
