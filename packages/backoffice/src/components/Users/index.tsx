@@ -177,7 +177,6 @@ export default function Users() {
                       onClick: () =>
                         askConfirm({
                           title: t('actions.disable2FA'),
-                          cancelButton: true,
                           safeWord: t('actions.disable2FA-short'),
                           description: t(`actions.disable2FA-confirm`, {
                             email: original.email,
