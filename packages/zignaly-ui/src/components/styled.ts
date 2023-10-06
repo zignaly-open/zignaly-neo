@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { styled } from "@mui/system";
 import ZigTypography from "./display/ZigTypography";
-export const MarginContainer = styled.div`
+export const MarginContainer = styled("div")`
   margin: 0 auto;
   max-width: 1430px;
   padding: 0 22px;
@@ -8,7 +8,10 @@ export const MarginContainer = styled.div`
 `;
 
 export const PageContainer = styled(MarginContainer)`
-  padding: 52px 22px 40px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    padding: 52px 22px 40px;
+  }
+  padding: 52px 4px 40px;
 `;
 
 // TODO: replace with proper styled comp usages instead of classes

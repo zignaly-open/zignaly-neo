@@ -14,6 +14,9 @@ import {
 import { useIsAuthenticated } from 'apis/user/use';
 import { useServiceDetails } from 'apis/service/use';
 
+const DEFAULT_SERVICE_COMMISSION = 10;
+const DEFAULT_USER_BOOST = 2;
+
 export function useTiersData(serviceId?: string) {
   const isAuthenticated = useIsAuthenticated();
   const {
@@ -43,7 +46,7 @@ export function useTiersData(serviceId?: string) {
 
   const serviceCommissionRaw = serviceId
     ? serviceCommissionData?.commission
-    : 10;
+    : DEFAULT_SERVICE_COMMISSION;
   const traderBoost = getTraderBoost(
     serviceCommissionRaw,
     serviceData?.zglySuccessFee,
@@ -66,7 +69,9 @@ export function useTiersData(serviceId?: string) {
   const boostEndsDate = new Date(referral?.boostEndsAt);
   const boostRunning = isFuture(boostEndsDate);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const boost = boostRunning ? 2 : referral?.boost;
+  const boost = boostRunning
+    ? DEFAULT_USER_BOOST
+    : referral?.boost ?? DEFAULT_USER_BOOST;
   const lastTier = tiers?.[tiers?.length - 1];
   const currentTier = tiers?.[referral?.tierId];
   const inviteLeft =
