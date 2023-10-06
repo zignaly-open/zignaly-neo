@@ -1,4 +1,5 @@
 import { MenuPlacement, Props as SelectProps } from "react-select";
+import { SxProps } from "@mui/system";
 
 export type ZigSelectOption<T> = {
   value: T;
@@ -25,4 +26,5 @@ export type ZigSelectProps<T> = Omit<
   disabled?: boolean;
   menuPlacement?: MenuPlacement;
   hoverBackground?: boolean;
+  sx?: SxProps;
 };

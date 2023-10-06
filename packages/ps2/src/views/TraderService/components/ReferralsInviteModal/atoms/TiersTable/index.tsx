@@ -16,6 +16,7 @@ import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 import { Table } from './styles';
+import { ZIGNALY_PROFIT_FEE } from 'util/constants';
 
 const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   const currentTier = tiers[tierIndex];
@@ -89,13 +90,7 @@ const CellLabelBoost = ({
   );
 };
 
-const CellLabelTraderBoost = ({
-  commission,
-  multiplier,
-}: {
-  commission: number;
-  multiplier: number;
-}) => {
+const CellLabelTraderBoost = ({ traderBoost }: { traderBoost: number }) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
@@ -105,16 +100,21 @@ const CellLabelTraderBoost = ({
       gap='10px'
       justifyContent='flex-end'
     >
-      <BoostChip boost={multiplier} showBolt />
+      <BoostChip boost={traderBoost + 1} showBolt />
       <ZigTypography
         fontWeight={500}
         variant='h4'
         lineHeight='24px'
         color='#24b68d'
         className='tier-chart__label-trader-commission'
+        whiteSpace={'nowrap'}
       >
         {t('trader-boost')}
-        <Tooltip title={t('tooltips.trader-boost', { commission })}>
+        <Tooltip
+          title={t('tooltips.trader-boost', {
+            commission: traderBoost * ZIGNALY_PROFIT_FEE,
+          })}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -125,35 +125,26 @@ const CellLabelTraderBoost = ({
 const TiersTable = ({
   tiers,
   referral,
-  serviceCommission,
-  zignalyCommission,
   boostRunning,
   boost,
+  traderBoost,
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
 
-  const layers = useTierLayers(
-    tiers,
-    tiers[0].id,
-    boost,
-    serviceCommission,
-    zignalyCommission,
-  );
+  const layers = useTierLayers(tiers, tiers[0].id, boost, traderBoost);
+
   const composeCellTierLabels = () => {
     return (
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
-        {serviceCommission > 0 && (
+        {layers[2].value > 0 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost
-              commission={serviceCommission}
-              multiplier={layers[0].value / layers[1].value}
-            />
+            <CellLabelTraderBoost traderBoost={traderBoost} />
           </Box>
         )}
         {boost > 1 && (
           <Box
             position='absolute'
-            bottom={layers.reverse().find((l) => l.value).height}
+            bottom={[...layers].reverse().find((l) => l.value).height}
             right={0}
           >
             <CellLabelBoost activated={!boostRunning} boost={boost} />
@@ -176,8 +167,7 @@ const TiersTable = ({
                 tier={tier}
                 referral={referral}
                 tiers={tiers}
-                serviceCommission={serviceCommission}
-                zignalyCommission={zignalyCommission}
+                traderBoost={traderBoost}
                 boost={boost}
               />
             </Box>
@@ -246,7 +236,7 @@ const TiersTable = ({
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
                 (
-                  Math.round(MAX_FEES_AMOUNT * zignalyCommission) / 100
+                  Math.round(MAX_FEES_AMOUNT * ZIGNALY_PROFIT_FEE) / 100
                 ).toString(),
                 {
                   thousandSeparator: true,
@@ -269,8 +259,7 @@ const TiersTable = ({
                 getMaxEarnings(
                   tier.commissionPct,
                   boost,
-                  serviceCommission,
-                  zignalyCommission,
+                  traderBoost,
                 ).toFixed(),
               )}
             </ZigTypography>

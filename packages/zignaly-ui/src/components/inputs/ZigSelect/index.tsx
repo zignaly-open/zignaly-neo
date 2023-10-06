@@ -63,6 +63,7 @@ function ZigSelect<T>({
   id,
   showBorder = true,
   hoverBackground = true,
+  sx,
   styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
@@ -84,7 +85,7 @@ function ZigSelect<T>({
           {label}
         </ZigTypography>
       )}
-      <div>
+      <Box sx={sx}>
         {ZigSelectGlobalStyle}
         <Select
           id={id}
@@ -111,7 +112,7 @@ function ZigSelect<T>({
             <ErrorMessage text={error} id={id && `${id}-error-text`} />
           </Box>
         )}
-      </div>
+      </Box>
     </StyledSelectWrapper>
   );
 }

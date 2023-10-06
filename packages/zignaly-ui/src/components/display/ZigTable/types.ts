@@ -10,6 +10,7 @@ interface ZigTablePropsBase<T extends object>
   defaultHiddenColumns?: string[];
   renderSubComponent?: (props: { row: Row<T> }) => React.ReactElement;
   emptyMessage?: string;
+  onRowClick?: (id: string) => void;
 }
 
 export interface ZigTablePropsData<T extends object> extends ZigTablePropsBase<T> {

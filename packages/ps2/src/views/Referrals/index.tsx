@@ -60,7 +60,7 @@ const Referrals: React.FC = () => {
     referral,
     maxCommission,
     maxCommissionWithoutTraderBoost,
-    traderBoostMultiplier,
+    traderBoost,
     isLoading,
     boostRunning,
     inviteLeft,
@@ -93,6 +93,7 @@ const Referrals: React.FC = () => {
                 fontSize={'35px'}
                 fontWeight={600}
                 position={'relative'}
+                className='referral-page__title'
               >
                 {t('title', { commission: maxCommission })}
                 {inviteLeft > 0 && boostRunning && <ReferralLimitedTime />}
@@ -104,13 +105,14 @@ const Referrals: React.FC = () => {
                 variant={'h2'}
                 fontWeight={400}
                 color='neutral300'
+                className='referral-page__subtitle'
               >
                 <Trans
                   i18nKey={'description'}
                   values={{
                     commission: maxCommissionWithoutTraderBoost,
                     maxCommission: maxCommission,
-                    multiplier: traderBoostMultiplier,
+                    multiplier: traderBoost + 1,
                   }}
                   t={t}
                 >
