@@ -2,10 +2,14 @@
   "actions": {
     "approve": "Approve",
     "reject": "Reject",
-    "approve-confirm": "Approve Deposit",
-    "reject-confirm": "Reject Deposit",
-    "approve-confirm-description": "Approve Deposit for {{amount}} {{coin}} for user {{email}}",
-    "reject-confirm-description": "Reject Deposit for {{amount}} {{coin}} for user {{email}}",
+    "approve-deposit": "Approve Deposit",
+    "reject-deposit": "Reject Deposit",
+    "approve-withdrawal": "Approve Withdrawal",
+    "reject-withdrawal": "Reject Withdrawal",
+    "approve-deposit-description": "Approve Deposit for {{amount}} {{coin}} for user {{email}}",
+    "reject-deposit-description": "Reject Deposit for {{amount}} {{coin}} for user {{email}}",
+    "approve-withdrawal-description": "Approve Withdrawal for {{amount}} {{coin}} for user {{email}}",
+    "reject-withdrawal-description": "Reject Withdrawal for {{amount}} {{coin}} for user {{email}}",
 
     "ban-confirm": "Ban {{email}}",
     "unban-confirm": "Unban {{email}}",

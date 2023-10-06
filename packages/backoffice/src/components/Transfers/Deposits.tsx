@@ -115,8 +115,8 @@ export default function Deposits() {
             <ZigButton
               onClick={() =>
                 showConfirmAction({
-                  title: t(`actions.approve-confirm`),
-                  description: t(`actions.approve-confirm-description`, {
+                  title: t(`actions.approve-deposit`),
+                  description: t(`actions.approve-deposit-description`, {
                     email: row.original.email,
                     amount: row.original.amount,
                     coin: row.original.coin,

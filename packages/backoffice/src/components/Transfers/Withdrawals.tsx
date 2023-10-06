@@ -120,8 +120,8 @@ export default function Withdrawals() {
               <ZigButton
                 onClick={() =>
                   showConfirmAction({
-                    title: t(`actions.approve-confirm`),
-                    description: t(`actions.approve-confirm-description`, {
+                    title: t(`actions.approve-withdrawal`),
+                    description: t(`actions.approve-withdrawal-description`, {
                       email: row.original.email,
                       amount: row.original.amount,
                       coin: row.original.currency,
@@ -140,8 +140,8 @@ export default function Withdrawals() {
               <ZigButton
                 onClick={() =>
                   showConfirmAction({
-                    title: t(`actions.reject-confirm`),
-                    description: t(`actions.reject-confirm-description`, {
+                    title: t(`actions.reject-withdrawal`),
+                    description: t(`actions.reject-withdrawal-description`, {
                       email: row.original.email,
                       amount: row.original.amount,
                       coin: row.original.currency,
