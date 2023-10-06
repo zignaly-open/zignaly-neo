@@ -18,6 +18,7 @@ const ChangeIndicator = ({
   stableCoinOperative = false,
   style,
   labelTooltip = "",
+  decimalScale = stableCoinOperative ? 2 : 8,
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -71,7 +72,7 @@ const ChangeIndicator = ({
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
                 thousandSeparator={","}
-                decimalScale={stableCoinOperative ? 2 : 8}
+                decimalScale={decimalScale}
                 fixedDecimalScale={stableCoinOperative}
                 id={id}
               />
@@ -89,7 +90,7 @@ const ChangeIndicator = ({
                 displayType={"text"}
                 suffix={"%"}
                 thousandSeparator={","}
-                decimalScale={stableCoinOperative ? 2 : 8}
+                decimalScale={decimalScale}
                 fixedDecimalScale={stableCoinOperative}
                 id={id}
               />

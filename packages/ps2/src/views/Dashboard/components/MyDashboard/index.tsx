@@ -29,7 +29,7 @@ import {
   ROUTE_TRADING_SERVICE,
 } from '../../../../routes';
 import { useOpenDepositModal } from '../ManageInvestmentModals/DepositModal';
-import { Box, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 import { generatePath, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -53,6 +53,7 @@ const MyDashboard: React.FC = () => {
     showEditInvestmentModal({ serviceId: service.serviceId });
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
 
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
@@ -63,9 +64,19 @@ const MyDashboard: React.FC = () => {
             .plus(new BigNumber(row.pending))
             .toNumber(),
         {
-          header: t('tableHeader.summary.title'),
+          header: t(
+            md
+              ? 'tableHeader.summary.title'
+              : 'tableHeader.summary.title-mobile',
+          ),
           id: 'invested',
-          meta: { subtitle: t('tableHeader.summary.subtitle') },
+          meta: {
+            subtitle: t(
+              md
+                ? 'tableHeader.summary.subtitle'
+                : 'tableHeader.summary.subtitle-mobile',
+            ),
+          },
           cell: ({ getValue, row: { original } }) => {
             return (
               <BalanceSummary
@@ -84,15 +95,26 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('serviceName', {
         style: {
           justifyContent: 'flex-start',
-          marginLeft: '83px',
+          marginLeft: md ? '83px' : '20px',
           textAlign: 'left',
         },
-        header: t('tableHeader.serviceName.title'),
-        meta: {
+        header: t(
+          md
+            ? 'tableHeader.serviceName.title'
+            : 'tableHeader.serviceName.title-mobile',
+        ),
+        meta: md && {
           subtitle: t('tableHeader.serviceName.subtitle'),
         },
         cell: ({ row: { original } }) => (
-          <ServiceName prefixId={'portfolio-table'} service={original} />
+          <ServiceName
+            truncateServiceName={!md}
+            size={md ? 'x-large' : 'large'}
+            prefixId={'portfolio-table'}
+            service={original}
+            showCoin={md}
+            showOwner={md}
+          />
         ),
       }),
       columnHelper.accessor((row) => +row.pnl30dPct, {
@@ -100,27 +122,29 @@ const MyDashboard: React.FC = () => {
         id: 'pnl30dPct',
         cell: ({ row: { original } }) => (
           <Box
-            minHeight={'125px'}
+            minHeight={md ? '125px' : '97px'}
             display={'flex'}
             flexDirection={'column'}
             justifyContent={'center'}
           >
             {original.pnl30dPct ||
             Object.keys(original.sparklines).length > 1 ? (
-              <>
+              <Box sx={!md && { transform: 'scale(0.9)' }}>
                 <ZigChartMiniSuspensed
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
                   data={[0, ...(original.sparklines as number[])]}
                   precision={getPrecisionForCoin(original.ssc)}
                 />
-                <ChangeIndicator
-                  id={`portfolio-table__chart-percentage-${original.serviceId}`}
-                  normalized
-                  value={new BigNumber(original.pnl30dPct).toFixed()}
-                  type='graph'
-                />
-              </>
+                {md && (
+                  <ChangeIndicator
+                    id={`portfolio-table__chart-percentage-${original.serviceId}`}
+                    normalized
+                    value={new BigNumber(original.pnl30dPct).toFixed()}
+                    type='graph'
+                  />
+                )}
+              </Box>
             ) : (
               <ZigTypography variant='body2' color='neutral400'>
                 {t('tableHeader.1-mo.no-data')}
@@ -131,94 +155,104 @@ const MyDashboard: React.FC = () => {
         sortingFn: 'auto',
         enableHiding: false,
       }),
-      columnHelper.accessor('pnlDailyMeanLc', {
-        header: t('tableHeader.dailyAvg-title'),
-        cell: ({ getValue, row: { original } }) => (
-          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
-            <ZigTablePriceLabel
-              id={`portfolio-table__dailyAvg-${original.serviceId}`}
-              coin={original.ssc}
-              value={new BigNumber(getValue()).toFixed()}
-              color={getColorForNumber(getValue())}
-            />
-          </Box>
-        ),
-        sortingFn: 'alphanumeric',
-      }),
-      columnHelper.accessor((row) => +row.pnl90dPct, {
-        header: t('tableHeader.3-mos-title'),
-        id: 'pnl90dPct',
-        cell: ({ getValue, row: { original } }) => (
-          <ChangeIndicator
-            id={`portfolio-table__pnl90dPct-${original.serviceId}`}
-            normalized
-            type='default'
-            value={new BigNumber(getValue()).toFixed()}
-          />
-        ),
-        sortingFn: 'auto',
-      }),
-      columnHelper.accessor((row) => +row.pnl180dPct, {
-        header: t('tableHeader.6-mos-title'),
-        id: 'pnl180dPct',
-        cell: ({ getValue, row: { original } }) => (
-          <ChangeIndicator
-            id={`portfolio-table__pnl180dPct-${original.serviceId}`}
-            normalized
-            type='default'
-            value={new BigNumber(getValue()).toFixed()}
-          />
-        ),
-        sortingFn: 'auto',
-      }),
-      columnHelper.accessor((row) => +row.pnlPctLc, {
-        header: t('tableHeader.all.title'),
-        id: 'pnlPctLc',
-        meta: { subtitle: t('tableHeader.all.subtitle') },
-        cell: ({ getValue, row: { original } }) => (
-          <ChangeIndicator
-            id={`portfolio-table__pnlPctLc-${original.serviceId}`}
-            type='default'
-            normalized
-            value={getValue()}
-            label={formatDateFromDays(calculateServiceAge(original.createdAt))}
-            labelTooltip={t('tooltip-date', {
-              date: new Date(original.createdAt).toLocaleDateString(),
-            })}
-          />
-        ),
-        sortingFn: 'auto',
-      }),
-      columnHelper.display({
-        id: 'link',
-        cell: ({ row }) => (
-          <Box
-            component={Link}
-            to={generatePath(ROUTE_TRADING_SERVICE, {
-              serviceId: row?.original?.serviceId?.toString(),
-            })}
-            sx={{
-              cursor: 'pointer',
-              alignItems: 'center',
-              flexDirection: 'row',
-              display: 'flex',
-              textAlign: 'start',
-              width: '0px',
-            }}
-            id={`portfolio-table__link-${row.original.serviceId}`}
-          >
-            <ArrowForwardIosIcon
-              sx={{
-                color: theme.palette.links,
-                width: '20px',
-                height: '20px',
-              }}
-            />
-          </Box>
-        ),
-      }),
+      ...(md
+        ? [
+            columnHelper.accessor('pnlDailyMeanLc', {
+              header: t('tableHeader.dailyAvg-title'),
+              cell: ({ getValue, row: { original } }) => (
+                <Box
+                  display={'flex'}
+                  alignItems={'center'}
+                  justifyContent={'center'}
+                >
+                  <ZigTablePriceLabel
+                    id={`portfolio-table__dailyAvg-${original.serviceId}`}
+                    coin={original.ssc}
+                    value={new BigNumber(getValue()).toFixed()}
+                    color={getColorForNumber(getValue())}
+                  />
+                </Box>
+              ),
+              sortingFn: 'alphanumeric',
+            }),
+            columnHelper.accessor((row) => +row.pnl90dPct, {
+              header: t('tableHeader.3-mos-title'),
+              id: 'pnl90dPct',
+              cell: ({ getValue, row: { original } }) => (
+                <ChangeIndicator
+                  id={`portfolio-table__pnl90dPct-${original.serviceId}`}
+                  normalized
+                  type='default'
+                  value={new BigNumber(getValue()).toFixed()}
+                />
+              ),
+              sortingFn: 'auto',
+            }),
+            columnHelper.accessor((row) => +row.pnl180dPct, {
+              header: t('tableHeader.6-mos-title'),
+              id: 'pnl180dPct',
+              cell: ({ getValue, row: { original } }) => (
+                <ChangeIndicator
+                  id={`portfolio-table__pnl180dPct-${original.serviceId}`}
+                  normalized
+                  type='default'
+                  value={new BigNumber(getValue()).toFixed()}
+                />
+              ),
+              sortingFn: 'auto',
+            }),
+            columnHelper.accessor((row) => +row.pnlPctLc, {
+              header: t('tableHeader.all.title'),
+              id: 'pnlPctLc',
+              meta: { subtitle: t('tableHeader.all.subtitle') },
+              cell: ({ getValue, row: { original } }) => (
+                <ChangeIndicator
+                  id={`portfolio-table__pnlPctLc-${original.serviceId}`}
+                  type='default'
+                  normalized
+                  value={getValue()}
+                  label={formatDateFromDays(
+                    calculateServiceAge(original.createdAt),
+                  )}
+                  labelTooltip={t('tooltip-date', {
+                    date: new Date(original.createdAt).toLocaleDateString(),
+                  })}
+                />
+              ),
+              sortingFn: 'auto',
+            }),
+            columnHelper.display({
+              id: 'link',
+              cell: ({ row }) => (
+                <Box
+                  component={Link}
+                  to={generatePath(ROUTE_TRADING_SERVICE, {
+                    serviceId: row?.original?.serviceId?.toString(),
+                  })}
+                  sx={{
+                    cursor: 'pointer',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    display: 'flex',
+                    textAlign: 'start',
+                    width: '0px',
+                  }}
+                  id={`portfolio-table__link-${row.original.serviceId}`}
+                >
+                  <ArrowForwardIosIcon
+                    sx={{
+                      color: theme.palette.links,
+                      width: '20px',
+                      height: '20px',
+                    }}
+                  />
+                </Box>
+              ),
+            }),
+          ]
+        : []),
     ],
-    [t],
+    [t, md],
   );
 
   return (
@@ -265,7 +299,7 @@ const MyDashboard: React.FC = () => {
                   columns={columns}
                   data={services}
                   emptyMessage={t('table-search-emptyMessage')}
-                  columnVisibility
+                  columnVisibility={md}
                 />
               </ZigTableWrapper>
             </>

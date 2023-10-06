@@ -38,7 +38,7 @@ describe('useTierLayers', () => {
   it('should calculate the 3 layers when user + trader boost', () => {
     const {
       result: { current: layers },
-    } = renderHook(() => useTierLayers(tiers, 1, 2, 5));
+    } = renderHook(() => useTierLayers(tiers, 1, 2, 1));
 
     expect(layers).toEqual([
       { value: 40, height: 121 },
@@ -74,7 +74,7 @@ describe('useTierLayers', () => {
   it('should calculate the 2 layers when trader boost only', () => {
     const {
       result: { current: layers },
-    } = renderHook(() => useTierLayers(tiers, 1, 1, 5));
+    } = renderHook(() => useTierLayers(tiers, 1, 1, 1));
 
     expect(layers).toEqual([
       { value: 20, height: expect.any(Number) },

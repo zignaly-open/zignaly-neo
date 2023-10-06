@@ -21,7 +21,7 @@ import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
 import { QueryReturnType } from '../../util/queryReturnType';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
-import { TraderServiceFull } from '../service/types';
+import { Service } from '../service/types';
 import { serviceToInvestmentServiceDetail } from './util';
 
 export const useInvestments = useInvestmentsQuery;
@@ -44,7 +44,7 @@ export function useInvestmentDetails(
 
 export function useSelectInvestment(
   // we support both scenarios, so it's easier for you <3
-  service: InvestmentServiceDetails | TraderServiceFull,
+  service: InvestmentServiceDetails | Service,
 ): void {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -118,17 +118,19 @@ export function useCurrentBalance(coin?: string): {
   id: string;
   balance: string;
   isFetching: boolean;
+  refetch: () => void;
 } {
   const service = useSelectedInvestment();
-  const { data: coins, isFetching } = useCoinBalances();
+  const { data: coins, isFetching, refetch } = useCoinBalances();
 
   return useMemo(
     () => ({
       isFetching,
       id: coin || service?.ssc,
       balance: coins?.[coin || service?.ssc]?.balanceFree || '0',
+      refetch,
     }),
-    [coin, service?.ssc, coins, isFetching],
+    [coin, service?.ssc, coins, isFetching, refetch],
   );
 }
 

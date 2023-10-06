@@ -4,13 +4,13 @@ import {
   Investor,
   TraderService,
   TraderServiceBalance,
-  TraderServiceFull,
   TraderServiceManagement,
   TraderServiceChart,
   TransferPayload,
   EditServicePayload,
   CreateServicePayload,
   ServiceTypesInfo,
+  Service,
 } from './types';
 import { injectEndpoints, providesList } from 'apis/util';
 import baseApiPs2 from '../baseApiPs2';
@@ -22,7 +22,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
     providesTags: (result) => providesList(result, 'Service', 'serviceId'),
   }),
-  traderServiceDetails: builder.query<TraderServiceFull, string>({
+  traderServiceDetails: builder.query<Service, string>({
     providesTags: (result, error, id) => [{ type: 'Service', id }],
     query: (id) => ({
       url: `services/${id}`,
@@ -69,10 +69,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       body: { minimum },
     }),
   }),
-  createTraderService: builder.mutation<
-    TraderServiceFull,
-    CreateServicePayload
-  >({
+  createTraderService: builder.mutation<Service, CreateServicePayload>({
     invalidatesTags: ['Service'],
     query: (payload) => ({
       url: `services`,

@@ -25,9 +25,9 @@ const TraderCard = ({
       gap='12px'
       padding='42px 6px 30px'
     >
-      {traderBoost > 1 && (
+      {traderBoost > 0 && (
         <CommissionBoostChip>
-          <ServiceBoostChip boost={traderBoost} />
+          <ServiceBoostChip boost={traderBoost + 1} />
         </CommissionBoostChip>
       )}
       <ZigTypography
