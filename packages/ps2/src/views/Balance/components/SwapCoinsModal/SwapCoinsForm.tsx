@@ -105,10 +105,12 @@ function SwapCoinsForm({
   useEffect(() => {
     if (convertPreview)
       setMinAmount(trimZeros((convertPreview?.min).toFixed(8)));
+  }, [convertPreview]);
+  useEffect(() => {
     if (amount) {
       trigger('fromCoinAmount');
     }
-  }, [convertPreview, isFetchingConvertPreview, trigger, minAmount]);
+  }, [minAmount]);
 
   const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
     selectedFromToken.coin,
