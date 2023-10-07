@@ -1,0 +1,13 @@
+name: PS2 Staging deploy
+on:
+  push:
+    branches:
+      - feat/unauthorized-deploy
+
+jobs:
+  deploy:
+    name: PS2 Staging deploy
+    uses: ./.github/workflows/ps2-deploy.yml
+    secrets: inherit
+    with:
+      deploy-env: staging
