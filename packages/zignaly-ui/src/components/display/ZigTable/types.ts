@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Row, SortingState, TableOptions, TableState } from "@tanstack/react-table";
+import { Row, TableOptions, TableState } from "@tanstack/react-table";
 import { RtkQueryLike } from "../../../utils/rtk";
 
 interface ZigTablePropsBase<T extends object>
