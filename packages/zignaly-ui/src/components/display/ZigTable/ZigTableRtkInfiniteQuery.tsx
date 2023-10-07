@@ -14,7 +14,7 @@ const ZigTableRtkInfiniteQuery = <T extends object, V extends ZigTableQueryParam
 ) => {
   const { pagination, setPagination, isFetching, isLoading, hasMore, data, refetch } =
     useInfinitePaginatedQuery({
-      useInfiniteQuery,
+      useQuery: useInfiniteQuery,
       queryExtraParams,
     });
 

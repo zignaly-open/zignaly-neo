@@ -9,10 +9,8 @@ const ZigTable = <T extends object, V extends ZigTableQueryParams>(
   ref: ForwardedRef<ZigTableQueryRef>,
 ) => {
   if ("data" in props) return <ZigTableData {...props} />;
-  if ("useQuery" in props && props.infinite)
-    return <ZigTableRtkInfiniteQuery {...props} ref={ref} />;
-  if ("useQuery" in props && !props.infinite)
-    return <ZigTableRtkFiniteQuery {...props} ref={ref} />;
+  if ("useInfiniteQuery" in props) return <ZigTableRtkInfiniteQuery {...props} ref={ref} />;
+  if ("useQuery" in props) return <ZigTableRtkFiniteQuery {...props} ref={ref} />;
   throw new Error("ZigTable should have either data or query prop");
 };
 
