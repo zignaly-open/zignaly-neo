@@ -20,7 +20,6 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
-import { isSafari } from "react-device-detect";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -170,22 +169,15 @@ export default function ZigTable<T extends object>({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => {
-              const onClick = () => {
-                onRowClick?.(row.id);
-                if (row.getCanExpand()) row.getToggleExpandedHandler();
-              };
               return (
                 <React.Fragment key={row.id}>
                   <tr
                     {...(row.getCanExpand() && {
+                      onClick: row.getToggleExpandedHandler(),
                       style: { cursor: "pointer" },
                     })}
-                    onClick={onClick}
-                    style={{
-                      cursor: onRowClick ? "pointer" : "unset",
-                      position: "relative",
-                      transform: isSafari ? "scale(1)" : undefined,
-                    }}
+                    onClick={() => onRowClick?.(row.id)}
+                    style={{ cursor: onRowClick ? "pointer" : "unset", position: "relative" }}
                   >
                     {row.getVisibleCells().map((cell, index) => {
                       return (
