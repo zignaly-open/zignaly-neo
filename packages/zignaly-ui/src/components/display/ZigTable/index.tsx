@@ -172,12 +172,14 @@ export default function ZigTable<T extends object>({
               return (
                 <React.Fragment key={row.id}>
                   <tr
-                    {...(row.getCanExpand() && {
-                      onClick: row.getToggleExpandedHandler(),
-                      style: { cursor: "pointer" },
-                    })}
-                    onClick={() => onRowClick?.(row.id)}
-                    style={{ cursor: onRowClick ? "pointer" : "unset", position: "relative" }}
+                    onClick={() => {
+                      row.getCanExpand() && row.getToggleExpandedHandler()();
+                      onRowClick?.(row.id);
+                    }}
+                    style={{
+                      cursor: onRowClick || row.getCanExpand() ? "pointer" : "unset",
+                      position: "relative",
+                    }}
                   >
                     {row.getVisibleCells().map((cell, index) => {
                       return (
