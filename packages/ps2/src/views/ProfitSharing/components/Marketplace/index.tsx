@@ -215,7 +215,6 @@ const Marketplace: React.FC = () => {
       columnHelper.display({
         header: '',
         id: 'action',
-        style: { display: 'none' },
         cell: (props) =>
           md ? (
             <MarketplaceAction service={props.row.original} />
@@ -225,7 +224,6 @@ const Marketplace: React.FC = () => {
               rowId={props.row.id}
             />
           ),
-        enableHiding: true,
       }),
       ...(md
         ? [
