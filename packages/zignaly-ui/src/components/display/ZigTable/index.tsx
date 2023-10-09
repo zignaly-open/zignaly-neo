@@ -170,19 +170,15 @@ export default function ZigTable<T extends object>({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => {
-              const onClick = () => {
-                onRowClick?.(row.id);
-                if (row.getCanExpand()) row.getToggleExpandedHandler();
-              };
               return (
                 <React.Fragment key={row.id}>
                   <tr
-                    {...(row.getCanExpand() && {
-                      style: { cursor: "pointer" },
-                    })}
-                    onClick={onClick}
+                    onClick={() => {
+                      row.getCanExpand() && row.getToggleExpandedHandler()();
+                      onRowClick?.(row.id);
+                    }}
                     style={{
-                      cursor: onRowClick ? "pointer" : "unset",
+                      cursor: onRowClick || row.getCanExpand() ? "pointer" : "unset",
                       position: "relative",
                       transform: isSafari ? "scale(1)" : undefined,
                     }}

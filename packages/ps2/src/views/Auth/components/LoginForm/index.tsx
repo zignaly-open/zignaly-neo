@@ -9,7 +9,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { ZigTypography, ZigInput, ZigButton, ZigLink } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { LoginPayload } from '../../../../apis/user/types';
+import { LoginPayload, UserAccessLevel } from '../../../../apis/user/types';
+import { useZModal } from 'components/ZModal/use';
+import AlertModal from 'components/ZModal/modals/AlertModal';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -37,13 +39,25 @@ const LoginForm: React.FC = () => {
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
   const { state: locationState } = useLocation();
+  const { showModal } = useZModal();
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
       // eslint-disable-next-line no-console
       console.error(e);
-      setError('email', { type: 'server', message: e.message });
-      setError('password', { type: 'server', message: e.message });
+      if (
+        e.data.error.code === 1091 &&
+        e.data.error.details.userLevel === UserAccessLevel.Banned
+      ) {
+        showModal(AlertModal, {
+          title: t('access.banned.title', { ns: 'error' }),
+          okLabel: t('access.banned.action', { ns: 'error' }),
+          description: t('access.banned.description', { ns: 'error' }),
+        });
+      } else {
+        setError('email', { type: 'server', message: e.message });
+        setError('password', { type: 'server', message: e.message });
+      }
     });
   };
 

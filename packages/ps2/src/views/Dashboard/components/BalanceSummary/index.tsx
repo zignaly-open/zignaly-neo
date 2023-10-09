@@ -15,7 +15,7 @@ export const BalanceSummary = ({
   profit,
   coin = 'USDT',
   dashboardType = 'investor',
-  onClickEdit = () => null,
+  onClickEdit,
 }: BalanceSummaryProps) => {
   // we need editinvestment to have that ns when we fire the modal
   const { t } = useTranslation(['table', 'action', 'edit-investment']);
@@ -48,16 +48,17 @@ export const BalanceSummary = ({
           />
         )}
       </Box>
-
-      <DottedButton
-        variant={'text'}
-        id={`${prefixId}__edit-${serviceId}`}
-        startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
-        onClick={onClickEdit}
-        sx={{}}
-      >
-        {t('action:edit')}
-      </DottedButton>
+      {onClickEdit && (
+        <DottedButton
+          variant={'text'}
+          id={`${prefixId}__edit-${serviceId}`}
+          startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
+          onClick={onClickEdit}
+          sx={{}}
+        >
+          {t('action:edit')}
+        </DottedButton>
+      )}
     </Layout>
   );
 };

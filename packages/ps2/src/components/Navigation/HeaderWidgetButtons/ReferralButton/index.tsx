@@ -52,6 +52,7 @@ const ReferralButton = () => {
                 lineHeight: 1,
                 textAlign: 'center',
               }}
+              className='referral-button__title'
             >
               {t('header.referrals.title', { commission: maxCommission })}
             </ZigTypography>
@@ -63,6 +64,7 @@ const ReferralButton = () => {
                 textAlign: 'center',
               }}
               color='neutral200'
+              className='referral-button__subtitle'
             >
               {t('header.referrals.description')}
             </ZigTypography>
