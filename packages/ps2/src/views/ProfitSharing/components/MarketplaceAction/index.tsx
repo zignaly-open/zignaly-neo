@@ -12,12 +12,20 @@ import { Service } from '../../../../apis/service/types';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
-import { CenteredLoader, ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
+import {
+  CenteredLoader,
+  trimZeros,
+  ZigButton,
+  ZigCrossIcon,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useTranslation } from 'react-i18next';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
+import { useZModal } from '../../../../components/ZModal/use';
+import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 
 const loadingSpinner = (
   <LoaderWrapper>
@@ -53,7 +61,7 @@ export const MobileMarketplaceAction = ({
         width={'100%'}
         height={'100px'}
       >
-        <MarketplaceAction service={service} />
+        <MarketplaceAction service={service} fullSize={false} />
         <ZigButton
           size={'large'}
           variant={'outlined'}
@@ -87,9 +95,11 @@ export const MobileMarketplaceAction = ({
 const MarketplaceAction = ({
   service,
   prefixId = 'marketplace-table',
+  fullSize = true,
 }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
+  const { t } = useTranslation('marketplace');
 
   const { isLoading, data: investments } = useInvestments(
     exchange?.internalId,
@@ -97,6 +107,7 @@ const MarketplaceAction = ({
       skip: !exchange?.internalId,
     },
   );
+  const { showModal } = useZModal({ disableAutoDestroy: true });
 
   const traderService = marketplaceServiceToServiceType(service) as Service;
   const investment = investments?.find((x) => x.serviceId === service.id);
@@ -113,11 +124,30 @@ const MarketplaceAction = ({
           <Suspense fallback={loadingSpinner}>
             <>
               {isAuthenticated && investedAmount ? (
-                <InvestedButtonBase
-                  prefixId={prefixId}
-                  service={traderService}
-                  investedAmount={investedAmount.toString()}
-                />
+                fullSize ? (
+                  <InvestedButtonBase
+                    prefixId={prefixId}
+                    service={traderService}
+                    investedAmount={investedAmount.toString()}
+                  />
+                ) : (
+                  <ZigButton
+                    id={prefixId && `${prefixId}__edit-investment`}
+                    size={'large'}
+                    onClick={() => {
+                      showModal(EditInvestmentModal, { serviceId: service.id });
+                    }}
+                  >
+                    <Box display={'flex'} flexDirection={'column'}>
+                      {t('table.invested', {
+                        invested: trimZeros(investedAmount.toFixed(2)),
+                      })}
+                      <ZigTypography variant={'body2'}>
+                        {t('table.edit')}
+                      </ZigTypography>
+                    </Box>
+                  </ZigButton>
+                )
               ) : (
                 <InvestButton prefixId={prefixId} service={traderService} />
               )}
