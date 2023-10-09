@@ -20,6 +20,7 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
+import { isSafari } from "react-device-detect";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -179,6 +180,7 @@ export default function ZigTable<T extends object>({
                     style={{
                       cursor: onRowClick || row.getCanExpand() ? "pointer" : "unset",
                       position: "relative",
+                      transform: isSafari ? "scale(1)" : undefined,
                     }}
                   >
                     {row.getVisibleCells().map((cell, index) => {
