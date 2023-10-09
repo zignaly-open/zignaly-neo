@@ -16,6 +16,8 @@ import dateLocaleTr from 'date-fns/locale/tr';
 import dateLocaleRu from 'date-fns/locale/ru';
 import dateLocaleVi from 'date-fns/locale/vi';
 
+import HttpBackend from 'i18next-http-backend';
+
 Countries.registerLocale(CountriesEn);
 Countries.registerLocale(CountriesPt);
 Countries.registerLocale(CountriesTr);
@@ -68,7 +70,12 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
+      backends: [HttpBackend],
+      backendOptions: [
+        {
+          loadPath: '/locales/{{lng}}/{{ns}}2.json',
+        },
+      ],
     },
     debug: false,
     ns: ['common', 'error'],
@@ -96,6 +103,7 @@ i18n
         return `${value}`;
       },
     },
+
     react: {
       useSuspense: true,
     },
