@@ -59,7 +59,7 @@ export const MobileMarketplaceAction = ({
           gap: 2,
         }}
         width={'100%'}
-        height={'100px'}
+        height={'93px'}
       >
         <MarketplaceAction service={service} fullSize={false} />
         <ZigButton
@@ -137,15 +137,35 @@ const MarketplaceAction = ({
                     onClick={() => {
                       showModal(EditInvestmentModal, { serviceId: service.id });
                     }}
+                    sx={{
+                      flexDirection: 'column',
+                      minWidth: 165,
+                      padding: '6px 26px',
+                    }}
                   >
-                    <Box display={'flex'} flexDirection={'column'}>
-                      {t('table.invested', {
-                        invested: trimZeros(investedAmount.toFixed(2)),
-                      })}
-                      <ZigTypography variant={'body2'}>
+                    <>
+                      <ZigTypography
+                        variant='body2'
+                        color='neutral000'
+                        fontWeight={600}
+                        letterSpacing={1.1}
+                        lineHeight={'15px'}
+                        sx={{ textTransform: 'uppercase !important' }}
+                      >
+                        {t('table.invested', {
+                          invested: trimZeros(investedAmount.toFixed(2)),
+                        })}
+                      </ZigTypography>
+
+                      <ZigTypography
+                        variant={'caption'}
+                        component='p'
+                        color='neutral150'
+                        fontWeight={500}
+                      >
                         {t('table.edit')}
                       </ZigTypography>
-                    </Box>
+                    </>
                   </ZigButton>
                 )
               ) : (
