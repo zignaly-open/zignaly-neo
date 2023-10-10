@@ -149,7 +149,7 @@ const MarketplaceAction = ({
                         color='neutral000'
                         fontWeight={600}
                         letterSpacing={1.1}
-                        lineHeight={'15px'}
+                        lineHeight={'20px'}
                         sx={{ textTransform: 'uppercase !important' }}
                       >
                         {t('table.invested', {
