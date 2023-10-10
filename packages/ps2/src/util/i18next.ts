@@ -73,7 +73,7 @@ i18n
       backends: [HttpBackend],
       backendOptions: [
         {
-          loadPath: '/locales/{{lng}}/{{ns}}2.json',
+          loadPath: '/locales/{{lng}}/{{ns}}.json',
         },
       ],
     },
