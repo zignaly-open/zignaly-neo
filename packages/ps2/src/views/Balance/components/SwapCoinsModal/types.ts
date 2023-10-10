@@ -10,7 +10,7 @@ export type SwapCoinsModalProps = {
 
 export type CoinsSelect = {
   coin: string;
-  available: string | number;
+  available?: string | number;
   label: JSX.Element;
   availableInUsd?: string | number;
 };
