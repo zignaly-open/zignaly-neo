@@ -25,6 +25,8 @@
     "n-years_other": "{{count}} years",
     "account-age": "Account age",
     "x-investors_one": "{{count}} investor",
-    "x-investors_other": "{{count}} investors"
+    "x-investors_other": "{{count}} investors",
+    "invested": "{{ invested }} invested",
+    "edit": "Click to edit"
   }
 }
