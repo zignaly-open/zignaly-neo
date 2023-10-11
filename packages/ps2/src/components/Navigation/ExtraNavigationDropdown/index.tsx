@@ -85,7 +85,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       })),
     },
     {
-      element: (
+      element: socialNetworksLinks.length > 0 && (
         <Networks key={'--social-networks'}>
           {socialNetworksLinks.map((socialNetwork, index) => {
             const IconComponent = socialNetwork.image;

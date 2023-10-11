@@ -24,4 +24,14 @@ export type WhitelabelOverride = {
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
   theme: string;
+  social: Record<
+    | 'telegram'
+    | 'twitter'
+    | 'discord'
+    | 'medium'
+    | 'linkedin'
+    | 'instagram'
+    | 'youtube',
+    string | void
+  >;
 };

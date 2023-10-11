@@ -335,27 +335,31 @@ const ZigDrawer = () => {
                 {t('account-menu.notAuth-button-logOut')}
               </ZigButton>
             )}
-            <ZigTypography mt={2} variant='caption' marginTop='auto'>
-              {t('follow-us')}
-            </ZigTypography>
-            <Box display='flex' justifyContent='center' mt={-1} mb={1}>
-              <Networks>
-                {socialNetworksLinks.map((socialNetwork, index) => {
-                  const IconComponent = socialNetwork.image;
-                  return (
-                    <NavLink
-                      onClick={handleDrawerToggle}
-                      href={socialNetwork.path}
-                      key={`--social-network-nav-link-${index.toString()}`}
-                      id={`drawer__social-network-${index.toString()}`}
-                      target={'_blank'}
-                    >
-                      <IconComponent height={'22px'} width={'22px'} />
-                    </NavLink>
-                  );
-                })}
-              </Networks>
-            </Box>
+            {socialNetworksLinks.length > 0 && (
+              <>
+                <ZigTypography mt={2} variant='caption' marginTop='auto'>
+                  {t('follow-us')}
+                </ZigTypography>
+                <Box display='flex' justifyContent='center' mt={-1} mb={1}>
+                  <Networks>
+                    {socialNetworksLinks.map((socialNetwork, index) => {
+                      const IconComponent = socialNetwork.image;
+                      return (
+                        <NavLink
+                          onClick={handleDrawerToggle}
+                          href={socialNetwork.path}
+                          key={`--social-network-nav-link-${index.toString()}`}
+                          id={`drawer__social-network-${index.toString()}`}
+                          target={'_blank'}
+                        >
+                          <IconComponent height={'22px'} width={'22px'} />
+                        </NavLink>
+                      );
+                    })}
+                  </Networks>
+                </Box>
+              </>
+            )}
           </Box>
         </Drawer>
       </Box>
