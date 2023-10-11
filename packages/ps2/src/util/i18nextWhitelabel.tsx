@@ -6,17 +6,22 @@ let overrides: Record<string, Record<string, Record<string, string>>> | null =
 
 const loaderPromise = fetch('/translationOverride.json')
   .then((r) => r.json())
+  // .then((r) => new Promise((res) => setTimeout(res, 5000)).then(() => r))
   .then((v) => {
     overrides = v;
-    // postProcessOverrides(overrides);
+    postProcessOverrides();
   })
+
   .catch((e) => {
     // eslint-disable-next-line no-console
     console.error('Failed to load translation overrides', e);
     overrides = {};
   });
 
-i18n.on('loaded', (data) => {
+i18n.on('loaded', addOverrides);
+
+function addOverrides(data: Record<string, Record<string, boolean | unknown>>) {
+  // this is for when we have the overrides and we've just loaded the ns
   for (const [language, namespaces] of Object.entries(data)) {
     for (const [ns, loaded] of Object.entries(namespaces)) {
       if (loaded) {
@@ -24,9 +29,20 @@ i18n.on('loaded', (data) => {
       }
     }
   }
-});
+}
 
-// function postProcessOverrides(overrides) {}
+function postProcessOverrides() {
+  // this is for whenn we already have some ns, and now we've just loaded the overrides
+
+  // we can not just add resources before they are loaded
+  // because in this case react-i18next thinks that it already has a resource
+  // and it won't load the full translation
+
+  // here we check only the current language
+  // because the scenario when they loaded 1st language, switched to another and then would switch back
+  // is extremely unlikely provided this function should not be even firing normally
+  addOverrides({ [i18n.language]: i18n.getDataByLanguage(i18n.language) });
+}
 
 const I18NextWhitelabelTranslationOverrideLoader: React.FC<
   PropsWithChildren
