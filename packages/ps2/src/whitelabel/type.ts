@@ -14,6 +14,7 @@ export type OverrideableEndpoints = 'marketplace/';
 export type WhitelabelOverride = {
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
+  translationOverrides?: boolean;
   featureOverrides: Record<Partial<Features>, boolean>;
   xSource?: string;
   subscriptionPurchaseLink?: string;

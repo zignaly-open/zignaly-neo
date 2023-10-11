@@ -19,5 +19,6 @@ export default {
   // background: '#fcdcdc',
   // backgroundImage: null,
   // theme: 'example',
+  translationOverrides: true,
   loadFontsFromGoogle: true,
 } as WhitelabelOverride;
