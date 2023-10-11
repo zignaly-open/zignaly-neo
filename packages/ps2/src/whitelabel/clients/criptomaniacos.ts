@@ -2,6 +2,7 @@ import { Features, WhitelabelOverride } from '../type';
 import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
+  title: 'Criptomaniacos',
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,

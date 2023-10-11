@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Enable2FAForm from './Enable2FaForm';
 import Disable2FAForm from './Disable2FaForm';
 import { useCurrentUser } from 'apis/user/use';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import { PageContainer, ZigTypography } from '@zignaly-open/ui';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
 

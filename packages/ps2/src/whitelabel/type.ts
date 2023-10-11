@@ -12,6 +12,7 @@ export enum Features {
 export type OverrideableEndpoints = 'marketplace/';
 
 export type WhitelabelOverride = {
+  title: string;
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: boolean;

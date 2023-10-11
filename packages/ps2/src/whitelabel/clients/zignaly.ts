@@ -1,6 +1,7 @@
 import { WhitelabelOverride } from '../type';
 
 export default {
+  title: 'Zignaly',
   social: {
     twitter: 'https://twitter.com/zignaly',
     telegram: 'https://t.me/ZignalyHQ',
