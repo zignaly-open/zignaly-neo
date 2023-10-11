@@ -21,11 +21,12 @@ const DEFAULT_USER_BOOST = 2;
 
 export function useTiersData(serviceId?: string) {
   const isAuthenticated = useIsAuthenticated();
+  const featureOn = isFeatureOn(Features.Referrals);
   const {
     data: tiers,
     isError: isErrorTiers,
     refetch: refetchTiers,
-  } = useTierLevelsQuery(undefined, { skip: !isFeatureOn(Features.Referrals) });
+  } = useTierLevelsQuery(undefined, { skip: !featureOn });
   const {
     data: serviceCommissionData,
     isError: isErrorCommissions,
@@ -36,13 +37,13 @@ export function useTiersData(serviceId?: string) {
       serviceId: serviceId,
     },
     {
-      skip: !serviceId || !isFeatureOn(Features.Referrals),
+      skip: !serviceId || !featureOn,
     },
   );
   const { data: serviceData, isLoading: serviceLoading } = useServiceDetails(
     serviceId,
     {
-      skip: !serviceId || !isFeatureOn(Features.Referrals),
+      skip: !serviceId || !featureOn,
     },
   );
 
@@ -63,7 +64,7 @@ export function useTiersData(serviceId?: string) {
     isError: isErrorReferrakRewards,
     refetch: refetchRewards,
   } = useReferralRewardsQuery(undefined, {
-    skip: !isAuthenticated || !isFeatureOn(Features.Referrals),
+    skip: !isAuthenticated || !featureOn,
     // todo: reset referral state in clearUserSession
     refetchOnMountOrArgChange: true,
   });
@@ -110,7 +111,7 @@ export function useTiersData(serviceId?: string) {
     boostRunning,
     isError,
     isLoading:
-      isFeatureOn(Features.Referrals) &&
+      featureOn &&
       !isError &&
       (!tiers || serviceCommissionLoading || referralLoading || serviceLoading),
     tiers,
