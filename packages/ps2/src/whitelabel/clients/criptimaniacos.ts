@@ -10,5 +10,6 @@ export default {
   endpointOverrides: {
     'marketplace/': 'market',
   },
+  translationOverrides: true,
   xSource: 'criptomaniacos',
 } as WhitelabelOverride;

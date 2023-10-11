@@ -35,7 +35,7 @@ if (whitelabel.translationOverrides) {
     addOverrides({ [i18n.language]: i18n.getDataByLanguage(i18n.language) });
   };
 
-  loaderPromise = fetch('/translationOverride.json?wl=' + whitelabelName)
+  loaderPromise = fetch(`/locales/_overrides/${whitelabelName}.json`)
     .then((r) => r.json())
     .then((v) => {
       overrides = v;
