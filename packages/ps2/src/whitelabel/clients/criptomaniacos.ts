@@ -1,4 +1,5 @@
 import { Features, WhitelabelOverride } from '../type';
+import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   featureOverrides: {
@@ -12,6 +13,8 @@ export default {
   },
   translationOverrides: true,
   xSource: 'criptomaniacos',
+  mainAppLink: ROUTE_DASHBOARD,
+  logo: '/images/whitelabel/criptomaniacos/logo-horizontal.svg',
   social: {
     twitter: 'https://cmania.co/zig-xtwitter',
     telegram: 'https://cmania.co/zig-tg',
