@@ -12,6 +12,7 @@ import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
 import { useTiersData } from 'apis/referrals/use';
 import CurrentCommission from './CurrentCommission';
+import { HELP_REFERRAL } from 'util/constants';
 
 const ReferralsInviteModal = ({
   service,
@@ -192,6 +193,9 @@ const ReferralsInviteModal = ({
               />
             }
             id='referrals-invite-modal__terms-link'
+            href={HELP_REFERRAL}
+            target='_blank'
+            rel='noopener'
           >
             {t('terms')}
           </ZigButton>
