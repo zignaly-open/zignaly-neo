@@ -13,6 +13,8 @@ import {
 } from 'views/TraderService/components/ReferralsInviteModal/util';
 import { useIsAuthenticated } from 'apis/user/use';
 import { useServiceDetails } from 'apis/service/use';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 const DEFAULT_SERVICE_COMMISSION = 10;
 const DEFAULT_USER_BOOST = 2;
@@ -23,7 +25,7 @@ export function useTiersData(serviceId?: string) {
     data: tiers,
     isError: isErrorTiers,
     refetch: refetchTiers,
-  } = useTierLevelsQuery();
+  } = useTierLevelsQuery(undefined, { skip: !isFeatureOn(Features.Referrals) });
   const {
     data: serviceCommissionData,
     isError: isErrorCommissions,
@@ -34,13 +36,13 @@ export function useTiersData(serviceId?: string) {
       serviceId: serviceId,
     },
     {
-      skip: !serviceId,
+      skip: !serviceId || !isFeatureOn(Features.Referrals),
     },
   );
   const { data: serviceData, isLoading: serviceLoading } = useServiceDetails(
     serviceId,
     {
-      skip: !serviceId,
+      skip: !serviceId || !isFeatureOn(Features.Referrals),
     },
   );
 
@@ -61,7 +63,7 @@ export function useTiersData(serviceId?: string) {
     isError: isErrorReferrakRewards,
     refetch: refetchRewards,
   } = useReferralRewardsQuery(undefined, {
-    skip: !isAuthenticated,
+    skip: !isAuthenticated || !isFeatureOn(Features.Referrals),
     // todo: reset referral state in clearUserSession
     refetchOnMountOrArgChange: true,
   });
@@ -108,6 +110,7 @@ export function useTiersData(serviceId?: string) {
     boostRunning,
     isError,
     isLoading:
+      isFeatureOn(Features.Referrals) &&
       !isError &&
       (!tiers || serviceCommissionLoading || referralLoading || serviceLoading),
     tiers,
