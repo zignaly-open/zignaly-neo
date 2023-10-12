@@ -17,6 +17,7 @@ import dateLocaleRu from 'date-fns/locale/ru';
 import dateLocaleVi from 'date-fns/locale/vi';
 
 import HttpBackend from 'i18next-http-backend';
+import { whitelabel } from '../whitelabel';
 
 Countries.registerLocale(CountriesEn);
 Countries.registerLocale(CountriesPt);
@@ -29,7 +30,9 @@ Countries.registerLocale(CountriesVi);
 // if (CountriesEn.countries.RU)
 //   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
-export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
+export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'].filter(
+  (l) => !whitelabel?.locales || whitelabel?.locales.includes(l),
+);
 
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
 

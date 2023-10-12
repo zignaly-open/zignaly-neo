@@ -10,6 +10,7 @@ export default {
     [Features.Trader]: false,
     [Features.NewSignup]: false,
   },
+  locales: ['en', 'pt'],
   endpointOverrides: {
     'marketplace/': 'market',
   },
