@@ -19,6 +19,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Replace index.html
         if: ${{ vars.WHITELABEL != ''}}
+        # Well, we could have achieved the same with ejecting the app and configuring
+        # multiple entry points, but ejecting instills feat into my heart and soul
         run: |
           if [ -f "packages/ps2/public/whitelabel/${{ vars.WHITELABEL}}.html" ]; then
             cp -r "packages/ps2/public/whitelabel/${{ vars.WHITELABEL}}.html" "packages/ps2/public/index.html"
