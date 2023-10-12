@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import Marketplace from './components/Marketplace';
 import { useMarketplace } from '../../apis/marketplace/use';
 import { zigSuspenseFallback } from '../../util/suspense';

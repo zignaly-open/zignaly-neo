@@ -2,6 +2,8 @@ import { Features, WhitelabelOverride } from '../type';
 import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
+  title: 'Example',
+  helpUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
@@ -19,5 +21,6 @@ export default {
   // background: '#fcdcdc',
   // backgroundImage: null,
   // theme: 'example',
+  translationOverrides: true,
   loadFontsFromGoogle: true,
 } as WhitelabelOverride;

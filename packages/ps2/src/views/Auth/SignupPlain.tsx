@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import { PageContainer } from '@zignaly-open/ui';
 import SignupForm from './components/SignupForm';
 import { useMaybeSaveMissedDestinationUrl } from '../../util/navigation';

@@ -12,8 +12,12 @@ export enum Features {
 export type OverrideableEndpoints = 'marketplace/';
 
 export type WhitelabelOverride = {
+  title: string;
+  helpUrl: string;
+  locales?: string[];
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
+  translationOverrides?: boolean;
   featureOverrides: Record<Partial<Features>, boolean>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
@@ -23,4 +27,14 @@ export type WhitelabelOverride = {
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
   theme: string;
+  social: Record<
+    | 'telegram'
+    | 'twitter'
+    | 'discord'
+    | 'medium'
+    | 'linkedin'
+    | 'instagram'
+    | 'youtube',
+    string | void
+  >;
 };

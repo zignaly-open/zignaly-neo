@@ -1,7 +1,7 @@
 import { toast, ToastOptions } from 'react-toastify';
 import { Toaster } from '@zignaly-open/ui';
 import React from 'react';
-import { TFunction, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { BackendError } from '../errors';
 
 type ToastFn = (text: string, extraOptions?: ToastOptions) => void;
@@ -22,7 +22,7 @@ const showToast =
       } as ToastOptions,
     );
 
-const backendErrorText = (t: TFunction, error: BackendError) => {
+const backendErrorText = (t: (key: string) => string, error: BackendError) => {
   const { code, msg } = error?.data?.error || {};
   const translationKey = 'error:error.' + code;
   return code && t(translationKey) !== translationKey.replace(/^error:/, '')
@@ -38,7 +38,7 @@ const ignoreError = (error: BackendError) => {
 };
 
 export const backendError = (
-  t: TFunction,
+  t: (key: string) => string,
   error: BackendError,
   ignoreDuplicate: boolean,
 ) => {
@@ -63,7 +63,7 @@ export function useToast(): {
   error: ToastFn;
   backendError: (error?: BackendError, ignoreDuplicate?: boolean) => void;
 } {
-  const { t } = useTranslation('error');
+  const { t } = useTranslation<'error'>('error');
   return {
     success: showToast('success'),
     error: showToast('error'),

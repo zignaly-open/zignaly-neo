@@ -19,7 +19,10 @@ const ReferralsInviteModal = ({
   close,
   ...props
 }: ReferralsInviteModalProps) => {
-  const { t } = useTranslation(['referrals-trader', 'service']);
+  const { t } = useTranslation<['referrals-trader', 'service']>([
+    'referrals-trader',
+    'service',
+  ]);
   const {
     tiers,
     referral,
