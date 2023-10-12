@@ -47,14 +47,13 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
 } from 'routes';
 import theme from 'theme';
-import { HELP_URL } from 'util/constants';
 import { supportedLanguages } from 'util/i18next';
 import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DrawerMenuItem, DropdownExchangeAccount } from './atoms';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { isFeatureOn } from '../../../whitelabel';
+import { isFeatureOn, whitelabel } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 
 const drawerWidth = 250;
@@ -267,7 +266,7 @@ const ZigDrawer = () => {
                 </ListItem>
               )}
               <ListItem disablePadding onClick={handleDrawerToggle}>
-                <ListItemButton target='_blank' href={HELP_URL}>
+                <ListItemButton target='_blank' href={whitelabel.helpUrl}>
                   <ListItemText
                     primary={t('main-menu.dropdown-link-helpDocs')}
                   />

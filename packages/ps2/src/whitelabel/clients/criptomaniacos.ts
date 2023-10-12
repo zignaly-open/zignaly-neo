@@ -3,6 +3,7 @@ import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'Criptomaniacos',
+  helpUrl: 'https://cmania.co/suporte-zig',
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
