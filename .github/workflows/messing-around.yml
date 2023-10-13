@@ -1,0 +1,45 @@
+name: Messing with Staging
+on:
+  push:
+    branches:
+      - chore/messing-with-staging
+
+jobs:
+  build:
+    name: Messing with Staging
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create junk
+        run: |
+          mkdir -p packages/ps2/build
+          echo "Hello world" > packages/ps2/build/index.html
+      - name: Echo junk
+        run: |
+          cat packages/ps2/build/index.html
+      - name: AWS
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_PS2_STAGING_S3_BUCKET_2 }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/ps2/build'
+
+  invalidate:
+    name: Invalidate caches
+    needs: build
+    runs-on: ubuntu-latest
+    environment: test
+    timeout-minutes: 10
+    steps:
+      - name: Invalidate Cloudflare
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE_STAGING }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_KEY_STAGING }}
