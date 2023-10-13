@@ -246,19 +246,45 @@ const MyBalancesTable = (): JSX.Element => {
       unmountOnRefetch={false}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
-        <ZigTable
-          prefixId={'balance'}
-          columns={columns}
-          data={getFilteredData(coins, balances)}
-          initialState={{
-            sorting: [
-              {
-                id: 'balanceTotalUSDT',
-                desc: true,
-              },
-            ],
-          }}
-        />
+        <>
+          <ZigTable
+            columnVisibility={md}
+            prefixId={'balance'}
+            columns={columns}
+            data={getFilteredData(coins, balances)}
+            initialState={{
+              sorting: [
+                {
+                  id: 'balanceTotalUSDT',
+                  desc: true,
+                },
+              ],
+            }}
+          />
+          {!md && (
+            <ButtonsWrapper>
+              <ZigButton
+                size={'large'}
+                onClick={() => {
+                  showDepositModal();
+                }}
+              >
+                {t('action:deposit')}
+              </ZigButton>
+              <ZigButton
+                variant={'outlined'}
+                onClick={() => {
+                  openWithdrawModal();
+                }}
+              >
+                {t('action:withdraw')}
+              </ZigButton>
+              <ZigButton variant={'outlined'} href={BUY_CRYPTO_URL}>
+                {t('action:buy-crypto')}
+              </ZigButton>
+            </ButtonsWrapper>
+          )}
+        </>
       )}
     />
   );
