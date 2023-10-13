@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { ZigSelect } from '@zignaly-open/ui';
+import { ZigSelect, ZigTab, ZigTabs } from '@zignaly-open/ui';
 
 export const Header = styled('div')`
   display: flex;
@@ -8,6 +8,35 @@ export const Header = styled('div')`
   flex-direction: row;
   margin-bottom: 88px;
   margin-top: 46px;
+`;
+export const StyledTab = styled(ZigTab)<{ active?: boolean }>`
+  position: relative;
+  background-color: ${({ theme, active }) =>
+    active
+      ? theme.palette.backgrounds.activeTab
+      : theme.palette.backgrounds.modal};
+  border-radius: 5px;
+  border: 1px solid
+    ${({ theme, active }) => !active && theme.palette.neutral600};
+  padding: 19px 25px 17px 25px !important;
+  font-weight: 500 !important;
+  z-index: ${({ active }) => (active ? 2 : 1)};
+  margin-left: -23px;
+`;
+
+export const StyledTabs = styled(ZigTabs)<{ md?: boolean }>`
+  margin-left: -23px;
+  justify-content: unset;
+  gap: unset;
+  .MuiTabs-flexContainer {
+    margin-left: 45px;
+  }
+  .MuiTabs-indicator {
+    display: none;
+  }
+  .Mui-selected {
+    color: ${({ theme }) => theme.palette.highlighted} !important;
+  }
 `;
 
 export const StyledZigSelect = styled(ZigSelect)`
