@@ -11,13 +11,13 @@ import {
 import MyBalancesTable from './components/MyBalancesTable';
 import TransactionHistoryTable from './components/TransactionsHistoryTable';
 import BalanceAccountSelector from './components/BalanceAccountSelector';
-import { Header, StyledZigSelect } from './styles';
+import { Header, StyledTab, StyledTabs, StyledZigSelect } from './styles';
 import { useTitle, useUpdateEffect } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
 import { useZModal } from 'components/ZModal/use';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
 import { CSSObject } from '@emotion/react';
@@ -63,95 +63,138 @@ const MyBalances: React.FC = () => {
       };
     }),
   );
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <PageContainer className={'withSubHeader'}>
       <MarginContainer>
-        <Header>
-          <Box sx={{ flex: '0 0 100px' }} />
-          <BalanceAccountSelector />
-          <Box sx={{ flex: '0 0 100px' }}>
-            <ZigButton
-              id={'balances__deposit-header'}
-              startIcon={<ZigPlusIcon width={10} height={10} />}
-              sx={{ fontWeight: 600, mb: 1 }}
-              variant={'contained'}
-              onClick={() => openDepositModal()}
-            >
-              {t('action:deposit')}
-            </ZigButton>
-          </Box>
-        </Header>
-        <Box height='67px' display='flex' alignItems='center'>
-          <ZigTabs
-            value={tab}
-            onChange={(event, newValue) => {
-              setTab(newValue);
-            }}
+        {md ? (
+          <>
+            <Header>
+              <Box sx={{ flex: '0 0 100px' }} />
+              <BalanceAccountSelector />
+              <Box sx={{ flex: '0 0 100px' }}>
+                <ZigButton
+                  id={'balances__deposit-header'}
+                  startIcon={<ZigPlusIcon width={10} height={10} />}
+                  sx={{ fontWeight: 600, mb: 1 }}
+                  variant={'contained'}
+                  onClick={() => openDepositModal()}
+                >
+                  {t('action:deposit')}
+                </ZigButton>
+              </Box>
+            </Header>
+            <Box height='67px' display='flex' alignItems='center'>
+              <ZigTabs
+                value={tab}
+                onChange={(event, newValue) => {
+                  setTab(newValue);
+                }}
+              >
+                <ZigTab
+                  label={t('my-balances:my-coins')}
+                  id={'balance__my-coins'}
+                  value={ROUTE_MY_BALANCES}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  to={generatePath(ROUTE_MY_BALANCES)}
+                  component={Link}
+                />
+                <ZigTab
+                  id={'balance__deposits-withdrawals'}
+                  label={t('my-balances:deposits-withdrawals')}
+                  value={ROUTE_MY_BALANCES_TRANSACTIONS}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  component={Link}
+                  to={generatePath(ROUTE_MY_BALANCES_TRANSACTIONS)}
+                  asideComponent={
+                    <Box display='flex' gap={2}>
+                      <ZigButton
+                        variant={'text'}
+                        id={'balance__export'}
+                        sx={{
+                          '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                            fill: theme.palette.links,
+                          },
+                        }}
+                        endIcon={
+                          <OpenInNew
+                            sx={{ width: '17.33px', height: '17.33px' }}
+                          />
+                        }
+                        onClick={() => {
+                          showModal(ExportModal, {
+                            type: type !== 'all' ? type : null,
+                          });
+                        }}
+                      >
+                        {t('action:export')}
+                      </ZigButton>
+                      <StyledZigSelect
+                        id={'balances-transaction__select-type'}
+                        options={filterOptions}
+                        value={type}
+                        onChange={setType}
+                        styles={{
+                          singleValue: (_, state): CSSObject => ({
+                            display: state.selectProps.menuIsOpen
+                              ? 'none'
+                              : 'inline-block',
+                            textAlign: 'center',
+                            ':after': {
+                              content: `'\\A ${t(
+                                'transactions-history:filter.max',
+                              )}'`,
+                              whiteSpace: 'pre',
+                            },
+                          }),
+                        }}
+                      />
+                    </Box>
+                  }
+                />
+              </ZigTabs>
+            </Box>
+          </>
+        ) : (
+          <Box
+            display={'flex'}
+            width={'100%'}
+            flexDirection={'column'}
+            alignItems={'center'}
           >
-            <ZigTab
-              label={t('my-balances:my-coins')}
-              id={'balance__my-coins'}
-              value={ROUTE_MY_BALANCES}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              to={generatePath(ROUTE_MY_BALANCES)}
-              component={Link}
-            />
-            <ZigTab
-              id={'balance__deposits-withdrawals'}
-              label={t('my-balances:deposits-withdrawals')}
-              value={ROUTE_MY_BALANCES_TRANSACTIONS}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              component={Link}
-              to={generatePath(ROUTE_MY_BALANCES_TRANSACTIONS)}
-              asideComponent={
-                <Box display='flex' gap={2}>
-                  <ZigButton
-                    variant={'text'}
-                    id={'balance__export'}
-                    sx={{
-                      '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                        fill: (theme) => theme.palette.links,
-                      },
-                    }}
-                    endIcon={
-                      <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
-                    }
-                    onClick={() => {
-                      showModal(ExportModal, {
-                        type: type !== 'all' ? type : null,
-                      });
-                    }}
-                  >
-                    {t('action:export')}
-                  </ZigButton>
-                  <StyledZigSelect
-                    id={'balances-transaction__select-type'}
-                    options={filterOptions}
-                    value={type}
-                    onChange={setType}
-                    styles={{
-                      singleValue: (_, state): CSSObject => ({
-                        display: state.selectProps.menuIsOpen
-                          ? 'none'
-                          : 'inline-block',
-                        textAlign: 'center',
-                        ':after': {
-                          content: `'\\A ${t(
-                            'transactions-history:filter.max',
-                          )}'`,
-                          whiteSpace: 'pre',
-                        },
-                      }),
-                    }}
-                  />
-                </Box>
-              }
-            />
-          </ZigTabs>
-        </Box>
+            <StyledTabs
+              value={tab}
+              onChange={(event, newValue) => {
+                setTab(newValue);
+              }}
+            >
+              <StyledTab
+                active={tab === ROUTE_MY_BALANCES}
+                label={t('my-balances:my-coins')}
+                id={'balance__my-coins'}
+                value={ROUTE_MY_BALANCES}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                to={generatePath(ROUTE_MY_BALANCES)}
+                component={Link}
+              />
+              <StyledTab
+                active={tab === ROUTE_MY_BALANCES_TRANSACTIONS}
+                id={'balance__deposits-withdrawals'}
+                label={t('my-balances:deposits-withdrawals')}
+                value={ROUTE_MY_BALANCES_TRANSACTIONS}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                component={Link}
+                to={generatePath(ROUTE_MY_BALANCES_TRANSACTIONS)}
+              />
+            </StyledTabs>
+          </Box>
+        )}
         <ZigTabPanel value={tab} index={ROUTE_MY_BALANCES}>
           <MyBalancesTable />
         </ZigTabPanel>
