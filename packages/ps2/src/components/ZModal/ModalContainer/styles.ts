@@ -24,6 +24,11 @@ export const Layout = styled(Box)<{ width: number }>`
     css`
       width: ${width}px; // TODO: responsiveness
     `};
+  max-width: calc(100vw - 30px);
+
+  @media (max-width: 600px) {
+    padding: 20px 23px;
+  }
 `;
 
 export const Title = styled(ZigTypography)`
@@ -41,11 +46,20 @@ export const Body = styled('div')`
   max-height: calc(100vh - 150px);
   overflow-y: auto;
   overflow-x: visible;
+
   margin-left: -40px;
   margin-right: -40px;
   width: calc(100% + 80px);
   padding-left: 40px;
   padding-right: 40px;
+
+  @media (max-width: 600px) {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
   /* Style Description  */
   > .MuiTypography-root:first-child {

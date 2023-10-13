@@ -47,6 +47,12 @@ export const Layout = styled("div")<{ error?: string; loading?: boolean }>`
       };
       height: 64px !important;
       font-size: 26px;
+
+      @media (max-width: 600px) {
+        width: 44px !important;
+        max-width: calc(100vw - 120px);
+        height: 54px !important;
+      }
     }
 
     input:not(:placeholder-shown):valid {
