@@ -2,7 +2,7 @@ name: PS2 Staging deploy
 on:
   push:
     branches:
-      - master
+      - chore/messing-with-staging2
 
 jobs:
   deploy:

@@ -17,12 +17,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Whitelabel status
-        if: ${{ vars.WHITELABEL != ''}}
-        run: |
-          echo "Whitelabel: ${{ vars.WHITELABEL }}"
-      - name: Replace index.html
-        if: ${{ vars.WHITELABEL != ''}}
+#      - name: Whitelabel status
+#        if: ${{ vars.WHITELABEL != ''}}
+#        run: |
+#          echo "Whitelabel: ${{ vars.WHITELABEL }}"
+#      - name: Replace index.html
+#        if: ${{ vars.WHITELABEL != ''}}
         # Well, we could have achieved the same with ejecting the app and configuring
         # multiple entry points, but ejecting instills feat into my heart and soul
         run: |
@@ -33,7 +33,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           # env-specific
-          envkey_REACT_APP_WHITELABEL: ${{ vars.WHITELABEL }}
+#          envkey_REACT_APP_WHITELABEL: ${{ vars.WHITELABEL }}
           envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
           envkey_REACT_APP_GTM_ID: ${{ vars.GTM_ID }}
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
