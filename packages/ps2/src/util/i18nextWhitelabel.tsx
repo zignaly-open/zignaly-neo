@@ -7,6 +7,25 @@ let overrides: Record<string, Record<string, Record<string, string>>> | null =
 
 let loaderPromise: Promise<unknown> | null = null;
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+type TranslationRecord = Record<string, string | TranslationRecord>;
+
+function flattenOverrideObject(
+  obj: TranslationRecord,
+  prefix = '',
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === 'string') {
+      result[key] = value;
+    } else {
+      Object.assign(result, flattenOverrideObject(value, `${prefix}${key}.`));
+    }
+  }
+  return result;
+}
+
 if (whitelabel.translationOverrides) {
   const addOverrides = (
     data: Record<string, Record<string, boolean | unknown>>,
@@ -15,8 +34,11 @@ if (whitelabel.translationOverrides) {
     for (const [language, namespaces] of Object.entries(data || {})) {
       for (const [ns, loaded] of Object.entries(namespaces || {})) {
         const override = overrides?.[language]?.[ns];
-        if (loaded && override) {
-          i18n.addResourceBundle(language, ns, override);
+        const overridesProcessed = flattenOverrideObject(override || {});
+        if (loaded) {
+          for (const [k, v] of Object.entries(overridesProcessed)) {
+            i18n.addResource(language, ns, k, v);
+          }
         }
       }
     }
