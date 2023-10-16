@@ -13,8 +13,9 @@ import { Box } from '@mui/material';
 import { useTierLayers } from './util';
 import { TierBarProps } from './types';
 import { UserRate } from './atoms';
+import { useTranslation } from 'react-i18next';
 
-const TierBar = ({
+const MiniTierBar = ({
   tier,
   traderBoost,
   referral,
@@ -30,8 +31,10 @@ const TierBar = ({
   maxFontSize = 15.5,
   miniVariant = false,
 }: TierBarProps) => {
+  const { t } = useTranslation('referrals-trader');
   const min = tiers[0].commissionPct;
-  const max = tiers[tiers.length - 1].commissionPct;
+  const lastTier = tiers[tiers.length - 1];
+  const max = lastTier.commissionPct;
 
   // Bar opacity
   const opacityPower = 0.9;
@@ -57,52 +60,65 @@ const TierBar = ({
     minHeight,
     maxHeight,
   });
+
+  //   .map((l, i) =>
+  //   i === 0 && tier.id !== lastTier.id ? { ...l, value: 0, height: 0 } : l,
+  // );
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
-
+  const hideOtherLayers = layersCount > 1 && tier.id !== lastTier.id;
   /**
    * Uncomment to debug layers
    *  */
-  // console.log(`\n---\nTier ${tier.id}:`);
-  // console.table(layers);
+  console.log(`\n---\nTier ${tier.id}:`);
+  console.table(layers);
 
   return (
     <AnimatedContainer>
-      {referral.tierId === tier.id && !miniVariant && <UserRate />}
       <Box position='relative' height={layer1.height}>
         <TierBarContainer
           opacity={opacity}
           width={width}
           height={1}
           emphasis={showArrow}
+          hide={hideOtherLayers}
         >
-          <BarContent>
-            {traderBoost > 0 && <BoltIcon width={'10px'} height={'16px'} />}
-            <ZigTypography
-              color={
-                layersCount > 1
-                  ? showArrow
-                    ? '#28ba62'
-                    : 'greenGraph'
-                  : 'neutral200'
-              }
-              fontSize={fontSize}
-              fontWeight={showArrow ? 600 : 500}
-              className='tier-bar__value'
-            >
-              {Math.floor(layer1.value)}
-              {'%'}
-            </ZigTypography>
-          </BarContent>
-          <Overlay opacity={opacity} />
-          {referral.tierId === tier.id && (
-            <HighlightRate
-              height={layer1.height - layer2.height}
-              width={width - 3}
-            />
+          {!hideOtherLayers && (
+            <>
+              <BarContent>
+                {traderBoost > 0 && <BoltIcon width={'10px'} height={'16px'} />}
+                <ZigTypography
+                  color={
+                    layersCount > 1
+                      ? showArrow
+                        ? '#28ba62'
+                        : 'greenGraph'
+                      : 'neutral200'
+                  }
+                  fontSize={fontSize}
+                  fontWeight={showArrow ? 600 : 500}
+                  className='tier-bar__value'
+                  lineHeight={'16px'}
+                >
+                  {Math.floor(layer1.value)}
+                  {'%'}
+                </ZigTypography>
+                <ZigTypography
+                  color={'neutral100'}
+                  fontSize={7}
+                  fontWeight={600}
+                  className='tier-bar__1-week'
+                  lineHeight={'14px'}
+                >
+                  {t('1-week')}
+                </ZigTypography>
+              </BarContent>
+              <Overlay opacity={opacity} />
+              {showArrow && layersCount === 1 && <TierArrow />}
+            </>
           )}
-          {showArrow && <TierArrow />}
         </TierBarContainer>
+
         {[layer2, layer3].map(
           (layer, index) =>
             layer.value > 0 && (
@@ -116,6 +132,7 @@ const TierBar = ({
                 subLayer={true}
               >
                 <Overlay opacity={opacity} />
+                {showArrow && layersCount > 1 && <TierArrow />}
                 <BarContent subLayer={true}>
                   <ZigTypography
                     color={
@@ -138,4 +155,4 @@ const TierBar = ({
   );
 };
 
-export default TierBar;
+export default MiniTierBar;

@@ -74,5 +74,8 @@
         "email-subject": "Zignaly, a new way to trade",
         "facebook-hashtags": "#crypto #trading"
     },
-    "share-link": "Share your invite link:"
+    "share-link": "Share your invite link:",
+    "how-to-earn": "How to Earn {{commission}}%",
+    "view-terms": "View terms",
+    "earnings": "Earnings"
 }

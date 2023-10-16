@@ -28,6 +28,7 @@
     "invite-more": "Invite {{invite}} More People and Get {{commission}}%",
     "invite-and-earn-1-week": "Invite {{invite}}+ people within 1 week and earn {{commission}}%",
     "invite-and-earn-trader-boost": "Invite {{invite}}+ people and earn {{commission}}% ({{commissionBefore}}% + {{multiplier}}x trader boost)",
+    "when-trader-matches": "When the trader matches, you’ll get up to {{commission}}%",
     "max-earnings-from-fees": "Earnings example\nfrom {{amount}} of fees:",
     "base-commission": "Base commission:",
     "within-1-week": "within 1 week:",
@@ -48,5 +49,8 @@
     "invite": "Invite",
     "invite-count": "Invite {{count}} people and get {{pct}}% of success fees",
     "invite-generic": "From everyone you invite to my trading service",
-    "invite-commission": "{{pct}}% Commission"
+    "invite-commission": "{{pct}}% Commission",
+    "1-week": "1 Week",
+    "how-it-works": "How it works",
+    "invite-people-1-week": "Earn <0>{{commission}}%</0> if you invite {{invite}} people in 1 week"
 }

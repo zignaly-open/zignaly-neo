@@ -15,7 +15,7 @@ export const Table = styled('table')`
     rgba(16, 25, 70, 0.4) 27%,
     transparent 51%
   );
-  > tr > td:first-child {
+  /* > tr > td:first-child {
     min-width: 165px;
   }
   > tr > td:not(td:first-child) {
@@ -23,5 +23,5 @@ export const Table = styled('table')`
     > div {
       width: 70px;
     }
-  }
+  } */
 `;

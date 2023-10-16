@@ -5,12 +5,14 @@ import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Tooltip } from '@mui/material';
 import {
   PageContainer,
+  ZigButton,
   ZigPriceLabel,
   ZigTypography,
   ZigUserFilledIcon,
+  trimZeros,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../apis/user/use';
@@ -22,7 +24,9 @@ import ReferralTable from './components/ReferralTable';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useTiersData } from 'apis/referrals/use';
 import {
+  AltShareCommissionSlider,
   BorderFix,
+  BorderFixAlt,
   CommissionBox,
   StyledCurrentCommission,
   StyledReferralLinkInvite,
@@ -30,9 +34,13 @@ import {
 } from './styles';
 import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
 import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
-import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
+import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/atoms/CurrentCommission';
 import ReferralLimitedTime from './components/ReferralLimitedTime';
-import { Verified } from '@mui/icons-material';
+import { ChevronRight, InfoOutlined, Verified } from '@mui/icons-material';
+import ReferralHowToEarn from './components/ReferralHowToEarn';
+import ReferralDescriptionLines from './components/ReferralDescriptionLines';
+import { HELP_REFERRAL } from 'util/constants';
+import ReferralCommissionBox from './components/ReferralCommissionBox';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -42,20 +50,10 @@ const Referrals: React.FC = () => {
   const history = useReferralHistoryQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  const { refCode } = useCurrentUser();
 
   useTitle(t('pages:referrals'));
 
-  const baseUrl =
-    window.location.protocol +
-    '//' +
-    (window.location.host?.includes('localhost')
-      ? 'app.zignaly.com'
-      : window.location.host);
-
-  const link =
-    baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode ?? '' });
-
+  const tierData = useTiersData();
   const {
     referral,
     maxCommission,
@@ -64,8 +62,7 @@ const Referrals: React.FC = () => {
     isLoading,
     boostRunning,
     inviteLeft,
-  } = useTiersData();
-
+  } = tierData;
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
@@ -124,30 +121,43 @@ const Referrals: React.FC = () => {
                   />
                 </Trans>
               </ZigTypography>
-              <CommissionBox>
-                <Box display='flex' alignItems={'center'} gap='30px'>
-                  <StyledCurrentCommission>
-                    <CurrentCommission
-                      showReferrals={false}
-                      showAsMaxCommission={true}
-                    />
-                  </StyledCurrentCommission>
-                  <StyledShareCommissionSlider>
-                    <BorderFix />
-                    <ShareCommissionSlider
-                      discountPct={referral.discountPct}
-                      max={maxCommission}
-                    />
-                  </StyledShareCommissionSlider>
-                </Box>
-                <StyledReferralLinkInvite>
-                  <ReferralLinkInvite link={link} title={t('share-link')} />
-                </StyledReferralLinkInvite>
-              </CommissionBox>
+              <ReferralCommissionBox
+                tierData={tierData}
+                rewardsData={rewardsData}
+              />
+              <ZigButton
+                variant={'text'}
+                sx={{ fontSize: '16px !important', marginTop: '61px' }}
+                endIcon={
+                  <ChevronRight
+                    sx={{
+                      color: 'links',
+                      fill: 'currentColor !important',
+                      fontSize: '16px !important',
+                    }}
+                  />
+                }
+                id='referrals-invite-modal__terms-link'
+                href={HELP_REFERRAL}
+                target='_blank'
+                rel='noopener'
+              >
+                {t('view-terms')}
+              </ZigButton>
             </Box>
 
             {!rewardsData.invitedCount ? (
               <>
+                <ZigTypography
+                  align={'center'}
+                  variant={'h1'}
+                  fontSize={'26px'}
+                  fontWeight={600}
+                  sx={{ mt: 7, mb: '29px' }}
+                >
+                  {t('how-to-earn', { commission: 300 })}
+                </ZigTypography>
+                <ReferralHowToEarn />
                 <ZigTypography
                   align={'center'}
                   variant={'h1'}

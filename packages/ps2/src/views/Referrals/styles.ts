@@ -11,19 +11,16 @@ export const CommissionBox = styled(Box)`
   border-radius: 17px;
   background-image: linear-gradient(to bottom, #18194b, #12374e);
   width: 849px;
-  height: 354px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 27px;
-  padding: 10px 59px;
+  padding: 48px 59px 42px;
 `;
 
-// Custom borders with left arrow and transparent background
-export const StyledShareCommissionSlider = styled('div')`
+export const BaseShareCommissionSlider = styled('div')`
   position: relative;
-  margin-left: 18px;
 
   ${ContainerArrow} {
     display: none;
@@ -31,17 +28,34 @@ export const StyledShareCommissionSlider = styled('div')`
 
   ${SliderContainer} {
     position: relative;
-    width: 356px;
-    height: 160px;
     margin: 0;
     border: none;
-    border-right: 1px solid rgba(148, 150, 180, 0.2);
     border-radius: 15px;
 
     &:before,
     &:after {
       content: '';
       position: absolute;
+    }
+  }
+
+  ${StyledZigSlider} {
+    padding: 0 40px;
+  }
+`;
+
+// Custom borders with left arrow and transparent background
+export const StyledShareCommissionSlider = styled(BaseShareCommissionSlider)`
+  margin-left: 18px;
+
+  ${SliderContainer} {
+    border-right: 1px solid rgba(148, 150, 180, 0.2);
+    border-radius: 15px;
+    width: 356px;
+    height: 160px;
+
+    &:before,
+    &:after {
       padding-left: 19px;
       left: -18px;
     }
@@ -65,13 +79,48 @@ export const StyledShareCommissionSlider = styled('div')`
 
     > div > .MuiTypography-root {
       font-size: 18.5px;
-      letter-spacing: 0.56px;
       padding: 0px 20px 8px;
     }
   }
+`;
 
-  ${StyledZigSlider} {
-    padding: 0 40px;
+export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
+  margin-top: 18px;
+
+  ${SliderContainer} {
+    border-bottom: 1px solid rgba(148, 150, 180, 0.2);
+    border-radius: 15px;
+    width: 428px;
+    height: 110px;
+
+    &:before,
+    &:after {
+      padding-top: 19px;
+      top: -18px;
+    }
+
+    &:before {
+      left: calc(50% - 11.5px);
+      transform: skewX(-50deg);
+      border: 1px solid rgba(148, 150, 180, 0.3);
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    &:after {
+      right: calc(50% - 11.5px);
+      transform: skewX(50deg);
+      border: 1px solid rgba(148, 150, 180, 0.3);
+      border-right: none;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    > div > .MuiTypography-root {
+      font-size: 16px;
+      padding: 0px 10px 4px;
+    }
   }
 `;
 
@@ -98,6 +147,32 @@ export const BorderFix = styled('div')`
     bottom: 0;
     border-top: none;
     border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+`;
+
+export const BorderFixAlt = styled('div')`
+  &:before,
+  &:after {
+    content: '';
+    height: 100%;
+    border: 1px solid rgba(148, 150, 180, 0.1);
+    width: calc(50% - 23px);
+    position: absolute;
+    border-bottom: none;
+  }
+
+  &:before {
+    left: 0;
+    border-right: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+
+  &:after {
+    right: 0;
+    border-left: none;
+    border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
   }
 `;
@@ -133,7 +208,7 @@ export const LimitedTimeChipArrow = styled('div')`
 `;
 
 export const StyledReferralLinkInvite = styled('div')`
-  margin-top: 35px;
+  margin-top: 19px;
 
   ${InviteBox} {
     background-color: #0d1935;
@@ -142,9 +217,13 @@ export const StyledReferralLinkInvite = styled('div')`
 
 export const StyledCurrentCommission = styled('div')`
   min-width: 230px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
 
   > div > div {
     margin-bottom: 8px;
+    justify-content: space-between;
 
     > div > .MuiTypography-body1 {
       padding-top: 15px;
@@ -274,4 +353,28 @@ export const ShareIconsContainer = styled(Box)`
       fill: ${({ theme }) => theme.palette.highlighted};
     }
   }
+`;
+
+export const HowToEarnBox = styled(Box)`
+  ::before {
+    background: linear-gradient(46deg, #138ea0, #3f3bb1);
+    border-radius: 5px;
+  }
+  width: 100%;
+  padding: 16px;
+
+  /* & > div { */
+  /* height: 40px; */
+  background: ${({ theme }) => theme.palette.neutral900} !important;
+  /* } */
+`;
+
+export const TiersCardBox = styled(Box)`
+  background-image: linear-gradient(to top, #09122acc, #09122acc, #142f4dcc);
+  padding: 15px 10px 10px;
+  width: 244px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

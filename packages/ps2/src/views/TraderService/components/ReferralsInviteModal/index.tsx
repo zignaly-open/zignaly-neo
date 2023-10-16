@@ -11,7 +11,7 @@ import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
 import { useTiersData } from 'apis/referrals/use';
-import CurrentCommission from './CurrentCommission';
+import CurrentCommission from './atoms/CurrentCommission';
 import { HELP_REFERRAL } from 'util/constants';
 
 const ReferralsInviteModal = ({
@@ -80,7 +80,11 @@ const ReferralsInviteModal = ({
               flexDirection={'column'}
               alignItems={'center'}
             >
-              <CurrentCommission service={service} />
+              <CurrentCommission
+                service={service}
+                showReferrals={referral.investorsCount > 0}
+                showMaxCommission={inviteLeft > 0}
+              />
               <Box px='20px'>
                 <ShareCommissionSlider
                   discountPct={referral.discountPct}
@@ -197,7 +201,7 @@ const ReferralsInviteModal = ({
             target='_blank'
             rel='noopener'
           >
-            {t('terms')}
+            {t('view-terms')}
           </ZigButton>
         </>
       )}
