@@ -165,6 +165,7 @@ const MyBalances: React.FC = () => {
             width={'100%'}
             flexDirection={'column'}
             alignItems={'center'}
+            marginTop={'15px'}
           >
             <StyledTabs
               value={tab}

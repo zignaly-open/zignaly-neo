@@ -6,7 +6,7 @@ export const MarginContainer = styled("div")`
   @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     padding: 0 22px;
   }
-  padding: 20px 2px 0;
+  padding: 0 2px 0;
   width: 100%;
 `;
 

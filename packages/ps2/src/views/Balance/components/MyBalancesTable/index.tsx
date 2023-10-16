@@ -30,6 +30,8 @@ import SwapCoinsModal from '../SwapCoinsModal';
 import { useOpenDepositModal } from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ButtonsWrapper } from './styles';
 import { BUY_CRYPTO_URL } from '../../../../util/constants';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation(['my-balances', 'action']);
@@ -293,8 +295,9 @@ const MyBalancesTable = (): JSX.Element => {
             <ButtonsWrapper>
               <ZigButton
                 size={'large'}
+                sx={{ padding: '19px 5px' }}
                 onClick={() => {
-                  showDepositModal();
+                  showDepositModal({ selectedCoin: 'USDT' });
                 }}
               >
                 {t('action:deposit')}
@@ -304,12 +307,51 @@ const MyBalancesTable = (): JSX.Element => {
                 onClick={() => {
                   openWithdrawModal();
                 }}
+                sx={{ padding: '5px 0' }}
               >
-                {t('action:withdraw')}
+                <Box
+                  display={'flex'}
+                  flexDirection={'column'}
+                  alignItems={'center'}
+                >
+                  <ExitToAppIcon />
+                  {t('action:withdraw')}
+                </Box>
               </ZigButton>
-              <ZigButton variant={'outlined'} href={BUY_CRYPTO_URL}>
-                {t('action:buy-crypto')}
+              <ZigButton
+                variant={'outlined'}
+                href={BUY_CRYPTO_URL}
+                sx={{ padding: '5px 0' }}
+              >
+                <Box
+                  display={'flex'}
+                  flexDirection={'column'}
+                  alignItems={'center'}
+                >
+                  <CurrencyExchangeIcon />
+                  {t('action:buy-crypto')}
+                </Box>
               </ZigButton>
+              {exchangeType === 'spot' && (
+                <ZigButton
+                  variant={'outlined'}
+                  onClick={() => {
+                    showModal(SwapCoinsModal, {
+                      refetchBalance: balancesEndpoint.refetch,
+                    });
+                  }}
+                  sx={{ padding: '5px 0' }}
+                >
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                  >
+                    <ZigSwapCircleIcon width={25} height={25} />
+                    {t('swap')}
+                  </Box>
+                </ZigButton>
+              )}
             </ButtonsWrapper>
           )}
         </>
