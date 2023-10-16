@@ -63,7 +63,7 @@
       },
       "button": "Back",
       "hoverTooltip": "Hover over the amount to see the full decimals",
-      "waiting-for-next-accounting-tooltip": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please consider that your investment is at risk until the balance is transferred to you. Depending on the fund manager and his strategy, this usually takes a few days but may take longer to complete."
+      "waiting-for-next-accounting-tooltip": "You'll receive your funds once the fund manager releases them, and the daily accounting is carried out. Please understand that your investment may remain exposed until the balance is transferred to you. The duration can vary depending on the fund manager's strategy, typically taking a few days but possibly longer."
     },
     "editInvestments": {
       "title": "Edit Investment With",
