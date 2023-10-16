@@ -4,7 +4,6 @@ on:
     branches:
       - test
       - master
-      - feat/wl-i18n-overrides
 
 jobs:
   deploy:
