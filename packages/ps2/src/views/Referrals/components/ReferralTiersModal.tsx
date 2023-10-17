@@ -1,27 +1,28 @@
+import { NorthEast } from '@mui/icons-material';
+import { DialogProps, Grid, Box } from '@mui/material';
+import { ZigTypography, trimZeros, ZigButton } from '@zignaly-open/ui';
+import { TiersData } from 'apis/referrals/types';
+import { useTiersData } from 'apis/referrals/use';
+import ZModal from 'components/ZModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZigButton, ZigTypography, trimZeros } from '@zignaly-open/ui';
-import { ReferralsInviteModalProps } from './types';
-import ZModal from 'components/ZModal';
-import { Box, Grid } from '@mui/material';
-import Tiers from './atoms/TiersTable';
-import { NorthEast } from '@mui/icons-material';
-import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
-import { DescriptionLine } from './atoms/DescriptionLine';
-import TraderCard from './atoms/TraderCard';
-import ReferralLinkInvite from './atoms/ReferralLinkInvite';
-import { useTiersData } from 'apis/referrals/use';
-import CurrentCommission from './atoms/CurrentCommission';
 import { HELP_REFERRAL } from 'util/constants';
-import ReferralTermsButton from './atoms/ReferralTermsButton';
+import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
+import { DescriptionLine } from 'views/TraderService/components/ReferralsInviteModal/atoms/DescriptionLine';
+import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
+import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
+import TiersTable from 'views/TraderService/components/ReferralsInviteModal/atoms/TiersTable';
+import TraderCard from 'views/TraderService/components/ReferralsInviteModal/atoms/TraderCard';
 
-const ReferralsInviteModal = ({
-  service,
-  close,
+type ReferralTiersModalProps = {
+  tiersData: TiersData;
+} & DialogProps;
+
+const ReferralTiersModal = ({
+  tiersData,
   ...props
-}: ReferralsInviteModalProps) => {
-  const { t } = useTranslation(['referrals-trader', 'service']);
-  const tiersData = useTiersData(service.id);
+}: ReferralTiersModalProps) => {
+  const { t } = useTranslation(['referrals-trader', 'referrals']);
   const {
     tiers,
     referral,
@@ -37,70 +38,13 @@ const ReferralsInviteModal = ({
 
   return (
     <ZModal
-      titleStyles={{ fontSize: '26px', textTransform: 'unset !important' }}
       width={838}
       {...props}
-      close={close}
-      title={t(isLoading || inviteLeft <= 0 ? 'invite-earn' : 'title', {
-        commission: maxCommission,
-      })}
+      title={t('how-to-earn', { commission: maxCommission, ns: 'referrals' })}
       isLoading={isLoading}
-      sx={{
-        // Hack to make the box shadow visible beyond the container
-        // despite the staking context created by the scrollbar
-        '> div': {
-          paddingTop: '28px',
-        },
-        '> div > div:first-child': {
-          marginBottom: '2px',
-        },
-        '> div > div:last-child': {
-          m: '0px -48px 0',
-          p: '0px 48px 0',
-          width: 'calc(100% + 96px)',
-        },
-      }}
     >
       {!isLoading && (
         <>
-          <Grid container mt={'38px'}>
-            <Grid
-              item
-              sm={12}
-              md={4}
-              display={'flex'}
-              justifyContent={'center'}
-              mb={{ sm: 3, md: 0 }}
-            >
-              <TraderCard service={service} traderBoost={traderBoost} />
-            </Grid>
-            <Grid
-              item
-              sm={12}
-              md={8}
-              display='flex'
-              flexDirection={'column'}
-              alignItems={'center'}
-            >
-              <CurrentCommission
-                tiersData={tiersData}
-                showReferrals={referral.investorsCount > 0}
-                showMaxCommission={inviteLeft > 0}
-              />
-              <Box px='20px'>
-                <ShareCommissionSlider
-                  discountPct={referral.discountPct}
-                  max={maxCommission}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-          <Box mt='44px'>
-            <ReferralLinkInvite
-              serviceId={service.id}
-              referralCode={referral.referralCode}
-            />
-          </Box>
           {inviteLeft > 0 && (
             <Box
               display='flex'
@@ -177,7 +121,7 @@ const ReferralsInviteModal = ({
             </Box>
           )}
           <Box width={'100%'} display={'flex'} justifyContent={'center'}>
-            <Tiers
+            <TiersTable
               tiers={tiers}
               referral={referral}
               traderBoost={traderBoost}
@@ -186,13 +130,29 @@ const ReferralsInviteModal = ({
             />
           </Box>
 
-          <Box mt='61px'>
-            <ReferralTermsButton />
-          </Box>
+          <ZigButton
+            variant={'text'}
+            sx={{ fontSize: '16px !important', marginTop: '61px' }}
+            endIcon={
+              <NorthEast
+                sx={{
+                  color: 'links',
+                  fill: 'currentColor !important',
+                  fontSize: '16px !important',
+                }}
+              />
+            }
+            id='referrals-invite-modal__terms-link'
+            href={HELP_REFERRAL}
+            target='_blank'
+            rel='noopener'
+          >
+            {t('terms')}
+          </ZigButton>
         </>
       )}
     </ZModal>
   );
 };
 
-export default ReferralsInviteModal;
+export default ReferralTiersModal;

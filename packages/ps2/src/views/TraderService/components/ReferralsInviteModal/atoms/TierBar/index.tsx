@@ -28,7 +28,6 @@ const TierBar = ({
   maxOpacity = 0.4,
   minFontSize = 12,
   maxFontSize = 15.5,
-  miniVariant = false,
 }: TierBarProps) => {
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
@@ -68,7 +67,7 @@ const TierBar = ({
 
   return (
     <AnimatedContainer>
-      {referral.tierId === tier.id && !miniVariant && <UserRate />}
+      {referral.tierId === tier.id && <UserRate />}
       <Box position='relative' height={layer1.height}>
         <TierBarContainer
           opacity={opacity}

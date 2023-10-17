@@ -8,21 +8,20 @@ import { ZigButton, ZigTypography, ZigUserFilledIcon } from '@zignaly-open/ui';
 import BoostTimer from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostTimer';
 import { TiersData } from 'apis/referrals/types';
 import { composeInvitesValue } from 'views/TraderService/components/ReferralsInviteModal/atoms/TiersTable';
+import { useZModal } from 'components/ZModal/use';
+import ReferralTiersModal from './ReferralTiersModal';
 
 const ReferralTiersCard = ({ tiersData }: { tiersData: TiersData }) => {
   const { t } = useTranslation('referrals');
   const theme = useTheme();
+  const { showModal } = useZModal();
 
   const {
     referral,
-    maxCommission,
     maxCommissionWithoutTraderBoost,
-    traderBoost,
-    isLoading,
     boostRunning,
     currentDate,
     boostEndsDate,
-    inviteLeft,
     tiers,
     boost,
   } = tiersData;
@@ -114,6 +113,11 @@ const ReferralTiersCard = ({ tiersData }: { tiersData: TiersData }) => {
           />
         }
         id='referrals-invite-modal__terms-link'
+        onClick={() => {
+          showModal(ReferralTiersModal, {
+            tiersData,
+          });
+        }}
       >
         {t('how-it-works')}
       </ZigButton>

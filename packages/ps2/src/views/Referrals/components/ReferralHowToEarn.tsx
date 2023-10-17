@@ -1,26 +1,18 @@
 import React from 'react';
 import { HowToEarnBox } from '../styles';
-import { useTiersData } from 'apis/referrals/use';
 import { Box } from '@mui/material';
 import TiersTable from 'views/TraderService/components/ReferralsInviteModal/atoms/TiersTable';
 import { useTranslation } from 'react-i18next';
-import { DescriptionLine } from 'views/TraderService/components/ReferralsInviteModal/atoms/DescriptionLine';
+import { TiersData } from 'apis/referrals/types';
+import { ZigTypography } from '@zignaly-open/ui';
+import ReferralDescriptionLines from './ReferralDescriptionLines';
+import ReferralTermsButton from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralTermsButton';
 
-const ReferralHowToEarn = () => {
-  const { t } = useTranslation('referrals-trader');
+const ReferralHowToEarn = ({ tiersData }: { tiersData: TiersData }) => {
+  const { t } = useTranslation('referrals');
 
-  const {
-    referral,
-    maxCommission,
-    maxCommissionWithoutTraderBoost,
-    traderBoost,
-    isLoading,
-    boostRunning,
-    inviteLeft,
-    tiers,
-    boost,
-  } = useTiersData();
-  const { invitees } = tiers[tiers.length - 1];
+  const { referral, maxCommission, traderBoost, boostRunning, tiers, boost } =
+    tiersData;
 
   return (
     <HowToEarnBox>
@@ -30,35 +22,19 @@ const ReferralHowToEarn = () => {
         justifyContent={'center'}
         alignItems={'center'}
         flexDirection={'column'}
+        position={'relative'}
+        zIndex={2}
       >
-        <DescriptionLine
-          text={t('earn-success-fees')}
-          tooltip={t('tooltips.earn-success-fees')}
-          id='referrals-invite-modal__earn-success-fees'
-        />
-        {boostRunning && (
-          <DescriptionLine
-            text={t('invite-and-earn-1-week', {
-              invite: invitees,
-              commission: maxCommissionWithoutTraderBoost,
-            })}
-            tooltip={t('tooltips.invite-and-earn-1-week', {
-              invite: invitees,
-              commission: maxCommissionWithoutTraderBoost,
-            })}
-            id='referrals-invite-modal__invite-and-earn-1-week'
-          />
-        )}
-        <DescriptionLine
-          text={t('when-trader-matches', {
-            commission: maxCommission,
-          })}
-          tooltip={t('tooltips.invite-and-earn', {
-            invite: invitees,
-            commission: maxCommission,
-          })}
-          id='referrals-invite-modal__invite-and-earn-trader-boost'
-        />
+        <ZigTypography
+          align={'center'}
+          variant={'h1'}
+          fontSize={'26px'}
+          fontWeight={600}
+          sx={{ mt: '7px', mb: '16px' }}
+        >
+          {t('how-to-earn', { commission: maxCommission })}
+        </ZigTypography>
+        <ReferralDescriptionLines tiersData={tiersData} />
         <TiersTable
           tiers={tiers}
           referral={referral}
@@ -66,6 +42,9 @@ const ReferralHowToEarn = () => {
           boost={boost}
           boostRunning={boostRunning}
         />
+        <Box mt='30px'>
+          <ReferralTermsButton />
+        </Box>
       </Box>
     </HowToEarnBox>
   );

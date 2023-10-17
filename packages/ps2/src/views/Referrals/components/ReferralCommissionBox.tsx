@@ -80,7 +80,6 @@ const ReferralCommissionBox = ({
     );
   }, [referral.discountPct, maxCommission]);
 
-  // height={referral.invitedCount > 0 ? 407 : 354}
   return (
     <CommissionBox>
       <Box display='flex' gap='42px'>
@@ -113,13 +112,7 @@ const ReferralCommissionBox = ({
           <CustomSlider />
         </Box>
         {referral.invitedCount > 0 && (
-          <ReferralTiersCard
-            tiersData={{
-              ...tiersData,
-              maxCommission,
-              traderBoost,
-            }}
-          />
+          <ReferralTiersCard tiersData={tiersData} />
         )}
       </Box>
 

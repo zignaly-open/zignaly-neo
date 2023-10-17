@@ -38,16 +38,29 @@ const MiniTierBar = ({
     [min, max, tier],
   );
 
+  // Value top margin
+  const textMarginPower = 0.9;
+  const minTextMargin = 1;
+  const maxTextMargin = 6.5;
+  const textMargin = useMemo(
+    () =>
+      minTextMargin +
+      Math.pow((tier.commissionPct - min) / (max - min), textMarginPower) *
+        (maxTextMargin - minTextMargin),
+    [min, max, tier],
+  );
+
   const layers = useTierLayers(tiers, tier.id, boost, traderBoost, {
     minHeight,
     maxHeight,
+    miniVariant: true,
   });
 
   const [layer1, layer2] = layers;
   // Hide top layer if there is a boost running, except for the last tier
   const hideTopLayer = boostRunning && tier.id !== lastTier.id;
   // Or if the boost if unlocked, only show that layer
-  const hideBottomLayer = !hideTopLayer && boost > 1;
+  const hideBottomLayer = !hideTopLayer && boost > 1 && !boostRunning;
 
   /**
    * Uncomment to debug layers
@@ -74,7 +87,7 @@ const MiniTierBar = ({
                 className='tier-bar__value'
                 lineHeight={'14px'}
                 letterSpacing={'-0.1px'}
-                mt={hideBottomLayer || !boostRunning ? '3px' : 0}
+                mt={hideBottomLayer || !boostRunning ? `${textMargin}px` : 0}
               >
                 {Math.floor(layer1.value)}
                 {'%'}
@@ -115,6 +128,8 @@ const MiniTierBar = ({
               color={'greenGraph'}
               fontSize={fontSize}
               fontWeight={500}
+              mt={`${textMargin}px`}
+              lineHeight={'14px'}
             >
               {Math.floor(layer2.value)}
               {'%'}

@@ -11,7 +11,7 @@ export const TierBarContainer = styled(TierBarContainerBase)<{
   padding-top: 0;
 
   &::before {
-    ${({ hide }) => !hide && `content: '';`}
+    content: ${({ hide }) => (hide ? 'none' : '')};
   }
 `;
 

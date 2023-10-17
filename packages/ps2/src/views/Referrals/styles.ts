@@ -351,13 +351,28 @@ export const ShareIconsContainer = styled(Box)`
 `;
 
 export const HowToEarnBox = styled(Box)`
-  ::before {
-    background: linear-gradient(46deg, #138ea0, #3f3bb1);
-    border-radius: 5px;
-  }
+  border-radius: 17px;
   width: 100%;
-  padding: 16px;
-  background: ${({ theme }) => theme.palette.neutral900} !important;
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(12, 14, 37, 0.5);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 17px;
+    border: 1px solid transparent;
+    background: linear-gradient(180deg, #138ea0cc, #3f3bb1cc) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+  }
 `;
 
 export const TiersCardBox = styled(Box)`
@@ -369,4 +384,5 @@ export const TiersCardBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
+  justify-content: center;
 `;

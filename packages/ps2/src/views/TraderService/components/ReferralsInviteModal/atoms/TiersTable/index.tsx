@@ -21,7 +21,7 @@ import { ZIGNALY_PROFIT_FEE } from 'util/constants';
 export const composeInvitesValue = (
   tierIndex: number,
   tiers: TierLevels,
-  showPlus = false,
+  showPlus = true,
 ) => {
   const currentTier = tiers[tierIndex];
   const previousTier = tiers[tierIndex - 1];
@@ -140,7 +140,7 @@ const TiersTable = ({
   const composeCellTierLabels = () => {
     return (
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
-        {layers[2].value > 0 && (
+        {traderBoost >= 1 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
             <CellLabelTraderBoost traderBoost={traderBoost} />
           </Box>
