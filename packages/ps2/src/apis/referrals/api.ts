@@ -29,6 +29,14 @@ export const api = createApi({
       query: () => ({
         url: 'v1/referrer/data',
       }),
+      transformResponse: (response: any) => ({
+        ...response,
+        boost: 2,
+        investorsCount: 1,
+        invitedCount: 1,
+        tierId: null,
+        boostEndsAt: '2023-10-20T23:59:59.000Z',
+      }),
     }),
     referralHistory: builder.query<ReferralHistory, void>({
       query: () => ({
