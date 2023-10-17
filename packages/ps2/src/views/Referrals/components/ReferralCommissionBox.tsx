@@ -84,7 +84,17 @@ const ReferralCommissionBox = ({
   return (
     <CommissionBox>
       <Box display='flex' gap='42px'>
-        <div>
+        <Box
+          display='flex'
+          {...(referral.invitedCount > 0
+            ? {
+                flexDirection: 'column',
+              }
+            : {
+                alignItems: 'center',
+                gap: '30px',
+              })}
+        >
           <StyledCurrentCommission>
             <CurrentCommission
               tiersData={{
@@ -93,7 +103,7 @@ const ReferralCommissionBox = ({
                 traderBoost,
               }}
               showReferrals={referral.invitedCount > 0}
-              showWhenYouInvite={false}
+              showWhenYouInvite={!referral.invitedCount}
               showMaxCommission={!referral.invitedCount}
               earnings={
                 referral.invitedCount > 0 ? rewardsData.usdtEarned : null
@@ -101,17 +111,19 @@ const ReferralCommissionBox = ({
             />
           </StyledCurrentCommission>
           <CustomSlider />
-        </div>
-        <ReferralTiersCard
-          tiersData={{
-            ...tiersData,
-            maxCommission,
-            traderBoost,
-          }}
-        />
+        </Box>
+        {referral.invitedCount > 0 && (
+          <ReferralTiersCard
+            tiersData={{
+              ...tiersData,
+              maxCommission,
+              traderBoost,
+            }}
+          />
+        )}
       </Box>
 
-      <StyledReferralLinkInvite>
+      <StyledReferralLinkInvite mt={referral.invitedCount ? '19px' : '36px'}>
         <ReferralLinkInvite link={link} title={t('share-link')} />
       </StyledReferralLinkInvite>
     </CommissionBox>

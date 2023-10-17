@@ -208,9 +208,7 @@ export const LimitedTimeChipArrow = styled('div')`
   border-top: 13px solid ${({ theme }) => theme.palette.greenGraph}33;
 `;
 
-export const StyledReferralLinkInvite = styled('div')`
-  margin-top: 19px;
-
+export const StyledReferralLinkInvite = styled(Box)`
   ${InviteBox} {
     background-color: #0d1935;
   }
@@ -218,13 +216,9 @@ export const StyledReferralLinkInvite = styled('div')`
 
 export const StyledCurrentCommission = styled('div')`
   min-width: 230px;
-  display: flex;
-  gap: 30px;
-  align-items: center;
 
   > div > div {
     margin-bottom: 8px;
-    justify-content: space-between;
 
     > div > .MuiTypography-body1 {
       padding-top: 15px;
