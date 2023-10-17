@@ -20,6 +20,7 @@ const ReferralsInviteModal = ({
   ...props
 }: ReferralsInviteModalProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
+  const tiersData = useTiersData(service.id);
   const {
     tiers,
     referral,
@@ -31,7 +32,7 @@ const ReferralsInviteModal = ({
     traderBoost,
     inviteLeft,
     isLoading,
-  } = useTiersData(service.id);
+  } = tiersData;
 
   return (
     <ZModal
@@ -81,7 +82,7 @@ const ReferralsInviteModal = ({
               alignItems={'center'}
             >
               <CurrentCommission
-                service={service}
+                tiersData={tiersData}
                 showReferrals={referral.investorsCount > 0}
                 showMaxCommission={inviteLeft > 0}
               />
@@ -201,7 +202,7 @@ const ReferralsInviteModal = ({
             target='_blank'
             rel='noopener'
           >
-            {t('view-terms')}
+            {t('terms')}
           </ZigButton>
         </>
       )}

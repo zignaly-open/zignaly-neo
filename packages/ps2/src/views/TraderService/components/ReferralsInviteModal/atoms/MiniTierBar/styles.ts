@@ -43,7 +43,7 @@ export const TierBarContainer = styled(Box)<{
       ${emphasis ? `rgba(42, 177, 104, 0.7)` : `rgba(0, 145, 121, ${opacity})`},
       rgba(33, 81, 78, ${opacity})
     )`};
-    clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 95%);
+    clip-path: inset(0 0 3px 0);
   }
 
   ${({ subLayer }) =>
@@ -66,12 +66,12 @@ export const HighlightRate = styled(Box)`
   border-bottom-right-radius: 0;
 `;
 
-export const TierArrow = styled('div')`
+export const TierArrow = styled('div')<{ subLayer?: boolean }>`
   position: absolute;
   height: 100%;
   width: 100%;
-  margin-top: 12px;
-  opacity: 0.3;
+  margin-top: ${({ subLayer }) => (subLayer ? -3 : 6)}px;
+  opacity: 0.2;
 
   &::before {
     content: '';
@@ -81,46 +81,21 @@ export const TierArrow = styled('div')`
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 15px solid #28ba62;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #28ba62;
   }
 
   &::after {
     content: '';
     position: absolute;
-    top: 15px;
+    top: 10px;
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 14px;
+    width: 10px;
     background: linear-gradient(#28ba62 18%, #0c2438),
       linear-gradient(#103e50, #0c2438 100%);
-  }
-`;
-
-export const BarContent0 = styled(Box)<{ subLayer: boolean }>`
-  position: absolute;
-  justify-content: center;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  ${({ subLayer }) =>
-    !subLayer &&
-    css`
-      transform: translateY(8%);
-      justify-content: start;
-    `}
-
-  svg {
-    height: 12px;
-    min-height: 12px;
-    width: 7.5px;
-    min-width: 7.5px;
   }
 `;
 
@@ -140,20 +115,4 @@ export const BarContent = styled(Box)<{ subLayer?: boolean }>`
   svg {
     opacity: 0.6;
   }
-`;
-const growAnimation = keyframes`
-  from {
-    transform: scaleY(0);
-    opacity: 0;
-    transform-origin: bottom;
-  }
-  to {
-    transform: scaleY(1);
-    opacity: 1;
-    transform-origin: bottom;
-  }
-`;
-
-export const AnimatedContainer = styled(Box)`
-  animation: ${growAnimation} 0.3s ease-in-out;
 `;

@@ -1,15 +1,17 @@
 import React from 'react';
 import { TiersCardBox } from '../styles';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import MiniTierBar from 'views/TraderService/components/ReferralsInviteModal/atoms/MiniTierBar';
 import { ChevronRight } from '@mui/icons-material';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography, ZigUserFilledIcon } from '@zignaly-open/ui';
 import BoostTimer from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostTimer';
 import { TiersData } from 'apis/referrals/types';
+import { composeInvitesValue } from 'views/TraderService/components/ReferralsInviteModal/atoms/TiersTable';
 
-const ReferralTiersCard = ({ tierData }: { tierData: TiersData }) => {
-  const { t } = useTranslation('referrals-trader');
+const ReferralTiersCard = ({ tiersData }: { tiersData: TiersData }) => {
+  const { t } = useTranslation('referrals');
+  const theme = useTheme();
 
   const {
     referral,
@@ -23,7 +25,7 @@ const ReferralTiersCard = ({ tierData }: { tierData: TiersData }) => {
     inviteLeft,
     tiers,
     boost,
-  } = tierData;
+  } = tiersData;
 
   return (
     <TiersCardBox>
@@ -35,13 +37,14 @@ const ReferralTiersCard = ({ tierData }: { tierData: TiersData }) => {
         fontWeight={500}
         textAlign={'center'}
         mt='5px'
+        lineHeight={'19px'}
       >
         <Trans
-          i18nKey={'invite-people-1-week'}
+          i18nKey={boostRunning ? 'invite-people-1-week' : 'invite-people'}
           t={t}
           values={{
             invite: tiers[tiers.length - 1].invitees,
-            commission: maxCommission,
+            commission: maxCommissionWithoutTraderBoost,
           }}
         >
           <ZigTypography color='#25b990' fontWeight={600} />
@@ -52,22 +55,50 @@ const ReferralTiersCard = ({ tierData }: { tierData: TiersData }) => {
         display={'flex'}
         justifyContent={'center'}
         alignItems={'flex-end'}
+        mt={!boostRunning ? '12px' : '2px'}
       >
         {tiers?.map((tier, tierIndex) => (
-          <MiniTierBar
-            width={30}
-            minFontSize={7}
-            maxFontSize={8.5}
-            maxHeight={88}
-            minHeight={20}
-            miniVariant={true}
-            showArrow={tierIndex === tiers.length - 1}
-            tier={tier}
-            referral={referral}
-            tiers={tiers}
-            traderBoost={0}
-            boost={boost}
-          />
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            alignItems={'center'}
+            key={tier.id}
+          >
+            <MiniTierBar
+              maxHeight={88}
+              minHeight={20}
+              showArrow={tierIndex === tiers.length - 1}
+              tier={tier}
+              referral={referral}
+              tiers={tiers}
+              traderBoost={0}
+              boost={boost}
+              boostRunning={boostRunning}
+            />
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              gap='4px'
+              justifyContent='center'
+              mt={'-12px'}
+              zIndex={2}
+            >
+              <ZigTypography
+                fontWeight={500}
+                fontSize={12}
+                color='neutral200'
+                className='tier-chart__referrals-value'
+              >
+                {composeInvitesValue(tierIndex, tiers, false)}
+              </ZigTypography>
+              <ZigUserFilledIcon
+                color={theme.palette.neutral300}
+                height={9.5}
+                width={8}
+                style={{ marginTop: '-1px' }}
+              />
+            </Box>
+          </Box>
         ))}
       </Box>
       <ZigButton
@@ -78,7 +109,7 @@ const ReferralTiersCard = ({ tierData }: { tierData: TiersData }) => {
             sx={{
               color: 'links',
               fill: 'currentColor !important',
-              fontSize: '12px !important',
+              fontSize: '16px !important',
             }}
           />
         }

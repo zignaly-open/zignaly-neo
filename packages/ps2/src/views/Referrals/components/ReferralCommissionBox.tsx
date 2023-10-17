@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   AltShareCommissionSlider,
   BorderFix,
@@ -26,13 +26,13 @@ import { ReferralRewards, TiersData } from 'apis/referrals/types';
 import ReferralTiersCard from './ReferralTiersCard';
 
 const ReferralCommissionBox = ({
-  tierData,
+  tiersData,
   rewardsData,
 }: {
-  tierData: TiersData;
+  tiersData: TiersData;
   rewardsData: ReferralRewards;
 }) => {
-  const { t } = useTranslation('referrals-trader');
+  const { t } = useTranslation('referrals');
   const baseUrl =
     window.location.protocol +
     '//' +
@@ -46,15 +46,44 @@ const ReferralCommissionBox = ({
 
   const {
     referral,
-    maxCommission,
+    maxCommission: maxCommissionOrig,
     maxCommissionWithoutTraderBoost,
-    traderBoost,
+    traderBoost: traderBoostOrig,
     isLoading,
     boostRunning,
     inviteLeft,
     tiers,
     boost,
-  } = tierData;
+  } = tiersData;
+  console.log('tiersData', tiersData);
+  let maxCommission = maxCommissionOrig;
+  let traderBoost = traderBoostOrig;
+
+  if (referral.invitedCount) {
+    // Don't use trader boost if there are invited users
+    maxCommission = maxCommissionWithoutTraderBoost;
+    traderBoost = 0;
+  }
+
+  const CustomSlider = useCallback(() => {
+    return referral.invitedCount > 0 ? (
+      <AltShareCommissionSlider>
+        <BorderFixAlt />
+        <ShareCommissionSlider
+          discountPct={referral.discountPct}
+          max={maxCommission}
+        />
+      </AltShareCommissionSlider>
+    ) : (
+      <StyledShareCommissionSlider>
+        <BorderFix />
+        <ShareCommissionSlider
+          discountPct={referral.discountPct}
+          max={maxCommission}
+        />
+      </StyledShareCommissionSlider>
+    );
+  }, [referral.discountPct, maxCommission]);
 
   // height={referral.invitedCount > 0 ? 407 : 354}
   return (
@@ -63,6 +92,11 @@ const ReferralCommissionBox = ({
         <div>
           <StyledCurrentCommission>
             <CurrentCommission
+              tiersData={{
+                ...tiersData,
+                maxCommission,
+                traderBoost,
+              }}
               showReferrals={referral.invitedCount > 0}
               showWhenYouInvite={false}
               showMaxCommission={!referral.invitedCount}
@@ -71,25 +105,15 @@ const ReferralCommissionBox = ({
               }
             />
           </StyledCurrentCommission>
-          {referral.invitedCount > 0 ? (
-            <AltShareCommissionSlider>
-              <BorderFixAlt />
-              <ShareCommissionSlider
-                discountPct={referral.discountPct}
-                max={maxCommission}
-              />
-            </AltShareCommissionSlider>
-          ) : (
-            <StyledShareCommissionSlider>
-              <BorderFix />
-              <ShareCommissionSlider
-                discountPct={referral.discountPct}
-                max={maxCommission}
-              />
-            </StyledShareCommissionSlider>
-          )}
+          <CustomSlider />
         </div>
-        <ReferralTiersCard tierData={tierData} />
+        <ReferralTiersCard
+          tiersData={{
+            ...tiersData,
+            maxCommission,
+            traderBoost,
+          }}
+        />
       </Box>
 
       <StyledReferralLinkInvite>

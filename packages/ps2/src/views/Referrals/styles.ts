@@ -100,7 +100,7 @@ export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
     }
 
     &:before {
-      left: calc(50% - 11.5px);
+      left: 44px;
       transform: skewX(-50deg);
       border: 1px solid rgba(148, 150, 180, 0.3);
       border-left: none;
@@ -109,7 +109,7 @@ export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
     }
 
     &:after {
-      right: calc(50% - 11.5px);
+      left: 66px;
       transform: skewX(50deg);
       border: 1px solid rgba(148, 150, 180, 0.3);
       border-right: none;
@@ -157,19 +157,20 @@ export const BorderFixAlt = styled('div')`
     content: '';
     height: 100%;
     border: 1px solid rgba(148, 150, 180, 0.1);
-    width: calc(50% - 23px);
     position: absolute;
     border-bottom: none;
   }
 
   &:before {
     left: 0;
+    width: 33px;
     border-right: none;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
   }
 
   &:after {
+    left: 77px;
     right: 0;
     border-left: none;
     border-top-right-radius: 15px;
@@ -362,19 +363,16 @@ export const HowToEarnBox = styled(Box)`
   }
   width: 100%;
   padding: 16px;
-
-  /* & > div { */
-  /* height: 40px; */
   background: ${({ theme }) => theme.palette.neutral900} !important;
-  /* } */
 `;
 
 export const TiersCardBox = styled(Box)`
-  background-image: linear-gradient(to top, #09122acc, #09122acc, #142f4dcc);
-  padding: 15px 10px 10px;
+  background-image: linear-gradient(to bottom, #09122acc, #09122acc, #142f4dcc);
+  padding: 10px;
   width: 244px;
   height: 230px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
 `;

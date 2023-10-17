@@ -18,12 +18,16 @@ import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util
 import { Table } from './styles';
 import { ZIGNALY_PROFIT_FEE } from 'util/constants';
 
-const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
+export const composeInvitesValue = (
+  tierIndex: number,
+  tiers: TierLevels,
+  showPlus = false,
+) => {
   const currentTier = tiers[tierIndex];
   const previousTier = tiers[tierIndex - 1];
 
   if (tierIndex === tiers.length - 1) {
-    return `${currentTier.invitees}+`;
+    return `${currentTier.invitees}${showPlus ? '+' : ''}`;
   }
 
   if (tierIndex > 0 && currentTier.invitees - previousTier.invitees > 1) {

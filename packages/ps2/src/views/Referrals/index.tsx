@@ -53,7 +53,7 @@ const Referrals: React.FC = () => {
 
   useTitle(t('pages:referrals'));
 
-  const tierData = useTiersData();
+  const tiersData = useTiersData();
   const {
     referral,
     maxCommission,
@@ -62,7 +62,7 @@ const Referrals: React.FC = () => {
     isLoading,
     boostRunning,
     inviteLeft,
-  } = tierData;
+  } = tiersData;
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
@@ -122,7 +122,7 @@ const Referrals: React.FC = () => {
                 </Trans>
               </ZigTypography>
               <ReferralCommissionBox
-                tierData={tierData}
+                tiersData={tiersData}
                 rewardsData={rewardsData}
               />
               <ZigButton

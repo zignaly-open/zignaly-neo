@@ -49,8 +49,5 @@
     "invite": "Invite",
     "invite-count": "Invite {{count}} people and get {{pct}}% of success fees",
     "invite-generic": "From everyone you invite to my trading service",
-    "invite-commission": "{{pct}}% Commission",
-    "1-week": "1 Week",
-    "how-it-works": "How it works",
-    "invite-people-1-week": "Earn <0>{{commission}}%</0> if you invite {{invite}} people in 1 week"
+    "invite-commission": "{{pct}}% Commission"
 }

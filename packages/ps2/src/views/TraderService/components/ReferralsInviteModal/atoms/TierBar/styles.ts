@@ -42,7 +42,7 @@ export const TierBarContainer = styled(Box)<{
       ${emphasis ? `rgba(42, 177, 104, 0.7)` : `rgba(0, 145, 121, ${opacity})`},
       rgba(33, 81, 78, ${opacity})
     )`};
-    clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 95%);
+    clip-path: inset(0 0 3px 0);
   }
 
   ${({ subLayer }) =>
@@ -87,7 +87,7 @@ export const TierArrow = styled('div')`
   &::after {
     content: '';
     position: absolute;
-    top: 15px;
+    top: 14px;
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);

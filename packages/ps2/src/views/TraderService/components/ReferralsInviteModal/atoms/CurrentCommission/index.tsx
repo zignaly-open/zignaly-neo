@@ -13,19 +13,20 @@ import { CommissionBoostChip } from '../../styles';
 import { Service } from 'apis/service/types';
 import { useTiersData } from 'apis/referrals/use';
 import { isNumber } from 'lodash-es';
+import { TiersData } from 'apis/referrals/types';
 
 const CurrentCommission = ({
-  service,
   showReferrals = true,
   showWhenYouInvite = true,
   showMaxCommission,
   earnings,
+  tiersData,
 }: {
-  service?: Service;
   showReferrals?: boolean;
   showWhenYouInvite?: boolean;
   showMaxCommission: boolean;
   earnings?: number;
+  tiersData: TiersData;
 }) => {
   const { t } = useTranslation('referrals-trader');
   const {
@@ -34,9 +35,10 @@ const CurrentCommission = ({
     currentDate,
     boostRunning,
     maxCommission,
+    maxCommissionWithoutTraderBoost,
     traderBoost,
     inviteLeft,
-  } = useTiersData(service?.id);
+  } = tiersData;
 
   return (
     <Box
@@ -65,7 +67,9 @@ const CurrentCommission = ({
                 showMaxCommission
                   ? 'tooltips.max-commission'
                   : 'tooltips.commission-rate',
-                { commission: maxCommission },
+                {
+                  commission: maxCommission,
+                },
               )}
             >
               <InfoOutlined
