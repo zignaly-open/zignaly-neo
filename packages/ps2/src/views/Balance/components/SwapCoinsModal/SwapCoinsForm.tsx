@@ -63,11 +63,11 @@ function SwapCoinsForm({
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
-    coinOptionsAllowedSwapFrom.find((coin) =>
-      selectedCoin
-        ? coin.coin === selectedCoin.coin
-        : coinOptionsAllowedSwapFrom[0],
-    ),
+    selectedCoin
+      ? coinOptionsAllowedSwapFrom.find(
+          (coin) => coin.coin === selectedCoin.coin,
+        )
+      : coinOptionsAllowedSwapFrom[0],
   );
   const [selectedToToken, setSelectedToToken] = useState<CoinsSelect>(
     {} as CoinsSelect,

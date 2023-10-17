@@ -10,6 +10,5 @@ export const ButtonsWrapper = styled(Box)`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  // background-color: ${({ theme }) => theme.palette.backgrounds.modal};
   background-color: #060819;
 `;
