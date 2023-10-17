@@ -2,7 +2,7 @@ name: PS2 Staging deploy WL
 on:
   push:
     branches:
-      - feat/wl-i18n-overrides
+      - master
 
 jobs:
   deploy:

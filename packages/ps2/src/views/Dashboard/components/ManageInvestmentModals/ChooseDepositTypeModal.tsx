@@ -46,11 +46,12 @@ export function useDepositModalContent({
         availableInUsd: balance?.balanceFreeUSDT || 0,
         label: <ZigTypography>{c}</ZigTypography>,
       }))
-      .filter((c) => c.available > 0 && allowedDeposits.spot.includes(c.coin));
+      .filter(
+        (c) => allowedDeposits.spot.includes(c.coin) && c.availableInUsd >= 10,
+      );
   }, [balances]);
   const showSwap =
-    exchangeType === 'spot' &&
-    coinOptionsAllowedSwapFrom.some((el) => el.availableInUsd > 10);
+    exchangeType === 'spot' && coinOptionsAllowedSwapFrom.length !== 0;
 
   const [view, setView] = useState<ChooseDepositTypeViews>();
   useEffect(() => {
