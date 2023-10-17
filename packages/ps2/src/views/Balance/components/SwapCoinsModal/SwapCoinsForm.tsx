@@ -106,10 +106,12 @@ function SwapCoinsForm({
   useEffect(() => {
     if (convertPreview)
       setMinAmount(trimZeros((convertPreview?.min).toFixed(8)));
+  }, [convertPreview]);
+  useEffect(() => {
     if (amount) {
       trigger('fromCoinAmount');
     }
-  }, [convertPreview, isFetchingConvertPreview, trigger, minAmount]);
+  }, [minAmount]);
 
   const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
     selectedFromToken.coin,
@@ -196,6 +198,7 @@ function SwapCoinsForm({
             id={'swap-coins-modal__from-input-amount'}
             label={t('from-input.label')}
             wide
+            selectSx={{ width: '150px' }}
             coin={selectedFromToken}
             onTokenChange={(token: CoinsSelect) => {
               setSelectedFromToken(token);
@@ -229,6 +232,7 @@ function SwapCoinsForm({
             id={'swap-coins-modal__to-input-amount'}
             label={t('to-input.label')}
             wide
+            selectSx={{ width: '150px' }}
             labelInline={false}
             coin={selectedToToken}
             onTokenChange={(token: CoinsSelect) => {

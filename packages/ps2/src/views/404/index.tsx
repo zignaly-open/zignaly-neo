@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import NotFound from '../../components/Stub/NotFound';
 
 const NotFoundPage: React.FC = () => {

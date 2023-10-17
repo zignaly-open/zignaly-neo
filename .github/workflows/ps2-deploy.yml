@@ -17,6 +17,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Whitelabel status
+        if: ${{ vars.WHITELABEL != ''}}
+        run: |
+          echo "Whitelabel: ${{ vars.WHITELABEL }}"
+      - name: Replace index.html
+        if: ${{ vars.WHITELABEL != ''}}
+        # Well, we could have achieved the same with ejecting the app and configuring
+        # multiple entry points, but ejecting instills feat into my heart and soul
+        run: |
+          if [ -f "packages/ps2/public/whitelabel/${{ vars.WHITELABEL}}.html" ]; then
+            cp -r "packages/ps2/public/whitelabel/${{ vars.WHITELABEL}}.html" "packages/ps2/public/index.html" && echo "Replaced index.html with ${{ vars.WHITELABEL}}.html"
+          fi
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:

@@ -22,6 +22,7 @@ import {
 import { LocalizationLanguages } from '../../../util/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
 import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
+import { whitelabel } from '../../../whitelabel';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
@@ -56,7 +57,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
       target: '_blank',
-      href: 'https://help.zignaly.com/hc/en-us',
+      href: whitelabel.helpUrl,
     },
     {
       separator: true,
@@ -85,7 +86,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       })),
     },
     {
-      element: (
+      element: socialNetworksLinks.length > 0 && (
         <Networks key={'--social-networks'}>
           {socialNetworksLinks.map((socialNetwork, index) => {
             const IconComponent = socialNetwork.image;

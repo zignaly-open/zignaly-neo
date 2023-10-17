@@ -180,6 +180,7 @@ export default function ZigTableData<T extends object>({
                     style={{
                       cursor: onRowClick || row.getCanExpand() ? "pointer" : "unset",
                       position: "relative",
+                      transform: "scale(1)",
                     }}
                   >
                     {row.getVisibleCells().map((cell, index) => {

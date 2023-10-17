@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ChooseDepositType from './views/ChooseDepositType';
 import DepositView from './views/Deposit';
@@ -46,17 +46,19 @@ export function useDepositModalContent({
         availableInUsd: balance?.balanceFreeUSDT || 0,
         label: <ZigTypography>{c}</ZigTypography>,
       }))
-      .filter((c) => c.available > 0 && allowedDeposits.spot.includes(c.coin));
+      .filter(
+        (c) => allowedDeposits.spot.includes(c.coin) && c.availableInUsd >= 10,
+      );
   }, [balances]);
   const showSwap =
-    exchangeType === 'spot' &&
-    !coinOptionsAllowedSwapFrom.some((el) => el.availableInUsd < 10);
+    exchangeType === 'spot' && coinOptionsAllowedSwapFrom.length !== 0;
 
-  const [view, setView] = useState<ChooseDepositTypeViews>(
+  const [view, setView] = useState<ChooseDepositTypeViews>();
+  useEffect(() => {
     showSwap
-      ? ChooseDepositTypeViews.SwapDepositView
-      : ChooseDepositTypeViews.ChooseDepositTypeView,
-  );
+      ? setView(ChooseDepositTypeViews.SwapDepositView)
+      : setView(ChooseDepositTypeViews.ChooseDepositTypeView);
+  }, [showSwap]);
   const openInvestModal = useOpenInvestDepositModal();
 
   type ViewDefinition = {

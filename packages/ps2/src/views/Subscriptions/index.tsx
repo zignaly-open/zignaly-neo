@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ZigTypography } from '@zignaly-open/ui';
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import SubscriptionCard from './SubscriptionCard';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { SubscriptionPlan } from '../../apis/subscription/types';
 import { useSubscriptionsQuery } from '../../apis/subscription/api';

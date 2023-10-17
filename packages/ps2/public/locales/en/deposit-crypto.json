@@ -12,7 +12,7 @@
   },
   "service-swap": {
     "title": "Deposit {{coin}} to Invest with Trader",
-    "description": "The trader is trading with {{coin}}, so you must deposit the same crypto the trader is using in order to share profits with them. Please deposit {{coin}} to your account.",
+    "description": "The trader is trading with {{coin}}, so you must deposit the same crypto the trader is using in order to share profits with them. Please deposit {{coin}} to your account or convert other coins to {{ coin }}.",
     "convert-to-coin": "Convert to {{ coin }}",
     "deposit-purchase": "Deposit or purchase {{ coin }}",
     "convert": "Convert",
@@ -33,7 +33,7 @@
     "label": "Network:",
     "placeholder": "Choose the network"
   },
-  "no-network": "Deposit is not available on this network",
+  "no-network": "The wallet is currently undergoing maintenance. Your funds in transit are safe once confirmed on the blockchain and will be credited shortly after deposits have resumed.",
   "network-unavailable": "Network unavailable",
   "depositAddress": {
     "copied": "Deposit address copied to clipboard!",

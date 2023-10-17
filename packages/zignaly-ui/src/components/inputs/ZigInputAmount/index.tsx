@@ -160,8 +160,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
                 hoverBackground={false}
                 placeholder={"Select coin"}
                 showBorder={false}
-                outlined
-                value={coin}
+                value={tokenOptions?.find((token) => token.coin === coin?.coin)}
                 onChange={(v1, v2) => {
                   onTokenChange?.(v2);
                 }}

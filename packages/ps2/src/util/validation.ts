@@ -149,7 +149,7 @@ export const inputAmountValidation = ({
       i18n.t('common:validation.insufficient-amount-min', {
         minValue: min,
         minValueCoin: coin,
-      }),
+      }) as string,
       (val) => !new BigNumber(val).isLessThan(new BigNumber(min)),
     );
   }
@@ -160,7 +160,7 @@ export const inputAmountValidation = ({
       i18n.t('common:validation.insufficient-amount-max', {
         maxValue: max,
         coin,
-      }),
+      }) as string,
       (val) => !new BigNumber(val).isGreaterThan(new BigNumber(max)),
     );
   }

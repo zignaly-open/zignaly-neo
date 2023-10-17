@@ -1,21 +1,21 @@
 import * as clients from './configs';
-import { Features, OverrideableEndpoints, WhitelabelOverride } from './type';
+import { Features, OverrideableEndpoints } from './type';
 import defaultFeatureState from './default';
 
-const { REACT_APP_WHITELABEL: whitelabelConfig } = process.env;
+const { REACT_APP_WHITELABEL: whitelabelName } = process.env;
 
-export const whitelabel = ((whitelabelConfig &&
-  typeof clients[whitelabelConfig] !== 'undefined' &&
-  clients[whitelabelConfig]) ||
-  {}) as WhitelabelOverride;
+export const whitelabel =
+  (whitelabelName && clients[whitelabelName]) || clients.zignaly;
+
+export { whitelabelName };
 
 export const isFeatureOn = (feature: Features): boolean => {
-  const featureState =
+  return (
     {
       ...defaultFeatureState,
       ...(whitelabel?.featureOverrides || {}),
-    }[feature] || false;
-  return featureState;
+    }[feature] || false
+  );
 };
 
 export const maybeOverrideEndpoint = (

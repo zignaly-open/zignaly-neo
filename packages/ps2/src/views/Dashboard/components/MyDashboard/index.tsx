@@ -8,7 +8,7 @@ import {
   ZigPlusIcon,
   getPrecisionForCoin,
 } from '@zignaly-open/ui';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
 import { useInvestments } from '../../../../apis/investment/use';
@@ -33,6 +33,8 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 import { generatePath, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { MobilePortfolioAction } from './MobilePortfolioAction';
+import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -54,6 +56,8 @@ const MyDashboard: React.FC = () => {
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
+  useEffect(() => () => setActiveRow(null), []);
 
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
@@ -85,7 +89,9 @@ const MyDashboard: React.FC = () => {
                 totalValue={getValue().toString()}
                 coin={original.ssc}
                 profit={new BigNumber(original.pnlSumLc).toFixed()}
-                onClickEdit={() => onClickEditInvestment(original)}
+                onClickEdit={
+                  md ? () => onClickEditInvestment(original) : undefined
+                }
               />
             );
           },
@@ -107,14 +113,17 @@ const MyDashboard: React.FC = () => {
           subtitle: t('tableHeader.serviceName.subtitle'),
         },
         cell: ({ row: { original } }) => (
-          <ServiceName
-            truncateServiceName={!md}
-            size={md ? 'x-large' : 'large'}
-            prefixId={'portfolio-table'}
-            service={original}
-            showCoin={md}
-            showOwner={md}
-          />
+          <Box paddingLeft={'4px'}>
+            <ServiceName
+              activeLink={md}
+              truncateServiceName={!md}
+              size={md ? 'x-large' : 'large'}
+              prefixId={'portfolio-table'}
+              service={original}
+              showCoin={md}
+              showOwner={md}
+            />
+          </Box>
         ),
       }),
       columnHelper.accessor((row) => +row.pnl30dPct, {
@@ -122,14 +131,14 @@ const MyDashboard: React.FC = () => {
         id: 'pnl30dPct',
         cell: ({ row: { original } }) => (
           <Box
-            minHeight={md ? '125px' : '97px'}
+            minHeight={md ? '125px' : '93px'}
             display={'flex'}
             flexDirection={'column'}
             justifyContent={'center'}
           >
             {original.pnl30dPct ||
             Object.keys(original.sparklines).length > 1 ? (
-              <Box sx={!md && { transform: 'scale(0.9)' }}>
+              <Box sx={!md && { transform: 'scale(0.7)' }}>
                 <ZigChartMiniSuspensed
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
@@ -155,6 +164,20 @@ const MyDashboard: React.FC = () => {
         sortingFn: 'auto',
         enableHiding: false,
       }),
+      ...(!md
+        ? [
+            columnHelper.display({
+              header: '',
+              id: 'action',
+              cell: (props) => (
+                <MobilePortfolioAction
+                  serviceId={props.row.original.serviceId}
+                  rowId={props.row.id}
+                />
+              ),
+            }),
+          ]
+        : []),
       ...(md
         ? [
             columnHelper.accessor('pnlDailyMeanLc', {
@@ -287,6 +310,13 @@ const MyDashboard: React.FC = () => {
               </Heading>
               <ZigTableWrapper>
                 <ZigTable
+                  onRowClick={
+                    !md
+                      ? (id: string) => {
+                          if (id !== activeRow) setActiveRow(id);
+                        }
+                      : undefined
+                  }
                   prefixId={'portfolio'}
                   initialState={{
                     sorting: [

@@ -162,7 +162,7 @@ const Marketplace: React.FC = () => {
         }),
         cell: (props) => (
           <Box
-            height={!md ? '97px' : 'unset'}
+            height={!md ? '90px' : 'unset'}
             minWidth={!md ? '60px' : 'unset'}
           >
             {+props.getValue() ||
@@ -189,6 +189,29 @@ const Marketplace: React.FC = () => {
           </Box>
         ),
       }),
+      ...(!md
+        ? [
+            columnHelper.accessor('invested', {
+              id: 'invested',
+              header: () => (
+                <div id={'marketplace-table__header-assets'}>
+                  {t('table.assets-mobile')}
+                </div>
+              ),
+              cell: (props) => (
+                <Box id={`marketplace-table__assets-${props.row.original.id}`}>
+                  <ZigTablePriceLabel
+                    sx={{ display: 'flex', flexDirection: 'column' }}
+                    shorten
+                    value={props.getValue()}
+                    coin={props.row.original.ssc}
+                  />
+                </Box>
+              ),
+              sortingFn: 'alphanumeric',
+            }),
+          ]
+        : []),
       columnHelper.display({
         header: '',
         id: 'action',
@@ -231,29 +254,6 @@ const Marketplace: React.FC = () => {
                   />
                 </Box>
               ),
-            }),
-          ]
-        : []),
-      ...(!md
-        ? [
-            columnHelper.accessor('invested', {
-              id: 'invested',
-              header: () => (
-                <div id={'marketplace-table__header-assets'}>
-                  {t('table.assets-mobile')}
-                </div>
-              ),
-              cell: (props) => (
-                <Box id={`marketplace-table__assets-${props.row.original.id}`}>
-                  <ZigTablePriceLabel
-                    sx={{ display: 'flex', flexDirection: 'column' }}
-                    shorten
-                    value={props.getValue()}
-                    coin={props.row.original.ssc}
-                  />
-                </Box>
-              ),
-              sortingFn: 'alphanumeric',
             }),
           ]
         : []),
