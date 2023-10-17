@@ -97,31 +97,6 @@ export const TierArrow = styled('div')`
   }
 `;
 
-export const BarContent0 = styled(Box)<{ subLayer: boolean }>`
-  position: absolute;
-  justify-content: center;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  ${({ subLayer }) =>
-    !subLayer &&
-    css`
-      transform: translateY(8%);
-      justify-content: start;
-    `}
-
-  svg {
-    height: 12px;
-    min-height: 12px;
-    width: 7.5px;
-    min-width: 7.5px;
-  }
-`;
-
 export const BarContent = styled(Box)<{ subLayer?: boolean }>`
   position: relative;
   align-items: center;

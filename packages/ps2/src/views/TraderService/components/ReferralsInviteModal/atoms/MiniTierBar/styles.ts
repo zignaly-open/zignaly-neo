@@ -1,69 +1,18 @@
-import { Box, css, styled, keyframes } from '@mui/material';
+import { styled } from '@mui/material';
+import { TierBarContainer as TierBarContainerBase } from '../TierBar/styles';
 
-export const Overlay = styled(Box)<{ opacity: number }>`
-  background-image: ${({ opacity }) =>
-    `linear-gradient(rgba(33, 81, 78, ${opacity}), rgba(18,33,59, ${
-      opacity * 0.52
-    }))`};
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
-
-export const TierBarContainer = styled(Box)<{
+export const TierBarContainer = styled(TierBarContainerBase)<{
   opacity: number;
   emphasis: boolean;
   subLayer?: boolean;
   hide?: boolean;
 }>`
-  border-radius: 4px;
   margin: 0 4px;
-  position: relative;
   padding-top: 0;
-  overflow: hidden;
 
   &::before {
     ${({ hide }) => !hide && `content: '';`}
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 4px;
-    padding: 1.5px;
-    background: none;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-    background-image: ${({ emphasis, opacity }) => `linear-gradient(
-      ${emphasis ? `rgba(42, 177, 104, 0.7)` : `rgba(0, 145, 121, ${opacity})`},
-      rgba(33, 81, 78, ${opacity})
-    )`};
-    clip-path: inset(0 0 3px 0);
   }
-
-  ${({ subLayer }) =>
-    subLayer &&
-    css`
-      position: absolute;
-      bottom: 0;
-    `}
-`;
-
-export const HighlightRate = styled(Box)`
-  position: absolute;
-  top: 1.5px;
-  left: 0;
-  right: 0;
-  background: #156747;
-  margin: 0 auto;
-  border-radius: 2.5px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
 `;
 
 export const TierArrow = styled('div')<{ subLayer?: boolean }>`
@@ -71,7 +20,7 @@ export const TierArrow = styled('div')<{ subLayer?: boolean }>`
   height: 100%;
   width: 100%;
   margin-top: ${({ subLayer }) => (subLayer ? -3 : 6)}px;
-  opacity: 0.2;
+  opacity: 0.15;
 
   &::before {
     content: '';
@@ -96,23 +45,5 @@ export const TierArrow = styled('div')<{ subLayer?: boolean }>`
     width: 10px;
     background: linear-gradient(#28ba62 18%, #0c2438),
       linear-gradient(#103e50, #0c2438 100%);
-  }
-`;
-
-export const BarContent = styled(Box)<{ subLayer?: boolean }>`
-  position: relative;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
-
-  ${({ subLayer }) =>
-    !subLayer &&
-    css`
-      transform: translateY(18%);
-    `}
-
-  svg {
-    opacity: 0.6;
   }
 `;

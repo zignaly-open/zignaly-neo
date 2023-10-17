@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
-import { BarContent, Overlay, TierArrow, TierBarContainer } from './styles';
+import { TierArrow, TierBarContainer } from './styles';
 import { ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useTierLayers } from './util';
 import { TierBarProps } from './types';
 import { useTranslation } from 'react-i18next';
+import { useTierLayers } from '../TierBar/util';
+import { BarContent, Overlay } from '../TierBar/styles';
 
 const MiniTierBar = ({
   tier,
@@ -43,7 +44,6 @@ const MiniTierBar = ({
   });
 
   const [layer1, layer2] = layers;
-  const layersCount = layers.filter((l) => l.value > 0).length;
   // Hide top layer if there is a boost running, except for the last tier
   const hideTopLayer = boostRunning && tier.id !== lastTier.id;
   // Or if the boost if unlocked, only show that layer
@@ -68,7 +68,7 @@ const MiniTierBar = ({
           <>
             <BarContent>
               <ZigTypography
-                color={layersCount > 1 || showArrow ? '#16dc65' : 'greenGraph'}
+                color={showArrow ? '#16dc65' : 'greenGraph'}
                 fontSize={fontSize}
                 fontWeight={showArrow ? 600 : 500}
                 className='tier-bar__value'

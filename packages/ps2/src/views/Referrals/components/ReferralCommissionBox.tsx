@@ -49,13 +49,8 @@ const ReferralCommissionBox = ({
     maxCommission: maxCommissionOrig,
     maxCommissionWithoutTraderBoost,
     traderBoost: traderBoostOrig,
-    isLoading,
-    boostRunning,
-    inviteLeft,
-    tiers,
-    boost,
   } = tiersData;
-  console.log('tiersData', tiersData);
+
   let maxCommission = maxCommissionOrig;
   let traderBoost = traderBoostOrig;
 
