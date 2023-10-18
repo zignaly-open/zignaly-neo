@@ -18,7 +18,7 @@ export const TierBarContainer = styled(Box)<{
   subLayer?: boolean;
 }>`
   border-radius: 4px;
-  margin: 0 10px;
+  margin: 0 8px;
   position: relative;
   padding-top: 4px;
   overflow: hidden;

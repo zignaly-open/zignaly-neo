@@ -8,7 +8,7 @@ import {
 import { Box, Grid } from '@mui/material';
 import {
   PageContainer,
-  ZigButton,
+  ZigArrowDescIcon,
   ZigPriceLabel,
   ZigTypography,
   ZigUserFilledIcon,
@@ -20,11 +20,9 @@ import ReferralTable from './components/ReferralTable';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useTiersData } from 'apis/referrals/use';
 import ReferralLimitedTime from './components/ReferralLimitedTime';
-import { ChevronRight, Verified } from '@mui/icons-material';
+import { Verified } from '@mui/icons-material';
 import ReferralHowToEarn from './components/ReferralHowToEarn';
-import { HELP_REFERRAL } from 'util/constants';
 import ReferralCommissionBox from './components/ReferralCommissionBox';
-import { useZModal } from 'components/ZModal/use';
 import ReferralTermsButton from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralTermsButton';
 
 const Referrals: React.FC = () => {
@@ -48,7 +46,7 @@ const Referrals: React.FC = () => {
     boostRunning,
     inviteLeft,
   } = tiersData;
-  console.log(tiersData);
+
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
@@ -127,6 +125,7 @@ const Referrals: React.FC = () => {
                   fontSize={'26px'}
                   fontWeight={600}
                   sx={{ mt: 7, mb: '29px' }}
+                  className='referral-page__start-earning-title'
                 >
                   {t('start-earning')}
                 </ZigTypography>
@@ -154,6 +153,7 @@ const Referrals: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
+                    alignItems: 'center',
                     pt: 3,
                     pb: 5,
                   }}
@@ -176,6 +176,7 @@ const Referrals: React.FC = () => {
                       </ZigTypography>
                     }
                   />
+                  <ZigArrowDescIcon />
                   <TotalBox
                     label={t('invested')}
                     value={
@@ -198,6 +199,7 @@ const Referrals: React.FC = () => {
                       </ZigTypography>
                     }
                   />
+                  <ZigArrowDescIcon />
                   <TotalBox
                     label={t('total-earned')}
                     value={

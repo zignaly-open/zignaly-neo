@@ -7,13 +7,10 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
   const { t } = useTranslation(['referrals-trader', 'referrals']);
 
   const {
-    referral,
     maxCommission,
     maxCommissionWithoutTraderBoost,
-    traderBoost,
     boostRunning,
     tiers,
-    boost,
   } = tiersData;
   const { invitees } = tiers[tiers.length - 1];
 
@@ -22,7 +19,7 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
       <DescriptionLine
         text={t('earn-success-fees')}
         tooltip={t('tooltips.earn-success-fees')}
-        id='referrals-invite-modal__earn-success-fees'
+        id='referrals__earn-success-fees'
       />
       {boostRunning ? (
         <DescriptionLine
@@ -34,7 +31,7 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
             invite: invitees,
             commission: maxCommissionWithoutTraderBoost,
           })}
-          id='referrals-invite-modal__invite-and-earn-1-week'
+          id='referrals__invite-and-earn-1-week'
         />
       ) : (
         <DescriptionLine
@@ -46,7 +43,7 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
             invite: invitees,
             commission: maxCommissionWithoutTraderBoost,
           })}
-          id='referrals-invite-modal__invite-and-earn'
+          id='referrals__invite-and-earn'
         />
       )}
       <DescriptionLine
@@ -57,7 +54,7 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
           invite: invitees,
           commission: maxCommission,
         })}
-        id='referrals-invite-modal__invite-and-earn-trader-boost'
+        id='referrals__invite-and-earn-trader-boost'
       />
     </div>
   );
