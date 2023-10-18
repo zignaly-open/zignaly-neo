@@ -13,18 +13,27 @@ export const ProfileStatusBox: React.FC<{
   status: string;
   ctaLabel: string;
   cta: () => void;
-}> = ({ isSuccess, label, status, cta, ctaLabel }) => {
+  id?: string;
+}> = ({ isSuccess, label, status, cta, ctaLabel, id }) => {
   const theme = useTheme();
   const color = isSuccess ? theme.palette.greenGraph : theme.palette.red;
 
   return (
     <ProfileStatusBoxContainer color={color}>
-      <ZigTypography color={'neutral200'}>{label}</ZigTypography>
-      <ZigTypography component={'p'} fontWeight={600} color={color} mb='5px'>
+      <ZigTypography color={'neutral200'} id={id && `${id}-label`}>
+        {label}
+      </ZigTypography>
+      <ZigTypography
+        component={'p'}
+        fontWeight={600}
+        color={color}
+        mb='5px'
+        id={id && `${id}-status`}
+      >
         {status}
       </ZigTypography>
       {!isSuccess && (
-        <ZigButton variant={'text'} onClick={cta}>
+        <ZigButton variant={'text'} onClick={cta} id={id && `${id}-action`}>
           {ctaLabel}
         </ZigButton>
       )}
@@ -35,9 +44,11 @@ export const ProfileStatusBox: React.FC<{
 export const KYCStatusBox = ({
   kycStatuses,
   cta,
+  id,
 }: {
   kycStatuses: KycResponse[];
   cta: () => void;
+  id?: string;
 }) => {
   const { t } = useTranslation(['settings', 'kyc']);
 
@@ -83,7 +94,11 @@ export const KYCStatusBox = ({
 
   return (
     <ProfileStatusBoxContainer color={color}>
-      <ZigTypography color={'neutral200'} component={'div'}>
+      <ZigTypography
+        color={'neutral200'}
+        component={'div'}
+        id={id && `${id}-verification-${kycStatuses[0].category.toLowerCase()}`}
+      >
         {t(`header.verification-${kycStatuses[0].category.toLowerCase()}`)}
       </ZigTypography>
       {kycConfig[kycStatuses[0].category].map((x, i) => {
@@ -117,6 +132,7 @@ export const KYCStatusBox = ({
               display={'flex'}
               alignItems={'center'}
               mb='5px'
+              id={id && `${id}-current-status`}
             >
               {t(getStatus(status))}
               {status === 'pending' && (
@@ -142,7 +158,7 @@ export const KYCStatusBox = ({
         );
       })}
       {(isNotStarted || retry) && (
-        <ZigButton variant={'text'} onClick={cta}>
+        <ZigButton variant={'text'} onClick={cta} id={id && `${id}-pass-kyc`}>
           {t('edit-profile.status-box.pass-kyc-cta')}
         </ZigButton>
       )}

@@ -23,7 +23,7 @@ const UpdatePassword: React.FC = () => {
           </ZigTypography>
           <ZigTypography
             variant={'body1'}
-            id={'kyc__description'}
+            id={'update-password__description'}
             color='neutral300'
             component={'p'}
           >
