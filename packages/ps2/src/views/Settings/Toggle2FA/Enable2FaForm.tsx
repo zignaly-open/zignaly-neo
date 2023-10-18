@@ -71,7 +71,11 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
               <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
             </Trans>
           </ZigTypography>
-          <QRCode aria-labelledby='QR Code' src={load2FAInfoResult.data[1]} />
+          <QRCode
+            aria-labelledby='QR Code'
+            src={load2FAInfoResult.data[1]}
+            id={'enable-two-fa_qr-code'}
+          />
 
           <ZigTypography
             color='yellow'
