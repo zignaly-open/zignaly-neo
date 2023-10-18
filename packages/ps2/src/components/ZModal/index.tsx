@@ -23,6 +23,7 @@ const ZModal: React.FC<ZModalProps> = ({
   wide,
   titleAlign,
   titleStyles,
+  mobileFullScreen,
   ...props
 }): React.ReactElement => {
   const isAuthenticated = useIsAuthenticated();
@@ -47,6 +48,10 @@ const ZModal: React.FC<ZModalProps> = ({
         justifyContent: 'center',
         display: 'flex',
         ...(props.sx ?? {}),
+        '@media (max-width: 600px)': mobileFullScreen && {
+          justifyContent: 'flex-start',
+          height: '100%',
+        },
       }}
     >
       <ModalContainer

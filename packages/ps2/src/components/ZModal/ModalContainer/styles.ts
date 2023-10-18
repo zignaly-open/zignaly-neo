@@ -23,11 +23,17 @@ export const Layout = styled(Box)<{ width: number }>`
     width &&
     css`
       width: ${width}px; // TODO: responsiveness
+      @media (max-width: ${width}px) {
+        width: 100%;
+        border-radius: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+      }
     `};
-  max-width: calc(100vw - 30px);
+  max-width: 100%;
 
   @media (max-width: 600px) {
-    padding: 20px 23px;
+    padding: 35px 23px;
   }
 `;
 
@@ -146,5 +152,6 @@ export const BackIconButton = styled(IconButton)`
 export const CloseIconButton = styled(IconButton)`
   position: absolute;
   right: 22px;
+  z-index: 999;
   top: 16px;
 `;
