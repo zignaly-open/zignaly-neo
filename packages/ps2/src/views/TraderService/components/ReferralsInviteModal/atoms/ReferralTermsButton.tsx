@@ -19,7 +19,7 @@ const ReferralTermsButton = () => {
           }}
         />
       }
-      id='referrals-invite-modal__terms-link'
+      id='referrals__terms-link'
       href={HELP_REFERRAL}
       target='_blank'
       rel='noopener'

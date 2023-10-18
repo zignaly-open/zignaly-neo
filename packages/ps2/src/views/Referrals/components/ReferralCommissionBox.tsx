@@ -4,18 +4,12 @@ import {
   BorderFix,
   BorderFixAlt,
   CommissionBox,
-  HowToEarnBox,
   StyledCurrentCommission,
   StyledReferralLinkInvite,
   StyledShareCommissionSlider,
-  TiersCardBox,
 } from '../styles';
-import { useTiersData } from 'apis/referrals/use';
 import { Box } from '@mui/material';
-import TiersTable from 'views/TraderService/components/ReferralsInviteModal/atoms/TiersTable';
 import { useTranslation } from 'react-i18next';
-import { DescriptionLine } from 'views/TraderService/components/ReferralsInviteModal/atoms/DescriptionLine';
-import { ZigTypography, ZigPriceLabel } from '@zignaly-open/ui';
 import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/atoms/CurrentCommission';
 import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
 import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';

@@ -10,8 +10,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import BoostChip from '../BoostChip';
 import BoostTimer from '../BoostTimer';
 import { CommissionBoostChip } from '../../styles';
-import { Service } from 'apis/service/types';
-import { useTiersData } from 'apis/referrals/use';
 import { isNumber } from 'lodash-es';
 import { TiersData } from 'apis/referrals/types';
 
@@ -35,7 +33,6 @@ const CurrentCommission = ({
     currentDate,
     boostRunning,
     maxCommission,
-    maxCommissionWithoutTraderBoost,
     traderBoost,
     inviteLeft,
   } = tiersData;
@@ -58,7 +55,7 @@ const CurrentCommission = ({
             <ZigTypography
               textTransform='uppercase'
               variant='h4'
-              id='referrals-invite-modal__commission-label'
+              id='commission__label'
             >
               {t(showMaxCommission ? 'max-commission' : 'commission-rate')}
             </ZigTypography>
@@ -91,7 +88,7 @@ const CurrentCommission = ({
             pt='20px'
             lineHeight='50px'
             position={'relative'}
-            id='referrals-invite-modal__max-commission'
+            id='commission__max'
           >
             {maxCommission}
             <ZigTypography
@@ -117,7 +114,7 @@ const CurrentCommission = ({
               <ZigTypography
                 textTransform='uppercase'
                 variant='h4'
-                id='referrals-invite-modal__referrals-label'
+                id='commission__referrals-label'
               >
                 {t('my-referrals')}
               </ZigTypography>
@@ -149,7 +146,7 @@ const CurrentCommission = ({
                 fontSize={35}
                 pl='9px'
                 pr='7px'
-                id='referrals-invite-modal__referrals-count'
+                id='commission__referrals-count'
               >
                 {referral.investorsCount}
               </ZigTypography>
@@ -162,7 +159,7 @@ const CurrentCommission = ({
             <ZigTypography
               textTransform='uppercase'
               variant='h4'
-              id='referrals-invite-modal__referrals-label'
+              id='commission__referrals-label'
             >
               {t('earnings')}
             </ZigTypography>
@@ -179,7 +176,7 @@ const CurrentCommission = ({
                 showTooltip
                 variant={'bigNumber'}
                 value={earnings}
-                id='referrals-invite-modal__referrals-label'
+                id='commission__referrals-label'
               />
             </Box>
           </Box>
@@ -191,7 +188,7 @@ const CurrentCommission = ({
             color='neutral200'
             variant='h3'
             fontWeight={400}
-            id='referrals-invite-modal__when-you-invite'
+            id='commission__when-you-invite'
             textAlign={'center'}
           >
             <Trans

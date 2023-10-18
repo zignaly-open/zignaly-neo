@@ -86,7 +86,7 @@ const ReferralTiersCard = ({ tiersData }: { tiersData: TiersData }) => {
                 fontWeight={500}
                 fontSize={12}
                 color='neutral200'
-                className='tier-chart__referrals-value'
+                id='tier-chart__referrals-count'
               >
                 {composeInvitesValue(tierIndex, tiers, false)}
               </ZigTypography>
@@ -112,7 +112,7 @@ const ReferralTiersCard = ({ tiersData }: { tiersData: TiersData }) => {
             }}
           />
         }
-        id='referrals-invite-modal__terms-link'
+        id='referrals-tiers-card__terms-link'
         onClick={() => {
           showModal(ReferralTiersModal, {
             tiersData,
