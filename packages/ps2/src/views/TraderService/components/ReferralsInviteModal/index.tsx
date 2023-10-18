@@ -184,7 +184,7 @@ const ReferralsInviteModal = ({
             />
           </Box>
 
-          <Box mt='61px'>
+          <Box mt='61px' textAlign={'center'}>
             <ReferralTermsButton />
           </Box>
         </>
