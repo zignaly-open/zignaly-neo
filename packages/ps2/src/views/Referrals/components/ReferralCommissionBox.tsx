@@ -44,7 +44,6 @@ const ReferralCommissionBox = ({
     maxCommissionWithoutTraderBoost,
     commissionWithoutTraderBoost,
     traderBoost: traderBoostOrig,
-    commission,
   } = tiersData;
 
   let maxCommission = maxCommissionOrig;
