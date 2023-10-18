@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginForm from './components/LoginForm';
 import { PageContainer } from '@zignaly-open/ui';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import { useTranslation } from 'react-i18next';
 import { useMaybeSaveMissedDestinationUrl } from '../../util/navigation';
 

@@ -5,33 +5,46 @@ import {
   ZigLogoTwitterIcon,
   ZigLogoLinkedInIcon,
 } from '@zignaly-open/ui';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { whitelabel } from '../whitelabel';
 
 const socialNetworksLinks = [
   {
     name: 'Twitter',
     image: ZigLogoTwitterIcon,
-    path: 'https://twitter.com/zignaly',
+    path: whitelabel.social?.twitter,
   },
   {
     name: 'Telegram',
     image: ZigLogoTelegramIcon,
-    path: 'https://t.me/ZignalyHQ',
+    path: whitelabel.social?.telegram,
   },
   {
     name: 'Discord',
     image: ZigLogoDiscordIcon,
-    path: 'https://discord.gg/9H6cEa9uRN',
+    path: whitelabel.social?.discord,
+  },
+  {
+    name: 'Instagram',
+    image: InstagramIcon,
+    path: whitelabel.social?.instagram,
+  },
+  {
+    name: 'Youtube',
+    image: YouTubeIcon,
+    path: whitelabel.social?.youtube,
   },
   {
     name: 'Medium',
     image: ZigLogoMediumIcon,
-    path: 'https://medium.com/zignaly',
+    path: whitelabel.social?.medium,
   },
   {
-    name: '',
+    name: 'LinkedIn',
     image: ZigLogoLinkedInIcon,
-    path: 'https://www.linkedin.com/company/zignaly/',
+    path: whitelabel.social?.linkedin,
   },
-];
+].filter((item) => item.path);
 
 export default socialNetworksLinks;

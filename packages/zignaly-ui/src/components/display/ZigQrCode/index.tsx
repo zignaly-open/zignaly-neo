@@ -18,7 +18,7 @@ const ZigQrCode = ({
   url?: string;
   label?: string;
   id?: string;
-  extraInfo?: JSX.Element;
+  extraInfo?: JSX.Element | string;
   className?: string;
   size?: number;
   width?: number;
