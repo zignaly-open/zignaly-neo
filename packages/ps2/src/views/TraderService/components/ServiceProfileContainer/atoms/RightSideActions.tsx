@@ -80,7 +80,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           alignItems={'center'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
-            <InviteButton service={service} />
+            <InviteButton service={service} tiersData={tiers} />
           )}
           {state === RightSideActionStates.Invested ? (
             <InvestedButton prefixId={'service-profile'} service={service} />

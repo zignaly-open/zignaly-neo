@@ -76,7 +76,8 @@ export function useTiersData(serviceId?: string) {
     ? DEFAULT_USER_BOOST
     : referral?.boost ?? DEFAULT_USER_BOOST;
   const lastTier = tiers?.[tiers?.length - 1];
-  const currentTier = tiers?.[referral?.tierId];
+  const currentTier = tiers?.find((t) => t.id === referral?.tierId);
+
   const inviteLeft =
     // in case it reached last tier but invites is increased afterwards
     referral?.tierId === lastTier?.id

@@ -1,28 +1,25 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZigButton, ZigTypography, trimZeros } from '@zignaly-open/ui';
+import { ZigTypography, trimZeros } from '@zignaly-open/ui';
 import { ReferralsInviteModalProps } from './types';
 import ZModal from 'components/ZModal';
 import { Box, Grid } from '@mui/material';
 import Tiers from './atoms/TiersTable';
-import { NorthEast } from '@mui/icons-material';
 import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
 import { useTiersData } from 'apis/referrals/use';
-import CurrentCommission from './CurrentCommission';
-import { HELP_REFERRAL } from 'util/constants';
+import CurrentCommission from './atoms/CurrentCommission';
+import ReferralTermsButton from './atoms/ReferralTermsButton';
 
 const ReferralsInviteModal = ({
   service,
   close,
   ...props
 }: ReferralsInviteModalProps) => {
-  const { t } = useTranslation<['referrals-trader', 'service']>([
-    'referrals-trader',
-    'service',
-  ]);
+  const { t } = useTranslation(['referrals-trader', 'service']);
+  const tiersData = useTiersData(service.id);
   const {
     tiers,
     referral,
@@ -34,7 +31,7 @@ const ReferralsInviteModal = ({
     traderBoost,
     inviteLeft,
     isLoading,
-  } = useTiersData(service.id);
+  } = tiersData;
 
   return (
     <ZModal
@@ -83,7 +80,11 @@ const ReferralsInviteModal = ({
               flexDirection={'column'}
               alignItems={'center'}
             >
-              <CurrentCommission service={service} />
+              <CurrentCommission
+                tiersData={tiersData}
+                showReferrals={referral.investorsCount > 0}
+                showMaxCommission={inviteLeft > 0}
+              />
               <Box px='20px'>
                 <ShareCommissionSlider
                   discountPct={referral.discountPct}
@@ -183,25 +184,9 @@ const ReferralsInviteModal = ({
             />
           </Box>
 
-          <ZigButton
-            variant={'text'}
-            sx={{ fontSize: '16px !important', marginTop: '61px' }}
-            endIcon={
-              <NorthEast
-                sx={{
-                  color: 'links',
-                  fill: 'currentColor !important',
-                  fontSize: '16px !important',
-                }}
-              />
-            }
-            id='referrals-invite-modal__terms-link'
-            href={HELP_REFERRAL}
-            target='_blank'
-            rel='noopener'
-          >
-            {t('terms')}
-          </ZigButton>
+          <Box mt='61px' textAlign={'center'}>
+            <ReferralTermsButton />
+          </Box>
         </>
       )}
     </ZModal>
