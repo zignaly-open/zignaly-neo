@@ -42,7 +42,9 @@ const ReferralCommissionBox = ({
     referral,
     maxCommission: maxCommissionOrig,
     maxCommissionWithoutTraderBoost,
+    commissionWithoutTraderBoost,
     traderBoost: traderBoostOrig,
+    commission,
   } = tiersData;
 
   let maxCommission = maxCommissionOrig;
@@ -60,7 +62,7 @@ const ReferralCommissionBox = ({
         <BorderFixAlt />
         <ShareCommissionSlider
           discountPct={referral.discountPct}
-          max={maxCommission}
+          max={commissionWithoutTraderBoost}
         />
       </AltShareCommissionSlider>
     ) : (
@@ -68,7 +70,7 @@ const ReferralCommissionBox = ({
         <BorderFix />
         <ShareCommissionSlider
           discountPct={referral.discountPct}
-          max={maxCommission}
+          max={commissionWithoutTraderBoost}
         />
       </StyledShareCommissionSlider>
     );
@@ -92,6 +94,7 @@ const ReferralCommissionBox = ({
             <CurrentCommission
               tiersData={{
                 ...tiersData,
+                commission: commissionWithoutTraderBoost,
                 maxCommission,
                 traderBoost,
               }}

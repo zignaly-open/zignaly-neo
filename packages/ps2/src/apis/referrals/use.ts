@@ -88,14 +88,12 @@ export function useTiersData(serviceId?: string) {
     getBoostedCommissionPct(lastTier?.commissionPct, boost, traderBoost),
   );
 
-  const maxCommissionWithoutTraderBoost = getBoostedCommissionPct(
-    lastTier?.commissionPct,
-    boost,
-  );
+  const maxCommissionWithoutTraderBoost = maxCommission / (traderBoost + 1);
 
   const commission = Math.floor(
     getBoostedCommissionPct(currentTier?.commissionPct, boost, traderBoost),
   );
+  const commissionWithoutTraderBoost = commission / (traderBoost + 1);
 
   useInterval(
     () => {
@@ -127,6 +125,7 @@ export function useTiersData(serviceId?: string) {
     maxCommission,
     maxCommissionWithoutTraderBoost,
     commission,
+    commissionWithoutTraderBoost,
     serviceCommission,
     serviceCommissionRaw,
     traderBoost,
