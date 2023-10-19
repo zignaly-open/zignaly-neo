@@ -68,8 +68,8 @@ const ReferralCommissionBox = ({
           discountPct={referral.discountPct}
           max={
             referral.invitedCount > 0
-              ? maxCommission
-              : commissionWithoutTraderBoost
+              ? commissionWithoutTraderBoost
+              : maxCommission
           }
         />
       </Wrapper>
