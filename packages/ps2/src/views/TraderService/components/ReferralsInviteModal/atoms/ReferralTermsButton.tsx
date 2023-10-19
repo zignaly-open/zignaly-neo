@@ -15,7 +15,7 @@ const ReferralTermsButton = () => {
           sx={{
             color: 'links',
             fill: 'currentColor !important',
-            fontSize: '16px !important',
+            fontSize: '20px',
           }}
         />
       }

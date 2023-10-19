@@ -74,7 +74,7 @@ const ReferralCommissionBox = ({
         />
       </Wrapper>
     );
-  }, [referral.discountPct, maxCommission]);
+  }, [referral.discountPct, maxCommission, commissionWithoutTraderBoost]);
 
   return (
     <CommissionBox>
