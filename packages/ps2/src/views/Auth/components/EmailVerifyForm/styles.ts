@@ -21,7 +21,7 @@ export const Field = styled('fieldset')`
 
 export const PaddedTitle = styled(ZigTypography)`
   margin-bottom: 35px;
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     margin-bottom: 10px;
   }
 `;

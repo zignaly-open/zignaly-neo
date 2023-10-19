@@ -35,7 +35,7 @@ export const Layout = styled(Box)<{
     `};
   max-width: 100%;
 
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     padding: 23px 23px 30px;
     ${({ mobileFullScreen }) =>
       mobileFullScreen &&
@@ -75,7 +75,7 @@ export const Body = styled('div', {
   padding-left: 40px;
   padding-right: 40px;
 
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     margin-left: -20px;
     margin-right: -20px;
     width: calc(100% + 40px);
@@ -88,7 +88,7 @@ export const Body = styled('div', {
     margin-bottom: 24px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     ${({ mobileFullScreen }) =>
       mobileFullScreen &&
       css`
