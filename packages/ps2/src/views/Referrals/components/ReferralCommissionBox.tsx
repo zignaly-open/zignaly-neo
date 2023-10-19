@@ -56,22 +56,23 @@ const ReferralCommissionBox = ({
   }
 
   const CustomSlider = useCallback(() => {
-    return referral.invitedCount > 0 ? (
-      <AltShareCommissionSlider>
-        <BorderFixAlt />
+    const Wrapper =
+      referral.invitedCount > 0
+        ? AltShareCommissionSlider
+        : StyledShareCommissionSlider;
+    const FixBorder = referral.invitedCount > 0 ? BorderFixAlt : BorderFix;
+    return (
+      <Wrapper>
+        <FixBorder />
         <ShareCommissionSlider
           discountPct={referral.discountPct}
-          max={commissionWithoutTraderBoost}
+          max={
+            referral.invitedCount > 0
+              ? commissionWithoutTraderBoost
+              : maxCommission
+          }
         />
-      </AltShareCommissionSlider>
-    ) : (
-      <StyledShareCommissionSlider>
-        <BorderFix />
-        <ShareCommissionSlider
-          discountPct={referral.discountPct}
-          max={commissionWithoutTraderBoost}
-        />
-      </StyledShareCommissionSlider>
+      </Wrapper>
     );
   }, [referral.discountPct, maxCommission]);
 
