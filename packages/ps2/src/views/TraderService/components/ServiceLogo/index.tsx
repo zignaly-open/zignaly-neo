@@ -12,11 +12,13 @@ const ServiceLogo = ({
   value,
   size,
   onChange,
+  id,
 }: {
   label: string | JSX.Element;
   value: string;
   size?: AvatarSizes | AvatarSizes[keyof AvatarSizes] | number;
   onChange: (logo: string) => void;
+  id?: string;
 }) => {
   const [uploading, setUploading] = useState(false);
 
@@ -44,6 +46,7 @@ const ServiceLogo = ({
           size={size || 'xx-large'}
           alt={''}
           image={getServiceLogo(value)}
+          id={id}
         />
         {uploading ? (
           <CircularProgress size={24} />
@@ -60,6 +63,7 @@ const ServiceLogo = ({
         startIcon={<Edit sx={{ width: '12px', height: '12px' }} />}
         variant='text'
         component='label'
+        id={id && `${id}-edit`}
       >
         {label}
         <input hidden type='file' onChange={uploadLogo} />

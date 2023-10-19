@@ -55,6 +55,7 @@ const UpdatePasswordForm = () => {
           control={control}
           render={({ field }) => (
             <ZigInput
+              id={'update-password__current-password'}
               label={t('update-password.current-password')}
               placeholder={t('update-password.current-password')}
               error={t(errors.password?.message)}
@@ -69,11 +70,13 @@ const UpdatePasswordForm = () => {
           control={control}
           render={({ field }) => (
             <ZigInput
+              id={'update-password__new-password'}
               label={t('update-password.new-password')}
               placeholder={t('update-password.new-password')}
               error={t(errors.newPassword?.message)}
               helperText={
                 <ZigAlertMessage
+                  id={'update-password__password-requirements'}
                   text={t('error:error.password-requirements', {
                     length: 8,
                   })}
