@@ -93,16 +93,16 @@ function InvestDepositModal({
     return null;
   }
 
-  const { title, component, onGoBack, modalWidth } =
+  const { title, component, modalWidth, ...rest } =
     (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
     <ZModal
       title={ready ? title : ''}
+      {...rest}
       {...props}
       close={trackAwareClose}
       isLoading={!ready}
-      onGoBack={onGoBack}
       wide
       width={modalWidth}
     >

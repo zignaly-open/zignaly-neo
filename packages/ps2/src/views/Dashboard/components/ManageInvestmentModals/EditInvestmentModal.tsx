@@ -83,6 +83,7 @@ function EditInvestmentModal({
 
   return (
     <ZModal
+      mobileFullScreen
       {...props}
       wide
       close={close}

@@ -48,6 +48,7 @@ export function useInvestModalContent({
         ? () => setView(InvestmentViews.Investment)
         : undefined,
     view,
+    mobileFullScreen: true,
     component: () =>
       !isLoading && <InvestView close={close} view={view} setView={setView} />,
   };

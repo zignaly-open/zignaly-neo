@@ -100,7 +100,7 @@ export const Body = styled('div', {
 
 export const Header = styled(Box)<{ compact: boolean }>`
   display: flex;
-  z-index: 999;
+  z-index: 996;
   position: relative;
   flex-direction: row;
   justify-content: space-between;

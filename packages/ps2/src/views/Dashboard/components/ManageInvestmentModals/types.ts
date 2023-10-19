@@ -1,3 +1,5 @@
+import { ModalContainerProps } from '../../../../components/ZModal/ModalContainer/types';
+
 export enum EditInvestmentViews {
   EditInvestment = 'edit-investment',
   EditInvestmentSuccess = 'edit-investment-success',
@@ -44,10 +46,9 @@ export enum ChooseDepositTypeViews {
 export type UseModalReturn = {
   title: string;
   component: () => JSX.Element;
-  onGoBack?: () => void;
   modalWidth?: number;
   view?: string;
-};
+} & Pick<ModalContainerProps, 'mobileFullScreen' | 'onGoBack'>;
 
 export type ConvertPreviewType = {
   side: string;
