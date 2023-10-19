@@ -171,6 +171,7 @@ export const Form = styled(
 export const BackIconButton = styled(IconButton)`
   position: absolute;
   left: 22px;
+  z-index: 999;
   top: 16px;
 `;
 
