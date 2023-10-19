@@ -82,8 +82,7 @@ export const trackAllocation = (
     { amount, coin, serviceId },
     {
       plugins: {
-        all: false,
-        'google-tag-manager': true,
+        all: true,
       },
     },
   );
