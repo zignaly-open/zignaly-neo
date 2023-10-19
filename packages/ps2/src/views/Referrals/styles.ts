@@ -90,7 +90,6 @@ export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
   ${SliderContainer} {
     border-bottom: 1px solid rgba(148, 150, 180, 0.2);
     border-radius: 15px;
-    min-width: 428px;
     height: 110px;
 
     &:before,

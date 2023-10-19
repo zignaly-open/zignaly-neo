@@ -78,7 +78,11 @@ const ReferralCommissionBox = ({
 
   return (
     <CommissionBox>
-      <Box display='flex' gap='42px'>
+      <Box
+        display='flex'
+        gap='42px'
+        marginLeft={referral.invitedCount > 0 ? '36px' : 0}
+      >
         <Box
           display='flex'
           {...(referral.invitedCount > 0
