@@ -1,4 +1,4 @@
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useTheme } from '@mui/material';
 import { ZigTypography, ZigArrowDescIcon } from '@zignaly-open/ui';
 import React from 'react';
 
@@ -11,9 +11,10 @@ export const DescriptionLine = ({
   tooltip?: string;
   id?: string;
 }) => {
+  const theme = useTheme();
   return (
     <Box display='flex' alignItems={'center'} gap='15px'>
-      <ZigArrowDescIcon />
+      <ZigArrowDescIcon color={theme.palette.greenGraph} />
       <Box position={'relative'}>
         <ZigTypography
           color='rgba(255, 255, 255, 0.6)'
