@@ -117,7 +117,11 @@ const Referrals: React.FC = () => {
             </Box>
 
             {!rewardsData.invitedCount ? (
-              <>
+              <Box
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+              >
                 <ReferralHowToEarn tiersData={tiersData} />
                 <ZigTypography
                   align={'center'}
@@ -141,7 +145,7 @@ const Referrals: React.FC = () => {
                     <ReferralSuccessStep step={3} />
                   </Grid>
                 </Grid>
-              </>
+              </Box>
             ) : (
               <>
                 <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>

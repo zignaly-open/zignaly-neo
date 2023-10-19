@@ -10,7 +10,7 @@ import {
 export const CommissionBox = styled(Box)`
   border-radius: 17px;
   background-image: linear-gradient(to bottom, #18194b, #12374e);
-  width: 849px;
+  width: 850px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,7 +90,6 @@ export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
   ${SliderContainer} {
     border-bottom: 1px solid rgba(148, 150, 180, 0.2);
     border-radius: 15px;
-    width: 428px;
     height: 110px;
 
     &:before,
@@ -100,7 +99,7 @@ export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
     }
 
     &:before {
-      left: 44px;
+      left: 54px;
       transform: skewX(-50deg);
       border: 1px solid rgba(148, 150, 180, 0.3);
       border-left: none;
@@ -109,7 +108,7 @@ export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
     }
 
     &:after {
-      left: 66px;
+      left: 76px;
       transform: skewX(50deg);
       border: 1px solid rgba(148, 150, 180, 0.3);
       border-right: none;
@@ -163,14 +162,14 @@ export const BorderFixAlt = styled('div')`
 
   &:before {
     left: 0;
-    width: 33px;
+    width: 43px;
     border-right: none;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
   }
 
   &:after {
-    left: 77px;
+    left: 87px;
     right: 0;
     border-left: none;
     border-top-right-radius: 15px;
@@ -223,6 +222,17 @@ export const StyledCurrentCommission = styled('div')`
     > div > .MuiTypography-body1 {
       padding-top: 15px;
     }
+
+    > div:nth-child(2) {
+      svg:nth-of-type(2) {
+        width: 21px;
+        height: 21px;
+      }
+    }
+  }
+
+  .MuiTypography-bigNumber {
+    font-size: 29px;
   }
 
   .boost-timer {
@@ -352,7 +362,7 @@ export const ShareIconsContainer = styled(Box)`
 
 export const HowToEarnBox = styled(Box)`
   border-radius: 17px;
-  width: 100%;
+  width: 850px;
   padding: 25px;
   position: relative;
   overflow: hidden;

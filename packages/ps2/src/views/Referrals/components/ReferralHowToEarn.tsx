@@ -30,7 +30,7 @@ const ReferralHowToEarn = ({ tiersData }: { tiersData: TiersData }) => {
           variant={'h1'}
           fontSize={'26px'}
           fontWeight={600}
-          sx={{ mt: '7px', mb: '16px' }}
+          sx={{ mt: '7px', mb: '26px' }}
         >
           {t('how-to-earn', { commission: maxCommission })}
         </ZigTypography>

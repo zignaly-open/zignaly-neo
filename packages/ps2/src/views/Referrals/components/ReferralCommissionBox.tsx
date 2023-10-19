@@ -67,18 +67,22 @@ const ReferralCommissionBox = ({
         <ShareCommissionSlider
           discountPct={referral.discountPct}
           max={
-            referral.invitedCount > 0
+            (referral.invitedCount > 0
               ? commissionWithoutTraderBoost
-              : maxCommission
+              : maxCommission) || 100
           }
         />
       </Wrapper>
     );
-  }, [referral.discountPct, maxCommission]);
+  }, [referral.discountPct, maxCommission, commissionWithoutTraderBoost]);
 
   return (
     <CommissionBox>
-      <Box display='flex' gap='42px'>
+      <Box
+        display='flex'
+        gap='42px'
+        marginLeft={referral.invitedCount > 0 ? '36px' : 0}
+      >
         <Box
           display='flex'
           {...(referral.invitedCount > 0

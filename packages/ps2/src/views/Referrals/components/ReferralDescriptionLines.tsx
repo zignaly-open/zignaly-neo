@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { TiersData } from 'apis/referrals/types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +16,7 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
   const { invitees } = tiers[tiers.length - 1];
 
   return (
-    <div>
+    <Box display='flex' flexDirection={'column'} gap='2px'>
       <DescriptionLine
         text={t('earn-success-fees')}
         tooltip={t('tooltips.earn-success-fees')}
@@ -56,7 +57,7 @@ const ReferralDescriptionLines = ({ tiersData }: { tiersData: TiersData }) => {
         })}
         id='referrals__invite-and-earn-trader-boost'
       />
-    </div>
+    </Box>
   );
 };
 

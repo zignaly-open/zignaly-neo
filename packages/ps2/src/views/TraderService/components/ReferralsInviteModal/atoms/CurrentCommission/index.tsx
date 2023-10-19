@@ -160,7 +160,7 @@ const CurrentCommission = ({
             <ZigTypography
               textTransform='uppercase'
               variant='h4'
-              id='commission__referrals-label'
+              id='commission__earnings-label'
             >
               {t('earnings')}
             </ZigTypography>
@@ -177,7 +177,7 @@ const CurrentCommission = ({
                 showTooltip
                 variant={'bigNumber'}
                 value={earnings}
-                id='commission__referrals-label'
+                id='commission__earnings-value'
               />
             </Box>
           </Box>
