@@ -33,6 +33,7 @@ const CurrentCommission = ({
     currentDate,
     boostRunning,
     maxCommission,
+    commission,
     traderBoost,
     inviteLeft,
   } = tiersData;
@@ -57,15 +58,15 @@ const CurrentCommission = ({
               variant='h4'
               id='commission__label'
             >
-              {t(showMaxCommission ? 'max-commission' : 'commission-rate')}
+              {t(showWhenYouInvite ? 'max-commission' : 'commission-rate')}
             </ZigTypography>
             <Tooltip
               title={t(
-                showMaxCommission
+                showWhenYouInvite
                   ? 'tooltips.max-commission'
                   : 'tooltips.commission-rate',
                 {
-                  commission: maxCommission,
+                  commission: showMaxCommission ? maxCommission : commission,
                 },
               )}
             >
@@ -90,7 +91,7 @@ const CurrentCommission = ({
             position={'relative'}
             id='commission__max'
           >
-            {maxCommission}
+            {showMaxCommission ? maxCommission : commission}
             <ZigTypography
               fontSize={25}
               fontWeight={600}
