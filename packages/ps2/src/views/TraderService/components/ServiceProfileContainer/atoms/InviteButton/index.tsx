@@ -11,10 +11,16 @@ import { useTranslation } from 'react-i18next';
 import { ComissionTypography, InviteBox, InviteBoxArrow } from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ChevronRight } from '@mui/icons-material';
-import { useTiersData } from 'apis/referrals/use';
 import BoostTimer from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostTimer';
+import { TiersData } from 'apis/referrals/types';
 
-const InviteButton = ({ service }: { service: Service }) => {
+const InviteButton = ({
+  service,
+  tiersData,
+}: {
+  service: Service;
+  tiersData: TiersData;
+}) => {
   const { showModal } = useZModal();
   const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
   const isAuthenticated = useIsAuthenticated();
@@ -29,13 +35,12 @@ const InviteButton = ({ service }: { service: Service }) => {
     inviteLeft,
     maxCommission,
     traderBoost,
-  } = useTiersData(service.id);
+  } = tiersData;
 
   const handleClick = () => {
     if (isAuthenticated) {
       showModal(ReferralsInviteModal, {
         service,
-        serviceId: service.id,
       });
     } else {
       navigateIfNotLoggedIn();

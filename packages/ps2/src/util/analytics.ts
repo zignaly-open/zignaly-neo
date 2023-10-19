@@ -83,7 +83,7 @@ export const trackAllocation = (
     {
       plugins: {
         all: false,
-        google: true,
+        'google-analytics': true,
       },
     },
   );

@@ -90,6 +90,7 @@ export function useTransactionsHistory(
 export function useDepositInfo(
   coinId: string,
   networkId: string,
+  depositEnable: boolean,
 ): QueryReturnType<DepositInfo> {
   const exchange = useActiveExchange();
   return useDepositInfoQuery(
@@ -98,6 +99,6 @@ export function useDepositInfo(
       networkId,
       exchangeId: exchange?.internalId,
     },
-    { skip: !coinId || !networkId || !exchange?.internalId },
+    { skip: !coinId || !networkId || !exchange?.internalId || !depositEnable },
   );
 }

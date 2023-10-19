@@ -29,6 +29,7 @@ export const api = createApi({
       query: () => ({
         url: 'v1/referrer/data',
       }),
+      providesTags: ['Referrals'],
     }),
     referralHistory: builder.query<ReferralHistory, void>({
       query: () => ({
@@ -58,15 +59,7 @@ export const api = createApi({
         method: 'PUT',
         body: payload,
       }),
-      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
-        await queryFulfilled;
-        // Update discountPct data
-        dispatch(
-          api.util.updateQueryData('referralRewards', undefined, (data) => {
-            Object.assign(data, { discountPct: payload.discount });
-          }),
-        );
-      },
+      invalidatesTags: ['Referrals'],
     }),
   }),
 });

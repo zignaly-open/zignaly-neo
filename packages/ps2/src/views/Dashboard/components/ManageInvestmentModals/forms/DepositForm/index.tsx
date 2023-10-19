@@ -109,20 +109,18 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
       }),
     [coins, allowedCoins, exchangeType],
   );
-
+  const coinObject = coin && coinOptions?.find((x) => x.value === coin);
+  const networkObject =
+    network && coinObject?.networks?.find((x) => x.value === network);
   const {
     isFetching: loading,
     data: depositInfo,
     error,
-  } = useDepositInfo(coinParam, network);
+  } = useDepositInfo(coinParam, network, networkObject?.depositEnable);
 
   useEffect(() => {
     depositInfo && trackEvent('show-deposit-info');
   }, [depositInfo]);
-
-  const coinObject = coin && coinOptions?.find((x) => x.value === coin);
-  const networkObject =
-    network && coinObject?.networks?.find((x) => x.value === network);
 
   useEffect(() => {
     if (coin) {

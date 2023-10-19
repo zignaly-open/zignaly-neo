@@ -20,7 +20,7 @@ const Toggle2FA: React.FC = () => {
             textAlign: 'center',
           }}
         >
-          <ZigTypography variant={'h1'} id={'enable-2fa__title'}>
+          <ZigTypography variant={'h1'} id={'two-fa__title'}>
             {t('enable-2fa.title')}
           </ZigTypography>
         </Box>

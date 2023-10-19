@@ -1,22 +1,30 @@
 import { InfoOutlined, Verified } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
-import { ZigTypography, ZigUserFilledIcon } from '@zignaly-open/ui';
+import {
+  ZigPriceLabel,
+  ZigTypography,
+  ZigUserFilledIcon,
+} from '@zignaly-open/ui';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import BoostChip from '../atoms/BoostChip';
-import BoostTimer from '../atoms/BoostTimer';
-import { CommissionBoostChip } from '../styles';
-import { Service } from 'apis/service/types';
-import { useTiersData } from 'apis/referrals/use';
+import BoostChip from '../BoostChip';
+import BoostTimer from '../BoostTimer';
+import { CommissionBoostChip } from '../../styles';
+import { isNumber } from 'lodash-es';
+import { TiersData } from 'apis/referrals/types';
 
 const CurrentCommission = ({
-  service,
   showReferrals = true,
-  showAsMaxCommission = false,
+  showWhenYouInvite = true,
+  showMaxCommission,
+  earnings,
+  tiersData,
 }: {
-  service?: Service;
   showReferrals?: boolean;
-  showAsMaxCommission?: boolean;
+  showWhenYouInvite?: boolean;
+  showMaxCommission: boolean;
+  earnings?: number;
+  tiersData: TiersData;
 }) => {
   const { t } = useTranslation('referrals-trader');
   const {
@@ -25,9 +33,10 @@ const CurrentCommission = ({
     currentDate,
     boostRunning,
     maxCommission,
+    commission,
     traderBoost,
     inviteLeft,
-  } = useTiersData(service?.id);
+  } = tiersData;
 
   return (
     <Box
@@ -47,20 +56,18 @@ const CurrentCommission = ({
             <ZigTypography
               textTransform='uppercase'
               variant='h4'
-              id='referrals-invite-modal__commission-label'
+              id='commission__label'
             >
-              {t(
-                inviteLeft > 0 || showAsMaxCommission
-                  ? 'max-commission'
-                  : 'commission-rate',
-              )}
+              {t(showWhenYouInvite ? 'max-commission' : 'commission-rate')}
             </ZigTypography>
             <Tooltip
               title={t(
-                inviteLeft > 0 || showAsMaxCommission
+                showWhenYouInvite
                   ? 'tooltips.max-commission'
                   : 'tooltips.commission-rate',
-                { commission: maxCommission },
+                {
+                  commission: showMaxCommission ? maxCommission : commission,
+                },
               )}
             >
               <InfoOutlined
@@ -82,9 +89,9 @@ const CurrentCommission = ({
             pt='20px'
             lineHeight='50px'
             position={'relative'}
-            id='referrals-invite-modal__max-commission'
+            id='commission__max'
           >
-            {maxCommission}
+            {showMaxCommission ? maxCommission : commission}
             <ZigTypography
               fontSize={25}
               fontWeight={600}
@@ -102,13 +109,13 @@ const CurrentCommission = ({
             )}
           </ZigTypography>
         </Box>
-        {showReferrals && referral.investorsCount > 0 && (
+        {showReferrals && (
           <Box display='flex' flexDirection={'column'}>
             <Box position={'relative'}>
               <ZigTypography
                 textTransform='uppercase'
                 variant='h4'
-                id='referrals-invite-modal__referrals-label'
+                id='commission__referrals-label'
               >
                 {t('my-referrals')}
               </ZigTypography>
@@ -132,7 +139,7 @@ const CurrentCommission = ({
               pt={'5px'}
               justifyContent={'center'}
             >
-              <ZigUserFilledIcon color='paleBlue' width={18} height={21.5} />
+              <ZigUserFilledIcon color='#979ce0' width={18} height={21.5} />
               <ZigTypography
                 fontWeight={600}
                 variant='h4'
@@ -140,7 +147,7 @@ const CurrentCommission = ({
                 fontSize={35}
                 pl='9px'
                 pr='7px'
-                id='referrals-invite-modal__referrals-count'
+                id='commission__referrals-count'
               >
                 {referral.investorsCount}
               </ZigTypography>
@@ -148,14 +155,41 @@ const CurrentCommission = ({
             </Box>
           </Box>
         )}
+        {isNumber(earnings) && (
+          <Box display='flex' flexDirection={'column'}>
+            <ZigTypography
+              textTransform='uppercase'
+              variant='h4'
+              id='commission__earnings-label'
+            >
+              {t('earnings')}
+            </ZigTypography>
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              flex={1}
+              pt={'5px'}
+              justifyContent={'center'}
+            >
+              <ZigPriceLabel
+                color={'#28ba62'}
+                usd
+                showTooltip
+                variant={'bigNumber'}
+                value={earnings}
+                id='commission__earnings-value'
+              />
+            </Box>
+          </Box>
+        )}
       </Box>
-      {inviteLeft > 0 && (
+      {showWhenYouInvite && inviteLeft > 0 && (
         <>
           <ZigTypography
             color='neutral200'
             variant='h3'
             fontWeight={400}
-            id='referrals-invite-modal__when-you-invite'
+            id='commission__when-you-invite'
             textAlign={'center'}
           >
             <Trans
