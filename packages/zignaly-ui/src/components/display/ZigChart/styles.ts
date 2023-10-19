@@ -15,6 +15,15 @@ export const ChartLayoutMini = styled("div")<{ height?: number }>`
   width: 100%;
   display: block;
   margin-bottom: 10px;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 5;
+  }
 `;
 
 export const useAxisStyle = () => {
