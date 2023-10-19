@@ -3,7 +3,10 @@ import { css, Box, IconButton } from '@mui/material';
 import { styledIf, ZigTypography } from '@zignaly-open/ui';
 import { withAttrs } from 'util/styles';
 
-export const Layout = styled(Box)<{ width: number }>`
+export const Layout = styled(Box)<{
+  width: number;
+  mobileFullScreen?: boolean;
+}>`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -33,7 +36,17 @@ export const Layout = styled(Box)<{ width: number }>`
   max-width: 100%;
 
   @media (max-width: 600px) {
-    padding: 35px 23px;
+    padding: 23px 23px 30px;
+    ${({ mobileFullScreen }) =>
+      mobileFullScreen &&
+      css`
+        padding-bottom: 0;
+        justify-content: flex-start;
+        height: 100%;
+        border-radius: 0;
+        border-top-width: 0;
+        border-bottom-width: 0;
+      `}
   }
 `;
 
@@ -43,12 +56,15 @@ export const Title = styled(ZigTypography)`
   text-transform: capitalize;
 `;
 
-export const Body = styled('div')`
+export const Body = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'mobileFullScreen',
+})<{ mobileFullScreen?: boolean }>`
   font-size: 14px;
   text-align: left;
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.palette.neutral200};
+
   max-height: calc(100vh - 150px);
   overflow-y: auto;
   overflow-x: visible;
@@ -70,6 +86,15 @@ export const Body = styled('div')`
   /* Style Description  */
   > .MuiTypography-root:first-child {
     margin-bottom: 24px;
+  }
+
+  @media (max-width: 600px) {
+    ${({ mobileFullScreen }) =>
+      mobileFullScreen &&
+      css`
+        max-height: 100%;
+        padding-bottom: 30px;
+      `}
   }
 `;
 

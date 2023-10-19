@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
-import { useTheme } from '@mui/material';
+import React, { forwardRef, useMemo } from 'react';
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   Layout,
   Header,
@@ -21,13 +21,25 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
     width,
     onClickClose = null,
     titleStyles,
+    mobileFullScreen,
   } = props;
   const theme = useTheme();
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const clickBack = useMemo(
+    () => onGoBack || (xs && mobileFullScreen && onClickClose) || null,
+    [onGoBack, onClickClose, mobileFullScreen, xs],
+  );
 
   return (
-    <Layout width={width} ref={ref} tabIndex={-1}>
-      {onGoBack && typeof onGoBack === 'function' && (
-        <BackIconButton onClick={onGoBack}>
+    <Layout
+      width={width}
+      mobileFullScreen={mobileFullScreen}
+      ref={ref}
+      tabIndex={-1}
+    >
+      {clickBack && typeof clickBack === 'function' && (
+        <BackIconButton onClick={clickBack}>
           <ZigBackIcon
             width={'32px'}
             height={'32px'}
@@ -36,7 +48,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
           />
         </BackIconButton>
       )}
-      <Header compact={!title && !onGoBack}>
+      <Header compact={!title && !clickBack}>
         <Inline align={titleAlign}>
           {!!title && (
             <Title
@@ -61,7 +73,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
           />
         </CloseIconButton>
       )}
-      <Body>{children}</Body>
+      <Body mobileFullScreen={mobileFullScreen}>{children}</Body>
     </Layout>
   );
 });

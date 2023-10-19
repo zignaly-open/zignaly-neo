@@ -48,16 +48,13 @@ const ZModal: React.FC<ZModalProps> = ({
         justifyContent: 'center',
         display: 'flex',
         ...(props.sx ?? {}),
-        '@media (max-width: 600px)': mobileFullScreen && {
-          justifyContent: 'flex-start',
-          height: '100%',
-        },
       }}
     >
       <ModalContainer
         width={width || (wide && 620)}
         title={title}
         onClickClose={close}
+        mobileFullScreen={mobileFullScreen}
         onGoBack={onGoBack}
         titleAlign={titleAlign}
         titleStyles={titleStyles}
