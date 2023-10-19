@@ -27,7 +27,7 @@ import DepositModal, {
 } from '../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { usePrefetchTranslation } from 'util/i18nextHelpers';
 import { ROUTE_MY_BALANCES, ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
-import { Link, generatePath, matchPath } from 'react-router-dom';
+import { matchPath, useNavigate } from 'react-router-dom';
 
 const matchRoute = () =>
   [ROUTE_MY_BALANCES_TRANSACTIONS, ROUTE_MY_BALANCES].find((tab) =>
@@ -47,6 +47,7 @@ const MyBalances: React.FC = () => {
     // On url change, find the matching tab and set it as the active tab
     setTab(matchRoute());
   }, [location.pathname]);
+  const navigate = useNavigate();
 
   const [tab, setTab] = useState(matchRoute());
   const openDepositModal = useOpenDepositModal();
@@ -97,19 +98,13 @@ const MyBalances: React.FC = () => {
                   label={t('my-balances:my-coins')}
                   id={'balance__my-coins'}
                   value={ROUTE_MY_BALANCES}
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  to={generatePath(ROUTE_MY_BALANCES)}
-                  component={Link}
+                  onClick={() => navigate(ROUTE_MY_BALANCES)}
                 />
                 <ZigTab
                   id={'balance__deposits-withdrawals'}
                   label={t('my-balances:deposits-withdrawals')}
                   value={ROUTE_MY_BALANCES_TRANSACTIONS}
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  component={Link}
-                  to={generatePath(ROUTE_MY_BALANCES_TRANSACTIONS)}
+                  onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}
                   asideComponent={
                     <Box display='flex' gap={2}>
                       <ZigButton
@@ -178,20 +173,14 @@ const MyBalances: React.FC = () => {
                 label={t('my-balances:my-coins')}
                 id={'balance__my-coins'}
                 value={ROUTE_MY_BALANCES}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                to={generatePath(ROUTE_MY_BALANCES)}
-                component={Link}
+                onClick={() => navigate(ROUTE_MY_BALANCES)}
               />
               <StyledTab
                 active={tab === ROUTE_MY_BALANCES_TRANSACTIONS}
                 id={'balance__deposits-withdrawals'}
                 label={t('my-balances:deposits-withdrawals')}
                 value={ROUTE_MY_BALANCES_TRANSACTIONS}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                component={Link}
-                to={generatePath(ROUTE_MY_BALANCES_TRANSACTIONS)}
+                onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}
               />
             </StyledTabs>
           </Box>
