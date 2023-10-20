@@ -170,7 +170,6 @@ export const GridCell = styled(Grid)<{ rightBorder?: boolean }>`
 
   & > span:first-child {
     display: block;
-    margin-bottom: 10px;
   }
 `;
 
