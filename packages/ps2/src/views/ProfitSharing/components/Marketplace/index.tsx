@@ -36,6 +36,7 @@ const Marketplace: React.FC = () => {
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
     () => [
@@ -71,10 +72,10 @@ const Marketplace: React.FC = () => {
         cell: (props) => (
           <ServiceName
             activeLink={md}
-            truncateServiceName={!md}
-            size={md ? 'x-large' : 'large'}
+            truncateServiceName={!lg}
+            size={lg ? 'x-large' : 'large'}
             showCoin={md}
-            showOwner={md}
+            showOwner={lg}
             prefixId={`marketplace-table`}
             service={
               marketplaceServiceToInvestmentType(
@@ -121,12 +122,36 @@ const Marketplace: React.FC = () => {
               ),
               sortingFn: 'alphanumeric',
             }),
-            columnHelper.accessor((row) => Number(row.pnlPercent180t), {
-              id: 'pnlPercent180t',
-              header: t('table.n-months-pnl', { count: 6 }),
+          ]
+        : []),
+      columnHelper.accessor((row) => Number(row.pnlPercent180t), {
+        id: 'pnlPercent180t',
+        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
+          count: 6,
+        }),
+        cell: (props) => (
+          <ChangeIndicator
+            decimalScale={!md && 0}
+            type={md ? 'graph' : 'default'}
+            id={`marketplace-table__pnl180t-${props.row.original.id}`}
+            style={{
+              fontSize: '18px',
+              lineHeight: '28px',
+            }}
+            value={props.getValue()}
+          />
+        ),
+      }),
+      ...(lg
+        ? [
+            columnHelper.accessor((row) => Number(row.pnlPercent90t), {
+              id: 'pnlPercent90t',
+              header: t('table.n-months-pnl', {
+                count: 3,
+              }),
               cell: (props) => (
                 <ChangeIndicator
-                  id={`marketplace-table__pnl180t-${props.row.original.id}`}
+                  id={`marketplace-table__pnl90t-${props.row.original.id}`}
                   style={{
                     fontSize: '18px',
                     lineHeight: '28px',
@@ -137,24 +162,6 @@ const Marketplace: React.FC = () => {
             }),
           ]
         : []),
-      columnHelper.accessor((row) => Number(row.pnlPercent90t), {
-        id: 'pnlPercent90t',
-        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
-          count: 3,
-        }),
-        cell: (props) => (
-          <ChangeIndicator
-            decimalScale={!md && 0}
-            type={md ? 'graph' : 'default'}
-            id={`marketplace-table__pnl90t-${props.row.original.id}`}
-            style={{
-              fontSize: '18px',
-              lineHeight: '28px',
-            }}
-            value={props.getValue()}
-          />
-        ),
-      }),
       columnHelper.accessor((row) => Number(row.pnlPercent30t), {
         id: 'pnlPercent30t',
         header: t(md ? 'table.n-months-pnl' : 'table.n-month-pnl-mobile', {
@@ -258,7 +265,7 @@ const Marketplace: React.FC = () => {
           ]
         : []),
     ],
-    [t, md],
+    [t, md, lg],
   );
 
   return (
@@ -304,7 +311,7 @@ const Marketplace: React.FC = () => {
                 initialState={{
                   sorting: [
                     {
-                      id: md ? 'pnlPercent180t' : 'pnlPercent90t',
+                      id: 'pnlPercent180t',
                       desc: true,
                     },
                   ],
