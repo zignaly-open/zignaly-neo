@@ -17,7 +17,8 @@ import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
 import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
+import theme from '../../../../theme';
 
 function EditInvestmentModal({
   close,
@@ -30,7 +31,7 @@ function EditInvestmentModal({
   const { isLoading: isLoadingInvestment } = useInvestmentDetails(serviceId);
   const { isLoading: isLoadingService, data: service } =
     useServiceDetails(serviceId);
-
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
   useSelectInvestment(service);
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
   const selectedInvestment = useSelectedInvestment();
@@ -99,7 +100,7 @@ function EditInvestmentModal({
       }
       isLoading={isLoading}
     >
-      <Box paddingX='30px'>{!isLoading && component()}</Box>
+      <Box paddingX={xs ? 0 : '30px'}>{!isLoading && component()}</Box>
     </ZModal>
   );
 }

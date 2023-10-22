@@ -50,6 +50,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
             <Title
               variant={mobileFullScreen && xs ? 'h2' : 'h1'}
               mb={0}
+              mt={mobileFullScreen && xs ? 'h2' : 'h1' ? -2 : undefined}
               color='neutral100'
               id={'modal__title'}
               sx={titleStyles}

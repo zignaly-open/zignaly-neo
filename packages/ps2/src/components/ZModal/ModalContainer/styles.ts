@@ -54,6 +54,11 @@ export const Title = styled(ZigTypography)`
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+  }
 `;
 
 export const Body = styled('div', {
