@@ -14,7 +14,7 @@ const AuthenticatedWall: React.FC = () => {
     navigateIfNotLoggedIn();
   }, [isAuthenticated]);
 
-  return <Outlet />;
+  return isAuthenticated ? <Outlet /> : null;
 };
 
 export default AuthenticatedWall;
