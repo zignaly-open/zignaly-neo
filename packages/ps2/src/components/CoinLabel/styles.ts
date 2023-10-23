@@ -14,6 +14,10 @@ export const WrapCoin = styled('div')`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    max-width: 70px;
+  }
 `;
 
 export const Icon = styled(ZigCoinIcon)`

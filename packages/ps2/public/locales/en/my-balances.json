@@ -2,10 +2,12 @@
   "tableHeader": {
     "coin": "Coin",
     "totalBalance": "Total Balance",
+    "balance-mobile": "Balance",
     "availableBalance": "Available Balance",
     "lockedBalance": "Locked Balance",
     "valueBTC": "Value in BTC",
-    "valueUSD": "Value in USD"
+    "valueUSD": "Value in USD",
+    "valueUSD-mobile": "USD Value"
   },
   "withdraw": "Withdraw",
   "deposit": "Deposit",
