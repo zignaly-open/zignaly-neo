@@ -40,7 +40,7 @@ export const MobilePortfolioAction = ({
           gap: 2,
         }}
         width={'100%'}
-        height={'113px'}
+        height={'100%'}
       >
         <ZigButton size={'large'} onClick={() => onClickEditInvestment()}>
           {t('action:edit')}
