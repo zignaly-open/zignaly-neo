@@ -37,6 +37,7 @@ const Marketplace: React.FC = () => {
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const xl = useMediaQuery(theme.breakpoints.up('xl'));
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
     () => [
@@ -232,7 +233,7 @@ const Marketplace: React.FC = () => {
             />
           ),
       }),
-      ...(md
+      ...(xl
         ? [
             columnHelper.display({
               id: 'link',
@@ -265,7 +266,7 @@ const Marketplace: React.FC = () => {
           ]
         : []),
     ],
-    [t, md, lg],
+    [t, md, lg, xl],
   );
 
   return (
