@@ -55,7 +55,10 @@
 `;var jsx_runtime=__webpack_require__("../../node_modules/react/jsx-runtime.js");function Header({leftElements=[],rightElements=[],className}){return(0,jsx_runtime.jsx)(Layout,{className,children:(0,jsx_runtime.jsxs)(Container,{children:[(0,jsx_runtime.jsx)(Side,{children:leftElements?.length>0&&leftElements}),(0,jsx_runtime.jsx)(Side,{children:rightElements?.length>0&&rightElements})]})})}Header.displayName="Header";const navigation_Header=Header;try{Header.displayName="Header",Header.__docgenInfo={description:"",displayName:"Header",props:{leftElements:{defaultValue:{value:"[]"},description:"",name:"leftElements",required:!1,type:{name:"ReactElement<any, string | JSXElementConstructor<any>>[]"}},rightElements:{defaultValue:{value:"[]"},description:"",name:"rightElements",required:!1,type:{name:"ReactElement<any, string | JSXElementConstructor<any>>[]"}},className:{defaultValue:null,description:"",name:"className",required:!1,type:{name:"string | undefined"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/components/navigation/Header/index.tsx#Header"]={docgenInfo:Header.__docgenInfo,name:"Header",path:"src/components/navigation/Header/index.tsx#Header"})}catch(__react_docgen_typescript_loader_error){}var BrandImage=__webpack_require__("./src/components/navigation/Header/components/BrandImage/index.tsx");const stories={title:"Navigation/___FIXME____Header",component:navigation_Header},Template=args=>(0,jsx_runtime.jsx)(navigation_Header,{...args});Template.displayName="Template";const Main=Template.bind({});Main.args={leftElements:[(0,jsx_runtime.jsx)(BrandImage.Z,{type:"isotype",width:"32px",height:"32px"},"logo"),(0,jsx_runtime.jsxs)(HeaderLinksContainer,{children:[(0,jsx_runtime.jsx)("a",{href:"javascript:void(0)",className:"active",children:"Menu 1"},"header-link-1"),(0,jsx_runtime.jsx)("a",{href:"javascript:void(0)",children:"Menu 2"},"header-link-2"),(0,jsx_runtime.jsx)("a",{href:"javascript:void(0)",children:"Menu 3"},"header-link-3")]},"links")]}},"./src/components/styled.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{D0:()=>ValueIndicator,Us:()=>MarginContainer});var _mui_system__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("../../node_modules/@mui/system/esm/styled.js"),_display_ZigTypography__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./src/components/display/ZigTypography/index.tsx");const MarginContainer=(0,_mui_system__WEBPACK_IMPORTED_MODULE_0__.Z)("div")`
   margin: 0 auto;
   max-width: 1430px;
-  padding: 0 22px;
+  @media (min-width: ${({theme})=>theme.breakpoints.values.md}px) {
+    padding: 0 22px;
+  }
+  padding: 0 2px 0;
   width: 100%;
 `,ValueIndicator=((0,_mui_system__WEBPACK_IMPORTED_MODULE_0__.Z)(MarginContainer)`
   @media (min-width: ${({theme})=>theme.breakpoints.values.md}px) {
@@ -70,4 +73,4 @@
 
   ${props=>`\n    \n    &.zero {\n      color: ${props.theme.palette.neutral300}\n    }\n    \n    &.positive {\n      color: ${props.theme.palette.greenGraph};\n    }\n    \n    &.negative {\n      color: ${props.theme.palette.redGraphOrError};\n    }\n  `}
 `)}}]);
-//# sourceMappingURL=components-navigation-Header-stories.7ecaaa9a.iframe.bundle.js.map
+//# sourceMappingURL=components-navigation-Header-stories.d5cf4e3f.iframe.bundle.js.map
