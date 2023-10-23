@@ -12,10 +12,11 @@ import { useCurrentUser, useIsAuthenticated } from '../../../../apis/user/use';
 import { UseModalReturn } from './types';
 import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
 import { useCanInvestIn } from '../../../../util/walls/util';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import theme from '../../../../theme';
 
 function InvestDepositModal({
   serviceId,
@@ -57,6 +58,7 @@ function InvestDepositModal({
 
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn()();
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
 
   const trackAwareClose = () => {
     // we need this because we're not using the normal zmodal
@@ -93,20 +95,22 @@ function InvestDepositModal({
     return null;
   }
 
-  const { title, component, onGoBack, modalWidth } =
+  const { title, component, modalWidth, ...rest } =
     (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
     <ZModal
       title={ready ? title : ''}
+      {...rest}
       {...props}
       close={trackAwareClose}
       isLoading={!ready}
-      onGoBack={onGoBack}
       wide
       width={modalWidth}
     >
-      <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
+      <Box paddingX={!showDeposit && !(xs && rest.mobileFullScreen) && '30px'}>
+        {ready && component()}
+      </Box>
     </ZModal>
   );
 }

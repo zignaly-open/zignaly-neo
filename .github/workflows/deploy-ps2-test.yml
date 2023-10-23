@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - test
+      - feat/adaptive
 
 jobs:
   deploy:
