@@ -56,6 +56,7 @@ const MyDashboard: React.FC = () => {
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   useEffect(() => () => setActiveRow(null), []);
 
@@ -116,12 +117,12 @@ const MyDashboard: React.FC = () => {
           <Box paddingLeft={'4px'}>
             <ServiceName
               activeLink={md}
-              truncateServiceName={!md}
-              size={md ? 'x-large' : 'large'}
+              truncateServiceName={!lg}
+              size={lg ? 'x-large' : 'large'}
               prefixId={'portfolio-table'}
               service={original}
               showCoin={md}
-              showOwner={md}
+              showOwner={lg}
             />
           </Box>
         ),
@@ -178,7 +179,7 @@ const MyDashboard: React.FC = () => {
             }),
           ]
         : []),
-      ...(md
+      ...(lg
         ? [
             columnHelper.accessor('pnlDailyMeanLc', {
               header: t('tableHeader.dailyAvg-title'),
@@ -198,6 +199,10 @@ const MyDashboard: React.FC = () => {
               ),
               sortingFn: 'alphanumeric',
             }),
+          ]
+        : []),
+      ...(md
+        ? [
             columnHelper.accessor((row) => +row.pnl90dPct, {
               header: t('tableHeader.3-mos-title'),
               id: 'pnl90dPct',
@@ -275,7 +280,7 @@ const MyDashboard: React.FC = () => {
           ]
         : []),
     ],
-    [t, md],
+    [t, md, lg],
   );
 
   return (
