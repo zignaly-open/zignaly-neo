@@ -192,7 +192,7 @@
       height: 95px;
     }
     color: ${({theme})=>theme.palette.neutral100};
-    padding: 0;
+    padding: 10px;
     white-space: nowrap;
     border-bottom: 1px solid ${({theme})=>theme.palette.neutral700};
     text-align: center;
@@ -464,4 +464,4 @@
 
   ${props=>`\n    \n    &.zero {\n      color: ${props.theme.palette.neutral300}\n    }\n    \n    &.positive {\n      color: ${props.theme.palette.greenGraph};\n    }\n    \n    &.negative {\n      color: ${props.theme.palette.redGraphOrError};\n    }\n  `}
 `)},"./src/utils/numbers.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{aL:()=>numberOfDecimals,m1:()=>trimZeros});const trimZeros=v=>v?.toString()?.replace(/(\.\d*?[1-9]+)0+$|\.0+$/g,"$1"),numberOfDecimals=v=>(v?.toString()?.split(".")[1]??"").length},"./src/utils/styled.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{W:()=>styledIf});const styledIf=(cond,primaryQuery,secondaryQuery)=>secondaryQuery?cond?primaryQuery:secondaryQuery:cond?primaryQuery:""},"./src/assets/icons/error-alert-icon.svg":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{r:()=>SvgErrorAlertIcon});var react__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("../../node_modules/react/index.js");function _extends(){return _extends=Object.assign?Object.assign.bind():function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source)Object.prototype.hasOwnProperty.call(source,key)&&(target[key]=source[key])}return target},_extends.apply(this,arguments)}var SvgErrorAlertIcon=function SvgErrorAlertIcon(props){return react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg",_extends({width:"1em",height:"1em",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",className:"zig-icon"},props),react__WEBPACK_IMPORTED_MODULE_0__.createElement("path",{d:"M12 3C7.02979 3 3 7.03124 3 12C3 16.9717 7.02979 21 12 21C16.9702 21 21 16.9717 21 12C21 7.03124 16.9702 3 12 3ZM12 19.2581C7.98876 19.2581 4.74194 16.0126 4.74194 12C4.74194 7.9901 7.9889 4.74194 12 4.74194C16.0098 4.74194 19.2581 7.98887 19.2581 12C19.2581 16.0112 16.0126 19.2581 12 19.2581ZM13.5242 15.4839C13.5242 16.3243 12.8404 17.0081 12 17.0081C11.1596 17.0081 10.4758 16.3243 10.4758 15.4839C10.4758 14.6434 11.1596 13.9597 12 13.9597C12.8404 13.9597 13.5242 14.6434 13.5242 15.4839ZM10.5712 7.81206L10.818 12.7475C10.8296 12.9793 11.0209 13.1613 11.253 13.1613H12.747C12.9791 13.1613 13.1704 12.9793 13.182 12.7475L13.4287 7.81206C13.4412 7.56333 13.2429 7.35484 12.9938 7.35484H11.0062C10.7571 7.35484 10.5588 7.56333 10.5712 7.81206Z",fill:props.color}))}}}]);
-//# sourceMappingURL=components-display-ZigTable-stories.092669b0.iframe.bundle.js.map
+//# sourceMappingURL=components-display-ZigTable-stories.83243497.iframe.bundle.js.map
