@@ -12,16 +12,21 @@ import { Service } from 'apis/service/types';
 import { ROUTE_404 } from 'routes';
 import CriticalError from 'components/Stub/CriticalError';
 import { PageContainer } from '@zignaly-open/ui';
+import { useServiceCommissionQuery } from 'apis/referrals/api';
+import { ServiceCommission } from 'apis/referrals/types';
 
 const EditService: React.FC = () => {
   const { serviceId } = useParams();
   useTraderServiceTitle('profit-sharing.edit', serviceId);
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
+  const serviceCommissionEndpoint = useServiceCommissionQuery({
+    serviceId,
+  });
 
   return (
     <PageContainer>
       <LayoutContentWrapper
-        endpoint={serviceDetailsEndpoint}
+        endpoint={[serviceDetailsEndpoint, serviceCommissionEndpoint]}
         unmountOnRefetch
         error={(error: BackendError) => {
           if (error?.data?.error.code === ErrorCodes.NoSuchService)
@@ -29,9 +34,12 @@ const EditService: React.FC = () => {
 
           return <CriticalError />;
         }}
-        content={(service: Service) => (
+        content={([service, commission]: [Service, ServiceCommission]) => (
           <PageWithHeaderContainer>
-            <EditServiceProfileContainer service={service} />
+            <EditServiceProfileContainer
+              service={service}
+              commission={commission.commission}
+            />
           </PageWithHeaderContainer>
         )}
       />

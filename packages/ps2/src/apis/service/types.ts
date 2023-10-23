@@ -176,6 +176,7 @@ export type EditServicePayload = {
   maximumSbt: number;
   logo: string;
   level: TraderServiceAccessLevel;
+  commission: number;
 };
 
 export type CreateServicePayload = {

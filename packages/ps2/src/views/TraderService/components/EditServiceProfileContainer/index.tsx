@@ -20,12 +20,16 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
 import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
-import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
+import {
+  HELP_CREATE_SERVICE_MARKETPLACE_URL,
+  ZIGNALY_PROFIT_FEE,
+} from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
+import CommissionReferralSharing from './atoms/CommissionReferralSharing';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -39,9 +43,10 @@ const getVisibility = (level: TraderServiceAccessLevel) => {
   }
 };
 
-const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
-  service,
-}) => {
+const EditServiceProfileContainer: React.FC<{
+  service: Service;
+  commission: number;
+}> = ({ service, commission }) => {
   const { t } = useTranslation('service');
   const defaultValues = {
     name: service.name,
@@ -49,7 +54,9 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     maximumSbt: service.maximumSbt,
     successFee: service.successFee,
     logo: service.logo,
+    commission,
   };
+
   const {
     handleSubmit,
     control,
@@ -173,6 +180,34 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               />
             )}
           />
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name='maximumSbt'
+              control={control}
+              render={({ field }) => (
+                <ZigInput
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        {service.ssc}
+                      </InputAdornment>
+                    ),
+                  }}
+                  fullWidth
+                  label={
+                    <div>
+                      {t('edit.pool-size')}
+                      <ZigTypography variant='h4' color='neutral400'>
+                        {t('edit.pool-size-desc')}
+                      </ZigTypography>
+                    </div>
+                  }
+                  error={t(errors.maximumSbt?.message)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
           <Grid item container columnSpacing={6} rowSpacing={6}>
             <Grid item xs={12}>
               <Controller
@@ -198,29 +233,14 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <Controller
-                name='maximumSbt'
+                name='commission'
                 control={control}
                 render={({ field }) => (
-                  <ZigInput
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>
-                          {service.ssc}
-                        </InputAdornment>
-                      ),
-                    }}
-                    fullWidth
-                    label={
-                      <div>
-                        {t('edit.pool-size')}
-                        <ZigTypography variant='h4' color='neutral400'>
-                          {t('edit.pool-size-desc')}
-                        </ZigTypography>
-                      </div>
-                    }
-                    error={t(errors.maximumSbt?.message)}
+                  <CommissionReferralSharing
+                    successFee={service.successFee}
+                    zglySuccessFee={service.zglySuccessFee}
                     {...field}
                   />
                 )}
