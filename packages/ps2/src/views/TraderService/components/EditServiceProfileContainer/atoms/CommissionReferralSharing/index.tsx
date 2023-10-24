@@ -111,6 +111,7 @@ const CommissionReferralSharing = ({
                     </Box>
                   )}
                   labelFormat={(v) => v.toString()}
+                  valueLabelDisplay='on'
                 />
                 <BoostChip
                   boost={getTraderBoost(max, zglySuccessFee)}

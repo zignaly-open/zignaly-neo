@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import {
-  EditServicePayload,
   Service,
   TraderServiceAccessLevel,
 } from '../../../../apis/service/types';
