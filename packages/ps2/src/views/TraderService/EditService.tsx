@@ -14,14 +14,21 @@ import CriticalError from 'components/Stub/CriticalError';
 import { PageContainer } from '@zignaly-open/ui';
 import { useServiceCommissionQuery } from 'apis/referrals/api';
 import { ServiceCommission } from 'apis/referrals/types';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 const EditService: React.FC = () => {
   const { serviceId } = useParams();
   useTraderServiceTitle('profit-sharing.edit', serviceId);
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
-  const serviceCommissionEndpoint = useServiceCommissionQuery({
-    serviceId,
-  });
+  const serviceCommissionEndpoint = useServiceCommissionQuery(
+    {
+      serviceId,
+    },
+    {
+      skip: !isFeatureOn(Features.Referrals),
+    },
+  );
 
   return (
     <PageContainer>
@@ -38,7 +45,7 @@ const EditService: React.FC = () => {
           <PageWithHeaderContainer>
             <EditServiceProfileContainer
               service={service}
-              commission={commission.commission}
+              commission={commission?.commission}
             />
           </PageWithHeaderContainer>
         )}

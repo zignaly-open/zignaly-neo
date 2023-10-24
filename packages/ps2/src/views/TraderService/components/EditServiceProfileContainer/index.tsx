@@ -30,6 +30,8 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -45,7 +47,7 @@ const getVisibility = (level: TraderServiceAccessLevel) => {
 
 const EditServiceProfileContainer: React.FC<{
   service: Service;
-  commission: number;
+  commission?: number;
 }> = ({ service, commission }) => {
   const { t } = useTranslation('service');
   const defaultValues = {
@@ -54,7 +56,7 @@ const EditServiceProfileContainer: React.FC<{
     maximumSbt: service.maximumSbt,
     successFee: service.successFee,
     logo: service.logo,
-    commission,
+    ...(isFeatureOn(Features.Referrals) && { commission }),
   };
 
   const {
@@ -233,19 +235,21 @@ const EditServiceProfileContainer: React.FC<{
                 )}
               />
             </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name='commission'
-                control={control}
-                render={({ field }) => (
-                  <CommissionReferralSharing
-                    successFee={service.successFee}
-                    zglySuccessFee={service.zglySuccessFee}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
+            {isFeatureOn(Features.Referrals) && (
+              <Grid item xs={12}>
+                <Controller
+                  name='commission'
+                  control={control}
+                  render={({ field }) => (
+                    <CommissionReferralSharing
+                      successFee={service.successFee}
+                      zglySuccessFee={service.zglySuccessFee}
+                      {...field}
+                    />
+                  )}
+                />
+              </Grid>
+            )}
           </Grid>
           <Grid
             item

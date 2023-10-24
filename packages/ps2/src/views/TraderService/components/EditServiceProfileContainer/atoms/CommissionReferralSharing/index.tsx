@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { ZigSwitch, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigSwitch, ZigTypography } from '@zignaly-open/ui';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,9 +10,10 @@ import {
 } from './styles';
 import BoostChip from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostChip';
 import { getTraderBoost } from 'views/TraderService/components/ReferralsInviteModal/util';
-import { ZIGNALY_PROFIT_FEE } from 'util/constants';
+import { HELP_REFERRAL, ZIGNALY_PROFIT_FEE } from 'util/constants';
 import CommissionPromo from 'views/TraderService/components/ServiceProfileContainer/atoms/CommissionPromo';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
+import { ChevronRight } from '@mui/icons-material';
 
 const CommissionReferralSharing = ({
   value,
@@ -38,7 +39,25 @@ const CommissionReferralSharing = ({
     <Box display='flex' flexDirection={'column'}>
       <ZigTypography>{t('edit.commission.title')}</ZigTypography>
       <ZigTypography variant='body2' color='neutral400'>
-        {t('edit.commission.description')}
+        {t('edit.commission.description')}&nbsp;
+        <ZigButton
+          variant={'text'}
+          endIcon={
+            <ChevronRight
+              sx={{
+                marginTop: '2px !important',
+                marginLeft: '-2px !important',
+                color: 'links',
+                fill: 'currentColor !important',
+              }}
+            />
+          }
+          href={HELP_REFERRAL}
+          target='_blank'
+          rel='noopener'
+        >
+          {t('edit.commission.how-it-works')}
+        </ZigButton>
       </ZigTypography>
       <Box display={'flex'} gap='25px' mt='20px'>
         <ZigSwitch
