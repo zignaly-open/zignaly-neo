@@ -6,6 +6,9 @@ export const Icon = styled('div')`
   margin-right: 20px;
   display: flex;
   align-items: center;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    margin-right: 10px;
+  }
 `;
 
 export const StyledVerifiedIcon = styled(VerifiedIcon)`
