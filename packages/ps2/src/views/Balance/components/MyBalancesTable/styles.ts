@@ -15,7 +15,7 @@ export const ButtonsWrapper = styled(Box)`
 export const TableWrapper = styled(Box)`
   td {
     @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-      padding: 0;
+      padding: 0 !important;
     }
   }
 `;
