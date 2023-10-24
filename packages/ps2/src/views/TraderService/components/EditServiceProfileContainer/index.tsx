@@ -18,7 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { EditServiceValidation } from './validations';
 import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
-import { VISIBILITY_LABEL } from './types';
+import { EditServiceForm, VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
@@ -29,6 +29,7 @@ import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessF
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
+import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -62,21 +63,34 @@ const EditServiceProfileContainer: React.FC<{
     watch,
     formState: { errors },
     reset,
-  } = useForm<EditServicePayload>({
+  } = useForm<EditServiceForm>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     defaultValues,
     resolver: yupResolver(EditServiceValidation),
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
+  const [updateCommission, commissionStatus] =
+    useUpdateServiceCommissionMutation();
   const [visibility, setVisibility] = useState<TraderServiceAccessLevel>(
     getVisibility(service.level),
   );
   const navigate = useNavigate();
   const user = useCurrentUser();
 
-  const submit = async (data: EditServicePayload) => {
-    await edit({ id: service.id, ...data, level: visibility });
+  const submit = async (data: EditServiceForm) => {
+    const { commission: c, ...rest } = data;
+    await Promise.all([
+      edit({ id: service.id, ...rest, level: visibility }),
+      ...(isFeatureOn(Features.Referrals)
+        ? [
+            updateCommission({
+              service: service.id,
+              commission: c || 0,
+            }),
+          ]
+        : []),
+    ]);
     back();
   };
 
@@ -303,7 +317,7 @@ const EditServiceProfileContainer: React.FC<{
             <ZigButton
               variant='contained'
               type='submit'
-              loading={editStatus.isLoading}
+              loading={editStatus.isLoading || commissionStatus.isLoading}
               size='large'
             >
               {t('edit.save')}

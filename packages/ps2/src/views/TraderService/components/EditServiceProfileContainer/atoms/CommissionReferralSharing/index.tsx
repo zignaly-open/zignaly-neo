@@ -17,7 +17,7 @@ const CommissionReferralSharing = ({
   zglySuccessFee,
 }: {
   value: number;
-  onChange: (value: number) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   successFee: number;
   zglySuccessFee: number;
 }) => {
@@ -59,6 +59,13 @@ const CommissionReferralSharing = ({
           checked={enable}
           onChange={(e) => {
             setEnable(e.target.checked);
+            onChange({
+              ...e,
+              target: {
+                ...e.target,
+                value: e.target.checked ? ZIGNALY_PROFIT_FEE.toString() : '0',
+              },
+            });
           }}
         />
         {enable && (
@@ -81,9 +88,11 @@ const CommissionReferralSharing = ({
                   max={max}
                   value={value || ZIGNALY_PROFIT_FEE}
                   prefixId={'service-edit__commission-slider'}
-                  onChange={(_, v: number) => {
-                    onChange(v);
-                  }}
+                  onChange={(e) =>
+                    onChange(
+                      e as unknown as React.ChangeEvent<HTMLInputElement>,
+                    )
+                  }
                   marks={false}
                   valueLabelFormat={(v) => (
                     <Box display='flex' alignItems={'center'} gap='2px'>

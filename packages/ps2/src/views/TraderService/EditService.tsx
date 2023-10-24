@@ -26,6 +26,7 @@ const EditService: React.FC = () => {
       serviceId,
     },
     {
+      refetchOnMountOrArgChange: true,
       skip: !isFeatureOn(Features.Referrals),
     },
   );
