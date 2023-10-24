@@ -23,7 +23,7 @@ export const Inline = styled('div')`
 export const ZigTableWrapper = styled('div')`
   td {
     @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-      padding: 0;
+      padding: 0 !important;
     }
   }
   td,
