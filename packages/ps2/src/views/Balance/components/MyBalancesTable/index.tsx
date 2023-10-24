@@ -28,7 +28,7 @@ import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
 import SwapCoinsModal from '../SwapCoinsModal';
 import { useOpenDepositModal } from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
-import { ButtonsWrapper } from './styles';
+import { ButtonsWrapper, TableWrapper } from './styles';
 import { BUY_CRYPTO_URL } from '../../../../util/constants';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -276,7 +276,7 @@ const MyBalancesTable = (): JSX.Element => {
       unmountOnRefetch={false}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
-        <>
+        <TableWrapper>
           <ZigTable
             columnVisibility={md}
             prefixId={'balance'}
@@ -354,7 +354,7 @@ const MyBalancesTable = (): JSX.Element => {
               )}
             </ButtonsWrapper>
           )}
-        </>
+        </TableWrapper>
       )}
     />
   );

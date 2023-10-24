@@ -15,6 +15,11 @@ export const TableWrapper = styled('div')`
     padding: 0 30px;
   }
   padding: 0;
+  td {
+    @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+      padding: 0;
+    }
+  }
   td,
   th {
     &:first-of-type {
