@@ -20,10 +20,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
 import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
-import {
-  HELP_CREATE_SERVICE_MARKETPLACE_URL,
-  ZIGNALY_PROFIT_FEE,
-} from 'util/constants';
+import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';

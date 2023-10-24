@@ -2,12 +2,7 @@ import { Box } from '@mui/material';
 import { ZigButton, ZigSwitch, ZigTypography } from '@zignaly-open/ui';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  SliderBox,
-  StyledZigSlider,
-  ValueBox,
-  ZigTypographyValue,
-} from './styles';
+import { SliderBox, StyledZigSlider, ZigTypographyValue } from './styles';
 import BoostChip from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostChip';
 import { getTraderBoost } from 'views/TraderService/components/ReferralsInviteModal/util';
 import { HELP_REFERRAL, ZIGNALY_PROFIT_FEE } from 'util/constants';

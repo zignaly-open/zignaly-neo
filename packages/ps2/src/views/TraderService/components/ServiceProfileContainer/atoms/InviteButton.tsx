@@ -1,5 +1,5 @@
 import React from 'react';
-import { ZigButton, ZigInviteIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigInviteIcon } from '@zignaly-open/ui';
 import ReferralsInviteModal from '../../ReferralsInviteModal';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
@@ -7,7 +7,6 @@ import { useZModal } from 'components/ZModal/use';
 import { Service } from 'apis/service/types';
 import { useIsAuthenticated } from 'apis/user/use';
 import { useTranslation } from 'react-i18next';
-import { InviteBox, InviteBoxArrow } from './CommissionPromo/styles';
 import BoostTimer from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostTimer';
 import { TiersData } from 'apis/referrals/types';
 import CommissionPromo from './CommissionPromo';
