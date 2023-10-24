@@ -18,6 +18,7 @@ export type WhitelabelOverride = {
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: boolean;
+  minInvestment?: number;
   featureOverrides: Record<Partial<Features>, boolean>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
