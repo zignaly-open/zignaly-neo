@@ -87,7 +87,7 @@ const Marketplace: React.FC = () => {
       }),
       ...(md
         ? [
-            columnHelper.accessor('investedUSDT', {
+            columnHelper.accessor((row) => row.investedUSDT, {
               id: 'investedUSDT',
               header: () => (
                 <div id={'marketplace-table__header-assets'}>
@@ -120,7 +120,6 @@ const Marketplace: React.FC = () => {
                   />
                 </Box>
               ),
-              sortingFn: 'alphanumeric',
             }),
           ]
         : []),
@@ -198,7 +197,7 @@ const Marketplace: React.FC = () => {
       }),
       ...(!md
         ? [
-            columnHelper.accessor('invested', {
+            columnHelper.accessor((row) => +row.invested, {
               id: 'invested',
               header: () => (
                 <div id={'marketplace-table__header-assets'}>
@@ -215,7 +214,6 @@ const Marketplace: React.FC = () => {
                   />
                 </Box>
               ),
-              sortingFn: 'alphanumeric',
             }),
           ]
         : []),

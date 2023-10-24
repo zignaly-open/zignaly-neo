@@ -182,7 +182,7 @@ const MyDashboard: React.FC = () => {
         : []),
       ...(lg
         ? [
-            columnHelper.accessor('pnlDailyMeanLc', {
+            columnHelper.accessor((row) => +row.pnlDailyMeanLc, {
               header: t('tableHeader.dailyAvg-title'),
               cell: ({ getValue, row: { original } }) => (
                 <Box
@@ -198,7 +198,6 @@ const MyDashboard: React.FC = () => {
                   />
                 </Box>
               ),
-              sortingFn: 'alphanumeric',
             }),
           ]
         : []),

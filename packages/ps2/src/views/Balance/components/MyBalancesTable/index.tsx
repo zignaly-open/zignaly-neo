@@ -131,7 +131,6 @@ const MyBalancesTable = (): JSX.Element => {
             value={getValue()}
           />
         ),
-        sortingFn: 'alphanumeric',
       }),
       ...(md
         ? [
@@ -145,7 +144,6 @@ const MyBalancesTable = (): JSX.Element => {
                   value={getValue()}
                 />
               ),
-              sortingFn: 'alphanumeric',
             }),
             columnHelper.accessor((row) => +row.balance.balanceLocked, {
               id: 'balanceLocked',
@@ -157,7 +155,6 @@ const MyBalancesTable = (): JSX.Element => {
                   value={getValue()}
                 />
               ),
-              sortingFn: 'alphanumeric',
             }),
             columnHelper.accessor((row) => +row.balance.balanceTotalBTC, {
               id: 'balanceTotalBTC',
@@ -169,7 +166,6 @@ const MyBalancesTable = (): JSX.Element => {
                   value={getValue()}
                 />
               ),
-              sortingFn: 'alphanumeric',
             }),
           ]
         : []),
@@ -185,7 +181,6 @@ const MyBalancesTable = (): JSX.Element => {
             value={getValue()}
           />
         ),
-        sortingFn: 'alphanumeric',
       }),
       ...(md
         ? [
