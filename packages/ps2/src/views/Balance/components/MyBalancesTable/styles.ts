@@ -12,3 +12,10 @@ export const ButtonsWrapper = styled(Box)`
   gap: 5px;
   background-color: #060819;
 `;
+export const TableWrapper = styled(Box)`
+  td {
+    @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+      padding: 0;
+    }
+  }
+`;

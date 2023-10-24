@@ -20,6 +20,7 @@ import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
 import { useBalanceQuery } from 'apis/user/api';
+import { TableWrapper } from './styles';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -232,38 +233,40 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint, coinsEndpoint]}
       content={() => (
-        <ZigTable
-          columnVisibility={md}
-          prefixId={'transactions'}
-          columns={columns}
-          data={filteredData}
-          initialState={{
-            sorting: [
-              {
-                id: 'datetime',
-                desc: true,
-              },
-            ],
-          }}
-          renderSubComponent={
-            md
-              ? ({ row }) => (
-                  <TransactionDetails
-                    transaction={row.original}
-                    txId={row.original.txId}
-                  />
-                )
-              : undefined
-          }
-          manualPagination={true}
-          pagination={pagination}
-          pageCount={
-            transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
-          }
-          onPaginationChange={setPagination}
-          loading={transactionsEndpoint.isFetching}
-          emptyMessage={t('noData')}
-        />
+        <TableWrapper>
+          <ZigTable
+            columnVisibility={md}
+            prefixId={'transactions'}
+            columns={columns}
+            data={filteredData}
+            initialState={{
+              sorting: [
+                {
+                  id: 'datetime',
+                  desc: true,
+                },
+              ],
+            }}
+            renderSubComponent={
+              md
+                ? ({ row }) => (
+                    <TransactionDetails
+                      transaction={row.original}
+                      txId={row.original.txId}
+                    />
+                  )
+                : undefined
+            }
+            manualPagination={true}
+            pagination={pagination}
+            pageCount={
+              transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
+            }
+            onPaginationChange={setPagination}
+            loading={transactionsEndpoint.isFetching}
+            emptyMessage={t('noData')}
+          />
+        </TableWrapper>
       )}
     />
   );
