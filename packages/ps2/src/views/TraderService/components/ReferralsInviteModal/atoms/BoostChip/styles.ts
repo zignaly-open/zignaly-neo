@@ -5,7 +5,7 @@ export const BoostBox = styled(Box)`
   justify-content: center;
   align-items: center;
   border-radius: 13.5px;
-  background-color: ${({ theme }) => theme.palette.greenGraph}1a;
+  background-color: ${({ theme }) => theme.palette.greenGraph}1E;
   height: 27px;
   gap: 4px;
   padding: 2px 10px;

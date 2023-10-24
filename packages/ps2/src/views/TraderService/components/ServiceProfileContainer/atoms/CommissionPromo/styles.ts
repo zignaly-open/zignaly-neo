@@ -1,7 +1,7 @@
 import { Box, styled } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 
-export const InviteBox = styled(Box)`
+export const CommissionPromoBox = styled(Box)`
   z-index: 2;
   margin-right: 8px;
   position: relative;
