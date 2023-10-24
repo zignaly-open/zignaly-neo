@@ -78,6 +78,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           display='flex'
           gap={3}
           alignItems={'center'}
+          flexWrap={'wrap'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
             <InviteButton service={service} tiersData={tiers} />
