@@ -110,6 +110,7 @@ const MyBalancesTable = (): JSX.Element => {
             alignItems={'center'}
             display={'flex'}
             maxWidth={'110px'}
+            pl={!md && '7px'}
           >
             <CoinLabel
               coin={getValue()}
@@ -273,6 +274,7 @@ const MyBalancesTable = (): JSX.Element => {
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <TableWrapper>
           <ZigTable
+            pagination={!md ? false : undefined}
             columnVisibility={md}
             prefixId={'balance'}
             columns={columns}
