@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { generatePath, useNavigate } from 'react-router-dom';
-import { Box, IconButton, useTheme } from '@mui/material';
+import { IconButton, useTheme } from '@mui/material';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
 import { ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../../../routes';
 import React from 'react';
 import { useZRouteModal } from '../../../../components/ZModal/use';
+import { ZigTableMobileActionRow } from '../../../../components/ZigTableMobileActionRow';
 export const MobilePortfolioAction = ({
   serviceId,
   rowId,
@@ -27,21 +28,7 @@ export const MobilePortfolioAction = ({
   const onClickEditInvestment = () => showEditInvestmentModal({ serviceId });
   return (
     rowId === activeRow && (
-      <Box
-        position={'absolute'}
-        left={0}
-        top={-2}
-        sx={{
-          backdropFilter: 'blur(7px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 3,
-          gap: 2,
-        }}
-        width={'100%'}
-        height={'113px'}
-      >
+      <ZigTableMobileActionRow safariHeight={113}>
         <ZigButton size={'large'} onClick={() => onClickEditInvestment()}>
           {t('action:edit')}
         </ZigButton>
@@ -70,7 +57,7 @@ export const MobilePortfolioAction = ({
             color={theme.palette.neutral300}
           />
         </IconButton>
-      </Box>
+      </ZigTableMobileActionRow>
     )
   );
 };
