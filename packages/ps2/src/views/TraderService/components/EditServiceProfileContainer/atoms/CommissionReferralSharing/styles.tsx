@@ -51,6 +51,10 @@ export const StyledZigSlider = styled(ZigSlider)`
     height: 32px;
     margin-top: 10px;
 
+    &::before {
+      background-color: #0b1e28;
+    }
+
     .MuiTypography-root {
       color: rgba(38, 196, 150, 0.9);
       font-weight: 600;
