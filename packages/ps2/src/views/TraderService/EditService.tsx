@@ -34,7 +34,12 @@ const EditService: React.FC = () => {
   return (
     <PageContainer>
       <LayoutContentWrapper
-        endpoint={[serviceDetailsEndpoint, serviceCommissionEndpoint]}
+        endpoint={[
+          serviceDetailsEndpoint,
+          ...(isFeatureOn(Features.Referrals)
+            ? [serviceCommissionEndpoint]
+            : []),
+        ]}
         unmountOnRefetch
         error={(error: BackendError) => {
           if (error?.data?.error.code === ErrorCodes.NoSuchService)
