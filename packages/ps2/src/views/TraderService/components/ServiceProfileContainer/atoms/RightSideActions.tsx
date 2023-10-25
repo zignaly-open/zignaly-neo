@@ -28,7 +28,8 @@ enum RightSideActionStates {
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
   const isInvested = useIsInvestedInService(service.id);
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('service');
   const tiers = useTiersData(service.id);
   const state = useMemo<RightSideActionStates>(() => {
@@ -74,11 +75,11 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         RightSideActionStates.NotInvested,
       ].includes(state) && (
         <Box
-          sx={{ mt: md ? 0 : 3 }}
+          sx={{ mt: sm ? 0 : 3 }}
           display='flex'
           gap={3}
           alignItems={'center'}
-          flexWrap={'wrap'}
+          flexWrap={lg ? 'nowrap' : 'wrap'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
             <InviteButton service={service} tiersData={tiers} />
