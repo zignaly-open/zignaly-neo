@@ -75,6 +75,7 @@ const CommissionReferralSharing = ({
                 variant='h4'
                 textAlign={'center'}
                 component={'div'}
+                fontWeight={400}
               >
                 {t('edit.commission.max-success-fee')}
               </ZigTypography>
@@ -124,6 +125,7 @@ const CommissionReferralSharing = ({
                 variant='h4'
                 textAlign={'center'}
                 component={'div'}
+                fontWeight={400}
               >
                 {t('edit.commission.promo-preview')}
               </ZigTypography>
