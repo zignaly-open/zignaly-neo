@@ -330,6 +330,7 @@ export const UlList = styled('ul')`
   & li {
     list-style: disc;
   }
+  text-align: left;
   margin-left: 20px;
 `;
 
