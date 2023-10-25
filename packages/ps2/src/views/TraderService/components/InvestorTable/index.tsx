@@ -66,7 +66,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           ) : (
             getValue()
           ),
-        enableColumnFilter: false,
       }),
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
@@ -109,7 +108,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             />
           </Box>
         ),
-        enableColumnFilter: false,
       }),
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
@@ -122,7 +120,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             <ChangeIndicator value={props.row.original.pnlPctLc} />
           </>
         ),
-        enableColumnFilter: false,
       }),
       columnHelper.accessor((row) => +row.pnlNetAt, {
         header: t('tableHeader.P&LTotal'),
@@ -133,7 +130,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             value={props.getValue()}
           />
         ),
-        enableColumnFilter: false,
       }),
       columnHelper.accessor((row) => +row.sfOwnerAt, {
         header: t('tableHeader.totalFeesPaid'),
@@ -144,7 +140,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             value={props.getValue()}
           />
         ),
-        enableColumnFilter: false,
       }),
       columnHelper.accessor(
         (row) =>
@@ -190,13 +185,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               </ZigTypography>
             </Tooltip>
           ),
-          enableColumnFilter: false,
         },
       ),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
         cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
-        enableColumnFilter: false,
       }),
       columnHelper.accessor('actions', {
         header: '',
@@ -243,7 +236,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               ]}
             />
           ),
-        enableColumnFilter: false,
       }),
     ];
   }, [service]);
@@ -282,6 +274,9 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             emptyMessage={t('no-investors')}
             enableSortingRemoval={false}
             state={{ globalFilter: searchFilter }}
+            getColumnCanGlobalFilter={(column) =>
+              ['email', 'userId'].includes(column.id)
+            }
           />
         </PageWithHeaderContainer>
       )}
