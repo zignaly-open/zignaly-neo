@@ -23,6 +23,7 @@ import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/a
 import { useServiceDetails } from '../../../../../../apis/service/use';
 import { trimZeros } from '@zignaly-open/ui';
 import { Form, ModalActions } from 'components/ZModal';
+import { whitelabel } from '../../../../../../whitelabel';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -62,11 +63,13 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
       amountTransfer: '',
     },
     resolver: yupResolver(
-      withdrawValidation(
-        service.accountType === 'owner' ? minInvestedAmountOwner : undefined,
-        coin.id,
-        coin.balance,
-      ),
+      withdrawValidation({
+        minInvestment: whitelabel.minInvestment,
+        minOwner:
+          service.accountType === 'owner' ? minInvestedAmountOwner : undefined,
+        coin: coin.id,
+        max: coin.balance,
+      }),
     ),
   });
 
@@ -111,7 +114,11 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
             wide={true}
             coin={coin.id}
             max={coin.balance}
-            error={t(errors?.amountTransfer?.message)}
+            error={t(errors?.amountTransfer?.message, {
+              minAmount: minInvestedAmountOwner,
+              minInvestment: whitelabel.minInvestment,
+              minAmountCoin: coin.id,
+            })}
             extraInfo={{
               max: t('form.available'),
             }}
