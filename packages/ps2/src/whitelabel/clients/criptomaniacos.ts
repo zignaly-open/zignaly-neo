@@ -14,7 +14,7 @@ export default {
   endpointOverrides: {
     'marketplace/': 'market',
   },
-  minInvestment: 10,
+  minInvestment: 1,
   translationOverrides: true,
   xSource: 'criptomaniacos',
   mainAppLink: ROUTE_DASHBOARD,
