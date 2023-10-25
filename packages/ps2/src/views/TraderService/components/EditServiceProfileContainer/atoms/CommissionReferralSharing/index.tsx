@@ -72,10 +72,10 @@ const CommissionReferralSharing = ({
           <Box display={'flex'}>
             <SliderBox>
               <ZigTypography
-                variant='h4'
                 textAlign={'center'}
                 component={'div'}
-                fontWeight={400}
+                variant='body2'
+                color={'neutral200'}
               >
                 {t('edit.commission.max-success-fee')}
               </ZigTypography>
@@ -122,10 +122,10 @@ const CommissionReferralSharing = ({
             </SliderBox>
             <Box display={'flex'} flexDirection={'column'} ml='27px' gap='4px'>
               <ZigTypography
-                variant='h4'
+                variant='body2'
                 textAlign={'center'}
                 component={'div'}
-                fontWeight={400}
+                color={'neutral200'}
               >
                 {t('edit.commission.promo-preview')}
               </ZigTypography>
