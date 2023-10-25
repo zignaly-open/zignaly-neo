@@ -273,6 +273,7 @@ const MyBalancesTable = (): JSX.Element => {
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <TableWrapper>
           <ZigTable
+            pagination={!md ? false : undefined}
             columnVisibility={md}
             prefixId={'balance'}
             columns={columns}
