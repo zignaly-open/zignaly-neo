@@ -29,7 +29,7 @@ const CommissionPromo = ({
   const { t } = useTranslation('referrals-trader');
 
   const { length } = (traderBoost + 1).toString();
-  let boostFontSize = '18px';
+  let boostFontSize = 18;
   if (length > 3) {
     boostFontSize = 11;
   } else if (length > 2) {
