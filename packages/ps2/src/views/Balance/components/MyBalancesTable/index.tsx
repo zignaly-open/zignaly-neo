@@ -110,6 +110,7 @@ const MyBalancesTable = (): JSX.Element => {
             alignItems={'center'}
             display={'flex'}
             maxWidth={'110px'}
+            pl={!md && '7px'}
           >
             <CoinLabel
               coin={getValue()}
