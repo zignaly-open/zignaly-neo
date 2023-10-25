@@ -39,6 +39,7 @@ export const ServiceName = ({
         display: 'flex',
         textAlign: 'start',
         width: size === 'x-large' ? 300 : 130,
+        paddingRight: truncateServiceName && '5px',
       }}
       {...linkProps}
     >

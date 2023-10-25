@@ -4,6 +4,7 @@ import { ZigTypography } from '@zignaly-open/ui';
 
 export const Icon = styled('div')`
   margin-right: 20px;
+  margin-left: 5px;
   display: flex;
   align-items: center;
   @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Service } from '../../../../apis/service/types';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ServiceProfileHeader from './atoms/ServiceProfileHeader';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import RightSideActions from './atoms/RightSideActions';
 import ServiceGrowthChart from './atoms/ServiceGrowthChart';
 import ServiceDescription from './atoms/ServiceDescription';
@@ -14,6 +14,9 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
 }) => {
   // we do not use the results of this till before the modal
   useCoinBalances();
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   return (
     <Box
       sx={{
@@ -35,20 +38,31 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         >
           <Grid item xs={12} lg={8}>
             <ServiceGrowthChart service={service} />
-            <ServiceDescription service={service} />
-            <ServiceManagerDescription service={service} />
+            {!lg && (
+              <Box paddingTop={3}>
+                <ServiceSummary service={service} />
+              </Box>
+            )}
+            {sm && (
+              <>
+                <ServiceDescription service={service} />
+                <ServiceManagerDescription service={service} />
+              </>
+            )}
           </Grid>
-          <Grid
-            item
-            xs={12}
-            lg={4}
-            pt={{ sm: 3, lg: 0 }}
-            sx={{
-              minWidth: { lg: '422px' },
-            }}
-          >
-            <ServiceSummary service={service} />
-          </Grid>
+          {lg && (
+            <Grid
+              item
+              xs={12}
+              lg={4}
+              pt={{ xs: 3, lg: 0 }}
+              sx={{
+                minWidth: { lg: '422px' },
+              }}
+            >
+              <ServiceSummary service={service} />
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Box>
