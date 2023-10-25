@@ -59,7 +59,7 @@ export const MobileMarketplaceAction = ({
           gap: 2,
         }}
         width={'100%'}
-        height={'100%'}
+        height={'93px'}
       >
         <MarketplaceAction service={service} fullSize={false} />
         <ZigButton
