@@ -35,7 +35,7 @@ export const Layout = styled(Box)<{
     `};
   max-width: 100%;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
     padding: 23px 23px 30px;
     ${({ mobileFullScreen }) =>
       mobileFullScreen &&
@@ -54,7 +54,7 @@ export const Title = styled(ZigTypography)`
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
-  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
     padding-left: 30px;
     padding-right: 30px;
     text-align: center;
@@ -80,7 +80,7 @@ export const Body = styled('div', {
   padding-left: 40px;
   padding-right: 40px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
     margin-left: -20px;
     margin-right: -20px;
     width: calc(100% + 40px);
@@ -93,7 +93,7 @@ export const Body = styled('div', {
     margin-bottom: 24px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
     ${({ mobileFullScreen }) =>
       mobileFullScreen &&
       css`
