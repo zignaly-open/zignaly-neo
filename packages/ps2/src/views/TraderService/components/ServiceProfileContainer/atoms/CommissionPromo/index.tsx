@@ -28,6 +28,14 @@ const CommissionPromo = ({
 }) => {
   const { t } = useTranslation('referrals-trader');
 
+  const { length } = (traderBoost + 1).toString();
+  let boostFontSize = '18px';
+  if (length > 3) {
+    boostFontSize = 11;
+  } else if (length > 2) {
+    boostFontSize = 14;
+  }
+
   return (
     <CommissionPromoBox id={id}>
       {showArrow && <InviteBoxArrow />}
@@ -56,7 +64,7 @@ const CommissionPromo = ({
         >
           <ZigTypography
             fontWeight={700}
-            fontSize={traderBoost % 1 !== 0 ? '14px' : '18px'}
+            fontSize={boostFontSize}
             color='#fffc19'
             id='service-profile__comission-multiplier'
           >
