@@ -56,7 +56,7 @@ const CommissionPromo = ({
         >
           <ZigTypography
             fontWeight={700}
-            fontSize={'18px'}
+            fontSize={traderBoost % 1 !== 0 ? '14px' : '18px'}
             color='#fffc19'
             id='service-profile__comission-multiplier'
           >
