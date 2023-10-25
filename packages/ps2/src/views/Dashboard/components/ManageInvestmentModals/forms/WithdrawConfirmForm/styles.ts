@@ -43,4 +43,8 @@ export const AmountContainer = styled('div')<{
     css`
       background: ${theme.palette.backgrounds.withdrawalHighlight};
     `}
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
+    width: 100%;
+  }
 `;
