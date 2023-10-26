@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
 import { useZModal } from '../../../../components/ZModal/use';
 import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
+import { ZigTableMobileActionRow } from '../../../../components/ZigTableMobileActionRow';
 
 const loadingSpinner = (
   <LoaderWrapper>
@@ -46,21 +47,7 @@ export const MobileMarketplaceAction = ({
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   return (
     rowId === activeRow && (
-      <Box
-        position={'absolute'}
-        left={0}
-        top={-2}
-        sx={{
-          backdropFilter: 'blur(7px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 3,
-          gap: 2,
-        }}
-        width={'100%'}
-        height={'93px'}
-      >
+      <ZigTableMobileActionRow safariHeight={93}>
         <MarketplaceAction service={service} fullSize={false} />
         <ZigButton
           size={'large'}
@@ -87,7 +74,7 @@ export const MobileMarketplaceAction = ({
             color={theme.palette.neutral300}
           />
         </IconButton>
-      </Box>
+      </ZigTableMobileActionRow>
     )
   );
 };
