@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { isSafari } from 'react-device-detect';
+import { isChrome, isSafari } from 'react-device-detect';
 
 export const ZigTableMobileActionRow = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'safariHeight',
@@ -22,6 +22,8 @@ export const ZigTableMobileActionRow = styled(Box, {
     // but instead it makes it 100vh
     // so screw it
     (props) =>
-      props.safariHeight && isSafari ? `${props.safariHeight}px` : '100%;'
+      props.safariHeight && (isSafari || isChrome)
+        ? `${props.safariHeight}px`
+        : '100%;'
   };
 `;
