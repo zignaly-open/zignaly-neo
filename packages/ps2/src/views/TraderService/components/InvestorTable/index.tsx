@@ -82,6 +82,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           ) : (
             getValue()
           ),
+        sortingFn: 'basic',
       }),
       columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
