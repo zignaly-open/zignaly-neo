@@ -39,7 +39,9 @@ const MyBalancesTable = (): JSX.Element => {
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType, internalId } = useActiveExchange();
   const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { showModal } = useZModal();
   const openWithdrawModal = useOpenWithdrawModal();
   const showDepositModal = useOpenDepositModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
@@ -110,7 +112,7 @@ const MyBalancesTable = (): JSX.Element => {
             alignItems={'center'}
             display={'flex'}
             maxWidth={'110px'}
-            pl={!md && '7px'}
+            pl={!sm && '7px'}
           >
             <CoinLabel
               coin={getValue()}
@@ -133,7 +135,7 @@ const MyBalancesTable = (): JSX.Element => {
           />
         ),
       }),
-      ...(md
+      ...(sm
         ? [
             columnHelper.accessor((row) => +row.balance.balanceFree, {
               id: 'balanceFree',
@@ -146,6 +148,10 @@ const MyBalancesTable = (): JSX.Element => {
                 />
               ),
             }),
+          ]
+        : []),
+      ...(md
+        ? [
             columnHelper.accessor((row) => +row.balance.balanceLocked, {
               id: 'balanceLocked',
               header: t('tableHeader.lockedBalance'),
@@ -157,6 +163,10 @@ const MyBalancesTable = (): JSX.Element => {
                 />
               ),
             }),
+          ]
+        : []),
+      ...(lg
+        ? [
             columnHelper.accessor((row) => +row.balance.balanceTotalBTC, {
               id: 'balanceTotalBTC',
               header: t('tableHeader.valueBTC'),
@@ -183,7 +193,7 @@ const MyBalancesTable = (): JSX.Element => {
           />
         ),
       }),
-      ...(md
+      ...(sm
         ? [
             columnHelper.display({
               id: 'action',
@@ -264,7 +274,7 @@ const MyBalancesTable = (): JSX.Element => {
           ]
         : []),
     ],
-    [t, exchangeType, hasNonZeroBalance, md],
+    [t, exchangeType, hasNonZeroBalance, md, sm, lg],
   );
 
   return (
@@ -274,8 +284,8 @@ const MyBalancesTable = (): JSX.Element => {
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <TableWrapper>
           <ZigTable
-            pagination={!md ? false : undefined}
-            columnVisibility={md}
+            pagination={!sm ? false : undefined}
+            columnVisibility={sm}
             prefixId={'balance'}
             columns={columns}
             data={getFilteredData(coins, balances)}
@@ -288,7 +298,7 @@ const MyBalancesTable = (): JSX.Element => {
               ],
             }}
           />
-          {!md && (
+          {!sm && (
             <ButtonsWrapper>
               <ZigButton
                 size={'large'}
