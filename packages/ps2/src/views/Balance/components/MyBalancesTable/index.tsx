@@ -135,7 +135,7 @@ const MyBalancesTable = (): JSX.Element => {
           />
         ),
       }),
-      ...(sm
+      ...(md
         ? [
             columnHelper.accessor((row) => +row.balance.balanceFree, {
               id: 'balanceFree',
@@ -150,7 +150,7 @@ const MyBalancesTable = (): JSX.Element => {
             }),
           ]
         : []),
-      ...(md
+      ...(lg
         ? [
             columnHelper.accessor((row) => +row.balance.balanceLocked, {
               id: 'balanceLocked',
@@ -163,10 +163,6 @@ const MyBalancesTable = (): JSX.Element => {
                 />
               ),
             }),
-          ]
-        : []),
-      ...(lg
-        ? [
             columnHelper.accessor((row) => +row.balance.balanceTotalBTC, {
               id: 'balanceTotalBTC',
               header: t('tableHeader.valueBTC'),
