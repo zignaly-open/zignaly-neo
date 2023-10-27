@@ -8,6 +8,12 @@ import ServiceGrowthChart from './atoms/ServiceGrowthChart';
 import ServiceDescription from './atoms/ServiceDescription';
 import ServiceManagerDescription from './atoms/ServiceManagerDescription';
 import ServiceSummary from './atoms/ServiceSummary';
+import AssetsInPool from '../../../../components/AssetsInPool';
+import { AssetsInPoolWrapper, ServiceInfoWrapper } from './styles';
+import { ZigTypography } from '@zignaly-open/ui';
+import { useTranslation } from 'react-i18next';
+import { subMonths } from 'date-fns';
+import ServicePercentageInfo from './atoms/ServicePercentageInfo';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -17,6 +23,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const { t } = useTranslation(['service', 'marketplace']);
   return (
     <Box
       sx={{
@@ -26,12 +33,44 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
       }}
     >
       <Grid container>
-        <Grid item sx={{ display: 'flex' }} xs={12} md={7} pb={{ md: 4 }}>
+        <Grid item sx={{ display: 'flex' }} xs={12} md={7} pb={4}>
           <ServiceProfileHeader service={service} />
         </Grid>
-        <Grid item xs={12} md={5} pb={4}>
+        <Grid item xs={12} md={5} pb={sm && 4}>
           <RightSideActions service={service} />
         </Grid>
+        {!sm && (
+          <Grid item xs={12} md={7} pb={3}>
+            <Box display={'flex'} justifyContent={'center'} gap={'35px'}>
+              <ServiceInfoWrapper>
+                <ZigTypography color={'neutral300'}>
+                  {t('assets-in-pool')}
+                </ZigTypography>
+                <AssetsInPoolWrapper>
+                  <AssetsInPool
+                    serviceId={service.id}
+                    prefixId={'service-profile'}
+                    assetsValue={service.investedUSDT}
+                    convertedValue={+service.invested}
+                    convertedValueCoin={service.ssc}
+                  />
+                </AssetsInPoolWrapper>
+              </ServiceInfoWrapper>
+              <ServiceInfoWrapper>
+                <ServicePercentageInfo
+                  id={'service-profile__pnl30t'}
+                  title={t('marketplace:table.n-months', { count: 1 })}
+                  value={service.pnlSsc30t}
+                  percent={service.pnlPercent30t}
+                  ssc={service.ssc}
+                  canShow={
+                    +new Date(service.createdAt) < +subMonths(new Date(), 1)
+                  }
+                />
+              </ServiceInfoWrapper>
+            </Box>
+          </Grid>
+        )}
         <Grid
           container
           sx={{ gap: { lg: '75px', xl: '90px' }, flexWrap: { lg: 'nowrap' } }}

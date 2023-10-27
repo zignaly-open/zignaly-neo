@@ -14,16 +14,18 @@ import CommissionPromo from './CommissionPromo';
 const InviteButton = ({
   service,
   tiersData,
+  fullSize = true,
 }: {
   service: Service;
   tiersData: TiersData;
+  fullSize?: boolean;
 }) => {
   const { showModal } = useZModal();
   const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
   const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation('referrals-trader');
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down('md'));
+  const md = useMediaQuery(theme.breakpoints.down('md'));
 
   const {
     boostRunning,
@@ -48,7 +50,7 @@ const InviteButton = ({
     <Box
       display={'flex'}
       alignItems={'center'}
-      mb={sm && boostRunning ? '10px' : 0}
+      mb={md && boostRunning ? '10px' : 0}
     >
       {(traderBoost > 0 || boostRunning) && (
         <Box>
@@ -59,6 +61,7 @@ const InviteButton = ({
             onClick={handleClick}
             id='service-profile__invite-widget'
             showArrow={true}
+            showLabel={fullSize}
           />
           {boostRunning && (
             <Box

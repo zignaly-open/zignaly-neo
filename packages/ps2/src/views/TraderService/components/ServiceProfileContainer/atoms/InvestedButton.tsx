@@ -8,7 +8,12 @@ import { useZModal } from '../../../../../components/ZModal/use';
 import EditInvestmentModal from '../../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { useTranslation } from 'react-i18next';
 import { BigNumberWrapper, InvestButtonContainer, TopDivider } from '../styles';
-import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import {
+  trimZeros,
+  ZigButton,
+  ZigPriceLabel,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import OtherAccountsButton from './OtherAccountsButton';
 import EditIcon from '@mui/icons-material/Edit';
@@ -48,6 +53,53 @@ const InvestedButton: React.FC<{
       service={service}
       investedAmount={investedAmount}
     />
+  );
+};
+
+export const MobileInvestedButton: React.FC<{
+  serviceId: string;
+  id: string;
+  investedAmount: string;
+}> = ({ serviceId, id, investedAmount }) => {
+  const { showModal } = useZModal({ disableAutoDestroy: true });
+  const { t } = useTranslation('marketplace');
+  return (
+    <ZigButton
+      id={id}
+      size={'large'}
+      onClick={() => {
+        showModal(EditInvestmentModal, { serviceId: serviceId });
+      }}
+      sx={{
+        flexDirection: 'column',
+        minWidth: 165,
+        padding: '6px 26px',
+      }}
+    >
+      <>
+        <ZigTypography
+          variant='body2'
+          color='neutral000'
+          fontWeight={600}
+          letterSpacing={1.1}
+          lineHeight={'20px'}
+          sx={{ textTransform: 'uppercase !important' }}
+        >
+          {t('table.invested', {
+            invested: trimZeros(Number(investedAmount).toFixed(2)),
+          })}
+        </ZigTypography>
+
+        <ZigTypography
+          variant={'caption'}
+          component='p'
+          color='neutral150'
+          fontWeight={500}
+        >
+          {t('table.edit')}
+        </ZigTypography>
+      </>
+    </ZigButton>
   );
 };
 

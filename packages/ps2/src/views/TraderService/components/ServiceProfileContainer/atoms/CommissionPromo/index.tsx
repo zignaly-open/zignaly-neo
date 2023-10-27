@@ -18,6 +18,7 @@ const CommissionPromo = ({
   onClick,
   id = '',
   showArrow = false,
+  showLabel = true,
 }: {
   traderBoost: number;
   maxCommission: number;
@@ -25,6 +26,7 @@ const CommissionPromo = ({
   onClick?: () => void;
   id?: string;
   showArrow?: boolean;
+  showLabel?: boolean;
 }) => {
   const { t } = useTranslation('referrals-trader');
 
@@ -72,47 +74,49 @@ const CommissionPromo = ({
           </ZigTypography>
         </Box>
       </Box>
-      <Box>
-        <ComissionTypography id='service-profile__comission-text'>
-          {traderBoost > 0 && (
-            <BoltIcon
-              width={'10px'}
-              height={'16px'}
-              style={{ margin: '0 4px 0 -6px' }}
-              id='service-profile__bolt-icon'
-            />
-          )}
-          {t('invite-commission', { pct: maxCommission })}
-        </ComissionTypography>
-        <ZigTypography
-          variant='h4'
-          fontWeight={'400'}
-          color='neutral200'
-          lineHeight={1.28}
-          fontSize={'12.5px'}
-          sx={{
-            cursor: onClick ? 'pointer' : 'default',
-          }}
-          onClick={onClick}
-          id='service-profile__invite-widget-text'
-        >
-          {t(inviteLeft ? 'invite-count' : 'invite-generic', {
-            count: inviteLeft,
-            pct: maxCommission,
-          })}
-          <ChevronRight
+      {showLabel && (
+        <Box>
+          <ComissionTypography id='service-profile__comission-text'>
+            {traderBoost > 0 && (
+              <BoltIcon
+                width={'10px'}
+                height={'16px'}
+                style={{ margin: '0 4px 0 -6px' }}
+                id='service-profile__bolt-icon'
+              />
+            )}
+            {t('invite-commission', { pct: maxCommission })}
+          </ComissionTypography>
+          <ZigTypography
+            variant='h4'
+            fontWeight={'400'}
+            color='neutral200'
+            lineHeight={1.28}
+            fontSize={'12.5px'}
             sx={{
-              color: 'links',
-              display: 'inline-block',
-              position: 'absolute',
-              bottom: 0,
-              marginLeft: '-2px',
-              fontSize: '19px',
-              marginBottom: '3px',
+              cursor: onClick ? 'pointer' : 'default',
             }}
-          />
-        </ZigTypography>
-      </Box>
+            onClick={onClick}
+            id='service-profile__invite-widget-text'
+          >
+            {t(inviteLeft ? 'invite-count' : 'invite-generic', {
+              count: inviteLeft,
+              pct: maxCommission,
+            })}
+            <ChevronRight
+              sx={{
+                color: 'links',
+                display: 'inline-block',
+                position: 'absolute',
+                bottom: 0,
+                marginLeft: '-2px',
+                fontSize: '19px',
+                marginBottom: '3px',
+              }}
+            />
+          </ZigTypography>
+        </Box>
+      )}
     </CommissionPromoBox>
   );
 };
