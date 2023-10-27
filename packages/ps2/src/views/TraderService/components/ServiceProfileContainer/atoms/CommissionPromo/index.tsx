@@ -39,7 +39,7 @@ const CommissionPromo = ({
   }
 
   return (
-    <CommissionPromoBox id={id}>
+    <CommissionPromoBox id={id} fullWidth={showLabel}>
       {showArrow && <InviteBoxArrow />}
       <Box
         position='absolute'

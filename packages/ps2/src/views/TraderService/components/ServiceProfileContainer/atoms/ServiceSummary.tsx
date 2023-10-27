@@ -101,27 +101,31 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
 
       <Grid container py={2} mb={!sm && '25px'}>
         <Grid item xs={sm ? 6 : 12}>
-          <ZigTypography
-            fontSize={12}
-            color={'neutral300'}
-            sx={{ mt: 0.5 }}
-            component={'p'}
-          >
-            {t('investors-count')}
-            {': '}
+          {!sm && (
             <ZigTypography
               fontSize={12}
-              color={'neutral200'}
-              id={'service-profile__investors-count'}
+              color={'neutral300'}
+              sx={{ mt: 0.5 }}
+              component={'p'}
             >
-              {service.investors}
+              {t('investors-count')}
+              {': '}
+              <ZigTypography
+                fontSize={12}
+                color={'neutral200'}
+                id={'service-profile__investors-count'}
+                mr={'3px'}
+              >
+                {service.investors}
+              </ZigTypography>
+              <ZigUserIcon
+                color={theme.palette.backgrounds.investorsIcon}
+                height='9px'
+                width={'9px'}
+              />
             </ZigTypography>
-            <ZigUserIcon
-              color={theme.palette.backgrounds.investorsIcon}
-              height='9px'
-              width={'9px'}
-            />
-          </ZigTypography>
+          )}
+
           <ZigTypography
             fontSize={12}
             color={'neutral300'}

@@ -80,6 +80,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           display='flex'
           gap={3}
           alignItems={'center'}
+          justifyContent={'center'}
           flexWrap={lg || !sm ? 'nowrap' : 'wrap'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
@@ -90,7 +91,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
               <InvestedButton prefixId={'service-profile'} service={service} />
             ) : (
               <MobileInvestedButton
-                serviceId={service?.id}
+                service={service}
                 id={'service-profile__invested'}
                 investedAmount={investedAmount.toString()}
               />

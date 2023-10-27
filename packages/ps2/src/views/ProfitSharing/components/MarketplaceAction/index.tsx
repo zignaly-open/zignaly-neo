@@ -112,7 +112,7 @@ const MarketplaceAction = ({
                   />
                 ) : (
                   <MobileInvestedButton
-                    serviceId={service?.id}
+                    service={traderService}
                     id={prefixId && `${prefixId}__edit-investment`}
                     investedAmount={investedAmount.toString()}
                   />
