@@ -37,6 +37,7 @@ import BigNumber from 'bignumber.js';
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const md = useMediaQuery(theme.breakpoints.up('md'));
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
     useChartConfig();
   const { data, isLoading, isFetching, isError } = useChartData({
@@ -199,9 +200,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           </>
         )}
 
-        {sm && <Box sx={{ flex: 1 }} />}
-
-        <SqueezedButtonGroupWrapper sx={{ mr: sm && 3, order: !sm && 1 }}>
+        <SqueezedButtonGroupWrapper
+          sx={{ mr: sm && 3, order: !sm && 1, ml: sm && 'auto' }}
+        >
           <ZigButtonGroupInput
             options={Object.keys(GraphTimeframe).map(
               (v: GraphTimeframe, i, all) => {
@@ -215,7 +216,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   label: t(`periods.${v}`),
                   id: `service-profile__choose-period-${v}`,
                   extraProps: {
-                    sx: { padding: !sm && '0 !important' },
+                    sx: { padding: !md && '0 !important' },
                     size: 'small',
                     disabled: isDisabled,
                     tooltip: isDisabled
