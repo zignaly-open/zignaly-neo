@@ -1,0 +1,39 @@
+{
+  "short_name": "Criptomaniacos",
+  "name": "Criptomaniacos",
+  "icons": [{
+      "src": "/images/whitelabel/criptomaniacos/favicon.ico",
+      "sizes": "24x24",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/images/whitelabel/criptomaniacos/logo16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/images/whitelabel/criptomaniacos/logo32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/images/whitelabel/criptomaniacos/logo64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "/images/whitelabel/criptomaniacos/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/whitelabel/criptomaniacos/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#7682F7",
+  "background_color": "#080810"
+}

@@ -3,7 +3,10 @@ import ZigTypography from "./display/ZigTypography";
 export const MarginContainer = styled("div")`
   margin: 0 auto;
   max-width: 1430px;
-  padding: 0 22px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    padding: 0 22px;
+  }
+  padding: 0 2px 0;
   width: 100%;
 `;
 

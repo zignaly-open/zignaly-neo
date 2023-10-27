@@ -9,7 +9,7 @@ export const SliderLabelValue = ({
   max = 100,
   min = 0,
   value = 0,
-  valueLabelFormat,
+  labelFormat,
   prefixId,
 }: {
   labels: SliderLabels;
@@ -17,7 +17,7 @@ export const SliderLabelValue = ({
   max?: number;
   min?: number;
   value?: number;
-  valueLabelFormat?: (value: number) => string;
+  labelFormat?: (value: number) => string | JSX.Element;
   prefixId: string;
 }) => {
   const valueLabel =
@@ -30,9 +30,9 @@ export const SliderLabelValue = ({
       : max;
 
   let valueLabelStr = valueLabel.toString();
-  if (valueLabelFormat) {
-    valueLabelStr = valueLabelFormat(valueLabel);
-  } else if (max === 100 && valueLabelFormat !== null) {
+  if (labelFormat) {
+    valueLabelStr = labelFormat(valueLabel);
+  } else if (max === 100 && labelFormat !== null) {
     valueLabelStr = `${valueLabel}%`;
   }
 

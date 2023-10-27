@@ -134,6 +134,7 @@ const EditProfileForm = () => {
               control={control}
               render={({ field }) => (
                 <ServiceLogo
+                  id={'edit-profile__logo'}
                   size={100}
                   label={t('edit-profile.edit-avatar')}
                   {...field}
@@ -143,6 +144,7 @@ const EditProfileForm = () => {
 
             <Box sx={{ pt: 2 }}>
               <ProfileStatusBox
+                id={'edit-profile__two-fa'}
                 isSuccess={user['2FAEnable']}
                 label={t('edit-profile.status-box.2fa')}
                 ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
@@ -156,6 +158,7 @@ const EditProfileForm = () => {
 
               {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
                 <KYCStatusBox
+                  id={'edit-profile__kyc'}
                   kycStatuses={kycStarted}
                   cta={() => navigate(generatePath(ROUTE_KYC))}
                 />
@@ -164,18 +167,21 @@ const EditProfileForm = () => {
           </Box>
           <Grid container>
             <Grid sm={6} xs={12} p={1} pb={2}>
-              <ZigTypography>{t('edit-profile.email')}</ZigTypography>
+              <ZigTypography id={'edit-profile__email-label'}>
+                {t('edit-profile.email')}
+              </ZigTypography>
 
               <ZigTypography
                 component={'p'}
                 sx={{ mt: 1, wordWrap: 'break-word' }}
+                id={'edit-profile__email'}
               >
                 {user.email}
               </ZigTypography>
             </Grid>
 
             <Grid sm={6} p={1} pb={2}>
-              <ZigTypography>
+              <ZigTypography id={'edit-profile__user-id-label'}>
                 {t('edit-profile.user-id')}
                 <ZigTypography
                   sx={{ pl: 1 }}
@@ -186,7 +192,11 @@ const EditProfileForm = () => {
                 </ZigTypography>
               </ZigTypography>
 
-              <ZigTypography component={'p'} sx={{ mt: 1 }}>
+              <ZigTypography
+                component={'p'}
+                sx={{ mt: 1 }}
+                id={'edit-profile__user-id'}
+              >
                 {user.userId}
               </ZigTypography>
             </Grid>
@@ -197,6 +207,7 @@ const EditProfileForm = () => {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
+                    id={'edit-profile__username'}
                     wide
                     label={t('edit-profile.username')}
                     placeholder={t('edit-profile.username')}
@@ -217,6 +228,7 @@ const EditProfileForm = () => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     filterOption={filterCountries}
+                    id={'edit-profile__country-select'}
                     label={
                       <>
                         {t('edit-profile.country')}
@@ -224,6 +236,7 @@ const EditProfileForm = () => {
                           sx={{ pl: 1 }}
                           variant={'body2'}
                           color={'neutral400'}
+                          id={'edit-profile__country-select-visible-if-trader'}
                         >
                           {t('edit-profile.visible-if-trader')}
                         </ZigTypography>
@@ -242,16 +255,18 @@ const EditProfileForm = () => {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
+                    id={'edit-profile__about-you'}
                     wide
                     multiline
                     rows={12}
                     label={
-                      <ZigTypography>
+                      <ZigTypography id={'edit-profile__about-you-label'}>
                         {t('edit-profile.about-you')}
                         <ZigTypography
                           sx={{ pl: 1 }}
                           variant={'body2'}
                           color={'neutral400'}
+                          id={'edit-profile__about-you-visible-if-trader'}
                         >
                           {t('edit-profile.visible-if-trader')}
                         </ZigTypography>

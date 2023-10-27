@@ -14,7 +14,7 @@ import {
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   ChartWrapper,
   GraphPercentageWrapperBox,
@@ -35,6 +35,8 @@ import {
 import BigNumber from 'bignumber.js';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
     useChartConfig();
   const { data, isLoading, isFetching, isError } = useChartData({
@@ -107,11 +109,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'wrap',
+          gap: !sm && '5px',
         }}
       >
         {canShowSummary && (
           <>
-            <Box sx={{ mr: 2 }}>
+            <Box sx={{ mr: sm && 2, order: !sm && 2, ml: !sm && 'auto' }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -160,7 +163,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   GraphChartType.at_risk_pct,
                 ].includes(chartType) && (
                   <ZigTypography
-                    variant={'bigNumber'}
+                    variant={sm ? 'bigNumber' : 'h2'}
                     sx={{ whiteSpace: 'nowrap' }}
                     color={getColorForNumber(value)}
                   >
@@ -196,9 +199,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           </>
         )}
 
-        <Box sx={{ flex: 1 }} />
+        {sm && <Box sx={{ flex: 1 }} />}
 
-        <SqueezedButtonGroupWrapper sx={{ mr: 3 }}>
+        <SqueezedButtonGroupWrapper sx={{ mr: sm && 3, order: !sm && 1 }}>
           <ZigButtonGroupInput
             options={Object.keys(GraphTimeframe).map(
               (v: GraphTimeframe, i, all) => {
@@ -212,6 +215,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   label: t(`periods.${v}`),
                   id: `service-profile__choose-period-${v}`,
                   extraProps: {
+                    sx: { padding: !sm && '0 !important' },
                     size: 'small',
                     disabled: isDisabled,
                     tooltip: isDisabled
@@ -225,17 +229,19 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             onChange={(v: GraphTimeframe) => setChartTimeframe(v)}
           />
         </SqueezedButtonGroupWrapper>
-        <SelectWrapperBox>
-          <ZigSelect
-            id={'service-profile__choose-graph-view'}
-            outlined
-            width={170}
-            small
-            value={chartType}
-            onChange={(v) => setChartType(v)}
-            options={chartTypeOptions}
-          />
-        </SelectWrapperBox>
+        {sm && (
+          <SelectWrapperBox>
+            <ZigSelect
+              id={'service-profile__choose-graph-view'}
+              outlined
+              width={170}
+              small
+              value={chartType}
+              onChange={(v) => setChartType(v)}
+              options={chartTypeOptions}
+            />
+          </SelectWrapperBox>
+        )}
       </Box>
 
       <ChartWrapper>

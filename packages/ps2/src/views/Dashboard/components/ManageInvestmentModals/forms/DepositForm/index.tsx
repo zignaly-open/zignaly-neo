@@ -349,6 +349,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                     flexDirection: ['column', 'row'],
                     gap: 2,
                     mt: '-6px',
+                    mb: 2,
                   }}
                 >
                   <ZigQrCode

@@ -78,6 +78,7 @@ export const ShareCommissionSlider = ({
         }}
         max={max}
         valueLabelFormat={(v) => v.toString()}
+        step={5}
       />
     </SliderContainer>
   );

@@ -68,10 +68,17 @@ export const useTierLayers = (
   tierId: number,
   boost: number,
   traderBoost: number,
-  options: { minHeight?: number; maxHeight?: number } = {},
+  options: {
+    minHeight?: number;
+    maxHeight?: number;
+    miniVariant?: boolean;
+  } = {},
 ) => {
-  const { minHeight = DEFAULT_MIN_HEIGHT, maxHeight = DEFAULT_MAX_HEIGHT } =
-    options;
+  const {
+    minHeight = DEFAULT_MIN_HEIGHT,
+    maxHeight = DEFAULT_MAX_HEIGHT,
+    miniVariant = false,
+  } = options;
   const tierCommission = tiers.find(
     (tier) => tier.id === tierId,
   )?.commissionPct;
@@ -109,9 +116,12 @@ export const useTierLayers = (
       value,
       layer1.value,
       layer1.height - minAdditionalHeight,
-      // If there is a 3rd layer, the 2nd layer should be at least half of the 1st layer
-      layers > 2
-        ? Math.max(layer2minHeight, 0.5 * layer1.height)
+      miniVariant
+        ? // If mini variant, the 2nd layer should be at least 65% of the 1st layer
+          Math.max(layer2minHeight, 0.65 * layer1.height)
+        : layers > 2
+        ? // If there is a 3rd layer, the 2nd layer should be at least half of the 1st layer
+          Math.max(layer2minHeight, 0.5 * layer1.height)
         : layer2minHeight,
     );
 

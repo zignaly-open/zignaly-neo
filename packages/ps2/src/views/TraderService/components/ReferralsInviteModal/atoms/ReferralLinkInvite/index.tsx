@@ -1,4 +1,4 @@
-import { ZigTypography, ZigButton } from '@zignaly-open/ui';
+import { ZigTypography, ZigButton, ZigCopyIcon } from '@zignaly-open/ui';
 import React from 'react';
 import { InviteBox, InviteUrlInput, StyledInviteIcon } from './styles';
 import { useTranslation } from 'react-i18next';
@@ -60,6 +60,7 @@ const ReferralLinkInvite = ({
           copy(url);
           toast.success(t('copied', { ns: 'action' }));
         }}
+        startIcon={<ZigCopyIcon />}
       >
         {t('copy-link', { ns: 'service' })}
       </ZigButton>

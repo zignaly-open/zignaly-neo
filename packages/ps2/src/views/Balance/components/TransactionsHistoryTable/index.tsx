@@ -13,14 +13,19 @@ import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { getTransactionSideType, truncateAddress } from './util';
 import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
 import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
+import { TableWrapper } from './styles';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('transactions-history');
   const coinsEndpoint = useExchangeCoinsList();
   const exchange = useActiveExchange();
@@ -55,82 +60,113 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         ),
         enableSorting: false,
       }),
-      columnHelper.accessor('asset', {
-        header: t('tableHeader.coin'),
-        cell: ({ getValue, row: { original } }) => (
-          <CoinLabel
-            id={`balances-table-transaction__coin-${original.txId}`}
-            coin={getValue()}
+      ...(md
+        ? [
+            columnHelper.accessor('asset', {
+              header: t('tableHeader.coin'),
+              cell: ({ getValue, row: { original } }) => (
+                <CoinLabel
+                  id={`balances-table-transaction__coin-${original.txId}`}
+                  coin={getValue()}
             name={coinsEndpoint.data?.[original.asset]?.name ?? '-'}
-          />
-        ),
-        enableSorting: false,
-      }),
-      columnHelper.accessor('txType', {
-        header: t('tableHeader.type'),
-        cell: ({ getValue, row: { original } }) => (
-          <ZigTypography
-            whiteSpace='normal'
-            color='neutral100'
-            fontWeight={500}
-            id={`balances-table-transaction__type-${original.txId}`}
-          >
-            {t(TRANSACTION_TYPE_NAME[getValue()])}
-          </ZigTypography>
-        ),
-        enableSorting: false,
-      }),
+                />
+              ),
+              enableSorting: false,
+            }),
+            columnHelper.accessor('txType', {
+              header: t('tableHeader.type'),
+              cell: ({ getValue, row: { original } }) => (
+                <Box
+                  width={!lg ? '100px' : '100%'}
+                  display={'flex'}
+                  justifyContent={'center'}
+                >
+                  <ZigTypography
+                    whiteSpace='normal'
+                    color='neutral100'
+                    fontWeight={500}
+                    id={`balances-table-transaction__type-${original.txId}`}
+                  >
+                    {t(TRANSACTION_TYPE_NAME[getValue()])}
+                  </ZigTypography>
+                </Box>
+              ),
+              enableSorting: false,
+            }),
+          ]
+        : []),
+
       columnHelper.accessor('amount', {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigTablePriceLabel
-            id={`balances-table-transaction__amount-${original.txId}`}
-            exact
-            coin={original.asset}
-            alwaysShowSign
-            value={defineSign(original.txType, original.from) * getValue()}
-          />
+          <Box display={'flex'} flexDirection={'column'}>
+            <ZigTablePriceLabel
+              id={`balances-table-transaction__amount-${original.txId}`}
+              exact
+              coin={original.asset}
+              alwaysShowSign
+              value={defineSign(original.txType, original.from) * getValue()}
+            />
+            {!md && (
+              <ZigTypography
+                whiteSpace='normal'
+                color='neutral300'
+                fontWeight={400}
+                fontSize={'10px'}
+                lineHeight={'10px'}
+                id={`balances-table-transaction__type-${original.txId}`}
+              >
+                {t(TRANSACTION_TYPE_NAME[original.txType])}
+              </ZigTypography>
+            )}
+          </Box>
         ),
         enableSorting: false,
       }),
-      columnHelper.accessor('fromName', {
-        header: t('tableHeader.from'),
-        cell: ({ getValue, row: { original } }) => (
-          <ZigTypography
-            id={`balances-table-transaction__from-${original.txId}`}
-            whiteSpace='normal'
-            color='neutral100'
-            fontWeight={500}
-          >
-            {getValue() ||
-              (original.txType === TRANSACTION_TYPE.PS_WITHDRAW
-                ? t('psService')
-                : getTransactionSideType(original.txType, 'from') === 'zignaly'
-                ? t('deleted')
-                : t('external'))}
-          </ZigTypography>
-        ),
-        enableSorting: false,
-      }),
-      columnHelper.accessor('toName', {
-        header: t('tableHeader.to'),
-        cell: ({ getValue, row: { original } }) => (
-          <ZigTypography
-            whiteSpace='normal'
-            color='neutral100'
-            fontWeight={500}
-            id={`balances-table-transaction__to-${original.txId}`}
-          >
-            {getValue() ||
-              (original.to
-                ? truncateAddress(original.to)
-                : getTransactionSideType(original.txType, 'to') === 'zignaly'
-                ? t('deleted')
-                : '-')}
-          </ZigTypography>
-        ),
-        enableSorting: false,
-      }),
+      ...(lg
+        ? [
+            columnHelper.accessor('fromName', {
+              header: t('tableHeader.from'),
+              cell: ({ getValue, row: { original } }) => (
+                <ZigTypography
+                  id={`balances-table-transaction__from-${original.txId}`}
+                  whiteSpace='normal'
+                  color='neutral100'
+                  fontWeight={500}
+                >
+                  {getValue() ||
+                    (original.txType === TRANSACTION_TYPE.PS_WITHDRAW
+                      ? t('psService')
+                      : getTransactionSideType(original.txType, 'from') ===
+                        'zignaly'
+                      ? t('deleted')
+                      : t('external'))}
+                </ZigTypography>
+              ),
+              enableSorting: false,
+            }),
+            columnHelper.accessor('toName', {
+              header: t('tableHeader.to'),
+              cell: ({ getValue, row: { original } }) => (
+                <ZigTypography
+                  whiteSpace='normal'
+                  color='neutral100'
+                  fontWeight={500}
+                  id={`balances-table-transaction__to-${original.txId}`}
+                >
+                  {getValue() ||
+                    (original.to
+                      ? truncateAddress(original.to)
+                      : getTransactionSideType(original.txType, 'to') ===
+                        'zignaly'
+                      ? t('deleted')
+                      : '-')}
+                </ZigTypography>
+              ),
+              enableSorting: false,
+            }),
+          ]
+        : []),
       columnHelper.accessor('status', {
         header: t('tableHeader.status'),
         cell: ({ getValue, row }) => (
@@ -146,43 +182,49 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
                 id={`balances-table-transaction__status-${row.original.txId}`}
               />
             </Box>
-            {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
+            {md ? row.getIsExpanded() ? <ExpandLess /> : <ExpandMore /> : null}
           </Box>
         ),
         enableSorting: false,
       }),
     ],
-    [t, coinsEndpoint.data],
+    [t, coinsEndpoint.data, md, lg, sm],
   );
 
   return (
     <LayoutContentWrapper
       endpoint={[coinsEndpoint]}
       content={() => (
-        <ZigTable
-          prefixId={'transactions'}
-          columns={columns}
-          initialState={{
-            sorting: [
-              {
-                id: 'datetime',
-                desc: true,
-              },
-            ],
-          }}
-          renderSubComponent={({ row }) => (
-            <TransactionDetails
-              transaction={row.original}
-              txId={row.original.txId}
-            />
-          )}
-          emptyMessage={t('noData')}
+        <TableWrapper>
+          <ZigTable
+            columnVisibility={md}
+            prefixId={'transactions'}
+            columns={columns}
+            initialState={{
+              sorting: [
+                {
+                  id: 'datetime',
+                  desc: true,
+                },
+              ],
+            }}
+            renderSubComponent={
+              md
+                ? ({ row }) => (
+                    <TransactionDetails
+                      transaction={row.original}
+                      txId={row.original.txId}
+                    />
+                  )
+                : undefined}
+            emptyMessage={t('noData')}
           useInfiniteQuery={useTransactionsHistoryQuery}
           queryExtraParams={{
             exchangeInternalId: exchange?.internalId,
             type,
           }}
-        />
+          />
+        </TableWrapper>
       )}
     />
   );

@@ -1,7 +1,7 @@
 import React from 'react';
-import { InputCode, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { InputCode, ZigButton } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { Layout, Field } from './styles';
+import { Layout, Field, PaddedTitle } from './styles';
 import { EmailVerifyFormProps } from './types';
 
 function EmailVerifyForm({
@@ -16,13 +16,9 @@ function EmailVerifyForm({
   return (
     <Layout>
       <Field>
-        <ZigTypography
-          variant={'body1'}
-          id={'new-device-modal__description'}
-          sx={{ mb: '35px' }}
-        >
+        <PaddedTitle variant={'body1'} id={'new-device-modal__description'}>
           {t('login-form.verifyEmail.title')}
-        </ZigTypography>
+        </PaddedTitle>
         <InputCode
           prefixId={'new-device-modal'}
           fields={6}

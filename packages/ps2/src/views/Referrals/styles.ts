@@ -10,20 +10,17 @@ import {
 export const CommissionBox = styled(Box)`
   border-radius: 17px;
   background-image: linear-gradient(to bottom, #18194b, #12374e);
-  width: 849px;
-  height: 354px;
+  width: 850px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 27px;
-  padding: 10px 59px;
+  padding: 48px 59px 42px;
 `;
 
-// Custom borders with left arrow and transparent background
-export const StyledShareCommissionSlider = styled('div')`
+export const BaseShareCommissionSlider = styled('div')`
   position: relative;
-  margin-left: 18px;
 
   ${ContainerArrow} {
     display: none;
@@ -31,17 +28,34 @@ export const StyledShareCommissionSlider = styled('div')`
 
   ${SliderContainer} {
     position: relative;
-    width: 356px;
-    height: 160px;
     margin: 0;
     border: none;
-    border-right: 1px solid rgba(148, 150, 180, 0.2);
     border-radius: 15px;
 
     &:before,
     &:after {
       content: '';
       position: absolute;
+    }
+  }
+
+  ${StyledZigSlider} {
+    padding: 0 40px;
+  }
+`;
+
+// Custom borders with left arrow and transparent background
+export const StyledShareCommissionSlider = styled(BaseShareCommissionSlider)`
+  margin-left: 18px;
+
+  ${SliderContainer} {
+    border-right: 1px solid rgba(148, 150, 180, 0.2);
+    border-radius: 15px;
+    width: 356px;
+    height: 160px;
+
+    &:before,
+    &:after {
       padding-left: 19px;
       left: -18px;
     }
@@ -65,13 +79,47 @@ export const StyledShareCommissionSlider = styled('div')`
 
     > div > .MuiTypography-root {
       font-size: 18.5px;
-      letter-spacing: 0.56px;
       padding: 0px 20px 8px;
     }
   }
+`;
 
-  ${StyledZigSlider} {
-    padding: 0 40px;
+export const AltShareCommissionSlider = styled(BaseShareCommissionSlider)`
+  margin-top: 18px;
+
+  ${SliderContainer} {
+    border-bottom: 1px solid rgba(148, 150, 180, 0.2);
+    border-radius: 15px;
+    height: 110px;
+
+    &:before,
+    &:after {
+      padding-top: 19px;
+      top: -18px;
+    }
+
+    &:before {
+      left: 54px;
+      transform: skewX(-50deg);
+      border: 1px solid rgba(148, 150, 180, 0.3);
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    &:after {
+      left: 76px;
+      transform: skewX(50deg);
+      border: 1px solid rgba(148, 150, 180, 0.3);
+      border-right: none;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    > div > .MuiTypography-root {
+      font-size: 16px;
+      padding: 0px 10px 4px;
+    }
   }
 `;
 
@@ -98,6 +146,33 @@ export const BorderFix = styled('div')`
     bottom: 0;
     border-top: none;
     border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+`;
+
+export const BorderFixAlt = styled('div')`
+  &:before,
+  &:after {
+    content: '';
+    height: 100%;
+    border: 1px solid rgba(148, 150, 180, 0.1);
+    position: absolute;
+    border-bottom: none;
+  }
+
+  &:before {
+    left: 0;
+    width: 43px;
+    border-right: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+
+  &:after {
+    left: 87px;
+    right: 0;
+    border-left: none;
+    border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
   }
 `;
@@ -132,9 +207,7 @@ export const LimitedTimeChipArrow = styled('div')`
   border-top: 13px solid ${({ theme }) => theme.palette.greenGraph}33;
 `;
 
-export const StyledReferralLinkInvite = styled('div')`
-  margin-top: 35px;
-
+export const StyledReferralLinkInvite = styled(Box)`
   ${InviteBox} {
     background-color: #0d1935;
   }
@@ -149,6 +222,17 @@ export const StyledCurrentCommission = styled('div')`
     > div > .MuiTypography-body1 {
       padding-top: 15px;
     }
+
+    > div:nth-child(2) {
+      svg:nth-of-type(2) {
+        width: 21px;
+        height: 21px;
+      }
+    }
+  }
+
+  .MuiTypography-bigNumber {
+    font-size: 29px;
   }
 
   .boost-timer {
@@ -246,6 +330,7 @@ export const UlList = styled('ul')`
   & li {
     list-style: disc;
   }
+  text-align: left;
   margin-left: 20px;
 `;
 
@@ -274,4 +359,41 @@ export const ShareIconsContainer = styled(Box)`
       fill: ${({ theme }) => theme.palette.highlighted};
     }
   }
+`;
+
+export const HowToEarnBox = styled(Box)`
+  border-radius: 17px;
+  width: 850px;
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(12, 14, 37, 0.5);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 17px;
+    border: 1px solid transparent;
+    background: linear-gradient(180deg, #138ea0cc, #3f3bb1cc) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+  }
+`;
+
+export const TiersCardBox = styled(Box)`
+  background-image: linear-gradient(to bottom, #09122acc, #09122acc, #142f4dcc);
+  padding: 10px;
+  width: 244px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
 `;

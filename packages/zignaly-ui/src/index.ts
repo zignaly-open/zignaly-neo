@@ -19,6 +19,7 @@ export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
 export { default as ZigSlider } from "./components/inputs/ZigSlider";
 export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
+export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
 
 export { default as ZigSearch } from "./components/filters/ZigSearch";
 

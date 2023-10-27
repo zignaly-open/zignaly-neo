@@ -63,4 +63,7 @@ export const Grid = styled('div')`
 
 export const TransactionContainer = styled('div')`
   margin: 42px -54px 0;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    margin: 42px 0 0;
+  }
 `;

@@ -8,31 +8,22 @@ import {
 import { Box, Grid } from '@mui/material';
 import {
   PageContainer,
+  ZigArrowDescIcon,
   ZigPriceLabel,
   ZigTypography,
   ZigUserFilledIcon,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
-import { useCurrentUser } from '../../apis/user/use';
-import { generatePath } from 'react-router-dom';
-import { ROUTE_REFERRALS_INVITE } from '../../routes';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useTiersData } from 'apis/referrals/use';
-import {
-  BorderFix,
-  CommissionBox,
-  StyledCurrentCommission,
-  StyledReferralLinkInvite,
-  StyledShareCommissionSlider,
-} from './styles';
-import { ShareCommissionSlider } from 'views/TraderService/components/ReferralsInviteModal/atoms/ShareCommissionSlider';
-import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
-import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/CurrentCommission';
 import ReferralLimitedTime from './components/ReferralLimitedTime';
 import { Verified } from '@mui/icons-material';
+import ReferralHowToEarn from './components/ReferralHowToEarn';
+import ReferralCommissionBox from './components/ReferralCommissionBox';
+import ReferralTermsButton from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralTermsButton';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -42,20 +33,10 @@ const Referrals: React.FC = () => {
   const history = useReferralHistoryQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  const { refCode } = useCurrentUser();
 
   useTitle(t('pages:referrals'));
 
-  const baseUrl =
-    window.location.protocol +
-    '//' +
-    (window.location.host?.includes('localhost')
-      ? 'app.zignaly.com'
-      : window.location.host);
-
-  const link =
-    baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode ?? '' });
-
+  const tiersData = useTiersData();
   const {
     referral,
     maxCommission,
@@ -64,7 +45,7 @@ const Referrals: React.FC = () => {
     isLoading,
     boostRunning,
     inviteLeft,
-  } = useTiersData();
+  } = tiersData;
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
@@ -124,36 +105,31 @@ const Referrals: React.FC = () => {
                   />
                 </Trans>
               </ZigTypography>
-              <CommissionBox>
-                <Box display='flex' alignItems={'center'} gap='30px'>
-                  <StyledCurrentCommission>
-                    <CurrentCommission
-                      showReferrals={false}
-                      showAsMaxCommission={true}
-                    />
-                  </StyledCurrentCommission>
-                  <StyledShareCommissionSlider>
-                    <BorderFix />
-                    <ShareCommissionSlider
-                      discountPct={referral.discountPct}
-                      max={maxCommission}
-                    />
-                  </StyledShareCommissionSlider>
+              <ReferralCommissionBox
+                tiersData={tiersData}
+                rewardsData={rewardsData}
+              />
+              {referral.invitedCount > 0 && (
+                <Box mt='30px'>
+                  <ReferralTermsButton />
                 </Box>
-                <StyledReferralLinkInvite>
-                  <ReferralLinkInvite link={link} title={t('share-link')} />
-                </StyledReferralLinkInvite>
-              </CommissionBox>
+              )}
             </Box>
 
             {!rewardsData.invitedCount ? (
-              <>
+              <Box
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+              >
+                <ReferralHowToEarn tiersData={tiersData} />
                 <ZigTypography
                   align={'center'}
                   variant={'h1'}
                   fontSize={'26px'}
                   fontWeight={600}
                   sx={{ mt: 7, mb: '29px' }}
+                  className='referral__start-earning-title'
                 >
                   {t('start-earning')}
                 </ZigTypography>
@@ -169,7 +145,7 @@ const Referrals: React.FC = () => {
                     <ReferralSuccessStep step={3} />
                   </Grid>
                 </Grid>
-              </>
+              </Box>
             ) : (
               <>
                 <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>
@@ -181,6 +157,7 @@ const Referrals: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
+                    alignItems: 'center',
                     pt: 3,
                     pb: 5,
                   }}
@@ -203,6 +180,7 @@ const Referrals: React.FC = () => {
                       </ZigTypography>
                     }
                   />
+                  <ZigArrowDescIcon />
                   <TotalBox
                     label={t('invested')}
                     value={
@@ -225,6 +203,7 @@ const Referrals: React.FC = () => {
                       </ZigTypography>
                     }
                   />
+                  <ZigArrowDescIcon />
                   <TotalBox
                     label={t('total-earned')}
                     value={

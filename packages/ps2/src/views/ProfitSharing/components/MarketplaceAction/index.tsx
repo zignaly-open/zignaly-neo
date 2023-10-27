@@ -6,26 +6,22 @@ import {
 } from '../../../../apis/user/use';
 import { useInvestments } from '../../../../apis/investment/use';
 import InvestButton from '../../../TraderService/components/ServiceProfileContainer/atoms/InvestButton';
-import { InvestedButtonBase } from '../../../TraderService/components/ServiceProfileContainer/atoms/InvestedButton';
+import {
+  InvestedButtonBase,
+  MobileInvestedButton,
+} from '../../../TraderService/components/ServiceProfileContainer/atoms/InvestedButton';
 import { marketplaceServiceToServiceType } from '../../../../apis/marketplace/util';
 import { Service } from '../../../../apis/service/types';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
-import {
-  CenteredLoader,
-  trimZeros,
-  ZigButton,
-  ZigCrossIcon,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { CenteredLoader, ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useTranslation } from 'react-i18next';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
-import { useZModal } from '../../../../components/ZModal/use';
-import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
+import { ZigTableMobileActionRow } from '../../../../components/ZigTableMobileActionRow';
 
 const loadingSpinner = (
   <LoaderWrapper>
@@ -46,21 +42,7 @@ export const MobileMarketplaceAction = ({
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   return (
     rowId === activeRow && (
-      <Box
-        position={'absolute'}
-        left={0}
-        top={-2}
-        sx={{
-          backdropFilter: 'blur(7px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 3,
-          gap: 2,
-        }}
-        width={'100%'}
-        height={'93px'}
-      >
+      <ZigTableMobileActionRow safariHeight={93}>
         <MarketplaceAction service={service} fullSize={false} />
         <ZigButton
           size={'large'}
@@ -87,7 +69,7 @@ export const MobileMarketplaceAction = ({
             color={theme.palette.neutral300}
           />
         </IconButton>
-      </Box>
+      </ZigTableMobileActionRow>
     )
   );
 };
@@ -99,7 +81,6 @@ const MarketplaceAction = ({
 }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
-  const { t } = useTranslation('marketplace');
 
   const { isLoading, data: investments } = useInvestments(
     exchange?.internalId,
@@ -107,7 +88,6 @@ const MarketplaceAction = ({
       skip: !exchange?.internalId,
     },
   );
-  const { showModal } = useZModal({ disableAutoDestroy: true });
 
   const traderService = marketplaceServiceToServiceType(service) as Service;
   const investment = investments?.find((x) => x.serviceId === service.id);
@@ -131,42 +111,11 @@ const MarketplaceAction = ({
                     investedAmount={investedAmount.toString()}
                   />
                 ) : (
-                  <ZigButton
+                  <MobileInvestedButton
+                    serviceId={service?.id}
                     id={prefixId && `${prefixId}__edit-investment`}
-                    size={'large'}
-                    onClick={() => {
-                      showModal(EditInvestmentModal, { serviceId: service.id });
-                    }}
-                    sx={{
-                      flexDirection: 'column',
-                      minWidth: 165,
-                      padding: '6px 26px',
-                    }}
-                  >
-                    <>
-                      <ZigTypography
-                        variant='body2'
-                        color='neutral000'
-                        fontWeight={600}
-                        letterSpacing={1.1}
-                        lineHeight={'20px'}
-                        sx={{ textTransform: 'uppercase !important' }}
-                      >
-                        {t('table.invested', {
-                          invested: trimZeros(investedAmount.toFixed(2)),
-                        })}
-                      </ZigTypography>
-
-                      <ZigTypography
-                        variant={'caption'}
-                        component='p'
-                        color='neutral150'
-                        fontWeight={500}
-                      >
-                        {t('table.edit')}
-                      </ZigTypography>
-                    </>
-                  </ZigButton>
+                    investedAmount={investedAmount.toString()}
+                  />
                 )
               ) : (
                 <InvestButton prefixId={prefixId} service={traderService} />

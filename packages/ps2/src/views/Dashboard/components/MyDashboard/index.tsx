@@ -55,7 +55,9 @@ const MyDashboard: React.FC = () => {
     showEditInvestmentModal({ serviceId: service.serviceId });
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   useEffect(() => () => setActiveRow(null), []);
 
@@ -69,14 +71,14 @@ const MyDashboard: React.FC = () => {
             .toNumber(),
         {
           header: t(
-            md
+            sm
               ? 'tableHeader.summary.title'
               : 'tableHeader.summary.title-mobile',
           ),
           id: 'invested',
           meta: {
             subtitle: t(
-              md
+              sm
                 ? 'tableHeader.summary.subtitle'
                 : 'tableHeader.summary.subtitle-mobile',
             ),
@@ -90,7 +92,7 @@ const MyDashboard: React.FC = () => {
                 coin={original.ssc}
                 profit={new BigNumber(original.pnlSumLc).toFixed()}
                 onClickEdit={
-                  md ? () => onClickEditInvestment(original) : undefined
+                  sm ? () => onClickEditInvestment(original) : undefined
                 }
               />
             );
@@ -101,27 +103,27 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('serviceName', {
         style: {
           justifyContent: 'flex-start',
-          marginLeft: md ? '83px' : '20px',
+          marginLeft: sm ? '83px' : '20px',
           textAlign: 'left',
         },
         header: t(
-          md
+          sm
             ? 'tableHeader.serviceName.title'
             : 'tableHeader.serviceName.title-mobile',
         ),
-        meta: md && {
+        meta: sm && {
           subtitle: t('tableHeader.serviceName.subtitle'),
         },
         cell: ({ row: { original } }) => (
           <Box paddingLeft={'4px'}>
             <ServiceName
-              activeLink={md}
-              truncateServiceName={!md}
-              size={md ? 'x-large' : 'large'}
+              activeLink={sm}
+              truncateServiceName={!lg}
+              size={lg ? 'x-large' : 'large'}
               prefixId={'portfolio-table'}
               service={original}
-              showCoin={md}
-              showOwner={md}
+              showCoin={sm}
+              showOwner={lg}
             />
           </Box>
         ),
@@ -131,21 +133,21 @@ const MyDashboard: React.FC = () => {
         id: 'pnl30dPct',
         cell: ({ row: { original } }) => (
           <Box
-            minHeight={md ? '125px' : '93px'}
+            minHeight={sm ? '125px' : '93px'}
             display={'flex'}
             flexDirection={'column'}
             justifyContent={'center'}
           >
             {original.pnl30dPct ||
             Object.keys(original.sparklines).length > 1 ? (
-              <Box sx={!md && { transform: 'scale(0.7)' }}>
+              <Box sx={!sm && { transform: 'scale(0.7)' }}>
                 <ZigChartMiniSuspensed
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
                   data={[0, ...(original.sparklines as number[])]}
                   precision={getPrecisionForCoin(original.ssc)}
                 />
-                {md && (
+                {sm && (
                   <ChangeIndicator
                     id={`portfolio-table__chart-percentage-${original.serviceId}`}
                     normalized
@@ -164,7 +166,7 @@ const MyDashboard: React.FC = () => {
         sortingFn: 'auto',
         enableHiding: false,
       }),
-      ...(!md
+      ...(!sm
         ? [
             columnHelper.display({
               header: '',
@@ -178,9 +180,9 @@ const MyDashboard: React.FC = () => {
             }),
           ]
         : []),
-      ...(md
+      ...(lg
         ? [
-            columnHelper.accessor('pnlDailyMeanLc', {
+            columnHelper.accessor((row) => +row.pnlDailyMeanLc, {
               header: t('tableHeader.dailyAvg-title'),
               cell: ({ getValue, row: { original } }) => (
                 <Box
@@ -196,8 +198,11 @@ const MyDashboard: React.FC = () => {
                   />
                 </Box>
               ),
-              sortingFn: 'alphanumeric',
             }),
+          ]
+        : []),
+      ...(md
+        ? [
             columnHelper.accessor((row) => +row.pnl90dPct, {
               header: t('tableHeader.3-mos-title'),
               id: 'pnl90dPct',
@@ -224,6 +229,11 @@ const MyDashboard: React.FC = () => {
               ),
               sortingFn: 'auto',
             }),
+          ]
+        : []),
+
+      ...(sm
+        ? [
             columnHelper.accessor((row) => +row.pnlPctLc, {
               header: t('tableHeader.all.title'),
               id: 'pnlPctLc',
@@ -275,7 +285,7 @@ const MyDashboard: React.FC = () => {
           ]
         : []),
     ],
-    [t, md],
+    [t, sm, md, lg],
   );
 
   return (
@@ -311,7 +321,7 @@ const MyDashboard: React.FC = () => {
               <ZigTableWrapper>
                 <ZigTable
                   onRowClick={
-                    !md
+                    !sm
                       ? (id: string) => {
                           if (id !== activeRow) setActiveRow(id);
                         }
@@ -329,7 +339,7 @@ const MyDashboard: React.FC = () => {
                   columns={columns}
                   data={services}
                   emptyMessage={t('table-search-emptyMessage')}
-                  columnVisibility={md}
+                  columnVisibility={sm}
                 />
               </ZigTableWrapper>
             </>

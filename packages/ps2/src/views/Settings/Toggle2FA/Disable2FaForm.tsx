@@ -57,6 +57,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
         sx={{ pb: 4 }}
         component='p'
         textAlign={'center'}
+        id={'disable-two-fa_description'}
       >
         {t('disable-2fa.description')}
       </ZigTypography>
@@ -66,6 +67,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           control={control}
           render={({ field }) => (
             <ZigInput
+              id={'disable-two-fa_enter-code'}
               label={t('enable-2fa.enter-code')}
               placeholder={t('enable-2fa.code-2fa')}
               error={t(errors.code?.message)}
@@ -74,11 +76,14 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             />
           )}
         />
-        <ErrorMessage text={t('disable-2fa.security')} />
+        <ErrorMessage
+          text={t('disable-2fa.security')}
+          id={'disable-two-fa_security'}
+        />
 
         <ZigModalActions>
           <ZigButton
-            id={'disable-2fa__submit'}
+            id={'disable-two-fa__submit'}
             type='submit'
             variant='contained'
             size='xlarge'

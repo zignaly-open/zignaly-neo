@@ -14,6 +14,9 @@ const CoinLabel = ({ name, coin, bucket, id }: CoinLabelProps) => (
         variant='body2'
         color='neutral300'
         className={`name__${name}`}
+        overflow={'hidden'}
+        textOverflow={'ellipsis'}
+        width={'100%'}
       >
         {name}
       </ZigTypography>

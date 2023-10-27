@@ -63,17 +63,30 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
     return (
       <>
         <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
-          <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
+          <ZigTypography
+            whiteSpace='pre-line'
+            textAlign={'center'}
+            id={'enable-two-fa_description'}
+          >
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
               <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
             </Trans>
           </ZigTypography>
-          <QRCode aria-labelledby='QR Code' src={load2FAInfoResult.data[1]} />
+          <QRCode
+            aria-labelledby='QR Code'
+            src={load2FAInfoResult.data[1]}
+            id={'enable-two-fa_qr-code'}
+          />
 
-          <ZigTypography color='yellow' textAlign={'center'}>
+          <ZigTypography
+            color='yellow'
+            textAlign={'center'}
+            id={'enable-two-fa_key-phrase-info'}
+          >
             {t('enable-2fa.key-phrase-info')}
           </ZigTypography>
           <ZigCopyText
+            id={'enable-two-fa_key-phrase'}
             label={t('enable-2fa.key-phrase')}
             value={load2FAInfoResult.data[0]}
             onCopied={() => {
@@ -85,6 +98,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             control={control}
             render={({ field }) => (
               <ZigInput
+                id={'enable-two-fa_enter-code'}
                 label={
                   <div>
                     {t('enable-2fa.enter-code')}
@@ -103,7 +117,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
 
           <ZigModalActions>
             <ZigButton
-              id={'enable-2fa__submit'}
+              id={'enable-two-fa__submit'}
               type='submit'
               variant='contained'
               size='xlarge'
@@ -120,7 +134,11 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <ZigModalForm>
-      <ZigTypography color='neutral300' textAlign={'center'}>
+      <ZigTypography
+        color='neutral300'
+        textAlign={'center'}
+        id={'enable-two-fa_description'}
+      >
         <Trans i18nKey='enable-2fa.description' t={t}>
           <Link
             href={HELP_CREATE_ENABLE_2FA_URL}
@@ -137,7 +155,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
           loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}
           variant='contained'
           size='xlarge'
-          id='enable-2fa__setup'
+          id={'enable-two-fa__submit'}
         >
           {t('enable-2fa.setup-2fa')}
         </ZigButton>
