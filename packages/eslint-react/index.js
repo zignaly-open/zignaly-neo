@@ -60,7 +60,7 @@ module.exports = {
     'no-plusplus': 'off',
     'jest/no-mocks-import': 'off',
     'react/no-danger': 'off',
-    'import/extensions': ['error', 'never', { svg: 'always' }],
+    'import/extensions': ['error', 'never', { json: 'always', svg: 'always' }],
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-unused-vars': 'error',
     'import/prefer-default-export': 'off',

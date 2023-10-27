@@ -68,7 +68,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
                 <CoinLabel
                   id={`balances-table-transaction__coin-${original.txId}`}
                   coin={getValue()}
-            name={coinsEndpoint.data?.[original.asset]?.name ?? '-'}
+                  name={coinsEndpoint.data?.[original.asset]?.name ?? '-'}
                 />
               ),
               enableSorting: false,
@@ -216,13 +216,14 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
                       txId={row.original.txId}
                     />
                   )
-                : undefined}
+                : undefined
+            }
             emptyMessage={t('noData')}
-          useInfiniteQuery={useTransactionsHistoryQuery}
-          queryExtraParams={{
-            exchangeInternalId: exchange?.internalId,
-            type,
-          }}
+            useInfiniteQuery={useTransactionsHistoryQuery}
+            queryExtraParams={{
+              exchangeInternalId: exchange?.internalId,
+              type,
+            }}
           />
         </TableWrapper>
       )}
