@@ -28,6 +28,8 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   );
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 30,
@@ -120,14 +122,20 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             columnHelper.accessor('txType', {
               header: t('tableHeader.type'),
               cell: ({ getValue, row: { original } }) => (
-                <ZigTypography
-                  whiteSpace='normal'
-                  color='neutral100'
-                  fontWeight={500}
-                  id={`balances-table-transaction__type-${original.txId}`}
+                <Box
+                  width={!lg ? '100px' : '100%'}
+                  display={'flex'}
+                  justifyContent={'center'}
                 >
-                  {t(TRANSACTION_TYPE_NAME[getValue()])}
-                </ZigTypography>
+                  <ZigTypography
+                    whiteSpace='normal'
+                    color='neutral100'
+                    fontWeight={500}
+                    id={`balances-table-transaction__type-${original.txId}`}
+                  >
+                    {t(TRANSACTION_TYPE_NAME[getValue()])}
+                  </ZigTypography>
+                </Box>
               ),
               enableSorting: false,
             }),
@@ -161,7 +169,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         ),
         enableSorting: false,
       }),
-      ...(md
+      ...(lg
         ? [
             columnHelper.accessor('fromName', {
               header: t('tableHeader.from'),
@@ -226,7 +234,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         enableSorting: false,
       }),
     ],
-    [md],
+    [md, lg, sm],
   );
 
   return (
