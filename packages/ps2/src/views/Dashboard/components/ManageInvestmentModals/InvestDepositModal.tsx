@@ -106,6 +106,7 @@ function InvestDepositModal({
       close={trackAwareClose}
       isLoading={!ready}
       wide
+      mobileFullScreen
       width={modalWidth}
     >
       <Box paddingX={!showDeposit && !(xs && rest.mobileFullScreen) && '30px'}>
