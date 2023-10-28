@@ -266,11 +266,12 @@ export function useActiveExchange(): ExtendedExchange | undefined {
   const result = exchange || defaultExchange || undefined;
   return useMemo(
     () =>
-      result && {
+      result &&
+      user?.exchanges && {
         ...result,
         image: getImageOfAccount(user.exchanges.indexOf(result)),
       },
-    [result, user.exchanges],
+    [result, user?.exchanges],
   );
 }
 

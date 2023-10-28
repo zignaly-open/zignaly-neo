@@ -1,4 +1,4 @@
-import { ModalContainerProps } from '../../../../components/ZModal/ModalContainer/types';
+import type { ModalContainerProps } from '@zignaly-open/ui/lib/components/display/ZigModalContainer/types';
 
 export enum EditInvestmentViews {
   EditInvestment = 'edit-investment',
