@@ -7,8 +7,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { useConvertPreview } from '../../../../../../apis/coin/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from '../../../../../Balance/components/SwapCoinsModal/validation';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { ChooseDepositTypeViews } from '../../types';
+import theme from '../../../../../../theme';
 
 function SwapForm({
   coinSwapTo,
@@ -23,6 +24,7 @@ function SwapForm({
       acc.availableInUsd > curr.availableInUsd ? acc : curr,
     ),
   );
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [minAmount, setMinAmount] = useState<number>(0);
 
@@ -127,7 +129,12 @@ function SwapForm({
         )}
       />
 
-      <Box position={'relative'} mt={1.5} ml={3}>
+      <Box
+        position={'relative'}
+        mt={1.5}
+        ml={3}
+        sx={xs && { textAlign: 'center' }}
+      >
         <ZigButton
           id={'swap-coins-modal__continue'}
           loading={isFetchingConvertPreview}
