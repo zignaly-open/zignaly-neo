@@ -24,7 +24,7 @@ const WithdrawConfirmForm = ({
   feeCoin = coin,
   close,
 }: WithdrawConfirmFormProps) => {
-  const sm = useMediaQuery(theme.breakpoints.down('sm'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('withdraw-crypto');
   if (status.isSuccess) {
     return (
@@ -146,7 +146,7 @@ const WithdrawConfirmForm = ({
         mt={4}
         mb={2}
         display='flex'
-        direction={sm ? 'column' : 'row'}
+        direction={sm ? 'row' : 'column'}
       >
         <AmountContainer sx={{ height: '100%', flex: 5 }} noBorders>
           <Grid
@@ -223,7 +223,7 @@ const WithdrawConfirmForm = ({
             flex: 1,
             color: 'neutral400',
             opacity: 0.8,
-            transform: `rotate(${sm ? 90 : 0}deg)`,
+            transform: `rotate(${sm ? 0 : 90}deg)`,
           }}
         />
         <AmountContainer
