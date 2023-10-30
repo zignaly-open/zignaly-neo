@@ -33,6 +33,7 @@ import {
   setActiveExchangeInternalId,
   setSessionExpiryDate,
   setUser,
+  setUserLocale,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
 import { trackNewSession } from '../../util/analytics';
@@ -58,6 +59,7 @@ const useStartSession = (eventType: SessionsTypes) => {
   const [loadSession] = useLazySessionQuery();
   const [loadTraderServices] = useLazyTraderServicesQuery();
   const [loadUser] = useLazyUserQuery();
+  const updateCurrentLocale = useChangeLocale(true);
 
   return async (
     user: { token: string; userId?: string } & Partial<LoginResponse>,
@@ -97,6 +99,7 @@ const useStartSession = (eventType: SessionsTypes) => {
       user.emailUnconfirmed ? SessionsTypes.Signup : eventType,
     );
     junkyard.set('hasLoggedIn', 'true');
+    updateCurrentLocale(userData.locale);
   };
 };
 
@@ -196,34 +199,26 @@ export const useResendCodeNewUser: typeof useResendCodeNewUserMutation =
 export const useResendKnownDeviceCode: typeof useResendKnownDeviceCodeMutation =
   useResendKnownDeviceCodeMutation;
 
-export function useChangeLocale(): (locale: string) => void {
+/*
+ * We have two scenarios here:
+ * - the user manually changes the language
+ * - we get the locale value from the backend and uodate it
+ */
+export function useChangeLocale(soft?: boolean): (locale: string) => void {
   const [save] = useSetLocaleMutation();
   const { i18n } = useTranslation();
   const isAuthenticated = useIsAuthenticated();
-  const userData = useCurrentUser();
-  const [newLocale, setNewLocale] = useState<string>(null);
-
-  useEffect(() => {
-    if (!isAuthenticated) return;
-    // After logged in
-
-    if (newLocale && userData?.locale !== newLocale) {
-      // Update BE with custom locale if changed
-      save({ locale: newLocale });
-    } else if (userData?.locale !== i18n.language) {
-      // Otherwise update locale to match BE
-      i18n.changeLanguage(userData.locale);
-    }
-  }, [userData?.locale]);
+  const dispatch = useDispatch();
+  const newLanguageWeSaveAfterLogin = useRef<string>(null);
 
   return (locale: string) => {
-    i18n.changeLanguage(locale);
-    if (isAuthenticated) {
-      // Update locale to BE directly
-      save({ locale });
-    } else {
-      // Save locale for BE update after login
-      setNewLocale(locale);
+    // Suppose a user is logged out, then they change their locale and then log in
+    // We should not change their locale to what they had on the backend
+    if (!isAuthenticated) newLanguageWeSaveAfterLogin.current = locale;
+    if (isAuthenticated && !soft) save({ locale });
+    if (!isAuthenticated || !(newLanguageWeSaveAfterLogin.current && soft)) {
+      i18n.changeLanguage(locale);
+      dispatch(setUserLocale(locale));
     }
   };
 }

@@ -28,6 +28,11 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<UserData>) => {
       state.user = action.payload;
     },
+    setUserLocale: (state, action: PayloadAction<string>) => {
+      if (state.user) {
+        state.user.locale = action.payload;
+      }
+    },
     activateExchange: (state, action: PayloadAction<string>) => {
       state.user.exchanges.find(
         (e) => e.internalId === action.payload,
@@ -54,6 +59,7 @@ export const {
   setActiveExchangeInternalId,
   activateExchange,
   enable2FA,
+  setUserLocale,
 } = userSlice.actions;
 
 export default userSlice.reducer;
