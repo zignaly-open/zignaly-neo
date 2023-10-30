@@ -24,7 +24,7 @@ function SwapForm({
       acc.availableInUsd > curr.availableInUsd ? acc : curr,
     ),
   );
-  const xs = useMediaQuery(theme.breakpoints.down('sm'));
+  const sm = useMediaQuery(theme.breakpoints.down('md'));
 
   const [minAmount, setMinAmount] = useState<number>(0);
 
@@ -133,7 +133,7 @@ function SwapForm({
         position={'relative'}
         mt={1.5}
         ml={3}
-        sx={xs && { textAlign: 'center' }}
+        sx={sm && { textAlign: 'center' }}
       >
         <ZigButton
           id={'swap-coins-modal__continue'}
