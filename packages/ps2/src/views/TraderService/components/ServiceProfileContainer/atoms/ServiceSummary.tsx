@@ -20,7 +20,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
         <>
           <GridWithBottomBorder container pb={2.5} pt={0}>
             <GridCell item xs={6}>
-              <ZigTypography color={'neutral300'}>
+              <ZigTypography color={'neutral300'} sx={{ mb: '10px' }}>
                 {t('assets-in-pool')}
               </ZigTypography>
               <AssetsInPoolWrapper>
@@ -34,7 +34,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               </AssetsInPoolWrapper>
             </GridCell>
             <GridCell item xs={6}>
-              <ZigTypography color={'neutral300'}>
+              <ZigTypography color={'neutral300'} sx={{ mb: '10px' }}>
                 {t('investors-count')}
               </ZigTypography>
               <Box
