@@ -1,5 +1,10 @@
 import { Alert, Box } from '@mui/material';
-import { ZigButton, ZigSwitch, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigAlertMessage,
+  ZigButton,
+  ZigSwitch,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SliderBox, StyledZigSlider, ZigTypographyValue } from './styles';
@@ -64,11 +69,10 @@ const CommissionReferralSharing = ({
       </ZigTypography>
       <Box display={'flex'} gap='25px' mt='20px'>
         {!successFee ? (
-          <Alert severity='warning'>
-            <ZigTypography variant='body2'>
-              {t('edit.commission.increase-success-fee')}
-            </ZigTypography>
-          </Alert>
+          <ZigAlertMessage
+            text={t('edit.commission.increase-success-fee')}
+            warning
+          />
         ) : (
           <>
             <ZigSwitch
