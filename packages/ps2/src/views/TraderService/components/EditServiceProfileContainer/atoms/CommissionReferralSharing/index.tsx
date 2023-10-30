@@ -1,6 +1,6 @@
 import { Alert, Box } from '@mui/material';
 import { ZigButton, ZigSwitch, ZigTypography } from '@zignaly-open/ui';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SliderBox, StyledZigSlider, ZigTypographyValue } from './styles';
 import BoostChip from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostChip';
@@ -17,7 +17,7 @@ const CommissionReferralSharing = ({
   zglySuccessFee,
 }: {
   value: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: number) => void;
   successFee: number;
   zglySuccessFee: number;
 }) => {
@@ -29,6 +29,14 @@ const CommissionReferralSharing = ({
     value || ZIGNALY_PROFIT_FEE,
     zglySuccessFee,
   );
+
+  useEffect(() => {
+    if (!successFee || !enable) {
+      onChange(0);
+    } else if (max === min || (enable && !value)) {
+      onChange(ZIGNALY_PROFIT_FEE);
+    }
+  }, [value, successFee, zglySuccessFee, enable]);
 
   return (
     <Box display='flex' flexDirection={'column'}>
@@ -65,15 +73,6 @@ const CommissionReferralSharing = ({
               checked={enable}
               onChange={(e) => {
                 setEnable(e.target.checked);
-                onChange({
-                  ...e,
-                  target: {
-                    ...e.target,
-                    value: e.target.checked
-                      ? ZIGNALY_PROFIT_FEE.toString()
-                      : '0',
-                  },
-                });
               }}
             />
             {enable && (
@@ -98,11 +97,7 @@ const CommissionReferralSharing = ({
                         max={max}
                         value={value || ZIGNALY_PROFIT_FEE}
                         prefixId={'service-edit__commission-slider'}
-                        onChange={(e) =>
-                          onChange(
-                            e as unknown as React.ChangeEvent<HTMLInputElement>,
-                          )
-                        }
+                        onChange={(e, v) => onChange(v as number)}
                         marks={false}
                         valueLabelFormat={(v) => (
                           <Box display='flex' alignItems={'center'} gap='2px'>
