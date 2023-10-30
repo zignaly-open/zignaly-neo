@@ -79,7 +79,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         <Box
           display='flex'
           gap={3}
-          alignItems={'center'}
+          alignItems={sm ? 'center' : 'flex-start'}
           justifyContent={'center'}
           flexWrap={lg || !sm ? 'nowrap' : 'wrap'}
         >
@@ -90,20 +90,24 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
             sm ? (
               <InvestedButton prefixId={'service-profile'} service={service} />
             ) : (
-              <MobileInvestedButton
-                service={service}
-                id={'service-profile__invested'}
-                investedAmount={investedAmount.toString()}
-                showMultipleAccountButton
-              />
+              <Box mt={'2px'}>
+                <MobileInvestedButton
+                  service={service}
+                  id={'service-profile__invested'}
+                  investedAmount={investedAmount.toString()}
+                  showMultipleAccountButton
+                />
+              </Box>
             )
           ) : (
-            <InvestButton
-              modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
-              prefixId={'service-profile'}
-              showMultipleAccountButton
-              service={service}
-            />
+            <Box mt={!sm && '2px'}>
+              <InvestButton
+                modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+                prefixId={'service-profile'}
+                showMultipleAccountButton
+                service={service}
+              />
+            </Box>
           )}
         </Box>
       )}
