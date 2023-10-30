@@ -53,5 +53,6 @@
     "scan": "Scan for mobile deposits"
   },
   "buy-crypto": "Buy Crypto",
+  "buy-crypto-description": "Buy now Crypto easily from Zignaly using our third party Changelly/MoonPay.",
   "history": "History"
 }

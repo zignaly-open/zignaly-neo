@@ -1,18 +1,17 @@
 import React from 'react';
 import {
   CenteredLoader,
-  ZigArrowOutIcon,
   ZigButton,
   ZigPlusIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
 import ChooseBetweenTwo from './ChooseBetweenTwo';
 import SwapForm from '../forms/SwapForm';
 import { Box, useTheme } from '@mui/material';
 import { SwapDepositPurchaseProps } from '../forms/SwapForm/types';
+import { useOpenBuyModal } from '../BuyModal';
 
 const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
   coin,
@@ -24,6 +23,7 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
 }) => {
   const { t } = useTranslation('deposit-crypto');
   const theme = useTheme();
+  const showBuyModal = useOpenBuyModal();
 
   if (isLoadingBalances) {
     return <CenteredLoader />;
@@ -74,16 +74,8 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
           <ZigButton
             size={'medium'}
             variant={'outlined'}
-            href={BUY_CRYPTO_URL}
+            onClick={() => showBuyModal()}
             id={'modal-swap-deposit-purchase__purchase'}
-            endIcon={
-              <ZigArrowOutIcon
-                width={'7px'}
-                height={'7px'}
-                style={{ marginBottom: '1px' }}
-                color={theme.palette.neutral300}
-              />
-            }
             sx={{ padding: '8px 20px' }}
           >
             {t('service-deposit.buttons.purchase', { coin })}

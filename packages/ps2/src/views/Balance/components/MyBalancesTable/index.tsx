@@ -29,9 +29,9 @@ import { useBalanceQuery } from 'apis/user/api';
 import SwapCoinsModal from '../SwapCoinsModal';
 import { useOpenDepositModal } from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ButtonsWrapper, TableWrapper } from './styles';
-import { BUY_CRYPTO_URL } from '../../../../util/constants';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useOpenBuyModal } from 'views/Dashboard/components/ManageInvestmentModals/BuyModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation(['my-balances', 'action']);
@@ -45,6 +45,8 @@ const MyBalancesTable = (): JSX.Element => {
   const { showModal } = useZModal();
   const openWithdrawModal = useOpenWithdrawModal();
   const showDepositModal = useOpenDepositModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
+  const showBuyModal = useOpenBuyModal();
+
   // Trigger balance update to be sure that balance widget matches coins data
   useBalanceQuery(
     {
@@ -323,7 +325,7 @@ const MyBalancesTable = (): JSX.Element => {
               </ZigButton>
               <ZigButton
                 variant={'outlined'}
-                href={BUY_CRYPTO_URL}
+                onClick={() => showBuyModal()}
                 sx={{ padding: '5px 0' }}
               >
                 <Box
