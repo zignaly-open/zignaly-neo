@@ -134,7 +134,6 @@ const SwapCoinsConfirmForm = ({
           {t('confirmation.receive')}
         </ZigTypography>
         <ZigPriceLabel
-          exact
           showTooltip={false}
           variant={'h1'}
           coinProps={{ variant: 'h2' }}
