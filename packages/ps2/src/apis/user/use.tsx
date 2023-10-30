@@ -31,9 +31,9 @@ import {
   activateExchange,
   setAccessToken,
   setActiveExchangeInternalId,
+  setLocale,
   setSessionExpiryDate,
   setUser,
-  setUserLocale,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
 import { trackNewSession } from '../../util/analytics';
@@ -204,21 +204,29 @@ export const useResendKnownDeviceCode: typeof useResendKnownDeviceCodeMutation =
  * - the user manually changes the language
  * - we get the locale value from the backend and uodate it
  */
-export function useChangeLocale(soft?: boolean): (locale: string) => void {
+export function useChangeLocale(
+  isSavedLocale?: boolean,
+): (locale: string) => void {
   const [save] = useSetLocaleMutation();
   const { i18n } = useTranslation();
+  const selectedLocale = useSelector((state: RootState) => state.user)?.locale;
   const isAuthenticated = useIsAuthenticated();
   const dispatch = useDispatch();
-  const newLanguageWeSaveAfterLogin = useRef<string>(null);
 
   return (locale: string) => {
     // Suppose a user is logged out, then they change their locale and then log in
     // We should not change their locale to what they had on the backend
-    if (!isAuthenticated) newLanguageWeSaveAfterLogin.current = locale;
-    if (isAuthenticated && !soft) save({ locale });
-    if (!isAuthenticated || !(newLanguageWeSaveAfterLogin.current && soft)) {
+    if (!isSavedLocale || !selectedLocale) {
+      dispatch(setLocale(locale));
       i18n.changeLanguage(locale);
-      dispatch(setUserLocale(locale));
+    }
+    if (isAuthenticated && !isSavedLocale) {
+      save({ locale });
+    } else if (isSavedLocale && locale !== selectedLocale && selectedLocale) {
+      // we do not check for isAuthenticated here because we know the user is authenticated because
+      // we come here with the saved locale.
+      // the isAuthenticated flag will be false though because we're ina  process of getting authenticated
+      save({ locale: selectedLocale });
     }
   };
 }
