@@ -65,7 +65,9 @@ const CommissionReferralSharing = ({
       <Box display={'flex'} gap='25px' mt='20px'>
         {!successFee ? (
           <Alert severity='warning'>
-            {t('edit.commission.increase-success-fee')}
+            <ZigTypography variant='body2'>
+              {t('edit.commission.increase-success-fee')}
+            </ZigTypography>
           </Alert>
         ) : (
           <>
