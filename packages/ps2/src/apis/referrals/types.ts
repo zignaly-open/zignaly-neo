@@ -94,7 +94,7 @@ export type ServiceCommission = {
 };
 
 export type ServiceCommissionPayload = {
-  service: string;
+  serviceId: string;
   commission: number;
 };
 
