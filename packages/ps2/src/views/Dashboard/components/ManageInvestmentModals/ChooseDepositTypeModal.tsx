@@ -15,6 +15,15 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { allowedDeposits } from '../../../../util/coins';
 import SwapCoinsConfirmForm from '../../../Balance/components/SwapCoinsModal/SwapCoinsConfirmForm';
 import { useOpenInvestDepositModal } from './InvestDepositModal';
+import { ZModalProps } from '../../../../components/ZModal/types';
+
+type ViewDefinition = Pick<
+  ZModalProps,
+  'title' | 'onGoBack' | 'mobileFullScreen'
+> & {
+  component: () => JSX.Element;
+  modalWidth?: number;
+};
 
 export function useDepositModalContent({
   coin,
@@ -60,13 +69,6 @@ export function useDepositModalContent({
       : setView(ChooseDepositTypeViews.ChooseDepositTypeView);
   }, [showSwap]);
   const openInvestModal = useOpenInvestDepositModal();
-
-  type ViewDefinition = {
-    title: string;
-    component: () => JSX.Element;
-    onGoBack?: () => void;
-    modalWidth?: number;
-  };
 
   const views: Record<ChooseDepositTypeViews, ViewDefinition> = {
     [ChooseDepositTypeViews.ChooseDepositTypeView]: {

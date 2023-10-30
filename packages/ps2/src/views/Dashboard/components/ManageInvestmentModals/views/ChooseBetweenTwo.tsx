@@ -1,7 +1,8 @@
 import React from 'react';
 import { ZigButton, ZigButtonProps, ZigTypography } from '@zignaly-open/ui';
-import { Box, Divider, Grid } from '@mui/material';
+import { Box, Divider, Grid, useMediaQuery } from '@mui/material';
 import { TypographyProps } from '@mui/system';
+import theme from '../../../../../theme';
 
 type ExtendedTypographyProps = TypographyProps & { id: string };
 export type ChooseBetweenTwoProps = {
@@ -38,6 +39,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
   leftOptionSize = 5,
   rightOptionSize = 5,
 }) => {
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
@@ -65,9 +67,9 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
                 }}
               >
                 <Box
+                  height={xs ? 50 : 90}
                   sx={{
                     textAlign: 'center',
-                    height: '90px',
                     paddingTop: '10px',
                     lineHeight: 2,
                   }}
@@ -83,6 +85,21 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
               </Box>
             )}
           </Grid>
+
+          {xs && (
+            <Box px={8} py={4} sx={{ width: '100%' }}>
+              <Divider
+                sx={{
+                  marginTop: 1,
+                  width: '100%',
+                  borderTop: `1px solid ${theme.palette.neutral500}`,
+                }}
+                orientation={'horizontal'}
+                flexItem
+                role={'presentation'}
+              />
+            </Box>
+          )}
 
           <Grid item container xs={false} md={1} justifyContent='center'>
             <Divider
@@ -100,7 +117,11 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
                   textAlign: 'center',
                 }}
               >
-                <Box textAlign={'center'} height={90} paddingTop={'10px'}>
+                <Box
+                  textAlign={'center'}
+                  height={xs ? 50 : 90}
+                  paddingTop={'10px'}
+                >
                   <ZigTypography variant={'h3'} {...(explainer2Props || {})}>
                     {explainer2}
                   </ZigTypography>
