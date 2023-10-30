@@ -7,6 +7,7 @@ import { useZModal } from '../../../../components/ZModal/use';
 import { Loader, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useAsync } from 'react-use';
+import { useDepositInfo } from 'apis/coin/use';
 
 function BuyModal({
   close,
@@ -19,6 +20,7 @@ function BuyModal({
 } & DepositModalProps &
   DialogProps): React.ReactElement {
   const { t } = useTranslation(['deposit-crypto']);
+  const { data: depositInfo } = useDepositInfo('USDT', 'TRX', true);
 
   const { value: currency } = useAsync(async () => {
     const response = await fetch('http://www.geoplugin.net/json.gp');
@@ -38,12 +40,14 @@ function BuyModal({
         {t('buy-crypto-description')}
       </ZigTypography>
       <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-        {currency ? (
+        {currency && depositInfo ? (
           <iframe
             width='100%'
             height='400px'
             allow='camera'
-            src={`https://widget.changelly.com/?from=*&to=usdtrx&amount=1000&address=TSHcvNgyZNMV77fuwZJjm6bNJ3pa6AqzHB&fromDefault=${currency.toLowerCase()}&toDefault=usdtrx&merchant_id=q0s68wsie1uf9wza&payment_id=&v=3`}
+            src={`https://widget.changelly.com/?from=*&to=usdtrx&amount=1000&address=${
+              depositInfo.address
+            }&fromDefault=${currency.toLowerCase()}&toDefault=usdtrx&merchant_id=q0s68wsie1uf9wza&payment_id=&v=3`}
           />
         ) : (
           <Loader width={24} height={24} />
