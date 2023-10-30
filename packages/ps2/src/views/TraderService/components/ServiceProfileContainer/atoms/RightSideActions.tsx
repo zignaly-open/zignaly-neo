@@ -94,6 +94,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
                 service={service}
                 id={'service-profile__invested'}
                 investedAmount={investedAmount.toString()}
+                showMultipleAccountButton
               />
             )
           ) : (
