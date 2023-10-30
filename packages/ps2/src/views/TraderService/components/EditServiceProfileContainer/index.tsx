@@ -51,7 +51,7 @@ const EditServiceProfileContainer: React.FC<{
     name: service.name,
     description: service.description,
     maximumSbt: service.maximumSbt,
-    successFee: service.successFee,
+    successFee: service.successFee || 0,
     logo: service.logo,
     ...(isFeatureOn(Features.Referrals) && { commission }),
   };
@@ -76,6 +76,7 @@ const EditServiceProfileContainer: React.FC<{
   );
   const navigate = useNavigate();
   const user = useCurrentUser();
+  const successFee = watch('successFee');
 
   const submit = async (data: EditServiceForm) => {
     const { commission: c, ...rest } = data;
@@ -227,7 +228,7 @@ const EditServiceProfileContainer: React.FC<{
                 control={control}
                 render={({ field }) => (
                   <SuccessFeeInputWrapper
-                    value={watch('successFee') || 0}
+                    value={successFee}
                     showZeroFeeExplainer
                   >
                     <ZigInput
@@ -252,7 +253,7 @@ const EditServiceProfileContainer: React.FC<{
                   control={control}
                   render={({ field }) => (
                     <CommissionReferralSharing
-                      successFee={service.successFee}
+                      successFee={successFee}
                       zglySuccessFee={service.zglySuccessFee}
                       {...field}
                     />

@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import { ZigButton, ZigSwitch, ZigTypography } from '@zignaly-open/ui';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -55,86 +55,101 @@ const CommissionReferralSharing = ({
         </ZigButton>
       </ZigTypography>
       <Box display={'flex'} gap='25px' mt='20px'>
-        <ZigSwitch
-          checked={enable}
-          onChange={(e) => {
-            setEnable(e.target.checked);
-            onChange({
-              ...e,
-              target: {
-                ...e.target,
-                value: e.target.checked ? ZIGNALY_PROFIT_FEE.toString() : '0',
-              },
-            });
-          }}
-        />
-        {enable && (
-          <Box display={'flex'}>
-            <SliderBox>
-              <ZigTypography
-                textAlign={'center'}
-                component={'div'}
-                variant='body2'
-                color={'neutral200'}
-              >
-                {t('edit.commission.max-success-fee')}
-              </ZigTypography>
+        {!successFee ? (
+          <Alert severity='warning'>
+            {t('edit.commission.increase-success-fee')}
+          </Alert>
+        ) : (
+          <>
+            <ZigSwitch
+              checked={enable}
+              onChange={(e) => {
+                setEnable(e.target.checked);
+                onChange({
+                  ...e,
+                  target: {
+                    ...e.target,
+                    value: e.target.checked
+                      ? ZIGNALY_PROFIT_FEE.toString()
+                      : '0',
+                  },
+                });
+              }}
+            />
+            {enable && (
               <Box display={'flex'}>
-                <BoostChip
-                  boost={getTraderBoost(min, zglySuccessFee)}
-                  showBolt
-                />
-                <StyledZigSlider
-                  min={min}
-                  max={max}
-                  value={value || ZIGNALY_PROFIT_FEE}
-                  prefixId={'service-edit__commission-slider'}
-                  onChange={(e) =>
-                    onChange(
-                      e as unknown as React.ChangeEvent<HTMLInputElement>,
-                    )
-                  }
-                  marks={false}
-                  valueLabelFormat={(v) => (
-                    <Box display='flex' alignItems={'center'} gap='2px'>
-                      <ZigTypographyValue>{v}</ZigTypographyValue>
-                      <Box
-                        display={'flex'}
-                        flexDirection={'column'}
-                        alignItems={'center'}
-                      >
-                        <BoltIcon width={3} height={8} />
-                        <ZigTypography fontSize={10} lineHeight={'14px'}>
-                          {currentBoost}
-                          {'x'}
-                        </ZigTypography>
-                      </Box>
-                    </Box>
-                  )}
-                  labelFormat={(v) => v.toString()}
-                  valueLabelDisplay='on'
-                />
-                <BoostChip
-                  boost={getTraderBoost(max, zglySuccessFee)}
-                  showBolt
-                />
+                <SliderBox>
+                  <ZigTypography
+                    textAlign={'center'}
+                    component={'div'}
+                    variant='body2'
+                    color={'neutral200'}
+                  >
+                    {t('edit.commission.max-success-fee')}
+                  </ZigTypography>
+                  <Box display={'flex'}>
+                    <BoostChip
+                      boost={getTraderBoost(min, zglySuccessFee)}
+                      showBolt
+                    />
+                    <StyledZigSlider
+                      min={min}
+                      max={max}
+                      value={value || ZIGNALY_PROFIT_FEE}
+                      prefixId={'service-edit__commission-slider'}
+                      onChange={(e) =>
+                        onChange(
+                          e as unknown as React.ChangeEvent<HTMLInputElement>,
+                        )
+                      }
+                      marks={false}
+                      valueLabelFormat={(v) => (
+                        <Box display='flex' alignItems={'center'} gap='2px'>
+                          <ZigTypographyValue>{v}</ZigTypographyValue>
+                          <Box
+                            display={'flex'}
+                            flexDirection={'column'}
+                            alignItems={'center'}
+                          >
+                            <BoltIcon width={3} height={8} />
+                            <ZigTypography fontSize={10} lineHeight={'14px'}>
+                              {currentBoost}
+                              {'x'}
+                            </ZigTypography>
+                          </Box>
+                        </Box>
+                      )}
+                      labelFormat={(v) => v.toString()}
+                      valueLabelDisplay='on'
+                    />
+                    <BoostChip
+                      boost={getTraderBoost(max, zglySuccessFee)}
+                      showBolt
+                    />
+                  </Box>
+                </SliderBox>
+                <Box
+                  display={'flex'}
+                  flexDirection={'column'}
+                  ml='27px'
+                  gap='4px'
+                >
+                  <ZigTypography
+                    variant='body2'
+                    textAlign={'center'}
+                    component={'div'}
+                    color={'neutral200'}
+                  >
+                    {t('edit.commission.promo-preview')}
+                  </ZigTypography>
+                  <CommissionPromo
+                    traderBoost={currentBoost}
+                    maxCommission={Math.round(50 * (1 + currentBoost))}
+                  />
+                </Box>
               </Box>
-            </SliderBox>
-            <Box display={'flex'} flexDirection={'column'} ml='27px' gap='4px'>
-              <ZigTypography
-                variant='body2'
-                textAlign={'center'}
-                component={'div'}
-                color={'neutral200'}
-              >
-                {t('edit.commission.promo-preview')}
-              </ZigTypography>
-              <CommissionPromo
-                traderBoost={currentBoost}
-                maxCommission={Math.round(50 * (1 + currentBoost))}
-              />
-            </Box>
-          </Box>
+            )}
+          </>
         )}
       </Box>
     </Box>
