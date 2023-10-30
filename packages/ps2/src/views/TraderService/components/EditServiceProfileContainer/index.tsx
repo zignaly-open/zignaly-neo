@@ -88,7 +88,7 @@ const EditServiceProfileContainer: React.FC<{
       ...(isFeatureOn(Features.Referrals)
         ? [
             updateCommission({
-              service: service.id,
+              serviceId: service.id,
               commission: c || 0,
             }),
           ]
