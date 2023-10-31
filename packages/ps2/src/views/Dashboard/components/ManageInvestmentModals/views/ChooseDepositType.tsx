@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
 import ChooseBetweenTwo from './ChooseBetweenTwo';
+import { useTheme } from '@mui/material';
 
 const ChooseDepositType: React.FC<{
   coin: string;
   setView: (view: ChooseDepositTypeViews) => void;
 }> = ({ coin, setView }) => {
   const { t } = useTranslation('deposit-crypto');
+  const theme = useTheme();
   return (
     <>
       <ChooseBetweenTwo
@@ -28,7 +30,7 @@ const ChooseDepositType: React.FC<{
             <ZigArrowOutIcon
               width={'9px'}
               height={'9px'}
-              style={{ marginBottom: '4px' }}
+              style={{ marginBottom: '4px', fill: theme.palette.neutral100 }}
             />
           ),
           sx: { padding: '8px 20px' },

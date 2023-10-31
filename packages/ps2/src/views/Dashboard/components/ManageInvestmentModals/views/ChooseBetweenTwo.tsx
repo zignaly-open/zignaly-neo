@@ -39,7 +39,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
   leftOptionSize = 5,
   rightOptionSize = 5,
 }) => {
-  const xs = useMediaQuery(theme.breakpoints.down('sm'));
+  const sm = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
@@ -67,7 +67,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
                 }}
               >
                 <Box
-                  height={xs ? 50 : 90}
+                  height={sm ? 50 : 90}
                   sx={{
                     textAlign: 'center',
                     paddingTop: '10px',
@@ -86,7 +86,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
             )}
           </Grid>
 
-          {xs && (
+          {sm && (
             <Box px={8} py={4} sx={{ width: '100%' }}>
               <Divider
                 sx={{
@@ -119,7 +119,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
               >
                 <Box
                   textAlign={'center'}
-                  height={xs ? 50 : 90}
+                  height={sm ? 50 : 90}
                   paddingTop={'10px'}
                 >
                   <ZigTypography variant={'h3'} {...(explainer2Props || {})}>
