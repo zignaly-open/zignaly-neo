@@ -141,10 +141,14 @@ const SwapCoinsConfirmForm = ({
           mt: '25px',
         }}
       >
-        <ZigTypography variant={sm ? 'h1' : 'h2'}>
+        <ZigTypography
+          variant={sm ? 'h1' : 'h2'}
+          id={'swap-coins-confirm-modal__receive-label'}
+        >
           {t('confirmation.receive')}
         </ZigTypography>
         <ZigPriceLabel
+          id={'swap-coins-confirm-modal__receive'}
           showTooltip={false}
           variant={'h1'}
           coinProps={{ variant: 'h2' }}
@@ -155,7 +159,7 @@ const SwapCoinsConfirmForm = ({
 
       <ModalActions>
         <ZigButton
-          id={'withdraw-modal-confirmation__confirm-withdraw'}
+          id={'swap-coins-confirm-modal__confirm-swap'}
           onClick={handleConvert}
           variant='contained'
           size='xlarge'
