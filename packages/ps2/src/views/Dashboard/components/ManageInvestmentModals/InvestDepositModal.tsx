@@ -17,6 +17,7 @@ import { track } from '@zignaly-open/tracker';
 import { useCanInvestIn } from '../../../../util/walls/util';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import theme from '../../../../theme';
+import { useCoinBalances } from '../../../../apis/coin/use';
 
 function InvestDepositModal({
   serviceId,
@@ -43,12 +44,20 @@ function InvestDepositModal({
     isFetching: isLoadingBalance,
     refetch: refetchBalance,
   } = useCurrentBalance(service?.ssc);
+  const { data: coinBalances, isLoading: isLoadingCoinBalances } =
+    useCoinBalances({
+      convert: true,
+    });
 
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
   const selectedInvestment = useSelectedInvestment();
   // we need this only once
   const loading =
-    isLoadingService || isLoadingBalance || isFetching || !selectedInvestment;
+    isLoadingService ||
+    isLoadingBalance ||
+    isFetching ||
+    !selectedInvestment ||
+    isLoadingCoinBalances;
   const [ready, setReady] = useState(!loading);
   useEffect(() => {
     setReady((r) => !loading || r);
@@ -70,6 +79,8 @@ function InvestDepositModal({
     coin: service?.ssc,
     refetchBalance,
     serviceId,
+    balances: coinBalances,
+    isLoadingBalances: isLoadingCoinBalances,
     close: trackAwareClose,
   });
   const investModal = useInvestModalContent({ close: trackAwareClose });
@@ -106,6 +117,7 @@ function InvestDepositModal({
       close={trackAwareClose}
       isLoading={!ready}
       wide
+      mobileFullScreen
       width={modalWidth}
     >
       <Box paddingX={!showDeposit && !(xs && rest.mobileFullScreen) && '30px'}>

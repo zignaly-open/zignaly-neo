@@ -72,6 +72,7 @@ export const Separator = styled('span')`
 export const InvestButtonContainer = styled('div')`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
+  min-width: 170px;
   align-items: center;
   padding: 15px 25px;
   position: relative;
@@ -81,6 +82,9 @@ export const InvestButtonContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.xl}px) {
+    padding: 15px 5px;
+  }
 `;
 
 export const TopDivider = styled(Divider)`
@@ -196,7 +200,7 @@ export const RightSideActionWrapper = styled(Box)<{
     bottom: ${({ isAuthenticated }) => (isAuthenticated ? '56px' : '0')};
     left: 0;
     align-items: flex-start;
-    height: 95px;
+    height: 85px;
     min-height: unset;
     width: 100%;
     padding: 10px 3px 5px 3px;

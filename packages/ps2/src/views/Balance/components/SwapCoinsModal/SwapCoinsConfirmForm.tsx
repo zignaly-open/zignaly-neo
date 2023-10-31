@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, Grid } from '@mui/material';
+import { Box, Divider, Grid, useMediaQuery } from '@mui/material';
 import {
   ZigButton,
   ZigPriceLabel,
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { SwapCoinsConfirmFormProps } from './types';
 import { useToast } from '../../../../util/hooks/useToast';
 import { useConvertMutation } from '../../../../apis/coin/api';
+import theme from '../../../../theme';
 
 const SwapCoinsConfirmForm = ({
   toCoin,
@@ -24,6 +25,7 @@ const SwapCoinsConfirmForm = ({
   internalId,
 }: SwapCoinsConfirmFormProps) => {
   const { t } = useTranslation('swap-coins');
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const [convert, convertStatus] = useConvertMutation();
   const handleConvert = () =>
     convert({
@@ -47,15 +49,16 @@ const SwapCoinsConfirmForm = ({
           display: 'flex',
           width: '100%',
           justifyContent: 'center',
-          gap: 3,
+          gap: sm ? 3 : 1,
+          flexDirection: sm ? 'row' : 'column',
           alignItems: 'center',
           mt: '5px',
         }}
       >
         <Box>
           <ZigTypography
-            variant={'h2'}
-            mb={'12px'}
+            variant={sm ? 'h2' : 'h3'}
+            mb={sm ? 1.5 : 0.5}
             id={'swap-coins-confirm-modal__from-label'}
           >
             {t('confirmation.from')}
@@ -71,13 +74,13 @@ const SwapCoinsConfirmForm = ({
           />
         </Box>
 
-        <Box mt={'25px'}>
+        <Box mt={sm ? 3 : 0} height={sm ? undefined : '35px'} mb={sm ? 0 : -1}>
           <ZigSwapCircleIcon width={'35px'} height={'35px'} />
         </Box>
         <Box>
           <ZigTypography
-            variant={'h2'}
-            mb={'12px'}
+            variant={sm ? 'h2' : 'h3'}
+            mb={sm ? 1.5 : 0.5}
             id={'swap-coins-confirm-modal__to-label'}
           >
             {t('confirmation.to')}
@@ -93,10 +96,17 @@ const SwapCoinsConfirmForm = ({
           />
         </Box>
       </Box>
+
       <Divider
-        sx={{ border: '1px dotted #35334A', width: '100%', mb: '25px' }}
+        sx={{
+          border: '1px dotted #35334A',
+          width: '100%',
+          mb: 3,
+          mt: sm ? 0 : 2,
+        }}
       />
-      <Box display={'flex'}>
+
+      <Box display={'flex'} textAlign={sm ? 'left' : 'center'}>
         <ZigTypography
           variant={'body1'}
           mr={'10px'}
@@ -125,16 +135,16 @@ const SwapCoinsConfirmForm = ({
           padding: '25px',
           justifyContent: 'center',
           alignItems: 'center',
+          flexDirection: sm ? 'row' : 'column',
           gap: '10px',
           backgroundColor: '#0c0d1d',
           mt: '25px',
         }}
       >
-        <ZigTypography variant={'h1'}>
+        <ZigTypography variant={sm ? 'h1' : 'h2'}>
           {t('confirmation.receive')}
         </ZigTypography>
         <ZigPriceLabel
-          exact
           showTooltip={false}
           variant={'h1'}
           coinProps={{ variant: 'h2' }}

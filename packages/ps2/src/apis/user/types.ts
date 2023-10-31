@@ -4,6 +4,7 @@ export interface UserState {
   accessToken?: string;
   sessionExpiryDate?: Date;
   user?: UserData;
+  locale?: string;
   activeExchangeInternalId?: string;
 }
 
