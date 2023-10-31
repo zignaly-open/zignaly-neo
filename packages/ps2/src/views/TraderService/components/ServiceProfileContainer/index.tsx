@@ -59,6 +59,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
               <ServiceInfoWrapper>
                 <ServicePercentageInfo
                   id={'service-profile__pnl30t'}
+                  priceLabelSx={{ fontSize: '18px', lineHeight: '28px' }}
                   title={t('marketplace:table.n-months', { count: 1 })}
                   value={service.pnlSsc30t}
                   percent={service.pnlPercent30t}
