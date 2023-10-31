@@ -151,6 +151,16 @@ export enum SessionsTypes {
 export type ExtendedExchange = Exchange & { image: string };
 
 export type UserBalance = {
-  totalBTC: number;
-  totalUSDT: number;
+  totalFreeBTC: number;
+  totalFreeUSDT: number;
+  totalLockedBTC: number;
+  totalLockedUSDT: number;
+  totalPnlBTC: number;
+  totalPnlUSDT: number;
+  totalWalletBTC: number;
+  totalWalletUSDT: number;
+  totalUnrealizedProfitBTC: number;
+  totalUnrealizedProfitUSDT: number;
+  totalMarginBTC: number;
+  totalMarginUSDT: number;
 };
