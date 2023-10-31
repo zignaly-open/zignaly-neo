@@ -238,6 +238,9 @@ export const ServiceInfoWrapper = styled(Box)`
   justify-content: center;
   display: flex;
   flex-direction: column;
+  & > :first-child {
+    margin-bottom: 0;
+  }
 `;
 
 export const SqueezedButtonGroupWrapper = styled(Box)`
