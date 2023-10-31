@@ -251,7 +251,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     async onQueryStarted(_, { dispatch, queryFulfilled }) {
       const { data } = await queryFulfilled;
       // Invalidate assets if USD balance changed
-      const usdBalance = (data as UserBalance)?.totalUSDT;
+      const usdBalance = (data as UserBalance)?.totalFreeUSDT;
       if (lastUsdBalance && usdBalance !== lastUsdBalance) {
         dispatch(api.util.invalidateTags(['Assets']));
       }

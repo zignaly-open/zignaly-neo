@@ -43,7 +43,7 @@ const BalanceButton = () => {
     if (!investments || !balance) return null;
 
     if (!investedAmount) {
-      return +balance.totalUSDT
+      return +balance.totalFreeUSDT
         ? BalanceStatus.NoInvestments
         : BalanceStatus.NoFunds;
     }
@@ -135,7 +135,7 @@ const BalanceButton = () => {
               <ZigPriceLabel
                 id='top-widget__available-amount'
                 usd
-                value={balance.totalUSDT}
+                value={balance.totalFreeUSDT}
                 color='neutral100'
                 variant='body2'
                 fontSize='11px'
