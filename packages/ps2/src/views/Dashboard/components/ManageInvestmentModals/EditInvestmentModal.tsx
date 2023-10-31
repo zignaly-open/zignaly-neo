@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EditInvestmentViews } from './types';
 import { DialogProps } from '@mui/material/Dialog';
@@ -50,36 +50,36 @@ function EditInvestmentModal({
   const { t } = useTranslation(['edit-investment']);
   usePrefetchTranslation('withdraw');
 
-  const views = useMemo(() => {
-    return {
-      [EditInvestmentViews.WithdrawInvestment]: {
-        title: t('withdrawal-request'),
-        component: WithdrawInvestment,
-      },
-      [EditInvestmentViews.WithdrawSuccess]: {
-        title: t('withdrawal-success.title'),
-        component: WithdrawModalSuccess,
-      },
-      [EditInvestmentViews.WithdrawPerform]: {
-        title: t('withdrawal-request'),
-        component: WithdrawWithdrawInvestmentSuccessPerform,
-      },
-      [EditInvestmentViews.PendingTransactions]: {
-        title: t('modal.pendingTransaction.title'),
-        component: PendingTransactionsList,
-      },
-      [EditInvestmentViews.EditInvestment]: {
-        title: t('modal.editInvestments.title'),
-        component: EditInvestment,
-      },
-      [EditInvestmentViews.EditInvestmentSuccess]: {
-        title: t('modalSuccess.title'),
-        component: EditInvestmentSuccess,
-      },
-    };
-  }, [setView, close]);
+  const views = {
+    [EditInvestmentViews.WithdrawInvestment]: {
+      title: t('withdrawal-request'),
+      component: () => <WithdrawInvestment setView={setView} />,
+    },
+    [EditInvestmentViews.WithdrawSuccess]: {
+      title: t('withdrawal-success.title'),
+      component: () => <WithdrawModalSuccess close={close} />,
+    },
+    [EditInvestmentViews.WithdrawPerform]: {
+      title: t('withdrawal-request'),
+      component: () => (
+        <WithdrawWithdrawInvestmentSuccessPerform setView={setView} />
+      ),
+    },
+    [EditInvestmentViews.PendingTransactions]: {
+      title: t('modal.pendingTransaction.title'),
+      component: () => <PendingTransactionsList setView={setView} />,
+    },
+    [EditInvestmentViews.EditInvestment]: {
+      title: t('modal.editInvestments.title'),
+      component: () => <EditInvestment setView={setView} close={close} />,
+    },
+    [EditInvestmentViews.EditInvestmentSuccess]: {
+      title: t('modalSuccess.title'),
+      component: () => <EditInvestmentSuccess close={close} />,
+    },
+  };
 
-  const { title, component: Component } =
+  const { title, component } =
     views[view in views ? view : EditInvestmentViews.EditInvestment];
 
   const isLoading =
@@ -110,9 +110,7 @@ function EditInvestmentModal({
       isLoading={isLoading}
     >
       <Box paddingX={xs ? 0 : '30px'}>
-        {!isLoading && !isError && (
-          <Component close={close} setView={setView} />
-        )}
+        {!isLoading && !isError && component()}
         {isError && <CriticalError />}
       </Box>
     </ZModal>
