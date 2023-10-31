@@ -30,10 +30,8 @@ const CommissionReferralSharing = ({
   const [enable, setEnable] = useState(value > 0);
   const min = ZIGNALY_PROFIT_FEE;
   const max = successFee - zglySuccessFee;
-  const currentBoost = getTraderBoost(
-    value || ZIGNALY_PROFIT_FEE,
-    zglySuccessFee,
-  );
+  const currentBoost =
+    1 + getTraderBoost(value || ZIGNALY_PROFIT_FEE, zglySuccessFee);
 
   useEffect(() => {
     if (!successFee || !enable) {
@@ -95,7 +93,7 @@ const CommissionReferralSharing = ({
                     </ZigTypography>
                     <Box display={'flex'}>
                       <BoostChip
-                        boost={getTraderBoost(min, zglySuccessFee)}
+                        boost={1 + getTraderBoost(min, zglySuccessFee)}
                         showBolt
                       />
                       <StyledZigSlider
@@ -125,7 +123,7 @@ const CommissionReferralSharing = ({
                         valueLabelDisplay='on'
                       />
                       <BoostChip
-                        boost={getTraderBoost(max, zglySuccessFee)}
+                        boost={1 + getTraderBoost(max, zglySuccessFee)}
                         showBolt
                       />
                     </Box>
@@ -147,7 +145,7 @@ const CommissionReferralSharing = ({
                   </ZigTypography>
                   <CommissionPromo
                     traderBoost={currentBoost}
-                    maxCommission={Math.round(50 * (1 + currentBoost))}
+                    maxCommission={Math.round(100 * currentBoost)}
                   />
                 </Box>
               </Box>
