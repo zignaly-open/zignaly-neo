@@ -42,7 +42,7 @@ import { getImageOfAccount } from '../../../util/images';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
-import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
+import { usePrefetchTranslation } from '../../../util/i18n/i18nextHelpers';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 

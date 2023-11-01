@@ -47,8 +47,8 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
 } from 'routes';
 import theme from 'theme';
-import { supportedLanguages } from 'util/i18next';
-import { LocalizationLanguages } from 'util/languages';
+import { supportedLanguages } from 'util/i18n/i18next';
+import { LocalizationLanguages } from 'util/i18n/languages';
 import socialNetworksLinks from 'util/socialNetworks';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DrawerMenuItem, DropdownExchangeAccount } from './atoms';

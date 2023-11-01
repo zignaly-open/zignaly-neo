@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
-import i18n from 'util/i18next';
+import i18n from 'util/i18n/i18next';
 import * as yup from 'yup';
 import { inputAmountValidation } from 'util/validation';
 

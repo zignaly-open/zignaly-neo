@@ -9,7 +9,10 @@ import googleAnalytics from '@analytics/google-analytics';
 
 let analytics: AnalyticsInstance | null = null;
 
-if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
+if (
+  process.env.NODE_ENV !== 'test' &&
+  process.env.REACT_APP_ENABLE_TRACKING === 'true'
+) {
   const customerIoPlugin = customerIo({
     siteId: process.env.REACT_APP_CUSTOMER_IO_SITE_ID,
   });
