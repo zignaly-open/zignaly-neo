@@ -10,7 +10,7 @@ import { useDepositInfo } from 'apis/coin/use';
 
 function useCurrency() {
   const { value: currency } = useAsync(async () => {
-    const response = await fetch('http://www.geoplugin.net/json.gp');
+    const response = await fetch('https://www.geoplugin.net/json.gp');
     const data = await response.json();
     return data.geoplugin_currencyCode;
   }, []);
