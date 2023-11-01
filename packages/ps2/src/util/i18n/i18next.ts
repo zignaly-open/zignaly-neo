@@ -17,7 +17,7 @@ import dateLocaleRu from 'date-fns/locale/ru';
 import dateLocaleVi from 'date-fns/locale/vi';
 
 import HttpBackend from 'i18next-http-backend';
-import { whitelabel } from '../whitelabel';
+import { whitelabel } from '../../whitelabel';
 
 Countries.registerLocale(CountriesEn);
 Countries.registerLocale(CountriesPt);

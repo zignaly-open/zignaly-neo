@@ -25,7 +25,7 @@ import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
 import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
-import I18NextWhitelabelTranslationOverrideLoader from './util/i18nextWhitelabel';
+import I18NextWhitelabelTranslationOverrideLoader from './util/i18n/i18nextWhitelabel';
 
 if (
   process.env.NODE_ENV === 'production' &&

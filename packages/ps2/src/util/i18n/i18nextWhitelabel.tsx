@@ -1,6 +1,6 @@
 import i18n from './i18next';
 import React, { PropsWithChildren } from 'react';
-import { whitelabel, whitelabelName } from '../whitelabel';
+import { whitelabel, whitelabelName } from '../../whitelabel';
 
 let overrides: Record<string, Record<string, Record<string, string>>> | null =
   null;

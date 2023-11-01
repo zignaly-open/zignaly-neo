@@ -16,7 +16,7 @@ import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
-import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
+import { usePrefetchTranslation } from '../../../../util/i18n/i18nextHelpers';
 import { Box, useMediaQuery } from '@mui/material';
 import theme from '../../../../theme';
 
