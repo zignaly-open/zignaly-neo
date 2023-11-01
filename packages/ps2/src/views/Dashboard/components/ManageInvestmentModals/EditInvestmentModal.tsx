@@ -19,6 +19,7 @@ import ZModal from '../../../../components/ZModal';
 import { usePrefetchTranslation } from '../../../../util/i18n/i18nextHelpers';
 import { Box, useMediaQuery } from '@mui/material';
 import theme from '../../../../theme';
+import CriticalError from '../../../../components/Stub/CriticalError';
 
 function EditInvestmentModal({
   close,
@@ -28,14 +29,19 @@ function EditInvestmentModal({
   close: () => void;
   serviceId: string;
 } & DialogProps): React.ReactElement {
-  const { isLoading: isLoadingInvestment } = useInvestmentDetails(serviceId);
-  const { isLoading: isLoadingService, data: service } =
-    useServiceDetails(serviceId);
+  const { isLoading: isLoadingInvestment, isError: isErrorLoadingInvestment } =
+    useInvestmentDetails(serviceId);
+  const {
+    isLoading: isLoadingService,
+    isError: isErrorLoadingService,
+    data: service,
+  } = useServiceDetails(serviceId);
   const xs = useMediaQuery(theme.breakpoints.down('sm'));
   useSelectInvestment(service);
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
   const selectedInvestment = useSelectedInvestment();
-  const { isLoading: isLoadingCoins } = useCoinBalances();
+  const { isLoading: isLoadingCoins, isError: isErrorLoadingCoins } =
+    useCoinBalances();
 
   const [view, setView] = useState<EditInvestmentViews>(
     EditInvestmentViews.EditInvestment,
@@ -82,6 +88,9 @@ function EditInvestmentModal({
     isLoadingCoins ||
     !selectedInvestment;
 
+  const isError =
+    isErrorLoadingInvestment || isErrorLoadingService || isErrorLoadingCoins;
+
   return (
     <ZModal
       mobileFullScreen
@@ -100,7 +109,10 @@ function EditInvestmentModal({
       }
       isLoading={isLoading}
     >
-      <Box paddingX={xs ? 0 : '30px'}>{!isLoading && component()}</Box>
+      <Box paddingX={xs ? 0 : '30px'}>
+        {!isLoading && !isError && component()}
+        {isError && <CriticalError />}
+      </Box>
     </ZModal>
   );
 }

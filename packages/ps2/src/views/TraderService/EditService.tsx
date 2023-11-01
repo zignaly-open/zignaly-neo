@@ -42,9 +42,8 @@ const EditService: React.FC = () => {
         ]}
         unmountOnRefetch
         error={(error: BackendError) => {
-          if (error?.data?.error.code === ErrorCodes.NoSuchService)
+          if (error?.data?.error?.code === ErrorCodes.NoSuchService)
             return <Navigate to={ROUTE_404} />;
-
           return <CriticalError />;
         }}
         content={([service, commission]: [Service, ServiceCommission]) => (
