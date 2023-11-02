@@ -54,6 +54,7 @@ jobs:
           envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
           envkey_REACT_APP_INTERCOM_APP_ID: ${{ vars.INTERCOM_APP_ID }}
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ vars.LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_IPGEOLOCATION_API_KEY: ${{ vars.IPGEOLOCATION_API_KEY }}
 
           directory: packages/ps2
           file_name: .env
