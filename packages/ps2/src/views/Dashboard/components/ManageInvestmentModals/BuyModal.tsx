@@ -26,13 +26,7 @@ function BuyModal(props: DialogProps): React.ReactElement {
   const currency = useCurrency();
 
   return (
-    <ZModal
-      mobileFullScreen
-      wide
-      {...props}
-      close={close}
-      title={t('buy-crypto')}
-    >
+    <ZModal mobileFullScreen wide {...props} title={t('buy-crypto')}>
       <ZigTypography id={'buy-modal__description'} textAlign='center'>
         {t('buy-crypto-description')}
       </ZigTypography>
