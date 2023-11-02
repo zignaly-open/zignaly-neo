@@ -34,12 +34,16 @@ export const useSingleInvestment = (serviceId: string): Investment => {
 
 export function useInvestmentDetails(
   serviceId: string,
+  options?: { skip: boolean },
 ): QueryReturnType<InvestmentDetails> {
   const exchange = useActiveExchange();
-  return useInvestmentDetailsQuery({
-    exchangeInternalId: exchange?.internalId,
-    serviceId,
-  });
+  return useInvestmentDetailsQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+      serviceId,
+    },
+    options,
+  );
 }
 
 export function useSelectInvestment(
