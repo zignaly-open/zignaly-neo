@@ -66,8 +66,8 @@ export const TRANSACTION_TYPE = {
   DEPOSIT: 'deposit',
   // Withdrawal from a Zignaly exchange account to an external address
   WITHDRAW: 'withdrawal',
-  // Referral reward
-  REWARD: 'referral',
+  // Referral
+  REFERRAL: 'referral',
   // Investment in a PS1 service
   PS_DEPOSIT: 'psDeposit',
   // Investment out from a PS1 service
@@ -80,6 +80,10 @@ export const TRANSACTION_TYPE = {
   BUYZIG: 'buyZig',
   // In PS1 transfers when the trader receives his success fee
   SUCCESS_FEE: 'psSuccessFee',
+  // Reward payment
+  REWARD: 'reward',
+  // Refund
+  VOUCHER_REFUND: 'voucher refund',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER: 'user',
 };
