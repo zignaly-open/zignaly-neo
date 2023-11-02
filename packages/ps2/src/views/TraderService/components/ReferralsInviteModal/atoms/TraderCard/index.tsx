@@ -4,7 +4,7 @@ import { Service } from 'apis/service/types';
 import { t } from 'i18next';
 import React from 'react';
 import { getServiceLogo } from 'util/images';
-import { CardBox, CommissionBoostChip } from './styles';
+import { CardBox, CommissionBoostChip, TypographyName } from './styles';
 import ServiceBoostChip from '../ServiceBoostChip';
 
 const TraderCard = ({
@@ -30,23 +30,15 @@ const TraderCard = ({
           <ServiceBoostChip boost={traderBoost + 1} />
         </CommissionBoostChip>
       )}
-      <ZigTypography
+      <TypographyName
         variant='h1'
         fontWeight='500'
         textAlign={'center'}
         lineHeight={'28px'}
-        sx={{
-          display: '-webkit-box',
-          overflow: 'hidden',
-          textOverflow: 'clip',
-          WebkitLineClamp: 2,
-          lineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-        }}
         id='referrals-invite-modal__service-name'
       >
         {service.name}
-      </ZigTypography>
+      </TypographyName>
       <Box
         position={'relative'}
         display={'flex'}
