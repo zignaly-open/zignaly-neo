@@ -23,6 +23,7 @@ export type WhitelabelOverride = {
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;
   logo?: string;
+  headContent?: string;
   background?: string;
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;

@@ -1,11 +1,15 @@
 import * as clients from './configs';
-import { Features, OverrideableEndpoints } from './type';
+import { Features, OverrideableEndpoints, WhitelabelOverride } from './type';
 import defaultFeatureState from './default';
 
 const { REACT_APP_WHITELABEL: whitelabelName } = process.env;
 
 export const whitelabel =
-  (whitelabelName && clients[whitelabelName]) || clients.zignaly;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  (window.zignalyWhitelabelConfig as unknown as WhitelabelOverride) ||
+  (whitelabelName && clients[whitelabelName]) ||
+  clients.zignaly;
 
 export { whitelabelName };
 
