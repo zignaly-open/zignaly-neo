@@ -84,6 +84,8 @@ export const TRANSACTION_TYPE = {
   REWARD: 'reward',
   // Refund
   VOUCHER_REFUND: 'voucher refund',
+  // System tx by us to fix something,
+  SYSTEM: 'system',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER: 'user',
 };
