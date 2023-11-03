@@ -2,40 +2,45 @@
 <html lang="en" translate="no">
 <head>
     <meta charset="utf-8"/>
-
-    <link rel="shortcut icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/images/whitelabel/freedom/favicon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/images/whitelabel/freedom/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/images/whitelabel/freedom/favicon.png">
-
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#ffffff">
-
     <% if (process.env.REACT_APP_NO_INDEX === 'true') { %>
-    <meta name="robots" content="noindex">
-    <meta name="googlebot" content="noindex">
+      <meta name="robots" content="noindex">
+      <meta name="googlebot" content="noindex">
     <% } %>
 
-
-    <meta name="description" content="Dive into Obsidian Freedom, an invite-only group dedicated to empowering individuals with a passion for impact. Here, we lay the foundation for distributing freedom to those driven by purpose.">
+    <meta name="description" content="Discover the best traders available to invest through Zignaly's Profit Sharing">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://freedom.wl.zignaly.com/profit-sharing">
+    <meta property="og:url" content="https://app.zignaly.com/profit-sharing">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Obsidian Freedom: Exclusive Club for Purpose-Driven Change-Makers">
-    <meta property="og:description" content="Dive into Obsidian Freedom, an invite-only group dedicated to empowering individuals with a passion for impact. Here, we lay the foundation for distributing freedom to those driven by purpose.">
-    <meta property="og:image:alt" content="freedom.wl.zignaly.com"/>
+    <meta property="og:title" content="Discover the best traders on Zignaly">
+    <meta property="og:description" content="Discover the best traders available to invest through Zignaly's Profit Sharing">
+    <meta property="og:image" content="https://app.zignaly.com/images/zignaly-social.png">
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content="zignaly.com"/>
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="freedom.wl.zignaly.com">
-    <meta property="twitter:url" content="https://freedom.wl.zignaly.com/profit-sharing">
-    <meta name="twitter:title" content="Obsidian Freedom: Exclusive Club for Purpose-Driven Change-Makers">
-    <meta name="twitter:description" content="Dive into Obsidian Freedom, an invite-only group dedicated to empowering individuals with a passion for impact. Here, we lay the foundation for distributing freedom to those driven by purpose.">
+    <meta property="twitter:domain" content="zignaly.com">
+    <meta property="twitter:url" content="https://app.zignaly.com/profit-sharing">
+    <meta name="twitter:title" content="Discover the best traders on Zignaly">
+    <meta name="twitter:description" content="Discover the best traders available to invest through Zignaly's Profit Sharing">
+    <meta name="twitter:image" content="https://app.zignaly.com/images/zignaly-social.png">
+    <meta name="twitter:site" content="@zignaly">
 
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <link rel="manifest" href="%PUBLIC_URL%/whitelabel/criptomaniacos.json"/>
-
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -45,7 +50,18 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Obsitian Freedom</title>
+    <title>Zignaly</title>
+    <% if (process.env.REACT_APP_ENABLE_TRACKING === 'true') { %>
+    <!-- Twitter conversion tracking base code -->
+    <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    twq('config','og0cu');
+    </script>
+    <!-- End Twitter conversion tracking base code -->
+    <% } %>
+
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
