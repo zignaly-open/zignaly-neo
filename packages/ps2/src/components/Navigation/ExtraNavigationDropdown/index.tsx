@@ -8,7 +8,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { GlobeLanguagesStyled, LabelButton, NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
-import { supportedLanguages } from '../../../util/i18next';
+import { supportedLanguages } from '../../../util/i18n/i18next';
 import { useChangeLocale, useIsAuthenticated } from '../../../apis/user/use';
 import {
   useFirstOwnedService,
@@ -19,7 +19,7 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import { LocalizationLanguages } from '../../../util/languages';
+import { LocalizationLanguages } from '../../../util/i18n/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
 import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
 import { whitelabel } from '../../../whitelabel';

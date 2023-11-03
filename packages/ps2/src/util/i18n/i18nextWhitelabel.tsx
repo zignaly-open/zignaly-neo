@@ -1,6 +1,6 @@
 import i18n from './i18next';
 import React, { PropsWithChildren } from 'react';
-import { whitelabel, whitelabelName } from '../whitelabel';
+import { whitelabel, whitelabelName } from '../../whitelabel';
 
 let overrides: Record<string, Record<string, Record<string, string>>> | null =
   null;
@@ -11,16 +11,16 @@ let loaderPromise: Promise<unknown> | null = null;
 // @ts-ignore
 type TranslationRecord = Record<string, string | TranslationRecord>;
 
-function flattenOverrideObject(
+export function flattenOverrideObject(
   obj: TranslationRecord,
   prefix = '',
+  result = {} as Record<string, string>,
 ): Record<string, string> {
-  const result: Record<string, string> = {};
   for (const [key, value] of Object.entries(obj)) {
     if (typeof value === 'string') {
-      result[key] = value;
+      result[prefix + key] = value;
     } else {
-      Object.assign(result, flattenOverrideObject(value, `${prefix}${key}.`));
+      flattenOverrideObject(value, `${prefix}${key}.`, result);
     }
   }
   return result;

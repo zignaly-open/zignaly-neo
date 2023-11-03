@@ -29,7 +29,6 @@ export function useInvestModalContent({
   useUpdateEffect(() => {
     track({
       hash: {
-        [InvestmentViews.InvestmentConfirm]: 'invest-confirm',
         [InvestmentViews.Investment]: 'invest',
         [InvestmentViews.InvestmentSuccess]: 'invest-success',
       }[view],
@@ -43,10 +42,6 @@ export function useInvestModalContent({
         ? 'modalSuccess.title'
         : 'invest-modal.invest-with',
     ),
-    onGoBack:
-      view === InvestmentViews.InvestmentConfirm
-        ? () => setView(InvestmentViews.Investment)
-        : undefined,
     view,
     mobileFullScreen: true,
     component: () =>

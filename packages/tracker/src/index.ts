@@ -15,7 +15,11 @@ const sendTz = (data: tzData) => {
     },
   };
 
-  return fetch('https://zignaly.com/new_api/tz', options);
+  return fetch(
+    process.env.REACT_APP_TZ_TRACKER_ENDPOINT ||
+      'https://zignaly.com/new_api/tz',
+    options,
+  );
 };
 
 /**

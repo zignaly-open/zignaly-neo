@@ -16,6 +16,7 @@ import { Features } from '../../../../../whitelabel/type';
 import InviteButton from './InviteButton';
 import { useTiersData } from 'apis/referrals/use';
 import { Trans, useTranslation } from 'react-i18next';
+import { usePrefetchTranslation } from 'util/i18n/i18nextHelpers';
 
 enum RightSideActionStates {
   Loading,
@@ -31,6 +32,11 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('service');
+  usePrefetchTranslation([
+    ...(isFeatureOn(Features.Referrals) && ['referrals-trader']),
+    'edit-investment',
+    'deposit-crypto',
+  ]);
   const tiers = useTiersData(service.id);
   const state = useMemo<RightSideActionStates>(() => {
     if (isInvested.isLoading || tiers.isLoading)
@@ -79,7 +85,8 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         <Box
           display='flex'
           gap={3}
-          alignItems={'center'}
+          alignItems={sm ? 'center' : 'flex-start'}
+          justifyContent={'center'}
           flexWrap={lg || !sm ? 'nowrap' : 'wrap'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
@@ -89,19 +96,24 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
             sm ? (
               <InvestedButton prefixId={'service-profile'} service={service} />
             ) : (
-              <MobileInvestedButton
-                serviceId={service?.id}
-                id={'service-profile__invested'}
-                investedAmount={investedAmount.toString()}
-              />
+              <Box mt={'2px'}>
+                <MobileInvestedButton
+                  service={service}
+                  id={'service-profile__invested'}
+                  investedAmount={investedAmount.toString()}
+                  showMultipleAccountButton
+                />
+              </Box>
             )
           ) : (
-            <InvestButton
-              modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
-              prefixId={'service-profile'}
-              showMultipleAccountButton
-              service={service}
-            />
+            <Box mt={!sm && '2px'}>
+              <InvestButton
+                modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+                prefixId={'service-profile'}
+                showMultipleAccountButton
+                service={service}
+              />
+            </Box>
           )}
         </Box>
       )}

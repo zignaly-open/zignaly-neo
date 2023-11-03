@@ -11,7 +11,6 @@ export enum EditInvestmentViews {
 
 export enum InvestmentViews {
   Investment = 'investment',
-  InvestmentConfirm = 'investment-confirm',
   InvestmentSuccess = 'investment-success',
 }
 

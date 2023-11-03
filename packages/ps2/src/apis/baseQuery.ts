@@ -9,7 +9,7 @@ import { Mutex } from 'async-mutex';
 import { setSessionExpiryDate } from './user/store';
 import { SessionResponse } from './user/types';
 import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
-import i18next from '../util/i18next';
+import i18next from '../util/i18n/i18next';
 import { backendError } from 'util/hooks/useToast';
 import { BackendError } from '../util/errors';
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';

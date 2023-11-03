@@ -1,5 +1,5 @@
 import { addDays, format, formatDistance } from 'date-fns';
-import i18n, { dateFnsLocaleMapping } from '../../../../util/i18next';
+import i18n, { dateFnsLocaleMapping } from '../../../../util/i18n/i18next';
 
 export const formatDateFromDays = (days: string) =>
   formatLocalizedDistance(addDays(new Date(), Number(days)), new Date());

@@ -25,7 +25,7 @@ import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
 import DepositModal, {
   useOpenDepositModal,
 } from '../Dashboard/components/ManageInvestmentModals/DepositModal';
-import { usePrefetchTranslation } from 'util/i18nextHelpers';
+import { usePrefetchTranslation } from 'util/i18n/i18nextHelpers';
 import { ROUTE_MY_BALANCES, ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { matchPath, useNavigate } from 'react-router-dom';
 

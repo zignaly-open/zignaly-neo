@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
-import i18n from 'util/i18next';
+import i18n from 'util/i18n/i18next';
 import * as yup from 'yup';
 import { inputAmountValidation } from 'util/validation';
 
@@ -30,7 +30,6 @@ export const editInvestmentValidation = ({
   max,
   coin,
   balance,
-  checkTransferInput = false,
 }: {
   max: string;
   coin: string;
@@ -39,18 +38,5 @@ export const editInvestmentValidation = ({
 }) =>
   yup.object().shape({
     amountTransfer: investAmountValidation(max, coin, balance),
-    transferConfirm: yup
-      .string()
-      .test(
-        'text-matches',
-        'edit-investment:invest-modal.transfer-error',
-        function (value) {
-          return (
-            !checkTransferInput ||
-            value.toLocaleLowerCase() ===
-              this.parent.transferLabelForValidation?.toLocaleLowerCase()
-          );
-        },
-      ),
     understandRisk: yup.boolean().oneOf([true], 'error:error.required'),
   });

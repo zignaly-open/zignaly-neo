@@ -19,7 +19,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
 import { EditServiceForm, VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
-import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
+import {
+  HELP_CREATE_SERVICE_MARKETPLACE_URL,
+  ZIGNALY_PROFIT_FEE,
+} from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';
@@ -51,7 +54,7 @@ const EditServiceProfileContainer: React.FC<{
     name: service.name,
     description: service.description,
     maximumSbt: service.maximumSbt,
-    successFee: service.successFee,
+    successFee: service.successFee || 0,
     logo: service.logo,
     ...(isFeatureOn(Features.Referrals) && { commission }),
   };
@@ -76,6 +79,7 @@ const EditServiceProfileContainer: React.FC<{
   );
   const navigate = useNavigate();
   const user = useCurrentUser();
+  const successFee = watch('successFee');
 
   const submit = async (data: EditServiceForm) => {
     const { commission: c, ...rest } = data;
@@ -84,7 +88,7 @@ const EditServiceProfileContainer: React.FC<{
       ...(isFeatureOn(Features.Referrals)
         ? [
             updateCommission({
-              service: service.id,
+              serviceId: service.id,
               commission: c || 0,
             }),
           ]
@@ -227,7 +231,7 @@ const EditServiceProfileContainer: React.FC<{
                 control={control}
                 render={({ field }) => (
                   <SuccessFeeInputWrapper
-                    value={watch('successFee') || 0}
+                    value={successFee}
                     showZeroFeeExplainer
                   >
                     <ZigInput
@@ -252,8 +256,8 @@ const EditServiceProfileContainer: React.FC<{
                   control={control}
                   render={({ field }) => (
                     <CommissionReferralSharing
-                      successFee={service.successFee}
-                      zglySuccessFee={service.zglySuccessFee}
+                      successFee={+successFee}
+                      zglySuccessFee={ZIGNALY_PROFIT_FEE}
                       {...field}
                     />
                   )}

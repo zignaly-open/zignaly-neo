@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import i18n from 'util/i18next';
+import i18n from 'util/i18n/i18next';
 
 const specialRegex = /[`!@#$%^&*()_+\-=[\]{};':"|,.<>/?~\\]/;
 const PASSWORD_LENGTH = 8;

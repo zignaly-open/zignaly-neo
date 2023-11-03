@@ -53,9 +53,9 @@ const InviteButton = ({
       mb={md && boostRunning ? '10px' : 0}
     >
       {(traderBoost > 0 || boostRunning) && (
-        <Box>
+        <Box position={'relative'}>
           <CommissionPromo
-            traderBoost={traderBoost}
+            traderBoost={traderBoost + 1}
             inviteLeft={inviteLeft}
             maxCommission={maxCommission}
             onClick={handleClick}

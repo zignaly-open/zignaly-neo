@@ -1,4 +1,5 @@
 import { styled, Box } from '@mui/material';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const CardBox = styled(Box)`
   border-radius: 7.5px;
@@ -18,4 +19,13 @@ export const CommissionBoostChip = styled(Box)`
   transform: translateY(-50%);
 `;
 
-export const AvatarBox = styled(Box)``;
+export const TypographyName = styled(ZigTypography)`
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: clip;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow-wrap: break-word;
+  max-width: 100%;
+`;

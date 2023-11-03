@@ -17,23 +17,26 @@ import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDash
 const ServiceInformation: React.FC<{
   service?: Service;
 }> = ({ service }) => {
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
   return (
     <>
-      <ZigTypography variant={'h1'} id={'service-profile__service-name'}>
+      <ZigTypography
+        variant={sm ? 'h1' : 'h2'}
+        id={'service-profile__service-name'}
+      >
         {service.name}
       </ZigTypography>
       <Box
         sx={{
-          flexDirection: md ? 'row' : 'column',
+          flexDirection: sm ? 'row' : 'column',
           display: 'flex',
           alignItems: 'center',
-          paddingRight: md ? 3 : 0,
+          paddingRight: sm ? 3 : 0,
         }}
       >
         <GreySubHeader
-          component={md ? 'span' : 'p'}
+          component={sm ? 'span' : 'p'}
           id={'service-profile__owner-name'}
         >
           <StyledPersonIcon />
@@ -54,24 +57,26 @@ const ServiceInformation: React.FC<{
             </Tooltip>
           )}
         </GreySubHeader>
-        {md && <Separator />}
-        <GreySubHeader
-          component={md ? 'span' : 'p'}
-          id={'service-profile__started-since'}
-        >
-          <StyledCalendarMonthIcon />
-          <Trans
-            t={t}
-            i18nKey={'service-age'}
-            values={{
-              date: formatLocalizedDistance(
-                new Date(),
-                new Date(service.createdAt),
-              ),
-            }}
-            components={[<GreySubHeaderHighlight key={'--service--by'} />]}
-          />
-        </GreySubHeader>
+        {sm && <Separator />}
+        {sm && (
+          <GreySubHeader
+            component={sm ? 'span' : 'p'}
+            id={'service-profile__started-since'}
+          >
+            <StyledCalendarMonthIcon />
+            <Trans
+              t={t}
+              i18nKey={'service-age'}
+              values={{
+                date: formatLocalizedDistance(
+                  new Date(),
+                  new Date(service.createdAt),
+                ),
+              }}
+              components={[<GreySubHeaderHighlight key={'--service--by'} />]}
+            />
+          </GreySubHeader>
+        )}
       </Box>
     </>
   );

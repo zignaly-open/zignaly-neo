@@ -39,7 +39,7 @@ const CommissionPromo = ({
   }
 
   return (
-    <CommissionPromoBox id={id}>
+    <CommissionPromoBox id={id} fullWidth={showLabel}>
       {showArrow && <InviteBoxArrow />}
       <Box
         position='absolute'
@@ -70,7 +70,7 @@ const CommissionPromo = ({
             color='#fffc19'
             id='service-profile__comission-multiplier'
           >
-            {traderBoost ? `${traderBoost + 1}x` : '%'}
+            {traderBoost ? `${traderBoost}x` : '%'}
           </ZigTypography>
         </Box>
       </Box>

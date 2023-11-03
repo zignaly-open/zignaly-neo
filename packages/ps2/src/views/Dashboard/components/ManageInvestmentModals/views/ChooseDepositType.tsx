@@ -1,15 +1,16 @@
 import React from 'react';
-import { ZigArrowOutIcon } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
 import ChooseBetweenTwo from './ChooseBetweenTwo';
+import { useOpenBuyModal } from '../BuyModal';
 
 const ChooseDepositType: React.FC<{
   coin: string;
   setView: (view: ChooseDepositTypeViews) => void;
 }> = ({ coin, setView }) => {
   const { t } = useTranslation('deposit-crypto');
+  const showBuyModal = useOpenBuyModal();
+
   return (
     <>
       <ChooseBetweenTwo
@@ -22,15 +23,8 @@ const ChooseDepositType: React.FC<{
           onClick: () => setView(ChooseDepositTypeViews.DepositView),
         }}
         button2Props={{
-          href: BUY_CRYPTO_URL,
+          onClick: () => showBuyModal(),
           id: 'modal-choose-deposit-type__purchase',
-          endIcon: (
-            <ZigArrowOutIcon
-              width={'9px'}
-              height={'9px'}
-              style={{ marginBottom: '4px' }}
-            />
-          ),
           sx: { padding: '8px 20px' },
         }}
         explainer1={t('service-deposit.transfer-crypto', { coin })}
