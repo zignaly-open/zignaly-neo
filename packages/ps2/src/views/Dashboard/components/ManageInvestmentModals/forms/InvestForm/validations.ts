@@ -30,7 +30,6 @@ export const editInvestmentValidation = ({
   max,
   coin,
   balance,
-  checkTransferInput = false,
 }: {
   max: string;
   coin: string;
@@ -39,18 +38,5 @@ export const editInvestmentValidation = ({
 }) =>
   yup.object().shape({
     amountTransfer: investAmountValidation(max, coin, balance),
-    transferConfirm: yup
-      .string()
-      .test(
-        'text-matches',
-        'edit-investment:invest-modal.transfer-error',
-        function (value) {
-          return (
-            !checkTransferInput ||
-            value.toLocaleLowerCase() ===
-              this.parent.transferLabelForValidation?.toLocaleLowerCase()
-          );
-        },
-      ),
     understandRisk: yup.boolean().oneOf([true], 'error:error.required'),
   });
