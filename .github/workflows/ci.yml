@@ -43,7 +43,6 @@ jobs:
           envkey_ESLINT_NO_DEV_ERRORS: true
           envkey_REACT_APP_ENABLE_TRACKING: false
           envkey_REACT_APP_BASE_API: https://test.zignaly.com/new_api
-          envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
           envkey_REACT_APP_REFERRALS_API: https://test-referrals.zignaly.com/
           directory: packages/ps2
           file_name: .env
