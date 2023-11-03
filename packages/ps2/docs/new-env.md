@@ -15,7 +15,6 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 | `CF_ZONE` | Secret   |                                                   CloudFlare Zone                                                   | **Optional*** |
 | `CF_TOKEN` | Secret   |                                                   CloudFlare Zone                                                   |                            **Optional*** |
 | `PS2_BASE_API` | Variable |                              Base API path, e.g. `https://staging.zignaly.com/new_api`                              |                              **Required** |
-| `PS2_WALLET_API` | Variable |                               Wallet API path, e.g. `https://wallet.zignaly.com/api`                                |                              **Required** |
 | `PS2_REFERRAL_API` | Variable |    Wallet API path, e.g. `https://test-referrals.zignaly.com/`. Yes, the api path names are pretty inconsistent.    |                              **Optional*** |
 | `WHITELABEL` | Variable | The name of the whitelabnel config for the deployment. Whitelabel configs can be defined [here](../src/whitelabel). |                              <opt>Optional</opt> |
 | `ENABLE_TRACKING` | Variable |                            Whether or not to enable tracking systems. `true` to enable.                             |                              <opt>Optional</opt> |
@@ -28,6 +27,7 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 | `CUSTOMER_IO_SITE_ID` | Variable |                                                 Customer IO Site ID                                                 |                              <opt>Optional</opt> |
 | `INTERCOM_APP_ID` | Variable |                                                   Intercom App ID                                                   |                              <opt>Optional</opt> |
 | `LIVE_SESSION_TRACK_ID` | Variable |                                                Live Session track ID                                                |                              <opt>Optional</opt> |
+| `IPGEOLOCATION_API_KEY` | Variable |                               API key for ipgeolocation.io, used to detect user currency when buying crypto                                |                              **Optional*** |
 
 
 Now what?
