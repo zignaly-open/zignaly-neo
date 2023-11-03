@@ -61,7 +61,7 @@ export type UserData = {
   wall?: {
     banned: boolean;
   };
-
+  voucher?: boolean;
   exchanges: Exchange[];
 };
 
