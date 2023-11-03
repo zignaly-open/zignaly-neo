@@ -52,6 +52,6 @@ jobs:
 
 ```
 
-Not [push](https://youtu.be/X-wub0Q0AGc?si=2S65LQWcY0hrb7Kj&t=1) your changes to trigger a deploy.
+Now [push](https://youtu.be/X-wub0Q0AGc?si=2S65LQWcY0hrb7Kj&t=1) your changes to trigger a deploy.
 
 Congrats, you're done.
