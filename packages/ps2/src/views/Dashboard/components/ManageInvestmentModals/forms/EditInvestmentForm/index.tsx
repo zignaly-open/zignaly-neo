@@ -32,7 +32,7 @@ import { Add } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
 import { useCanInvestIn } from '../../../../../../util/walls/util';
-import { whitelabel } from '../../../../../../whitelabel';
+import { getMinInvestmentAmount } from '../../../../../../whitelabel';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -67,7 +67,7 @@ function EditInvestmentForm({
           .minus(service.pending)
           .toString(),
         invested: details?.invested + details?.pending,
-        min: whitelabel.minInvestment,
+        min: getMinInvestmentAmount(service.ssc),
         balance: coin?.balance,
         coin: service.ssc,
       }),
