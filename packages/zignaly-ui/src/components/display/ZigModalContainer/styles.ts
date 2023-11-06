@@ -60,8 +60,8 @@ export const Title = styled(ZigTypography)`
   }
 `;
 
-export const Body = styled('div', {
-  shouldForwardProp: (prop) => prop !== 'mobileFullScreen',
+export const Body = styled("div", {
+  shouldForwardProp: (prop) => prop !== "mobileFullScreen",
 })<{ mobileFullScreen?: boolean }>`
   font-size: 14px;
   text-align: left;
