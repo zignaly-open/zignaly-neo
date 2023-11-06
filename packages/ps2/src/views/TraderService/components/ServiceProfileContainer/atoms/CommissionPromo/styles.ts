@@ -1,13 +1,14 @@
 import { Box, styled } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 
-export const InviteBox = styled(Box)`
+export const CommissionPromoBox = styled(Box)<{ fullWidth: boolean }>`
   z-index: 2;
   margin-right: 8px;
   position: relative;
-  width: 265px;
+  width: ${({ fullWidth }) => (fullWidth ? '265px' : 'fit-content')};
   height: 66px;
-  padding: 4px 11px 6px 68px;
+  padding: ${({ fullWidth }) =>
+    fullWidth ? '4px 11px 6px 68px' : '4px 11px 6px 58px'};
   border-radius: 5px;
   border: 1px solid rgba(111, 111, 111, 0.99);
   background: ${({ theme }) => theme.palette.backgrounds.tableHeader};

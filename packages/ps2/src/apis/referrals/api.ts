@@ -13,7 +13,7 @@ import baseQuery from '../baseQuery';
 export const api = createApi({
   baseQuery: baseQuery(process.env.REACT_APP_REFERRALS_API),
   reducerPath: 'referralApi',
-  tagTypes: ['Referrals'],
+  tagTypes: ['Referrals', 'Commission'],
   endpoints: (builder) => ({
     benefits: builder.query<Benefit[], void>({
       query: () => ({
@@ -45,6 +45,7 @@ export const api = createApi({
       query: ({ serviceId }) => ({
         url: `v1/service/commission/${serviceId}`,
       }),
+      providesTags: ['Commission'],
     }),
     updateServiceCommission: builder.mutation<void, ServiceCommissionPayload>({
       query: (payload) => ({
@@ -52,6 +53,7 @@ export const api = createApi({
         method: 'POST',
         body: payload,
       }),
+      invalidatesTags: ['Commission'],
     }),
     updateDiscount: builder.mutation<void, { discount: number }>({
       query: (payload) => ({

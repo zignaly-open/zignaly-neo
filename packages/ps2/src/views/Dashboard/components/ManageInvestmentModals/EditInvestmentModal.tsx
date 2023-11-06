@@ -16,8 +16,10 @@ import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
-import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
-import { Box } from '@mui/material';
+import { usePrefetchTranslation } from '../../../../util/i18n/i18nextHelpers';
+import { Box, useMediaQuery } from '@mui/material';
+import theme from '../../../../theme';
+import CriticalError from '../../../../components/Stub/CriticalError';
 
 function EditInvestmentModal({
   close,
@@ -27,18 +29,27 @@ function EditInvestmentModal({
   close: () => void;
   serviceId: string;
 } & DialogProps): React.ReactElement {
-  const { isLoading: isLoadingInvestment } = useInvestmentDetails(serviceId);
-  const { isLoading: isLoadingService, data: service } =
-    useServiceDetails(serviceId);
-
-  useSelectInvestment(service);
-  // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
-  const selectedInvestment = useSelectedInvestment();
-  const { isLoading: isLoadingCoins } = useCoinBalances();
-
   const [view, setView] = useState<EditInvestmentViews>(
     EditInvestmentViews.EditInvestment,
   );
+  const { isLoading: isLoadingInvestment, isError: isErrorLoadingInvestment } =
+    useInvestmentDetails(serviceId, {
+      skip: [
+        EditInvestmentViews.WithdrawSuccess,
+        EditInvestmentViews.WithdrawPerform,
+      ].includes(view),
+    });
+  const {
+    isLoading: isLoadingService,
+    isError: isErrorLoadingService,
+    data: service,
+  } = useServiceDetails(serviceId);
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
+  useSelectInvestment(service);
+  // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
+  const selectedInvestment = useSelectedInvestment();
+  const { isLoading: isLoadingCoins, isError: isErrorLoadingCoins } =
+    useCoinBalances();
 
   const { t } = useTranslation(['edit-investment']);
   usePrefetchTranslation('withdraw');
@@ -81,8 +92,12 @@ function EditInvestmentModal({
     isLoadingCoins ||
     !selectedInvestment;
 
+  const isError =
+    isErrorLoadingInvestment || isErrorLoadingService || isErrorLoadingCoins;
+
   return (
     <ZModal
+      mobileFullScreen
       {...props}
       wide
       close={close}
@@ -92,14 +107,16 @@ function EditInvestmentModal({
           EditInvestmentViews.EditInvestment,
           EditInvestmentViews.EditInvestmentSuccess,
           EditInvestmentViews.WithdrawSuccess,
-          EditInvestmentViews.PendingTransactions,
         ].includes(view)
           ? () => setView(EditInvestmentViews.EditInvestment)
           : undefined
       }
       isLoading={isLoading}
     >
-      <Box paddingX='30px'>{!isLoading && component()}</Box>
+      <Box paddingX={xs ? 0 : '30px'}>
+        {!isLoading && !isError && component()}
+        {isError && <CriticalError />}
+      </Box>
     </ZModal>
   );
 }

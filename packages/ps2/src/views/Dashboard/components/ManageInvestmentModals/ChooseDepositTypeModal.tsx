@@ -10,28 +10,38 @@ import {
 } from './types';
 import SwapDepositPurchase from './views/SwapDepositPurchase';
 import { useActiveExchange } from '../../../../apis/user/use';
-import { useCoinBalances } from '../../../../apis/coin/use';
 import { ZigTypography } from '@zignaly-open/ui';
 import { allowedDeposits } from '../../../../util/coins';
 import SwapCoinsConfirmForm from '../../../Balance/components/SwapCoinsModal/SwapCoinsConfirmForm';
 import { useOpenInvestDepositModal } from './InvestDepositModal';
+import { ZModalProps } from '../../../../components/ZModal/types';
+import { CoinBalances } from '../../../../apis/coin/types';
+
+type ViewDefinition = Pick<
+  ZModalProps,
+  'title' | 'onGoBack' | 'mobileFullScreen'
+> & {
+  component: () => JSX.Element;
+  modalWidth?: number;
+};
 
 export function useDepositModalContent({
   coin,
   serviceId,
   refetchBalance,
+  balances,
+  isLoadingBalances,
   close,
 }: {
   coin: string;
   serviceId?: string;
   refetchBalance: () => void;
+  balances: CoinBalances;
+  isLoadingBalances: boolean;
   close: () => void;
 }): UseModalReturn {
   const { t } = useTranslation(['deposit-crypto', 'swap-coins']);
   const { exchangeType, internalId } = useActiveExchange();
-  const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
-    convert: true,
-  });
   const [convertPreviewData, setConvertPreviewData] =
     useState<ConvertPreviewType>();
   const [confirmSwapData, setConfirmSwapData] = useState<ConfirmSwapDataType>();
@@ -60,13 +70,6 @@ export function useDepositModalContent({
       : setView(ChooseDepositTypeViews.ChooseDepositTypeView);
   }, [showSwap]);
   const openInvestModal = useOpenInvestDepositModal();
-
-  type ViewDefinition = {
-    title: string;
-    component: () => JSX.Element;
-    onGoBack?: () => void;
-    modalWidth?: number;
-  };
 
   const views: Record<ChooseDepositTypeViews, ViewDefinition> = {
     [ChooseDepositTypeViews.ChooseDepositTypeView]: {

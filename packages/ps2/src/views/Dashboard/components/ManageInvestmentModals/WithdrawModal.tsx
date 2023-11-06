@@ -27,6 +27,7 @@ function WithdrawModal({
       wide
       {...props}
       close={close}
+      mobileFullScreen
       title={t(
         step === 'success'
           ? 'success.title'

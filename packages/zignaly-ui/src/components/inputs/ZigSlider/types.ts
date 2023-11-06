@@ -20,6 +20,8 @@ export type ZigSliderProps = Omit<SliderProps, "valueLabelFormat"> & {
   prefixId?: string;
   labels?: SliderLabels;
   /** Format slider value, by default it will add a % sign if max is 100. Set to null to always show the number only. */
-  valueLabelFormat?: (value: number) => string;
+  valueLabelFormat?: (value: number) => string | JSX.Element;
+  /** Format slider labels, set to true (default), to use the same as valueLabelFormat. */
+  labelFormat?: true | ((value: number) => string | JSX.Element);
   className?: string;
 };

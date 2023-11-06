@@ -6,6 +6,7 @@ export type ZModalProps = {
   title?: string;
   wide?: boolean;
   allowUnauth?: boolean;
+  mobileFullScreen?: boolean;
   isLoading?: boolean;
   disableBackdropClose?: boolean;
   onGoBack?: () => void;

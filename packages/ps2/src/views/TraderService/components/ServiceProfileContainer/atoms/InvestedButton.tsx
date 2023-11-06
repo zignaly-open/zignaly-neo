@@ -8,7 +8,12 @@ import { useZModal } from '../../../../../components/ZModal/use';
 import EditInvestmentModal from '../../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { useTranslation } from 'react-i18next';
 import { BigNumberWrapper, InvestButtonContainer, TopDivider } from '../styles';
-import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import {
+  trimZeros,
+  ZigButton,
+  ZigPriceLabel,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import OtherAccountsButton from './OtherAccountsButton';
 import EditIcon from '@mui/icons-material/Edit';
@@ -48,6 +53,70 @@ const InvestedButton: React.FC<{
       service={service}
       investedAmount={investedAmount}
     />
+  );
+};
+
+export const MobileInvestedButton: React.FC<{
+  service: Service;
+  id: string;
+  investedAmount: string;
+  showMultipleAccountButton?: boolean;
+}> = ({ id, investedAmount, showMultipleAccountButton, service }) => {
+  const { showModal } = useZModal({ disableAutoDestroy: true });
+
+  const investedFromAccounts = useInvestedAccountsCount(service?.id, {
+    skip: !showMultipleAccountButton,
+  });
+
+  const showOtherAccounts =
+    investedFromAccounts > 1 && showMultipleAccountButton;
+
+  const { t } = useTranslation('marketplace');
+  return (
+    <Box
+      display={'flex'}
+      justifyContent={'center'}
+      flexDirection={'column'}
+      alignItems={'center'}
+    >
+      <ZigButton
+        id={id}
+        size={'large'}
+        onClick={() => {
+          showModal(EditInvestmentModal, { serviceId: service?.id });
+        }}
+        sx={{
+          flexDirection: 'column',
+          minWidth: 165,
+          padding: '6px 26px',
+        }}
+      >
+        <>
+          <ZigTypography
+            variant='body2'
+            color='neutral000'
+            fontWeight={600}
+            letterSpacing={1.1}
+            lineHeight={'20px'}
+            sx={{ textTransform: 'uppercase !important' }}
+          >
+            {t('table.invested', {
+              invested: trimZeros(Number(investedAmount).toFixed(2)),
+            })}
+          </ZigTypography>
+
+          <ZigTypography
+            variant={'caption'}
+            component='p'
+            color='neutral150'
+            fontWeight={500}
+          >
+            {t('table.edit')}
+          </ZigTypography>
+        </>
+      </ZigButton>
+      {showOtherAccounts && <OtherAccountsButton service={service} />}
+    </Box>
   );
 };
 

@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import LiquidatedLabel from './LiquidatedLabel';
-import InvestedButton from './InvestedButton';
+import InvestedButton, { MobileInvestedButton } from './InvestedButton';
 import InvestButton from './InvestButton';
 import React, { useMemo } from 'react';
 import { useIsAuthenticated } from '../../../../../apis/user/use';
@@ -16,6 +16,7 @@ import { Features } from '../../../../../whitelabel/type';
 import InviteButton from './InviteButton';
 import { useTiersData } from 'apis/referrals/use';
 import { Trans, useTranslation } from 'react-i18next';
+import { usePrefetchTranslation } from 'util/i18n/i18nextHelpers';
 
 enum RightSideActionStates {
   Loading,
@@ -28,8 +29,14 @@ enum RightSideActionStates {
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
   const isInvested = useIsInvestedInService(service.id);
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('service');
+  usePrefetchTranslation([
+    ...(isFeatureOn(Features.Referrals) ? ['referrals-trader'] : []),
+    'edit-investment',
+    'deposit-crypto',
+  ]);
   const tiers = useTiersData(service.id);
   const state = useMemo<RightSideActionStates>(() => {
     if (isInvested.isLoading || tiers.isLoading)
@@ -41,8 +48,10 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
     return RightSideActionStates.NotInvested;
   }, [isInvested, service, tiers, isAuthenticated]);
 
+  const { investedAmount } = useIsInvestedInService(service.id);
+
   return (
-    <RightSideActionWrapper>
+    <RightSideActionWrapper isAuthenticated={isAuthenticated}>
       {state === RightSideActionStates.Liquidated && (
         <Box sx={{ mt: -0.5 }}>
           <LiquidatedLabel />
@@ -74,23 +83,37 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         RightSideActionStates.NotInvested,
       ].includes(state) && (
         <Box
-          sx={{ mt: md ? 0 : 3 }}
           display='flex'
           gap={3}
-          alignItems={'center'}
+          alignItems={sm ? 'center' : 'flex-start'}
+          justifyContent={'center'}
+          flexWrap={lg || !sm ? 'nowrap' : 'wrap'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
-            <InviteButton service={service} tiersData={tiers} />
+            <InviteButton service={service} tiersData={tiers} fullSize={sm} />
           )}
           {state === RightSideActionStates.Invested ? (
-            <InvestedButton prefixId={'service-profile'} service={service} />
+            sm ? (
+              <InvestedButton prefixId={'service-profile'} service={service} />
+            ) : (
+              <Box mt={'2px'}>
+                <MobileInvestedButton
+                  service={service}
+                  id={'service-profile__invested'}
+                  investedAmount={investedAmount.toString()}
+                  showMultipleAccountButton
+                />
+              </Box>
+            )
           ) : (
-            <InvestButton
-              modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
-              prefixId={'service-profile'}
-              showMultipleAccountButton
-              service={service}
-            />
+            <Box mt={!sm && '2px'}>
+              <InvestButton
+                modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+                prefixId={'service-profile'}
+                showMultipleAccountButton
+                service={service}
+              />
+            </Box>
           )}
         </Box>
       )}

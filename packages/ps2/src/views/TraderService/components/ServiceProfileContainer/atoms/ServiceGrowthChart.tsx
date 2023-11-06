@@ -14,7 +14,7 @@ import {
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   ChartWrapper,
   GraphPercentageWrapperBox,
@@ -35,6 +35,10 @@ import {
 import BigNumber from 'bignumber.js';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
     useChartConfig();
   const { data, isLoading, isFetching, isError } = useChartData({
@@ -107,11 +111,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'wrap',
+          gap: !sm && '5px',
         }}
       >
         {canShowSummary && (
           <>
-            <Box sx={{ mr: 2 }}>
+            <Box sx={{ mr: sm && 2, order: !sm && 2, ml: !sm && 'auto' }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -160,7 +165,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   GraphChartType.at_risk_pct,
                 ].includes(chartType) && (
                   <ZigTypography
-                    variant={'bigNumber'}
+                    variant={sm ? 'bigNumber' : 'h2'}
                     sx={{ whiteSpace: 'nowrap' }}
                     color={getColorForNumber(value)}
                   >
@@ -196,9 +201,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           </>
         )}
 
-        <Box sx={{ flex: 1 }} />
-
-        <SqueezedButtonGroupWrapper sx={{ mr: 3 }}>
+        <SqueezedButtonGroupWrapper
+          sx={{ mr: sm && 3, order: !sm && 1, ml: sm && 'auto' }}
+        >
           <ZigButtonGroupInput
             options={Object.keys(GraphTimeframe).map(
               (v: GraphTimeframe, i, all) => {
@@ -212,6 +217,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   label: t(`periods.${v}`),
                   id: `service-profile__choose-period-${v}`,
                   extraProps: {
+                    sx: { padding: !md && '0 !important' },
                     size: 'small',
                     disabled: isDisabled,
                     tooltip: isDisabled
@@ -225,17 +231,19 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             onChange={(v: GraphTimeframe) => setChartTimeframe(v)}
           />
         </SqueezedButtonGroupWrapper>
-        <SelectWrapperBox>
-          <ZigSelect
-            id={'service-profile__choose-graph-view'}
-            outlined
-            width={170}
-            small
-            value={chartType}
-            onChange={(v) => setChartType(v)}
-            options={chartTypeOptions}
-          />
-        </SelectWrapperBox>
+        {sm && (
+          <SelectWrapperBox>
+            <ZigSelect
+              id={'service-profile__choose-graph-view'}
+              outlined
+              width={170}
+              small
+              value={chartType}
+              onChange={(v) => setChartType(v)}
+              options={chartTypeOptions}
+            />
+          </SelectWrapperBox>
+        )}
       </Box>
 
       <ChartWrapper>
@@ -248,41 +256,43 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         ) : isLoading || isFetching || !data?.data ? (
           <CenteredLoader />
         ) : (
-          <ZigChart
-            id={'service-profile__graph'}
-            bars={[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
-              chartType,
-            )}
-            onlyIntegerTicks={chartType === GraphChartType.investors}
-            events={events}
-            yAxisFormatter={(v) =>
-              `${formatCompactNumber(v, isPercent ? 2 : 8)}${
-                isPercent ? `%` : ``
-              }`
-            }
-            data={data?.data}
-            tooltipFormatter={(v) =>
-              `${formatLocalizedDate(
-                (v as typeof v & { date?: Date }).date,
-                'PP',
-              )}\n${numericFormatter(new BigNumber(v.y).toFormat(), {
-                ...(isPercent
-                  ? {
-                      decimalScale: 2,
-                      suffix: '%',
-                    }
-                  : {
-                      thousandSeparator: true,
-                      decimalScale: getPrecisionForCoin(service.ssc) ?? 8,
-                      suffix:
-                        chartType === GraphChartType.investors
-                          ? ''
-                          : ` ${service.ssc}`,
-                    }),
-              })}`
-            }
-            precision={precision}
-          />
+          <Box width={lg || !sm ? '100%' : '90%'}>
+            <ZigChart
+              id={'service-profile__graph'}
+              bars={[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
+                chartType,
+              )}
+              onlyIntegerTicks={chartType === GraphChartType.investors}
+              events={events}
+              yAxisFormatter={(v) =>
+                `${formatCompactNumber(v, isPercent ? 2 : 8)}${
+                  isPercent ? `%` : ``
+                }`
+              }
+              data={data?.data}
+              tooltipFormatter={(v) =>
+                `${formatLocalizedDate(
+                  (v as typeof v & { date?: Date }).date,
+                  'PP',
+                )}\n${numericFormatter(new BigNumber(v.y).toFormat(), {
+                  ...(isPercent
+                    ? {
+                        decimalScale: 2,
+                        suffix: '%',
+                      }
+                    : {
+                        thousandSeparator: true,
+                        decimalScale: getPrecisionForCoin(service.ssc) ?? 8,
+                        suffix:
+                          chartType === GraphChartType.investors
+                            ? ''
+                            : ` ${service.ssc}`,
+                      }),
+                })}`
+              }
+              precision={precision}
+            />
+          </Box>
         )}
       </ChartWrapper>
     </Box>

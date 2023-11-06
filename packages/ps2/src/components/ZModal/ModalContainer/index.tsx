@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react';
-import { useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
-  Layout,
-  Header,
-  Title,
-  Body,
-  Inline,
-  CloseIconButton,
   BackIconButton,
+  Body,
+  CloseIconButton,
+  Header,
+  Inline,
+  Layout,
+  Title,
 } from './styles';
 import { ZigBackIcon, ZigCrossIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
@@ -21,16 +21,24 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
     width,
     onClickClose = null,
     titleStyles,
+    mobileFullScreen,
   } = props;
   const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const buttonSize = !sm && mobileFullScreen ? '22px' : '32px';
 
   return (
-    <Layout width={width} ref={ref} tabIndex={-1}>
+    <Layout
+      width={width}
+      mobileFullScreen={mobileFullScreen}
+      ref={ref}
+      tabIndex={-1}
+    >
       {onGoBack && typeof onGoBack === 'function' && (
         <BackIconButton onClick={onGoBack}>
           <ZigBackIcon
-            width={'32px'}
-            height={'32px'}
+            width={buttonSize}
+            height={buttonSize}
             color={theme.palette.neutral100}
             id={'modal__back'}
           />
@@ -40,8 +48,9 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
         <Inline align={titleAlign}>
           {!!title && (
             <Title
-              variant='h1'
+              variant={mobileFullScreen && !sm ? 'h2' : 'h1'}
               mb={0}
+              mt={mobileFullScreen && !sm ? 'h2' : 'h1' ? -2 : undefined}
               color='neutral100'
               id={'modal__title'}
               sx={titleStyles}
@@ -54,14 +63,14 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
       {onClickClose && typeof onClickClose === 'function' && (
         <CloseIconButton onClick={onClickClose}>
           <ZigCrossIcon
-            width={'32px'}
-            height={'32px'}
+            width={buttonSize}
+            height={buttonSize}
             color={theme.palette.neutral100}
             id={'modal__close'}
           />
         </CloseIconButton>
       )}
-      <Body>{children}</Body>
+      <Body mobileFullScreen={mobileFullScreen}>{children}</Body>
     </Layout>
   );
 });

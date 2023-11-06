@@ -14,7 +14,7 @@ function SwapCoinsModal({
   ...props
 }: {
   close: () => void;
-  selectedCoin: { coin: string; balance: CoinBalance & CoinDetail };
+  selectedCoin?: { coin: string; balance: CoinBalance & CoinDetail };
   refetchBalance: () => void;
 } & DialogProps): React.ReactElement {
   const [step, setStep] = useState<Step>('');

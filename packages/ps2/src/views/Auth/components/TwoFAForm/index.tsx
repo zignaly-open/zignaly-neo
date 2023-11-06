@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Layout, Field } from './styles';
 import { TwoFAFormProps } from './types';
-import { InputCode, ZigTypography } from '@zignaly-open/ui';
+import { InputCode } from '@zignaly-open/ui';
+import { PaddedTitle } from '../EmailVerifyForm/styles';
 
 function TwoFAForm({
   onSubmit,
@@ -14,9 +15,9 @@ function TwoFAForm({
   return (
     <Layout>
       <Field>
-        <ZigTypography id={'twoFA-modal__description'} sx={{ mb: '35px' }}>
+        <PaddedTitle id={'twoFA-modal__description'}>
           {t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-description')}
-        </ZigTypography>
+        </PaddedTitle>
         <InputCode
           prefixId={'ask-2fa-modal'}
           fields={6}

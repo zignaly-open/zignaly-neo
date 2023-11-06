@@ -31,7 +31,7 @@ export const Table = styled("table")`
       height: 95px;
     }
     color: ${({ theme }) => theme.palette.neutral100};
-    padding: 0;
+    padding: 10px 5px;
     white-space: nowrap;
     border-bottom: 1px solid ${({ theme }) => theme.palette.neutral700};
     text-align: center;

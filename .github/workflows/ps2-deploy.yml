@@ -35,6 +35,7 @@ jobs:
           # env-specific
           envkey_REACT_APP_WHITELABEL: ${{ vars.WHITELABEL }}
           envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
+          envkey_REACT_APP_TZ_TRACKER_ENDPOINT: ${{ vars.TZ_TRACKER_ENDPOINT }}
           envkey_REACT_APP_GTM_ID: ${{ vars.GTM_ID }}
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
@@ -54,6 +55,7 @@ jobs:
           envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
           envkey_REACT_APP_INTERCOM_APP_ID: ${{ vars.INTERCOM_APP_ID }}
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ vars.LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_IPGEOLOCATION_API_KEY: ${{ vars.IPGEOLOCATION_API_KEY }}
 
           directory: packages/ps2
           file_name: .env
@@ -75,8 +77,6 @@ jobs:
         run: lerna run build --scope=@zignaly-open/ps2
       - name: AWS Deploy
         uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --delete
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}

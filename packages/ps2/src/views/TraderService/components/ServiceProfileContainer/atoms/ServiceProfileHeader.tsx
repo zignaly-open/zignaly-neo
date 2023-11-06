@@ -13,7 +13,7 @@ import ServiceInformation from './ServiceInformation';
 
 const ServiceProfileHeader: React.FC<{ service: Service }> = ({ service }) => {
   const isInvested = useIsInvestedInService(service.id);
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
   const activeExchange = useActiveExchange();
 
@@ -24,22 +24,22 @@ const ServiceProfileHeader: React.FC<{ service: Service }> = ({ service }) => {
   return (
     <Box
       sx={{
-        flexDirection: md ? 'row' : 'column',
         display: 'flex',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        gap: !sm && '10px',
       }}
     >
-      <Box sx={{ marginBottom: md ? 0 : 2 }}>
+      <Box sx={{ marginBottom: sm ? 0 : 2 }}>
         <Avatar
-          size={'xx-large'}
+          size={sm ? 'xx-large' : 'x-large'}
           alt={t('logo-alt', { name: service.name })}
           image={getServiceLogo(service.logo)}
           id={'service-profile__avatar'}
         />
       </Box>
-      <Box ml={md ? '31px' : 0} sx={{ textAlign: md ? 'left' : 'center' }}>
+      <Box ml={sm ? '31px' : 0} sx={{ textAlign: sm ? 'left' : 'center' }}>
         <ServiceInformation service={service} />
       </Box>
     </Box>

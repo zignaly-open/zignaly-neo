@@ -11,7 +11,7 @@ import {
   ZigListIcon,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import {
   useCoinBalances,
   useExchangeCoinsList,
@@ -26,6 +26,7 @@ import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheckWithdraw } from 'apis/user/use';
 import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { useNavigate } from 'react-router-dom';
+import theme from '../../../../../../theme';
 
 function WithdrawForm({
   setStep,
@@ -35,6 +36,7 @@ function WithdrawForm({
 }: WithdrawModalProps) {
   const navigate = useNavigate();
   const { t } = useTranslation('withdraw-crypto');
+  const md = useMediaQuery(theme.breakpoints.up('md'));
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
@@ -203,7 +205,7 @@ function WithdrawForm({
             placeholder={t('coinSelector.placeholder')}
             options={coinOptions}
             filterOption={filterOptions}
-            width={260}
+            width={md ? 260 : undefined}
             {...field}
           />
         )}
@@ -222,7 +224,7 @@ function WithdrawForm({
             label={t('networkSelector.label')}
             placeholder={t('networkSelector.placeholder')}
             options={coinObject?.networks}
-            width={260}
+            width={md ? 260 : undefined}
             {...field}
           />
         )}
@@ -322,7 +324,7 @@ function WithdrawForm({
               {t('confirmation.continue')}
             </ZigButton>
             <ZigButton
-              sx={{ position: 'absolute', right: '-22px', bottom: 0 }}
+              sx={md ? { position: 'absolute', right: '-22px', bottom: 0 } : {}}
               id={'withdraw-modal__history'}
               startIcon={
                 <ZigListIcon
@@ -335,7 +337,10 @@ function WithdrawForm({
                 />
               }
               variant='text'
-              onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}
+              onClick={() => {
+                navigate(ROUTE_MY_BALANCES_TRANSACTIONS);
+                close();
+              }}
             >
               {t('history')}
             </ZigButton>

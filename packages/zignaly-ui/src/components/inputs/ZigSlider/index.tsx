@@ -5,10 +5,24 @@ import { SliderLabelValue } from "./atoms";
 import ZigTypography from "components/display/ZigTypography";
 
 const ZigSlider = forwardRef(
-  ({ labels = {}, prefixId, className = "", valueLabelFormat, ...props }: ZigSliderProps, ref) => {
+  (
+    {
+      labels = {},
+      prefixId,
+      className = "",
+      valueLabelFormat,
+      labelFormat = true,
+      ...props
+    }: ZigSliderProps,
+    ref,
+  ) => {
     let valueLabelFormatDefaulted = valueLabelFormat;
     if (!valueLabelFormatDefaulted && (!props.max || props.max === 100)) {
       valueLabelFormatDefaulted = (value: number) => `${value}%`;
+    }
+    let labelFormatDefaulted = valueLabelFormatDefaulted;
+    if (labelFormat && labelFormat !== true) {
+      labelFormatDefaulted = labelFormat;
     }
     const { start, end, showValues = true, labelsAbove } = labels;
     const showLabels = start || end;
@@ -50,7 +64,7 @@ const ZigSlider = forwardRef(
                 min={props.min}
                 max={props.max}
                 value={props.value as number}
-                valueLabelFormat={valueLabelFormatDefaulted}
+                labelFormat={labelFormatDefaulted}
               />
             )}
             <Slider
@@ -70,7 +84,7 @@ const ZigSlider = forwardRef(
                 min={props.min}
                 max={props.max}
                 value={props.value as number}
-                valueLabelFormat={valueLabelFormatDefaulted}
+                labelFormat={labelFormatDefaulted}
               />
             )}
           </Box>

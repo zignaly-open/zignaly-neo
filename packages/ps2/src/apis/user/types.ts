@@ -4,6 +4,7 @@ export interface UserState {
   accessToken?: string;
   sessionExpiryDate?: Date;
   user?: UserData;
+  locale?: string;
   activeExchangeInternalId?: string;
 }
 
@@ -60,7 +61,7 @@ export type UserData = {
   wall?: {
     banned: boolean;
   };
-
+  voucher?: boolean;
   exchanges: Exchange[];
 };
 
@@ -150,16 +151,6 @@ export enum SessionsTypes {
 export type ExtendedExchange = Exchange & { image: string };
 
 export type UserBalance = {
-  totalFreeBTC: number;
-  totalFreeUSDT: number;
-  totalLockedBTC: number;
-  totalLockedUSDT: number;
-  totalPnlBTC: number;
-  totalPnlUSDT: number;
-  totalWalletBTC: number;
-  totalWalletUSDT: number;
-  totalUnrealizedProfitBTC: number;
-  totalUnrealizedProfitUSDT: number;
-  totalMarginBTC: number;
-  totalMarginUSDT: number;
+  totalBTC: number;
+  totalUSDT: number;
 };

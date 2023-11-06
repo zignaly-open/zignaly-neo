@@ -72,6 +72,7 @@ export const Separator = styled('span')`
 export const InvestButtonContainer = styled('div')`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
+  min-width: 170px;
   align-items: center;
   padding: 15px 25px;
   position: relative;
@@ -81,6 +82,9 @@ export const InvestButtonContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.xl}px) {
+    padding: 15px 5px;
+  }
 `;
 
 export const TopDivider = styled(Divider)`
@@ -170,7 +174,6 @@ export const GridCell = styled(Grid)<{ rightBorder?: boolean }>`
 
   & > span:first-child {
     display: block;
-    margin-bottom: 10px;
   }
 `;
 
@@ -183,12 +186,28 @@ export const PercentChangeContainer: typeof ZigTypography = styled(
   flex-direction: row;
 `;
 
-export const RightSideActionWrapper = styled(Box)`
+export const RightSideActionWrapper = styled(Box)<{
+  isAuthenticated?: boolean;
+}>`
   min-height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
+    display: flex;
+    position: fixed;
+    bottom: ${({ isAuthenticated }) => (isAuthenticated ? '56px' : '0')};
+    left: 0;
+    align-items: flex-start;
+    height: 85px;
+    min-height: unset;
+    width: 100%;
+    padding: 10px 3px 5px 3px;
+    flex-direction: row;
+    background-color: #060819;
+    z-index: 5;
+  }
 `;
 
 export const ChartWrapper = styled(Box)`
@@ -210,6 +229,17 @@ export const GraphPercentageWrapperBox = styled(Box)`
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+`;
+export const ServiceInfoWrapper = styled(Box)`
+  background-color: ${({ theme }) => theme.palette.backgrounds.activeTab};
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  & > :first-child {
+    margin-bottom: 0;
   }
 `;
 

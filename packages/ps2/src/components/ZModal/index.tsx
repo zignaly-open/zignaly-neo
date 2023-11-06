@@ -23,6 +23,7 @@ const ZModal: React.FC<ZModalProps> = ({
   wide,
   titleAlign,
   titleStyles,
+  mobileFullScreen,
   ...props
 }): React.ReactElement => {
   const isAuthenticated = useIsAuthenticated();
@@ -53,6 +54,7 @@ const ZModal: React.FC<ZModalProps> = ({
         width={width || (wide && 620)}
         title={title}
         onClickClose={close}
+        mobileFullScreen={mobileFullScreen}
         onGoBack={onGoBack}
         titleAlign={titleAlign}
         titleStyles={titleStyles}
