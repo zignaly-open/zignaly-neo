@@ -33,7 +33,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('service');
   usePrefetchTranslation([
-    ...(isFeatureOn(Features.Referrals) && ['referrals-trader']),
+    ...(isFeatureOn(Features.Referrals) ? ['referrals-trader'] : []),
     'edit-investment',
     'deposit-crypto',
   ]);
