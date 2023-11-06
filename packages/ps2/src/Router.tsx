@@ -19,7 +19,6 @@ import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
 import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
-import { useCurrentUser } from './apis/user/use';
 
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
@@ -68,7 +67,6 @@ const outleted = (Component: JSX.Element) => (
 );
 
 const Router: React.FC = () => {
-  const { voucher } = useCurrentUser();
   return (
     <RouterRoutes>
       <Route element={<AuthenticatedWall />}>
@@ -93,7 +91,6 @@ const Router: React.FC = () => {
             element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
           />
         </Route>
-
         <Route
           path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
           element={outleted(<MyBalances />)}
@@ -107,7 +104,7 @@ const Router: React.FC = () => {
         {isFeatureOn(Features.Referrals) && (
           <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
         )}
-        {isFeatureOn(Features.Rewards) && voucher && (
+        {isFeatureOn(Features.Rewards) && (
           <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
         )}
       </Route>
