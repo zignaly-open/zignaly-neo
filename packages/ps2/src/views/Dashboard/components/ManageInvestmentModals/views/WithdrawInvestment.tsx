@@ -27,7 +27,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
         {t('modal.withdrawInvestment.freeWithdrawal.description')}
       </ZigTypography>
 
-      <ZigModalActions>
+      <ZigModalActions mt={1.5}>
         <ZigButton
           id={'withdraw-modal__confirm-withdraw'}
           onClick={() => setView(EditInvestmentViews.WithdrawPerform)}

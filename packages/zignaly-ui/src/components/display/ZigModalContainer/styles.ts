@@ -139,8 +139,7 @@ export const Inline = styled("div")<{ align?: string }>`
 
 export const ZigModalActions = styled(
   withAttrs(Box, {
-    /* Will be overwritten to a smaller margin when inside Form */
-    mt: "35px",
+    mt: "28px",
   }),
 )<{
   align?: "left" | "center" | "right";
@@ -162,11 +161,7 @@ export const ZigModalForm = styled(
     flexDirection: "column",
     gap: 3,
   }),
-)`
-  > ${ZigModalActions} {
-    margin-top: 11px;
-  }
-`;
+)``;
 
 export const BackIconButton = styled(IconButton)`
   position: absolute;
