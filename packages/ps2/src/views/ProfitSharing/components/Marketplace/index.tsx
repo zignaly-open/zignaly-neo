@@ -280,14 +280,14 @@ const Marketplace: React.FC = () => {
               }}
             >
               <ZigTypography variant={'h1'} id={'marketplace__title'}>
-                {t('invest-in-services')}
+                {t('invest-in-services')}11111111
               </ZigTypography>
               <ZigTypography
                 variant={'body1'}
                 id={'marketplace__description'}
                 color='neutral300'
               >
-                {t('invest-in-services-explainer')}
+                {t('invest-in-services-explainer')}1111111
               </ZigTypography>
             </Box>
             {/* <TopServicesCards
