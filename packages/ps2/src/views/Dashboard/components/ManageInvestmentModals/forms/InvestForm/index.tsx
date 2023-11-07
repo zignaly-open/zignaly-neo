@@ -28,6 +28,7 @@ import { InvestmentViews } from '../../types';
 import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
 import { trackAllocation } from 'util/analytics';
 import { useCurrentUser } from 'apis/user/use';
+import { getMinInvestmentAmount } from '../../../../../../whitelabel';
 
 function InvestForm({ view, setView, close }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -60,6 +61,8 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
           .minus(serviceDetails.invested)
           .minus(serviceDetails.pending)
           .toString(),
+        invested: 0,
+        min: getMinInvestmentAmount(service.ssc),
         coin: service.ssc,
       }),
     ),
