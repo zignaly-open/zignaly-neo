@@ -23,7 +23,7 @@ const GlobalAppStyle = getGlobalAppStyle({
 
 const IntercomStyle = createGlobalStyle`
   @media (max-width: 600px) {
-    .${whitelabel.intercomClass} .${whitelabel.intercomLightWeightClass}{
+    .intercom-launcher-frame .intercom-launcher{
       display: none;
     }
   }
@@ -60,7 +60,7 @@ export default () => {
     <>
       <LocalFontsStyle />
       <GlobalAppStyle />
-      <IntercomStyle />
+      {whitelabel.intercomId && <IntercomStyle />}
       {whitelabel.loadFontsFromGoogle && (
         <GoogleFontLoader
           fonts={[

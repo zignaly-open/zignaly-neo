@@ -266,7 +266,7 @@ const ZigDrawer = () => {
                   </ListItemButton>
                 </ListItem>
               )}
-              {whitelabel.intercomClass && (
+              {whitelabel.intercomId && (
                 <ListItem disablePadding>
                   <ListItemButton
                     id='drawer__help-chat'
@@ -274,14 +274,14 @@ const ZigDrawer = () => {
                       if (lightWeightIntercom) {
                         (
                           document.querySelector(
-                            `.${whitelabel.intercomLightWeightClass}`,
+                            'intercom-launcher',
                           ) as HTMLElement
                         )?.click();
                         setLightWeightIntercom(false);
                       } else {
                         (
                           document.querySelector(
-                            `.${whitelabel.intercomClass}`,
+                            'intercom-launcher-frame',
                           ) as HTMLElement
                         )?.click();
                       }

@@ -10,6 +10,5 @@ export default {
     medium: 'https://medium.com/zignaly',
     linkedin: 'https://www.linkedin.com/company/zignaly/',
   },
-  intercomClass: 'intercom-launcher-frame',
-  intercomLightWeightClass: 'intercom-launcher',
+  intercomId: 'asjdgajshgdjahgsdha',
 } as WhitelabelOverride;

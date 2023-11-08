@@ -30,8 +30,7 @@ export type WhitelabelOverride = {
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
   theme?: string;
-  intercomClass?: string;
-  intercomLightWeightClass?: string;
+  intercomId?: string;
   social: Record<
     | 'telegram'
     | 'twitter'
