@@ -31,6 +31,11 @@ body {
     overflow: overlay;
     color-scheme: dark;
   }
+  @media (max-width: 600px) {
+    .${whitelabel.intercomClass} .${whitelabel.intercomLightWeightClass}{
+      display: none;
+    }
+  }
 
   /* Use default scrollbar on Safari because it doesn't support overflow: overlay */
   ${!window.safari && NiceScrollbar}

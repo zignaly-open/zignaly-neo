@@ -66,7 +66,8 @@
   },
   "navigation-menu": {
     "profit-sharing": "Browse Top Traders",
-    "become-trader": "Offer your Trading Services"
+    "become-trader": "Offer your Trading Services",
+    "ping-us": "Help chat"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
