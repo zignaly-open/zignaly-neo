@@ -157,7 +157,11 @@ const MyDashboard: React.FC = () => {
                 )}
               </Box>
             ) : (
-              <ZigTypography variant='body2' color='neutral400'>
+              <ZigTypography
+                variant='body2'
+                color='neutral400'
+                sx={!md && { whiteSpace: 'normal' }}
+              >
                 {t('tableHeader.1-mo.no-data')}
               </ZigTypography>
             )}

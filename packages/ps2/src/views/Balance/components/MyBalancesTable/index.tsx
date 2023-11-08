@@ -337,7 +337,7 @@ const MyBalancesTable = (): JSX.Element => {
                   {t('action:buy-crypto')}
                 </Box>
               </ZigButton>
-              {exchangeType === 'spot' && (
+              {exchangeType === 'spot' && hasNonZeroBalance && (
                 <ZigButton
                   variant={'outlined'}
                   onClick={() => {
