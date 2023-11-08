@@ -35,6 +35,11 @@ export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
 export { default as Avatar } from "./components/display/Avatar";
 export { default as ZigAlertMessage, ErrorMessage } from "./components/display/ZigAlertMessage";
+export {
+  default as ZigModalContainer,
+  ZigModalActions,
+  ZigModalForm,
+} from "./components/display/ZigModalContainer";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigCopyText } from "./components/display/ZigCopyText";
 export { default as ZigProgressBar } from "./components/display/ZigProgressBar";
@@ -52,6 +57,7 @@ export type {
 export { createColumnHelper } from "@tanstack/react-table";
 export type { ColumnDef } from "@tanstack/react-table";
 export { default as ZigTable } from "./components/display/ZigTable";
+export type { ZigTableQueryRef } from "./components/display/ZigTable/types";
 export { downloadTableCsv } from "./components/display/ZigTable/util";
 export { default as DateLabel } from "./components/display/ZigTable/components/DateLabel"; // yes, this is used
 export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
@@ -72,7 +78,7 @@ export { NiceScrollbar } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this
-export { styledIf } from "utils/styled";
+export { styledIf, withAttrs } from "utils/styled";
 
 // Layouts
 // TODO: questionable, probably should move to ps2
@@ -84,3 +90,8 @@ export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";
+
+// hooks
+export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
+export { getGlobalAppStyle } from "./theme/globalAppStyle";
+export { fixSearchParams } from "./utils/search";

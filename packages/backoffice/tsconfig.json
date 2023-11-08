@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "crypto": [
+        "./node_modules/crypto-browserify"
+      ],
+      "https": [
+        "./node_modules/https-browserify"
+      ]
+    }
+  }
+}

@@ -13,6 +13,8 @@ import {
   ZigButton,
   ZigCopyText,
   ZigInput,
+  ZigModalActions,
+  ZigModalForm,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
@@ -32,7 +34,6 @@ import { formTypeToBackendPayloadType } from '../util';
 import { useCheck2FA } from '../../../../../apis/user/use';
 import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
-import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function EditApiKeysModal({
   close,
@@ -118,7 +119,7 @@ function EditApiKeysModal({
         </ZigTypography>
       )}
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         {!isCreate && (
           <Controller
             name='alias'
@@ -268,7 +269,7 @@ function EditApiKeysModal({
           )}
         </div>
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'api-key__save-and-close'}
             variant={'contained'}
@@ -279,8 +280,8 @@ function EditApiKeysModal({
           >
             {t('action:save-and-close')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </ZModal>
   );
 }

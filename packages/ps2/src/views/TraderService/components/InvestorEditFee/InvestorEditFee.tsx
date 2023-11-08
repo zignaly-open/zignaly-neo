@@ -1,8 +1,13 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
-import ZModal, { ModalActions } from '../../../../components/ZModal';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import ZModal from '../../../../components/ZModal';
+import {
+  ZigButton,
+  ZigInput,
+  ZigModalActions,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box, InputAdornment } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { useToast } from '../../../../util/hooks/useToast';
@@ -126,7 +131,7 @@ function InvestorEditFee({
           )}
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'edit-success-fee__save'}
             loading={isLoading}
@@ -136,7 +141,7 @@ function InvestorEditFee({
           >
             {t('actions:save')}
           </ZigButton>
-        </ModalActions>
+        </ZigModalActions>
       </form>
     </ZModal>
   );

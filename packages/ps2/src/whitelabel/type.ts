@@ -18,6 +18,9 @@ export type WhitelabelOverride = {
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: boolean;
+  minInvestment?: Partial<
+    Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
+  >;
   featureOverrides: Record<Partial<Features>, boolean>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
@@ -26,7 +29,7 @@ export type WhitelabelOverride = {
   background?: string;
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
-  theme: string;
+  theme?: string;
   intercomClass?: string;
   intercomLightWeightClass?: string;
   social: Record<

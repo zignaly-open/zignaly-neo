@@ -7,6 +7,8 @@ import {
   ZigButton,
   ZigInputAmount,
   ZigSlider,
+  ZigModalActions,
+  ZigModalForm,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
 import {
@@ -16,7 +18,6 @@ import {
 } from '../../../../../../apis/investment/use';
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Form, ModalActions } from 'components/ZModal';
 import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { useServiceDetails } from 'apis/service/use';
@@ -28,6 +29,7 @@ import { InvestmentViews } from '../../types';
 import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
 import { trackAllocation } from 'util/analytics';
 import { useCurrentUser } from 'apis/user/use';
+import { getMinInvestmentAmount } from '../../../../../../whitelabel';
 
 function InvestForm({ view, setView, close }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -60,6 +62,8 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
           .minus(serviceDetails.invested)
           .minus(serviceDetails.pending)
           .toString(),
+        invested: 0,
+        min: getMinInvestmentAmount(service.ssc),
         coin: service.ssc,
       }),
     ),
@@ -127,7 +131,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   );
 
   return (
-    <Form onSubmit={handleSubmit(onSubmitInvest)}>
+    <ZigModalForm onSubmit={handleSubmit(onSubmitInvest)}>
       <Controller
         name={'amountTransfer'}
         control={control}
@@ -202,7 +206,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         />
       </Box>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'invest-modal__continue'}
           size={'large'}
@@ -212,8 +216,8 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         >
           {t('form.button.transfer-now')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 }
 

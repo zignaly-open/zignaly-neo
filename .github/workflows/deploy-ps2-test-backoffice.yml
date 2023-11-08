@@ -1,0 +1,14 @@
+name: PS2 Test Backoffice deploy
+on:
+  push:
+    branches:
+      - feat/backoffice
+      - master
+
+jobs:
+  deploy:
+    name: PS2 Test Backoffice deploy
+    uses: ./.github/workflows/ps2-backoffice-deploy.yml
+    secrets: inherit
+    with:
+      deploy-env: test-backoffice

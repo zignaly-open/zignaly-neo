@@ -1,4 +1,4 @@
-import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
+import { TRANSACTION_TYPE } from 'apis/coin/types';
 
 export const TRANSACTION_TYPE_NAME = {
   [TRANSACTION_TYPE.DEPOSIT]: 'type.deposit',
@@ -16,6 +16,5 @@ export const TRANSACTION_TYPE_NAME = {
   [TRANSACTION_TYPE.SYSTEM]: 'type.system',
 };
 
-export type TransactionsTableDataType = Transaction & { assetName: string };
 export type Side = 'to' | 'from';
 export type SideType = 'service' | 'external' | 'zignaly';

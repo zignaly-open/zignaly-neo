@@ -77,6 +77,8 @@
   },
   "invest-modal": {
     "invest-with": "Invest with",
+    "min-not-reached": "Minimum investment {{ value, prettyNumberFull }} {{ coin }}",
+    "min-not-reached-invested": "Min investment {{ value, prettyNumberFull }} {{ coin }} (you need at least {{ newMin, prettyNumberFull }} {{ coin }})",
     "amount-to-invest": "Amount to Invest:",
     "type-transfer": "Type the word <0>“{{word}}”</0> in the field below to agree with the transfer:",
     "type-transfer-placeholder": "Type “{{word}}” in here",
