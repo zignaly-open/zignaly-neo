@@ -4,12 +4,51 @@ import i18n from 'util/i18n/i18next';
 import * as yup from 'yup';
 import { inputAmountValidation } from 'util/validation';
 
-export const investAmountValidation = (
-  max: string,
-  coin: string,
-  balance: string,
-) =>
-  inputAmountValidation({ balance, max, coin })
+export const investAmountValidation = ({
+  min,
+  max,
+  coin,
+  invested,
+  balance,
+}: {
+  min?: number;
+  max: string;
+  coin: string;
+  balance: string;
+  invested?: number;
+}) => {
+  return inputAmountValidation({ balance, max, coin })
+    .test(
+      'min-investment',
+      i18n.t('edit-investment:invest-modal.min-not-reached', {
+        coin,
+        value: min,
+      }),
+      (val) =>
+        // we do not show this error when the user has invested anything
+        !!invested ||
+        !min ||
+        (min > 0 &&
+          new BigNumber(val)
+            .plus(new BigNumber(invested))
+            .isGreaterThanOrEqualTo(min)),
+    )
+    .test(
+      'min-investment-invested',
+      i18n.t('edit-investment:invest-modal.min-not-reached-invested', {
+        coin,
+        value: min,
+        newMin: +new BigNumber(min).minus(new BigNumber(invested)).toString(),
+      }),
+      (val) =>
+        !invested ||
+        !min ||
+        (invested > 0 &&
+          min > 0 &&
+          new BigNumber(val)
+            .plus(new BigNumber(invested))
+            .isGreaterThanOrEqualTo(min)),
+    )
     .test(
       'sbt',
       i18n.t('edit-investment:invest-modal.max-reached'),
@@ -25,18 +64,28 @@ export const investAmountValidation = (
       }),
       (val) => new BigNumber(val).isLessThanOrEqualTo(max),
     );
+};
 
 export const editInvestmentValidation = ({
-  max,
-  coin,
-  balance,
-}: {
-  max: string;
-  coin: string;
-  balance: string;
+  checkTransferInput = false,
+  ...rest
+}: Parameters<typeof investAmountValidation>[0] & {
   checkTransferInput?: boolean;
 }) =>
   yup.object().shape({
-    amountTransfer: investAmountValidation(max, coin, balance),
+    amountTransfer: investAmountValidation(rest),
+    transferConfirm: yup
+      .string()
+      .test(
+        'text-matches',
+        'edit-investment:invest-modal.transfer-error',
+        function (value) {
+          return (
+            !checkTransferInput ||
+            value.toLocaleLowerCase() ===
+              this.parent.transferLabelForValidation?.toLocaleLowerCase()
+          );
+        },
+      ),
     understandRisk: yup.boolean().oneOf([true], 'error:error.required'),
   });

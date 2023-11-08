@@ -18,6 +18,10 @@ export const isFeatureOn = (feature: Features): boolean => {
   );
 };
 
+export function getMinInvestmentAmount(coin: string): number {
+  return whitelabel.minInvestment?.[coin] || 0;
+}
+
 export const maybeOverrideEndpoint = (
   endpoint: OverrideableEndpoints,
 ): string => whitelabel.endpointOverrides?.[endpoint] || endpoint;
