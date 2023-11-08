@@ -6,7 +6,7 @@
     "precommit": "yarn lint-staged",
     "start": "PORT=3001 react-app-rewired start",
     "build": "react-app-rewired build && generate-version",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
