@@ -17,7 +17,7 @@ export const investAmountValidation = ({
   balance: string;
   invested?: number;
 }) => {
-  return inputAmountValidation({ balance, max, coin })
+  return inputAmountValidation({ balance, coin })
     .test(
       'min-investment',
       i18n.t('edit-investment:invest-modal.min-not-reached', {
