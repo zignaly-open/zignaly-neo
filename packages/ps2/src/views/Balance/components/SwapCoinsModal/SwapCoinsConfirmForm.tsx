@@ -2,11 +2,11 @@ import React from 'react';
 import { Box, Divider, Grid, useMediaQuery } from '@mui/material';
 import {
   ZigButton,
+  ZigModalActions,
   ZigPriceLabel,
   ZigSwapCircleIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 import { useTranslation } from 'react-i18next';
 import { SwapCoinsConfirmFormProps } from './types';
@@ -157,7 +157,7 @@ const SwapCoinsConfirmForm = ({
         />
       </Box>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'swap-coins-confirm-modal__confirm-swap'}
           onClick={handleConvert}
@@ -168,7 +168,7 @@ const SwapCoinsConfirmForm = ({
         >
           {t('confirmation.confirm')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
     </Grid>
   );
 };

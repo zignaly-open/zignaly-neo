@@ -9,6 +9,7 @@ import {
   ZigTypography,
   ZigInputAmount,
   ZigSlider,
+  ZigModalActions,
   ZigAlertMessage,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
@@ -22,7 +23,6 @@ import {
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { useDebounce } from 'react-use';
@@ -211,7 +211,7 @@ function EditInvestmentForm({
             )}
           />
 
-          <ModalActions direction='column' mt='25px'>
+          <ZigModalActions direction='column' mt='25px'>
             <ZigButton
               variant={'text'}
               id={'edit-investment-modal__withdraw'}
@@ -227,7 +227,7 @@ function EditInvestmentForm({
             >
               {t('form.link.withdraw')}
             </ZigButton>
-          </ModalActions>
+          </ZigModalActions>
         </>
       )}
     </Form>

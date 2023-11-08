@@ -8,6 +8,8 @@ import {
   ZigTypography,
   ZigInputAmount,
   ZigSlider,
+  ZigModalForm,
+  ZigModalActions,
 } from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
@@ -22,7 +24,6 @@ import { useToast } from '../../../../../../util/hooks/useToast';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
 import { trimZeros } from '@zignaly-open/ui';
-import { Form, ModalActions } from 'components/ZModal';
 import { getMinInvestmentAmount } from '../../../../../../whitelabel';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
@@ -94,7 +95,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     return <CenteredLoader />;
   }
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
       <ZigTypography
         id={'withdraw-modal__replace-amount-text'}
         textAlign='center'
@@ -144,7 +145,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         )}
       />
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'withdraw-modal__confirm-withdraw'}
           type={'submit'}
@@ -154,8 +155,8 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         >
           {t('button')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 };
 

@@ -9,6 +9,8 @@ import {
   CenteredLoader,
   ZigInputAmount,
   ZigListIcon,
+  ZigModalActions,
+  ZigModalForm,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
 import { Box, useMediaQuery } from '@mui/material';
@@ -19,7 +21,6 @@ import {
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { withdrawAmountValidation } from './validations';
-import { Form, ModalActions } from 'components/ZModal';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
@@ -183,7 +184,7 @@ function WithdrawForm({
   }
 
   return (
-    <Form
+    <ZigModalForm
       onSubmit={handleSubmit((data) => {
         setStep('confirm');
         setConfirmationData(data);
@@ -314,7 +315,7 @@ function WithdrawForm({
             )}
           </Box>
 
-          <ModalActions position='relative'>
+          <ZigModalActions position='relative'>
             <ZigButton
               id={'withdraw-modal__continue'}
               size={'large'}
@@ -344,10 +345,10 @@ function WithdrawForm({
             >
               {t('history')}
             </ZigButton>
-          </ModalActions>
+          </ZigModalActions>
         </>
       )}
-    </Form>
+    </ZigModalForm>
   );
 }
 

@@ -1,0 +1,18 @@
+{
+  "table": {
+    "userId": "User ID",
+    "agentId": "Agent ID",
+    "date": "Date",
+    "user": "User email",
+    "agent": "Agent email",
+    "action": "Action"
+  },
+  "statuses": {
+    "disable_2fa": "Disable 2FA",
+    "unban_user": "Unban user",
+    "ban_user": "Ban user",
+    "approve_deposit": "Approve deposit",
+    "approve_withdrawal": "Approve withdrawal",
+    "reject_withdrawal": "Reject withdrawal"
+  }
+}

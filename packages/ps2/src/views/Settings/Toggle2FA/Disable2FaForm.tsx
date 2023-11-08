@@ -3,6 +3,8 @@ import {
   ErrorMessage,
   ZigButton,
   ZigInput,
+  ZigModalActions,
+  ZigModalForm,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +13,6 @@ import { useDisable2FAMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
-import { Form, ModalActions } from 'components/ZModal';
 import { useToast } from 'util/hooks/useToast';
 import { useDispatch } from 'react-redux';
 import { enable2FA } from 'apis/user/store';
@@ -60,7 +61,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
       >
         {t('disable-2fa.description')}
       </ZigTypography>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='code'
           control={control}
@@ -80,7 +81,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           id={'disable-two-fa_security'}
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'disable-two-fa__submit'}
             type='submit'
@@ -91,8 +92,8 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           >
             {t('disable-2fa.title')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </>
   );
 };

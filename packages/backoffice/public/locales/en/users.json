@@ -1,0 +1,36 @@
+{
+  "actions": {
+    "disable2FA": "Disable 2FA",
+    "disable2FA-short": "Disable",
+    "disable2FA-confirm": "Disable 2FA for {{email}}",
+    "ban-confirm": "Ban {{email}}",
+    "unban-confirm": "Unban {{email}}",
+    "ban": "Ban",
+    "ban-user": "Ban user",
+    "unban": "Unban",
+    "unban-user": "Unban user"
+  },
+  "table": {
+    "subscriptionCode": "Code",
+    "subscriptionLevel": "Subscription",
+    "kycLevels": "KYC",
+    "isBanned": "Banned",
+    "userId": "ID",
+    "email": "E-mail",
+    "2faEnabled": "2FA",
+    "accessLevel": "Access Level",
+    "accessLevel-short": "Level"
+  },
+  "accessLevels": {
+    "Banned": "Banned",
+    "NotVerified": "Not Verified",
+    "KycPending": "Kyc Pending",
+    "NoSubscription": "No Subscription",
+    "Frozen": "Frozen",
+    "KycExpired": "Kyc Expired",
+    "SubscriptionExpired": "Subscription Expired",
+    "Normal": "Normal",
+    "Support": "Support",
+    "Admin": "Admin"
+  }
+}

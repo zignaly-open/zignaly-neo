@@ -4,6 +4,8 @@ import {
   ZigInput,
   ZigSelect,
   ZigTypography,
+  ZigModalForm,
+  ZigModalActions,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,7 +18,6 @@ import { Controller, useForm } from 'react-hook-form';
 import Countries from 'i18n-iso-countries';
 import { EditProfileValidation } from './validations';
 import { EditProfileFormType } from './types';
-import { Form, ModalActions } from 'components/ZModal';
 import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { Grid } from '@mui/material';
@@ -125,7 +126,7 @@ const EditProfileForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
           <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
             <Controller
@@ -283,7 +284,7 @@ const EditProfileForm = () => {
           </Grid>
         </Box>
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'edit-profile__submit'}
             type='submit'
@@ -294,8 +295,8 @@ const EditProfileForm = () => {
           >
             {t('edit-profile.update-profile')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </>
   );
 };
