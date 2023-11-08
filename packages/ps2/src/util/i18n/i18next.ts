@@ -103,6 +103,11 @@ i18n
             maximumFractionDigits: 2,
           });
         }
+        if (format === 'prettyNumberFull' && typeof value === 'number') {
+          return Number(+value).toLocaleString(undefined, {
+            maximumFractionDigits: 20,
+          });
+        }
         return `${value}`;
       },
     },
