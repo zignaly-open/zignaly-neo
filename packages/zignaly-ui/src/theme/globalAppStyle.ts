@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { whitelabel } from "@zignaly-open/ps2/src/whitelabel";
 import { NiceScrollbar } from "../utils/css";
 
 // Copied from webapp-neo
@@ -17,6 +18,11 @@ body {
     color: #fff;
     overflow: overlay;
     color-scheme: dark;
+  }
+  @media (max-width: 600px) {
+    .${whitelabel.intercomClass} .${whitelabel.intercomLightWeightClass}{
+      display: none;
+    }
   }
 
   /* Use default scrollbar on Safari because it doesn't support overflow: overlay */
