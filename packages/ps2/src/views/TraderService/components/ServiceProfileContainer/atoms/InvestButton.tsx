@@ -92,7 +92,7 @@ const InvestButton: React.FC<{
             textAlign: 'center',
             position: 'absolute',
             bottom: '-25px',
-            right: '50px',
+            width: '100%',
           }}
         >
           <OtherAccountsButton service={service} />
