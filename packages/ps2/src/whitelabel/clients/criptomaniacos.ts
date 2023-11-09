@@ -2,7 +2,7 @@ import { Features, WhitelabelOverride } from '../type';
 import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
-  title: 'Criptomaniacos',
+  title: 'Lastra',
   helpUrl: 'https://cmania.co/suporte-zig',
   featureOverrides: {
     [Features.Referrals]: false,
@@ -24,7 +24,7 @@ export default {
   translationOverrides: true,
   xSource: 'criptomaniacos',
   mainAppLink: ROUTE_DASHBOARD,
-  logo: '/images/whitelabel/criptomaniacos/logo-horizontal.svg',
+  logo: '/images/whitelabel/lastra/logo-horizontal2.png',
   social: {
     twitter: 'https://cmania.co/zig-xtwitter',
     telegram: 'https://cmania.co/zig-tg',
