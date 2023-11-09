@@ -61,7 +61,7 @@ const ServiceInformation: React.FC<{
         {sm && <Separator />}
         {sm && (
           <Tooltip
-            title={createdAt.toLocaleDateString('en-EN', {
+            title={createdAt.toLocaleDateString('zh-Hans-CN', {
               year: 'numeric',
               month: '2-digit',
               day: '2-digit',
