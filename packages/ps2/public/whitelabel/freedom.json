@@ -1,0 +1,30 @@
+{
+  "short_name": "Obsidian Freedom",
+  "name": "Obsidian Freedom",
+  "icons": [
+    {
+      "src": "/images/whitelabel/freedom/obsidian-logo32.png",
+      "sizes": "32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/whitelabel/freedom/obsidian-logo64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/whitelabel/freedom/obsidian-logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/whitelabel/freedom/obsidian-logo512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#7682F7",
+  "background_color": "#080810"
+}

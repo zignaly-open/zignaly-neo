@@ -14,13 +14,6 @@ export default {
   endpointOverrides: {
     'marketplace/': 'market',
   },
-  minInvestment: {
-    USDT: 2,
-    ETH: 0.0001,
-    BTC: 0.0001,
-    BNB: 0.0001,
-    USDC: 2,
-  },
   translationOverrides: true,
   xSource: 'criptomaniacos',
   mainAppLink: ROUTE_DASHBOARD,
