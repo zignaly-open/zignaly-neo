@@ -84,7 +84,7 @@
     "type-transfer-placeholder": "Type “{{word}}” in here",
     "transfer-error": "Invalid value. Please type the correct word.",
     "max-funds": "Exceeds maximum funds allowed in this service. Invest max. {{max}} {{coin}}.",
-    "max-reached": "Cannot invest in this service because it has reached Maximum Funds limit.",
+    "max-reached": "Maximum funds in service reached. Try a different service",
     "transfer-label": "Transfer",
     "i-understand-risk": "I understand and accept that my funds will be transferred to the Service Pool account and that my funds are at risk"
   },
