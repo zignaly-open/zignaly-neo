@@ -1,0 +1,16 @@
+name: PS2 Obsidian Freedom
+on:
+  push:
+    branches:
+      - feat/obsidian-freedom
+    tags:
+      - 'release-ps2-*'
+      - 'release-ps2_of-*'
+
+jobs:
+  deploy:
+    name: PS2 Obsidian Freedom deploy
+    uses: ./.github/workflows/ps2-deploy.yml
+    secrets: inherit
+    with:
+      deploy-env: obsidian-freedom
