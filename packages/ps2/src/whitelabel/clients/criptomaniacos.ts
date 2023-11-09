@@ -22,7 +22,9 @@ export default {
   xSource: 'criptomaniacos',
   mainAppLink: ROUTE_DASHBOARD,
   background: '#1A1A1A',
-  backgroundImage: `/background-dark.${isWebpSupported() ? 'webp' : 'png'}`,
+  backgroundImage: `/background-dark-grayscale.${
+    isWebpSupported() ? 'webp' : 'png'
+  }`,
   logo: '/images/whitelabel/lastra/logo-horizontal2.png',
   social: {
     twitter: 'https://cmania.co/zig-xtwitter',
