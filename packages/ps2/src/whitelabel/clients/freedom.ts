@@ -13,6 +13,13 @@ export default {
   endpointOverrides: {
     'marketplace/': 'market',
   },
+  minInvestment: {
+    USDT: 2,
+    ETH: 0.0001,
+    BTC: 0.0001,
+    BNB: 0.0001,
+    USDC: 0.0001,
+  },
   translationOverrides: false,
   xSource: 'freedom',
   mainAppLink: ROUTE_DASHBOARD,
