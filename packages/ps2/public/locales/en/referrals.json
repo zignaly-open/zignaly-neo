@@ -1,6 +1,6 @@
 {
-    "title": "{{commission}}% Zignaly Referral Program",
-    "description": "Earn up to <0>{{commission}}% of Zignaly’s success fees</0> PLUS a trader match <0>up to {{multiplier}}x.</0> That’s {{maxCommission}}%!!",
+    "title": "{{commission}}% {{ whitelabel }} Referral Program",
+    "description": "Earn up to <0>{{commission}}% of {{ whitelabel }}’s success fees</0> PLUS a trader match <0>up to {{multiplier}}x.</0> That’s {{maxCommission}}%!!",
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
     "what-they-get": "What they get",
@@ -9,11 +9,11 @@
     "start-earning-steps": {
         "step-1": {
             "title": "Share Your Invite Link",
-            "description": "Send your referral link to friends who will sign up to Zignaly"
+            "description": "Send your referral link to friends who will sign up to {{ whitelabel }}"
         },
         "step-2": {
-            "title": "Friends Invest on Zignaly",
-            "description": "Have your friends invest in at least one trader on Zignaly"
+            "title": "Friends Invest on {{ whitelabel }}",
+            "description": "Have your friends invest in at least one trader on {{ whitelabel }}"
         },
         "step-3": {
             "title": "You Earn and They Save",
@@ -61,17 +61,17 @@
         "deposit-trader-cta": "Have a chance at offering your services to <0>450,000+</0> investors!",
         "friend-cta": "Sign up and\n get $20 in ZIG",
         "trader-cta": "Want to earn $20\nand a stream\nof investors?",
-        "scan-qr": "Scan the QR code and join me on Zignaly!",
+        "scan-qr": "Scan the QR code and join me on {{ whitelabel }}!",
         "customize-text": "Customize your invitation:",
-        "invite-text-friend": "Let's earn together! Join me at Zignaly and invest with your favourite Crypto Fund Managers!",
-        "invite-text-trader": "Let's earn together! Join me at Zignaly and create your own Crypto Fund!",
+        "invite-text-friend": "Let's earn together! Join me at {{ whitelabel }} and invest with your favourite Crypto Fund Managers!",
+        "invite-text-trader": "Let's earn together! Join me at {{ whitelabel }} and create your own Crypto Fund!",
         "scan-join": "Scan the QR code and join me on <0>app.zignaly.com</0>",
         "invite-code": "Code: <0>{{code}}</0>",
         "ugly-friend-cta": "Invest in a vetted and curated marketplace of crypto fund managers",
-        "ugly-trader-cta": "Become a Crypto <0>Fund Manager</0> at Zignaly!"
+        "ugly-trader-cta": "Become a Crypto <0>Fund Manager</0> at {{ whitelabel }}!"
     },
     "share": {
-        "email-subject": "Zignaly, a new way to trade",
+        "email-subject": "{{ whitelabel }}, a new way to trade",
         "facebook-hashtags": "#crypto #trading"
     },
     "share-link": "Share your invite link:",
