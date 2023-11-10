@@ -7,7 +7,7 @@ import { ROUTE_REFERRALS } from '../../../../routes';
 import { GradientBorderButtonWrapper } from './atoms';
 import { useTiersData } from 'apis/referrals/use';
 
-const ReferralButton = () => {
+const ReferralButton = ({ fullSize = true }: { fullSize?: boolean }) => {
   const { t } = useTranslation('common');
   const { maxCommission } = useTiersData();
 
@@ -28,6 +28,7 @@ const ReferralButton = () => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+            minWidth: !fullSize && '55px',
           }}
           variant='outlined'
         >
@@ -36,39 +37,41 @@ const ReferralButton = () => {
             style={{ height: 22, width: 22 }}
             alt={'referral'}
           />
-          <Box
-            component={'span'}
-            sx={{
-              display: 'flex',
-              ml: 1,
-              flexDirection: 'column',
-              justifyContent: 'center',
-            }}
-          >
-            <ZigTypography
-              color={'primary'}
+          {fullSize && (
+            <Box
+              component={'span'}
               sx={{
-                fontSize: '13px',
-                lineHeight: 1,
-                textAlign: 'center',
+                display: 'flex',
+                ml: 1,
+                flexDirection: 'column',
+                justifyContent: 'center',
               }}
-              className='referral-button__title'
             >
-              {t('header.referrals.title', { commission: maxCommission })}
-            </ZigTypography>
-            <ZigTypography
-              sx={{
-                mt: '1px',
-                fontSize: '11px',
-                lineHeight: 1.3,
-                textAlign: 'center',
-              }}
-              color='neutral200'
-              className='referral-button__subtitle'
-            >
-              {t('header.referrals.description')}
-            </ZigTypography>
-          </Box>
+              <ZigTypography
+                color={'primary'}
+                sx={{
+                  fontSize: '13px',
+                  lineHeight: 1,
+                  textAlign: 'center',
+                }}
+                className='referral-button__title'
+              >
+                {t('header.referrals.title', { commission: maxCommission })}
+              </ZigTypography>
+              <ZigTypography
+                sx={{
+                  mt: '1px',
+                  fontSize: '11px',
+                  lineHeight: 1.3,
+                  textAlign: 'center',
+                }}
+                color='neutral200'
+                className='referral-button__subtitle'
+              >
+                {t('header.referrals.description')}
+              </ZigTypography>
+            </Box>
+          )}
         </ZigButton>
       </GradientBorderButtonWrapper>
     </Link>
