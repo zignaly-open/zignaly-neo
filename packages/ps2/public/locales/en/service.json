@@ -2,7 +2,7 @@
   "service-by": "by <0>{{name}}</0>",
   "service-age": "Started <0>{{date}}</0> ago",
   "link-copied": "Link copied to clipboard!",
-  "logo-alt": "{{ whitelabel }} - Profit Sharing / Copy Trading Service Profile Logo of {{name}}",
+  "logo-alt": "Zignaly - Profit Sharing / Copy Trading Service Profile Logo of {{name}}",
   "liquidated": "Liquidated",
   "failed-to-load": "Failed to load. <0>Retry</0>",
   "invested-label": "Invested",
@@ -71,7 +71,7 @@
     "name": "Service Name:",
     "logo": "Edit Logo",
     "description": "Description:",
-    "success-fee-desc": "Amount of profits you will charge your investors (including {{ zignalyFee }}% {{ whitelabel }} fee)",
+    "success-fee-desc": "Amount of profits you will charge your investors (including {{ zignalyFee }}% Zignaly fee)",
     "pool-size": "Maximum pool size:",
     "pool-size-desc": "Max you'll accept from investors",
     "visibility": {
@@ -92,8 +92,8 @@
       "success-fee-range": "Must be 0 or an integer between 10 and 75"
     },
     "commission": {
-      "title": "Participate in {{ whitelabel }} referral promotion:",
-      "description": "{{ whitelabel }} is offering referrers up to 100% of it's own success fees. To bring more investors to your service, you can match {{ whitelabel }}'s offer or exceed it.",
+      "title": "Participate in Zignaly referral promotion:",
+      "description": "Zignaly is offering referrers up to 100% of it's own success fees. To bring more investors to your service, you can match Zignaly's offer or exceed it.",
       "max-success-fee": "Max success fee paid to referrers:",
       "promo-preview": "Promo preview:",
       "how-it-works": "See how it works",
@@ -117,7 +117,7 @@
     "minimum-balance": "To trade and allow investors to invest, you need to invest at least \n {{ minValue }} {{ minValueCoin }} in your service",
     "profits-explainer": "Decide how much of your profits from trading and success fees you would like to request to transfer out automatically.",
     "please-verify": "*Please review your info. Type and base can't be changed later",
-    "zero-fee": "If you choose success fee = 0, {{ whitelabel }} will not charge any fee either",
+    "zero-fee": "If you choose success fee = 0, Zignaly will not charge any fee either",
     "total-fee": "Total fee",
     "you-receive": "You receive"
   },

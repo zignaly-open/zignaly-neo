@@ -78,7 +78,7 @@
     "76": "Captcha error, please try again.",
     "77": "Max user broker accounts reached for exchange",
     "78": "Could not remove an account with a balance greater than 0.",
-    "79": "The selected follower can't be suspended because they is from {{ whitelabel }} staff or contributor.",
+    "79": "The selected follower can't be suspended because they is from Zignaly staff or contributor.",
     "80": "You can not suspend yourself.",
     "81": "Exchanges accounts type futures can only be connected to one provider or copy-trader. You need to create another exchange account for using a different provider/copy-trader.",
     "82": "You need to have a description and a logo before being listed",

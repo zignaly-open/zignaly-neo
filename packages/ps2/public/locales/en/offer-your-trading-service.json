@@ -45,7 +45,7 @@
       },
       "item2": {
         "title": "FUND MANAGEMENT",
-        "description": "You can handle thousands of investors without worrying about each individual's accounting and support. {{ whitelabel }}’s team will take care of it."
+        "description": "You can handle thousands of investors without worrying about each individual's accounting and support. Zignaly’s team will take care of it."
       },
       "item3": {
         "title": "DAILY PAYOUTS",
@@ -58,7 +58,7 @@
     }
   },
   "howWorks": {
-    "title": "Reasons why the best traders offer their services in {{ whitelabel }}",
+    "title": "Reasons why the best traders offer their services in Zignaly",
     "list": {
       "item1": {
         "title": "Pool Funds",
@@ -71,7 +71,7 @@
       },
       "item3": {
         "title": "Split Profits",
-        "description": "Choose your desired success fee. {{ whitelabel }}'s share is always {{ zignalyFee }}% which must be included."
+        "description": "Choose your desired success fee. Zignaly's share is always {{ zignalyFee }}% which must be included."
       }
     }
   }

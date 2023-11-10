@@ -37,7 +37,7 @@
   },
   "update-password": {
     "title": "Update Password",
-    "description": "Update the password of your {{ whitelabel }} Account.\nFor your security, you will be logged out after clicking Update password.",
+    "description": "Update the password of your Zignaly Account.\nFor your security, you will be logged out after clicking Update password.",
     "current-password": "Current Password:",
     "new-password": "New Password:",
     "success": "Password updated successfully. Please log in again."
