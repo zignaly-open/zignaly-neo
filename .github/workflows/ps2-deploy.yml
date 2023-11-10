@@ -97,7 +97,7 @@ jobs:
           codedeploy_name: zignaly
           codedeploy_group: zignaly-staticContent-test
           codedeploy_register_only: false
-          s3_bucket: ${{ secrets.AWS_CODEDEPLOY_ACCESS_KEY }}
+          s3_bucket: ${{ secrets.AWS_CODEDEPLOY_BUCKET }}
           s3_folder: ${{ inputs.deploy-env }}
           max_polling_iterations: 60
           excluded_files: '.git/* *node_modules/*'
