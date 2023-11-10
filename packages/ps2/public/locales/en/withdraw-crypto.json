@@ -27,7 +27,7 @@
     "fee": "Fee:"
   },
   "validation": {
-    "indicateAnAddress": "You must indicate an valid address.",
+    "indicateAnAddress": "You must indicate a valid address.",
     "minWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
   },
   "notEnoughZig": "You don't have enough ZIG to pay for the withdrawal fees.",
