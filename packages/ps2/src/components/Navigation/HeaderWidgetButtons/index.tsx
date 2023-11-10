@@ -9,12 +9,13 @@ import { Features } from '../../../whitelabel/type';
 
 const HeaderWidgetButtons = () => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   return (
     <>
       <BalanceButton key={'balance'} />
       {isFeatureOn(Features.Rewards) && <RewardsButton key={'rewards'} />}
       {isFeatureOn(Features.Referrals) && md && (
-        <ReferralButton key={'referral'} />
+        <ReferralButton key={'referral'} fullSize={lg} />
       )}
     </>
   );
