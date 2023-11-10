@@ -17,10 +17,10 @@
         "number-referrals": "Number of referrals that invested in a service(s)"
     },
     "my-referrals": "My Referrals",
-    "when-you-invite": "when you invite {{invite}}+ people to {{ whitelabel }}",
+    "when-you-invite": "when you invite {{invite}}+ people to Zignaly",
     "when-you-invite-in": "when you invite {{invite}} people in:",
-    "get-by-inviting": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to {{ whitelabel }}",
-    "get-by-inviting-in": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to {{ whitelabel }} in:",
+    "get-by-inviting": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly",
+    "get-by-inviting-in": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly in:",
     "split-commission": "Split your commission with friends you invite",
     "trader-referral-link": "Your referral link to this trader:",
     "earn-success-fees": "Earn a % of success fees paid by people you invite",
