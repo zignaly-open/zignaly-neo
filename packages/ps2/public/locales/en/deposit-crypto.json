@@ -18,7 +18,7 @@
     "convert": "Convert",
     "confirm-swap-title": "Confirm Swap"
   },
-  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
+  "description": "Deposit Crypto in your {{ whitelabel }} Account. {{ whitelabel }} is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"
@@ -53,6 +53,6 @@
     "scan": "Scan for mobile deposits"
   },
   "buy-crypto": "Buy Crypto",
-  "buy-crypto-description": "Buy now Crypto easily from Zignaly using our third party partner Changelly/MoonPay.",
+  "buy-crypto-description": "Buy now Crypto easily from {{ whitelabel }} using our third party partner Changelly/MoonPay.",
   "history": "History"
 }
