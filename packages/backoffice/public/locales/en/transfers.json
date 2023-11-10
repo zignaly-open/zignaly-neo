@@ -1,0 +1,52 @@
+{
+  "actions": {
+    "approve": "Approve",
+    "reject": "Reject",
+    "approve-deposit": "Approve Deposit",
+    "reject-deposit": "Reject Deposit",
+    "approve-withdrawal": "Approve Withdrawal",
+    "reject-withdrawal": "Reject Withdrawal",
+    "approve-deposit-description": "Approve Deposit for {{amount}} {{coin}} for user {{email}}",
+    "reject-deposit-description": "Reject Deposit for {{amount}} {{coin}} for user {{email}}",
+    "approve-withdrawal-description": "Approve Withdrawal for {{amount}} {{coin}} for user {{email}}",
+    "reject-withdrawal-description": "Reject Withdrawal for {{amount}} {{coin}} for user {{email}}",
+
+    "ban-confirm": "Ban {{email}}",
+    "unban-confirm": "Unban {{email}}",
+    "ban": "Ban",
+    "unban": "Unban"
+  },
+  "operator": "Operator",
+  "depositStatuses": {
+    "pending": "Pending",
+    "reviewing": "Reviewing",
+    "blocked_by_risk": "Blocked by Risk",
+    "blocked_by_limit": "Blocked by Limit",
+    "blocked_by_error": "Blocked by Error",
+    "completed": "Completed"
+  },
+  "withdrawalStatuses": {
+    "pending": "Pending",
+    "transfer": "Transfer",
+    "sent":  "Sent",
+    "closed": "Closed",
+    "error":  "Error",
+    "pending_to_approve": "Pending Approval",
+    "approved":  "Approved",
+    "reviewing": "Revieweing",
+    "rejected":  "Rejected"
+  },
+  "table": {
+    "userId": "User ID",
+    "id": "ID",
+    "user": "User",
+    "email": "E-mail",
+    "amount": "Amount",
+    "date": "Date",
+    "transactionId": "Transaction ID",
+    "status": "Status",
+    "exposureType": "Exposure",
+    "riskLevel": "Risk Level",
+    "actions": "Actions"
+  }
+}

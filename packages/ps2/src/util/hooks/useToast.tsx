@@ -1,26 +1,6 @@
-import { toast, ToastOptions } from 'react-toastify';
-import { Toaster } from '@zignaly-open/ui';
-import React from 'react';
+import { useToast as getToastUi } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { BackendError } from '../errors';
-
-type ToastFn = (text: string, extraOptions?: ToastOptions) => void;
-
-const showToast =
-  (type: 'success' | 'error' | 'info') =>
-  (message: string, options?: ToastOptions) =>
-    toast(
-      <Toaster
-        variant={type}
-        caption={message}
-        id={type && `toast__${type}`}
-      />,
-      {
-        type: type,
-        icon: false,
-        ...options,
-      } as ToastOptions,
-    );
 
 const backendErrorText = (t: (key: string) => string, error: BackendError) => {
   const { code, msg } = error?.data?.error || {};
@@ -54,20 +34,15 @@ export const backendError = (
 
   lastShownBackendError.time = Date.now();
   lastShownBackendError.error = text;
-  showToast('error')(text);
+  getToastUi().error(text);
 };
 
-export function useToast(): {
-  success: ToastFn;
-  info: ToastFn;
-  error: ToastFn;
+export function useToast(): ReturnType<typeof getToastUi> & {
   backendError: (error?: BackendError, ignoreDuplicate?: boolean) => void;
 } {
   const { t } = useTranslation<'error'>('error');
   return {
-    success: showToast('success'),
-    error: showToast('error'),
-    info: showToast('info'),
+    ...getToastUi(),
     backendError: (error: BackendError, ignoreDuplicate: boolean) =>
       backendError(t, error, ignoreDuplicate),
   };

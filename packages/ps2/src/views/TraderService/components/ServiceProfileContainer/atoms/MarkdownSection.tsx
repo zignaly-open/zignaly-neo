@@ -1,12 +1,11 @@
 import { Box } from '@mui/system';
 import React, { useEffect, useRef, useState } from 'react';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography, withAttrs } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
 import breaks from 'remark-breaks';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { withAttrs } from 'util/styles';
 
 const MarkdownSection: React.FC<{
   title: string;

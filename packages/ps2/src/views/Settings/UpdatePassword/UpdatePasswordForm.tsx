@@ -1,12 +1,17 @@
 import React from 'react';
-import { ZigAlertMessage, ZigButton, ZigInput } from '@zignaly-open/ui';
+import {
+  ZigAlertMessage,
+  ZigButton,
+  ZigInput,
+  ZigModalForm,
+  ZigModalActions,
+} from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUpdatePasswordMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { UpdatePasswordValidation } from './validations';
 import { UpdatePasswordFormType } from './types';
-import { Form, ModalActions } from 'components/ZModal';
 import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 
@@ -49,7 +54,7 @@ const UpdatePasswordForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='password'
           control={control}
@@ -89,7 +94,7 @@ const UpdatePasswordForm = () => {
           )}
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'update-password__submit'}
             type='submit'
@@ -100,8 +105,8 @@ const UpdatePasswordForm = () => {
           >
             {t('update-password.title')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </>
   );
 };

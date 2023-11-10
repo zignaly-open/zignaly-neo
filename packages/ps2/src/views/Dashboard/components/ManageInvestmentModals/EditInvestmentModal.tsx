@@ -29,8 +29,16 @@ function EditInvestmentModal({
   close: () => void;
   serviceId: string;
 } & DialogProps): React.ReactElement {
+  const [view, setView] = useState<EditInvestmentViews>(
+    EditInvestmentViews.EditInvestment,
+  );
   const { isLoading: isLoadingInvestment, isError: isErrorLoadingInvestment } =
-    useInvestmentDetails(serviceId);
+    useInvestmentDetails(serviceId, {
+      skip: [
+        EditInvestmentViews.WithdrawSuccess,
+        EditInvestmentViews.WithdrawPerform,
+      ].includes(view),
+    });
   const {
     isLoading: isLoadingService,
     isError: isErrorLoadingService,
@@ -42,10 +50,6 @@ function EditInvestmentModal({
   const selectedInvestment = useSelectedInvestment();
   const { isLoading: isLoadingCoins, isError: isErrorLoadingCoins } =
     useCoinBalances();
-
-  const [view, setView] = useState<EditInvestmentViews>(
-    EditInvestmentViews.EditInvestment,
-  );
 
   const { t } = useTranslation(['edit-investment']);
   usePrefetchTranslation('withdraw');

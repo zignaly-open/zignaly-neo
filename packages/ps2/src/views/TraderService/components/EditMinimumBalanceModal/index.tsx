@@ -9,6 +9,7 @@ import {
   ZigButton,
   InputAmountAdvanced,
   ZigTypography,
+  ZigModalActions,
 } from '@zignaly-open/ui';
 import {
   useServiceDetails,
@@ -19,7 +20,6 @@ import { Box } from '@mui/material';
 import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from 'components/ZModal';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 type EditMinBalanceFormValues = { amountValue: InputAmountAdvancedValueType };
 
@@ -93,7 +93,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           showUnit
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'edit-balance__save'}
             loading={isLoadingManagement || isLoadingService || isUpdating}
@@ -103,7 +103,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           >
             {t('minBalanceModal.save')}
           </ZigButton>
-        </ModalActions>
+        </ZigModalActions>
       </form>
     </ZModal>
   );

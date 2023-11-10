@@ -7,10 +7,21 @@ export const TableContainer = styled("div")`
   overflow: auto hidden;
 `;
 
-export const Table = styled("table")`
+export const Table = styled("table", {
+  shouldForwardProp: (prop) => prop !== "fetching",
+})<{ fetching?: boolean }>`
   border-spacing: 0;
   width: 100%;
   border-radius: 16px;
+  ${(props) =>
+    props.fetching &&
+    css`
+      opacity: 0.5;
+      cursor: wait;
+      tbody {
+        pointer-events: none;
+      }
+    `}
 
   thead {
     height: 56px;

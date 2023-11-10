@@ -5,6 +5,8 @@ import {
   ZigButton,
   ZigButtonGroupInput,
   ZigInput,
+  ZigModalActions,
+  ZigModalForm,
   ZigSelect,
 } from '@zignaly-open/ui';
 import { Controller, useForm } from 'react-hook-form';
@@ -19,7 +21,6 @@ import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
-import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
@@ -54,14 +55,16 @@ const CreateServiceForm: React.FC<{
   const coinOptions = useMemo(
     () =>
       exchangeType
-        ? Object.keys(serviceTypesInfo?.[exchangeType])?.map((ssc: string) => {
-            const name = coins[ssc]?.name || '';
-            return {
-              value: ssc,
-              name,
-              label: <CoinOption key={ssc} coin={ssc} name={name} />,
-            };
-          })
+        ? Object.keys(serviceTypesInfo?.[exchangeType])
+            ?.map((ssc: string) => {
+              const name = coins[ssc]?.name || '';
+              return {
+                value: ssc,
+                name,
+                label: <CoinOption key={ssc} coin={ssc} name={name} />,
+              };
+            })
+            .filter((coin) => coin.value !== 'BUSD')
         : [],
     [exchangeType],
   );
@@ -91,7 +94,7 @@ const CreateServiceForm: React.FC<{
   register('serviceType');
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
       <ZigButtonGroupInputWrapper>
         <ZigButtonGroupInput
           value={exchangeType}
@@ -171,7 +174,7 @@ const CreateServiceForm: React.FC<{
       />
       <ZigAlertMessage text={t('create.please-verify')} warning />
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           variant='contained'
           type='submit'
@@ -180,8 +183,8 @@ const CreateServiceForm: React.FC<{
         >
           {t('create.next-step')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 };
 

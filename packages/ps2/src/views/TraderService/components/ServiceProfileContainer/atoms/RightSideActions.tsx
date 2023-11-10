@@ -16,6 +16,7 @@ import { Features } from '../../../../../whitelabel/type';
 import InviteButton from './InviteButton';
 import { useTiersData } from 'apis/referrals/use';
 import { Trans, useTranslation } from 'react-i18next';
+import { usePrefetchTranslation } from 'util/i18n/i18nextHelpers';
 
 enum RightSideActionStates {
   Loading,
@@ -31,6 +32,11 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('service');
+  usePrefetchTranslation([
+    ...(isFeatureOn(Features.Referrals) ? ['referrals-trader'] : []),
+    'edit-investment',
+    'deposit-crypto',
+  ]);
   const tiers = useTiersData(service.id);
   const state = useMemo<RightSideActionStates>(() => {
     if (isInvested.isLoading || tiers.isLoading)

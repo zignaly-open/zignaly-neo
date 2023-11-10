@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   createColumnHelper,
@@ -8,92 +8,46 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
-import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
+import { useExchangeCoinsList, useRefetchBalance } from 'apis/coin/use';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
+import { TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
-import { TRANSACTION_TYPE } from 'apis/coin/types';
+import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
-import { useBalanceQuery } from 'apis/user/api';
+import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
 import { TableWrapper } from './styles';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
-  const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
-    [],
-  );
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 30,
-  });
-  const { pageIndex, pageSize } = pagination;
   const { t } = useTranslation('transactions-history');
-  const transactionsEndpoint = useTransactionsHistory(
-    {
-      limit: pageSize,
-      type,
-    },
-    pageIndex,
-  );
   const coinsEndpoint = useExchangeCoinsList();
   const exchange = useActiveExchange();
-  // Trigger balance update to be sure that balance widget matches transactions data
-  useBalanceQuery(
-    {
-      exchangeInternalId: exchange?.internalId,
+  useRefetchBalance();
+
+  const defineSign = useCallback(
+    (typeTransaction: string, fromId: string) => {
+      if (
+        [
+          TRANSACTION_TYPE.PS_DEPOSIT,
+          TRANSACTION_TYPE.WITHDRAW,
+          TRANSACTION_TYPE.BUYZIG,
+        ].includes(typeTransaction) ||
+        fromId === exchange?.internalId
+      )
+        return -1;
+      else return 1;
     },
-    {
-      refetchOnMountOrArgChange: true,
-      skip: !exchange?.internalId,
-    },
+    [exchange],
   );
 
-  const defineSign = (typeTransaction: string, fromId: string) => {
-    if (
-      [
-        TRANSACTION_TYPE.PS_DEPOSIT,
-        TRANSACTION_TYPE.WITHDRAW,
-        TRANSACTION_TYPE.BUYZIG,
-      ].includes(typeTransaction) ||
-      fromId === exchange?.internalId
-    )
-      return -1;
-    else return 1;
-  };
-
-  const updateData = () => {
-    const data = transactionsEndpoint.data
-      .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-      .sort((a, b) => +new Date(b.datetime) - +new Date(a.datetime))
-      .map((transaction) => ({
-        ...transaction,
-        assetName: coinsEndpoint.data[transaction.asset]?.name,
-      }));
-    setFilteredData(data);
-  };
-
-  useEffect(() => {
-    if (transactionsEndpoint.data && coinsEndpoint.data) {
-      updateData();
-    }
-  }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
-
-  useLayoutEffect(() => {
-    // Reset pagination when infinite query is refreshed from filter change
-    if (transactionsEndpoint.page === 1) {
-      setPagination((p) => ({ ...p, pageIndex: 0 }));
-    }
-  }, [transactionsEndpoint.page]);
-
-  const columnHelper = createColumnHelper<TransactionsTableDataType>();
+  const columnHelper = createColumnHelper<Transaction>();
   const columns = useMemo(
     () => [
       columnHelper.accessor('datetime', {
@@ -114,7 +68,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
                 <CoinLabel
                   id={`balances-table-transaction__coin-${original.txId}`}
                   coin={getValue()}
-                  name={original.assetName ?? '-'}
+                  name={coinsEndpoint.data?.[original.asset]?.name ?? '-'}
                 />
               ),
               enableSorting: false,
@@ -234,19 +188,18 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         enableSorting: false,
       }),
     ],
-    [md, lg, sm],
+    [t, coinsEndpoint.data, md, lg, sm],
   );
 
   return (
     <LayoutContentWrapper
-      endpoint={[transactionsEndpoint, coinsEndpoint]}
+      endpoint={[coinsEndpoint]}
       content={() => (
         <TableWrapper>
           <ZigTable
             columnVisibility={md}
             prefixId={'transactions'}
             columns={columns}
-            data={filteredData}
             initialState={{
               sorting: [
                 {
@@ -265,14 +218,12 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
                   )
                 : undefined
             }
-            manualPagination={true}
-            pagination={pagination}
-            pageCount={
-              transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
-            }
-            onPaginationChange={setPagination}
-            loading={transactionsEndpoint.isFetching}
             emptyMessage={t('noData')}
+            useInfiniteQuery={useTransactionsHistoryQuery}
+            queryExtraParams={{
+              exchangeInternalId: exchange?.internalId,
+              type,
+            }}
           />
         </TableWrapper>
       )}

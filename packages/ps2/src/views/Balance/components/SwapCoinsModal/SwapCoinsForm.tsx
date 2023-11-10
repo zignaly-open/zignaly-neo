@@ -5,11 +5,12 @@ import {
   trimZeros,
   ZigButton,
   ZigInputAmount,
+  ZigModalActions,
+  ZigModalForm,
   ZigSwapCircleIcon,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, ModalActions } from 'components/ZModal';
 import CoinOption from '../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
 import {
   useCoinBalances,
@@ -176,7 +177,7 @@ function SwapCoinsForm({
     watch('toCoinAmount');
 
   return (
-    <Form
+    <ZigModalForm
       onSubmit={handleSubmit(({ fromCoinAmount, toCoinAmount }) => {
         setStep('confirm');
         setConfirmationData({
@@ -250,7 +251,7 @@ function SwapCoinsForm({
         )}
       />
 
-      <ModalActions position={'relative'}>
+      <ZigModalActions position={'relative'}>
         <ZigButton
           id={'swap-coins-modal__continue'}
           loading={isFetchingConvertPreview}
@@ -260,9 +261,9 @@ function SwapCoinsForm({
         >
           {t('continue')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
       {step}
-    </Form>
+    </ZigModalForm>
   );
 }
 

@@ -10,9 +10,11 @@ import { useDepositInfo } from 'apis/coin/use';
 
 function useCurrency() {
   const { value: currency } = useAsync(async () => {
-    const response = await fetch('https://www.geoplugin.net/json.gp');
+    const response = await fetch(
+      `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_IPGEOLOCATION_API_KEY}`,
+    );
     const data = await response.json();
-    return data.geoplugin_currencyCode;
+    return data.currency.code;
   }, []);
 
   return currency;
@@ -24,13 +26,7 @@ function BuyModal(props: DialogProps): React.ReactElement {
   const currency = useCurrency();
 
   return (
-    <ZModal
-      mobileFullScreen
-      wide
-      {...props}
-      close={close}
-      title={t('buy-crypto')}
-    >
+    <ZModal mobileFullScreen wide {...props} title={t('buy-crypto')}>
       <ZigTypography id={'buy-modal__description'} textAlign='center'>
         {t('buy-crypto-description')}
       </ZigTypography>

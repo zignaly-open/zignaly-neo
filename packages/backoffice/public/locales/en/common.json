@@ -1,0 +1,20 @@
+{
+  "on": "On",
+  "yes": "Yes",
+  "no": "No",
+  "off": "Off",
+  "all": "All",
+  "filter": "Filter",
+  "clear": "Clear",
+  "type-to-confirm": "Type \"{{word}}\" to confirm",
+  "generic-confirm": "Please confirm you'd like to perform this action",
+  "navigation": {
+    "login": "Login",
+    "logout": "Logout",
+    "withdrawals": "Withdrawals",
+    "logs": "Logs",
+    "deposits": "Deposits",
+    "users": "Users"
+  },
+  "no-data": "No data to show"
+}

@@ -1,12 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import { ModalActions, Form } from 'components/ZModal';
+import {
+  ZigButton,
+  ZigModalActions,
+  ZigModalForm,
+  ZigTypography,
+} from '@zignaly-open/ui';
 
 function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
   return (
-    <Form component='div'>
+    <ZigModalForm component='div'>
       <ZigTypography
         variant={'body1'}
         color={'neutral200'}
@@ -15,7 +19,7 @@ function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
       >
         {t('withdrawal-success.description')}
       </ZigTypography>
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'withdraw-modal-success__close'}
           onClick={close}
@@ -23,8 +27,8 @@ function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
         >
           {t('withdrawal-success.button')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 }
 

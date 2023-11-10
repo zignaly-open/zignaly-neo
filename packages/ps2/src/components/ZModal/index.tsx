@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Modal as MuiModal } from '@mui/material';
 import { LoaderContainer } from './styles';
-import { Loader } from '@zignaly-open/ui';
-import ModalContainer from './ModalContainer';
+import { Loader, ZigModalContainer } from '@zignaly-open/ui';
 import { ZModalProps } from './types';
 import AuthenticatedWall from '../../util/walls/AuthenticatedWall';
 import {
@@ -50,7 +49,7 @@ const ZModal: React.FC<ZModalProps> = ({
         ...(props.sx ?? {}),
       }}
     >
-      <ModalContainer
+      <ZigModalContainer
         width={width || (wide && 620)}
         title={title}
         onClickClose={close}
@@ -68,10 +67,9 @@ const ZModal: React.FC<ZModalProps> = ({
         ) : (
           <>{children}</>
         )}
-      </ModalContainer>
+      </ZigModalContainer>
     </MuiModal>
   );
 };
 
 export default ZModal;
-export { Form, ModalActions } from './ModalContainer/styles';
