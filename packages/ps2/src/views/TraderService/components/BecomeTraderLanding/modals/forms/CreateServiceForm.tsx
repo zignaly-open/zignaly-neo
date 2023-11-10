@@ -55,14 +55,16 @@ const CreateServiceForm: React.FC<{
   const coinOptions = useMemo(
     () =>
       exchangeType
-        ? Object.keys(serviceTypesInfo?.[exchangeType])?.map((ssc: string) => {
-            const name = coins[ssc]?.name || '';
-            return {
-              value: ssc,
-              name,
-              label: <CoinOption key={ssc} coin={ssc} name={name} />,
-            };
-          })
+        ? Object.keys(serviceTypesInfo?.[exchangeType])
+            ?.map((ssc: string) => {
+              const name = coins[ssc]?.name || '';
+              return {
+                value: ssc,
+                name,
+                label: <CoinOption key={ssc} coin={ssc} name={name} />,
+              };
+            })
+            .filter((coin) => coin.value !== 'BUSD')
         : [],
     [exchangeType],
   );
