@@ -25,7 +25,7 @@ export default {
   backgroundImage: `/background-dark-grayscale.${
     isWebpSupported() ? 'webp' : 'png'
   }`,
-  logo: '/images/whitelabel/lastra/logo-horizontal2.png',
+  logo: '/images/whitelabel/lastra/logo-horizontal.png',
   social: {
     twitter: 'https://cmania.co/zig-xtwitter',
     telegram: 'https://cmania.co/zig-tg',
