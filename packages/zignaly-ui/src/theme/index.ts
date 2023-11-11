@@ -8,7 +8,7 @@ export const getZignalyThemeExport = (
   themeName?: "dark" | "example",
   overrides?: Partial<ThemeStyledComponents>,
 ): ThemeExport => {
-  const theme = themeName !== "example" ? example : dark;
+  const theme = themeName === "example" ? example : dark;
   return getMuiAndStyledThemes(theme, overrides);
 };
 
