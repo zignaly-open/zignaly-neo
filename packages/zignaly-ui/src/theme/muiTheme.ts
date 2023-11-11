@@ -516,12 +516,28 @@ const createMuiTheme = ({
     },
   } as ThemeOptions);
 
+type StylePart = Record<string, unknown>;
+const overrideTheme = <U>(
+  base: Record<string | number, U>,
+  override?: Partial<Record<string | number, U>>,
+) => {
+  if (!override) return base;
+  const result = {} as StylePart;
+  for (const k of Object.keys(base)) {
+    if (typeof base[k] === "object") {
+      result[k] = overrideTheme(base[k] as StylePart, override[k] as StylePart);
+    } else {
+      result[k] = override[k] ?? base[k];
+    }
+  }
+  return result;
+};
+
 export const getMuiAndStyledThemes = (
   baseTheme: ThemeStyledComponents,
   overrides?: Partial<ThemeStyledComponents>,
 ): ThemeExport => {
-  // TODO
-  const overriden = Object.assign({}, baseTheme, overrides || {});
+  const overriden = overrideTheme(baseTheme, overrides) as ThemeStyledComponents;
   return {
     legacyStyledComponentsDoNotUse: overriden,
     mui: createMuiTheme(overriden),
