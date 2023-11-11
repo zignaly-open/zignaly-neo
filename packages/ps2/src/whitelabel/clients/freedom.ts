@@ -3,6 +3,7 @@ import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'OBSIDIAN FREEDOM',
+  domain: 'freedom.wl.zignaly.com',
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,

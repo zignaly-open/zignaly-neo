@@ -2,6 +2,7 @@ import { WhitelabelOverride } from '../type';
 
 export default {
   title: 'Zignaly',
+  domain: 'app.zignaly.com',
   helpUrl: 'https://help.zignaly.com/hc/en-us',
   social: {
     twitter: 'https://twitter.com/zignaly',

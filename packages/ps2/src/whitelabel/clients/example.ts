@@ -3,6 +3,7 @@ import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'Example',
+  domain: 'example.zignaly.com',
   helpUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   featureOverrides: {
     [Features.Referrals]: false,

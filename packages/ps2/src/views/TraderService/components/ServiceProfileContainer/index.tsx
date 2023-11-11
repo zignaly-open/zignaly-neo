@@ -14,6 +14,7 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { subMonths } from 'date-fns';
 import ServicePercentageInfo from './atoms/ServicePercentageInfo';
+import ServiceCanonical from './atoms/ServiceCanonical';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -32,6 +33,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         mt: { xs: '-15px', md: '-45px' },
       }}
     >
+      <ServiceCanonical service={service} />
       <Grid container>
         <Grid item sx={{ display: 'flex' }} xs={12} md={7} pb={4}>
           <ServiceProfileHeader service={service} />
