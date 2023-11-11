@@ -1,6 +1,7 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { linearProgressClasses } from "@mui/material";
-import { ThemeExport, ThemeStyledComponents } from "./types";
+import { ThemeExport, ThemeStyledComponents, ThemeStyledComponentsOverrides } from "./types";
+import { DeepPartial } from "react-hook-form";
 
 const {
   palette: { augmentColor },
@@ -519,13 +520,16 @@ const createMuiTheme = ({
 type StylePart = Record<string, unknown>;
 const overrideTheme = <U>(
   base: Record<string | number, U>,
-  override?: Partial<Record<string | number, U>>,
+  override?: DeepPartial<Record<string | number, U>>,
 ) => {
   if (!override) return base;
   const result = {} as StylePart;
   for (const k of Object.keys(base)) {
     if (typeof base[k] === "object") {
-      result[k] = overrideTheme(base[k] as StylePart, override[k] as StylePart);
+      result[k] = overrideTheme(
+        base[k] as Record<string | number, U>,
+        override[k] as DeepPartial<Record<string | number, U>>,
+      );
     } else {
       result[k] = override[k] ?? base[k];
     }
@@ -535,7 +539,7 @@ const overrideTheme = <U>(
 
 export const getMuiAndStyledThemes = (
   baseTheme: ThemeStyledComponents,
-  overrides?: Partial<ThemeStyledComponents>,
+  overrides?: ThemeStyledComponentsOverrides,
 ): ThemeExport => {
   const overriden = overrideTheme(baseTheme, overrides) as ThemeStyledComponents;
   return {

@@ -5,11 +5,46 @@ import { CustomPalette } from "@mui/material/styles";
 export type ThemeStyledComponents = {
   fontFamily: string[];
   palette: Omit<CustomPalette, "backgrounds" | "boxShadows" | "chart">;
-  backgrounds: CustomPalette["backgrounds"];
+  backgrounds: Record<
+    | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
+    | "selectInputFill"
+    | "inputTextFill"
+    | "toastSuccess"
+    | "toastError"
+    | "greyedOutBorder"
+    | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
+    | "socialNetworksTab" // why have a dedicated color used only once? because fuck me, that's why
+    | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
+    | "activeTab" // why have a dedicated color used only once? because fuck me, that's why
+    | "modal"
+    | "secondaryBackground"
+    | "sliderMark"
+    | "tableRow"
+    | "sliderThumb"
+    | "tableHeader"
+    | "input2fa"
+    | "input2faGradient"
+    | "input2faGradientBorder"
+    | "buttonPrimary"
+    | "loader"
+    | "header"
+    | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
+    | "input",
+    string
+  >;
   boxShadows: CustomPalette["boxShadows"];
   chart: CustomPalette["chart"];
   mode: "dark" | "light";
 };
+
+// https://stackoverflow.com/a/61132308/2044039
+type DeepPartial<T> = T extends object
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;
+
+export type ThemeStyledComponentsOverrides = DeepPartial<ThemeStyledComponents>;
 
 export type ThemeExport = {
   mui: ThemeMui;
