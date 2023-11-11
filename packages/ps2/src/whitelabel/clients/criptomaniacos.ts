@@ -7,6 +7,7 @@ import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'Lastra',
+  domain: 'lastra.zignaly.com',
   helpUrl: 'https://cmania.co/suporte-zig',
   featureOverrides: {
     [Features.Referrals]: false,

@@ -12,6 +12,7 @@ export enum Features {
 export type OverrideableEndpoints = 'marketplace/';
 
 export type WhitelabelOverride = {
+  domain: string;
   title: string;
   helpUrl: string;
   locales?: string[];
