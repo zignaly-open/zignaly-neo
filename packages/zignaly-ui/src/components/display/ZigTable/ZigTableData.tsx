@@ -202,7 +202,9 @@ export default function ZigTableData<T extends object>({
                   </tr>
                   {row.getIsExpanded() && (
                     <tr style={{ border: "none", padding: "0 14px" }}>
-                      <td colSpan={row.getVisibleCells().length}>{renderSubComponent!({ row })}</td>
+                      <td colSpan={row.getVisibleCells().length + !!enableColumnVisibility}>
+                        {renderSubComponent!({ row })}
+                      </td>
                     </tr>
                   )}
                 </React.Fragment>
