@@ -1,7 +1,6 @@
-import Theme from "./theme";
-import createMuiTheme from "./createMuiTheme";
+import { ThemeStyledComponents } from "../types";
 
-const dark: Theme = {
+const dark: ThemeStyledComponents = {
   mode: "dark",
   fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"],
   palette: {
@@ -77,4 +76,3 @@ const dark: Theme = {
 };
 
 export default dark;
-export const darkMui = createMuiTheme(dark);

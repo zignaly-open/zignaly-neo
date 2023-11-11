@@ -1,20 +1,15 @@
-import { Theme as ThemeMui } from "@mui/system";
-import { default as darkLegacyDoNotUse, darkMui } from "./dark";
-import { default as exampleLegacyDoNotUse, exampleMui } from "./example";
-import ThemeStyledComponents from "./theme";
+import { ThemeExport, ThemeStyledComponents } from "./types";
 
-type ThemeExport = {
-  mui: ThemeMui;
-  legacyStyledComponentsDoNotUse: ThemeStyledComponents;
+import dark from "./themes/dark";
+import example from "./themes/example";
+import { getMuiAndStyledThemes } from "./muiTheme";
+
+export const getZignalyThemeExport = (
+  themeName?: "dark" | "example",
+  overrides?: Partial<ThemeStyledComponents>,
+): ThemeExport => {
+  const theme = themeName !== "example" ? example : dark;
+  return getMuiAndStyledThemes(theme, overrides);
 };
-export const themes: Record<"dark" | string, ThemeExport> = {
-  dark: {
-    mui: darkMui,
-    legacyStyledComponentsDoNotUse: darkLegacyDoNotUse,
-  },
-  example: {
-    mui: exampleMui,
-    legacyStyledComponentsDoNotUse: exampleLegacyDoNotUse,
-  },
-};
-export type { default as ThemeType } from "./theme";
+
+export type { ThemeStyledComponents as ThemeType } from "./types";

@@ -1,7 +1,8 @@
+import { Theme as ThemeMui } from "@mui/system/createTheme/createTheme";
 // this thing is overwritten in module-name.d.ts
 import { CustomPalette } from "@mui/material/styles";
 
-interface Theme {
+export interface ThemeStyledComponents {
   fontFamily: string[];
   palette: Omit<CustomPalette, "backgrounds" | "boxShadows" | "chart">;
   backgrounds: CustomPalette["backgrounds"];
@@ -10,4 +11,7 @@ interface Theme {
   mode: "dark" | "light";
 }
 
-export default Theme;
+export type ThemeExport = {
+  mui: ThemeMui;
+  legacyStyledComponentsDoNotUse: ThemeStyledComponents;
+};

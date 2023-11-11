@@ -1,13 +1,20 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { linearProgressClasses } from "@mui/material";
-import Theme from "./theme";
+import { ThemeExport, ThemeStyledComponents } from "./types";
 
 const {
   palette: { augmentColor },
 } = createTheme();
 const createColor = (mainColor: string) => augmentColor({ color: { main: mainColor } });
 
-export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: Theme) =>
+const createMuiTheme = ({
+  palette,
+  mode,
+  chart,
+  backgrounds,
+  boxShadows,
+  fontFamily,
+}: ThemeStyledComponents) =>
   createTheme({
     palette: {
       ...palette,
@@ -508,3 +515,15 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
       },
     },
   } as ThemeOptions);
+
+export const getMuiAndStyledThemes = (
+  baseTheme: ThemeStyledComponents,
+  overrides?: Partial<ThemeStyledComponents>,
+): ThemeExport => {
+  // TODO
+  const overriden = Object.assign({}, baseTheme, overrides || {});
+  return {
+    legacyStyledComponentsDoNotUse: overriden,
+    mui: createMuiTheme(overriden),
+  };
+};
