@@ -36,7 +36,7 @@ const dark: ThemeStyledComponents = {
     tableHeader: "#08081d",
     investorsIcon: "#65647E",
     inputTextFill: "#838b95",
-    socialNetworksTab: "#1c1d35",
+    menuHover: "#1c1d35",
     secondaryBackground: "#0f0f25",
     dropdown2ndLevel: "rgb(25, 26, 48)",
     tableRow: "#13122566",

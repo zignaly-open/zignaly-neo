@@ -64,7 +64,7 @@ declare module '@mui/material/styles' {
     // d) because I added them here only because adding an explanatory comment and a ts-ignore every time
     // is too much of a hassle (see a).).
     backgrounds: Record<
-      | 'socialNetworksTab'
+      | 'menuHover'
       | 'modal'
       | 'investorsIcon'
       | 'withdrawalHighlight'
