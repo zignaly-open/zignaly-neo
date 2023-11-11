@@ -1,3 +1,5 @@
+import { ThemeOverridesType } from '@zignaly-open/ui';
+
 export enum Features {
   AccessLevels,
   Rewards,
@@ -29,7 +31,8 @@ export type WhitelabelOverride = {
   background?: string;
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
-  theme?: string;
+  baseTheme?: string;
+  themeOverrides?: ThemeOverridesType;
   social: Record<
     | 'telegram'
     | 'twitter'

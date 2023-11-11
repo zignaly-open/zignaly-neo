@@ -12,4 +12,7 @@ export const getZignalyThemeExport = (
   return getMuiAndStyledThemes(theme, overrides);
 };
 
-export type { ThemeStyledComponents as ThemeType } from "./types";
+export type {
+  ThemeStyledComponents as ThemeType,
+  ThemeStyledComponentsOverrides as ThemeOverridesType,
+} from "./types";
