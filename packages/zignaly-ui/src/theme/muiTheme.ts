@@ -534,7 +534,7 @@ const overrideTheme = <U>(
   if (!override) return base;
   const result = {} as StylePart;
   for (const k of Object.keys(base)) {
-    if (typeof base[k] === "object") {
+    if (typeof base[k] === "object" && !Array.isArray(base[k])) {
       result[k] = overrideTheme(
         base[k] as Record<string | number, U>,
         override[k] as DeepPartial<Record<string | number, U>>,
