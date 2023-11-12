@@ -28,6 +28,8 @@ export const Table = styled("table", {
     user-select: none;
     background: ${({ theme }) => theme.palette.backgrounds.tableHeader};
     box-shadow: 0 0 10px ${({ theme }) => theme.palette.boxShadows.tableHeader};
+    z-index: 2;
+    position: relative;
   }
 
   th {

@@ -1,4 +1,3 @@
-import { ThemeType } from '@zignaly-open/ui';
 import { TransactionStateType } from 'apis/coin/types';
 
 export const transactionStateName: {
@@ -13,9 +12,7 @@ export const transactionStateName: {
   [TransactionStateType.ERROR]: 'status.error',
 };
 
-export const transactionStateColor: {
-  [key in TransactionStateType]: keyof ThemeType['palette'];
-} = {
+export const transactionStateColor = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
   [TransactionStateType.SENT]: 'greenGraph',
   [TransactionStateType.TRANSFER]: 'yellow',

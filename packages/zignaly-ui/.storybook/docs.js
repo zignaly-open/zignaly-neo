@@ -1,15 +1,12 @@
 import React from "react";
 import { DocsContainer as BaseContainer } from "@storybook/addon-docs/blocks";
 import theme from "./theme";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
-import {
-  ChartGradients,
-  // ThemeProvider, ThemeProviderMui,
-  dark,
-  darkMui,
-} from "../src";
+import { ChartGradients, getZignalyThemeExport } from "../src";
 import GlobalStyle from "@zignaly-open/ps2/src/styles";
+
+const { mui: darkMui, legacyStyledComponentsDoNotUse: dark } = getZignalyThemeExport("dark");
 
 export const DocsContainer = ({ children, context }) => {
   return (

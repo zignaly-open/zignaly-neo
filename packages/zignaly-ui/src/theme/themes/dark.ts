@@ -1,7 +1,6 @@
-import Theme from "./theme";
-import createMuiTheme from "./createMuiTheme";
+import { ThemeStyledComponents } from "../types";
 
-const dark: Theme = {
+const dark: ThemeStyledComponents = {
   mode: "dark",
   fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"],
   palette: {
@@ -26,28 +25,28 @@ const dark: Theme = {
     yellow: "#AE9C5B",
     red: "#CC394E",
     contrasting: "#F3F4F6",
-    paleBlue: "#999fe1",
+    paleBlue: "#999fe1", // TODO: fix
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
-    selectInputFill: "#101225",
+    selectInputFill: "#101225", // TODO: fix?
     toastSuccess: "#122431",
-    withdrawalHighlight: "rgb(24, 30, 52)",
+    withdrawalHighlight: "rgb(24, 30, 52)", // TODO: fix?
     toastError: "#231630",
     tableHeader: "#08081d",
-    investorsIcon: "#65647E",
-    inputTextFill: "#838b95",
-    socialNetworksTab: "#1c1d35",
-    secondaryBackground: "#0f0f25",
-    dropdown2ndLevel: "rgb(25, 26, 48)",
+    investorsIcon: "#65647E", // TODO: fix?
+    inputTextFill: "#838b95", // TODO: fix? 1 usage
+    headerMenuItemHover: "#1c1d35",
+    secondaryBackground: "#0f0f25", // TODO: investigate
+    dropdown2ndLevel: "rgb(25, 26, 48)", // TODO: fix?
     tableRow: "#13122566",
     modal: "#101225",
     loader: "#fff",
-    activeTab: "#181B2F",
-    greyedOutBorder: "#464a85",
+    activeTab: "#181B2F", // TODO: fix?
+    greyedOutBorder: "#464a85", // TODO: fix?
     sliderMark: "#888999",
     sliderThumb: "#999ee0",
-    manageServiceMenuHover: "#1b213d",
+    manageServiceMenuHover: "#1b213d", // TODO: fix?
     buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
     input2fa: "#0f1124",
     input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
@@ -77,4 +76,3 @@ const dark: Theme = {
 };
 
 export default dark;
-export const darkMui = createMuiTheme(dark);

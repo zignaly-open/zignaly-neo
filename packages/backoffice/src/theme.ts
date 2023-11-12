@@ -1,6 +1,6 @@
-import { themes } from '@zignaly-open/ui';
+import { getZignalyThemeExport } from '@zignaly-open/ui';
 
-const { mui, legacyStyledComponentsDoNotUse } = themes.dark;
+const { mui, legacyStyledComponentsDoNotUse } = getZignalyThemeExport('dark');
 
 export default mui;
 export { legacyStyledComponentsDoNotUse };
