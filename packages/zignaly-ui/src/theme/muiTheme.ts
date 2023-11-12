@@ -15,6 +15,7 @@ const createMuiTheme = ({
   backgrounds,
   boxShadows,
   fontFamily,
+  fontFamilyH1H6,
 }: ThemeStyledComponents) =>
   createTheme({
     palette: {
@@ -40,6 +41,14 @@ const createMuiTheme = ({
     },
     typography: {
       fontFamily: fontFamily.join(","),
+      ...(fontFamilyH1H6 && {
+        h1: { fontFamily: fontFamilyH1H6.join(",") },
+        h2: { fontFamily: fontFamilyH1H6.join(",") },
+        h3: { fontFamily: fontFamilyH1H6.join(",") },
+        h4: { fontFamily: fontFamilyH1H6.join(",") },
+        h5: { fontFamily: fontFamilyH1H6.join(",") },
+        h6: { fontFamily: fontFamilyH1H6.join(",") },
+      }),
       button: {
         textTransform: "none",
       },

@@ -4,6 +4,7 @@ import { CustomPalette } from "@mui/material/styles";
 
 export type ThemeStyledComponents = {
   fontFamily: string[];
+  fontFamilyH1H6?: string[];
   palette: Omit<CustomPalette, "backgrounds" | "boxShadows" | "chart">;
   backgrounds: Record<
     | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
