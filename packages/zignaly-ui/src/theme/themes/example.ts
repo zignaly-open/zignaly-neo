@@ -41,7 +41,7 @@ const example: ThemeStyledComponents = {
     modal: "#fff6f6",
     dropdown2ndLevel: "#fff6f6",
     investorsIcon: "#999",
-    menuHover: "#999",
+    headerMenuItemHover: "#999",
     sliderThumb: "#bb9e90",
     tableRow: "#ff999966",
     secondaryBackground: "#eebbbb",

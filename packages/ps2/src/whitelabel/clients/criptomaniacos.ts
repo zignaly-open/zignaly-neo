@@ -58,7 +58,7 @@ export default {
       input:
         'linear-gradient(90deg, rgb(16 18 18) 0%, rgb(16 18 17) 35%, rgb(16 18 17) 100%)',
 
-      menuHover: '#6A00FF',
+      headerMenuItemHover: '#6A00FF',
 
       secondaryBackground: '#0f0f25',
       activeTab: '#181B2F',

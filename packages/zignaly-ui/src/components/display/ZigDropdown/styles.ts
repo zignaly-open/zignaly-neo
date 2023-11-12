@@ -68,7 +68,7 @@ export const NavLink = styled.span<
     !notClickable &&
     css`
       &:hover {
-        background: ${theme.backgrounds.menuHover};
+        background: ${theme.backgrounds.headerMenuItemHover};
       }
     `}
 

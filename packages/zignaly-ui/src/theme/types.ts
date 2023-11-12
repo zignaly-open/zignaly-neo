@@ -13,7 +13,7 @@ export type ThemeStyledComponents = {
     | "toastError"
     | "greyedOutBorder"
     | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
-    | "menuHover" // why have a dedicated color used only once? because fuck me, that's why
+    | "headerMenuItemHover" // why have a dedicated color used only once? because fuck me, that's why
     | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
     | "activeTab" // why have a dedicated color used only once? because fuck me, that's why
     | "modal"
