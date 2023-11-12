@@ -23,7 +23,7 @@ export type WhitelabelOverride = {
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;
-  featureOverrides: Record<Partial<Features>, boolean>;
+  featureOverrides: Partial<Record<Features, boolean>>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;
@@ -33,14 +33,16 @@ export type WhitelabelOverride = {
   backgroundImage?: string | null;
   baseTheme?: string;
   themeOverrides?: ThemeOverridesType;
-  social: Record<
-    | 'telegram'
-    | 'twitter'
-    | 'discord'
-    | 'medium'
-    | 'linkedin'
-    | 'instagram'
-    | 'youtube',
-    string | void
+  social: Partial<
+    Record<
+      | 'telegram'
+      | 'twitter'
+      | 'discord'
+      | 'medium'
+      | 'linkedin'
+      | 'instagram'
+      | 'youtube',
+      string | void
+    >
   >;
 };

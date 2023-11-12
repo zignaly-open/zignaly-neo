@@ -27,7 +27,22 @@ export default {
     youtube: 'https://cmania.co/zig-yt',
     linkedin: 'https://cmania.co/zig-linkedin',
   },
+  loadFontsFromGoogle: true,
   themeOverrides: {
+    fontFamily: [
+      'Roboto Condensed',
+      'Roboto',
+      'Helvetica',
+      'Arial',
+      'sans-serif',
+    ],
+    fontFamilyH1H6: [
+      'Roboto Condensed',
+      'Roboto',
+      'Helvetica',
+      'Arial',
+      'sans-serif',
+    ],
     palette: {
       neutral900: '#060606',
       neutral800: '#121512',
