@@ -79,7 +79,7 @@ export default {
     },
     chart: {
       green: '#1298C9',
-      greenGradient: ['rgba(18, 33, 59, 0.52)', 'rgba(33, 81, 78, 0.69)'],
+      greenGradient: ['rgba(18, 33, 59, 0.52)', 'rgba(33, 70, 78, 0.69)'],
       greenMiniGradient: [
         'rgba(17, 27, 47, 0)',
         'rgba(22, 41, 67, 0.5)',
