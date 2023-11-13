@@ -38,7 +38,7 @@ export default {
       'sans-serif',
     ],
     palette: {
-      neutral900: '#060606',
+      neutral900: '#090909',
       neutral800: '#121512',
       neutral750: '#1b1b1b',
       neutral700: '#252329',
@@ -69,9 +69,9 @@ export default {
 
       headerMenuItemHover: '#6A00FF',
 
-      secondaryBackground: '#0f0f25',
+      secondaryBackground: '#121212',
       activeTab: '#181B2F',
-      manageServiceMenuHover: '#1b213d',
+      manageServiceMenuHover: '#1f1f1f',
       input2fa: '#0f1124',
       input2faGradient: 'linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)',
       input2faGradientBorder:
@@ -79,7 +79,7 @@ export default {
     },
     chart: {
       green: '#1298C9',
-      greenGradient: ['rgba(18, 33, 59, 0.52)', 'rgba(33, 81, 78, 0.69)'],
+      greenGradient: ['rgba(18, 33, 59, 0.52)', 'rgba(33, 70, 78, 0.69)'],
       greenMiniGradient: [
         'rgba(17, 27, 47, 0)',
         'rgba(22, 41, 67, 0.5)',
