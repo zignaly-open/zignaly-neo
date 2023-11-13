@@ -40,7 +40,7 @@
     "disconnected": "Disconnected",
     "owner": "Owner"
   },
-  "first-grade-math-explainer": "Apply a discount on your Success Fee besides the {{zignalyFee}}% charged by {{ whitelabel }}",
-  "success-fee-explainer": "You get {{owner}}%, {{ whitelabel }} gets {{zignalyFee}}%",
-  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{owner}}% - {{discount}}% discount), {{ whitelabel }} gets {{zignalyFee}}%"
+  "first-grade-math-explainer": "Apply a discount on your Success Fee besides the {{zignalyFee}}% charged by ZIGDAO",
+  "success-fee-explainer": "You get {{owner}}%, ZIGDAO gets {{zignalyFee}}%",
+  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{owner}}% - {{discount}}% discount), ZIGDAO gets {{zignalyFee}}%"
 }

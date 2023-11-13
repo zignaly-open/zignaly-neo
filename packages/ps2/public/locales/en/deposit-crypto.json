@@ -18,7 +18,7 @@
     "convert": "Convert",
     "confirm-swap-title": "Confirm Swap"
   },
-  "description": "Deposit Crypto in your {{ whitelabel }} Account. {{ whitelabel }} is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
+  "description": "Deposit Crypto in your {{ whitelabel }} Account. {{ whitelabel }} is powered by ZIGDAO, an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"
