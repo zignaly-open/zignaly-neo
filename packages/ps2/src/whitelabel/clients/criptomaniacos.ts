@@ -29,13 +29,7 @@ export default {
   },
   loadFontsFromGoogle: true,
   themeOverrides: {
-    fontFamily: [
-      'Roboto Condensed',
-      'Roboto',
-      'Helvetica',
-      'Arial',
-      'sans-serif',
-    ],
+    fontFamily: ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
     fontFamilyH1H6: [
       'Roboto Condensed',
       'Roboto',
