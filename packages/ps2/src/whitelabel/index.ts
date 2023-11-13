@@ -4,6 +4,8 @@ import defaultFeatureState from './default';
 
 const { REACT_APP_WHITELABEL: whitelabelName } = process.env;
 
+export const isZignaly = whitelabelName === 'zignaly';
+
 export const whitelabel =
   (whitelabelName && clients[whitelabelName]) || clients.zignaly;
 

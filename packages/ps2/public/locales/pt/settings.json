@@ -1,7 +1,7 @@
 {
 	"update-password": {
 		"title": "Atualizar Senha",
-		"description": "Atualize a senha da sua Conta de Zignaly.\nPara sua segurança, você será desconectado após clicar em Atualizar senha.",
+		"description": "Atualize a senha.\nPara sua segurança, você será desconectado após clicar em Atualizar senha.",
 		"current-password": "Senha Atual:",
 		"new-password": "Nova Senha:",
 		"success": "Senha atualizada com sucesso. Por favor, faz novamente o login."
@@ -25,5 +25,41 @@
 		"description": "Tua conta é protegida com a Autenticação de Dois Fatores (2FA). Para desativar o 2FA, introduz o código do aplicativo autenticador.",
 		"success": "2FA foi desativado com sucesso.",
 		"security": "Por segurança, recomendamos ter o 2FA ativado na tua conta."
+	},
+	"header": {
+		"2fa": "2FA",
+		"edit-profile": "Editar Perfil",
+		"edit-password": "Senha",
+		"verification": "Verificação",
+		"verification-kyc": "KYC",
+		"verification-kyb": "KYB"
+	},
+	"edit-profile": {
+		"title": "Editar Perfil",
+		"description": "Personalize os dados do seu perfil de usuário",
+		"username": "Nome do usuário",
+		"visible-if-trader": "(Visível se você for gestor de um serviço)",
+		"internal-use": "(Para uso interno)",
+		"user-id": "ID do usuário",
+		"about-you": "Sobre você",
+		"update-profile": "Atualizar perfil",
+		"success": "Perfil atualizado com sucesso",
+		"edit-avatar": "Editar Avatar",
+		"change-email": "Não é possível alterar o e-mail",
+		"country": "País",
+		"email": "Email",
+		"status-box": {
+			"2fa": "2FA",
+			"kyc": "KYC",
+			"enable-2fa-cta": "Ativar",
+			"enabled": "Ativado",
+			"disabled": "Desativado",
+			"pass-kyc-cta": "Verificar",
+			"verified": "Verificado",
+			"not-verified": "Não verificado",
+			"pending": "Pendente",
+			"rejected": "Rejeitado"
+		},
+		"tell-me-the-story-of-your-left": "Conte-nos sobre você"
 	}
 }

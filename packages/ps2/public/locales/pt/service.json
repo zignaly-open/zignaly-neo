@@ -2,7 +2,7 @@
 	"service-by": "por <0>{{name}}<\/0>",
 	"service-age": "Começou <0>{{date}}<\/0> atrás",
 	"link-copied": "Link copiado para a prancheta!",
-	"logo-alt": "Zignaly - Profit Sharing \/ Copy Trading Logotipo do Serviço de {{name}}",
+	"logo-alt": "{{ whitelabel }} - Profit Sharing \/ Copy Trading Logotipo do Serviço de {{name}}",
 	"liquidated": "Liquidado",
 	"invested-label": "Investido",
 	"copy-link": "Copiar link",
@@ -70,7 +70,7 @@
 		"name": "Nome do Serviço:",
 		"logo": "Editar Logótipo",
 		"description": "Descrição:",
-		"success-fee-desc": "Quantidade de lucros que você cobrará de teus investidores (incluindo 5% de taxa Zignaly)",
+		"success-fee-desc": "Valor dos lucros que você cobrará dos teus investidores (incluindo {{ zignalyFee }}% ZIGDAO fee)",
 		"pool-size": "Tamanho máximo do pool:",
 		"pool-size-desc": "Máximo que você aceitará de investidores",
 		"visibility": {
@@ -104,11 +104,13 @@
 			"spot": "Spot",
 			"futures": "Futuros"
 		},
-		"minimum-balance": "Para tradear e permitir que os investidores invistam, você precisa investir pelo menos {{ minValue }} {{ minValueCoin }} no teu serviço",
+		"minimum-balance": "Para tradear e permitir que os investidores invistam, você precisa investir pelo menos\n{{ minValue }} {{ minValueCoin }} no teu serviço",
 		"profits-explainer": "Decida quanto dos seus lucros de trading e success fee gostaria de solicitar a transferência automática.",
-		"zero-fee": "Se você escolher success fee = 0, a Zignaly também não cobrará nenhuma taxa",
+		"please-verify": "*Por favor, reveja as tuas informações. O tipo e a base não podem ser alterados posteriormente",
+		"zero-fee": "Se você escolher success fee = 0, a ZIGDAO também não cobrará nenhuma taxa",
 		"total-fee": "Taxa total",
 		"you-receive": "Você recebe"
 	},
-	"you-receive": "Você recebe"
+	"you-receive": "Você recebe",
+	"z-score": "Pontuação Z"
 }
