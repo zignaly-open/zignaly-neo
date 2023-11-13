@@ -3,7 +3,8 @@
 	"tableHeader": {
 		"summary": {
 			"title": "Meu Valor Atual",
-			"subtitle": "Rentabilidade"
+			"subtitle": "Rentabilidade",
+			"title-mobile": "Investido"
 		},
 		"serviceName": {
 			"title": "Nome do Serviço",
@@ -48,8 +49,6 @@
 			"description": "Invista nos serviços e espere para ver os teus retornos crescendo dia a dia",
 			"time": "Leva 2 minutos"
 		},
-		"bottom-title": "Serviços do Meu Portfólio",
-		"bottom-description": "Você ainda não está seguindo nenhum serviço, invista neles para obter lucros.",
 		"start-investing": "Começa já a investir"
 	}
 }

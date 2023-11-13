@@ -20,6 +20,7 @@
 		"n-years_other": "{{count}} anos",
 		"account-age": "Idade da conta",
 		"x-investors_one": "{{count}} investidor",
-		"x-investors_other": "{{count}} investidores"
+		"x-investors_other": "{{count}} investidores",
+		"assets-mobile": "Ativos"
 	}
 }
