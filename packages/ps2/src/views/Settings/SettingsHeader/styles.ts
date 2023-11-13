@@ -1,7 +1,10 @@
 import { styled } from '@mui/material';
 import { Theme } from '@mui/system';
+import { lighten } from '@mui/material/styles';
 
+// FIXME
 const secondaryBackground = ({ theme }: { theme: Theme }) => `
+  background: ${lighten(theme.palette.neutral900, (0x0f - 0x05) / 0xff)};
   background: ${theme.palette.backgrounds.secondaryBackground};
 `;
 
