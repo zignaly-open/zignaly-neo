@@ -90,7 +90,9 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           flexWrap={lg || !sm ? 'nowrap' : 'wrap'}
         >
           {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
-            <InviteButton service={service} tiersData={tiers} fullSize={sm} />
+            <Box mt={!sm && '-7px'}>
+              <InviteButton service={service} tiersData={tiers} fullSize={sm} />
+            </Box>
           )}
           {state === RightSideActionStates.Invested ? (
             sm ? (
