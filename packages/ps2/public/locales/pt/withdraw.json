@@ -3,6 +3,6 @@
 	"button": "Retirar",
 	"form": {
 		"label": "Quantidade a retirar:",
-		"labelBalance": "Disponível:"
+		"available": "Disponível:"
 	}
 }

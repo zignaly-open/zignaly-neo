@@ -45,7 +45,7 @@
 		"34": "A ordem seria acionada imediatamente",
 		"35": "Posição fechada",
 		"36": "Erro ao ativar 2FA",
-		"37": "Código Errado",
+		"37": "Código 2FA incorreto",
 		"wrong-code": "Código Errado",
 		"38": "O preço do take profit já foi alcançado",
 		"39": "O valor do take profit deve ser maior do que 1",
@@ -88,7 +88,7 @@
 		"76": "Erro de Captcha, por favor tente novamente.",
 		"77": "Máximo de contas broker de usuário alcançadas pelo exchange",
 		"78": "Não foi possível remover uma conta com um saldo superior a 0.",
-		"79": "O seguidor selecionado não pode ser suspenso porque faz parte da equipe ou contribuidor da Zignaly.",
+		"79": "O seguidor selecionado não pode ser suspenso porque faz parte da equipe ou contribuidor da {{ whitelabel }}.",
 		"80": "Não pode se suspender.",
 		"81": "Os Exchanges de futuros só podem ser conectados a um provedor ou copytrader. Precisa criar outra conta de exchange para usar um provedor\/copytrader diferente.",
 		"82": "Precisa ter uma descrição e um logo antes de ser listado",
@@ -173,12 +173,58 @@
 		"did-you-mean": "Queria dizer {{suggested}}?",
 		"password-requirements": "Pelo menos {{length}} caracteres, com uma letra, número e símbolo",
 		"occurred": "Ocorreu um erro",
-		"login-session-expired": "Sessão expirou, por favor façao login novamente"
+		"login-session-expired": "Sessão expirou, por favor façao login novamente",
+		"1086": "Código de e-mail incorreto",
+		"1095": "Código de assinatura inválido",
+		"1097": "Formato de código inválido: deve ser AA-XXXX-XXXX-XXXX"
 	},
 	"something-went-wrong": "Algo deu errado",
 	"404": {
 		"title": "Página não encontrada",
 		"subtitle": "Esta página não está disponível ou não existe.",
 		"button-back": "Ir para o inicio"
+	},
+	"access": {
+		"banned": {
+			"title": "Você está banido",
+			"description": "As suas ações maldosas resultaram num banimento. O Pai Noel também foi informado.",
+			"action": "Sinto muito"
+		},
+		"mail-not-verified": {
+			"title": "Verifique o seu endereço de e-mail",
+			"description": "Antes de poder fazer login, você precisará verificar o seu endereço de e-mail",
+			"action": "Entendi"
+		},
+		"kyc-pending": {
+			"title": "Verifique a sua conta (KYC\/KYB)",
+			"description": "Verifique sua conta para começar a acessar todos os serviços. O processo é fácil e rápido e levará aproximadamente 2 minutos.",
+			"action": "Iniciar Verificação"
+		},
+		"no-subscription": {
+			"title": "Ative a sua Assinatura",
+			"description": "Para começar a investir num serviço, você precisa primeiro de um código de assinatura.",
+			"explainer-1": "Redimir código de assinatura",
+			"explainer-2": "Eu não tenho nenhum código de assinatura",
+			"cta-1": "Redimir",
+			"cta-2": "Comprar"
+		},
+		"expired-subscription": {
+			"title": "Assinatura Expirada",
+			"description": "A sua assinatura expirou, favor compre o código de renovação para continuar.",
+			"explainer-1": "Redimir código de assinatura",
+			"explainer-2": "Eu não tenho nenhum código de assinatura",
+			"cta-1": "Redimir",
+			"cta-2": "Comprar"
+		},
+		"frozen": {
+			"title": "Conta Congelada",
+			"description": "Estamos verificando uma transferência recente na sua conta que requer aprovação manual. Assim que tudo for verificado e aprovado por nossa equipe você poderá gerir sua conta normalmente.",
+			"action": "OK :("
+		},
+		"kyc-expired": {
+			"title": "Verificação (KYC\/KYB) Expirada",
+			"description": "A sua verificação (KYC\/KYB) expirou e você precisa reenviá-la para continuar acessando todos os serviços.",
+			"action": "Rever KYC"
+		}
 	}
 }
