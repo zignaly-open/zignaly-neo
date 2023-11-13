@@ -14,6 +14,10 @@ export default {
   endpointOverrides: {
     'marketplace/': 'market',
   },
+  links: {
+    tos: 'https://www.lastra.app/termos',
+    privacyPolicy: 'https://www.lastra.app/politica-privacidade/',
+  },
   translationOverrides: true,
   xSource: 'criptomaniacos',
   mainAppLink: ROUTE_DASHBOARD,
