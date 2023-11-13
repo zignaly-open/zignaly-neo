@@ -4,6 +4,7 @@
     "assets": "Assets",
     "investors": "Investors"
   },
+  "table-search-emptyMessage": "No services in the Marketplace",
   "invest-in-services": "Invest in Profit Sharing",
   "invest-in-services-explainer": "Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1.",
   "table": {

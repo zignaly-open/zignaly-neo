@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+import { lighten } from '@mui/material/styles';
 import { ZigGlobeLanguages, styledIf, ZigTypography } from '@zignaly-open/ui';
 
 export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
@@ -70,7 +71,9 @@ export const Networks = styled('div')`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  background: ${({ theme }) => theme.palette.backgrounds.socialNetworksTab};
+  background: ${({ theme }) =>
+    // ok we dropped the color here EFFORTLESSLY preserving the original color
+    lighten(theme.palette.neutral800, (0x1c - 0x12) / 0xff)};
   padding: 19px 32px;
   margin: 6px -32px -12px;
 

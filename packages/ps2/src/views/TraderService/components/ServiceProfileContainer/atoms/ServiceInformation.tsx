@@ -19,6 +19,7 @@ const ServiceInformation: React.FC<{
 }> = ({ service }) => {
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
+  const createdAt = new Date(service?.createdAt);
   return (
     <>
       <ZigTypography
@@ -59,23 +60,28 @@ const ServiceInformation: React.FC<{
         </GreySubHeader>
         {sm && <Separator />}
         {sm && (
-          <GreySubHeader
-            component={sm ? 'span' : 'p'}
-            id={'service-profile__started-since'}
+          <Tooltip
+            title={createdAt.toLocaleDateString('zh-Hans-CN', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })}
           >
-            <StyledCalendarMonthIcon />
-            <Trans
-              t={t}
-              i18nKey={'service-age'}
-              values={{
-                date: formatLocalizedDistance(
-                  new Date(),
-                  new Date(service.createdAt),
-                ),
-              }}
-              components={[<GreySubHeaderHighlight key={'--service--by'} />]}
-            />
-          </GreySubHeader>
+            <GreySubHeader
+              component={sm ? 'span' : 'p'}
+              id={'service-profile__started-since'}
+            >
+              <StyledCalendarMonthIcon />
+              <Trans
+                t={t}
+                i18nKey={'service-age'}
+                values={{
+                  date: formatLocalizedDistance(new Date(), createdAt),
+                }}
+                components={[<GreySubHeaderHighlight key={'--service--by'} />]}
+              />
+            </GreySubHeader>
+          </Tooltip>
         )}
       </Box>
     </>

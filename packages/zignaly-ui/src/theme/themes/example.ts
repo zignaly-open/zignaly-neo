@@ -1,8 +1,7 @@
-import Theme from "./theme";
-import createMuiTheme from "./createMuiTheme";
+import { ThemeStyledComponents } from "../types";
 
 // aesthetic-wise, this very theme is a very good example of how NOT to design apps
-const example: Theme = {
+const example: ThemeStyledComponents = {
   mode: "light",
   fontFamily: ["Handlee", "cursive"],
   palette: {
@@ -21,6 +20,7 @@ const example: Theme = {
     neutral000: "#490300",
     secondary: "#af558b",
     highlighted: "#e10095",
+    paleBlue: "#ef6ec5",
     redGraphOrError: "#cc3939",
     greenGraph: "#53c426",
     links: "#9c00a9",
@@ -41,7 +41,7 @@ const example: Theme = {
     modal: "#fff6f6",
     dropdown2ndLevel: "#fff6f6",
     investorsIcon: "#999",
-    socialNetworksTab: "#999",
+    headerMenuItemHover: "#999",
     sliderThumb: "#bb9e90",
     tableRow: "#ff999966",
     secondaryBackground: "#eebbbb",
@@ -51,6 +51,8 @@ const example: Theme = {
     input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
     input2faGradientBorder: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
     input: "linear-gradient(90deg, #F96860 0%, #F96860 100%)",
+    activeTab: "#f99",
+    manageServiceMenuHover: "#f99",
   },
   boxShadows: {
     tableHeader: "#fcc",
@@ -80,4 +82,3 @@ const example: Theme = {
 };
 
 export default example;
-export const exampleMui = createMuiTheme(example);

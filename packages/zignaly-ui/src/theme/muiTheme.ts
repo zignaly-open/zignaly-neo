@@ -1,13 +1,22 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { linearProgressClasses } from "@mui/material";
-import Theme from "./theme";
+import { ThemeExport, ThemeStyledComponents, ThemeStyledComponentsOverrides } from "./types";
+import { DeepPartial } from "react-hook-form";
 
 const {
   palette: { augmentColor },
 } = createTheme();
 const createColor = (mainColor: string) => augmentColor({ color: { main: mainColor } });
 
-export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: Theme) =>
+const createMuiTheme = ({
+  palette,
+  mode,
+  chart,
+  backgrounds,
+  boxShadows,
+  fontFamily,
+  fontFamilyH1H6,
+}: ThemeStyledComponents) =>
   createTheme({
     palette: {
       ...palette,
@@ -32,6 +41,14 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
     },
     typography: {
       fontFamily: fontFamily.join(","),
+      ...(fontFamilyH1H6 && {
+        h1: { fontFamily: fontFamilyH1H6.join(",") },
+        h2: { fontFamily: fontFamilyH1H6.join(",") },
+        h3: { fontFamily: fontFamilyH1H6.join(",") },
+        h4: { fontFamily: fontFamilyH1H6.join(",") },
+        h5: { fontFamily: fontFamilyH1H6.join(",") },
+        h6: { fontFamily: fontFamilyH1H6.join(",") },
+      }),
       button: {
         textTransform: "none",
       },
@@ -508,3 +525,34 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
       },
     },
   } as ThemeOptions);
+
+type StylePart = Record<string, unknown>;
+const overrideTheme = <U>(
+  base: Record<string | number, U>,
+  override?: DeepPartial<Record<string | number, U>>,
+) => {
+  if (!override) return base;
+  const result = {} as StylePart;
+  for (const k of Object.keys(base)) {
+    if (typeof base[k] === "object" && !Array.isArray(base[k])) {
+      result[k] = overrideTheme(
+        base[k] as Record<string | number, U>,
+        override[k] as DeepPartial<Record<string | number, U>>,
+      );
+    } else {
+      result[k] = override[k] ?? base[k];
+    }
+  }
+  return result;
+};
+
+export const getMuiAndStyledThemes = (
+  baseTheme: ThemeStyledComponents,
+  overrides?: ThemeStyledComponentsOverrides,
+): ThemeExport => {
+  const overriden = overrideTheme(baseTheme, overrides) as ThemeStyledComponents;
+  return {
+    legacyStyledComponentsDoNotUse: overriden,
+    mui: createMuiTheme(overriden),
+  };
+};
