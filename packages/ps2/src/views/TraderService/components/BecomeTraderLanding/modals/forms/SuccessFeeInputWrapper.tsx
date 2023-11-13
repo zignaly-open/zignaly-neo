@@ -15,6 +15,7 @@ const SuccessFeeInputWrapper: React.FC<{
   precision?: number;
   newValue?: number | string;
   value: number | string;
+  prefixId?: string;
 }> = ({
   title,
   newValue,
@@ -23,6 +24,7 @@ const SuccessFeeInputWrapper: React.FC<{
   children,
   newValueLabel,
   value,
+  prefixId,
 }) => {
   const { t } = useTranslation('service');
   const feeWeCharge = getServiceOwnerFee(+value);
@@ -30,8 +32,14 @@ const SuccessFeeInputWrapper: React.FC<{
   return (
     <div>
       <SuccessFieldWrapper>
-        <ZigTypography>{title || t('summary.success-fee')}</ZigTypography>
-        <ZigTypography variant='body2' color='neutral400'>
+        <ZigTypography id={prefixId && `${prefixId}-title`}>
+          {title || t('summary.success-fee')}
+        </ZigTypography>
+        <ZigTypography
+          variant='body2'
+          color='neutral400'
+          id={prefixId && `${prefixId}-description`}
+        >
           {description ||
             t('edit.success-fee-desc', { zignalyFee: ZIGNALY_PROFIT_FEE })}
         </ZigTypography>
@@ -49,11 +57,17 @@ const SuccessFeeInputWrapper: React.FC<{
                 left: '4px',
                 width: '100%',
               }}
+              id={prefixId && `${prefixId}-you-receive-label`}
             >
               {newValueLabel || t('you-receive')}
             </ZigTypography>
             <Box display='flex' paddingTop='23px'>
-              <ZigTypography color='neutral400' textAlign='center' width='100%'>
+              <ZigTypography
+                color='neutral400'
+                textAlign='center'
+                width='100%'
+                id={prefixId && `${prefixId}-you-receive`}
+              >
                 {newValue ?? Math.round(feeWeCharge)}
               </ZigTypography>
               <ZigTypography
@@ -68,7 +82,7 @@ const SuccessFeeInputWrapper: React.FC<{
         </Box>
       </SuccessFieldWrapper>
       {!!showZeroFeeExplainer && value === '0' && (
-        <Box mt='3px'>
+        <Box mt='3px' id={prefixId && `${prefixId}-zero-fee-alert`}>
           <ZigAlertMessage text={t('create.zero-fee')} />
         </Box>
       )}
