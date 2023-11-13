@@ -9,11 +9,7 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  useKycStatusesQuery,
-  useLazyUserQuery,
-  useUpdateUserMutation,
-} from 'apis/user/api';
+import { useLazyUserQuery, useUpdateUserMutation } from 'apis/user/api';
 import { Controller, useForm } from 'react-hook-form';
 import Countries from 'i18n-iso-countries';
 import { EditProfileValidation } from './validations';
@@ -22,41 +18,16 @@ import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import Flag from '../../../components/Flag';
-import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
-import { KYCStatusBox, ProfileStatusBox } from './atoms';
-import { generatePath, useNavigate } from 'react-router-dom';
-import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
-import { isFeatureOn } from '../../../whitelabel';
-import { Features } from '../../../whitelabel/type';
-import { find, groupBy } from 'lodash-es';
+import { ServiceLogoStatus } from './atoms';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
   const user = useCurrentUser();
-  const navigate = useNavigate();
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const [loadUser, userReloadStatus] = useLazyUserQuery();
-  const { data: kycStatuses } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc),
-  });
-
-  const kycStarted = useMemo(() => {
-    const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
-    const res = find(kycStatusesCateg, (x) => {
-      return x.some(
-        (kyc) =>
-          (kyc.status === 'rejected' && kyc.canBeRetried) ||
-          ['approved', 'pending'].includes(kyc.status),
-      );
-    });
-    if (!res) {
-      return kycStatusesCateg[kycStatuses?.status[0].category];
-    }
-    return res;
-  }, [kycStatuses?.status]);
 
   const {
     handleSubmit,
@@ -126,45 +97,6 @@ const EditProfileForm = () => {
         loadUser();
         toast.success(t('edit-profile.success'));
       });
-  const ServiceLogoStatus = () => (
-    <>
-      <Controller
-        name='imageUrl'
-        control={control}
-        render={({ field }) => (
-          <ServiceLogo
-            id={'edit-profile__logo'}
-            size={md ? 100 : sm ? 70 : 50}
-            label={t('edit-profile.edit-avatar')}
-            {...field}
-          />
-        )}
-      />
-
-      <Box sx={{ pt: md && 2 }}>
-        <ProfileStatusBox
-          id={'edit-profile__two-fa'}
-          isSuccess={user['2FAEnable']}
-          label={t('edit-profile.status-box.2fa')}
-          ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
-          cta={() => navigate(generatePath(ROUTE_2FA))}
-          status={t(
-            user['2FAEnable']
-              ? 'edit-profile.status-box.enabled'
-              : 'edit-profile.status-box.disabled',
-          )}
-        />
-
-        {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
-          <KYCStatusBox
-            id={'edit-profile__kyc'}
-            kycStatuses={kycStarted}
-            cta={() => navigate(generatePath(ROUTE_KYC))}
-          />
-        )}
-      </Box>
-    </>
-  );
 
   return (
     <>
@@ -172,7 +104,7 @@ const EditProfileForm = () => {
         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
           {md && (
             <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
-              <ServiceLogoStatus />
+              <ServiceLogoStatus control={control} />
             </Box>
           )}
           <Grid container>
@@ -225,7 +157,7 @@ const EditProfileForm = () => {
                   alignItems={'center'}
                   justifyContent={sm && 'center'}
                 >
-                  <ServiceLogoStatus />
+                  <ServiceLogoStatus control={control} />
                 </Box>
               </Grid>
             )}

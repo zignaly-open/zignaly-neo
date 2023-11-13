@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ProfileStatusBoxContainer } from './styles';
-import { Box, Tooltip, useTheme } from '@mui/material';
+import { Box, Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import { KycResponse } from 'apis/user/types';
 import { useTranslation } from 'react-i18next';
 import kycConfig from '../Kyc/kycDefinitions';
 import { InfoOutlined } from '@mui/icons-material';
+import { Control, Controller } from 'react-hook-form';
+import ServiceLogo from '../../TraderService/components/ServiceLogo';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
+import { useCurrentUser } from '../../../apis/user/use';
+import { useKycStatusesQuery } from '../../../apis/user/api';
+import { find, groupBy } from 'lodash-es';
+import { EditProfileFormType } from './types';
 
 export const ProfileStatusBox: React.FC<{
   isSuccess: boolean;
@@ -38,6 +48,76 @@ export const ProfileStatusBox: React.FC<{
         </ZigButton>
       )}
     </ProfileStatusBoxContainer>
+  );
+};
+
+export const ServiceLogoStatus = ({
+  control,
+}: {
+  control: Control<EditProfileFormType>;
+}) => {
+  const { t } = useTranslation('settings');
+  const user = useCurrentUser();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const { data: kycStatuses } = useKycStatusesQuery(undefined, {
+    skip: !isFeatureOn(Features.Kyc),
+  });
+
+  const kycStarted = useMemo(() => {
+    const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
+    const res = find(kycStatusesCateg, (x) => {
+      return x.some(
+        (kyc) =>
+          (kyc.status === 'rejected' && kyc.canBeRetried) ||
+          ['approved', 'pending'].includes(kyc.status),
+      );
+    });
+    if (!res) {
+      return kycStatusesCateg[kycStatuses?.status[0].category];
+    }
+    return res;
+  }, [kycStatuses?.status]);
+  return (
+    <>
+      <Controller
+        name='imageUrl'
+        control={control}
+        render={({ field }) => (
+          <ServiceLogo
+            id={'edit-profile__logo'}
+            size={md ? 100 : sm ? 70 : 50}
+            label={t('edit-profile.edit-avatar')}
+            {...field}
+          />
+        )}
+      />
+
+      <Box sx={{ pt: md && 2 }}>
+        <ProfileStatusBox
+          id={'edit-profile__two-fa'}
+          isSuccess={user['2FAEnable']}
+          label={t('edit-profile.status-box.2fa')}
+          ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
+          cta={() => navigate(generatePath(ROUTE_2FA))}
+          status={t(
+            user['2FAEnable']
+              ? 'edit-profile.status-box.enabled'
+              : 'edit-profile.status-box.disabled',
+          )}
+        />
+
+        {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
+          <KYCStatusBox
+            id={'edit-profile__kyc'}
+            kycStatuses={kycStarted}
+            cta={() => navigate(generatePath(ROUTE_KYC))}
+          />
+        )}
+      </Box>
+    </>
   );
 };
 
