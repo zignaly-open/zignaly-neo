@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPLOYMENTPATH="/zignaly/{directory}"
+DEPLOYMENTPATH="~/{directory}"
 
 # Change permissions
 sudo chown -R admin:admin $DEPLOYMENTPATH/deploy
