@@ -26,6 +26,7 @@ const InviteButton = ({
   const { t } = useTranslation('referrals-trader');
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down('md'));
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
 
   const {
     boostRunning,
@@ -51,6 +52,7 @@ const InviteButton = ({
       display={'flex'}
       alignItems={'center'}
       mb={md && boostRunning ? '10px' : 0}
+      mt={!sm && '-7px'}
     >
       {(traderBoost > 0 || boostRunning) && (
         <Box position={'relative'}>

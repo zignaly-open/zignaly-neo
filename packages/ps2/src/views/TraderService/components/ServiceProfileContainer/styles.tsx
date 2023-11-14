@@ -200,7 +200,7 @@ export const RightSideActionWrapper = styled(Box)<{
     bottom: ${({ isAuthenticated }) => (isAuthenticated ? '56px' : '0')};
     left: 0;
     align-items: flex-start;
-    height: 85px;
+    height: 87px;
     min-height: unset;
     width: 100%;
     padding: 10px 3px 5px 3px;
