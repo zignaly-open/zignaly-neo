@@ -14,7 +14,8 @@ const MarkdownSection: React.FC<{
   content: string;
   heightLimit?: number;
   emptyText: string;
-}> = ({ title, subtitle, readMore = true, content, emptyText }) => {
+  id?: string;
+}> = ({ id, title, subtitle, readMore = true, content, emptyText }) => {
   const { t } = useTranslation('action');
   const ref = useRef(null);
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
@@ -30,7 +31,12 @@ const MarkdownSection: React.FC<{
   const Icon = isTruncated ? ExpandMore : ExpandLess;
   return (
     <Box mt={8} mb={4}>
-      <ZigTypography variant={'h2'} sx={{ mb: 3 }} align='center'>
+      <ZigTypography
+        variant={'h2'}
+        sx={{ mb: 3 }}
+        align='center'
+        id={id && `${id}-title`}
+      >
         {title}
       </ZigTypography>
       {subtitle}
@@ -40,7 +46,7 @@ const MarkdownSection: React.FC<{
         truncate={shouldShowReadMore && isTruncated}
       >
         {chunks ? (
-          <MarkdownContainer>
+          <MarkdownContainer id={id}>
             <ReactMarkdown
               remarkPlugins={[breaks]}
               linkTarget='_blank'
@@ -52,7 +58,9 @@ const MarkdownSection: React.FC<{
             </ReactMarkdown>
           </MarkdownContainer>
         ) : (
-          <ZigTypography color={'neutral400'}>{emptyText}</ZigTypography>
+          <ZigTypography color={'neutral400'} id={id && `${id}-empty-text`}>
+            {emptyText}
+          </ZigTypography>
         )}
       </HideReadMoreEffects>
 
@@ -63,6 +71,7 @@ const MarkdownSection: React.FC<{
             <Icon sx={{ color: 'links', fill: 'currentColor !important' }} />
           }
           onClick={() => setIsTruncated((v) => !v)}
+          id={id && `${id}-more-less-button`}
         >
           {isTruncated ? t('more') : t('less')}
         </ZigButton>
