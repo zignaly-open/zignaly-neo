@@ -80,6 +80,7 @@ export const ServiceLogoStatus = ({
     }
     return res;
   }, [kycStatuses?.status]);
+  
   return (
     <>
       <Controller
