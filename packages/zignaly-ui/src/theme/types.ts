@@ -27,7 +27,6 @@ export type ThemeStyledComponents = {
     | "input2faGradient"
     | "input2faGradientBorder"
     | "buttonPrimary"
-    | "loader"
     | "header"
     | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
     | "input",
