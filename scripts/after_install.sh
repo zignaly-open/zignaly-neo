@@ -1,6 +1,15 @@
 #!/bin/bash
 
+
 DEPLOYMENTPATH="~/{directory}"
+
+whoami;
+echo $DEPLOYMENTPATH;
+cd ~
+pwd
+ls -la
+
+
 
 # Change permissions
 sudo chown -R admin:admin $DEPLOYMENTPATH/deploy
