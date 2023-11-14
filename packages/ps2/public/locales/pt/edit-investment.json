@@ -3,18 +3,17 @@
 	"addMoreInvestmentSuccess": "Investiu {{amount}} {{currency}} com sucesso no serviço {{serviceName}}.",
 	"withdrawInvestmentSuccess": "Retirada solicitada com sucesso.",
 	"validation-indicateAnAmount": "Deve indicar uma quantidade.",
-	"error-blockedInvestment": "Todos os seus fundos estão pendentes para serem transferidos para fora do serviço.",
 	"form": {
 		"title": "Quantidade Investida:",
 		"profits": {
 			"title": "O que fazer com os lucros:",
 			"left": "Reinvestir",
 			"right": "Retirada",
-			"title-confirmation": "Percentagem de lucros a Retirar:"
+			"pct-withdraw": "% de Lucros a Retirar:"
 		},
 		"inputAmount": {
-			"label": "Quantidade a Investir:",
-			"labelBalance": "Disponível:"
+			"label": "Quantidade a Investir",
+			"labelMinDeposit": "Depósito mínimo:"
 		},
 		"link": {
 			"investMore": "Invista mais",
@@ -23,8 +22,10 @@
 		"button": {
 			"continue-to-confirmation": "Continuar a Confirmação",
 			"invest-now": "Investir {{amount}}{{coin}} agora",
-			"addInvestment": "Adicionar ao Investimento"
-		}
+			"addInvestment": "Adicionar ao Investimento",
+			"transfer-now": "Transferir agora"
+		},
+		"transferOutAll": "Todo o seu investimento está pendente de retirada e será processado em breve durante a contabilidade diária, assim que o trader liberar os fundos."
 	},
 	"pendingMajorThan": {
 		"type": "Novo investimento",
@@ -59,10 +60,12 @@
 				"type": "Tipo",
 				"status": "Estado"
 			},
-			"button": "Voltar"
+			"button": "Voltar",
+			"hoverTooltip": "Passe o cursor sobre a quantidade para ver os decimais completos",
+			"waiting-for-next-accounting-tooltip": "Receberá os seus fundos depois que o gestor do fundo os liberar e a contabilidade diária for realizada. Por favor, considere que o seu investimento está em risco até que o saldo seja transferido para você. Dependendo do gestor do fundo e a sua estratégia, isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído."
 		},
 		"editInvestments": {
-			"title": "Editar Investimento",
+			"title": "Editar Investimento Com",
 			"loading": "Carregando editar investimento"
 		}
 	},
@@ -73,19 +76,20 @@
 	},
 	"invest-modal": {
 		"invest-with": "Invista com",
-		"amount-to-invest": "Quantidade a Investir",
-		"type-transfer": "Escreva a palavra <0>\"{{word}}\"</0> no campo abaixo para completar a transferência:",
+		"amount-to-invest": "Quantidade a Investir:",
+		"type-transfer": "Digite a palavra <0>”{{word}}”<\/0> no campo abaixo para concordar com a transferência:",
 		"transfer-error": "Valor inválido. Por favor, escreva a palavra correcta.",
 		"transfer-label": "Transferência",
-		"i-understand-margin": "Entendo e confirmo que todo o meu {{coin}} saldo faz agora parte do margin e está em risco",
-		"i-understand-money-transferred": "Eu entendo e confirmo que meus fundos serão transferidos para o pool do trader e não aparecerão mais no meu saldo disponível.",
 		"max-funds": "Excede os fundos máximos permitidos neste serviço. Investir no máximo {{max}} {{coin}}.",
-		"max-reached": "Não é possível investir neste serviço porque atingiu o limite Máximo de Fundos."
+		"max-reached": "Não é possível investir neste serviço porque atingiu o limite Máximo de Fundos.",
+		"type-transfer-placeholder": "Digite “{{word}}” aqui",
+		"i-understand-risk": "Entendo e aceito que os meus fundos serão transferidos para a conta do Pool do Serviço e que os meus fundos estão em risco"
 	},
 	"withdrawal-request": "Pedido de Retirada",
 	"withdrawal-success": {
 		"title": "Retirada Solicitada",
-		"description": "Receberá os seus fundos depois que o gestor do fundo os liberar e a contabilidade diária for realizada. Por favor, considere que o seu investimento está em risco até que o saldo seja transferido para você. Dependendo do administrador do fundo, isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído. A Zignaly não controla esse período de tempo, portanto, seja paciente.",
+		"description": "Receberá os seus fundos depois que o gestor do fundo os liberar e a contabilidade diária for realizada. Por favor, considere que o seu investimento está em risco até que o saldo seja transferido para você. Dependendo do administrador do fundo, isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído. Nos não controla esse período de tempo, portanto, seja paciente.",
 		"button": "Fechar"
-	}
+	},
+	"investorDetail-successFee-discounted": "<0>{{oldFee}}%<\/0> {{fee}}% Taxa de sucesso"
 }

@@ -25,12 +25,12 @@
     "voucher_pending": "Deposit Bonus"
   },
   "full-terms": {
-    "1": "Zignaly reserves the right to cancel \"Fee Vouchers\" if the user is found to be involved in inappropriate, dishonest, or abusive activities.",
-    "2": "Zignaly reserves the right to amend the Terms and Conditions of the Rewards program at any time without prior notice.",
-    "3": "The \"Fee Vouchers\" are applicable to Zignaly's part of the \"Success Fee\".",
+    "1": "{{ whitelabel }} reserves the right to cancel \"Fee Vouchers\" if the user is found to be involved in inappropriate, dishonest, or abusive activities.",
+    "2": "{{ whitelabel }} reserves the right to amend the Terms and Conditions of the Rewards program at any time without prior notice.",
+    "3": "The \"Fee Vouchers\" are applicable to {{ whitelabel }}'s part of the \"Success Fee\".",
     "4": "The \"Fee Vouchers\" are not transferable and shall only be used by the original user that attained them.",
-    "5": "Paid online advertisements with the Zignaly logo are strictly prohibited.",
-    "6": "All reward calculations by Zignaly are final.",
+    "5": "Paid online advertisements with the {{ whitelabel }} logo are strictly prohibited.",
+    "6": "All reward calculations by {{ whitelabel }} are final.",
     "7": "Participants found violating these terms will not be eligible for the rewards; any fraudulent or abusive behavior will result in the immediate termination of all outstanding rewards.",
     "title": "Global Terms"
   },

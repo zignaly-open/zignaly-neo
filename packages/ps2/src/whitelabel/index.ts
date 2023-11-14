@@ -4,6 +4,8 @@ import defaultFeatureState from './default';
 
 const { REACT_APP_WHITELABEL: whitelabelName } = process.env;
 
+export const isZignaly = whitelabelName === 'zignaly';
+
 export const whitelabel =
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

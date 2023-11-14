@@ -2,8 +2,11 @@ import { styled } from '@mui/material';
 import { MenuDropDown } from '@zignaly-open/ui';
 import { Link } from 'react-router-dom';
 import { Theme } from '@mui/system';
+import { lighten } from '@mui/material/styles';
 
+// FIXME why tf do we have duplication here?
 const secondaryBackground = ({ theme }: { theme: Theme }) => `
+  background: ${lighten(theme.palette.neutral900, (0x0f - 0x05) / 0xff)};
   background: ${theme.palette.backgrounds.secondaryBackground};
 `;
 
@@ -55,6 +58,8 @@ export const Option = styled('span', {
   &:hover {
     background: ${({ theme }) =>
       theme.palette.backgrounds.manageServiceMenuHover};
+    background: ${({ theme }) =>
+      lighten(theme.palette.neutral750, (0x1b - 0x16) / 0xff)};
     & > * {
       color: ${({ theme }) => theme.palette.neutral100};
     }

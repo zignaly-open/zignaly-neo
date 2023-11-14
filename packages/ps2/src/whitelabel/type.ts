@@ -1,3 +1,5 @@
+import { ThemeOverridesType } from '@zignaly-open/ui';
+
 export enum Features {
   AccessLevels,
   Rewards,
@@ -21,24 +23,31 @@ export type WhitelabelOverride = {
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;
-  featureOverrides: Record<Partial<Features>, boolean>;
+  featureOverrides: Partial<Record<Features, boolean>>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;
   logo?: string;
   headContent?: string;
+  links?: {
+    tos?: string;
+    privacyPolicy?: string;
+  };
   background?: string;
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
-  theme?: string;
-  social: Record<
-    | 'telegram'
-    | 'twitter'
-    | 'discord'
-    | 'medium'
-    | 'linkedin'
-    | 'instagram'
-    | 'youtube',
-    string | void
+  baseTheme?: string;
+  themeOverrides?: ThemeOverridesType;
+  social: Partial<
+    Record<
+      | 'telegram'
+      | 'twitter'
+      | 'discord'
+      | 'medium'
+      | 'linkedin'
+      | 'instagram'
+      | 'youtube',
+      string | void
+    >
   >;
 };

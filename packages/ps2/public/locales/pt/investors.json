@@ -25,5 +25,21 @@
 		"owner": "Proprietário"
 	},
 	"number-of-investors_one": "{{count}} Investidor",
-	"number-of-investors_other": "{{count}} Investidores"
+	"number-of-investors_other": "{{count}} Investidores",
+	"change-fee": "Editar taxa de sucesso",
+	"change-fee-modal": {
+		"title": "Desconto no Success Fee:",
+		"desc": "Reconheça aos seus valiosos investidores oferecendo-lhes um desconto na Taxa de Sucesso",
+		"input-desc": "Desconto que será aplicado na Taxa de Sucesso",
+		"discount": "Desconto",
+		"new-success-fee": "Taxa de Sucesso",
+		"fee-edited": "Taxa de Sucesso editada com sucesso",
+		"validate-must-be-between": "Deve ser um número inteiro (0 a {{max}} ). Ou {{full}} para ser gratuito",
+		"already-0": "Vá lá, o vosso serviço já é gratuito, não podemos fazer descontos mais baixos"
+	},
+	"first-grade-math-explainer": "Aplique um desconto na sua Taxa de Sucesso além da {{zignalyFee}}% cobrada pela ZIGDAO",
+	"success-fee-explainer": "Você obtém {{owner}}%, ZIGDAO recebe {{zignalyFee}}%",
+	"success-fee-explainer-with-discount": "Você recebe {{discounted}}% ({{owner}}% - {{discount}}% de desconto), ZIGDAO recebe {{zignalyFee}}%",
+	"it-is-you": "É você! Aliás, você está incrível hoje",
+	"it-is-you-0-fee": "É você, então a taxa de sucesso é 0%"
 }
