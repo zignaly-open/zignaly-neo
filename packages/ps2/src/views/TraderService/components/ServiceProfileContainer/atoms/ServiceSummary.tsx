@@ -20,7 +20,11 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
         <>
           <GridWithBottomBorder container pb={2.5} pt={0}>
             <GridCell item xs={6}>
-              <ZigTypography color={'neutral300'} sx={{ mb: '10px' }}>
+              <ZigTypography
+                color={'neutral300'}
+                sx={{ mb: '10px' }}
+                id={'service-profile__assets-in-pool-label'}
+              >
                 {t('assets-in-pool')}
               </ZigTypography>
               <AssetsInPoolWrapper>
@@ -34,7 +38,11 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               </AssetsInPoolWrapper>
             </GridCell>
             <GridCell item xs={6}>
-              <ZigTypography color={'neutral300'} sx={{ mb: '10px' }}>
+              <ZigTypography
+                color={'neutral300'}
+                sx={{ mb: '10px' }}
+                id={'service-profile__investors-label'}
+              >
                 {t('investors-count')}
               </ZigTypography>
               <Box
@@ -107,6 +115,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               color={'neutral300'}
               sx={{ mt: 0.5 }}
               component={'p'}
+              id={'service-profile__investors-count-label'}
             >
               {t('investors-count')}
               {': '}
@@ -131,6 +140,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__base-currency-label'}
           >
             {t('summary.base-currency')}{' '}
             <ZigTypography
@@ -146,6 +156,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__funds-allocated-label'}
           >
             {t('summary.funds-allocated')}{' '}
             <ZigTypography
@@ -179,6 +190,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__success-fee-label'}
           >
             {t('summary.success-fee')}{' '}
             <ZigTypography
@@ -196,6 +208,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__tags-label'}
           >
             {t('summary.tags')}{' '}
             <ZigTypography

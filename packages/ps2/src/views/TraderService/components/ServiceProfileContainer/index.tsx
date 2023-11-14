@@ -43,7 +43,10 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
           <Grid item xs={12} md={7} pb={3}>
             <Box display={'flex'} justifyContent={'center'} gap={'35px'}>
               <ServiceInfoWrapper>
-                <ZigTypography color={'neutral300'}>
+                <ZigTypography
+                  color={'neutral300'}
+                  id={'service-profile__assets-in-pool-label'}
+                >
                   {t('assets-in-pool')}
                 </ZigTypography>
                 <AssetsInPoolWrapper>
