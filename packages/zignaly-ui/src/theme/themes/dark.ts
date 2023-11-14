@@ -41,7 +41,6 @@ const dark: ThemeStyledComponents = {
     dropdown2ndLevel: "rgb(25, 26, 48)", // TODO: fix?
     tableRow: "#13122566",
     modal: "#101225",
-    loader: "#fff",
     activeTab: "#181B2F", // TODO: fix?
     greyedOutBorder: "#464a85", // TODO: fix?
     sliderMark: "#888999",
