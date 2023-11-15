@@ -9,51 +9,25 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  useKycStatusesQuery,
-  useLazyUserQuery,
-  useUpdateUserMutation,
-} from 'apis/user/api';
+import { useLazyUserQuery, useUpdateUserMutation } from 'apis/user/api';
 import { Controller, useForm } from 'react-hook-form';
 import Countries from 'i18n-iso-countries';
 import { EditProfileValidation } from './validations';
 import { EditProfileFormType } from './types';
 import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import Flag from '../../../components/Flag';
-import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
-import { KYCStatusBox, ProfileStatusBox } from './atoms';
-import { generatePath, useNavigate } from 'react-router-dom';
-import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
-import { isFeatureOn } from '../../../whitelabel';
-import { Features } from '../../../whitelabel/type';
-import { find, groupBy } from 'lodash-es';
+import { ServiceLogoStatus } from './atoms';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
   const user = useCurrentUser();
-  const navigate = useNavigate();
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const [loadUser, userReloadStatus] = useLazyUserQuery();
-  const { data: kycStatuses } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc),
-  });
-
-  const kycStarted = useMemo(() => {
-    const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
-    const res = find(kycStatusesCateg, (x) => {
-      return x.some(
-        (kyc) =>
-          (kyc.status === 'rejected' && kyc.canBeRetried) ||
-          ['approved', 'pending'].includes(kyc.status),
-      );
-    });
-    if (!res) {
-      return kycStatusesCateg[kycStatuses?.status[0].category];
-    }
-    return res;
-  }, [kycStatuses?.status]);
 
   const {
     handleSubmit,
@@ -128,43 +102,11 @@ const EditProfileForm = () => {
     <>
       <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-          <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
-            <Controller
-              name='imageUrl'
-              control={control}
-              render={({ field }) => (
-                <ServiceLogo
-                  id={'edit-profile__logo'}
-                  size={100}
-                  label={t('edit-profile.edit-avatar')}
-                  {...field}
-                />
-              )}
-            />
-
-            <Box sx={{ pt: 2 }}>
-              <ProfileStatusBox
-                id={'edit-profile__two-fa'}
-                isSuccess={user['2FAEnable']}
-                label={t('edit-profile.status-box.2fa')}
-                ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
-                cta={() => navigate(generatePath(ROUTE_2FA))}
-                status={t(
-                  user['2FAEnable']
-                    ? 'edit-profile.status-box.enabled'
-                    : 'edit-profile.status-box.disabled',
-                )}
-              />
-
-              {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
-                <KYCStatusBox
-                  id={'edit-profile__kyc'}
-                  kycStatuses={kycStarted}
-                  cta={() => navigate(generatePath(ROUTE_KYC))}
-                />
-              )}
+          {md && (
+            <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
+              <ServiceLogoStatus control={control} />
             </Box>
-          </Box>
+          )}
           <Grid container>
             <Grid sm={6} xs={12} p={1} pb={2}>
               <ZigTypography id={'edit-profile__email-label'}>
@@ -180,7 +122,14 @@ const EditProfileForm = () => {
               </ZigTypography>
             </Grid>
 
-            <Grid sm={6} p={1} pb={2}>
+            <Grid
+              sm={6}
+              xs={12}
+              p={1}
+              pb={2}
+              justifyContent={'center'}
+              alignItems={'center'}
+            >
               <ZigTypography id={'edit-profile__user-id-label'}>
                 {t('edit-profile.user-id')}
                 <ZigTypography
@@ -200,6 +149,18 @@ const EditProfileForm = () => {
                 {user.userId}
               </ZigTypography>
             </Grid>
+            {!md && (
+              <Grid sm={12} xs={12} p={1} pb={2}>
+                <Box
+                  display={'flex'}
+                  gap={sm ? '30px' : '10px'}
+                  alignItems={'center'}
+                  justifyContent={sm && 'center'}
+                >
+                  <ServiceLogoStatus control={control} />
+                </Box>
+              </Grid>
+            )}
 
             <Grid sm={12} xs={12} p={1} pb={2}>
               <Controller
@@ -218,7 +179,7 @@ const EditProfileForm = () => {
               />
             </Grid>
 
-            <Grid sm={12} p={1} pb={2}>
+            <Grid xs={12} p={1} pb={2}>
               <Controller
                 name='country'
                 control={control}
@@ -249,7 +210,7 @@ const EditProfileForm = () => {
                 )}
               />
             </Grid>
-            <Grid sm={12} p={1} pb={2}>
+            <Grid xs={12} p={1} pb={2}>
               <Controller
                 name='bio'
                 control={control}
