@@ -5,12 +5,12 @@ cd ~
 pwd
 
 echo ""
-ls -lah
+ls -lah .nvm
 echo ""
 
-DEPLOYMENTPATH="~/{directory}"
+DEPLOYMENTPATH="$HOME/{directory}"
 echo $DEPLOYMENTPATH
-\. "~/.nvm/nvm.sh"
+\. "$HOME/.nvm/nvm.sh"
 
 # Change permissions
 sudo chown -R admin:admin $DEPLOYMENTPATH/deploy

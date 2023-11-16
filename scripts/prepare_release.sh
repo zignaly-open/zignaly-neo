@@ -11,5 +11,5 @@ if ! test -f "$HOME/.nvm"; then
   sudo npm i -g pm2
 fi
 
-DEPLOYMENTPATH="~/{directory}"
+DEPLOYMENTPATH="$HOME/{directory}"
 sudo mkdir -p $DEPLOYMENTPATH/deploy
