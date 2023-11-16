@@ -97,17 +97,14 @@ export default {
   },
   headContent: `
     <title>Lastra</title>
+    <meta name="description" content="A global platform to invest in winning crypto portfolios.">
+    
     <link rel="manifest" href="/whitelabel/lastra.json"/>
-    
-    
     <link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/lastra/logo32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
     <link rel="apple-touch-icon" href="/images/whitelabel/lastra/logo192.png"/>
-
-
-    <meta name="description" content="A global platform to invest in winning crypto portfolios.">
-
+    
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://lastra.zignaly.com/profit-sharing">
     <meta property="og:type" content="website">
@@ -126,5 +123,13 @@ export default {
     <meta name="twitter:description" content="A global platform to invest in winning crypto portfolios.">
     <meta name="twitter:image" content="https://lastra.zignaly.com/images/whitelabel/lastra/banner630.jpg">
     <meta name="twitter:site" content="@Criptomaniacos_">
+    
+  `,
+  scripts: `
+    !(function (b, t, c) {
+      ((c = t.createElement(b)).async = 1),
+      (c.src = "https://s.cmania.co/code.js"),
+      (b = t.getElementsByTagName(b)[0]).parentNode.insertBefore(c, b);
+    })("script", document);
   `,
 } as WhitelabelOverride;

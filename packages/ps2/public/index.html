@@ -2,6 +2,9 @@
 <html lang="en" translate="no">
 <head>
     <meta charset="utf-8"/>
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#ffffff">
     <% if (process.env.REACT_APP_NO_INDEX === 'true') { %>
       <meta name="robots" content="noindex">
       <meta name="googlebot" content="noindex">
@@ -21,5 +24,8 @@
   To begin the development, run `npm start` or `yarn start`.
   To create a production bundle, use `npm run build` or `yarn build`.
 -->
+<% if (process.env.REACT_APP_ENABLE_TRACKING === 'true') { %>
+<script id="analytics-scripts"></script>
+<% } %>
 </body>
 </html>

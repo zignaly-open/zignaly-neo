@@ -53,6 +53,9 @@ function getIndexHtmlWithWhitelabelHead(wlConfig) {
     }<script type="text/javascript">window.__zignalyWhitelabelConfig = ${JSON.stringify(
       wlConfig,
     )}</script></head>`,
+  ).replace(
+    '<script id="analytics-scripts"></script>',
+    `<script id="analytics-scripts">${wlConfig.scripts || ''}}</script>`
   );
 }
 

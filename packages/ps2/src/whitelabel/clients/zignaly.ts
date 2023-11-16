@@ -17,9 +17,6 @@ export default {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/logo192.png"/>
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="theme-color" content="#ffffff">
     
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://app.zignaly.com/profit-sharing">
@@ -39,5 +36,11 @@ export default {
     <meta name="twitter:description" content="Discover the best traders available to invest through Zignaly's Profit Sharing">
     <meta name="twitter:image" content="https://app.zignaly.com/images/zignaly-social.png">
     <meta name="twitter:site" content="@zignaly">
+  `,
+  scripts: `
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    twq('config','og0cu');
   `,
 } as WhitelabelOverride;

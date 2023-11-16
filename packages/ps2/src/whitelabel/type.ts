@@ -29,6 +29,7 @@ export type WhitelabelOverride = {
   mainAppLink?: string;
   logo?: string;
   headContent?: string;
+  scripts?: string;
   links?: {
     tos?: string;
     privacyPolicy?: string;
