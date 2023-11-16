@@ -11,6 +11,3 @@ if ! test -f "$HOME/.nvm"; then
   npm i -g pm2
   npm i -g yarn
 fi
-
-#DEPLOYMENTPATH="/zignaly/{directory}"
-#sudo mkdir -p $DEPLOYMENTPATH/deploy
