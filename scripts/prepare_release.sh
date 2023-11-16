@@ -6,8 +6,10 @@ if ! test -f "$HOME/.nvm"; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  npm i -g pm2
+  nvm install 20
+  nvm use 20
+  sudo npm i -g pm2
 fi
 
 DEPLOYMENTPATH="~/{directory}"
-mkdir -p $DEPLOYMENTPATH/deploy
+sudo mkdir -p $DEPLOYMENTPATH/deploy
