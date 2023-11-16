@@ -205,7 +205,8 @@ export const RightSideActionWrapper = styled(Box)<{
     width: 100%;
     padding: 10px 3px 5px 3px;
     flex-direction: row;
-    background-color: #060819;
+    background-color: ${({ theme }) =>
+      theme.palette.backgrounds.mobileButtonsWrapper};
     z-index: 5;
   }
 `;

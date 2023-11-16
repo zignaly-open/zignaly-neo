@@ -13,7 +13,7 @@ export const ZigTabs = styled(Tabs)`
 
   .MuiTab-root {
     text-transform: initial;
-    color: #9ca3af;
+    color: ${({ theme }) => theme.palette.lightGrey};
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;

@@ -29,7 +29,10 @@ export type ThemeStyledComponents = {
     | "buttonPrimary"
     | "header"
     | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
-    | "input",
+    | "input"
+    | "breakLineSignUp"
+    | "mobileButtonsWrapper"
+    | "coinIconPlaceholder",
     string
   >;
   boxShadows: CustomPalette["boxShadows"];

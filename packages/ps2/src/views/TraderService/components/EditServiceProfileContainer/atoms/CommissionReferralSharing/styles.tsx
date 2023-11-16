@@ -52,7 +52,8 @@ export const StyledZigSlider = styled(ZigSlider)`
     margin-top: 10px;
 
     &::before {
-      background-color: #0b1e28;
+      background-color: ${({ theme }) =>
+        theme.palette.backgrounds.toastSuccess};
     }
 
     .MuiTypography-root {
