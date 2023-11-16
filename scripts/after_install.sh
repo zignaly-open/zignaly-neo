@@ -5,7 +5,7 @@ cd ~
 pwd
 
 echo ""
-ls -lah
+#ls -lah
 echo ""
 
 DEPLOYMENTPATH="~/{directory}"
