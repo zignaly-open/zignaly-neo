@@ -19,7 +19,7 @@ export type WhitelabelOverride = {
   locales?: string[];
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
-  translationOverrides?: boolean;
+  translationOverrides?: string;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;

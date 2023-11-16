@@ -17,7 +17,7 @@ export default {
     tos: 'https://www.lastra.app/termos',
     privacyPolicy: 'https://www.lastra.app/politica-privacidade/',
   },
-  translationOverrides: true,
+  translationOverrides: 'criptomaniacos',
   xSource: 'criptomaniacos',
   background: '#0D0E0E',
   backgroundImage: null,

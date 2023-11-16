@@ -1,6 +1,6 @@
 import i18n from './i18next';
 import React, { PropsWithChildren } from 'react';
-import { whitelabel, whitelabelName } from '../../whitelabel';
+import { whitelabel } from '../../whitelabel';
 
 let overrides: Record<string, Record<string, Record<string, string>>> | null =
   null;
@@ -57,7 +57,9 @@ if (whitelabel.translationOverrides) {
     addOverrides({ [i18n.language]: i18n.getDataByLanguage(i18n.language) });
   };
 
-  loaderPromise = fetch(`/locales/_overrides/${whitelabelName}.json`)
+  loaderPromise = fetch(
+    `/locales/_overrides/${whitelabel.translationOverrides}.json`,
+  )
     .then((r) => r.json())
     .then((v) => {
       overrides = v;

@@ -19,7 +19,6 @@ export default {
     BNB: 0.0001,
     USDC: 0.0001,
   },
-  translationOverrides: false,
   xSource: 'freedom',
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',
   social: {},
