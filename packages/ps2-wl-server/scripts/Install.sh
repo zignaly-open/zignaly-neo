@@ -1,17 +1,6 @@
 #!/bin/bash
 
-DEPLOYMENTPATH="$HOME/{directory}"
+DEPLOYMENTPATH="/zignaly/{directory}/deploy"
 \. "$HOME/.nvm/nvm.sh"
-# Change permissions
-sudo chown -R admin:admin $DEPLOYMENTPATH/deploy
-
-
-
-
-
-cd $DEPLOYMENTPATH/deploy/packages/ps2
-npm i express serve-static
-
-npm i express serve-static
-
-
+cd $DEPLOYMENTPATH
+npm i

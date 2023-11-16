@@ -1,9 +1,7 @@
 #!/bin/bash
 
-DEPLOYMENTPATH="$HOME/{directory}"
+DEPLOYMENTPATH="/zignaly/{directory}/deploy"
+cd $DEPLOYMENTPATH
 \. "$HOME/.nvm/nvm.sh"
 
-#cd $DEPLOYMENTPATH/deploy/packages/ps2
-#npm i express serve-static
-
-
+pm2 start npm --name "zignaly-wl" -- start
