@@ -12,7 +12,6 @@ import {
 import { RouteGroup } from 'views/TraderService/components/ServiceHeader/atoms';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
-import DoneIcon from '@mui/icons-material/Done';
 import { useCurrentUser } from '../../../apis/user/use';
 import CircleIcon from '@mui/icons-material/Circle';
 
@@ -39,16 +38,7 @@ function SettingsHeader() {
                 name: t('header.2fa'),
                 path: generatePath(ROUTE_2FA),
                 id: `settings__edit-2fa`,
-                sideElement: user['2FAEnable'] ? (
-                  <DoneIcon
-                    sx={{
-                      width: '15px',
-                      height: '15px',
-                      color: 'greenGraph',
-                      mt: '-5px',
-                    }}
-                  />
-                ) : (
+                sideElement: !user['2FAEnable'] && (
                   <CircleIcon
                     sx={{
                       width: '10px',

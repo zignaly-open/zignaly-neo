@@ -108,59 +108,62 @@ const EditProfileForm = () => {
             </Box>
           )}
           <Grid container>
-            <Grid sm={6} xs={12} p={1} pb={2}>
-              <ZigTypography id={'edit-profile__email-label'}>
-                {t('edit-profile.email')}
-              </ZigTypography>
-
-              <ZigTypography
-                component={'p'}
-                sx={{ mt: 1, wordWrap: 'break-word' }}
-                id={'edit-profile__email'}
-              >
-                {user.email}
-              </ZigTypography>
-            </Grid>
-
-            <Grid
-              sm={6}
-              xs={12}
-              p={1}
-              pb={2}
-              justifyContent={'center'}
-              alignItems={'center'}
-            >
-              <ZigTypography id={'edit-profile__user-id-label'}>
-                {t('edit-profile.user-id')}
-                <ZigTypography
-                  sx={{ pl: 1 }}
-                  variant={'body2'}
-                  color={'neutral400'}
-                >
-                  {t('edit-profile.internal-use')}
+            <Grid container alignItems={'center'}>
+              {!md && (
+                <Grid sm={3} xs={12} p={1} pb={2} order={!sm && 3}>
+                  <Box
+                    display={'flex'}
+                    gap={sm ? '30px' : '10px'}
+                    alignItems={'center'}
+                    justifyContent={sm && 'center'}
+                  >
+                    <ServiceLogoStatus control={control} />
+                  </Box>
+                </Grid>
+              )}
+              <Grid sm={4.5} xs={12} p={1} pb={2} order={!sm && 1}>
+                <ZigTypography id={'edit-profile__email-label'}>
+                  {t('edit-profile.email')}
                 </ZigTypography>
-              </ZigTypography>
 
-              <ZigTypography
-                component={'p'}
-                sx={{ mt: 1 }}
-                id={'edit-profile__user-id'}
-              >
-                {user.userId}
-              </ZigTypography>
-            </Grid>
-            {!md && (
-              <Grid sm={12} xs={12} p={1} pb={2}>
-                <Box
-                  display={'flex'}
-                  gap={sm ? '30px' : '10px'}
-                  alignItems={'center'}
-                  justifyContent={sm && 'center'}
+                <ZigTypography
+                  component={'p'}
+                  sx={{ mt: 1, wordWrap: 'break-word' }}
+                  id={'edit-profile__email'}
                 >
-                  <ServiceLogoStatus control={control} />
-                </Box>
+                  {user.email}
+                </ZigTypography>
               </Grid>
-            )}
+
+              <Grid
+                sm={4.5}
+                xs={12}
+                p={1}
+                pb={2}
+                justifyContent={'center'}
+                alignItems={'center'}
+                order={!sm && 2}
+              >
+                <ZigTypography id={'edit-profile__user-id-label'}>
+                  {t('edit-profile.user-id')}
+                  <ZigTypography
+                    sx={{ pl: 1 }}
+                    variant={'body2'}
+                    color={'neutral400'}
+                  >
+                    {t('edit-profile.internal-use')}
+                  </ZigTypography>
+                </ZigTypography>
+
+                <ZigTypography
+                  component={'p'}
+                  sx={{ mt: 1 }}
+                  id={'edit-profile__user-id'}
+                >
+                  {user.userId}
+                </ZigTypography>
+              </Grid>
+            </Grid>
 
             <Grid sm={12} xs={12} p={1} pb={2}>
               <Controller
