@@ -89,35 +89,37 @@ export const ServiceLogoStatus = ({
         render={({ field }) => (
           <ServiceLogo
             id={'edit-profile__logo'}
-            size={md ? 100 : sm ? 70 : 50}
+            size={md ? 100 : sm ? 60 : 50}
             label={t('edit-profile.edit-avatar')}
             {...field}
           />
         )}
       />
 
-      <Box sx={{ pt: md && 2 }}>
-        <ProfileStatusBox
-          id={'edit-profile__two-fa'}
-          isSuccess={user['2FAEnable']}
-          label={t('edit-profile.status-box.2fa')}
-          ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
-          cta={() => navigate(generatePath(ROUTE_2FA))}
-          status={t(
-            user['2FAEnable']
-              ? 'edit-profile.status-box.enabled'
-              : 'edit-profile.status-box.disabled',
-          )}
-        />
-
-        {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
-          <KYCStatusBox
-            id={'edit-profile__kyc'}
-            kycStatuses={kycStarted}
-            cta={() => navigate(generatePath(ROUTE_KYC))}
+      {md && (
+        <Box sx={{ pt: md && 2 }}>
+          <ProfileStatusBox
+            id={'edit-profile__two-fa'}
+            isSuccess={user['2FAEnable']}
+            label={t('edit-profile.status-box.2fa')}
+            ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
+            cta={() => navigate(generatePath(ROUTE_2FA))}
+            status={t(
+              user['2FAEnable']
+                ? 'edit-profile.status-box.enabled'
+                : 'edit-profile.status-box.disabled',
+            )}
           />
-        )}
-      </Box>
+
+          {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
+            <KYCStatusBox
+              id={'edit-profile__kyc'}
+              kycStatuses={kycStarted}
+              cta={() => navigate(generatePath(ROUTE_KYC))}
+            />
+          )}
+        </Box>
+      )}
     </>
   );
 };
