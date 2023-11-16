@@ -1,24 +1,73 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
 import { getZignalyThemeExport } from '../theme';
-import dark from '../theme/dark';
+import dark from '../theme/themes/dark';
+import TheresMore from '../assets/docs/theres-more.png'
 
 
 <Meta title="Palette" />
 
 ## Zignaly UI Kit
 
-The Zignaly UI Kit contains a collection of React components that can be used to build beautiful and performant React applications consistent with our company style.
+All the colors we use in the app.
 
-Please be advised that if you work on Zignaly projects and start implementing your own basic components so that we end up with two instances of components with the same roles, I will <span style={{textDecoration: 'line-through'}}>break your legs</span> kindly explain this is not the way things are done here.
+I am painfully aware of the fact that this is not how you are supposed to manage the palette in MUI but it is what it is.
+
+Maybe once a day would come that we will sit with the designer and trim all the single-use colors. Maybe a day would come when we will be able to drop extending the mui theme in type definitions for mui stuff. But probably not today.
+
+It is what it is.
+
+<iframe width="300" height="300" src="https://www.youtube.com/embed/y9r_pZL4boE?si=MNKhNMkzVQvtPT3Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+## Palette
+
+Here are the basic colors we have in the palette
+
+<ColorPalette>
+    {Object.entries(dark.palette).map(([name, color]) => {
+        return <ColorItem
+            key={name}
+            title={"theme.palette." + name}
+            colors={{ [name]: color }}
+          />
+      })}
+</ColorPalette>
+
+Ok so that was the main palette.
+
+<img src={TheresMore} />
+
+We also have...
+
+## "Backgrounds"
 
 
 <ColorPalette>
-    {['primary', 'secondary', 'success', 'danger', ...Object.keys(dark)].map(x => {
+    {Object.entries(dark.backgrounds).map(([name, color]) => {
         return <ColorItem
-            key={x}
-            title={"theme.palette." + x}
-            subtitle="Some of the greys"
-            colors={typeof darkMui.palette[x] === 'string' ? { [x]: darkMui.palette[x] } : darkMui.palette[x]}
+            key={name}
+            title={"theme.backgrounds." + name}
+            colors={{ [name]: color }}
+          />
+      })}
+</ColorPalette>
+
+OK, palette, backgrounds. Are we done?
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ob7_LkZWjaI?si=oloBMSV3-bBoRL8p&amp;start=4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Because we also have...
+
+
+## Chart colors
+
+
+<ColorPalette>
+    {Object.entries(dark.chart).map(([name, color]) => {
+        return <ColorItem
+            key={name}
+            title={"theme.chart." + name}
+            colors={{ [name]: Array.isArray(color) ? ('linear-gradient(to top, ' + color.join(', ') + ')') : color }}
           />
       })}
 </ColorPalette>
