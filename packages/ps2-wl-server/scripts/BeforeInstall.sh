@@ -8,7 +8,8 @@ if ! test -f "$HOME/.nvm"; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
   nvm install 20
   nvm use 20
-  sudo npm i -g pm2
+  npm i -g pm2
+  npm i -g yarn
 fi
 
 DEPLOYMENTPATH="$HOME/{directory}"
