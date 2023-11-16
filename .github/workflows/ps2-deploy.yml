@@ -22,7 +22,7 @@ jobs:
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/appspec.yml
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/ApplicationStart.sh
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/BeforeInstall.sh
-          sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/Install.sh
+          sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/AfterInstall.sh
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:

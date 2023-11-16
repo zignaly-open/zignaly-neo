@@ -10,7 +10,7 @@ hooks:
           timeout: 300
           runas: admin
     Install:
-        - location: scripts/Install.sh
+        - location: scripts/AfterInstall.sh
           runas: admin
           timeout: 1200
     ApplicationStart:
