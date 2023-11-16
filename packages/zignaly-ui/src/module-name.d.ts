@@ -25,6 +25,11 @@ declare module "@mui/material/styles" {
     red: string;
     contrasting: string;
     paleBlue: string;
+    lightGrayBlue: string;
+    darkGreen: string;
+    labelCheckbox: string;
+    checkboxPrimary: string;
+    lightGrey: string;
 
     backgrounds: Record<
       | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
@@ -47,10 +52,10 @@ declare module "@mui/material/styles" {
       | "input2faGradient"
       | "input2faGradientBorder"
       | "buttonPrimary"
-      | "loader"
       | "header"
       | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
-      | "input",
+      | "input"
+      | "coinIconPlaceholder", // why have a dedicated color used only once? because fuck me, that's why
       string
     >;
 

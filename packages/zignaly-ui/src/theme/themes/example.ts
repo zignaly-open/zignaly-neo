@@ -35,7 +35,6 @@ const example: ThemeStyledComponents = {
     inputTextFill: "#f00",
     tableHeader: "#f88",
     withdrawalHighlight: "F96860",
-    loader: "#f9a",
     sliderMark: "#aa8999",
     greyedOutBorder: "#f00",
     modal: "#fff6f6",

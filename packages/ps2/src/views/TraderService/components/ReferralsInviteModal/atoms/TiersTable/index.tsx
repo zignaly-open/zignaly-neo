@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useTheme } from '@mui/material';
 import {
   ZigClockIcon,
   ZigTypography,
@@ -134,7 +134,7 @@ const TiersTable = ({
   traderBoost,
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
-
+  const theme = useTheme();
   const layers = useTierLayers(tiers, tiers[0].id, boost, traderBoost);
 
   const composeCellTierLabels = () => {
@@ -186,13 +186,17 @@ const TiersTable = ({
             gap='12px'
             justifyContent='flex-end'
           >
-            <ZigUserFilledIcon color='#979ce0' height={19.5} width={16.5} />
+            <ZigUserFilledIcon
+              color={theme.palette.paleBlue}
+              height={19.5}
+              width={16.5}
+            />
             <ZigTypography
               fontWeight={500}
               variant='h3'
               textAlign='end'
               lineHeight='24px'
-              color='#979ce0'
+              color={theme.palette.paleBlue}
               className='tier-chart__label-referrals'
             >
               {t('referrals')}
@@ -219,7 +223,11 @@ const TiersTable = ({
               >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
-              <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
+              <ZigUserFilledIcon
+                color={theme.palette.paleBlue}
+                height={12}
+                width={10}
+              />
             </Box>
           </td>
         ))}

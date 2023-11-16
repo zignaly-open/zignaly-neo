@@ -12,9 +12,12 @@ import {
 import { RouteGroup } from 'views/TraderService/components/ServiceHeader/atoms';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
+import { useCurrentUser } from '../../../apis/user/use';
+import CircleIcon from '@mui/icons-material/Circle';
 
 function SettingsHeader() {
   const { t } = useTranslation(['settings', 'pages']);
+  const user = useCurrentUser();
   return (
     <Layout>
       <MarginContainer>
@@ -35,6 +38,16 @@ function SettingsHeader() {
                 name: t('header.2fa'),
                 path: generatePath(ROUTE_2FA),
                 id: `settings__edit-2fa`,
+                sideElement: !user['2FAEnable'] && (
+                  <CircleIcon
+                    sx={{
+                      width: '10px',
+                      height: '10px',
+                      color: 'red',
+                      mt: '-5px',
+                    }}
+                  />
+                ),
               },
             ]}
           />

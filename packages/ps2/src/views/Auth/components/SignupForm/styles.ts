@@ -38,7 +38,7 @@ export const LineBox = styled(Box)`
   height: 10px;
   width: 100%;
   border-radius: 4px;
-  background: #b7bac7;
+  background: ${({ theme }) => theme.palette.backgrounds.breakLineSignUp};
   border: 2px solid #150448;
   margin-bottom: 20px;
 `;

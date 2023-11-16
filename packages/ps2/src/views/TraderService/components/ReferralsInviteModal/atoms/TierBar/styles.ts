@@ -58,7 +58,7 @@ export const HighlightRate = styled(Box)`
   top: 1.5px;
   left: 0;
   right: 0;
-  background: #156747;
+  background: ${({ theme }) => theme.palette.darkGreen};
   margin: 0 auto;
   border-radius: 2.5px;
   border-bottom-left-radius: 0;
