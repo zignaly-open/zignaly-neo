@@ -4,4 +4,4 @@ DEPLOYMENTPATH="/zignaly/{directory}/deploy"
 cd $DEPLOYMENTPATH
 \. "$HOME/.nvm/nvm.sh"
 
-pm2 start npm --name "zignaly-wl" -- start
+pm2 restart npm --name "zignaly-wl" -- start
