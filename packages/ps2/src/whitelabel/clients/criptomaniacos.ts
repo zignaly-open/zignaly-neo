@@ -95,4 +95,36 @@ export default {
       ],
     },
   },
+  headContent: `
+    <title>Lastra</title>
+    <link rel="manifest" href="/whitelabel/lastra.json"/>
+    
+    
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/lastra/logo32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
+    <link rel="apple-touch-icon" href="/images/whitelabel/lastra/logo192.png"/>
+
+
+    <meta name="description" content="A global platform to invest in winning crypto portfolios.">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://lastra.zignaly.com/profit-sharing">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lastra - Your last Crypto app">
+    <meta property="og:description" content="A global platform to invest in winning crypto portfolios.">
+    <meta property="og:image" content="https://lastra.zignaly.com/images/whitelabel/lastra/banner630.jpg">
+    <meta property="og:image:width" content="1920"/>
+    <meta property="og:image:height" content="1080"/>
+    <meta property="og:image:alt" content="lastra.zignaly.com"/>
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="lastra.zignaly.com">
+    <meta property="twitter:url" content="https://lastra.zignaly.com/profit-sharing">
+    <meta name="twitter:title" content="Lastra - Your last Crypto app">
+    <meta name="twitter:description" content="A global platform to invest in winning crypto portfolios.">
+    <meta name="twitter:image" content="https://lastra.zignaly.com/images/whitelabel/lastra/banner630.jpg">
+    <meta name="twitter:site" content="@Criptomaniacos_">
+  `,
 } as WhitelabelOverride;

@@ -56,7 +56,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18' # lol we actually use nodes 16, 18 and 20
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna@6.6.2
