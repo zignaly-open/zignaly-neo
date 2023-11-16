@@ -9,7 +9,7 @@ hooks:
         - location: scripts/BeforeInstall.sh
           timeout: 300
           runas: admin
-    Install:
+    AfterInstall:
         - location: scripts/AfterInstall.sh
           runas: admin
           timeout: 1200
