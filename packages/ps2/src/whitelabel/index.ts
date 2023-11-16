@@ -9,9 +9,6 @@ export const whitelabel =
   (whitelabelNameOverride && clients[whitelabelNameOverride]) ||
   clients.zignaly;
 export const isZignaly = whitelabel === clients.zignaly;
-export const whitelabelName = Object.entries(clients).find(
-  ([, v]) => v === whitelabel,
-)[0];
 
 export const isFeatureOn = (feature: Features): boolean => {
   return (
