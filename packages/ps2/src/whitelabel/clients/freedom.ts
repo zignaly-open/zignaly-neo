@@ -1,5 +1,4 @@
 import { Features, WhitelabelOverride } from '../type';
-import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'OBSIDIAN FREEDOM',
@@ -22,7 +21,6 @@ export default {
   },
   translationOverrides: false,
   xSource: 'freedom',
-  mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',
   social: {},
 } as WhitelabelOverride;

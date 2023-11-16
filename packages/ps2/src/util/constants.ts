@@ -8,7 +8,6 @@ export const GATEIO_URL = 'https://www.gate.io/signup/9545237';
 export const BUY_CRYPTO_URL =
   'https://changelly.com/buy?from=usd&to=usdtrx&amount=200&ref_id=q0s68wsie1uf9wza';
 
-export const MAIN_APP_URL = 'https://zignaly.com';
 export const HELP_URL = 'https://help.zignaly.com/hc/en-us';
 export const DEPOSIT_INFO_URL =
   'https://help.zignaly.com/en/articles/6885146-what-is-a-zignaly-exchange-account';

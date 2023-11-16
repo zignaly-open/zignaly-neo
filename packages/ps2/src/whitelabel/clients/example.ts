@@ -1,5 +1,4 @@
 import { Features, WhitelabelOverride } from '../type';
-import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'Example',
@@ -15,7 +14,6 @@ export default {
   endpointOverrides: {
     'marketplace/': 'market',
   },
-  mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',

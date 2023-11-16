@@ -10,6 +10,7 @@ export default {
     medium: 'https://medium.com/zignaly',
     linkedin: 'https://www.linkedin.com/company/zignaly/',
   },
+  mainAppLink: 'https://zignaly.com',
   headContent: `
     <title>Zignaly</title>
     <link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">

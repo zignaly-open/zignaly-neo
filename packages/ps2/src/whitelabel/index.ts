@@ -1,19 +1,17 @@
 import * as clients from './configs';
-import { Features, OverrideableEndpoints, WhitelabelOverride } from './type';
+import { Features, OverrideableEndpoints } from './type';
 import defaultFeatureState from './default';
 
-const { REACT_APP_WHITELABEL: whitelabelName } = process.env;
-
-export const isZignaly = whitelabelName === 'zignaly';
+const { REACT_APP_DEV_ONLY_WHITELABEL: whitelabelNameOverride } = process.env;
 
 export const whitelabel =
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  (window.zignalyWhitelabelConfig as unknown as WhitelabelOverride) ||
-  (whitelabelName && clients[whitelabelName]) ||
+  window.__zignalyWhitelabelConfig ||
+  (whitelabelNameOverride && clients[whitelabelNameOverride]) ||
   clients.zignaly;
-
-export { whitelabelName };
+export const isZignaly = whitelabel === clients.zignaly;
+export const whitelabelName = Object.entries(clients).find(
+  ([, v]) => v === whitelabel,
+)[0];
 
 export const isFeatureOn = (feature: Features): boolean => {
   return (

@@ -7,27 +7,27 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 <opt2>Optional*</opt2> means that the variable/secret is kinda option, but 99% you'll need it.
 
 
-| Name     | Type     |                                                     Description                                                     |                                         Optional |
-|----------|----------|:-------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------:|
-| `AWS_S3_BUCKET` | Secret   |                                                 AWS S3 Bucket name                                                  |                              **Required** |
-| `AWS_ACCESS_KEY` | Secret   |                                                  AWS S3 Access key                                                  |                              **Required** |
-| `AWS_SECRET_KEY` | Secret   |                                                  AWS S3 Secret key                                                  |                              **Required** |
-| `CF_ZONE` | Secret   |                                                   CloudFlare Zone                                                   | **Optional*** |
-| `CF_TOKEN` | Secret   |                                                   CloudFlare Zone                                                   |                            **Optional*** |
-| `PS2_BASE_API` | Variable |                              Base API path, e.g. `https://staging.zignaly.com/new_api`                              |                              **Required** |
-| `PS2_WALLET_API` | Variable |                               Wallet API path, e.g. `https://wallet.zignaly.com/api`                                |                              **Required** |
-| `PS2_REFERRAL_API` | Variable |    Wallet API path, e.g. `https://test-referrals.zignaly.com/`. Yes, the api path names are pretty inconsistent.    |                              **Optional*** |
-| `WHITELABEL` | Variable | The name of the whitelabnel config for the deployment. Whitelabel configs can be defined [here](../src/whitelabel). |                              <opt>Optional</opt> |
-| `ENABLE_TRACKING` | Variable |                            Whether or not to enable tracking systems. `true` to enable.                             |                              <opt>Optional</opt> |
-| `TZ_TRACKER_ENDPOINT` | Variable |                           Custom tracker URL. Default: `https://zignaly.com/new_api/tz`                             |                              <opt>Optional</opt> |
-| `GTM_ID` | Variable |                                                Google Tag Manager ID                                                |                              <opt>Optional</opt> |
-| `GA_ID` | Variable |                                                 Google Analytics ID                                                 |                              <opt>Optional</opt> |
-| `ENABLE_TEST_LANGUAGE` | Variable |                            Set to `1` to enable the [test language](./multilanguage.md)                             |                              <opt>Optional</opt> |
-| `NO_INDEX` | Variable |                                        `true` to make the deployment noindex                                        |                              <opt>Optional</opt> |
-| `SENTRY_DNS` | Variable |                                                     Sentry DNS                                                      |                              <opt>Optional</opt> |
-| `CUSTOMER_IO_SITE_ID` | Variable |                                                 Customer IO Site ID                                                 |                              <opt>Optional</opt> |
-| `INTERCOM_APP_ID` | Variable |                                                   Intercom App ID                                                   |                              <opt>Optional</opt> |
-| `LIVE_SESSION_TRACK_ID` | Variable |                                                Live Session track ID                                                |                              <opt>Optional</opt> |
+| Name                    | Type     |                                                               Description                                                                |                                         Optional |
+|-------------------------|----------|:----------------------------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------:|
+| `AWS_S3_BUCKET`         | Secret   |                                                            AWS S3 Bucket name                                                            |                              **Required** |
+| `AWS_ACCESS_KEY`        | Secret   |                                                            AWS S3 Access key                                                             |                              **Required** |
+| `AWS_SECRET_KEY`        | Secret   |                                                            AWS S3 Secret key                                                             |                              **Required** |
+| `CF_ZONE`               | Secret   |                                                             CloudFlare Zone                                                              | **Optional*** |
+| `CF_TOKEN`              | Secret   |                                                             CloudFlare Zone                                                              |                            **Optional*** |
+| `PS2_BASE_API`          | Variable |                                        Base API path, e.g. `https://staging.zignaly.com/new_api`                                         |                              **Required** |
+| `PS2_WALLET_API`        | Variable |                                          Wallet API path, e.g. `https://wallet.zignaly.com/api`                                          |                              **Required** |
+| `PS2_REFERRAL_API`      | Variable |              Wallet API path, e.g. `https://test-referrals.zignaly.com/`. Yes, the api path names are pretty inconsistent.               |                              **Optional*** |
+| `DEV_ONLY_WHITELABEL`   | Variable | The name of the whitelabnel config for the deployment. Only used in dev mode [here](../src/whitelabel). |                              <opt>Optional</opt> |
+| `ENABLE_TRACKING`       | Variable |                                       Whether or not to enable tracking systems. `true` to enable.                                       |                              <opt>Optional</opt> |
+| `TZ_TRACKER_ENDPOINT`   | Variable |                                      Custom tracker URL. Default: `https://zignaly.com/new_api/tz`                                       |                              <opt>Optional</opt> |
+| `GTM_ID`                | Variable |                                                          Google Tag Manager ID                                                           |                              <opt>Optional</opt> |
+| `GA_ID`                 | Variable |                                                           Google Analytics ID                                                            |                              <opt>Optional</opt> |
+| `ENABLE_TEST_LANGUAGE`  | Variable |                                       Set to `1` to enable the [test language](./multilanguage.md)                                       |                              <opt>Optional</opt> |
+| `NO_INDEX`              | Variable |                                                  `true` to make the deployment noindex                                                   |                              <opt>Optional</opt> |
+| `SENTRY_DNS`            | Variable |                                                                Sentry DNS                                                                |                              <opt>Optional</opt> |
+| `CUSTOMER_IO_SITE_ID`   | Variable |                                                           Customer IO Site ID                                                            |                              <opt>Optional</opt> |
+| `INTERCOM_APP_ID`       | Variable |                                                             Intercom App ID                                                              |                              <opt>Optional</opt> |
+| `LIVE_SESSION_TRACK_ID` | Variable |                                                          Live Session track ID                                                           |                              <opt>Optional</opt> |
 
 
 Now what?

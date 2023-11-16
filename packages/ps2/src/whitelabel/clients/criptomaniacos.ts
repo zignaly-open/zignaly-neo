@@ -1,5 +1,4 @@
 import { Features, WhitelabelOverride } from '../type';
-import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
   title: 'Lastra',
@@ -20,7 +19,6 @@ export default {
   },
   translationOverrides: true,
   xSource: 'criptomaniacos',
-  mainAppLink: ROUTE_DASHBOARD,
   background: '#0D0E0E',
   backgroundImage: null,
   logo: '/images/whitelabel/lastra/logo-horizontal.png',
