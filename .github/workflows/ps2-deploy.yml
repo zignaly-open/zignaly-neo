@@ -53,22 +53,22 @@ jobs:
 
           directory: packages/ps2
           file_name: .env
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: '18'
-#          cache: 'yarn'
-#      - name: Install Lerna
-#        run: yarn global add lerna@6.6.2
-#      - name: Restore Lerna modules
-#        uses: actions/cache@v3
-#        with:
-#          path: '**/node_modules'
-#          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-#      - name: Bootstrap packages
-#        run: lerna bootstrap --scope=@zignaly-open/ps2
-#      - name: Build client
-#        run: lerna run build --scope=@zignaly-open/ps2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna@6.6.2
+      - name: Restore Lerna modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Bootstrap packages
+        run: lerna bootstrap --scope=@zignaly-open/ps2
+      - name: Build client + wl
+        run: yarn ps2-wl-build
 #      - name: AWS Deploy
 #        uses: jakejarvis/s3-sync-action@master
 #        env:

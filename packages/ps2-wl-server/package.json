@@ -1,11 +1,9 @@
-
 {
   "name": "@zignaly-open/ps2-wl-server",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node src/index.js",
-    "dummy": "node src/dumm.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "express": "4.18.2",
