@@ -2,7 +2,7 @@
 
 
 DEPLOYMENTPATH="~/{directory}"
-\. "$NVM_DIR/nvm.sh"
+\. "~/.nvm/nvm.sh"
 
 # Change permissions
 sudo chown -R admin:admin $DEPLOYMENTPATH/deploy
