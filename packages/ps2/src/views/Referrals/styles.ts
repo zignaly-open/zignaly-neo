@@ -209,7 +209,7 @@ export const LimitedTimeChipArrow = styled('div')`
 
 export const StyledReferralLinkInvite = styled(Box)`
   ${InviteBox} {
-    background-color: #0d1935;
+    background-color: ${({ theme }) => theme.palette.neutral800}};
   }
 `;
 

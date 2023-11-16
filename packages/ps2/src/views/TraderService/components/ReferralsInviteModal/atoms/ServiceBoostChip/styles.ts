@@ -9,7 +9,7 @@ export const BoostBox = styled(Box)`
   padding: 2px 24px;
   height: 34px;
   box-shadow: 0 0 5px 1.5px rgba(255, 229, 105, 0.16);
-  background-color: #0c1b30;
+  background-color: ${({ theme }) => theme.palette.neutral750};
 
   .MuiTypography-root {
     color: rgba(38, 196, 150, 0.9);
