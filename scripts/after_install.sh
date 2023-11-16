@@ -1,7 +1,15 @@
 #!/bin/bash
 
+whoami
+cd ~
+pwd
+
+echo ""
+ls -lah
+echo ""
 
 DEPLOYMENTPATH="~/{directory}"
+echo $DEPLOYMENTPATH
 \. "~/.nvm/nvm.sh"
 
 # Change permissions
