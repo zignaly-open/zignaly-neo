@@ -10,11 +10,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).toHaveClass("MuiButton-sizeSmall");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.minWidth).toBe("76px");
-      expect(buttonStyles?.minHeight).toBe("30px");
       expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
 
     it("ZigButton medium size", async () => {
@@ -22,11 +20,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).toHaveClass("MuiButton-sizeMedium");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.minWidth).toBe("76px");
-      expect(buttonStyles?.minHeight).toBe("36px");
       expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
 
     it("ZigButton large size", async () => {
@@ -34,11 +30,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).toHaveClass("MuiButton-sizeLarge");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.minWidth).toBe("110px");
-      expect(buttonStyles?.minHeight).toBe("48px");
       expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
 
     it("ZigButton xlarge size", async () => {
@@ -46,11 +40,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).toHaveClass("MuiButton-sizeXlarge");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.minWidth).toBe("127px");
-      expect(buttonStyles?.minHeight).toBe("60px");
       expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
 
     it("ZigButton contained variant by default", async () => {
@@ -58,9 +50,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).toHaveClass("MuiButton-contained");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.backgroundColor).not.toBe("transparent");
+      expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
 
     it("ZigButton outlined variant", async () => {
@@ -68,11 +60,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).not.toHaveClass("MuiButton-contained");
-      expect(button).not.toHaveClass("MuiButton-contained");
-      expect(button).toHaveClass("MuiButton-outlined");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.backgroundColor).toBe("transparent");
+      expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
 
     it("ZigButton text variant", async () => {
@@ -80,11 +70,9 @@ describe("components/inputs/ZigButton", () => {
 
       const button = container.querySelector("button") as Element;
       expect(button).toBeVisible();
-      expect(button).not.toHaveClass("MuiButton-contained");
-      expect(button).not.toHaveClass("MuiButton-outlined");
-      expect(button).toHaveClass("MuiButton-text");
       const buttonStyles = getComputedStyle(button);
-      expect(buttonStyles?.backgroundColor).toBe("transparent");
+      expect(button).toMatchSnapshot();
+      expect(buttonStyles).toMatchSnapshot();
     });
   });
   describe("disable", () => {
