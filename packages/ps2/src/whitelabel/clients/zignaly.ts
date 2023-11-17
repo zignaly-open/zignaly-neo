@@ -1,5 +1,4 @@
 import { WhitelabelOverride } from '../type';
-import * as process from 'process';
 
 export default {
   title: 'Zignaly',
@@ -11,5 +10,5 @@ export default {
     medium: 'https://medium.com/zignaly',
     linkedin: 'https://www.linkedin.com/company/zignaly/',
   },
-  intercomId: process.env.REACT_APP_INTERCOM_APP_ID,
+  intercomId: 'nc3z6oqm',
 } as WhitelabelOverride;
