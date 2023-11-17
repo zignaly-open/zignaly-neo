@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/inputs/ZigButton renders ZigButton large size 1`] = `
+<button
+  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonBase-root css-172u00w-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  id=":r2:"
+  tabindex="0"
+  type="button"
+/>
+`;
+
+exports[`components/inputs/ZigButton renders ZigButton medium size 1`] = `
+<button
+  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root css-z3a501-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  id=":r1:"
+  tabindex="0"
+  type="button"
+/>
+`;
+
+exports[`components/inputs/ZigButton renders ZigButton small size 1`] = `
+<button
+  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButtonBase-root css-25ezg8-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  id=":r0:"
+  tabindex="0"
+  type="button"
+/>
+`;
