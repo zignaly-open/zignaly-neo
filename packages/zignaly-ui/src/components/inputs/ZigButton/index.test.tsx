@@ -16,6 +16,7 @@ describe("components/inputs/ZigButton", () => {
       expect(buttonStyles?.minHeight).toBe("30px");
       expect(button).toMatchSnapshot();
     });
+
     it("ZigButton medium size", async () => {
       const { container } = renderWithProvidersUi(<ZigButton size={"medium"} />);
 
@@ -27,6 +28,7 @@ describe("components/inputs/ZigButton", () => {
       expect(buttonStyles?.minHeight).toBe("36px");
       expect(button).toMatchSnapshot();
     });
+
     it("ZigButton large size", async () => {
       const { container } = renderWithProvidersUi(<ZigButton size={"large"} />);
 
@@ -38,6 +40,7 @@ describe("components/inputs/ZigButton", () => {
       expect(buttonStyles?.minHeight).toBe("48px");
       expect(button).toMatchSnapshot();
     });
+
     it("ZigButton xlarge size", async () => {
       const { container } = renderWithProvidersUi(<ZigButton size={"xlarge"} />);
 
@@ -48,6 +51,7 @@ describe("components/inputs/ZigButton", () => {
       expect(buttonStyles?.minWidth).toBe("127px");
       expect(buttonStyles?.minHeight).toBe("60px");
     });
+
     it("ZigButton contained variant by default", async () => {
       const { container } = renderWithProvidersUi(<ZigButton />);
 
@@ -57,6 +61,7 @@ describe("components/inputs/ZigButton", () => {
       const buttonStyles = getComputedStyle(button);
       expect(buttonStyles?.backgroundColor).not.toBe("transparent");
     });
+
     it("ZigButton outlined variant", async () => {
       const { container } = renderWithProvidersUi(<ZigButton variant={"outlined"} />);
 
@@ -68,6 +73,7 @@ describe("components/inputs/ZigButton", () => {
       const buttonStyles = getComputedStyle(button);
       expect(buttonStyles?.backgroundColor).toBe("transparent");
     });
+
     it("ZigButton text variant", async () => {
       const { container } = renderWithProvidersUi(<ZigButton variant={"text"} />);
 
@@ -91,6 +97,7 @@ describe("components/inputs/ZigButton", () => {
         expect(onClick).toHaveBeenCalledTimes(1);
       });
     });
+
     it("ZigButton disabled test", async () => {
       const onClick = jest.fn();
       const { container } = renderWithProvidersUi(<ZigButton disabled onClick={onClick} />);
