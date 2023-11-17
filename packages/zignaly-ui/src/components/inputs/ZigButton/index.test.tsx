@@ -50,6 +50,7 @@ describe("components/inputs/ZigButton", () => {
       const buttonStyles = getComputedStyle(button);
       expect(buttonStyles?.minWidth).toBe("127px");
       expect(buttonStyles?.minHeight).toBe("60px");
+      expect(button).toMatchSnapshot();
     });
 
     it("ZigButton contained variant by default", async () => {

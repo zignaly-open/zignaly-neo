@@ -26,3 +26,12 @@ exports[`components/inputs/ZigButton renders ZigButton small size 1`] = `
   type="button"
 />
 `;
+
+exports[`components/inputs/ZigButton renders ZigButton xlarge size 1`] = `
+<button
+  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeXlarge MuiButton-containedSizeXlarge MuiButtonBase-root css-q0r81f-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  id=":r3:"
+  tabindex="0"
+  type="button"
+/>
+`;
