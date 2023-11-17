@@ -10,7 +10,8 @@ export const ButtonsWrapper = styled(Box)`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  background-color: #060819;
+  background-color: ${({ theme }) =>
+    theme.palette.backgrounds.mobileButtonsWrapper};
 `;
 export const TableWrapper = styled(Box)`
   td {

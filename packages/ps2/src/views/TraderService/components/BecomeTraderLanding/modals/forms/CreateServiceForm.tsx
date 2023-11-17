@@ -72,6 +72,7 @@ const CreateServiceForm: React.FC<{
   const serviceTypes = useMemo(
     () => [
       {
+        id: 'create-service__select-type-spot',
         value: 'spot',
         label: t(`create.types.spot`),
         extraProps: {
@@ -80,6 +81,7 @@ const CreateServiceForm: React.FC<{
         },
       },
       {
+        id: 'create-service__select-type-futures',
         value: 'futures',
         label: t(`create.types.futures`),
         extraProps: {
@@ -97,6 +99,7 @@ const CreateServiceForm: React.FC<{
     <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
       <ZigButtonGroupInputWrapper>
         <ZigButtonGroupInput
+          prefixId={'create-service__select-type'}
           value={exchangeType}
           options={serviceTypes}
           error={t(errors.serviceType?.message)}
@@ -155,10 +158,12 @@ const CreateServiceForm: React.FC<{
         control={control}
         render={({ field }) => (
           <SuccessFeeInputWrapper
+            prefixId={'create-service__service-fee'}
             value={watch('successFee') || 0}
             showZeroFeeExplainer
           >
             <ZigInput
+              id={'create-service__service-fee'}
               type='number'
               InputProps={{
                 endAdornment: <InputAdornment position='end'>%</InputAdornment>,
@@ -172,13 +177,17 @@ const CreateServiceForm: React.FC<{
           </SuccessFeeInputWrapper>
         )}
       />
-      <ZigAlertMessage text={t('create.please-verify')} warning />
+      <ZigAlertMessage
+        id={'create-service__alert-message'}
+        text={t('create.please-verify')}
+        warning
+      />
 
       <ZigModalActions>
         <ZigButton
           variant='contained'
           type='submit'
-          id={'create-service-modal__create-1st-step'}
+          id={'create-service__create-1st-step'}
           size='xlarge'
         >
           {t('create.next-step')}

@@ -12,7 +12,7 @@ export const Loader: React.FC<{
     <Oval
       width={width + "px"}
       height={height + "px"}
-      color={palette.backgrounds.loader}
+      color={palette.contrasting}
       secondaryColor={palette.contrasting + "33"}
       ariaLabel={"Loading..."}
     />

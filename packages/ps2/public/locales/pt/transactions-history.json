@@ -28,7 +28,9 @@
 	"status": {
 		"pending": "Pendente",
 		"completed": "Completado",
-		"error": "Erro"
+		"error": "Erro",
+		"reviewing": "Em curso",
+		"reviewing-tooltip": "A transferência está sendo revisada e será concluída em breve."
 	},
 	"details": {
 		"from": "De:",

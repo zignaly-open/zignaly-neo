@@ -25,6 +25,11 @@ const dark: ThemeStyledComponents = {
     yellow: "#AE9C5B",
     red: "#CC394E",
     contrasting: "#F3F4F6",
+    lightGrayBlue: "#707185",
+    darkGreen: "#156747",
+    labelCheckbox: "#4f4f5e",
+    checkboxPrimary: "#2a2a36",
+    lightGrey: "#9ca3af",
     paleBlue: "#999fe1", // TODO: fix
   },
   backgrounds: {
@@ -41,7 +46,6 @@ const dark: ThemeStyledComponents = {
     dropdown2ndLevel: "rgb(25, 26, 48)", // TODO: fix?
     tableRow: "#13122566",
     modal: "#101225",
-    loader: "#fff",
     activeTab: "#181B2F", // TODO: fix?
     greyedOutBorder: "#464a85", // TODO: fix?
     sliderMark: "#888999",
@@ -52,6 +56,9 @@ const dark: ThemeStyledComponents = {
     input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
     input2faGradientBorder: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
     input: "linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%)",
+    breakLineSignUp: "#b7bac7",
+    mobileButtonsWrapper: "#060819",
+    coinIconPlaceholder: "#324054",
   },
   boxShadows: {
     tableHeader: "#16192b",

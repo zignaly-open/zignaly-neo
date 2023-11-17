@@ -136,11 +136,13 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                         color={'neutral200'}
                         variant={'h1'}
                         sx={{ mr: 0.5, mb: 0, position: 'relative' }}
+                        id={'service-profile__amount-total-label'}
                       >
                         {t('service:total')}
                       </ZigTypography>
                     )}
                     <ZigPriceLabel
+                      id={'service-profile__amount-total'}
                       precision={precision}
                       shorten
                       coin={service.ssc}
@@ -168,6 +170,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     variant={sm ? 'bigNumber' : 'h2'}
                     sx={{ whiteSpace: 'nowrap' }}
                     color={getColorForNumber(value)}
+                    id={'service-profile__percent-change'}
                   >
                     {t('common:percent', { value })}
                   </ZigTypography>
@@ -178,6 +181,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     color={'neutral200'}
                     variant={'h1'}
                     sx={{ whiteSpace: 'nowrap' }}
+                    id={'service-profile__investors'}
                   >
                     {t('marketplace:table:x-investors', {
                       count: +value,

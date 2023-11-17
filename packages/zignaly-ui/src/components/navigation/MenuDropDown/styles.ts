@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { styledIf } from "../../../utils/styled";
+import { lighten } from "@mui/system";
 
 export const Layout = styled.div`
   position: relative;
@@ -51,6 +52,10 @@ export const Button = styled.div<ButtonProps>`
   user-select: none;
   height: 56px;
   cursor: pointer;
+  background: ${
+    // FIXME
+    ({ theme }) => lighten(theme.palette.neutral900, (0x0f - 0x05) / 0xff)
+  };
   background: ${({ theme }) => theme.backgrounds.secondaryBackground};
 
   ${({ center, theme, isActiveDropDown, focused }) => `    

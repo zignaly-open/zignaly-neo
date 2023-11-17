@@ -24,6 +24,7 @@ const ServicePercentageInfo: React.FC<{
         color={'neutral300'}
         lineHeight={'23px'}
         sx={{ mb: '10px' }}
+        id={id && `${id}-label`}
       >
         {title}
       </ZigTypography>

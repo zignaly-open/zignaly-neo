@@ -18,8 +18,9 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   const [flagInFolder, setFlagInFolder] = useState(true);
 
   return (
-    <Box id={'service-profile__about-manager'}>
+    <Box>
       <MarkdownSection
+        id={'service-profile__about-manager'}
         content={service.ownerDescription}
         title={t('about-trader')}
         emptyText={t('about-trader-empty')}
@@ -39,12 +40,18 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                 display: 'flex',
                 alignItems: 'center',
               }}
+              id={'service-profile__service-owner-name'}
             >
               {service.ownerName}
 
               {service.ownerVerified && (
                 <Tooltip title={t('owner-verified')}>
-                  <StyledVerifiedIcon sx={{ ml: 1 }} width={13} height={13} />
+                  <StyledVerifiedIcon
+                    sx={{ ml: 1 }}
+                    width={13}
+                    height={13}
+                    id={'service-profile__verified-icon'}
+                  />
                 </Tooltip>
               )}
 
@@ -55,7 +62,7 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                       country || service.ownerCountry?.toLocaleUpperCase(),
                   })}
                 >
-                  <span>
+                  <span id={'service-profile__country-flag'}>
                     <Flag
                       country={service.ownerCountry}
                       onError={() => {
@@ -74,6 +81,7 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                 variant={'body2'}
                 color='neutral400'
                 component={'span'}
+                id={'service-profile__trader-joined-time'}
               >
                 {t('about-trader-joined-time', {
                   date: formatLocalizedDistance(

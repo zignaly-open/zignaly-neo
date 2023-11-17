@@ -66,16 +66,16 @@ export const Layout = styled.div<LayoutProps>`
       }
       
       ${Label} {
-        color: #4f4f5e;
+        color: ${theme.palette.labelCheckbox};
       }
   
       ${Box} {
-        border-color: #2a2a36 !important;
+        border-color: ${theme.palette.checkboxPrimary} !important;
         
         ${styledIf(
           isActive,
           `
-          box-shadow: 0 0 0 1px #2a2a36;
+          box-shadow: 0 0 0 1px ${theme.palette.checkboxPrimary};
         `,
         )}
       }

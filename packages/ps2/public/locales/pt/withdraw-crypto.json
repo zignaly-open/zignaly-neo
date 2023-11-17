@@ -1,6 +1,5 @@
 {
 	"title": "Retirar Criptomoedas",
-	"description": "Retirar as criptomoedas para uma conta externa.",
 	"coinSelector": {
 		"label": "Moeda:",
 		"placeholder": "Pesquisar uma moeda"
@@ -16,7 +15,7 @@
 		"invalid": "Endereço inválido"
 	},
 	"amountToWithdraw": {
-		"label": "Quantidade a Retirar:",
+		"label": "Quantidade:",
 		"labelBalance": "Disponível:",
 		"minimum": "Mínimo:",
 		"fee": "Taxa:"
@@ -35,15 +34,17 @@
 		"description": "Por favor confirmar que as informações estão corretas e enviar sua retirada.",
 		"receive": "Você irá Receber:",
 		"network": "Rede de Retirada:",
-		"address": "Retirada para Endereço:",
-		"amount": "Quantidade de Retirada:",
-		"networkFee": "Taxa de Rede:",
-		"continue": "Continuar para Confirmação",
+		"address": "Endereço de Retirada:",
+		"amount": "Valor do Retirada:",
+		"networkFee": "Taxa Aproximada de Rede:",
+		"continue": "Continuar",
 		"withdrawNow": "Retirar agora"
 	},
 	"success": {
 		"title": "Retirada com Sucesso",
 		"description": "O seu pedido de retirada foi enviado e deverá ser processado em breve."
 	},
-	"notEnoughZig": "Você não tem ZIG suficiente para pagar as taxas de retirada."
+	"notEnoughZig": "Você não tem ZIG suficiente para pagar as taxas de retirada.",
+	"history": "Histórico",
+	"description": "Retirar as criptomoedas para uma conta externa."
 }

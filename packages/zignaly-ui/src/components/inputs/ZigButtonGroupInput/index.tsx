@@ -10,6 +10,7 @@ const ZigButtonGroupInput = ({
   error,
   options,
   onChange,
+  prefixId,
 }: {
   value: string;
   options: {
@@ -21,13 +22,14 @@ const ZigButtonGroupInput = ({
   }[];
   error?: string | JSX.Element;
   label?: string | JSX.Element;
+  prefixId?: string;
   onChange: (value: string) => void;
 }) => {
   return (
     <>
       {typeof label === "string" && (
         <Box sx={{ mb: 1.25 }}>
-          <ZigTypography variant="body1" color="neutral200">
+          <ZigTypography variant="body1" color="neutral200" id={prefixId && `${prefixId}__label`}>
             {label}
           </ZigTypography>
         </Box>

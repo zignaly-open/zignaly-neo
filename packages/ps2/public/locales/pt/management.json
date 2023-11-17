@@ -18,7 +18,7 @@
 		"labelBalance": "Saldo Mínimo Atual",
 		"save": "Guardar"
 	},
-	"controlledZignaly": "Controlado por Zignaly",
+	"controlledZignaly": "Controlado por {{ whitelabel }}",
 	"transfer": {
 		"title": "Transferência",
 		"loading": "Carregando",
@@ -55,7 +55,7 @@
 		"cant-disable-read": "Não pode desativar a permissão de leitura",
 		"restrict-ip": "Restringir IP",
 		"api-secret": "API Segredo",
-		"zignaly-code": "Código Zignaly",
+		"zignaly-code": "Código {{ whitelabel }}",
 		"api-secret-explainer": "Apenas visível na geração de chave. Se se perder, terá de gerar uma nova chave API",
 		"permission-label": "Permissões",
 		"permissions": {
@@ -82,6 +82,9 @@
 		"ip-restrictions-duplicates": "Alguns ips são listados duas vezes, por favor remova os duplicados",
 		"ip-restrictions-allowed": "Endereços IP",
 		"ip-restrictions-allowed-explainer": "Ao introduzir mais do que um endereço IP, separá-los por favor com vírgulas",
-		"ip-restrictions-on": "Restringir o acesso apenas a IPs confiáveis (recomendado)"
-	}
+		"ip-restrictions-on": "Restringir o acesso apenas a IPs confiáveis (recomendado)",
+		"delete-api-key-toast": "A chave de API foi excluída com sucesso"
+	},
+	"positive-claim": "Os usuários estão investindo {{ claim }} {{ coin }} na próxima contabilidade.",
+	"negative-claim": "Os usuários estão solicitando a retirada de {{claim }} {{ coin }}."
 }

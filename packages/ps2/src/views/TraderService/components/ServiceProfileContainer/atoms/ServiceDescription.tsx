@@ -7,8 +7,9 @@ import { Box } from '@mui/material';
 const ServiceDescription: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation('service');
   return (
-    <Box id={'service-profile__description'}>
+    <Box>
       <MarkdownSection
+        id={'service-profile__description'}
         content={service.description}
         title={t('strategy')}
         emptyText={t('strategy-empty')}

@@ -1,5 +1,5 @@
 import { InfoOutlined, Verified } from '@mui/icons-material';
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useTheme } from '@mui/material';
 import {
   ZigPriceLabel,
   ZigTypography,
@@ -37,7 +37,7 @@ const CurrentCommission = ({
     traderBoost,
     inviteLeft,
   } = tiersData;
-
+  const theme = useTheme();
   return (
     <Box
       width={1}
@@ -139,7 +139,11 @@ const CurrentCommission = ({
               pt={'5px'}
               justifyContent={'center'}
             >
-              <ZigUserFilledIcon color='#979ce0' width={18} height={21.5} />
+              <ZigUserFilledIcon
+                color={theme.palette.paleBlue}
+                width={18}
+                height={21.5}
+              />
               <ZigTypography
                 fontWeight={600}
                 variant='h4'
@@ -151,7 +155,7 @@ const CurrentCommission = ({
               >
                 {referral.investorsCount}
               </ZigTypography>
-              <Verified sx={{ color: '#26c496' }} />
+              <Verified sx={{ color: theme.palette.greenGraph }} />
             </Box>
           </Box>
         )}
