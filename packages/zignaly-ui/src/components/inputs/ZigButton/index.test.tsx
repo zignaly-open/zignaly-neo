@@ -1,6 +1,6 @@
 import React from "react";
 import ZigButton from ".";
-import { renderWithProvidersUi } from "../../../utils/test";
+import { renderWithProvidersUi } from "../../../utils/testConfig";
 import { fireEvent, waitFor } from "@testing-library/react";
 
 describe("components/inputs/ZigButton", () => {
@@ -14,6 +14,7 @@ describe("components/inputs/ZigButton", () => {
       const buttonStyles = getComputedStyle(button);
       expect(buttonStyles?.minWidth).toBe("76px");
       expect(buttonStyles?.minHeight).toBe("30px");
+      expect(button).toMatchSnapshot();
     });
     it("ZigButton medium size", async () => {
       const { container } = renderWithProvidersUi(<ZigButton size={"medium"} />);
@@ -24,6 +25,7 @@ describe("components/inputs/ZigButton", () => {
       const buttonStyles = getComputedStyle(button);
       expect(buttonStyles?.minWidth).toBe("76px");
       expect(buttonStyles?.minHeight).toBe("36px");
+      expect(button).toMatchSnapshot();
     });
     it("ZigButton large size", async () => {
       const { container } = renderWithProvidersUi(<ZigButton size={"large"} />);
@@ -34,6 +36,7 @@ describe("components/inputs/ZigButton", () => {
       const buttonStyles = getComputedStyle(button);
       expect(buttonStyles?.minWidth).toBe("110px");
       expect(buttonStyles?.minHeight).toBe("48px");
+      expect(button).toMatchSnapshot();
     });
     it("ZigButton xlarge size", async () => {
       const { container } = renderWithProvidersUi(<ZigButton size={"xlarge"} />);
@@ -79,8 +82,8 @@ describe("components/inputs/ZigButton", () => {
   });
   describe("disable", () => {
     it("ZigButton active test", async () => {
-      const { container } = renderWithProvidersUi(<ZigButton disabled={false} />);
       const onClick = jest.fn();
+      const { container } = renderWithProvidersUi(<ZigButton disabled={false} onClick={onClick} />);
       const button = container.querySelector("button") as Element;
       expect(button).not.toHaveClass("Mui-disabled");
       fireEvent.click(button);
@@ -89,8 +92,8 @@ describe("components/inputs/ZigButton", () => {
       });
     });
     it("ZigButton disabled test", async () => {
-      const { container } = renderWithProvidersUi(<ZigButton disabled />);
       const onClick = jest.fn();
+      const { container } = renderWithProvidersUi(<ZigButton disabled onClick={onClick} />);
       const button = container.querySelector("button") as Element;
       expect(button).toHaveClass("Mui-disabled");
       fireEvent.click(button);
