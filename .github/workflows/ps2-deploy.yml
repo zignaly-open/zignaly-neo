@@ -35,7 +35,6 @@ jobs:
           # env-specific
           envkey_REACT_APP_WHITELABEL: ${{ vars.WHITELABEL }}
           envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
-          envkey_REACT_APP_TZ_TRACKER_ENDPOINT: ${{ vars.TZ_TRACKER_ENDPOINT }}
           envkey_REACT_APP_GTM_ID: ${{ vars.GTM_ID }}
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
