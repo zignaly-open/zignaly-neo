@@ -32,7 +32,7 @@ import { useIsAuthenticated } from '../../../../apis/user/use';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
-import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
+import { whitelabel } from '../../../../whitelabel';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation(['offer-your-trading-service', 'service']);
@@ -109,7 +109,7 @@ const BecomeTraderLanding: React.FC = () => {
         title: t('howWorks.list.item3.title'),
         id: 'become-trader__reasons-split-profits',
         description: t('howWorks.list.item3.description', {
-          zignalyFee: ZIGNALY_PROFIT_FEE,
+          zignalyFee: whitelabel.defaultSuccessFee,
         }),
         image: 'split-profits.png',
       },

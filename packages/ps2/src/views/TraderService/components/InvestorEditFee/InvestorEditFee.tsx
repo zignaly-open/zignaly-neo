@@ -21,7 +21,7 @@ import {
   adjustDiscountToBackend,
   getServiceTotalFee,
 } from '../../../../util/fee';
-import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
+import { whitelabel } from '../../../../whitelabel';
 
 type EditFeeFormValues = {
   value: number;
@@ -63,7 +63,7 @@ function InvestorEditFee({
     defaultValues: {
       value: previousValue,
       maxDiscount: {
-        max: Math.max(0, serviceTotalFee - 2 * ZIGNALY_PROFIT_FEE),
+        max: Math.max(0, serviceTotalFee - 2 * whitelabel.defaultSuccessFee),
         full: serviceTotalFee,
       },
     },

@@ -22,4 +22,5 @@ export default {
   // backgroundImage: null,
   translationOverrides: true,
   loadFontsFromGoogle: true,
+  defaultSuccessFee: 5,
 } as WhitelabelOverride;
