@@ -2,7 +2,7 @@ import { Features, WhitelabelOverride } from '../type';
 
 export default {
   title: 'Zigbids',
-  id: 'zigbids',
+  id: 'example',
   helpUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   featureOverrides: {
     [Features.Referrals]: false,
@@ -12,6 +12,7 @@ export default {
     [Features.Kyc]: true,
     [Features.Subscriptions]: true,
   },
+  translationOverrides: true,
   endpointOverrides: {
     'marketplace/': 'market',
   },

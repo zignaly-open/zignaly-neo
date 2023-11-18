@@ -74,9 +74,11 @@ async function serveNewIndexHtml(req, res) {
 async function getWhitelabelConfig(req) {
   const host = req.get('host');
   const overrides = {
-    'zig1.xfuturum.com': config.zignaly,
-    'zig2.xfuturum.com': config.criptomaniacos,
+    'app.zignaly.com': config.zignaly,
+    'freedom.obsidiangroup.io': config.freedom,
+    'use.lastra.app': config.criptomaniacos,
+    'zigbids.com': config.example,
   };
 
-  return overrides[host] || config.criptomaniacos;
+  return overrides[host] || config.zignaly;
 }
