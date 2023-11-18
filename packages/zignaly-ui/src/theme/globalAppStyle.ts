@@ -4,7 +4,7 @@ import { NiceScrollbar } from "../utils/css";
 // Copied from webapp-neo
 export const getGlobalAppStyle = ({
   background = "#070819",
-  backgroundImage = "/background-dark.png",
+  backgroundImage = "/images/background-dark.png",
 }) => createGlobalStyle`
 body {
     padding: 0;

@@ -17,7 +17,7 @@ const GlobalAppStyle = getGlobalAppStyle({
       ? 'none'
       : `url("${
           whitelabel.backgroundImage ||
-          `/background-dark.${isWebpSupported() ? 'webp' : 'png'}`
+          `/images/background-dark.${isWebpSupported() ? 'webp' : 'png'}`
         }")`,
 });
 
