@@ -18,7 +18,7 @@ export default {
     <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/zignaly/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/zignaly/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/images/whitelabel/zignaly/logo192.png"/>
-    <link rel="manifest" href="/whitelabel/zignaly.json"/>
+    <link rel="manifest" href="/manifests/zignaly.json"/>
     
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://app.zignaly.com/profit-sharing">

@@ -100,7 +100,7 @@ export default {
     <title>Lastra</title>
     <meta name="description" content="A global platform to invest in winning crypto portfolios.">
     
-    <link rel="manifest" href="/whitelabel/lastra.json"/>
+    <link rel="manifest" href="/manifests/lastra.json"/>
     <link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/lastra/logo32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">

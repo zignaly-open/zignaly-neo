@@ -28,7 +28,7 @@ export default {
     <link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/whitelabel/freedom/favicon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/freedom/favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/freedom/favicon.png">
-    <link rel="manifest" href="/whitelabel/freedom.json"/>
+    <link rel="manifest" href="/manifests/freedom.json"/>
     
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
