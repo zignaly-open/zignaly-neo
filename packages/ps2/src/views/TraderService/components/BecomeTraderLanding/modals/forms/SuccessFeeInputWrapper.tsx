@@ -16,6 +16,7 @@ const SuccessFeeInputWrapper: React.FC<{
   newValue?: number | string;
   value: number | string;
   prefixId?: string;
+  zglyFee: number;
 }> = ({
   title,
   newValue,
@@ -25,9 +26,10 @@ const SuccessFeeInputWrapper: React.FC<{
   newValueLabel,
   value,
   prefixId,
+  zglyFee,
 }) => {
   const { t } = useTranslation('service');
-  const feeWeCharge = getServiceOwnerFee(+value);
+  const feeWeCharge = getServiceOwnerFee(+value, zglyFee);
 
   return (
     <div>

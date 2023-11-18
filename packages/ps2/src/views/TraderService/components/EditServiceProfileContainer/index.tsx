@@ -231,6 +231,7 @@ const EditServiceProfileContainer: React.FC<{
                 control={control}
                 render={({ field }) => (
                   <SuccessFeeInputWrapper
+                    zglyFee={service?.zglySuccessFee}
                     value={successFee}
                     showZeroFeeExplainer
                   >

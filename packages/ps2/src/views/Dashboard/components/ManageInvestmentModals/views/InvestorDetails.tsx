@@ -18,6 +18,7 @@ const InvestorDetails: React.FC<{ prefixId?: string }> = ({ prefixId }) => {
         serviceLogo: service.serviceLogo,
         serviceName: service.serviceName,
         successFee: data.successFee,
+        zglyFee: data.zglySuccessFee,
       }}
     />
   );
