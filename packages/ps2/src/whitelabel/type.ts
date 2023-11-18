@@ -14,12 +14,13 @@ export enum Features {
 export type OverrideableEndpoints = 'marketplace/';
 
 export type WhitelabelOverride = {
+  id: string;
   title: string;
   helpUrl: string;
   locales?: string[];
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
-  translationOverrides?: string;
+  translationOverrides?: boolean;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;

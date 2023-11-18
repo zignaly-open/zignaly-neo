@@ -1,6 +1,7 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
+  id: 'criptomaniacos',
   title: 'Lastra',
   helpUrl: 'https://cmania.co/suporte-zig',
   featureOverrides: {
@@ -17,7 +18,7 @@ export default {
     tos: 'https://www.lastra.app/termos',
     privacyPolicy: 'https://www.lastra.app/politica-privacidade/',
   },
-  translationOverrides: 'criptomaniacos',
+  translationOverrides: true,
   xSource: 'criptomaniacos',
   background: '#0D0E0E',
   backgroundImage: null,

@@ -1,6 +1,7 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
+  id: 'freedom',
   title: 'OBSIDIAN FREEDOM',
   featureOverrides: {
     [Features.Referrals]: false,

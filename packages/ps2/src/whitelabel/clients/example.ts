@@ -1,7 +1,8 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
-  title: 'Example',
+  title: 'Zigbids',
+  id: 'zigbids',
   helpUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   featureOverrides: {
     [Features.Referrals]: false,
