@@ -35,7 +35,12 @@ server.use('index.html', serveNewIndexHtml);
 
 // This should not be used in prod
 // In prod, the reverse proxy should serve static and this script should not be processing those requests
-server.use(serveStatic(__dirname + '/../build'));
+server.use(
+  serveStatic(__dirname + '/../build', {
+    dotfiles: 'ignore',
+    index: false,
+  }),
+);
 
 server.use('*', serveNewIndexHtml);
 
@@ -46,17 +51,19 @@ server.listen(port, (err) => {
 });
 
 function getIndexHtmlWithWhitelabelHead(wlConfig) {
-  return indexHtml.replace(
-    '</head>',
-    `${
-      wlConfig?.headContent || ''
-    }<script type="text/javascript">window.__zignalyWhitelabelConfig = ${JSON.stringify(
-      wlConfig,
-    )}</script></head>`,
-  ).replace(
-    '<script id="analytics-scripts"></script>',
-    `<script id="analytics-scripts">${wlConfig.scripts || ''}}</script>`
-  );
+  return indexHtml
+    .replace(
+      '</head>',
+      `${
+        wlConfig?.headContent || ''
+      }<script type="text/javascript">window.__zignalyWhitelabelConfig = ${JSON.stringify(
+        wlConfig,
+      )}</script></head>`,
+    )
+    .replace(
+      '<script id="analytics-scripts"></script>',
+      `<script id="analytics-scripts">${wlConfig.scripts || ''}}</script>`,
+    );
 }
 
 async function serveNewIndexHtml(req, res) {
