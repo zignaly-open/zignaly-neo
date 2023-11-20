@@ -127,11 +127,11 @@ export default {
     <meta name="twitter:site" content="@Criptomaniacos_">
     
   `,
-  scripts: `
-    !(function (b, t, c) {
-      ((c = t.createElement(b)).async = 1),
-      (c.src = "https://s.cmania.co/code.js"),
-      (b = t.getElementsByTagName(b)[0]).parentNode.insertBefore(c, b);
-    })("script", document);
-  `,
+  // scripts: `
+  //   !(function (b, t, c) {
+  //     ((c = t.createElement(b)).async = 1),
+  //     (c.src = "https://s.cmania.co/code.js"),
+  //     (b = t.getElementsByTagName(b)[0]).parentNode.insertBefore(c, b);
+  //   })("script", document);
+  // `,
 } as WhitelabelOverride;
