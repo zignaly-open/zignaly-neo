@@ -45,4 +45,5 @@ export default {
     a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
     twq('config','og0cu');
   `,
+  defaultSuccessFee: 10,
 } as WhitelabelOverride;

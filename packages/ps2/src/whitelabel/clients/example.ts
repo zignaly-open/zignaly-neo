@@ -21,4 +21,5 @@ export default {
   // background: '#fcdcdc',
   // backgroundImage: null,
   loadFontsFromGoogle: true,
+  defaultSuccessFee: 5,
 } as WhitelabelOverride;

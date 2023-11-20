@@ -53,4 +53,5 @@ export default {
     <meta name="twitter:description" content="Dive into Obsidian Freedom, an invite-only group dedicated to empowering individuals with a passion for impact. Here, we lay the foundation for distributing freedom to those driven by purpose.">
     <meta name="twitter:image" content="https://freedom.wl.zignaly.com/images/whitelabel/freedom/banner.png">
   `,
+  defaultSuccessFee: 10,
 } as WhitelabelOverride;

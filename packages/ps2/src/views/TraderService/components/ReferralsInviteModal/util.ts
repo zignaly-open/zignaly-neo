@@ -1,14 +1,15 @@
-import { ZIGNALY_PROFIT_FEE } from 'util/constants';
+import { whitelabel } from '../../../../whitelabel';
 
 export const MAX_FEES_AMOUNT = 100000;
 
 export const getTraderBoost = (
   serviceCommission: number,
-  zignalyCommission = ZIGNALY_PROFIT_FEE,
+  zignalyCommission = whitelabel.defaultSuccessFee,
 ) => {
   return (
-    serviceCommission / ZIGNALY_PROFIT_FEE +
-    (zignalyCommission - ZIGNALY_PROFIT_FEE) / ZIGNALY_PROFIT_FEE
+    serviceCommission / whitelabel.defaultSuccessFee +
+    (zignalyCommission - whitelabel.defaultSuccessFee) /
+      whitelabel.defaultSuccessFee
   );
 };
 
@@ -17,7 +18,8 @@ export const getServiceCommission = (
   zignalyCommission: number,
 ) => {
   return (
-    ZIGNALY_PROFIT_FEE * getTraderBoost(serviceCommission, zignalyCommission)
+    whitelabel.defaultSuccessFee *
+    getTraderBoost(serviceCommission, zignalyCommission)
   );
 };
 
@@ -42,6 +44,6 @@ export const getMaxEarnings = (
   );
   return (
     MAX_FEES_AMOUNT *
-      (((ZIGNALY_PROFIT_FEE / 100) * boostedCommission) / 100) || 0
+      (((whitelabel.defaultSuccessFee / 100) * boostedCommission) / 100) || 0
   );
 };
