@@ -10,6 +10,7 @@ const InvestorDetailsForService: React.FC<{
     serviceName: string;
     serviceLogo?: string;
     successFee: number;
+    zglyFee: number;
   };
   discount?: string;
   prefixId?: string;
@@ -18,6 +19,7 @@ const InvestorDetailsForService: React.FC<{
   const successFeeDiscount = adjustDiscountFromBackend(
     +discount || 0,
     +service.successFee,
+    service.zglyFee,
   );
   return (
     <Investor id={prefixId && `${prefixId}__investor-details`}>

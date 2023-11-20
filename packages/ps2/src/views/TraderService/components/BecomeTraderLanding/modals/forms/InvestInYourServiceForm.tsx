@@ -25,6 +25,7 @@ import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
 import { Add } from '@mui/icons-material';
 import DepositModal from '../../../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { useZModal } from '../../../../../../components/ZModal/use';
+import { whitelabel } from '../../../../../../whitelabel';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
@@ -110,6 +111,7 @@ const InvestInYourServiceForm: React.FC<{
           serviceLogo: '',
           successFee: service.successFee,
           serviceName: service.serviceName,
+          zglyFee: whitelabel.defaultSuccessFee,
         }}
       />
 

@@ -25,4 +25,5 @@ export default {
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',
   social: {},
+  defaultSuccessFee: 10,
 } as WhitelabelOverride;

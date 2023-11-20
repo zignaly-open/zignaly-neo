@@ -49,4 +49,5 @@ export type WhitelabelOverride = {
       string | void
     >
   >;
+  defaultSuccessFee?: number;
 };

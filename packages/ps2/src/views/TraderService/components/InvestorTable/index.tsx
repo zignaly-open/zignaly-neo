@@ -63,6 +63,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           r.sfOwnerAt,
           getServiceTotalFee(
             r.ownerSuccessFee,
+            service?.zglySuccessFee,
             r.account_id === exchange.internalId || r.accountType === 'owner',
           ),
           t(connectionStateName[r.accountType]),
@@ -187,6 +188,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         (row) =>
           getServiceTotalFee(
             row.ownerSuccessFee,
+            service?.zglySuccessFee,
             row.account_id === exchange.internalId ||
               row.accountType === 'owner',
           ),
@@ -214,7 +216,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                       {
                         discounted: ownerSuccessFee,
                         owner: ownerSuccessFee + ownerSfDiscount,
-                        zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                        serviceTotal: service?.successFee,
+                        zignalyFee: getServiceZignalyFee(
+                          ownerSuccessFee,
+                          service?.zglySuccessFee,
+                        ),
                         discount: ownerSfDiscount,
                       },
                     )
