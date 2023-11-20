@@ -10,5 +10,5 @@ export default {
     medium: 'https://medium.com/zignaly',
     linkedin: 'https://www.linkedin.com/company/zignaly/',
   },
-  defaultSuccessFee: 10,
+  defaultSuccessFee: 5,
 } as WhitelabelOverride;
