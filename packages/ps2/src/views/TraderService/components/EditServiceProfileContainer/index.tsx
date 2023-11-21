@@ -255,7 +255,7 @@ const EditServiceProfileContainer: React.FC<{
                   render={({ field }) => (
                     <CommissionReferralSharing
                       successFee={+successFee}
-                      zglySuccessFee={whitelabel.defaultSuccessFee}
+                      zglySuccessFee={service?.zglySuccessFee}
                       {...field}
                     />
                   )}

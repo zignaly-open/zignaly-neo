@@ -29,7 +29,7 @@ const CommissionReferralSharing = ({
 }) => {
   const { t } = useTranslation(['service', 'referrals-trader']);
   const [enable, setEnable] = useState(value > 0);
-  const min = whitelabel.defaultSuccessFee;
+  const min = zglySuccessFee;
   const max = successFee - zglySuccessFee;
   const currentBoost =
     1 + getTraderBoost(value || whitelabel.defaultSuccessFee, zglySuccessFee);
@@ -38,7 +38,7 @@ const CommissionReferralSharing = ({
     if (!successFee || !enable) {
       onChange(0);
     } else if (max === min || (enable && !value)) {
-      onChange(whitelabel.defaultSuccessFee);
+      onChange(zglySuccessFee);
     }
   }, [value, successFee, zglySuccessFee, enable]);
 
@@ -100,7 +100,7 @@ const CommissionReferralSharing = ({
                       <StyledZigSlider
                         min={min}
                         max={max}
-                        value={value || whitelabel.defaultSuccessFee}
+                        value={value || zglySuccessFee}
                         prefixId={'service-edit__commission-slider'}
                         onChange={(e, v) => onChange(v as number)}
                         marks={false}
