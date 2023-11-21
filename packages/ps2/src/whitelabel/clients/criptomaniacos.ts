@@ -53,6 +53,7 @@ export default {
       highlighted: '#1298C9',
       links: '#1298C9',
     },
+    defaultSuccessFee: 10,
     boxShadows: {
       tableHeader: 'rgba(0,0,0,.5)',
     },

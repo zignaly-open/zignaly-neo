@@ -15,11 +15,9 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 | `CF_ZONE` | Secret   |                                                   CloudFlare Zone                                                   | **Optional*** |
 | `CF_TOKEN` | Secret   |                                                   CloudFlare Zone                                                   |                            **Optional*** |
 | `PS2_BASE_API` | Variable |                              Base API path, e.g. `https://staging.zignaly.com/new_api`                              |                              **Required** |
-| `PS2_WALLET_API` | Variable |                               Wallet API path, e.g. `https://wallet.zignaly.com/api`                                |                              **Required** |
 | `PS2_REFERRAL_API` | Variable |    Wallet API path, e.g. `https://test-referrals.zignaly.com/`. Yes, the api path names are pretty inconsistent.    |                              **Optional*** |
 | `WHITELABEL` | Variable | The name of the whitelabnel config for the deployment. Whitelabel configs can be defined [here](../src/whitelabel). |                              <opt>Optional</opt> |
 | `ENABLE_TRACKING` | Variable |                            Whether or not to enable tracking systems. `true` to enable.                             |                              <opt>Optional</opt> |
-| `TZ_TRACKER_ENDPOINT` | Variable |                           Custom tracker URL. Default: `https://zignaly.com/new_api/tz`                             |                              <opt>Optional</opt> |
 | `GTM_ID` | Variable |                                                Google Tag Manager ID                                                |                              <opt>Optional</opt> |
 | `GA_ID` | Variable |                                                 Google Analytics ID                                                 |                              <opt>Optional</opt> |
 | `ENABLE_TEST_LANGUAGE` | Variable |                            Set to `1` to enable the [test language](./multilanguage.md)                             |                              <opt>Optional</opt> |
@@ -27,6 +25,7 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 | `SENTRY_DNS` | Variable |                                                     Sentry DNS                                                      |                              <opt>Optional</opt> |
 | `CUSTOMER_IO_SITE_ID` | Variable |                                                 Customer IO Site ID                                                 |                              <opt>Optional</opt> |
 | `LIVE_SESSION_TRACK_ID` | Variable |                                                Live Session track ID                                                |                              <opt>Optional</opt> |
+| `IPGEOLOCATION_API_KEY` | Variable |                               API key for ipgeolocation.io, used to detect user currency when buying crypto                                |                              **Optional*** |
 
 
 Now what?
@@ -51,6 +50,6 @@ jobs:
 
 ```
 
-Not [push](https://youtu.be/X-wub0Q0AGc?si=2S65LQWcY0hrb7Kj&t=1) your changes to trigger a deploy.
+Now [push](https://youtu.be/X-wub0Q0AGc?si=2S65LQWcY0hrb7Kj&t=1) your changes to trigger a deploy.
 
 Congrats, you're done.

@@ -5,20 +5,8 @@ import ZModal from '../../../../components/ZModal';
 import { useZModal } from '../../../../components/ZModal/use';
 import { Loader, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useAsync } from 'react-use';
 import { useDepositInfo } from 'apis/coin/use';
-
-function useCurrency() {
-  const { value: currency } = useAsync(async () => {
-    const response = await fetch(
-      `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_IPGEOLOCATION_API_KEY}`,
-    );
-    const data = await response.json();
-    return data.currency.code;
-  }, []);
-
-  return currency;
-}
+import useCurrency from './useCurrency';
 
 function BuyModal(props: DialogProps): React.ReactElement {
   const { t } = useTranslation(['deposit-crypto']);

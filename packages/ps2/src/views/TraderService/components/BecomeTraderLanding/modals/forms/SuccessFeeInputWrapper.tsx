@@ -4,7 +4,6 @@ import { ZigAlertMessage, ZigTypography } from '@zignaly-open/ui';
 import { SuccessFieldWrapper, SuccessFieldReceive } from '../atoms';
 import { Box } from '@mui/material';
 import { getServiceOwnerFee } from '../../../../../../util/fee';
-import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
 
 const SuccessFeeInputWrapper: React.FC<{
   children: JSX.Element;
@@ -16,6 +15,7 @@ const SuccessFeeInputWrapper: React.FC<{
   newValue?: number | string;
   value: number | string;
   prefixId?: string;
+  zglyFee: number;
 }> = ({
   title,
   newValue,
@@ -25,9 +25,10 @@ const SuccessFeeInputWrapper: React.FC<{
   newValueLabel,
   value,
   prefixId,
+  zglyFee,
 }) => {
   const { t } = useTranslation('service');
-  const feeWeCharge = getServiceOwnerFee(+value);
+  const feeWeCharge = getServiceOwnerFee(+value, zglyFee);
 
   return (
     <div>
@@ -41,7 +42,9 @@ const SuccessFeeInputWrapper: React.FC<{
           id={prefixId && `${prefixId}-description`}
         >
           {description ||
-            t('edit.success-fee-desc', { zignalyFee: ZIGNALY_PROFIT_FEE })}
+            t('edit.success-fee-desc', {
+              zignalyFee: zglyFee,
+            })}
         </ZigTypography>
 
         <Box display='flex' mt={1.25}>

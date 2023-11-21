@@ -16,7 +16,7 @@ import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 import { Table } from './styles';
-import { ZIGNALY_PROFIT_FEE } from 'util/constants';
+import { whitelabel } from '../../../../../../whitelabel';
 
 export const composeInvitesValue = (
   tierIndex: number,
@@ -116,7 +116,7 @@ const CellLabelTraderBoost = ({ traderBoost }: { traderBoost: number }) => {
         {t('trader-boost')}
         <Tooltip
           title={t('tooltips.trader-boost', {
-            commission: traderBoost * ZIGNALY_PROFIT_FEE,
+            commission: traderBoost * whitelabel.defaultSuccessFee,
           })}
         >
           <TooltipIcon />
@@ -248,7 +248,8 @@ const TiersTable = ({
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
                 (
-                  Math.round(MAX_FEES_AMOUNT * ZIGNALY_PROFIT_FEE) / 100
+                  Math.round(MAX_FEES_AMOUNT * whitelabel.defaultSuccessFee) /
+                  100
                 ).toString(),
                 {
                   thousandSeparator: true,
