@@ -35,9 +35,10 @@ if (
         measurementIds: [process.env.REACT_APP_GA_ID],
       }),
       customerIoPlugin,
-      intercomPlugin({
-        appId: whitelabel.intercomId,
-      }),
+      whitelabel.intercomId &&
+        intercomPlugin({
+          appId: whitelabel.intercomId,
+        }),
     ],
   });
 }
