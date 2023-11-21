@@ -26,7 +26,7 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
-import { isFeatureOn, whitelabel } from 'whitelabel';
+import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
 
@@ -255,7 +255,7 @@ const EditServiceProfileContainer: React.FC<{
                   render={({ field }) => (
                     <CommissionReferralSharing
                       successFee={+successFee}
-                      zglySuccessFee={whitelabel.defaultSuccessFee}
+                      zglySuccessFee={service?.zglySuccessFee}
                       {...field}
                     />
                   )}
