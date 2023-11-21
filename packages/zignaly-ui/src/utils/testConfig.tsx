@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from "@testing-library/react";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
 import { ThemeProvider, ThemeProviderMui as ThemeInheritorMui } from "../index";
