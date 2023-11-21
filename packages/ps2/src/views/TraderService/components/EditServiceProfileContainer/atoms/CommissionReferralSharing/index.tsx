@@ -10,10 +10,11 @@ import { useTranslation } from 'react-i18next';
 import { SliderBox, StyledZigSlider, ZigTypographyValue } from './styles';
 import BoostChip from 'views/TraderService/components/ReferralsInviteModal/atoms/BoostChip';
 import { getTraderBoost } from 'views/TraderService/components/ReferralsInviteModal/util';
-import { HELP_REFERRAL, ZIGNALY_PROFIT_FEE } from 'util/constants';
+import { HELP_REFERRAL } from 'util/constants';
 import CommissionPromo from 'views/TraderService/components/ServiceProfileContainer/atoms/CommissionPromo';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ChevronRight } from '@mui/icons-material';
+import { whitelabel } from '../../../../../../whitelabel';
 
 const CommissionReferralSharing = ({
   value,
@@ -28,16 +29,16 @@ const CommissionReferralSharing = ({
 }) => {
   const { t } = useTranslation(['service', 'referrals-trader']);
   const [enable, setEnable] = useState(value > 0);
-  const min = ZIGNALY_PROFIT_FEE;
+  const min = whitelabel.defaultSuccessFee;
   const max = successFee - zglySuccessFee;
   const currentBoost =
-    1 + getTraderBoost(value || ZIGNALY_PROFIT_FEE, zglySuccessFee);
+    1 + getTraderBoost(value || whitelabel.defaultSuccessFee, zglySuccessFee);
 
   useEffect(() => {
     if (!successFee || !enable) {
       onChange(0);
     } else if (max === min || (enable && !value)) {
-      onChange(ZIGNALY_PROFIT_FEE);
+      onChange(whitelabel.defaultSuccessFee);
     }
   }, [value, successFee, zglySuccessFee, enable]);
 
@@ -99,7 +100,7 @@ const CommissionReferralSharing = ({
                       <StyledZigSlider
                         min={min}
                         max={max}
-                        value={value || ZIGNALY_PROFIT_FEE}
+                        value={value || whitelabel.defaultSuccessFee}
                         prefixId={'service-edit__commission-slider'}
                         onChange={(e, v) => onChange(v as number)}
                         marks={false}

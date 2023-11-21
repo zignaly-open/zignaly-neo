@@ -22,6 +22,7 @@ import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { whitelabel } from '../../../../../../whitelabel';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -158,6 +159,7 @@ const CreateServiceForm: React.FC<{
         control={control}
         render={({ field }) => (
           <SuccessFeeInputWrapper
+            zglyFee={whitelabel.defaultSuccessFee}
             prefixId={'create-service__service-fee'}
             value={watch('successFee') || 0}
             showZeroFeeExplainer

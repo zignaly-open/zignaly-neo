@@ -21,7 +21,7 @@ import {
   adjustDiscountToBackend,
   getServiceTotalFee,
 } from '../../../../util/fee';
-import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
+import { whitelabel } from '../../../../whitelabel';
 
 type EditFeeFormValues = {
   value: number;
@@ -50,6 +50,7 @@ function InvestorEditFee({
   const previousValue = adjustDiscountFromBackend(
     ownerSfDiscount,
     serviceTotalFee,
+    data?.zglySuccessFee,
   );
   const {
     handleSubmit,
@@ -62,7 +63,7 @@ function InvestorEditFee({
     defaultValues: {
       value: previousValue,
       maxDiscount: {
-        max: Math.max(0, serviceTotalFee - 2 * ZIGNALY_PROFIT_FEE),
+        max: Math.max(0, serviceTotalFee - 2 * whitelabel.defaultSuccessFee),
         full: serviceTotalFee,
       },
     },
@@ -77,7 +78,7 @@ function InvestorEditFee({
   const onSubmit = useCallback(
     ({ value: discount, maxDiscount: { full } }: EditFeeFormValues) => {
       editFee({
-        discount: adjustDiscountToBackend(discount, full),
+        discount: adjustDiscountToBackend(discount, full, data?.zglySuccessFee),
         accountId,
         serviceId,
       })
@@ -105,14 +106,16 @@ function InvestorEditFee({
               newValueLabel={t('change-fee-modal.new-success-fee')}
               title={t('change-fee-modal.title')}
               description={t('first-grade-math-explainer', {
-                zignalyFee: ZIGNALY_PROFIT_FEE,
+                zignalyFee: data?.zglySuccessFee,
               })}
               newValue={getServiceTotalFee(
                 Math.max(
-                  serviceTotalFee - watch('value') - ZIGNALY_PROFIT_FEE,
+                  serviceTotalFee - watch('value') - data?.zglySuccessFee,
                   0,
                 ),
+                data?.zglySuccessFee,
               )}
+              zglyFee={data?.zglySuccessFee}
             >
               <ZigInput
                 type='number'

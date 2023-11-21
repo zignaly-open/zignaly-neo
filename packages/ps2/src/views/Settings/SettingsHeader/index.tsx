@@ -44,7 +44,6 @@ function SettingsHeader() {
                       width: '10px',
                       height: '10px',
                       color: 'red',
-                      mt: '-5px',
                     }}
                   />
                 ),
