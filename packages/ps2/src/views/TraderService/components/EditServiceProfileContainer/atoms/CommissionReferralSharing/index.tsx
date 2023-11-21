@@ -29,22 +29,17 @@ const CommissionReferralSharing = ({
 }) => {
   const { t } = useTranslation(['service', 'referrals-trader']);
   const [enable, setEnable] = useState(value > 0);
-  const min = zglySuccessFee;
+  const min = whitelabel.defaultSuccessFee;
   const max = successFee - zglySuccessFee;
-  const currentBoost =
-    1 +
-    getTraderBoost(
-      value || whitelabel.defaultSuccessFee,
-      whitelabel.defaultSuccessFee,
-    );
+  const currentBoost = 1 + getTraderBoost(value || min, zglySuccessFee);
 
   useEffect(() => {
     if (!successFee || !enable) {
       onChange(0);
     } else if (max === min || (enable && !value)) {
-      onChange(zglySuccessFee);
+      onChange(min);
     }
-  }, [value, successFee, zglySuccessFee, enable]);
+  }, [value, successFee, enable]);
 
   return (
     <Box display='flex' flexDirection={'column'}>
@@ -98,9 +93,7 @@ const CommissionReferralSharing = ({
                     </ZigTypography>
                     <Box display={'flex'}>
                       <BoostChip
-                        boost={
-                          1 + getTraderBoost(min, whitelabel.defaultSuccessFee)
-                        }
+                        boost={1 + getTraderBoost(min, zglySuccessFee)}
                         showBolt
                       />
                       <StyledZigSlider
@@ -130,9 +123,7 @@ const CommissionReferralSharing = ({
                         valueLabelDisplay='on'
                       />
                       <BoostChip
-                        boost={
-                          1 + getTraderBoost(max, whitelabel.defaultSuccessFee)
-                        }
+                        boost={1 + getTraderBoost(max, zglySuccessFee)}
                         showBolt
                       />
                     </Box>
