@@ -24,7 +24,7 @@ const GlobalAppStyle = getGlobalAppStyle({
 const IntercomStyle = createGlobalStyle`
   @media (max-width: 600px) {
     .intercom-launcher-frame .intercom-launcher{
-      display: none;
+      display: none !important;
     }
   }
 `;
