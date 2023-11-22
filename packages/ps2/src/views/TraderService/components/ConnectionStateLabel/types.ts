@@ -32,4 +32,5 @@ export const connectionStateColor = (theme: Theme) => ({
 
 export type ConnectionStateLabelProps = {
   stateId: string;
+  id?: string;
 };

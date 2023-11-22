@@ -153,7 +153,11 @@ const EditServiceProfileContainer: React.FC<{
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form'>
-      <ZigTypography textAlign='center' variant='h1'>
+      <ZigTypography
+        textAlign='center'
+        variant='h1'
+        id={'edit-service-profile__title'}
+      >
         {t('edit.title')}
       </ZigTypography>
       <Grid container mt={8} gap={2}>
@@ -162,7 +166,11 @@ const EditServiceProfileContainer: React.FC<{
             name='logo'
             control={control}
             render={({ field }) => (
-              <ServiceLogo label={t('edit.logo')} {...field} />
+              <ServiceLogo
+                label={t('edit.logo')}
+                {...field}
+                id={'edit-service-profile__service-logo'}
+              />
             )}
           />
         </Grid>
@@ -172,6 +180,7 @@ const EditServiceProfileContainer: React.FC<{
             control={control}
             render={({ field }) => (
               <ZigInput
+                id={'edit-service-profile__service-name'}
                 fullWidth
                 label={t('edit.name')}
                 error={t(errors.name?.message)}
@@ -184,6 +193,7 @@ const EditServiceProfileContainer: React.FC<{
             control={control}
             render={({ field }) => (
               <ZigInput
+                id={'edit-service-profile__service-description'}
                 fullWidth
                 label={t('edit.description')}
                 error={t(errors.description?.message)}
@@ -199,6 +209,7 @@ const EditServiceProfileContainer: React.FC<{
               control={control}
               render={({ field }) => (
                 <ZigInput
+                  id={'edit-service-profile__service-max-sbt'}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
@@ -210,7 +221,11 @@ const EditServiceProfileContainer: React.FC<{
                   label={
                     <div>
                       {t('edit.pool-size')}
-                      <ZigTypography variant='h4' color='neutral400'>
+                      <ZigTypography
+                        variant='h4'
+                        color='neutral400'
+                        id={'edit-service-profile__pool-size-description'}
+                      >
                         {t('edit.pool-size-desc')}
                       </ZigTypography>
                     </div>
@@ -228,11 +243,13 @@ const EditServiceProfileContainer: React.FC<{
                 control={control}
                 render={({ field }) => (
                   <SuccessFeeInputWrapper
+                    prefixId={'edit-service-profile__service-success-fee'}
                     zglyFee={service?.zglySuccessFee}
                     value={successFee}
                     showZeroFeeExplainer
                   >
                     <ZigInput
+                      id={'edit-service-profile__service-input-success-fee'}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position='end'>%</InputAdornment>
@@ -254,6 +271,9 @@ const EditServiceProfileContainer: React.FC<{
                   control={control}
                   render={({ field }) => (
                     <CommissionReferralSharing
+                      prefixId={
+                        'edit-service-profile__service-commision-referral'
+                      }
                       successFee={+successFee}
                       zglySuccessFee={service?.zglySuccessFee}
                       {...field}
@@ -272,13 +292,18 @@ const EditServiceProfileContainer: React.FC<{
           >
             <Grid item xs={12} sm={6}>
               <StyledZigSelect
+                id={'edit-service-profile__service-visibility'}
                 options={visibilityOptions}
                 label={t('edit.visibility.visibility')}
                 value={visibility}
                 onChange={setVisibility}
                 styles={selectStyles}
               />
-              <ZigTypography variant='h4' color='neutral400'>
+              <ZigTypography
+                variant='h4'
+                color='neutral400'
+                id={'edit-service-profile__service-visibility-label'}
+              >
                 {t(`edit.visibility.${VISIBILITY_LABEL[visibility].key}-desc`)}
               </ZigTypography>
             </Grid>
@@ -292,6 +317,7 @@ const EditServiceProfileContainer: React.FC<{
             >
               <ZigTypography variant='h4' color='neutral400'>
                 <Trans
+                  id={'edit-service-profile__service-marketplace-requirements'}
                   i18nKey={'edit.visibility.marketplace-requirements'}
                   t={t}
                   components={[
@@ -312,7 +338,12 @@ const EditServiceProfileContainer: React.FC<{
             gap={2}
             mb={2}
           >
-            <ZigButton variant='outlined' size='large' onClick={back}>
+            <ZigButton
+              variant='outlined'
+              size='large'
+              onClick={back}
+              id={'edit-service-profile__cancel'}
+            >
               {t('action:cancel')}
             </ZigButton>
             <ZigButton
@@ -320,6 +351,7 @@ const EditServiceProfileContainer: React.FC<{
               type='submit'
               loading={editStatus.isLoading || commissionStatus.isLoading}
               size='large'
+              id={'edit-service-profile__save'}
             >
               {t('edit.save')}
             </ZigButton>
