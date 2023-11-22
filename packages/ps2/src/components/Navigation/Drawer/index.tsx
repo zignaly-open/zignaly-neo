@@ -274,14 +274,14 @@ const ZigDrawer = () => {
                       if (lightWeightIntercom) {
                         (
                           document.querySelector(
-                            'intercom-launcher',
+                            '.intercom-launcher',
                           ) as HTMLElement
                         )?.click();
                         setLightWeightIntercom(false);
                       } else {
                         (
                           document.querySelector(
-                            'intercom-launcher-frame',
+                            '.intercom-launcher-frame',
                           ) as HTMLElement
                         )?.click();
                       }
@@ -291,7 +291,11 @@ const ZigDrawer = () => {
                   </ListItemButton>
                 </ListItem>
               )}
-              <ListItem disablePadding onClick={handleDrawerToggle}>
+              <ListItem
+                disablePadding
+                onClick={handleDrawerToggle}
+                className={'test-class'}
+              >
                 <ListItemButton target='_blank' href={whitelabel.helpUrl}>
                   <ListItemText
                     primary={t('main-menu.dropdown-link-helpDocs')}
