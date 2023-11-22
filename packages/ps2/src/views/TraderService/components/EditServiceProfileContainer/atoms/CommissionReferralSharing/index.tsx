@@ -31,16 +31,15 @@ const CommissionReferralSharing = ({
   const [enable, setEnable] = useState(value > 0);
   const min = whitelabel.defaultSuccessFee;
   const max = successFee - zglySuccessFee;
-  const currentBoost =
-    1 + getTraderBoost(value || whitelabel.defaultSuccessFee, zglySuccessFee);
+  const currentBoost = 1 + getTraderBoost(value || min, zglySuccessFee);
 
   useEffect(() => {
     if (!successFee || !enable) {
       onChange(0);
     } else if (max === min || (enable && !value)) {
-      onChange(whitelabel.defaultSuccessFee);
+      onChange(min);
     }
-  }, [value, successFee, zglySuccessFee, enable]);
+  }, [value, successFee, enable]);
 
   return (
     <Box display='flex' flexDirection={'column'}>
@@ -100,7 +99,7 @@ const CommissionReferralSharing = ({
                       <StyledZigSlider
                         min={min}
                         max={max}
-                        value={value || whitelabel.defaultSuccessFee}
+                        value={value || zglySuccessFee}
                         prefixId={'service-edit__commission-slider'}
                         onChange={(e, v) => onChange(v as number)}
                         marks={false}
