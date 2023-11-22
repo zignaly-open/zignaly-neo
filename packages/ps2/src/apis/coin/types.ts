@@ -86,8 +86,6 @@ export const TRANSACTION_TYPE = {
   SYSTEM: 'system',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER: 'user',
-  // System transfers
-  SYSTEM: 'system',
 };
 export type TransactionType = keyof typeof TRANSACTION_TYPE;
 
