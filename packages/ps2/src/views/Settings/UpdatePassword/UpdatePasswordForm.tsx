@@ -1,12 +1,17 @@
 import React from 'react';
-import { ZigAlertMessage, ZigButton, ZigInput } from '@zignaly-open/ui';
+import {
+  ZigAlertMessage,
+  ZigButton,
+  ZigInput,
+  ZigModalForm,
+  ZigModalActions,
+} from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUpdatePasswordMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { UpdatePasswordValidation } from './validations';
 import { UpdatePasswordFormType } from './types';
-import { Form, ModalActions } from 'components/ZModal';
 import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 
@@ -49,12 +54,13 @@ const UpdatePasswordForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='password'
           control={control}
           render={({ field }) => (
             <ZigInput
+              id={'update-password__current-password'}
               label={t('update-password.current-password')}
               placeholder={t('update-password.current-password')}
               error={t(errors.password?.message)}
@@ -69,11 +75,13 @@ const UpdatePasswordForm = () => {
           control={control}
           render={({ field }) => (
             <ZigInput
+              id={'update-password__new-password'}
               label={t('update-password.new-password')}
               placeholder={t('update-password.new-password')}
               error={t(errors.newPassword?.message)}
               helperText={
                 <ZigAlertMessage
+                  id={'update-password__password-requirements'}
                   text={t('error:error.password-requirements', {
                     length: 8,
                   })}
@@ -86,7 +94,7 @@ const UpdatePasswordForm = () => {
           )}
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'update-password__submit'}
             type='submit'
@@ -97,8 +105,8 @@ const UpdatePasswordForm = () => {
           >
             {t('update-password.title')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </>
   );
 };

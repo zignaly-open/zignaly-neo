@@ -10,10 +10,11 @@ import {
 
 const ConnectionStateLabel = ({
   stateId = ConnectionStateLabelId.CONNECTED,
+  id,
 }: ConnectionStateLabelProps) => {
   const { t } = useTranslation('investors');
   return (
-    <styled.Layout stateId={stateId}>
+    <styled.Layout stateId={stateId} id={id}>
       {t(connectionStateName[stateId])}
     </styled.Layout>
   );

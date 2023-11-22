@@ -1,15 +1,18 @@
-import { Box, styled } from '@mui/material';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
 import { ZigInviteIcon } from '@zignaly-open/ui';
 
 export const InviteBox = styled(Box)`
   border-radius: 5px;
   box-shadow: 1.4px 2.1px 12px 0 rgba(0, 0, 0, 0.26);
-  background-color: #1f224c;
+  background-color: ${({ theme }) =>
+    theme.palette.backgrounds.manageServiceMenuHover};
   display: flex;
   flex: 1;
   align-content: space-between;
   padding: 7px 12px;
   height: 68px;
+  max-width: 476px;
 `;
 
 export const StyledInviteIcon = styled(ZigInviteIcon)`
@@ -23,7 +26,7 @@ export const StyledInviteIcon = styled(ZigInviteIcon)`
 
 export const InviteUrlInput = styled('input')`
   font-family: inherit;
-  width: 390px;
+  width: 370px;
   overflow: hidden;
   text-overflow: ellipsis;
   border: none;

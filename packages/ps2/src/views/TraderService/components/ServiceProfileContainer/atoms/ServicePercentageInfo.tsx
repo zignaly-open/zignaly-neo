@@ -4,6 +4,7 @@ import PercentChange from './PercentChange';
 import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { getColorForNumber } from '../../../../../util/numbers';
+import { SxProps } from '@mui/system';
 
 const ServicePercentageInfo: React.FC<{
   title: string;
@@ -11,12 +12,20 @@ const ServicePercentageInfo: React.FC<{
   percent: string;
   ssc: string;
   canShow?: boolean;
+  priceLabelSx?: SxProps;
   id?: string;
-}> = ({ title, value, ssc, percent, canShow, id }) => {
+}> = ({ title, value, ssc, percent, canShow, id, priceLabelSx }) => {
   const { t } = useTranslation('service');
+
   return (
     <>
-      <ZigTypography textTransform='capitalize' color={'neutral300'}>
+      <ZigTypography
+        textTransform='capitalize'
+        color={'neutral300'}
+        lineHeight={'23px'}
+        sx={{ mb: '10px' }}
+        id={id && `${id}-label`}
+      >
         {title}
       </ZigTypography>
 
@@ -24,7 +33,7 @@ const ServicePercentageInfo: React.FC<{
         <>
           <ZigPriceLabel
             id={id}
-            sx={{ mb: 1 }}
+            sx={priceLabelSx || { mb: 1 }}
             component='div'
             shorten
             variant={'h1'}

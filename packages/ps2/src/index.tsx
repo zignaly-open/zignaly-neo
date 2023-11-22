@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import './util/i18next';
+import './util/i18n/i18next';
 import reportWebVitals from './reportWebVitals';
 import * as ReactDOMClient from 'react-dom/client';
 

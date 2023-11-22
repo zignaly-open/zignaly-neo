@@ -12,10 +12,12 @@ import { useCurrentUser, useIsAuthenticated } from '../../../../apis/user/use';
 import { UseModalReturn } from './types';
 import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
 import { useCanInvestIn } from '../../../../util/walls/util';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import theme from '../../../../theme';
+import { useCoinBalances } from '../../../../apis/coin/use';
 
 function InvestDepositModal({
   serviceId,
@@ -37,15 +39,25 @@ function InvestDepositModal({
     data: service,
   } = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
-  const { balance, isFetching: isLoadingBalance } = useCurrentBalance(
-    service?.ssc,
-  );
+  const {
+    balance,
+    isFetching: isLoadingBalance,
+    refetch: refetchBalance,
+  } = useCurrentBalance(service?.ssc);
+  const { data: coinBalances, isLoading: isLoadingCoinBalances } =
+    useCoinBalances({
+      convert: true,
+    });
 
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
   const selectedInvestment = useSelectedInvestment();
   // we need this only once
   const loading =
-    isLoadingService || isLoadingBalance || isFetching || !selectedInvestment;
+    isLoadingService ||
+    isLoadingBalance ||
+    isFetching ||
+    !selectedInvestment ||
+    isLoadingCoinBalances;
   const [ready, setReady] = useState(!loading);
   useEffect(() => {
     setReady((r) => !loading || r);
@@ -55,6 +67,7 @@ function InvestDepositModal({
 
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn()();
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
 
   const trackAwareClose = () => {
     // we need this because we're not using the normal zmodal
@@ -64,6 +77,10 @@ function InvestDepositModal({
 
   const depositModal = useDepositModalContent({
     coin: service?.ssc,
+    refetchBalance,
+    serviceId,
+    balances: coinBalances,
+    isLoadingBalances: isLoadingCoinBalances,
     close: trackAwareClose,
   });
   const investModal = useInvestModalContent({ close: trackAwareClose });
@@ -89,19 +106,23 @@ function InvestDepositModal({
     return null;
   }
 
-  const { title, component, onGoBack } =
+  const { title, component, modalWidth, ...rest } =
     (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
     <ZModal
       title={ready ? title : ''}
+      {...rest}
       {...props}
       close={trackAwareClose}
       isLoading={!ready}
-      onGoBack={onGoBack}
       wide
+      mobileFullScreen
+      width={modalWidth}
     >
-      <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
+      <Box paddingX={!showDeposit && !(xs && rest.mobileFullScreen) && '30px'}>
+        {ready && component()}
+      </Box>
     </ZModal>
   );
 }

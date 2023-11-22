@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Enable2FAForm from './Enable2FaForm';
 import Disable2FAForm from './Disable2FaForm';
 import { useCurrentUser } from 'apis/user/use';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import { PageContainer, ZigTypography } from '@zignaly-open/ui';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
 
@@ -20,12 +20,12 @@ const Toggle2FA: React.FC = () => {
             textAlign: 'center',
           }}
         >
-          <ZigTypography variant={'h1'} id={'update-password__title'}>
+          <ZigTypography variant={'h1'} id={'two-fa__title'}>
             {t('enable-2fa.title')}
           </ZigTypography>
         </Box>
 
-        {user.ask2FA ? (
+        {user['2FAEnable'] ? (
           <Disable2FAForm
             close={() => {
               // Do nothing

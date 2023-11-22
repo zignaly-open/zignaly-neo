@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Exchange,
   ExtendedExchange,
@@ -31,6 +31,7 @@ import {
   activateExchange,
   setAccessToken,
   setActiveExchangeInternalId,
+  setLocale,
   setSessionExpiryDate,
   setUser,
 } from './store';
@@ -52,12 +53,13 @@ import { clearUserSession } from './util';
 import { junkyard } from '../../util/junkyard';
 import EmailVerifyWithdrawModal from 'views/Auth/components/EmailVerifyWithdrawModal';
 
-const useStartSession = () => {
+const useStartSession = (eventType: SessionsTypes) => {
   const { showModal } = useZModal();
   const dispatch = useDispatch();
   const [loadSession] = useLazySessionQuery();
   const [loadTraderServices] = useLazyTraderServicesQuery();
   const [loadUser] = useLazyUserQuery();
+  const updateCurrentLocale = useChangeLocale(true);
 
   return async (
     user: { token: string; userId?: string } & Partial<LoginResponse>,
@@ -92,8 +94,12 @@ const useStartSession = () => {
 
     dispatch(setUser(userData));
     startLiveSession(userData);
-    trackNewSession(userData, SessionsTypes.Login);
+    trackNewSession(
+      userData,
+      user.emailUnconfirmed ? SessionsTypes.Signup : eventType,
+    );
     junkyard.set('hasLoggedIn', 'true');
+    updateCurrentLocale(userData.locale);
   };
 };
 
@@ -103,7 +109,7 @@ export const useSignup = (): [
 ] => {
   const [loading, setLoading] = useState(false);
   const [signup] = useSignupMutation();
-  const startSession = useStartSession();
+  const startSession = useStartSession(SessionsTypes.Signup);
 
   return [
     { loading },
@@ -124,7 +130,7 @@ export const useAuthenticate = (): [
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
-  const startSession = useStartSession();
+  const startSession = useStartSession(SessionsTypes.Login);
 
   const [loading, setLoading] = useState(false);
 
@@ -193,34 +199,34 @@ export const useResendCodeNewUser: typeof useResendCodeNewUserMutation =
 export const useResendKnownDeviceCode: typeof useResendKnownDeviceCodeMutation =
   useResendKnownDeviceCodeMutation;
 
-export function useChangeLocale(): (locale: string) => void {
+/*
+ * We have two scenarios here:
+ * - the user manually changes the language
+ * - we get the locale value from the backend and uodate it
+ */
+export function useChangeLocale(
+  isSavedLocale?: boolean,
+): (locale: string) => void {
   const [save] = useSetLocaleMutation();
   const { i18n } = useTranslation();
+  const selectedLocale = useSelector((state: RootState) => state.user)?.locale;
   const isAuthenticated = useIsAuthenticated();
-  const userData = useCurrentUser();
-  const [newLocale, setNewLocale] = useState<string>(null);
-
-  useEffect(() => {
-    if (!isAuthenticated) return;
-    // After logged in
-
-    if (newLocale && userData?.locale !== newLocale) {
-      // Update BE with custom locale if changed
-      save({ locale: newLocale });
-    } else if (userData?.locale !== i18n.language) {
-      // Otherwise update locale to match BE
-      i18n.changeLanguage(userData.locale);
-    }
-  }, [userData?.locale]);
+  const dispatch = useDispatch();
 
   return (locale: string) => {
-    i18n.changeLanguage(locale);
-    if (isAuthenticated) {
-      // Update locale to BE directly
+    // Suppose a user is logged out, then they change their locale and then log in
+    // We should not change their locale to what they had on the backend
+    if (!isSavedLocale || !selectedLocale) {
+      dispatch(setLocale(locale));
+      i18n.changeLanguage(locale);
+    }
+    if (isAuthenticated && !isSavedLocale) {
       save({ locale });
-    } else {
-      // Save locale for BE update after login
-      setNewLocale(locale);
+    } else if (isSavedLocale && locale !== selectedLocale && selectedLocale) {
+      // we do not check for isAuthenticated here because we know the user is authenticated because
+      // we come here with the saved locale.
+      // the isAuthenticated flag will be false though because we're ina  process of getting authenticated
+      save({ locale: selectedLocale });
     }
   };
 }
@@ -261,11 +267,14 @@ export function useActiveExchange(): ExtendedExchange | undefined {
   }, [exchange]);
 
   const result = exchange || defaultExchange || undefined;
-  return (
-    result && {
-      ...result,
-      image: getImageOfAccount(user.exchanges.indexOf(result)),
-    }
+  return useMemo(
+    () =>
+      result &&
+      user?.exchanges && {
+        ...result,
+        image: getImageOfAccount(user.exchanges.indexOf(result)),
+      },
+    [result, user?.exchanges],
   );
 }
 

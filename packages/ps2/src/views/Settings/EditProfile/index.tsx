@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import EditProfileForm from './EditProfileForm';
 import { PageContainer, ZigTypography } from '@zignaly-open/ui';
 import { PageWithHeaderContainer } from 'views/TraderService/components/styles';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import { Box } from '@mui/material';
 
 const EditProfile: React.FC = () => {

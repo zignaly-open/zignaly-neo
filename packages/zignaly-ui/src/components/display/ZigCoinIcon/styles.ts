@@ -12,6 +12,6 @@ export const Placeholder = styled(Icon)<{ size: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #324054;
+  background: ${({ theme }) => theme.palette.backgrounds.coinIconPlaceholder};
   font-size: 16px;
 `;

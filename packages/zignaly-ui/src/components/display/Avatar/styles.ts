@@ -15,6 +15,7 @@ export const Layout = styled.div<{ size: number }>`
 
   ${({ size }) => `
     width: ${size}px;
+    min-width: ${size}px;
     height: ${size}px;
   `}
 `;

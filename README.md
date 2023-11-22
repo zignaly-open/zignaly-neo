@@ -24,6 +24,7 @@ This will install all dependencies and link projects together. Next, run instruc
 * `yarn test` - you guessed it - runs `yarn test` for all packages.
 * `yarn storybook` runs zignaly-ui (`@zignaly-open/ui`) storybook. More on that later.
 * `yarn ps2` runs Webapp Neo <sup>2</sup>. Needs `.env` config.
+* `yarn backoffice` runs the Backoffice app. Needs `.env` config.
 * `yarn build` builds all repos (needed for UI repos)
 
 ### More FYIs
@@ -90,6 +91,8 @@ Customizable fonts will be implemented over the next 2 days.
 
 ## How to deploy
 
+Please go [here](./packages/ps2/docs/deploy.md) for a guide on how to manually trigger a deploy and [here](./packages/ps2/docs/new-env.md) to set up a new environment.
+
 ### Deploy to master
 
 An auto-deploy would trigger when you merge to `master`. 
@@ -112,6 +115,10 @@ More aliases than your average SoundCloud rapper.
 A replacement for the zignaly-webapp-neo, created with [CRA](https://github.com/facebook/create-react-app)
 , [Zignaly UI](https://www.npmjs.com/package/@zignaly-open/ui)
 and [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for State management
+
+### Backoffice aka `@zignaly-open/backoffice`
+
+A backoffice app largely replicating the PS2 architecture.
 
 ## Some guidelines
 

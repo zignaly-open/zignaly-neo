@@ -25,12 +25,12 @@
 		"voucher_pending": "Bónus de Depósito"
 	},
 	"full-terms": {
-		"1": "A Zignaly reserva-se o direito de cancelar \"Vouchers de Taxas\" se o usuário for considerado envolvido em atividades inadequadas, desonestas ou abusivas.",
-		"2": "A Zignaly reserva-se o direito de alterar os Termos e Condições do programa de Recompensas a qualquer momento, sem aviso prévio.",
-		"3": "Os \"Vouchers de Taxa\" são aplicáveis à parte da Zignaly do \"Success Fee\".",
+		"1": "A {{ whitelabel }} reserva-se o direito de cancelar \"Vouchers de Taxas\" se o usuário for considerado envolvido em atividades inadequadas, desonestas ou abusivas.",
+		"2": "A {{ whitelabel }} reserva-se o direito de alterar os Termos e Condições do programa de Recompensas a qualquer momento, sem aviso prévio.",
+		"3": "Os \"Vouchers de Taxa\" são aplicáveis à parte da {{ whitelabel }} do \"Success Fee\".",
 		"4": "Os \"Vouchers de Taxa\" não são transferíveis e só serão utilizados pelo usuário original que os obteve.",
-		"5": "Anúncios on-line pagos com o logotipo da Zignaly são estritamente proibidos.",
-		"6": "Todos os cálculos de recompensa feitos por Zignaly são finais.",
+		"5": "Anúncios on-line pagos com o logotipo da {{ whitelabel }} são estritamente proibidos.",
+		"6": "Todos os cálculos de recompensa feitos por {{ whitelabel }} são finais.",
 		"7": "Os participantes que violarem estes termos não serão elegíveis para as recompensas; qualquer comportamento fraudulento ou abusivo resultará na rescisão imediata de todas as recompensas pendentes.",
 		"title": "Termos Globais"
 	},

@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
 import { TransactionContainer } from '../styles';
-import { ZigButton, ZigTable, ZigTablePriceLabel } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigTable,
+  ZigTablePriceLabel,
+  ZigModalActions,
+} from '@zignaly-open/ui';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {
   ChangeViewFn,
@@ -13,7 +18,6 @@ import {
   useInvestmentDetails,
   useSelectedInvestment,
 } from '../../../../../apis/investment/use';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { ColumnDef } from '@tanstack/react-table';
 import { Box, Tooltip } from '@mui/material';
 
@@ -152,7 +156,7 @@ const PendingTransactionsList: React.FC<{
         />
       </TransactionContainer>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'pending-transactions__close'}
           startIcon={<ArrowBackIosIcon />}
@@ -162,7 +166,7 @@ const PendingTransactionsList: React.FC<{
         >
           {t('modal.pendingTransaction.button')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
     </>
   );
 };

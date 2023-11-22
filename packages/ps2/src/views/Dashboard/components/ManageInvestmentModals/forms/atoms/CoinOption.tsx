@@ -30,19 +30,28 @@ const CoinOption = ({
   prefixId?: string;
 }) => {
   return (
-    <Box display='flex' alignItems='center'>
+    <Box
+      display='flex'
+      alignItems='center'
+      id={prefixId && `${prefixId}__${coin.toLowerCase()}`}
+    >
       <Box mr='11px' mt={'4px'}>
         <ZigCoinIcon
           size={'small'}
           coin={coin}
-          id={prefixId && `${prefixId}__coin-icon`}
+          id={prefixId && `${prefixId}__coin-icon-${coin.toLowerCase()}`}
         />
       </Box>
-      <ZigTypography fontWeight={600} id={prefixId && `${prefixId}__coin`}>
+      <ZigTypography
+        fontWeight={600}
+        id={prefixId && `${prefixId}__coin-${coin.toLowerCase()}`}
+      >
         {coin}
       </ZigTypography>
       &nbsp;
-      <ZigTypography id={prefixId && `${prefixId}__coin-network`}>
+      <ZigTypography
+        id={prefixId && `${prefixId}__coin-network-${coin.toLowerCase()}`}
+      >
         {name}
       </ZigTypography>
     </Box>

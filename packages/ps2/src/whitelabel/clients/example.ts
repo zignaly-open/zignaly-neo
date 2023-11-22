@@ -2,6 +2,8 @@ import { Features, WhitelabelOverride } from '../type';
 import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
+  title: 'Example',
+  helpUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
@@ -15,9 +17,10 @@ export default {
   },
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
-  subscriptionPurchaseLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',
   // backgroundImage: null,
-  // theme: 'example',
+  translationOverrides: true,
   loadFontsFromGoogle: true,
+  defaultSuccessFee: 5,
 } as WhitelabelOverride;

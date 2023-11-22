@@ -63,7 +63,7 @@
       },
       "button": "Back",
       "hoverTooltip": "Hover over the amount to see the full decimals",
-      "waiting-for-next-accounting-tooltip": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please consider that your investment is at risk until the balance is transferred to you. Depending on the fund manager and his strategy, this usually takes a few days but may take longer to complete."
+      "waiting-for-next-accounting-tooltip": "You'll receive your funds once the fund manager releases them, and the daily accounting is carried out. Please understand that your investment may remain exposed until the balance is transferred to you. The duration can vary depending on the fund manager's strategy, typically taking a few days but possibly longer."
     },
     "editInvestments": {
       "title": "Edit Investment With",
@@ -77,19 +77,21 @@
   },
   "invest-modal": {
     "invest-with": "Invest with",
+    "min-not-reached": "Minimum investment {{ value, prettyNumberFull }} {{ coin }}",
+    "min-not-reached-invested": "Min investment {{ value, prettyNumberFull }} {{ coin }} (you need at least {{ newMin, prettyNumberFull }} {{ coin }})",
     "amount-to-invest": "Amount to Invest:",
     "type-transfer": "Type the word <0>“{{word}}”</0> in the field below to agree with the transfer:",
     "type-transfer-placeholder": "Type “{{word}}” in here",
     "transfer-error": "Invalid value. Please type the correct word.",
     "max-funds": "Exceeds maximum funds allowed in this service. Invest max. {{max}} {{coin}}.",
-    "max-reached": "Cannot invest in this service because it has reached Maximum Funds limit.",
+    "max-reached": "Maximum funds in service reached. Try a different service",
     "transfer-label": "Transfer",
     "i-understand-risk": "I understand and accept that my funds will be transferred to the Service Pool account and that my funds are at risk"
   },
   "withdrawal-request": "Withdrawal Request",
   "withdrawal-success": {
     "title": "Withdrawal Requested",
-    "description": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please, take into account that your investment is at risk until the balance is transferred to you. Depending on the fund manager, this usually takes a few days but may take longer to complete. Zignaly does not control this time frame, so please be patient.",
+    "description": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please, take into account that your investment is at risk until the balance is transferred to you. Depending on the fund manager, this usually takes a few days but may take longer to complete. We do not control this time frame, so please be patient.",
     "button": "Close"
   }
 }

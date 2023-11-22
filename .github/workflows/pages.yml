@@ -56,9 +56,9 @@ jobs:
       - name: Install Lerna
         run: yarn global add lerna
       - name: Bootstrap
-        run: lerna bootstrap --scope=*/ui
+        run: yarn lerna bootstrap --scope=*/ui
       - name: Build modified packages
-        run: lerna run build-storybook --scope=*/ui
+        run: yarn lerna run build-storybook --scope=*/ui
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

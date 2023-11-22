@@ -24,6 +24,12 @@ declare module "@mui/material/styles" {
     yellow: string;
     red: string;
     contrasting: string;
+    paleBlue: string;
+    lightGrayBlue: string;
+    darkGreen: string;
+    labelCheckbox: string;
+    checkboxPrimary: string;
+    lightGrey: string;
 
     backgrounds: Record<
       | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
@@ -33,8 +39,9 @@ declare module "@mui/material/styles" {
       | "toastError"
       | "greyedOutBorder"
       | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
-      | "socialNetworksTab" // why have a dedicated color used only once? because fuck me, that's why
+      | "headerMenuItemHover" // why have a dedicated color used only once? because fuck me, that's why
       | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
+      | "activeTab" // why have a dedicated color used only once? because fuck me, that's why
       | "modal"
       | "secondaryBackground"
       | "sliderMark"
@@ -45,10 +52,10 @@ declare module "@mui/material/styles" {
       | "input2faGradient"
       | "input2faGradientBorder"
       | "buttonPrimary"
-      | "loader"
       | "header"
       | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
-      | "input",
+      | "input"
+      | "coinIconPlaceholder", // why have a dedicated color used only once? because fuck me, that's why
       string
     >;
 

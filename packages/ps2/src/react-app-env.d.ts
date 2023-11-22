@@ -8,6 +8,7 @@ declare global {
       push: (payload: unknown) => void;
     };
     safari?: unknown;
+    twq?: (e: string, eventKey: string, eventData: unknown) => void;
     intercomSettings?: { user_hash?: string };
   }
 }
@@ -56,6 +57,12 @@ declare module '@mui/material/styles' {
     red: string;
     avatarBack: string;
     contrasting: string;
+    paleBlue: string;
+    lightGrayBlue: string;
+    darkGreen: string;
+    labelCheckbox: string;
+    checkboxPrimary: string;
+    lightGrey: string;
 
     // I am sorry
     // Here we define some of the "new" colors - only thoise needed in ps2
@@ -63,13 +70,18 @@ declare module '@mui/material/styles' {
     // d) because I added them here only because adding an explanatory comment and a ts-ignore every time
     // is too much of a hassle (see a).).
     backgrounds: Record<
-      | 'socialNetworksTab'
+      | 'headerMenuItemHover'
       | 'modal'
       | 'investorsIcon'
       | 'withdrawalHighlight'
       | 'secondaryBackground'
       | 'selectInputFill'
-      | 'manageServiceMenuHover',
+      | 'activeTab'
+      | 'manageServiceMenuHover'
+      | 'breakLineSignUp'
+      | 'mobileButtonsWrapper'
+      | 'toastSuccess'
+      | 'coinIconPlaceholder',
       string
     >;
   }

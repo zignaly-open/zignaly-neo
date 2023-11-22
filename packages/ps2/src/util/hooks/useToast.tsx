@@ -1,28 +1,8 @@
-import { toast, ToastOptions } from 'react-toastify';
-import { Toaster } from '@zignaly-open/ui';
-import React from 'react';
-import { TFunction, useTranslation } from 'react-i18next';
+import { useToast as getToastUi } from '@zignaly-open/ui';
+import { useTranslation } from 'react-i18next';
 import { BackendError } from '../errors';
 
-type ToastFn = (text: string, extraOptions?: ToastOptions) => void;
-
-const showToast =
-  (type: 'success' | 'error' | 'info') =>
-  (message: string, options?: ToastOptions) =>
-    toast(
-      <Toaster
-        variant={type}
-        caption={message}
-        id={type && `toast__${type}`}
-      />,
-      {
-        type: type,
-        icon: false,
-        ...options,
-      } as ToastOptions,
-    );
-
-const backendErrorText = (t: TFunction, error: BackendError) => {
+const backendErrorText = (t: (key: string) => string, error: BackendError) => {
   const { code, msg } = error?.data?.error || {};
   const translationKey = 'error:error.' + code;
   return code && t(translationKey) !== translationKey.replace(/^error:/, '')
@@ -32,8 +12,13 @@ const backendErrorText = (t: TFunction, error: BackendError) => {
 
 const lastShownBackendError = { error: '', time: 0, expiry: 10_000 };
 
+const ignoreError = (error: BackendError) => {
+  const { code } = error?.data?.error || {};
+  return code === 1091;
+};
+
 export const backendError = (
-  t: TFunction,
+  t: (key: string) => string,
   error: BackendError,
   ignoreDuplicate: boolean,
 ) => {
@@ -44,22 +29,20 @@ export const backendError = (
     lastShownBackendError.time + lastShownBackendError.expiry > Date.now()
   )
     return;
+
+  if (ignoreError(error)) return;
+
   lastShownBackendError.time = Date.now();
   lastShownBackendError.error = text;
-  showToast('error')(text);
+  getToastUi().error(text);
 };
 
-export function useToast(): {
-  success: ToastFn;
-  info: ToastFn;
-  error: ToastFn;
+export function useToast(): ReturnType<typeof getToastUi> & {
   backendError: (error?: BackendError, ignoreDuplicate?: boolean) => void;
 } {
-  const { t } = useTranslation('error');
+  const { t } = useTranslation<'error'>('error');
   return {
-    success: showToast('success'),
-    error: showToast('error'),
-    info: showToast('info'),
+    ...getToastUi(),
     backendError: (error: BackendError, ignoreDuplicate: boolean) =>
       backendError(t, error, ignoreDuplicate),
   };

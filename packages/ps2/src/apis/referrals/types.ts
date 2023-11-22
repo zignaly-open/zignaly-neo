@@ -1,3 +1,5 @@
+import { useTiersData } from './use';
+
 export type ReferralsState = Record<string, never>;
 
 export type ReferralRewards = {
@@ -92,6 +94,8 @@ export type ServiceCommission = {
 };
 
 export type ServiceCommissionPayload = {
-  service: string;
+  serviceId: string;
   commission: number;
 };
+
+export type TiersData = ReturnType<typeof useTiersData>;

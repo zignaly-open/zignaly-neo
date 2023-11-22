@@ -1,5 +1,3 @@
-import { InfiniteQueryResponse } from 'util/hooks/useInfinitePaginatedQuery';
-
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type CoinState = {};
 
@@ -66,6 +64,7 @@ export const TRANSACTION_TYPE = {
   DEPOSIT: 'deposit',
   // Withdrawal from a Zignaly exchange account to an external address
   WITHDRAW: 'withdrawal',
+  // Referral
   REFERRAL: 'referral',
   // Investment in a PS1 service
   PS_DEPOSIT: 'psDeposit',
@@ -79,6 +78,12 @@ export const TRANSACTION_TYPE = {
   BUYZIG: 'buyZig',
   // In PS1 transfers when the trader receives his success fee
   SUCCESS_FEE: 'psSuccessFee',
+  // Reward payment
+  REWARD: 'reward',
+  // Refund
+  VOUCHER_REFUND: 'voucher refund',
+  // System tx by us to fix something,
+  SYSTEM: 'system',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER: 'user',
   // System transfers
@@ -117,4 +122,12 @@ export type Transaction = {
   servicePsVersion?: number;
 };
 
-export type Transactions = InfiniteQueryResponse<Transaction[]>;
+export type PaginationMetadata = {
+  from: string;
+  length: number;
+};
+
+export type Transactions = {
+  items: Transaction[];
+  metadata: PaginationMetadata;
+};

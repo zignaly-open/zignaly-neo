@@ -31,7 +31,10 @@
 		"portfolio": "Meu Portfólio",
 		"marketplace": "Marketplace",
 		"balance": "Saldos",
-		"rewards": "Recompensas"
+		"rewards": "Recompensas",
+		"dropdown-link-kyc": "KYC",
+		"notAuth-dropdown-link-profile": "Perfil",
+		"subscriptions": "Assinaturas"
 	},
 	"account-selector": {
 		"type": {
@@ -47,18 +50,20 @@
 	"amount": "Quantia",
 	"new-version": "Nova versão, clique em mim para actualizar",
 	"validation": {
-		"insufficient-amount": "Fundos insuficientes",
+		"insufficient-amount": "Excede o saldo disponível",
 		"invalid-value": "Valor inválido",
-		"negative-amount": "Deve ser >= 0",
+		"negative-amount": "Deve ser > 0",
 		"invalid-amount": "Deve indicar uma quantia",
-		"negative-zeroable-amount": "Deve ser > 0",
-		"max-decimals": "Por favor insira números com no máximo 8 decimais.",
+		"negative-zeroable-amount": "Deve ser >= 0",
+		"max-decimals": "Por favor insira números com no máximo {{maxDecimals}} decimais.",
 		"max-allowed-length": "Deve ter menos de {{ maxLength }} caracteres",
 		"min-amount": "A quantidade mínima é {{amount}} {{coin}}.",
 		"insufficient-amount-min": "Quantidade mínima: {{ minValue }} {{ minValueCoin }}",
 		"invalid-characters": "Caracteres inválidos",
 		"letter-number": "Deve conter pelo menos uma letra ou número",
-		"min-invest-amount-for-owner": "O saldo do proprietário deve estar acima de {{minAmount}} {{minAmountCoin}}"
+		"min-invest-amount-for-owner": "O saldo do proprietário deve estar acima de {{minAmount}} {{minAmountCoin}}",
+		"insufficient-amount-max": "Quantidade máxima: {{ maxValue }} {{ coin }}",
+		"2fa-invalid-format": "O código deve ser um número de 6 dígitos"
 	},
 	"back": "Voltar",
 	"close": "Fechar",
@@ -78,11 +83,11 @@
 	"type-to-confirm": "Digite \" {{word}} \" para confirmar",
 	"ok": "OK",
 	"balance": {
-		"total": "Total",
-		"available": "Disponível",
+		"available": "Disponível:",
 		"deposit-funds": "Depositar Fundos",
 		"find-traders": "Encontra traders para investir",
-		"my-portfolio": "Meu Portfólio"
+		"my-portfolio": "Meu Portfólio",
+		"portfolio": "Portfólio:"
 	},
 	"follow-us": "Siga-nos",
 	"portfolio": "Portfólio",
@@ -95,5 +100,7 @@
 			"title": "Ganhe 20%",
 			"description": "Convidar Amigos"
 		}
-	}
+	},
+	"kyc-updated": "Estado do KYC atualizado!",
+	"coin": "Moeda"
 }

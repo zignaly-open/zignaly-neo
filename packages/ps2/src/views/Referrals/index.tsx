@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useTitle } from 'react-use';
+import { Trans, useTranslation } from 'react-i18next';
+import { useTitle } from 'util/title';
 import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
@@ -8,27 +8,22 @@ import {
 import { Box, Grid } from '@mui/material';
 import {
   PageContainer,
-  ZigButton,
-  ZigCopyText,
+  ZigArrowDescIcon,
   ZigPriceLabel,
   ZigTypography,
+  ZigUserFilledIcon,
 } from '@zignaly-open/ui';
-import GroupIcon from '@mui/icons-material/Group';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
-import { useCurrentUser } from '../../apis/user/use';
-import { useToast } from '../../util/hooks/useToast';
-import { generatePath } from 'react-router-dom';
-import {
-  ROUTE_REFERRALS_INVITE,
-  ROUTE_REFERRALS_INVITE_SHORT,
-} from '../../routes';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
-import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
-import { useZModal } from 'components/ZModal/use';
-import ReferralInviteModal from './components/ReferralInviteModal';
+import { useTiersData } from 'apis/referrals/use';
+import ReferralLimitedTime from './components/ReferralLimitedTime';
+import { Verified } from '@mui/icons-material';
+import ReferralHowToEarn from './components/ReferralHowToEarn';
+import ReferralCommissionBox from './components/ReferralCommissionBox';
+import ReferralTermsButton from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralTermsButton';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -38,30 +33,25 @@ const Referrals: React.FC = () => {
   const history = useReferralHistoryQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  const { refCode } = useCurrentUser();
-  const toast = useToast();
-  const { showModal } = useZModal();
 
   useTitle(t('pages:referrals'));
 
-  const baseUrl =
-    window.location.protocol +
-    '//' +
-    (window.location.host?.includes('localhost')
-      ? 'app.zignaly.com'
-      : window.location.host);
-
-  const link = baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
-  const shortLink =
-    baseUrl + generatePath(ROUTE_REFERRALS_INVITE_SHORT, { key: refCode });
-
-  const openInviteModal = () =>
-    showModal(ReferralInviteModal, { url: link, urlShort: shortLink });
+  const tiersData = useTiersData();
+  const {
+    referral,
+    maxCommission,
+    maxCommissionWithoutTraderBoost,
+    traderBoost,
+    isLoading,
+    boostRunning,
+    inviteLeft,
+  } = tiersData;
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
         endpoint={[rewards, history]}
+        loading={isLoading}
         content={([rewardsData, referrals]: [
           ReferralRewards,
           ReferralHistory,
@@ -69,98 +59,84 @@ const Referrals: React.FC = () => {
           <>
             <Box
               sx={{
-                mt: 5,
-                justifyContent: 'center',
+                mt: 8,
+                alignItems: 'center',
                 mb: 6,
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
               }}
             >
-              <Box
+              <ZigTypography
                 sx={{
-                  mr: 4,
-                  ml: 4,
-                  display: 'flex',
-                  alignItems: 'center',
+                  mb: '19px',
                 }}
+                variant={'h1'}
+                fontSize={'35px'}
+                fontWeight={600}
+                position={'relative'}
+                className='referral-page__title'
               >
-                <img
-                  src={'/images/referrals/envelope-main.png'}
-                  style={{ width: 200, marginTop: 17 }}
-                  alt={'referral'}
-                />
-              </Box>
-              <Box
+                {t('title', { commission: maxCommission })}
+                {inviteLeft > 0 && boostRunning && <ReferralLimitedTime />}
+              </ZigTypography>
+              <ZigTypography
                 sx={{
-                  flex: 1,
-                  maxWidth: 700,
-                  justifyContent: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
+                  mb: 1,
                 }}
+                variant={'h2'}
+                fontWeight={400}
+                color='neutral300'
+                className='referral-page__subtitle'
               >
-                <ZigTypography
-                  sx={{
-                    mb: 1,
+                <Trans
+                  i18nKey={'description'}
+                  values={{
+                    commission: maxCommissionWithoutTraderBoost,
+                    maxCommission: maxCommission,
+                    multiplier: traderBoost + 1,
                   }}
-                  variant={'h1'}
+                  t={t}
                 >
-                  {t('title')}
-                </ZigTypography>
-
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <Box sx={{ flex: 1 }}>
-                    <ZigCopyText
-                      id={'deposit__deposit-address'}
-                      copyElementId={'referrals__copy-link'}
-                      value={link}
-                      onCopied={() => toast.success(t('action:copied'))}
-                    />
-                  </Box>
-                  <ZigButton
-                    variant={'contained'}
-                    id='referrals__open-invite-image-modal'
-                    size={'xlarge'}
-                    sx={{
-                      mb: '10px',
-                      ml: 1,
-                    }}
-                    onClick={openInviteModal}
-                  >
-                    <img
-                      src={'/images/referrals/qrcode.svg'}
-                      width='16'
-                      height='16'
-                      style={{ marginRight: 10 }}
-                      alt={''}
-                    />
-                    {t('create-invite.create-invite')}
-                  </ZigButton>
+                  <ZigTypography
+                    color='paleBlue'
+                    variant={'h2'}
+                    fontWeight={'inherit'}
+                    component={'span'}
+                  />
+                </Trans>
+              </ZigTypography>
+              <ReferralCommissionBox
+                tiersData={tiersData}
+                rewardsData={rewardsData}
+              />
+              {referral.invitedCount > 0 && (
+                <Box mt='30px'>
+                  <ReferralTermsButton />
                 </Box>
-              </Box>
+              )}
             </Box>
 
-            <ReferralRewardsList rewards={rewardsData} />
-
             {!rewardsData.invitedCount ? (
-              <>
+              <Box
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+              >
+                <ReferralHowToEarn tiersData={tiersData} />
                 <ZigTypography
                   align={'center'}
                   variant={'h1'}
-                  sx={{ mt: 7, mb: 5 }}
+                  fontSize={'26px'}
+                  fontWeight={600}
+                  sx={{ mt: 7, mb: '29px' }}
+                  className='referral__start-earning-title'
                 >
-                  {t('how-to-earn')}
+                  {t('start-earning')}
                 </ZigTypography>
 
-                <Grid container sx={{ mb: 8 }}>
+                <Grid container>
                   <Grid item xs={12} md={4}>
-                    <ReferralSuccessStep step={1} link={link} />
+                    <ReferralSuccessStep step={1} />
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <ReferralSuccessStep step={2} />
@@ -169,7 +145,7 @@ const Referrals: React.FC = () => {
                     <ReferralSuccessStep step={3} />
                   </Grid>
                 </Grid>
-              </>
+              </Box>
             ) : (
               <>
                 <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>
@@ -181,23 +157,58 @@ const Referrals: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
-                    pt: 5,
+                    alignItems: 'center',
+                    pt: 3,
                     pb: 5,
                   }}
                 >
                   <TotalBox
-                    label={t('total-invitees')}
+                    label={t('signups')}
                     value={
-                      <ZigTypography color={'neutral175'}>
-                        {rewardsData.investorsCount} <GroupIcon />
+                      <ZigTypography
+                        color={'yellow'}
+                        display={'flex'}
+                        alignItems={'center'}
+                        gap={1}
+                      >
+                        <ZigUserFilledIcon
+                          style={{
+                            fontSize: '19px',
+                          }}
+                        />
+                        {rewardsData.invitedCount}
                       </ZigTypography>
                     }
                   />
+                  <ZigArrowDescIcon />
                   <TotalBox
-                    label={t('total-rewards')}
+                    label={t('invested')}
+                    value={
+                      <ZigTypography
+                        color={'paleBlue'}
+                        display={'flex'}
+                        alignItems={'center'}
+                        gap={1}
+                      >
+                        <ZigUserFilledIcon
+                          color={'paleBlue'}
+                          style={{
+                            fontSize: '19px',
+                          }}
+                        />
+                        {rewardsData.investorsCount}
+                        <Verified
+                          sx={{ color: 'greenGraph', fontSize: '21px' }}
+                        />
+                      </ZigTypography>
+                    }
+                  />
+                  <ZigArrowDescIcon />
+                  <TotalBox
+                    label={t('total-earned')}
                     value={
                       <ZigPriceLabel
-                        color={'greenGraph'}
+                        color={'#28ba62'}
                         usd
                         showTooltip
                         variant={'bigNumber'}
@@ -205,22 +216,10 @@ const Referrals: React.FC = () => {
                       />
                     }
                   />
-                  <TotalBox
-                    label={t('pending-rewards')}
-                    value={
-                      <ZigPriceLabel
-                        color={'yellow'}
-                        usd
-                        showTooltip
-                        variant={'bigNumber'}
-                        value={rewardsData.usdtPending}
-                      />
-                    }
-                  />
                 </Box>
+                <ReferralTable referrals={referrals.history} />
               </>
             )}
-            <ReferralTable referrals={referrals.history} />
           </>
         )}
       />

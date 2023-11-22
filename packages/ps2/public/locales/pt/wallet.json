@@ -5,7 +5,7 @@
 	"successFee": "Desconto no success fee:",
 	"tradingFee": "Reembolso de taxas de trading:",
 	"successFeeTooltip": "Pague os success fees de qualquer serviço de Profit Sharing com ZIG e obtenha um desconto sobre o valor a pagar.",
-	"tradingFeeTooltip": "Zignaly devolverá todas as taxas de trading de suas novas operações em USDT para sua conta e lhe cobrará o valor equivalente menos o desconto em ZIG.",
+	"tradingFeeTooltip": "{{ whitelabel }} devolverá todas as taxas de trading de suas novas operações em USDT para sua conta e lhe cobrará o valor equivalente menos o desconto em ZIG.",
 	"withdraw": "Retirar",
 	"savingMoney": "Você está a POUPAR DINHEIRO com ZIG!",
 	"saveMoney": "POUPE DINHEIRO com ZIG!",

@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
-import { Avatar, ZigTypography } from '@zignaly-open/ui';
+import { Avatar } from '@zignaly-open/ui';
 import { Service } from 'apis/service/types';
 import { t } from 'i18next';
 import React from 'react';
 import { getServiceLogo } from 'util/images';
-import { CardBox, CommissionBoostChip } from './styles';
+import { CardBox, CommissionBoostChip, TypographyName } from './styles';
 import ServiceBoostChip from '../ServiceBoostChip';
 
 const TraderCard = ({
@@ -16,31 +16,29 @@ const TraderCard = ({
 }) => {
   return (
     <CardBox
-      width='228px'
+      width='230px'
       height='288px'
       display='flex'
       flexDirection={'column'}
       alignItems={'center'}
       position='relative'
       gap='12px'
-      padding='42px 32px 30px'
+      padding='42px 6px 30px'
     >
-      {traderBoost > 1 && (
+      {traderBoost > 0 && (
         <CommissionBoostChip>
-          <ServiceBoostChip boost={traderBoost} />
+          <ServiceBoostChip boost={traderBoost + 1} />
         </CommissionBoostChip>
       )}
-      <ZigTypography
+      <TypographyName
         variant='h1'
-        fontWeight='600'
+        fontWeight='500'
         textAlign={'center'}
         lineHeight={'28px'}
-        noWrap
-        textOverflow={'ellipsis'}
-        maxWidth={'170px'}
+        id='referrals-invite-modal__service-name'
       >
         {service.name}
-      </ZigTypography>
+      </TypographyName>
       <Box
         position={'relative'}
         display={'flex'}

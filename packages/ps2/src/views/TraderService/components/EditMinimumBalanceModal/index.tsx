@@ -9,6 +9,7 @@ import {
   ZigButton,
   InputAmountAdvanced,
   ZigTypography,
+  ZigModalActions,
 } from '@zignaly-open/ui';
 import {
   useServiceDetails,
@@ -19,7 +20,6 @@ import { Box } from '@mui/material';
 import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from 'components/ZModal';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 type EditMinBalanceFormValues = { amountValue: InputAmountAdvancedValueType };
 
@@ -63,14 +63,24 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   }, []);
 
   return (
-    <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
+    <ZModal
+      id={'edit-minimum-balance-modal'}
+      wide
+      {...props}
+      title={t('minBalanceModal.title')}
+      close={close}
+    >
       <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
-        <ZigTypography textAlign={'center'}>
+        <ZigTypography
+          textAlign={'center'}
+          id={'edit-minimum-balance-modal__description'}
+        >
           {t('minBalanceModal.desc')}
         </ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <InputAmountAdvanced
+          id={'edit-minimum-balance-modal__input-amount'}
           label={t('common:amount') + ':'}
           placeholder={t('minBalanceModal.placeholder')}
           labelBalance={t('minBalanceModal.labelBalance')}
@@ -93,9 +103,9 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           showUnit
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
-            id={'edit-balance__save'}
+            id={'edit-minimum-balance-modal__save'}
             loading={isLoadingManagement || isLoadingService || isUpdating}
             disabled={!isValid}
             size='xlarge'
@@ -103,7 +113,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           >
             {t('minBalanceModal.save')}
           </ZigButton>
-        </ModalActions>
+        </ZigModalActions>
       </form>
     </ZModal>
   );

@@ -4,6 +4,7 @@
   "ok": "OK",
   "back": "Back",
   "close": "Close",
+  "coin": "Coin",
   "loading": "Loading...",
   "changes-saved": "Changes saved successfully",
   "coming-soon": {
@@ -39,6 +40,7 @@
     "marketplace": "Marketplace",
     "balance": "Balances",
     "rewards": "Rewards",
+    "subscriptions": "Subscriptions",
     "notAuth-dropdown-link-settings": "Settings",
     "notAuth-dropdown-link-password": "Password",
     "notAuth-dropdown-link-profile": "Profile",
@@ -52,7 +54,7 @@
       "description": "On 1st deposit"
     },
     "referrals": {
-      "title": "Earn 20%",
+      "title": "Earn {{commission}}%",
       "description": "Invite Friends"
     }
   },
@@ -65,7 +67,8 @@
   },
   "navigation-menu": {
     "profit-sharing": "Browse Top Traders",
-    "become-trader": "Offer your Trading Services"
+    "become-trader": "Offer your Trading Services",
+    "ping-us": "Help chat"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
@@ -87,8 +90,9 @@
     "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
     "insufficient-amount-max": "Max amount: {{ maxValue }} {{ coin }}",
     "invalid-value": "Invalid value",
+    "2fa-invalid-format": "The code should be a 6 digit number",
     "negative-amount": "Should be > 0",
-    "max-allowed-length": "Should be under {{ maxLength }} characters",
+    "max-allowed-length": "Should not exceed {{ maxLength }} characters",
     "negative-zeroable-amount": "Should be >= 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",

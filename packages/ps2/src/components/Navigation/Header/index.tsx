@@ -1,4 +1,4 @@
-import { HeaderLinksContainer, BrandImage } from '@zignaly-open/ui';
+import { BrandImage, HeaderLinksContainer } from '@zignaly-open/ui';
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';

@@ -45,7 +45,7 @@
 			},
 			"item2": {
 				"title": "GESTÃO DE FUNDOS",
-				"description": "Você pode lidar com milhares de investidores sem se preocupar com a contabilidade e o suporte de cada indivíduo. A equipe de Zignaly se encarregará disso."
+				"description": "Você pode lidar com milhares de investidores sem se preocupar com a contabilidade e o suporte de cada indivíduo. A equipe de {{ whitelabel }} se encarregará disso."
 			},
 			"item3": {
 				"title": "PAGAMENTOS DIÁRIOS",
@@ -58,7 +58,7 @@
 		}
 	},
 	"howWorks": {
-		"title": "Razões pelas quais os melhores traders oferecem os seus serviços em Zignaly",
+		"title": "Razões pelas quais os melhores traders oferecem os seus serviços em {{ whitelabel }}",
 		"list": {
 			"item1": {
 				"title": "Pool de Fundos",
@@ -70,7 +70,7 @@
 			},
 			"item3": {
 				"title": "Dividir Lucros",
-				"description": "Escolha o success fee desejado. A quota da Zignaly é sempre de 5%, que deve ser incluída."
+				"description": "Escolha a taxa de sucesso desejada. A parte da {{ whitelabel }} é sempre {{ zignalyFee }}% que deve ser incluída."
 			}
 		}
 	}

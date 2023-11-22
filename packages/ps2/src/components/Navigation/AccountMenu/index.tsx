@@ -35,13 +35,14 @@ import {
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
   ROUTE_SIGNUP,
+  ROUTE_SUBSCRIPTIONS,
 } from '../../../routes';
 import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
-import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
+import { usePrefetchTranslation } from '../../../util/i18n/i18nextHelpers';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 
@@ -53,7 +54,7 @@ function AccountMenu(): React.ReactElement | null {
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
   const navigate = useNavigate();
-  const { exchanges } = useCurrentUser();
+  const { exchanges, voucher } = useCurrentUser();
   const selectExchange = useSelectExchange();
   const openDepositModal = useOpenDepositModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
@@ -204,23 +205,24 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
         { separator: true },
-        isFeatureOn(Features.Rewards) && {
-          customStyle: `margin-top: 4px;`,
-          label: (
-            <>
-              <GiftIcon
-                width={24}
-                height={24}
-                style={{ marginTop: -1 }}
-                color={theme.palette.neutral175}
-              />
-              {t('account-menu.rewards')}
-            </>
-          ),
-          id: 'account-menu-dropdown__rewards',
-          href: generatePath(ROUTE_REWARDS),
-          onClick: () => navigate(ROUTE_REWARDS),
-        },
+        isFeatureOn(Features.Rewards) &&
+          voucher && {
+            customStyle: `margin-top: 4px;`,
+            label: (
+              <>
+                <GiftIcon
+                  width={24}
+                  height={24}
+                  style={{ marginTop: -1 }}
+                  color={theme.palette.neutral175}
+                />
+                {t('account-menu.rewards')}
+              </>
+            ),
+            id: 'account-menu-dropdown__rewards',
+            href: generatePath(ROUTE_REWARDS),
+            onClick: () => navigate(ROUTE_REWARDS),
+          },
         isFeatureOn(Features.Referrals) && {
           label: (
             <>
@@ -238,6 +240,15 @@ function AccountMenu(): React.ReactElement | null {
           onClick: () => navigate(ROUTE_REFERRALS),
         },
         (isFeatureOn(Features.Referrals) || isFeatureOn(Features.Rewards)) && {
+          separator: true,
+        },
+        isFeatureOn(Features.Subscriptions) && {
+          label: t('account-menu.subscriptions'),
+          id: 'account-menu-dropdown__balance',
+          href: generatePath(ROUTE_SUBSCRIPTIONS),
+          onClick: () => navigate(ROUTE_SUBSCRIPTIONS),
+        },
+        isFeatureOn(Features.Subscriptions) && {
           separator: true,
         },
         {

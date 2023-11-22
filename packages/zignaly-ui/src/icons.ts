@@ -44,11 +44,14 @@ export { ReactComponent as ZignalyCaretDownIcon } from "assets/icons/caret-down.
 export { ReactComponent as ZigCaretRightIcon } from "assets/icons/caret-right.svg";
 export { ReactComponent as ZigDotsVerticalIcon } from "assets/icons/dots-vertical.svg";
 export { ReactComponent as ZigDotsHorizontalIcon } from "assets/icons/dots-horizontal.svg";
-export { ReactComponent as ZigCrossCircleIcon } from "assets/icons/cross-circle-icon.svg";
+export { ReactComponent as ZigCrossIcon } from "assets/icons/cross-icon.svg";
 export { ReactComponent as ZigBackIcon } from "assets/icons/back-icon.svg";
 export { ReactComponent as ZigListIcon } from "assets/icons/list-icon.svg";
 export { ReactComponent as ZigTransferIcon } from "assets/icons/transfer-icon.svg";
 export { ReactComponent as ZigClockIcon } from "assets/icons/clock-icon.svg";
+export { ReactComponent as ZigClockAltIcon } from "assets/icons/clock-alt-icon.svg";
 export { ReactComponent as ZigUserFilledIcon } from "assets/icons/user-filled-icon.svg";
 export { ReactComponent as ZigInviteIcon } from "assets/icons/invite-icon.svg";
 export { ReactComponent as ZigSwapCircleIcon } from "assets/icons/swap-circle-icon.svg";
+export { ReactComponent as ZigResetIcon } from "assets/icons/reset-icon.svg";
+export { ReactComponent as ZigArrowDescIcon } from "assets/icons/arrow-desc-icon.svg";

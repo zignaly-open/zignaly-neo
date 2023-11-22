@@ -23,6 +23,7 @@
     "invested": "Invested",
     "pending": "Pending",
     "P&L": "P&L",
+    "P&L-percent": "P&L %",
     "P&LTotal": "P&L Total",
     "totalFeesPaid": "Total Fees Paid",
     "successFee": "Success Fee",
@@ -39,7 +40,7 @@
     "disconnected": "Disconnected",
     "owner": "Owner"
   },
-  "first-grade-math-explainer": "Apply a discount on your Success Fee besides the {{zignalyFee}}% charged by Zignaly",
-  "success-fee-explainer": "You get {{owner}}%, Zignaly gets {{zignalyFee}}%",
-  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{owner}}% - {{discount}}% discount), Zignaly gets {{zignalyFee}}%"
+  "first-grade-math-explainer": "Apply a discount on your Success Fee besides the {{zignalyFee}}% charged by ZIGDAO",
+  "success-fee-explainer": "You get {{owner}}%, ZIGDAO gets {{zignalyFee}}%",
+  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{serviceTotal}}% - {{discount}}% discount), ZIGDAO gets {{zignalyFee}}%"
 }

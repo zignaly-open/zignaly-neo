@@ -12,9 +12,23 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
+    env:
+      HAS_CLOUDFLARE: ${{ secrets.CF_ZONE != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Whitelabel status
+        if: ${{ vars.WHITELABEL != ''}}
+        run: |
+          echo "Whitelabel: ${{ vars.WHITELABEL }}"
+      - name: Replace index.html
+        if: ${{ vars.WHITELABEL != ''}}
+        # Well, we could have achieved the same with ejecting the app and configuring
+        # multiple entry points, but ejecting instills feat into my heart and soul
+        run: |
+          if [ -f "packages/ps2/public/whitelabel/${{ vars.WHITELABEL}}.html" ]; then
+            cp -r "packages/ps2/public/whitelabel/${{ vars.WHITELABEL}}.html" "packages/ps2/public/index.html" && echo "Replaced index.html with ${{ vars.WHITELABEL}}.html"
+          fi
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -25,8 +39,9 @@ jobs:
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
           envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
-          envkey_REACT_APP_WALLET_API: ${{ vars.PS2_WALLET_API }}
           envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRAL_API }}
+          envkey_REACT_APP_NO_INDEX: ${{ vars.NO_INDEX }}
+          envkey_REACT_APP_SUBSCRIPTIONS_SHOP_URL: ${{ vars.SUBSCRIPTIONS_SHOP_URL }}
 
           #constant
           envkey_EXTEND_ESLINT: true
@@ -36,10 +51,8 @@ jobs:
           # non-env-specific
           envkey_REACT_APP_SENTRY_DNS: ${{ vars.SENTRY_DNS }}
           envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
-          envkey_REACT_APP_INTERCOM_APP_ID: ${{ vars.INTERCOM_APP_ID }}
-
-          # these do not need to be secrets but I am too lazy to change that
-          envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ vars.LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_IPGEOLOCATION_API_KEY: ${{ vars.IPGEOLOCATION_API_KEY }}
 
           directory: packages/ps2
           file_name: .env
@@ -61,8 +74,6 @@ jobs:
         run: lerna run build --scope=@zignaly-open/ps2
       - name: AWS Deploy
         uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --delete
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
@@ -71,6 +82,7 @@ jobs:
           SOURCE_DIR: 'packages/ps2/build'
 
       - name: Invalidate Cloudflare
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
         uses: strrife/cloudflare-chunked-purge-action@master
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}

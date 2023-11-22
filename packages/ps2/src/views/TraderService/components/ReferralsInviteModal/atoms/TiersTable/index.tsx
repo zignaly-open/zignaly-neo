@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useTheme } from '@mui/material';
 import {
   ZigClockIcon,
   ZigTypography,
@@ -15,13 +15,19 @@ import { TiersTableProps } from './types';
 import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
+import { Table } from './styles';
+import { whitelabel } from '../../../../../../whitelabel';
 
-const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
+export const composeInvitesValue = (
+  tierIndex: number,
+  tiers: TierLevels,
+  showPlus = true,
+) => {
   const currentTier = tiers[tierIndex];
   const previousTier = tiers[tierIndex - 1];
 
   if (tierIndex === tiers.length - 1) {
-    return `${currentTier.invitees}+`;
+    return `${currentTier.invitees}${showPlus ? '+' : ''}`;
   }
 
   if (tierIndex > 0 && currentTier.invitees - previousTier.invitees > 1) {
@@ -41,9 +47,10 @@ const CellLabelBaseCommission = () => {
       textAlign='end'
       lineHeight='24px'
       color={'neutral200'}
+      className='tier-chart__label-base-commission'
     >
       {t('base-commission')}
-      <Tooltip title={t('zig-held-tooltip')}>
+      <Tooltip title={t('tooltips.base-commission')}>
         <TooltipIcon />
       </Tooltip>
     </ZigTypography>
@@ -64,14 +71,22 @@ const CellLabelBoost = ({
       <BoostChip boost={boost} />
       {!activated && <ZigClockIcon color='#e93ea7' />}
       <ZigTypography
+        whiteSpace={'nowrap'}
         fontWeight={500}
         variant='h4'
         textAlign='end'
         lineHeight='24px'
         color={activated ? '#24b68d' : '#e93ea7'}
+        className='tier-chart__label-boost'
       >
         {t(activated ? 'welcome-boost' : 'within-1-week')}
-        <Tooltip title={t('zig-held-tooltip')}>
+        <Tooltip
+          title={t(
+            activated
+              ? 'tooltips.within-1-week-unlocked'
+              : 'tooltips.within-1-week',
+          )}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -79,7 +94,7 @@ const CellLabelBoost = ({
   );
 };
 
-const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
+const CellLabelTraderBoost = ({ traderBoost }: { traderBoost: number }) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
@@ -89,15 +104,21 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
       gap='10px'
       justifyContent='flex-end'
     >
-      <BoostChip boost={boost} showBolt />
+      <BoostChip boost={traderBoost + 1} showBolt />
       <ZigTypography
         fontWeight={500}
         variant='h4'
         lineHeight='24px'
         color='#24b68d'
+        className='tier-chart__label-trader-commission'
+        whiteSpace={'nowrap'}
       >
         {t('trader-boost')}
-        <Tooltip title={t('zig-held-tooltip')}>
+        <Tooltip
+          title={t('tooltips.trader-boost', {
+            commission: traderBoost * whitelabel.defaultSuccessFee,
+          })}
+        >
           <TooltipIcon />
         </Tooltip>
       </ZigTypography>
@@ -108,32 +129,26 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
 const TiersTable = ({
   tiers,
   referral,
-  serviceCommission,
-  zignalyCommission,
   boostRunning,
   boost,
+  traderBoost,
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
+  const theme = useTheme();
+  const layers = useTierLayers(tiers, tiers[0].id, boost, traderBoost);
 
-  const layers = useTierLayers(
-    tiers,
-    tiers[0].id,
-    boost,
-    serviceCommission,
-    zignalyCommission,
-  );
   const composeCellTierLabels = () => {
     return (
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
-        {serviceCommission > 0 && (
+        {traderBoost >= 1 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost boost={layers[0].value / layers[1].value} />
+            <CellLabelTraderBoost traderBoost={traderBoost} />
           </Box>
         )}
         {boost > 1 && (
           <Box
             position='absolute'
-            bottom={layers.reverse().find((l) => l.value).height}
+            bottom={[...layers].reverse().find((l) => l.value).height}
             right={0}
           >
             <CellLabelBoost activated={!boostRunning} boost={boost} />
@@ -145,13 +160,7 @@ const TiersTable = ({
   };
 
   return (
-    <table
-      style={{
-        marginTop: '16px',
-        backgroundImage:
-          'radial-gradient(circle at center, rgba(16, 13, 70, 0.4) 0%, rgba(16, 25, 70, 0.4) 27%, transparent 51%)',
-      }}
-    >
+    <Table>
       <tr>
         {composeCellTierLabels()}
         {tiers?.map((tier, tierIndex) => (
@@ -162,8 +171,7 @@ const TiersTable = ({
                 tier={tier}
                 referral={referral}
                 tiers={tiers}
-                serviceCommission={serviceCommission}
-                zignalyCommission={zignalyCommission}
+                traderBoost={traderBoost}
                 boost={boost}
               />
             </Box>
@@ -171,23 +179,28 @@ const TiersTable = ({
         ))}
       </tr>
       <tr>
-        <td height='36px'>
+        <td height='34px'>
           <Box
             display={'flex'}
             alignItems={'center'}
             gap='12px'
             justifyContent='flex-end'
           >
-            <ZigUserFilledIcon color='#979ce0' height={19.5} width={16.5} />
+            <ZigUserFilledIcon
+              color={theme.palette.paleBlue}
+              height={19.5}
+              width={16.5}
+            />
             <ZigTypography
-              fontWeight={400}
+              fontWeight={500}
               variant='h3'
               textAlign='end'
               lineHeight='24px'
-              color='#979ce0'
+              color={theme.palette.paleBlue}
+              className='tier-chart__label-referrals'
             >
-              {t('invites')}
-              <Tooltip title={t('zig-held-tooltip')}>
+              {t('referrals')}
+              <Tooltip title={t('tooltips.number-referrals')}>
                 <TooltipIcon />
               </Tooltip>
             </ZigTypography>
@@ -198,13 +211,23 @@ const TiersTable = ({
             <Box
               display={'flex'}
               alignItems={'center'}
-              gap='9px'
+              gap='6px'
               justifyContent='center'
             >
-              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+              <ZigTypography
+                fontWeight={600}
+                fontSize={16}
+                color='paleBlue'
+                lineHeight={'23px'}
+                className='tier-chart__referrals-value'
+              >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
-              <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
+              <ZigUserFilledIcon
+                color={theme.palette.paleBlue}
+                height={12}
+                width={10}
+              />
             </Box>
           </td>
         ))}
@@ -217,15 +240,22 @@ const TiersTable = ({
             mt='2px'
             mr='16px'
             textAlign='end'
-            lineHeight='24px'
+            lineHeight='18px'
             whiteSpace='pre-line'
             color={'neutral200'}
+            className='tier-chart__label-earnings'
           >
             {t('max-earnings-from-fees', {
-              amount: numericFormatter(MAX_FEES_AMOUNT.toString(), {
-                thousandSeparator: true,
-                prefix: '$',
-              }),
+              amount: numericFormatter(
+                (
+                  Math.round(MAX_FEES_AMOUNT * whitelabel.defaultSuccessFee) /
+                  100
+                ).toString(),
+                {
+                  thousandSeparator: true,
+                  prefix: '$',
+                },
+              ),
             })}
           </ZigTypography>
         </td>
@@ -235,21 +265,21 @@ const TiersTable = ({
               fontWeight={500}
               fontSize={16}
               color=' rgba(36, 184, 142, 0.9);'
+              className='tier-chart__earnings-value'
             >
               {'$'}
               {formatCompactNumber(
                 getMaxEarnings(
                   tier.commissionPct,
-                  referral.boost,
-                  serviceCommission,
-                  zignalyCommission,
+                  boost,
+                  traderBoost,
                 ).toFixed(),
               )}
             </ZigTypography>
           </td>
         ))}
       </tr>
-    </table>
+    </Table>
   );
 };
 

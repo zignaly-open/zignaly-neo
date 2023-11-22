@@ -9,6 +9,7 @@ import {
   ZigTypography,
   ZigInputAmount,
   ZigSlider,
+  ZigModalActions,
   ZigAlertMessage,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
@@ -22,7 +23,6 @@ import {
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { useDebounce } from 'react-use';
@@ -32,10 +32,12 @@ import { Add } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
 import { useCanInvestIn } from '../../../../../../util/walls/util';
+import { getMinInvestmentAmount } from '../../../../../../whitelabel';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
   setView,
+  close,
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
@@ -64,6 +66,8 @@ function EditInvestmentForm({
           .minus(service.invested)
           .minus(service.pending)
           .toString(),
+        invested: details?.invested + details?.pending,
+        min: getMinInvestmentAmount(service.ssc),
         balance: coin?.balance,
         coin: service.ssc,
       }),
@@ -71,7 +75,7 @@ function EditInvestmentForm({
   });
 
   const toast = useToast();
-  const checkCanInvest = useCanInvestIn();
+  const checkCanInvest = useCanInvestIn(close);
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
@@ -146,7 +150,7 @@ function EditInvestmentForm({
           <ZigTypography
             variant={'body2'}
             color='neutral300'
-            id='edit-investment-modal__title'
+            id='edit-investment-modal__profit-manage-title'
           >
             {t('form.profits.title')}
           </ZigTypography>
@@ -207,7 +211,7 @@ function EditInvestmentForm({
             )}
           />
 
-          <ModalActions direction='column' mt='25px'>
+          <ZigModalActions direction='column' mt='25px'>
             <ZigButton
               variant={'text'}
               id={'edit-investment-modal__withdraw'}
@@ -223,7 +227,7 @@ function EditInvestmentForm({
             >
               {t('form.link.withdraw')}
             </ZigButton>
-          </ModalActions>
+          </ZigModalActions>
         </>
       )}
     </Form>

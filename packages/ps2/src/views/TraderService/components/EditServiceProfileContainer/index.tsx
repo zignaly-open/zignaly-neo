@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import {
-  EditServicePayload,
   Service,
   TraderServiceAccessLevel,
 } from '../../../../apis/service/types';
@@ -18,7 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { EditServiceValidation } from './validations';
 import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
-import { VISIBILITY_LABEL } from './types';
+import { EditServiceForm, VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
@@ -26,6 +25,10 @@ import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
+import CommissionReferralSharing from './atoms/CommissionReferralSharing';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
+import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -39,38 +42,55 @@ const getVisibility = (level: TraderServiceAccessLevel) => {
   }
 };
 
-const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
-  service,
-}) => {
+const EditServiceProfileContainer: React.FC<{
+  service: Service;
+  commission?: number;
+}> = ({ service, commission }) => {
   const { t } = useTranslation('service');
   const defaultValues = {
     name: service.name,
     description: service.description,
     maximumSbt: service.maximumSbt,
-    successFee: service.successFee,
+    successFee: service.successFee || 0,
     logo: service.logo,
+    ...(isFeatureOn(Features.Referrals) && { commission }),
   };
+
   const {
     handleSubmit,
     control,
     watch,
     formState: { errors },
     reset,
-  } = useForm<EditServicePayload>({
+  } = useForm<EditServiceForm>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     defaultValues,
     resolver: yupResolver(EditServiceValidation),
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
+  const [updateCommission, commissionStatus] =
+    useUpdateServiceCommissionMutation();
   const [visibility, setVisibility] = useState<TraderServiceAccessLevel>(
     getVisibility(service.level),
   );
   const navigate = useNavigate();
   const user = useCurrentUser();
+  const successFee = watch('successFee');
 
-  const submit = async (data: EditServicePayload) => {
-    await edit({ id: service.id, ...data, level: visibility });
+  const submit = async (data: EditServiceForm) => {
+    const { commission: c, ...rest } = data;
+    await Promise.all([
+      edit({ id: service.id, ...rest, level: visibility }),
+      ...(isFeatureOn(Features.Referrals)
+        ? [
+            updateCommission({
+              serviceId: service.id,
+              commission: c || 0,
+            }),
+          ]
+        : []),
+    ]);
     back();
   };
 
@@ -133,7 +153,11 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form'>
-      <ZigTypography textAlign='center' variant='h1'>
+      <ZigTypography
+        textAlign='center'
+        variant='h1'
+        id={'edit-service-profile__title'}
+      >
         {t('edit.title')}
       </ZigTypography>
       <Grid container mt={8} gap={2}>
@@ -142,7 +166,11 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             name='logo'
             control={control}
             render={({ field }) => (
-              <ServiceLogo label={t('edit.logo')} {...field} />
+              <ServiceLogo
+                label={t('edit.logo')}
+                {...field}
+                id={'edit-service-profile__service-logo'}
+              />
             )}
           />
         </Grid>
@@ -152,6 +180,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             control={control}
             render={({ field }) => (
               <ZigInput
+                id={'edit-service-profile__service-name'}
                 fullWidth
                 label={t('edit.name')}
                 error={t(errors.name?.message)}
@@ -164,6 +193,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             control={control}
             render={({ field }) => (
               <ZigInput
+                id={'edit-service-profile__service-description'}
                 fullWidth
                 label={t('edit.description')}
                 error={t(errors.description?.message)}
@@ -173,6 +203,39 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               />
             )}
           />
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name='maximumSbt'
+              control={control}
+              render={({ field }) => (
+                <ZigInput
+                  id={'edit-service-profile__service-max-sbt'}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        {service.ssc}
+                      </InputAdornment>
+                    ),
+                  }}
+                  fullWidth
+                  label={
+                    <div>
+                      {t('edit.pool-size')}
+                      <ZigTypography
+                        variant='h4'
+                        color='neutral400'
+                        id={'edit-service-profile__pool-size-description'}
+                      >
+                        {t('edit.pool-size-desc')}
+                      </ZigTypography>
+                    </div>
+                  }
+                  error={t(errors.maximumSbt?.message)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
           <Grid item container columnSpacing={6} rowSpacing={6}>
             <Grid item xs={12}>
               <Controller
@@ -180,10 +243,13 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 control={control}
                 render={({ field }) => (
                   <SuccessFeeInputWrapper
-                    value={watch('successFee') || 0}
+                    prefixId={'edit-service-profile__service-success-fee'}
+                    zglyFee={service?.zglySuccessFee}
+                    value={successFee}
                     showZeroFeeExplainer
                   >
                     <ZigInput
+                      id={'edit-service-profile__service-input-success-fee'}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position='end'>%</InputAdornment>
@@ -198,34 +264,24 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name='maximumSbt'
-                control={control}
-                render={({ field }) => (
-                  <ZigInput
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>
-                          {service.ssc}
-                        </InputAdornment>
-                      ),
-                    }}
-                    fullWidth
-                    label={
-                      <div>
-                        {t('edit.pool-size')}
-                        <ZigTypography variant='h4' color='neutral400'>
-                          {t('edit.pool-size-desc')}
-                        </ZigTypography>
-                      </div>
-                    }
-                    error={t(errors.maximumSbt?.message)}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
+            {isFeatureOn(Features.Referrals) && (
+              <Grid item xs={12}>
+                <Controller
+                  name='commission'
+                  control={control}
+                  render={({ field }) => (
+                    <CommissionReferralSharing
+                      prefixId={
+                        'edit-service-profile__service-commision-referral'
+                      }
+                      successFee={+successFee}
+                      zglySuccessFee={service?.zglySuccessFee}
+                      {...field}
+                    />
+                  )}
+                />
+              </Grid>
+            )}
           </Grid>
           <Grid
             item
@@ -236,13 +292,18 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
           >
             <Grid item xs={12} sm={6}>
               <StyledZigSelect
+                id={'edit-service-profile__service-visibility'}
                 options={visibilityOptions}
                 label={t('edit.visibility.visibility')}
                 value={visibility}
                 onChange={setVisibility}
                 styles={selectStyles}
               />
-              <ZigTypography variant='h4' color='neutral400'>
+              <ZigTypography
+                variant='h4'
+                color='neutral400'
+                id={'edit-service-profile__service-visibility-label'}
+              >
                 {t(`edit.visibility.${VISIBILITY_LABEL[visibility].key}-desc`)}
               </ZigTypography>
             </Grid>
@@ -256,6 +317,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             >
               <ZigTypography variant='h4' color='neutral400'>
                 <Trans
+                  id={'edit-service-profile__service-marketplace-requirements'}
                   i18nKey={'edit.visibility.marketplace-requirements'}
                   t={t}
                   components={[
@@ -276,14 +338,20 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             gap={2}
             mb={2}
           >
-            <ZigButton variant='outlined' size='large' onClick={back}>
+            <ZigButton
+              variant='outlined'
+              size='large'
+              onClick={back}
+              id={'edit-service-profile__cancel'}
+            >
               {t('action:cancel')}
             </ZigButton>
             <ZigButton
               variant='contained'
               type='submit'
-              loading={editStatus.isLoading}
+              loading={editStatus.isLoading || commissionStatus.isLoading}
               size='large'
+              id={'edit-service-profile__save'}
             >
               {t('edit.save')}
             </ZigButton>

@@ -2,7 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../../components/ZModal';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigInput,
+  ZigModalActions,
+  ZigModalForm,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateKeyValidation } from '../validations';
@@ -10,7 +16,6 @@ import { useServiceApiKeyCreateMutation } from '../../../../../apis/serviceApiKe
 import { CreateApiKeyFormType } from '../types';
 import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
 import { useCheck2FA } from '../../../../../apis/user/use';
-import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function CreateApiKeysModal({
   close,
@@ -55,17 +60,27 @@ function CreateApiKeysModal({
   };
 
   return (
-    <ZModal wide {...props} close={close} title={t('api-keys.create-new-key')}>
-      <ZigTypography textAlign={'center'}>
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={t('api-keys.create-new-key')}
+      id={'create-api-key-modal'}
+    >
+      <ZigTypography
+        textAlign={'center'}
+        id={'create-api-key-modal__description'}
+      >
         {t('api-keys.create-new-key-description')}
       </ZigTypography>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='alias'
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
+              id={'create-api-key-modal__key-name'}
               wide
               label={t('common:name') + ':'}
               placeholder={t('common:name') + ':'}
@@ -76,9 +91,9 @@ function CreateApiKeysModal({
           )}
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
-            id={'api-key__create-key'}
+            id={'create-api-key-modal__create'}
             disabled={isCreating}
             variant={'contained'}
             type='submit'
@@ -86,8 +101,8 @@ function CreateApiKeysModal({
           >
             {t('api-keys.create-key')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </ZModal>
   );
 }

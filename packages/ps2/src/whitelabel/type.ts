@@ -1,3 +1,5 @@
+import { ThemeOverridesType } from '@zignaly-open/ui';
+
 export enum Features {
   AccessLevels,
   Rewards,
@@ -12,15 +14,41 @@ export enum Features {
 export type OverrideableEndpoints = 'marketplace/';
 
 export type WhitelabelOverride = {
+  title: string;
+  helpUrl: string;
+  locales?: string[];
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
-  featureOverrides: Record<Partial<Features>, boolean>;
+  translationOverrides?: boolean;
+  minInvestment?: Partial<
+    Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
+  >;
+  featureOverrides: Partial<Record<Features, boolean>>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;
   logo?: string;
+  links?: {
+    tos?: string;
+    privacyPolicy?: string;
+  };
   background?: string;
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
-  theme: string;
+  baseTheme?: string;
+  themeOverrides?: ThemeOverridesType;
+  intercomId?: string;
+  social: Partial<
+    Record<
+      | 'telegram'
+      | 'twitter'
+      | 'discord'
+      | 'medium'
+      | 'linkedin'
+      | 'instagram'
+      | 'youtube',
+      string | void
+    >
+  >;
+  defaultSuccessFee?: number;
 };

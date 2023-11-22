@@ -132,7 +132,13 @@ export const inputAmountValidation = ({
   let validation = yup
     .string()
     .typeError('common:validation.invalid-value')
+    // not sure why we're getting the error here but it's not a big deal
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     .concat(inputAmountNumberValidation)
+    // not sure why we're getting the error here but it's not a big deal
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     .concat(inputAmountNumberValidationGt0);
 
   if (balance !== undefined) {
@@ -149,7 +155,7 @@ export const inputAmountValidation = ({
       i18n.t('common:validation.insufficient-amount-min', {
         minValue: min,
         minValueCoin: coin,
-      }),
+      }) as string,
       (val) => !new BigNumber(val).isLessThan(new BigNumber(min)),
     );
   }
@@ -160,7 +166,7 @@ export const inputAmountValidation = ({
       i18n.t('common:validation.insufficient-amount-max', {
         maxValue: max,
         coin,
-      }),
+      }) as string,
       (val) => !new BigNumber(val).isGreaterThan(new BigNumber(max)),
     );
   }

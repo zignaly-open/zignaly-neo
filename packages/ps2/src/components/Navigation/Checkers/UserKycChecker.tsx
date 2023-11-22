@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { KYC_CHECK_INTERVAL } from './constants';
 import { useToast } from '../../../util/hooks/useToast';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,8 @@ import {
   useLazyKycStatusesQuery,
   useLazyUserQuery,
 } from '../../../apis/user/api';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 type StatusType = { statusSerialized: string; shouldCheck: boolean };
 
@@ -17,8 +19,7 @@ const UserKycChecker: React.FC = () => {
   const { t } = useTranslation('common');
   const [loadUser] = useLazyUserQuery();
   const [loadKyc] = useLazyKycStatusesQuery();
-  const [interval, setIntervalValue] = useState(null as NodeJS.Timer);
-  const shouldCheck = isAuthenticated && isPending;
+  const shouldCheck = isAuthenticated && isPending && isFeatureOn(Features.Kyc);
 
   const oldStatus = useRef<StatusType>();
 
@@ -31,35 +32,38 @@ const UserKycChecker: React.FC = () => {
       }));
   }, []);
 
-  const pollKyc = useCallback(async () => {
-    setTimeout(async () => {
-      const newStatus = await getStatuses();
-      if (newStatus.shouldCheck) {
-        pollKyc();
-      }
-
-      if (newStatus.statusSerialized !== oldStatus.current.statusSerialized) {
-        oldStatus.current = newStatus;
-        toast.info(t('kyc-updated'));
-        loadUser();
-      }
-    }, KYC_CHECK_INTERVAL);
-  }, [oldStatus]);
-
   useEffect(() => {
-    shouldCheck &&
-      getStatuses().then((s) => {
-        oldStatus.current = s;
+    let timeoutId: NodeJS.Timeout = null;
+
+    (async () => {
+      const pollKyc = () => {
+        timeoutId = setTimeout(async () => {
+          const newStatus = await getStatuses();
+
+          if (
+            newStatus.statusSerialized !== oldStatus.current.statusSerialized
+          ) {
+            oldStatus.current = newStatus;
+            toast.info(t('kyc-updated'));
+            loadUser();
+          }
+
+          if (newStatus.shouldCheck) {
+            pollKyc();
+          }
+        }, KYC_CHECK_INTERVAL);
+      };
+
+      if (shouldCheck) {
+        oldStatus.current = await getStatuses();
         pollKyc();
-      });
+      }
+    })();
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [shouldCheck]);
-
-  useEffect(() => {
-    if (shouldCheck) {
-      setIntervalValue(setInterval(() => {}, KYC_CHECK_INTERVAL));
-    }
-    return () => clearInterval(interval);
-  }, [shouldCheck, interval]);
 
   return null;
 };

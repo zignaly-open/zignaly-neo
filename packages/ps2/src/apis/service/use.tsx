@@ -21,7 +21,7 @@ import {
 } from './types';
 import { RootState } from '../store';
 import { useIsAuthenticated } from '../user/use';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
@@ -32,7 +32,7 @@ import {
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();
-  return useTraderServicesQuery(null, {
+  return useTraderServicesQuery(undefined, {
     skip: !isAuthenticated,
   });
 }

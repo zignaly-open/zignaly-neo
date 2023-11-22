@@ -1,8 +1,13 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
-import ZModal, { ModalActions } from '../../../../components/ZModal';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import ZModal from '../../../../components/ZModal';
+import {
+  ZigButton,
+  ZigInput,
+  ZigModalActions,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box, InputAdornment } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { useToast } from '../../../../util/hooks/useToast';
@@ -16,7 +21,7 @@ import {
   adjustDiscountToBackend,
   getServiceTotalFee,
 } from '../../../../util/fee';
-import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
+import { whitelabel } from '../../../../whitelabel';
 
 type EditFeeFormValues = {
   value: number;
@@ -45,6 +50,7 @@ function InvestorEditFee({
   const previousValue = adjustDiscountFromBackend(
     ownerSfDiscount,
     serviceTotalFee,
+    data?.zglySuccessFee,
   );
   const {
     handleSubmit,
@@ -57,7 +63,7 @@ function InvestorEditFee({
     defaultValues: {
       value: previousValue,
       maxDiscount: {
-        max: Math.max(0, serviceTotalFee - 2 * ZIGNALY_PROFIT_FEE),
+        max: Math.max(0, serviceTotalFee - 2 * whitelabel.defaultSuccessFee),
         full: serviceTotalFee,
       },
     },
@@ -72,7 +78,7 @@ function InvestorEditFee({
   const onSubmit = useCallback(
     ({ value: discount, maxDiscount: { full } }: EditFeeFormValues) => {
       editFee({
-        discount: adjustDiscountToBackend(discount, full),
+        discount: adjustDiscountToBackend(discount, full, data?.zglySuccessFee),
         accountId,
         serviceId,
       })
@@ -86,9 +92,17 @@ function InvestorEditFee({
   );
 
   return (
-    <ZModal wide {...props} close={close} title={t('change-fee-modal.title')}>
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={t('change-fee-modal.title')}
+      id={'edit-success-fee-modal'}
+    >
       <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
-        <ZigTypography>{t('change-fee-modal.desc')}</ZigTypography>
+        <ZigTypography id={'edit-success-fee-modal__description'}>
+          {t('change-fee-modal.desc')}
+        </ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -96,20 +110,24 @@ function InvestorEditFee({
           control={control}
           render={({ field }) => (
             <SuccessFeeInputWrapper
+              prefixId={'edit-success-fee-modal__success-fee-input'}
               value={value}
               newValueLabel={t('change-fee-modal.new-success-fee')}
               title={t('change-fee-modal.title')}
               description={t('first-grade-math-explainer', {
-                zignalyFee: ZIGNALY_PROFIT_FEE,
+                zignalyFee: data?.zglySuccessFee,
               })}
               newValue={getServiceTotalFee(
                 Math.max(
-                  serviceTotalFee - watch('value') - ZIGNALY_PROFIT_FEE,
+                  serviceTotalFee - watch('value') - data?.zglySuccessFee,
                   0,
                 ),
+                data?.zglySuccessFee,
               )}
+              zglyFee={data?.zglySuccessFee}
             >
               <ZigInput
+                id={'edit-success-fee-modal__discount'}
                 type='number'
                 InputProps={{
                   endAdornment: (
@@ -126,9 +144,9 @@ function InvestorEditFee({
           )}
         />
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
-            id={'edit-success-fee__save'}
+            id={'edit-success-fee-modal__save'}
             loading={isLoading}
             disabled={!isValid || previousValue === Number(value)}
             size='xlarge'
@@ -136,7 +154,7 @@ function InvestorEditFee({
           >
             {t('actions:save')}
           </ZigButton>
-        </ModalActions>
+        </ZigModalActions>
       </form>
     </ZModal>
   );

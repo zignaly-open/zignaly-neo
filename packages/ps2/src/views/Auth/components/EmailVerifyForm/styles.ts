@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const Layout = styled('form')`
   display: flex;
@@ -16,4 +17,11 @@ export const Field = styled('fieldset')`
   display: flex;
   flex-direction: column;
   gap: 26px;
+`;
+
+export const PaddedTitle = styled(ZigTypography)`
+  margin-bottom: 35px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    margin-bottom: 10px;
+  }
 `;

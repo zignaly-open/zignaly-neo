@@ -1,0 +1,61 @@
+name: PS2 Backoffice Deploy
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: PS2 backoffice deploy
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deploy-env }}
+    env:
+      HAS_CLOUDFLARE: ${{ secrets.CF_ZONE != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create client .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_REACT_APP_BASE_API: ${{ vars.BASE_API }}
+          envkey_EXTEND_ESLINT: true
+          envkey_DISABLE_ESLINT_PLUGIN: true
+          envkey_ESLINT_NO_DEV_ERRORS: true
+          directory: packages/backoffice
+          file_name: .env
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna@6.6.2
+      - name: Restore Lerna modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Bootstrap packages
+        run: lerna bootstrap --scope=@zignaly-open/backoffice
+      - name: Build client
+        run: lerna run build --scope=@zignaly-open/backoffice
+      - name: AWS Deploy
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/backoffice/build'
+
+      - name: Invalidate Cloudflare
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN }}

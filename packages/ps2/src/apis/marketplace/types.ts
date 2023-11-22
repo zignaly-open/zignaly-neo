@@ -1,4 +1,6 @@
-export type MarketplaceState = Record<string, never>;
+export type MarketplaceState = {
+  mobileActiveRow?: string | null;
+};
 
 export type MarketplaceService = {
   userId: string;

@@ -15,7 +15,10 @@ const sendTz = (data: tzData) => {
     },
   };
 
-  return fetch('https://zignaly.com/new_api/tz', options);
+  return fetch(
+    `${process.env.REACT_APP_BASE_API}tz` || 'https://zignaly.com/new_api/tz',
+    options,
+  );
 };
 
 /**

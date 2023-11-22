@@ -5,6 +5,9 @@ import { SliderContainer, ContainerArrow, StyledZigSlider } from './styles';
 import { useDebounce } from 'react-use';
 import { useUpdateDiscountMutation } from 'apis/referrals/api';
 import { useToast } from 'util/hooks/useToast';
+import { Box, Tooltip } from '@mui/material';
+import { round } from 'lodash-es';
+import { InfoOutlined } from '@mui/icons-material';
 
 export const ShareCommissionSlider = ({
   discountPct,
@@ -14,7 +17,7 @@ export const ShareCommissionSlider = ({
   max: number;
 }) => {
   const { t } = useTranslation(['referrals-trader', 'common']);
-  const [value, setValue] = useState(Math.round((discountPct / max) * 100));
+  const [value, setValue] = useState(Math.round((discountPct * max) / 100));
   const [updateDiscount] = useUpdateDiscountMutation();
   const toast = useToast();
   const isFirstRun = useRef(true);
@@ -26,24 +29,41 @@ export const ShareCommissionSlider = ({
         return;
       }
       await updateDiscount({
-        discount: (value / max) * 100,
+        discount: round((value / max) * 100, 2),
       }).unwrap();
       toast.success(t('changes-saved'));
     },
-    750,
+    600,
     [value],
   );
 
   return (
     <SliderContainer>
       <ContainerArrow />
-      <ZigTypography
-        fontSize={16}
-        letterSpacing={'0.48px'}
-        textAlign={'center'}
-      >
-        {t('split-commission')}
-      </ZigTypography>
+      <Box position={'relative'}>
+        <ZigTypography
+          fontSize={16}
+          letterSpacing={'0.48px'}
+          textAlign={'center'}
+          color={'neutral100'}
+          id='referrals-invite-modal__slider-label'
+          position={'relative'}
+          component={'div'}
+        >
+          {t('split-commission')}
+          <Tooltip title={t('tooltips.split-commission')}>
+            <InfoOutlined
+              sx={{
+                color: 'neutral300',
+                fontSize: '10px',
+                marginLeft: '3px',
+                marginBottom: '8px',
+              }}
+            />
+          </Tooltip>
+        </ZigTypography>
+      </Box>
+
       <StyledZigSlider
         labels={{
           start: t('for-me'),
@@ -58,6 +78,7 @@ export const ShareCommissionSlider = ({
         }}
         max={max}
         valueLabelFormat={(v) => v.toString()}
+        step={5}
       />
     </SliderContainer>
   );

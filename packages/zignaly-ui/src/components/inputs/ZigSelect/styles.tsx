@@ -96,6 +96,10 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
           : ""};
     }
 
+    &__placeholder {
+      white-space: nowrap;
+    }
+
     &__single-value,
     &__input {
       ${({ small }) =>
@@ -115,6 +119,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
 
     &__placeholder {
       color: ${({ theme }) => theme.palette.neutral400} !important;
+      opacity: 0.5;
     }
 
     &__input-container {

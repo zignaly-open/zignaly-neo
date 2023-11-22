@@ -97,13 +97,13 @@ export const Layout = styled.div<LayoutProps>`
       opacity: 0.33;
               
       ${InputContainer} {
-        border-color: #9CA3AF;
+        border-color: ${props.theme.palette.lightGrey};
       }
       
       ${MaxButton} {
         cursor: default;
-        border-color: #9CA3AF;
-        color: #9CA3AF;
+        border-color: ${props.theme.palette.lightGrey};
+        color: ${props.theme.palette.lightGrey};
       }
       
       ${InputValue} {

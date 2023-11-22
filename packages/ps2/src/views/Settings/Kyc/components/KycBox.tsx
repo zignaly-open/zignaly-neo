@@ -10,7 +10,10 @@ import { useTranslation } from 'react-i18next';
 import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
 import { KycBoxListEntry } from './atoms';
-import { KycResponse } from '../../../../apis/user/types';
+import { KycResponse, UserData } from '../../../../apis/user/types';
+import { useDispatch } from 'react-redux';
+import { useCurrentUser } from 'apis/user/use';
+import { setUser } from 'apis/user/store';
 
 const largeIconStyle = {
   height: '16px',
@@ -52,6 +55,8 @@ const KycBox: React.FC<{
   const { t } = useTranslation(['kyc']);
   const theme = useTheme();
   const showModal = useZAlert();
+  const dispatch = useDispatch();
+  const user = useCurrentUser();
 
   const infoIconStyle = {
     height: '15.6px',
@@ -61,7 +66,10 @@ const KycBox: React.FC<{
   const openKyc = useCallback(async () => {
     await getCerificationLinkUrl(level)
       .unwrap()
-      .then(({ link: kycLink }) =>
+      .then(({ link: kycLink }) => {
+        // Force KYCMonitoring to true to trigger UserKycChecker
+        dispatch(setUser({ ...(user as UserData), KYCMonitoring: true }));
+
         showModal({
           title: t('modal.title'),
           description: t('modal.description'),
@@ -76,8 +84,8 @@ const KycBox: React.FC<{
             </>
           ),
           okAction: () => window.open(kycLink),
-        }),
-      );
+        });
+      });
   }, [level, getCerificationLinkUrl]);
 
   return (
@@ -135,7 +143,7 @@ const KycBox: React.FC<{
               fontWeight={500}
               variant={'body1'}
             >
-              {t('status.completed')}
+              {t('status.verified')}
               <CheckCircleOutlineIcon sx={{ ...largeIconStyle, ml: 1 }} />
             </ZigTypography>
           )}
@@ -165,9 +173,17 @@ const KycBox: React.FC<{
               variant={'body1'}
             >
               <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
-              {t('status.failed')}
+              {t('status.rejected')}
               {!!response?.reason && (
-                <Tooltip title={response?.reason}>
+                <Tooltip
+                  title={
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {`${response?.reason}\n${
+                        response.canBeRetried ? t('resubmit-issues') : ''
+                      }`}
+                    </span>
+                  }
+                >
                   <InfoOutlinedIcon sx={infoIconStyle} />
                 </Tooltip>
               )}

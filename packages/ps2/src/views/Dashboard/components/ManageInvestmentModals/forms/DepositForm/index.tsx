@@ -13,8 +13,8 @@ import {
   ZigButton,
   ZigListIcon,
   trimZeros,
+  ZigModalForm,
 } from '@zignaly-open/ui';
-import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box, Grid } from '@mui/material';
@@ -28,14 +28,11 @@ import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
-import {
-  BUY_CRYPTO_URL,
-  DEPOSIT_INFO_URL,
-} from '../../../../../../util/constants';
-import { Form } from 'components/ZModal';
+import { DEPOSIT_INFO_URL } from '../../../../../../util/constants';
 import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { useNavigate } from 'react-router-dom';
 import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
+import { useOpenBuyModal } from '../../BuyModal';
 
 const BinanceBroker = ({ children }: { children?: JSX.Element }) => {
   return (
@@ -109,20 +106,18 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
       }),
     [coins, allowedCoins, exchangeType],
   );
-
+  const coinObject = coin && coinOptions?.find((x) => x.value === coin);
+  const networkObject =
+    network && coinObject?.networks?.find((x) => x.value === network);
   const {
     isFetching: loading,
     data: depositInfo,
     error,
-  } = useDepositInfo(coinParam, network);
+  } = useDepositInfo(coinParam, network, networkObject?.depositEnable);
 
   useEffect(() => {
     depositInfo && trackEvent('show-deposit-info');
   }, [depositInfo]);
-
-  const coinObject = coin && coinOptions?.find((x) => x.value === coin);
-  const networkObject =
-    network && coinObject?.networks?.find((x) => x.value === network);
 
   useEffect(() => {
     if (coin) {
@@ -153,9 +148,10 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
     close();
     navigate(ROUTE_MY_BALANCES_TRANSACTIONS);
   };
+  const showBuyModal = useOpenBuyModal();
 
   return (
-    <Form onSubmit={handleSubmit(() => {})}>
+    <ZigModalForm onSubmit={handleSubmit(() => {})}>
       <ZigTypography id={'deposit-modal__description'} textAlign='center'>
         <Trans t={t} i18nKey={'description'}>
           <BinanceBroker />
@@ -351,6 +347,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                     flexDirection: ['column', 'row'],
                     gap: 2,
                     mt: '-6px',
+                    mb: 2,
                   }}
                 >
                   <ZigQrCode
@@ -403,16 +400,8 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
         >
           <ZigButton
             id={'deposit-modal__purchase'}
-            endIcon={
-              <NorthEastIcon
-                sx={{
-                  fill: 'currentcolor !important',
-                  fontSize: 'inherit !important',
-                }}
-              />
-            }
             variant='text'
-            href={BUY_CRYPTO_URL}
+            onClick={() => showBuyModal()}
           >
             {t('buy-crypto')}
           </ZigButton>
@@ -435,7 +424,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           </ZigButton>
         </Grid>
       </Grid>
-    </Form>
+    </ZigModalForm>
   );
 }
 

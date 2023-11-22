@@ -6,10 +6,14 @@ import customerIo from '@analytics/customerio';
 import intercomPlugin from '@analytics/intercom';
 import { getUnixTime } from 'date-fns';
 import googleAnalytics from '@analytics/google-analytics';
+import { whitelabel } from '../whitelabel';
 
 let analytics: AnalyticsInstance | null = null;
 
-if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
+if (
+  process.env.NODE_ENV !== 'test' &&
+  process.env.REACT_APP_ENABLE_TRACKING === 'true'
+) {
   const customerIoPlugin = customerIo({
     siteId: process.env.REACT_APP_CUSTOMER_IO_SITE_ID,
   });
@@ -31,9 +35,10 @@ if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
         measurementIds: [process.env.REACT_APP_GA_ID],
       }),
       customerIoPlugin,
-      intercomPlugin({
-        appId: process.env.REACT_APP_INTERCOM_APP_ID,
-      }),
+      whitelabel.intercomId &&
+        intercomPlugin({
+          appId: whitelabel.intercomId,
+        }),
     ],
   });
 }
@@ -55,6 +60,7 @@ export const trackNewSession = (
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
+      twq(userId).trackVerify();
     }
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -68,4 +74,44 @@ export const trackEndSession = () => {
 
 export const trackPage = () => {
   analytics?.page();
+};
+
+export const trackAllocation = (
+  userId: string,
+  amount: string,
+  coin: string,
+  serviceId: string,
+) => {
+  analytics?.track(
+    'invest',
+    { amount, coin, serviceId },
+    {
+      plugins: {
+        all: false,
+        'google-analytics': true,
+      },
+    },
+  );
+  twq(userId).trackAllocation();
+};
+
+export const twq = (userId: string) => {
+  const twqWrapper = (eventKey: string, eventData: object = {}) => {
+    if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
+      window.twq?.('event', eventKey, {
+        contents: [{ content_id: userId }],
+        ...eventData,
+      });
+    }
+  };
+
+  const trackVerify = () => {
+    twqWrapper('tw-og0cu-og0hv');
+  };
+
+  const trackAllocationFn = () => {
+    twqWrapper('tw-og0cu-og0hz');
+  };
+
+  return { trackVerify, trackAllocation: trackAllocationFn };
 };

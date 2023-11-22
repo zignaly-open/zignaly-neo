@@ -4,40 +4,30 @@ import {
   ZigInput,
   ZigSelect,
   ZigTypography,
+  ZigModalForm,
+  ZigModalActions,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  useKycStatusesQuery,
-  useLazyUserQuery,
-  useUpdateUserMutation,
-} from 'apis/user/api';
+import { useLazyUserQuery, useUpdateUserMutation } from 'apis/user/api';
 import { Controller, useForm } from 'react-hook-form';
 import Countries from 'i18n-iso-countries';
 import { EditProfileValidation } from './validations';
 import { EditProfileFormType } from './types';
-import { Form, ModalActions } from 'components/ZModal';
 import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import Flag from '../../../components/Flag';
-import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
-import { ProfileStatusBox } from './atoms';
-import { generatePath, useNavigate } from 'react-router-dom';
-import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
-import { isFeatureOn } from '../../../whitelabel';
-import { Features } from '../../../whitelabel/type';
+import { ServiceLogoStatus } from './atoms';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
   const user = useCurrentUser();
-  const navigate = useNavigate();
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const [loadUser, userReloadStatus] = useLazyUserQuery();
-  const { data: kycStatuses } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc),
-  });
-  const hasKyc = kycStatuses?.status?.some((x) => x.status === 'approved');
 
   const {
     handleSubmit,
@@ -49,7 +39,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: user.bio || '',
+      bio: user.about || '',
       country: user.country || '',
     },
   });
@@ -78,7 +68,7 @@ const EditProfileForm = () => {
 
   const countryOptions = useMemo(
     () =>
-      Object.entries(Countries.getNames(i18n.language)).map(
+      Object.entries(Countries.getNames(i18n.language.split('_')[0])).map(
         ([value, label]) => ({
           value,
           text: label,
@@ -110,76 +100,69 @@ const EditProfileForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-          <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
-            <Controller
-              name='imageUrl'
-              control={control}
-              render={({ field }) => (
-                <ServiceLogo
-                  size={100}
-                  label={t('edit-profile.edit-avatar')}
-                  {...field}
-                />
-              )}
-            />
-
-            <Box sx={{ pt: 2 }}>
-              <ProfileStatusBox
-                isSuccess={user.ask2FA}
-                label={t('edit-profile.status-box.2fa')}
-                ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
-                cta={() => navigate(generatePath(ROUTE_2FA))}
-                status={t(
-                  user.ask2FA
-                    ? 'edit-profile.status-box.enabled'
-                    : 'edit-profile.status-box.disabled',
-                )}
-              />
-
-              {isFeatureOn(Features.Kyc) && !!kycStatuses && (
-                <ProfileStatusBox
-                  isSuccess={hasKyc}
-                  ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}
-                  cta={() => navigate(generatePath(ROUTE_KYC))}
-                  label={t('edit-profile.status-box.kyc')}
-                  status={t(
-                    hasKyc
-                      ? 'edit-profile.status-box.verified'
-                      : 'edit-profile.status-box.not-verified',
-                  )}
-                />
-              )}
+          {md && (
+            <Box sx={{ pt: 3, pr: '50px', flex: '0 0 220px' }}>
+              <ServiceLogoStatus control={control} />
             </Box>
-          </Box>
+          )}
           <Grid container>
-            <Grid sm={6} xs={12} p={1} pb={2}>
-              <ZigTypography>{t('edit-profile.email')}</ZigTypography>
-
-              <ZigTypography
-                component={'p'}
-                sx={{ mt: 1, wordWrap: 'break-word' }}
-              >
-                {user.email}
-              </ZigTypography>
-            </Grid>
-
-            <Grid sm={6} p={1} pb={2}>
-              <ZigTypography>
-                {t('edit-profile.user-id')}
-                <ZigTypography
-                  sx={{ pl: 1 }}
-                  variant={'body2'}
-                  color={'neutral400'}
-                >
-                  {t('edit-profile.internal-use')}
+            <Grid container alignItems={'center'}>
+              {!md && (
+                <Grid sm={3} xs={12} p={1} pb={2} order={!sm && 3}>
+                  <Box
+                    display={'flex'}
+                    gap={sm ? '30px' : '10px'}
+                    alignItems={'center'}
+                    justifyContent={sm && 'center'}
+                  >
+                    <ServiceLogoStatus control={control} />
+                  </Box>
+                </Grid>
+              )}
+              <Grid sm={4.5} xs={12} p={1} pb={2} order={!sm && 1}>
+                <ZigTypography id={'edit-profile__email-label'}>
+                  {t('edit-profile.email')}
                 </ZigTypography>
-              </ZigTypography>
 
-              <ZigTypography component={'p'} sx={{ mt: 1 }}>
-                {user.userId}
-              </ZigTypography>
+                <ZigTypography
+                  component={'p'}
+                  sx={{ mt: 1, wordWrap: 'break-word' }}
+                  id={'edit-profile__email'}
+                >
+                  {user.email}
+                </ZigTypography>
+              </Grid>
+
+              <Grid
+                sm={4.5}
+                xs={12}
+                p={1}
+                pb={2}
+                justifyContent={'center'}
+                alignItems={'center'}
+                order={!sm && 2}
+              >
+                <ZigTypography id={'edit-profile__user-id-label'}>
+                  {t('edit-profile.user-id')}
+                  <ZigTypography
+                    sx={{ pl: 1 }}
+                    variant={'body2'}
+                    color={'neutral400'}
+                  >
+                    {t('edit-profile.internal-use')}
+                  </ZigTypography>
+                </ZigTypography>
+
+                <ZigTypography
+                  component={'p'}
+                  sx={{ mt: 1 }}
+                  id={'edit-profile__user-id'}
+                >
+                  {user.userId}
+                </ZigTypography>
+              </Grid>
             </Grid>
 
             <Grid sm={12} xs={12} p={1} pb={2}>
@@ -188,17 +171,18 @@ const EditProfileForm = () => {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
+                    id={'edit-profile__username'}
                     wide
                     label={t('edit-profile.username')}
                     placeholder={t('edit-profile.username')}
-                    error={t(errors.username?.message)}
+                    error={t(errors.username?.message, { maxLength: 15 })}
                     {...field}
                   />
                 )}
               />
             </Grid>
 
-            <Grid sm={12} p={1} pb={2}>
+            <Grid xs={12} p={1} pb={2}>
               <Controller
                 name='country'
                 control={control}
@@ -208,6 +192,7 @@ const EditProfileForm = () => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     filterOption={filterCountries}
+                    id={'edit-profile__country-select'}
                     label={
                       <>
                         {t('edit-profile.country')}
@@ -215,6 +200,7 @@ const EditProfileForm = () => {
                           sx={{ pl: 1 }}
                           variant={'body2'}
                           color={'neutral400'}
+                          id={'edit-profile__country-select-visible-if-trader'}
                         >
                           {t('edit-profile.visible-if-trader')}
                         </ZigTypography>
@@ -227,22 +213,24 @@ const EditProfileForm = () => {
                 )}
               />
             </Grid>
-            <Grid sm={12} p={1} pb={2}>
+            <Grid xs={12} p={1} pb={2}>
               <Controller
                 name='bio'
                 control={control}
                 render={({ field }) => (
                   <ZigInput
+                    id={'edit-profile__about-you'}
                     wide
                     multiline
-                    rows={3}
+                    rows={12}
                     label={
-                      <ZigTypography>
+                      <ZigTypography id={'edit-profile__about-you-label'}>
                         {t('edit-profile.about-you')}
                         <ZigTypography
                           sx={{ pl: 1 }}
                           variant={'body2'}
                           color={'neutral400'}
+                          id={'edit-profile__about-you-visible-if-trader'}
                         >
                           {t('edit-profile.visible-if-trader')}
                         </ZigTypography>
@@ -260,7 +248,7 @@ const EditProfileForm = () => {
           </Grid>
         </Box>
 
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             id={'edit-profile__submit'}
             type='submit'
@@ -271,8 +259,8 @@ const EditProfileForm = () => {
           >
             {t('edit-profile.update-profile')}
           </ZigButton>
-        </ModalActions>
-      </Form>
+        </ZigModalActions>
+      </ZigModalForm>
     </>
   );
 };

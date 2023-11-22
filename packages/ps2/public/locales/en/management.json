@@ -23,7 +23,7 @@
     "labelBalance": "Current Minimum Balance",
     "save": "Save"
   },
-  "controlledZignaly": "Controlled by Zignaly",
+  "controlledZignaly": "Controlled by {{ whitelabel }}",
   "transfer": {
     "title": "Transfer",
     "loading": "Loading",
@@ -41,7 +41,7 @@
     "title": "Transfer Funds",
     "description": "Transfer funds immediately between the Trading Account and the Standby Account in your service"
   },
-  "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
+  "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, {{ whitelabel }} will take control of your service.",
   "previousValue": "Previous Value:",
   "loading-arialLabel": "Loading management",
   "api-keys": {
@@ -57,7 +57,7 @@
     "cant-disable-read": "You can not disable the read permission",
     "restrict-ip": "Restrict IP",
     "api-secret": "API Secret",
-    "zignaly-code": "Zignaly Code",
+    "zignaly-code": "{{ whitelabel }} Code",
     "api-secret-explainer": "Only visible on key generation. If lost, you will have to generate a new API key",
     "permission-label": "Permissions",
     "permissions": {

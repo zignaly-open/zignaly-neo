@@ -8,7 +8,7 @@ export const TwoFAValidation = yup
       .typeError('common:validation.invalid-value')
       .test(
         'value',
-        'common:validation.invalid-value',
+        'common:validation.2fa-invalid-format',
         (v) => Number.isInteger(Number(v)) && v?.length === 6,
       ),
   })

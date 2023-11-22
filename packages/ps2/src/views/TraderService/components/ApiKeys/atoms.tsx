@@ -25,14 +25,19 @@ export const TextWrapperRow = styled(Box)`
   margin-top: 6px;
 `;
 
-export const MultilineLabel: React.FC<{ title: string; subtitle: string }> = ({
-  title,
-  subtitle,
-}) => {
+export const MultilineLabel: React.FC<{
+  title: string;
+  subtitle: string;
+  id?: string;
+}> = ({ title, subtitle, id }) => {
   return (
     <Box sx={{ flexDirection: 'column', display: 'flex' }}>
-      <ZigTypography>{title}</ZigTypography>
-      <ZigTypography color='neutral400' variant={'caption'}>
+      <ZigTypography id={id && `${id}-title`}>{title}</ZigTypography>
+      <ZigTypography
+        color='neutral400'
+        variant={'caption'}
+        id={id && `${id}-subtitle`}
+      >
         {subtitle}
       </ZigTypography>
     </Box>

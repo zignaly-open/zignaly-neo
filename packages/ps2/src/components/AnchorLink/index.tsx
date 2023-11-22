@@ -4,7 +4,7 @@ import { ZigLink } from '@zignaly-open/ui';
 
 const AnchorLink = ({ children, ...props }: LinkProps) => (
   <Link {...props}>
-    <ZigLink>{children}</ZigLink>
+    <ZigLink>{children as JSX.Element}</ZigLink>
   </Link>
 );
 export default AnchorLink;

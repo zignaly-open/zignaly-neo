@@ -16,8 +16,7 @@ import { UserRate } from './atoms';
 
 const TierBar = ({
   tier,
-  serviceCommission,
-  zignalyCommission,
+  traderBoost,
   referral,
   boost,
   tiers,
@@ -25,8 +24,8 @@ const TierBar = ({
   maxHeight,
   width = 60,
   showArrow = true,
-  minOpacity = 0.2,
-  maxOpacity = 0.8,
+  minOpacity = 0.1,
+  maxOpacity = 0.4,
   minFontSize = 12,
   maxFontSize = 15.5,
 }: TierBarProps) => {
@@ -53,16 +52,18 @@ const TierBar = ({
     [min, max, tier],
   );
 
-  const layers = useTierLayers(
-    tiers,
-    tier.id,
-    boost,
-    serviceCommission,
-    zignalyCommission,
-    { minHeight, maxHeight },
-  );
+  const layers = useTierLayers(tiers, tier.id, boost, traderBoost, {
+    minHeight,
+    maxHeight,
+  });
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
+
+  /**
+   * Uncomment to debug layers
+   *  */
+  // console.log(`\n---\nTier ${tier.id}:`);
+  // console.table(layers);
 
   return (
     <AnimatedContainer>
@@ -75,7 +76,7 @@ const TierBar = ({
           emphasis={showArrow}
         >
           <BarContent>
-            {serviceCommission > 0 && <BoltIcon />}
+            {traderBoost > 0 && <BoltIcon width={'10px'} height={'16px'} />}
             <ZigTypography
               color={
                 layersCount > 1
@@ -86,6 +87,7 @@ const TierBar = ({
               }
               fontSize={fontSize}
               fontWeight={showArrow ? 600 : 500}
+              className='tier-bar__value'
             >
               {Math.floor(layer1.value)}
               {'%'}

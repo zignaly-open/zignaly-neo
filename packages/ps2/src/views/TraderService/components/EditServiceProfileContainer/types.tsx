@@ -1,4 +1,7 @@
-import { TraderServiceAccessLevel } from 'apis/service/types';
+import {
+  EditServicePayload,
+  TraderServiceAccessLevel,
+} from 'apis/service/types';
 
 export const VISIBILITY_LABEL = {
   [TraderServiceAccessLevel.Solo]: {
@@ -17,4 +20,8 @@ export const VISIBILITY_LABEL = {
     key: 'marketplace',
     color: '#26c496',
   },
+};
+
+export type EditServiceForm = EditServicePayload & {
+  commission: number;
 };

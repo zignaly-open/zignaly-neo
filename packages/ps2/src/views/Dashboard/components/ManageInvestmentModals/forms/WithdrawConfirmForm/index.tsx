@@ -1,14 +1,19 @@
 import React from 'react';
 import { AmountContainer } from './styles';
-import { Grid, Tooltip } from '@mui/material';
-import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
-import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Grid, Tooltip, useMediaQuery } from '@mui/material';
+import {
+  ZigButton,
+  ZigModalActions,
+  ZigPriceLabel,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import ChainIcon from 'components/ChainIcon';
 import { useTranslation } from 'react-i18next';
 import { WithdrawConfirmFormProps } from './types';
 import BigNumber from 'bignumber.js';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import RemoveIcon from '@mui/icons-material/Remove';
+import theme from '../../../../../../theme';
 
 const WithdrawConfirmForm = ({
   action,
@@ -23,6 +28,7 @@ const WithdrawConfirmForm = ({
   feeCoin = coin,
   close,
 }: WithdrawConfirmFormProps) => {
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('withdraw-crypto');
   if (status.isSuccess) {
     return (
@@ -35,7 +41,7 @@ const WithdrawConfirmForm = ({
         >
           {t('success.description')}
         </ZigTypography>
-        <ModalActions>
+        <ZigModalActions>
           <ZigButton
             onClick={close}
             variant='contained'
@@ -44,7 +50,7 @@ const WithdrawConfirmForm = ({
           >
             {t('common:close')}
           </ZigButton>
-        </ModalActions>
+        </ZigModalActions>
       </Grid>
     );
   }
@@ -111,7 +117,7 @@ const WithdrawConfirmForm = ({
       <ZigTypography
         variant='h3'
         color='neutral100'
-        sx={{ weight: 'medium' }}
+        sx={{ weight: 'medium', wordBreak: 'break-all' }}
         id={'withdraw-modal-confirmation__address'}
         mt={'10px'}
       >
@@ -144,7 +150,7 @@ const WithdrawConfirmForm = ({
         mt={4}
         mb={2}
         display='flex'
-        direction='row'
+        direction={sm ? 'row' : 'column'}
       >
         <AmountContainer sx={{ height: '100%', flex: 5 }} noBorders>
           <Grid
@@ -217,7 +223,12 @@ const WithdrawConfirmForm = ({
           </Grid>
         </AmountContainer>
         <ArrowRightAltIcon
-          sx={{ flex: 1, color: 'neutral400', opacity: 0.8 }}
+          sx={{
+            flex: 1,
+            color: 'neutral400',
+            opacity: 0.8,
+            transform: `rotate(${sm ? 0 : 90}deg)`,
+          }}
         />
         <AmountContainer
           sx={{ padding: '20px', flex: 7 }}
@@ -263,7 +274,7 @@ const WithdrawConfirmForm = ({
         </AmountContainer>
       </Grid>
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'withdraw-modal-confirmation__confirm-withdraw'}
           onClick={action}
@@ -274,7 +285,7 @@ const WithdrawConfirmForm = ({
         >
           {t('confirmation.withdrawNow')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
     </Grid>
   );
 };

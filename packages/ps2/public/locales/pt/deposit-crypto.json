@@ -1,6 +1,6 @@
 {
 	"title": "Depositar Criptomoedas",
-	"description": "Deposita Cripto na tua conta Zignaly. Zignaly é um oficial <0><\/0> Binance Broker. Os teus fundos estarão seguros no Binance. <1>Mais informações<\/1>.",
+	"description": "Deposita Cripto na tua conta {{ whitelabel }}. {{ whitelabel }} powered by ZIGDAO é um oficial \n<0><\/0> Binance Broker. Os teus fundos estarão seguros no Binance. <1>Mais informações<\/1>.",
 	"coinSelector": {
 		"label": "Moeda:",
 		"placeholder": "Pesquisar uma moeda"
@@ -8,7 +8,7 @@
 	"balances": {
 		"loadingAriaLabel": "Carregando saldos de moedas",
 		"total": "Saldo:",
-		"balanceLocked": "Em Ordens:",
+		"balanceLocked": "Em ordens:",
 		"balanceFree": "Disponível:"
 	},
 	"networkSelector": {
@@ -29,7 +29,8 @@
 	},
 	"depositQR": {
 		"address": "{{coin}} Endereço",
-		"memo": "{{coin}} MEMO\/Tag"
+		"memo": "{{coin}} MEMO\/Tag",
+		"scan": "Digitalizar para depósitos no aplicativo móvel"
 	},
 	"no-network": "O depósito não está disponível nesta rede",
 	"buy-crypto": "Compre Cripto",
@@ -42,5 +43,11 @@
 			"deposit": "Deposita {{coin}}",
 			"purchase": "Compra {{coin}}"
 		}
-	}
+	},
+	"history": "Histórico",
+	"network-unavailable": "Rede indisponível",
+	"service-swap": {
+		"convert": "Converter"
+	},
+	"buy-crypto-description": "Compre agora Crypto facilmente em {{ whitelabel }} usando nosso parceiro terceirizado Changelly\/MoonPay."
 }

@@ -29,6 +29,7 @@ import Mailcheck from 'react-mailcheck';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import LockIcon from '@mui/icons-material/Lock';
+import { whitelabel } from '../../../../whitelabel';
 
 const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
   const { t } = useTranslation(['auth', 'error']);
@@ -178,12 +179,17 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
               <ZigLink
-                href='https://zignaly.com/legal/terms'
+                href={
+                  whitelabel.links?.tos || 'https://zignaly.com/legal/terms'
+                }
                 target='_blank'
                 rel='noopener'
               />
               <ZigLink
-                href='https://zignaly.com/legal/privacy'
+                href={
+                  whitelabel.links?.privacyPolicy ||
+                  'https://zignaly.com/legal/privacy'
+                }
                 target='_blank'
                 rel='noopener'
               />

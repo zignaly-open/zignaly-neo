@@ -4,19 +4,32 @@ import { SortDirection } from "@tanstack/react-table";
 import { IconButton } from "@mui/material";
 
 export const TableContainer = styled("div")`
-  overflow: auto;
+  overflow: auto hidden;
 `;
 
-export const Table = styled("table")`
+export const Table = styled("table", {
+  shouldForwardProp: (prop) => prop !== "fetching",
+})<{ fetching?: boolean }>`
   border-spacing: 0;
   width: 100%;
   border-radius: 16px;
+  ${(props) =>
+    props.fetching &&
+    css`
+      opacity: 0.5;
+      cursor: wait;
+      tbody {
+        pointer-events: none;
+      }
+    `}
 
   thead {
     height: 56px;
     user-select: none;
     background: ${({ theme }) => theme.palette.backgrounds.tableHeader};
     box-shadow: 0 0 10px ${({ theme }) => theme.palette.boxShadows.tableHeader};
+    z-index: 2;
+    position: relative;
   }
 
   th {
@@ -26,10 +39,13 @@ export const Table = styled("table")`
   }
 
   td {
+    @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+      padding: 12px 22px;
+      height: 95px;
+    }
     color: ${({ theme }) => theme.palette.neutral100};
-    padding: 12px 22px;
+    padding: 10px 5px;
     white-space: nowrap;
-    height: 95px;
     border-bottom: 1px solid ${({ theme }) => theme.palette.neutral700};
     text-align: center;
   }

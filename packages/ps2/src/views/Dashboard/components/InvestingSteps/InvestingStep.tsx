@@ -7,12 +7,12 @@ import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRou
 import { useOpenDepositModal } from '../ManageInvestmentModals/DepositModal';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PROFIT_SHARING } from '../../../../routes';
-import { BUY_CRYPTO_URL } from '../../../../util/constants';
-import NorthEastIcon from '@mui/icons-material/NorthEast';
+import { useOpenBuyModal } from '../ManageInvestmentModals/BuyModal';
 
 const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
   const { t } = useTranslation('my-dashboard');
   const openDepositModal = useOpenDepositModal();
+  const showBuyModal = useOpenBuyModal();
   const navigate = useNavigate();
 
   return (
@@ -55,19 +55,9 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
             {step === 2 && (
               <ZigLink
                 id={'my-portfolio-steps__purchase'}
-                href={BUY_CRYPTO_URL}
+                onClick={() => showBuyModal()}
                 underline={'hover'}
                 target={'_blank'}
-              />
-            )}
-            {step === 2 && (
-              <NorthEastIcon
-                sx={{
-                  width: '13px',
-                  height: '13px',
-                  mb: '-2px',
-                  color: 'links',
-                }}
               />
             )}
           </Trans>

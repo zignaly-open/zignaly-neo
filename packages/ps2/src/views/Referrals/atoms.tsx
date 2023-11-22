@@ -7,17 +7,13 @@ export const TotalBox: React.FC<{
   value: string | JSX.Element;
 }> = ({ label, value }) => (
   <TotalBoxBox>
-    <ZigTypography>{label}</ZigTypography>
-    <TotalBoxValue>{value}</TotalBoxValue>
-  </TotalBoxBox>
-);
-
-export const GetWhatYouDeserveBox: React.FC<{
-  label: string | JSX.Element;
-  value: string | JSX.Element;
-}> = ({ label, value }) => (
-  <TotalBoxBox>
-    <ZigTypography>{label}</ZigTypography>
-    <TotalBoxValue>{value}</TotalBoxValue>
+    <ZigTypography
+      textTransform={'uppercase'}
+      fontWeight={500}
+      className='referral-box__label'
+    >
+      {label}
+    </ZigTypography>
+    <TotalBoxValue className='referral-box__value'>{value}</TotalBoxValue>
   </TotalBoxBox>
 );

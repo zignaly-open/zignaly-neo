@@ -1,7 +1,7 @@
 import { PageContainer } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTitle } from 'react-use';
+import { useTitle } from 'util/title';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
 import { useLocation } from 'react-router-dom';
 

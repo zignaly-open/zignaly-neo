@@ -5,6 +5,8 @@ import {
   ZigButton,
   ZigButtonGroupInput,
   ZigInput,
+  ZigModalActions,
+  ZigModalForm,
   ZigSelect,
 } from '@zignaly-open/ui';
 import { Controller, useForm } from 'react-hook-form';
@@ -19,8 +21,8 @@ import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
-import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { whitelabel } from '../../../../../../whitelabel';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -54,14 +56,16 @@ const CreateServiceForm: React.FC<{
   const coinOptions = useMemo(
     () =>
       exchangeType
-        ? Object.keys(serviceTypesInfo?.[exchangeType])?.map((ssc: string) => {
-            const name = coins[ssc]?.name || '';
-            return {
-              value: ssc,
-              name,
-              label: <CoinOption key={ssc} coin={ssc} name={name} />,
-            };
-          })
+        ? Object.keys(serviceTypesInfo?.[exchangeType])
+            ?.map((ssc: string) => {
+              const name = coins[ssc]?.name || '';
+              return {
+                value: ssc,
+                name,
+                label: <CoinOption key={ssc} coin={ssc} name={name} />,
+              };
+            })
+            .filter((coin) => coin.value !== 'BUSD')
         : [],
     [exchangeType],
   );
@@ -69,6 +73,7 @@ const CreateServiceForm: React.FC<{
   const serviceTypes = useMemo(
     () => [
       {
+        id: 'create-service__select-type-spot',
         value: 'spot',
         label: t(`create.types.spot`),
         extraProps: {
@@ -77,6 +82,7 @@ const CreateServiceForm: React.FC<{
         },
       },
       {
+        id: 'create-service__select-type-futures',
         value: 'futures',
         label: t(`create.types.futures`),
         extraProps: {
@@ -91,9 +97,10 @@ const CreateServiceForm: React.FC<{
   register('serviceType');
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
       <ZigButtonGroupInputWrapper>
         <ZigButtonGroupInput
+          prefixId={'create-service__select-type'}
           value={exchangeType}
           options={serviceTypes}
           error={t(errors.serviceType?.message)}
@@ -152,10 +159,13 @@ const CreateServiceForm: React.FC<{
         control={control}
         render={({ field }) => (
           <SuccessFeeInputWrapper
+            zglyFee={whitelabel.defaultSuccessFee}
+            prefixId={'create-service__service-fee'}
             value={watch('successFee') || 0}
             showZeroFeeExplainer
           >
             <ZigInput
+              id={'create-service__service-fee'}
               type='number'
               InputProps={{
                 endAdornment: <InputAdornment position='end'>%</InputAdornment>,
@@ -169,19 +179,23 @@ const CreateServiceForm: React.FC<{
           </SuccessFeeInputWrapper>
         )}
       />
-      <ZigAlertMessage text={t('create.please-verify')} warning />
+      <ZigAlertMessage
+        id={'create-service__alert-message'}
+        text={t('create.please-verify')}
+        warning
+      />
 
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           variant='contained'
           type='submit'
-          id={'create-service-modal__create-1st-step'}
+          id={'create-service__create-1st-step'}
           size='xlarge'
         >
           {t('create.next-step')}
         </ZigButton>
-      </ModalActions>
-    </Form>
+      </ZigModalActions>
+    </ZigModalForm>
   );
 };
 

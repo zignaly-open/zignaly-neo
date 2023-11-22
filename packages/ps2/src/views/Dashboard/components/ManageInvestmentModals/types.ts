@@ -1,3 +1,5 @@
+import type { ModalContainerProps } from '@zignaly-open/ui/lib/components/display/ZigModalContainer/types';
+
 export enum EditInvestmentViews {
   EditInvestment = 'edit-investment',
   EditInvestmentSuccess = 'edit-investment-success',
@@ -9,7 +11,6 @@ export enum EditInvestmentViews {
 
 export enum InvestmentViews {
   Investment = 'investment',
-  InvestmentConfirm = 'investment-confirm',
   InvestmentSuccess = 'investment-success',
 }
 
@@ -37,11 +38,26 @@ export type WithdrawModalProps = {
 export enum ChooseDepositTypeViews {
   DepositView = 'deposit',
   ChooseDepositTypeView = 'deposit_or_buy',
+  SwapDepositView = 'swap-deposit',
+  SwapConfirmView = 'swap-confirm',
 }
 
 export type UseModalReturn = {
   title: string;
   component: () => JSX.Element;
-  onGoBack?: () => void;
+  modalWidth?: number;
   view?: string;
+} & Pick<ModalContainerProps, 'mobileFullScreen' | 'onGoBack'>;
+
+export type ConvertPreviewType = {
+  side: string;
+  lastPrice: number;
+  estimatedAmount: number;
+  min: number;
+};
+
+export type ConfirmSwapDataType = {
+  fromCoinAmount: number;
+  toCoinAmount: number;
+  fromCoin: string;
 };

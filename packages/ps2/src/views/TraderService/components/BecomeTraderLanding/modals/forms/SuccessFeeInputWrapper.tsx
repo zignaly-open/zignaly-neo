@@ -4,7 +4,6 @@ import { ZigAlertMessage, ZigTypography } from '@zignaly-open/ui';
 import { SuccessFieldWrapper, SuccessFieldReceive } from '../atoms';
 import { Box } from '@mui/material';
 import { getServiceOwnerFee } from '../../../../../../util/fee';
-import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
 
 const SuccessFeeInputWrapper: React.FC<{
   children: JSX.Element;
@@ -15,6 +14,8 @@ const SuccessFeeInputWrapper: React.FC<{
   precision?: number;
   newValue?: number | string;
   value: number | string;
+  prefixId?: string;
+  zglyFee: number;
 }> = ({
   title,
   newValue,
@@ -23,17 +24,27 @@ const SuccessFeeInputWrapper: React.FC<{
   children,
   newValueLabel,
   value,
+  prefixId,
+  zglyFee,
 }) => {
   const { t } = useTranslation('service');
-  const feeWeCharge = getServiceOwnerFee(+value);
+  const feeWeCharge = getServiceOwnerFee(+value, zglyFee);
 
   return (
     <div>
       <SuccessFieldWrapper>
-        <ZigTypography>{title || t('summary.success-fee')}</ZigTypography>
-        <ZigTypography variant='body2' color='neutral400'>
+        <ZigTypography id={prefixId && `${prefixId}-title`}>
+          {title || t('summary.success-fee')}
+        </ZigTypography>
+        <ZigTypography
+          variant='body2'
+          color='neutral400'
+          id={prefixId && `${prefixId}-description`}
+        >
           {description ||
-            t('edit.success-fee-desc', { zignalyFee: ZIGNALY_PROFIT_FEE })}
+            t('edit.success-fee-desc', {
+              zignalyFee: zglyFee,
+            })}
         </ZigTypography>
 
         <Box display='flex' mt={1.25}>
@@ -49,11 +60,17 @@ const SuccessFeeInputWrapper: React.FC<{
                 left: '4px',
                 width: '100%',
               }}
+              id={prefixId && `${prefixId}-you-receive-label`}
             >
               {newValueLabel || t('you-receive')}
             </ZigTypography>
             <Box display='flex' paddingTop='23px'>
-              <ZigTypography color='neutral400' textAlign='center' width='100%'>
+              <ZigTypography
+                color='neutral400'
+                textAlign='center'
+                width='100%'
+                id={prefixId && `${prefixId}-you-receive`}
+              >
                 {newValue ?? Math.round(feeWeCharge)}
               </ZigTypography>
               <ZigTypography
@@ -68,7 +85,7 @@ const SuccessFeeInputWrapper: React.FC<{
         </Box>
       </SuccessFieldWrapper>
       {!!showZeroFeeExplainer && value === '0' && (
-        <Box mt='3px'>
+        <Box mt='3px' id={prefixId && `${prefixId}-zero-fee-alert`}>
           <ZigAlertMessage text={t('create.zero-fee')} />
         </Box>
       )}

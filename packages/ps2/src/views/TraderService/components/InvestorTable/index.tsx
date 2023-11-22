@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { InvestorCounts } from './styles';
@@ -11,6 +11,9 @@ import {
   ZigTablePriceLabel,
   ZigDropdown,
   ZigDotsVerticalIcon,
+  ZigSearch,
+  downloadTableCsv,
+  ZigButton,
 } from '@zignaly-open/ui';
 import {
   useTraderServiceInvestors,
@@ -30,7 +33,11 @@ import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
 import { useToast } from '../../../../util/hooks/useToast';
 import { useActiveExchange } from '../../../../apis/user/use';
-import { ConnectionStateLabelId } from '../ConnectionStateLabel/types';
+import {
+  ConnectionStateLabelId,
+  connectionStateName,
+} from '../ConnectionStateLabel/types';
+import { OpenInNew } from '@mui/icons-material';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -42,6 +49,43 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   const { data: service } = serviceDetailsEndpoint;
 
+  const exporter = useCallback(
+    (investors: Investor[]) =>
+      downloadTableCsv(
+        investors.map((r) => [
+          r.email,
+          r.userId,
+          service?.ssc,
+          r.invested,
+          r.pnlNetLc,
+          r.pnlPctLc,
+          r.pnlNetAt,
+          r.sfOwnerAt,
+          getServiceTotalFee(
+            r.ownerSuccessFee,
+            service?.zglySuccessFee,
+            r.account_id === exchange.internalId || r.accountType === 'owner',
+          ),
+          t(connectionStateName[r.accountType]),
+        ]),
+        [
+          t('tableHeader.email'),
+          t('tableHeader.userId'),
+          t('common:coin'),
+          t('tableHeader.invested'),
+          t('tableHeader.P&L'),
+          t('tableHeader.P&L-percent'),
+          t('tableHeader.P&LTotal'),
+          t('tableHeader.totalFeesPaid'),
+          t('tableHeader.successFee'),
+          t('tableHeader.status'),
+        ],
+        `Investors ${service.name}.csv`,
+      ),
+    [service],
+  );
+
+  const [searchFilter, setSearchFilter] = React.useState('');
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
@@ -59,7 +103,9 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         }) =>
           accountId === exchange.internalId ? (
             <Tooltip title={t('it-is-you')}>
-              <ZigTypography>{getValue()}</ZigTypography>
+              <ZigTypography id={`service-investors-table__email-${accountId}`}>
+                {getValue()}
+              </ZigTypography>
             </Tooltip>
           ) : (
             getValue()
@@ -75,15 +121,24 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         }) =>
           accountId === exchange.internalId ? (
             <Tooltip title={t('it-is-you')}>
-              <ZigTypography>{getValue()}</ZigTypography>
+              <ZigTypography
+                id={`service-investors-table__userId-${accountId}`}
+              >
+                {getValue()}
+              </ZigTypography>
             </Tooltip>
           ) : (
             getValue()
           ),
+        sortingFn: 'basic',
       }),
       columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
-          <Box display={'flex'} flexDirection={'column'}>
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            id={`service-investors-table__header-invested`}
+          >
             {t('tableHeader.invested')}
             <Box fontSize={'12px'} color={'neutral300'}>
               {t('tableHeader.pending')}
@@ -94,10 +149,12 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: (props) => (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <ZigTablePriceLabel
+              id={`service-investors-table__invested-${props.row.original.account_id}`}
               coin={service?.ssc ?? 'USDT'}
               value={props.getValue()}
             />
             <ZigTablePriceLabel
+              id={`service-investors-table__pending-${props.row.original.account_id}`}
               showApproximate
               variant={'body2'}
               coin={service?.ssc ?? 'USDT'}
@@ -112,10 +169,14 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: (props) => (
           <>
             <ZigTablePriceLabel
+              id={`service-investors-table__p&l-${props.row.original.account_id}`}
               coin={service?.ssc ?? 'USDT'}
               value={parseFloat(props.getValue())}
             />
-            <ChangeIndicator value={props.row.original.pnlPctLc} />
+            <ChangeIndicator
+              value={props.row.original.pnlPctLc}
+              id={`service-investors-table__p&l-change-${props.row.original.account_id}`}
+            />
           </>
         ),
       }),
@@ -124,6 +185,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         id: 'pnlNetAt',
         cell: (props) => (
           <ZigTablePriceLabel
+            id={`service-investors-table__p&l-total-${props.row.original.account_id}`}
             coin={service?.ssc ?? 'USDT'}
             value={props.getValue()}
           />
@@ -134,6 +196,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         id: 'totalFeesPaid',
         cell: (props) => (
           <ZigTablePriceLabel
+            id={`service-investors-table__total-fees-${props.row.original.account_id}`}
             coin={service?.ssc ?? 'USDT'}
             value={props.getValue()}
           />
@@ -143,6 +206,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         (row) =>
           getServiceTotalFee(
             row.ownerSuccessFee,
+            service?.zglySuccessFee,
             row.account_id === exchange.internalId ||
               row.accountType === 'owner',
           ),
@@ -170,13 +234,19 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                       {
                         discounted: ownerSuccessFee,
                         owner: ownerSuccessFee + ownerSfDiscount,
-                        zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                        serviceTotal: service?.successFee,
+                        zignalyFee: getServiceZignalyFee(
+                          ownerSuccessFee,
+                          service?.zglySuccessFee,
+                        ),
                         discount: ownerSfDiscount,
                       },
                     )
               }
             >
-              <ZigTypography>
+              <ZigTypography
+                id={`service-investors-table__success-fee-${accountId}`}
+              >
                 {getValue()}
                 {/* eslint-disable-next-line i18next/no-literal-string */}
                 {'%'}
@@ -187,7 +257,12 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       ),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
-        cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
+        cell: (props) => (
+          <ConnectionStateLabel
+            id={`service-investors-table__status-${props.row.original.account_id}`}
+            stateId={props.getValue()}
+          />
+        ),
       }),
       columnHelper.accessor('actions', {
         header: '',
@@ -207,7 +282,10 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           accountType !== 'owner' && (
             <ZigDropdown
               component={() => (
-                <IconButton sx={{ mr: '-4px' }}>
+                <IconButton
+                  sx={{ mr: '-4px' }}
+                  id={`service-investors-table__show-menu-button-${accountId}`}
+                >
                   <ZigDotsVerticalIcon
                     color={theme.palette.neutral200}
                     height={16}
@@ -219,7 +297,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 {
                   label: t('change-fee'),
                   onClick: () => {
-                    if ((service?.successFee || 0) > 0) {
+                    if ((+service?.successFee || 0) > 0) {
                       showModal(InvestorEditFee, {
                         serviceId,
                         accountId,
@@ -245,34 +323,67 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       content={([investors, management]: [
         Investor[],
         TraderServiceManagement,
-      ]) => (
-        <PageWithHeaderContainer>
-          <InvestorCounts>
-            <ZigUserIcon
-              width={'17px'}
-              height={'20px'}
-              color={theme.palette.backgrounds.investorsIcon}
-            />
-            <ZigTypography variant={'h3'} color={'contrasting'}>
-              {t('number-of-investors', {
-                count: investors?.length,
-              })}
-            </ZigTypography>
-          </InvestorCounts>
+      ]) => {
+        const processedInvestorsList = investors.map((inv) => ({
+          ...inv,
+          successFee: inv.accountType === 'owner' ? '0' : management.successFee,
+        }));
 
-          <ZigTable
-            prefixId={'investor'}
-            columns={columns}
-            data={investors.map((inv) => ({
-              ...inv,
-              successFee:
-                inv.accountType === 'owner' ? '0' : management.successFee,
-            }))}
-            emptyMessage={t('no-investors')}
-            enableSortingRemoval={false}
-          />
-        </PageWithHeaderContainer>
-      )}
+        return (
+          <PageWithHeaderContainer>
+            <InvestorCounts>
+              <ZigUserIcon
+                width={'17px'}
+                height={'20px'}
+                color={theme.palette.backgrounds.investorsIcon}
+                id={`service-investors__investors-number-icon`}
+              />
+              <ZigTypography
+                variant={'h3'}
+                color={'contrasting'}
+                id={`service-investors__investors-number`}
+              >
+                {t('number-of-investors', {
+                  count: investors?.length,
+                })}
+              </ZigTypography>
+              <ZigSearch
+                value={searchFilter}
+                onChange={setSearchFilter}
+                id={`service-investors__search`}
+              />
+
+              <ZigButton
+                id={`service-investors__export`}
+                onClick={() => exporter(processedInvestorsList)}
+                variant={'text'}
+                sx={{
+                  '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                    fill: theme.palette.links,
+                  },
+                }}
+                endIcon={
+                  <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                }
+              >
+                {t('action:export')}
+              </ZigButton>
+            </InvestorCounts>
+
+            <ZigTable
+              prefixId={'investors'}
+              columns={columns}
+              data={processedInvestorsList}
+              emptyMessage={t('no-investors')}
+              enableSortingRemoval={false}
+              state={{ globalFilter: searchFilter }}
+              getColumnCanGlobalFilter={(column) =>
+                ['email', 'userId'].includes(column.id)
+              }
+            />
+          </PageWithHeaderContainer>
+        );
+      }}
     />
   );
 };

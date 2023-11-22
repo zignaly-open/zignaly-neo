@@ -4,15 +4,15 @@ import { useEffect } from 'react';
 /**
  * Save ref in cookies
  */
-const useReferralCookie = (ref?: string) => {
+const useReferralCookie = (ref?: string, subtrack?: string) => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const inviteRef = params.get('invite');
-    const subtrack = params.get('subtrack');
+    const inviteSubtrack = params.get('subtrack');
     if (ref || inviteRef) {
       Cookies.set('ref', ref || inviteRef);
-      if (subtrack) {
-        Cookies.set('subtrack', subtrack);
+      if (subtrack || inviteSubtrack) {
+        Cookies.set('subtrack', subtrack || inviteSubtrack);
       }
     }
   }, [ref]);

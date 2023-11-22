@@ -5,11 +5,12 @@ import {
   trimZeros,
   ZigButton,
   ZigInputAmount,
+  ZigModalActions,
+  ZigModalForm,
   ZigSwapCircleIcon,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, ModalActions } from 'components/ZModal';
 import CoinOption from '../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
 import {
   useCoinBalances,
@@ -18,7 +19,6 @@ import {
 } from '../../../../apis/coin/use';
 import { Box } from '@mui/material';
 import SwapCoinsConfirmForm from './SwapCoinsConfirmForm';
-import { useConvertMutation } from '../../../../apis/coin/api';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
@@ -39,15 +39,7 @@ function SwapCoinsForm({
     fromCoin: string;
     toCoin: string;
   }>();
-  const [convert, convertStatus] = useConvertMutation();
-  const handleConvert = async () => {
-    await convert({
-      exchangeInternalId: exchange?.internalId,
-      from: confirmationData.fromCoin,
-      qty: confirmationData.fromCoinAmount,
-      to: confirmationData.toCoin,
-    });
-  };
+
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
@@ -72,7 +64,11 @@ function SwapCoinsForm({
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
-    coinOptionsAllowedSwapFrom.find((coin) => coin.coin === selectedCoin.coin),
+    selectedCoin
+      ? coinOptionsAllowedSwapFrom.find(
+          (coin) => coin.coin === selectedCoin.coin,
+        )
+      : coinOptionsAllowedSwapFrom[0],
   );
   const [selectedToToken, setSelectedToToken] = useState<CoinsSelect>(
     {} as CoinsSelect,
@@ -114,10 +110,12 @@ function SwapCoinsForm({
   useEffect(() => {
     if (convertPreview)
       setMinAmount(trimZeros((convertPreview?.min).toFixed(8)));
+  }, [convertPreview]);
+  useEffect(() => {
     if (amount) {
       trigger('fromCoinAmount');
     }
-  }, [convertPreview, isFetchingConvertPreview, trigger, minAmount]);
+  }, [minAmount]);
 
   const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
     selectedFromToken.coin,
@@ -165,9 +163,8 @@ function SwapCoinsForm({
             ? 1 / convertPreview.lastPrice
             : convertPreview.lastPrice
         }
-        action={handleConvert}
         close={close}
-        status={convertStatus}
+        internalId={exchange?.internalId}
         {...confirmationData}
       />
     );
@@ -180,7 +177,7 @@ function SwapCoinsForm({
     watch('toCoinAmount');
 
   return (
-    <Form
+    <ZigModalForm
       onSubmit={handleSubmit(({ fromCoinAmount, toCoinAmount }) => {
         setStep('confirm');
         setConfirmationData({
@@ -205,6 +202,7 @@ function SwapCoinsForm({
             id={'swap-coins-modal__from-input-amount'}
             label={t('from-input.label')}
             wide
+            selectSx={{ width: '150px' }}
             coin={selectedFromToken}
             onTokenChange={(token: CoinsSelect) => {
               setSelectedFromToken(token);
@@ -238,6 +236,7 @@ function SwapCoinsForm({
             id={'swap-coins-modal__to-input-amount'}
             label={t('to-input.label')}
             wide
+            selectSx={{ width: '150px' }}
             labelInline={false}
             coin={selectedToToken}
             onTokenChange={(token: CoinsSelect) => {
@@ -252,7 +251,7 @@ function SwapCoinsForm({
         )}
       />
 
-      <ModalActions position={'relative'}>
+      <ZigModalActions position={'relative'}>
         <ZigButton
           id={'swap-coins-modal__continue'}
           loading={isFetchingConvertPreview}
@@ -262,9 +261,9 @@ function SwapCoinsForm({
         >
           {t('continue')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
       {step}
-    </Form>
+    </ZigModalForm>
   );
 }
 

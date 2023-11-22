@@ -30,12 +30,14 @@
       "disabled": "Disabled",
       "pass-kyc-cta": "Verify",
       "verified": "Verified",
-      "not-verified": "Not verified"
+      "not-verified": "Not verified",
+      "pending": "Pending",
+      "rejected": "Rejected"
     }
   },
   "update-password": {
     "title": "Update Password",
-    "description": "Update the password of your Zignaly Account.\nFor your security, you will be logged out after clicking Update password.",
+    "description": "Update your password.\nFor your security, you will be logged out after clicking Update password.",
     "current-password": "Current Password:",
     "new-password": "New Password:",
     "success": "Password updated successfully. Please log in again."

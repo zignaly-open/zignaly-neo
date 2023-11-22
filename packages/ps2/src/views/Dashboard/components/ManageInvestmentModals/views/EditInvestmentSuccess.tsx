@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { ZigButton, ZigTypography, ZigModalActions } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 
 function EditInvestmentSuccessModal({ close }: { close: () => void }) {
@@ -14,7 +13,7 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
       >
         {t('modalSuccess.description')}
       </ZigTypography>
-      <ModalActions>
+      <ZigModalActions>
         <ZigButton
           id={'edit-investment-success-modal__close'}
           onClick={close}
@@ -22,7 +21,7 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
         >
           {t('modalSuccess.button')}
         </ZigButton>
-      </ModalActions>
+      </ZigModalActions>
     </Box>
   );
 }

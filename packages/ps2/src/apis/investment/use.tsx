@@ -21,7 +21,7 @@ import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
 import { QueryReturnType } from '../../util/queryReturnType';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
-import { TraderServiceFull } from '../service/types';
+import { Service } from '../service/types';
 import { serviceToInvestmentServiceDetail } from './util';
 
 export const useInvestments = useInvestmentsQuery;
@@ -34,17 +34,21 @@ export const useSingleInvestment = (serviceId: string): Investment => {
 
 export function useInvestmentDetails(
   serviceId: string,
+  options?: { skip: boolean },
 ): QueryReturnType<InvestmentDetails> {
   const exchange = useActiveExchange();
-  return useInvestmentDetailsQuery({
-    exchangeInternalId: exchange?.internalId,
-    serviceId,
-  });
+  return useInvestmentDetailsQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+      serviceId,
+    },
+    options,
+  );
 }
 
 export function useSelectInvestment(
   // we support both scenarios, so it's easier for you <3
-  service: InvestmentServiceDetails | TraderServiceFull,
+  service: InvestmentServiceDetails | Service,
 ): void {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -73,6 +77,7 @@ export function useIsInvestedInService(
 ): {
   isLoading: boolean;
   thisAccount: boolean;
+  isError: boolean;
   accounts?: InvestedInService;
   refetch: () => void;
   investedAmount: string;
@@ -80,12 +85,10 @@ export function useIsInvestedInService(
   const isAuthenticated = useIsAuthenticated();
   const exchange = useActiveExchange();
 
-  const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
-    serviceId,
-    {
+  const { isLoading, data, refetch, isFetching, isError } =
+    useInvestedAmountQuery(serviceId, {
       skip: !isAuthenticated || !exchange?.internalId || options?.skip,
-    },
-  );
+    });
 
   const invested = isAuthenticated && data?.[exchange?.internalId];
 
@@ -96,6 +99,7 @@ export function useIsInvestedInService(
   return {
     isLoading: isAuthenticated && (isLoading || isFetching),
     refetch,
+    isError,
     thisAccount: investedAmount.gt(0),
     accounts: data,
     investedAmount: investedAmount.toString(),
@@ -118,17 +122,19 @@ export function useCurrentBalance(coin?: string): {
   id: string;
   balance: string;
   isFetching: boolean;
+  refetch: () => void;
 } {
   const service = useSelectedInvestment();
-  const { data: coins, isFetching } = useCoinBalances();
+  const { data: coins, isFetching, refetch } = useCoinBalances();
 
   return useMemo(
     () => ({
       isFetching,
       id: coin || service?.ssc,
       balance: coins?.[coin || service?.ssc]?.balanceFree || '0',
+      refetch,
     }),
-    [coin, service?.ssc, coins, isFetching],
+    [coin, service?.ssc, coins, isFetching, refetch],
   );
 }
 

@@ -2,7 +2,10 @@ import { styled } from '@mui/material';
 import { PageContainer } from '@zignaly-open/ui';
 
 export const Layout = styled(PageContainer)`
-  padding: 120px 52px 0 52px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    padding: 120px 52px 0 52px;
+  }
+  padding-top: 100px;
 `;
 
 export const Heading = styled('div')`
@@ -18,6 +21,11 @@ export const Inline = styled('div')`
 `;
 
 export const ZigTableWrapper = styled('div')`
+  td {
+    @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+      padding: 0 !important;
+    }
+  }
   td,
   th {
     &:first-of-type {
