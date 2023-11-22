@@ -24,7 +24,6 @@ Next we define the variables and secrets. Variables are public, secrets are - su
 | `NO_INDEX` | Variable |                                        `true` to make the deployment noindex                                        |                              <opt>Optional</opt> |
 | `SENTRY_DNS` | Variable |                                                     Sentry DNS                                                      |                              <opt>Optional</opt> |
 | `CUSTOMER_IO_SITE_ID` | Variable |                                                 Customer IO Site ID                                                 |                              <opt>Optional</opt> |
-| `INTERCOM_APP_ID` | Variable |                                                   Intercom App ID                                                   |                              <opt>Optional</opt> |
 | `LIVE_SESSION_TRACK_ID` | Variable |                                                Live Session track ID                                                |                              <opt>Optional</opt> |
 | `IPGEOLOCATION_API_KEY` | Variable |                               API key for ipgeolocation.io, used to detect user currency when buying crypto                                |                              **Optional*** |
 

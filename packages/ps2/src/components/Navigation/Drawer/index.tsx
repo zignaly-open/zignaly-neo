@@ -73,6 +73,7 @@ const ZigDrawer = () => {
   const { exchanges, email, imageUrl } = useCurrentUser();
   const openDepositModal = useOpenDepositModal();
   const changeLocale = useChangeLocale();
+  const [lightWeightIntercom, setLightWeightIntercom] = useState(true);
 
   const languageMap = supportedLanguages
     ? supportedLanguages.map((x) => LocalizationLanguages[x])
@@ -262,6 +263,31 @@ const ZigDrawer = () => {
                     <ListItemText
                       primary={t('navigation-menu.profit-sharing')}
                     />
+                  </ListItemButton>
+                </ListItem>
+              )}
+              {whitelabel.intercomId && (
+                <ListItem disablePadding>
+                  <ListItemButton
+                    id='drawer__help-chat'
+                    onClick={() => {
+                      if (lightWeightIntercom) {
+                        (
+                          document.querySelector(
+                            'intercom-launcher',
+                          ) as HTMLElement
+                        )?.click();
+                        setLightWeightIntercom(false);
+                      } else {
+                        (
+                          document.querySelector(
+                            'intercom-launcher-frame',
+                          ) as HTMLElement
+                        )?.click();
+                      }
+                    }}
+                  >
+                    <ListItemText primary={t('navigation-menu.ping-us')} />
                   </ListItemButton>
                 </ListItem>
               )}

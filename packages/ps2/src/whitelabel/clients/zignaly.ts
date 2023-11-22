@@ -11,4 +11,5 @@ export default {
     linkedin: 'https://www.linkedin.com/company/zignaly/',
   },
   defaultSuccessFee: 5,
+  intercomId: 'nc3z6oqm',
 } as WhitelabelOverride;

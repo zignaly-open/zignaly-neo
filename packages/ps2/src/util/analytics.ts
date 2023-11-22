@@ -6,6 +6,7 @@ import customerIo from '@analytics/customerio';
 import intercomPlugin from '@analytics/intercom';
 import { getUnixTime } from 'date-fns';
 import googleAnalytics from '@analytics/google-analytics';
+import { whitelabel } from '../whitelabel';
 
 let analytics: AnalyticsInstance | null = null;
 
@@ -34,9 +35,10 @@ if (
         measurementIds: [process.env.REACT_APP_GA_ID],
       }),
       customerIoPlugin,
-      intercomPlugin({
-        appId: process.env.REACT_APP_INTERCOM_APP_ID,
-      }),
+      whitelabel.intercomId &&
+        intercomPlugin({
+          appId: whitelabel.intercomId,
+        }),
     ],
   });
 }
