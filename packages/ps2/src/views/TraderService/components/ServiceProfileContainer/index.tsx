@@ -29,21 +29,24 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
       sx={{
         p: 2,
         pt: 0,
-        mt: { xs: '-15px', md: '-45px' },
+        mt: { xs: '-15px', lg: '-45px' },
       }}
     >
       <Grid container>
-        <Grid item sx={{ display: 'flex' }} xs={12} md={7} pb={4}>
+        <Grid item sx={{ display: 'flex' }} xs={12} lg={7} pb={4}>
           <ServiceProfileHeader service={service} />
         </Grid>
-        <Grid item xs={12} md={5} pb={sm && 4}>
+        <Grid item xs={12} lg={5} pb={sm && 4}>
           <RightSideActions service={service} />
         </Grid>
         {!sm && (
           <Grid item xs={12} md={7} pb={3}>
             <Box display={'flex'} justifyContent={'center'} gap={'35px'}>
               <ServiceInfoWrapper>
-                <ZigTypography color={'neutral300'}>
+                <ZigTypography
+                  color={'neutral300'}
+                  id={'service-profile__assets-in-pool-label'}
+                >
                   {t('assets-in-pool')}
                 </ZigTypography>
                 <AssetsInPoolWrapper>

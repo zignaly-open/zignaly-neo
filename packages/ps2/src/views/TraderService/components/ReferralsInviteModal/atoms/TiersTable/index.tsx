@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useTheme } from '@mui/material';
 import {
   ZigClockIcon,
   ZigTypography,
@@ -16,7 +16,7 @@ import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 import { Table } from './styles';
-import { ZIGNALY_PROFIT_FEE } from 'util/constants';
+import { whitelabel } from '../../../../../../whitelabel';
 
 export const composeInvitesValue = (
   tierIndex: number,
@@ -116,7 +116,7 @@ const CellLabelTraderBoost = ({ traderBoost }: { traderBoost: number }) => {
         {t('trader-boost')}
         <Tooltip
           title={t('tooltips.trader-boost', {
-            commission: traderBoost * ZIGNALY_PROFIT_FEE,
+            commission: traderBoost * whitelabel.defaultSuccessFee,
           })}
         >
           <TooltipIcon />
@@ -134,7 +134,7 @@ const TiersTable = ({
   traderBoost,
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
-
+  const theme = useTheme();
   const layers = useTierLayers(tiers, tiers[0].id, boost, traderBoost);
 
   const composeCellTierLabels = () => {
@@ -186,13 +186,17 @@ const TiersTable = ({
             gap='12px'
             justifyContent='flex-end'
           >
-            <ZigUserFilledIcon color='#979ce0' height={19.5} width={16.5} />
+            <ZigUserFilledIcon
+              color={theme.palette.paleBlue}
+              height={19.5}
+              width={16.5}
+            />
             <ZigTypography
               fontWeight={500}
               variant='h3'
               textAlign='end'
               lineHeight='24px'
-              color='#979ce0'
+              color={theme.palette.paleBlue}
               className='tier-chart__label-referrals'
             >
               {t('referrals')}
@@ -219,7 +223,11 @@ const TiersTable = ({
               >
                 {composeInvitesValue(tierIndex, tiers)}
               </ZigTypography>
-              <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
+              <ZigUserFilledIcon
+                color={theme.palette.paleBlue}
+                height={12}
+                width={10}
+              />
             </Box>
           </td>
         ))}
@@ -240,7 +248,8 @@ const TiersTable = ({
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
                 (
-                  Math.round(MAX_FEES_AMOUNT * ZIGNALY_PROFIT_FEE) / 100
+                  Math.round(MAX_FEES_AMOUNT * whitelabel.defaultSuccessFee) /
+                  100
                 ).toString(),
                 {
                   thousandSeparator: true,

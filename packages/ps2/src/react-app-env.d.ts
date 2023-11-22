@@ -58,6 +58,11 @@ declare module '@mui/material/styles' {
     avatarBack: string;
     contrasting: string;
     paleBlue: string;
+    lightGrayBlue: string;
+    darkGreen: string;
+    labelCheckbox: string;
+    checkboxPrimary: string;
+    lightGrey: string;
 
     // I am sorry
     // Here we define some of the "new" colors - only thoise needed in ps2
@@ -72,7 +77,11 @@ declare module '@mui/material/styles' {
       | 'secondaryBackground'
       | 'selectInputFill'
       | 'activeTab'
-      | 'manageServiceMenuHover',
+      | 'manageServiceMenuHover'
+      | 'breakLineSignUp'
+      | 'mobileButtonsWrapper'
+      | 'toastSuccess'
+      | 'coinIconPlaceholder',
       string
     >;
   }

@@ -59,7 +59,7 @@ export const WrapperAction = styled.div`
 export const InfoBar = styled.div`
   padding: 28px 0;
   margin-bottom: 28px;
-  background: #12142b;
+  background: ${({ theme }) => theme.palette.neutral800}};
 `;
 
 export const InfoBarList = styled.ul<{ itemsLength: number }>`
@@ -141,7 +141,7 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
   padding: 32px;
-  background-color: #181b30;
+  background-color: ${({ theme }) => theme.palette.neutral750};
   border-radius: 4px;
   width: 100%;
 `;

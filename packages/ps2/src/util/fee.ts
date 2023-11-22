@@ -2,32 +2,32 @@
 // feet.s
 // https://imgur.com/p6iMcpA
 
-import { ZIGNALY_PROFIT_FEE } from './constants';
-
-export function getServiceTotalFee(ownerFee: number, isSelf?: boolean) {
-  return isSelf ? 0 : ownerFee + getServiceZignalyFee(ownerFee);
+export function getServiceTotalFee(
+  ownerFee: number,
+  zglyFee: number,
+  isSelf?: boolean,
+) {
+  return isSelf ? 0 : ownerFee + getServiceZignalyFee(ownerFee, zglyFee);
 }
 
-export function getServiceZignalyFee(ownerFee: number) {
-  return ownerFee > 0 ? ZIGNALY_PROFIT_FEE : 0;
+export function getServiceZignalyFee(ownerFee: number, zglyFee: number) {
+  return ownerFee > 0 ? zglyFee : 0;
 }
 
-export function getServiceOwnerFee(totalFee: number) {
-  return !totalFee
-    ? 0
-    : Math.max(0, Math.min(75, +totalFee) - ZIGNALY_PROFIT_FEE);
+export function getServiceOwnerFee(totalFee: number, zglyFee: number) {
+  return !totalFee ? 0 : Math.max(0, Math.min(75, +totalFee) - zglyFee);
 }
 
 // adjustment for the way the backend handles the full discount
 export const adjustDiscountFromBackend = (
   backendValue: number,
   serviceTotalFee: number,
+  zglyFee: number,
 ) =>
-  backendValue === serviceTotalFee - ZIGNALY_PROFIT_FEE
-    ? serviceTotalFee
-    : backendValue;
+  backendValue === serviceTotalFee - zglyFee ? serviceTotalFee : backendValue;
 
 export const adjustDiscountToBackend = (
   uiValue: number,
   serviceTotalFee: number,
-) => uiValue - (uiValue === serviceTotalFee ? ZIGNALY_PROFIT_FEE : 0);
+  zglyFee: number,
+) => uiValue - (uiValue === serviceTotalFee ? zglyFee : 0);

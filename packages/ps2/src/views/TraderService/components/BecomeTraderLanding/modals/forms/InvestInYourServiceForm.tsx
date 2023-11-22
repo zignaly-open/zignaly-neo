@@ -25,6 +25,7 @@ import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
 import { Add } from '@mui/icons-material';
 import DepositModal from '../../../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { useZModal } from '../../../../../../components/ZModal/use';
+import { whitelabel } from '../../../../../../whitelabel';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
@@ -63,7 +64,7 @@ const InvestInYourServiceForm: React.FC<{
 
   const renderDepositCoin = () => (
     <ZigButton
-      id={'invest-modal__deposit'}
+      id={'invest-in-your-service-modal__deposit'}
       startIcon={<Add sx={{ fill: 'currentColor !important' }} />}
       sx={{
         fontWeight: 400,
@@ -105,10 +106,12 @@ const InvestInYourServiceForm: React.FC<{
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <InvestorDetailsForService
+        prefixId={'invest-in-your-service-modal'}
         service={{
           serviceLogo: '',
           successFee: service.successFee,
           serviceName: service.serviceName,
+          zglyFee: whitelabel.defaultSuccessFee,
         }}
       />
 
@@ -120,6 +123,7 @@ const InvestInYourServiceForm: React.FC<{
             textAlign={'center'}
             marginBottom={'20px'}
             whiteSpace={'pre-line'}
+            id={'invest-in-your-service-modal__minimum-balance-hint'}
           >
             {t('create.minimum-balance', {
               minValue,
@@ -132,7 +136,7 @@ const InvestInYourServiceForm: React.FC<{
             rules={{ required: true }}
             render={({ field }) => (
               <ZigInputAmount
-                id={'withdraw-modal__input-amount'}
+                id={'invest-in-your-service-modal__input-amount'}
                 label={t('edit-investment:form.inputAmount.label')}
                 coin={coin.id}
                 balance={coin.balance}
@@ -158,7 +162,7 @@ const InvestInYourServiceForm: React.FC<{
           type='submit'
           loading={isLoading}
           disabled={!!errors?.amountToInvest || !watch('amountToInvest')}
-          id={'create-service-modal__invest-and-create'}
+          id={'invest-in-your-service-modal__invest-and-create'}
           size='xlarge'
         >
           {t('create.action')}

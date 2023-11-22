@@ -10,7 +10,8 @@ export const ServiceListOption: React.FC<{
   label: string;
   id: string;
   isSubOption?: boolean;
-}> = ({ path, label, id, isSubOption }) => {
+  sideElement?: React.ReactNode;
+}> = ({ path, label, id, isSubOption, sideElement }) => {
   const location = useLocation();
   return (
     <MenuLink to={path} id={id} isSubOption={isSubOption}>
@@ -18,12 +19,14 @@ export const ServiceListOption: React.FC<{
         <Box
           display='flex'
           alignItems='center'
+          gap={sideElement && '5px'}
           justifyContent={isSubOption ? 'space-between' : 'center'}
           flex={1}
         >
           <ZigTypography color='inherit' fontWeight='inherit' variant={'h3'}>
             {label}
           </ZigTypography>
+          {sideElement}
           {isSubOption && location.pathname === path && <Check />}
         </Box>
       </HeadOption>
@@ -32,7 +35,12 @@ export const ServiceListOption: React.FC<{
 };
 
 export const RouteGroup: React.FC<{
-  routes: { path: string; name: string; id: string }[];
+  routes: {
+    path: string;
+    name: string;
+    id: string;
+    sideElement?: React.ReactNode;
+  }[];
   isSubGroup?: boolean;
 }> = ({ routes, isSubGroup }) => {
   return (
@@ -44,6 +52,7 @@ export const RouteGroup: React.FC<{
           key={r.path}
           label={r.name}
           isSubOption={isSubGroup}
+          sideElement={r.sideElement}
         />
       ))}
     </>

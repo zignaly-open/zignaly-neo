@@ -82,8 +82,8 @@ export const Networks = styled('div')`
   }
 
   span svg {
-    fill: #707185;
-    color: #707185;
+    fill: ${({ theme }) => theme.palette.lightGrayBlue};
+    color: ${({ theme }) => theme.palette.lightGrayBlue};
     transition: all 0.15s linear;
   }
 `;

@@ -35,12 +35,10 @@ jobs:
           # env-specific
           envkey_REACT_APP_WHITELABEL: ${{ vars.WHITELABEL }}
           envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
-          envkey_REACT_APP_TZ_TRACKER_ENDPOINT: ${{ vars.TZ_TRACKER_ENDPOINT }}
           envkey_REACT_APP_GTM_ID: ${{ vars.GTM_ID }}
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
           envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
-          envkey_REACT_APP_WALLET_API: ${{ vars.PS2_WALLET_API }}
           envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRAL_API }}
           envkey_REACT_APP_NO_INDEX: ${{ vars.NO_INDEX }}
           envkey_REACT_APP_SUBSCRIPTIONS_SHOP_URL: ${{ vars.SUBSCRIPTIONS_SHOP_URL }}
