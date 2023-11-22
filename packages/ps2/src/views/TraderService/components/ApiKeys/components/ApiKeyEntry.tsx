@@ -43,40 +43,69 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
 
   return (
     <ApiKey>
-      <ZigTypography variant='h3' sx={{ mb: 1.5 }}>
+      <ZigTypography
+        variant='h3'
+        sx={{ mb: 1.5 }}
+        id={`service-api__api-key-alias-${apiKey.id}`}
+      >
         {apiKey.alias}
       </ZigTypography>
       <Box sx={{ flexDirection: 'row', display: 'flex', gap: 3 }}>
         <Box sx={{ flex: 5, mr: 2 }}>
           <ZigCopyText
+            id={`service-api__api-key-copy-${apiKey.id}`}
             label={t('api-keys.api-key')}
             value={apiKey.key}
             onCopied={() => toast.success(t('action:copied'))}
           />
         </Box>
         <Box sx={{ flex: 2 }}>
-          <ZigTypography color={'neutral200'}>
+          <ZigTypography
+            color={'neutral200'}
+            id={`service-api__api-key-permissions-label-${apiKey.id}`}
+          >
             {t('api-keys.permission-label')}
           </ZigTypography>
           <TextWrapperRow>
-            <ZigTypography color={'neutral100'}>
-              {addReadIfMissing(apiKey.permissions)
-                .map((p) =>
-                  i18n.exists(`management:api-keys.permissions.${p}`)
+            <ZigTypography
+              color={'neutral100'}
+              id={`service-api__api-key-permissions-${apiKey.id}`}
+            >
+              {addReadIfMissing(apiKey.permissions).map((p, index) => (
+                <span
+                  id={`service-api__api-key-permissions-${
+                    apiKey.id
+                  }-${p.toLowerCase()}`}
+                  key={p.toLowerCase()}
+                >
+                  {i18n.exists(`management:api-keys.permissions.${p}`)
                     ? t(`api-keys.permissions.${p}`)
-                    : p,
-                )
-                .join(', ')}
+                    : p}
+                  {index !== addReadIfMissing(apiKey.permissions).length - 1 &&
+                    ', '}
+                </span>
+              ))}
             </ZigTypography>
           </TextWrapperRow>
         </Box>
         <Box sx={{ flex: 2 }}>
-          <ZigTypography color={'neutral200'}>
+          <ZigTypography
+            color={'neutral200'}
+            id={`service-api__api-key-restrictions-${apiKey.id}`}
+          >
             {t('api-keys.ip-restrictions')}
           </ZigTypography>
           <TextWrapperRow>
             <ZigTypography color={'neutral100'}>
-              {apiKey.ips.join(', ') || t('api-keys.ip-restrictions-none')}
+              {apiKey.ips.map((el, index) => (
+                <span
+                  id={`service-api__api-key-restrictions-${apiKey.id}-${index}`}
+                  key={el}
+                >
+                  {el}
+                  {index !== apiKey.ips.length - 1 && ', '}
+                </span>
+              )) || t('api-keys.ip-restrictions-none')}
             </ZigTypography>
           </TextWrapperRow>
         </Box>
@@ -86,7 +115,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
           }}
         >
           <ZigButton
-            id={'trader-api__edit-key'}
+            id={`service-api__api-key-edit-${apiKey.id}`}
             sx={{ mr: 2 }}
             onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
             startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
@@ -95,7 +124,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             {t('action:edit')}
           </ZigButton>
           <ZigButton
-            id={'trader-api__delete-key'}
+            id={`service-api__api-key-delete-${apiKey.id}`}
             sx={{ mr: 2 }}
             onClick={() =>
               askConfirm({
@@ -114,6 +143,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                     handleDeleteWrapper({ serviceId, keyId: apiKey.id, code }),
                   );
                 },
+                prefixId: `delete-api-key-modal`,
               })
             }
             color={'danger'}

@@ -22,6 +22,7 @@ function TypeTextConfirmModal({
   noLabel,
   noAction,
   cancelButton = true,
+  prefixId,
   ...props
 }: {
   close: () => void;
@@ -32,14 +33,26 @@ function TypeTextConfirmModal({
   const typedCorrectly =
     confirmWord?.toLocaleLowerCase() !== safeWord.toLocaleLowerCase();
   return (
-    <ZModal allowUnauth wide {...props} close={close} title={title}>
+    <ZModal
+      allowUnauth
+      wide
+      {...props}
+      close={close}
+      title={title}
+      id={prefixId}
+    >
       {!!description && (
-        <ZigTypography sx={{ mb: 1 }} textAlign={'center'}>
+        <ZigTypography
+          sx={{ mb: 1 }}
+          textAlign={'center'}
+          id={prefixId && `${prefixId}__description`}
+        >
           {description}
         </ZigTypography>
       )}
 
       <ZigInput
+        id={prefixId && `${prefixId}__type-to-confirm`}
         label={t('common:type-to-confirm', { word: safeWord.toUpperCase() })}
         onChange={(e) => {
           setConfirmWord(e.target.value);
@@ -57,6 +70,7 @@ function TypeTextConfirmModal({
         }}
       >
         <ZigButton
+          id={prefixId && `${prefixId}__confirm`}
           disabled={typedCorrectly}
           tooltip={
             typedCorrectly
@@ -84,6 +98,7 @@ function TypeTextConfirmModal({
               noAction?.();
               close();
             }}
+            id={prefixId && `${prefixId}__cancel`}
           >
             {noLabel || t('cancel')}
           </ZigButton>

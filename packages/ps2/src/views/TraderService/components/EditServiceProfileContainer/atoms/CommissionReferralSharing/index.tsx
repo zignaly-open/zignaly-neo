@@ -21,11 +21,13 @@ const CommissionReferralSharing = ({
   onChange,
   successFee,
   zglySuccessFee,
+  prefixId,
 }: {
   value: number;
   onChange: (value: number) => void;
   successFee: number;
   zglySuccessFee: number;
+  prefixId?: string;
 }) => {
   const { t } = useTranslation(['service', 'referrals-trader']);
   const [enable, setEnable] = useState(value > 0);
@@ -48,11 +50,18 @@ const CommissionReferralSharing = ({
 
   return (
     <Box display='flex' flexDirection={'column'}>
-      <ZigTypography>{t('edit.commission.title')}</ZigTypography>
-      <ZigTypography variant='body2' color='neutral400'>
+      <ZigTypography id={prefixId && `${prefixId}-title`}>
+        {t('edit.commission.title')}
+      </ZigTypography>
+      <ZigTypography
+        variant='body2'
+        color='neutral400'
+        id={prefixId && `${prefixId}-description`}
+      >
         {t('edit.commission.description')}&nbsp;
         <ZigButton
           variant={'text'}
+          id={prefixId && `${prefixId}-how-it-works`}
           endIcon={
             <ChevronRight
               sx={{
@@ -73,12 +82,14 @@ const CommissionReferralSharing = ({
       <Box display={'flex'} gap='25px' mt='20px'>
         {!successFee ? (
           <ZigAlertMessage
+            id={prefixId && `${prefixId}-alert-success-fee`}
             text={t('edit.commission.increase-success-fee')}
             warning
           />
         ) : (
           <>
             <ZigSwitch
+              id={prefixId && `${prefixId}-switch`}
               checked={enable}
               onChange={(e) => {
                 setEnable(e.target.checked);
@@ -93,6 +104,7 @@ const CommissionReferralSharing = ({
                       component={'div'}
                       variant='body2'
                       color={'neutral200'}
+                      id={prefixId && `${prefixId}-max-success-fee-label`}
                     >
                       {t('edit.commission.max-success-fee')}
                     </ZigTypography>
@@ -149,10 +161,12 @@ const CommissionReferralSharing = ({
                     textAlign={'center'}
                     component={'div'}
                     color={'neutral200'}
+                    id={prefixId && `${prefixId}-promo-preview-label`}
                   >
                     {t('edit.commission.promo-preview')}
                   </ZigTypography>
                   <CommissionPromo
+                    id={prefixId && `${prefixId}-promo-preview`}
                     traderBoost={currentBoost}
                     maxCommission={Math.round(100 * currentBoost)}
                   />
