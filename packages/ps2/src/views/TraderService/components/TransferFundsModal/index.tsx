@@ -92,6 +92,7 @@ function TransferModal({
 
   return (
     <ZModal
+      id={'transfer-funds-modal'}
       wide
       {...props}
       close={close}
@@ -99,7 +100,11 @@ function TransferModal({
       isLoading={!balance || isTransferring}
     >
       <ZigModalForm onSubmit={handleSubmit(onSubmit)} alignItems='center'>
-        <ZigTypography textAlign='center' component='div'>
+        <ZigTypography
+          textAlign='center'
+          component='div'
+          id={'transfer-funds-modal__description'}
+        >
           {t('transferFunds.description')}
         </ZigTypography>
 
@@ -112,7 +117,7 @@ function TransferModal({
               render={({ field }) => (
                 <Box maxWidth='440px'>
                   <ZigInputAmount
-                    id={'edit-investment-modal__input-amount'}
+                    id={'transfer-funds-modal__input-amount'}
                     wide={true}
                     label={
                       <ZigTypography variant='h2' textAlign='center'>
@@ -134,7 +139,7 @@ function TransferModal({
               )}
             />
             <ZigButton
-              id={'transfer__swap-zig'}
+              id={'transfer-funds-modal__change-side'}
               variant='outlined'
               narrow
               onClick={toggleDestination}
@@ -152,7 +157,10 @@ function TransferModal({
               alignItems='center'
               gap={1}
             >
-              <ZigTypography variant='h2'>
+              <ZigTypography
+                variant='h2'
+                id={'transfer-funds-modal__to-account-label'}
+              >
                 {t(
                   `transfer.${
                     fromTradingAccount ? 'toStandbyAccount' : 'toTradingAccount'
@@ -160,19 +168,33 @@ function TransferModal({
                 )}
               </ZigTypography>
               <Box display='flex' alignItems='center'>
-                <ZigTypography variant='bigNumber' color='neutral100' mr='8px'>
+                <ZigTypography
+                  variant='bigNumber'
+                  color='neutral100'
+                  mr='8px'
+                  id={'transfer-funds-modal__to-account-amount'}
+                >
                   {amountTransferValue
                     ? new BigNumber(amountTransferValue).toString()
                     : '--'}{' '}
                 </ZigTypography>
-                <ZigTypography variant='h3' color='neutral400'>
+                <ZigTypography
+                  variant='h3'
+                  color='neutral400'
+                  id={'transfer-funds-modal__to-account-coin'}
+                >
                   {service?.ssc ?? 'USDT'}
                 </ZigTypography>
               </Box>
-              <ZigTypography variant='body2' mt='-3px'>
+              <ZigTypography
+                variant='body2'
+                mt='-3px'
+                id={'transfer-funds-modal__to-account-available-label'}
+              >
                 {t('transfer.deposit-available')}
                 <ZigTypography variant='body2' color='neutral100' ml='4px'>
                   <NumericFormat
+                    id={'transfer-funds-modal__to-account-available'}
                     value={balanceTo}
                     displayType={'text'}
                     suffix={` ${service?.ssc ?? 'USDT'}`}
@@ -184,7 +206,7 @@ function TransferModal({
 
             <ZigModalActions>
               <ZigButton
-                id={'transfer__transfer-now'}
+                id={"'transfer-funds-modal__transfer-now"}
                 disabled={!isValid}
                 size='large'
                 type='submit'

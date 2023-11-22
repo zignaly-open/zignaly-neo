@@ -71,10 +71,15 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
       ]) => (
         <Layout>
           <Box>
-            <ZigTypography variant='h2' color='neutral100'>
+            <ZigTypography
+              variant='h2'
+              color='neutral100'
+              id={'service-manage-funds__total-funds-label'}
+            >
               {t('totalFunds')}
             </ZigTypography>
             <ZigPriceLabel
+              id={'service-manage-funds__total-funds'}
               variant={'bigNumber'}
               coinProps={{
                 color: 'highlighted',
@@ -89,23 +94,44 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
           <BottomContainer>
             <Box>
               <Circle />
-              <ZigTypography variant='h2' color='neutral100'>
+              <ZigTypography
+                variant='h2'
+                color='neutral100'
+                id={'service-manage-funds__trading-funds-title'}
+              >
                 {t('tradingFunds')}
               </ZigTypography>
-              <ZigTypography color='neutral200'>
+              <ZigTypography
+                color='neutral200'
+                id={'service-manage-funds__trading-funds-description'}
+              >
                 {t('tradingFunds-desc')}
               </ZigTypography>
               <TradingFunds>
-                <ZigTypography color='neutral400' variant='body2'>
+                <ZigTypography
+                  color='neutral400'
+                  variant='body2'
+                  id={
+                    'service-manage-funds__trading-funds-available-trading-label'
+                  }
+                >
                   {t('availableTrading')}
                   <InlinePriceLabel
+                    id={'service-manage-funds__trading-funds-available-trading'}
                     value={parseFloat(balance.staSscFree)}
                     coin={service?.ssc ?? 'USDT'}
                   />
                 </ZigTypography>
-                <ZigTypography color='neutral400' variant='body2'>
+                <ZigTypography
+                  color='neutral400'
+                  variant='body2'
+                  id={
+                    'service-manage-funds__trading-funds-allocated-trading-label'
+                  }
+                >
                   {t('allocatedTrading')}
                   <InlinePriceLabel
+                    id={'service-manage-funds__trading-funds-allocated-trading'}
                     value={parseFloat(balance.staSscSum)}
                     coin={service?.ssc ?? 'USDT'}
                   />
@@ -129,7 +155,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               />
               <HorizontalConnection />
               <ZigButton
-                id={'trader-service__transfer'}
+                id={'service-manage-funds__transfer'}
                 variant='outlined'
                 size='large'
                 onClick={onClickTransfers}
@@ -145,22 +171,44 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
             </MiddleContainer>
             <Box>
               <Circle />
-              <ZigTypography variant='h2' color='neutral100'>
+              <ZigTypography
+                variant='h2'
+                color='neutral100'
+                id={'service-manage-funds__standby-funds-title'}
+              >
                 {t('standbyFunds')}
               </ZigTypography>
-              <ZigTypography color='neutral200'>
+              <ZigTypography
+                color='neutral200'
+                id={'service-manage-funds__standby-funds-description'}
+              >
                 {t('standbyFunds-desc')}
               </ZigTypography>
               <TradingFunds>
-                <ZigTypography color='neutral400' variant='body2'>
+                <ZigTypography
+                  color='neutral400'
+                  variant='body2'
+                  id={
+                    'service-manage-funds__standby-funds-available-withdrawals-label'
+                  }
+                >
                   {t('availableWithdrawals')}
                   <InlinePriceLabel
+                    id={
+                      'service-manage-funds__standby-funds-available-withdrawals'
+                    }
                     value={parseFloat(balance.scaSscSum)}
                     coin={service?.ssc ?? 'USDT'}
                   />
                 </ZigTypography>
 
-                <ZigTypography color='neutral400' variant='body2'>
+                <ZigTypography
+                  color='neutral400'
+                  variant='body2'
+                  id={
+                    'service-manage-funds__standby-funds-needed-snapshots-label'
+                  }
+                >
                   {t('neededSnapshot')}
                   <Tooltip
                     title={
@@ -179,6 +227,9 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   >
                     <div>
                       <InlinePriceLabel
+                        id={
+                          'service-manage-funds__standby-funds-needed-snapshots'
+                        }
                         value={
                           management?.claims < 0
                             ? parseFloat((-management?.claims).toString())
@@ -190,16 +241,21 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   </Tooltip>
                 </ZigTypography>
 
-                <ZigTypography color='neutral400' variant='body2'>
+                <ZigTypography
+                  color='neutral400'
+                  variant='body2'
+                  id={'service-manage-funds__standby-funds-min-balance-label'}
+                >
                   {t('minBalance.title')}
                   <InlinePriceLabel
+                    id={'service-manage-funds__standby-funds-min-balance'}
                     value={parseFloat(management.minimumSca)}
                     coin={service?.ssc ?? 'USDT'}
                   />
                   <ZigButton
                     sx={{ ml: 1.5 }}
                     variant={'text'}
-                    id={'trader-service__edit'}
+                    id={'service-manage-funds__standby-funds-edit'}
                     startIcon={
                       <EditIcon sx={{ width: '12px', height: '12px' }} />
                     }

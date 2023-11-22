@@ -14,6 +14,7 @@ export type ConfirmModalProps = {
   yesButtonProps?: Partial<ZigButtonProps>;
   noLabel?: string | JSX.Element;
   noAction?: () => void;
+  prefixId?: string;
 };
 
 function ConfirmModal({

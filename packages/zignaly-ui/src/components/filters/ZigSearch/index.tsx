@@ -5,7 +5,7 @@ import { Search } from "@mui/icons-material";
 import { ZigCrossIcon, ZigResetIcon } from "../../../icons";
 import { ZigInputStyled } from "./styles";
 
-const ZigSearch = ({ value, onChange }: ZigSearchProps) => {
+const ZigSearch = ({ value, onChange, id }: ZigSearchProps) => {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
@@ -27,6 +27,7 @@ const ZigSearch = ({ value, onChange }: ZigSearchProps) => {
         >
           <Box position="absolute" width={"100%"} height={"100%"} p="6px 45px 6px 6px">
             <ZigInputStyled
+              id={id && `${id}-input`}
               ref={inputRef}
               wide
               value={value}
@@ -43,6 +44,7 @@ const ZigSearch = ({ value, onChange }: ZigSearchProps) => {
                         height: "24px",
                         width: "24px",
                       }}
+                      id={id && `${id}-input-reset`}
                     >
                       <ZigResetIcon onClick={() => onChange("")} />
                     </IconButton>
@@ -59,6 +61,7 @@ const ZigSearch = ({ value, onChange }: ZigSearchProps) => {
             sx={{ height: "32px", width: "32px", marginLeft: "auto" }}
           >
             <ZigCrossIcon
+              id={id && `${id}-close`}
               width={"24px"}
               height={"24px"}
               style={{ minHeight: "24px", minWidth: "24px" }}
@@ -69,6 +72,7 @@ const ZigSearch = ({ value, onChange }: ZigSearchProps) => {
       <Box position="absolute" right={0}>
         <Fade in={!expanded}>
           <IconButton
+            id={id}
             onClick={() => {
               setExpanded(true);
               setTimeout(() => {

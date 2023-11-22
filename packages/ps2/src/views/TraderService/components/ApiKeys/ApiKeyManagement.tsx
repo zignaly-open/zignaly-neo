@@ -36,8 +36,10 @@ const ApiKeyManagement: React.FC = () => {
             mr: 5,
           }}
         >
-          <ZigTypography variant={'h1'}>{t('api-keys.title')}</ZigTypography>
-          <ZigTypography variant={'body1'}>
+          <ZigTypography variant={'h1'} id={'service-api__title'}>
+            {t('api-keys.title')}
+          </ZigTypography>
+          <ZigTypography variant={'body1'} id={'service-api__description'}>
             {t('api-keys.description')}
           </ZigTypography>
         </Box>
@@ -47,7 +49,7 @@ const ApiKeyManagement: React.FC = () => {
           }}
         >
           <ZigButton
-            id={'trader-api__create-key'}
+            id={'service-api__create-key'}
             onClick={() =>
               showModal(CreateApiKey, {
                 serviceId,
@@ -68,13 +70,18 @@ const ApiKeyManagement: React.FC = () => {
       ) : (
         <ApiKeysContainer>
           {!!keys.length && (
-            <ZigTypography color='neutral200' variant={'h2'}>
+            <ZigTypography
+              color='neutral200'
+              variant={'h2'}
+              id={'service-api__manage-keys-label'}
+            >
               {t('api-keys.manage-keys')}
             </ZigTypography>
           )}
 
           {!keys.length && (
             <Stub
+              id={'service-api__no-keys'}
               title={t('api-keys.no-keys')}
               description={t('api-keys.no-keys-description')}
             />

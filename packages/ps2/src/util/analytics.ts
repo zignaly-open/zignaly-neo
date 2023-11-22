@@ -39,7 +39,7 @@ if (
         intercomPlugin({
           appId: whitelabel.intercomId,
         }),
-    ],
+    ].filter(Boolean),
   });
 }
 

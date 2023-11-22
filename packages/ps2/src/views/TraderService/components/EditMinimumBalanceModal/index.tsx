@@ -63,14 +63,24 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   }, []);
 
   return (
-    <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
+    <ZModal
+      id={'edit-minimum-balance-modal'}
+      wide
+      {...props}
+      title={t('minBalanceModal.title')}
+      close={close}
+    >
       <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
-        <ZigTypography textAlign={'center'}>
+        <ZigTypography
+          textAlign={'center'}
+          id={'edit-minimum-balance-modal__description'}
+        >
           {t('minBalanceModal.desc')}
         </ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <InputAmountAdvanced
+          id={'edit-minimum-balance-modal__input-amount'}
           label={t('common:amount') + ':'}
           placeholder={t('minBalanceModal.placeholder')}
           labelBalance={t('minBalanceModal.labelBalance')}
@@ -95,7 +105,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
 
         <ZigModalActions>
           <ZigButton
-            id={'edit-balance__save'}
+            id={'edit-minimum-balance-modal__save'}
             loading={isLoadingManagement || isLoadingService || isUpdating}
             disabled={!isValid}
             size='xlarge'
