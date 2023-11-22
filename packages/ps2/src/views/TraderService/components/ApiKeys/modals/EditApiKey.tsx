@@ -167,7 +167,7 @@ function EditApiKeysModal({
             />
             <Tooltip title={t('api-keys.api-settings-tooltip')}>
               <ZigTypography id={'edit-key-modal__api-asterisks'}>
-                ********
+                {'********'}
               </ZigTypography>
             </Tooltip>
           </div>
