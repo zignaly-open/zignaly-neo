@@ -277,6 +277,13 @@ const ZigDrawer = () => {
                             '.intercom-launcher',
                           ) as HTMLElement
                         )?.click();
+                        // eslint-disable-next-line no-console
+                        console.log(
+                          document.querySelector(
+                            '.intercom-launcher',
+                          ) as HTMLElement,
+                          lightWeightIntercom,
+                        );
                         setLightWeightIntercom(false);
                       } else {
                         (
@@ -284,6 +291,13 @@ const ZigDrawer = () => {
                             '.intercom-launcher-frame',
                           ) as HTMLElement
                         )?.click();
+                        // eslint-disable-next-line no-console
+                        console.log(
+                          document.querySelector(
+                            '.intercom-launcher-frame',
+                          ) as HTMLElement,
+                          lightWeightIntercom,
+                        );
                       }
                     }}
                   >
