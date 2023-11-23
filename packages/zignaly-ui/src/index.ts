@@ -95,3 +95,5 @@ export { HeaderLinksContainer } from "./components/navigation/Header/styles";
 export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
 export { getGlobalAppStyle } from "./theme/globalAppStyle";
 export { fixSearchParams } from "./utils/search";
+
+export * as fonts from "./theme/fonts";

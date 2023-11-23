@@ -49,7 +49,13 @@ export default {
         utils: path.resolve(__dirname, "./src/utils"),
       },
     }),
-    url(),
+    url({
+      // by default, rollup-plugin-url will not handle font files
+      include: ['**/*.otf', '**/*.svg', '**/*.png', '**/*.jpg', '**/*.gif'],
+      // setting infinite limit will ensure that the files
+      // are always bundled with the code, not copied to /dist
+      limit: Infinity,
+    }),
     svgr({icon: true}),
   ],
 }
