@@ -33,6 +33,7 @@ export default {
     linkedin: 'https://cmania.co/zig-linkedin',
   },
   loadFontsFromGoogle: true,
+  defaultSuccessFee: 10,
   themeOverrides: {
     fontFamily: ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
     fontFamilyH1H6: [
@@ -54,7 +55,6 @@ export default {
       highlighted: '#1298C9',
       links: '#1298C9',
     },
-    defaultSuccessFee: 10,
     boxShadows: {
       tableHeader: 'rgba(0,0,0,.5)',
     },
