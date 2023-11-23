@@ -8,7 +8,7 @@ export default {
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
-    [Features.Trader]: false,
+    [Features.CreateService]: false,
     [Features.NewSignup]: false,
   },
   locales: ['en', 'pt'],

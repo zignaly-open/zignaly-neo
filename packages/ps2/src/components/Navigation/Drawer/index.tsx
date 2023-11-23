@@ -211,7 +211,7 @@ const ZigDrawer = () => {
                       )}
                     </List>
                   </Collapse>
-                  {isFeatureOn(Features.Trader) && (
+                  {isFeatureOn(Features.CreateService) && (
                     <ListItem disablePadding onClick={handleDrawerToggle}>
                       <ListItemButton
                         id='drawer__become-trader'

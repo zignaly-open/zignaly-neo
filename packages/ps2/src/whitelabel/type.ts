@@ -4,7 +4,7 @@ export enum Features {
   AccessLevels,
   Rewards,
   Referrals,
-  Trader,
+  CreateService,
   NewSignup,
   Subscriptions,
   Kyc,

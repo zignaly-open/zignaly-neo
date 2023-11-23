@@ -62,7 +62,7 @@ const Header: React.FC = () => {
                   >
                     {t('navigation-menu.profit-sharing')}
                   </NavigationLink>
-                  {isFeatureOn(Features.Trader) && md && (
+                  {isFeatureOn(Features.CreateService) && md && (
                     <NavigationLink
                       id='menu__become-trader'
                       to={ROUTE_BECOME_TRADER}
