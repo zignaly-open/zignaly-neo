@@ -20,7 +20,6 @@ export default {
     BNB: 0.0001,
     USDC: 0.0001,
   },
-  translationOverrides: false,
   xSource: 'freedom',
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',

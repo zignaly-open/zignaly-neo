@@ -13,13 +13,16 @@ export enum Features {
 // yes, the trailing slash IS important
 export type OverrideableEndpoints = 'marketplace/';
 
+interface TranslationOverrides {
+  [x: string]: string | TranslationOverrides;
+}
+
 export type WhitelabelOverride = {
   title: string;
   helpUrl: string;
   locales?: string[];
-  promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
-  translationOverrides?: boolean;
+  translationOverrides?: TranslationOverrides;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;

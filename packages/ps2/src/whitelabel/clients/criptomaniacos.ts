@@ -19,7 +19,38 @@ export default {
     tos: 'https://www.lastra.app/termos',
     privacyPolicy: 'https://www.lastra.app/politica-privacidade/',
   },
-  translationOverrides: true,
+  translationOverrides: {
+    en: {
+      common: {
+        'navigation-menu': {
+          'profit-sharing': 'Explore the best investment strategies',
+        },
+        'main-menu': {
+          'dropdown-link-helpDocs': 'Support',
+        },
+      },
+      marketplace: {
+        'invest-in-services': 'Invest in the best strategies',
+        'invest-in-services-explainer':
+          'Discover the new investment model from Lastra, where you only pay when you make profit and need $1 to start.',
+      },
+    },
+    pt: {
+      common: {
+        'navigation-menu': {
+          'profit-sharing': 'Procurar Carteira',
+        },
+        'main-menu': {
+          'dropdown-link-helpDocs': 'Suporte',
+        },
+      },
+      marketplace: {
+        'invest-in-services': 'Invista nas Melhores Estratégias',
+        'invest-in-services-explainer':
+          'Conheça as carteiras da Lastra, em novo formato que você paga somente quando lucra! Comece hoje com apenas $1!',
+      },
+    },
+  },
   xSource: 'criptomaniacos',
   mainAppLink: ROUTE_DASHBOARD,
   background: '#0D0E0E',
