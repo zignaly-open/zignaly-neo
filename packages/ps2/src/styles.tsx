@@ -60,7 +60,7 @@ export default () => {
     <>
       <LocalFontsStyle />
       <GlobalAppStyle />
-      <IntercomStyle />
+      {whitelabel.intercomId && <IntercomStyle />}
       {whitelabel.loadFontsFromGoogle && (
         <GoogleFontLoader
           fonts={[

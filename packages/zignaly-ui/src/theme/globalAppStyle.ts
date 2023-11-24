@@ -6,7 +6,7 @@ export const getGlobalAppStyle = ({
   background = "#070819",
   backgroundImage = "/background-dark.png",
 }) => createGlobalStyle`
-body {
+  body {
     padding: 0;
     margin: 0;
     background-color: ${background};
@@ -17,6 +17,11 @@ body {
     color: #fff;
     overflow: overlay;
     color-scheme: dark;
+  }
+  @media (max-width: 600px) {
+    .intercom-launcher-frame .intercom-lightweight-app-launcher .intercom-launcher{
+      display: none !important;
+    }
   }
 
   /* Use default scrollbar on Safari because it doesn't support overflow: overlay */
