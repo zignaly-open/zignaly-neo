@@ -141,14 +141,24 @@ function EditApiKeysModal({
         )}
 
         <ZigCopyText
-          id={isCreate ? 'create-new-key-modal__copy' : 'edit-key-modal__copy'}
+          id={
+            isCreate
+              ? 'create-new-key-modal__input-api-key'
+              : 'edit-key-modal__input-api-key'
+          }
+          copyElementId={
+            isCreate
+              ? 'create-new-key-modal__copy-api-key'
+              : 'edit-key-modal__copy-api-key'
+          }
           label={t('api-keys.api-key')}
           value={apiKey.key}
           onCopied={() => toast.success(t('action:copied'))}
         />
         {isCreate ? (
           <ZigCopyText
-            id={'create-new-key-modal__copy-api-secret'}
+            id={'create-new-key-modal__input-api-secret'}
+            copyElementId={'create-new-key-modal__copy-api-secret'}
             label={
               <MultilineLabel
                 title={t('api-keys.api-secret')}
@@ -199,7 +209,17 @@ function EditApiKeysModal({
                       onChange={() => {}}
                     />
                   }
-                  label={t('api-keys.permissions-enable.read')}
+                  label={
+                    <span
+                      id={
+                        isCreate
+                          ? 'create-new-key-modal__enabled-read-label'
+                          : 'edit-key-modal__enabled-read-label'
+                      }
+                    >
+                      {t('api-keys.permissions-enable.read')}
+                    </span>
+                  }
                 />
               </Tooltip>
             </Grid>
@@ -217,7 +237,17 @@ function EditApiKeysModal({
                     disabled={isLoading}
                   />
                 }
-                label={t('api-keys.permissions-enable.canTrade')}
+                label={
+                  <span
+                    id={
+                      isCreate
+                        ? 'create-new-key-modal__can-trade-label'
+                        : 'edit-key-modal__can-trade-label'
+                    }
+                  >
+                    {t('api-keys.permissions-enable.canTrade')}
+                  </span>
+                }
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -234,7 +264,17 @@ function EditApiKeysModal({
                     disabled={isLoading}
                   />
                 }
-                label={t('api-keys.permissions-enable.futuresTrade')}
+                label={
+                  <span
+                    id={
+                      isCreate
+                        ? 'create-new-key-modal__futures-trade-label'
+                        : 'edit-key-modal__futures-trade-label'
+                    }
+                  >
+                    {t('api-keys.permissions-enable.futuresTrade')}
+                  </span>
+                }
               />
             </Grid>
           </Grid>

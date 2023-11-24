@@ -212,7 +212,10 @@ const EditServiceProfileContainer: React.FC<{
                   id={'edit-service-profile__service-max-sbt'}
                   InputProps={{
                     endAdornment: (
-                      <InputAdornment position='end'>
+                      <InputAdornment
+                        position='end'
+                        id={'edit-service-profile__service-max-sbt-coin'}
+                      >
                         {service.ssc}
                       </InputAdornment>
                     ),
@@ -272,7 +275,7 @@ const EditServiceProfileContainer: React.FC<{
                   render={({ field }) => (
                     <CommissionReferralSharing
                       prefixId={
-                        'edit-service-profile__service-commision-referral'
+                        'edit-service-profile__service-commission-slider'
                       }
                       successFee={+successFee}
                       zglySuccessFee={service?.zglySuccessFee}
@@ -315,13 +318,19 @@ const EditServiceProfileContainer: React.FC<{
               justifyContent='center'
               display='flex'
             >
-              <ZigTypography variant='h4' color='neutral400'>
+              <ZigTypography
+                variant='h4'
+                color='neutral400'
+                id={'edit-service-profile__service-marketplace-requirements'}
+              >
                 <Trans
-                  id={'edit-service-profile__service-marketplace-requirements'}
                   i18nKey={'edit.visibility.marketplace-requirements'}
                   t={t}
                   components={[
                     <ZigLink
+                      id={
+                        'edit-service-profile__service-marketplace-requirements-link'
+                      }
                       href={HELP_CREATE_SERVICE_MARKETPLACE_URL}
                       key={0}
                     />,

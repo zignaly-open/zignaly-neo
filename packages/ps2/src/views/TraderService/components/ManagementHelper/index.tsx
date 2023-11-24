@@ -8,9 +8,16 @@ const ManagementHelper: React.FC = () => {
   const { t } = useTranslation('management');
   return (
     <Box sx={{ mt: 10, textAlign: 'center' }}>
-      <ZigTypography color='neutral400'>
+      <ZigTypography
+        color='neutral400'
+        id={'service-manage-funds__helper-label'}
+      >
         <Trans i18nKey={'helper'} t={t}>
-          <ZigLink href={HELP_MANAGE_FUNDS_URL} target='_blank' />
+          <ZigLink
+            href={HELP_MANAGE_FUNDS_URL}
+            target='_blank'
+            id={'service-manage-funds__helper-link'}
+          />
         </Trans>
       </ZigTypography>
     </Box>
