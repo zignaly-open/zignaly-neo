@@ -7,6 +7,8 @@
   "table-search-emptyMessage": "No services in the Marketplace",
   "invest-in-services": "Invest in Profit Sharing",
   "invest-in-services-explainer": "Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1.",
+  "investment-preferences": "Investment preferences",
+  "n-profit-sharing-services": "{{count}} Profit Sharing Services",
   "table": {
     "service-name": "Service Name",
     "service-name-mobile": "Service",

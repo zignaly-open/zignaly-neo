@@ -18,3 +18,9 @@ export type MarketplaceTableDataType = {
     investors: number;
   };
 };
+
+export type MarketplaceFilters = {
+  returns?: number;
+  investors?: number;
+  invested?: number;
+};

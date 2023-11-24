@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "@mui/system";
 import { Meta, StoryObj } from "@storybook/react";
 import ZigSearch from "./index";
 import { Box } from "@mui/material";
