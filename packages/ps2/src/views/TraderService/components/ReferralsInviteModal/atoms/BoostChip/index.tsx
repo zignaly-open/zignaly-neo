@@ -6,12 +6,14 @@ import { ZigTypography } from '@zignaly-open/ui';
 const BoostChip = ({
   boost,
   showBolt,
+  id,
 }: {
   boost: number;
   showBolt?: boolean;
+  id?: string;
 }) => (
   <BoostBox className='boost-chip-multiplier'>
-    <ZigTypography fontSize={13}>
+    <ZigTypography fontSize={13} id={id}>
       {+boost.toFixed(2)}
       {'x'}
     </ZigTypography>
