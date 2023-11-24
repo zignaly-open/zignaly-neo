@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import Router from './Router';
 import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
-import * as Sentry from '@sentry/browser';
+// import * as Sentry from '@sentry/browser';
 import {
   ChartGradients,
   ThemeProvider as ThemeInheritorStyled,
@@ -28,17 +28,18 @@ import ZModal from './components/ZModal';
 import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
 import './util/i18n/i18nextWhitelabel';
 
-if (
-  process.env.NODE_ENV === 'production' &&
-  process.env.REACT_APP_SENTRY_RELEASE &&
-  process.env.REACT_APP_SENTRY_DNS
-) {
-  Sentry.init({
-    dsn: process.env.REACT_APP_SENTRY_DNS,
-    debug: false,
-    release: process.env.REACT_APP_SENTRY_RELEASE,
-  });
-}
+// TODO: use Sentry
+// if (
+//   process.env.NODE_ENV === 'production' &&
+//   process.env.REACT_APP_SENTRY_RELEASE &&
+//   process.env.REACT_APP_SENTRY_DNS
+// ) {
+//   Sentry.init({
+//     dsn: process.env.REACT_APP_SENTRY_DNS,
+//     debug: false,
+//     release: process.env.REACT_APP_SENTRY_RELEASE,
+//   });
+// }
 
 export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
   children,
