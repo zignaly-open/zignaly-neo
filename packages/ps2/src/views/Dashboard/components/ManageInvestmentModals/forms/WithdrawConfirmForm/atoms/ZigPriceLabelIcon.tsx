@@ -1,7 +1,6 @@
+import React from 'react';
 import { Box } from '@mui/material';
 import { ZigCoinIcon, ZigPriceLabel } from '@zignaly-open/ui';
-import {} from '@zignaly-open/ui/icons';
-import React from 'react';
 
 export const ZigPriceLabelIcon = ({
   amount,
