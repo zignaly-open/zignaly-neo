@@ -16,14 +16,16 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  ZigArrowBottomIcon,
   ZigButton,
   ZigDropdown,
   ZigDropdownHandleType,
-  ZigLoginUserIcon,
-  ZigPlusIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
+import {
+  ZigArrowBottomIcon,
+  ZigLoginUserIcon,
+  ZigPlusIcon,
+} from '@zignaly-open/ui/icons';
 import {
   ROUTE_2FA,
   ROUTE_DASHBOARD,

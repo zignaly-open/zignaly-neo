@@ -4,9 +4,9 @@ import {
   ZigButton,
   ZigModalActions,
   ZigPriceLabel,
-  ZigSwapCircleIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
+import { ZigSwapCircleIcon } from '@zignaly-open/ui/icons';
 
 import { useTranslation } from 'react-i18next';
 import { SwapCoinsConfirmFormProps } from './types';

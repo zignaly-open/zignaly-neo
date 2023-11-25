@@ -1,3 +1,5 @@
+export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg";
+
 // Core
 export { ThemeProvider as ThemeProviderMui } from "@mui/material";
 export { default as ThemeProvider } from "utils/ThemeProvider";
@@ -63,14 +65,8 @@ export { default as DateLabel } from "./components/display/ZigTable/components/D
 export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
-// Chart
-export * from "./components/display/ZigChart";
-
 // TODO: @Nikita9901 pls replace with mui and add stories
 export { default as CheckBox } from "./components/inputs/CheckBox";
-
-// Icons
-export * from "./icons";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
@@ -95,5 +91,3 @@ export { HeaderLinksContainer } from "./components/navigation/Header/styles";
 export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
 export { getGlobalAppStyle } from "./theme/globalAppStyle";
 export { fixSearchParams } from "./utils/search";
-
-export * as fonts from "./theme/fonts";

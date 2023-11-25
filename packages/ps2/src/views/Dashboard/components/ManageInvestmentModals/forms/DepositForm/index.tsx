@@ -11,10 +11,10 @@ import {
   ZigCopyText,
   ZigLink,
   ZigButton,
-  ZigListIcon,
   trimZeros,
   ZigModalForm,
 } from '@zignaly-open/ui';
+import { ZigListIcon } from '@zignaly-open/ui/icons';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box, Grid } from '@mui/material';

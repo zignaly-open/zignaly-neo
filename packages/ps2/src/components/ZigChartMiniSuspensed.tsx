@@ -2,8 +2,9 @@ import { lazily } from 'react-lazily';
 import React, { Suspense } from 'react';
 import { Loader } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
+import { ZigChartMini } from '@zignaly-open/ui/charts';
 
-const { ZigChartMini } = lazily(() => import('@zignaly-open/ui'));
+// const { ZigChartMini } = lazily(() => import('@zignaly-open/ui/charts'));
 
 const ZigChartMiniStub = (
   <Box

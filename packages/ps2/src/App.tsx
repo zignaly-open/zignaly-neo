@@ -3,7 +3,7 @@ import Router from './Router';
 import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 // import * as Sentry from '@sentry/browser';
 import {
-  ChartGradients,
+  // ChartGradients,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
   // has to be imported from the same module from where we call the show toast
@@ -92,7 +92,9 @@ function App() {
             <UpdateChecker />
             <UserKycChecker />
             <DateLocaleFixer />
-            <ChartGradients />
+            {/*<Suspense>*/}
+            {/*  <ChartGradients />*/}
+            {/*</Suspense>*/}
             <Router />
             <BottomNavigation />
           </>

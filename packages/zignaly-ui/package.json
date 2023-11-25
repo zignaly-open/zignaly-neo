@@ -4,9 +4,19 @@
   "description": "A library of interface resources designed by Zignaly.",
   "module": "./lib/packages/zignaly-ui/src/index.js",
   "main": "./lib/cjs.js",
-  "types": "./lib/index.d.ts",
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./icons": { "import": "./lib/icons.js" },
+    "./fonts": { "import": "./lib/fonts.js" },
+    "./charts": { "import": "./lib/charts.js" },
+    ".": { "import": "./lib/index.js" }
+  },
+  "typesVersions": {
+    "*": {
+      "*": ["./lib/*", "./lib/index.d.ts"]
+    }
   },
   "sideEffects": false,
   "scripts": {

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
-import { ZigArrowOutIcon } from '@zignaly-open/ui';
+import { ZigArrowOutIcon } from '@zignaly-open/ui/icons';
 import { UserAccessLevel as Level } from '../../apis/user/types';
 import {
   useIsAuthenticated,

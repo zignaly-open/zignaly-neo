@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { fonts, getGlobalAppStyle } from '@zignaly-open/ui';
+import { getGlobalAppStyle } from '@zignaly-open/ui';
 // TODO: fix this, smth weird with type defs not loading
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -30,15 +30,15 @@ const IntercomStyle = createGlobalStyle`
 `;
 
 // Copied from webapp-neo
-const LocalFontsStyle = !whitelabel.loadFontsFromGoogle
-  ? fonts.avenirNext
-  : null;
+// const LocalFontsStyle = !whitelabel.loadFontsFromGoogle
+//   ? fonts.avenirNext
+//   : null;
 
 export default () => {
   const theme = useTheme();
   return (
     <>
-      <LocalFontsStyle />
+      <Suspense fallback={null}></Suspense>
       <GlobalAppStyle />
       {whitelabel.intercomId && <IntercomStyle />}
       {whitelabel.loadFontsFromGoogle && (

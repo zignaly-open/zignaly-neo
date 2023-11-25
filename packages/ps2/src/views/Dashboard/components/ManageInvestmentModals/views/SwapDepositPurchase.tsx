@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  CenteredLoader,
-  ZigButton,
-  ZigPlusIcon,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { CenteredLoader, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigPlusIcon } from '@zignaly-open/ui/icons';
 import { useTranslation } from 'react-i18next';
 import { ChooseDepositTypeViews } from '../types';
 import ChooseBetweenTwo from './ChooseBetweenTwo';

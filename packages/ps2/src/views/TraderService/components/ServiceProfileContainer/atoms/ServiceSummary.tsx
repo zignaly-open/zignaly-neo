@@ -1,7 +1,8 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { trimZeros, ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
+import { trimZeros, ZigTypography } from '@zignaly-open/ui';
+import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';

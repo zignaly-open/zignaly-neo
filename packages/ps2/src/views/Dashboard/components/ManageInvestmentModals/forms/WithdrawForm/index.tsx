@@ -8,10 +8,10 @@ import {
   ZigInput,
   CenteredLoader,
   ZigInputAmount,
-  ZigListIcon,
   ZigModalActions,
   ZigModalForm,
 } from '@zignaly-open/ui';
+import { ZigListIcon } from '@zignaly-open/ui/icons';
 import { WithdrawFormData } from './types';
 import { Box, useMediaQuery } from '@mui/material';
 import {

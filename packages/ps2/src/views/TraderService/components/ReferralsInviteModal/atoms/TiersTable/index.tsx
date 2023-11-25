@@ -1,10 +1,7 @@
 import React from 'react';
 import { Box, Tooltip, useTheme } from '@mui/material';
-import {
-  ZigClockIcon,
-  ZigTypography,
-  ZigUserFilledIcon,
-} from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import { ZigClockIcon, ZigUserFilledIcon } from '@zignaly-open/ui/icons';
 import { MAX_FEES_AMOUNT, getMaxEarnings } from '../../util';
 import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';

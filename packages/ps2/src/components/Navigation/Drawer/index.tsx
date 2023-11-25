@@ -16,14 +16,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
+import { Avatar, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
-  Avatar,
-  ZigButton,
-  ZigGlobeLanguages,
+  ZigGlobeLanguagesIcon,
   ZigPlusIcon,
-  ZigTypography,
   ZigUserIcon,
-} from '@zignaly-open/ui';
+} from '@zignaly-open/ui/icons';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
   useChangeLocale,
@@ -336,7 +334,7 @@ const ZigDrawer = () => {
               <ListItem disablePadding>
                 <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
                   <ListItemIcon sx={{ minWidth: '48px' }}>
-                    <ZigGlobeLanguages
+                    <ZigGlobeLanguagesIcon
                       color={theme.palette.neutral300}
                       width={'26px'}
                       height={'26px'}

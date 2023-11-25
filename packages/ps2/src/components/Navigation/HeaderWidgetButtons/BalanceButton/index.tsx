@@ -1,11 +1,7 @@
 import React, { useMemo } from 'react';
 import { Box, Divider } from '@mui/material';
-import {
-  ZigButton,
-  ZigCaretRightIcon,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigCaretRightIcon } from '@zignaly-open/ui/icons';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../../routes';

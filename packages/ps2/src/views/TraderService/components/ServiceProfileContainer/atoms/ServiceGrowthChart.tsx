@@ -8,12 +8,12 @@ import {
 import {
   getPrecisionForCoin,
   ZigButtonGroupInput,
-  ZigChart,
   ZigPriceLabel,
   CenteredLoader,
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
+import { ZigChart } from '@zignaly-open/ui/charts';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   ChartWrapper,

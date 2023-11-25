@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Icon, Placeholder } from "./styles";
 import { COIN_SIZES, sizes } from "./types";
 import type { ZIGCoinIconProps, CoinSizes } from "./types";
-import { ZignalyIcon } from "../../../index";
+import { ZignalyIcon } from "../../../icons";
 
 const ZigCoinIcon = ({
   size = COIN_SIZES.Medium,

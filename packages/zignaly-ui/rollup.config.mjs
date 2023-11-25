@@ -12,14 +12,13 @@ import {fileURLToPath} from "url";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default {
-  input: "src/index.ts",
+  input: {
+    index: "src/index.ts",
+    fonts: "src/fonts.ts",
+    charts: "src/charts.ts",
+    icons: "src/icons.ts"
+  },
   output: [
-    {
-      file: 'lib/cjs.js',
-      format: 'cjs',
-      sourcemap: false,
-      interop: "compat",
-    },
     {
       dir: "lib",
       format: "esm",

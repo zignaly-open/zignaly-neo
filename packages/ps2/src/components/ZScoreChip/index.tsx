@@ -1,5 +1,6 @@
 import React from 'react';
-import { ZigMonoIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import { ZigMonoIcon } from '@zignaly-open/ui/icons';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 

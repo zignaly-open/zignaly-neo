@@ -3,7 +3,7 @@
     "target": "es5",
     "outDir": "dist",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
