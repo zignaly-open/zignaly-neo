@@ -60,6 +60,7 @@ function getIndexHtmlWithWhitelabelHead(wlConfig) {
         wlConfig,
       )}</script></head>`,
     )
+    .replace('<head>', `<head><!-- THIS IS THE NEW SERVER -->`)
     .replace(
       '<script id="analytics-scripts"></script>',
       `<script id="analytics-scripts">${wlConfig.scripts || ''}}</script>`,
@@ -67,6 +68,7 @@ function getIndexHtmlWithWhitelabelHead(wlConfig) {
 }
 
 async function serveNewIndexHtml(req, res) {
+  res.header('X-Served-By', 'New Zignaly WL Server');
   const wlConfig = await getWhitelabelConfig(req);
   res.send(getIndexHtmlWithWhitelabelHead(wlConfig)).status(200);
 }
