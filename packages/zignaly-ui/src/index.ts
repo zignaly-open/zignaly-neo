@@ -35,12 +35,13 @@ export { default as ZigInputAmount } from "./components/inputs/ZigInputAmount";
 export { Loader, CenteredLoader } from "./components/display/Loader";
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
-export { default as Avatar } from "./components/display/Avatar";
+export { default as Avatar, AvatarSizes } from "./components/display/Avatar";
 export { default as ZigAlertMessage, ErrorMessage } from "./components/display/ZigAlertMessage";
 export {
   default as ZigModalContainer,
   ZigModalActions,
   ZigModalForm,
+  ModalContainerProps,
 } from "./components/display/ZigModalContainer";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigCopyText } from "./components/display/ZigCopyText";
