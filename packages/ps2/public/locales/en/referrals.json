@@ -32,6 +32,7 @@
         "no-commission-history": "Earning History is empty. Invite some friends or traders to earn.",
         "time-and-date": "Time & Date",
         "user-trader": "User/Trader",
+        "subtrack": "Subtrack",
         "reward-type": "Earning Type",
         "filter-status": "Status",
         "filter-type": "Type"
