@@ -3,11 +3,12 @@ import Router from './Router';
 import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 // import * as Sentry from '@sentry/browser';
 import {
-  // ChartGradients,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
   // has to be imported from the same module from where we call the show toast
   ToastContainer,
+  // imported not from @zignaly-open/ui/chart for performance reasons
+  ThemeChartGradients,
 } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
@@ -92,9 +93,7 @@ function App() {
             <UpdateChecker />
             <UserKycChecker />
             <DateLocaleFixer />
-            {/*<Suspense>*/}
-            {/*  <ChartGradients />*/}
-            {/*</Suspense>*/}
+            <ThemeChartGradients />
             <Router />
             <BottomNavigation />
           </>
