@@ -33,6 +33,7 @@ const dark: ThemeStyledComponents = {
     paleBlue: "#999fe1", // TODO: fix
   },
   backgrounds: {
+    body: "#070819",
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
     selectInputFill: "#101225", // TODO: fix?
     toastSuccess: "#122431",
