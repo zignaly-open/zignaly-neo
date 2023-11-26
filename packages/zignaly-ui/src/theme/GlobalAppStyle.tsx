@@ -46,6 +46,7 @@ export const GlobalAppStyle: React.FC = () => {
       <GlobalStyles
         styles={{
           body: {
+            fontFamily: theme.typography.fontFamily,
             background: theme.palette.backgrounds.body,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
