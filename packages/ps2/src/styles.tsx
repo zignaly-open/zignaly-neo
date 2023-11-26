@@ -1,10 +1,6 @@
 import React, { Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { GlobalAppStyle } from '@zignaly-open/ui';
-// TODO: fix this, smth weird with type defs not loading
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { isWebpSupported } from 'react-image-webp/dist/utils';
 import { whitelabel } from './whitelabel';
 import { GlobalStyles } from '@mui/system';
 import { useTheme } from '@mui/material';

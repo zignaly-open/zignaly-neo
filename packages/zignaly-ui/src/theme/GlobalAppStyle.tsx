@@ -49,6 +49,8 @@ export const GlobalAppStyle: React.FC = () => {
             background: theme.palette.backgrounds.body,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
+            backgroundPositionX: "center",
+            backgroundPositionY: "top",
           },
         }}
       />

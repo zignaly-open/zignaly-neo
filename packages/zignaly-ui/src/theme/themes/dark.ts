@@ -1,4 +1,8 @@
 import { ThemeStyledComponents } from "../types";
+// TODO: fix this, smth weird with type defs not loading
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { isWebpSupported } from "react-image-webp/dist/utils";
 
 const dark: ThemeStyledComponents = {
   mode: "dark",
@@ -33,7 +37,11 @@ const dark: ThemeStyledComponents = {
     paleBlue: "#999fe1", // TODO: fix
   },
   backgrounds: {
-    body: "#070819",
+    body: `url(${
+      isWebpSupported()
+        ? "https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/4048a0ac-9c9d-4298-4146-fb7b1524d900/public"
+        : "https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/b182ff22-04bd-4ccf-0b61-cf2450910e00/public"
+    }) #070819`,
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
     selectInputFill: "#101225", // TODO: fix?
     toastSuccess: "#122431",
