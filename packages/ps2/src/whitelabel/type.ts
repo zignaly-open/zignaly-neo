@@ -36,7 +36,6 @@ export type WhitelabelOverride = {
     privacyPolicy?: string;
   };
   background?: string;
-  loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
   baseTheme?: string;
   themeOverrides?: ThemeOverridesType;

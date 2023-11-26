@@ -71,7 +71,7 @@ export { default as CheckBox } from "./components/inputs/CheckBox";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
-export { NiceScrollbar } from "utils/css";
+export { NiceScrollbar, userHasFont } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this

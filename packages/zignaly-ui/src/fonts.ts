@@ -1,1 +1,1 @@
-export * as fonts from "./theme/fonts";
+export * from "./theme/fonts";

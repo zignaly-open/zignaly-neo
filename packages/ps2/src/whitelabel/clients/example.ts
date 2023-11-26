@@ -20,6 +20,5 @@ export default {
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',
   // backgroundImage: null,
-  loadFontsFromGoogle: true,
   defaultSuccessFee: 5,
 } as WhitelabelOverride;

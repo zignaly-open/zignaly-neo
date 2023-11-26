@@ -63,7 +63,6 @@ export default {
     youtube: 'https://cmania.co/zig-yt',
     linkedin: 'https://cmania.co/zig-linkedin',
   },
-  loadFontsFromGoogle: true,
   defaultSuccessFee: 10,
   themeOverrides: {
     fontFamily: ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
