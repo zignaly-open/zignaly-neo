@@ -1,14 +1,13 @@
 import { ThemeExport, ThemeStyledComponentsOverrides } from "./types";
 
 import dark from "./themes/dark";
-import example from "./themes/example";
 import { getMuiAndStyledThemes } from "./muiTheme";
 
 export const getZignalyThemeExport = (
-  themeName?: "dark" | "example",
+  themeName?: "dark",
   overrides?: ThemeStyledComponentsOverrides,
 ): ThemeExport => {
-  const theme = themeName === "example" ? example : dark;
+  const theme = dark;
   return getMuiAndStyledThemes(theme, overrides);
 };
 
