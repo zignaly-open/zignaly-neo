@@ -16,3 +16,4 @@ export type {
   ThemeStyledComponents as ThemeType,
   ThemeStyledComponentsOverrides as ThemeOverridesType,
 } from "./types";
+export { GlobalAppStyle } from "./GlobalAppStyle";

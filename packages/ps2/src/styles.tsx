@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { getGlobalAppStyle } from '@zignaly-open/ui';
+import { GlobalAppStyle } from '@zignaly-open/ui';
 // TODO: fix this, smth weird with type defs not loading
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -13,17 +13,6 @@ import { lazily } from 'react-lazily';
 import { userHasFont } from '@zignaly-open/ui';
 
 const { AvenirNext } = lazily(() => import('@zignaly-open/ui/fonts'));
-
-const GlobalAppStyle = getGlobalAppStyle({
-  background: whitelabel.background || '#070819',
-  backgroundImage:
-    whitelabel.backgroundImage === null
-      ? 'none'
-      : `url("${
-          whitelabel.backgroundImage ||
-          `/background-dark.${isWebpSupported() ? 'webp' : 'png'}`
-        }")`,
-});
 
 const IntercomStyle = createGlobalStyle`
   @media (max-width: 600px) {
