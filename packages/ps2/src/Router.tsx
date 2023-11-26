@@ -170,7 +170,7 @@ const Router: React.FC = () => {
         </Route>
       </Route>
 
-      {isFeatureOn(Features.Trader) && (
+      {isFeatureOn(Features.CreateService) && (
         <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
       )}
 

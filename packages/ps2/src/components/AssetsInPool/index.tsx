@@ -1,7 +1,8 @@
 import React from 'react';
 import { Icon, PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
-import { ZigWhaleIcon, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigWhaleIcon } from '@zignaly-open/ui/icons';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/util';

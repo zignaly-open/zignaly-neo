@@ -5,9 +5,9 @@ import {
   ZigTypography,
   ZigTablePriceLabel,
   ZigButton,
-  ZigPlusIcon,
   getPrecisionForCoin,
 } from '@zignaly-open/ui';
+import { ZigPlusIcon } from '@zignaly-open/ui/icons';
 import React, { useEffect, useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
 import { useTranslation } from 'react-i18next';

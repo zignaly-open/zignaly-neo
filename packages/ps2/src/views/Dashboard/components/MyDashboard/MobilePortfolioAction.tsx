@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { IconButton, useTheme } from '@mui/material';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
-import { ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
+import { ZigButton } from '@zignaly-open/ui';
+import { ZigCrossIcon } from '@zignaly-open/ui/icons';
 import {
   ROUTE_DASHBOARD_EDIT_INVESTMENT,
   ROUTE_TRADING_SERVICE,

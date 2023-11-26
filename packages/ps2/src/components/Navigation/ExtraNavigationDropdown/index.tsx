@@ -1,8 +1,5 @@
-import {
-  ZigDotsHorizontalIcon,
-  ZigDropdown,
-  ZigDropdownHandleType,
-} from '@zignaly-open/ui';
+import { ZigDropdown, ZigDropdownHandleType } from '@zignaly-open/ui';
+import { ZigDotsHorizontalIcon } from '@zignaly-open/ui/icons';
 import React, { useCallback, useRef } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { GlobeLanguagesStyled, LabelButton, NavLink, Networks } from './styles';

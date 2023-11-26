@@ -1,76 +1,60 @@
-import React from 'react';
-import { createGlobalStyle, css } from 'styled-components';
-import { getGlobalAppStyle } from '@zignaly-open/ui';
-// TODO: fix this, smth weird with type defs not loading
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { isWebpSupported } from 'react-image-webp/dist/utils';
+import React, { Suspense } from 'react';
+import { createGlobalStyle } from 'styled-components';
+import { GlobalAppStyle } from '@zignaly-open/ui';
 import { whitelabel } from './whitelabel';
 import { GlobalStyles } from '@mui/system';
 import { useTheme } from '@mui/material';
 import GoogleFontLoader from 'react-google-font-loader';
+import { lazily } from 'react-lazily';
+import { userHasFont } from '@zignaly-open/ui';
 
-const GlobalAppStyle = getGlobalAppStyle({
-  background: whitelabel.background || '#070819',
-  backgroundImage:
-    whitelabel.backgroundImage === null
-      ? 'none'
-      : `url("${
-          whitelabel.backgroundImage ||
-          `/background-dark.${isWebpSupported() ? 'webp' : 'png'}`
-        }")`,
-});
+const { AvenirNext } = lazily(() => import('@zignaly-open/ui/fonts'));
 
 const IntercomStyle = createGlobalStyle`
   @media (max-width: 600px) {
-    .intercom-launcher-frame .intercom-lightweight-app-launcher{
+    .intercom-launcher-frame .intercom-lightweight-app-launcher {
       display: none !important;
     }
   }
 `;
 
-// Copied from webapp-neo
-const LocalFontsStyle = createGlobalStyle`
-  ${
-    !whitelabel.loadFontsFromGoogle &&
-    css`
-      /** Fonts **/
-      @font-face {
-        font-family: 'Avenir Next', sans-serif;
-        src: url('/fonts/AvenirNext/AvenirNextLTPro-Regular.otf');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Avenir Next', sans-serif;
-        src: url('/fonts/AvenirNext/AvenirNextLTPro-Bold.otf');
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-    `
-  }
-`;
+const GlobalFonts = () => {
+  const theme = useTheme();
+  const isAvenir = (font: string) => font === 'Avenir Next';
+  const fontsToLoad = [
+    theme.typography.fontFamily.split(',')[0],
+    whitelabel.themeOverrides?.fontFamilyH1H6?.split(',')?.[0],
+  ]
+    .filter(Boolean)
+    .filter((x) => !userHasFont(x));
+  const shouldLoadAvenir = fontsToLoad.some(isAvenir);
+  const googleFonts = fontsToLoad.filter((font) => !isAvenir(font));
+  return (
+    <>
+      {shouldLoadAvenir && (
+        <Suspense fallback={null}>
+          <AvenirNext />
+        </Suspense>
+      )}
+      {googleFonts.length > 0 && (
+        <GoogleFontLoader
+          fonts={googleFonts.map((font) => ({
+            font,
+            weights: [400, 700],
+          }))}
+        />
+      )}
+    </>
+  );
+};
 
 export default () => {
   const theme = useTheme();
   return (
     <>
-      <LocalFontsStyle />
+      <GlobalFonts />
       <GlobalAppStyle />
-      <IntercomStyle />
-      {whitelabel.loadFontsFromGoogle && (
-        <GoogleFontLoader
-          fonts={[
-            {
-              font: theme.typography.fontFamily.split(',')[0],
-              weights: [400, 700],
-            },
-          ]}
-        />
-      )}
+      {whitelabel.intercomId && <IntercomStyle />}
       <GlobalStyles
         styles={{ body: { fontFamily: theme.typography.fontFamily } }}
       />

@@ -4,7 +4,7 @@ const defaultFeatureState: Record<Features, boolean> = {
   [Features.AccessLevels]: true,
   [Features.Rewards]: true,
   [Features.Referrals]: true,
-  [Features.Trader]: true,
+  [Features.CreateService]: true,
   [Features.NewSignup]: true,
   [Features.Subscriptions]: false,
   [Features.Kyc]: false,

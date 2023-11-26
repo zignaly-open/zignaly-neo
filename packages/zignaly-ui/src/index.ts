@@ -1,3 +1,5 @@
+export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg";
+
 // Core
 export { ThemeProvider as ThemeProviderMui } from "@mui/material";
 export { default as ThemeProvider } from "utils/ThemeProvider";
@@ -33,12 +35,13 @@ export { default as ZigInputAmount } from "./components/inputs/ZigInputAmount";
 export { Loader, CenteredLoader } from "./components/display/Loader";
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
-export { default as Avatar } from "./components/display/Avatar";
+export { default as Avatar, AvatarSizes } from "./components/display/Avatar";
 export { default as ZigAlertMessage, ErrorMessage } from "./components/display/ZigAlertMessage";
 export {
   default as ZigModalContainer,
   ZigModalActions,
   ZigModalForm,
+  ModalContainerProps,
 } from "./components/display/ZigModalContainer";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigCopyText } from "./components/display/ZigCopyText";
@@ -63,18 +66,12 @@ export { default as DateLabel } from "./components/display/ZigTable/components/D
 export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
-// Chart
-export * from "./components/display/ZigChart";
-
 // TODO: @Nikita9901 pls replace with mui and add stories
 export { default as CheckBox } from "./components/inputs/CheckBox";
 
-// Icons
-export * from "./icons";
-
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
-export { NiceScrollbar } from "utils/css";
+export { NiceScrollbar, userHasFont } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this
@@ -93,5 +90,10 @@ export { HeaderLinksContainer } from "./components/navigation/Header/styles";
 
 // hooks
 export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
-export { getGlobalAppStyle } from "./theme/globalAppStyle";
 export { fixSearchParams } from "./utils/search";
+
+// it makes total sense to export this under @zignaly-open/ui/chart, and we do this too
+// but this little shit (a crutch by itself), when imported from  @zignaly-open/ui/chart,
+// pulls the entire bloody victory charts because those fuckign charts are not tree shakeable
+// fuck!
+export { default as ThemeChartGradients } from "./components/display/ZigChart/ThemeChartGradients";

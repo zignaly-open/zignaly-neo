@@ -72,6 +72,7 @@ declare module '@mui/material/styles' {
     backgrounds: Record<
       | 'headerMenuItemHover'
       | 'modal'
+      | 'body'
       | 'investorsIcon'
       | 'withdrawalHighlight'
       | 'secondaryBackground'

@@ -1,5 +1,5 @@
 import Analytics, { AnalyticsInstance } from 'analytics';
-import * as Sentry from '@sentry/browser';
+// import * as Sentry from '@sentry/browser';
 import { SessionsTypes, UserData } from '../apis/user/types';
 import googleTagManager from '@analytics/google-tag-manager';
 import customerIo from '@analytics/customerio';
@@ -57,7 +57,7 @@ export const trackNewSession = (
     if (window.intercomSettings) {
       window.intercomSettings.user_hash = intercomHash;
     }
-    Sentry.setUser({ email, id: userId });
+    // Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
       twq(userId).trackVerify();
@@ -69,7 +69,7 @@ export const trackNewSession = (
 };
 
 export const trackEndSession = () => {
-  Sentry.configureScope((scope) => scope?.setUser(null));
+  // Sentry.configureScope((scope) => scope?.setUser(null));
 };
 
 export const trackPage = () => {

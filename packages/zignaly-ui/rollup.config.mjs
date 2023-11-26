@@ -12,14 +12,13 @@ import {fileURLToPath} from "url";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default {
-  input: "src/index.ts",
+  input: {
+    index: "src/index.ts",
+    fonts: "src/fonts.ts",
+    charts: "src/charts.ts",
+    icons: "src/icons.ts"
+  },
   output: [
-    {
-      file: 'lib/cjs.js',
-      format: 'cjs',
-      sourcemap: false,
-      interop: "compat",
-    },
     {
       dir: "lib",
       format: "esm",
@@ -49,7 +48,13 @@ export default {
         utils: path.resolve(__dirname, "./src/utils"),
       },
     }),
-    url(),
+    url({
+      // by default, rollup-plugin-url will not handle font files
+      include: ['**/*.otf', '**/*.svg', '**/*.png', '**/*.jpg', '**/*.gif'],
+      // setting infinite limit will ensure that the files
+      // are always bundled with the code, not copied to /dist
+      limit: Infinity,
+    }),
     svgr({icon: true}),
   ],
 }

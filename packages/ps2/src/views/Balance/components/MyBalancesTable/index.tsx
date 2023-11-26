@@ -5,8 +5,8 @@ import {
   ZigTablePriceLabel,
   createColumnHelper,
   ZigButton,
-  ZigSwapCircleIcon,
 } from '@zignaly-open/ui';
+import { ZigSwapCircleIcon } from '@zignaly-open/ui/icons';
 import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';

@@ -7,7 +7,7 @@ export default {
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
-    [Features.Trader]: false,
+    [Features.CreateService]: false,
     [Features.NewSignup]: false,
     [Features.Kyc]: true,
     [Features.Subscriptions]: true,
@@ -20,7 +20,5 @@ export default {
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',
   // backgroundImage: null,
-  translationOverrides: true,
-  loadFontsFromGoogle: true,
   defaultSuccessFee: 5,
 } as WhitelabelOverride;

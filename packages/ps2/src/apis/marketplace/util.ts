@@ -1,7 +1,6 @@
 import { Investment } from '../investment/types';
 import { MarketplaceService } from './types';
-import { ZigChartAxisFormatType } from '@zignaly-open/ui';
-import { Service } from '../service/types';
+import { ChartDataFormat, Service } from '../service/types';
 
 export function marketplaceServiceToInvestmentType(
   service: MarketplaceService,
@@ -12,7 +11,7 @@ export function marketplaceServiceToInvestmentType(
     serviceName: service.name,
     serviceLogo: service.logo,
     ownerName: service.ownerName,
-    sparklines: service.sparklines as unknown as ZigChartAxisFormatType[],
+    sparklines: service.sparklines as unknown as ChartDataFormat,
     createdAt: service.createdAt,
     ownerVerified: service.ownerVerified,
     pnl30dPct: service.pnlPercent30t.toString(),
