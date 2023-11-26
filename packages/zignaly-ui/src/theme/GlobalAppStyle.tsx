@@ -40,7 +40,7 @@ export const GlobalAppStyle: React.FC = () => {
 
       {
         // @ts-ignore
-        window.isSafari && <NiceScrollGlobalStyle />
+        !!window.isSafari && <NiceScrollGlobalStyle />
       }
 
       <GlobalStyles
