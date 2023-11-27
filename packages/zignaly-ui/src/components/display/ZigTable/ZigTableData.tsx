@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ForwardedRef, forwardRef, useImperativeHandle } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -13,7 +13,7 @@ import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBo
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
-import { ZigTablePropsData } from "./types";
+import { ZigTablePropsData, ZigTableRef } from "./types";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
@@ -21,22 +21,25 @@ import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
 
-export default function ZigTableData<T extends object>({
-  prefixId,
-  data,
-  columns,
-  initialState = {},
-  columnVisibility: enableColumnVisibility = true,
-  defaultHiddenColumns = [],
-  renderSubComponent,
-  pagination,
-  loading,
-  onRowClick,
-  fetching,
-  emptyMessage,
-  state = {},
-  ...rest
-}: ZigTablePropsData<T>) {
+function ZigTableData<T extends object>(
+  {
+    prefixId,
+    data,
+    columns,
+    initialState = {},
+    columnVisibility: enableColumnVisibility = true,
+    defaultHiddenColumns = [],
+    renderSubComponent,
+    pagination,
+    loading,
+    onRowClick,
+    fetching,
+    emptyMessage,
+    state = {},
+    ...rest
+  }: ZigTablePropsData<T>,
+  ref: ForwardedRef<ZigTableRef>,
+) {
   const theme = useTheme();
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
   const [columnVisibility, setColumnVisibility] = React.useState(
@@ -69,6 +72,13 @@ export default function ZigTableData<T extends object>({
     },
     ...rest,
   });
+
+  console.log("actual", table.getFilteredRowModel().rows.length);
+
+  useImperativeHandle(ref, () => ({
+    table,
+    count: table.getFilteredRowModel().rows.length,
+  }));
 
   const pageSizeOptions = [10, 20, 30, 40, 50].map((o) => ({ value: o, label: o.toString() }));
 
@@ -317,3 +327,5 @@ export default function ZigTableData<T extends object>({
     </>
   );
 }
+
+export default forwardRef(ZigTableData);

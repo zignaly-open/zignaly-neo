@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   useMarketplaceMobileActiveRow,
   useMarketplace,
@@ -11,6 +11,7 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
+  ZigTableRef,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -30,69 +31,113 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { MarketplaceFilters } from './types';
 import ServicesFiltersBar from './ServicesFiltersBar';
 import { ColumnFiltersState } from '@tanstack/react-table';
+import { useUpdateEffect } from 'react-use';
 // import TopServicesCards from '../TopServicesCards';
 
-const filters = [
-  {
-    type: 'slider',
-    value: [19, 100],
-    label: '6 months returns',
-    allowNoMin: true,
-    allowNoMax: true,
-    min: 0,
-    max: 100,
-    id: 'returns',
-    showInBar: true,
-  },
-  {
-    type: 'select',
-    value: 'all',
-    label: 'Coin',
-    options: [
-      { value: 'all', label: 'All' },
-      { value: 'USDT', label: 'USDT' },
-      { value: 'USDC', label: 'USDC' },
-    ],
-    id: 'coin',
-    showInBar: true,
-  },
-  {
-    type: 'checkbox',
-    label: 'Type',
-    options: [
-      { value: 'spot', label: 'Spot', checked: true },
-      { value: 'futures', label: 'Futures', checked: true },
-    ],
-    id: 'type',
-  },
-  {
-    type: 'slider',
-    value: [0, 50],
-    label: 'Service Fee',
-    min: 0,
-    max: 50,
-    id: 'fee',
-  },
-];
-
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
+  const filters = [
+    {
+      type: 'slider',
+      value: [19, 100],
+      label: '6 months returns',
+      allowNoMin: true,
+      allowNoMax: true,
+      min: 0,
+      max: 100,
+      id: 'returns',
+      showInBar: true,
+    },
+    {
+      type: 'select',
+      value: 'all',
+      label: 'Coin',
+      options: [
+        { value: 'all', label: 'All' },
+        { value: 'USDT', label: 'USDT' },
+        { value: 'USDC', label: 'USDC' },
+        { value: 'BNB', label: 'BNB' },
+        { value: 'ETH', label: 'ETH' },
+        { value: 'BTC', label: 'BTC' },
+      ],
+      id: 'coin',
+      showInBar: true,
+    },
+    {
+      type: 'checkbox',
+      label: 'Type',
+      options: [
+        { value: 'spot', label: 'Spot', checked: true },
+        { value: 'futures', label: 'Futures', checked: true },
+      ],
+      id: 'type',
+    },
+    {
+      type: 'slider',
+      value: [0, 50],
+      label: 'Service Fee',
+      min: 0,
+      max: 50,
+      id: 'fee',
+    },
+  ];
   const { t } = useTranslation('marketplace');
   const theme = useTheme();
   const [localFilters, setLocalFilters] = useState(filters);
   const [searchFilter, setSearchFilter] = useState('');
 
+  const ref = useRef<ZigTableRef>();
+
   // const [filters, setFilters] = useState<MarketplaceFilters>({});
   const [filteredServices, setFilteredServices] =
     useState<MarketplaceService[]>(services);
 
+  // usememo
   const composeColumnFilters = (filterss) => {
     return [
+      {
+        id: 'service-name',
+        value: filterss.find((f) => f.id === 'coin')?.value,
+      },
+      // {
+      //   id: 'service-name',
+      //   value: filterss
+      //     .find((f) => f.id === 'type')
+      //     ?.options.filter((o) => o.checked)
+      //     .map((o) => o.value),
+      // },
       {
         id: 'pnlPercent180t',
         value: filterss.find((f) => f.id === 'returns')?.value,
       },
     ];
   };
+
+  const servicesCount = ref.current?.table.getFilteredRowModel().rows.length;
+
+  // useEffect(() => {
+  //   console.log('omh', ref.current?.count);
+  // }, [ref.current?.count]);
+  // const count = useMemo(() => {
+  //   return ref.current?.count;
+  // }, [ref.current?.count]);
+  // console.log(count);
+  useUpdateEffect(() => {
+    setColumnFilters(composeColumnFilters(localFilters));
+    console.log(
+      ref.current?.table.getFilteredRowModel().rows.length,
+      ref.current?.count,
+      servicesCount,
+    );
+    // set count state?
+
+    // setTimeout(() => {
+    //   console.log(
+    //     'after timeout',
+    //     ref.current?.table.getFilteredRowModel().rows.length,
+    //     servicesCount,
+    //   );
+    // }, []);
+  }, [localFilters]);
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     composeColumnFilters(filters),
@@ -132,6 +177,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             {t(md ? 'table.service-name' : 'table.service-name-mobile')}
           </div>
         ),
+        filterFn: (row, columnIds, filterValue) => {
+          console.log(row.original.ssc, filterValue);
+          return filterValue === 'all' || row.original.ssc === filterValue;
+        },
         style: {
           justifyContent: 'flex-start',
           paddingLeft: md && '88px',
@@ -372,12 +421,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         </ZigTypography>
       </Box>
       <ServicesFiltersBar
-        count={filteredServices?.length}
+        // count={filteredServices?.length}
+        count={servicesCount}
         filters={filters}
         defaultFilters={filters}
         onChange={(v) => {
           console.log('v', v);
-          setColumnFilters(composeColumnFilters(v));
+          setLocalFilters(v);
         }}
         search={searchFilter}
         onSearchChange={setSearchFilter}
@@ -412,6 +462,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           columnVisibility={false}
           enableSortingRemoval={false}
           state={{ columnFilters, globalFilter: searchFilter }}
+          ref={ref}
         />
       </TableWrapper>
     </>

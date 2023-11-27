@@ -32,12 +32,20 @@ const BalanceButton = () => {
   );
 
   const investedAmount = useMemo(() => {
+    if (investments) {
+      for (let i = 0; i < investments.length; i++) {
+        if (isNaN(+investments[i].investedUSDT)) {
+          console.log(investments[i]);
+        }
+      }
+    }
     return investments?.reduce(
       (total, investment) =>
         total + +investment.investedUSDT + +investment.pendingUSDT,
       0,
     );
   }, [investments]);
+  console.log(investedAmount);
 
   const balanceStatus = useMemo(() => {
     if (!investments || !balance) return null;
