@@ -1,6 +1,6 @@
 import { SelectFilter } from "../../types";
 
 export type SelectFilterDropdownProps = {
-  onChange: (value: string) => void;
+  onChange: (filter: SelectFilter) => void;
   filter: SelectFilter;
 };

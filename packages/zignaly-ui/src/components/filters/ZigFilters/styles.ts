@@ -10,3 +10,7 @@ export const Layout = styled(Box)`
     padding: 16px;
   }
 `;
+
+export const DropdownItem = styled(Box)<{ active: boolean }>`
+  background: ${({ active, theme }) => (active ? theme.palette.neutral800 : "inherit")};
+`;

@@ -1,6 +1,6 @@
 import { SliderFilter } from "../../types";
 
 export type SliderFilterDropdownProps = {
-  onChange: (value: SliderFilter["value"]) => void;
+  onChange: (filter: SliderFilter) => void;
   filter: SliderFilter;
 };

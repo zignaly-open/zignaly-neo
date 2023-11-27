@@ -10,22 +10,10 @@ const meta = {
 } as Meta;
 export default meta;
 
-const ZigFiltersWrapper = ({ filters: defaultFilters }: { filters: ZigFiltersType }) => {
-  const [filters, setFilters] = useState(defaultFilters);
-
-  // todo: add to util?
-  const updateFilters = (id, value) => {
-    const updatedFilters = [...filters];
-    // fix and adapt to type
-    updatedFilters.find((filter) => filter.id === id).value = value;
-    // updatedFilters[index] = { ...updatedFilters[index], value };
-    setFilters(updatedFilters);
-    console.log(updatedFilters);
-  };
-
+const ZigFiltersWrapper = ({ filters }: { filters: ZigFiltersType }) => {
   return (
     <Box display="flex">
-      <ZigFilters defaultFilters={defaultFilters} filters={filters} onChange={updateFilters} />
+      <ZigFilters defaultFilters={filters} filters={filters} onChange={() => {}} />
     </Box>
   );
 };

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigFilters, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 
 const ServicesFiltersBar = ({
   count,
   filters,
+  defaultFilters,
   onChange,
+  search,
+  onSearchChange,
 }): { count: number } => {
   const { t } = useTranslation('marketplace');
   return (
@@ -17,6 +20,13 @@ const ServicesFiltersBar = ({
       <ZigTypography variant='h4' fontWeight={400}>
         {t('investment-preferences')}
       </ZigTypography>
+      <ZigFilters
+        defaultFilters={defaultFilters}
+        filters={filters}
+        onChange={onChange}
+        search={search}
+        onSearchChange={onSearchChange}
+      />
     </Box>
   );
 };

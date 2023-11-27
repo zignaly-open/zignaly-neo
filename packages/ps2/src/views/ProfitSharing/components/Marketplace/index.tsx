@@ -29,27 +29,94 @@ import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { MarketplaceFilters } from './types';
 import ServicesFiltersBar from './ServicesFiltersBar';
+import { ColumnFiltersState } from '@tanstack/react-table';
 // import TopServicesCards from '../TopServicesCards';
+
+const filters = [
+  {
+    type: 'slider',
+    value: [19, 100],
+    label: '6 months returns',
+    allowNoMin: true,
+    allowNoMax: true,
+    min: 0,
+    max: 100,
+    id: 'returns',
+    showInBar: true,
+  },
+  {
+    type: 'select',
+    value: 'all',
+    label: 'Coin',
+    options: [
+      { value: 'all', label: 'All' },
+      { value: 'USDT', label: 'USDT' },
+      { value: 'USDC', label: 'USDC' },
+    ],
+    id: 'coin',
+    showInBar: true,
+  },
+  {
+    type: 'checkbox',
+    label: 'Type',
+    options: [
+      { value: 'spot', label: 'Spot', checked: true },
+      { value: 'futures', label: 'Futures', checked: true },
+    ],
+    id: 'type',
+  },
+  {
+    type: 'slider',
+    value: [0, 50],
+    label: 'Service Fee',
+    min: 0,
+    max: 50,
+    id: 'fee',
+  },
+];
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const { t } = useTranslation('marketplace');
   const theme = useTheme();
-  const [filters, setFilters] = useState<MarketplaceFilters>({});
-  const filteredServices = useMemo(() => {
-    return services.filter((service) => {
-      // Apply your filtering logic here based on the filters object
-      // For example, if you have a filter for minimum investment amount:
-      // if (
-      //   filters.minInvestmentAmount &&
-      //   service.investmentAmount < filters.minInvestmentAmount
-      // ) {
-      //   return false;
-      // }
-      // Add more filtering conditions as needed
-      // Return true if the service passes all the filters
-      return true;
-    });
-  }, [services, filters]);
+  const [localFilters, setLocalFilters] = useState(filters);
+  const [searchFilter, setSearchFilter] = useState('');
+
+  // const [filters, setFilters] = useState<MarketplaceFilters>({});
+  const [filteredServices, setFilteredServices] =
+    useState<MarketplaceService[]>(services);
+
+  const composeColumnFilters = (filterss) => {
+    return [
+      {
+        id: 'pnlPercent180t',
+        value: filterss.find((f) => f.id === 'returns')?.value,
+      },
+    ];
+  };
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
+    composeColumnFilters(filters),
+  );
+
+  const filterServices = () => {
+    // return services.filter((service) => {
+  };
+
+  // const filteredServices = useMemo(() => {
+  //   return services.filter((service) => {
+  //     // Apply your filtering logic here based on the filters object
+  //     // For example, if you have a filter for minimum investment amount:
+  //     // if (
+  //     //   filters.minInvestmentAmount &&
+  //     //   service.investmentAmount < filters.minInvestmentAmount
+  //     // ) {
+  //     //   return false;
+  //     // }
+  //     // Add more filtering conditions as needed
+  //     // Return true if the service passes all the filters
+  //     return true;
+  //   });
+  // }, [services, filters]);
 
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
@@ -307,7 +374,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       <ServicesFiltersBar
         count={filteredServices?.length}
         filters={filters}
-        onChange={setFilters}
+        defaultFilters={filters}
+        onChange={(v) => {
+          console.log('v', v);
+          setColumnFilters(composeColumnFilters(v));
+        }}
+        search={searchFilter}
+        onSearchChange={setSearchFilter}
       />
       {/* <TopServicesCards
               services={services
@@ -338,6 +411,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           emptyMessage={t('table-search-emptyMessage')}
           columnVisibility={false}
           enableSortingRemoval={false}
+          state={{ columnFilters, globalFilter: searchFilter }}
         />
       </TableWrapper>
     </>

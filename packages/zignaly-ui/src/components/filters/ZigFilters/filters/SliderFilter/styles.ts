@@ -9,7 +9,9 @@ export const StyledZigSlider = styled(ZigSlider)`
   }
 `;
 
-export const Value = styled(ZigTypography)<{ showPct: boolean }>`
+export const Value = styled(ZigTypography, {
+  shouldForwardProp: (p) => p !== "showPct",
+})<{ showPct: boolean }>`
   font-size: 18px;
   color: ${({ theme }) => theme.palette.paleBlue};
 

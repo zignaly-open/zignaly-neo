@@ -3,15 +3,13 @@ import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import SliderFilter from "../../filters/SliderFilter";
 import { Box } from "@mui/material";
-import { ZigFilter, ZigFiltersType } from "../../types";
 import { LayoutItem } from "./styles";
-import { FilterItemProps, SliderFilterDropdownProps } from "./type";
+import { SliderFilterDropdownProps } from "./type";
+import { DropdownItem } from "../../styles";
 
-// move to SliderFilter
 const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) => {
-  console.log("a", filter);
   const displayValue = useMemo(() => {
-    if (filter.type === "slider") {
+    if (filter.type === "slider" && Array.isArray(filter.value)) {
       const min = filter.min ?? 0;
       const max = filter.max ?? 100;
       if (filter.value[0] < min && filter.value[1] > max) return "All";
@@ -25,7 +23,7 @@ const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) =
   return (
     <ZigDropdown
       component={({ open }) => (
-        <LayoutItem active={open}>
+        <DropdownItem active={open}>
           <Box display="flex" gap={1} justifyContent="center">
             <ZigTypography fontSize={13} color={"neutral300"}>
               {filter.label}
@@ -34,11 +32,16 @@ const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) =
               {displayValue}
             </ZigTypography>
           </Box>
-        </LayoutItem>
+        </DropdownItem>
       )}
       options={[
         {
-          element: <SliderFilter filter={{ ...filter, label: "" }} onChange={onChange} />,
+          element: (
+            <SliderFilter
+              filter={{ ...filter, label: "" }}
+              onChange={(f) => onChange({ ...f, label: filter.label })}
+            />
+          ),
         },
         { separator: true },
         {

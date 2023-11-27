@@ -1,17 +1,19 @@
 export type ZigFiltersProps = {
-  onChange: (id: string, value: any) => void;
+  onChange: (filters: ZigFiltersType) => void;
   filters: ZigFiltersType;
   defaultFilters: ZigFiltersType;
 };
 
-export type ZigFilter = (SliderFilter | CheckboxFilter | SelectFilter) & {
+export type BaseFilter = {
   id: string;
   showInBar?: boolean;
 };
 
+export type ZigFilter = SliderFilter | CheckboxFilter | SelectFilter;
+
 export type ZigFiltersType = ZigFilter[];
 
-export type SliderFilter = {
+export type SliderFilter = BaseFilter & {
   type: "slider";
   value: number | [number, number];
   label: string;
@@ -22,7 +24,7 @@ export type SliderFilter = {
   allowNoMax?: boolean;
 };
 
-export type CheckboxFilter = {
+export type CheckboxFilter = BaseFilter & {
   type: "checkbox";
   label: string;
   options: {
@@ -32,12 +34,12 @@ export type CheckboxFilter = {
   }[];
 };
 
-export type SelectFilter = {
+export type SelectFilter = BaseFilter & {
   type: "select";
   label: string;
+  value: string;
   options: {
     value: string;
     label: string;
-    checked: boolean;
   }[];
 };

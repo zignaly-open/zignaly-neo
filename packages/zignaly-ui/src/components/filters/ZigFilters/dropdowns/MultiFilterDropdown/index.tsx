@@ -2,14 +2,16 @@ import ZigDropdown from "components/display/ZigDropdown";
 import ZigTypography from "components/display/ZigTypography";
 import React from "react";
 import SliderFilter from "../../filters/SliderFilter";
-import { LayoutItem } from "./styles";
+import { FiltersCount, LayoutItem } from "./styles";
 import { FilterItemProps, MultiFilterDropdownProps } from "./type";
 import { Tune } from "@mui/icons-material";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { ZigFilter } from "../../types";
 import ZigButton from "components/inputs/ZigButton";
+import { ZigSettingsIcon } from "../../../../../icons";
+import { DropdownItem } from "../../styles";
 
-const MultiFilterDropdown = ({ filters, onChange }: MultiFilterDropdownProps) => {
+const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDropdownProps) => {
   const getFilterComponent = (filter: ZigFilter) => {
     switch (filter.type) {
       case "slider":
@@ -36,7 +38,8 @@ const MultiFilterDropdown = ({ filters, onChange }: MultiFilterDropdownProps) =>
     <ZigDropdown
       component={({ open }) => (
         <LayoutItem active={open}>
-          <Tune />
+          <ZigSettingsIcon width={22.5} height={19} />
+          <FiltersCount>{filters.length}</FiltersCount>
         </LayoutItem>
       )}
       options={filters
@@ -54,7 +57,7 @@ const MultiFilterDropdown = ({ filters, onChange }: MultiFilterDropdownProps) =>
                   width: "100%",
                 }}
                 // color={"links"}
-                onClick={() => {}}
+                onClick={resetFilters}
               >
                 reset
               </ZigButton>

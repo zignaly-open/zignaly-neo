@@ -1,9 +1,11 @@
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
 import React from "react";
+import { CheckBoxFilterProps } from "./type";
 
 const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
   const { label, options } = filter;
-  const handleChange = (o, checked) => {
+
+  const handleChange = (o: string, checked: boolean) => {
     const updatedOptions = options.map((option) => {
       if (option.value === o) {
         return { ...option, checked };
@@ -11,7 +13,7 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
       return option;
     });
 
-    onChange(updatedOptions);
+    onChange({ ...filter, options: updatedOptions });
   };
 
   return (
@@ -24,7 +26,7 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
           control={
             <Checkbox
               checked={option.checked}
-              onChange={(e, checked) => handleChange(option.value, checked)}
+              onChange={(_, checked) => handleChange(option.value, checked)}
             />
           }
         />
