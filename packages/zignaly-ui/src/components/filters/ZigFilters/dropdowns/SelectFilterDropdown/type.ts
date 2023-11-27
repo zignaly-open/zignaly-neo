@@ -1,6 +1,6 @@
-import { ZigFilter } from "../../types";
+import { SelectFilter } from "../../types";
 
-export type FilterItemProps = {
-  onChange: (value: number) => void;
-  filter: ZigFilter;
+export type SelectFilterDropdownProps = {
+  onChange: (value: string) => void;
+  filter: SelectFilter;
 };

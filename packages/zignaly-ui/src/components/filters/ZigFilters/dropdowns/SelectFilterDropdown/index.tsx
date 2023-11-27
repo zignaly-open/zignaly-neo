@@ -5,10 +5,10 @@ import SliderFilter from "../../filters/SliderFilter";
 import { Box } from "@mui/material";
 import { ZigFilter, ZigFiltersType } from "../../types";
 import { LayoutItem } from "./styles";
-import { FilterItemProps } from "./type";
+import { FilterItemProps, SelectFilterDropdownProps } from "./type";
 import { ExpandLess, ChevronRight } from "@mui/icons-material";
 
-const SelectFilterDropdown = ({ filter, onChange }: FilterItemProps) => {
+const SelectFilterDropdown = ({ filter, onChange }: SelectFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     const option = filter.options.find((option) => option.value === filter.value);
     return option.label;

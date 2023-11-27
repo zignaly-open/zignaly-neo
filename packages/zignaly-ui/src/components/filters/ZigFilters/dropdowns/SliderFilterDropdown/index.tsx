@@ -5,10 +5,11 @@ import SliderFilter from "../../filters/SliderFilter";
 import { Box } from "@mui/material";
 import { ZigFilter, ZigFiltersType } from "../../types";
 import { LayoutItem } from "./styles";
-import { FilterItemProps } from "./type";
+import { FilterItemProps, SliderFilterDropdownProps } from "./type";
 
 // move to SliderFilter
-const SliderFilterDropdown = ({ filter, onChange }: FilterItemProps) => {
+const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) => {
+  console.log("a", filter);
   const displayValue = useMemo(() => {
     if (filter.type === "slider") {
       const min = filter.min ?? 0;
@@ -37,14 +38,7 @@ const SliderFilterDropdown = ({ filter, onChange }: FilterItemProps) => {
       )}
       options={[
         {
-          element: (
-            <SliderFilter
-              value={filter.value}
-              onChange={onChange}
-              allowNoMin={filter.allowNoMin}
-              allowNoMax={filter.allowNoMax}
-            />
-          ),
+          element: <SliderFilter filter={{ ...filter, label: "" }} onChange={onChange} />,
         },
         { separator: true },
         {

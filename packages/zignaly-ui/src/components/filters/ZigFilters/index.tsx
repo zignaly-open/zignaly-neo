@@ -1,36 +1,43 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { Layout } from "./styles";
-import { ZigFiltersType } from "./types";
-import ZigDropdown from "components/display/ZigDropdown";
 import { Box } from "@mui/material";
 import ZigTypography from "components/display/ZigTypography";
-import { ChevronRight, ExpandLess } from "@mui/icons-material";
 import ZigSearch from "../ZigSearch";
-import SliderFilter from "./filters/SliderFilter";
-import FilterItem from "./dropdowns/SliderFilterDropdown";
-import SliderFilterItem from "./dropdowns/SliderFilterDropdown";
-import SelectFilterItem from "./dropdowns/SelectFilterDropdown";
+import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
+import SelectFilterDropdown from "./dropdowns/SelectFilterDropdown";
+import MultiFilterDropdown from "./dropdowns/MultiFilterDropdown";
+import { ZigFiltersProps } from "./types";
+import ZigButton from "components/inputs/ZigButton";
 
-const ZigFilters = ({
-  defaultFilters,
-  filters,
-  onChange,
-}: {
-  defaultFilters: ZigFiltersType;
-  filters: ZigFiltersType;
-}) => {
+const ZigFilters = ({ defaultFilters, filters, onChange }: ZigFiltersProps) => {
+  const [mainFilters, secondaryFilters] = useMemo(() => {
+    return [
+      filters.filter((filter) => filter.showInBar),
+      filters.filter((filter) => !filter.showInBar),
+    ];
+  }, [filters]);
+
   return (
     <Box display="flex" width={1}>
       <Box display="flex" gap={2} alignItems={"center"}>
         <Layout>
-          {filters.map((filter, index) => {
-            const FilterComponent = filter.type === "slider" ? SliderFilterItem : SelectFilterItem;
+          {mainFilters.map((filter) => {
+            // todo: add checkbox
+            const FilterDropdown =
+              filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
             return (
-              <FilterComponent filter={filter} key={index} onChange={(v) => onChange(index, v)} />
+              <FilterDropdown
+                filter={filter}
+                key={filter.id}
+                onChange={(v) => onChange(filter.id, v)}
+              />
             );
           })}
+          <MultiFilterDropdown filters={secondaryFilters} />
         </Layout>
-        <ZigTypography>Reset</ZigTypography>
+        <ZigButton variant="text" onClick={() => onChange(defaultFilters)}>
+          Reset
+        </ZigButton>
       </Box>
       <ZigSearch />
     </Box>

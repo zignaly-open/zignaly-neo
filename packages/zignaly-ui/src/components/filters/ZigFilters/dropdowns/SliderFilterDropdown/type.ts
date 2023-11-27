@@ -1,6 +1,6 @@
-import { ZigFilter } from "../../types";
+import { SliderFilter } from "../../types";
 
-export type FilterItemProps = {
-  onChange: (value: number) => void;
-  filter: ZigFilter;
+export type SliderFilterDropdownProps = {
+  onChange: (value: SliderFilter["value"]) => void;
+  filter: SliderFilter;
 };

@@ -1,5 +1,6 @@
-export type SliderFilterValue = number | [number, number];
+import { SliderFilter } from "../../types";
 
 export type SliderFilterProps = {
-  value: SliderFilterValue;
+  filter: SliderFilter;
+  onChange: (value: SliderFilter["value"]) => void;
 };

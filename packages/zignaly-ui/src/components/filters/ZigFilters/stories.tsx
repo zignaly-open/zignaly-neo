@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import ZigFilters from "./index";
 import { Box } from "@mui/material";
+import { ZigFiltersType } from "./types";
 
 const meta = {
   title: "Filters/ZigFilters",
@@ -9,12 +10,15 @@ const meta = {
 } as Meta;
 export default meta;
 
-const ZigFiltersWrapper = ({ filters: defaultFilters }) => {
+const ZigFiltersWrapper = ({ filters: defaultFilters }: { filters: ZigFiltersType }) => {
   const [filters, setFilters] = useState(defaultFilters);
 
-  const updateFilters = (index, value) => {
+  // todo: add to util?
+  const updateFilters = (id, value) => {
     const updatedFilters = [...filters];
-    updatedFilters[index] = { ...updatedFilters[index], value };
+    // fix and adapt to type
+    updatedFilters.find((filter) => filter.id === id).value = value;
+    // updatedFilters[index] = { ...updatedFilters[index], value };
     setFilters(updatedFilters);
     console.log(updatedFilters);
   };
@@ -40,17 +44,36 @@ export const Default: Story = {
         min: 0,
         max: 100,
         id: "returns",
+        showInBar: true,
       },
       {
         type: "select",
         value: "all",
-        label: "Type",
+        label: "Coin",
         options: [
           { value: "all", label: "All" },
-          { value: "spot", label: "Spot" },
-          { value: "futures", label: "Futures" },
+          { value: "USDT", label: "USDT" },
+          { value: "USDC", label: "USDC" },
+        ],
+        id: "coin",
+        showInBar: true,
+      },
+      {
+        type: "checkbox",
+        label: "Type",
+        options: [
+          { value: "spot", label: "Spot", checked: true },
+          { value: "futures", label: "Futures", checked: true },
         ],
         id: "type",
+      },
+      {
+        type: "slider",
+        value: [0, 50],
+        label: "Service Fee",
+        min: 0,
+        max: 50,
+        id: "fee",
       },
     ],
   },
