@@ -286,6 +286,7 @@ const ZigDrawer = () => {
                           ) as HTMLElement;
                         iframeContent?.click();
                       }
+                      handleDrawerToggle();
                     }}
                   >
                     <ListItemText primary={t('navigation-menu.ping-us')} />
