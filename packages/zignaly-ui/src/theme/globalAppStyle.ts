@@ -20,7 +20,7 @@ export const getGlobalAppStyle = ({
   }
   @media (max-width: 600px) {
     .intercom-launcher-frame .intercom-lightweight-app-launcher .intercom-launcher{
-      display: none !important;
+      visibility: hidden !important;
     }
   }
 
