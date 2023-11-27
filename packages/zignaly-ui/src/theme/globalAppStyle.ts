@@ -18,11 +18,6 @@ export const getGlobalAppStyle = ({
     overflow: overlay;
     color-scheme: dark;
   }
-  @media (max-width: 600px) {
-    .intercom-launcher-frame .intercom-lightweight-app-launcher .intercom-launcher{
-      visibility: hidden !important;
-    }
-  }
 
   /* Use default scrollbar on Safari because it doesn't support overflow: overlay */
   ${
