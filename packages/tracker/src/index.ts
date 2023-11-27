@@ -18,7 +18,7 @@ const sendTz = (data: tzData) => {
   return fetch(
     `${process.env.REACT_APP_BASE_API}${
       process.env.REACT_APP_BASE_API?.endsWith('/') ? '' : '/'
-    }tz` || 'https://zignaly.com/new_api/tz',
+    }tz`,
     options,
   );
 };
