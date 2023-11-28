@@ -15,22 +15,40 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
     allowNoMin = false,
     allowNoMax = false,
   } = filter;
+  // Value used for displaying the slider values before it's committed
   const [internalValue, setInternalValue] = useState(value);
+  // Value used for the slider itself, handling no min/max values
+  const sliderValue = Array.isArray(internalValue)
+    ? [
+        internalValue[0] === null ? min - step : internalValue[0],
+        internalValue[1] === null ? max + step : internalValue[1],
+      ]
+    : internalValue;
+
   useEffect(() => {
     if (value !== internalValue) {
       setInternalValue(value);
     }
   }, [value]);
 
+  const adaptValue = (value: SliderFilterType["value"]) =>
+    Array.isArray(value)
+      ? [value[0] < min ? null : value[0], value[1] > max ? null : value[1]]
+      : value;
+
+  const handleChange = (e, value: SliderFilterType["value"]) => {
+    onChange({ ...filter, value: adaptValue(value) });
+  };
+
   return (
     <Box>
       {label}
       <StyledZigSlider
-        value={internalValue}
+        value={sliderValue}
         min={allowNoMin ? min - step : min}
         max={allowNoMax ? max + step : max}
-        onChange={(_, v) => setInternalValue(v)}
-        onChangeCommitted={(e, v) => onChange({ ...filter, value: v as SliderFilterType["value"] })}
+        onChange={(_, v) => setInternalValue(adaptValue(v))}
+        onChangeCommitted={handleChange}
         marks={false}
         valueLabelDisplay="off"
         labels={{ showValues: false }}
@@ -38,12 +56,12 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
       <Box display={"flex"} justifyContent={"center"} pt={1} gap={"6px"}>
         {Array.isArray(internalValue) ? (
           <>
-            <Value showPct={internalValue[0] >= min}>
-              {internalValue[0] < min ? "Min" : internalValue[0]}
+            <Value showPct={internalValue[0] !== null}>
+              {internalValue[0] === null ? "Min" : internalValue[0]}
             </Value>
             <ZigTypography fontSize={18}>to</ZigTypography>
-            <Value showPct={internalValue[1] <= max}>
-              {internalValue[1] > max ? "Max" : internalValue[1]}
+            <Value showPct={internalValue[1] !== null}>
+              {internalValue[1] === null ? "Max" : internalValue[1]}
             </Value>
           </>
         ) : (

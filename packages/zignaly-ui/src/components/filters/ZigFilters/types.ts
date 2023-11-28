@@ -15,7 +15,7 @@ export type ZigFiltersType = ZigFilter[];
 
 export type SliderFilter = BaseFilter & {
   type: "slider";
-  value: number | [number, number];
+  value: number | [number | null, number | null];
   label: string;
   min?: number;
   max?: number;

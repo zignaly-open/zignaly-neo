@@ -10,15 +10,14 @@ import { DropdownItem } from "../../styles";
 const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     if (filter.type === "slider" && Array.isArray(filter.value)) {
-      const min = filter.min ?? 0;
-      const max = filter.max ?? 100;
-      if (filter.value[0] < min && filter.value[1] > max) return "All";
-      else if (filter.value[0] < min) return `< ${filter.value[1]}%`;
-      else if (filter.value[1] > max) return `> ${filter.value[0]}%`;
+      if (filter.value[0] === null && filter.value[1] === null) return "All";
+      else if (filter.value[0] === null) return `< ${filter.value[1]}%`;
+      else if (filter.value[1] === null) return `> ${filter.value[0]}%`;
       else return `${filter.value[0]}% to ${filter.value[1]}%`;
     }
     return filter.value;
   }, [filter.value]);
+  console.log(filter);
 
   return (
     <ZigDropdown
