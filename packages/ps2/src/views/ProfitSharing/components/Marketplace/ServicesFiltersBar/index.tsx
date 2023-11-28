@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { ZigFilters, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
+import { ServicesFiltersBarProps } from './types';
 
 const ServicesFiltersBar = ({
   count,
@@ -10,7 +11,7 @@ const ServicesFiltersBar = ({
   onChange,
   search,
   onSearchChange,
-}): { count: number } => {
+}: ServicesFiltersBarProps) => {
   const { t } = useTranslation('marketplace');
   return (
     <Box display='flex'>
@@ -22,7 +23,7 @@ const ServicesFiltersBar = ({
       </ZigTypography>
       <ZigFilters
         defaultFilters={defaultFilters}
-        filters={filters}
+        initialFilters={filters}
         onChange={onChange}
         search={search}
         onSearchChange={onSearchChange}

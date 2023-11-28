@@ -1,6 +1,8 @@
 export type ZigFiltersProps = {
   onChange: (filters: ZigFiltersType) => void;
-  filters: ZigFiltersType;
+  search?: string;
+  onSearchChange?: (search: string) => void;
+  initialFilters: ZigFiltersType;
   defaultFilters: ZigFiltersType;
 };
 

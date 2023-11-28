@@ -7,6 +7,7 @@ import {
   ZigTypography,
   downloadTableCsv,
   ZigButton,
+  ZigFilters,
 } from '@zignaly-open/ui';
 import { FilterWrapperContainer } from '../styles';
 import React, { useMemo, useState } from 'react';
@@ -14,6 +15,7 @@ import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
+import { filter } from 'lodash';
 
 const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
@@ -142,6 +144,37 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       'commissions.csv',
     );
 
+  const filters = [
+    {
+      type: 'select',
+      value: null,
+      label: t('table.filter-type'),
+      options: rewardTypeOptions,
+      id: 'type',
+      showInBar: true,
+    },
+    {
+      type: 'select',
+      value: null,
+      label: t('table.filter-status'),
+      options: statusOptions,
+      id: 'status',
+      showInBar: true,
+    },
+  ];
+
+  const [localFilters, setLocalFilters] = useState(filters);
+
+  const columnFilters = useMemo(() => {
+    return localFilters.flatMap(({ id, value }) => {
+      if (value === null) return [];
+      return {
+        id,
+        value,
+      };
+    });
+  }, [localFilters]);
+
   return (
     <Box sx={{ mb: 6, mt: 3 }}>
       <Grid container mb={3}>
@@ -160,19 +193,10 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         </Grid>
         {referrals.length > 0 && (
           <FilterWrapperContainer item xs={12} sm={8}>
-            <ZigSelect
-              onChange={setRewardType}
-              value={rewardType}
-              small
-              label={t('table.filter-type')}
-              options={rewardTypeOptions}
-            />
-            <ZigSelect
-              onChange={setStatus}
-              value={status}
-              small
-              label={t('table.filter-status')}
-              options={statusOptions}
+            <ZigFilters
+              defaultFilters={filters}
+              initialFilters={filters}
+              onChange={setLocalFilters}
             />
 
             <ZigButton
@@ -208,6 +232,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
           columnVisibility={false}
           enableSortingRemoval={false}
           emptyMessage={t('table.no-referrals')}
+          state={{ columnFilters }}
         />
       ) : (
         <Paper sx={{ p: 2 }}>

@@ -13,7 +13,7 @@ export default meta;
 const ZigFiltersWrapper = ({ filters }: { filters: ZigFiltersType }) => {
   return (
     <Box display="flex">
-      <ZigFilters defaultFilters={filters} filters={filters} onChange={() => {}} />
+      <ZigFilters defaultFilters={filters} initialFilters={filters} onChange={() => {}} />
     </Box>
   );
 };

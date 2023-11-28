@@ -96,10 +96,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
     {
       type: 'select',
-      value: 'all',
+      value: null,
       label: 'Coin',
       options: [
-        { value: 'all', label: 'All' },
+        { value: null, label: 'All' },
         { value: 'USDT', label: 'USDT' },
         { value: 'USDC', label: 'USDC' },
         { value: 'BNB', label: 'BNB' },
@@ -134,73 +134,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
 
   const ref = useRef<ZigTableRef>();
 
-  // const [filters, setFilters] = useState<MarketplaceFilters>({});
-  // const [filteredServices, setFilteredServices] =
-  //   useState<MarketplaceService[]>(services);
-
-  // usememo
-  // const composeColumnFilters = (filterss) => {
-  //   return [
-  //     {
-  //       id: 'service-name',
-  //       value: filterss.find((f) => f.id === 'coin')?.value,
-  //     },
-  //     // {
-  //     //   id: 'service-name',
-  //     //   value: filterss
-  //     //     .find((f) => f.id === 'type')
-  //     //     ?.options.filter((o) => o.checked)
-  //     //     .map((o) => o.value),
-  //     // },
-  //     {
-  //       id: 'pnlPercent180t',
-  //       value: filterss.find((f) => f.id === 'returns')?.value,
-  //     },
-  //   ];
-  // };
-
-  const servicesCount = ref.current?.table.getFilteredRowModel().rows.length;
-
-  // useEffect(() => {
-  //   console.log('omh', ref.current?.count);
-  // }, [ref.current?.count]);
-  // const count = useMemo(() => {
-  //   return ref.current?.count;
-  // }, [ref.current?.count]);
-  // console.log(count);
-  // useUpdateEffect(() => {
-  //   setColumnFilters(composeColumnFilters(localFilters));
-  //   console.log(
-  //     ref.current?.table.getFilteredRowModel().rows.length,
-  //     ref.current?.count,
-  //     servicesCount,
-  //   );
-  //   // set count state?
-
-  //   // setTimeout(() => {
-  //   //   console.log(
-  //   //     'after timeout',
-  //   //     ref.current?.table.getFilteredRowModel().rows.length,
-  //   //     servicesCount,
-  //   //   );
-  //   // }, []);
-  // }, [localFilters]);
-
-  // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-  //   composeColumnFilters(filters),
-  // );
-
-  const filterServices = () => {
-    // return services.filter((service) => {
-  };
-
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
       return localFilters.every((filter) => {
         if (filter.id === 'returns') {
           return FilterFns.inNumberRange(+service.pnlPercent180t, filter.value);
         } else if (filter.id === 'coin') {
-          return filter.value === 'all' || service.ssc === filter.value;
+          return !filter.value || service.ssc === filter.value;
         } else if (filter.id === 'type') {
           const serviceType = service.type.split('_')[1];
           return FilterFns.inOptionsChecked(serviceType, filter.options);
@@ -473,10 +413,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         count={filteredServices?.length}
         filters={filters}
         defaultFilters={filters}
-        onChange={(v) => {
-          console.log('v', v);
-          setLocalFilters(v);
-        }}
+        onChange={setLocalFilters}
         search={searchFilter}
         onSearchChange={setSearchFilter}
       />

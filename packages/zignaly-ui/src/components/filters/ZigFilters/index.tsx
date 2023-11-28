@@ -1,7 +1,6 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Layout } from "./styles";
 import { Box } from "@mui/material";
-import ZigTypography from "components/display/ZigTypography";
 import ZigSearch from "../ZigSearch";
 import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
 import SelectFilterDropdown from "./dropdowns/SelectFilterDropdown";
@@ -12,7 +11,7 @@ import { useUpdateEffect } from "react-use";
 
 const ZigFilters = ({
   defaultFilters,
-  filters,
+  initialFilters: filters,
   onChange,
   search,
   onSearchChange,
@@ -65,17 +64,19 @@ const ZigFilters = ({
               filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
             return <FilterDropdown filter={filter} key={filter.id} onChange={updateFilters} />;
           })}
-          <MultiFilterDropdown
-            resetFilters={resetSecondaryFilters}
-            filters={secondaryFilters}
-            onChange={updateFilters}
-          />
+          {secondaryFilters.length > 0 && (
+            <MultiFilterDropdown
+              resetFilters={resetSecondaryFilters}
+              filters={secondaryFilters}
+              onChange={updateFilters}
+            />
+          )}
         </Layout>
         <ZigButton variant="text" onClick={resetFilters}>
           Reset
         </ZigButton>
       </Box>
-      <ZigSearch value={search} onChange={onSearchChange} />
+      {search && <ZigSearch value={search} onChange={onSearchChange} />}
     </Box>
   );
 };
