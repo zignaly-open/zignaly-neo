@@ -53,7 +53,8 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
       <Box sx={{ flexDirection: 'row', display: 'flex', gap: 3 }}>
         <Box sx={{ flex: 5, mr: 2 }}>
           <ZigCopyText
-            id={`service-api__api-key-copy-${apiKey.id}`}
+            id={`service-api__input-api-key-${apiKey.id}`}
+            copyElementId={`service-api__copy-api-key-${apiKey.id}`}
             label={t('api-keys.api-key')}
             value={apiKey.key}
             onCopied={() => toast.success(t('action:copied'))}
