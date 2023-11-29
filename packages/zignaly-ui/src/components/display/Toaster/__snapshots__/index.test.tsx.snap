@@ -1,0 +1,394 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/display/Toaster renders Toaster render 1`] = `
+<div
+  class="sc-dkzDqf cPWBcW"
+  id="toaster"
+>
+  <div
+    class="sc-gsnTZi dwqIQN"
+  >
+    <svg
+      color="#CC3993"
+    />
+  </div>
+  <div
+    class="sc-bczRLJ chEsjx"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 css-pz04qi-MuiTypography-root"
+    />
+  </div>
+</div>
+`;
+
+exports[`components/display/Toaster renders Toaster render 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "flex-direction",
+  "10": "border",
+  "11": "background",
+  "12": "visibility",
+  "2": "align-items",
+  "3": "justify-content",
+  "4": "box-sizing",
+  "5": "box-shadow",
+  "6": "border-radius",
+  "7": "position",
+  "8": "padding",
+  "9": "height",
+  "_importants": {
+    "align-items": "",
+    "background": "",
+    "border": "",
+    "border-radius": "",
+    "box-shadow": "",
+    "box-sizing": "",
+    "display": "",
+    "flex-direction": "",
+    "height": "",
+    "justify-content": "",
+    "padding": "",
+    "position": "",
+    "visibility": undefined,
+  },
+  "_length": 13,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "background": "rgb(35, 22, 48)",
+    "background-color": "rgb(35, 22, 48)",
+    "border": "1px solid #231630",
+    "border-bottom": "1px solid #231630",
+    "border-bottom-color": "#231630",
+    "border-bottom-style": "solid",
+    "border-bottom-width": "1px",
+    "border-color": "#231630",
+    "border-left": "1px solid #231630",
+    "border-left-color": "#231630",
+    "border-left-style": "solid",
+    "border-left-width": "1px",
+    "border-radius": "5px",
+    "border-right": "1px solid #231630",
+    "border-right-color": "#231630",
+    "border-right-style": "solid",
+    "border-right-width": "1px",
+    "border-style": "solid",
+    "border-top": "1px solid #231630",
+    "border-top-color": "#231630",
+    "border-top-style": "solid",
+    "border-top-width": "1px",
+    "border-width": "1px",
+    "box-shadow": "4px 6px 4px 44",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "flex-direction": "row",
+    "height": "48px",
+    "justify-content": "center",
+    "padding": "11px 24px",
+    "padding-bottom": "11px",
+    "padding-left": "24px",
+    "padding-right": "24px",
+    "padding-top": "11px",
+    "position": "absolute",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/display/Toaster renders Toaster render info variant 1`] = `
+<div
+  class="sc-dkzDqf dtZXct"
+  id="toaster"
+>
+  <div
+    class="sc-gsnTZi dwqIQN"
+  >
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="InfoIcon"
+      fill="#35334A"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+      />
+    </svg>
+  </div>
+  <div
+    class="sc-bczRLJ chEsjx"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 css-fwwn99-MuiTypography-root"
+    />
+  </div>
+</div>
+`;
+
+exports[`components/display/Toaster renders Toaster render info variant 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "flex-direction",
+  "10": "border",
+  "11": "background",
+  "12": "visibility",
+  "2": "align-items",
+  "3": "justify-content",
+  "4": "box-sizing",
+  "5": "box-shadow",
+  "6": "border-radius",
+  "7": "position",
+  "8": "padding",
+  "9": "height",
+  "_importants": {
+    "align-items": "",
+    "background": "",
+    "border": "",
+    "border-radius": "",
+    "box-shadow": "",
+    "box-sizing": "",
+    "display": "",
+    "flex-direction": "",
+    "height": "",
+    "justify-content": "",
+    "padding": "",
+    "position": "",
+    "visibility": undefined,
+  },
+  "_length": 13,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "background": "rgb(53, 51, 74)",
+    "background-color": "rgb(53, 51, 74)",
+    "border": "1px solid #35334a",
+    "border-bottom": "1px solid #35334a",
+    "border-bottom-color": "#35334a",
+    "border-bottom-style": "solid",
+    "border-bottom-width": "1px",
+    "border-color": "#35334a",
+    "border-left": "1px solid #35334a",
+    "border-left-color": "#35334a",
+    "border-left-style": "solid",
+    "border-left-width": "1px",
+    "border-radius": "5px",
+    "border-right": "1px solid #35334a",
+    "border-right-color": "#35334a",
+    "border-right-style": "solid",
+    "border-right-width": "1px",
+    "border-style": "solid",
+    "border-top": "1px solid #35334a",
+    "border-top-color": "#35334a",
+    "border-top-style": "solid",
+    "border-top-width": "1px",
+    "border-width": "1px",
+    "box-shadow": "4px 6px 4px 44",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "flex-direction": "row",
+    "height": "48px",
+    "justify-content": "center",
+    "padding": "11px 24px",
+    "padding-bottom": "11px",
+    "padding-left": "24px",
+    "padding-right": "24px",
+    "padding-top": "11px",
+    "position": "absolute",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/display/Toaster renders Toaster render small size 1`] = `
+<div
+  class="sc-dkzDqf hnTGNs"
+  id="toaster"
+>
+  <div
+    class="sc-gsnTZi dwqIQN"
+  >
+    <svg
+      color="#CC3993"
+    />
+  </div>
+  <div
+    class="sc-bczRLJ chEsjx"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body2 css-17qoo2p-MuiTypography-root"
+    />
+  </div>
+</div>
+`;
+
+exports[`components/display/Toaster renders Toaster render small size 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "flex-direction",
+  "10": "border",
+  "11": "background",
+  "12": "visibility",
+  "2": "align-items",
+  "3": "justify-content",
+  "4": "box-sizing",
+  "5": "box-shadow",
+  "6": "border-radius",
+  "7": "position",
+  "8": "padding",
+  "9": "height",
+  "_importants": {
+    "align-items": "",
+    "background": "",
+    "border": "",
+    "border-radius": "",
+    "box-shadow": "",
+    "box-sizing": "",
+    "display": "",
+    "flex-direction": "",
+    "height": "",
+    "justify-content": "",
+    "padding": "",
+    "position": "",
+    "visibility": undefined,
+  },
+  "_length": 13,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "background": "rgb(35, 22, 48)",
+    "background-color": "rgb(35, 22, 48)",
+    "border": "1px solid #231630",
+    "border-bottom": "1px solid #231630",
+    "border-bottom-color": "#231630",
+    "border-bottom-style": "solid",
+    "border-bottom-width": "1px",
+    "border-color": "#231630",
+    "border-left": "1px solid #231630",
+    "border-left-color": "#231630",
+    "border-left-style": "solid",
+    "border-left-width": "1px",
+    "border-radius": "5px",
+    "border-right": "1px solid #231630",
+    "border-right-color": "#231630",
+    "border-right-style": "solid",
+    "border-right-width": "1px",
+    "border-style": "solid",
+    "border-top": "1px solid #231630",
+    "border-top-color": "#231630",
+    "border-top-style": "solid",
+    "border-top-width": "1px",
+    "border-width": "1px",
+    "box-shadow": "4px 6px 4px 44",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "flex-direction": "row",
+    "height": "32px",
+    "justify-content": "center",
+    "padding": "4px 18px",
+    "padding-bottom": "4px",
+    "padding-left": "18px",
+    "padding-right": "18px",
+    "padding-top": "4px",
+    "position": "absolute",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/display/Toaster renders Toaster render success variant 1`] = `
+<div
+  class="sc-dkzDqf vTvCu"
+  id="toaster"
+>
+  <div
+    class="sc-gsnTZi dwqIQN"
+  >
+    <svg
+      color="#26c496"
+    />
+  </div>
+  <div
+    class="sc-bczRLJ chEsjx"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 css-xnxsde-MuiTypography-root"
+    />
+  </div>
+</div>
+`;
+
+exports[`components/display/Toaster renders Toaster render success variant 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "flex-direction",
+  "10": "border",
+  "11": "background",
+  "12": "visibility",
+  "2": "align-items",
+  "3": "justify-content",
+  "4": "box-sizing",
+  "5": "box-shadow",
+  "6": "border-radius",
+  "7": "position",
+  "8": "padding",
+  "9": "height",
+  "_importants": {
+    "align-items": "",
+    "background": "",
+    "border": "",
+    "border-radius": "",
+    "box-shadow": "",
+    "box-sizing": "",
+    "display": "",
+    "flex-direction": "",
+    "height": "",
+    "justify-content": "",
+    "padding": "",
+    "position": "",
+    "visibility": undefined,
+  },
+  "_length": 13,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "background": "rgb(18, 36, 49)",
+    "background-color": "rgb(18, 36, 49)",
+    "border": "1px solid #122431",
+    "border-bottom": "1px solid #122431",
+    "border-bottom-color": "#122431",
+    "border-bottom-style": "solid",
+    "border-bottom-width": "1px",
+    "border-color": "#122431",
+    "border-left": "1px solid #122431",
+    "border-left-color": "#122431",
+    "border-left-style": "solid",
+    "border-left-width": "1px",
+    "border-radius": "5px",
+    "border-right": "1px solid #122431",
+    "border-right-color": "#122431",
+    "border-right-style": "solid",
+    "border-right-width": "1px",
+    "border-style": "solid",
+    "border-top": "1px solid #122431",
+    "border-top-color": "#122431",
+    "border-top-style": "solid",
+    "border-top-width": "1px",
+    "border-width": "1px",
+    "box-shadow": "4px 6px 4px 44",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "flex-direction": "row",
+    "height": "48px",
+    "justify-content": "center",
+    "padding": "11px 24px",
+    "padding-bottom": "11px",
+    "padding-left": "24px",
+    "padding-right": "24px",
+    "padding-top": "11px",
+    "position": "absolute",
+    "visibility": "visible",
+  },
+}
+`;
