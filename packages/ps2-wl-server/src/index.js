@@ -63,7 +63,7 @@ function getIndexHtmlWithWhitelabelHead(wlConfig) {
     .replace('<head>', `<head><!-- THIS IS THE NEW SERVER -->`)
     .replace(
       '<script id="analytics-scripts"></script>',
-      `<script id="analytics-scripts">${wlConfig.scripts || ''}}</script>`,
+      wlConfig.scripts || '',
     );
 }
 
