@@ -30,6 +30,10 @@
     "x-investors_one": "{{count}} investor",
     "x-investors_other": "{{count}} investors",
     "invested": "{{ invested }} invested",
-    "edit": "Click to edit"
+    "edit": "Click to edit",
+    "filter-months": "{{count}} months returns",
+    "filter-coin": "Coin",
+    "filter-type": "Type",
+    "filter-fee": "Service Fee"
   }
 }

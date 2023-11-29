@@ -6,7 +6,7 @@ import { ServicesFiltersBarProps } from './types';
 
 const ServicesFiltersBar = ({
   count,
-  filters,
+  initialFilters,
   defaultFilters,
   onChange,
   search,
@@ -43,7 +43,7 @@ const ServicesFiltersBar = ({
         <ZigFilters
           title={t('investment-preferences')}
           defaultFilters={defaultFilters}
-          initialFilters={filters}
+          initialFilters={initialFilters}
           onChange={onChange}
           search={search}
           onSearchChange={onSearchChange}

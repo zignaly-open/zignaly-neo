@@ -4,7 +4,7 @@ import { ComponentProps } from 'react';
 type ZigFiltersProps = ComponentProps<typeof ZigFilters>;
 export type ServicesFiltersBarProps = {
   count: number;
-  filters: ZigFiltersProps['filters'];
+  initialFilters: ZigFiltersProps['initialFilters'];
   defaultFilters: ZigFiltersProps['defaultFilters'];
   onChange: ZigFiltersProps['onChange'];
   search: ZigFiltersProps['search'];

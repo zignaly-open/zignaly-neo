@@ -42,11 +42,6 @@ export type ZigTableQueryRef = {
   refetch: () => void;
 };
 
-export type ZigTableRef = {
-  // todo
-  table: any;
-};
-
 export interface ZigTablePropsInfiniteQuery<T extends object, V extends ZigTableQueryParams>
   extends ZigTablePropsBase<T> {
   useInfiniteQuery: RtkQueryLikeInfinitePagination<T, V>;

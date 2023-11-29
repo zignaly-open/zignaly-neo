@@ -11,7 +11,6 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
-  ZigTableRef,
   FilterFns,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
@@ -33,60 +32,19 @@ import { MarketplaceFilters } from './types';
 import ServicesFiltersBar from './ServicesFiltersBar';
 import { ColumnFiltersState, filterFns } from '@tanstack/react-table';
 import { useUpdateEffect } from 'react-use';
+import { setSort } from 'apis/settings/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { usePersistTable } from 'util/hooks/usePersistTable';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
-  // const filters = {
-  //   returns: {
-  //     type: 'slider',
-  //     value: [19, 100],
-  //     label: '6 months returns',
-  //     allowNoMin: true,
-  //     allowNoMax: true,
-  //     min: 0,
-  //     max: 100,
-  //     id: 'returns',
-  //     showInBar: true,
-  //   },
-  //   coin: {
-  //     type: 'select',
-  //     value: 'all',
-  //     label: 'Coin',
-  //     options: [
-  //       { value: 'all', label: 'All' },
-  //       { value: 'USDT', label: 'USDT' },
-  //       { value: 'USDC', label: 'USDC' },
-  //       { value: 'BNB', label: 'BNB' },
-  //       { value: 'ETH', label: 'ETH' },
-  //       { value: 'BTC', label: 'BTC' },
-  //     ],
-  //     id: 'coin',
-  //     showInBar: true,
-  //   },
-  //   type: {
-  //     type: 'checkbox',
-  //     label: 'Type',
-  //     options: [
-  //       { value: 'spot', label: 'Spot', checked: true },
-  //       { value: 'futures', label: 'Futures', checked: true },
-  //     ],
-  //     id: 'type',
-  //   },
-  //   fee: {
-  //     type: 'slider',
-  //     value: [0, 50],
-  //     label: 'Service Fee',
-  //     min: 0,
-  //     max: 50,
-  //     id: 'fee',
-  //   },
-  // };
+  const { t } = useTranslation('marketplace');
 
   const filters = [
     {
       type: 'slider',
       value: [19, null],
-      label: '6 months returns',
+      label: t('table.filter-months', { count: 6 }),
       allowNoMin: true,
       allowNoMax: true,
       min: 0,
@@ -97,7 +55,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     {
       type: 'select',
       value: null,
-      label: 'Coin',
+      label: t('table.filter-coin'),
       options: [
         { value: null, label: 'All' },
         { value: 'USDT', label: 'USDT' },
@@ -111,7 +69,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
     {
       type: 'checkbox',
-      label: 'Type',
+      label: t('table.filter-type'),
       options: [
         { value: 'spot', label: 'Spot', checked: true },
         { value: 'futures', label: 'Futures', checked: true },
@@ -121,18 +79,17 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     {
       type: 'slider',
       value: [0, 50],
-      label: 'Service Fee',
+      label: t('table.filter-fee'),
       min: 0,
       max: 50,
       id: 'fee',
     },
   ];
-  const { t } = useTranslation('marketplace');
   const theme = useTheme();
   const [localFilters, setLocalFilters] = useState(filters);
   const [searchFilter, setSearchFilter] = useState('');
-
-  const ref = useRef<ZigTableRef>();
+  const tableId = 'marketplace';
+  const tablePersist = usePersistTable(tableId, localFilters);
 
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
@@ -166,10 +123,6 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             {t(md ? 'table.service-name' : 'table.service-name-mobile')}
           </div>
         ),
-        // filterFn: (row, columnIds, filterValue) => {
-        //   console.log(row.original.ssc, filterValue);
-        //   return filterValue === 'all' || row.original.ssc === filterValue;
-        // },
         style: {
           justifyContent: 'flex-start',
           paddingLeft: md && '88px',
@@ -412,7 +365,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       <TableWrapper>
         <ServicesFiltersBar
           count={filteredServices?.length}
-          filters={filters}
+          initialFilters={tablePersist.filters}
           defaultFilters={filters}
           onChange={setLocalFilters}
           search={searchFilter}
@@ -432,9 +385,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 }
               : undefined
           }
-          prefixId={'marketplace'}
+          prefixId={tableId}
           initialState={{
-            sorting: [
+            sorting: tablePersist.sorting ?? [
               {
                 id: 'pnlPercent180t',
                 desc: true,
@@ -447,7 +400,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           columnVisibility={false}
           enableSortingRemoval={false}
           state={{ globalFilter: searchFilter }}
-          ref={ref}
+          onSortingChange={tablePersist.sortTable}
         />
       </TableWrapper>
     </>

@@ -20,6 +20,7 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
+import { useUpdateEffect } from "react-use";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -35,10 +36,16 @@ function ZigTableData<T extends object>({
   fetching,
   emptyMessage,
   state = {},
+  onSortingChange,
   ...rest
 }: ZigTablePropsData<T>) {
   const theme = useTheme();
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
+  useUpdateEffect(() => {
+    console.log("sorting", sorting);
+    onSortingChange?.(sorting);
+  }, [sorting]);
+
   const [columnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
   );

@@ -17,7 +17,7 @@ const ZigFilters = ({
   onSearchChange,
   title,
 }: ZigFiltersProps) => {
-  const [internalFilters, setInternalFilters] = useState(filters);
+  const [internalFilters, setInternalFilters] = useState(filters ?? defaultFilters);
 
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
@@ -81,7 +81,9 @@ const ZigFilters = ({
           Reset
         </ZigButton>
       </Box>
-      {search && <ZigSearch value={search} onChange={onSearchChange} />}
+      {search !== undefined && onSearchChange && (
+        <ZigSearch value={search} onChange={onSearchChange} />
+      )}
     </Box>
   );
 };

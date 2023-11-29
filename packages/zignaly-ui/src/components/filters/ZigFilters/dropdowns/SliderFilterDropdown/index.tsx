@@ -3,7 +3,6 @@ import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import SliderFilter from "../../filters/SliderFilter";
 import { Box } from "@mui/material";
-import { LayoutItem } from "./styles";
 import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 
@@ -17,7 +16,6 @@ const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) =
     }
     return filter.value;
   }, [filter.value]);
-  console.log(filter);
 
   return (
     <ZigDropdown
