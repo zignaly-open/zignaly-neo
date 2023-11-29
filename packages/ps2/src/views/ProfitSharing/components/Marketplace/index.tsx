@@ -409,21 +409,21 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           {t('invest-in-services-explainer')}
         </ZigTypography>
       </Box>
-      <ServicesFiltersBar
-        count={filteredServices?.length}
-        filters={filters}
-        defaultFilters={filters}
-        onChange={setLocalFilters}
-        search={searchFilter}
-        onSearchChange={setSearchFilter}
-      />
-      {/* <TopServicesCards
+      <TableWrapper>
+        <ServicesFiltersBar
+          count={filteredServices?.length}
+          filters={filters}
+          defaultFilters={filters}
+          onChange={setLocalFilters}
+          search={searchFilter}
+          onSearchChange={setSearchFilter}
+        />
+        {/* <TopServicesCards
               services={services
                 ?.slice()
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
                 .slice(0, 3)}
             /> */}
-      <TableWrapper>
         <ZigTable
           onRowClick={
             !md

@@ -272,22 +272,6 @@ export const TotalBoxValue = styled(ZigTypography)`
   }
 `;
 
-export const FilterWrapperContainer = styled(Grid)`
-  justify-content: flex-end;
-
-  &,
-  & > .MuiBox-root {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .zig-react-select__control {
-    width: 150px;
-  }
-`;
-
 export const GetWhatYouDeserveLabel = styled(ZigTypography)`
   display: block;
   text-align: center;

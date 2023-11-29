@@ -15,6 +15,7 @@ const ZigFilters = ({
   onChange,
   search,
   onSearchChange,
+  title,
 }: ZigFiltersProps) => {
   const [internalFilters, setInternalFilters] = useState(filters);
 
@@ -26,7 +27,6 @@ const ZigFilters = ({
   }, [internalFilters]);
 
   useUpdateEffect(() => {
-    console.log("change");
     onChange(internalFilters);
   }, [internalFilters]);
 
@@ -57,6 +57,11 @@ const ZigFilters = ({
   return (
     <Box display="flex" width={1}>
       <Box display="flex" gap={2} alignItems={"center"}>
+        {/* {title && <Box flexGrow={1}>
+                <ZigTypography variant='h4' fontWeight={400}>
+          {title}
+        </ZigTypography>
+        </Box>} */}
         <Layout>
           {mainFilters.map((filter) => {
             // todo: add checkbox

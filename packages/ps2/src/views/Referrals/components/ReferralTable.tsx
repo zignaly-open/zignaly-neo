@@ -2,20 +2,17 @@ import { Box, Grid, Paper } from '@mui/material';
 import {
   createColumnHelper,
   ZigPriceLabel,
-  ZigSelect,
   ZigTable,
   ZigTypography,
   downloadTableCsv,
   ZigButton,
   ZigFilters,
 } from '@zignaly-open/ui';
-import { FilterWrapperContainer } from '../styles';
 import React, { useMemo, useState } from 'react';
 import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
-import { filter } from 'lodash';
 
 const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
@@ -177,45 +174,56 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
 
   return (
     <Box sx={{ mb: 6, mt: 3 }}>
-      <Grid container mb={3}>
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <ZigTypography sx={{}} variant={'h2'}>
-            {t('table.title')}
-          </ZigTypography>
-        </Grid>
+      <Box
+        display='flex'
+        alignItems='center'
+        justifyContent='center'
+        flexWrap='wrap'
+        gap={1}
+        mb='36px'
+      >
+        <Box display={'flex'} flex={3} flexBasis={{ xs: '100%', md: 0 }}>
+          <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
+        </Box>
         {referrals.length > 0 && (
-          <FilterWrapperContainer item xs={12} sm={8}>
-            <ZigFilters
-              defaultFilters={filters}
-              initialFilters={filters}
-              onChange={setLocalFilters}
-            />
-
-            <ZigButton
-              onClick={exporter}
-              variant={'text'}
-              sx={{
-                '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                  fill: (theme) => theme.palette.links,
-                },
-              }}
-              endIcon={
-                <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
-              }
+          <>
+            <Box
+              justifyContent='center'
+              display='flex'
+              gap={1}
+              alignItems='center'
+              flex={3}
             >
-              {t('export')}
-            </ZigButton>
-          </FilterWrapperContainer>
+              <ZigFilters
+                defaultFilters={filters}
+                initialFilters={filters}
+                onChange={setLocalFilters}
+              />
+            </Box>
+            <Box
+              flex={3}
+              display='flex'
+              alignItems='center'
+              justifyContent={'flex-end'}
+            >
+              <ZigButton
+                onClick={exporter}
+                variant={'text'}
+                sx={{
+                  '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                    fill: (theme) => theme.palette.links,
+                  },
+                }}
+                endIcon={
+                  <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                }
+              >
+                {t('export')}
+              </ZigButton>
+            </Box>
+          </>
         )}
-      </Grid>
+      </Box>
 
       {referrals.length ? (
         <ZigTable

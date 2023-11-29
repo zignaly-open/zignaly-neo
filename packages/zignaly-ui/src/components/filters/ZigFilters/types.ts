@@ -4,6 +4,7 @@ export type ZigFiltersProps = {
   onSearchChange?: (search: string) => void;
   initialFilters: ZigFiltersType;
   defaultFilters: ZigFiltersType;
+  title?: string;
 };
 
 export type BaseFilter = {
