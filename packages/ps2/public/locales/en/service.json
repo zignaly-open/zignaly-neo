@@ -108,11 +108,17 @@
     "action": "Create service",
     "next-step": "Next",
     "service-type": "Service type:",
+    "exchange": "Exchange:",
     "service-name": "Service name",
     "base-currency": "Base currency",
     "types": {
       "spot": "Spot",
       "futures": "Futures"
+    },
+    "bybit-warning": "Please fill the following <0>form</0> to be part of Bybit Beta.",
+    "exchanges": {
+      "bybit": "Bybit",
+      "binance": "Binance"
     },
     "minimum-balance": "To trade and allow investors to invest, you need to invest at least \n {{ minValue }} {{ minValueCoin }} in your service",
     "profits-explainer": "Decide how much of your profits from trading and success fees you would like to request to transfer out automatically.",
