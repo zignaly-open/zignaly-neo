@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Layout } from "./styles";
+import { FilterDropdownWrapper, Layout, LayoutContent, TopDivider, VertDivider } from "./styles";
 import { Box } from "@mui/material";
 import ZigSearch from "../ZigSearch";
 import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
@@ -8,6 +8,18 @@ import MultiFilterDropdown from "./dropdowns/MultiFilterDropdown";
 import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import { useUpdateEffect } from "react-use";
+import ZigTypography from "components/display/ZigTypography";
+
+const FilterDropdown = ({ filter, onChange }) => {
+  // todo: add checkbox
+  const Component = filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
+  return (
+    <FilterDropdownWrapper>
+      <Component filter={filter} onChange={onChange} />
+      <VertDivider orientation="vertical" flexItem />
+    </FilterDropdownWrapper>
+  );
+};
 
 const ZigFilters = ({
   defaultFilters,
@@ -15,7 +27,7 @@ const ZigFilters = ({
   onChange,
   search,
   onSearchChange,
-  title,
+  label,
   leftComponent,
   rightComponent,
   ...rest
@@ -71,25 +83,28 @@ const ZigFilters = ({
       </Box>
       <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={1} flexGrow={2}>
         <Box display="flex" gap={2} alignItems={"center"} justifyContent="center">
-          {/* {title && <Box flexGrow={1}>
-                <ZigTypography variant='h4' fontWeight={400}>
-                {title}
+          <Layout label={label}>
+            {label && (
+              <TopDivider>
+                <ZigTypography variant={"h4"} fontWeight={400}>
+                  {label}
                 </ZigTypography>
-              </Box>} */}
-          <Layout>
-            {mainFilters.map((filter) => {
-              // todo: add checkbox
-              const FilterDropdown =
-                filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
-              return <FilterDropdown filter={filter} key={filter.id} onChange={updateFilters} />;
-            })}
-            {secondaryFilters.length > 0 && (
-              <MultiFilterDropdown
-                resetFilters={resetSecondaryFilters}
-                filters={secondaryFilters}
-                onChange={updateFilters}
-              />
+              </TopDivider>
             )}
+            <Box display={"flex"} alignItems={"center"}>
+              {mainFilters.map((filter) => {
+                return <FilterDropdown filter={filter} key={filter.id} onChange={updateFilters} />;
+              })}
+              {secondaryFilters.length > 0 && (
+                <FilterDropdownWrapper>
+                  <MultiFilterDropdown
+                    resetFilters={resetSecondaryFilters}
+                    filters={secondaryFilters}
+                    onChange={updateFilters}
+                  />
+                </FilterDropdownWrapper>
+              )}
+            </Box>
           </Layout>
           <ZigButton variant="text" onClick={resetFilters}>
             Reset

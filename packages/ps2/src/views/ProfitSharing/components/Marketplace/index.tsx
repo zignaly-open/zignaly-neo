@@ -341,7 +341,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         sx={{
           textAlign: 'center',
           mt: 4,
-          mb: 4,
+          mb: '50px',
         }}
       >
         <ZigTypography variant={'h1'} id={'marketplace__title'}>
@@ -370,6 +370,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           search={searchFilter}
           onSearchChange={setSearchFilter}
           mb='28px'
+          label={t('investment-preferences')}
         />
         {/* <TopServicesCards
               services={services

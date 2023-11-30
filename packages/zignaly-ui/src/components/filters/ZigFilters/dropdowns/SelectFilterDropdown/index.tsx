@@ -2,7 +2,6 @@ import ZigDropdown from "components/display/ZigDropdown";
 import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import { Box } from "@mui/material";
-import { LayoutItem } from "./styles";
 import { SelectFilterDropdownProps } from "./type";
 import { ExpandLess, ChevronRight } from "@mui/icons-material";
 import { DropdownItem } from "../../styles";
@@ -24,14 +23,13 @@ const SelectFilterDropdown = ({ filter, onChange }: SelectFilterDropdownProps) =
             <ZigTypography fontSize={14} color={"neutral100"}>
               {displayValue}
             </ZigTypography>
-            {open ? <ExpandLess /> : <ChevronRight />}
           </Box>
         </DropdownItem>
       )}
       options={filter.options.map((option, index) => ({
         active: filter.value === option.value,
         onClick: () => onChange({ ...filter, value: option.value }),
-        id: `drawer-account-switcher-dropdown__account-${index}`,
+        id: `select-filter__option-${index}`,
         label: option.label,
       }))}
     />

@@ -1,16 +1,45 @@
+import { Divider } from "@mui/material";
 import { Box, styled } from "@mui/system";
 
-export const Layout = styled(Box)`
-  display: flex;
-  border: 1px solid ${({ theme }) => theme.palette.neutral700};
-  align-items: center;
-  gap: 10px;
+export const Layout = styled(Box)<{ label?: string }>`
+  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
+  ${({ label }) => label && `border-top: none;`}
+  border-radius: 5px;
+  position: relative;
+`;
 
-  > div > div {
-    padding: 16px;
+export const TopDivider = styled(Divider)`
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0 2px;
+  transform: translateY(-50%);
+
+  &:before,
+  &:after {
+    border-color: ${({ theme }) => theme.palette.neutral600};
+    border-top-style: dotted;
   }
+`;
+
+export const VertDivider = styled(Divider)`
+  border-color: ${({ theme }) => theme.palette.neutral600};
 `;
 
 export const DropdownItem = styled(Box)<{ active: boolean }>`
   background: ${({ active, theme }) => (active ? theme.palette.neutral800 : "inherit")};
+`;
+
+export const FilterDropdownWrapper = styled(Box)`
+  display: flex;
+
+  > div > div {
+    padding: 10px 20px;
+  }
+
+  hr {
+    margin: 10px 0;
+  }
 `;
