@@ -13,13 +13,13 @@ import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
+import { TableId, usePersistTable } from 'util/hooks/usePersistTable';
 
 const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
 }) => {
   const { t } = useTranslation('referrals');
 
-  const [status, setStatus] = useState<StatusType>(null as StatusType);
   const statusOptions = useMemo(
     () => [
       { label: t('filter-any'), value: null },
@@ -33,7 +33,6 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [t, referrals],
   );
 
-  const [rewardType, setRewardType] = useState<RewardType>(null as RewardType);
   const rewardTypeOptions = useMemo(
     () => [
       { label: t('filter-any'), value: null },
@@ -112,15 +111,37 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [],
   );
 
+  const defaultFilters = useMemo(
+    () => [
+      {
+        type: 'select',
+        value: null,
+        label: t('table.filter-type'),
+        options: rewardTypeOptions,
+        id: 'type',
+        showInBar: true,
+      },
+      {
+        type: 'select',
+        value: null,
+        label: t('table.filter-status'),
+        options: statusOptions,
+        id: 'status',
+        showInBar: true,
+      },
+    ],
+    [rewardTypeOptions, statusOptions, t],
+  );
+
+  const [localFilters, setLocalFilters] = useState(defaultFilters);
   const filteredHistory = useMemo(
     () =>
-      referrals.filter(
-        (r) =>
-          (!status || r.status === status) &&
-          (!rewardType || r.type === rewardType),
+      referrals.filter((r) =>
+        localFilters.every(({ id, value }) => !value || r[id] === value),
       ),
-    [referrals, rewardType, status],
+    [referrals, localFilters],
   );
+  const tablePersist = usePersistTable(TableId.Referrals, localFilters);
 
   const exporter = () =>
     downloadTableCsv(
@@ -141,71 +162,15 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       'commissions.csv',
     );
 
-  const filters = [
-    {
-      type: 'select',
-      value: null,
-      label: t('table.filter-type'),
-      options: rewardTypeOptions,
-      id: 'type',
-      showInBar: true,
-    },
-    {
-      type: 'select',
-      value: null,
-      label: t('table.filter-status'),
-      options: statusOptions,
-      id: 'status',
-      showInBar: true,
-    },
-  ];
-
-  const [localFilters, setLocalFilters] = useState(filters);
-
-  const columnFilters = useMemo(() => {
-    return localFilters.flatMap(({ id, value }) => {
-      if (value === null) return [];
-      return {
-        id,
-        value,
-      };
-    });
-  }, [localFilters]);
-
   return (
     <Box sx={{ mb: 6, mt: 3 }}>
-      <Box
-        display='flex'
-        alignItems='center'
-        justifyContent='center'
-        flexWrap='wrap'
-        gap={1}
-        mb='36px'
-      >
-        <Box display={'flex'} flex={3} flexBasis={{ xs: '100%', md: 0 }}>
-          <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
-        </Box>
-        {referrals.length > 0 && (
-          <>
-            <Box
-              justifyContent='center'
-              display='flex'
-              gap={1}
-              alignItems='center'
-              flex={3}
-            >
-              <ZigFilters
-                defaultFilters={filters}
-                initialFilters={filters}
-                onChange={setLocalFilters}
-              />
-            </Box>
-            <Box
-              flex={3}
-              display='flex'
-              alignItems='center'
-              justifyContent={'flex-end'}
-            >
+      {referrals.length > 0 && (
+        <>
+          <ZigFilters
+            leftComponent={
+              <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
+            }
+            rightComponent={
               <ZigButton
                 onClick={exporter}
                 variant={'text'}
@@ -220,16 +185,20 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
               >
                 {t('export')}
               </ZigButton>
-            </Box>
-          </>
-        )}
-      </Box>
+            }
+            defaultFilters={defaultFilters}
+            initialFilters={tablePersist.filters}
+            onChange={setLocalFilters}
+            mb='36px'
+          />
+        </>
+      )}
 
       {referrals.length ? (
         <ZigTable
           initialState={{
             sorting: [
-              {
+              tablePersist.sorting ?? {
                 id: 'date',
                 desc: true,
               },
@@ -240,7 +209,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
           columnVisibility={false}
           enableSortingRemoval={false}
           emptyMessage={t('table.no-referrals')}
-          state={{ columnFilters }}
+          onSortingChange={tablePersist.sortTable}
         />
       ) : (
         <Paper sx={{ p: 2 }}>

@@ -34,6 +34,9 @@
     "filter-months": "{{count}} months returns",
     "filter-coin": "Coin",
     "filter-type": "Type",
-    "filter-fee": "Service Fee"
+    "filter-fee": "Service Fee",
+    "filter-spot": "Spot",
+    "filter-futures": "Futures",
+    "filter-all": "All"
   }
 }

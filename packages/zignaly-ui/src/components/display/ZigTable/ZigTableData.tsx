@@ -42,7 +42,6 @@ function ZigTableData<T extends object>({
   const theme = useTheme();
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
   useUpdateEffect(() => {
-    console.log("sorting", sorting);
     onSortingChange?.(sorting);
   }, [sorting]);
 

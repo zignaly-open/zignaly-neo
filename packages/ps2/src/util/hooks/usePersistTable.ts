@@ -4,6 +4,13 @@ import { isEmpty } from 'lodash-es';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUpdateEffect } from 'react-use';
 
+// export type TableId = 'marketplace' | 'referrals' | 'investment';
+export enum TableId {
+  Marketplace = 'marketplace',
+  Referrals = 'referrals',
+  Investment = 'investment',
+}
+
 /**
  * A hook to persist table sorting and filtering.
  * @param id Table id
@@ -11,7 +18,7 @@ import { useUpdateEffect } from 'react-use';
  * Or you can use the `filterTable` function returned by this hook instead.
  * @returns watchSorting Optional sorting to automatically persist, like `watchFilters`.
  */
-export const usePersistTable = (id: string, watchFilters, watchSorting) => {
+export const usePersistTable = (id: TableId, watchFilters, watchSorting) => {
   const { sorting, filters } = useSelector(
     (store: RootState) =>
       store.settings.table[id] ?? { sorting: undefined, filters: undefined },
@@ -31,7 +38,7 @@ export const usePersistTable = (id: string, watchFilters, watchSorting) => {
   }, [watchSorting]);
 
   return {
-    sorting: isEmpty(sorting) ? null : [sorting],
+    sorting: isEmpty(sorting) ? null : sorting,
     filters,
     sortTable: (newSorting) =>
       dispatch(sortTable({ id, sorting: newSorting[0] })),

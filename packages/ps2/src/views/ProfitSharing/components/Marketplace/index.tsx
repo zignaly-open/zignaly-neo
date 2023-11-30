@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   useMarketplaceMobileActiveRow,
   useMarketplace,
@@ -12,6 +12,7 @@ import {
   createColumnHelper,
   ZigTablePriceLabel,
   FilterFns,
+  ZigFilters,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -28,19 +29,15 @@ import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed'
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { MarketplaceFilters } from './types';
-import ServicesFiltersBar from './ServicesFiltersBar';
-import { ColumnFiltersState, filterFns } from '@tanstack/react-table';
-import { useUpdateEffect } from 'react-use';
-import { setSort } from 'apis/settings/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { usePersistTable } from 'util/hooks/usePersistTable';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const { t } = useTranslation('marketplace');
 
-  const filters = [
+  const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'];
+
+  const defaultFilters = [
     {
       type: 'slider',
       value: [19, null],
@@ -57,12 +54,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       value: null,
       label: t('table.filter-coin'),
       options: [
-        { value: null, label: 'All' },
-        { value: 'USDT', label: 'USDT' },
-        { value: 'USDC', label: 'USDC' },
-        { value: 'BNB', label: 'BNB' },
-        { value: 'ETH', label: 'ETH' },
-        { value: 'BTC', label: 'BTC' },
+        { value: null, label: t('table.filter-all') },
+        ...coins.map((coin) => ({ value: coin, label: coin })),
       ],
       id: 'coin',
       showInBar: true,
@@ -71,8 +64,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       type: 'checkbox',
       label: t('table.filter-type'),
       options: [
-        { value: 'spot', label: 'Spot', checked: true },
-        { value: 'futures', label: 'Futures', checked: true },
+        { value: 'spot', label: t('table.filter-spot'), checked: true },
+        { value: 'futures', label: t('table.filter-futures'), checked: true },
       ],
       id: 'type',
     },
@@ -86,7 +79,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
   ];
   const theme = useTheme();
-  const [localFilters, setLocalFilters] = useState(filters);
+  const [localFilters, setLocalFilters] = useState(defaultFilters);
   const [searchFilter, setSearchFilter] = useState('');
   const tableId = 'marketplace';
   const tablePersist = usePersistTable(tableId, localFilters);
@@ -363,13 +356,20 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         </ZigTypography>
       </Box>
       <TableWrapper>
-        <ServicesFiltersBar
-          count={filteredServices?.length}
+        <ZigFilters
+          leftComponent={
+            <ZigTypography variant='h2'>
+              {t('n-profit-sharing-services', {
+                count: filteredServices?.length,
+              })}
+            </ZigTypography>
+          }
           initialFilters={tablePersist.filters}
-          defaultFilters={filters}
+          defaultFilters={defaultFilters}
           onChange={setLocalFilters}
           search={searchFilter}
           onSearchChange={setSearchFilter}
+          mb='28px'
         />
         {/* <TopServicesCards
               services={services
@@ -387,8 +387,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           }
           prefixId={tableId}
           initialState={{
-            sorting: tablePersist.sorting ?? [
-              {
+            sorting: [
+              tablePersist.sorting ?? {
                 id: 'pnlPercent180t',
                 desc: true,
               },
