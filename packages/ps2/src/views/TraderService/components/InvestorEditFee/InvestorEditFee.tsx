@@ -92,9 +92,17 @@ function InvestorEditFee({
   );
 
   return (
-    <ZModal wide {...props} close={close} title={t('change-fee-modal.title')}>
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={t('change-fee-modal.title')}
+      id={'edit-success-fee-modal'}
+    >
       <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
-        <ZigTypography>{t('change-fee-modal.desc')}</ZigTypography>
+        <ZigTypography id={'edit-success-fee-modal__description'}>
+          {t('change-fee-modal.desc')}
+        </ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -102,6 +110,7 @@ function InvestorEditFee({
           control={control}
           render={({ field }) => (
             <SuccessFeeInputWrapper
+              prefixId={'edit-success-fee-modal__success-fee-input'}
               value={value}
               newValueLabel={t('change-fee-modal.new-success-fee')}
               title={t('change-fee-modal.title')}
@@ -118,6 +127,7 @@ function InvestorEditFee({
               zglyFee={data?.zglySuccessFee}
             >
               <ZigInput
+                id={'edit-success-fee-modal__discount'}
                 type='number'
                 InputProps={{
                   endAdornment: (
@@ -136,7 +146,7 @@ function InvestorEditFee({
 
         <ZigModalActions>
           <ZigButton
-            id={'edit-success-fee__save'}
+            id={'edit-success-fee-modal__save'}
             loading={isLoading}
             disabled={!isValid || previousValue === Number(value)}
             size='xlarge'

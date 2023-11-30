@@ -265,6 +265,33 @@ const ZigDrawer = () => {
                   </ListItemButton>
                 </ListItem>
               )}
+              {whitelabel.intercomId && (
+                <ListItem disablePadding>
+                  <ListItemButton
+                    id='drawer__help-chat'
+                    onClick={() => {
+                      const intercomLauncher = document.querySelector(
+                        '.intercom-launcher',
+                      ) as HTMLElement;
+                      const iframeLauncher = document.querySelector(
+                        '.intercom-launcher-frame',
+                      ) as HTMLIFrameElement;
+
+                      if (intercomLauncher) {
+                        intercomLauncher.click();
+                      } else {
+                        const iframeContent =
+                          iframeLauncher?.contentDocument?.querySelector(
+                            '.intercom-launcher',
+                          ) as HTMLElement;
+                        iframeContent?.click();
+                      }
+                    }}
+                  >
+                    <ListItemText primary={t('navigation-menu.ping-us')} />
+                  </ListItemButton>
+                </ListItem>
+              )}
               <ListItem disablePadding onClick={handleDrawerToggle}>
                 <ListItemButton target='_blank' href={whitelabel.helpUrl}>
                   <ListItemText

@@ -103,7 +103,9 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         }) =>
           accountId === exchange.internalId ? (
             <Tooltip title={t('it-is-you')}>
-              <ZigTypography>{getValue()}</ZigTypography>
+              <ZigTypography id={`service-investors-table__email-${accountId}`}>
+                {getValue()}
+              </ZigTypography>
             </Tooltip>
           ) : (
             getValue()
@@ -119,7 +121,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         }) =>
           accountId === exchange.internalId ? (
             <Tooltip title={t('it-is-you')}>
-              <ZigTypography>{getValue()}</ZigTypography>
+              <ZigTypography
+                id={`service-investors-table__userId-${accountId}`}
+              >
+                {getValue()}
+              </ZigTypography>
             </Tooltip>
           ) : (
             getValue()
@@ -128,7 +134,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       }),
       columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
-          <Box display={'flex'} flexDirection={'column'}>
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            id={`service-investors-table__header-invested`}
+          >
             {t('tableHeader.invested')}
             <Box fontSize={'12px'} color={'neutral300'}>
               {t('tableHeader.pending')}
@@ -139,10 +149,12 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: (props) => (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <ZigTablePriceLabel
+              id={`service-investors-table__invested-${props.row.original.account_id}`}
               coin={service?.ssc ?? 'USDT'}
               value={props.getValue()}
             />
             <ZigTablePriceLabel
+              id={`service-investors-table__pending-${props.row.original.account_id}`}
               showApproximate
               variant={'body2'}
               coin={service?.ssc ?? 'USDT'}
@@ -157,10 +169,14 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: (props) => (
           <>
             <ZigTablePriceLabel
+              id={`service-investors-table__p&l-${props.row.original.account_id}`}
               coin={service?.ssc ?? 'USDT'}
               value={parseFloat(props.getValue())}
             />
-            <ChangeIndicator value={props.row.original.pnlPctLc} />
+            <ChangeIndicator
+              value={props.row.original.pnlPctLc}
+              id={`service-investors-table__p&l-change-${props.row.original.account_id}`}
+            />
           </>
         ),
       }),
@@ -169,6 +185,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         id: 'pnlNetAt',
         cell: (props) => (
           <ZigTablePriceLabel
+            id={`service-investors-table__p&l-total-${props.row.original.account_id}`}
             coin={service?.ssc ?? 'USDT'}
             value={props.getValue()}
           />
@@ -179,6 +196,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         id: 'totalFeesPaid',
         cell: (props) => (
           <ZigTablePriceLabel
+            id={`service-investors-table__total-fees-${props.row.original.account_id}`}
             coin={service?.ssc ?? 'USDT'}
             value={props.getValue()}
           />
@@ -226,7 +244,9 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                     )
               }
             >
-              <ZigTypography>
+              <ZigTypography
+                id={`service-investors-table__success-fee-${accountId}`}
+              >
                 {getValue()}
                 {/* eslint-disable-next-line i18next/no-literal-string */}
                 {'%'}
@@ -237,7 +257,12 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       ),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
-        cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
+        cell: (props) => (
+          <ConnectionStateLabel
+            id={`service-investors-table__status-${props.row.original.account_id}`}
+            stateId={props.getValue()}
+          />
+        ),
       }),
       columnHelper.accessor('actions', {
         header: '',
@@ -257,7 +282,10 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           accountType !== 'owner' && (
             <ZigDropdown
               component={() => (
-                <IconButton sx={{ mr: '-4px' }}>
+                <IconButton
+                  sx={{ mr: '-4px' }}
+                  id={`service-investors-table__show-menu-button-${accountId}`}
+                >
                   <ZigDotsVerticalIcon
                     color={theme.palette.neutral200}
                     height={16}
@@ -308,15 +336,25 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 width={'17px'}
                 height={'20px'}
                 color={theme.palette.backgrounds.investorsIcon}
+                id={`service-investors__investors-number-icon`}
               />
-              <ZigTypography variant={'h3'} color={'contrasting'}>
+              <ZigTypography
+                variant={'h3'}
+                color={'contrasting'}
+                id={`service-investors__investors-number`}
+              >
                 {t('number-of-investors', {
                   count: investors?.length,
                 })}
               </ZigTypography>
-              <ZigSearch value={searchFilter} onChange={setSearchFilter} />
+              <ZigSearch
+                value={searchFilter}
+                onChange={setSearchFilter}
+                id={`service-investors__search`}
+              />
 
               <ZigButton
+                id={`service-investors__export`}
                 onClick={() => exporter(processedInvestorsList)}
                 variant={'text'}
                 sx={{
@@ -333,7 +371,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             </InvestorCounts>
 
             <ZigTable
-              prefixId={'investor'}
+              prefixId={'investors'}
               columns={columns}
               data={processedInvestorsList}
               emptyMessage={t('no-investors')}

@@ -112,9 +112,10 @@ function EditApiKeysModal({
       {...props}
       close={close}
       title={t(isCreate ? 'api-keys.create-new-key' : 'api-keys.edit-key')}
+      id={isCreate ? 'create-new-key-modal' : 'edit-key-modal'}
     >
       {isCreate && (
-        <ZigTypography>
+        <ZigTypography id={'create-new-key-modal__description'}>
           {t('api-keys.create-new-key-description')}
         </ZigTypography>
       )}
@@ -127,6 +128,7 @@ function EditApiKeysModal({
             rules={{ required: true }}
             render={({ field }) => (
               <ZigInput
+                id={'edit-key-modal__name'}
                 wide
                 label={t('common:name') + ':'}
                 placeholder={t('common:name')}
@@ -139,12 +141,14 @@ function EditApiKeysModal({
         )}
 
         <ZigCopyText
+          id={isCreate ? 'create-new-key-modal__copy' : 'edit-key-modal__copy'}
           label={t('api-keys.api-key')}
           value={apiKey.key}
           onCopied={() => toast.success(t('action:copied'))}
         />
         {isCreate ? (
           <ZigCopyText
+            id={'create-new-key-modal__copy-api-secret'}
             label={
               <MultilineLabel
                 title={t('api-keys.api-secret')}
@@ -157,23 +161,39 @@ function EditApiKeysModal({
         ) : (
           <div>
             <MultilineLabel
+              id={'edit-key-modal__api-secret'}
               title={t('api-keys.api-secret')}
               subtitle={t('api-keys.api-secret-explainer')}
             />
             <Tooltip title={t('api-keys.api-settings-tooltip')}>
-              <ZigTypography>********</ZigTypography>
+              <ZigTypography id={'edit-key-modal__api-asterisks'}>
+                {'********'}
+              </ZigTypography>
             </Tooltip>
           </div>
         )}
 
         <div>
-          <ZigTypography>{t('api-keys.api-settings')}</ZigTypography>
+          <ZigTypography
+            id={
+              isCreate
+                ? 'create-new-key-modal__api-settings'
+                : 'edit-key-modal__api-settings'
+            }
+          >
+            {t('api-keys.api-settings')}
+          </ZigTypography>
           <Grid container>
             <Grid item xs={12} md={6}>
               <Tooltip title={t('api-keys.cant-disable-read')}>
                 <FormControlLabel
                   control={
                     <Checkbox
+                      id={
+                        isCreate
+                          ? 'create-new-key-modal__enabled-read'
+                          : 'edit-key-modal__enabled-read'
+                      }
                       disabled={isLoading}
                       checked
                       onChange={() => {}}
@@ -187,6 +207,11 @@ function EditApiKeysModal({
               <FormControlLabel
                 control={
                   <Checkbox
+                    id={
+                      isCreate
+                        ? 'create-new-key-modal__can-trade'
+                        : 'edit-key-modal__can-trade'
+                    }
                     {...register('canTrade')}
                     checked={watch('canTrade')}
                     disabled={isLoading}
@@ -199,6 +224,11 @@ function EditApiKeysModal({
               <FormControlLabel
                 control={
                   <Checkbox
+                    id={
+                      isCreate
+                        ? 'create-new-key-modal__futures-trade'
+                        : 'edit-key-modal__futures-trade'
+                    }
                     {...register('futuresTrade')}
                     checked={watch('futuresTrade')}
                     disabled={isLoading}
@@ -211,7 +241,15 @@ function EditApiKeysModal({
         </div>
 
         <div>
-          <ZigTypography>{t('api-keys.restrict-ip')}</ZigTypography>
+          <ZigTypography
+            id={
+              isCreate
+                ? 'create-new-key-modal__restrict-ip-label'
+                : 'edit-key-modal__restrict-api-label'
+            }
+          >
+            {t('api-keys.restrict-ip')}
+          </ZigTypography>
 
           <RadioGroup
             name={'enableIpRestriction'}
@@ -220,22 +258,52 @@ function EditApiKeysModal({
             <FormControlLabel
               control={
                 <Radio
+                  id={
+                    isCreate
+                      ? 'create-new-key-modal__unrestricted'
+                      : 'edit-key-modal__unrestricted'
+                  }
                   disabled={isLoading}
                   {...register('enableIpRestriction')}
                 />
               }
               value={'false'}
-              label={t('api-keys.ip-restrictions-none')}
+              label={
+                <span
+                  id={
+                    isCreate
+                      ? 'create-new-key-modal__unrestricted-label'
+                      : 'edit-key-modal__unrestricted-label'
+                  }
+                >
+                  {t('api-keys.ip-restrictions-none')}
+                </span>
+              }
             />
             <FormControlLabel
               control={
                 <Radio
+                  id={
+                    isCreate
+                      ? 'create-new-key-modal__restricted'
+                      : 'edit-key-modal__restricted'
+                  }
                   disabled={isLoading}
                   {...register('enableIpRestriction')}
                 />
               }
               value={'true'}
-              label={t('api-keys.ip-restrictions-on')}
+              label={
+                <span
+                  id={
+                    isCreate
+                      ? 'create-new-key-modal__restricted-label'
+                      : 'edit-key-modal__restricted-label'
+                  }
+                >
+                  {t('api-keys.ip-restrictions-on')}
+                </span>
+              }
             />
           </RadioGroup>
           {showIpRestrictions && (
@@ -246,12 +314,22 @@ function EditApiKeysModal({
                 rules={{ required: true }}
                 render={({ field }) => (
                   <ZigInput
+                    id={
+                      isCreate
+                        ? 'create-new-key-modal__restricted-input-ips'
+                        : 'edit-key-modal__restricted-input-ips'
+                    }
                     disabled={isLoading}
                     multiline
                     rows={2}
                     wide
                     label={
                       <MultilineLabel
+                        id={
+                          isCreate
+                            ? 'create-new-key-modal__restricted-input-ips-label'
+                            : 'edit-key-modal__restricted-input-ips-label'
+                        }
                         title={t('api-keys.ip-restrictions-allowed')}
                         subtitle={t(
                           'api-keys.ip-restrictions-allowed-explainer',
@@ -271,7 +349,11 @@ function EditApiKeysModal({
 
         <ZigModalActions>
           <ZigButton
-            id={'api-key__save-and-close'}
+            id={
+              isCreate
+                ? 'create-new-key-modal__save-and-close'
+                : 'edit-key-modal__save-and-close'
+            }
             variant={'contained'}
             loading={isLoading}
             disabled={!isValid}

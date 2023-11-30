@@ -33,7 +33,6 @@ jobs:
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
           envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
-          envkey_REACT_APP_WALLET_API: ${{ vars.PS2_WALLET_API }}
           envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRAL_API }}
           envkey_REACT_APP_NO_INDEX: ${{ vars.NO_INDEX }}
           envkey_REACT_APP_SUBSCRIPTIONS_SHOP_URL: ${{ vars.SUBSCRIPTIONS_SHOP_URL }}
@@ -46,7 +45,6 @@ jobs:
           # non-env-specific
           envkey_REACT_APP_SENTRY_DNS: ${{ vars.SENTRY_DNS }}
           envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
-          envkey_REACT_APP_INTERCOM_APP_ID: ${{ vars.INTERCOM_APP_ID }}
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ vars.LIVE_SESSION_TRACK_ID }}
           envkey_REACT_APP_IPGEOLOCATION_API_KEY: ${{ vars.IPGEOLOCATION_API_KEY }}
 

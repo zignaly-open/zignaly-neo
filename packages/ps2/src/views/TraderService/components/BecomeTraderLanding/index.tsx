@@ -171,7 +171,7 @@ const BecomeTraderLanding: React.FC = () => {
                   <ZigTypography
                     variant={'body1'}
                     color={'neutral300'}
-                    id={'become-trader__benefits-benefit-2'}
+                    id={'become-trader__benefits-benefit-3'}
                   >
                     <Trans i18nKey={'wrapper.list.item3'} t={t}>
                       <ZigLink

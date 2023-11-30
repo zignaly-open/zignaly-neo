@@ -60,8 +60,17 @@ function CreateApiKeysModal({
   };
 
   return (
-    <ZModal wide {...props} close={close} title={t('api-keys.create-new-key')}>
-      <ZigTypography textAlign={'center'}>
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={t('api-keys.create-new-key')}
+      id={'create-api-key-modal'}
+    >
+      <ZigTypography
+        textAlign={'center'}
+        id={'create-api-key-modal__description'}
+      >
         {t('api-keys.create-new-key-description')}
       </ZigTypography>
       <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
@@ -71,6 +80,7 @@ function CreateApiKeysModal({
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
+              id={'create-api-key-modal__key-name'}
               wide
               label={t('common:name') + ':'}
               placeholder={t('common:name') + ':'}
@@ -83,7 +93,7 @@ function CreateApiKeysModal({
 
         <ZigModalActions>
           <ZigButton
-            id={'api-key__create-key'}
+            id={'create-api-key-modal__create'}
             disabled={isCreating}
             variant={'contained'}
             type='submit'

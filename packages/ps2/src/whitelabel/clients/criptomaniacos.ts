@@ -3,7 +3,8 @@ import { Features, WhitelabelOverride } from '../type';
 export default {
   id: 'criptomaniacos',
   title: 'Lastra',
-  helpUrl: 'https://cmania.co/suporte-zig',
+  helpUrl:
+    'https://api.whatsapp.com/send/?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20o%20time%20de%20atendimento.&phone=554888387787',
   featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
@@ -31,6 +32,7 @@ export default {
     linkedin: 'https://cmania.co/zig-linkedin',
   },
   loadFontsFromGoogle: true,
+  defaultSuccessFee: 10,
   themeOverrides: {
     fontFamily: ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
     fontFamilyH1H6: [
@@ -52,7 +54,6 @@ export default {
       highlighted: '#1298C9',
       links: '#1298C9',
     },
-    defaultSuccessFee: 10,
     boxShadows: {
       tableHeader: 'rgba(0,0,0,.5)',
     },

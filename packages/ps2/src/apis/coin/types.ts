@@ -78,8 +78,6 @@ export const TRANSACTION_TYPE = {
   BUYZIG: 'buyZig',
   // In PS1 transfers when the trader receives his success fee
   SUCCESS_FEE: 'psSuccessFee',
-  // Reward payment
-  REWARD: 'reward',
   // Refund
   VOUCHER_REFUND: 'voucher refund',
   // System tx by us to fix something,

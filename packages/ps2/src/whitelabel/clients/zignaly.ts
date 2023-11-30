@@ -46,4 +46,5 @@ export default {
     twq('config','og0cu');
   `,
   defaultSuccessFee: 5,
+  intercomId: 'nc3z6oqm',
 } as WhitelabelOverride;

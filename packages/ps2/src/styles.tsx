@@ -21,6 +21,14 @@ const GlobalAppStyle = getGlobalAppStyle({
         }")`,
 });
 
+const IntercomStyle = createGlobalStyle`
+  @media (max-width: 600px) {
+    .intercom-launcher-frame .intercom-lightweight-app-launcher{
+      display: none !important;
+    }
+  }
+`;
+
 // Copied from webapp-neo
 const LocalFontsStyle = createGlobalStyle`
   ${
@@ -52,6 +60,7 @@ export default () => {
     <>
       <LocalFontsStyle />
       <GlobalAppStyle />
+      <IntercomStyle />
       {whitelabel.loadFontsFromGoogle && (
         <GoogleFontLoader
           fonts={[
