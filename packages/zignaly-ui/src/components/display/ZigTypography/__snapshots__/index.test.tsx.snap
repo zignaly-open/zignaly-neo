@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/display/ZigTypography renders ZigTypography render 1`] = `
+<span
+  class="MuiTypography-root MuiTypography-body1 css-15f8135-MuiTypography-root"
+  id="typography"
+/>
+`;
+
+exports[`components/display/ZigTypography renders ZigTypography render 2`] = `
+CSSStyleDeclaration {
+  "0": "margin",
+  "1": "font-family",
+  "2": "font-weight",
+  "3": "font-size",
+  "4": "line-height",
+  "5": "letter-spacing",
+  "6": "color",
+  "7": "visibility",
+  "_importants": {
+    "color": "",
+    "font-family": "",
+    "font-size": "",
+    "font-weight": "",
+    "letter-spacing": "",
+    "line-height": "",
+    "margin": "",
+    "visibility": undefined,
+  },
+  "_length": 8,
+  "_onChange": [Function],
+  "_values": {
+    "color": "rgb(169, 169, 186)",
+    "font-family": "Avenir Next,Roboto,Helvetica,Arial,sans-serif",
+    "font-size": "15px",
+    "font-weight": "400",
+    "letter-spacing": "0.55px",
+    "line-height": "24px",
+    "margin": "0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "0px",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/display/ZigTypography renders ZigTypography render custom variant 1`] = `
+<h2
+  class="MuiTypography-root MuiTypography-h2 css-1hohiwo-MuiTypography-root"
+  id="typography"
+/>
+`;
+
+exports[`components/display/ZigTypography renders ZigTypography render custom variant 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "font-size",
+  "2": "font-weight",
+  "3": "margin",
+  "4": "font-family",
+  "5": "line-height",
+  "6": "letter-spacing",
+  "7": "color",
+  "8": "visibility",
+  "_importants": {
+    "color": "",
+    "display": "",
+    "font-family": "",
+    "font-size": "",
+    "font-weight": "",
+    "letter-spacing": "",
+    "line-height": "",
+    "margin": "",
+    "visibility": undefined,
+  },
+  "_length": 9,
+  "_onChange": [Function],
+  "_values": {
+    "color": "rgb(193, 193, 200)",
+    "display": "block",
+    "font-family": "Avenir Next,Roboto,Helvetica,Arial,sans-serif",
+    "font-size": "18px",
+    "font-weight": "500",
+    "letter-spacing": "0.55px",
+    "line-height": "28px",
+    "margin": "0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "0px",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/display/ZigTypography renders ZigTypography render with sx prop 1`] = `
+<span
+  class="MuiTypography-root MuiTypography-body1 css-f7uwmi-MuiTypography-root"
+  id="typography"
+/>
+`;
+
+exports[`components/display/ZigTypography renders ZigTypography render with sx prop 2`] = `
+CSSStyleDeclaration {
+  "0": "margin",
+  "1": "font-family",
+  "2": "font-weight",
+  "3": "font-size",
+  "4": "line-height",
+  "5": "letter-spacing",
+  "6": "color",
+  "7": "visibility",
+  "_importants": {
+    "color": "",
+    "font-family": "",
+    "font-size": "",
+    "font-weight": "",
+    "letter-spacing": "",
+    "line-height": "",
+    "margin": undefined,
+    "margin-top": "",
+    "visibility": undefined,
+  },
+  "_length": 8,
+  "_onChange": [Function],
+  "_values": {
+    "color": "rgb(169, 169, 186)",
+    "font-family": "Avenir Next,Roboto,Helvetica,Arial,sans-serif",
+    "font-size": "25px",
+    "font-weight": "400",
+    "letter-spacing": "0.55px",
+    "line-height": "24px",
+    "margin": "15px 0px 0px 0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "15px",
+    "visibility": "visible",
+  },
+}
+`;
