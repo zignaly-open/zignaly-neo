@@ -42,7 +42,11 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
 
   return (
     <Box>
-      {label}
+      {label && (
+        <ZigTypography component={"div"} pb={1}>
+          {label}
+        </ZigTypography>
+      )}
       <StyledZigSlider
         value={sliderValue}
         min={allowNoMin ? min - step : min}

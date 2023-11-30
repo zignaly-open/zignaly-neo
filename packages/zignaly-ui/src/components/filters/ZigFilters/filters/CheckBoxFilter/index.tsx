@@ -1,6 +1,7 @@
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
 import React from "react";
 import { CheckBoxFilterProps } from "./type";
+import ZigTypography from "components/display/ZigTypography";
 
 const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
   const { label, options } = filter;
@@ -18,7 +19,11 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
 
   return (
     <Box display={"flex"} flexDirection={"column"}>
-      {label}
+      {label && (
+        <ZigTypography component={"div"} pb={1}>
+          {label}
+        </ZigTypography>
+      )}
       {options.map((option) => (
         <FormControlLabel
           key={option.value}

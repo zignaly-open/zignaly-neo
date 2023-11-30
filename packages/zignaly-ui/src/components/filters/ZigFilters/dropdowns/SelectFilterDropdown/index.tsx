@@ -16,7 +16,7 @@ const SelectFilterDropdown = ({ filter, onChange }: SelectFilterDropdownProps) =
     <ZigDropdown
       component={({ open }) => (
         <DropdownItem active={open}>
-          <Box display="flex" gap={1} justifyContent="center">
+          <Box display="flex" gap={2} justifyContent="center">
             <ZigTypography fontSize={13} color={"neutral300"}>
               {filter.label}
             </ZigTypography>

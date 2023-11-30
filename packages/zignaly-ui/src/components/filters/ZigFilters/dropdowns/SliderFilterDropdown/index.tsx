@@ -5,8 +5,9 @@ import SliderFilter from "../../filters/SliderFilter";
 import { Box } from "@mui/material";
 import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
+import ZigButton from "components/inputs/ZigButton";
 
-const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) => {
+const SliderFilterDropdown = ({ resetFilter, filter, onChange }: SliderFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     if (filter.type === "slider" && Array.isArray(filter.value)) {
       if (filter.value[0] === null && filter.value[1] === null) return "All";
@@ -21,7 +22,7 @@ const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) =
     <ZigDropdown
       component={({ open }) => (
         <DropdownItem active={open}>
-          <Box display="flex" gap={1} justifyContent="center">
+          <Box display="flex" gap={2} justifyContent="center">
             <ZigTypography fontSize={13} color={"neutral300"}>
               {filter.label}
             </ZigTypography>
@@ -42,22 +43,20 @@ const SliderFilterDropdown = ({ filter, onChange }: SliderFilterDropdownProps) =
         },
         { separator: true },
         {
-          label: (
-            <ZigTypography
-              component={"p"}
+          element: (
+            <ZigButton
+              variant={"text"}
               sx={{
                 textAlign: "center",
                 p: "4px 9px 3px",
                 fontSize: "14px",
                 width: "100%",
               }}
-              color={"links"}
+              onClick={resetFilter}
             >
-              reset
-            </ZigTypography>
+              Reset
+            </ZigButton>
           ),
-          id: "account-menu-dropdown__logout",
-          onClick: () => {},
         },
       ]}
     />

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { FilterDropdownWrapper, Layout, LayoutContent, TopDivider, VertDivider } from "./styles";
 import { Box } from "@mui/material";
 import ZigSearch from "../ZigSearch";
@@ -10,12 +10,12 @@ import ZigButton from "components/inputs/ZigButton";
 import { useUpdateEffect } from "react-use";
 import ZigTypography from "components/display/ZigTypography";
 
-const FilterDropdown = ({ filter, onChange }) => {
-  // todo: add checkbox
+const FilterDropdown = ({ resetFilter, filter, onChange }) => {
+  // todo: add checkbox filter
   const Component = filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
   return (
     <FilterDropdownWrapper>
-      <Component filter={filter} onChange={onChange} />
+      <Component resetFilter={resetFilter} filter={filter} onChange={onChange} />
       <VertDivider orientation="vertical" flexItem />
     </FilterDropdownWrapper>
   );
@@ -59,6 +59,16 @@ const ZigFilters = ({
     setInternalFilters(defaultFilters);
   };
 
+  const resetFilter = (id: string) => {
+    const updatedFilters = internalFilters.map((filter) => {
+      if (filter.id === id) {
+        return defaultFilters.find((defaultFilter) => defaultFilter.id === id) as ZigFilter;
+      }
+      return filter;
+    });
+    setInternalFilters(updatedFilters);
+  };
+
   const resetSecondaryFilters = () => {
     const updatedFilters = internalFilters.map((filter) => {
       if (!filter.showInBar) {
@@ -93,7 +103,14 @@ const ZigFilters = ({
             )}
             <Box display={"flex"} alignItems={"center"}>
               {mainFilters.map((filter) => {
-                return <FilterDropdown filter={filter} key={filter.id} onChange={updateFilters} />;
+                return (
+                  <FilterDropdown
+                    resetFilter={() => resetFilter(filter.id)}
+                    filter={filter}
+                    key={filter.id}
+                    onChange={updateFilters}
+                  />
+                );
               })}
               {secondaryFilters.length > 0 && (
                 <FilterDropdownWrapper>
