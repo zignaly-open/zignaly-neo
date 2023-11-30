@@ -142,7 +142,7 @@ const CreateServiceForm: React.FC<{
         />
       </ZigButtonGroupInputWrapper>
       {selectedExchange === 'bybit' ? (
-        <ZigTypography>
+        <ZigTypography mt={3} textAlign={'center'}>
           <Trans t={t} i18nKey={`create.bybit-warning`}>
             <ZigLink
               id={'create-service__bybit-warning'}
