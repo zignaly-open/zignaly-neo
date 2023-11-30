@@ -79,7 +79,7 @@ async function getWhitelabelConfig(req) {
     'freedom.obsidiangroup.io': config.freedom,
     'use.lastra.app': config.criptomaniacos,
     'zigbids.com': config.example,
-    'zigbids.wl.zignaly.com': config.example,
+    'zigbids.wl.zignaly.com': config.zignaly,
   };
 
   return overrides[host] || config.zignaly;
