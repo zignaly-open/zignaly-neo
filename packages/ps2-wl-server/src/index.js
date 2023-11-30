@@ -60,7 +60,6 @@ function getIndexHtmlWithWhitelabelHead(wlConfig) {
         wlConfig,
       )}</script></head>`,
     )
-    .replace('<head>', `<head><!-- THIS IS THE NEW SERVER -->`)
     .replace(
       '<script id="analytics-scripts"></script>',
       wlConfig.scripts || '',
