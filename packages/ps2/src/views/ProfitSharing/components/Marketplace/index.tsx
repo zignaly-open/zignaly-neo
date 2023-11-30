@@ -30,6 +30,14 @@ import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { usePersistTable } from 'util/hooks/usePersistTable';
+import { TableId } from 'apis/settings/types';
+import {
+  CheckboxFilter,
+  SelectFilter,
+  SliderFilter,
+  ZigFilter,
+  ZigFiltersType,
+} from '@zignaly-open/ui/lib/components/filters/ZigFilters/types';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -37,10 +45,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
 
   const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'];
 
-  const defaultFilters = [
+  const defaultFilters: ZigFiltersType = [
     {
       type: 'slider',
-      value: [19, null],
+      value: [null, null],
       label: t('table.filter-months', { count: 6 }),
       allowNoMin: true,
       allowNoMax: true,
@@ -79,23 +87,33 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
   ];
   const theme = useTheme();
-  const [localFilters, setLocalFilters] = useState(defaultFilters);
+  const [localFilters, setLocalFilters] =
+    useState<ZigFiltersType>(defaultFilters);
   const [searchFilter, setSearchFilter] = useState('');
-  const tableId = 'marketplace';
-  const tablePersist = usePersistTable(tableId, localFilters);
+  const tablePersist = usePersistTable(TableId.Marketplace, localFilters);
 
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
       return localFilters.every((filter) => {
         if (filter.id === 'returns') {
-          return FilterFns.inNumberRange(+service.pnlPercent180t, filter.value);
+          return FilterFns.inNumberRange(
+            +service.pnlPercent180t,
+            (filter as SliderFilter).value as [number, number],
+          );
         } else if (filter.id === 'coin') {
-          return !filter.value || service.ssc === filter.value;
+          const coinFilter = filter as SelectFilter;
+          return !coinFilter.value || service.ssc === coinFilter.value;
         } else if (filter.id === 'type') {
           const serviceType = service.type.split('_')[1];
-          return FilterFns.inOptionsChecked(serviceType, filter.options);
+          return FilterFns.inOptionsChecked(
+            serviceType,
+            (filter as CheckboxFilter).options,
+          );
         } else if (filter.id === 'fee') {
-          return FilterFns.inNumberRange(service.successFee, filter.value);
+          return FilterFns.inNumberRange(
+            service.successFee,
+            (filter as SliderFilter).value as [number, number],
+          );
         }
         return true;
       });
@@ -386,7 +404,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 }
               : undefined
           }
-          prefixId={tableId}
+          prefixId={TableId.Marketplace}
           initialState={{
             sorting: [
               tablePersist.sorting ?? {
