@@ -33,8 +33,8 @@ export type CheckboxFilter = BaseFilter & {
   options: {
     value: string;
     label: string;
-    checked: boolean;
   }[];
+  value: [string];
 };
 
 export type SelectFilter = BaseFilter & {

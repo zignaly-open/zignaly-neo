@@ -98,21 +98,17 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         if (filter.id === 'returns') {
           return FilterFns.inNumberRange(
             +service.pnlPercent180t,
-            (filter as SliderFilter).value as [number, number],
+            filter.value as [number, number],
           );
         } else if (filter.id === 'coin') {
-          const coinFilter = filter as SelectFilter;
-          return !coinFilter.value || service.ssc === coinFilter.value;
+          return !filter.value || service.ssc === filter.value;
         } else if (filter.id === 'type') {
           const serviceType = service.type.split('_')[1];
-          return FilterFns.inOptionsChecked(
-            serviceType,
-            (filter as CheckboxFilter).options,
-          );
+          return (filter as CheckboxFilter).value.includes(serviceType);
         } else if (filter.id === 'fee') {
           return FilterFns.inNumberRange(
             service.successFee,
-            (filter as SliderFilter).value as [number, number],
+            filter.value as [number, number],
           );
         }
         return true;
