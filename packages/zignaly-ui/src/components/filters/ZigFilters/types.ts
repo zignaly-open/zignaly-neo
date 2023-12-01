@@ -2,10 +2,17 @@ export type ZigFiltersProps = {
   onChange: (filters: ZigFiltersType) => void;
   search?: string;
   onSearchChange?: (search: string) => void;
-  initialFilters: ZigFiltersType;
+  savedFilterValues: ZigFiltersSavedValues;
   defaultFilters: ZigFiltersType;
   label?: string;
 };
+
+export type ZigFiltersSavedValue = {
+  id: string;
+  type: ZigFilter["type"];
+  value: ZigFilter["value"];
+};
+export type ZigFiltersSavedValues = ZigFiltersSavedValue[];
 
 export type BaseFilter = {
   id: string;

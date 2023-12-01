@@ -1,47 +1,74 @@
 import { ColumnSort } from '@tanstack/react-table';
-import { ZigFiltersType } from '@zignaly-open/ui/lib/components/filters/ZigFilters/types';
+import { loadFilters } from '@zignaly-open/ui';
+import {
+  ZigFiltersSavedValues,
+  ZigFiltersType,
+} from '@zignaly-open/ui/lib/components/filters/ZigFilters/types';
 import { filterTable, sortTable } from 'apis/settings/store';
 import { TableId } from 'apis/settings/types';
 import { RootState } from 'apis/store';
 import { isEmpty } from 'lodash-es';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUpdateEffect } from 'react-use';
 
 /**
  * A hook to persist table sorting and filtering.
  * @param id Table id
- * @param watchFilters Optional filters to automatically persist.
+ * @param watchFiltersValues Optional filters to automatically persist.
  * Or you can use the `filterTable` function returned by this hook instead.
  * @param watchSorting Optional sorting to automatically persist, like `watchFilters`.
  */
 export const usePersistTable = (
   id: TableId,
-  watchFilters?: ZigFiltersType,
+  defaultFilters: ZigFiltersType,
+  watchFiltersValues?: ZigFiltersSavedValues,
   watchSorting?: ColumnSort,
 ) => {
-  const { sorting, filters } = useSelector(
-    (store: RootState) =>
-      store.settings.table[id] ?? { sorting: undefined, filters: undefined },
+  const isFirstRenderRef = useRef(true);
+  const initialValueRef = useRef();
+  const tableData = useSelector((store: RootState) =>
+    isFirstRenderRef.current
+      ? {
+          filters: loadFilters(
+            defaultFilters,
+            store.settings.table[id]?.filters,
+          ),
+          sorting: store.settings.table[id]?.sorting,
+        }
+      : initialValueRef.current,
   );
+  initialValueRef.current = tableData;
+  console.log(tableData);
+  const { sorting, filters } = tableData;
+
   const dispatch = useDispatch();
 
-  useUpdateEffect(() => {
-    if (watchFilters) {
-      dispatch(filterTable({ id, filters: watchFilters }));
+  useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
     }
-  }, [watchFilters]);
+    // else {
+    //   setCachedSettings({ sorting, filters });
+    // }
+  }, []);
+
+  useUpdateEffect(() => {
+    if (watchFiltersValues) {
+      dispatch(filterTable({ id, filters: watchFiltersValues }));
+    }
+  }, [watchFiltersValues]);
 
   useUpdateEffect(() => {
     if (watchSorting) {
-      dispatch(sortTable({ id, sorting: newSorting[0] }));
+      dispatch(sortTable({ id, sorting: newSorting }));
     }
   }, [watchSorting]);
 
   return {
     sorting: isEmpty(sorting) ? null : sorting,
     filters,
-    sortTable: (newSorting) =>
-      dispatch(sortTable({ id, sorting: newSorting[0] })),
+    sortTable: (newSorting) => dispatch(sortTable({ id, sorting: newSorting })),
     filterTable: (newFilters) =>
       dispatch(filterTable({ id, filters: newFilters })),
   };

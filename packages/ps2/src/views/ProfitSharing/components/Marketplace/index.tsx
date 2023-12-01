@@ -13,6 +13,7 @@ import {
   ZigTablePriceLabel,
   FilterFns,
   ZigFilters,
+  ZigFiltersSavedValues,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -37,7 +38,7 @@ import {
   SliderFilter,
   ZigFilter,
   ZigFiltersType,
-} from '@zignaly-open/ui/lib/components/filters/ZigFilters/types';
+} from '@zignaly-open/ui';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -72,9 +73,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       type: 'checkbox',
       label: t('table.filter-type'),
       options: [
-        { value: 'spot', label: t('table.filter-spot'), checked: true },
-        { value: 'futures', label: t('table.filter-futures'), checked: true },
+        { value: 'spot', label: t('table.filter-spot') },
+        { value: 'futures', label: t('table.filter-futures') },
       ],
+      value: ['spot', 'futures'],
       id: 'type',
     },
     {
@@ -87,34 +89,41 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
   ];
   const theme = useTheme();
-  const [localFilters, setLocalFilters] =
-    useState<ZigFiltersType>(defaultFilters);
+  const [filtersValues, setFiltersValues] =
+    useState<ZigFiltersSavedValues>(null);
   const [searchFilter, setSearchFilter] = useState('');
-  const tablePersist = usePersistTable(TableId.Marketplace, localFilters);
+  const tablePersist = usePersistTable(
+    TableId.Marketplace,
+    defaultFilters,
+    filtersValues,
+  );
 
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
-      return localFilters.every((filter) => {
-        if (filter.id === 'returns') {
-          return FilterFns.inNumberRange(
-            +service.pnlPercent180t,
-            filter.value as [number, number],
-          );
-        } else if (filter.id === 'coin') {
-          return !filter.value || service.ssc === filter.value;
-        } else if (filter.id === 'type') {
-          const serviceType = service.type.split('_')[1];
-          return (filter as CheckboxFilter).value.includes(serviceType);
-        } else if (filter.id === 'fee') {
-          return FilterFns.inNumberRange(
-            service.successFee,
-            filter.value as [number, number],
-          );
-        }
-        return true;
-      });
+      return (
+        tablePersist.filters &&
+        tablePersist.filters.every((filter) => {
+          if (filter.id === 'returns') {
+            return FilterFns.inNumberRange(
+              +service.pnlPercent180t,
+              filter.value as [number, number],
+            );
+          } else if (filter.id === 'coin') {
+            return !filter.value || service.ssc === filter.value;
+          } else if (filter.id === 'type') {
+            const serviceType = service.type.split('_')[1];
+            return (filter.value as string[]).includes(serviceType);
+          } else if (filter.id === 'fee') {
+            return FilterFns.inNumberRange(
+              service.successFee,
+              filter.value as [number, number],
+            );
+          }
+          return true;
+        })
+      );
     });
-  }, [services, localFilters]);
+  }, [services, tablePersist.filters]);
 
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
@@ -378,9 +387,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
               })}
             </ZigTypography>
           }
-          initialFilters={tablePersist.filters}
+          savedFilterValues={tablePersist.filters}
           defaultFilters={defaultFilters}
-          onChange={setLocalFilters}
+          onChange={setFiltersValues}
           search={searchFilter}
           onSearchChange={setSearchFilter}
           mb='28px'

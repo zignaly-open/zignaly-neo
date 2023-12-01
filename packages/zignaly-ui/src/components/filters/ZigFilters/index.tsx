@@ -5,7 +5,7 @@ import ZigSearch from "../ZigSearch";
 import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
 import SelectFilterDropdown from "./dropdowns/SelectFilterDropdown";
 import MultiFilterDropdown from "./dropdowns/MultiFilterDropdown";
-import { ZigFilter, ZigFiltersProps } from "./types";
+import { ZigFilter, ZigFiltersProps, ZigFiltersSavedValues, ZigFiltersType } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import { useUpdateEffect } from "react-use";
 import ZigTypography from "components/display/ZigTypography";
@@ -21,9 +21,28 @@ const FilterDropdown = ({ resetFilter, filter, onChange }) => {
   );
 };
 
+// const loadFilters = (
+//   defaultFilters: ZigFiltersType,
+//   savedFilterValues: ZigFiltersSavedValues = [],
+// ) => {
+//   return defaultFilters.map((filter) => {
+//     const savedFilter = savedFilterValues.find((savedFilter) => savedFilter.id === filter.id);
+//     return {
+//       ...filter,
+//       value: savedFilter?.value ?? filter.value,
+//     };
+//   });
+//   // const loadedFilters = { ...savedFilters };
+//   // Object.keys(defaultFilters).forEach((id) => {
+//   //   loadedFilters[id] = savedFilters[id] ?? defaultFilters[id];
+//   // });
+//   // return loadedFilters;
+//   // return Object.keys(defaultFilters).map((id) => savedFilters[id] ?? defaultFilters[id]);
+// };
+
 const ZigFilters = ({
   defaultFilters,
-  initialFilters: filters,
+  savedFilterValues: internalFilters,
   onChange,
   search,
   onSearchChange,
@@ -32,7 +51,9 @@ const ZigFilters = ({
   rightComponent,
   ...rest
 }: ZigFiltersProps) => {
-  const [internalFilters, setInternalFilters] = useState(filters ?? defaultFilters);
+  // const [internalFilters, setInternalFilters] = useState(savedFilterValues ?? []);
+  // loadFilters(defaultFilters, savedFilterValues),
+  console.log("int", internalFilters);
 
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
@@ -41,9 +62,10 @@ const ZigFilters = ({
     ];
   }, [internalFilters]);
 
-  useUpdateEffect(() => {
-    onChange(internalFilters);
-  }, [internalFilters]);
+  // replace by util called outside
+  // useUpdateEffect(() => {
+  //   onChange(internalFilters);
+  // }, [internalFilters]);
 
   const updateFilters = (updatedFilter: ZigFilter) => {
     const updatedFilters = internalFilters.map((filter) => {
