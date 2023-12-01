@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getWhitelabelConfig } = require('./config');
+const getWhitelabelConfig = require('./config');
 
 const indexHtml = fs.readFileSync(__dirname + '/../build/index.html', 'utf8');
 
@@ -25,9 +25,10 @@ function getGeneratedIndexHtml(wlConfig) {
 }
 
 async function generateIndexHtmlForRequest(req) {
-  const host = req.get('host');
+  // const host = req.get('host');
+  const host = 'app.zignaly.com';
   const wlConfig = await getWhitelabelConfig(host);
   return getGeneratedIndexHtml(wlConfig);
 }
 
-exports = { generateIndexHtmlForRequest };
+module.exports = { generateIndexHtmlForRequest };

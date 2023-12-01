@@ -1,11 +1,7 @@
 const axios = require('axios');
-const { CACHE_TTL } = require('./constants');
-const { BASE_API } = process.env;
+const { CACHE_TTL, BASE_API } = require('./constants');
 
-if(!BASE_API) {
-  console.error('`BASE_API` should be defined');
-  process.exit(1);
-}
+console.error({ CACHE_TTL, BASE_API });
 
 const whitelabelCache = {};
 
@@ -26,9 +22,15 @@ const getWhitelabelConfig = async (domain) => {
   const cached = getCacheValue(domain);
   if (cached) return cached;
   // TODO: process it somehow
-  const whitelabel = await axios.get(`${BASE_API}/wl/config?domain=${domain}`);
-  setCacheValue(domain, whitelabel);
-  return whitelabel;
+  try {
+    const { data: whitelabel } = await axios.get(
+      `${BASE_API}wl/config?domain=${domain}`,
+    );
+    setCacheValue(domain, whitelabel);
+    return whitelabel;
+  } catch (e) {
+    console.error(e);
+  }
 };
 
-exports = { getWhitelabelConfig };
+module.exports = getWhitelabelConfig;
