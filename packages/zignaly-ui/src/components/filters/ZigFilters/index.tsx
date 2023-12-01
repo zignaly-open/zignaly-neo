@@ -42,7 +42,7 @@ const FilterDropdown = ({ resetFilter, filter, onChange }) => {
 
 const ZigFilters = ({
   defaultFilters,
-  savedFilterValues: internalFilters,
+  filters = [],
   onChange,
   search,
   onSearchChange,
@@ -53,14 +53,14 @@ const ZigFilters = ({
 }: ZigFiltersProps) => {
   // const [internalFilters, setInternalFilters] = useState(savedFilterValues ?? []);
   // loadFilters(defaultFilters, savedFilterValues),
-  console.log("int", internalFilters);
+  console.log("int", filters);
 
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
-      internalFilters.filter((filter) => filter.showInBar),
-      internalFilters.filter((filter) => !filter.showInBar),
+      filters.filter((filter) => filter.showInBar),
+      filters.filter((filter) => !filter.showInBar),
     ];
-  }, [internalFilters]);
+  }, [filters]);
 
   // replace by util called outside
   // useUpdateEffect(() => {
@@ -68,37 +68,37 @@ const ZigFilters = ({
   // }, [internalFilters]);
 
   const updateFilters = (updatedFilter: ZigFilter) => {
-    const updatedFilters = internalFilters.map((filter) => {
+    const updatedFilters = filters.map((filter) => {
       if (filter.id === updatedFilter.id) {
         return updatedFilter;
       }
       return filter;
     });
-    setInternalFilters(updatedFilters);
+    onChange(updatedFilters);
   };
 
   const resetFilters = () => {
-    setInternalFilters(defaultFilters);
+    onChange(defaultFilters);
   };
 
   const resetFilter = (id: string) => {
-    const updatedFilters = internalFilters.map((filter) => {
+    const updatedFilters = filters.map((filter) => {
       if (filter.id === id) {
         return defaultFilters.find((defaultFilter) => defaultFilter.id === id) as ZigFilter;
       }
       return filter;
     });
-    setInternalFilters(updatedFilters);
+    onChange(updatedFilters);
   };
 
   const resetSecondaryFilters = () => {
-    const updatedFilters = internalFilters.map((filter) => {
+    const updatedFilters = filters.map((filter) => {
       if (!filter.showInBar) {
         return defaultFilters.find((defaultFilter) => defaultFilter.id === filter.id) as ZigFilter;
       }
       return filter;
     });
-    setInternalFilters(updatedFilters);
+    onChange(updatedFilters);
   };
   return (
     <Box

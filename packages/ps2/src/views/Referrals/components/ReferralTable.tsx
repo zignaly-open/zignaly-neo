@@ -188,7 +188,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
               </ZigButton>
             }
             defaultFilters={defaultFilters}
-            initialFilters={tablePersist.filters}
+            filters={tablePersist.filters}
             onChange={setLocalFilters}
             mb='36px'
           />

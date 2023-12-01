@@ -97,6 +97,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     defaultFilters,
     filtersValues,
   );
+  console.log('omg', tablePersist.filters);
 
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
@@ -387,9 +388,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
               })}
             </ZigTypography>
           }
-          savedFilterValues={tablePersist.filters}
+          filters={tablePersist.filters}
           defaultFilters={defaultFilters}
-          onChange={setFiltersValues}
+          onChange={tablePersist.filterTable}
           search={searchFilter}
           onSearchChange={setSearchFilter}
           mb='28px'
@@ -411,8 +412,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           }
           prefixId={TableId.Marketplace}
           initialState={{
-            sorting: [
-              tablePersist.sorting ?? {
+            sorting: tablePersist.sorting ?? [
+              {
                 id: 'pnlPercent180t',
                 desc: true,
               },
