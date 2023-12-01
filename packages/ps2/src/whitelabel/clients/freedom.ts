@@ -3,7 +3,7 @@ import { Features, WhitelabelOverride } from '../type';
 export default {
   id: 'freedom',
   title: 'OBSIDIAN FREEDOM',
-  featureOverrides: {
+  settings: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
     [Features.CreateService]: false,

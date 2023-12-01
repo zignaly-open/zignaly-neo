@@ -1,13 +1,13 @@
 import { ThemeOverridesType } from '@zignaly-open/ui';
 
 export enum Features {
-  AccessLevels,
-  Rewards,
-  Referrals,
-  CreateService,
-  NewSignup,
-  Subscriptions,
-  Kyc,
+  AccessLevels = 'accessLevels',
+  Rewards = 'rewards',
+  Referrals = 'referrals',
+  CreateService = 'createServices',
+  NewSignup = 'newSignup',
+  Subscriptions = 'subscriptions',
+  Kyc = 'kyc',
 }
 
 // yes, the trailing slash IS important
@@ -27,7 +27,7 @@ export type WhitelabelOverride = {
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;
-  featureOverrides: Partial<Record<Features, boolean>>;
+  settings: Partial<Record<Features, boolean>>;
   xSource?: string;
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;

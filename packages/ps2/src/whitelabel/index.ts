@@ -14,7 +14,7 @@ export const isFeatureOn = (feature: Features): boolean => {
   return (
     {
       ...defaultFeatureState,
-      ...(whitelabel?.featureOverrides || {}),
+      ...(whitelabel?.settings || {}),
     }[feature] || false
   );
 };
