@@ -91,9 +91,3 @@ export { HeaderLinksContainer } from "./components/navigation/Header/styles";
 // hooks
 export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
 export { fixSearchParams } from "./utils/search";
-
-// it makes total sense to export this under @zignaly-open/ui/chart, and we do this too
-// but this little shit (a crutch by itself), when imported from  @zignaly-open/ui/chart,
-// pulls the entire bloody victory charts because those fuckign charts are not tree shakeable
-// fuck!
-export { default as ThemeChartGradients } from "./components/display/ZigChart/ThemeChartGradients";

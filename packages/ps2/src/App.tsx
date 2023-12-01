@@ -7,9 +7,9 @@ import {
   ThemeProviderMui as ThemeInheritorMui,
   // has to be imported from the same module from where we call the show toast
   ToastContainer,
-  // imported not from @zignaly-open/ui/chart for performance reasons
-  ThemeChartGradients,
 } from '@zignaly-open/ui';
+import { ThemeChartGradients } from '@zignaly-open/ui/charts';
+
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
