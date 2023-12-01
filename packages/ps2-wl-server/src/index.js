@@ -8,7 +8,7 @@ Even if we could load the configs dynamically from the backend,
 we still have problems like the fact that different customers needed
 different metadata in index.html (for social network sharing), etc
 
-This could have been achieved by us building the app every time, but managing 20 deplpoyments is no fn
+This could have been achieved by us building the app every time, but managing 20 deplpoyments is no fun
 
 So, this is not SSR but yes I'm preparing the index.html on the backend
 
@@ -18,18 +18,11 @@ If you still see this in the code, it means we had good business reasons to choo
 */
 
 const express = require('express');
-const fs = require('fs');
 const serveStatic = require('serve-static');
-const config = require('./wl-config.json');
+const { generateIndexHtmlForRequest } = require('./html');
 
 const port = 2000;
 const server = express();
-const indexHtml = fs.readFileSync(__dirname + '/../build/index.html', 'utf8');
-
-if (!indexHtml) {
-  console.error('build/index.html is missing, aborting');
-  process.exit(1);
-}
 
 server.use('index.html', serveNewIndexHtml);
 
@@ -50,37 +43,6 @@ server.listen(port, (err) => {
   console.log(`> Ready on :${port}`);
 });
 
-function getIndexHtmlWithWhitelabelHead(wlConfig) {
-  return indexHtml
-    .replace(
-      '</head>',
-      `${
-        wlConfig?.headContent || ''
-      }<script type="text/javascript">window.__zignalyWhitelabelConfig = ${JSON.stringify(
-        wlConfig,
-      )}</script></head>`,
-    )
-    .replace(
-      '<script id="analytics-scripts"></script>',
-      wlConfig.scripts || '',
-    );
-}
-
 async function serveNewIndexHtml(req, res) {
-  res.header('X-Served-By', 'New Zignaly WL Server');
-  const wlConfig = await getWhitelabelConfig(req);
-  res.send(getIndexHtmlWithWhitelabelHead(wlConfig)).status(200);
-}
-
-async function getWhitelabelConfig(req) {
-  const host = req.get('host');
-  const overrides = {
-    'app.zignaly.com': config.zignaly,
-    'freedom.obsidiangroup.io': config.freedom,
-    'use.lastra.app': config.criptomaniacos,
-    'zigbids.com': config.example,
-    'zigbids.wl.zignaly.com': config.zignaly,
-  };
-
-  return overrides[host] || config.zignaly;
+  res.send(await generateIndexHtmlForRequest(req)).status(200);
 }

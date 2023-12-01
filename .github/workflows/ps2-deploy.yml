@@ -23,11 +23,10 @@ jobs:
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/ApplicationStart.sh
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/BeforeInstall.sh
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/AfterInstall.sh
-      - name: Create client .env file
+      - name: Create PS2 .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
           # env-specific
-          envkey_REACT_APP_WHITELABEL: ${{ vars.WHITELABEL }}
           envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
           envkey_REACT_APP_GTM_ID: ${{ vars.GTM_ID }}
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
@@ -35,7 +34,6 @@ jobs:
           envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
           envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRAL_API }}
           envkey_REACT_APP_NO_INDEX: ${{ vars.NO_INDEX }}
-          envkey_REACT_APP_SUBSCRIPTIONS_SHOP_URL: ${{ vars.SUBSCRIPTIONS_SHOP_URL }}
 
           #constant
           envkey_EXTEND_ESLINT: true
@@ -66,7 +64,15 @@ jobs:
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client + wl
         run: yarn ps2-wl-build
-#      - name: AWS Deploy
+      - name: Create PS2 WL Server .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          # env-specific
+          envkey_BASE_API: ${{ vars.PS2_BASE_API }}
+          directory: packages/ps2-wl-server
+          file_name: .env
+
+      #      - name: AWS Deploy
 #        uses: jakejarvis/s3-sync-action@master
 #        env:
 #          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
