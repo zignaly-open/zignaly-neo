@@ -1,7 +1,7 @@
 import { Features, WhitelabelOverride } from '../type';
-import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
+  id: 'criptomaniacos',
   title: 'Lastra',
   helpUrl:
     'https://api.whatsapp.com/send/?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20o%20time%20de%20atendimento.&phone=554888387787',
@@ -52,7 +52,6 @@ export default {
     },
   },
   xSource: 'criptomaniacos',
-  mainAppLink: ROUTE_DASHBOARD,
   background: '#0D0E0E',
   backgroundImage: null,
   logo: '/images/whitelabel/lastra/logo-horizontal.png',
@@ -129,4 +128,40 @@ export default {
       ],
     },
   },
+  headContent: `
+    <title>Lastra</title>
+    <meta name="description" content="A global platform to invest in winning crypto portfolios.">
+    
+    <link rel="manifest" href="/manifests/lastra.json"/>
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/lastra/logo32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/lastra/logo16.png">
+    <link rel="apple-touch-icon" href="/images/whitelabel/lastra/logo192.png"/>
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://lastra.zignaly.com/profit-sharing">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lastra - Your last Crypto app">
+    <meta property="og:description" content="A global platform to invest in winning crypto portfolios.">
+    <meta property="og:image" content="https://lastra.zignaly.com/images/whitelabel/lastra/banner630.jpg">
+    <meta property="og:image:width" content="1920"/>
+    <meta property="og:image:height" content="1080"/>
+    <meta property="og:image:alt" content="lastra.zignaly.com"/>
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="lastra.zignaly.com">
+    <meta property="twitter:url" content="https://lastra.zignaly.com/profit-sharing">
+    <meta name="twitter:title" content="Lastra - Your last Crypto app">
+    <meta name="twitter:description" content="A global platform to invest in winning crypto portfolios.">
+    <meta name="twitter:image" content="https://lastra.zignaly.com/images/whitelabel/lastra/banner630.jpg">
+    <meta name="twitter:site" content="@Criptomaniacos_">
+    
+  `,
+  scripts: `
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5JS4ZRXZ');
+    </script>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5JS4ZRXZ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  `,
 } as WhitelabelOverride;

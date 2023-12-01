@@ -18,6 +18,7 @@ interface TranslationOverrides {
 }
 
 export type WhitelabelOverride = {
+  id: string;
   title: string;
   helpUrl: string;
   locales?: string[];
@@ -31,6 +32,8 @@ export type WhitelabelOverride = {
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;
   logo?: string;
+  headContent?: string;
+  scripts?: string;
   links?: {
     tos?: string;
     privacyPolicy?: string;

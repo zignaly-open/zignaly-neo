@@ -2,7 +2,11 @@ import { BrandImage, HeaderLinksContainer } from '@zignaly-open/ui';
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
-import { ROUTE_BECOME_TRADER, ROUTE_PROFIT_SHARING } from '../../../routes';
+import {
+  ROUTE_BECOME_TRADER,
+  ROUTE_DASHBOARD,
+  ROUTE_PROFIT_SHARING,
+} from '../../../routes';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
 import { useIsAuthenticated } from '../../../apis/user/use';
@@ -10,7 +14,6 @@ import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
-import { MAIN_APP_URL } from '../../../util/constants';
 import HeaderWidgetButtons from '../HeaderWidgetButtons';
 import { isFeatureOn, whitelabel } from '../../../whitelabel';
 import { Features } from 'whitelabel/type';
@@ -20,7 +23,7 @@ const Header: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  const logoRoute = whitelabel.mainAppLink || MAIN_APP_URL;
+  const logoRoute = whitelabel.mainAppLink || ROUTE_DASHBOARD;
 
   const logo = whitelabel.logo ? (
     <img src={whitelabel.logo} id='menu__logo' height='32' />

@@ -1,0 +1,18 @@
+{
+  "name": "@zignaly-open/ps2-wl-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.22"
+  },
+  "dependencies": {
+    "axios": "1.6.2",
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "serve-static": "1.15.0"
+  }
+}

@@ -1,8 +1,8 @@
 import { Features, WhitelabelOverride } from '../type';
-import { ROUTE_DASHBOARD } from '../../routes';
 
 export default {
-  title: 'Example',
+  title: 'Zigbids',
+  id: 'example',
   helpUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   featureOverrides: {
     [Features.Referrals]: false,
@@ -12,13 +12,14 @@ export default {
     [Features.Kyc]: true,
     [Features.Subscriptions]: true,
   },
+  translationOverrides: true,
   endpointOverrides: {
     'marketplace/': 'market',
   },
-  mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',
   // backgroundImage: null,
+  loadFontsFromGoogle: true,
   defaultSuccessFee: 5,
 } as WhitelabelOverride;
