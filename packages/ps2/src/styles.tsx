@@ -11,9 +11,9 @@ import { userHasFont } from '@zignaly-open/ui';
 const { AvenirNext } = lazily(() => import('@zignaly-open/ui/fonts'));
 
 const IntercomStyle = createGlobalStyle`
-  @media (max-width: 600px) {
-    .intercom-launcher-frame .intercom-lightweight-app-launcher {
-      display: none !important;
+  @media (max-width: 450px) {
+    .intercom-launcher-frame, .intercom-lightweight-app-launcher , .intercom-launcher {
+      visibility: hidden !important;
     }
   }
 `;

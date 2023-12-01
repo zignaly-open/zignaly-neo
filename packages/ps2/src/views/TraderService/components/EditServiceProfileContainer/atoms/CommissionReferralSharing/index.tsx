@@ -105,6 +105,7 @@ const CommissionReferralSharing = ({
                     </ZigTypography>
                     <Box display={'flex'}>
                       <BoostChip
+                        id={prefixId && `${prefixId}__start-boost`}
                         boost={1 + getTraderBoost(min, zglySuccessFee)}
                         showBolt
                       />
@@ -112,11 +113,16 @@ const CommissionReferralSharing = ({
                         min={min}
                         max={max}
                         value={value || zglySuccessFee}
-                        prefixId={'service-edit__commission-slider'}
+                        prefixId={prefixId}
                         onChange={(e, v) => onChange(v as number)}
                         marks={false}
                         valueLabelFormat={(v) => (
-                          <Box display='flex' alignItems={'center'} gap='2px'>
+                          <Box
+                            display='flex'
+                            alignItems={'center'}
+                            gap='2px'
+                            id={prefixId && `${prefixId}__slider-boost`}
+                          >
                             <ZigTypographyValue>{v}</ZigTypographyValue>
                             <Box
                               display={'flex'}
@@ -135,6 +141,7 @@ const CommissionReferralSharing = ({
                         valueLabelDisplay='on'
                       />
                       <BoostChip
+                        id={prefixId && `${prefixId}__end-boost`}
                         boost={1 + getTraderBoost(max, zglySuccessFee)}
                         showBolt
                       />

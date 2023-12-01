@@ -294,7 +294,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               )}
               options={[
                 {
-                  label: t('change-fee'),
+                  label: (
+                    <span
+                      id={`service-investors-table__menu-edit-fee-${accountId}`}
+                    >
+                      {t('change-fee')}
+                    </span>
+                  ),
                   onClick: () => {
                     if ((+service?.successFee || 0) > 0) {
                       showModal(InvestorEditFee, {

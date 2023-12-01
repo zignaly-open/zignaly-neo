@@ -206,7 +206,7 @@ function TransferModal({
 
             <ZigModalActions>
               <ZigButton
-                id={"'transfer-funds-modal__transfer-now"}
+                id={'transfer-funds-modal__transfer-now'}
                 disabled={!isValid}
                 size='large'
                 type='submit'

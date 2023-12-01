@@ -48,6 +48,7 @@ export type ReferralHistoryEntry = {
   coin: string;
   email: string;
   percentage: number;
+  subtrack: string;
 };
 
 export type ReferralHistory = {
