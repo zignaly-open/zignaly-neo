@@ -1,4 +1,4 @@
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import {
   createColumnHelper,
   ZigPriceLabel,
@@ -7,8 +7,9 @@ import {
   downloadTableCsv,
   ZigButton,
   ZigFilters,
+  ZigFiltersType,
 } from '@zignaly-open/ui';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
@@ -112,7 +113,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [],
   );
 
-  const defaultFilters = useMemo(
+  const defaultFilters: ZigFiltersType = useMemo(
     () => [
       {
         type: 'select',
@@ -134,15 +135,16 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [rewardTypeOptions, statusOptions, t],
   );
 
-  const [localFilters, setLocalFilters] = useState(defaultFilters);
+  const tablePersist = usePersistTable(TableId.Referrals, defaultFilters);
   const filteredHistory = useMemo(
     () =>
       referrals.filter((r) =>
-        localFilters.every(({ id, value }) => !value || r[id] === value),
+        tablePersist.filters.every(
+          ({ id, value }) => !value || r[id] === value,
+        ),
       ),
-    [referrals, localFilters],
+    [referrals, tablePersist.filters],
   );
-  const tablePersist = usePersistTable(TableId.Referrals, localFilters);
 
   const exporter = () =>
     downloadTableCsv(
@@ -189,8 +191,8 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             }
             defaultFilters={defaultFilters}
             filters={tablePersist.filters}
-            onChange={setLocalFilters}
-            mb='36px'
+            onChange={tablePersist.filterTable}
+            sx={{ mb: '36px' }}
           />
         </>
       )}
@@ -198,8 +200,8 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       {referrals.length ? (
         <ZigTable
           initialState={{
-            sorting: [
-              tablePersist.sorting ?? {
+            sorting: tablePersist.sorting ?? [
+              {
                 id: 'date',
                 desc: true,
               },

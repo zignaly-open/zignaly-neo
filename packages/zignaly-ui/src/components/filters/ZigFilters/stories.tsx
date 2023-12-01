@@ -4,21 +4,22 @@ import ZigFilters from "./index";
 import { Box } from "@mui/material";
 import { ZigFiltersType } from "./types";
 
-const meta = {
-  title: "Filters/ZigFilters",
-  component: ZigFilters,
-} as Meta;
-export default meta;
-
 const ZigFiltersWrapper = ({ filters }: { filters: ZigFiltersType }) => {
+  const [currentFilters, setCurrentFilters] = useState(filters);
   return (
-    <Box display="flex">
-      <ZigFilters defaultFilters={filters} initialFilters={filters} onChange={() => {}} />
+    <Box display="flex" width={1}>
+      <ZigFilters defaultFilters={filters} filters={currentFilters} onChange={setCurrentFilters} />
     </Box>
   );
 };
-
-type Story = StoryObj<typeof meta>;
+type ZigFiltersProps = React.ComponentProps<typeof ZigFilters>;
+type Story = StoryObj<ZigFiltersProps>;
+const meta: Meta<ZigFiltersProps> = {
+  title: "Filters/ZigFilters",
+  component: ZigFilters,
+  render: (props) => <ZigFiltersWrapper {...props} />,
+};
+export default meta;
 
 export const Default: Story = {
   args: {
@@ -50,10 +51,11 @@ export const Default: Story = {
         type: "checkbox",
         label: "Type",
         options: [
-          { value: "spot", label: "Spot", checked: true },
-          { value: "futures", label: "Futures", checked: true },
+          { value: "spot", label: "Spot" },
+          { value: "futures", label: "Futures" },
         ],
         id: "type",
+        value: ["spot", "futures"],
       },
       {
         type: "slider",
@@ -65,5 +67,4 @@ export const Default: Story = {
       },
     ],
   },
-  render: (props) => <ZigFiltersWrapper {...props} />,
 };

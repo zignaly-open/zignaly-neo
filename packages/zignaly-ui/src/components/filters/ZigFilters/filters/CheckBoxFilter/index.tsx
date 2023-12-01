@@ -4,7 +4,7 @@ import { CheckBoxFilterProps } from "./type";
 import ZigTypography from "components/display/ZigTypography";
 
 const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
-  const { label, options } = filter;
+  const { label, options, value } = filter;
 
   const handleChange = (o: string, checked: boolean) => {
     const updatedOptions = options.map((option) => {
@@ -30,7 +30,7 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
           label={option.label}
           control={
             <Checkbox
-              checked={option.checked}
+              checked={value?.includes(option.value)}
               onChange={(_, checked) => handleChange(option.value, checked)}
             />
           }

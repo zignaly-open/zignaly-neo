@@ -1,18 +1,23 @@
+import { SxProps } from "@mui/system";
+
 export type ZigFiltersProps = {
   onChange: (filters: ZigFiltersType) => void;
   search?: string;
   onSearchChange?: (search: string) => void;
-  filters: ZigFiltersSavedValues;
+  filters: ZigFiltersType;
   defaultFilters: ZigFiltersType;
   label?: string;
+  leftComponent?: React.ReactNode;
+  rightComponent?: React.ReactNode;
+  sx?: SxProps;
 };
 
-export type ZigFiltersSavedValue = {
+export type ZigFilterPruned = {
   id: string;
   type: ZigFilter["type"];
   value: ZigFilter["value"];
 };
-export type ZigFiltersSavedValues = ZigFiltersSavedValue[];
+export type ZigFiltersPruned = ZigFilterPruned[];
 
 export type BaseFilter = {
   id: string;
@@ -41,7 +46,7 @@ export type CheckboxFilter = BaseFilter & {
     value: string;
     label: string;
   }[];
-  value: [string];
+  value: string[];
 };
 
 export type SelectFilter = BaseFilter & {

@@ -1,16 +1,23 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { FilterDropdownWrapper, Layout, LayoutContent, TopDivider, VertDivider } from "./styles";
+import React, { useMemo } from "react";
+import { FilterDropdownWrapper, Layout, TopDivider, VertDivider } from "./styles";
 import { Box } from "@mui/material";
 import ZigSearch from "../ZigSearch";
 import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
 import SelectFilterDropdown from "./dropdowns/SelectFilterDropdown";
 import MultiFilterDropdown from "./dropdowns/MultiFilterDropdown";
-import { ZigFilter, ZigFiltersProps, ZigFiltersSavedValues, ZigFiltersType } from "./types";
+import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
-import { useUpdateEffect } from "react-use";
 import ZigTypography from "components/display/ZigTypography";
 
-const FilterDropdown = ({ resetFilter, filter, onChange }) => {
+const FilterDropdown = ({
+  resetFilter,
+  filter,
+  onChange,
+}: {
+  resetFilter: () => void;
+  onChange: (filter: ZigFilter) => void;
+  filter: ZigFilter;
+}) => {
   // todo: add checkbox filter
   const Component = filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
   return (
@@ -21,25 +28,6 @@ const FilterDropdown = ({ resetFilter, filter, onChange }) => {
   );
 };
 
-// const loadFilters = (
-//   defaultFilters: ZigFiltersType,
-//   savedFilterValues: ZigFiltersSavedValues = [],
-// ) => {
-//   return defaultFilters.map((filter) => {
-//     const savedFilter = savedFilterValues.find((savedFilter) => savedFilter.id === filter.id);
-//     return {
-//       ...filter,
-//       value: savedFilter?.value ?? filter.value,
-//     };
-//   });
-//   // const loadedFilters = { ...savedFilters };
-//   // Object.keys(defaultFilters).forEach((id) => {
-//   //   loadedFilters[id] = savedFilters[id] ?? defaultFilters[id];
-//   // });
-//   // return loadedFilters;
-//   // return Object.keys(defaultFilters).map((id) => savedFilters[id] ?? defaultFilters[id]);
-// };
-
 const ZigFilters = ({
   defaultFilters,
   filters = [],
@@ -49,23 +37,14 @@ const ZigFilters = ({
   label,
   leftComponent,
   rightComponent,
-  ...rest
+  sx,
 }: ZigFiltersProps) => {
-  // const [internalFilters, setInternalFilters] = useState(savedFilterValues ?? []);
-  // loadFilters(defaultFilters, savedFilterValues),
-  console.log("int", filters);
-
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
       filters.filter((filter) => filter.showInBar),
       filters.filter((filter) => !filter.showInBar),
     ];
   }, [filters]);
-
-  // replace by util called outside
-  // useUpdateEffect(() => {
-  //   onChange(internalFilters);
-  // }, [internalFilters]);
 
   const updateFilters = (updatedFilter: ZigFilter) => {
     const updatedFilters = filters.map((filter) => {
@@ -108,7 +87,7 @@ const ZigFilters = ({
       justifyContent="center"
       flexWrap="wrap"
       gap={1}
-      {...rest}
+      sx={sx}
     >
       <Box display={"flex"} flex={1} flexBasis={{ xs: "100%", md: 0 }}>
         {leftComponent}

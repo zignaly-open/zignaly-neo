@@ -3,7 +3,6 @@ import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import { Box } from "@mui/material";
 import { SelectFilterDropdownProps } from "./type";
-import { ExpandLess, ChevronRight } from "@mui/icons-material";
 import { DropdownItem } from "../../styles";
 
 const SelectFilterDropdown = ({ filter, onChange }: SelectFilterDropdownProps) => {

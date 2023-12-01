@@ -1,4 +1,4 @@
-import { Box, styled } from "@mui/system";
+import { styled } from "@mui/system";
 import ZigTypography from "components/display/ZigTypography";
 import { DropdownItem } from "../../styles";
 

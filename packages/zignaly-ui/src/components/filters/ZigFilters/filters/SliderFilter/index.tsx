@@ -31,14 +31,15 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
     }
   }, [value]);
 
-  const adaptValue = (value: SliderFilterType["value"]) =>
+  const adaptValue = (
+    value: SliderFilterType["value"] | number | number[],
+  ): number | SliderFilterType["value"] =>
     Array.isArray(value)
-      ? [value[0] < min ? null : value[0], value[1] > max ? null : value[1]]
+      ? [
+          value[0] !== null && value[0] < min ? null : value[0],
+          value[1] !== null && value[1] > max ? null : value[1],
+        ]
       : value;
-
-  const handleChange = (e, value: SliderFilterType["value"]) => {
-    onChange({ ...filter, value: adaptValue(value) });
-  };
 
   return (
     <Box>
@@ -52,7 +53,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
         min={allowNoMin ? min - step : min}
         max={allowNoMax ? max + step : max}
         onChange={(_, v) => setInternalValue(adaptValue(v))}
-        onChangeCommitted={handleChange}
+        onChangeCommitted={(_, v) => onChange({ ...filter, value: adaptValue(v) })}
         marks={false}
         valueLabelDisplay="off"
         labels={{ showValues: false }}

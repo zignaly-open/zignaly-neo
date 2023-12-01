@@ -1,15 +1,12 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import ZigTypography from "components/display/ZigTypography";
 import React, { useCallback } from "react";
 import SliderFilter from "../../filters/SliderFilter";
 import { FiltersCount, LayoutItem } from "./styles";
-import { FilterItemProps, MultiFilterDropdownProps } from "./type";
-import { Tune } from "@mui/icons-material";
+import { MultiFilterDropdownProps } from "./type";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { ZigFilter } from "../../types";
 import ZigButton from "components/inputs/ZigButton";
 import { ZigSettingsIcon } from "../../../../../icons";
-import { DropdownItem } from "../../styles";
 
 const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDropdownProps) => {
   const getFilterComponent = useCallback(

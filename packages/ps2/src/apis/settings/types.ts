@@ -1,5 +1,5 @@
-import { ColumnSort, SortingState } from '@tanstack/react-table';
-import { ZigFiltersType } from '@zignaly-open/ui/lib/components/filters/ZigFilters/types';
+import { SortingState } from '@tanstack/react-table';
+import { ZigFiltersPruned } from '@zignaly-open/ui';
 
 export enum TableId {
   Marketplace = 'marketplace',
@@ -7,11 +7,14 @@ export enum TableId {
 }
 
 export type SettingsState = {
-  table: Record<
-    TableId,
-    {
-      filters: ZigFiltersType;
-      sorting: ColumnSort;
-    }
-  >;
+  table:
+    | Record<
+        TableId,
+        {
+          filters?: ZigFiltersPruned;
+          sorting?: SortingState;
+        }
+      >
+    | Record<string, never>;
+  version: number;
 };

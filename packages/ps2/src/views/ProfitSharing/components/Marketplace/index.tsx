@@ -13,7 +13,6 @@ import {
   ZigTablePriceLabel,
   FilterFns,
   ZigFilters,
-  ZigFiltersSavedValues,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -32,13 +31,7 @@ import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { usePersistTable } from 'util/hooks/usePersistTable';
 import { TableId } from 'apis/settings/types';
-import {
-  CheckboxFilter,
-  SelectFilter,
-  SliderFilter,
-  ZigFilter,
-  ZigFiltersType,
-} from '@zignaly-open/ui';
+import { ZigFiltersType } from '@zignaly-open/ui';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -89,15 +82,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
   ];
   const theme = useTheme();
-  const [filtersValues, setFiltersValues] =
-    useState<ZigFiltersSavedValues>(null);
   const [searchFilter, setSearchFilter] = useState('');
-  const tablePersist = usePersistTable(
-    TableId.Marketplace,
-    defaultFilters,
-    filtersValues,
-  );
-  console.log('omg', tablePersist.filters);
+  const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
 
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
@@ -393,7 +379,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           onChange={tablePersist.filterTable}
           search={searchFilter}
           onSearchChange={setSearchFilter}
-          mb='28px'
+          sx={{ mb: '28px' }}
           label={t('investment-preferences')}
         />
         {/* <TopServicesCards
