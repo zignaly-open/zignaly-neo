@@ -45,9 +45,11 @@ function getGeneratedIndexHtml(wlConfig) {
       <meta name="twitter:description" content="${description}">
 <!--      <meta name="twitter:image" content="https://app.zignaly.com/images/zignaly-social.png">-->
 <!--      <meta name="twitter:site" content="@zignaly">-->
-      <script type="text/javascript">window.__zignalyWhitelabelConfig = ${JSON.stringify(
-        wlConfig,
-      )}</script>
+      <script type="text/javascript">
+      window.__zignalyWhitelabelConfig = JSON.parse(decodeURIComponent('${encodeURIComponent(
+        JSON.stringify(wlConfig),
+      )}'));
+      </script>
       </head>`,
   );
   // .replace(
