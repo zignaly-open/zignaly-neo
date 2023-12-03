@@ -18,14 +18,29 @@ const getCacheValue = (domain) => {
   return null;
 };
 
+const mapBackendConfigToFrontendConfig = ({
+  settings: featureOverrides,
+  supportUrl: helpUrl,
+  tos,
+  privacyPolicy,
+  mainAppLink,
+  ...config
+}) => ({
+  ...config,
+  featureOverrides,
+
+  links: { tos, privacyPolicy, mainAppLink, helpUrl },
+});
+
 const getWhitelabelConfig = async (domain) => {
   const cached = getCacheValue(domain);
   if (cached) return cached;
   // TODO: process it somehow
   try {
-    const { data: whitelabel } = await axios.get(
+    let { data: whitelabel } = await axios.get(
       `${BASE_API}wl/config?domain=${domain}`,
     );
+    whitelabel = mapBackendConfigToFrontendConfig(whitelabel);
     setCacheValue(domain, whitelabel);
     return whitelabel;
   } catch (e) {

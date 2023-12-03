@@ -1,9 +1,8 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
-  id: 'freedom',
   title: 'OBSIDIAN FREEDOM',
-  settings: {
+  featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
     [Features.CreateService]: false,
@@ -20,7 +19,7 @@ export default {
     BNB: 0.0001,
     USDC: 0.0001,
   },
-  xSource: 'freedom',
+  slug: 'freedom',
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',
   social: {},
   headContent: `

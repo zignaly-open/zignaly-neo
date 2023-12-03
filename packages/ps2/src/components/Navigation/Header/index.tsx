@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  const logoRoute = whitelabel.mainAppLink || ROUTE_DASHBOARD;
+  const logoRoute = whitelabel.links.mainAppLink || ROUTE_DASHBOARD;
 
   const logo = whitelabel.logo ? (
     <img src={whitelabel.logo} id='menu__logo' height='32' />

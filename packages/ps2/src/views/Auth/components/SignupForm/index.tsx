@@ -179,15 +179,13 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
               <ZigLink
-                href={
-                  whitelabel.links?.tos || 'https://zignaly.com/legal/terms'
-                }
+                href={whitelabel.links.tos || 'https://zignaly.com/legal/terms'}
                 target='_blank'
                 rel='noopener'
               />
               <ZigLink
                 href={
-                  whitelabel.links?.privacyPolicy ||
+                  whitelabel.links.privacyPolicy ||
                   'https://zignaly.com/legal/privacy'
                 }
                 target='_blank'

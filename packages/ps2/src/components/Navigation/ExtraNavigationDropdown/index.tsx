@@ -54,7 +54,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
       target: '_blank',
-      href: whitelabel.helpUrl,
+      href: whitelabel.links.helpUrl,
     },
     {
       separator: true,

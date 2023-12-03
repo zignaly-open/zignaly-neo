@@ -18,25 +18,24 @@ interface TranslationOverrides {
 }
 
 export type WhitelabelOverride = {
-  id: string;
   title: string;
-  helpUrl: string;
   locales?: string[];
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: TranslationOverrides;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;
-  settings: Partial<Record<Features, boolean>>;
-  xSource?: string;
-  subscriptionPurchaseLink?: string;
-  mainAppLink?: string;
+  featureOverrides?: Partial<Record<Features, boolean>>;
+  slug?: string;
   logo?: string;
   headContent?: string;
   scripts?: string;
-  links?: {
+  links: {
     tos?: string;
+    helpUrl: string;
+    mainAppLink?: string;
     privacyPolicy?: string;
+    subscriptionPurchaseLink?: string;
   };
   background?: string;
   backgroundImage?: string | null;

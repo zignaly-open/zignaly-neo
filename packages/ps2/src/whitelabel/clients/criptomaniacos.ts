@@ -1,11 +1,8 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
-  id: 'criptomaniacos',
   title: 'Lastra',
-  helpUrl:
-    'https://api.whatsapp.com/send/?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20o%20time%20de%20atendimento.&phone=554888387787',
-  settings: {
+  featureOverrides: {
     [Features.Referrals]: false,
     [Features.Rewards]: false,
     [Features.CreateService]: false,
@@ -18,6 +15,8 @@ export default {
   links: {
     tos: 'https://www.lastra.app/termos',
     privacyPolicy: 'https://www.lastra.app/politica-privacidade/',
+    helpUrl:
+      'https://api.whatsapp.com/send/?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20o%20time%20de%20atendimento.&phone=554888387787',
   },
   translationOverrides: {
     en: {
@@ -51,7 +50,7 @@ export default {
       },
     },
   },
-  xSource: 'criptomaniacos',
+  slug: 'criptomaniacos',
   background: '#0D0E0E',
   backgroundImage: null,
   logo: '/images/whitelabel/lastra/logo-horizontal.png',
