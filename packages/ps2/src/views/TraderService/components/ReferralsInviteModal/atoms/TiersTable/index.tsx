@@ -113,7 +113,7 @@ const CellLabelTraderBoost = ({ traderBoost }: { traderBoost: number }) => {
         {t('trader-boost')}
         <Tooltip
           title={t('tooltips.trader-boost', {
-            commission: traderBoost * whitelabel.defaultSuccessFee,
+            commission: traderBoost * whitelabel.zignalySuccessFee,
           })}
         >
           <TooltipIcon />
@@ -245,7 +245,7 @@ const TiersTable = ({
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
                 (
-                  Math.round(MAX_FEES_AMOUNT * whitelabel.defaultSuccessFee) /
+                  Math.round(MAX_FEES_AMOUNT * whitelabel.zignalySuccessFee) /
                   100
                 ).toString(),
                 {

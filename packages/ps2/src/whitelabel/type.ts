@@ -19,6 +19,7 @@ interface TranslationOverrides {
 
 export type WhitelabelOverride = {
   title: string;
+  domain: string;
   locales?: string[];
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: TranslationOverrides;
@@ -30,6 +31,13 @@ export type WhitelabelOverride = {
   logo?: string;
   headContent?: string;
   scripts?: string;
+  // meta: {
+  //   title: string;
+  //   description: string;
+  //   logo: string;
+  //   banner: string;
+  //   favicon: string;
+  // };
   links: {
     tos?: string;
     helpUrl: string;
@@ -54,5 +62,5 @@ export type WhitelabelOverride = {
       string | void
     >
   >;
-  defaultSuccessFee?: number;
+  zignalySuccessFee?: number;
 };

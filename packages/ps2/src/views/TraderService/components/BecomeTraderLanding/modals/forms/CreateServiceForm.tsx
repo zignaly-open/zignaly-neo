@@ -216,7 +216,7 @@ const CreateServiceForm: React.FC<{
             control={control}
             render={({ field }) => (
               <SuccessFeeInputWrapper
-                zglyFee={whitelabel.defaultSuccessFee}
+                zglyFee={whitelabel.zignalySuccessFee}
                 prefixId={'create-service__service-fee'}
                 value={watch('successFee') || 0}
                 showZeroFeeExplainer

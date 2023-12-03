@@ -48,6 +48,6 @@ export default {
     twq('config','og0cu');
     </script>
   `,
-  defaultSuccessFee: 5,
+  zignalySuccessFee: 5,
   intercomId: 'nc3z6oqm',
 } as WhitelabelOverride;
