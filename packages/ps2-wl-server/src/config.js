@@ -1,8 +1,6 @@
 const axios = require('axios');
 const { CACHE_TTL, BASE_API } = require('./constants');
 
-console.error({ CACHE_TTL, BASE_API });
-
 const whitelabelCache = {};
 
 const setCacheValue = (domain, value) => {
