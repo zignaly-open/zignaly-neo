@@ -89,6 +89,7 @@
     "qrcode.react": "3.0.2",
     "react-device-detect": "^2.2.3",
     "react-hook-form": "7.34.2",
+    "react-image-webp": "^0.8.0",
     "react-loader-spinner": "6.0.0-0",
     "react-number-format": "5.1.2",
     "react-portal": "4.2.2",
