@@ -86,6 +86,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const [searchFilter, setSearchFilter] = useState('');
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
 
+  // Filtering manually instead of via react-table/ZigTable allows having access to the filtered services
+  // to display results count.
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
       return (
