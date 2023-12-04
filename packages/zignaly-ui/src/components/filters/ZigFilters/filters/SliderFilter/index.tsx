@@ -32,15 +32,23 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
     }
   }, [value]);
 
-  const adaptValue = (
-    value: SliderFilterType["value"] | number | number[],
-  ): number | SliderFilterType["value"] =>
-    Array.isArray(value)
-      ? [
-          value[0] !== null && value[0] < min ? null : value[0],
-          value[1] !== null && value[1] > max ? null : value[1],
-        ]
-      : value;
+  const adaptMin = (value: number) => {
+    if (value < min) return null;
+    if (value > max) return max;
+    return value;
+  };
+
+  const adaptMax = (value: number) => {
+    if (value > max) return null;
+    if (value < min) return min;
+    return value;
+  };
+
+  /**
+   * Set values as null when outside the range
+   */
+  const adaptValue = (value: number | number[]): SliderFilterType["value"] =>
+    Array.isArray(value) ? [adaptMin(value[0]), adaptMax(value[1])] : value;
 
   return (
     <Box>
