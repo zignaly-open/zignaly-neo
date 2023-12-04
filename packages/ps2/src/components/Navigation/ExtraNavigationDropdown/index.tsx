@@ -50,7 +50,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   };
 
   let options: ZigDropdownProps['options'] = [
-    ...(whitelabel.links.helpUrl
+    ...(whitelabel.links?.helpUrl
       ? ([
           {
             label: t('main-menu.dropdown-link-helpDocs'),

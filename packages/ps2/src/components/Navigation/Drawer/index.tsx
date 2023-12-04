@@ -292,7 +292,7 @@ const ZigDrawer = () => {
                 </ListItem>
               )}
 
-              {!!whitelabel.links.helpUrl && (
+              {!!whitelabel.links?.helpUrl && (
                 <ListItem disablePadding onClick={handleDrawerToggle}>
                   <ListItemButton
                     target='_blank'

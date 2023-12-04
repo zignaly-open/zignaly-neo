@@ -97,7 +97,7 @@ const usePerformLevelCheck = (
           button2Props: {
             // if we have the subscription feature on but we don't have this configured...
             // too bad
-            href: whitelabel.links.subscriptionPurchaseLink,
+            href: whitelabel.links?.subscriptionPurchaseLink,
             id: 'modal-access.no-subscription__purchase',
             endIcon: (
               <ZigArrowOutIcon
@@ -145,7 +145,7 @@ const usePerformLevelCheck = (
           button2Props: {
             // if we have the subscription feature on but we don't have this configured...
             // too bad
-            href: whitelabel.links.subscriptionPurchaseLink,
+            href: whitelabel.links?.subscriptionPurchaseLink,
             id: 'modal-access.expired-subscription__purchase',
             endIcon: (
               <ZigArrowOutIcon

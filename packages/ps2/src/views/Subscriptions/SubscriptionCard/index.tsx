@@ -67,7 +67,7 @@ const SubscriptionCard = ({
           <Box width={'100%'}>
             {status === 'accessible' ? (
               <ZigLink
-                href={`${whitelabel.links.subscriptionPurchaseLink}`}
+                href={`${whitelabel.links?.subscriptionPurchaseLink}`}
                 target={'_blank'}
                 sx={{ width: '100%' }}
                 underline={'none'}
