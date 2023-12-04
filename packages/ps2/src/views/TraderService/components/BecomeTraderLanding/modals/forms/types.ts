@@ -6,6 +6,7 @@ export type ServiceFormData = {
   serviceName: string;
   baseCurrency: string;
   successFee: number;
+  selectExchange: string;
 };
 
 export type ServiceInvestType = {

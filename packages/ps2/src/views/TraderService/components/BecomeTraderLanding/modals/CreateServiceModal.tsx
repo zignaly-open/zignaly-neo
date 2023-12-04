@@ -25,7 +25,9 @@ function CreateServiceModal({
   const [, { isLoading: isCreating }] = useCreateTraderServiceMutation();
   const [step, setStep] = useState(0);
   const { isLoading: isLoadingServiceTypes } = useTraderServiceTypesInfoQuery();
-  const [service, setService] = useState<Partial<ServiceFormData>>({});
+  const [service, setService] = useState<Partial<ServiceFormData>>({
+    selectExchange: 'binance',
+  });
   const { isFetching: isLoadingBalances } = useCurrentBalance(
     service.baseCurrency,
   );

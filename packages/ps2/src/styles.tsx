@@ -22,9 +22,9 @@ const GlobalAppStyle = getGlobalAppStyle({
 });
 
 const IntercomStyle = createGlobalStyle`
-  @media (max-width: 600px) {
-    .intercom-launcher-frame .intercom-launcher{
-      display: none !important;
+  @media (max-width: 450px) {
+    .intercom-launcher-frame, .intercom-lightweight-app-launcher, .intercom-launcher {
+      visibility: hidden !important;
     }
   }
 `;

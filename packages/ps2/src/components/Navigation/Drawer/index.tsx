@@ -73,7 +73,6 @@ const ZigDrawer = () => {
   const { exchanges, email, imageUrl } = useCurrentUser();
   const openDepositModal = useOpenDepositModal();
   const changeLocale = useChangeLocale();
-  const [lightWeightIntercom, setLightWeightIntercom] = useState(true);
 
   const languageMap = supportedLanguages
     ? supportedLanguages.map((x) => LocalizationLanguages[x])
@@ -271,31 +270,30 @@ const ZigDrawer = () => {
                   <ListItemButton
                     id='drawer__help-chat'
                     onClick={() => {
-                      if (lightWeightIntercom) {
-                        (
-                          document.querySelector(
-                            '.intercom-launcher',
-                          ) as HTMLElement
-                        )?.click();
-                        setLightWeightIntercom(false);
+                      const intercomLauncher = document.querySelector(
+                        '.intercom-launcher',
+                      ) as HTMLElement;
+                      const iframeLauncher = document.querySelector(
+                        '.intercom-launcher-frame',
+                      ) as HTMLIFrameElement;
+
+                      if (intercomLauncher) {
+                        intercomLauncher.click();
                       } else {
-                        (
-                          document.querySelector(
-                            '.intercom-launcher-frame',
-                          ) as HTMLElement
-                        )?.click();
+                        const iframeContent =
+                          iframeLauncher?.contentDocument?.querySelector(
+                            '.intercom-launcher',
+                          ) as HTMLElement;
+                        iframeContent?.click();
                       }
+                      handleDrawerToggle();
                     }}
                   >
                     <ListItemText primary={t('navigation-menu.ping-us')} />
                   </ListItemButton>
                 </ListItem>
               )}
-              <ListItem
-                disablePadding
-                onClick={handleDrawerToggle}
-                className={'test-class'}
-              >
+              <ListItem disablePadding onClick={handleDrawerToggle}>
                 <ListItemButton target='_blank' href={whitelabel.helpUrl}>
                   <ListItemText
                     primary={t('main-menu.dropdown-link-helpDocs')}

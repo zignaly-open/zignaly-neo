@@ -6,7 +6,7 @@ export const getGlobalAppStyle = ({
   background = "#070819",
   backgroundImage = "/background-dark.png",
 }) => createGlobalStyle`
-body {
+  body {
     padding: 0;
     margin: 0;
     background-color: ${background};

@@ -79,6 +79,20 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         header: t('table.user-trader'),
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
+      columnHelper.accessor('subtrack', {
+        header: t('table.subtrack'),
+        cell: ({ getValue }) => (
+          <Box display={'flex'} justifyContent={'center'}>
+            <ZigTypography
+              overflow={'hidden'}
+              maxWidth={'250px'}
+              textOverflow={'ellipsis'}
+            >
+              {getValue()}
+            </ZigTypography>
+          </Box>
+        ),
+      }),
       columnHelper.accessor('type', {
         header: t('table.reward-type'),
         cell: ({ getValue }) => (
@@ -152,6 +166,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         r.date,
         `${r.amount} ${r.coin}`,
         r.email,
+        r.subtrack,
         r.type in RewardType ? t(`rewardTypes.${r.type}`) : r.type,
         r.status in StatusType ? t(`statusTypes.${r.status}`) : r.status,
       ]),
@@ -159,6 +174,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         t('table.time-and-date'),
         t('common:amount'),
         t('table.user-trader'),
+        t('table.subtrack'),
         t('table.reward-type'),
         t('table.filter-status'),
       ],

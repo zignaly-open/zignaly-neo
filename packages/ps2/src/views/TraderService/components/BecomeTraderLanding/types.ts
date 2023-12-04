@@ -5,6 +5,8 @@ export type InfoBarItem = {
   id?: string;
 };
 
+export type ExchangesType = 'binance' | 'bybit';
+
 export type FeatureItem = InfoBarItem;
 
 export type HowWorksItem = InfoBarItem;
