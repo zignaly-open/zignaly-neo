@@ -74,10 +74,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
     {
       type: 'slider',
-      value: [0, 50],
+      value: [0, 100],
       label: t('table.filter-fee'),
       min: 0,
-      max: 50,
+      max: 100,
       id: 'fee',
     },
   ];

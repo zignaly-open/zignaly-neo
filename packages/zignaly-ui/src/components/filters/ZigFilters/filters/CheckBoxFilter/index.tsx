@@ -7,14 +7,17 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
   const { label, options, value } = filter;
 
   const handleChange = (o: string, checked: boolean) => {
-    const updatedOptions = options.map((option) => {
-      if (option.value === o) {
-        return { ...option, checked };
-      }
-      return option;
-    });
+    let updatedValue = [...value];
 
-    onChange({ ...filter, options: updatedOptions });
+    if (checked) {
+      if (!updatedValue.includes(o)) {
+        updatedValue.push(o);
+      }
+    } else {
+      updatedValue = updatedValue.filter((option) => option !== o);
+    }
+
+    onChange({ ...filter, value: updatedValue });
   };
 
   return (
