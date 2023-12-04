@@ -11,7 +11,7 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
-  FilterFns,
+  filterFns as zigFilterFns,
   ZigFilters,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
@@ -32,6 +32,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { usePersistTable } from 'util/hooks/usePersistTable';
 import { TableId } from 'apis/settings/types';
 import { ZigFiltersType } from '@zignaly-open/ui';
+import { filterFns } from '@tanstack/react-table';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -91,7 +92,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         tablePersist.filters &&
         tablePersist.filters.every((filter) => {
           if (filter.id === 'returns') {
-            return FilterFns.inNumberRange(
+            return zigFilterFns.inNumberRange(
               +service.pnlPercent180t,
               filter.value as [number, number],
             );
@@ -101,7 +102,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             const serviceType = service.type.split('_')[1];
             return (filter.value as string[]).includes(serviceType);
           } else if (filter.id === 'fee') {
-            return FilterFns.inNumberRange(
+            return zigFilterFns.inNumberRange(
               service.successFee,
               filter.value as [number, number],
             );
@@ -412,6 +413,17 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           enableSortingRemoval={false}
           state={{ globalFilter: searchFilter }}
           onSortingChange={tablePersist.sortTable}
+          getColumnCanGlobalFilter={(column) =>
+            ['service-name'].includes(column.id)
+          }
+          globalFilterFn={(row, columnId, filterValue, addMeta) => {
+            return (
+              filterFns.includesString(row, columnId, filterValue, addMeta) ||
+              row.original.ownerName
+                .toLowerCase()
+                .includes(filterValue.toLowerCase())
+            );
+          }}
         />
       </TableWrapper>
     </>

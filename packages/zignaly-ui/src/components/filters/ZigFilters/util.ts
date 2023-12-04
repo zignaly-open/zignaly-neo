@@ -1,6 +1,6 @@
 import { ZigFiltersPruned, ZigFiltersType } from "./types";
 
-export const FilterFns = {
+export const filterFns = {
   // https://github.com/TanStack/table/blob/main/packages/table-core/src/filterFns.ts
   inNumberRange: (value: number, [min, max]: [number | null, number | null]) => {
     return ((!min && min !== 0) || value >= min) && ((!max && max !== 0) || value <= max);
