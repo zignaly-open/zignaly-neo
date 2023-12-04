@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/display/ZigPriceLabel renders ZigPriceLabel render 1`] = `
+<span
+  aria-label="500 usdt"
+  class="MuiTypography-root MuiTypography-body1 css-1c6zzem-MuiTypography-root"
+  data-mui-internal-clone-element="true"
+  id="test-id"
+>
+  500
+   
+  <span
+    class="MuiTypography-root MuiTypography-body2 test-id-coin css-1e0f0rf-MuiTypography-root"
+  >
+    usdt
+  </span>
+</span>
+`;
+
+exports[`components/display/ZigPriceLabel renders ZigPriceLabel render 2`] = `
+CSSStyleDeclaration {
+  "0": "margin",
+  "1": "font-family",
+  "10": "justify-content",
+  "11": "visibility",
+  "2": "font-weight",
+  "3": "font-size",
+  "4": "line-height",
+  "5": "letter-spacing",
+  "6": "color",
+  "7": "white-space",
+  "8": "display",
+  "9": "align-items",
+  "_importants": {
+    "align-items": "",
+    "color": "",
+    "display": "",
+    "font-family": "",
+    "font-size": "",
+    "font-weight": "",
+    "justify-content": "",
+    "letter-spacing": "",
+    "line-height": "",
+    "margin": "",
+    "visibility": undefined,
+    "white-space": "",
+  },
+  "_length": 12,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "color": "rgb(243, 244, 246)",
+    "display": "inline-flex",
+    "font-family": "Avenir Next,Roboto,Helvetica,Arial,sans-serif",
+    "font-size": "15px",
+    "font-weight": "500",
+    "justify-content": "center",
+    "letter-spacing": "0.55px",
+    "line-height": "24px",
+    "margin": "0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "0px",
+    "visibility": "visible",
+    "white-space": "nowrap",
+  },
+}
+`;
+
+exports[`components/display/ZigPriceLabel renders ZigTablePriceLabel render 1`] = `
+<span
+  aria-label="500 btc"
+  class="MuiTypography-root MuiTypography-body1 css-10ef9gy-MuiTypography-root"
+  data-mui-internal-clone-element="true"
+  id="test-id"
+>
+  500
+   
+  <span
+    class="MuiTypography-root MuiTypography-body2 test-id-coin css-1k4dd5e-MuiTypography-root"
+  >
+    btc
+  </span>
+</span>
+`;
+
+exports[`components/display/ZigPriceLabel renders ZigTablePriceLabel render 2`] = `
+CSSStyleDeclaration {
+  "0": "margin",
+  "1": "font-family",
+  "10": "justify-content",
+  "11": "visibility",
+  "2": "font-weight",
+  "3": "font-size",
+  "4": "line-height",
+  "5": "letter-spacing",
+  "6": "color",
+  "7": "white-space",
+  "8": "display",
+  "9": "align-items",
+  "_importants": {
+    "align-items": "",
+    "color": "",
+    "display": "",
+    "font-family": "",
+    "font-size": "",
+    "font-weight": "",
+    "justify-content": "",
+    "letter-spacing": "",
+    "line-height": "",
+    "margin": "",
+    "visibility": undefined,
+    "white-space": "",
+  },
+  "_length": 12,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "color": "rgb(193, 193, 200)",
+    "display": "inline-flex",
+    "font-family": "Avenir Next,Roboto,Helvetica,Arial,sans-serif",
+    "font-size": "15px",
+    "font-weight": "500",
+    "justify-content": "center",
+    "letter-spacing": "0.55px",
+    "line-height": "24px",
+    "margin": "0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "0px",
+    "visibility": "visible",
+    "white-space": "nowrap",
+  },
+}
+`;
