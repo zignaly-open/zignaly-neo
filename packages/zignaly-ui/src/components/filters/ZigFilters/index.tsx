@@ -18,11 +18,16 @@ const FilterDropdown = ({
   onChange: (filter: ZigFilter) => void;
   filter: ZigFilter;
 }) => {
-  // todo: add checkbox filter
+  // todo: add checkbox dropdown
   const Component = filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
   return (
     <FilterDropdownWrapper>
-      <Component resetFilter={resetFilter} filter={filter} onChange={onChange} />
+      <Component
+        resetFilter={resetFilter}
+        filter={filter}
+        onChange={onChange}
+        id={`filters__dropdown-${filter.id}`}
+      />
       <VertDivider orientation="vertical" flexItem />
     </FilterDropdownWrapper>
   );
@@ -124,7 +129,7 @@ const ZigFilters = ({
               )}
             </Box>
           </Layout>
-          <ZigButton variant="text" onClick={resetFilters}>
+          <ZigButton variant="text" onClick={resetFilters} id={"filters__reset-all"}>
             Reset
           </ZigButton>
         </Box>
@@ -135,10 +140,12 @@ const ZigFilters = ({
           <ZigSearch
             value={search}
             onChange={onSearchChange}
-            position="absolute"
-            right={0}
-            top={0}
-            bottom={0}
+            sx={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+            }}
           />
         )}
       </Box>

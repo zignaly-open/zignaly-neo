@@ -13,7 +13,9 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
     (filter: ZigFilter) => {
       switch (filter.type) {
         case "slider":
-          return { element: <SliderFilter filter={filter} onChange={onChange} /> };
+          return {
+            element: <SliderFilter filter={filter} onChange={onChange} />,
+          };
         case "checkbox":
           return {
             element: <CheckBoxFilter filter={filter} onChange={onChange} />,
@@ -25,7 +27,7 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
             label: filter.label,
             children: filter.options.map((option, index) => ({
               onClick: () => onChange(option.value),
-              id: `filter-option-${index}`,
+              id: `filter-select__option-${index}`,
               label: option.label,
             })),
           };
@@ -36,6 +38,7 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
 
   return (
     <ZigDropdown
+      id={`filters__multi-dropdown`}
       component={({ open }) => (
         <LayoutItem active={open}>
           <ZigSettingsIcon width={22.5} height={19} />
@@ -48,6 +51,7 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
           {
             element: (
               <ZigButton
+                id={`filters__multi-dropdown-reset`}
                 variant={"text"}
                 sx={{
                   textAlign: "center",

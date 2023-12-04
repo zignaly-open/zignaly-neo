@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import { SelectFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 
-const SelectFilterDropdown = ({ filter, onChange }: SelectFilterDropdownProps) => {
+const SelectFilterDropdown = ({ filter, onChange, id = "" }: SelectFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     const option = filter.options.find((option) => option.value === filter.value);
     return option?.label;
@@ -13,6 +13,7 @@ const SelectFilterDropdown = ({ filter, onChange }: SelectFilterDropdownProps) =
 
   return (
     <ZigDropdown
+      id={id}
       component={({ open }) => (
         <DropdownItem active={open}>
           <Box display="flex" gap={2} justifyContent="center">

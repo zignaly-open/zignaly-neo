@@ -7,7 +7,12 @@ import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import ZigButton from "components/inputs/ZigButton";
 
-const SliderFilterDropdown = ({ resetFilter, filter, onChange }: SliderFilterDropdownProps) => {
+const SliderFilterDropdown = ({
+  resetFilter,
+  filter,
+  onChange,
+  id = "",
+}: SliderFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     if (filter.type === "slider" && Array.isArray(filter.value)) {
       if (filter.value[0] === null && filter.value[1] === null) return "All";
@@ -20,6 +25,7 @@ const SliderFilterDropdown = ({ resetFilter, filter, onChange }: SliderFilterDro
 
   return (
     <ZigDropdown
+      id={id}
       component={({ open }) => (
         <DropdownItem active={open}>
           <Box display="flex" gap={2} justifyContent="center">
@@ -53,6 +59,7 @@ const SliderFilterDropdown = ({ resetFilter, filter, onChange }: SliderFilterDro
                 width: "100%",
               }}
               onClick={resetFilter}
+              id={`filters__slider-dropdown-${filter.id}-reset`}
             >
               Reset
             </ZigButton>

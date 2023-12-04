@@ -14,6 +14,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
     step = 1,
     allowNoMin = false,
     allowNoMax = false,
+    id,
   } = filter;
   // Value used for displaying the slider values before it's committed
   const [internalValue, setInternalValue] = useState(value);
@@ -44,7 +45,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
   return (
     <Box>
       {label && (
-        <ZigTypography component={"div"} pb={1}>
+        <ZigTypography component={"div"} pb={1} id={`filter-slider_${id}__label`}>
           {label}
         </ZigTypography>
       )}
@@ -61,11 +62,11 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
       <Box display={"flex"} justifyContent={"center"} pt={1} gap={"6px"}>
         {Array.isArray(internalValue) ? (
           <>
-            <Value showPct={internalValue[0] !== null}>
+            <Value showPct={internalValue[0] !== null} id={`filter-slider_${id}__value-1`}>
               {internalValue[0] === null ? "Min" : internalValue[0]}
             </Value>
             <ZigTypography fontSize={18}>to</ZigTypography>
-            <Value showPct={internalValue[1] !== null}>
+            <Value showPct={internalValue[1] !== null} id={`filter-slider_${id}__value-2`}>
               {internalValue[1] === null ? "Max" : internalValue[1]}
             </Value>
           </>

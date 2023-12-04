@@ -28,7 +28,9 @@ export const VertDivider = styled(Divider)`
   border-color: ${({ theme }) => theme.palette.neutral600};
 `;
 
-export const DropdownItem = styled(Box)<{ active: boolean }>`
+export const DropdownItem = styled(Box, {
+  shouldForwardProp: (p) => p !== "active",
+})<{ active: boolean }>`
   background: ${({ active, theme }) => (active ? theme.palette.neutral800 : "inherit")};
 `;
 
