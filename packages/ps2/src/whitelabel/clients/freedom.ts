@@ -20,6 +20,23 @@ export default {
     BNB: 0.0001,
     USDC: 0.0001,
   },
+  translationOverrides: {
+    en: {
+      marketplace: {
+        'invest-in-services-explainer': '',
+      },
+    },
+    pt: {
+      marketplace: {
+        'invest-in-services-explainer': '',
+      },
+    },
+    es: {
+      marketplace: {
+        'invest-in-services-explainer': '',
+      },
+    },
+  },
   xSource: 'freedom',
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',

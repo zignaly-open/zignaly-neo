@@ -50,16 +50,20 @@ const ExtraNavigationDropdown: React.FC = () => {
   };
 
   let options: ZigDropdownProps['options'] = [
-    {
-      label: t('main-menu.dropdown-link-helpDocs'),
-      id: 'menu-dropdown__help-docs',
-      target: '_blank',
-      href: whitelabel.helpUrl,
-    },
-    {
-      separator: true,
-      customStyle: `margin-top: 11px; margin-bottom: 12px;`,
-    },
+    ...(whitelabel.helpUrl
+      ? ([
+          {
+            label: t('main-menu.dropdown-link-helpDocs'),
+            id: 'menu-dropdown__help-docs',
+            target: '_blank',
+            href: whitelabel.helpUrl,
+          },
+          {
+            separator: true,
+            customStyle: `margin-top: 11px; margin-bottom: 12px;`,
+          },
+        ] as ZigDropdownProps['options'])
+      : []),
     {
       id: 'menu-dropdown__language-switcher',
       label: (

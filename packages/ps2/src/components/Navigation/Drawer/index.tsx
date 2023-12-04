@@ -291,13 +291,15 @@ const ZigDrawer = () => {
                   </ListItemButton>
                 </ListItem>
               )}
-              <ListItem disablePadding onClick={handleDrawerToggle}>
-                <ListItemButton target='_blank' href={whitelabel.helpUrl}>
-                  <ListItemText
-                    primary={t('main-menu.dropdown-link-helpDocs')}
-                  />
-                </ListItemButton>
-              </ListItem>
+              {!!whitelabel.helpUrl && (
+                <ListItem disablePadding onClick={handleDrawerToggle}>
+                  <ListItemButton target='_blank' href={whitelabel.helpUrl}>
+                    <ListItemText
+                      primary={t('main-menu.dropdown-link-helpDocs')}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
 
               {isAuthenticated && (
                 <ListItem>

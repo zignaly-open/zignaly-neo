@@ -19,7 +19,7 @@ interface TranslationOverrides {
 
 export type WhitelabelOverride = {
   title: string;
-  helpUrl: string;
+  helpUrl?: string;
   locales?: string[];
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: TranslationOverrides;
