@@ -52,9 +52,9 @@ export type CheckboxFilter = BaseFilter & {
 export type SelectFilter = BaseFilter & {
   type: "select";
   label: string;
-  value: string;
+  value: string | null;
   options: {
-    value: string;
+    value: string | null;
     label: string;
   }[];
 };

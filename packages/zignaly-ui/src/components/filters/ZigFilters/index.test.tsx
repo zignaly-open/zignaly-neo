@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import ZigButton from ".";
+import React from "react";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
 import { fireEvent, waitFor, screen, within } from "@testing-library/react";
 import CheckBoxFilter from "./filters/CheckBoxFilter";
@@ -139,9 +138,9 @@ describe("components/filters/ZigFilters", () => {
 
       const customFilters = filters.map((filter) => {
         if (filter.id === "returns") {
-          return { ...filter, value: [null, 12] };
+          return { ...filter, value: [null, 12] } as SliderFilterType;
         } else if (filter.id === "type") {
-          return { ...filter, value: ["test"] };
+          return { ...filter, value: ["test"] } as CheckboxFilter;
         } else {
           return filter;
         }
@@ -158,7 +157,6 @@ describe("components/filters/ZigFilters", () => {
       const returnsReset = within(screen.getByRole("presentation")).getByText("Reset");
       fireEvent.click(returnsReset!);
       await waitFor(() => {
-        // expect(onChange).toBeCalledWith(filters);
         expect(onChange).toBeCalledWith([
           returnsFilter,
           coinFilter,
