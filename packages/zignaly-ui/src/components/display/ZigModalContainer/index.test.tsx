@@ -19,6 +19,8 @@ describe("components/display/ZigModalContainer", () => {
       expect(modal).toMatchSnapshot();
       expect(modalStyles).toMatchSnapshot();
     });
+  });
+  describe("actions", () => {
     it("ZigModalContainer close", async () => {
       const onClick = jest.fn();
       const { container } = renderWithProvidersUi(
