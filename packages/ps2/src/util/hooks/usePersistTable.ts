@@ -24,7 +24,7 @@ export const usePersistTable = (
   return {
     sorting,
     // loadFilters initially will apply saved filters to default filters.
-    // But also convert redux pruned data to full filters.
+    // And also convert redux pruned data to full filters.
     // We don't store the full filters data in redux to avoid bloating the store with data that can be outdated.
     // We also override the saved filters if the version is outdated.
     filters:

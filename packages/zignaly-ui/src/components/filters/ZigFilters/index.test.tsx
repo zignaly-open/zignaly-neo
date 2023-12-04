@@ -78,19 +78,16 @@ describe("components/filters/ZigFilters", () => {
   });
 
   describe("SliderFilter", () => {
-    // it("filters", async () => {
-    //   const onChange = jest.fn();
-    //   const { container } = renderWithProvidersUi(
-    //     <SliderFilter filter={coinFilter} onChange={onChange} />,
-    //   );
+    it("filters", async () => {
+      const onChange = jest.fn();
+      const { container } = renderWithProvidersUi(
+        <SliderFilter filter={coinFilter} onChange={onChange} />,
+      );
 
-    //   const options = container.querySelectorAll("label");
-    //   expect(options.length).toBe(typeFilter.options.length);
-    //   // fireEvent.click(options[1]);
-    //   // await waitFor(() => {
-    //   //   expect(onChange).toBeCalledWith({ ...typeFilter, value: ["spot"] });
-    //   // });
-    // });
+      const input = container.querySelector("input");
+      expect(input).toBeInTheDocument();
+      // todo: mock slider
+    });
 
     it("handle Min", async () => {
       const onChange = jest.fn();
