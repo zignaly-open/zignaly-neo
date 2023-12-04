@@ -44,7 +44,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     {
       type: 'slider',
       value: [null, null],
-      label: t('table.filter-months', { count: 6 }),
+      label: t('filters.returns-months', { count: 6 }),
       allowNoMin: true,
       allowNoMax: true,
       min: 0,
@@ -55,9 +55,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     {
       type: 'select',
       value: null,
-      label: t('table.filter-coin'),
+      label: t('filters.coin'),
       options: [
-        { value: null, label: t('table.filter-all') },
+        { value: null, label: t('filters.all') },
         ...coins.map((coin) => ({ value: coin, label: coin })),
       ],
       id: 'coin',
@@ -65,10 +65,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
     {
       type: 'checkbox',
-      label: t('table.filter-type'),
+      label: t('filters.type'),
       options: [
-        { value: 'spot', label: t('table.filter-spot') },
-        { value: 'futures', label: t('table.filter-futures') },
+        { value: 'spot', label: t('filters.spot') },
+        { value: 'futures', label: t('filters.futures') },
       ],
       value: ['spot', 'futures'],
       id: 'type',
@@ -76,7 +76,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     {
       type: 'slider',
       value: [0, 100],
-      label: t('table.filter-fee'),
+      label: t('filters.fee'),
       min: 0,
       max: 100,
       id: 'fee',

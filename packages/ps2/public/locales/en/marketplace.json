@@ -30,13 +30,15 @@
     "x-investors_one": "{{count}} investor",
     "x-investors_other": "{{count}} investors",
     "invested": "{{ invested }} invested",
-    "edit": "Click to edit",
-    "filter-months": "{{count}} months returns",
-    "filter-coin": "Coin",
-    "filter-type": "Type",
-    "filter-fee": "Service Fee",
-    "filter-spot": "Spot",
-    "filter-futures": "Futures",
-    "filter-all": "All"
+    "edit": "Click to edit"
+  },
+  "filters": {
+    "returns-months": "{{count}} months returns",
+    "coin": "Coin",
+    "type": "Type",
+    "fee": "Service Fee",
+    "spot": "Spot",
+    "futures": "Futures",
+    "all": "All"
   }
 }
