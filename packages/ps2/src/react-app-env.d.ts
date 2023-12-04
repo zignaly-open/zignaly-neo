@@ -10,6 +10,7 @@ declare global {
     safari?: unknown;
     twq?: (e: string, eventKey: string, eventData: unknown) => void;
     intercomSettings?: { user_hash?: string };
+    __zignalyWhitelabelConfig?: WhitelabelOverride;
   }
 }
 
@@ -159,6 +160,7 @@ declare module '@mui/material/SvgIcon' {
 import { Theme as MuiTheme } from '@mui/material/styles';
 import { NumericFormatProps } from 'react-number-format';
 import React from 'react';
+import { WhitelabelOverride } from './whitelabel/type';
 
 declare module '@emotion/react' {
   export interface Theme extends MuiTheme {

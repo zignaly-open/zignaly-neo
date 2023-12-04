@@ -1,13 +1,13 @@
 import { ThemeOverridesType } from '@zignaly-open/ui';
 
 export enum Features {
-  AccessLevels,
-  Rewards,
-  Referrals,
-  CreateService,
-  NewSignup,
-  Subscriptions,
-  Kyc,
+  AccessLevels = 'accessLevels',
+  Rewards = 'rewards',
+  Referrals = 'referrals',
+  CreateService = 'createServices',
+  NewSignup = 'newSignup',
+  Subscriptions = 'subscriptions',
+  Kyc = 'kyc',
 }
 
 // yes, the trailing slash IS important
@@ -19,21 +19,31 @@ interface TranslationOverrides {
 
 export type WhitelabelOverride = {
   title: string;
-  helpUrl?: string;
+  domain: string;
   locales?: string[];
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: TranslationOverrides;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;
-  featureOverrides: Partial<Record<Features, boolean>>;
-  xSource?: string;
-  subscriptionPurchaseLink?: string;
-  mainAppLink?: string;
+  featureOverrides?: Partial<Record<Features, boolean>>;
+  slug?: string;
   logo?: string;
+  headContent?: string;
+  scripts?: string;
+  // meta: {
+  //   title: string;
+  //   description: string;
+  //   logo: string;
+  //   banner: string;
+  //   favicon: string;
+  // };
   links?: {
     tos?: string;
+    helpUrl?: string;
+    mainAppLink?: string;
     privacyPolicy?: string;
+    subscriptionPurchaseLink?: string;
   };
   background?: string;
   backgroundImage?: string | null;
@@ -52,5 +62,5 @@ export type WhitelabelOverride = {
       string | void
     >
   >;
-  defaultSuccessFee?: number;
+  zignalySuccessFee?: number;
 };

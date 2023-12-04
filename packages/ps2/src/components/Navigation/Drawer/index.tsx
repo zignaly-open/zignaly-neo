@@ -291,9 +291,13 @@ const ZigDrawer = () => {
                   </ListItemButton>
                 </ListItem>
               )}
-              {!!whitelabel.helpUrl && (
+
+              {!!whitelabel.links.helpUrl && (
                 <ListItem disablePadding onClick={handleDrawerToggle}>
-                  <ListItemButton target='_blank' href={whitelabel.helpUrl}>
+                  <ListItemButton
+                    target='_blank'
+                    href={whitelabel.links.helpUrl}
+                  >
                     <ListItemText
                       primary={t('main-menu.dropdown-link-helpDocs')}
                     />

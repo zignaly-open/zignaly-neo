@@ -6,10 +6,14 @@ files:
 file_exists_behavior: OVERWRITE
 hooks:
     BeforeInstall:
-        - location: scripts/prepare_release.sh
+        - location: scripts/BeforeInstall.sh
           timeout: 300
           runas: admin
     AfterInstall:
-        - location: scripts/after_install.sh
+        - location: scripts/AfterInstall.sh
+          runas: admin
+          timeout: 1200
+    ApplicationStart:
+        - location: scripts/ApplicationStart.sh
           runas: admin
           timeout: 1200
