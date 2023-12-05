@@ -3,8 +3,8 @@ import ZigPriceLabel, { ZigTablePriceLabel } from "./index";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
 
 describe("components/display/ZigPriceLabel", () => {
-  describe("renders", () => {
-    it("ZigPriceLabel render", async () => {
+  describe("ZigPriceLabel rendering", () => {
+    it("renders", async () => {
       const { container } = renderWithProvidersUi(
         <ZigPriceLabel id={"test-id"} value={500} coin={"usdt"} />,
       );
@@ -15,7 +15,9 @@ describe("components/display/ZigPriceLabel", () => {
       expect(priceLabel).toMatchSnapshot();
       expect(priceLabelStyles).toMatchSnapshot();
     });
-    it("ZigTablePriceLabel render", async () => {
+  });
+  describe("ZigTablePriceLabel rendering", () => {
+    it("renders", async () => {
       const { container } = renderWithProvidersUi(
         <ZigTablePriceLabel id={"test-id"} value={500} coin={"btc"} />,
       );
