@@ -20,13 +20,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
   const buttonSize = !sm && mobileFullScreen ? "22px" : "32px";
 
   return (
-    <Layout
-      id={"modal-container"}
-      width={width as number}
-      mobileFullScreen={mobileFullScreen}
-      ref={ref}
-      tabIndex={-1}
-    >
+    <Layout id={"modal-container"} width={width as number} mobileFullScreen={mobileFullScreen} ref={ref} tabIndex={-1}>
       {onGoBack && typeof onGoBack === "function" && (
         <BackIconButton onClick={onGoBack}>
           <ZigBackIcon
