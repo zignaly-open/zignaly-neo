@@ -16,6 +16,7 @@ describe("components/display/ZigPriceLabel", () => {
       expect(priceLabelStyles).toMatchSnapshot();
     });
   });
+
   describe("ZigTablePriceLabel rendering", () => {
     it("renders", async () => {
       const { container } = renderWithProvidersUi(
