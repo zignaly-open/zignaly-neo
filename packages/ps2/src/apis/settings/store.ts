@@ -4,8 +4,7 @@ import { SettingsState, TableId } from './types';
 import { ZigFiltersPruned } from '@zignaly-open/ui';
 import { SortingState } from '@tanstack/react-table';
 
-export const FILTERS_VERSION = 1;
-const initialState: SettingsState = { table: {}, version: FILTERS_VERSION };
+const initialState: SettingsState = { table: {} };
 
 export const settingsSlice = createSlice({
   name: 'settings',

@@ -16,5 +16,4 @@ export type SettingsState = {
         }
       >
     | Record<string, never>;
-  version: number;
 };
