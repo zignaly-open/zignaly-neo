@@ -20,6 +20,7 @@ describe("components/display/ZigModalContainer", () => {
       expect(modalStyles).toMatchSnapshot();
     });
   });
+
   describe("ZigModalContainer actions", () => {
     it("close modal", async () => {
       const onClick = jest.fn();
