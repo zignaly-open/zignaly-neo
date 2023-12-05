@@ -86,7 +86,7 @@ const ZigBottomNavigation = () => {
             component={Link}
             value={ROUTE_DASHBOARD}
           />
-          {isFeatureOn(Features.Referrals) && (
+          {isFeatureOn(Features.Referrals) && false && (
             <BottomNavigationAction
               label={t('account-menu.referrals')}
               icon={<RewardsIcon />}
