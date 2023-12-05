@@ -27,6 +27,7 @@ import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
 import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
 import I18NextWhitelabelTranslationOverrideLoader from './util/i18n/i18nextWhitelabel';
+import PwaInstall from 'util/pwaInstall';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -60,6 +61,7 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
               pauseOnHover
               theme='dark'
             />
+            <PwaInstall />
             <PersistGate persistor={persistor}>
               <BrowserRouter>
                 <Suspense fallback={zigSuspenseFallback}>

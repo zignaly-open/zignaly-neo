@@ -10,6 +10,17 @@ import { GlobalStyles } from '@mui/system';
 import { useTheme } from '@mui/material';
 import GoogleFontLoader from 'react-google-font-loader';
 
+const PWAStyle = createGlobalStyle`
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-touch-callout: none;
+  }
+`;
+
 const GlobalAppStyle = getGlobalAppStyle({
   background: whitelabel.background || '#070819',
   backgroundImage:
@@ -71,6 +82,7 @@ export default () => {
           ]}
         />
       )}
+      <PWAStyle />
       <GlobalStyles
         styles={{ body: { fontFamily: theme.typography.fontFamily } }}
       />
