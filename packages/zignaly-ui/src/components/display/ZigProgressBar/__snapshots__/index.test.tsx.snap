@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/display/ZigProgressBar renders ZigProgressBar render 1`] = `
+exports[`components/display/ZigProgressBar renders 1`] = `
 <div
   class="sc-bczRLJ ipRuFC test-class"
 >
@@ -39,7 +39,7 @@ exports[`components/display/ZigProgressBar renders ZigProgressBar render 1`] = `
 </div>
 `;
 
-exports[`components/display/ZigProgressBar renders ZigProgressBar render 2`] = `
+exports[`components/display/ZigProgressBar renders 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "position",
