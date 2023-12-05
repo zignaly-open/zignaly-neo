@@ -11,8 +11,6 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
-  filterFns as zigFilterFns,
-  ZigFilters,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -29,96 +27,25 @@ import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed'
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { usePersistTable } from 'util/hooks/usePersistTable';
 import { TableId } from 'apis/settings/types';
-import { ZigFiltersType } from '@zignaly-open/ui';
 import { filterFns } from '@tanstack/react-table';
+import { usePersistTable } from 'apis/settings/use';
+import MarketplaceFilters from '../MarketplaceFilters';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const { t } = useTranslation('marketplace');
-
-  const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'];
-
-  const defaultFilters: ZigFiltersType = [
-    {
-      type: 'slider',
-      value: [null, null],
-      label: t('filters.returns-months', { count: 6 }),
-      allowNoMin: true,
-      allowNoMax: true,
-      min: 0,
-      max: 100,
-      id: 'returns',
-      showInBar: true,
-    },
-    {
-      type: 'select',
-      value: null,
-      label: t('filters.coin'),
-      options: [
-        { value: null, label: t('filters.all') },
-        ...coins.map((coin) => ({ value: coin, label: coin })),
-      ],
-      id: 'coin',
-      showInBar: true,
-    },
-    {
-      type: 'checkbox',
-      label: t('filters.type'),
-      options: [
-        { value: 'spot', label: t('filters.spot') },
-        { value: 'futures', label: t('filters.futures') },
-      ],
-      value: ['spot', 'futures'],
-      id: 'type',
-    },
-    {
-      type: 'slider',
-      value: [0, 100],
-      label: t('filters.fee'),
-      min: 0,
-      max: 100,
-      id: 'fee',
-    },
-  ];
   const theme = useTheme();
-  const [searchFilter, setSearchFilter] = useState('');
-  const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
-
-  // Filtering manually instead of via react-table/ZigTable allows having access to the filtered services
-  // to display results count.
-  const filteredServices = useMemo(() => {
-    return services.filter((service) => {
-      return (
-        tablePersist.filters &&
-        tablePersist.filters.every((filter) => {
-          if (filter.id === 'returns') {
-            return zigFilterFns.inNumberRange(
-              +service.pnlPercent180t,
-              filter.value as [number, number],
-            );
-          } else if (filter.id === 'coin') {
-            return !filter.value || service.ssc === filter.value;
-          } else if (filter.id === 'type') {
-            const serviceType = service.type.split('_')[1];
-            return (filter.value as string[]).includes(serviceType);
-          } else if (filter.id === 'fee') {
-            return zigFilterFns.inNumberRange(
-              service.successFee,
-              filter.value as [number, number],
-            );
-          }
-          return true;
-        })
-      );
-    });
-  }, [services, tablePersist.filters]);
-
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const [searchFilter, setSearchFilter] = useState('');
+  const tablePersist = usePersistTable(TableId.Marketplace);
+  const [filteredServices, setFilteredServices] = useState([]);
+  // Filtering manually instead of via react-table/ZigTable allows having access to the filtered services
+  // to display results count.
+
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
     () => [
@@ -369,21 +296,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         </ZigTypography>
       </Box>
       <TableWrapper>
-        <ZigFilters
-          leftComponent={
-            <ZigTypography variant='h2'>
-              {t('n-profit-sharing-services', {
-                count: filteredServices?.length,
-              })}
-            </ZigTypography>
-          }
+        <MarketplaceFilters
+          services={services}
           filters={tablePersist.filters}
-          defaultFilters={defaultFilters}
-          onChange={tablePersist.filterTable}
-          search={searchFilter}
+          onFiltersChange={tablePersist.filterTable}
+          onDataFiltered={setFilteredServices}
           onSearchChange={setSearchFilter}
-          sx={{ mb: '28px' }}
-          label={t('investment-preferences')}
+          searchFilter={searchFilter}
         />
         {/* <TopServicesCards
               services={services

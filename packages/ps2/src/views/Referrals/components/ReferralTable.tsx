@@ -15,7 +15,7 @@ import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
 import { TableId } from 'apis/settings/types';
-import { usePersistTable } from 'apis/settings/usePersistTable';
+import { usePersistTable } from 'apis/settings/use';
 
 const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,

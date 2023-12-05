@@ -1,5 +1,9 @@
 import { SortingState } from '@tanstack/react-table';
-import { ZigFiltersPruned } from '@zignaly-open/ui';
+import {
+  ZigFilterPruned,
+  ZigFiltersPruned,
+  ZigFiltersType,
+} from '@zignaly-open/ui';
 
 export enum TableId {
   Marketplace = 'marketplace',
@@ -16,4 +20,18 @@ export type SettingsState = {
         }
       >
     | Record<string, never>;
+};
+
+type PersistTableData = {
+  sorting: SortingState;
+  sortTable: (sorting: SortingState) => void;
+  filterTable: (filters: ZigFiltersType) => void;
+};
+
+export type PersistTableDataFull = PersistTableData & {
+  filters: ZigFiltersType;
+};
+
+export type PersistTableDataPruned = PersistTableData & {
+  filters: ZigFilterPruned[];
 };
