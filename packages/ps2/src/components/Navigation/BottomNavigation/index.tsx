@@ -54,6 +54,8 @@ const ZigBottomNavigation = () => {
       <Paper
         sx={{
           position: 'fixed',
+          paddingBottom: `env(safe-area-inset-bottom)`,
+          backgroundColor: 'neutral900',
           bottom: 0,
           left: 0,
           right: 0,
