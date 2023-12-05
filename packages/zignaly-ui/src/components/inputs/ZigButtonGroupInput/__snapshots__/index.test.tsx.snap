@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/inputs/ZigButtonGroupInput renders ZigButtonGroup render 2 options 1`] = `
+exports[`components/inputs/ZigButtonGroupInput ZigButtonGroup rendering renders with 2 options 1`] = `
 <div>
   <div
     class="MuiButtonGroup-root MuiButtonGroup-outlined css-1oyhkbl-MuiButtonGroup-root"

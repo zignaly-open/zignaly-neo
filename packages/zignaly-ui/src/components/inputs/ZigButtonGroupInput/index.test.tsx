@@ -45,8 +45,8 @@ const fiveTestOptions = [
 let mainValue = "test1";
 
 describe("components/inputs/ZigButtonGroupInput", () => {
-  describe("renders", () => {
-    it("ZigButtonGroup render 2 options", async () => {
+  describe("ZigButtonGroup rendering", () => {
+    it("renders with 2 options", async () => {
       const { container } = renderWithProvidersUi(
         <ZigButtonGroupInput value={mainValue} options={testOptions} onChange={() => {}} />,
       );
@@ -57,7 +57,7 @@ describe("components/inputs/ZigButtonGroupInput", () => {
       expect(button1).toBeVisible();
       expect(button2).toBeVisible();
     });
-    it("ZigButtonGroup render more than 2 options", async () => {
+    it("renders with more than 2 options", async () => {
       const { container } = renderWithProvidersUi(
         <ZigButtonGroupInput value={mainValue} options={fiveTestOptions} onChange={() => {}} />,
       );
@@ -73,7 +73,9 @@ describe("components/inputs/ZigButtonGroupInput", () => {
       expect(button4).toBeVisible();
       expect(button5).toBeVisible();
     });
-    it("ZigButtonGroup change value", async () => {
+  });
+  describe("ZigButtonGroup actions", () => {
+    it("changes active value", async () => {
       const { container, rerender } = renderWithProvidersUi(
         <ZigButtonGroupInput
           value={mainValue}
