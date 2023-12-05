@@ -30,6 +30,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
 import { filterFns } from '@tanstack/react-table';
 import { usePersistTable } from 'apis/settings/use';
+import { filterServices, getFilters } from '../MarketplaceFilters/util';
 import MarketplaceFilters from '../MarketplaceFilters';
 // import TopServicesCards from '../TopServicesCards';
 
@@ -41,10 +42,11 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
-  const tablePersist = usePersistTable(TableId.Marketplace);
-  const [filteredServices, setFilteredServices] = useState([]);
-  // Filtering manually instead of via react-table/ZigTable allows having access to the filtered services
-  // to display results count.
+  const tablePersist = usePersistTable(TableId.Marketplace, getFilters(t));
+  const filteredServices = useMemo(
+    () => filterServices(services, tablePersist.filters),
+    [services, tablePersist.filters],
+  );
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -297,10 +299,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       </Box>
       <TableWrapper>
         <MarketplaceFilters
-          services={services}
+          services={filteredServices}
           filters={tablePersist.filters}
           onFiltersChange={tablePersist.filterTable}
-          onDataFiltered={setFilteredServices}
           onSearchChange={setSearchFilter}
           searchFilter={searchFilter}
         />
@@ -310,42 +311,44 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
                 .slice(0, 3)}
             /> */}
-        <ZigTable
-          onRowClick={
-            !md
-              ? (id: string) => {
-                  if (id !== activeRow) setActiveRow(id);
-                }
-              : undefined
-          }
-          prefixId={TableId.Marketplace}
-          initialState={{
-            sorting: tablePersist.sorting ?? [
-              {
-                id: 'pnlPercent180t',
-                desc: true,
-              },
-            ],
-          }}
-          columns={columns}
-          data={filteredServices}
-          emptyMessage={t('table-search-emptyMessage')}
-          columnVisibility={false}
-          enableSortingRemoval={false}
-          state={{ globalFilter: searchFilter }}
-          onSortingChange={tablePersist.sortTable}
-          getColumnCanGlobalFilter={(column) =>
-            ['service-name'].includes(column.id)
-          }
-          globalFilterFn={(row, columnId, filterValue, addMeta) => {
-            return (
-              filterFns.includesString(row, columnId, filterValue, addMeta) ||
-              row.original.ownerName
-                .toLowerCase()
-                .includes(filterValue.toLowerCase())
-            );
-          }}
-        />
+        {filteredServices && (
+          <ZigTable
+            onRowClick={
+              !md
+                ? (id: string) => {
+                    if (id !== activeRow) setActiveRow(id);
+                  }
+                : undefined
+            }
+            prefixId={TableId.Marketplace}
+            initialState={{
+              sorting: tablePersist.sorting ?? [
+                {
+                  id: 'pnlPercent180t',
+                  desc: true,
+                },
+              ],
+            }}
+            columns={columns}
+            data={filteredServices}
+            emptyMessage={t('table-search-emptyMessage')}
+            columnVisibility={false}
+            enableSortingRemoval={false}
+            state={{ globalFilter: searchFilter }}
+            onSortingChange={tablePersist.sortTable}
+            getColumnCanGlobalFilter={(column) =>
+              ['service-name'].includes(column.id)
+            }
+            globalFilterFn={(row, columnId, filterValue, addMeta) => {
+              return (
+                filterFns.includesString(row, columnId, filterValue, addMeta) ||
+                row.original.ownerName
+                  .toLowerCase()
+                  .includes(filterValue.toLowerCase())
+              );
+            }}
+          />
+        )}
       </TableWrapper>
     </>
   );
