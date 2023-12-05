@@ -5,8 +5,8 @@ import { ZigTypography } from "../../../index";
 import { fireEvent, waitFor } from "@testing-library/react";
 
 describe("components/display/ZigModalContainer", () => {
-  describe("renders", () => {
-    it("ZigModalContainer render", async () => {
+  describe("ZigModalContainer rendering", () => {
+    it("renders", async () => {
       const { container } = renderWithProvidersUi(
         <ZigModalContainer>
           <ZigTypography>modal</ZigTypography>
@@ -20,8 +20,8 @@ describe("components/display/ZigModalContainer", () => {
       expect(modalStyles).toMatchSnapshot();
     });
   });
-  describe("actions", () => {
-    it("ZigModalContainer close", async () => {
+  describe("ZigModalContainer actions", () => {
+    it("close modal", async () => {
       const onClick = jest.fn();
       const { container } = renderWithProvidersUi(
         <ZigModalContainer onClickClose={onClick}>
@@ -37,7 +37,7 @@ describe("components/display/ZigModalContainer", () => {
         expect(onClick).toHaveBeenCalledTimes(1);
       });
     });
-    it("ZigModalContainer go back", async () => {
+    it("should go back when click on go back button", async () => {
       const onClick = jest.fn();
       const { container } = renderWithProvidersUi(
         <ZigModalContainer onGoBack={onClick}>
