@@ -3,8 +3,8 @@ import ZigQrCode from ".";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
 
 describe("components/display/ZigQrCode", () => {
-  describe("renders", () => {
-    it("ZigQrCode render default url", async () => {
+  describe("ZigQrCode rendering", () => {
+    it("render with default url", async () => {
       const { container } = renderWithProvidersUi(<ZigQrCode id={"qr-code-test-id"} />);
 
       const qrCode = container.querySelector("#qr-code-test-id") as Element;
@@ -13,7 +13,7 @@ describe("components/display/ZigQrCode", () => {
       expect(qrCode).toMatchSnapshot();
       expect(qrCodeStyles).toMatchSnapshot();
     });
-    it("ZigQrCode render custom url", async () => {
+    it("render with custom url", async () => {
       const { container } = renderWithProvidersUi(
         <ZigQrCode id={"qr-code-test-id"} url={"https://github.com/zignaly-open/zignaly-neo/"} />,
       );
@@ -24,7 +24,7 @@ describe("components/display/ZigQrCode", () => {
       expect(qrCode).toMatchSnapshot();
       expect(qrCodeStyles).toMatchSnapshot();
     });
-    it("ZigQrCode render custom size", async () => {
+    it("render with custom size", async () => {
       const { container } = renderWithProvidersUi(
         <ZigQrCode id={"qr-code-test-id"} width={500} height={500} />,
       );
@@ -35,7 +35,7 @@ describe("components/display/ZigQrCode", () => {
       expect(qrCode).toMatchSnapshot();
       expect(qrCodeStyles).toMatchSnapshot();
     });
-    it("ZigQrCode render with label", async () => {
+    it("render with label", async () => {
       const { container } = renderWithProvidersUi(
         <ZigQrCode id={"qr-code-test-id"} label={"test-label"} className={"test-class"} />,
       );
