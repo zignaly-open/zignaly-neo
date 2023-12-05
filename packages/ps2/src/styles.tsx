@@ -11,6 +11,11 @@ import { useTheme } from '@mui/material';
 import GoogleFontLoader from 'react-google-font-loader';
 
 const PWAStyle = createGlobalStyle`
+  html {
+    min-height: calc(100% + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);    
+  }
+
   body {
     -webkit-user-select: none;
     -moz-user-select: none;
