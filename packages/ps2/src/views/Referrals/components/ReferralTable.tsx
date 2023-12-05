@@ -1,26 +1,27 @@
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import {
   createColumnHelper,
   ZigPriceLabel,
-  ZigSelect,
   ZigTable,
   ZigTypography,
   downloadTableCsv,
   ZigButton,
+  ZigFilters,
+  ZigFiltersType,
 } from '@zignaly-open/ui';
-import { FilterWrapperContainer } from '../styles';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
+import { TableId } from 'apis/settings/types';
+import { usePersistTable } from 'apis/settings/use';
 
 const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
 }) => {
   const { t } = useTranslation('referrals');
 
-  const [status, setStatus] = useState<StatusType>(null as StatusType);
   const statusOptions = useMemo(
     () => [
       { label: t('filter-any'), value: null },
@@ -34,7 +35,6 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [t, referrals],
   );
 
-  const [rewardType, setRewardType] = useState<RewardType>(null as RewardType);
   const rewardTypeOptions = useMemo(
     () => [
       { label: t('filter-any'), value: null },
@@ -127,14 +127,37 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [],
   );
 
+  const defaultFilters: ZigFiltersType = useMemo(
+    () => [
+      {
+        type: 'select',
+        value: null,
+        label: t('table.filter-type'),
+        options: rewardTypeOptions,
+        id: 'type',
+        showInBar: true,
+      },
+      {
+        type: 'select',
+        value: null,
+        label: t('table.filter-status'),
+        options: statusOptions,
+        id: 'status',
+        showInBar: true,
+      },
+    ],
+    [rewardTypeOptions, statusOptions, t],
+  );
+
+  const tablePersist = usePersistTable(TableId.Referrals, defaultFilters);
   const filteredHistory = useMemo(
     () =>
-      referrals.filter(
-        (r) =>
-          (!status || r.status === status) &&
-          (!rewardType || r.type === rewardType),
+      referrals.filter((r) =>
+        tablePersist.filters.every(
+          ({ id, value }) => !value || r[id] === value,
+        ),
       ),
-    [referrals, rewardType, status],
+    [referrals, tablePersist.filters],
   );
 
   const exporter = () =>
@@ -160,59 +183,40 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
 
   return (
     <Box sx={{ mb: 6, mt: 3 }}>
-      <Grid container mb={3}>
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <ZigTypography sx={{}} variant={'h2'}>
-            {t('table.title')}
-          </ZigTypography>
-        </Grid>
-        {referrals.length > 0 && (
-          <FilterWrapperContainer item xs={12} sm={8}>
-            <ZigSelect
-              onChange={setRewardType}
-              value={rewardType}
-              small
-              label={t('table.filter-type')}
-              options={rewardTypeOptions}
-            />
-            <ZigSelect
-              onChange={setStatus}
-              value={status}
-              small
-              label={t('table.filter-status')}
-              options={statusOptions}
-            />
-
-            <ZigButton
-              onClick={exporter}
-              variant={'text'}
-              sx={{
-                '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                  fill: (theme) => theme.palette.links,
-                },
-              }}
-              endIcon={
-                <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
-              }
-            >
-              {t('export')}
-            </ZigButton>
-          </FilterWrapperContainer>
-        )}
-      </Grid>
+      {referrals.length > 0 && (
+        <>
+          <ZigFilters
+            leftComponent={
+              <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
+            }
+            rightComponent={
+              <ZigButton
+                onClick={exporter}
+                variant={'text'}
+                sx={{
+                  '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                    fill: (theme) => theme.palette.links,
+                  },
+                }}
+                endIcon={
+                  <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                }
+              >
+                {t('export')}
+              </ZigButton>
+            }
+            defaultFilters={defaultFilters}
+            filters={tablePersist.filters}
+            onChange={tablePersist.filterTable}
+            sx={{ mb: '36px' }}
+          />
+        </>
+      )}
 
       {referrals.length ? (
         <ZigTable
           initialState={{
-            sorting: [
+            sorting: tablePersist.sorting ?? [
               {
                 id: 'date',
                 desc: true,
@@ -224,6 +228,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
           columnVisibility={false}
           enableSortingRemoval={false}
           emptyMessage={t('table.no-referrals')}
+          onSortingChange={tablePersist.sortTable}
         />
       ) : (
         <Paper sx={{ p: 2 }}>

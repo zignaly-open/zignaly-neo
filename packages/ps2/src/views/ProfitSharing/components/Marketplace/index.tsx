@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   useMarketplaceMobileActiveRow,
   useMarketplace,
@@ -27,16 +27,27 @@ import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed'
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { TableId } from 'apis/settings/types';
+import { filterFns } from '@tanstack/react-table';
+import { usePersistTable } from 'apis/settings/use';
+import { filterServices, getFilters } from '../MarketplaceFilters/util';
+import MarketplaceFilters from '../MarketplaceFilters';
 // import TopServicesCards from '../TopServicesCards';
 
-const Marketplace: React.FC = () => {
-  const marketplaceEndpoint = useMarketplace();
+const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const { t } = useTranslation('marketplace');
   const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const [searchFilter, setSearchFilter] = useState('');
+  const tablePersist = usePersistTable(TableId.Marketplace, getFilters(t));
+  const filteredServices = useMemo(
+    () => filterServices(services, tablePersist.filters),
+    [services, tablePersist.filters],
+  );
+
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
     () => [
@@ -267,65 +278,94 @@ const Marketplace: React.FC = () => {
   );
 
   return (
-    <PageContainer>
-      <LayoutContentWrapper
-        endpoint={marketplaceEndpoint}
-        content={(services: MarketplaceService[]) => (
-          <>
-            <Box
-              sx={{
-                textAlign: 'center',
-                mt: 4,
-                mb: 4,
-              }}
-            >
-              <ZigTypography variant={'h1'} id={'marketplace__title'}>
-                {t('invest-in-services')}
-              </ZigTypography>
-              <ZigTypography
-                variant={'body1'}
-                id={'marketplace__description'}
-                color='neutral300'
-              >
-                {t('invest-in-services-explainer')}
-              </ZigTypography>
-            </Box>
-            {/* <TopServicesCards
+    <>
+      <Box
+        sx={{
+          textAlign: 'center',
+          mt: 4,
+          mb: '50px',
+        }}
+      >
+        <ZigTypography variant={'h1'} id={'marketplace__title'}>
+          {t('invest-in-services')}
+        </ZigTypography>
+        <ZigTypography
+          variant={'body1'}
+          id={'marketplace__description'}
+          color='neutral300'
+        >
+          {t('invest-in-services-explainer')}
+        </ZigTypography>
+      </Box>
+      <TableWrapper>
+        <MarketplaceFilters
+          services={filteredServices}
+          filters={tablePersist.filters}
+          onFiltersChange={tablePersist.filterTable}
+          onSearchChange={setSearchFilter}
+          searchFilter={searchFilter}
+        />
+        {/* <TopServicesCards
               services={services
                 ?.slice()
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
                 .slice(0, 3)}
             /> */}
-            <TableWrapper>
-              <ZigTable
-                onRowClick={
-                  !md
-                    ? (id: string) => {
-                        if (id !== activeRow) setActiveRow(id);
-                      }
-                    : undefined
-                }
-                prefixId={'marketplace'}
-                initialState={{
-                  sorting: [
-                    {
-                      id: 'pnlPercent180t',
-                      desc: true,
-                    },
-                  ],
-                }}
-                columns={columns}
-                data={services}
-                emptyMessage={t('table-search-emptyMessage')}
-                columnVisibility={false}
-                enableSortingRemoval={false}
-              />
-            </TableWrapper>
-          </>
+        {filteredServices && (
+          <ZigTable
+            onRowClick={
+              !md
+                ? (id: string) => {
+                    if (id !== activeRow) setActiveRow(id);
+                  }
+                : undefined
+            }
+            prefixId={TableId.Marketplace}
+            initialState={{
+              sorting: tablePersist.sorting ?? [
+                {
+                  id: 'pnlPercent180t',
+                  desc: true,
+                },
+              ],
+            }}
+            columns={columns}
+            data={filteredServices}
+            emptyMessage={t('table-search-emptyMessage')}
+            columnVisibility={false}
+            enableSortingRemoval={false}
+            state={{ globalFilter: searchFilter }}
+            onSortingChange={tablePersist.sortTable}
+            getColumnCanGlobalFilter={(column) =>
+              ['service-name'].includes(column.id)
+            }
+            globalFilterFn={(row, columnId, filterValue, addMeta) => {
+              return (
+                filterFns.includesString(row, columnId, filterValue, addMeta) ||
+                row.original.ownerName
+                  .toLowerCase()
+                  .includes(filterValue.toLowerCase())
+              );
+            }}
+          />
+        )}
+      </TableWrapper>
+    </>
+  );
+};
+
+const MarketplaceContainer = () => {
+  const marketplaceEndpoint = useMarketplace();
+  return (
+    <PageContainer>
+      <LayoutContentWrapper
+        endpoint={marketplaceEndpoint}
+        content={(services: MarketplaceService[]) => (
+          <Marketplace services={services} />
         )}
       />
     </PageContainer>
   );
 };
 
-export default Marketplace;
+export default MarketplaceContainer;

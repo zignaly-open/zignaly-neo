@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { SxProps } from '@mui/system';
+import { SxProps } from "@mui/system";
 
 export type ModalContainerProps = {
   children: React.ReactElement[] | React.ReactElement;

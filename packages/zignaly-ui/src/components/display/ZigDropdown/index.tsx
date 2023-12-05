@@ -21,7 +21,7 @@ const ZigDropdown: (
   innerRef: React.Ref<ZigDropdownHandle>,
 ) => JSX.Element = (
   {
-    id,
+    id = "",
     component,
     options,
     anchorOrigin = {
@@ -81,7 +81,7 @@ const ZigDropdown: (
 
   return (
     <>
-      <Component role="button" onClick={handleToggle}>
+      <Component role="button" onClick={handleToggle} id={id && `${id}-container`}>
         {component({ open: isOpen })}
       </Component>
       {options && (
