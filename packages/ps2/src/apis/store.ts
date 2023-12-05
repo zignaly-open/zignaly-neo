@@ -7,6 +7,7 @@ import coinReducer from './coin/store';
 import serviceReducer from './service/store';
 import marketplaceReducer from './marketplace/store';
 import referralsReducer from './referrals/store';
+import settingsReducer from './settings//store';
 import { api as referralApi } from './referrals/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -16,6 +17,7 @@ import { ServiceState } from './service/types';
 import { MarketplaceState } from './marketplace/types';
 import { CoinState } from './coin/types';
 import { ReferralsState } from './referrals/types';
+import { SettingsState } from './settings/types';
 
 const persistConfig = {
   key: 'root',
@@ -34,6 +36,7 @@ const appReducer = combineReducers({
   investment: investmentReducer,
   serviceApiKey: serviceApiKeyReducer,
   service: serviceReducer,
+  settings: settingsReducer,
 });
 
 export const store = configureStore({
@@ -56,6 +59,7 @@ export type RootState = {
   referrals: ReferralsState;
   investment: InvestmentState;
   service: ServiceState;
+  settings: SettingsState;
 };
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
