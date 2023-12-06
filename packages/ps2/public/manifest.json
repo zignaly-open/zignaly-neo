@@ -30,5 +30,72 @@
   "dir": "auto",
   "name": "Zignaly",
   "short_name": "Zignaly",
-  "start_url": "/"
+  "description": "Zignaly is a Portfolio Managers marketplace that connects 450,000+ users with 150+ veteran Portfolio Managers in a transparent success-fee-based model.",
+  "start_url": "/profit-sharing",
+  "screenshots": [
+    {
+      "src": "/screenshots/splash.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/login.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/portfolio.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/balances.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/marketplace.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/profile.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/drawer.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+zignaly",
+      "url": "/profit-sharing"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Marketplace",
+      "url": "/profit-sharing",
+      "description": "Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1."
+    },
+    {
+      "name": "My Portfolio",
+      "url": "/my-portfolio",
+      "description": "Track your investments and see how much you are earning."
+    },
+    {
+      "name": "My Balances",
+      "url": "/my-balances",
+      "description": "See your balances and deposit or withdraw funds."
+    }
+  ],
+  "display_override": []
 }
