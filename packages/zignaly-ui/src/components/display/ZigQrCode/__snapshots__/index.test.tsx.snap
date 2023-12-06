@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with custom size 1`] = `
+exports[`components/display/ZigQrCode renders with custom size 1`] = `
 <svg
   height="160"
   id="qr-code-test-id"
@@ -19,7 +19,7 @@ exports[`components/display/ZigQrCode ZigQrCode rendering renders with custom si
 </svg>
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with custom size 2`] = `
+exports[`components/display/ZigQrCode renders with custom size 2`] = `
 CSSStyleDeclaration {
   "0": "visibility",
   "_importants": {
@@ -33,7 +33,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with custom url 1`] = `
+exports[`components/display/ZigQrCode renders with custom url 1`] = `
 <svg
   height="160"
   id="qr-code-test-id"
@@ -52,7 +52,7 @@ exports[`components/display/ZigQrCode ZigQrCode rendering renders with custom ur
 </svg>
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with custom url 2`] = `
+exports[`components/display/ZigQrCode renders with custom url 2`] = `
 CSSStyleDeclaration {
   "0": "visibility",
   "_importants": {
@@ -66,7 +66,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with default url 1`] = `
+exports[`components/display/ZigQrCode renders with default url 1`] = `
 <svg
   height="160"
   id="qr-code-test-id"
@@ -85,7 +85,7 @@ exports[`components/display/ZigQrCode ZigQrCode rendering renders with default u
 </svg>
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with default url 2`] = `
+exports[`components/display/ZigQrCode renders with default url 2`] = `
 CSSStyleDeclaration {
   "0": "visibility",
   "_importants": {
@@ -99,7 +99,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with label 1`] = `
+exports[`components/display/ZigQrCode renders with label 1`] = `
 <div
   class="test-class MuiBox-root css-4zozz0"
 >
@@ -134,7 +134,7 @@ exports[`components/display/ZigQrCode ZigQrCode rendering renders with label 1`]
 </div>
 `;
 
-exports[`components/display/ZigQrCode ZigQrCode rendering renders with label 2`] = `
+exports[`components/display/ZigQrCode renders with label 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
