@@ -5,8 +5,8 @@ import { FiltersCount, LayoutItem } from "./styles";
 import { MultiFilterDropdownProps } from "./type";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { ZigFilter } from "../../types";
-import ZigButton from "components/inputs/ZigButton";
 import { ZigSettingsIcon } from "../../../../../icons";
+import { DropdownResetButton } from "../../DropdownResetButton";
 
 const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDropdownProps) => {
   const getFilterComponent = useCallback(
@@ -50,19 +50,7 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
         .concat([
           {
             element: (
-              <ZigButton
-                id={`filters__multi-dropdown-reset`}
-                variant={"text"}
-                sx={{
-                  textAlign: "center",
-                  p: "4px 9px 3px",
-                  fontSize: "14px",
-                  width: "100%",
-                }}
-                onClick={resetFilters}
-              >
-                Reset
-              </ZigButton>
+              <DropdownResetButton id={`filters__multi-dropdown-reset`} onClick={resetFilters} />
             ),
           },
         ])}

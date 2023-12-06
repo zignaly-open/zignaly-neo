@@ -20,7 +20,7 @@ export const loadFilters = (
     );
     return {
       ...filter,
-      value: savedFilter?.value ?? filter.value,
+      value: savedFilter ? savedFilter.value : filter.value,
     };
   }) as ZigFiltersType;
 };

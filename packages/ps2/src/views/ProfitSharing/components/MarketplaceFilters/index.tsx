@@ -2,28 +2,29 @@ import { ZigFilters, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import { MarketplaceFiltersProps } from './types';
 import { useTranslation } from 'react-i18next';
-import { getFilters } from './util';
+import { useMarketplaceFilters } from './util';
 
 const MarketplaceFilters = ({
   filters,
-  services,
+  resultsCount,
   onFiltersChange,
   searchFilter,
   onSearchChange,
 }: MarketplaceFiltersProps) => {
   const { t } = useTranslation('marketplace');
+  const defaultFilters = useMarketplaceFilters();
 
   return (
     <ZigFilters
       leftComponent={
         <ZigTypography variant='h2'>
           {t('n-profit-sharing-services', {
-            count: services.length,
+            count: resultsCount,
           })}
         </ZigTypography>
       }
       filters={filters}
-      defaultFilters={getFilters(t)}
+      defaultFilters={defaultFilters}
       onChange={onFiltersChange}
       search={searchFilter}
       onSearchChange={onSearchChange}

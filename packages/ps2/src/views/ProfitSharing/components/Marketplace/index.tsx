@@ -30,7 +30,10 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
 import { filterFns } from '@tanstack/react-table';
 import { usePersistTable } from 'apis/settings/use';
-import { filterServices, getFilters } from '../MarketplaceFilters/util';
+import {
+  filterServices,
+  useMarketplaceFilters,
+} from '../MarketplaceFilters/util';
 import MarketplaceFilters from '../MarketplaceFilters';
 // import TopServicesCards from '../TopServicesCards';
 
@@ -42,11 +45,12 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
-  const tablePersist = usePersistTable(TableId.Marketplace, getFilters(t));
-  const filteredServices = useMemo(
-    () => filterServices(services, tablePersist.filters),
-    [services, tablePersist.filters],
-  );
+  const defaultFilters = useMarketplaceFilters();
+  const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
+
+  const filteredServices = useMemo(() => {
+    return filterServices(services, tablePersist.filters);
+  }, [services, tablePersist.filters]);
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -299,7 +303,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       </Box>
       <TableWrapper>
         <MarketplaceFilters
-          services={filteredServices}
+          resultsCount={filteredServices?.length}
           filters={tablePersist.filters}
           onFiltersChange={tablePersist.filterTable}
           onSearchChange={setSearchFilter}
@@ -367,5 +371,6 @@ const MarketplaceContainer = () => {
     </PageContainer>
   );
 };
+// Marketplace.whyDidYouRender = true;
 
 export default MarketplaceContainer;

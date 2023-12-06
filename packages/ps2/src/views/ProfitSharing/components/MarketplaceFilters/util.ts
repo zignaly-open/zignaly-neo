@@ -1,11 +1,13 @@
 import { ZigFiltersType, filterFns } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
-import { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'];
 
-export const getFilters = (t: TFunction) =>
-  [
+export const useMarketplaceFilters = () => {
+  const { t } = useTranslation('marketplace');
+
+  return [
     {
       type: 'slider',
       value: [null, null],
@@ -18,13 +20,10 @@ export const getFilters = (t: TFunction) =>
       showInBar: true,
     },
     {
-      type: 'select',
+      type: 'checkbox',
       value: null,
-      label: t('filters.coin'),
-      options: [
-        { value: null, label: t('filters.all') },
-        ...coins.map((coin) => ({ value: coin, label: coin })),
-      ],
+      label: t('filters.coins'),
+      options: coins.map((coin) => ({ value: coin, label: coin })),
       id: 'coin',
       showInBar: true,
     },
@@ -35,7 +34,7 @@ export const getFilters = (t: TFunction) =>
         { value: 'spot', label: t('filters.spot') },
         { value: 'futures', label: t('filters.futures') },
       ],
-      value: ['spot', 'futures'],
+      value: null,
       id: 'type',
     },
     {
@@ -47,6 +46,7 @@ export const getFilters = (t: TFunction) =>
       id: 'fee',
     },
   ] as ZigFiltersType;
+};
 
 export const filterServices = (
   services: MarketplaceService[],
@@ -60,10 +60,14 @@ export const filterServices = (
           filter.value as [number, number],
         );
       } else if (filter.id === 'coin') {
-        return !filter.value || service.ssc === filter.value;
+        return (
+          !filter.value || (filter.value as string[]).includes(service.ssc)
+        );
       } else if (filter.id === 'type') {
         const serviceType = service.type.split('_')[1];
-        return (filter.value as string[]).includes(serviceType);
+        return (
+          !filter.value || (filter.value as string[]).includes(serviceType)
+        );
       } else if (filter.id === 'fee') {
         return filterFns.inNumberRange(
           service.successFee,

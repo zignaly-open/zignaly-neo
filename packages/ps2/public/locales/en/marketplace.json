@@ -34,7 +34,7 @@
   },
   "filters": {
     "returns-months": "{{count}} months returns",
-    "coin": "Coin",
+    "coins": "Coins",
     "type": "Type",
     "fee": "Service Fee",
     "spot": "Spot",

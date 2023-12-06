@@ -1,26 +1,26 @@
 import ZigDropdown from "components/display/ZigDropdown";
 import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
-import SliderFilter from "../../filters/SliderFilter";
 import { Box } from "@mui/material";
-import { SliderFilterDropdownProps } from "./type";
+import { CheckboxFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
+import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { DropdownResetButton } from "../../DropdownResetButton";
 
-const SliderFilterDropdown = ({
-  resetFilter,
+const CheckboxFilterDropdown = ({
   filter,
   onChange,
   id = "",
-}: SliderFilterDropdownProps) => {
+  resetFilter,
+}: CheckboxFilterDropdownProps) => {
   const displayValue = useMemo(() => {
-    if (filter.type === "slider" && Array.isArray(filter.value)) {
-      if (filter.value[0] === null && filter.value[1] === null) return "All";
-      else if (filter.value[0] === null) return `< ${filter.value[1]}%`;
-      else if (filter.value[1] === null) return `> ${filter.value[0]}%`;
-      else return `${filter.value[0]}% to ${filter.value[1]}%`;
-    }
-    return filter.value;
+    if (!filter.value) return "All";
+    const options = filter.options.filter((option) => filter.value?.includes(option.value));
+    return options.length > 0
+      ? options.length > 8
+        ? options.length
+        : options.map((o) => o.label).join(", ")
+      : "None";
   }, [filter.value]);
 
   return (
@@ -41,9 +41,12 @@ const SliderFilterDropdown = ({
       options={[
         {
           element: (
-            <SliderFilter
+            <CheckBoxFilter
               filter={{ ...filter, label: "" }}
-              onChange={(f) => onChange({ ...f, label: filter.label })}
+              onChange={(f) => {
+                console.log("omfg", f);
+                onChange({ ...f, label: filter.label });
+              }}
             />
           ),
         },
@@ -51,7 +54,7 @@ const SliderFilterDropdown = ({
         {
           element: (
             <DropdownResetButton
-              id={`filters__slider-dropdown-${filter.id}-reset`}
+              id={`filters__checkbox-dropdown-${filter.id}-reset`}
               onClick={resetFilter}
             />
           ),
@@ -61,4 +64,4 @@ const SliderFilterDropdown = ({
   );
 };
 
-export default SliderFilterDropdown;
+export default CheckboxFilterDropdown;

@@ -46,7 +46,7 @@ export type CheckboxFilter = BaseFilter & {
     value: string;
     label: string;
   }[];
-  value: string[];
+  value: string[] | null;
 };
 
 export type SelectFilter = BaseFilter & {

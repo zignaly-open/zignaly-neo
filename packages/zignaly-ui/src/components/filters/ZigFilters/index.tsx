@@ -8,6 +8,7 @@ import MultiFilterDropdown from "./dropdowns/MultiFilterDropdown";
 import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
+import CheckboxFilterDropdown from "./dropdowns/CheckboxFilterDropdown";
 
 const FilterDropdown = ({
   resetFilter,
@@ -18,8 +19,19 @@ const FilterDropdown = ({
   onChange: (filter: ZigFilter) => void;
   filter: ZigFilter;
 }) => {
-  // todo: add checkbox dropdown
-  const Component = filter.type === "slider" ? SliderFilterDropdown : SelectFilterDropdown;
+  const Component = useMemo(() => {
+    if (filter.type === "slider") {
+      return SliderFilterDropdown;
+    } else if (filter.type === "select") {
+      return SelectFilterDropdown;
+    } else if (filter.type === "checkbox") {
+      return CheckboxFilterDropdown;
+    }
+    return null;
+  }, [filter.type]);
+
+  if (!Component) return null;
+
   return (
     <FilterDropdownWrapper>
       <Component
@@ -108,16 +120,14 @@ const ZigFilters = ({
               </TopDivider>
             )}
             <Box display={"flex"} alignItems={"center"}>
-              {mainFilters.map((filter) => {
-                return (
-                  <FilterDropdown
-                    resetFilter={() => resetFilter(filter.id)}
-                    filter={filter}
-                    key={filter.id}
-                    onChange={updateFilters}
-                  />
-                );
-              })}
+              {mainFilters.map((filter) => (
+                <FilterDropdown
+                  resetFilter={() => resetFilter(filter.id)}
+                  filter={filter}
+                  key={filter.id}
+                  onChange={updateFilters}
+                />
+              ))}
               {secondaryFilters.length > 0 && (
                 <FilterDropdownWrapper>
                   <MultiFilterDropdown
