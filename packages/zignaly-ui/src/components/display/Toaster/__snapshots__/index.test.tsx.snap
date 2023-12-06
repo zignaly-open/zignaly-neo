@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/display/Toaster renders Toaster render 1`] = `
+exports[`components/display/Toaster renders with default props 1`] = `
 <div
   class="sc-dkzDqf cPWBcW"
   id="toaster"
@@ -22,7 +22,7 @@ exports[`components/display/Toaster renders Toaster render 1`] = `
 </div>
 `;
 
-exports[`components/display/Toaster renders Toaster render 2`] = `
+exports[`components/display/Toaster renders with default props 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
@@ -96,7 +96,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/Toaster renders Toaster render info variant 1`] = `
+exports[`components/display/Toaster renders with info variant prop 1`] = `
 <div
   class="sc-dkzDqf dtZXct"
   id="toaster"
@@ -127,7 +127,7 @@ exports[`components/display/Toaster renders Toaster render info variant 1`] = `
 </div>
 `;
 
-exports[`components/display/Toaster renders Toaster render info variant 2`] = `
+exports[`components/display/Toaster renders with info variant prop 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
@@ -201,7 +201,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/Toaster renders Toaster render small size 1`] = `
+exports[`components/display/Toaster renders with small size prop 1`] = `
 <div
   class="sc-dkzDqf hnTGNs"
   id="toaster"
@@ -223,7 +223,7 @@ exports[`components/display/Toaster renders Toaster render small size 1`] = `
 </div>
 `;
 
-exports[`components/display/Toaster renders Toaster render small size 2`] = `
+exports[`components/display/Toaster renders with small size prop 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
@@ -297,7 +297,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/Toaster renders Toaster render success variant 1`] = `
+exports[`components/display/Toaster renders with success variant prop 1`] = `
 <div
   class="sc-dkzDqf vTvCu"
   id="toaster"
@@ -319,7 +319,7 @@ exports[`components/display/Toaster renders Toaster render success variant 1`] =
 </div>
 `;
 
-exports[`components/display/Toaster renders Toaster render success variant 2`] = `
+exports[`components/display/Toaster renders with success variant prop 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
