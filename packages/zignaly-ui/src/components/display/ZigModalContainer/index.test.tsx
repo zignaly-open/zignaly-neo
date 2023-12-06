@@ -38,6 +38,7 @@ describe("components/display/ZigModalContainer", () => {
         expect(onClick).toHaveBeenCalledTimes(1);
       });
     });
+
     it("should go back when click on go back button", async () => {
       const onClick = jest.fn();
       const { container } = renderWithProvidersUi(
