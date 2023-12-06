@@ -3,8 +3,8 @@ import { Loader, CenteredLoader } from "./index";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
 
 describe("components/inputs/ZigButton", () => {
-  describe("renders", () => {
-    it("Loader render", async () => {
+  describe("Loader rendering", () => {
+    it("renders with default props", () => {
       const { container } = renderWithProvidersUi(<Loader />);
 
       const loader = container.querySelector(".simple-loader") as Element;
@@ -13,7 +13,8 @@ describe("components/inputs/ZigButton", () => {
       expect(loader).toMatchSnapshot();
       expect(loaderStyles).toMatchSnapshot();
     });
-    it("Loader custom width and height", async () => {
+
+    it("renders with custom width and height", () => {
       const { container } = renderWithProvidersUi(<Loader width={50} height={50} />);
 
       const loader = container.querySelector(".simple-loader") as Element;
@@ -22,8 +23,10 @@ describe("components/inputs/ZigButton", () => {
       expect(loader).toMatchSnapshot();
       expect(loaderStyles).toMatchSnapshot();
     });
+  });
 
-    it("Centered Loader render", async () => {
+  describe("Centered Loader rendering", () => {
+    it("renders with default props", () => {
       const { container } = renderWithProvidersUi(<CenteredLoader />);
 
       const loader = container.querySelector(".centered-loader-wrapper") as Element;

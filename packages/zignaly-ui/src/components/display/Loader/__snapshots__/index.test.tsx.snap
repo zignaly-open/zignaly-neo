@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/inputs/ZigButton renders Centered Loader render 1`] = `
+exports[`components/inputs/ZigButton Centered Loader rendering renders with default props 1`] = `
 <div
   class="centered-loader-wrapper MuiBox-root css-1lhu1y1"
 >
@@ -53,7 +53,7 @@ exports[`components/inputs/ZigButton renders Centered Loader render 1`] = `
 </div>
 `;
 
-exports[`components/inputs/ZigButton renders Centered Loader render 2`] = `
+exports[`components/inputs/ZigButton Centered Loader rendering renders with default props 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "padding",
@@ -83,7 +83,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/inputs/ZigButton renders Loader custom width and height 1`] = `
+exports[`components/inputs/ZigButton Loader rendering renders with custom width and height 1`] = `
 <div
   class="simple-loader"
   data-testid="oval-loading"
@@ -132,7 +132,7 @@ exports[`components/inputs/ZigButton renders Loader custom width and height 1`] 
 </div>
 `;
 
-exports[`components/inputs/ZigButton renders Loader custom width and height 2`] = `
+exports[`components/inputs/ZigButton Loader rendering renders with custom width and height 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "visibility",
@@ -156,7 +156,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/inputs/ZigButton renders Loader render 1`] = `
+exports[`components/inputs/ZigButton Loader rendering renders with default props 1`] = `
 <div
   class="simple-loader"
   data-testid="oval-loading"
@@ -205,7 +205,7 @@ exports[`components/inputs/ZigButton renders Loader render 1`] = `
 </div>
 `;
 
-exports[`components/inputs/ZigButton renders Loader render 2`] = `
+exports[`components/inputs/ZigButton Loader rendering renders with default props 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "visibility",
