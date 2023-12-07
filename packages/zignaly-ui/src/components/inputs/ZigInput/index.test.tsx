@@ -3,7 +3,7 @@ import { renderWithProvidersUi } from "../../../utils/testConfig";
 import { fireEvent, waitFor } from "@testing-library/react";
 import ZigInput from ".";
 
-describe("components/inputs/InputCode", () => {
+describe("components/inputs/ZigInput", () => {
   it("should render without crashing", () => {
     const { container } = renderWithProvidersUi(<ZigInput id={"test-id"} />);
 

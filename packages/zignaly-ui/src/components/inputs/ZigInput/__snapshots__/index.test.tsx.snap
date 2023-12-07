@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/inputs/InputCode should render without crashing 1`] = `
+exports[`components/inputs/ZigInput should render without crashing 1`] = `
 <input
   aria-invalid="false"
   class="MuiInputBase-input MuiInput-input css-1fsdrue-MuiInputBase-input-MuiInput-input"
@@ -11,7 +11,7 @@ exports[`components/inputs/InputCode should render without crashing 1`] = `
 />
 `;
 
-exports[`components/inputs/InputCode should render without crashing 2`] = `
+exports[`components/inputs/ZigInput should render without crashing 2`] = `
 CSSStyleDeclaration {
   "0": "text-rendering",
   "1": "letter-spacing",
