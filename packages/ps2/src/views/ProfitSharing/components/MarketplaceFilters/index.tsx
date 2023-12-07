@@ -2,6 +2,7 @@ import { ZigFilters, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import { MarketplaceFiltersProps } from './types';
 import { useTranslation } from 'react-i18next';
+import { TableId } from 'apis/settings/types';
 
 const MarketplaceFilters = ({
   filters,
