@@ -3,11 +3,11 @@ import ZigTypography from "components/display/ZigTypography";
 import ZigSlider from "components/inputs/ZigSlider";
 
 export const StyledZigSlider = styled(ZigSlider)`
-  padding: 0 10px;
+  padding: 0 9px;
 
   .MuiSlider-thumb {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 `;
 
