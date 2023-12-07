@@ -2,11 +2,12 @@ import { ZigFilters, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import { MarketplaceFiltersProps } from './types';
 import { useTranslation } from 'react-i18next';
-import { getFilters } from './util';
+import { TableId } from 'apis/settings/types';
 
 const MarketplaceFilters = ({
   filters,
-  services,
+  defaultFilters,
+  resultsCount,
   onFiltersChange,
   searchFilter,
   onSearchChange,
@@ -16,19 +17,19 @@ const MarketplaceFilters = ({
   return (
     <ZigFilters
       leftComponent={
-        <ZigTypography variant='h2'>
+        <ZigTypography variant='h2' fontWeight={400}>
           {t('n-profit-sharing-services', {
-            count: services.length,
+            count: resultsCount,
           })}
         </ZigTypography>
       }
       filters={filters}
-      defaultFilters={getFilters(t)}
+      defaultFilters={defaultFilters}
       onChange={onFiltersChange}
       search={searchFilter}
       onSearchChange={onSearchChange}
       sx={{ mb: '28px' }}
-      label={t('investment-preferences')}
+      prefixId={TableId.Marketplace}
     />
   );
 };

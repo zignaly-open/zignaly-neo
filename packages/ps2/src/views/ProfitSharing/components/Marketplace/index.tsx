@@ -28,10 +28,12 @@ import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
-import { filterFns } from '@tanstack/react-table';
 import { usePersistTable } from 'apis/settings/use';
-import { filterServices, getFilters } from '../MarketplaceFilters/util';
 import MarketplaceFilters from '../MarketplaceFilters';
+import {
+  useFilteredServices,
+  useServiceFilters,
+} from '../MarketplaceFilters/use';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -42,10 +44,12 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
-  const tablePersist = usePersistTable(TableId.Marketplace, getFilters(t));
-  const filteredServices = useMemo(
-    () => filterServices(services, tablePersist.filters),
-    [services, tablePersist.filters],
+  const defaultFilters = useServiceFilters(services);
+  const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
+  const filteredServices = useFilteredServices(
+    services,
+    tablePersist.filters,
+    searchFilter,
   );
 
   useEffect(() => () => setActiveRow(null), []);
@@ -299,8 +303,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       </Box>
       <TableWrapper>
         <MarketplaceFilters
-          services={filteredServices}
+          resultsCount={filteredServices?.length}
           filters={tablePersist.filters}
+          defaultFilters={defaultFilters}
           onFiltersChange={tablePersist.filterTable}
           onSearchChange={setSearchFilter}
           searchFilter={searchFilter}
@@ -331,22 +336,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }}
             columns={columns}
             data={filteredServices}
-            emptyMessage={t('table-search-emptyMessage')}
+            emptyMessage={t('table-search-empty-message')}
             columnVisibility={false}
             enableSortingRemoval={false}
-            state={{ globalFilter: searchFilter }}
             onSortingChange={tablePersist.sortTable}
             getColumnCanGlobalFilter={(column) =>
               ['service-name'].includes(column.id)
             }
-            globalFilterFn={(row, columnId, filterValue, addMeta) => {
-              return (
-                filterFns.includesString(row, columnId, filterValue, addMeta) ||
-                row.original.ownerName
-                  .toLowerCase()
-                  .includes(filterValue.toLowerCase())
-              );
-            }}
           />
         )}
       </TableWrapper>

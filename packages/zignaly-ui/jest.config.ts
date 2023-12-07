@@ -9,6 +9,7 @@ const config: Config.InitialOptions = {
     "\\.[jt]sx?$": "babel-jest",
     "\\.ts$": "ts-jest",
   },
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
   modulePathIgnorePatterns: ["node_modules", "jest-test-results.json"],
@@ -18,6 +19,7 @@ const config: Config.InitialOptions = {
     "^components(.*)$": "<rootDir>/src/components$1",
     "^theme(.*)$": "<rootDir>/src/theme$1",
     "^utils(.*)$": "<rootDir>/src/utils$1",
+    "^icons(.*)$": "<rootDir>/src/icons$1",
   },
 };
 

@@ -10,6 +10,7 @@ export type ZigFiltersProps = {
   leftComponent?: React.ReactNode;
   rightComponent?: React.ReactNode;
   sx?: SxProps;
+  prefixId?: string;
 };
 
 export type ZigFilterPruned = {
@@ -46,7 +47,7 @@ export type CheckboxFilter = BaseFilter & {
     value: string;
     label: string;
   }[];
-  value: string[];
+  value: string[] | null;
 };
 
 export type SelectFilter = BaseFilter & {
