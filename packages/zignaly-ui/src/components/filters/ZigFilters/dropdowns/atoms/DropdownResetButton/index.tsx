@@ -12,9 +12,12 @@ export const DropdownResetButton = (props: ZigButtonProps) => {
         p: "4px 9px 3px",
         fontSize: "14px",
         width: "100%",
+        "> span": {
+          top: "1px !important",
+        },
         ...(props?.sx || {}),
       }}
-      startIcon={<ZigResetIcon />}
+      startIcon={<ZigResetIcon style={{ top: "1px !important" }} />}
     >
       Reset
     </ZigButton>

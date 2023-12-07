@@ -73,7 +73,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
             <Value showPct={internalValue[0] !== null} id={`filter-slider_${id}__value-1`}>
               {internalValue[0] === null ? "Min" : internalValue[0]}
             </Value>
-            <ZigTypography fontSize={18}>to</ZigTypography>
+            <ZigTypography fontSize={15}>to</ZigTypography>
             <Value showPct={internalValue[1] !== null} id={`filter-slider_${id}__value-2`}>
               {internalValue[1] === null ? "Max" : internalValue[1]}
             </Value>
