@@ -47,8 +47,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
 
   const filteredServices = useMemo(() => {
-    return filterServices(services, tablePersist.filters);
-  }, [services, tablePersist.filters]);
+    return filterServices(services, tablePersist.filters, searchFilter);
+  }, [services, tablePersist.filters, searchFilter]);
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -334,22 +334,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }}
             columns={columns}
             data={filteredServices}
-            emptyMessage={t('table-search-emptyMessage')}
+            emptyMessage={t('table-search-empty-message')}
             columnVisibility={false}
             enableSortingRemoval={false}
-            state={{ globalFilter: searchFilter }}
             onSortingChange={tablePersist.sortTable}
             getColumnCanGlobalFilter={(column) =>
               ['service-name'].includes(column.id)
             }
-            globalFilterFn={(row, columnId, filterValue, addMeta) => {
-              return (
-                filterFns.includesString(row, columnId, filterValue, addMeta) ||
-                row.original.ownerName
-                  .toLowerCase()
-                  .includes(filterValue.toLowerCase())
-              );
-            }}
           />
         )}
       </TableWrapper>

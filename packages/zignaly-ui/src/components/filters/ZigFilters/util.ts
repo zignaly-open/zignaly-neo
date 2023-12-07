@@ -5,6 +5,9 @@ export const filterFns = {
   inNumberRange: (value: number, [min, max]: [number | null, number | null]) => {
     return ((!min && min !== 0) || value >= min) && ((!max && max !== 0) || value <= max);
   },
+  includesString: (value: string, filterValue: string) => {
+    return value.toLowerCase().includes(filterValue.toLowerCase());
+  },
 };
 
 /**
