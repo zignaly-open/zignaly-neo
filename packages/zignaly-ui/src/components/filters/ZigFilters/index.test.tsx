@@ -73,7 +73,7 @@ describe("components/filters/ZigFilters", () => {
   });
 
   describe("SliderFilter", () => {
-    it("filters", async () => {
+    it("should filter", async () => {
       const onChange = jest.fn();
       const { container } = renderWithProvidersUi(
         <SliderFilter filter={coinFilter} onChange={onChange} />,
@@ -84,7 +84,7 @@ describe("components/filters/ZigFilters", () => {
       // todo: mock slider
     });
 
-    it("handle Min", async () => {
+    it("should handle Min", async () => {
       const onChange = jest.fn();
       const { container } = renderWithProvidersUi(
         <SliderFilter filter={{ ...returnsFilter, value: [null, 12] }} onChange={onChange} />,
@@ -97,7 +97,7 @@ describe("components/filters/ZigFilters", () => {
       expect(value2).toHaveTextContent("12");
     });
 
-    it("handle Max", async () => {
+    it("should handle Max", async () => {
       const onChange = jest.fn();
       const { container } = renderWithProvidersUi(
         <SliderFilter filter={{ ...returnsFilter, value: [1, null] }} onChange={onChange} />,
@@ -110,7 +110,7 @@ describe("components/filters/ZigFilters", () => {
       expect(value2).toHaveTextContent("Max");
     });
 
-    it("handle Min and Max", async () => {
+    it("should handle Min and Max", async () => {
       const onChange = jest.fn();
       const { container } = renderWithProvidersUi(
         <SliderFilter filter={{ ...returnsFilter, value: [null, null] }} onChange={onChange} />,
@@ -125,7 +125,7 @@ describe("components/filters/ZigFilters", () => {
   });
 
   describe("ZigFilters", () => {
-    it("filters", async () => {
+    it("should filter", async () => {
       const onChange = jest.fn();
 
       const customFilters = filters.map((filter) => {
