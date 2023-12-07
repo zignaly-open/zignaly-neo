@@ -4,8 +4,8 @@ import { renderWithProvidersUi } from "../../../utils/testConfig";
 import { fireEvent, waitFor } from "@testing-library/react";
 
 describe("components/inputs/ZigLink", () => {
-  describe("renders", () => {
-    it("ZigLink render default props", async () => {
+  describe("rendering", () => {
+    it("renders with default props", async () => {
       const { container } = renderWithProvidersUi(<ZigLink href={"#"} id={"link-test"} />);
 
       const link = container.querySelector("#link-test") as Element;
@@ -15,8 +15,9 @@ describe("components/inputs/ZigLink", () => {
       expect(linkStyles).toMatchSnapshot();
     });
   });
-  describe("action", () => {
-    it("ZigLink handle click", async () => {
+
+  describe("actions", () => {
+    it("should handle click", async () => {
       const handleClick = jest.fn();
       const { container } = renderWithProvidersUi(
         <ZigLink href={"#"} id={"link-test"} onClick={handleClick} />,
