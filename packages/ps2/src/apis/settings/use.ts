@@ -24,7 +24,7 @@ export const usePersistTable: IOverload = (
 ) => {
   const tableData = useSelector(
     (store: RootState) =>
-      store.settings.table[id] ?? { filters: [], sorting: [] },
+      store.settings.table[id] ?? { filters: undefined, sorting: undefined },
   );
   const { sorting, filters } = tableData;
   const dispatch = useDispatch();
