@@ -18,7 +18,7 @@ const SelectFilterDropdown = ({ filter, onChange, id = "" }: SelectFilterDropdow
       id={id}
       component={({ open }) => (
         <DropdownItem active={open}>
-          <DropdownLabel minSpace={longestWidth + 100} label={filter.label} value={displayValue} />
+          <DropdownLabel minSpace={longestWidth} label={filter.label} value={displayValue} />
         </DropdownItem>
       )}
       options={filter.options.map((option, index) => ({
