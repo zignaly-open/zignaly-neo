@@ -3,11 +3,11 @@
 exports[`components/inputs/ZigButtonGroupInput ZigButtonGroup rendering renders with 2 options 1`] = `
 <div>
   <div
-    class="MuiButtonGroup-root MuiButtonGroup-outlined css-1oyhkbl-MuiButtonGroup-root"
+    class="MuiButtonGroup-root MuiButtonGroup-outlined css-t32351-MuiButtonGroup-root"
     role="group"
   >
     <button
-      class="MuiLoadingButton-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root undefined MuiButton-active MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary css-uqq2v3-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium undefined MuiButton-active MuiButtonGroup-firstButton css-19wldtv-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       data-testid="test-button1"
       id="test-button1"
       tabindex="0"
@@ -19,7 +19,7 @@ exports[`components/inputs/ZigButtonGroupInput ZigButtonGroup rendering renders 
       />
     </button>
     <button
-      class="MuiLoadingButton-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary css-uqq2v3-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonGroup-lastButton css-19wldtv-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       data-testid="test-button2"
       id="test-button2"
       tabindex="0"

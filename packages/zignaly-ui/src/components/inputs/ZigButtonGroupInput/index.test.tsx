@@ -62,17 +62,10 @@ describe("components/inputs/ZigButtonGroupInput", () => {
       const { container } = renderWithProvidersUi(
         <ZigButtonGroupInput value={mainValue} options={fiveTestOptions} onChange={() => {}} />,
       );
-
-      const button1 = container.querySelector("#test-button1") as Element;
-      const button2 = container.querySelector("#test-button2") as Element;
-      const button3 = container.querySelector("#test-button3") as Element;
-      const button4 = container.querySelector("#test-button4") as Element;
-      const button5 = container.querySelector("#test-button5") as Element;
-      expect(button1).toBeVisible();
-      expect(button2).toBeVisible();
-      expect(button3).toBeVisible();
-      expect(button4).toBeVisible();
-      expect(button5).toBeVisible();
+      testOptions.forEach(({ id }) => {
+        const button = container.querySelector(`#${id}`) as Element;
+        expect(button).toBeVisible();
+      });
     });
   });
 
