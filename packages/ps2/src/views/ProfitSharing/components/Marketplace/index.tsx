@@ -30,11 +30,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
 import { filterFns } from '@tanstack/react-table';
 import { usePersistTable } from 'apis/settings/use';
-import {
-  filterServices,
-  useMarketplaceFilters,
-} from '../MarketplaceFilters/util';
 import MarketplaceFilters from '../MarketplaceFilters';
+import { filterServices } from '../MarketplaceFilters/util';
+import { useMarketplaceFilters } from '../MarketplaceFilters/use';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
