@@ -15,6 +15,7 @@ describe("components/inputs/InputCode", () => {
     expect(inputs).toMatchSnapshot();
     expect(inputsStyles).toMatchSnapshot();
   });
+
   it("should dispatch onComplete when all input fields are filled", () => {
     const handleOnComplete = jest.fn();
     const { container } = renderWithProvidersUi(
@@ -28,6 +29,7 @@ describe("components/inputs/InputCode", () => {
       expect(handleOnComplete).toHaveBeenCalled();
     });
   });
+
   it("should display error message when `error` prop is passed", () => {
     const { container } = renderWithProvidersUi(
       <InputCode
