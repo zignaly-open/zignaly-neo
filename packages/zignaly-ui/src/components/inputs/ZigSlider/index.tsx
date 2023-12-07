@@ -77,6 +77,9 @@ const ZigSlider = forwardRef(
               sx={{
                 width: "auto",
                 flex: 1,
+                ".MuiSlider-track": {
+                  opacity: 0.7,
+                },
               }}
               value={value}
               {...props}
