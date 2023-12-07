@@ -19,8 +19,8 @@ export const Value = styled(ZigTypography, {
 
   &::after {
     content: "${({ showPct }) => (showPct ? "%" : "")}";
-    font-size: 12px;
+    font-size: 10px;
     position: relative;
-    top: -5px;
+    top: -6px;
   }
 `;
