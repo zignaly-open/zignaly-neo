@@ -3,7 +3,7 @@ import ZigAlertMessage, { ErrorMessage } from "./index";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
 
 describe("components/display/ZigAlertMessage", () => {
-  it("renders as alert", async () => {
+  it("renders as an alert", async () => {
     const { container } = renderWithProvidersUi(
       <ZigAlertMessage text={"test text"} id={"alert"} />,
     );
@@ -14,7 +14,8 @@ describe("components/display/ZigAlertMessage", () => {
     expect(alert).toMatchSnapshot();
     expect(alertStyles).toMatchSnapshot();
   });
-  it("renders as warning", async () => {
+
+  it("renders as a warning", async () => {
     const { container } = renderWithProvidersUi(
       <ZigAlertMessage warning text={"test text"} id={"alert"} />,
     );
@@ -25,6 +26,7 @@ describe("components/display/ZigAlertMessage", () => {
     expect(alert).toMatchSnapshot();
     expect(alertStyles).toMatchSnapshot();
   });
+
   it("renders as error", async () => {
     const { container } = renderWithProvidersUi(<ErrorMessage text={"test text"} id={"error"} />);
 

@@ -1,6 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/display/ZigAlertMessage renders as alert 1`] = `
+exports[`components/display/ZigAlertMessage renders as a warning 1`] = `
+<div
+  class="sc-bczRLJ bxlVqq"
+  id="alert"
+>
+  <div
+    class="sc-gsnTZi dhsoie"
+  >
+    <svg
+      color="#AE9C5B"
+      height="24px"
+      width="24px"
+    />
+  </div>
+  <span
+    class="MuiTypography-root MuiTypography-body2 css-13jpils-MuiTypography-root"
+  >
+    test text
+  </span>
+</div>
+`;
+
+exports[`components/display/ZigAlertMessage renders as a warning 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "flex-direction",
+  "2": "align-items",
+  "3": "visibility",
+  "_importants": {
+    "align-items": "",
+    "display": "",
+    "flex-direction": "",
+    "visibility": undefined,
+  },
+  "_length": 4,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "center",
+    "display": "flex",
+    "flex-direction": "row",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/display/ZigAlertMessage renders as an alert 1`] = `
 <div
   class="sc-bczRLJ bxlVqq"
   id="alert"
@@ -22,7 +67,7 @@ exports[`components/display/ZigAlertMessage renders as alert 1`] = `
 </div>
 `;
 
-exports[`components/display/ZigAlertMessage renders as alert 2`] = `
+exports[`components/display/ZigAlertMessage renders as an alert 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
@@ -68,51 +113,6 @@ exports[`components/display/ZigAlertMessage renders as error 1`] = `
 `;
 
 exports[`components/display/ZigAlertMessage renders as error 2`] = `
-CSSStyleDeclaration {
-  "0": "display",
-  "1": "flex-direction",
-  "2": "align-items",
-  "3": "visibility",
-  "_importants": {
-    "align-items": "",
-    "display": "",
-    "flex-direction": "",
-    "visibility": undefined,
-  },
-  "_length": 4,
-  "_onChange": [Function],
-  "_values": {
-    "align-items": "center",
-    "display": "flex",
-    "flex-direction": "row",
-    "visibility": "visible",
-  },
-}
-`;
-
-exports[`components/display/ZigAlertMessage renders as warning 1`] = `
-<div
-  class="sc-bczRLJ bxlVqq"
-  id="alert"
->
-  <div
-    class="sc-gsnTZi dhsoie"
-  >
-    <svg
-      color="#AE9C5B"
-      height="24px"
-      width="24px"
-    />
-  </div>
-  <span
-    class="MuiTypography-root MuiTypography-body2 css-13jpils-MuiTypography-root"
-  >
-    test text
-  </span>
-</div>
-`;
-
-exports[`components/display/ZigAlertMessage renders as warning 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "flex-direction",
