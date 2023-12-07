@@ -9,18 +9,6 @@ export const StyledZigSlider = styled(ZigSlider)`
     width: 20px;
     height: 20px;
   }
-
-  /* .MuiSlider-track {
-    color: yellow;
-  } */
-
-  .MuiSlider-rail {
-    color: #acc4e4;
-  }
-
-  .MuiSlider-active {
-    color: green;
-  }
 `;
 
 export const Value = styled(ZigTypography, {

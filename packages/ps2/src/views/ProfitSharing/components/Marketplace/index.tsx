@@ -363,6 +363,5 @@ const MarketplaceContainer = () => {
     </PageContainer>
   );
 };
-// Marketplace.whyDidYouRender = true;
 
 export default MarketplaceContainer;
