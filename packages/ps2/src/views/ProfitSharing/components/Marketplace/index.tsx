@@ -43,7 +43,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
-  const defaultFilters = useMarketplaceFilters();
+  const defaultFilters = useMarketplaceFilters(services);
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
 
   const filteredServices = useMemo(() => {
@@ -303,6 +303,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         <MarketplaceFilters
           resultsCount={filteredServices?.length}
           filters={tablePersist.filters}
+          defaultFilters={defaultFilters}
           onFiltersChange={tablePersist.filterTable}
           onSearchChange={setSearchFilter}
           searchFilter={searchFilter}

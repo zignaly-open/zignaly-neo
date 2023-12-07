@@ -1,10 +1,12 @@
 import { ZigFiltersType } from '@zignaly-open/ui';
+import { MarketplaceService } from 'apis/marketplace/types';
 import { useTranslation } from 'react-i18next';
 
-const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'];
-
-export const useMarketplaceFilters = () => {
+export const useMarketplaceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
+  const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'].filter((coin) =>
+    services.find((service) => service.ssc === coin),
+  );
 
   return [
     {
@@ -38,10 +40,10 @@ export const useMarketplaceFilters = () => {
     },
     {
       type: 'slider',
-      value: [0, 100],
+      value: [0, 75],
       label: t('filters.fee'),
       min: 0,
-      max: 100,
+      max: 75,
       id: 'fee',
     },
   ] as ZigFiltersType;
