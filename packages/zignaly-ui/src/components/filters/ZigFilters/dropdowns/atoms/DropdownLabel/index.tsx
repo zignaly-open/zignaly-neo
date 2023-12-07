@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import ZigTypography from "components/display/ZigTypography";
 import React from "react";
-import { useMeasure } from "react-use";
+import { LABEL_LENGTH_TO_WIDTH } from "../../util";
 
 export const DropdownLabel = ({
   minSpace = 0,
@@ -16,17 +16,14 @@ export const DropdownLabel = ({
   label: string;
   value: string;
 }) => {
-  const [ref, { width }] = useMeasure<HTMLDivElement>();
-  console.log(width);
-
   return (
     <Box
       display="flex"
       gap={2}
       justifyContent="center"
-      minWidth={width + (minSpace ? 16 : 0) + minSpace}
+      minWidth={label.length * LABEL_LENGTH_TO_WIDTH + (minSpace ? 16 : 0) + minSpace}
     >
-      <ZigTypography fontSize={13} color={"neutral300"} ref={ref}>
+      <ZigTypography fontSize={13} color={"neutral300"}>
         {label}
       </ZigTypography>
       <ZigTypography fontSize={14} color={"neutral100"}>
