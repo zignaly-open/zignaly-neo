@@ -55,7 +55,7 @@ const ZigFilters = ({
   leftComponent,
   rightComponent,
   sx,
-  id = "filters",
+  prefixId = "filters",
 }: ZigFiltersProps) => {
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
@@ -142,7 +142,7 @@ const ZigFilters = ({
               )}
             </Box>
           </Layout>
-          <ZigButton variant="text" onClick={resetFilters} id={`${id}__reset-all`}>
+          <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
             Reset
           </ZigButton>
         </Box>
@@ -159,7 +159,7 @@ const ZigFilters = ({
               top: 0,
               bottom: 0,
             }}
-            id={`${id}__search`}
+            id={`${prefixId}__search`}
           />
         )}
       </Box>

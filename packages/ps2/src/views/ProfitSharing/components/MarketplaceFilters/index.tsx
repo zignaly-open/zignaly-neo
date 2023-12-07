@@ -28,6 +28,7 @@ const MarketplaceFilters = ({
       search={searchFilter}
       onSearchChange={onSearchChange}
       sx={{ mb: '28px' }}
+      prefixId={TableId.Marketplace}
     />
   );
 };

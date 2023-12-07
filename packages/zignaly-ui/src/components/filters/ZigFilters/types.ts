@@ -10,6 +10,7 @@ export type ZigFiltersProps = {
   leftComponent?: React.ReactNode;
   rightComponent?: React.ReactNode;
   sx?: SxProps;
+  prefixId?: string;
 };
 
 export type ZigFilterPruned = {
