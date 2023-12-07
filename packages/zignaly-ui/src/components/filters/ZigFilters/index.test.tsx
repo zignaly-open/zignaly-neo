@@ -1,7 +1,6 @@
 import React from "react";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
 import { fireEvent, waitFor, screen, within } from "@testing-library/react";
-import CheckBoxFilter from "./filters/CheckBoxFilter";
 import {
   CheckboxFilter,
   SelectFilter,
