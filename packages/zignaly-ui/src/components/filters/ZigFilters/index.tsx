@@ -96,6 +96,7 @@ const ZigFilters = ({
     });
     onChange(updatedFilters);
   };
+
   return (
     <Box
       display="flex"
@@ -132,6 +133,7 @@ const ZigFilters = ({
                 <FilterDropdownWrapper>
                   <MultiFilterDropdown
                     resetFilters={resetSecondaryFilters}
+                    defaultFilters={defaultFilters}
                     filters={secondaryFilters}
                     onChange={updateFilters}
                   />

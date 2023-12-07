@@ -28,11 +28,12 @@ import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
-import { filterFns } from '@tanstack/react-table';
 import { usePersistTable } from 'apis/settings/use';
 import MarketplaceFilters from '../MarketplaceFilters';
-import { filterServices } from '../MarketplaceFilters/util';
-import { useMarketplaceFilters } from '../MarketplaceFilters/use';
+import {
+  useFilteredServices,
+  useServiceFilters,
+} from '../MarketplaceFilters/use';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -43,12 +44,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
-  const defaultFilters = useMarketplaceFilters(services);
+  const defaultFilters = useServiceFilters(services);
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
-
-  const filteredServices = useMemo(() => {
-    return filterServices(services, tablePersist.filters, searchFilter);
-  }, [services, tablePersist.filters, searchFilter]);
+  const filteredServices = useFilteredServices(
+    services,
+    tablePersist.filters,
+    searchFilter,
+  );
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(

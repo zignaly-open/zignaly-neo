@@ -1,4 +1,5 @@
 import ZigButton, { ZigButtonProps } from "components/inputs/ZigButton";
+import { ZigResetIcon } from "icons";
 import React from "react";
 
 export const DropdownResetButton = (props: ZigButtonProps) => {
@@ -13,6 +14,7 @@ export const DropdownResetButton = (props: ZigButtonProps) => {
         width: "100%",
         ...(props?.sx || {}),
       }}
+      startIcon={<ZigResetIcon />}
     >
       Reset
     </ZigButton>

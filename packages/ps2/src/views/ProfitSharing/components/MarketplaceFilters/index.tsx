@@ -16,7 +16,7 @@ const MarketplaceFilters = ({
   return (
     <ZigFilters
       leftComponent={
-        <ZigTypography variant='h2'>
+        <ZigTypography variant='h2' fontWeight={400}>
           {t('n-profit-sharing-services', {
             count: resultsCount,
           })}

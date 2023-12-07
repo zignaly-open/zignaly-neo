@@ -5,4 +5,5 @@ export type CheckboxFilterDropdownProps = {
   filter: CheckboxFilter;
   id?: string;
   resetFilter: () => void;
+  minSpace?: number;
 };

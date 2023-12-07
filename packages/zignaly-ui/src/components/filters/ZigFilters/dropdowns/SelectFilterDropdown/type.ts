@@ -4,4 +4,5 @@ export type SelectFilterDropdownProps = {
   onChange: (filter: SelectFilter) => void;
   filter: SelectFilter;
   id?: string;
+  minSpace?: number;
 };

@@ -1,26 +1,26 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import SliderFilter from "../../filters/SliderFilter";
-import { Box } from "@mui/material";
 import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
-import { DropdownResetButton } from "../../DropdownResetButton";
+import { DropdownResetButton } from "../atoms/DropdownResetButton";
+import { DropdownLabel } from "../atoms/DropdownLabel";
 
 const SliderFilterDropdown = ({
   resetFilter,
   filter,
   onChange,
   id = "",
+  minSpace = 65,
 }: SliderFilterDropdownProps) => {
   const displayValue = useMemo(() => {
-    if (filter.type === "slider" && Array.isArray(filter.value)) {
+    if (Array.isArray(filter.value)) {
       if (filter.value[0] === null && filter.value[1] === null) return "All";
       else if (filter.value[0] === null) return `< ${filter.value[1]}%`;
       else if (filter.value[1] === null) return `> ${filter.value[0]}%`;
-      else return `${filter.value[0]}% to ${filter.value[1]}%`;
+      else return `${filter.value[0]}%-${filter.value[1]}%`;
     }
-    return filter.value;
+    return filter.value?.toString();
   }, [filter.value]);
 
   return (
@@ -28,14 +28,7 @@ const SliderFilterDropdown = ({
       id={id}
       component={({ open }) => (
         <DropdownItem active={open}>
-          <Box display="flex" gap={2} justifyContent="center">
-            <ZigTypography fontSize={13} color={"neutral300"}>
-              {filter.label}
-            </ZigTypography>
-            <ZigTypography fontSize={14} color={"neutral100"}>
-              {displayValue}
-            </ZigTypography>
-          </Box>
+          <DropdownLabel minSpace={minSpace} label={filter.label} value={displayValue} />
         </DropdownItem>
       )}
       options={[
