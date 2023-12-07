@@ -34,10 +34,10 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
           {label}
         </ZigTypography>
       )}
-      {options.map((option) => (
+      {options.map((option, i) => (
         <Box py="6px" key={option.value}>
           <CheckBox
-            id={`filter-checkbox_${id}__option`}
+            id={`filter-checkbox_${id}__option-${i}`}
             value={!value || value?.includes(option.value)}
             label={option.label}
             onChange={(checked) => handleChange(option.value, checked)}
