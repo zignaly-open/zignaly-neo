@@ -3,6 +3,8 @@ import ZigTypography from "components/display/ZigTypography";
 import React from "react";
 import { LABEL_LENGTH_TO_WIDTH } from "../../util";
 
+const GAP = 2;
+
 export const DropdownLabel = ({
   minSpace = 0,
   label,
@@ -14,21 +16,26 @@ export const DropdownLabel = ({
    */
   minSpace?: number;
   label: string;
-  value: string;
+  value: string | JSX.Element;
 }) => {
   return (
     <Box
       display="flex"
-      gap={2}
+      gap={GAP}
       justifyContent="center"
-      minWidth={label.length * LABEL_LENGTH_TO_WIDTH + (minSpace ? 16 : 0) + minSpace}
+      alignItems={"center"}
+      minWidth={label.length * LABEL_LENGTH_TO_WIDTH + (minSpace ? GAP * 8 : 0) + minSpace}
     >
       <ZigTypography fontSize={13} color={"neutral300"}>
         {label}
       </ZigTypography>
-      <ZigTypography fontSize={14} color={"neutral100"}>
-        {value}
-      </ZigTypography>
+      {typeof value === "function" ? (
+        value
+      ) : (
+        <ZigTypography fontSize={14} color={"neutral100"}>
+          {value}
+        </ZigTypography>
+      )}
     </Box>
   );
 };
