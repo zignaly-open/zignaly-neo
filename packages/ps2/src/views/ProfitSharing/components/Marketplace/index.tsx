@@ -37,7 +37,7 @@ import {
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
-  const { t } = useTranslation('marketplace');
+  const { t } = useTranslation(['marketplace', 'table']);
   const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
@@ -340,9 +340,6 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             columnVisibility={false}
             enableSortingRemoval={false}
             onSortingChange={tablePersist.sortTable}
-            getColumnCanGlobalFilter={(column) =>
-              ['service-name'].includes(column.id)
-            }
           />
         )}
       </TableWrapper>
