@@ -2,7 +2,9 @@ import { ZigFiltersPruned, ZigFiltersType } from "./types";
 
 export const filterFns = {
   // https://github.com/TanStack/table/blob/main/packages/table-core/src/filterFns.ts
-  inNumberRange: (value: number, [min, max]: [number | null, number | null]) => {
+  inNumberRange: (value: number, filterValue: [number | null, number | null]) => {
+    if (!Array.isArray(filterValue)) return false;
+    const [min, max] = filterValue;
     return ((!min && min !== 0) || value >= min) && ((!max && max !== 0) || value <= max);
   },
   includesString: (value: string, filterValue: string) => {
