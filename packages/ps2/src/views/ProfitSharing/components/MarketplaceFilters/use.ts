@@ -8,6 +8,11 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
   const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'].filter((coin) =>
     services.find((service) => service.ssc === coin),
   );
+  const maxPnL = services.reduce((prev, current) => {
+    return +current.pnlPercent180t > prev
+      ? parseInt(current.pnlPercent180t)
+      : prev;
+  }, 100);
 
   return useMemo(() => {
     return [
@@ -18,7 +23,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         allowNoMin: true,
         allowNoMax: true,
         min: 0,
-        max: 100,
+        max: maxPnL,
         id: 'returns',
         showInBar: true,
       },
@@ -49,7 +54,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         id: 'fee',
       },
     ] as ZigFiltersType;
-  }, [t]);
+  }, [t, coins, maxPnL]);
 };
 
 export const useFilteredServices = (
