@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ZigAutocomplete should render without crashing 1`] = `
+<input
+  aria-autocomplete="list"
+  aria-expanded="false"
+  aria-invalid="false"
+  autocapitalize="none"
+  autocomplete="off"
+  class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1fsdrue-MuiInputBase-input-MuiInput-input"
+  data-testid="test-id"
+  id="test-id"
+  role="combobox"
+  spellcheck="false"
+  type="text"
+  value=""
+/>
+`;
