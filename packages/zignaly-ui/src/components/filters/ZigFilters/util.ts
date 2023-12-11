@@ -1,8 +1,10 @@
-import { ZigFiltersPruned, ZigFiltersType } from "./types";
+import { SliderFilter, ZigFiltersPruned, ZigFiltersType } from "./types";
 
 export const filterFns = {
   // https://github.com/TanStack/table/blob/main/packages/table-core/src/filterFns.ts
-  inNumberRange: (value: number, [min, max]: [number | null, number | null]) => {
+  inNumberRange: (value: number, filterValue: [number | null, number | null]) => {
+    if (!Array.isArray(filterValue)) return false;
+    const [min, max] = filterValue;
     return ((!min && min !== 0) || value >= min) && ((!max && max !== 0) || value <= max);
   },
   includesString: (value: string, filterValue: string) => {
@@ -21,9 +23,28 @@ export const loadFilters = (
     const savedFilter = savedFilterValues.find(
       (savedFilter) => savedFilter.id === filter.id && savedFilter.type === filter.type,
     );
+    let { value } = filter;
+
+    if (savedFilter) {
+      // Apply saved value
+      value = savedFilter.value;
+
+      if (filter.type === "slider" && Array.isArray(value)) {
+        const newValue = [...value];
+        // Check that value is still within range
+        if (filter.min !== undefined && (value[0] as number) < filter.min) {
+          newValue[0] = null;
+        }
+        if (filter.max !== undefined && (value[1] as number) > filter.max) {
+          newValue[1] = null;
+        }
+        value = newValue as SliderFilter["value"];
+      }
+    }
+
     return {
       ...filter,
-      value: savedFilter ? savedFilter.value : filter.value,
+      value,
     };
   }) as ZigFiltersType;
 };

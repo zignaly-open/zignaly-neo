@@ -6,6 +6,9 @@ import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
 import { useLongestString } from "../util";
+import { FiltersCount } from "../atoms/FilterCount";
+
+const FILTERS_COUNT_WIDTH = 16;
 
 const CheckboxFilterDropdown = ({
   filter,
@@ -20,18 +23,10 @@ const CheckboxFilterDropdown = ({
   const displayValue = useMemo(() => {
     if (!filter.value) return stringAll;
     const options = filter.options.filter((option) => filter.value?.includes(option.value));
-    return options.length > 0
-      ? options.length > 1
-        ? options.length.toString()
-        : options.map((o) => o.label).join(", ")
-      : stringNone;
+    return options.length > 0 ? options.length : stringNone;
   }, [filter.value]);
 
-  const longestWidth = useLongestString([
-    stringAll,
-    stringNone,
-    ...filter.options.map((o) => o.label),
-  ]);
+  const longestWidth = useLongestString([stringAll, stringNone]);
 
   return (
     <ZigDropdown
@@ -39,9 +34,15 @@ const CheckboxFilterDropdown = ({
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel
-            minSpace={minSpace ?? longestWidth}
+            minSpace={minSpace ?? Math.max(longestWidth, FILTERS_COUNT_WIDTH)}
             label={filter.label}
-            value={displayValue}
+            value={
+              typeof displayValue === "number" ? (
+                <FiltersCount>{displayValue}</FiltersCount>
+              ) : (
+                displayValue
+              )
+            }
           />
         </DropdownItem>
       )}
