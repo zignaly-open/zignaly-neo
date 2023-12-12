@@ -16,11 +16,12 @@ const extractItem = (
   defaultLabel?: string,
 ) => {
   if (item === false) return null;
+  if (React.isValidElement(item)) return item;
 
   if (typeof item === "object") {
     return {
-      value: item.value ?? defaultValue,
-      label: item.label ?? defaultLabel ?? "",
+      value: (item as InputExtraInfoItem).value ?? defaultValue,
+      label: (item as InputExtraInfoItem).label ?? defaultLabel ?? "",
     };
   } else {
     if (!defaultValue) return null;
@@ -42,7 +43,6 @@ export const InputExtraInfo = (
     let itemsList = Object.keys(DEFAULT_ITEMS).map((key) => {
       const validKey = key as keyof typeof DEFAULT_ITEMS;
       const infoItem = extraInfo[validKey];
-      if (infoItem === false) return null;
 
       return extractItem(
         infoItem,
@@ -53,11 +53,7 @@ export const InputExtraInfo = (
 
     // Custom items
     if (extraInfo.others) {
-      itemsList = itemsList.concat(
-        extraInfo.others.map((item) =>
-          React.isValidElement(item) ? item : extractItem(item as InputExtraInfoFalseableItem),
-        ),
-      );
+      itemsList = itemsList.concat(extraInfo.others.map((item) => extractItem(item)));
     }
     return itemsList.filter(Boolean);
   }, [balance, min, max, coin, extraInfo]);

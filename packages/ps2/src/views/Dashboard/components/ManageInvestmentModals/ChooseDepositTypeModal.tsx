@@ -50,7 +50,6 @@ export function useDepositModalContent({
 
     return Object.entries(balances)
       .map(([c, balance]) => ({
-        value: c,
         coin: c,
         available: balance?.balanceFree || 0,
         availableInUsd: balance?.balanceFreeUSDT || 0,
