@@ -1,5 +1,6 @@
 import { FilledTextFieldProps } from "@mui/material/TextField/TextField";
 import { SxProps } from "@mui/system";
+import { ZigSelectOption } from "../ZigSelect/types";
 
 export type Coin = {
   coin: string;
@@ -11,7 +12,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   disabled?: boolean;
   id?: string;
   coin?: string | Coin;
-  tokenOptions?: any;
+  tokenOptions?: ZigSelectOption<string>[];
   onTokenChange?: (token: any) => void;
   showMaxButton?: boolean;
   selectSx?: SxProps;

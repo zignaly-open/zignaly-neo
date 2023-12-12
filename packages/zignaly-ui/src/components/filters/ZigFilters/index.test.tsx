@@ -76,7 +76,7 @@ describe("components/filters/ZigFilters", () => {
     it("should filter", async () => {
       const onChange = jest.fn();
       const { container } = renderWithProvidersUi(
-        <SliderFilter filter={coinFilter} onChange={onChange} />,
+        <SliderFilter filter={returnsFilter} onChange={onChange} />,
       );
 
       const input = container.querySelector("input");
