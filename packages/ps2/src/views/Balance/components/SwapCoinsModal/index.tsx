@@ -23,7 +23,6 @@ function SwapCoinsModal({
   return (
     <ZModal
       id={'withdraw-modal'}
-      mobileFullScreen
       wide
       {...props}
       close={close}

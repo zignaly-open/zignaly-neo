@@ -3,7 +3,6 @@ import App from './App';
 import './util/i18n/i18next';
 import reportWebVitals from './reportWebVitals';
 import * as ReactDOMClient from 'react-dom/client';
-import PwaInstall from 'util/pwaInstall';
 
 const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container!);
@@ -14,7 +13,6 @@ root.render(
     <>
       <React.Suspense fallback={null}>
         <App />
-        <PwaInstall />
       </React.Suspense>
     </>
   </React.StrictMode>,

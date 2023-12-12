@@ -29,7 +29,7 @@ import {
   ROUTE_TRADING_SERVICE,
 } from '../../../../routes';
 import { useOpenDepositModal } from '../ManageInvestmentModals/DepositModal';
-import { Box, Stack, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 import { generatePath, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -301,31 +301,26 @@ const MyDashboard: React.FC = () => {
           investmentsEndpoint?.currentData?.length ? (
             <>
               <Heading>
-                <Stack
-                  sx={{ width: '100%' }}
-                  alignItems='center'
-                  justifyContent={{ xs: 'center', sm: 'space-between' }}
-                  direction={{ xs: 'column', sm: 'row' }}
-                  spacing={{ xs: 1, sm: 2 }}
+                <Box sx={{ flex: '0 0 100px' }} />
+                <ZigTypography
+                  variant='h1'
+                  align={'center'}
+                  sx={{ flex: 1 }}
+                  id={'my-portfolio__title'}
                 >
-                  <Box
-                    sx={{
-                      display: { xs: 'none', sm: 'block' },
-                    }}
-                  />
-                  <ZigTypography variant='h1' id={'my-portfolio__title'}>
-                    {t('title')}
-                  </ZigTypography>
+                  {t('title')}
+                </ZigTypography>
+                <Box sx={{ flex: '0 0 100px' }}>
                   <ZigButton
                     id={'my-portfolio__deposit'}
                     startIcon={<ZigPlusIcon width={10} height={10} />}
-                    sx={{ fontWeight: 600 }}
+                    sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
                     onClick={() => openDepositModal()}
                   >
                     {t('action:deposit')}
                   </ZigButton>
-                </Stack>
+                </Box>
               </Heading>
               <ZigTableWrapper>
                 <ZigTable
