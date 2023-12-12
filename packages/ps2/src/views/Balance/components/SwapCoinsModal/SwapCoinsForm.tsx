@@ -60,7 +60,9 @@ function SwapCoinsForm({
           />
         ),
       }))
-      .filter((c) => c.available > 0 && allowedDeposits.spot.includes(c.coin));
+      .filter(
+        (c) => c.available > 0 && allowedDeposits.spotSwap.includes(c.coin),
+      );
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
