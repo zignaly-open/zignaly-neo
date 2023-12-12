@@ -197,8 +197,7 @@ export const RightSideActionWrapper = styled(Box)<{
   @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
     display: flex;
     position: fixed;
-    bottom: ${({ isAuthenticated }) =>
-      isAuthenticated ? 'calc(56px + env(safe-area-inset-bottom))' : '0'};
+    bottom: ${({ isAuthenticated }) => (isAuthenticated ? '56px' : '0')};
     left: 0;
     align-items: flex-start;
     height: 87px;

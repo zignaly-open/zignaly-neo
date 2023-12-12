@@ -104,7 +104,6 @@ const ZigDrawer = () => {
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
-              paddingBottom: `env(safe-area-inset-bottom)`,
             },
           }}
         >
