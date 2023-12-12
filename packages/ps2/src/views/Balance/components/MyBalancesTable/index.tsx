@@ -247,7 +247,7 @@ const MyBalancesTable = (): JSX.Element => {
                   </Box>
                   {exchangeType === 'spot' &&
                     Number(row.original.balance.balanceTotal) > 0 &&
-                    allowedDeposits.spot.includes(row.original.coin) && (
+                    allowedDeposits.spotSwap.includes(row.original.coin) && (
                       <ZigButton
                         id={`balance-row__swap-coins-${row.original.coin}`}
                         onClick={() =>
