@@ -1,5 +1,5 @@
 export const allowedDeposits = {
-  spot: ['BUSD', 'USDT', 'ETH', 'BNB', 'BTC'],
-  spotSwap: ['BUSD', 'USDT', 'ETH', 'BNB', 'BTC', 'BUSD'],
-  futures: ['USDT', 'BUSD'],
+  spot: ['USDT', 'ETH', 'BNB', 'BTC'],
+  spotSwap: ['BUSD', 'USDT', 'ETH', 'BNB', 'BTC'],
+  futures: ['USDT'],
 };

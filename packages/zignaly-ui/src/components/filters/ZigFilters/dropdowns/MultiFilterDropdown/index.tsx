@@ -1,13 +1,14 @@
 import ZigDropdown from "components/display/ZigDropdown";
 import React, { useCallback, useMemo } from "react";
 import SliderFilter from "../../filters/SliderFilter";
-import { FiltersCount, LayoutItem } from "./styles";
+import { LayoutItem } from "./styles";
 import { MultiFilterDropdownProps } from "./type";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { ZigFilter } from "../../types";
 import { ZigSettingsIcon } from "../../../../../icons";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { isEqual } from "lodash-es";
+import { FiltersCount } from "../atoms/FilterCount";
 
 const MultiFilterDropdown = ({
   resetFilters,

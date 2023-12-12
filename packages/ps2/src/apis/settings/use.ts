@@ -8,6 +8,7 @@ import {
   TableId,
 } from 'apis/settings/types';
 import { RootState } from 'apis/store';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 type IOverload = {
@@ -28,15 +29,18 @@ export const usePersistTable: IOverload = (
   );
   const { sorting, filters } = tableData;
   const dispatch = useDispatch();
+  const properFilters = useMemo(() => {
+    return defaultFilters
+      ? loadFilters(defaultFilters, filters)
+      : (filters as ZigFiltersType);
+  }, [filters, defaultFilters]);
 
   return {
     sorting,
     // loadFilters initially will apply saved filters to default filters.
     // And also convert redux pruned data to full filters.
     // We don't store the full filters data in redux to avoid bloating the store with data that can be outdated.
-    filters: defaultFilters
-      ? loadFilters(defaultFilters, filters)
-      : (filters as ZigFiltersType),
+    filters: properFilters,
     sortTable: (newSorting: SortingState) =>
       dispatch(sortTable({ id, sorting: newSorting })),
     filterTable: (newFilters: ZigFiltersType) => {
