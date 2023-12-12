@@ -107,7 +107,7 @@ function InvestDepositModal({
   }
 
   const { title, component, modalWidth, ...rest } =
-    (!showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
+    (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
     <ZModal
