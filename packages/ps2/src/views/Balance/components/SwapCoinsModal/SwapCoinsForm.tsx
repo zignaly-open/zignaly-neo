@@ -126,7 +126,7 @@ function SwapCoinsForm({
     if (!allowedCoinsSwapTo) return [];
 
     return allowedCoinsSwapTo
-      .filter((c) => allowedDeposits.spot.includes(c))
+      .filter((c) => allowedDeposits.spotSwap.includes(c))
       .map((c) => ({
         value: c,
         coin: c,
