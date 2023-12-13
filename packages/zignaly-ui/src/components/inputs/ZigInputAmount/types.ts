@@ -1,5 +1,6 @@
 import { FilledTextFieldProps } from "@mui/material/TextField/TextField";
 import { SxProps } from "@mui/system";
+import { ZigPriceLabelProps } from "../../display/ZigPriceLabel/types";
 
 export type Coin = {
   coin: string;
@@ -59,10 +60,10 @@ export type InputExtraInfoProps = {
 
 export type InputExtraInfoObject = {
   balance?: InputExtraInfoFalseableItem;
-  exactAmount?: boolean;
   min?: InputExtraInfoFalseableItem;
   max?: InputExtraInfoFalseableItem;
   others?: InputExtraInfoFalseableItem[];
+  amountProps?: Partial<ZigPriceLabelProps>;
   wrapExtraInfo?: number | boolean;
 };
 

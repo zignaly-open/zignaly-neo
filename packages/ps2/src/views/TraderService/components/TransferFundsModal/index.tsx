@@ -133,7 +133,7 @@ function TransferModal({
                     balance={balanceFrom}
                     error={t(errors?.amountValue?.message)}
                     placeholder={t('transfer.placeholder')}
-                    extraInfo={{ exactAmount: true }}
+                    extraInfo={{ amountProps: { exact: true } }}
                     {...field}
                   />
                 </Box>

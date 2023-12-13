@@ -100,7 +100,7 @@ export const InputExtraInfo = (
                 color="neutral100"
                 variant="body2"
                 fontWeight="regular"
-                exact={extraInfo?.exactAmount}
+                {...extraInfo.amountProps}
               />
             </ZigTypography>
           )}
