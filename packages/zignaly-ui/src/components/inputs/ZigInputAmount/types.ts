@@ -59,6 +59,7 @@ export type InputExtraInfoProps = {
 
 export type InputExtraInfoObject = {
   balance?: InputExtraInfoFalseableItem;
+  exactAmount?: boolean;
   min?: InputExtraInfoFalseableItem;
   max?: InputExtraInfoFalseableItem;
   others?: InputExtraInfoFalseableItem[];
