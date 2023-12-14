@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/display/ZigCopyText should render without crashing 1`] = `
+<input
+  aria-invalid="false"
+  class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
+  data-testid="test-id"
+  id="test-id"
+  type="text"
+  value="test value"
+/>
+`;

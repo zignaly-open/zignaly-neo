@@ -111,7 +111,7 @@ const CreateServiceForm: React.FC<{
         },
       },
       {
-        id: 'create-service__select-type-futures',
+        id: 'create-service__select-exchange-bybit',
         value: 'bybit',
         label: t(`create.exchanges.bybit`),
         extraProps: {
@@ -142,10 +142,14 @@ const CreateServiceForm: React.FC<{
         />
       </ZigButtonGroupInputWrapper>
       {selectedExchange === 'bybit' ? (
-        <ZigTypography mt={3} textAlign={'center'}>
+        <ZigTypography
+          mt={3}
+          textAlign={'center'}
+          id={'create-service__bybit-warning'}
+        >
           <Trans t={t} i18nKey={`create.bybit-warning`}>
             <ZigLink
-              id={'create-service__bybit-warning'}
+              id={'create-service__bybit-warning__form-link'}
               href={BYBIT_FORM_URL}
               target={'_blank'}
             />

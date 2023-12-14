@@ -149,7 +149,7 @@ export enum GraphTimeframe {
   '90d' = '90d',
   '180d' = '180d',
   '365d' = '365d',
-  // 'all' = 'all', // looks like it is not supported by the backend
+  'all' = 'all',
 }
 
 export const GraphTimeframeDayLength = {

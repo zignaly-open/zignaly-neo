@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ZigDropdown should render without crashing 1`] = `
+<div
+  class="sc-kDDrLX eodwTk"
+  id="test-id-container"
+  role="button"
+>
+  <div>
+    Component
+  </div>
+</div>
+`;
