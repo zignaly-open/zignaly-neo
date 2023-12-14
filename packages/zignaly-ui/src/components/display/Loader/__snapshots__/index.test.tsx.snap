@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/inputs/ZigButton Centered Loader rendering renders with default props 1`] = `
+exports[`components/display/Loader CenteredLoader should render with default props without crashing 1`] = `
 <div
   class="centered-loader-wrapper MuiBox-root css-1lhu1y1"
 >
@@ -53,7 +53,7 @@ exports[`components/inputs/ZigButton Centered Loader rendering renders with defa
 </div>
 `;
 
-exports[`components/inputs/ZigButton Centered Loader rendering renders with default props 2`] = `
+exports[`components/display/Loader CenteredLoader should render with default props without crashing 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "padding",
@@ -83,7 +83,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/inputs/ZigButton Loader rendering renders with custom width and height 1`] = `
+exports[`components/display/Loader Loader should render with custom width and height without crashing 1`] = `
 <div
   class="simple-loader"
   data-testid="oval-loading"
@@ -132,7 +132,7 @@ exports[`components/inputs/ZigButton Loader rendering renders with custom width 
 </div>
 `;
 
-exports[`components/inputs/ZigButton Loader rendering renders with custom width and height 2`] = `
+exports[`components/display/Loader Loader should render with custom width and height without crashing 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "visibility",
@@ -156,7 +156,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/inputs/ZigButton Loader rendering renders with default props 1`] = `
+exports[`components/display/Loader Loader should render with default props without crashing 1`] = `
 <div
   class="simple-loader"
   data-testid="oval-loading"
@@ -205,7 +205,7 @@ exports[`components/inputs/ZigButton Loader rendering renders with default props
 </div>
 `;
 
-exports[`components/inputs/ZigButton Loader rendering renders with default props 2`] = `
+exports[`components/display/Loader Loader should render with default props without crashing 2`] = `
 CSSStyleDeclaration {
   "0": "display",
   "1": "visibility",
