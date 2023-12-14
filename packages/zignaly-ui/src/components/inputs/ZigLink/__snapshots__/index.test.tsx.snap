@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/inputs/ZigLink rendering renders with default props 1`] = `
+exports[`components/inputs/ZigLink renders with default props 1`] = `
 <a
   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-94cnhm-MuiTypography-root-MuiLink-root"
   href="#"
@@ -10,7 +10,7 @@ exports[`components/inputs/ZigLink rendering renders with default props 1`] = `
 />
 `;
 
-exports[`components/inputs/ZigLink rendering renders with default props 2`] = `
+exports[`components/inputs/ZigLink renders with default props 2`] = `
 CSSStyleDeclaration {
   "0": "margin",
   "1": "letter-spacing",
