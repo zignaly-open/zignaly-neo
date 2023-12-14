@@ -10,9 +10,6 @@ export enum Features {
   Kyc = 'kyc',
 }
 
-// yes, the trailing slash IS important
-export type OverrideableEndpoints = 'marketplace/';
-
 interface TranslationOverrides {
   [x: string]: string | TranslationOverrides;
 }
@@ -21,7 +18,6 @@ export type WhitelabelOverride = {
   title: string;
   domain: string;
   locales?: string[];
-  endpointOverrides?: Record<OverrideableEndpoints, string>;
   translationOverrides?: TranslationOverrides;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>

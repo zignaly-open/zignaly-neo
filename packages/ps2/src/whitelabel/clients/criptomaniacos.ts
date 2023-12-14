@@ -10,9 +10,6 @@ export default {
     [Features.NewSignup]: false,
   },
   locales: ['en', 'pt'],
-  endpointOverrides: {
-    'marketplace/': 'market',
-  },
   links: {
     tos: 'https://www.lastra.app/termos',
     privacyPolicy: 'https://www.lastra.app/politica-privacidade/',

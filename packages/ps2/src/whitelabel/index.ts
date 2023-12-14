@@ -1,5 +1,5 @@
 import * as clients from './configs';
-import { Features, OverrideableEndpoints } from './type';
+import { Features } from './type';
 import defaultFeatureState from './default';
 
 const { REACT_APP_DEV_ONLY_WHITELABEL: whitelabelNameOverride } = process.env;
@@ -22,7 +22,3 @@ export const isFeatureOn = (feature: Features): boolean => {
 export function getMinInvestmentAmount(coin: string): number {
   return whitelabel.minInvestment?.[coin] || 0;
 }
-
-export const maybeOverrideEndpoint = (
-  endpoint: OverrideableEndpoints,
-): string => whitelabel.endpointOverrides?.[endpoint] || endpoint;
