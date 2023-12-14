@@ -23,7 +23,7 @@ describe("components/display/Loader", () => {
     expect(loaderStyles).toMatchSnapshot();
   });
 
-  it("should render with default props without crashing", () => {
+  it("should render centered loader with default props without crashing", () => {
     const { container } = renderWithProvidersUi(<CenteredLoader />);
 
     const loader = container.querySelector(".centered-loader-wrapper") as Element;
