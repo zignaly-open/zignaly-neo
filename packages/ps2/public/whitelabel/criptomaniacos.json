@@ -1,7 +1,9 @@
 {
   "short_name": "Criptomaniacos",
   "name": "Criptomaniacos",
-  "icons": [{
+  "description": "A global platform to invest in winning crypto portfolios.",
+  "icons": [
+    {
       "src": "/images/whitelabel/criptomaniacos/favicon.ico",
       "sizes": "24x24",
       "type": "image/x-icon"
@@ -35,5 +37,7 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#7682F7",
-  "background_color": "#080810"
+  "background_color": "#080810",
+  "orientation": "portrait",
+  "dir": "auto"
 }

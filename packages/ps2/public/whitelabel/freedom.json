@@ -1,6 +1,7 @@
 {
   "short_name": "Obsidian Freedom",
   "name": "Obsidian Freedom",
+  "description": "Dive into Obsidian Freedom, an invite-only group dedicated to empowering individuals with a passion for impact. Here, we lay the foundation for distributing freedom to those driven by purpose.",
   "icons": [
     {
       "src": "/images/whitelabel/freedom/obsidian-logo32.png",
@@ -26,5 +27,7 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#7682F7",
-  "background_color": "#080810"
+  "background_color": "#080810",
+  "orientation": "portrait",
+  "dir": "auto"
 }

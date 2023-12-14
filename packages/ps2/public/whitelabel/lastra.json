@@ -1,7 +1,9 @@
 {
   "short_name": "Lastra",
   "name": "Lastra - Your last Crypto app",
-  "icons": [{
+  "description": "A global platform to invest in winning crypto portfolios.",
+  "icons": [
+    {
       "src": "/images/whitelabel/lastra/logo16.png",
       "sizes": "16x16",
       "type": "image/x-icon"
@@ -30,5 +32,7 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#7682F7",
-  "background_color": "#080810"
+  "background_color": "#080810",
+  "orientation": "portrait",
+  "dir": "auto"
 }
