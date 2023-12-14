@@ -28,6 +28,7 @@ export type WhitelabelOverride = {
   subscriptionPurchaseLink?: string;
   mainAppLink?: string;
   logo?: string;
+  manifest?: string;
   links?: {
     tos?: string;
     privacyPolicy?: string;

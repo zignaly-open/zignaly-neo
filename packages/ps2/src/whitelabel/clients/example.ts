@@ -17,6 +17,7 @@ export default {
   },
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
+  manifest: '/whitelabel/lastra.json', // TODO: change this to an example manifest
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',
   // background: '#fcdcdc',
   // backgroundImage: null,

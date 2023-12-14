@@ -25,6 +25,7 @@ export default {
   background: '#0D0E0E',
   backgroundImage: null,
   logo: '/images/whitelabel/lastra/logo-horizontal.png',
+  manifest: '/whitelabel/lastra.json',
   social: {
     twitter: 'https://cmania.co/zig-xtwitter',
     telegram: 'https://cmania.co/zig-tg',

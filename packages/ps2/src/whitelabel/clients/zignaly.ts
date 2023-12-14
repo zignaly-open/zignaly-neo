@@ -12,4 +12,5 @@ export default {
   },
   defaultSuccessFee: 5,
   intercomId: 'nc3z6oqm',
+  manifest: '/manifest.json',
 } as WhitelabelOverride;
