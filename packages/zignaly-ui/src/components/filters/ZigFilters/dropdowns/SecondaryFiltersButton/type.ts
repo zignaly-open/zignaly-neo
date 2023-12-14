@@ -1,6 +1,6 @@
 import { ZigFiltersType } from "../../types";
 
-export type MultiFilterDropdownProps = {
+export type SecondaryFiltersButtonProps = {
   onChange: (value: any) => void;
   resetFilters: () => void;
   filters: ZigFiltersType;

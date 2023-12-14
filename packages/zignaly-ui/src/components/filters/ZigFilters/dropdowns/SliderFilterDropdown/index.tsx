@@ -1,10 +1,15 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import SliderFilter from "../../filters/SliderFilter";
 import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
+import ZigSelect from "components/inputs/ZigSelect";
+import ZigButton from "components/inputs/ZigButton";
+import ZigTypography from "components/display/ZigTypography";
+import MobileFilterButton from "../atoms/MobileFilterButton";
+import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
 
 const SliderFilterDropdown = ({
   resetFilter,
@@ -12,6 +17,7 @@ const SliderFilterDropdown = ({
   onChange,
   id = "",
   minSpace = 65,
+  mobile,
 }: SliderFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     if (Array.isArray(filter.value)) {
@@ -22,6 +28,27 @@ const SliderFilterDropdown = ({
     }
     return filter.value?.toString();
   }, [filter.value]);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  if (mobile) {
+    return (
+      <>
+        <MobileFilterDrawer
+          filters={filter}
+          onChange={onChange}
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          resetFilters={resetFilter}
+        />
+        <MobileFilterButton
+          id={`filters__slider-mobile-${filter.id}-reset`}
+          onClick={() => setDrawerOpen(true)}
+          value={`${filter.label}: ${displayValue}`}
+        />
+      </>
+    );
+  }
 
   return (
     <ZigDropdown

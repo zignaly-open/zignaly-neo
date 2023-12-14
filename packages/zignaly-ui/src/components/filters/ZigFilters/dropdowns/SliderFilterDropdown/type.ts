@@ -6,4 +6,5 @@ export type SliderFilterDropdownProps = {
   filter: SliderFilter;
   id?: string;
   minSpace?: number;
+  mobile: boolean;
 };

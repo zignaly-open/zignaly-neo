@@ -27,7 +27,7 @@ function CheckBox({
       setInternalValue(newValue);
       onChange?.(newValue);
     }
-  }, [disabled, isChecked]);
+  }, [disabled, isChecked, onChange]);
 
   return (
     <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled} id={id}>
