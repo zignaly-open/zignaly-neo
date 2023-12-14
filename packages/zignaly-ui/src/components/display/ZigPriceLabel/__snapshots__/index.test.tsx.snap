@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/display/ZigPriceLabel ZigPriceLabel rendering renders 1`] = `
+exports[`components/display/ZigPriceLabel ZigPriceLabel should render without crashing 1`] = `
 <span
   aria-label="500 usdt"
   class="MuiTypography-root MuiTypography-body1 css-1c6zzem-MuiTypography-root"
@@ -17,7 +17,7 @@ exports[`components/display/ZigPriceLabel ZigPriceLabel rendering renders 1`] = 
 </span>
 `;
 
-exports[`components/display/ZigPriceLabel ZigPriceLabel rendering renders 2`] = `
+exports[`components/display/ZigPriceLabel ZigPriceLabel should render without crashing 2`] = `
 CSSStyleDeclaration {
   "0": "margin",
   "1": "font-family",
@@ -68,7 +68,7 @@ CSSStyleDeclaration {
 }
 `;
 
-exports[`components/display/ZigPriceLabel ZigTablePriceLabel rendering renders 1`] = `
+exports[`components/display/ZigPriceLabel ZigTablePriceLabel should render without crashing 1`] = `
 <span
   aria-label="500 btc"
   class="MuiTypography-root MuiTypography-body1 css-10ef9gy-MuiTypography-root"
@@ -85,7 +85,7 @@ exports[`components/display/ZigPriceLabel ZigTablePriceLabel rendering renders 1
 </span>
 `;
 
-exports[`components/display/ZigPriceLabel ZigTablePriceLabel rendering renders 2`] = `
+exports[`components/display/ZigPriceLabel ZigTablePriceLabel should render without crashing 2`] = `
 CSSStyleDeclaration {
   "0": "margin",
   "1": "font-family",
