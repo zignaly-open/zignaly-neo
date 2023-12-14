@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/inputs/InputCode should render without crashing 1`] = `
+<div
+  class="MuiBox-root css-0"
+  id="test__code-input"
+>
+  <div
+    class="styles_react-code-input-container__tpiKG input-box"
+    style="width: 348px;"
+  >
+    <div
+      class="styles_react-code-input__CRulA"
+    >
+      <input
+        autocomplete="one-time-code"
+        data-id="0"
+        pattern="[0-9]*"
+        placeholder=" "
+        style="width: 58px; height: 54px;"
+        type="tel"
+        value=""
+      />
+      <input
+        autocomplete="one-time-code"
+        data-id="1"
+        pattern="[0-9]*"
+        placeholder=" "
+        style="width: 58px; height: 54px;"
+        type="tel"
+        value=""
+      />
+      <input
+        autocomplete="one-time-code"
+        data-id="2"
+        pattern="[0-9]*"
+        placeholder=" "
+        style="width: 58px; height: 54px;"
+        type="tel"
+        value=""
+      />
+      <input
+        autocomplete="one-time-code"
+        data-id="3"
+        pattern="[0-9]*"
+        placeholder=" "
+        style="width: 58px; height: 54px;"
+        type="tel"
+        value=""
+      />
+      <input
+        autocomplete="one-time-code"
+        data-id="4"
+        pattern="[0-9]*"
+        placeholder=" "
+        style="width: 58px; height: 54px;"
+        type="tel"
+        value=""
+      />
+      <input
+        autocomplete="one-time-code"
+        data-id="5"
+        pattern="[0-9]*"
+        placeholder=" "
+        style="width: 58px; height: 54px;"
+        type="tel"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/inputs/InputCode should render without crashing 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "visibility",
+  "_importants": {
+    "display": "",
+    "visibility": undefined,
+  },
+  "_length": 2,
+  "_onChange": [Function],
+  "_values": {
+    "display": "block",
+    "visibility": "visible",
+  },
+}
+`;

@@ -1,29 +1,24 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
-import { Box } from "@mui/material";
 import { SelectFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
+import { useLongestString } from "../util";
+import { DropdownLabel } from "../atoms/DropdownLabel";
 
 const SelectFilterDropdown = ({ filter, onChange, id = "" }: SelectFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     const option = filter.options.find((option) => option.value === filter.value);
-    return option?.label;
+    return option?.label ?? "";
   }, [filter.value]);
+
+  const longestWidth = useLongestString(filter.options.map((o) => o.label));
 
   return (
     <ZigDropdown
       id={id}
       component={({ open }) => (
         <DropdownItem active={open}>
-          <Box display="flex" gap={2} justifyContent="center">
-            <ZigTypography fontSize={13} color={"neutral300"}>
-              {filter.label}
-            </ZigTypography>
-            <ZigTypography fontSize={14} color={"neutral100"}>
-              {displayValue}
-            </ZigTypography>
-          </Box>
+          <DropdownLabel minSpace={longestWidth} label={filter.label} value={displayValue} />
         </DropdownItem>
       )}
       options={filter.options.map((option, index) => ({
