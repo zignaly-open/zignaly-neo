@@ -60,9 +60,7 @@ function SwapCoinsForm({
           />
         ),
       }))
-      .filter(
-        (c) => c.available > 0 && allowedDeposits.spotSwap.includes(c.coin),
-      );
+      .filter((c) => c.available > 0 && allowedDeposits.spot.includes(c.coin));
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
@@ -126,7 +124,7 @@ function SwapCoinsForm({
     if (!allowedCoinsSwapTo) return [];
 
     return allowedCoinsSwapTo
-      .filter((c) => allowedDeposits.spotSwap.includes(c))
+      .filter((c) => allowedDeposits.spot.includes(c))
       .map((c) => ({
         value: c,
         coin: c,
