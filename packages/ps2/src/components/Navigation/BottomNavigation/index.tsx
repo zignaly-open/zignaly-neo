@@ -54,6 +54,8 @@ const ZigBottomNavigation = () => {
       <Paper
         sx={{
           position: 'fixed',
+          paddingBottom: `max(env(safe-area-inset-bottom), 16px)`,
+          backgroundColor: 'neutral900',
           bottom: 0,
           left: 0,
           right: 0,
@@ -84,7 +86,7 @@ const ZigBottomNavigation = () => {
             component={Link}
             value={ROUTE_DASHBOARD}
           />
-          {isFeatureOn(Features.Referrals) && (
+          {isFeatureOn(Features.Referrals) && false && (
             <BottomNavigationAction
               label={t('account-menu.referrals')}
               icon={<RewardsIcon />}

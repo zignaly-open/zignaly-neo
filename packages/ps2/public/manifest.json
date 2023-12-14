@@ -1,25 +1,101 @@
 {
-  "short_name": "Zignaly",
-  "name": "Zignaly",
+  "theme_color": "#101225",
+  "background_color": "#101225",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon512_maskable.png",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon512_rounded.png",
+      "type": "image/png"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "orientation": "portrait",
   "display": "standalone",
-  "theme_color": "#7682F7",
-  "background_color": "#080810"
+  "dir": "auto",
+  "name": "Zignaly",
+  "short_name": "Zignaly",
+  "description": "Zignaly is a Portfolio Managers marketplace that connects 450,000+ users with 150+ veteran Portfolio Managers in a transparent success-fee-based model.",
+  "start_url": "/",
+  "screenshots": [
+    {
+      "src": "/screenshots/splash.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/login.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/portfolio.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/balances.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/marketplace.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/profile.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/drawer.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+zignaly",
+      "url": "/"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Marketplace",
+      "url": "/profit-sharing",
+      "description": "Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1."
+    },
+    {
+      "name": "My Portfolio",
+      "url": "/my-portfolio",
+      "description": "Track your investments and see how much you are earning."
+    },
+    {
+      "name": "My Balances",
+      "url": "/my-balances",
+      "description": "See your balances and deposit or withdraw funds."
+    }
+  ],
+  "display_override": []
 }
