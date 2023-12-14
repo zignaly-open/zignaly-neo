@@ -4,10 +4,9 @@
     "assets": "Assets",
     "investors": "Investors"
   },
-  "table-search-emptyMessage": "No services in the Marketplace",
+  "table-search-empty-message": "No services meet your specified criteria. Please consider refining your search or exploring different options",
   "invest-in-services": "Invest in Profit Sharing",
   "invest-in-services-explainer": "Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1.",
-  "investment-preferences": "Investment preferences",
   "n-profit-sharing-services": "{{count}} Profit Sharing Services",
   "table": {
     "service-name": "Service Name",
@@ -34,7 +33,7 @@
   },
   "filters": {
     "returns-months": "{{count}} months returns",
-    "coin": "Coin",
+    "coins": "Coins",
     "type": "Type",
     "fee": "Service Fee",
     "spot": "Spot",

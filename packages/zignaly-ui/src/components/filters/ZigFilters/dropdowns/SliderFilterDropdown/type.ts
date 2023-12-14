@@ -5,4 +5,5 @@ export type SliderFilterDropdownProps = {
   resetFilter: () => void;
   filter: SliderFilter;
   id?: string;
+  minSpace?: number;
 };

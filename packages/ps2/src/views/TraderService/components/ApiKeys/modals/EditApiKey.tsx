@@ -345,8 +345,8 @@ function EditApiKeysModal({
                 <Radio
                   className={
                     isCreate
-                      ? 'create-new-key-modal__unrestricted'
-                      : 'edit-key-modal__unrestricted'
+                      ? 'create-new-key-modal__restricted'
+                      : 'edit-key-modal__restricted'
                   }
                   id={
                     isCreate

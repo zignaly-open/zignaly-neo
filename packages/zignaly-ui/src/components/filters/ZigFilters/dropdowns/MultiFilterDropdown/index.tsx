@@ -1,14 +1,22 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import SliderFilter from "../../filters/SliderFilter";
-import { FiltersCount, LayoutItem } from "./styles";
+import { LayoutItem } from "./styles";
 import { MultiFilterDropdownProps } from "./type";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
 import { ZigFilter } from "../../types";
-import ZigButton from "components/inputs/ZigButton";
 import { ZigSettingsIcon } from "../../../../../icons";
+import { DropdownResetButton } from "../atoms/DropdownResetButton";
+import { isEqual } from "lodash-es";
+import { FiltersCount } from "../atoms/FilterCount";
 
-const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDropdownProps) => {
+const MultiFilterDropdown = ({
+  resetFilters,
+  filters,
+  defaultFilters,
+  onChange,
+  minSpace = 90,
+}: MultiFilterDropdownProps) => {
   const getFilterComponent = useCallback(
     (filter: ZigFilter) => {
       switch (filter.type) {
@@ -36,13 +44,20 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
     [onChange],
   );
 
+  const filtersChangedCount = useMemo(() => {
+    return filters.filter((filter) => {
+      const defaultFilter = defaultFilters?.find((defaultFilter) => defaultFilter.id === filter.id);
+      return !isEqual(filter.value, defaultFilter?.value);
+    }).length;
+  }, [filters, defaultFilters]);
+
   return (
     <ZigDropdown
       id={`filters__multi-dropdown`}
       component={({ open }) => (
-        <LayoutItem active={open}>
+        <LayoutItem active={open} minWidth={minSpace}>
           <ZigSettingsIcon width={22.5} height={19} />
-          <FiltersCount>{filters.length}</FiltersCount>
+          {filtersChangedCount > 0 && <FiltersCount>{filtersChangedCount}</FiltersCount>}
         </LayoutItem>
       )}
       options={filters
@@ -50,19 +65,7 @@ const MultiFilterDropdown = ({ resetFilters, filters, onChange }: MultiFilterDro
         .concat([
           {
             element: (
-              <ZigButton
-                id={`filters__multi-dropdown-reset`}
-                variant={"text"}
-                sx={{
-                  textAlign: "center",
-                  p: "4px 9px 3px",
-                  fontSize: "14px",
-                  width: "100%",
-                }}
-                onClick={resetFilters}
-              >
-                Reset
-              </ZigButton>
+              <DropdownResetButton id={`filters__multi-dropdown-reset`} onClick={resetFilters} />
             ),
           },
         ])}
