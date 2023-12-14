@@ -34,3 +34,5 @@ export const YAHOO_URL =
 
 export const BITCOIN_URL =
   'https://news.bitcoin.com/zignaly-lists-on-ascendex/';
+
+export const BYBIT_FORM_URL = 'https://form.typeform.com/to/Ya7vwaKa';

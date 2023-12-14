@@ -199,6 +199,11 @@ function EditApiKeysModal({
                 <FormControlLabel
                   control={
                     <Checkbox
+                      className={
+                        isCreate
+                          ? 'create-new-key-modal__enabled-read'
+                          : 'edit-key-modal__enabled-read'
+                      }
                       id={
                         isCreate
                           ? 'create-new-key-modal__enabled-read'
@@ -227,6 +232,11 @@ function EditApiKeysModal({
               <FormControlLabel
                 control={
                   <Checkbox
+                    className={
+                      isCreate
+                        ? 'create-new-key-modal__can-trade'
+                        : 'edit-key-modal__can-trade'
+                    }
                     id={
                       isCreate
                         ? 'create-new-key-modal__can-trade'
@@ -254,6 +264,11 @@ function EditApiKeysModal({
               <FormControlLabel
                 control={
                   <Checkbox
+                    className={
+                      isCreate
+                        ? 'create-new-key-modal__futures-trade'
+                        : 'edit-key-modal__futures-trade'
+                    }
                     id={
                       isCreate
                         ? 'create-new-key-modal__futures-trade'
@@ -298,6 +313,11 @@ function EditApiKeysModal({
             <FormControlLabel
               control={
                 <Radio
+                  className={
+                    isCreate
+                      ? 'create-new-key-modal__unrestricted'
+                      : 'edit-key-modal__unrestricted'
+                  }
                   id={
                     isCreate
                       ? 'create-new-key-modal__unrestricted'
@@ -323,6 +343,11 @@ function EditApiKeysModal({
             <FormControlLabel
               control={
                 <Radio
+                  className={
+                    isCreate
+                      ? 'create-new-key-modal__restricted'
+                      : 'edit-key-modal__restricted'
+                  }
                   id={
                     isCreate
                       ? 'create-new-key-modal__restricted'
