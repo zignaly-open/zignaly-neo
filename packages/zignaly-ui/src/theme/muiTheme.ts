@@ -521,6 +521,9 @@ const createMuiTheme = ({
             width: "17px",
             height: "17px",
           },
+          track: {
+            color: backgrounds.sliderThumb,
+          },
         },
       },
     },
