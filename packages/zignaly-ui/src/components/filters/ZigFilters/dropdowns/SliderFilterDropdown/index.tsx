@@ -5,11 +5,9 @@ import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
-import ZigSelect from "components/inputs/ZigSelect";
-import ZigButton from "components/inputs/ZigButton";
-import ZigTypography from "components/display/ZigTypography";
 import MobileFilterButton from "../atoms/MobileFilterButton";
 import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
+import { SelectFilter } from "../../types";
 
 const SliderFilterDropdown = ({
   resetFilter,
@@ -42,7 +40,7 @@ const SliderFilterDropdown = ({
           resetFilters={resetFilter}
         />
         <MobileFilterButton
-          id={`filters__slider-mobile-${filter.id}-reset`}
+          id={`filters__slider-button-${filter.id}`}
           onClick={() => setDrawerOpen(true)}
           value={`${filter.label}: ${displayValue}`}
         />

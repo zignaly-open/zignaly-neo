@@ -1,5 +1,5 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { CheckboxFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
@@ -7,6 +7,9 @@ import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
 import { useLongestString } from "../util";
 import { FiltersCount } from "../atoms/FilterCount";
+import MobileFilterButton from "../atoms/MobileFilterButton";
+import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
+import { Box } from "@mui/material";
 
 const FILTERS_COUNT_WIDTH = 16;
 
@@ -16,6 +19,7 @@ const CheckboxFilterDropdown = ({
   id = "",
   resetFilter,
   minSpace,
+  mobile,
 }: CheckboxFilterDropdownProps) => {
   const stringAll = "All";
   const stringNone = "None";
@@ -27,6 +31,34 @@ const CheckboxFilterDropdown = ({
   }, [filter.value]);
 
   const longestWidth = useLongestString([stringAll, stringNone]);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  if (mobile) {
+    return (
+      <>
+        <MobileFilterDrawer
+          filters={filter}
+          onChange={onChange}
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          resetFilters={resetFilter}
+        />
+        <MobileFilterButton
+          id={`filters__checkbox-button-${filter.id}`}
+          onClick={() => setDrawerOpen(true)}
+          value={
+            typeof displayValue === "number" ? (
+              <Box display={"flex"} gap="6px" alignItems={"center"}>
+                {filter.label}: <FiltersCount>{displayValue}</FiltersCount>
+              </Box>
+            ) : (
+              `${filter.label}: ${displayValue}`
+            )
+          }
+        />
+      </>
+    );
+  }
 
   return (
     <ZigDropdown

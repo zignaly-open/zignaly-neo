@@ -5,4 +5,6 @@ export type SelectFilterDropdownProps = {
   filter: SelectFilter;
   id?: string;
   minSpace?: number;
+  resetFilter: () => void;
+  mobile: boolean;
 };

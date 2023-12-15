@@ -1,11 +1,10 @@
 import { ExpandMore } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Box } from "@mui/material";
 import ZigTypography from "components/display/ZigTypography";
-import CheckBoxFilter from "components/filters/ZigFilters/filters/CheckBoxFilter";
-import SliderFilter from "components/filters/ZigFilters/filters/SliderFilter";
-import { ZigFilter } from "components/filters/ZigFilters/types";
 import ZigButton from "components/inputs/ZigButton";
-import React, { lazy, useCallback, useState } from "react";
+import React, { lazy, useState } from "react";
+import { MobileFilterDrawerProps } from "./type";
+import Filter from "components/filters/ZigFilters/filters/Filter";
 const SwipeableDrawer = lazy(() => import("@mui/material/SwipeableDrawer"));
 
 const styles = {
@@ -26,34 +25,12 @@ const MobileFilterDrawer = ({
   onClose,
   onChange,
   resetFilters,
-}: {
-  filters: ZigFilter | ZigFilter[];
-  open: boolean;
-  onClose: () => void;
-  resetFilters: () => void;
-}) => {
-  const filters = Array.isArray(filtersProp) ? filtersProp : [filtersProp];
+  prefixId,
+}: MobileFilterDrawerProps) => {
+  const isMulti = Array.isArray(filtersProp);
+  const filters = isMulti ? filtersProp : [filtersProp];
   const [expanded, setExpanded] = useState<string | false>(
     filters.length === 1 ? filters[0].id : false,
-  );
-
-  const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded || filters.length === 1 ? panel : false);
-  };
-
-  const getFilterComponent = useCallback(
-    (filter: ZigFilter) => {
-      switch (filter.type) {
-        case "slider":
-          return <SliderFilter filter={filter} onChange={onChange} />;
-        case "checkbox":
-          return <CheckBoxFilter filter={filter} onChange={onChange} />;
-        case "select":
-          // todo
-          return <></>;
-      }
-    },
-    [onChange],
   );
 
   return (
@@ -68,10 +45,10 @@ const MobileFilterDrawer = ({
         <Box display={"flex"} alignItems="center" mt="3px" mb="19px">
           <Box flex={1}></Box>
           <Box flex={1} justifyContent={"center"} display={"flex"}>
-            <ZigTypography variant="h3">Filters</ZigTypography>
+            <ZigTypography variant="h3">{isMulti ? "Filters" : filters[0].label}</ZigTypography>
           </Box>
           <Box flex={1} justifyContent={"flex-end"} display={"flex"}>
-            <ZigButton variant="text" onClick={resetFilters}>
+            <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__dropdown-reset`}>
               Reset
             </ZigButton>
           </Box>
@@ -81,22 +58,30 @@ const MobileFilterDrawer = ({
             key={filter.id}
             sx={styles.accordion}
             expanded={expanded === filter.id}
-            onChange={handleChange(filter.id)}
+            onChange={(_, isExpanded) =>
+              setExpanded(isExpanded || filters.length === 1 ? filter.id : false)
+            }
           >
             <AccordionSummary
-              expandIcon={filters.length > 1 ? <ExpandMore /> : null}
-              id={`accordion-filter-header-${filter.id}`}
+              expandIcon={filters.length > 1 ? <ExpandMore sx={{ color: "neutral200" }} /> : null}
+              id={`${prefixId}__accordion-filter-header-${filter.id}`}
               sx={styles.accordionSummary}
             >
-              {filter.label}
+              {isMulti ? filter.label : ""}
             </AccordionSummary>
             <AccordionDetails sx={styles.accordionDetails}>
-              {getFilterComponent({ ...filter, label: "" })}
+              <Filter filter={{ ...filter, label: "" }} mobile={true} onChange={onChange} />
             </AccordionDetails>
           </Accordion>
         ))}
       </Box>
-      <ZigButton sx={{ alignSelf: "center", m: "8px 0 24px" }}>Show Results</ZigButton>
+      <ZigButton
+        onClick={onClose}
+        sx={{ alignSelf: "center", m: "8px 0 24px" }}
+        id={`${prefixId}____multi-dropdown-show`}
+      >
+        Show Results
+      </ZigButton>
     </SwipeableDrawer>
   );
 };

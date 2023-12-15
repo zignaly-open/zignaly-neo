@@ -6,4 +6,6 @@ export type SecondaryFiltersButtonProps = {
   filters: ZigFiltersType;
   defaultFilters: ZigFiltersType;
   minSpace?: number;
+  mobile: boolean;
+  prefixId: string;
 };

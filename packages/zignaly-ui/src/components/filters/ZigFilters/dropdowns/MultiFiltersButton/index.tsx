@@ -10,46 +10,20 @@ import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { isEqual } from "lodash-es";
 import { FiltersCount } from "../atoms/FilterCount";
 import { FilterDropdownWrapper } from "../../styles";
-// todo: lazy?
-import { Box, IconButton, SwipeableDrawer } from "@mui/material";
+import { Box } from "@mui/material";
 import ZigButton from "components/inputs/ZigButton";
 import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
+import Filter from "../../filters/Filter";
 
-const SecondaryFiltersButton = ({
+const MultiFiltersButton = ({
   resetFilters,
   filters,
   defaultFilters,
   onChange,
   minSpace = 90,
   mobile = false,
+  prefixId,
 }: SecondaryFiltersButtonProps) => {
-  const getFilterComponent = useCallback(
-    (filter: ZigFilter) => {
-      switch (filter.type) {
-        case "slider":
-          return {
-            element: <SliderFilter filter={filter} onChange={onChange} />,
-          };
-        case "checkbox":
-          return {
-            element: <CheckBoxFilter filter={filter} onChange={onChange} />,
-          };
-        case "select":
-          // Not needed and not used at the moment
-          return {
-            id: `filter-select-${filter.id}`,
-            label: filter.label,
-            children: filter.options.map((option, index) => ({
-              onClick: () => onChange(option.value),
-              id: `filter-select__option-${index}`,
-              label: option.label,
-            })),
-          };
-      }
-    },
-    [onChange],
-  );
-
   const filtersChangedCount = useMemo(() => {
     return filters.filter((filter) => {
       const defaultFilter = defaultFilters?.find((defaultFilter) => defaultFilter.id === filter.id);
@@ -71,6 +45,7 @@ const SecondaryFiltersButton = ({
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
           resetFilters={resetFilters}
+          prefixId={prefixId}
         />
         <Box display="flex" gap="6px" alignItems={"center"}>
           <ZigSettingsIcon width={19} height={16} onClick={() => setDrawerOpen(true)} />
@@ -83,7 +58,7 @@ const SecondaryFiltersButton = ({
   return (
     <FilterDropdownWrapper>
       <ZigDropdown
-        id={`filters__multi-dropdown`}
+        id={`${prefixId}__multi-dropdown`}
         component={({ open }) => (
           <LayoutItem active={open} minWidth={minSpace}>
             <ZigSettingsIcon width={22.5} height={19} />
@@ -91,11 +66,21 @@ const SecondaryFiltersButton = ({
           </LayoutItem>
         )}
         options={filters
-          .flatMap((filter) => [getFilterComponent(filter), { separator: true }])
+          .flatMap((filter) => [
+            {
+              element: (
+                <Filter filter={filter} onChange={onChange} mobile={false} key={filter.id} />
+              ),
+            },
+            { separator: true },
+          ])
           .concat([
             {
               element: (
-                <DropdownResetButton id={`filters__multi-dropdown-reset`} onClick={resetFilters} />
+                <DropdownResetButton
+                  id={`${prefixId}__multi-dropdown-reset`}
+                  onClick={resetFilters}
+                />
               ),
             },
           ])}
@@ -104,4 +89,4 @@ const SecondaryFiltersButton = ({
   );
 };
 
-export default SecondaryFiltersButton;
+export default MultiFiltersButton;

@@ -6,4 +6,5 @@ export type CheckboxFilterDropdownProps = {
   id?: string;
   resetFilter: () => void;
   minSpace?: number;
+  mobile?: boolean;
 };
