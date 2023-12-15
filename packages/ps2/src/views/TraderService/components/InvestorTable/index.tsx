@@ -353,27 +353,34 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                   count: investors?.length,
                 })}
               </ZigTypography>
-              <ZigSearch
-                value={searchFilter}
-                onChange={setSearchFilter}
-                id={`service-investors__search`}
-              />
-
-              <ZigButton
-                id={`service-investors__export`}
-                onClick={() => exporter(processedInvestorsList)}
-                variant={'text'}
-                sx={{
-                  '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                    fill: theme.palette.links,
-                  },
-                }}
-                endIcon={
-                  <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
-                }
+              <Box
+                display={'flex'}
+                flex={1}
+                justifyContent={'flex-end'}
+                gap={2}
               >
-                {t('action:export')}
-              </ZigButton>
+                <ZigSearch
+                  value={searchFilter}
+                  onChange={setSearchFilter}
+                  id={`service-investors__search`}
+                />
+
+                <ZigButton
+                  id={`service-investors__export`}
+                  onClick={() => exporter(processedInvestorsList)}
+                  variant={'text'}
+                  sx={{
+                    '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                      fill: theme.palette.links,
+                    },
+                  }}
+                  endIcon={
+                    <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                  }
+                >
+                  {t('action:export')}
+                </ZigButton>
+              </Box>
             </InvestorCounts>
 
             <ZigTable

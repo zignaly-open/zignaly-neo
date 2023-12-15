@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   useMarketplaceMobileActiveRow,
   useMarketplace,
@@ -27,16 +27,31 @@ import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed'
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { TableId } from 'apis/settings/types';
+import { usePersistTable } from 'apis/settings/use';
+import MarketplaceFilters from '../MarketplaceFilters';
+import {
+  useFilteredServices,
+  useServiceFilters,
+} from '../MarketplaceFilters/use';
 // import TopServicesCards from '../TopServicesCards';
 
-const Marketplace: React.FC = () => {
-  const marketplaceEndpoint = useMarketplace();
-  const { t } = useTranslation('marketplace');
+const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
+  const { t } = useTranslation(['marketplace', 'table']);
   const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const [searchFilter, setSearchFilter] = useState('');
+  const defaultFilters = useServiceFilters(services);
+  const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
+  const filteredServices = useFilteredServices(
+    services,
+    tablePersist.filters,
+    searchFilter,
+  );
+
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
     () => [
@@ -267,65 +282,83 @@ const Marketplace: React.FC = () => {
   );
 
   return (
-    <PageContainer>
-      <LayoutContentWrapper
-        endpoint={marketplaceEndpoint}
-        content={(services: MarketplaceService[]) => (
-          <>
-            <Box
-              sx={{
-                textAlign: 'center',
-                mt: 4,
-                mb: 4,
-              }}
-            >
-              <ZigTypography variant={'h1'} id={'marketplace__title'}>
-                {t('invest-in-services')}
-              </ZigTypography>
-              <ZigTypography
-                variant={'body1'}
-                id={'marketplace__description'}
-                color='neutral300'
-              >
-                {t('invest-in-services-explainer')}
-              </ZigTypography>
-            </Box>
-            {/* <TopServicesCards
+    <>
+      <Box
+        sx={{
+          textAlign: 'center',
+          mt: 4,
+          mb: '50px',
+        }}
+      >
+        <ZigTypography variant={'h1'} id={'marketplace__title'}>
+          {t('invest-in-services')}
+        </ZigTypography>
+        <ZigTypography
+          variant={'body1'}
+          id={'marketplace__description'}
+          color='neutral300'
+        >
+          {t('invest-in-services-explainer')}
+        </ZigTypography>
+      </Box>
+      <TableWrapper>
+        <MarketplaceFilters
+          resultsCount={filteredServices?.length}
+          filters={tablePersist.filters}
+          defaultFilters={defaultFilters}
+          onFiltersChange={tablePersist.filterTable}
+          onSearchChange={setSearchFilter}
+          searchFilter={searchFilter}
+        />
+        {/* <TopServicesCards
               services={services
                 ?.slice()
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
                 .slice(0, 3)}
             /> */}
-            <TableWrapper>
-              <ZigTable
-                onRowClick={
-                  !md
-                    ? (id: string) => {
-                        if (id !== activeRow) setActiveRow(id);
-                      }
-                    : undefined
-                }
-                prefixId={'marketplace'}
-                initialState={{
-                  sorting: [
-                    {
-                      id: 'pnlPercent180t',
-                      desc: true,
-                    },
-                  ],
-                }}
-                columns={columns}
-                data={services}
-                emptyMessage={t('table-search-emptyMessage')}
-                columnVisibility={false}
-                enableSortingRemoval={false}
-              />
-            </TableWrapper>
-          </>
+        {filteredServices && (
+          <ZigTable
+            onRowClick={
+              !md
+                ? (id: string) => {
+                    if (id !== activeRow) setActiveRow(id);
+                  }
+                : undefined
+            }
+            prefixId={TableId.Marketplace}
+            initialState={{
+              sorting: tablePersist.sorting ?? [
+                {
+                  id: 'pnlPercent180t',
+                  desc: true,
+                },
+              ],
+            }}
+            columns={columns}
+            data={filteredServices}
+            emptyMessage={t('table-search-empty-message')}
+            columnVisibility={false}
+            enableSortingRemoval={false}
+            onSortingChange={tablePersist.sortTable}
+          />
+        )}
+      </TableWrapper>
+    </>
+  );
+};
+
+const MarketplaceContainer = () => {
+  const marketplaceEndpoint = useMarketplace();
+  return (
+    <PageContainer>
+      <LayoutContentWrapper
+        endpoint={marketplaceEndpoint}
+        content={(services: MarketplaceService[]) => (
+          <Marketplace services={services} />
         )}
       />
     </PageContainer>
   );
 };
 
-export default Marketplace;
+export default MarketplaceContainer;

@@ -1,25 +1,18 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "checkJs": false,
     "preserveSymlinks": true,
-    "target": "es2021",
-    "module": "esnext",
     "strict": true,
-    "jsx": "react",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
-    "moduleResolution": "node",
-    "skipLibCheck": true,
     "sourceMap": true,
     "plugins": [
       {
         "name": "typescript-styled-plugin"
       }
     ],
-    "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "lib",
     "declarationMap": true
   },
