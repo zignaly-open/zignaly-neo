@@ -1,13 +1,41 @@
 import React, { useState } from "react";
-import { ComponentMeta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
+import ZigTabs from "./";
+import ZigTab from "./components/Tab";
+import ZigTabPanel from "./components/TabPanel";
 
-import Tabs from "./";
-import Tab from "./components/Tab";
-import TabPanel from "./components/TabPanel";
+type PropsAndCustomArgs = React.ComponentProps<typeof ZigTabs> & {
+  tabs: string[];
+  content: string[];
+};
 
-export default {
+const Template = (props: PropsAndCustomArgs) => {
+  const [value, setValue] = useState(0);
+  return (
+    <>
+      <ZigTabs
+        {...props}
+        onChange={(_: React.SyntheticEvent, newValue: any) => {
+          setValue(newValue);
+        }}
+        value={value}
+      >
+        {props.tabs.map((t: string) => (
+          <ZigTab label={t} key={t} />
+        ))}
+      </ZigTabs>
+      {props.content.map((c: string, i: number) => (
+        <ZigTabPanel value={value} index={i} key={c}>
+          {props.content[i]}
+        </ZigTabPanel>
+      ))}
+    </>
+  );
+};
+
+const meta: Meta<PropsAndCustomArgs> = {
   title: "Navigation/ZigTabs",
-  component: Tabs,
+  component: ZigTabs,
   argTypes: {
     tabs: {
       table: {
@@ -20,41 +48,15 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Tabs>;
-
-type IProps = {
-  tabs: string[];
-  content: string[];
+  render: (props) => <Template {...props} />,
 };
+export default meta;
 
-const Template: Story<typeof Tabs & IProps> = (args) => {
-  const [value, setValue] = useState(0);
-  return (
-    <>
-      <Tabs
-        {...args}
-        onChange={(_: React.SyntheticEvent, newValue: any) => {
-          setValue(newValue);
-        }}
-        value={value}
-      >
-        {/* @ts-ignore */}
-        {args.tabs?.map((t: string) => (
-          <Tab label={t} key={t} />
-        ))}
-      </Tabs>
-      {/* @ts-ignore */}
-      {args?.content?.map((c: string, i: number) => (
-        <TabPanel value={value} index={i} key={c}>
-          {args?.content?.[i]}
-        </TabPanel>
-      ))}
-    </>
-  );
-};
+type Story = StoryObj<PropsAndCustomArgs>;
 
-export const TabsExample = Template.bind({});
-TabsExample.args = {
-  tabs: ["Tab 1", "Tab 2", "Tab with long title 3", "Another Tab 4"],
-  content: ["Content 1", "Content 2", "Content 3", "Content 4"],
+export const TabsExample: Story = {
+  args: {
+    tabs: ["Tab 1", "Tab 2", "Tab with long title 3", "Another Tab 4"],
+    content: ["Content 1", "Content 2", "Content 3", "Content 4"],
+  },
 };

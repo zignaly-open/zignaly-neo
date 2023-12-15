@@ -64,7 +64,7 @@ const ZigSlider = forwardRef(
                 labels={labels}
                 min={props.min}
                 max={props.max}
-                value={props.value as number}
+                value={value as number}
                 labelFormat={labelFormatDefaulted}
               />
             )}
@@ -91,7 +91,7 @@ const ZigSlider = forwardRef(
                 labels={labels}
                 min={props.min}
                 max={props.max}
-                value={props.value as number}
+                value={value as number}
                 labelFormat={labelFormatDefaulted}
               />
             )}

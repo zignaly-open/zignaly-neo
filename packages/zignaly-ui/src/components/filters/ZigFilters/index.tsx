@@ -36,6 +36,7 @@ const FilterDropdown = ({
     <FilterDropdownWrapper>
       <Component
         resetFilter={resetFilter}
+        // @ts-ignore
         filter={filter}
         onChange={onChange}
         id={`filters__dropdown-${filter.id}`}

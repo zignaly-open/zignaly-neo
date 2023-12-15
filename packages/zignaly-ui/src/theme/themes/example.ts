@@ -27,6 +27,11 @@ const example: ThemeStyledComponents = {
     yellow: "#ffc800",
     red: "#ff0024",
     contrasting: "#030406",
+    lightGrayBlue: "#707185",
+    darkGreen: "#156747",
+    labelCheckbox: "#4f4f5e",
+    checkboxPrimary: "#2a2a36",
+    lightGrey: "#9ca3af",
   },
   backgrounds: {
     selectInputFill: "#fa7f79",
@@ -52,6 +57,9 @@ const example: ThemeStyledComponents = {
     input: "linear-gradient(90deg, #F96860 0%, #F96860 100%)",
     activeTab: "#f99",
     manageServiceMenuHover: "#f99",
+    breakLineSignUp: "#b7bac7",
+    mobileButtonsWrapper: "#060819",
+    coinIconPlaceholder: "#324054",
   },
   boxShadows: {
     tableHeader: "#fcc",
