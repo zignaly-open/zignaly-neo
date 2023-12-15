@@ -96,6 +96,7 @@ export const InputExtraInfo = (
                 color="neutral100"
                 variant="body2"
                 fontWeight="regular"
+                {...extraInfo.amountProps}
               />
             </ZigTypography>
           )}
