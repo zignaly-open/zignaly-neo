@@ -27,10 +27,18 @@ const CheckboxFilterDropdown = ({
   const displayValue = useMemo(() => {
     if (!filter.value) return stringAll;
     const options = filter.options.filter((option) => filter.value?.includes(option.value));
-    return options.length > 0 ? options.length : stringNone;
+    return options.length > 0
+      ? options.length === 1
+        ? options[0].label
+        : options.length
+      : stringNone;
   }, [filter.value]);
 
-  const longestWidth = useLongestString([stringAll, stringNone]);
+  const longestWidth = useLongestString([
+    stringAll,
+    stringNone,
+    ...filter.options.map((o) => o.label),
+  ]);
 
   if (mobile) {
     return (

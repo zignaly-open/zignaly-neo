@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 export const LABEL_LENGTH_TO_WIDTH = 6.9;
-export const VALUE_LENGTH_TO_WIDTH = 9.4;
+export const VALUE_LENGTH_TO_WIDTH = 9.8;
 
 export const useLongestString = (options: string[]) =>
   useMemo(() => {
