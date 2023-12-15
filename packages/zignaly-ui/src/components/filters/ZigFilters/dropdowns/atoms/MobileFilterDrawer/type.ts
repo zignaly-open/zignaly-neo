@@ -6,5 +6,5 @@ export type MobileFilterDrawerProps = {
   onClose: () => void;
   onChange: (filter: ZigFilter) => void;
   resetFilters: () => void;
-  prefixId: string;
+  prefixId?: string;
 };

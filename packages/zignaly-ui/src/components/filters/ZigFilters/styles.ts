@@ -25,10 +25,6 @@ export const TopDivider = styled(Divider)`
   }
 `;
 
-export const VertDivider = styled(Divider)`
-  border-color: ${({ theme }) => theme.palette.neutral600};
-`;
-
 export const DropdownItem = styled(Box, {
   shouldForwardProp: (p) => p !== "active",
 })<{ active: boolean }>`

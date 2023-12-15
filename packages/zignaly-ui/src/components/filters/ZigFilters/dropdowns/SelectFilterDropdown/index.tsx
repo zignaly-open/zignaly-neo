@@ -1,18 +1,18 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { SelectFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import { useLongestString } from "../util";
 import { DropdownLabel } from "../atoms/DropdownLabel";
-import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
 import MobileFilterButton from "../atoms/MobileFilterButton";
+import { ZigFilter } from "../../types";
 
 const SelectFilterDropdown = ({
   filter,
   onChange,
-  id = "",
   mobile,
   resetFilter,
+  prefixId,
 }: SelectFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     const option = filter.options.find((option) => option.value === filter.value);
@@ -21,29 +21,21 @@ const SelectFilterDropdown = ({
 
   const longestWidth = useLongestString(filter.options.map((o) => o.label));
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
   if (mobile) {
     return (
-      <>
-        <MobileFilterDrawer
-          filters={filter}
-          onChange={onChange}
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          resetFilters={resetFilter}
-        />
-        <MobileFilterButton
-          id={`filters__select-button-${filter.id}`}
-          onClick={() => setDrawerOpen(true)}
-          value={`${filter.label}: ${displayValue}`}
-        />
-      </>
+      <MobileFilterButton
+        filter={filter}
+        onChange={onChange as (filter: ZigFilter) => void}
+        resetFilter={resetFilter}
+        label={`${filter.label}: ${displayValue}`}
+        prefixId={prefixId}
+      />
     );
   }
 
   return (
     <ZigDropdown
-      id={id}
+      id={`${prefixId}__select-${filter.id}`}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel minSpace={longestWidth} label={filter.label} value={displayValue} />

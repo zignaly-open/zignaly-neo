@@ -1,21 +1,20 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import SliderFilter from "../../filters/SliderFilter";
 import { SliderFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
 import MobileFilterButton from "../atoms/MobileFilterButton";
-import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
-import { SelectFilter } from "../../types";
+import { ZigFilter } from "../../types";
 
 const SliderFilterDropdown = ({
   resetFilter,
   filter,
   onChange,
-  id = "",
   minSpace = 65,
   mobile,
+  prefixId,
 }: SliderFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     if (Array.isArray(filter.value)) {
@@ -27,30 +26,21 @@ const SliderFilterDropdown = ({
     return filter.value?.toString();
   }, [filter.value]);
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
   if (mobile) {
     return (
-      <>
-        <MobileFilterDrawer
-          filters={filter}
-          onChange={onChange}
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          resetFilters={resetFilter}
-        />
-        <MobileFilterButton
-          id={`filters__slider-button-${filter.id}`}
-          onClick={() => setDrawerOpen(true)}
-          value={`${filter.label}: ${displayValue}`}
-        />
-      </>
+      <MobileFilterButton
+        filter={filter}
+        onChange={onChange as (filter: ZigFilter) => void}
+        resetFilter={resetFilter}
+        label={`${filter.label}: ${displayValue}`}
+        prefixId={prefixId}
+      />
     );
   }
 
   return (
     <ZigDropdown
-      id={id}
+      id={`${prefixId}__dropdown-${filter.id}`}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel minSpace={minSpace} label={filter.label} value={displayValue} />
@@ -69,7 +59,7 @@ const SliderFilterDropdown = ({
         {
           element: (
             <DropdownResetButton
-              id={`filters__slider-dropdown-${filter.id}-reset`}
+              id={`${prefixId}__slider-dropdown-${filter.id}-reset`}
               onClick={resetFilter}
             />
           ),

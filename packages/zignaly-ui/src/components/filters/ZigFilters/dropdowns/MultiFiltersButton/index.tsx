@@ -1,10 +1,7 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useCallback, useMemo, useState } from "react";
-import SliderFilter from "../../filters/SliderFilter";
+import React, { useMemo, useState } from "react";
 import { LayoutItem } from "./styles";
 import { SecondaryFiltersButtonProps } from "./type";
-import CheckBoxFilter from "../../filters/CheckBoxFilter";
-import { ZigFilter } from "../../types";
 import { ZigSettingsIcon } from "../../../../../icons";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { isEqual } from "lodash-es";

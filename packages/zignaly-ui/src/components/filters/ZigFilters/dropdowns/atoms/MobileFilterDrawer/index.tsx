@@ -78,7 +78,7 @@ const MobileFilterDrawer = ({
       <ZigButton
         onClick={onClose}
         sx={{ alignSelf: "center", m: "8px 0 24px" }}
-        id={`${prefixId}____multi-dropdown-show`}
+        id={`${prefixId}__multi-dropdown-show`}
       >
         Show Results
       </ZigButton>

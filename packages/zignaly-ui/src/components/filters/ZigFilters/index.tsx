@@ -1,54 +1,12 @@
 import React, { useMemo } from "react";
-import { FilterDropdownWrapper, Layout, TopDivider, VertDivider } from "./styles";
+import { Layout, TopDivider } from "./styles";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import ZigSearch from "../ZigSearch";
-import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
-import SelectFilterDropdown from "./dropdowns/SelectFilterDropdown";
 import MultiFiltersButton from "./dropdowns/MultiFiltersButton";
 import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
-import CheckboxFilterDropdown from "./dropdowns/CheckboxFilterDropdown";
-
-const FilterDropdown = ({
-  resetFilter,
-  filter,
-  onChange,
-  separator,
-  mobile,
-}: {
-  resetFilter: () => void;
-  onChange: (filter: ZigFilter) => void;
-  filter: ZigFilter;
-  separator: boolean;
-  mobile: boolean;
-}) => {
-  const Component = useMemo(() => {
-    if (filter.type === "slider") {
-      return SliderFilterDropdown;
-    } else if (filter.type === "select") {
-      return SelectFilterDropdown;
-    } else if (filter.type === "checkbox") {
-      return CheckboxFilterDropdown;
-    }
-    return null;
-  }, [filter.type]);
-
-  if (!Component) return null;
-
-  return (
-    <FilterDropdownWrapper mobile={mobile}>
-      <Component
-        mobile={mobile}
-        resetFilter={resetFilter}
-        filter={filter as never}
-        onChange={onChange}
-        id={`filters__dropdown-${filter.id}`}
-      />
-      {separator && <VertDivider orientation="vertical" flexItem />}
-    </FilterDropdownWrapper>
-  );
-};
+import FilterDropdown from "./dropdowns/FilterDropdown";
 
 const ZigFilters = ({
   defaultFilters,
@@ -146,6 +104,7 @@ const ZigFilters = ({
                   onChange={updateFilter}
                   separator={!sm && (showMultiFilters || i < mainFilters.length - 1)}
                   mobile={sm}
+                  prefixId={prefixId}
                 />
               ))}
               {showMultiFilters && (

@@ -1,5 +1,5 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { CheckboxFilterDropdownProps } from "./type";
 import { DropdownItem } from "../../styles";
 import CheckBoxFilter from "../../filters/CheckBoxFilter";
@@ -8,18 +8,18 @@ import { DropdownLabel } from "../atoms/DropdownLabel";
 import { useLongestString } from "../util";
 import { FiltersCount } from "../atoms/FilterCount";
 import MobileFilterButton from "../atoms/MobileFilterButton";
-import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
 import { Box } from "@mui/material";
+import { ZigFilter } from "../../types";
 
 const FILTERS_COUNT_WIDTH = 16;
 
 const CheckboxFilterDropdown = ({
   filter,
   onChange,
-  id = "",
   resetFilter,
   minSpace,
   mobile,
+  prefixId,
 }: CheckboxFilterDropdownProps) => {
   const stringAll = "All";
   const stringNone = "None";
@@ -32,37 +32,29 @@ const CheckboxFilterDropdown = ({
 
   const longestWidth = useLongestString([stringAll, stringNone]);
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
   if (mobile) {
     return (
-      <>
-        <MobileFilterDrawer
-          filters={filter}
-          onChange={onChange}
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          resetFilters={resetFilter}
-        />
-        <MobileFilterButton
-          id={`filters__checkbox-button-${filter.id}`}
-          onClick={() => setDrawerOpen(true)}
-          value={
-            typeof displayValue === "number" ? (
-              <Box display={"flex"} gap="6px" alignItems={"center"}>
-                {filter.label}: <FiltersCount>{displayValue}</FiltersCount>
-              </Box>
-            ) : (
-              `${filter.label}: ${displayValue}`
-            )
-          }
-        />
-      </>
+      <MobileFilterButton
+        filter={filter}
+        onChange={onChange as (filter: ZigFilter) => void}
+        resetFilter={resetFilter}
+        label={
+          typeof displayValue === "number" ? (
+            <Box display={"flex"} gap="6px" alignItems={"center"}>
+              {filter.label}: <FiltersCount>{displayValue}</FiltersCount>
+            </Box>
+          ) : (
+            `${filter.label}: ${displayValue}`
+          )
+        }
+        prefixId={prefixId}
+      />
     );
   }
 
   return (
     <ZigDropdown
-      id={id}
+      id={`${prefixId}__checkbox-${filter.id}`}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel
