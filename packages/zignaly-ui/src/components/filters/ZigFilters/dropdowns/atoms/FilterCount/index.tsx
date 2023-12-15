@@ -12,4 +12,7 @@ export const FiltersCount = styled(ZigTypography)`
   font-weight: 600;
   font-size: 12px;
   border-radius: 50%;
+  /* font fix... */
+  padding-left: 1px;
+  padding-top: 1px;
 `;

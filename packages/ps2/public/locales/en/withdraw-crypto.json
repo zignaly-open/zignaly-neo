@@ -12,7 +12,7 @@
   "withdrawAddress": {
     "label": "Withdraw to Address:",
     "placeholder": "Paste wallet address here",
-    "warning": "Only send {{network}} {{coin}} tokens to this address",
+    "warning": "Ensure to provide a {{network}} {{coin}} address.",
     "invalid": "Invalid address"
   },
   "withdrawMemo": {
