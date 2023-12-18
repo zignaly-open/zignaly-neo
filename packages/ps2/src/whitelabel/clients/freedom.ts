@@ -7,6 +7,7 @@ export default {
     [Features.Rewards]: false,
     [Features.Trader]: false,
     [Features.NewSignup]: false,
+    [Features.Signup]: false,
   },
   locales: ['en', 'pt', 'es'],
   endpointOverrides: {

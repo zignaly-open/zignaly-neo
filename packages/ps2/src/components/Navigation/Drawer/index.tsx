@@ -157,11 +157,13 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                <Link to={ROUTE_SIGNUP}>
-                  <ZigButton id={'drawer__signup'} variant='contained'>
-                    {t('account-menu.isAuth-button-signUp')}
-                  </ZigButton>
-                </Link>
+                {isFeatureOn(Features.Signup) && (
+                  <Link to={ROUTE_SIGNUP}>
+                    <ZigButton id={'drawer__signup'} variant='contained'>
+                      {t('account-menu.isAuth-button-signUp')}
+                    </ZigButton>
+                  </Link>
+                )}
               </Box>
             )}
             <Divider />

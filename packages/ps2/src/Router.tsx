@@ -183,12 +183,14 @@ const Router: React.FC = () => {
           element={<Invite />}
         />
         <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
-        <Route
-          path={Routes.ROUTE_SIGNUP}
-          element={
-            isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />
-          }
-        />
+        {isFeatureOn(Features.Signup) && (
+          <Route
+            path={Routes.ROUTE_SIGNUP}
+            element={
+              isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />
+            }
+          />
+        )}
         <Route
           path={Routes.ROUTE_FORGOT_PASSWORD}
           element={<ForgotPassword />}
