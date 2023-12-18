@@ -6,6 +6,7 @@ export default {
   featureOverrides: {
     [Features.Trader]: false,
     [Features.NewSignup]: false,
+    [Features.Signup]: false,
   },
   locales: ['en', 'pt', 'es'],
   endpointOverrides: {
