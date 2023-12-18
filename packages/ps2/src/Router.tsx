@@ -198,7 +198,18 @@ const Router: React.FC = () => {
         <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
       </Route>
 
-      <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
+      <Route
+        element={
+          isFeatureOn(Features.NoPublicMarketplace) ? (
+            <AuthenticatedWall />
+          ) : (
+            <Outlet />
+          )
+        }
+      >
+        <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
+      </Route>
+
       <Route path={Routes.ROUTE_404} element={<NotFound />} />
 
       <Route

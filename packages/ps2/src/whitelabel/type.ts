@@ -7,6 +7,7 @@ export enum Features {
   Trader,
   Signup,
   NewSignup,
+  NoPublicMarketplace,
   Subscriptions,
   Kyc,
 }
