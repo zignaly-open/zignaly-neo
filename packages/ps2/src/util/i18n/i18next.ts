@@ -81,7 +81,7 @@ i18n
       ],
     },
     debug: false,
-    ns: ['common', 'error'],
+    ns: ['common', 'error', 'pages'],
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
     fallbackNS: 'common',
