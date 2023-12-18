@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/display/ZigCoinIcon should render without crashing 1`] = `
+<div>
+  <img
+    alt="btc"
+    class=" css-1edqgwj"
+    size="36"
+    src="https://res.cloudinary.com/zignaly/image/upload/c_scale,w_36,h_36,r_max/coins-binance/btc"
+  />
+</div>
+`;
