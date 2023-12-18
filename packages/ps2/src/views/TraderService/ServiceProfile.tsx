@@ -18,6 +18,8 @@ import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
 import InvestDepositModal from '../Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 import { PageContainer } from '@zignaly-open/ui';
 import { getNotLoggedInNavigationRoute } from '../../util/hooks/useMaybeNavigateNotLoggedIn';
+import { isFeatureOn } from '../../whitelabel';
+import { Features } from '../../whitelabel/type';
 
 const ServiceProfile: React.FC = () => {
   const { serviceId } = useParams();
@@ -26,6 +28,17 @@ const ServiceProfile: React.FC = () => {
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
   const isOwner = useIsServiceOwner(serviceId);
+
+  if (!isAuthenticated && isFeatureOn(Features.NoPublicMarketplace)) {
+    return (
+      <Navigate
+        to={getNotLoggedInNavigationRoute()}
+        state={{
+          redirectTo: location,
+        }}
+      />
+    );
+  }
 
   return (
     <>
