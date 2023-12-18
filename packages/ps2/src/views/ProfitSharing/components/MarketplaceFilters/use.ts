@@ -1,9 +1,12 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import { ZigFiltersType, filterFns } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation('marketplace');
   const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'].filter((coin) =>
     services.find((service) => service.ssc === coin),
@@ -19,7 +22,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
       {
         type: 'slider',
         value: [null, null],
-        label: t('filters.returns-months', { count: 6 }),
+        label: t(`filters.returns-months${sm ? '-short' : ''}`, { count: 6 }),
         allowNoMin: true,
         allowNoMax: true,
         min: 0,
@@ -33,7 +36,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         label: t('filters.coins'),
         options: coins.map((coin) => ({ value: coin, label: coin })),
         id: 'coin',
-        showInBar: true,
+        showInBar: sm ? false : true,
       },
       {
         type: 'checkbox',
