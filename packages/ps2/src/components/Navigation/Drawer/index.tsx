@@ -255,17 +255,20 @@ const ZigDrawer = () => {
                   )}
                 </>
               ) : (
-                <ListItem disablePadding onClick={handleDrawerToggle}>
-                  <ListItemButton
-                    to={ROUTE_PROFIT_SHARING}
-                    component={Link}
-                    id='drawer__ps'
-                  >
-                    <ListItemText
-                      primary={t('navigation-menu.profit-sharing')}
-                    />
-                  </ListItemButton>
-                </ListItem>
+                (!isFeatureOn(Features.NoPublicMarketplace) ||
+                  isAuthenticated) && (
+                  <ListItem disablePadding onClick={handleDrawerToggle}>
+                    <ListItemButton
+                      to={ROUTE_PROFIT_SHARING}
+                      component={Link}
+                      id='drawer__ps'
+                    >
+                      <ListItemText
+                        primary={t('navigation-menu.profit-sharing')}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                )
               )}
               {whitelabel.intercomId && (
                 <ListItem disablePadding>
