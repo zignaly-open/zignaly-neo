@@ -33,6 +33,7 @@
   },
   "filters": {
     "returns-months": "{{count}} months returns",
+    "returns-months-short": "{{count}}M Returns",
     "coins": "Coins",
     "type": "Type",
     "fee": "Service Fee",
