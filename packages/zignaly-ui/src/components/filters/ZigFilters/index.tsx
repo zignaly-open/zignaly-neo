@@ -120,7 +120,7 @@ const ZigFilters = ({
               {showMultiFilters && (
                 <MultiFiltersButton
                   resetFilters={resetSecondaryFilters}
-                  filtersChangedCount={filtersChangedCount}
+                  defaultFilters={defaultFilters}
                   filters={secondaryFilters}
                   onChange={updateFilter}
                   mobile={false}
@@ -146,7 +146,7 @@ const ZigFilters = ({
         {xs && secondaryFilters.length > 0 && (
           <MultiFiltersButton
             resetFilters={resetSecondaryFilters}
-            filtersChangedCount={filtersChangedCount}
+            defaultFilters={defaultFilters}
             filters={secondaryFilters}
             onChange={updateFilter}
             mobile={true}
