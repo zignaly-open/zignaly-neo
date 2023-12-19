@@ -11,12 +11,15 @@ const styles = {
   accordion: {
     border: "none",
     margin: "10px 0 10px !important",
+    "&:before": {
+      opacity: "1 !important",
+    },
   },
   accordionSummary: {
     minHeight: "0 !important",
-    ".Mui-expanded": { margin: "0 !important" },
+    ".Mui-expanded": { margin: "12px 0 !important" },
   },
-  accordionDetails: { padding: "14px 24px 2px" },
+  accordionDetails: { padding: "2px 24px" },
 };
 
 const MobileFilterDrawer = ({
