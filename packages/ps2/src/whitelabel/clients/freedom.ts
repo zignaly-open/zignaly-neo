@@ -7,7 +7,7 @@ export default {
     [Features.Rewards]: false,
     [Features.Trader]: false,
     [Features.NewSignup]: false,
-    [Features.Signup]: false,
+    [Features.HideSignup]: true,
     [Features.NoPublicMarketplace]: true,
   },
   locales: ['en', 'pt', 'es'],

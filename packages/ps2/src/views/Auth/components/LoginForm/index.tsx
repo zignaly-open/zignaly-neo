@@ -123,7 +123,7 @@ const LoginForm: React.FC = () => {
             {t('login-form.submit')}
           </ZigButton>
 
-          {isFeatureOn(Features.Signup) && (
+          {!isFeatureOn(Features.HideSignup) && (
             <ZigTypography variant={'body2'} align={'center'}>
               <Trans i18nKey={'login-form.link.signup'} t={t}>
                 <ZigLink

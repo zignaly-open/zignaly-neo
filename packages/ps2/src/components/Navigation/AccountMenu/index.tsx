@@ -78,7 +78,7 @@ function AccountMenu(): React.ReactElement | null {
             </ZigTypography>
           </LoginButton>
         </Link>
-        {isFeatureOn(Features.Signup) && (
+        {!isFeatureOn(Features.HideSignup) && (
           <Link to={ROUTE_SIGNUP}>
             <ZigButton id={'menu__signup'} variant={'contained'}>
               {t('account-menu.isAuth-button-signUp')}
