@@ -21,7 +21,7 @@ const ZigFilters = ({
   prefixId = "filters",
 }: ZigFiltersProps) => {
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
@@ -63,7 +63,7 @@ const ZigFilters = ({
     });
     onChange(updatedFilters);
   };
-  const showMultiFilters = !sm && secondaryFilters.length > 0;
+  const showMultiFilters = !xs && secondaryFilters.length > 0;
 
   return (
     <Box
@@ -74,12 +74,13 @@ const ZigFilters = ({
       flexWrap="wrap"
       gap={1}
       sx={sx}
+      mx={{ sm: 1, md: 0 }}
     >
       <Box display={"flex"} flex={1} flexBasis={{ xs: "100%", md: 0 }}>
         {leftComponent}
       </Box>
       <Box
-        justifyContent={sm ? "flex-start" : "center"}
+        justifyContent={{ sm: "flex-start", md: "center" }}
         display="flex"
         gap={1}
         alignItems="center"
@@ -87,7 +88,7 @@ const ZigFilters = ({
         flexGrow={2}
       >
         <Box display="flex" gap={2} alignItems={"center"} justifyContent="center">
-          <Layout label={label} mobile={sm}>
+          <Layout label={label} mobile={xs}>
             {label && (
               <TopDivider>
                 <ZigTypography variant={"h4"} fontWeight={400}>
@@ -95,15 +96,15 @@ const ZigFilters = ({
                 </ZigTypography>
               </TopDivider>
             )}
-            <Box display={"flex"} alignItems={"center"} {...(sm && { gap: 1, flexWrap: "wrap" })}>
+            <Box display={"flex"} alignItems={"center"} {...(xs && { gap: 1, flexWrap: "wrap" })}>
               {mainFilters.map((filter, i) => (
                 <FilterDropdown
                   resetFilter={() => resetFilter(filter.id)}
                   filter={filter}
                   key={filter.id}
                   onChange={updateFilter}
-                  separator={!sm && (showMultiFilters || i < mainFilters.length - 1)}
-                  mobile={sm}
+                  separator={!xs && (showMultiFilters || i < mainFilters.length - 1)}
+                  mobile={xs}
                   prefixId={prefixId}
                 />
               ))}
@@ -119,15 +120,15 @@ const ZigFilters = ({
               )}
             </Box>
           </Layout>
-          {!sm && (
+          {!xs && (
             <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
               Reset
             </ZigButton>
           )}
         </Box>
       </Box>
-      <Box flex={sm ? 0 : 1} display={"flex"} justifyContent={"flex-end"} position={"relative"}>
-        {sm && secondaryFilters.length > 0 && (
+      <Box flex={xs ? 0 : 1} display={"flex"} justifyContent={"flex-end"} position={"relative"}>
+        {xs && secondaryFilters.length > 0 && (
           <MultiFiltersButton
             resetFilters={resetSecondaryFilters}
             defaultFilters={defaultFilters}
@@ -137,7 +138,7 @@ const ZigFilters = ({
             prefixId={prefixId}
           />
         )}
-        {search !== undefined && onSearchChange && !sm && (
+        {search !== undefined && onSearchChange && !xs && (
           <>
             <Box mr={"46px"}>{rightComponent}</Box>
             <ZigSearch
