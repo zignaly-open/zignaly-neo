@@ -14,14 +14,14 @@ import {
   SubNavList,
 } from "./styles";
 import { useTheme } from "styled-components";
-import Theme from "theme/theme";
+import { Theme } from "@mui/material";
 
 const ZigDropdown: (
   props: ZigDropdownProps,
   innerRef: React.Ref<ZigDropdownHandle>,
 ) => JSX.Element = (
   {
-    id,
+    id = "",
     component,
     options,
     anchorOrigin = {
@@ -81,7 +81,7 @@ const ZigDropdown: (
 
   return (
     <>
-      <Component role="button" onClick={handleToggle}>
+      <Component role="button" onClick={handleToggle} id={id && `${id}-container`}>
         {component({ open: isOpen })}
       </Component>
       {options && (

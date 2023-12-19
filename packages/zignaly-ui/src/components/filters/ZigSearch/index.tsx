@@ -5,13 +5,20 @@ import { Search } from "@mui/icons-material";
 import { ZigCrossIcon, ZigResetIcon } from "../../../icons";
 import { ZigInputStyled } from "./styles";
 
-const ZigSearch = ({ value, onChange, id }: ZigSearchProps) => {
+const ZigSearch = ({ value, onChange, id, sx }: ZigSearchProps) => {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
 
   return (
-    <Box display="flex" gap={2} position={"relative"} alignItems={"center"} m="0 10px 0 auto">
+    <Box
+      display="flex"
+      gap={2}
+      position={"relative"}
+      alignItems={"center"}
+      justifyContent={"flex-end"}
+      sx={sx}
+    >
       <Collapse orientation="horizontal" in={expanded} timeout={expanded ? 150 : 0}>
         <Box
           display="flex"

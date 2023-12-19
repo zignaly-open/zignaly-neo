@@ -115,7 +115,10 @@ function SwapForm({
             error={t(errors.fromCoinAmount?.message)}
             labelInline={false}
             withCoinSelector
-            tokenOptions={coinsAllowedSwapFrom}
+            tokenOptions={coinsAllowedSwapFrom.map((c) => ({
+              ...c,
+              value: c.coin,
+            }))}
             id={'swap-coins-modal__from-input-amount'}
             label={t('service-swap.convert-to-coin', { coin: coinSwapTo })}
             showMaxButton={false}

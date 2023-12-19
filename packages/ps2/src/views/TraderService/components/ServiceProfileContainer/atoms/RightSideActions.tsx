@@ -41,7 +41,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const state = useMemo<RightSideActionStates>(() => {
     if (isInvested.isLoading || tiers.isLoading)
       return RightSideActionStates.Loading;
-    if (isInvested.isError || tiers.isError) return RightSideActionStates.Error;
+    if (isInvested.isError) return RightSideActionStates.Error;
     if (service.liquidated) return RightSideActionStates.Liquidated;
     if (isAuthenticated && isInvested.thisAccount)
       return RightSideActionStates.Invested;
@@ -66,10 +66,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           >
             <Trans i18nKey={'failed-to-load'} t={t}>
               <ZigButton
-                onClick={() => {
-                  isInvested.refetch();
-                  tiers.refetch();
-                }}
+                onClick={isInvested.refetch}
                 variant={'text'}
               ></ZigButton>
             </Trans>
@@ -85,25 +82,25 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         <Box
           display='flex'
           gap={3}
-          alignItems={sm ? 'center' : 'flex-start'}
+          alignItems={'center'}
           justifyContent={'center'}
           flexWrap={lg || !sm ? 'nowrap' : 'wrap'}
         >
-          {isFeatureOn(Features.Referrals) && service.zglySuccessFee > 0 && (
-            <InviteButton service={service} tiersData={tiers} fullSize={sm} />
-          )}
+          {isFeatureOn(Features.Referrals) &&
+            service.zglySuccessFee > 0 &&
+            !tiers.isError && (
+              <InviteButton service={service} tiersData={tiers} fullSize={sm} />
+            )}
           {state === RightSideActionStates.Invested ? (
             sm ? (
               <InvestedButton prefixId={'service-profile'} service={service} />
             ) : (
-              <Box mt={'2px'}>
-                <MobileInvestedButton
-                  service={service}
-                  id={'service-profile__invested'}
-                  investedAmount={investedAmount.toString()}
-                  showMultipleAccountButton
-                />
-              </Box>
+              <MobileInvestedButton
+                service={service}
+                id={'service-profile__invested'}
+                investedAmount={investedAmount.toString()}
+                showMultipleAccountButton
+              />
             )
           ) : (
             <Box mt={!sm && '2px'}>

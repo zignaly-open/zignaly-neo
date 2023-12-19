@@ -12,6 +12,7 @@ const ZigSlider = forwardRef(
       className = "",
       valueLabelFormat,
       labelFormat = true,
+      value,
       ...props
     }: ZigSliderProps,
     ref,
@@ -63,17 +64,24 @@ const ZigSlider = forwardRef(
                 labels={labels}
                 min={props.min}
                 max={props.max}
-                value={props.value as number}
+                value={value as number}
                 labelFormat={labelFormatDefaulted}
               />
             )}
             <Slider
               id={prefixId && `${prefixId}__slider`}
               marks={marks}
-              track={false}
+              track={Array.isArray(value) ? "normal" : false}
               valueLabelDisplay={labels.invertSliderValues ? "off" : "auto"}
               valueLabelFormat={valueLabelFormatDefaulted}
-              sx={{ width: "auto", flex: 1 }}
+              sx={{
+                width: "auto",
+                flex: 1,
+                ".MuiSlider-track": {
+                  opacity: 0.7,
+                },
+              }}
+              value={value}
               {...props}
             />
             {showValues && (
@@ -83,7 +91,7 @@ const ZigSlider = forwardRef(
                 labels={labels}
                 min={props.min}
                 max={props.max}
-                value={props.value as number}
+                value={value as number}
                 labelFormat={labelFormatDefaulted}
               />
             )}

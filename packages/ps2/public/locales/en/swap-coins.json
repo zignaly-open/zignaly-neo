@@ -12,7 +12,6 @@
   "from-input": {
     "label": "Swap from:",
     "placeholder": "Amount"
-
   },
   "to-input": {
     "label": "Swap to:",

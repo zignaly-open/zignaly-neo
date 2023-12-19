@@ -4,8 +4,7 @@ import { ROUTE_DASHBOARD } from '../../routes';
 export default {
   title: 'OBSIDIAN FREEDOM',
   featureOverrides: {
-    [Features.Referrals]: false,
-    [Features.Rewards]: false,
+    [Features.NewSignup]: false,
     [Features.CreateService]: false,
     [Features.NewSignup]: false,
   },

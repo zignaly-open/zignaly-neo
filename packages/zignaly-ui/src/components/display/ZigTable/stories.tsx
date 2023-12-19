@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { NumericFormat } from "react-number-format";
 import ZigTable from ".";
 import ChangeIndicator from "./components/ChangeIndicator";
@@ -12,6 +12,9 @@ import ZigButton from "components/inputs/ZigButton";
 import { Box } from "@mui/material";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
+
+type ZigTableProps = React.ComponentProps<typeof ZigTable>;
+type Story = StoryObj<ZigTableProps>;
 
 const exchangeOrdersData = makeExchangeOrdersData(10);
 const columnHelperExchangeOrders = createColumnHelper<typeof exchangeOrdersData[number]>();
@@ -223,43 +226,47 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
 export default {
   title: "Display/Table/ZigTable",
   component: ZigTable,
-  decorators: [(story) => <div style={{ paddingBottom: "2rem" }}>{story()}</div>],
-} as ComponentMeta<typeof ZigTable>;
+  decorators: [
+    (story: () => JSX.Element) => <div style={{ paddingBottom: "2rem" }}>{story()}</div>,
+  ],
+} as Meta<ZigTableProps>;
 
-const Template: ComponentStory<typeof ZigTable> = (args) => <ZigTable {...args} />;
-
-export const MyCoins = Template.bind({});
-MyCoins.args = {
-  initialState: {
-    sorting: [
-      {
-        id: "totalBalance_value",
-        desc: true,
-      },
-    ],
+export const MyCoins: Story = {
+  args: {
+    initialState: {
+      sorting: [
+        {
+          id: "totalBalance_value",
+          desc: true,
+        },
+      ],
+    },
+    // @ts-ignore: Property 'accessorFn' is missing in type (storybook only), god help me.
+    columns: myCoinsTableColumns,
+    data: myCoinsTableData,
   },
-  // @ts-ignore Property 'accessorFn' is missing in type (storybook only), god help me.
-  columns: myCoinsTableColumns,
-  data: myCoinsTableData,
 };
 
-export const Investors = Template.bind({});
-Investors.args = {
-  // @ts-ignore
-  columns: investorsTableColumns,
-  data: investorsTableData,
+export const Investors: Story = {
+  args: {
+    // @ts-ignore
+    columns: investorsTableColumns,
+    data: investorsTableData,
+  },
 };
 
-export const UserDashBoard = Template.bind({});
-UserDashBoard.args = {
-  // @ts-ignore
-  columns: userTableColumns,
-  data: userTableData,
+export const UserDashBoard: Story = {
+  args: {
+    // @ts-ignore
+    columns: userTableColumns,
+    data: userTableData,
+  },
 };
 
-export const ExchangeOrders = Template.bind({});
-ExchangeOrders.args = {
-  // @ts-ignore
-  columns: exchangeOrdersColumns,
-  data: exchangeOrdersData,
+export const ExchangeOrders: Story = {
+  args: {
+    // @ts-ignore
+    columns: exchangeOrdersColumns,
+    data: exchangeOrdersData,
+  },
 };
