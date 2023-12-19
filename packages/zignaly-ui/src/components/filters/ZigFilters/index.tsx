@@ -1,12 +1,14 @@
 import React, { useMemo } from "react";
 import { Layout, TopDivider } from "./styles";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import ZigSearch from "../ZigSearch";
 import MultiFiltersButton from "./dropdowns/MultiFiltersButton";
 import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
 import FilterDropdown from "./dropdowns/FilterDropdown";
+import { ZigResetIcon } from "icons";
+import { isEqual } from "lodash-es";
 
 const ZigFilters = ({
   defaultFilters,
@@ -65,6 +67,13 @@ const ZigFilters = ({
   };
   const showMultiFilters = !xs && secondaryFilters.length > 0;
 
+  const filtersChangedCount = useMemo(() => {
+    return filters.filter((filter) => {
+      const defaultFilter = defaultFilters?.find((defaultFilter) => defaultFilter.id === filter.id);
+      return !isEqual(filter.value, defaultFilter?.value);
+    }).length;
+  }, [filters, defaultFilters]);
+
   return (
     <Box
       display="flex"
@@ -87,7 +96,7 @@ const ZigFilters = ({
         flex={1}
         flexGrow={5}
       >
-        <Box display="flex" gap={2} alignItems={"center"} justifyContent="center">
+        <Box display="flex" gap={{ xs: 1, sm: 2 }} alignItems={"center"} justifyContent="center">
           <Layout label={label} mobile={xs}>
             {label && (
               <TopDivider>
@@ -111,7 +120,7 @@ const ZigFilters = ({
               {showMultiFilters && (
                 <MultiFiltersButton
                   resetFilters={resetSecondaryFilters}
-                  defaultFilters={defaultFilters}
+                  filtersChangedCount={filtersChangedCount}
                   filters={secondaryFilters}
                   onChange={updateFilter}
                   mobile={false}
@@ -120,7 +129,13 @@ const ZigFilters = ({
               )}
             </Box>
           </Layout>
-          {!xs && (
+          {xs ? (
+            filtersChangedCount > 0 && (
+              <IconButton onClick={resetFilters} sx={{ color: "links" }}>
+                <ZigResetIcon />
+              </IconButton>
+            )
+          ) : (
             <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
               Reset
             </ZigButton>
@@ -131,7 +146,7 @@ const ZigFilters = ({
         {xs && secondaryFilters.length > 0 && (
           <MultiFiltersButton
             resetFilters={resetSecondaryFilters}
-            defaultFilters={defaultFilters}
+            filtersChangedCount={filtersChangedCount}
             filters={secondaryFilters}
             onChange={updateFilter}
             mobile={true}
