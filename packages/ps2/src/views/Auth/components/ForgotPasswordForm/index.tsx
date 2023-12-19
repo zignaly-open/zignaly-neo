@@ -9,6 +9,8 @@ import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useResetPasswordRequestMutation } from 'apis/user/api';
 import AnchorLink from 'components/AnchorLink';
+import { isFeatureOn } from '../../../../whitelabel';
+import { Features } from '../../../../whitelabel/type';
 
 const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
   const { t } = useTranslation(['auth', 'error']);
@@ -100,21 +102,23 @@ const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
           >
             {t('reset-password.send-instructions')}
           </ZigButton>
-          <Box display='flex' flexDirection='column' alignItems='center'>
-            <ZigTypography variant='body2'>
-              {t('reset-password.found-password')}
-            </ZigTypography>
-            <ZigTypography variant='body2'>
-              <Trans
-                i18nKey={'reset-password.login-signup'}
-                t={t}
-                components={[
-                  <AnchorLink to={ROUTE_LOGIN} key='login' />,
-                  <AnchorLink to={ROUTE_SIGNUP} key='signup' />,
-                ]}
-              />
-            </ZigTypography>
-          </Box>
+          {isFeatureOn(Features.Signup) && (
+            <Box display='flex' flexDirection='column' alignItems='center'>
+              <ZigTypography variant='body2'>
+                {t('reset-password.found-password')}
+              </ZigTypography>
+              <ZigTypography variant='body2'>
+                <Trans
+                  i18nKey={'reset-password.login-signup'}
+                  t={t}
+                  components={[
+                    <AnchorLink to={ROUTE_LOGIN} key='login' />,
+                    <AnchorLink to={ROUTE_SIGNUP} key='signup' />,
+                  ]}
+                />
+              </ZigTypography>
+            </Box>
+          )}
         </Box>
       </Form>
     </Box>

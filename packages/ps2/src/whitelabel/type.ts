@@ -5,7 +5,9 @@ export enum Features {
   Rewards,
   Referrals,
   Trader,
+  Signup,
   NewSignup,
+  NoPublicMarketplace,
   Subscriptions,
   Kyc,
 }
