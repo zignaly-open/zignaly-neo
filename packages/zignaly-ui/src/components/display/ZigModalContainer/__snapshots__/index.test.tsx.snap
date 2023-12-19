@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/display/ZigModalContainer should render without crashing 1`] = `
+<div
+  class="MuiBox-root css-1na0hc3"
+  id="modal-container"
+  tabindex="-1"
+>
+  <div
+    class="MuiBox-root css-8tssri"
+  >
+    <div
+      class="css-1ethbpr"
+    />
+  </div>
+  <div
+    class="css-99csgg"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 css-15f8135-MuiTypography-root"
+    >
+      modal
+    </span>
+  </div>
+</div>
+`;
+
+exports[`components/display/ZigModalContainer should render without crashing 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "position",
+  "10": "visibility",
+  "2": "flex-direction",
+  "3": "justify-content",
+  "4": "align-items",
+  "5": "background",
+  "6": "border",
+  "7": "border-radius",
+  "8": "padding",
+  "9": "max-width",
+  "_importants": {
+    "align-items": "",
+    "background": "",
+    "border": "",
+    "border-radius": "",
+    "display": "",
+    "flex-direction": "",
+    "justify-content": "",
+    "max-width": "",
+    "padding": "",
+    "position": "",
+    "visibility": undefined,
+  },
+  "_length": 11,
+  "_onChange": [Function],
+  "_values": {
+    "align-items": "flex-start",
+    "background": "rgb(16, 18, 37)",
+    "background-color": "rgb(16, 18, 37)",
+    "border": "1px solid #35334a",
+    "border-bottom": "1px solid #35334a",
+    "border-bottom-color": "#35334a",
+    "border-bottom-style": "solid",
+    "border-bottom-width": "1px",
+    "border-color": "#35334a",
+    "border-left": "1px solid #35334a",
+    "border-left-color": "#35334a",
+    "border-left-style": "solid",
+    "border-left-width": "1px",
+    "border-radius": "16px",
+    "border-right": "1px solid #35334a",
+    "border-right-color": "#35334a",
+    "border-right-style": "solid",
+    "border-right-width": "1px",
+    "border-style": "solid",
+    "border-top": "1px solid #35334a",
+    "border-top-color": "#35334a",
+    "border-top-style": "solid",
+    "border-top-width": "1px",
+    "border-width": "1px",
+    "display": "flex",
+    "flex-direction": "column",
+    "justify-content": "center",
+    "max-width": "100%",
+    "padding": "40px 56px",
+    "padding-bottom": "40px",
+    "padding-left": "56px",
+    "padding-right": "56px",
+    "padding-top": "40px",
+    "position": "relative",
+    "visibility": "visible",
+  },
+}
+`;
