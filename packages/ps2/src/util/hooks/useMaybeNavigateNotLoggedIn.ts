@@ -7,7 +7,9 @@ import { Features } from '../../whitelabel/type';
 
 export const getNotLoggedInNavigationRoute = (): string => {
   const newUser = !junkyard.get('hasLoggedIn');
-  return newUser && isFeatureOn(Features.Signup) ? ROUTE_SIGNUP : ROUTE_LOGIN;
+  return newUser && !isFeatureOn(Features.HideSignup)
+    ? ROUTE_SIGNUP
+    : ROUTE_LOGIN;
 };
 
 export default function useMaybeNavigateNotLoggedIn(): () => void {

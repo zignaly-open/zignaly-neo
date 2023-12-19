@@ -6,7 +6,7 @@ const defaultFeatureState: Record<Features, boolean> = {
   [Features.Referrals]: true,
   [Features.Trader]: true,
   [Features.NoPublicMarketplace]: false,
-  [Features.Signup]: true,
+  [Features.HideSignup]: false,
   [Features.NewSignup]: true,
   [Features.Subscriptions]: false,
   [Features.Kyc]: false,

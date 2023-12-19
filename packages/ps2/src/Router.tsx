@@ -183,14 +183,16 @@ const Router: React.FC = () => {
           element={<Invite />}
         />
         <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
-        {isFeatureOn(Features.Signup) && (
-          <Route
-            path={Routes.ROUTE_SIGNUP}
-            element={
-              isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />
-            }
-          />
-        )}
+
+        {/* Waaaaait shouldn't we hide this if we have HideSignup feature on? */}
+        {/* Turns out we shouldn't lol */}
+        <Route
+          path={Routes.ROUTE_SIGNUP}
+          element={
+            isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />
+          }
+        />
+
         <Route
           path={Routes.ROUTE_FORGOT_PASSWORD}
           element={<ForgotPassword />}

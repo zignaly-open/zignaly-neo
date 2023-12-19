@@ -157,7 +157,7 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                {isFeatureOn(Features.Signup) && (
+                {!isFeatureOn(Features.HideSignup) && (
                   <Link to={ROUTE_SIGNUP}>
                     <ZigButton id={'drawer__signup'} variant='contained'>
                       {t('account-menu.isAuth-button-signUp')}
