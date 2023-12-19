@@ -1,9 +1,10 @@
 import ZigDropdown from "components/display/ZigDropdown";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { LayoutItem } from "./styles";
 import { SecondaryFiltersButtonProps } from "./type";
 import { ZigSettingsIcon } from "../../../../../icons";
 import { DropdownResetButton } from "../atoms/DropdownResetButton";
+import { isEqual } from "lodash-es";
 import { FiltersCount } from "../atoms/FilterCount";
 import { FilterDropdownWrapper } from "../../styles";
 import { Box } from "@mui/material";
@@ -14,12 +15,19 @@ import Filter from "../../filters/Filter";
 const MultiFiltersButton = ({
   resetFilters,
   filters,
-  filtersChangedCount,
+  defaultFilters,
   onChange,
   minSpace = 90,
   mobile = false,
   prefixId,
 }: SecondaryFiltersButtonProps) => {
+  const filtersChangedCount = useMemo(() => {
+    return filters.filter((filter) => {
+      const defaultFilter = defaultFilters?.find((defaultFilter) => defaultFilter.id === filter.id);
+      return !isEqual(filter.value, defaultFilter?.value);
+    }).length;
+  }, [filters, defaultFilters]);
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   if (mobile) {
