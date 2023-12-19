@@ -1,7 +1,10 @@
 import { Divider } from "@mui/material";
 import { Box, styled } from "@mui/system";
 
-export const Layout = styled(Box)<{ label?: string; mobile?: boolean }>`
+export const Layout = styled(Box, { shouldForwardProp: (p) => p !== "mobile" })<{
+  label?: string;
+  mobile?: boolean;
+}>`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   ${({ mobile }) => mobile && `border: none;`}
   ${({ label }) => label && `border-top: none;`}
