@@ -9,6 +9,8 @@ import ps2Api from './apis/baseApiPs2';
 import { api as referralApi } from './apis/referrals/api';
 import { cleanup } from '@testing-library/react';
 
+jest.useFakeTimers();
+
 // Establish API mocking before all tests.
 beforeAll(() => {
   server.listen();

@@ -16,6 +16,27 @@
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
   "jest": {
+    "testEnvironment": "jsdom",
+    "testEnvironmentOptions": {
+      "customExportConditions": []
+    },
+    "testRegex": "src/.*\\.test\\.(t|j)sx?$",
+    "transform": {
+      "\\.[t]sx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "useESM": true
+      }
+    },
+    "moduleNameMapper": {
+      "(.+)\\.js": "$1"
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts",
+      ".tsx"
+    ],
+    "moduleDirectories": ["node_modules", "src"],
     "transformIgnorePatterns": [
       "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
     ]
@@ -108,6 +129,8 @@
     "customize-cra": "^1.0.0",
     "eslint": "^8.16.0",
     "eslint-loader": "^4.0.2",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.1.1",
     "lint-staged": "^13.0.3",
     "lodash": "^4.17.21",
     "msw": "^1.2.1",
