@@ -19,7 +19,7 @@
     "test:generate-output-with-watch": "jest --json --outputFile=.jest-test-results.json --watch || true",
     "test": "jest -u",
     "test:watch": "jest --watch",
-    "build": "rollup -c",
+    "build": "rm -rf lib; rollup -c",
     "copy-files": "cp -R src/assets lib/assets",
     "lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
     "lint-ci": "echo 'Unless you fix all disabled rules, you knwo what you are'; eslint --fix src --ext .js,.jsx,.ts,.tsx",
