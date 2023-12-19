@@ -33,7 +33,7 @@ const MarketplaceFilters = ({
       onChange={onFiltersChange}
       search={searchFilter}
       onSearchChange={onSearchChange}
-      sx={{ mb: '28px' }}
+      sx={{ mb: { xs: 2, sm: 3.5 } }}
       prefixId={TableId.Marketplace}
     />
   );
