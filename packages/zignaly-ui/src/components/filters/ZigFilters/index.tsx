@@ -85,7 +85,7 @@ const ZigFilters = ({
         gap={1}
         alignItems="center"
         flex={1}
-        flexGrow={2}
+        flexGrow={5}
       >
         <Box display="flex" gap={2} alignItems={"center"} justifyContent="center">
           <Layout label={label} mobile={xs}>
