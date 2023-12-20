@@ -86,7 +86,7 @@ const ZigDrawer = () => {
   };
 
   useEffect(() => {
-    handleDrawerToggle();
+    setMobileOpen(false);
   }, [location]);
 
   return (
