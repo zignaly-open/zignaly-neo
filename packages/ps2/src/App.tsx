@@ -25,7 +25,7 @@ import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
-import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
+import { ZigErrorBoundary } from './util/ZigErrorBoundary';
 import I18NextWhitelabelTranslationOverrideLoader from './util/i18n/i18nextWhitelabel';
 
 if (
@@ -43,25 +43,25 @@ if (
 export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => (
-  <ChunkLoadErrorBoundary>
-    <Provider store={store}>
-      <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
-        <ThemeInheritorMui theme={themeMui}>
-          <ThemeProviderMui theme={themeMui}>
-            <GlobalStyle />
-            <ToastContainer
-              position='top-right'
-              autoClose={5000}
-              hideProgressBar
-              closeOnClick
-              pauseOnFocusLoss
-              draggable
-              closeButton={false}
-              pauseOnHover
-              theme='dark'
-            />
-            <PersistGate persistor={persistor}>
-              <BrowserRouter>
+  <Provider store={store}>
+    <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+      <ThemeInheritorMui theme={themeMui}>
+        <ThemeProviderMui theme={themeMui}>
+          <GlobalStyle />
+          <ToastContainer
+            position='top-right'
+            autoClose={5000}
+            hideProgressBar
+            closeOnClick
+            pauseOnFocusLoss
+            draggable
+            closeButton={false}
+            pauseOnHover
+            theme='dark'
+          />
+          <PersistGate persistor={persistor}>
+            <BrowserRouter>
+              <ZigErrorBoundary>
                 <Suspense fallback={zigSuspenseFallback}>
                   <ModalProvider
                     fallback={<ZModal allowUnauth wide open isLoading />}
@@ -69,13 +69,13 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
                     {children}
                   </ModalProvider>
                 </Suspense>
-              </BrowserRouter>
-            </PersistGate>
-          </ThemeProviderMui>
-        </ThemeInheritorMui>
-      </ThemeInheritorStyled>
-    </Provider>
-  </ChunkLoadErrorBoundary>
+              </ZigErrorBoundary>
+            </BrowserRouter>
+          </PersistGate>
+        </ThemeProviderMui>
+      </ThemeInheritorMui>
+    </ThemeInheritorStyled>
+  </Provider>
 );
 
 function App() {
@@ -86,7 +86,7 @@ function App() {
       <>
         <Header />
         <Suspense fallback={zigSuspenseFallback}>
-          <>
+          <ZigErrorBoundary>
             <I18NextWhitelabelTranslationOverrideLoader />
             <Tracker />
             <UpdateChecker />
@@ -95,7 +95,7 @@ function App() {
             <ChartGradients />
             <Router />
             <BottomNavigation />
-          </>
+          </ZigErrorBoundary>
         </Suspense>
       </>
     </WrappedInProviders>
