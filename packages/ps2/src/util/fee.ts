@@ -24,7 +24,7 @@ export const adjustDiscountFromBackend = (
   serviceTotalFee: number,
   zglyFee: number,
 ) =>
-  backendValue === serviceTotalFee - zglyFee ? serviceTotalFee : backendValue;
+  backendValue >= serviceTotalFee - zglyFee ? serviceTotalFee : backendValue;
 
 export const adjustDiscountToBackend = (
   uiValue: number,
