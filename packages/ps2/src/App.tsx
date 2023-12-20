@@ -25,7 +25,7 @@ import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
-import { ZigErrorBoundary } from './util/ZigErrorBoundary';
+import ZigErrorBoundary from './util/ZigErrorBoundary';
 import I18NextWhitelabelTranslationOverrideLoader from './util/i18n/i18nextWhitelabel';
 
 if (

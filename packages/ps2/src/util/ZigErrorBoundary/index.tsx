@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { ComponentClass, FunctionComponent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ErrorStub from './components/ErorStub';
+
+export const withRouter = function <T>(
+  C: ComponentClass<T> | FunctionComponent<T>,
+) {
+  return (props: T) => {
+    const history = useNavigate();
+    return <C history={history} {...props} />;
+  };
+};
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
-export class ZigErrorBoundary extends React.Component<
+class ZigErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   { error: Error }
 > {
@@ -26,3 +36,5 @@ export class ZigErrorBoundary extends React.Component<
     return this.props.children;
   }
 }
+
+export default withRouter(ZigErrorBoundary);
