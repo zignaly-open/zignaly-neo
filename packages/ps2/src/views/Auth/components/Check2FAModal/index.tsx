@@ -41,6 +41,7 @@ function Check2FAModal({
       close={close}
       title={t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title')}
       titleAlign='center'
+      mobileFullScreen
     >
       <TwoFAForm
         clearOnError

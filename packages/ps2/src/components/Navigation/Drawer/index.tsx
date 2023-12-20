@@ -31,9 +31,9 @@ import {
   useIsAuthenticated,
   useLogout,
 } from 'apis/user/use';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link } from 'react-router-dom';
+import { generatePath, Link, useLocation } from 'react-router-dom';
 import {
   ROUTE_2FA,
   ROUTE_BECOME_TRADER,
@@ -59,6 +59,8 @@ import { Features } from '../../../whitelabel/type';
 const drawerWidth = 250;
 
 const ZigDrawer = () => {
+  const location = useLocation();
+
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -82,6 +84,10 @@ const ZigDrawer = () => {
     changeLocale(locale);
     handleDrawerToggle();
   };
+
+  useEffect(() => {
+    handleDrawerToggle();
+  }, [location]);
 
   return (
     <>
@@ -340,10 +346,13 @@ const ZigDrawer = () => {
                 <List component='div' disablePadding>
                   {languageMap.map((language, index) => (
                     <ListItemButton
-                      sx={{ pl: 4 }}
+                      sx={{
+                        pl: 4,
+                      }}
                       key={language.locale}
                       onClick={() => handleSelectLanguage(language.locale)}
                       id={`drawer-languages__${index.toString()}`}
+                      selected={i18n.language === language.locale}
                     >
                       <ListItemText primary={language.label} />
                     </ListItemButton>

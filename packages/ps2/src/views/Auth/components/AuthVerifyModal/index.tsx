@@ -139,6 +139,7 @@ function AuthVerifyModal({
       close={emailUnconfirmed ? null : onClickClose}
       title={texts.title}
       titleAlign='center'
+      mobileFullScreen
     >
       <Title data-testid={'auth-verify-modal__title'}>
         {texts.description && (
