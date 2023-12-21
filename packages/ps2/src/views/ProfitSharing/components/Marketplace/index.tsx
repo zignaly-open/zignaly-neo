@@ -141,7 +141,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(md || returnsPeriod === 6
+      ...(lg || !returnsPeriod || returnsPeriod === 6
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent180t), {
               id: 'pnlPercent180t',

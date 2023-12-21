@@ -18,7 +18,7 @@ const MarketplaceFilters = ({
 }: MarketplaceFiltersProps) => {
   const { t } = useTranslation('marketplace');
   const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
 
   const ReturnsPicker = useCallback(() => {
     const options = RETURNS_PERIODS.map((n) => ({
@@ -40,7 +40,7 @@ const MarketplaceFilters = ({
   return (
     <ZigFilters
       leftComponent={
-        !md ? (
+        !lg ? (
           <ReturnsPicker />
         ) : (
           <ZigTypography
