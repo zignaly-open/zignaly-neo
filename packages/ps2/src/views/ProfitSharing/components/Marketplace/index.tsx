@@ -32,6 +32,7 @@ import { usePersistTable } from 'apis/settings/use';
 import MarketplaceFilters from '../MarketplaceFilters';
 import {
   useFilteredServices,
+  useReturnsPeriod,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
 import { RETURNS_PERIODS } from '../MarketplaceFilters/contants';
@@ -52,50 +53,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
-  // Mobile returns period
-  const [returnsPeriod, setReturnsPeriod] = useState(6);
-
-  const sortingPeriod = (() => {
-    console.log('persisted', tablePersist.sorting);
-    const sortId = tablePersist.sorting?.[0]?.id;
-    switch (sortId) {
-      case 'pnlPercent180t':
-        return 6;
-      case 'pnlPercent90t':
-        return 3;
-      case 'pnlPercent30t':
-        return 1;
-      default:
-        return null;
-    }
-  })();
-
-  const defaultSortingId = (() => {
-    switch (returnsPeriod) {
-      case 6:
-      default:
-        return 'pnlPercent180t';
-      case 3:
-        return 'pnlPercent90t';
-      case 1:
-        return 'pnlPercent30t';
-    }
-  })();
-
-  useEffect(() => {
-    // On returns period change and resize
-    // Reset sorting if the column is not displayed anymore
-    if (sortingPeriod && sortingPeriod > 1 && sortingPeriod !== returnsPeriod) {
-      if ((!md && returnsPeriod === 6) || (!lg && returnsPeriod === 3)) {
-        tablePersist.sortTable([
-          {
-            id: defaultSortingId,
-            desc: true,
-          },
-        ]);
-      }
-    }
-  }, [returnsPeriod, sortingPeriod, md, lg]);
+  const { returnsPeriod, setReturnsPeriod } = useReturnsPeriod(tablePersist);
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(

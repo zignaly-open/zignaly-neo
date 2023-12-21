@@ -1,6 +1,8 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import { ZigFiltersType, filterFns } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
-import { useMemo } from 'react';
+import { PersistTableDataPruned } from 'apis/settings/types';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
@@ -93,4 +95,37 @@ export const useFilteredServices = (
       );
     });
   }, [services, filters, searchFilter]);
+};
+
+const getMonthsFromColumnId = (columnId: string) => {
+  const days = columnId.match(/\d+/);
+  return days ? Math.round(parseInt(days[0], 10) / 30) : null;
+};
+
+/**
+ * Reset sorted column if it's no longer displayed
+ */
+export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
+  const [returnsPeriod, setReturnsPeriod] = useState('pnlPercent180t');
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
+
+  useEffect(() => {
+    const sortingPeriod = tablePersist.sorting?.[0]?.id;
+    if (sortingPeriod && sortingPeriod !== returnsPeriod) {
+      if (
+        (!md && returnsPeriod === 'pnlPercent180t') ||
+        (!lg && returnsPeriod === 'pnlPercent90t')
+      ) {
+        tablePersist.sortTable([{ id: returnsPeriod, desc: true }]);
+      }
+    }
+  }, [returnsPeriod, md, lg, tablePersist]);
+
+  return {
+    returnsPeriod: getMonthsFromColumnId(returnsPeriod),
+    setReturnsPeriod: (months: number) =>
+      setReturnsPeriod(`pnlPercent${months * 30}t`),
+  };
 };
