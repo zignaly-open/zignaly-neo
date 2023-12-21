@@ -1,8 +1,8 @@
-import { addDays, format, formatDistance } from 'date-fns';
+import { format, formatDistance } from 'date-fns';
 import i18n, { dateFnsLocaleMapping } from '../../../../util/i18n/i18next';
 
-export const formatDateFromDays = (days: string) =>
-  formatLocalizedDistance(addDays(new Date(), Number(days)), new Date());
+export const formatDateFromString = (date: string) =>
+  formatLocalizedDistance(new Date(), new Date(date));
 
 export const formatLocalizedDate = (date: Date | string, dateFormat = 'PP') => {
   return format(typeof date === 'string' ? new Date(date) : date, dateFormat, {
