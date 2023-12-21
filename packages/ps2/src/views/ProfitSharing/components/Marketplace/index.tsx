@@ -34,6 +34,7 @@ import {
   useFilteredServices,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
+import { RETURNS_PERIODS } from '../MarketplaceFilters/contants';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -51,6 +52,50 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
+  // Mobile returns period
+  const [returnsPeriod, setReturnsPeriod] = useState(6);
+
+  const sortingPeriod = (() => {
+    console.log('persisted', tablePersist.sorting);
+    const sortId = tablePersist.sorting?.[0]?.id;
+    switch (sortId) {
+      case 'pnlPercent180t':
+        return 6;
+      case 'pnlPercent90t':
+        return 3;
+      case 'pnlPercent30t':
+        return 1;
+      default:
+        return null;
+    }
+  })();
+
+  const defaultSortingId = (() => {
+    switch (returnsPeriod) {
+      case 6:
+      default:
+        return 'pnlPercent180t';
+      case 3:
+        return 'pnlPercent90t';
+      case 1:
+        return 'pnlPercent30t';
+    }
+  })();
+
+  useEffect(() => {
+    // On returns period change and resize
+    // Reset sorting if the column is not displayed anymore
+    if (sortingPeriod && sortingPeriod > 1 && sortingPeriod !== returnsPeriod) {
+      if ((!md && returnsPeriod === 6) || (!lg && returnsPeriod === 3)) {
+        tablePersist.sortTable([
+          {
+            id: defaultSortingId,
+            desc: true,
+          },
+        ]);
+      }
+    }
+  }, [returnsPeriod, sortingPeriod, md, lg]);
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -138,33 +183,45 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      columnHelper.accessor((row) => Number(row.pnlPercent180t), {
-        id: 'pnlPercent180t',
-        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
-          count: 6,
-        }),
-        cell: (props) => (
-          <ChangeIndicator
-            decimalScale={!md && 0}
-            type={md ? 'graph' : 'default'}
-            id={`marketplace-table__pnl180t-${props.row.original.id}`}
-            style={{
-              fontSize: '18px',
-              lineHeight: '28px',
-            }}
-            value={props.getValue()}
-          />
-        ),
-      }),
-      ...(lg
+      ...(md || returnsPeriod === 6
+        ? [
+            columnHelper.accessor((row) => Number(row.pnlPercent180t), {
+              id: 'pnlPercent180t',
+              header: t(
+                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
+                {
+                  count: 6,
+                },
+              ),
+              cell: (props) => (
+                <ChangeIndicator
+                  decimalScale={!md && 0}
+                  type={md ? 'graph' : 'default'}
+                  id={`marketplace-table__pnl180t-${props.row.original.id}`}
+                  style={{
+                    fontSize: '18px',
+                    lineHeight: '28px',
+                  }}
+                  value={props.getValue()}
+                />
+              ),
+            }),
+          ]
+        : []),
+      ...(lg || returnsPeriod === 3
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent90t), {
               id: 'pnlPercent90t',
-              header: t('table.n-months-pnl', {
-                count: 3,
-              }),
+              header: t(
+                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
+                {
+                  count: 3,
+                },
+              ),
               cell: (props) => (
                 <ChangeIndicator
+                  decimalScale={!md && 0}
+                  type={md ? 'graph' : 'default'}
                   id={`marketplace-table__pnl90t-${props.row.original.id}`}
                   style={{
                     fontSize: '18px',
@@ -278,7 +335,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           ]
         : []),
     ],
-    [t, md, lg],
+    [t, md, lg, returnsPeriod],
   );
 
   return (
@@ -309,6 +366,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           onFiltersChange={tablePersist.filterTable}
           onSearchChange={setSearchFilter}
           searchFilter={searchFilter}
+          returnsPeriod={returnsPeriod}
+          onReturnsPeriodChange={setReturnsPeriod}
         />
         {/* <TopServicesCards
               services={services
@@ -326,19 +385,19 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 : undefined
             }
             prefixId={TableId.Marketplace}
-            initialState={{
-              sorting: tablePersist.sorting ?? [
-                {
-                  id: 'pnlPercent180t',
-                  desc: true,
-                },
-              ],
-            }}
             columns={columns}
             data={filteredServices}
             emptyMessage={t('table-search-empty-message')}
             columnVisibility={false}
             enableSortingRemoval={false}
+            sorting={
+              tablePersist.sorting ?? [
+                {
+                  id: defaultSortingId,
+                  desc: true,
+                },
+              ]
+            }
             onSortingChange={tablePersist.sortTable}
           />
         )}

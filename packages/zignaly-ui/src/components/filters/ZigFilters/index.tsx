@@ -1,14 +1,12 @@
 import React, { useMemo } from "react";
 import { Layout, TopDivider } from "./styles";
-import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import ZigSearch from "../ZigSearch";
 import MultiFiltersButton from "./dropdowns/MultiFiltersButton";
 import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
 import FilterDropdown from "./dropdowns/FilterDropdown";
-import { ZigResetIcon } from "icons";
-import { isEqual } from "lodash-es";
 
 const ZigFilters = ({
   defaultFilters,
@@ -27,8 +25,8 @@ const ZigFilters = ({
 
   const [mainFilters, secondaryFilters] = useMemo(() => {
     return [
-      filters.filter((filter) => filter.showInBar),
-      filters.filter((filter) => !filter.showInBar),
+      filters.filter((filter) => filter.showInBar && !xs),
+      filters.filter((filter) => !filter.showInBar || xs),
     ];
   }, [filters]);
 
@@ -67,13 +65,6 @@ const ZigFilters = ({
   };
   const showMultiFilters = !xs && secondaryFilters.length > 0;
 
-  const filtersChangedCount = useMemo(() => {
-    return filters.filter((filter) => {
-      const defaultFilter = defaultFilters?.find((defaultFilter) => defaultFilter.id === filter.id);
-      return !isEqual(filter.value, defaultFilter?.value);
-    }).length;
-  }, [filters, defaultFilters]);
-
   return (
     <Box
       display="flex"
@@ -85,7 +76,7 @@ const ZigFilters = ({
       sx={sx}
       mx={{ sm: 1, md: 0 }}
     >
-      <Box display={"flex"} flex={1} flexBasis={{ xs: "100%", md: 0 }}>
+      <Box display={"flex"} flex={1} justifyContent={"flex-start"}>
         {leftComponent}
       </Box>
       <Box
@@ -94,7 +85,7 @@ const ZigFilters = ({
         gap={1}
         alignItems="center"
         flex={1}
-        flexGrow={5}
+        flexGrow={xs ? 0 : 5}
       >
         <Box display="flex" gap={{ xs: 1, sm: 2 }} alignItems={"center"} justifyContent="center">
           <Layout label={label} mobile={xs}>
@@ -129,13 +120,7 @@ const ZigFilters = ({
               )}
             </Box>
           </Layout>
-          {xs ? (
-            filtersChangedCount > 0 && (
-              <IconButton onClick={resetFilters} sx={{ color: "links" }}>
-                <ZigResetIcon />
-              </IconButton>
-            )
-          ) : (
+          {!xs && (
             <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
               Reset
             </ZigButton>

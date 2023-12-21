@@ -7,4 +7,6 @@ export type MarketplaceFiltersProps = {
   onSearchChange: (value: string) => void;
   onFiltersChange: (newFilters: ZigFiltersType) => void;
   searchFilter: string;
+  onReturnsPeriodChange: (value: number) => void;
+  returnsPeriod: number;
 };
