@@ -111,8 +111,8 @@ export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
 
+  const sortingPeriod = tablePersist.sorting?.[0]?.id;
   useEffect(() => {
-    const sortingPeriod = tablePersist.sorting?.[0]?.id;
     if (sortingPeriod && sortingPeriod !== returnsPeriod) {
       if (
         (!md && returnsPeriod === 'pnlPercent180t') ||
@@ -121,7 +121,7 @@ export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
         tablePersist.sortTable([{ id: returnsPeriod, desc: true }]);
       }
     }
-  }, [returnsPeriod, md, lg, tablePersist]);
+  }, [sortingPeriod, returnsPeriod, md, lg]);
 
   return {
     returnsPeriod: getMonthsFromColumnId(returnsPeriod),
