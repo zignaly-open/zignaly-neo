@@ -83,7 +83,7 @@ const ZigFilters = ({
         display={"flex"}
         flex={1}
         justifyContent={"flex-start"}
-        flexBasis={!lg && mobileFilters.length ? "100%" : 0}
+        flexBasis={!md && mobileFilters.length ? "100%" : 0}
       >
         {leftComponent}
       </Box>
@@ -105,7 +105,7 @@ const ZigFilters = ({
       <Box
         justifyContent={{
           sm: "flex-start",
-          md: mobileFilters.length ? "flex-start" : "center",
+          md: "center",
           lg: "center",
         }}
         display="flex"
@@ -155,7 +155,7 @@ const ZigFilters = ({
           )}
         </Box>
       </Box>
-      <Box flex={!md ? 0 : 1} display={"flex"} justifyContent={"flex-end"} position={"relative"}>
+      <Box flex={!lg ? 0 : 1} display={"flex"} justifyContent={"flex-end"} position={"relative"}>
         {!md && secondaryFilters.length > 0 && (
           <MultiFiltersButton
             resetFilters={resetSecondaryFilters}
