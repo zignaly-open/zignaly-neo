@@ -166,7 +166,7 @@ export function useChartData({
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
 
-    if (chartType === GraphChartType.pnl_pct_compound) {
+    if (chartType === GraphChartType.pnl_pct_compound && dates.length) {
       // Prepend previous date as 0
       const [firstDate, firstValue] = dates[0];
       if (firstValue !== 0) {
