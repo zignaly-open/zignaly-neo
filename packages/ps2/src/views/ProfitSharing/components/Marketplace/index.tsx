@@ -35,6 +35,7 @@ import {
   useReturnsPeriod,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
+import { DEFAULT_SORTING_ID } from '../MarketplaceFilters/contants';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -45,7 +46,6 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
-  const defaultSortingId = 'pnlPercent180t';
   const defaultFilters = useServiceFilters(services);
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
   const filteredServices = useFilteredServices(
@@ -141,7 +141,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(lg || !returnsPeriod || returnsPeriod === 6
+      ...(lg || returnsPeriod === 'pnlPercent180t'
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent180t), {
               id: 'pnlPercent180t',
@@ -166,7 +166,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(lg || returnsPeriod === 3
+      ...(lg || returnsPeriod === 'pnlPercent90t'
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent90t), {
               id: 'pnlPercent90t',
@@ -324,12 +324,6 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           onFiltersChange={tablePersist.filterTable}
           onSearchChange={setSearchFilter}
           searchFilter={searchFilter}
-          // onReturnsPeriodChange={(value) => {
-          //   setReturnsPeriod(value);
-          //   tablePersist.sortTable([
-          //     { id: `pnlPercent${value * 30}t`, desc: true },
-          //   ]);
-          // }}
         />
         {/* <TopServicesCards
               services={services
@@ -355,7 +349,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             sorting={
               tablePersist.sorting ?? [
                 {
-                  id: defaultSortingId,
+                  id: DEFAULT_SORTING_ID,
                   desc: true,
                 },
               ]

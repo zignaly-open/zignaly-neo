@@ -32,6 +32,7 @@
     "edit": "Click to edit"
   },
   "filters": {
+    "period": "Period",
     "returns-months": "{{count}} Months Returns",
     "coins": "Coins",
     "type": "Type",

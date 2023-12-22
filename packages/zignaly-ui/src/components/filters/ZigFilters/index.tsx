@@ -27,9 +27,8 @@ const ZigFilters = ({
   const [mobileFilters, mainFilters, secondaryFilters] = useMemo(() => {
     return [
       filters.filter((filter) => filter.mobile),
-      // todo: config option to decide if mobile filter should be displayed on md?
-      filters.filter((filter) => (filter.mobile ? md && !lg : filter.showInBar)),
-      filters.filter((filter) => !filter.mobile && !filter.showInBar),
+      filters.filter((filter) => (filter.mobile === "md" ? md && !lg : filter.showInBar)),
+      filters.filter((filter) => !filter.mobile && (!filter.showInBar || !md)),
     ];
   }, [filters]);
 

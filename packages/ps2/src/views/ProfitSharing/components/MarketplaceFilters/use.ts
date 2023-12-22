@@ -1,11 +1,15 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import { ZigFiltersType, filterFns } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
-import { updateFilter } from 'apis/settings/store';
 import { PersistTableDataPruned } from 'apis/settings/types';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import {
+  DEFAULT_PERIOD,
+  DEFAULT_SORTING_ID,
+  RETURNS_PERIODS,
+} from './contants';
+import { getMonthsFromColumnId } from './util';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
   const theme = useTheme();
@@ -24,14 +28,13 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
     return [
       {
         id: 'pnlPeriod',
-        value: 'pnlPercent180t',
+        value: DEFAULT_PERIOD,
         type: 'select',
-        options: ['pnlPercent180t', 'pnlPercent90t'].map((c) => ({
-          value: c,
-          // label: t('table.n-months', { count: 1 }),
-          label: c,
+        options: RETURNS_PERIODS.map((o) => ({
+          value: o,
+          label: t('table.n-months', { count: getMonthsFromColumnId(o) }),
         })),
-        label: 'Period',
+        label: t('filters.period'),
         // showInBar?
         mobile: true,
       },
@@ -115,18 +118,13 @@ export const useFilteredServices = (
   }, [services, filters, searchFilter]);
 };
 
-const getMonthsFromColumnId = (columnId: string) => {
-  const days = columnId.match(/\d+/);
-  return days ? Math.round(parseInt(days[0], 10) / 30) : null;
-};
-
 /**
  * Reset sorted column if it's no longer displayed
  */
 export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
   const returnsPeriod =
     tablePersist.filters.find((f) => f.id === 'pnlPeriod')?.value ??
-    'pnlPercent180t';
+    DEFAULT_PERIOD;
 
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -139,32 +137,10 @@ export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
         (!md && returnsPeriod === 'pnlPercent180t') ||
         (!lg && returnsPeriod === 'pnlPercent90t')
       ) {
-        tablePersist.sortTable([{ id: returnsPeriod, desc: true }]);
+        tablePersist.sortTable([{ id: DEFAULT_SORTING_ID, desc: true }]);
       }
     }
   }, [sortingPeriod, returnsPeriod, md, lg]);
 
-  return getMonthsFromColumnId(returnsPeriod);
-
-  return {
-    returnsPeriod: getMonthsFromColumnId(returnsPeriod),
-    // setReturnsPeriod: (months: number) => {
-    //   const column = `pnlPercent${months * 30}t`;
-    //   // const updatedFilters = tablePersist.filters.map((filter) => {
-    //   //   if (filter.id === filterId) {
-    //   //     return { ...filter, value: column };
-    //   //   }
-    //   //   return filter;
-    //   // });
-    //   dispatch(
-    //     updateFilter({
-    //       id: tablePersist.id,
-    //       filter: { id: filterId, value: column, type: 'select' },
-    //     }),
-    //   );
-    //   // tablePersist.filterTable(updatedFilters);
-
-    //   // setReturnsPeriod(),
-    // },
-  };
+  return returnsPeriod;
 };

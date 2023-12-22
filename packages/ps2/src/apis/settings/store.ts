@@ -26,6 +26,7 @@ export const settingsSlice = createSlice({
       if (!state.table[id]) state.table[id] = {};
       state.table[id].filters = filters;
     },
+    // Not used at the moment
     updateFilter: (
       state,
       action: PayloadAction<{ id: TableId; filter: ZigFilterPruned }>,
@@ -35,7 +36,6 @@ export const settingsSlice = createSlice({
         state.table[id] = {
           filters: [],
         };
-      // if (!state.table[id][filter.id]) state.table[id][filter.id] = {};
 
       let filterFound = false;
       state.table[id].filters = state.table[id].filters?.map((f) => {

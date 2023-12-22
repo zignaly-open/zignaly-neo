@@ -14,23 +14,6 @@ const MarketplaceFilters = ({
 }: MarketplaceFiltersProps) => {
   const { t } = useTranslation('marketplace');
 
-  // const ReturnsPicker = useCallback(() => {
-  //   const options = RETURNS_PERIODS.map((n) => ({
-  //     value: n,
-  //     label: t('table.n-months', { count: n }),
-  //   }));
-
-  //   return (
-  //     <ZigSelect
-  //       options={options}
-  //       value={returnsPeriod}
-  //       onChange={(value) => onReturnsPeriodChange(value)}
-  //       small
-  //       sx={{ minWidth: 120 }}
-  //     />
-  //   );
-  // }, [t, returnsPeriod]);
-
   return (
     <ZigFilters
       leftComponent={
