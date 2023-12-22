@@ -32,10 +32,7 @@ const MultiFiltersButton = ({
 
   if (mobile) {
     return (
-      <ZigButton
-        variant="outlined"
-        sx={{ py: "3px", px: filtersChangedCount > 0 ? "10px" : "12px", minWidth: 0 }}
-      >
+      <>
         <MobileFilterDrawer
           filters={filters}
           onChange={onChange}
@@ -44,11 +41,19 @@ const MultiFiltersButton = ({
           resetFilters={resetFilters}
           prefixId={prefixId}
         />
-        <Box display="flex" gap="6px" alignItems={"center"}>
-          <ZigSettingsIcon width={19} height={16} onClick={() => setDrawerOpen(true)} />
-          {filtersChangedCount > 0 && <FiltersCount>{filtersChangedCount}</FiltersCount>}
-        </Box>
-      </ZigButton>
+        <ZigButton
+          variant="outlined"
+          sx={{ py: "3px", px: filtersChangedCount > 0 ? "10px" : "12px", minWidth: 0 }}
+          onClick={() => {
+            setDrawerOpen(true);
+          }}
+        >
+          <Box display="flex" gap="6px" alignItems={"center"}>
+            <ZigSettingsIcon width={19} height={16} />
+            {filtersChangedCount > 0 && <FiltersCount>{filtersChangedCount}</FiltersCount>}
+          </Box>
+        </ZigButton>
+      </>
     );
   }
 

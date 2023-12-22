@@ -45,7 +45,7 @@ function ZigTableData<T extends object>({
     initialState.sorting ?? [],
   );
   useUpdateEffect(() => {
-    onSortingChange?.(sorting);
+    onSortingChange?.(internalSorting);
   }, [internalSorting]);
 
   const [columnVisibility, setColumnVisibility] = React.useState(

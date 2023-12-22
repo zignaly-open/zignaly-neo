@@ -12,8 +12,6 @@ import {
 import { getMonthsFromColumnId } from './util';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
-  const theme = useTheme();
-  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('marketplace');
   const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'].filter((coin) =>
     services.find((service) => service.ssc === coin),
