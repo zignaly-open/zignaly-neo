@@ -46,6 +46,5 @@ export const usePersistTable: IOverload = (
     filterTable: (newFilters: ZigFiltersType) => {
       dispatch(filterTable({ id, filters: pruneFilters(newFilters) }));
     },
-    id,
   };
 };

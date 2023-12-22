@@ -187,7 +187,9 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         <>
           <ZigFilters
             leftComponent={
-              <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
+              <ZigTypography whiteSpace={'nowrap'} variant={'h2'}>
+                {t('table.title')}
+              </ZigTypography>
             }
             rightComponent={
               <ZigButton
@@ -208,7 +210,6 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             defaultFilters={defaultFilters}
             filters={tablePersist.filters}
             onChange={tablePersist.filterTable}
-            sx={{ mb: '36px' }}
           />
         </>
       )}

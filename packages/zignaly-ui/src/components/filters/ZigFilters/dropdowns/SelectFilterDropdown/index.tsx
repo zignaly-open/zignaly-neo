@@ -27,7 +27,6 @@ const SelectFilterDropdown = ({
         filter={filter}
         onChange={onChange as (filter: ZigFilter) => void}
         resetFilter={resetFilter}
-        // label={`${filter.label ? `${filter.label}: ` : ""}${displayValue}`}
         label={displayValue}
         prefixId={prefixId}
       />

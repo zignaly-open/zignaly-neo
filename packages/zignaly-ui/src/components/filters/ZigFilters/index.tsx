@@ -30,7 +30,7 @@ const ZigFilters = ({
       filters.filter((filter) => (filter.mobile === "md" ? md && !lg : filter.primary)),
       filters.filter((filter) => !filter.mobile && (!filter.primary || !md)),
     ];
-  }, [filters]);
+  }, [filters, md, lg]);
 
   const updateFilter = (updatedFilter: ZigFilter) => {
     const updatedFilters = filters.map((filter) => {
@@ -75,10 +75,16 @@ const ZigFilters = ({
       justifyContent="center"
       flexWrap="wrap"
       gap={1}
-      sx={sx}
+      mb={{ xs: 2, sm: 3.5 }}
       mx={{ sm: 1, md: 0 }}
+      sx={sx}
     >
-      <Box display={"flex"} flex={1} justifyContent={"flex-start"} flexBasis={lg ? 0 : "100%"}>
+      <Box
+        display={"flex"}
+        flex={1}
+        justifyContent={"flex-start"}
+        flexBasis={!lg && mobileFilters.length ? "100%" : 0}
+      >
         {leftComponent}
       </Box>
       {!md && (
@@ -97,7 +103,11 @@ const ZigFilters = ({
         </Box>
       )}
       <Box
-        justifyContent={{ sm: "flex-start", lg: "center" }}
+        justifyContent={{
+          sm: "flex-start",
+          md: mobileFilters.length ? "flex-start" : "center",
+          lg: "center",
+        }}
         display="flex"
         gap={1}
         alignItems="center"

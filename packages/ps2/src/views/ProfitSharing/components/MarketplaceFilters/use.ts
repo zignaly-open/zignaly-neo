@@ -8,12 +8,13 @@ import {
   DEFAULT_PERIOD,
   DEFAULT_SORTING_ID,
   RETURNS_PERIODS,
+  SERVICES_COINS,
 } from './contants';
 import { getMonthsFromColumnId } from './util';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
-  const coins = ['USDT', 'USDC', 'BNB', 'ETH', 'BTC'].filter((coin) =>
+  const coins = SERVICES_COINS.filter((coin) =>
     services.find((service) => service.ssc === coin),
   );
   const maxPnL = services.reduce((prev, current) => {
