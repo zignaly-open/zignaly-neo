@@ -1,10 +1,8 @@
-import { ZigFilters, ZigSelect, ZigTypography } from '@zignaly-open/ui';
-import React, { useCallback, useState } from 'react';
+import { ZigFilters, ZigTypography } from '@zignaly-open/ui';
+import React from 'react';
 import { MarketplaceFiltersProps } from './types';
 import { useTranslation } from 'react-i18next';
 import { TableId } from 'apis/settings/types';
-import { useMediaQuery, useTheme } from '@mui/material';
-import { RETURNS_PERIODS } from './contants';
 
 const MarketplaceFilters = ({
   filters,
@@ -13,47 +11,39 @@ const MarketplaceFilters = ({
   onFiltersChange,
   searchFilter,
   onSearchChange,
-  returnsPeriod,
-  onReturnsPeriodChange,
 }: MarketplaceFiltersProps) => {
   const { t } = useTranslation('marketplace');
-  const theme = useTheme();
-  const lg = useMediaQuery(theme.breakpoints.up('lg'));
 
-  const ReturnsPicker = useCallback(() => {
-    const options = RETURNS_PERIODS.map((n) => ({
-      value: n,
-      label: t('table.n-months', { count: n }),
-    }));
+  // const ReturnsPicker = useCallback(() => {
+  //   const options = RETURNS_PERIODS.map((n) => ({
+  //     value: n,
+  //     label: t('table.n-months', { count: n }),
+  //   }));
 
-    return (
-      <ZigSelect
-        options={options}
-        value={returnsPeriod}
-        onChange={(value) => onReturnsPeriodChange(value)}
-        small
-        sx={{ minWidth: 120 }}
-      />
-    );
-  }, [t, returnsPeriod]);
+  //   return (
+  //     <ZigSelect
+  //       options={options}
+  //       value={returnsPeriod}
+  //       onChange={(value) => onReturnsPeriodChange(value)}
+  //       small
+  //       sx={{ minWidth: 120 }}
+  //     />
+  //   );
+  // }, [t, returnsPeriod]);
 
   return (
     <ZigFilters
       leftComponent={
-        !lg ? (
-          <ReturnsPicker />
-        ) : (
-          <ZigTypography
-            variant='h2'
-            fontWeight={400}
-            id='marketplace__services-count'
-            whiteSpace={'nowrap'}
-          >
-            {t('n-profit-sharing-services', {
-              count: resultsCount,
-            })}
-          </ZigTypography>
-        )
+        <ZigTypography
+          variant='h2'
+          fontWeight={400}
+          id='marketplace__services-count'
+          whiteSpace={'nowrap'}
+        >
+          {t('n-profit-sharing-services', {
+            count: resultsCount,
+          })}
+        </ZigTypography>
       }
       filters={filters}
       defaultFilters={defaultFilters}

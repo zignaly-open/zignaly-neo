@@ -35,7 +35,6 @@ import {
   useReturnsPeriod,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
-import { RETURNS_PERIODS } from '../MarketplaceFilters/contants';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -46,6 +45,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [searchFilter, setSearchFilter] = useState('');
+  const defaultSortingId = 'pnlPercent180t';
   const defaultFilters = useServiceFilters(services);
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
   const filteredServices = useFilteredServices(
@@ -53,7 +53,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
-  const { returnsPeriod, setReturnsPeriod } = useReturnsPeriod(tablePersist);
+  const returnsPeriod = useReturnsPeriod(tablePersist);
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -324,8 +324,12 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           onFiltersChange={tablePersist.filterTable}
           onSearchChange={setSearchFilter}
           searchFilter={searchFilter}
-          returnsPeriod={returnsPeriod}
-          onReturnsPeriodChange={setReturnsPeriod}
+          // onReturnsPeriodChange={(value) => {
+          //   setReturnsPeriod(value);
+          //   tablePersist.sortTable([
+          //     { id: `pnlPercent${value * 30}t`, desc: true },
+          //   ]);
+          // }}
         />
         {/* <TopServicesCards
               services={services
