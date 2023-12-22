@@ -13,7 +13,7 @@ import { Heading, Layout, ZigTableWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
 import { useInvestments } from '../../../../apis/investment/use';
 import BigNumber from 'bignumber.js';
-import { formatDateFromDays } from './util';
+import { formatDateFromString } from './util';
 import { Investment } from '../../../../apis/investment/types';
 import { BalanceSummary } from '../BalanceSummary';
 import { ServiceName } from '../ServiceName';
@@ -21,7 +21,6 @@ import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZRouteModal } from '../../../../components/ZModal/use';
-import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import {
@@ -53,8 +52,6 @@ const MyDashboard: React.FC = () => {
 
   const onClickEditInvestment = (service: Investment) =>
     showEditInvestmentModal({ serviceId: service.serviceId });
-  const calculateServiceAge = (createdAt: string) =>
-    differenceInDays(new Date(), new Date(createdAt)).toString();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
@@ -242,20 +239,20 @@ const MyDashboard: React.FC = () => {
               header: t('tableHeader.all.title'),
               id: 'pnlPctLc',
               meta: { subtitle: t('tableHeader.all.subtitle') },
-              cell: ({ getValue, row: { original } }) => (
-                <ChangeIndicator
-                  id={`portfolio-table__pnlPctLc-${original.serviceId}`}
-                  type='default'
-                  normalized
-                  value={getValue()}
-                  label={formatDateFromDays(
-                    calculateServiceAge(original.createdAt),
-                  )}
-                  labelTooltip={t('tooltip-date', {
-                    date: new Date(original.createdAt).toLocaleDateString(),
-                  })}
-                />
-              ),
+              cell: ({ getValue, row: { original } }) => {
+                return (
+                  <ChangeIndicator
+                    id={`portfolio-table__pnlPctLc-${original.serviceId}`}
+                    type='default'
+                    normalized
+                    value={getValue()}
+                    label={formatDateFromString(original.createdAt)}
+                    labelTooltip={t('tooltip-date', {
+                      date: new Date(original.createdAt).toLocaleDateString(),
+                    })}
+                  />
+                );
+              },
               sortingFn: 'auto',
             }),
             columnHelper.display({

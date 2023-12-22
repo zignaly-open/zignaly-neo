@@ -29,7 +29,7 @@
     "test:generate-output-with-watch": "jest --json --outputFile=.jest-test-results.json --watch || true",
     "test": "jest -u",
     "test:watch": "jest --watch",
-    "build": "rollup -c",
+    "build": "rm -rf lib; rollup -c",
     "copy-files": "cp -R src/assets lib/assets",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix ./src --ext .ts,.tsx",

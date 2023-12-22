@@ -183,12 +183,16 @@ const Router: React.FC = () => {
           element={<Invite />}
         />
         <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
+
+        {/* Waaaaait shouldn't we hide this if we have HideSignup feature on? */}
+        {/* Turns out we shouldn't lol */}
         <Route
           path={Routes.ROUTE_SIGNUP}
           element={
             isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />
           }
         />
+
         <Route
           path={Routes.ROUTE_FORGOT_PASSWORD}
           element={<ForgotPassword />}
@@ -196,7 +200,18 @@ const Router: React.FC = () => {
         <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
       </Route>
 
-      <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
+      <Route
+        element={
+          isFeatureOn(Features.NoPublicMarketplace) ? (
+            <AuthenticatedWall />
+          ) : (
+            <Outlet />
+          )
+        }
+      >
+        <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
+      </Route>
+
       <Route path={Routes.ROUTE_404} element={<NotFound />} />
 
       <Route

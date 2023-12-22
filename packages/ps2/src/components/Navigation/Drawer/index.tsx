@@ -155,11 +155,13 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                <Link to={ROUTE_SIGNUP}>
-                  <ZigButton id={'drawer__signup'} variant='contained'>
-                    {t('account-menu.isAuth-button-signUp')}
-                  </ZigButton>
-                </Link>
+                {!isFeatureOn(Features.HideSignup) && (
+                  <Link to={ROUTE_SIGNUP}>
+                    <ZigButton id={'drawer__signup'} variant='contained'>
+                      {t('account-menu.isAuth-button-signUp')}
+                    </ZigButton>
+                  </Link>
+                )}
               </Box>
             )}
             <Divider />
@@ -251,17 +253,20 @@ const ZigDrawer = () => {
                   )}
                 </>
               ) : (
-                <ListItem disablePadding onClick={handleDrawerToggle}>
-                  <ListItemButton
-                    to={ROUTE_PROFIT_SHARING}
-                    component={Link}
-                    id='drawer__ps'
-                  >
-                    <ListItemText
-                      primary={t('navigation-menu.profit-sharing')}
-                    />
-                  </ListItemButton>
-                </ListItem>
+                (!isFeatureOn(Features.NoPublicMarketplace) ||
+                  isAuthenticated) && (
+                  <ListItem disablePadding onClick={handleDrawerToggle}>
+                    <ListItemButton
+                      to={ROUTE_PROFIT_SHARING}
+                      component={Link}
+                      id='drawer__ps'
+                    >
+                      <ListItemText
+                        primary={t('navigation-menu.profit-sharing')}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                )
               )}
               {whitelabel.intercomId && (
                 <ListItem disablePadding>

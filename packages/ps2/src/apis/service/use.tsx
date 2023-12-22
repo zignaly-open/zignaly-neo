@@ -29,6 +29,8 @@ import {
   formatMonthDay,
   formatMonthDayYear,
 } from '../../views/Dashboard/components/MyDashboard/util';
+import { isFeatureOn } from '../../whitelabel';
+import { Features } from '../../whitelabel/type';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();
@@ -56,7 +58,18 @@ export const useTraderServiceInvestors = useTraderServiceInvestorsQuery;
 
 export const useTraderServiceManagement = useTraderServiceManagementQuery;
 
-export const useServiceDetails = useTraderServiceDetailsQuery;
+export const useServiceDetails: typeof useTraderServiceDetailsQuery = (
+  serviceId: string,
+  options?,
+) => {
+  const isAuthenticated = useIsAuthenticated();
+  const doNotLoadServicesForUnauth =
+    !isAuthenticated && isFeatureOn(Features.NoPublicMarketplace);
+  return useTraderServiceDetailsQuery(serviceId, {
+    ...(options || {}),
+    skip: options?.skip || doNotLoadServicesForUnauth,
+  });
+};
 
 export const useTraderServiceBalance = useTraderServiceBalanceQuery;
 

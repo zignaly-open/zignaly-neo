@@ -12,6 +12,8 @@ import { Box } from '@mui/material';
 import { LoginPayload, UserAccessLevel } from '../../../../apis/user/types';
 import { useZModal } from 'components/ZModal/use';
 import AlertModal from 'components/ZModal/modals/AlertModal';
+import { isFeatureOn } from '../../../../whitelabel';
+import { Features } from '../../../../whitelabel/type';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -121,14 +123,18 @@ const LoginForm: React.FC = () => {
             {t('login-form.submit')}
           </ZigButton>
 
-          <ZigTypography variant={'body2'} align={'center'}>
-            <Trans i18nKey={'login-form.link.signup'} t={t}>
-              <ZigLink
-                id={'login__signup'}
-                onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
-              />
-            </Trans>
-          </ZigTypography>
+          {!isFeatureOn(Features.HideSignup) && (
+            <ZigTypography variant={'body2'} align={'center'}>
+              <Trans i18nKey={'login-form.link.signup'} t={t}>
+                <ZigLink
+                  id={'login__signup'}
+                  onClick={() =>
+                    navigate(ROUTE_SIGNUP, { state: locationState })
+                  }
+                />
+              </Trans>
+            </ZigTypography>
+          )}
         </Action>
       </Form>
     </Box>
