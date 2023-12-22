@@ -19,7 +19,7 @@ const returnsFilter: SliderFilterType = {
   min: 0,
   max: 100,
   id: "returns",
-  showInBar: true,
+  primary: true,
 };
 
 const coinFilter: SelectFilter = {
@@ -32,7 +32,7 @@ const coinFilter: SelectFilter = {
   ],
   id: "coin",
   value: null,
-  showInBar: true,
+  primary: true,
 };
 
 const typeFilter: CheckboxFilter = {

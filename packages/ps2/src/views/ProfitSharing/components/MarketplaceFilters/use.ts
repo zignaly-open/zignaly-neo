@@ -35,7 +35,6 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
           label: t('table.n-months', { count: getMonthsFromColumnId(o) }),
         })),
         label: t('filters.period'),
-        // showInBar?
         mobile: true,
       },
       {
@@ -47,8 +46,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         min: 0,
         max: maxPnL,
         id: 'returns',
-        // primary
-        showInBar: true,
+        primary: true,
       },
       {
         type: 'checkbox',
@@ -56,7 +54,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         label: t('filters.coins'),
         options: coins.map((coin) => ({ value: coin, label: coin })),
         id: 'coin',
-        showInBar: true,
+        primary: true,
       },
       {
         type: 'checkbox',

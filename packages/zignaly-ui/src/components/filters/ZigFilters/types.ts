@@ -22,7 +22,7 @@ export type ZigFiltersPruned = ZigFilterPruned[];
 
 export type BaseFilter = {
   id: string;
-  showInBar?: boolean;
+  primary?: boolean;
   /**
    * Special filter to display on mobile only. Pass "md" to also display it on md screen size.
    *  */

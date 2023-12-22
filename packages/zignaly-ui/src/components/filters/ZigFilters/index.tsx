@@ -27,8 +27,8 @@ const ZigFilters = ({
   const [mobileFilters, mainFilters, secondaryFilters] = useMemo(() => {
     return [
       filters.filter((filter) => filter.mobile),
-      filters.filter((filter) => (filter.mobile === "md" ? md && !lg : filter.showInBar)),
-      filters.filter((filter) => !filter.mobile && (!filter.showInBar || !md)),
+      filters.filter((filter) => (filter.mobile === "md" ? md && !lg : filter.primary)),
+      filters.filter((filter) => !filter.mobile && (!filter.primary || !md)),
     ];
   }, [filters]);
 
@@ -58,7 +58,7 @@ const ZigFilters = ({
 
   const resetSecondaryFilters = () => {
     const updatedFilters = filters.map((filter) => {
-      if (!filter.showInBar) {
+      if (!filter.primary) {
         return defaultFilters.find((defaultFilter) => defaultFilter.id === filter.id) as ZigFilter;
       }
       return filter;

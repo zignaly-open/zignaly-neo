@@ -135,7 +135,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         label: t('table.filter-type'),
         options: rewardTypeOptions,
         id: 'type',
-        showInBar: true,
+        primary: true,
       },
       {
         type: 'select',
@@ -143,7 +143,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         label: t('table.filter-status'),
         options: statusOptions,
         id: 'status',
-        showInBar: true,
+        primary: true,
       },
     ],
     [rewardTypeOptions, statusOptions, t],
