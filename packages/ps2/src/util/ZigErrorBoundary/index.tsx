@@ -13,6 +13,7 @@ export const withRouter = function <T>(
 
 interface ErrorBoundaryProps {
   href?: string;
+  fallback?: JSX.Element;
   children: React.ReactNode;
 }
 
@@ -38,7 +39,7 @@ class ZigErrorBoundary extends React.Component<
 
   render() {
     if (this.state.error) {
-      return <ErrorStub />;
+      return this.props.fallback || <ErrorStub />;
     }
     return this.props.children;
   }
