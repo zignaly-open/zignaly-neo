@@ -33,7 +33,7 @@ export const Default: Story = {
         min: 0,
         max: 100,
         id: "returns",
-        showInBar: true,
+        primary: true,
       },
       {
         type: "select",
@@ -45,7 +45,7 @@ export const Default: Story = {
           { value: "USDC", label: "USDC" },
         ],
         id: "coin",
-        showInBar: true,
+        primary: true,
       },
       {
         type: "checkbox",
