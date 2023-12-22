@@ -20,12 +20,16 @@ export const renderWithProvidersUi = (ui: JSX.Element, renderOptions = {}) => {
 };
 
 const createMatchMedia = (width: number) => {
-  return (query: any) => {
+  return (query: string) => {
     return {
       matches: mediaQuery.match(query, { width }),
       media: "",
       addListener: () => {},
       removeListener: () => {},
+      onchange: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => true,
     };
   };
 };
