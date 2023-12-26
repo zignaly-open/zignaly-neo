@@ -57,11 +57,8 @@ const ZigFilters = ({
   };
 
   const resetSecondaryFilters = () => {
-    const updatedFilters = filters.map((filter) => {
-      if (!filter.primary) {
-        return defaultFilters.find((defaultFilter) => defaultFilter.id === filter.id) as ZigFilter;
-      }
-      return filter;
+    const updatedFilters = secondaryFilters.map((filter) => {
+      return defaultFilters.find((defaultFilter) => defaultFilter.id === filter.id) as ZigFilter;
     });
     onChange(updatedFilters);
   };
