@@ -1,4 +1,5 @@
-import { styled } from "@mui/system";
+import { FontStyle, TypographyOptions } from "@mui/material/styles/createTypography";
+import { css, styled } from "@mui/system";
 import ZigTypography from "components/display/ZigTypography";
 
 export const FiltersCount = styled(ZigTypography)`
@@ -12,7 +13,11 @@ export const FiltersCount = styled(ZigTypography)`
   font-weight: 600;
   font-size: 12px;
   border-radius: 50%;
-  /* Avoid Avenir Next due to bottom margin */
-  font-family: Roboto, Helvetica, Arial;
+  ${({ theme }) =>
+    (theme.typography as FontStyle)?.fontFamily?.includes("Avenir Next") &&
+    css`
+      /* Avoid Avenir Next due to bottom margin centering issue */
+      font-family: Roboto, Helvetica, Arial;
+    `};
   letter-spacing: normal;
 `;
