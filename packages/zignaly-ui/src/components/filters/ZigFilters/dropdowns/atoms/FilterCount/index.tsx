@@ -12,7 +12,7 @@ export const FiltersCount = styled(ZigTypography)`
   font-weight: 600;
   font-size: 12px;
   border-radius: 50%;
-  /* font fix... */
-  padding-top: 1px;
+  /* Avoid Avenir Next due to bottom margin */
+  font-family: Roboto, Helvetica, Arial;
   letter-spacing: normal;
 `;
