@@ -61,7 +61,6 @@ const ZigFilters = ({
       if (secondaryFilters.find((secondaryFilter) => secondaryFilter.id === filter.id)) {
         return defaultFilters.find((defaultFilter) => defaultFilter.id === filter.id) as ZigFilter;
       }
-
       return filter;
     });
     onChange(updatedFilters);
