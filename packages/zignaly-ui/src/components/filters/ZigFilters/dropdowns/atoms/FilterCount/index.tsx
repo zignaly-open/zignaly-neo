@@ -1,4 +1,4 @@
-import { FontStyle, TypographyOptions } from "@mui/material/styles/createTypography";
+import { FontStyle } from "@mui/material/styles/createTypography";
 import { css, styled } from "@mui/system";
 import ZigTypography from "components/display/ZigTypography";
 
