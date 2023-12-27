@@ -224,7 +224,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             },
           }) => (
             <Tooltip
-              sx={{ whiteSpace: 'nowrap' }}
+              componentsProps={{ tooltip: { sx: { maxWidth: '310px' } } }}
               title={
                 <Box whiteSpace={'nowrap'}>
                   {accountId === exchange.internalId
