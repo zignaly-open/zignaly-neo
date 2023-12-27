@@ -31,9 +31,9 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         type: 'select',
         options: RETURNS_PERIODS.map((o) => ({
           value: o,
-          label: t('table.n-months', { count: getMonthsFromColumnId(o) }),
+          label: t('table.n-months-pnl', { count: getMonthsFromColumnId(o) }),
         })),
-        label: t('filters.period'),
+        label: t('filters.period-pnl'),
         mobile: true,
       },
       {
