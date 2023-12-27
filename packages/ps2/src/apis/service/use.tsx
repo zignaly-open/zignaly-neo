@@ -25,10 +25,7 @@ import { useTitle } from 'util/title';
 import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
-import {
-  formatMonthDay,
-  formatMonthDayYear,
-} from '../../views/Dashboard/components/MyDashboard/util';
+import { formatMonthDayYear } from '../../views/Dashboard/components/MyDashboard/util';
 import { isFeatureOn } from '../../whitelabel';
 import { Features } from '../../whitelabel/type';
 
@@ -180,12 +177,7 @@ export function useChartData({
 
     const graph = dates?.reduce((acc, [date, value]) => {
       const dateObj = parse(date, 'yyyy-MM-dd', Date.now());
-      let label = formatMonthDay(dateObj);
-      const found = acc.find((a) => a.x === label);
-      if (found) {
-        // Duplicate label, append year to avoid overlapping issue
-        label = formatMonthDayYear(dateObj);
-      }
+      const label = formatMonthDayYear(dateObj);
 
       return [
         ...acc,
