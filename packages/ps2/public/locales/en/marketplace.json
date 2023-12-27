@@ -16,10 +16,10 @@
     "assets": "Assets in Pool",
     "assets-mobile": "Assets",
     "nb-investors": "# of investors",
-    "n-months-pnl_one": "{{count}} month PNL",
     "n-month-pnl-mobile_one": "{{count}}M",
-    "n-months-pnl_other": "{{count}} months PNL",
     "n-months-pnl-mobile_other": "P&L {{count}}M",
+    "n-months-pnl_one": "{{count}} month PNL",
+    "n-months-pnl_other": "{{count}} months PNL",
     "n-months_one": "{{count}} month",
     "n-months_other": "{{count}} months",
     "view-profile": "View profile",
@@ -32,8 +32,8 @@
     "edit": "Click to edit"
   },
   "filters": {
-    "returns-months": "{{count}} months returns",
-    "returns-months-short": "{{count}}M Returns",
+    "period": "Period",
+    "returns-months": "{{count}} Months Returns",
     "coins": "Coins",
     "type": "Type",
     "fee": "Service Fee",

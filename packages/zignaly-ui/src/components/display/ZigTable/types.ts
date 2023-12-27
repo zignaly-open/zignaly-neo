@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Row, TableOptions, TableState } from "@tanstack/react-table";
+import { Row, SortingState, TableOptions, TableState } from "@tanstack/react-table";
 import { RtkQueryLike } from "../../../utils/rtk";
 
 interface ZigTablePropsBase<T extends object>
@@ -11,6 +11,10 @@ interface ZigTablePropsBase<T extends object>
   renderSubComponent?: (props: { row: Row<T> }) => React.ReactElement;
   emptyMessage?: string;
   onRowClick?: (id: string) => void;
+  /**
+   * Controlled sorting state. For uncontrolled, pass it to `initialState`.
+   */
+  sorting?: SortingState;
 }
 
 export interface ZigTablePropsData<T extends object> extends ZigTablePropsBase<T> {

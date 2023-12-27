@@ -10,6 +10,4 @@ export const junkyard = {
 };
 
 export type junkyardResidentLocalStorage = 'hasLoggedIn';
-export type junkyardResidentSessionStorage =
-  | 'lastChunkLoadError'
-  | 'missedRoute';
+export type junkyardResidentSessionStorage = 'missedRoute';

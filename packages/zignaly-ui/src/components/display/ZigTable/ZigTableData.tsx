@@ -37,13 +37,16 @@ function ZigTableData<T extends object>({
   emptyMessage,
   state = {},
   onSortingChange,
+  sorting,
   ...rest
 }: ZigTablePropsData<T>) {
   const theme = useTheme();
-  const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
+  const [internalSorting, setInternalSorting] = React.useState<SortingState>(
+    initialState.sorting ?? [],
+  );
   useUpdateEffect(() => {
-    onSortingChange?.(sorting);
-  }, [sorting]);
+    onSortingChange?.(internalSorting);
+  }, [internalSorting]);
 
   const [columnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
@@ -53,13 +56,13 @@ function ZigTableData<T extends object>({
     data,
     columns,
     state: {
-      sorting,
+      sorting: sorting ?? internalSorting,
       columnVisibility,
       ...(pagination && { pagination }),
       ...state,
     },
     onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: onSortingChange || setSorting,
+    onSortingChange: onSortingChange || setInternalSorting,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),

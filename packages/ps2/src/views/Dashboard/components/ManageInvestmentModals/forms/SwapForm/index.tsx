@@ -137,6 +137,8 @@ function SwapForm({
         mt={1.5}
         ml={3}
         sx={sm && { textAlign: 'center' }}
+        justifyContent={'center'}
+        display={'flex'}
       >
         <ZigButton
           id={'swap-coins-modal__continue'}

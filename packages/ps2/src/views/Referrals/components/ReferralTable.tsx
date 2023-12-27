@@ -135,7 +135,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         label: t('table.filter-type'),
         options: rewardTypeOptions,
         id: 'type',
-        showInBar: true,
+        primary: true,
       },
       {
         type: 'select',
@@ -143,7 +143,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         label: t('table.filter-status'),
         options: statusOptions,
         id: 'status',
-        showInBar: true,
+        primary: true,
       },
     ],
     [rewardTypeOptions, statusOptions, t],
@@ -187,7 +187,9 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         <>
           <ZigFilters
             leftComponent={
-              <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
+              <ZigTypography whiteSpace={'nowrap'} variant={'h2'}>
+                {t('table.title')}
+              </ZigTypography>
             }
             rightComponent={
               <ZigButton
@@ -208,7 +210,6 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             defaultFilters={defaultFilters}
             filters={tablePersist.filters}
             onChange={tablePersist.filterTable}
-            sx={{ mb: '36px' }}
           />
         </>
       )}

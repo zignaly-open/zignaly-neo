@@ -1,5 +1,5 @@
 import React from "react";
-import { renderWithProvidersUi } from "../../../utils/testConfig";
+import { renderWithProvidersUi, resizeScreenSize } from "../../../utils/testConfig";
 import { fireEvent, waitFor, screen, within } from "@testing-library/react";
 import {
   CheckboxFilter,
@@ -19,7 +19,7 @@ const returnsFilter: SliderFilterType = {
   min: 0,
   max: 100,
   id: "returns",
-  showInBar: true,
+  primary: true,
 };
 
 const coinFilter: SelectFilter = {
@@ -32,7 +32,7 @@ const coinFilter: SelectFilter = {
   ],
   id: "coin",
   value: null,
-  showInBar: true,
+  primary: true,
 };
 
 const typeFilter: CheckboxFilter = {
@@ -126,6 +126,7 @@ describe("components/filters/ZigFilters", () => {
 
   describe("ZigFilters", () => {
     it("should filter", async () => {
+      resizeScreenSize(900);
       const onChange = jest.fn();
 
       const customFilters = filters.map((filter) => {

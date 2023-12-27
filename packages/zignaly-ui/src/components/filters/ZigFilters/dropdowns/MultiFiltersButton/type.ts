@@ -4,7 +4,7 @@ export type SecondaryFiltersButtonProps = {
   onChange: (value: any) => void;
   resetFilters: () => void;
   filters: ZigFiltersType;
-  filtersChangedCount: number;
+  defaultFilters: ZigFiltersType;
   minSpace?: number;
   mobile: boolean;
   prefixId: string;

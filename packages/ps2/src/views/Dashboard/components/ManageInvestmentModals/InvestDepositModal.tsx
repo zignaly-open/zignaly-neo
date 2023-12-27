@@ -14,7 +14,10 @@ import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
 import { Box, useMediaQuery } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
-import { useCanInvestIn } from '../../../../util/walls/util';
+import {
+  useCanInvestIn,
+  withModalRequiresAuthentication,
+} from '../../../../util/walls/util';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import theme from '../../../../theme';
 import { useCoinBalances } from '../../../../apis/coin/use';
@@ -127,6 +130,9 @@ function InvestDepositModal({
   );
 }
 
+const InvestDepositModalAuth =
+  withModalRequiresAuthentication(InvestDepositModal);
+
 // We should not do this because the logic inside this InvestDeposit makes sure we call the right track
 // InvestDepositModal.trackId = 'invest-deposit';
 
@@ -141,10 +147,10 @@ export const useOpenInvestDepositModal = (
       if (modalRoute) {
         showInvestModal({ serviceId });
       } else {
-        showModal(InvestDepositModal, { serviceId });
+        showModal(InvestDepositModalAuth, { serviceId });
       }
     }
   };
 };
 
-export default InvestDepositModal;
+export default InvestDepositModalAuth;
