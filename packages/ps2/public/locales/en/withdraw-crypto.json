@@ -18,7 +18,8 @@
   "withdrawMemo": {
     "label": "MEMO/Tag:",
     "placeholder": "Paste wallet MEMO/Tag here",
-    "invalid": "MEMO/Tag is invalid, please review your target wallet network details"
+    "invalid": "MEMO/Tag is invalid, please review your target wallet network details",
+    "required": "Both a memo/tag and an address are required"
   },
   "amountToWithdraw": {
     "label": "Amount:",

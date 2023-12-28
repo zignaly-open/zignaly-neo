@@ -34,5 +34,9 @@ export const withdrawAmountValidation = (
           'withdraw-crypto:withdrawMemo.invalid',
         ),
     }),
+    ...(network?.specialTips &&
+      !network?.memoRegex && {
+        tag: yup.string().required('withdraw-crypto:withdrawMemo.required'),
+      }),
   });
 };
