@@ -25,11 +25,11 @@ const MobileFilterDrawer = ({
     () => ({
       accordion: {
         border: "none",
+        borderTop: `1px dotted ${theme.palette.neutral600}`,
         margin: "10px 0 10px !important",
         "&:before": {
           opacity: "1 !important",
           height: 0,
-          borderTop: `1px dotted ${theme.palette.neutral600}`,
           margin: "0 18px",
         },
       },
