@@ -27,6 +27,7 @@ const MobileFilterDrawer = ({
         border: "none",
         borderTop: `1px dotted ${theme.palette.neutral600}`,
         margin: "10px 0 10px !important",
+        boxShadow: "none",
         "&:before": {
           height: 0,
         },
