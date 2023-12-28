@@ -25,7 +25,7 @@ const MobileFilterButton = ({
       <ZigButton
         variant="outlined"
         sx={{ p: "2px 14px" }}
-        id={`${prefixId}__slider-button-${filter.id}`}
+        id={`${prefixId}__button-${filter.id}`}
         onClick={() => setDrawerOpen(true)}
       >
         <ZigTypography>{label}</ZigTypography>

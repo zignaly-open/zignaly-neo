@@ -1,26 +1,11 @@
 import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Box } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, useTheme } from "@mui/material";
 import ZigTypography from "components/display/ZigTypography";
 import ZigButton from "components/inputs/ZigButton";
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useMemo, useState } from "react";
 import { MobileFilterDrawerProps } from "./type";
 import Filter from "components/filters/ZigFilters/filters/Filter";
 const SwipeableDrawer = lazy(() => import("@mui/material/SwipeableDrawer"));
-
-const styles = {
-  accordion: {
-    border: "none",
-    margin: "10px 0 10px !important",
-    "&:before": {
-      opacity: "1 !important",
-    },
-  },
-  accordionSummary: {
-    minHeight: "0 !important",
-    ".Mui-expanded": { margin: "12px 0 !important" },
-  },
-  accordionDetails: { padding: "2px 24px" },
-};
 
 const MobileFilterDrawer = ({
   filters: filtersProp,
@@ -34,6 +19,27 @@ const MobileFilterDrawer = ({
   const filters = isMulti ? filtersProp : [filtersProp];
   const [expanded, setExpanded] = useState<string | false>(
     filters.length === 1 ? filters[0].id : false,
+  );
+  const theme = useTheme();
+  const styles = useMemo(
+    () => ({
+      accordion: {
+        border: "none",
+        margin: "10px 0 10px !important",
+        "&:before": {
+          opacity: "1 !important",
+          height: 0,
+          borderTop: `1px dotted ${theme.palette.neutral600}`,
+          margin: "0 18px",
+        },
+      },
+      accordionSummary: {
+        minHeight: "0 !important",
+        ".Mui-expanded": { margin: "12px 0 !important" },
+      },
+      accordionDetails: { padding: "2px 24px" },
+    }),
+    [theme],
   );
 
   return (

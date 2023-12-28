@@ -1,130 +1,43 @@
 import React from "react";
 import { renderWithProvidersUi, resizeScreenSize } from "../../../utils/testConfig";
 import { fireEvent, waitFor, screen, within } from "@testing-library/react";
-import {
-  CheckboxFilter,
-  SelectFilter,
-  SliderFilter as SliderFilterType,
-  ZigFiltersType,
-} from "./types";
+import { CheckboxFilter, SliderFilter as SliderFilterType } from "./types";
 import ZigFilters from ".";
-import SliderFilter from "./filters/SliderFilter";
-
-const returnsFilter: SliderFilterType = {
-  type: "slider",
-  value: [19, 100],
-  label: "6 months returns",
-  allowNoMin: true,
-  allowNoMax: true,
-  min: 0,
-  max: 100,
-  id: "returns",
-  primary: true,
-};
-
-const coinFilter: SelectFilter = {
-  type: "select",
-  label: "Coin",
-  options: [
-    { value: null, label: "All" },
-    { value: "USDT", label: "USDT" },
-    { value: "USDC", label: "USDC" },
-  ],
-  id: "coin",
-  value: null,
-  primary: true,
-};
-
-const typeFilter: CheckboxFilter = {
-  type: "checkbox",
-  label: "Type",
-  options: [
-    { value: "spot", label: "Spot" },
-    { value: "futures", label: "Futures" },
-    { value: "test", label: "Test" },
-  ],
-  id: "type",
-  value: ["spot", "futures"],
-};
-
-const filters: ZigFiltersType = [returnsFilter, coinFilter, typeFilter];
+import { coinFilter, filters, returnsFilter, typeFilter } from "./test/filters";
 
 describe("components/filters/ZigFilters", () => {
-  describe("CheckBoxFilter", () => {
-    // todo: uncomment when checkbox is replaced with ZigCheckBox
-    // it("filters", async () => {
-    //   const onChange = jest.fn();
-    //   const { container } = renderWithProvidersUi(
-    //     <CheckBoxFilter filter={typeFilter} onChange={onChange} />,
-    //   );
-    //   const label = container.querySelector("#filter-checkbox_type__label");
-    //   expect(label).toHaveTextContent("Type");
-    //   const options = container.querySelectorAll("label");
-    //   expect(options.length).toBe(typeFilter.options.length);
-    //   const checkbox2 = options[1].querySelector("input");
-    //   expect(checkbox2?.checked).toBe(true);
-    //   const checkbox3 = options[2].querySelector("input");
-    //   expect(checkbox3?.checked).toBe(false);
-    //   fireEvent.click(options[1]);
-    //   await waitFor(() => {
-    //     expect(onChange).toBeCalledWith({ ...typeFilter, value: ["spot"] });
-    //   });
-    // });
-  });
-
-  describe("SliderFilter", () => {
-    it("should filter", async () => {
+  describe("on md", () => {
+    it("should render all primary filters", async () => {
+      resizeScreenSize(900);
       const onChange = jest.fn();
+      const testFilters = filters.map((filter) => ({ ...filter, primary: true }));
       const { container } = renderWithProvidersUi(
-        <SliderFilter filter={returnsFilter} onChange={onChange} />,
+        <ZigFilters defaultFilters={testFilters} filters={testFilters} onChange={onChange} />,
       );
-
-      const input = container.querySelector("input");
-      expect(input).toBeInTheDocument();
-      // todo: mock slider
+      const returnsDropdown = container.querySelector("#filters__dropdown-returns-container");
+      expect(returnsDropdown).toBeInTheDocument();
+      const coinsDropdown = container.querySelector("#filters__select-coin-container");
+      expect(coinsDropdown).toBeInTheDocument();
+      const checkboxDropdown = container.querySelector("#filters__checkbox-type-container");
+      expect(checkboxDropdown).toBeInTheDocument();
     });
 
-    it("should handle Min", async () => {
+    it("should render all secondary filters", async () => {
+      resizeScreenSize(900);
       const onChange = jest.fn();
+      const testFilters = filters.map((filter) => ({ ...filter, primary: false }));
       const { container } = renderWithProvidersUi(
-        <SliderFilter filter={{ ...returnsFilter, value: [null, 12] }} onChange={onChange} />,
+        <ZigFilters defaultFilters={testFilters} filters={testFilters} onChange={onChange} />,
       );
-
-      const value1 = container.querySelector("#filter-slider_returns__value-1");
-      expect(value1).toHaveTextContent("Min");
-
-      const value2 = container.querySelector("#filter-slider_returns__value-2");
-      expect(value2).toHaveTextContent("12");
+      const multiDropdown = container.querySelector("#filters__multi-dropdown-container");
+      fireEvent.click(multiDropdown!);
+      await waitFor(() => {
+        expect(document.querySelector("#filter-slider-returns__label")).toBeInTheDocument();
+        expect(document.querySelector("#filter-checkbox-type__label")).toBeInTheDocument();
+        expect(document.querySelector("#filter-select-coin__label")).toBeInTheDocument();
+      });
     });
 
-    it("should handle Max", async () => {
-      const onChange = jest.fn();
-      const { container } = renderWithProvidersUi(
-        <SliderFilter filter={{ ...returnsFilter, value: [1, null] }} onChange={onChange} />,
-      );
-
-      const value1 = container.querySelector("#filter-slider_returns__value-1");
-      expect(value1).toHaveTextContent("1");
-
-      const value2 = container.querySelector("#filter-slider_returns__value-2");
-      expect(value2).toHaveTextContent("Max");
-    });
-
-    it("should handle Min and Max", async () => {
-      const onChange = jest.fn();
-      const { container } = renderWithProvidersUi(
-        <SliderFilter filter={{ ...returnsFilter, value: [null, null] }} onChange={onChange} />,
-      );
-
-      const value1 = container.querySelector("#filter-slider_returns__value-1");
-      expect(value1).toHaveTextContent("Min");
-
-      const value2 = container.querySelector("#filter-slider_returns__value-2");
-      expect(value2).toHaveTextContent("Max");
-    });
-  });
-
-  describe("ZigFilters", () => {
     it("should filter", async () => {
       resizeScreenSize(900);
       const onChange = jest.fn();
@@ -185,6 +98,71 @@ describe("components/filters/ZigFilters", () => {
       await waitFor(() => {
         expect(onChange).toBeCalledWith(filters);
       });
+    });
+  });
+
+  describe("on sm", () => {
+    beforeEach(() => {
+      resizeScreenSize(600);
+    });
+
+    it("should render primary filters in multi dropdown", async () => {
+      const onChange = jest.fn();
+      const { container } = renderWithProvidersUi(
+        <ZigFilters defaultFilters={filters} filters={filters} onChange={onChange} />,
+      );
+      const returnsDropdown = container.querySelector("#filters__dropdown-returns-container");
+      expect(returnsDropdown).not.toBeInTheDocument();
+      const coinsDropdown = container.querySelector("#filters__select-coin-container");
+      expect(coinsDropdown).not.toBeInTheDocument();
+      const checkboxDropdown = container.querySelector("#filters__checkbox-type-container");
+      expect(checkboxDropdown).not.toBeInTheDocument();
+      const multiDropdown = container.querySelector("#filters__multi-dropdown-mobile");
+      fireEvent.click(multiDropdown!);
+      await waitFor(() => {
+        expect(
+          document.querySelector("#filters__accordion-filter-header-returns"),
+        ).toBeInTheDocument();
+        expect(
+          document.querySelector("#filters__accordion-filter-header-type"),
+        ).toBeInTheDocument();
+        expect(
+          document.querySelector("#filters__accordion-filter-header-coin"),
+        ).toBeInTheDocument();
+      });
+    });
+
+    it("should render select mobile filter", async () => {
+      const onChange = jest.fn();
+      const testFilters = [{ ...coinFilter, mobile: true }];
+      const { container } = renderWithProvidersUi(
+        <ZigFilters defaultFilters={testFilters} filters={testFilters} onChange={onChange} />,
+      );
+      fireEvent.click(container.querySelector("#filters__button-coin")!);
+      expect(document.querySelector(".MuiDrawer-paperAnchorBottom")).toBeVisible();
+
+      fireEvent.click(document.querySelector("#filters__multi-dropdown-show")!);
+      waitFor(() => {
+        expect(document.querySelector(".MuiDrawer-paperAnchorBottom")).not.toBeVisible();
+      });
+    });
+
+    it("should render slider mobile filter", async () => {
+      const onChange = jest.fn();
+      const testFilters = [{ ...returnsFilter, mobile: true }];
+      const { container } = renderWithProvidersUi(
+        <ZigFilters defaultFilters={testFilters} filters={testFilters} onChange={onChange} />,
+      );
+      expect(container.querySelector("#filters__button-returns")).toBeInTheDocument();
+    });
+
+    it("should render checkbox mobile filter", async () => {
+      const onChange = jest.fn();
+      const testFilters = [{ ...typeFilter, mobile: true }];
+      const { container } = renderWithProvidersUi(
+        <ZigFilters defaultFilters={testFilters} filters={testFilters} onChange={onChange} />,
+      );
+      expect(container.querySelector("#filters__button-type")).toBeInTheDocument();
     });
   });
 });

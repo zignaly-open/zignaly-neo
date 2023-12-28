@@ -48,18 +48,18 @@ export type CheckboxFilter = BaseFilter & {
   type: "checkbox";
   label: string;
   options: {
-    value: string;
+    value: string | number;
     label: string;
   }[];
-  value: string[] | null;
+  value: (string | number)[] | null;
 };
 
 export type SelectFilter = BaseFilter & {
   type: "select";
   label: string;
-  value: string | null;
+  value: string | number | null;
   options: {
-    value: string | null;
+    value: string | number | null;
     label: string;
   }[];
 };
