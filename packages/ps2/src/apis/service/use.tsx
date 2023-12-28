@@ -60,12 +60,15 @@ export const useTraderServiceManagement = useTraderServiceManagementQuery;
 
 export const useServiceDetails: typeof useTraderServiceDetailsQuery = (
   serviceId: string,
+  options = {},
 ) => {
   const isAuthenticated = useIsAuthenticated();
   const doNotLoadServicesForUnauth =
     !isAuthenticated && isFeatureOn(Features.NoPublicMarketplace);
+
   return useTraderServiceDetailsQuery(serviceId, {
-    skip: doNotLoadServicesForUnauth,
+    ...options,
+    skip: options.skip || doNotLoadServicesForUnauth,
   });
 };
 
