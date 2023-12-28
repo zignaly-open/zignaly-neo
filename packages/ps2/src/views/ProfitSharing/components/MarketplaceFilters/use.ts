@@ -88,8 +88,8 @@ export const useFilteredServices = (
         filters?.every((filter) => {
           if (filter.id === 'returns') {
             return filterFns.inNumberRange(
-              +service.pnlPercent180t,
               filter.value as [number, number],
+              +service.pnlPercent180t,
             );
           } else if (filter.id === 'coin') {
             return (
@@ -102,8 +102,8 @@ export const useFilteredServices = (
             );
           } else if (filter.id === 'fee') {
             return filterFns.inNumberRange(
-              service.successFee,
               filter.value as [number, number],
+              service.successFee,
             );
           }
           return true;

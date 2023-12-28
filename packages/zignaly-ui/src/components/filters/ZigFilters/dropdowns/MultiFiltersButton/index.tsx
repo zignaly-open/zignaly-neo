@@ -46,6 +46,7 @@ const MultiFiltersButton = ({
           prefixId={prefixId}
         />
         <ZigButton
+          id={`${prefixId}__multi-dropdown-mobile`}
           variant="outlined"
           sx={{
             py: "5px",

@@ -26,7 +26,9 @@ const CheckboxFilterDropdown = ({
 
   const displayValue = useMemo(() => {
     if (!filter.value) return stringAll;
-    const options = filter.options.filter((option) => filter.value?.includes(option.value));
+    const options = filter.options.filter((option) =>
+      filter.value?.includes(option.value as string),
+    );
     return options.length > 0
       ? options.length === 1
         ? options[0].label

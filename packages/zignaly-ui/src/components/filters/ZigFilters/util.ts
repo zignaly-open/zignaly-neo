@@ -2,10 +2,12 @@ import { SliderFilter, ZigFiltersPruned, ZigFiltersType } from "./types";
 
 export const filterFns = {
   // https://github.com/TanStack/table/blob/main/packages/table-core/src/filterFns.ts
-  inNumberRange: (value: number, filterValue: [number | null, number | null]) => {
-    if (!Array.isArray(filterValue)) return false;
-    const [min, max] = filterValue;
-    return ((!min && min !== 0) || value >= min) && ((!max && max !== 0) || value <= max);
+  inNumberRange: (value: [number | null, number | null], filterValue: number) => {
+    if (!Array.isArray(value)) return false;
+    const [min, max] = value;
+    return (
+      ((!min && min !== 0) || filterValue >= min) && ((!max && max !== 0) || filterValue <= max)
+    );
   },
   includesString: (value: string, filterValue: string) => {
     return value.toLowerCase().includes(filterValue.toLowerCase());
