@@ -8,14 +8,18 @@ if (!indexHtml) {
   process.exit(1);
 }
 
-const veryDumbSanitize = (string) => string.replaceAll(/[<>"]+/g, '');
+const veryDumbSanitizeAttribute = (string) =>
+  string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
 function getGeneratedIndexHtml(wlConfig) {
   const [title, domain, description] = [
     wlConfig.title,
     wlConfig.domain,
     wlConfig.description,
-  ].map(veryDumbSanitize);
+  ].map(veryDumbSanitizeAttribute);
+  const twitterAcc = wlConfig.social?.twitter?.match(
+    /(?:https?:\/\/|^)(?:twitter|x)\.com\/([a-zA-Z\d-_]{1,15})/,
+  )?.[1];
 
   return indexHtml.replace(
     '</head>',
@@ -30,7 +34,7 @@ function getGeneratedIndexHtml(wlConfig) {
       <!-- Facebook Meta Tags -->
       <meta property="og:url" content="https://${domain}/profit-sharing">
       <meta property="og:type" content="website">
-<!--      <meta property="og:title" content="Discover the best traders on Zignaly">-->
+      <meta property="og:title" content="${title}">
       <meta property="og:description" content="${description}">
 <!--      <meta property="og:image" content="https://app.zignaly.com/images/zignaly-social.png">-->
       <meta property="og:image:width" content="1200"/>
@@ -41,10 +45,10 @@ function getGeneratedIndexHtml(wlConfig) {
       <meta name="twitter:card" content="summary_large_image">
       <meta property="twitter:domain" content="${domain}">
       <meta property="twitter:url" content="https://${domain}/profit-sharing">
-<!--      <meta name="twitter:title" content="Discover the best traders on Zignaly">-->
+      <meta name="twitter:title" content="${title}">
       <meta name="twitter:description" content="${description}">
 <!--      <meta name="twitter:image" content="https://app.zignaly.com/images/zignaly-social.png">-->
-<!--      <meta name="twitter:site" content="@zignaly">-->
+      ${twitterAcc ? `<meta name="twitter:site" content="@${twitterAcc}">` : ''}
       <script type="text/javascript">
       window.__zignalyWhitelabelConfig = JSON.parse(decodeURIComponent('${encodeURIComponent(
         JSON.stringify(wlConfig),
@@ -52,10 +56,6 @@ function getGeneratedIndexHtml(wlConfig) {
       </script>
       </head>`,
   );
-  // .replace(
-  //   '<script id="analytics-scripts"></script>',
-  //   wlConfig.scripts || '',
-  // )
 }
 
 async function generateIndexHtmlForRequest(req) {
