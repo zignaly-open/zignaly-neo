@@ -54,7 +54,7 @@ export default () => {
     <>
       <GlobalFonts />
       <GlobalAppStyle />
-      {whitelabel.intercomId && <IntercomStyle />}
+      {!!whitelabel.tools?.intercom && <IntercomStyle />}
       <GlobalStyles
         styles={{ body: { fontFamily: theme.typography.fontFamily } }}
       />

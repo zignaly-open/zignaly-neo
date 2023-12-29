@@ -267,7 +267,7 @@ const ZigDrawer = () => {
                   </ListItem>
                 )
               )}
-              {whitelabel.intercomId && (
+              {!!whitelabel.tools?.intercom && (
                 <ListItem disablePadding>
                   <ListItemButton
                     id='drawer__help-chat'

@@ -28,16 +28,17 @@ if (
   analytics = Analytics({
     app: 'zignaly',
     plugins: [
-      googleTagManager({
-        containerId: process.env.REACT_APP_GTM_ID,
-      }),
+      whitelabel.tools?.google_tag_manager &&
+        googleTagManager({
+          containerId: whitelabel.tools?.google_tag_manager,
+        }),
       googleAnalytics({
         measurementIds: [process.env.REACT_APP_GA_ID],
       }),
       customerIoPlugin,
-      whitelabel.intercomId &&
+      whitelabel.tools?.intercom &&
         intercomPlugin({
-          appId: whitelabel.intercomId,
+          appId: whitelabel.tools?.intercom,
         }),
     ].filter(Boolean),
   });

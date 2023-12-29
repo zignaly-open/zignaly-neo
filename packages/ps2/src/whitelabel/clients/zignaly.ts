@@ -50,5 +50,8 @@ export default {
     </script>
   `,
   zignalySuccessFee: 5,
-  intercomId: 'nc3z6oqm',
+  tools: {
+    intercom: 'nc3z6oqm',
+    google_tag_manager: 'GTM-5ZQ4JLK',
+  },
 } as WhitelabelOverride;

@@ -46,7 +46,10 @@ export type WhitelabelOverride = {
   backgroundImage?: string | null;
   baseTheme?: string;
   themeOverrides?: ThemeOverridesType;
-  intercomId?: string;
+  tools?: {
+    intercom?: string;
+    google_tag_manager?: string;
+  };
   social: Partial<
     Record<
       | 'telegram'

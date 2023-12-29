@@ -26,7 +26,6 @@ const mapBackendConfigToFrontendConfig = ({
 }) => ({
   ...config,
   featureOverrides,
-
   links: { tos, privacyPolicy, mainAppLink, helpUrl },
 });
 
