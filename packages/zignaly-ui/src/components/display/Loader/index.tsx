@@ -10,6 +10,7 @@ export const Loader: React.FC<{
   const { palette } = useTheme();
   return (
     <Oval
+      wrapperClass={"simple-loader"}
       width={width + "px"}
       height={height + "px"}
       color={palette.contrasting}
@@ -24,6 +25,7 @@ export const CenteredLoader: React.FC<{
   height?: number;
 }> = ({ width = 40, height = 40 }) => (
   <Box
+    className={"centered-loader-wrapper"}
     sx={{
       display: "flex",
       padding: "8em 0",

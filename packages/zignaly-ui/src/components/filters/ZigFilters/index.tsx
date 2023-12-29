@@ -1,49 +1,12 @@
 import React, { useMemo } from "react";
-import { FilterDropdownWrapper, Layout, TopDivider, VertDivider } from "./styles";
-import { Box } from "@mui/material";
+import { Layout, TopDivider } from "./styles";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import ZigSearch from "../ZigSearch";
-import SliderFilterDropdown from "./dropdowns/SliderFilterDropdown";
-import SelectFilterDropdown from "./dropdowns/SelectFilterDropdown";
-import MultiFilterDropdown from "./dropdowns/MultiFilterDropdown";
+import MultiFiltersButton from "./dropdowns/MultiFiltersButton";
 import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
-import CheckboxFilterDropdown from "./dropdowns/CheckboxFilterDropdown";
-
-const FilterDropdown = ({
-  resetFilter,
-  filter,
-  onChange,
-}: {
-  resetFilter: () => void;
-  onChange: (filter: ZigFilter) => void;
-  filter: ZigFilter;
-}) => {
-  const Component = useMemo(() => {
-    if (filter.type === "slider") {
-      return SliderFilterDropdown;
-    } else if (filter.type === "select") {
-      return SelectFilterDropdown;
-    } else if (filter.type === "checkbox") {
-      return CheckboxFilterDropdown;
-    }
-    return null;
-  }, [filter.type]);
-
-  if (!Component) return null;
-
-  return (
-    <FilterDropdownWrapper>
-      <Component
-        resetFilter={resetFilter}
-        filter={filter}
-        onChange={onChange}
-        id={`filters__dropdown-${filter.id}`}
-      />
-      <VertDivider orientation="vertical" flexItem />
-    </FilterDropdownWrapper>
-  );
-};
+import FilterDropdown from "./dropdowns/FilterDropdown";
 
 const ZigFilters = ({
   defaultFilters,
@@ -57,14 +20,19 @@ const ZigFilters = ({
   sx,
   prefixId = "filters",
 }: ZigFiltersProps) => {
-  const [mainFilters, secondaryFilters] = useMemo(() => {
-    return [
-      filters.filter((filter) => filter.showInBar),
-      filters.filter((filter) => !filter.showInBar),
-    ];
-  }, [filters]);
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up("md"));
+  const lg = useMediaQuery(theme.breakpoints.up("lg"));
 
-  const updateFilters = (updatedFilter: ZigFilter) => {
+  const [mobileFilters, mainFilters, secondaryFilters] = useMemo(() => {
+    return [
+      filters.filter((filter) => filter.mobile),
+      filters.filter((filter) => (filter.mobile === "md" ? md && !lg : filter.primary)),
+      filters.filter((filter) => !filter.mobile && (!filter.primary || !md)),
+    ];
+  }, [filters, md, lg]);
+
+  const updateFilter = (updatedFilter: ZigFilter) => {
     const updatedFilters = filters.map((filter) => {
       if (filter.id === updatedFilter.id) {
         return updatedFilter;
@@ -90,13 +58,14 @@ const ZigFilters = ({
 
   const resetSecondaryFilters = () => {
     const updatedFilters = filters.map((filter) => {
-      if (!filter.showInBar) {
+      if (secondaryFilters.find((secondaryFilter) => secondaryFilter.id === filter.id)) {
         return defaultFilters.find((defaultFilter) => defaultFilter.id === filter.id) as ZigFilter;
       }
       return filter;
     });
     onChange(updatedFilters);
   };
+  const inlineMultiFilters = md && secondaryFilters.length > 0;
 
   return (
     <Box
@@ -106,14 +75,47 @@ const ZigFilters = ({
       justifyContent="center"
       flexWrap="wrap"
       gap={1}
+      mb={{ xs: 2, sm: 3.5 }}
+      mx={{ sm: 1, md: 0 }}
       sx={sx}
     >
-      <Box display={"flex"} flex={1} flexBasis={{ xs: "100%", md: 0 }}>
+      <Box
+        display={"flex"}
+        flex={1}
+        justifyContent={"flex-start"}
+        flexBasis={!md && mobileFilters.length ? "100%" : 0}
+      >
         {leftComponent}
       </Box>
-      <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={1} flexGrow={2}>
-        <Box display="flex" gap={2} alignItems={"center"} justifyContent="center">
-          <Layout label={label}>
+      {!md && (
+        <Box display={"flex"} flex={1} justifyContent={"flex-start"}>
+          {mobileFilters.map((filter, i) => (
+            <FilterDropdown
+              resetFilter={() => resetFilter(filter.id)}
+              filter={filter}
+              key={filter.id}
+              onChange={updateFilter}
+              separator={i < mobileFilters.length - 1}
+              mobile={!md}
+              prefixId={prefixId}
+            />
+          ))}
+        </Box>
+      )}
+      <Box
+        justifyContent={{
+          sm: "flex-start",
+          md: "center",
+          lg: "center",
+        }}
+        display="flex"
+        gap={1}
+        alignItems="center"
+        flex={1}
+        flexGrow={!md ? 0 : 5}
+      >
+        <Box display="flex" gap={{ xs: 1, sm: 2 }} alignItems={"center"} justifyContent="center">
+          <Layout label={label} mobile={!md}>
             {label && (
               <TopDivider>
                 <ZigTypography variant={"h4"} fontWeight={400}>
@@ -121,45 +123,72 @@ const ZigFilters = ({
                 </ZigTypography>
               </TopDivider>
             )}
-            <Box display={"flex"} alignItems={"center"}>
-              {mainFilters.map((filter) => (
-                <FilterDropdown
-                  resetFilter={() => resetFilter(filter.id)}
-                  filter={filter}
-                  key={filter.id}
-                  onChange={updateFilters}
-                />
-              ))}
-              {secondaryFilters.length > 0 && (
-                <FilterDropdownWrapper>
-                  <MultiFilterDropdown
-                    resetFilters={resetSecondaryFilters}
-                    defaultFilters={defaultFilters}
-                    filters={secondaryFilters}
-                    onChange={updateFilters}
+            <Box display={"flex"} alignItems={"center"} {...(!md && { gap: 1, flexWrap: "wrap" })}>
+              {md &&
+                mainFilters.map((filter, i) => (
+                  <FilterDropdown
+                    resetFilter={() => resetFilter(filter.id)}
+                    filter={filter}
+                    key={filter.id}
+                    onChange={updateFilter}
+                    separator={md && (inlineMultiFilters || i < mainFilters.length - 1)}
+                    mobile={!md}
+                    prefixId={prefixId}
                   />
-                </FilterDropdownWrapper>
+                ))}
+              {inlineMultiFilters && (
+                <MultiFiltersButton
+                  resetFilters={resetSecondaryFilters}
+                  defaultFilters={defaultFilters}
+                  filters={secondaryFilters}
+                  onChange={updateFilter}
+                  mobile={false}
+                  prefixId={prefixId}
+                />
               )}
             </Box>
           </Layout>
-          <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
-            Reset
-          </ZigButton>
+          {md && (
+            <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
+              Reset
+            </ZigButton>
+          )}
         </Box>
       </Box>
-      <Box flex={1} display={"flex"} justifyContent={"flex-end"} position={"relative"}>
-        <Box mr={"46px"}>{rightComponent}</Box>
-        {search !== undefined && onSearchChange && (
-          <ZigSearch
-            value={search}
-            onChange={onSearchChange}
-            sx={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-              bottom: 0,
-            }}
-            id={`${prefixId}__search`}
+      <Box
+        flex={!lg ? 0 : 1}
+        display={"flex"}
+        justifyContent={"flex-end"}
+        position={"relative"}
+        alignItems={"center"}
+        gap={1.5}
+      >
+        <>
+          {rightComponent}
+          {search !== undefined && onSearchChange && md && (
+            <Box mr="42px">
+              <ZigSearch
+                value={search}
+                onChange={onSearchChange}
+                sx={{
+                  position: "absolute",
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                }}
+                id={`${prefixId}__search`}
+              />
+            </Box>
+          )}
+        </>
+        {!md && secondaryFilters.length > 0 && (
+          <MultiFiltersButton
+            resetFilters={resetSecondaryFilters}
+            defaultFilters={defaultFilters}
+            filters={secondaryFilters}
+            onChange={updateFilter}
+            mobile={true}
+            prefixId={prefixId}
           />
         )}
       </Box>

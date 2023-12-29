@@ -127,5 +127,9 @@
     "total-fee": "Total fee",
     "you-receive": "You receive"
   },
-  "z-score": "Z-Score"
+  "z-score": "Z-Score",
+  "chart-crashed": {
+    "title": "Chart could not be rendered",
+    "description": "Sorry, but the chart could not be rendered due to some technical issues"
+  }
 }

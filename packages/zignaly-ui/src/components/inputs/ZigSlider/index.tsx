@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { Box, Slider } from "@mui/material";
 import { ZigSliderProps } from "./types";
 import { SliderLabelValue } from "./atoms";
@@ -12,11 +12,12 @@ const ZigSlider = forwardRef(
       className = "",
       valueLabelFormat,
       labelFormat = true,
-      value,
       ...props
     }: ZigSliderProps,
     ref,
   ) => {
+    const [internalValue, setInternalValue] = useState(props.defaultValue);
+    const value = props.value ?? internalValue;
     let valueLabelFormatDefaulted = valueLabelFormat;
     if (!valueLabelFormatDefaulted && (!props.max || props.max === 100)) {
       valueLabelFormatDefaulted = (value: number) => `${value}%`;
@@ -64,7 +65,7 @@ const ZigSlider = forwardRef(
                 labels={labels}
                 min={props.min}
                 max={props.max}
-                value={props.value as number}
+                value={value as number}
                 labelFormat={labelFormatDefaulted}
               />
             )}
@@ -81,7 +82,12 @@ const ZigSlider = forwardRef(
                   opacity: 0.7,
                 },
               }}
-              value={value}
+              onChange={(e, v, a) => {
+                if (props.defaultValue) {
+                  setInternalValue(v);
+                }
+                props.onChange?.(e, v, a);
+              }}
               {...props}
             />
             {showValues && (
@@ -91,7 +97,7 @@ const ZigSlider = forwardRef(
                 labels={labels}
                 min={props.min}
                 max={props.max}
-                value={props.value as number}
+                value={value as number}
                 labelFormat={labelFormatDefaulted}
               />
             )}

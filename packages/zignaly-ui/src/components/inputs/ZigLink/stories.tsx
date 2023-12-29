@@ -1,10 +1,9 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import ZigLink from "./index";
-// TODO: fix this
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type * as All from "@mui/material/node_modules/@mui/system/styleFunctionSx";
 import ZigTypography from "../../display/ZigTypography";
+
+type ZigLinkProps = React.ComponentProps<typeof ZigLink>;
 
 export default {
   title: "Inputs/ZigLink",
@@ -15,16 +14,16 @@ export default {
       defaultValue: "https://xfuturum.com",
     },
   },
-} as Meta<typeof ZigLink>;
+} as Meta<ZigLinkProps>;
 
-const Template: Story<typeof ZigLink> = (args) => <ZigLink {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  children: "Amount to Withdraw",
+type Story = StoryObj<ZigLinkProps>;
+export const Default: Story = {
+  args: {
+    children: "Amount to Withdraw",
+  },
 };
 
-const TemplateTextButton: Story<typeof ZigLink> = (args) => {
+const TemplateTextButton = (args: ZigLinkProps) => {
   return (
     <>
       <ZigTypography component={"p"}>
@@ -65,10 +64,10 @@ const TemplateTextButton: Story<typeof ZigLink> = (args) => {
   );
 };
 
-const buttonExampleArgs = {
-  children: "Amount to Withdraw",
-  href: "https://xfuturum.com",
+export const AllSamples: Story = {
+  args: {
+    children: "Amount to Withdraw",
+    href: "https://xfuturum.com",
+  },
+  render: (props) => <TemplateTextButton {...props} />,
 };
-
-export const AllSamples = TemplateTextButton.bind({});
-AllSamples.args = buttonExampleArgs;

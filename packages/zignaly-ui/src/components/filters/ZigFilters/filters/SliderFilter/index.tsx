@@ -53,7 +53,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
   return (
     <Box>
       {label && (
-        <ZigTypography component={"div"} pb={1} id={`filter-slider_${id}__label`}>
+        <ZigTypography component={"div"} pb={1} id={`filter-slider-${id}__label`}>
           {label}
         </ZigTypography>
       )}
@@ -70,11 +70,11 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
       <Box display={"flex"} justifyContent={"center"} pt={1} gap={"6px"}>
         {Array.isArray(internalValue) ? (
           <>
-            <Value showPct={internalValue[0] !== null} id={`filter-slider_${id}__value-1`}>
+            <Value showPct={internalValue[0] !== null} id={`filter-slider-${id}__value-1`}>
               {internalValue[0] === null ? "Min" : internalValue[0]}
             </Value>
             <ZigTypography fontSize={15}>to</ZigTypography>
-            <Value showPct={internalValue[1] !== null} id={`filter-slider_${id}__value-2`}>
+            <Value showPct={internalValue[1] !== null} id={`filter-slider-${id}__value-2`}>
               {internalValue[1] === null ? "Max" : internalValue[1]}
             </Value>
           </>

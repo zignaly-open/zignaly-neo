@@ -1,5 +1,5 @@
 import { BrandImage, HeaderLinksContainer } from '@zignaly-open/ui';
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
 import {
@@ -18,6 +18,13 @@ import HeaderWidgetButtons from '../HeaderWidgetButtons';
 import { isFeatureOn, whitelabel } from '../../../whitelabel';
 import { Features } from 'whitelabel/type';
 
+type HeaderMenuItem = {
+  id: string;
+  to: string;
+  key: string;
+  text: string;
+};
+
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
@@ -30,6 +37,28 @@ const Header: React.FC = () => {
   ) : (
     <BrandImage id='menu__logo' height='32px' type='isotype' width='32px' />
   );
+
+  const navigationLinks = useMemo<HeaderMenuItem[]>(() => {
+    const menuItems: HeaderMenuItem[] = [];
+    if (!isFeatureOn(Features.NoPublicMarketplace) || isAuthenticated) {
+      menuItems.push({
+        id: 'menu__marketplace',
+        to: ROUTE_PROFIT_SHARING,
+        key: '--route-ps',
+        text: t('navigation-menu.profit-sharing'),
+      });
+    }
+
+    if (md && isFeatureOn(Features.CreateService)) {
+      menuItems.push({
+        id: 'menu__become-trader',
+        to: ROUTE_BECOME_TRADER,
+        key: '--route-bt',
+        text: t('navigation-menu.become-trader'),
+      });
+    }
+    return menuItems;
+  }, [t, isAuthenticated, md]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -57,24 +86,15 @@ const Header: React.FC = () => {
                     {logo}
                   </a>
                 )}
-                <HeaderLinksContainer key='links'>
-                  <NavigationLink
-                    id='menu__marketplace'
-                    to={ROUTE_PROFIT_SHARING}
-                    key='--route-ps'
-                  >
-                    {t('navigation-menu.profit-sharing')}
-                  </NavigationLink>
-                  {isFeatureOn(Features.CreateService) && md && (
-                    <NavigationLink
-                      id='menu__become-trader'
-                      to={ROUTE_BECOME_TRADER}
-                      key='--route-bt'
-                    >
-                      {t('navigation-menu.become-trader')}
-                    </NavigationLink>
-                  )}
-                </HeaderLinksContainer>
+                {!!navigationLinks.length && (
+                  <HeaderLinksContainer key='links'>
+                    {navigationLinks.map(({ id, to, key, text }) => (
+                      <NavigationLink id={id} to={to} key={key}>
+                        {text}
+                      </NavigationLink>
+                    ))}
+                  </HeaderLinksContainer>
+                )}
                 <ExtraNavigationDropdown />
               </Box>
             ) : (

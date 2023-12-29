@@ -22,7 +22,11 @@ export type ZigFiltersPruned = ZigFilterPruned[];
 
 export type BaseFilter = {
   id: string;
-  showInBar?: boolean;
+  primary?: boolean;
+  /**
+   * Special filter to display on mobile only. Pass "md" to also display it on md screen size.
+   *  */
+  mobile?: boolean | "md";
 };
 
 export type ZigFilter = SliderFilter | CheckboxFilter | SelectFilter;
@@ -44,18 +48,18 @@ export type CheckboxFilter = BaseFilter & {
   type: "checkbox";
   label: string;
   options: {
-    value: string;
+    value: string | number;
     label: string;
   }[];
-  value: string[] | null;
+  value: (string | number)[] | null;
 };
 
 export type SelectFilter = BaseFilter & {
   type: "select";
   label: string;
-  value: string | null;
+  value: string | number | null;
   options: {
-    value: string | null;
+    value: string | number | null;
     label: string;
   }[];
 };

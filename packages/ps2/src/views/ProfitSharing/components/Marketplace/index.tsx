@@ -32,8 +32,10 @@ import { usePersistTable } from 'apis/settings/use';
 import MarketplaceFilters from '../MarketplaceFilters';
 import {
   useFilteredServices,
+  useReturnsPeriod,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
+import { DEFAULT_SORTING_ID } from '../MarketplaceFilters/contants';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
@@ -51,6 +53,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
+  const returnsPeriod = useReturnsPeriod(tablePersist);
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -138,33 +141,45 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      columnHelper.accessor((row) => Number(row.pnlPercent180t), {
-        id: 'pnlPercent180t',
-        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
-          count: 6,
-        }),
-        cell: (props) => (
-          <ChangeIndicator
-            decimalScale={!md && 0}
-            type={md ? 'graph' : 'default'}
-            id={`marketplace-table__pnl180t-${props.row.original.id}`}
-            style={{
-              fontSize: '18px',
-              lineHeight: '28px',
-            }}
-            value={props.getValue()}
-          />
-        ),
-      }),
-      ...(lg
+      ...(lg || returnsPeriod === 'pnlPercent180t'
+        ? [
+            columnHelper.accessor((row) => Number(row.pnlPercent180t), {
+              id: 'pnlPercent180t',
+              header: t(
+                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
+                {
+                  count: 6,
+                },
+              ),
+              cell: (props) => (
+                <ChangeIndicator
+                  decimalScale={!md && 0}
+                  type={md ? 'graph' : 'default'}
+                  id={`marketplace-table__pnl180t-${props.row.original.id}`}
+                  style={{
+                    fontSize: '18px',
+                    lineHeight: '28px',
+                  }}
+                  value={props.getValue()}
+                />
+              ),
+            }),
+          ]
+        : []),
+      ...(lg || returnsPeriod === 'pnlPercent90t'
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent90t), {
               id: 'pnlPercent90t',
-              header: t('table.n-months-pnl', {
-                count: 3,
-              }),
+              header: t(
+                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
+                {
+                  count: 3,
+                },
+              ),
               cell: (props) => (
                 <ChangeIndicator
+                  decimalScale={!md && 0}
+                  type={md ? 'graph' : 'default'}
                   id={`marketplace-table__pnl90t-${props.row.original.id}`}
                   style={{
                     fontSize: '18px',
@@ -278,7 +293,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           ]
         : []),
     ],
-    [t, md, lg],
+    [t, md, lg, returnsPeriod],
   );
 
   return (
@@ -326,19 +341,19 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 : undefined
             }
             prefixId={TableId.Marketplace}
-            initialState={{
-              sorting: tablePersist.sorting ?? [
-                {
-                  id: 'pnlPercent180t',
-                  desc: true,
-                },
-              ],
-            }}
             columns={columns}
             data={filteredServices}
             emptyMessage={t('table-search-empty-message')}
             columnVisibility={false}
             enableSortingRemoval={false}
+            sorting={
+              tablePersist.sorting ?? [
+                {
+                  id: DEFAULT_SORTING_ID,
+                  desc: true,
+                },
+              ]
+            }
             onSortingChange={tablePersist.sortTable}
           />
         )}

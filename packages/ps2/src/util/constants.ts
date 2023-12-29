@@ -22,6 +22,9 @@ export const HELP_REFERRAL =
 export const DOWNLOAD_GOOGLE_AUTHENTICATOR_URL =
   'https://support.google.com/accounts/answer/1066447';
 
+export const CABIN_IN_THE_WOODS_URL =
+  'https://www.youtube.com/watch?v=zrYvrzYAYEg';
+
 export const FORBES_URL =
   'https://www.forbes.com/sites/tatianakoffman/2021/04/14/how-copy-trader-platforms-are-capitalizing-on-the-crypto-boom/?sh=71c6df5e64d3';
 

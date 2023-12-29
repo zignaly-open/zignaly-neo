@@ -8,7 +8,7 @@ import { CheckboxFilter } from "../../types";
 const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
   const { label, options, value, id } = filter;
 
-  const handleChange = (o: string, checked: boolean) => {
+  const handleChange = (o: string | number, checked: boolean) => {
     // If null value, fill it with all options
     let updatedValue: CheckboxFilter["value"] = [...(value ?? options.map((o) => o.value))];
 
@@ -30,14 +30,14 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
   return (
     <Box display={"flex"} flexDirection={"column"}>
       {label && (
-        <ZigTypography component={"div"} pb={1} id={`filter-checkbox_${id}__label`}>
+        <ZigTypography component={"div"} pb={1} id={`filter-checkbox-${id}__label`}>
           {label}
         </ZigTypography>
       )}
       {options.map((option, i) => (
         <Box py="6px" key={option.value}>
           <CheckBox
-            id={`filter-checkbox_${id}__option-${i}`}
+            id={`filter-checkbox-${id}__option-${i}`}
             value={!value || value?.includes(option.value)}
             label={option.label}
             onChange={(checked) => handleChange(option.value, checked)}

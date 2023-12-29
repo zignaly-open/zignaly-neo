@@ -7,30 +7,64 @@ import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
 import { useLongestString } from "../util";
 import { FiltersCount } from "../atoms/FilterCount";
+import MobileFilterButton from "../atoms/MobileFilterButton";
+import { Box } from "@mui/material";
+import { ZigFilter } from "../../types";
 
 const FILTERS_COUNT_WIDTH = 16;
 
 const CheckboxFilterDropdown = ({
   filter,
   onChange,
-  id = "",
   resetFilter,
   minSpace,
+  mobile,
+  prefixId,
 }: CheckboxFilterDropdownProps) => {
   const stringAll = "All";
   const stringNone = "None";
 
   const displayValue = useMemo(() => {
     if (!filter.value) return stringAll;
-    const options = filter.options.filter((option) => filter.value?.includes(option.value));
-    return options.length > 0 ? options.length : stringNone;
+    const options = filter.options.filter((option) =>
+      filter.value?.includes(option.value as string),
+    );
+    return options.length > 0
+      ? options.length === 1
+        ? options[0].label
+        : options.length
+      : stringNone;
   }, [filter.value]);
 
-  const longestWidth = useLongestString([stringAll, stringNone]);
+  const longestWidth = useLongestString([
+    stringAll,
+    stringNone,
+    ...filter.options.map((o) => o.label),
+  ]);
+
+  if (mobile) {
+    return (
+      <MobileFilterButton
+        filter={filter}
+        onChange={onChange as (filter: ZigFilter) => void}
+        resetFilter={resetFilter}
+        label={
+          typeof displayValue === "number" ? (
+            <Box display={"flex"} gap="6px" alignItems={"center"}>
+              {filter.label}: <FiltersCount>{displayValue}</FiltersCount>
+            </Box>
+          ) : (
+            `${filter.label}: ${displayValue}`
+          )
+        }
+        prefixId={prefixId}
+      />
+    );
+  }
 
   return (
     <ZigDropdown
-      id={id}
+      id={`${prefixId}__checkbox-${filter.id}`}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel

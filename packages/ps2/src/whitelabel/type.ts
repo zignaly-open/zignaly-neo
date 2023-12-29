@@ -5,7 +5,9 @@ export enum Features {
   Rewards = 'rewards',
   Referrals = 'referrals',
   CreateService = 'createServices',
+  HideSignup = 'hideSignup',
   NewSignup = 'newSignup',
+  NoPublicMarketplace,
   Subscriptions = 'subscriptions',
   Kyc = 'kyc',
 }

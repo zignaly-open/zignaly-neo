@@ -75,7 +75,7 @@ const SwapDepositPurchase: React.FC<SwapDepositPurchaseProps> = ({
             variant={'outlined'}
             onClick={() => showBuyModal()}
             id={'modal-swap-deposit-purchase__purchase'}
-            sx={{ padding: '8px 20px' }}
+            sx={{ padding: '8px 20px', minWidth: '133px' }}
           >
             {t('service-deposit.buttons.purchase', { coin })}
           </ZigButton>

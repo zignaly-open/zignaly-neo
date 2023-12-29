@@ -21,6 +21,7 @@ const MarketplaceFilters = ({
           variant='h2'
           fontWeight={400}
           id='marketplace__services-count'
+          whiteSpace={'nowrap'}
         >
           {t('n-profit-sharing-services', {
             count: resultsCount,
@@ -32,7 +33,6 @@ const MarketplaceFilters = ({
       onChange={onFiltersChange}
       search={searchFilter}
       onSearchChange={onSearchChange}
-      sx={{ mb: '28px' }}
       prefixId={TableId.Marketplace}
     />
   );

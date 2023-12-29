@@ -97,11 +97,13 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           inOrders: balance?.balanceLocked || 0,
           balance: balance?.balanceTotal || 0,
           available: balance?.balanceFree || 0,
-          networks: coins[ssc].networks?.map((n) => ({
-            label: n.name,
-            value: n.network,
-            ...n,
-          })),
+          networks: coins[ssc].networks
+            ?.filter((n) => n.network.toUpperCase() !== 'LIGHTNING')
+            .map((n) => ({
+              label: n.name,
+              value: n.network,
+              ...n,
+            })),
         };
       }),
     [coins, allowedCoins, exchangeType],

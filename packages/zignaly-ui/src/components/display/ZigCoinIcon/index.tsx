@@ -24,7 +24,12 @@ const ZigCoinIcon = ({
   return src ? (
     <Icon src={src} alt={coin} size={s} className={className} onError={onError} id={id} />
   ) : coin.toLowerCase() === "zig" ? (
-    <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} id={id} />
+    <ZignalyIcon
+      width={sizes[size as CoinSizes]}
+      height={sizes[size as CoinSizes]}
+      id={id}
+      alt={"zig"}
+    />
   ) : (
     <Placeholder size={s} className={className} as="div" id={id}>
       {coin[0]}
