@@ -40,7 +40,7 @@ const Header: React.FC = () => {
 
   const navigationLinks = useMemo<HeaderMenuItem[]>(() => {
     const menuItems: HeaderMenuItem[] = [];
-    if (!isFeatureOn(Features.NoPublicMarketplace) || isAuthenticated) {
+    if (!isFeatureOn(Features.LoginOnlyAccess) || isAuthenticated) {
       menuItems.push({
         id: 'menu__marketplace',
         to: ROUTE_PROFIT_SHARING,

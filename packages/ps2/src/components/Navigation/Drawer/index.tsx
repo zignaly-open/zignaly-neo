@@ -155,7 +155,7 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                {!isFeatureOn(Features.HideSignup) && (
+                {!isFeatureOn(Features.LoginOnlyAccess) && (
                   <Link to={ROUTE_SIGNUP}>
                     <ZigButton id={'drawer__signup'} variant='contained'>
                       {t('account-menu.isAuth-button-signUp')}
@@ -253,8 +253,7 @@ const ZigDrawer = () => {
                   )}
                 </>
               ) : (
-                (!isFeatureOn(Features.NoPublicMarketplace) ||
-                  isAuthenticated) && (
+                (!isFeatureOn(Features.LoginOnlyAccess) || isAuthenticated) && (
                   <ListItem disablePadding onClick={handleDrawerToggle}>
                     <ListItemButton
                       to={ROUTE_PROFIT_SHARING}

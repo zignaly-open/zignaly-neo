@@ -202,7 +202,7 @@ const Router: React.FC = () => {
 
       <Route
         element={
-          isFeatureOn(Features.NoPublicMarketplace) ? (
+          isFeatureOn(Features.LoginOnlyAccess) ? (
             <AuthenticatedWall />
           ) : (
             <Outlet />

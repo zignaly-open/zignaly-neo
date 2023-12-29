@@ -8,8 +8,7 @@ export default {
     [Features.Rewards]: false,
     [Features.CreateService]: false,
     [Features.NewSignup]: false,
-    [Features.HideSignup]: true,
-    [Features.NoPublicMarketplace]: true,
+    [Features.LoginOnlyAccess]: true,
   },
   locales: ['en', 'pt', 'es'],
   minInvestment: {
