@@ -11,7 +11,42 @@ if (!indexHtml) {
 const veryDumbSanitizeAttribute = (string) =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
-function getGeneratedIndexHtml(wlConfig) {
+function generateManifest(wlConfig) {
+  const { title } = wlConfig;
+  return JSON.stringify({
+    short_name: title,
+    name: title,
+    icons: [
+      {
+        src: 'favicon.ico',
+        sizes: '32x32 24x24 16x16',
+        type: 'image/x-icon',
+      },
+      // TODO
+      {
+        src: '/images/whitelabel/zignaly/logo64.png',
+        type: 'image/png',
+        sizes: '64x64',
+      },
+      {
+        src: '/images/whitelabel/zignaly/logo192.png',
+        type: 'image/png',
+        sizes: '192x192',
+      },
+      {
+        src: '/images/whitelabel/zignaly/logo512.png',
+        type: 'image/png',
+        sizes: '512x512',
+      },
+    ],
+    start_url: '/',
+    display: 'standalone',
+    theme_color: '#7682F7',
+    background_color: '#080810',
+  });
+}
+
+function generateIndexHtml(wlConfig) {
   const [title, domain, description] = [
     wlConfig.title,
     wlConfig.domain,
@@ -29,7 +64,7 @@ function getGeneratedIndexHtml(wlConfig) {
 <!--      <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/zignaly/favicon-32x32.png">-->
 <!--      <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/zignaly/favicon-16x16.png">-->
 <!--      <link rel="apple-touch-icon" href="/images/whitelabel/zignaly/logo192.png"/>-->
-<!--      <link rel="manifest" href="/manifests/zignaly.json"/>-->
+      <link rel="manifest" href="/manifest.json"/>
       
       <!-- Facebook Meta Tags -->
       <meta property="og:url" content="https://${domain}/profit-sharing">
@@ -58,11 +93,4 @@ function getGeneratedIndexHtml(wlConfig) {
   );
 }
 
-async function generateIndexHtmlForRequest(req) {
-  // const host = req.get('host');
-  const host = 'app.zignaly.com';
-  const wlConfig = await getWhitelabelConfig(host);
-  return getGeneratedIndexHtml(wlConfig);
-}
-
-module.exports = { generateIndexHtmlForRequest };
+module.exports = { generateManifest, generateIndexHtml };

@@ -19,12 +19,14 @@ If you still see this in the code, it means we had good business reasons to choo
 
 const express = require('express');
 const serveStatic = require('serve-static');
-const { generateIndexHtmlForRequest } = require('./html');
+const { generateIndexHtml, generateManifest } = require('./html');
+const getWhitelabelConfig = require('./config');
 
 const port = 2000;
 const server = express();
 
 server.use('index.html', serveNewIndexHtml);
+server.use('manifest.json', serveNewManifestJson);
 
 // This should not be used in prod
 // In prod, the reverse proxy should serve static and this script should not be processing those requests
@@ -43,6 +45,16 @@ server.listen(port, (err) => {
   console.log(`> Ready on :${port}`);
 });
 
+const getWlConfigForReq = (res) => {
+  // const host = req.get('host');
+  const host = 'app.zignaly.com';
+  return getWhitelabelConfig(host);
+};
+
 async function serveNewIndexHtml(req, res) {
-  res.send(await generateIndexHtmlForRequest(req)).status(200);
+  res.send(await generateIndexHtml(await getWlConfigForReq(req))).status(200);
+}
+
+async function serveNewManifestJson(req, res) {
+  res.send(await generateManifest(await getWlConfigForReq(req))).status(200);
 }
