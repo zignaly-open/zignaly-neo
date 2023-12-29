@@ -128,30 +128,31 @@ export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
 
   const sortingPeriod = tablePersist.sorting?.[0]?.id;
-  useEffect(() => {
-    if (
-      sortingPeriod &&
-      RETURNS_PERIODS.includes(sortingPeriod) &&
-      sortingPeriod !== returnsPeriod
-    ) {
-      // If sorting by returns period, and the period is no longer displayed, reset sorting
-      if (
-        (!md && returnsPeriod === 'pnlPercent180t') ||
-        (!lg && returnsPeriod === 'pnlPercent90t')
-      ) {
-        // Pick selected pnl period, or the default column if it's not one from the list
-        const newSortingId = RETURNS_PERIODS.includes(DEFAULT_SORTING_ID)
-          ? returnsPeriod
-          : DEFAULT_SORTING_ID;
-        tablePersist.sortTable([
-          {
-            id: newSortingId,
-            desc: true,
-          },
-        ]);
-      }
-    }
-  }, [sortingPeriod, returnsPeriod, md, lg]);
+  // console.log(sortingPeriod, returnsPeriod);
+  // useEffect(() => {
+  //   if (
+  //     sortingPeriod &&
+  //     RETURNS_PERIODS.includes(sortingPeriod) &&
+  //     sortingPeriod !== returnsPeriod
+  //   ) {
+  //     // If sorting by returns period, and the period is no longer displayed, reset sorting
+  //     if (
+  //       (!md && returnsPeriod === 'pnlPercent180t') ||
+  //       (!lg && returnsPeriod === 'pnlPercent90t')
+  //     ) {
+  //       // Pick selected pnl period, or the default column if it's not one from the list
+  //       const newSortingId = RETURNS_PERIODS.includes(DEFAULT_SORTING_ID)
+  //         ? returnsPeriod
+  //         : DEFAULT_SORTING_ID;
+  //       tablePersist.sortTable([
+  //         {
+  //           id: newSortingId,
+  //           desc: true,
+  //         },
+  //       ]);
+  //     }
+  //   }
+  // }, [sortingPeriod, returnsPeriod, md, lg]);
 
   return returnsPeriod;
 };

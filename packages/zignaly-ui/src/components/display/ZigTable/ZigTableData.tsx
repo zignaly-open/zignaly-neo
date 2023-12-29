@@ -20,7 +20,6 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
-import { useUpdateEffect } from "react-use";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -44,25 +43,31 @@ function ZigTableData<T extends object>({
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
-  useUpdateEffect(() => {
-    onSortingChange?.(internalSorting);
-  }, [internalSorting]);
 
   const [columnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
   );
 
+  let properSorting = internalSorting;
+  // Make sure sorting columns exist or reset them
+  if (sorting?.length) {
+    properSorting = sorting.filter((s) => columns.find((c) => c.id === s.id));
+    if (!properSorting.length) {
+      properSorting = initialState.sorting ?? [];
+    }
+  }
+
   const table = useReactTable({
     data,
     columns,
     state: {
-      sorting: sorting ?? internalSorting,
+      sorting: properSorting?.length ? properSorting : undefined,
       columnVisibility,
       ...(pagination && { pagination }),
       ...state,
     },
     onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: setInternalSorting,
+    onSortingChange: sorting ? setInternalSorting : () => onSortingChange,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),

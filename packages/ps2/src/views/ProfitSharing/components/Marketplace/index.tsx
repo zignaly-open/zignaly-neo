@@ -346,14 +346,15 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             emptyMessage={t('table-search-empty-message')}
             columnVisibility={false}
             enableSortingRemoval={false}
-            sorting={
-              tablePersist.sorting ?? [
+            initialState={{
+              sorting: [
                 {
                   id: DEFAULT_SORTING_ID,
                   desc: true,
                 },
-              ]
-            }
+              ],
+            }}
+            sorting={tablePersist.sorting}
             onSortingChange={tablePersist.sortTable}
           />
         )}
