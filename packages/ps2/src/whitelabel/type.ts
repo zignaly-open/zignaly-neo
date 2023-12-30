@@ -18,6 +18,7 @@ interface TranslationOverrides {
 export type WhitelabelOverride = {
   title: string;
   domain: string;
+  description?: string;
   locales?: string[];
   translationOverrides?: TranslationOverrides;
   minInvestment?: Partial<
@@ -26,15 +27,6 @@ export type WhitelabelOverride = {
   featureOverrides?: Partial<Record<Features, boolean>>;
   slug?: string;
   logo?: string;
-  headContent?: string;
-  scripts?: string;
-  // meta: {
-  //   title: string;
-  //   description: string;
-  //   logo: string;
-  //   banner: string;
-  //   favicon: string;
-  // };
   links?: {
     tos?: string;
     helpUrl?: string;

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { WhitelabelConfig } from './config';
+import { WhitelabelFrontendConfig } from './config';
 import { BUILD_PATH } from './constants';
 
 const indexHtml = fs.readFileSync(path.join(BUILD_PATH, 'index.html'), 'utf8');
@@ -13,7 +13,7 @@ if (!indexHtml) {
 const veryDumbSanitizeAttribute = (string: string): string =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
-export function generateManifest(wlConfig: WhitelabelConfig) {
+export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
   const { title } = wlConfig;
   return JSON.stringify({
     short_name: title,
@@ -48,15 +48,17 @@ export function generateManifest(wlConfig: WhitelabelConfig) {
   });
 }
 
-export function generateIndexHtml(wlConfig: WhitelabelConfig) {
+export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
   const [title, domain, description] = [
     wlConfig.title,
     wlConfig.domain,
     wlConfig.description,
   ].map(veryDumbSanitizeAttribute);
-  const twitterAcc = wlConfig.social?.twitter?.match(
-    /(?:https?:\/\/|^)(?:twitter|x)\.com\/([a-zA-Z\d-_]{1,15})/,
-  )?.[1];
+  const twitterAcc =
+    wlConfig.social?.twitter &&
+    wlConfig.social?.twitter.match(
+      /(?:https?:\/\/|^)(?:twitter|x)\.com\/([a-zA-Z\d-_]{1,15})/,
+    )?.[1];
 
   return indexHtml.replace(
     '</head>',
