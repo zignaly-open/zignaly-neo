@@ -228,7 +228,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       ...(!md
         ? [
             columnHelper.accessor((row) => +row.invested, {
-              id: 'invested',
+              id: 'investedUSDT',
               header: () => (
                 <div id={'marketplace-table__header-assets'}>
                   {t('table.assets-mobile')}

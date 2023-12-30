@@ -83,7 +83,7 @@ const ZigSlider = forwardRef(
                 },
               }}
               onChange={(e, v, a) => {
-                if (props.defaultValue) {
+                if (props.defaultValue !== undefined) {
                   setInternalValue(v);
                 }
                 props.onChange?.(e, v, a);
