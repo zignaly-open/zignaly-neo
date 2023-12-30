@@ -15,6 +15,7 @@
     "currency": "Base Currency",
     "assets": "Assets in Pool",
     "assets-mobile": "Assets",
+    "zscore": "Z-Score",
     "nb-investors": "# of investors",
     "n-month-pnl-mobile_one": "{{count}}M",
     "n-months-pnl-mobile_other": "P&L {{count}}M",

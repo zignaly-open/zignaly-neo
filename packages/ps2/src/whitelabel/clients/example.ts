@@ -12,9 +12,7 @@ export default {
     [Features.Kyc]: true,
     [Features.Subscriptions]: true,
   },
-  endpointOverrides: {
-    'marketplace/': 'market',
-  },
+  endpointOverrides: {},
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',

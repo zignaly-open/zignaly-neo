@@ -29,4 +29,9 @@ export type MarketplaceService = {
   fundsAllocated: string;
   description: string;
   createdAt: string;
+  zbalanced: number;
+  zprofit: number;
+  zrisk: number;
+  zscore: number;
+  zservice: number;
 };

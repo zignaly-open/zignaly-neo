@@ -16,6 +16,7 @@ export const settingsSlice = createSlice({
     ) => {
       const { id, sorting } = action.payload;
       if (!state.table[id]) state.table[id] = {};
+      console.log('sorting', sorting);
       state.table[id].sorting = sorting;
     },
     filterTable: (

@@ -13,7 +13,7 @@ export enum Features {
 }
 
 // yes, the trailing slash IS important
-export type OverrideableEndpoints = 'marketplace/';
+export type OverrideableEndpoints = 'markeplace/';
 
 export type WhitelabelOverride = {
   title: string;

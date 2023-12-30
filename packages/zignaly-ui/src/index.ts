@@ -56,6 +56,7 @@ export type {
   ZigDropdownProps,
   ZigDropdownOptionType,
 } from "./components/display/ZigDropdown";
+export { default as ZScore } from "./components/display/ZScore";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";

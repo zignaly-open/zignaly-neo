@@ -48,26 +48,33 @@ function ZigTableData<T extends object>({
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
   );
 
-  let properSorting = internalSorting;
-  // Make sure sorting columns exist or reset them
-  if (sorting?.length) {
-    properSorting = sorting.filter((s) => columns.find((c) => c.id === s.id));
-    if (!properSorting.length) {
-      properSorting = initialState.sorting ?? [];
+  const properSorting = React.useMemo(() => {
+    let sortingResult = internalSorting;
+    // Make sure sorting columns exist or reset it
+    if (sorting?.length) {
+      sortingResult = sorting.filter((s) => columns.find((c) => c.id === s.id));
+      if (!sortingResult.length) {
+        sortingResult = initialState.sorting ?? [];
+      }
     }
-  }
+    return sortingResult;
+  }, [sorting, columns, initialState.sorting, internalSorting]);
 
   const table = useReactTable({
     data,
     columns,
     state: {
-      sorting: properSorting?.length ? properSorting : undefined,
+      sorting: properSorting,
       columnVisibility,
       ...(pagination && { pagination }),
       ...state,
     },
     onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: sorting ? setInternalSorting : () => onSortingChange,
+    onSortingChange: sorting
+      ? (v) => {
+          onSortingChange?.((v as unknown as () => SortingState)());
+        }
+      : setInternalSorting,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),

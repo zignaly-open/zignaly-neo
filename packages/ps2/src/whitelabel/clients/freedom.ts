@@ -12,9 +12,7 @@ export default {
     [Features.NoPublicMarketplace]: true,
   },
   locales: ['en', 'pt', 'es'],
-  endpointOverrides: {
-    'marketplace/': 'market',
-  },
+  endpointOverrides: {},
   minInvestment: {
     USDT: 2,
     ETH: 0.0001,

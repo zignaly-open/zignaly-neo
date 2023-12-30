@@ -11,6 +11,7 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
+  ZScore,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -247,6 +248,17 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
+      columnHelper.accessor((row) => row.zscore, {
+        id: 'zscore',
+        header: () => (
+          <div id={'marketplace-table__header-zscore'}>{t('table.zscore')}</div>
+        ),
+        cell: (props) => (
+          <Box id={`marketplace-table__zscore-${props.row.original.id}`}>
+            <ZScore value={props.getValue()} />
+          </Box>
+        ),
+      }),
       columnHelper.display({
         header: '',
         id: 'action',
