@@ -1,5 +1,26 @@
 {
-  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "es5",
+    "outDir": "dist",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "pretty": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+  },
   "include": [
     "src"
   ],
@@ -7,9 +28,6 @@
     "node_modules",
     "build"
   ],
-  "compilerOptions": {
-    "baseUrl": "./src"
-  },
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
