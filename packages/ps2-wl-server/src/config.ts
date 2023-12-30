@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { CACHE_TTL, BASE_API } from './constants';
 import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
+import * as translationOverridesMap from './translationOverrides';
 
 const whitelabelCache = {};
 
@@ -25,7 +26,7 @@ export type WhitelabelBackendConfig = Pick<
   supportUrl: string;
   supportHelpCenter: string;
   languages: WhitelabelOverride['locales'];
-  settings: WhitelabelOverride['featureOverrides'];
+  settings: WhitelabelOverride['featureOverrides'] & { translationOw: boolean };
   mainAppLink?: string;
   tos?: string;
   privacyPolicy?: string;
@@ -52,7 +53,7 @@ const getCacheValue = (domain: string): WhitelabelFrontendConfig | null => {
 };
 
 const mapBackendConfigToFrontendConfig = ({
-  settings: featureOverrides,
+  settings: { translationOw, ...featureOverrides },
   languages: locales,
   supportUrl: helpUrl,
   tos,
@@ -71,6 +72,8 @@ const mapBackendConfigToFrontendConfig = ({
     ...config,
     locales,
     featureOverrides,
+    translationOverrides:
+      (translationOw && translationOverridesMap[config.slug]) || null,
     links: {
       tos,
       privacyPolicy,
