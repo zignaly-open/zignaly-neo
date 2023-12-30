@@ -39,6 +39,7 @@
     "coins": "Coins",
     "type": "Type",
     "fee": "Service Fee",
+    "exchange": "Exchange",
     "spot": "Spot",
     "futures": "Futures",
     "all": "All"

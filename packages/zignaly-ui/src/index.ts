@@ -58,6 +58,7 @@ export type {
 } from "./components/display/ZigDropdown";
 export { default as ZScore } from "./components/display/ZScore";
 export { default as ZigRisk } from "./components/display/ZigRisk";
+export * from "./components/display/ZigRisk";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";

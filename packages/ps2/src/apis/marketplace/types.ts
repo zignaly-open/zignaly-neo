@@ -34,4 +34,5 @@ export type MarketplaceService = {
   zrisk: number;
   zscore: number;
   zservice: number;
+  exchange: string;
 };

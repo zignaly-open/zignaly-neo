@@ -1,5 +1,5 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import { ZigFiltersType, filterFns } from '@zignaly-open/ui';
+import { ZigFiltersType, filterFns, getRisk } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
 import { PersistTableDataPruned } from 'apis/settings/types';
 import { useEffect, useMemo } from 'react';
@@ -11,9 +11,12 @@ import {
   SERVICES_COINS,
 } from './contants';
 import { getMonthsFromColumnId } from './util';
+import { useRisks } from '@zignaly-open/ui';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
+  const risks = useRisks();
+
   const coins = SERVICES_COINS.filter((coin) =>
     services.find((service) => service.ssc === coin),
   );
@@ -22,6 +25,9 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
       ? parseInt(current.pnlPercent180t)
       : prev;
   }, 100);
+  const exchanges = services.reduce((prev, current) => {
+    return prev.includes(current.exchange) ? prev : [...prev, current.exchange];
+  }, []);
 
   return useMemo(() => {
     return [
@@ -50,10 +56,42 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
       {
         type: 'checkbox',
         value: null,
+        label: t('table.risk'),
+        options: risks.map((risk) => ({ value: risk.id, label: risk.label })),
+        id: 'risk',
+        primary: true,
+      },
+      {
+        type: 'slider',
+        value: [null, null],
+        label: t('table.zscore'),
+        allowNoMin: true,
+        allowNoMax: true,
+        showPct: false,
+        min: 0,
+        max: 100,
+        id: 'zscore',
+      },
+      ...(exchanges.length > 1
+        ? [
+            {
+              type: 'checkbox',
+              value: null,
+              label: t('filters.exchange'),
+              options: exchanges.map((exchange) => ({
+                value: exchange,
+                label: exchange,
+              })),
+              id: 'exchange',
+            },
+          ]
+        : []),
+      {
+        type: 'checkbox',
+        value: null,
         label: t('filters.coins'),
         options: coins.map((coin) => ({ value: coin, label: coin })),
         id: 'coin',
-        primary: true,
       },
       {
         type: 'checkbox',
@@ -82,6 +120,8 @@ export const useFilteredServices = (
   filters: ZigFiltersType,
   searchFilter = '',
 ) => {
+  const risks = useRisks();
+
   return useMemo(() => {
     return services.filter((service) => {
       return (
@@ -104,6 +144,23 @@ export const useFilteredServices = (
             return filterFns.inNumberRange(
               filter.value as [number, number],
               service.successFee,
+            );
+          } else if (filter.id === 'exchange') {
+            return (
+              !filter.value ||
+              (filter.value as string[]).includes(service.exchange)
+            );
+          } else if (filter.id === 'risk') {
+            const serviceRisk = getRisk(service.zrisk, risks);
+
+            return (
+              !(filter.value as number[])?.length ||
+              (filter.value as number[])?.includes(serviceRisk.id)
+            );
+          } else if (filter.id === 'zscore') {
+            return filterFns.inNumberRange(
+              filter.value as [number, number],
+              service.zscore,
             );
           }
           return true;
