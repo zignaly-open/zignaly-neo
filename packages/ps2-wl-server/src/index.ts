@@ -16,11 +16,11 @@ This is just one of the options along with going full SSR (nextjs, likely).
 If you still see this in the code, it means we had good business reasons to choose it over SSR
 
 */
-
-const express = require('express');
-const serveStatic = require('serve-static');
-const { generateIndexHtml, generateManifest } = require('./html');
-const getWhitelabelConfig = require('./config');
+import express, { Request, Response } from 'express';
+import serveStatic from 'serve-static';
+import { generateIndexHtml, generateManifest } from './html';
+import { getWhitelabelConfig } from './config';
+import { BUILD_PATH } from './constants';
 
 const port = 2000;
 const server = express();
@@ -31,7 +31,7 @@ server.use('manifest.json', serveNewManifestJson);
 // This should not be used in prod
 // In prod, the reverse proxy should serve static and this script should not be processing those requests
 server.use(
-  serveStatic(__dirname + '/../build', {
+  serveStatic(BUILD_PATH, {
     dotfiles: 'ignore',
     index: false,
   }),
@@ -39,22 +39,24 @@ server.use(
 
 server.use('*', serveNewIndexHtml);
 
-server.listen(port, (err) => {
+// @ts-ignore
+server.listen(port, (err: unknown) => {
   if (err) throw err;
   /* eslint no-console: "off" */
   console.log(`> Ready on :${port}`);
 });
 
-const getWlConfigForReq = (res) => {
-  // const host = req.get('host');
-  const host = 'app.zignaly.com';
+const getWlConfigForReq = (req: express.Request) => {
+  let host = req.get('host');
+  // testing purposes
+  host = 'app.zignaly.com';
   return getWhitelabelConfig(host);
 };
 
-async function serveNewIndexHtml(req, res) {
+async function serveNewIndexHtml(req: Request, res: Response) {
   res.send(await generateIndexHtml(await getWlConfigForReq(req))).status(200);
 }
 
-async function serveNewManifestJson(req, res) {
+async function serveNewManifestJson(req: Request, res: Response) {
   res.send(await generateManifest(await getWlConfigForReq(req))).status(200);
 }

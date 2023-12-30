@@ -1,27 +1,35 @@
-const axios = require('axios');
-const { CACHE_TTL, BASE_API } = require('./constants');
+import axios from 'axios';
+import { CACHE_TTL, BASE_API } from './constants';
 
 const whitelabelCache = {};
 
-const setCacheValue = (domain, value) => {
+export type WhitelabelConfig = any;
+
+const setCacheValue = (domain: string, value: WhitelabelConfig): void => {
   whitelabelCache[domain] = {
     expiry: Date.now() + CACHE_TTL,
     value,
   };
 };
 
-const getCacheValue = (domain) => {
+const getCacheValue = (domain: string): WhitelabelConfig | null => {
   if (whitelabelCache[domain] && whitelabelCache[domain].expiry > Date.now())
     return whitelabelCache[domain].value;
   return null;
 };
 
 const mapBackendConfigToFrontendConfig = ({
+  // @ts-ignore
   settings: featureOverrides,
+  // @ts-ignore
   supportUrl: helpUrl,
+  // @ts-ignore
   tos,
+  // @ts-ignore
   privacyPolicy,
+  // @ts-ignore
   mainAppLink,
+  // @ts-ignore
   ...config
 }) => ({
   ...config,
@@ -29,7 +37,9 @@ const mapBackendConfigToFrontendConfig = ({
   links: { tos, privacyPolicy, mainAppLink, helpUrl },
 });
 
-const getWhitelabelConfig = async (domain) => {
+export const getWhitelabelConfig = async (
+  domain: string,
+): Promise<WhitelabelConfig> => {
   const cached = getCacheValue(domain);
   if (cached) return cached;
   // TODO: process it somehow
@@ -44,5 +54,3 @@ const getWhitelabelConfig = async (domain) => {
     console.error(e);
   }
 };
-
-module.exports = getWhitelabelConfig;

@@ -1,17 +1,19 @@
-const fs = require('fs');
-const getWhitelabelConfig = require('./config');
+import fs from 'fs';
+import path from 'path';
+import { WhitelabelConfig } from './config';
+import { BUILD_PATH } from './constants';
 
-const indexHtml = fs.readFileSync(__dirname + '/../build/index.html', 'utf8');
+const indexHtml = fs.readFileSync(path.join(BUILD_PATH, 'index.html'), 'utf8');
 
 if (!indexHtml) {
   console.error('build/index.html is missing, aborting');
   process.exit(1);
 }
 
-const veryDumbSanitizeAttribute = (string) =>
+const veryDumbSanitizeAttribute = (string: string): string =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
-function generateManifest(wlConfig) {
+export function generateManifest(wlConfig: WhitelabelConfig) {
   const { title } = wlConfig;
   return JSON.stringify({
     short_name: title,
@@ -46,7 +48,7 @@ function generateManifest(wlConfig) {
   });
 }
 
-function generateIndexHtml(wlConfig) {
+export function generateIndexHtml(wlConfig: WhitelabelConfig) {
   const [title, domain, description] = [
     wlConfig.title,
     wlConfig.domain,
@@ -92,5 +94,3 @@ function generateIndexHtml(wlConfig) {
       </head>`,
   );
 }
-
-module.exports = { generateManifest, generateIndexHtml };
