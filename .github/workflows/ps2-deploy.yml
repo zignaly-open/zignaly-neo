@@ -92,7 +92,6 @@ jobs:
           s3_folder: ${{ inputs.deploy-env }}
           max_polling_iterations: 60
           excluded_files: '.git/* *node_modules/*'
-          directory: ./packages/ps2-wl-server
 #      - name: Invalidate Cloudflare
 #        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
 #        uses: strrife/cloudflare-chunked-purge-action@master

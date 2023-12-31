@@ -5,4 +5,5 @@ DEPLOYMENTPATH="/zignaly/{directory}"
 sudo chown -R admin:admin $DEPLOYMENTPATH
 cd $DEPLOYMENTPATH
 cd deploy
-npm i
+yarn
+yarn lerna bootstrap --scope=@zignaly-open/ps2-wl-server
