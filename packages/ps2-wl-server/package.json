@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts"
+    "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
+    "dev": "nodemon --watch ./src -e ts exec 'npm start'"
   },
   "devDependencies": {
     "nodemon": "2.0.22"
