@@ -63,6 +63,8 @@ jobs:
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client + wl
         run: yarn ps2-wl-build
+      - name: Copy appspec
+        run: cp packages/ps2-wl-server/appspec.yml appspec.yml
       - name: Create PS2 WL Server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
