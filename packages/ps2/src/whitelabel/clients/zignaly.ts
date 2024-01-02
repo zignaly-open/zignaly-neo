@@ -43,7 +43,7 @@ export default {
   `,
   zignalySuccessFee: 5,
   tools: {
-    twitter: 'og0cu',
+    twitter_tracker: 'og0cu',
     intercom: 'nc3z6oqm',
     google_tag_manager: 'GTM-5ZQ4JLK',
   },

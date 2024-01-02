@@ -39,7 +39,7 @@ export type WhitelabelOverride = {
   baseTheme?: string;
   themeOverrides?: ThemeOverridesType;
   tools?: {
-    twitter?: string;
+    twitter_tracker?: string;
     intercom?: string;
     google_tag_manager?: string;
   };
