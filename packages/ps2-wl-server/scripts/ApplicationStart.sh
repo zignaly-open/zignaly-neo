@@ -8,5 +8,5 @@ cd $DEPLOYMENTPATH
 if [ `pm2 list | grep zignaly-wl | wc -l | awk '{print $1}'` -ge "1" ]; then
   pm2 restart zignaly-wl
 else
-  pm2 start yarn --interpreter bash --name "zignaly-wl" -- run ps2-wl-prod
+  pm2 start yarn --interpreter bash --name "zignaly-wl" -- start
 fi

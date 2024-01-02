@@ -63,8 +63,6 @@ jobs:
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client + wl
         run: yarn ps2-wl-build
-      - name: Copy appspec
-        run: cp packages/ps2-wl-server/appspec.yml appspec.yml
       - name: Create PS2 WL Server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -94,6 +92,7 @@ jobs:
           s3_folder: ${{ inputs.deploy-env }}
           max_polling_iterations: 60
           excluded_files: '.git/* *node_modules/*'
+          directory: ./packages/ps2-wl-server
 #      - name: Invalidate Cloudflare
 #        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
 #        uses: strrife/cloudflare-chunked-purge-action@master

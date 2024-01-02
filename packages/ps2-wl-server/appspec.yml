@@ -6,14 +6,14 @@ files:
 file_exists_behavior: OVERWRITE
 hooks:
     BeforeInstall:
-        - location: packages/ps2-wl-server/scripts/BeforeInstall.sh
+        - location: scripts/BeforeInstall.sh
           timeout: 300
           runas: admin
     AfterInstall:
-        - location: packages/ps2-wl-server/scripts/AfterInstall.sh
+        - location: scripts/AfterInstall.sh
           runas: admin
           timeout: 1200
     ApplicationStart:
-        - location: packages/ps2-wl-server/scripts/ApplicationStart.sh
+        - location: scripts/ApplicationStart.sh
           runas: admin
           timeout: 1200
