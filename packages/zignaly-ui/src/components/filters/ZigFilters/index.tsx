@@ -7,8 +7,9 @@ import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
 import FilterDropdown from "./dropdowns/FilterDropdown";
-import { useMeasure, useSize } from "react-use";
 import useDetectWrapping from "hooks/useDetectWrapping";
+
+const GAP = 1;
 
 const ZigFilters = ({
   defaultFilters,
@@ -69,8 +70,11 @@ const ZigFilters = ({
   };
   const inlineMultiFilters = md && secondaryFilters.length > 0;
 
-  const boxRef = useRef(null);
-  const isWrapped = useDetectWrapping(boxRef);
+  const containerRef = useRef<HTMLElement>(null);
+  const rightRef = useRef<HTMLElement>(null);
+  // Hook to wrap middle item if right item is wrapped
+  // And to apply a space-between alignement
+  const isWrapped = useDetectWrapping(containerRef) && md;
 
   return (
     <Box
@@ -79,17 +83,23 @@ const ZigFilters = ({
       alignItems="center"
       justifyContent="center"
       flexWrap="wrap"
-      gap={1}
+      gap={GAP}
       mb={{ xs: 2, sm: 3.5 }}
       mx={{ sm: 1, md: 0 }}
       sx={sx}
-      ref={boxRef}
+      ref={containerRef}
     >
       <Box
         display={"flex"}
         flex={1}
         justifyContent={"flex-start"}
         flexBasis={!md && mobileFilters.length ? "100%" : 0}
+        borderRight={
+          // Hack to wrap middle item if right item is wrapped
+          isWrapped
+            ? `${(rightRef.current?.offsetWidth ?? 0) + GAP * 8 * 2}px solid transparent`
+            : "none"
+        }
       >
         {leftComponent}
       </Box>
@@ -171,6 +181,7 @@ const ZigFilters = ({
         position={"relative"}
         alignItems={"center"}
         gap={1.5}
+        ref={rightRef}
       >
         <>
           {rightComponent}

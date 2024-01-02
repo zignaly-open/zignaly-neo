@@ -1,31 +1,26 @@
 import { useEffect, useState } from "react";
 
-const calculateVerticalMiddle = (element: Element) => {
-  const rect = element.getBoundingClientRect();
-  return rect.top + rect.height / 2;
-};
-
-const useDetectWrapping = (ref: React.RefObject<Element>) => {
-  const [isWrapped, setIsWrapped] = useState(false);
+export const useDetectWrapping = (containerRef: React.RefObject<HTMLElement>) => {
+  const [wrap, setWrap] = useState(false);
 
   useEffect(() => {
-    const checkWrap = () => {
-      if (ref.current) {
-        const children = Array.from(ref.current.children);
-        const firstChild = children[0];
-        const lastChild = children[children.length - 1];
-        const middleOfFirst = calculateVerticalMiddle(firstChild);
-        const middleOfLast = calculateVerticalMiddle(lastChild);
-        console.log(middleOfFirst, middleOfLast);
-
-        setIsWrapped(middleOfFirst !== middleOfLast);
+    const calculateWidth = () => {
+      const children = containerRef.current?.children;
+      if (children) {
+        const totalChildrenWidth = Array.from(children).reduce(
+          (acc, child) => acc + child.clientWidth,
+          0,
+        );
+        const containerWidth = containerRef.current?.offsetWidth ?? 0;
+        const remainingWidth = containerWidth - totalChildrenWidth;
+        setWrap(remainingWidth < 0);
       }
     };
 
-    checkWrap(); // Check initially
+    calculateWidth(); // Initial calculation
 
     const resizeHandler = () => {
-      checkWrap(); // Check on window resize
+      calculateWidth(); // Recalculate on window resize
     };
 
     window.addEventListener("resize", resizeHandler);
@@ -33,9 +28,9 @@ const useDetectWrapping = (ref: React.RefObject<Element>) => {
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
-  }, [ref]);
+  }, []);
 
-  return isWrapped;
+  return wrap;
 };
 
 export default useDetectWrapping;

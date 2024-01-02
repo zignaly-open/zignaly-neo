@@ -16,7 +16,7 @@ import { useRisks } from '@zignaly-open/ui';
 export const useServiceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
   const risks = useRisks();
-  const lg = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  const md = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
   const coins = SERVICES_COINS.filter((coin) =>
     services.find((service) => service.ssc === coin),
@@ -57,7 +57,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         type: 'select',
         options: RETURNS_PERIODS.map((o) => ({
           value: o,
-          label: t(lg ? 'table.n-months' : 'table.n-months-pnl', {
+          label: t(md ? 'table.n-months' : 'table.n-months-pnl', {
             count: getMonthsFromColumnId(o),
           }),
         })),
