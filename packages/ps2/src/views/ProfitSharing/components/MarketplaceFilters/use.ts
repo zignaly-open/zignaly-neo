@@ -32,17 +32,6 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
   return useMemo(() => {
     return [
       {
-        id: 'pnlPeriod',
-        value: DEFAULT_PERIOD,
-        type: 'select',
-        options: RETURNS_PERIODS.map((o) => ({
-          value: o,
-          label: t('table.n-months-pnl', { count: getMonthsFromColumnId(o) }),
-        })),
-        label: t('filters.period-pnl'),
-        mobile: true,
-      },
-      {
         type: 'slider',
         value: [null, null],
         label: t('filters.returns-months', { count: 6 }),
@@ -62,15 +51,33 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         primary: true,
       },
       {
+        id: 'pnlPeriod',
+        value: DEFAULT_PERIOD,
+        type: 'select',
+        options: RETURNS_PERIODS.map((o) => ({
+          value: o,
+          label: t('table.n-months-pnl', { count: getMonthsFromColumnId(o) }),
+        })),
+        label: t('filters.period-pnl'),
+        primary: true,
+        mobile: true,
+      },
+      {
         type: 'slider',
-        value: [null, null],
+        value: [0, 100],
         label: t('table.zscore'),
-        allowNoMin: true,
-        allowNoMax: true,
         showPct: false,
         min: 0,
         max: 100,
         id: 'zscore',
+      },
+      {
+        type: 'slider',
+        value: [0, 75],
+        label: t('filters.fee'),
+        min: 0,
+        max: 75,
+        id: 'fee',
       },
       ...(exchanges.length > 1
         ? [
@@ -86,13 +93,17 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
             },
           ]
         : []),
-      {
-        type: 'checkbox',
-        value: null,
-        label: t('filters.coins'),
-        options: coins.map((coin) => ({ value: coin, label: coin })),
-        id: 'coin',
-      },
+      ...(coins.length > 1
+        ? [
+            {
+              type: 'checkbox',
+              value: null,
+              label: t('filters.coins'),
+              options: coins.map((coin) => ({ value: coin, label: coin })),
+              id: 'coin',
+            },
+          ]
+        : []),
       {
         type: 'checkbox',
         label: t('filters.type'),
@@ -102,14 +113,6 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         ],
         value: null,
         id: 'type',
-      },
-      {
-        type: 'slider',
-        value: [0, 75],
-        label: t('filters.fee'),
-        min: 0,
-        max: 75,
-        id: 'fee',
       },
     ] as ZigFiltersType;
   }, [t, coins, maxPnL]);

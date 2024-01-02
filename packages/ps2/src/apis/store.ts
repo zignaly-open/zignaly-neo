@@ -10,7 +10,13 @@ import referralsReducer from './referrals/store';
 import settingsReducer from './settings//store';
 import { api as referralApi } from './referrals/api';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+  MigrationManifest,
+  PersistedState,
+  createMigrate,
+  persistReducer,
+  persistStore,
+} from 'redux-persist';
 import { UserState } from './user/types';
 import { InvestmentState } from './investment/types';
 import { ServiceState } from './service/types';
@@ -19,11 +25,37 @@ import { CoinState } from './coin/types';
 import { ReferralsState } from './referrals/types';
 import { SettingsState } from './settings/types';
 
+type PersistedStateV1 = PersistedState & {
+  settings: {
+    table: {
+      marketplace: object;
+    };
+  };
+};
+
+const migrations: MigrationManifest = {
+  1: (state: PersistedStateV1) => {
+    // Reset marketplace filters & sorting
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        table: {
+          ...state.settings?.table,
+          marketplace: {},
+        },
+      },
+    };
+  },
+};
+
 const persistConfig = {
   key: 'root',
+  version: 2,
   storage,
   // TODO: maybe we should actually leverage cache
   blacklist: [ps2Api.reducerPath, referralApi.reducerPath],
+  migrate: createMigrate(migrations, { debug: false }),
 };
 
 const appReducer = combineReducers({

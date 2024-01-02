@@ -47,6 +47,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const xl = useMediaQuery(theme.breakpoints.up('xl'));
   const [searchFilter, setSearchFilter] = useState('');
   const defaultFilters = useServiceFilters(services);
   const tablePersist = usePersistTable(TableId.Marketplace, defaultFilters);
@@ -143,7 +144,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(lg || returnsPeriod === 'pnlPercent180t'
+      ...(xl || returnsPeriod === 'pnlPercent180t'
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent180t), {
               id: 'pnlPercent180t',
@@ -168,7 +169,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(lg || returnsPeriod === 'pnlPercent90t'
+      ...(xl || returnsPeriod === 'pnlPercent90t'
         ? [
             columnHelper.accessor((row) => Number(row.pnlPercent90t), {
               id: 'pnlPercent90t',

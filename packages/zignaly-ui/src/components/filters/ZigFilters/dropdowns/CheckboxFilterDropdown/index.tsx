@@ -29,18 +29,10 @@ const CheckboxFilterDropdown = ({
     const options = filter.options.filter((option) =>
       filter.value?.includes(option.value as string),
     );
-    return options.length > 0
-      ? options.length === 1
-        ? options[0].label
-        : options.length
-      : stringNone;
+    return options.length > 0 ? options.length : stringNone;
   }, [filter.value]);
 
-  const longestWidth = useLongestString([
-    stringAll,
-    stringNone,
-    ...filter.options.map((o) => o.label),
-  ]);
+  const longestWidth = useLongestString([stringAll, stringNone]);
 
   if (mobile) {
     return (
