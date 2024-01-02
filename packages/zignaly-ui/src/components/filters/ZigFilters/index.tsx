@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { Layout, TopDivider } from "./styles";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import ZigSearch from "../ZigSearch";
@@ -7,6 +7,8 @@ import { ZigFilter, ZigFiltersProps } from "./types";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
 import FilterDropdown from "./dropdowns/FilterDropdown";
+import { useMeasure, useSize } from "react-use";
+import useDetectWrapping from "hooks/useDetectWrapping";
 
 const ZigFilters = ({
   defaultFilters,
@@ -67,6 +69,9 @@ const ZigFilters = ({
   };
   const inlineMultiFilters = md && secondaryFilters.length > 0;
 
+  const boxRef = useRef(null);
+  const isWrapped = useDetectWrapping(boxRef);
+
   return (
     <Box
       display="flex"
@@ -78,6 +83,7 @@ const ZigFilters = ({
       mb={{ xs: 2, sm: 3.5 }}
       mx={{ sm: 1, md: 0 }}
       sx={sx}
+      ref={boxRef}
     >
       <Box
         display={"flex"}
@@ -103,11 +109,14 @@ const ZigFilters = ({
         </Box>
       )}
       <Box
-        justifyContent={{
-          sm: "flex-start",
-          md: "center",
-          lg: "center",
-        }}
+        justifyContent={
+          isWrapped
+            ? "flex-start"
+            : {
+                sm: "flex-start",
+                md: "center",
+              }
+        }
         display="flex"
         gap={1}
         alignItems="center"
