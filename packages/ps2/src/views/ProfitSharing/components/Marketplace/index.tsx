@@ -37,8 +37,14 @@ import {
   useReturnsPeriod,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
-import { DEFAULT_SORTING_ID } from '../MarketplaceFilters/contants';
 // import TopServicesCards from '../TopServicesCards';
+
+const sx = {
+  changeIndicator: {
+    fontSize: '18px',
+    lineHeight: '28px',
+  },
+};
 
 const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const { t } = useTranslation(['marketplace', 'table']);
@@ -57,7 +63,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
-  const returnsPeriod = useReturnsPeriod(tablePersist);
+  const returnsPeriod = tablePersist.filters.find(
+    (f) => f.id === 'pnlPeriod',
+  )?.value;
 
   useEffect(() => () => setActiveRow(null), []);
   const columns = useMemo(
@@ -158,10 +166,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                   decimalScale={xl ? undefined : 0}
                   type={'default'}
                   id={`marketplace-table__pnl180t-${props.row.original.id}`}
-                  style={{
-                    fontSize: '18px',
-                    lineHeight: '28px',
-                  }}
+                  style={sx.changeIndicator}
                   value={props.getValue()}
                 />
               ),
@@ -183,10 +188,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                   decimalScale={xl ? undefined : 0}
                   type={'default'}
                   id={`marketplace-table__pnl90t-${props.row.original.id}`}
-                  style={{
-                    fontSize: '18px',
-                    lineHeight: '28px',
-                  }}
+                  style={sx.changeIndicator}
                   value={props.getValue()}
                 />
               ),
@@ -218,18 +220,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                           ]}
                         />
                       )}
-                      {md && (
-                        <ChangeIndicator
-                          style={{
-                            fontSize: '18px',
-                            lineHeight: '28px',
-                          }}
-                          value={props.getValue()}
-                          type={lg ? 'graph' : 'default'}
-                          decimalScale={xl ? undefined : 0}
-                          id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
-                        />
-                      )}
+                      <ChangeIndicator
+                        value={props.getValue()}
+                        style={lg ? null : sx.changeIndicator}
+                        type={lg ? 'graph' : 'default'}
+                        decimalScale={xl ? undefined : 0}
+                        id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
+                      />
                     </>
                   ) : (
                     <ZigTypography variant='body2' color='neutral400'>
@@ -387,7 +384,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             initialState={{
               sorting: [
                 {
-                  id: DEFAULT_SORTING_ID,
+                  id: 'zscore',
                   desc: true,
                 },
               ],

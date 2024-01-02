@@ -41,6 +41,11 @@ export const loadFilters = (
           newValue[1] = null;
         }
         value = newValue as SliderFilter["value"];
+      } else if (filter.type === "select" || filter.type === "checkbox") {
+        // Check that value is still in options
+        if (!filter.options.find((option) => option.value === value)) {
+          value = filter.value;
+        }
       }
     }
 

@@ -1,15 +1,9 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import { ZigFiltersType, filterFns, getRisk } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
-import { PersistTableDataPruned } from 'apis/settings/types';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  DEFAULT_PERIOD,
-  DEFAULT_SORTING_ID,
-  RETURNS_PERIODS,
-  SERVICES_COINS,
-} from './contants';
+import { SERVICES_COINS } from './contants';
 import { getMonthsFromColumnId } from './util';
 import { useRisks } from '@zignaly-open/ui';
 
@@ -61,7 +55,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
       },
       {
         id: 'pnlPeriod',
-        value: DEFAULT_PERIOD,
+        value: 'pnlPercent180t',
         type: 'select',
         options: returnsPeriods.map((o) => ({
           value: o,
@@ -184,46 +178,4 @@ export const useFilteredServices = (
       );
     });
   }, [services, filters, searchFilter]);
-};
-
-/**
- * Reset sorted column if it's no longer displayed
- */
-export const useReturnsPeriod = (tablePersist: PersistTableDataPruned) => {
-  const returnsPeriod =
-    tablePersist.filters.find((f) => f.id === 'pnlPeriod')?.value ??
-    DEFAULT_PERIOD;
-
-  const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.up('md'));
-  const lg = useMediaQuery(theme.breakpoints.up('lg'));
-
-  const sortingPeriod = tablePersist.sorting?.[0]?.id;
-  // console.log(sortingPeriod, returnsPeriod);
-  // useEffect(() => {
-  //   if (
-  //     sortingPeriod &&
-  //     RETURNS_PERIODS.includes(sortingPeriod) &&
-  //     sortingPeriod !== returnsPeriod
-  //   ) {
-  //     // If sorting by returns period, and the period is no longer displayed, reset sorting
-  //     if (
-  //       (!md && returnsPeriod === 'pnlPercent180t') ||
-  //       (!lg && returnsPeriod === 'pnlPercent90t')
-  //     ) {
-  //       // Pick selected pnl period, or the default column if it's not one from the list
-  //       const newSortingId = RETURNS_PERIODS.includes(DEFAULT_SORTING_ID)
-  //         ? returnsPeriod
-  //         : DEFAULT_SORTING_ID;
-  //       tablePersist.sortTable([
-  //         {
-  //           id: newSortingId,
-  //           desc: true,
-  //         },
-  //       ]);
-  //     }
-  //   }
-  // }, [sortingPeriod, returnsPeriod, md, lg]);
-
-  return returnsPeriod;
 };
