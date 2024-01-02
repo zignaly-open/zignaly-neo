@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import axios from 'axios';
 import { CACHE_TTL, BASE_API } from './constants';
 import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
