@@ -45,6 +45,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const xl = useMediaQuery(theme.breakpoints.up('xl'));
@@ -94,7 +95,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           <ServiceName
             activeLink={md}
             truncateServiceName={!lg}
-            size={lg ? 'x-large' : 'large'}
+            size={lg ? 'x-large' : sm ? 'large' : 'small'}
             showCoin={md}
             showOwner={lg}
             prefixId={`marketplace-table`}
@@ -106,7 +107,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           />
         ),
       }),
-      ...(md
+      ...(lg
         ? [
             columnHelper.accessor((row) => row.investedUSDT, {
               id: 'investedUSDT',
@@ -128,16 +129,14 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 ),
               },
               cell: (props) => (
-                <Box
-                  minWidth={148}
-                  id={`marketplace-table__assets-${props.row.original.id}`}
-                >
+                <Box id={`marketplace-table__assets-${props.row.original.id}`}>
                   <AssetsInPool
                     prefixId={'marketplace-table'}
                     serviceId={props.row.original.id}
                     assetsValue={props.getValue()}
                     numberOfInvestors={props.row.original.investors}
                     createdAt={props.row.original.createdAt}
+                    shorten={!xl}
                   />
                 </Box>
               ),
@@ -156,8 +155,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
               ),
               cell: (props) => (
                 <ChangeIndicator
-                  decimalScale={!md && 0}
-                  type={md ? 'graph' : 'default'}
+                  decimalScale={xl ? undefined : 0}
+                  type={'default'}
                   id={`marketplace-table__pnl180t-${props.row.original.id}`}
                   style={{
                     fontSize: '18px',
@@ -181,8 +180,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
               ),
               cell: (props) => (
                 <ChangeIndicator
-                  decimalScale={!md && 0}
-                  type={md ? 'graph' : 'default'}
+                  decimalScale={xl ? undefined : 0}
+                  type={'default'}
                   id={`marketplace-table__pnl90t-${props.row.original.id}`}
                   style={{
                     fontSize: '18px',
@@ -194,41 +193,55 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      columnHelper.accessor((row) => Number(row.pnlPercent30t), {
-        id: 'pnlPercent30t',
-        header: t(md ? 'table.n-months-pnl' : 'table.n-month-pnl-mobile', {
-          count: 1,
-        }),
-        cell: (props) => (
-          <Box
-            height={!md ? '90px' : 'unset'}
-            minWidth={!md ? '60px' : 'unset'}
-          >
-            {+props.getValue() ||
-            Object.keys(props.row.original.sparklines).length > 1 ? (
-              <Box sx={!md && { transform: 'scale(0.9)' }}>
-                <ZigChartMiniSuspensed
-                  id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
-                  midLine
-                  data={[0, ...(props.row.original.sparklines as number[])]}
-                />
-                {md && (
-                  <ChangeIndicator
-                    value={props.getValue()}
-                    type={'graph'}
-                    id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
-                  />
-                )}
-              </Box>
-            ) : (
-              <ZigTypography variant='body2' color='neutral400'>
-                {t('tableHeader.1-mo.no-data')}
-              </ZigTypography>
-            )}
-          </Box>
-        ),
-      }),
-      ...(!md
+      ...(lg || returnsPeriod === 'pnlPercent30t'
+        ? [
+            columnHelper.accessor((row) => Number(row.pnlPercent30t), {
+              id: 'pnlPercent30t',
+              header: t(
+                md ? 'table.n-months-pnl' : 'table.n-month-pnl-mobile',
+                {
+                  count: 1,
+                },
+              ),
+              cell: (props) => (
+                <>
+                  {+props.getValue() ||
+                  Object.keys(props.row.original.sparklines).length > 1 ? (
+                    <>
+                      {lg && (
+                        <ZigChartMiniSuspensed
+                          id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
+                          midLine
+                          data={[
+                            0,
+                            ...(props.row.original.sparklines as number[]),
+                          ]}
+                        />
+                      )}
+                      {md && (
+                        <ChangeIndicator
+                          style={{
+                            fontSize: '18px',
+                            lineHeight: '28px',
+                          }}
+                          value={props.getValue()}
+                          type={lg ? 'graph' : 'default'}
+                          decimalScale={xl ? undefined : 0}
+                          id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <ZigTypography variant='body2' color='neutral400'>
+                      {t('tableHeader.1-mo.no-data')}
+                    </ZigTypography>
+                  )}
+                </>
+              ),
+            }),
+          ]
+        : []),
+      ...(!lg && sm
         ? [
             columnHelper.accessor((row) => +row.invested, {
               id: 'investedUSDT',
@@ -257,7 +270,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         ),
         cell: (props) => (
           <Box id={`marketplace-table__zscore-${props.row.original.id}`}>
-            <ZScore value={props.getValue()} />
+            <ZScore value={props.getValue()} mini={!sm} />
           </Box>
         ),
       }),
@@ -318,7 +331,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           ]
         : []),
     ],
-    [t, md, lg, returnsPeriod],
+    [t, sm, md, lg, xl, returnsPeriod],
   );
 
   return (
@@ -341,22 +354,22 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           {t('invest-in-services-explainer')}
         </ZigTypography>
       </Box>
-      <TableWrapper>
-        <MarketplaceFilters
-          resultsCount={filteredServices?.length}
-          filters={tablePersist.filters}
-          defaultFilters={defaultFilters}
-          onFiltersChange={tablePersist.filterTable}
-          onSearchChange={setSearchFilter}
-          searchFilter={searchFilter}
-        />
-        {/* <TopServicesCards
+      <MarketplaceFilters
+        resultsCount={filteredServices?.length}
+        filters={tablePersist.filters}
+        defaultFilters={defaultFilters}
+        onFiltersChange={tablePersist.filterTable}
+        onSearchChange={setSearchFilter}
+        searchFilter={searchFilter}
+      />
+      {/* <TopServicesCards
               services={services
                 ?.slice()
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
                 .slice(0, 3)}
-            /> */}
-        {filteredServices && (
+              /> */}
+      {filteredServices && (
+        <TableWrapper>
           <ZigTable
             onRowClick={
               !md
@@ -382,8 +395,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             sorting={tablePersist.sorting}
             onSortingChange={tablePersist.sortTable}
           />
-        )}
-      </TableWrapper>
+        </TableWrapper>
+      )}
     </>
   );
 };
