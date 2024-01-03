@@ -1,5 +1,6 @@
+import React from 'react';
 import { useMediaQuery } from '@mui/material';
-import { ZigFiltersType, filterFns, getRisk } from '@zignaly-open/ui';
+import { ZigFiltersType, ZigRisk, filterFns, getRisk } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -34,6 +35,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
     if (!lg) {
       returnsPeriods.push('pnlPercent30t');
     }
+
     return [
       {
         type: 'slider',
@@ -50,7 +52,17 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         type: 'checkbox',
         value: null,
         label: t('table.risk'),
-        options: risks.map((risk) => ({ value: risk.id, label: risk.label })),
+        options: risks.map((risk) => ({
+          value: risk.id,
+          label: (
+            <ZigRisk
+              value={risk.zrisk}
+              width={30}
+              height={16}
+              sx={{ flexDirection: 'row', gap: '10px' }}
+            />
+          ),
+        })),
         id: 'risk',
         primary: true,
       },

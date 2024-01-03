@@ -1,4 +1,4 @@
-import { SliderFilter, ZigFiltersPruned, ZigFiltersType } from "./types";
+import { CheckboxFilter, SliderFilter, ZigFilter, ZigFiltersPruned, ZigFiltersType } from "./types";
 
 export const filterFns = {
   // https://github.com/TanStack/table/blob/main/packages/table-core/src/filterFns.ts
@@ -12,6 +12,38 @@ export const filterFns = {
   includesString: (value: string, filterValue: string) => {
     return value.toLowerCase().includes(filterValue.toLowerCase());
   },
+};
+
+const checkFilterValue = (filter: ZigFilter, value: ZigFilter["value"]): ZigFilter["value"] => {
+  if (!value) return value;
+
+  if (filter.type === "slider" && Array.isArray(value)) {
+    const newValue = [...value];
+    // Check that value is still within range
+    if (filter.min !== undefined && (value[0] as number) < filter.min) {
+      newValue[0] = null;
+    }
+    if (filter.max !== undefined && (value[1] as number) > filter.max) {
+      newValue[1] = null;
+    }
+    return newValue as SliderFilter["value"];
+  } else if (filter.type === "select") {
+    // Check that value is still in options
+    if (!filter.options.find((option) => option.value === value)) {
+      return filter.value;
+    }
+  } else if (filter.type === "checkbox") {
+    // Check that values are still in options
+    if (
+      !(value as CheckboxFilter["value"])!.every((val) =>
+        filter.options.find((option) => option.value === val),
+      )
+    ) {
+      return filter.value;
+    }
+  }
+
+  return value;
 };
 
 /**
@@ -28,25 +60,7 @@ export const loadFilters = (
     let { value } = filter;
 
     if (savedFilter) {
-      // Apply saved value
-      value = savedFilter.value;
-
-      if (filter.type === "slider" && Array.isArray(value)) {
-        const newValue = [...value];
-        // Check that value is still within range
-        if (filter.min !== undefined && (value[0] as number) < filter.min) {
-          newValue[0] = null;
-        }
-        if (filter.max !== undefined && (value[1] as number) > filter.max) {
-          newValue[1] = null;
-        }
-        value = newValue as SliderFilter["value"];
-      } else if (filter.type === "select" || filter.type === "checkbox") {
-        // Check that value is still in options
-        if (!filter.options.find((option) => option.value === value)) {
-          value = filter.value;
-        }
-      }
+      value = checkFilterValue(filter, savedFilter.value);
     }
 
     return {
