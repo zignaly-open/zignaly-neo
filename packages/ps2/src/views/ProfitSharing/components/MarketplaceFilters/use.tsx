@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { SERVICES_COINS } from './contants';
 import { getMonthsFromColumnId } from './util';
 import { useRisks } from '@zignaly-open/ui';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 export const useServiceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
@@ -31,9 +33,12 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         : [...prev, current.exchange];
     }, []);
 
-    const returnsPeriods = ['pnlPercent180t', 'pnlPercent90t'];
-    if (!lg) {
-      returnsPeriods.push('pnlPercent30t');
+    const returnsPeriods = [];
+    if (isFeatureOn(Features.ZScore) || !lg) {
+      returnsPeriods.push('pnlPercent180t', 'pnlPercent90t');
+      if (isFeatureOn(Features.ZScore) && !lg) {
+        returnsPeriods.push('pnlPercent30t');
+      }
     }
 
     return [
@@ -66,27 +71,31 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         id: 'risk',
         primary: true,
       },
-      {
-        id: 'pnlPeriod',
-        value: 'pnlPercent180t',
-        type: 'select',
-        options: returnsPeriods.map((o) => ({
-          value: o,
-          label: t(
-            md
-              ? lg
-                ? 'table.n-months'
-                : 'table.n-months-mobile'
-              : 'table.n-months-pnl',
+      ...(returnsPeriods.length > 1
+        ? [
             {
-              count: getMonthsFromColumnId(o),
+              id: 'pnlPeriod',
+              value: 'pnlPercent180t',
+              type: 'select',
+              options: returnsPeriods.map((o) => ({
+                value: o,
+                label: t(
+                  md
+                    ? lg
+                      ? 'table.n-months'
+                      : 'table.n-months-mobile'
+                    : 'table.n-months-pnl',
+                  {
+                    count: getMonthsFromColumnId(o),
+                  },
+                ),
+              })),
+              label: t('filters.period-pnl'),
+              primary: true,
+              mobile: true,
             },
-          ),
-        })),
-        label: t('filters.period-pnl'),
-        primary: true,
-        mobile: true,
-      },
+          ]
+        : []),
       {
         type: 'slider',
         value: [0, 100],

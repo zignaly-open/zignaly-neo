@@ -10,6 +10,7 @@ export enum Features {
   NoPublicMarketplace,
   Subscriptions,
   Kyc,
+  ZScore,
 }
 
 // yes, the trailing slash IS important

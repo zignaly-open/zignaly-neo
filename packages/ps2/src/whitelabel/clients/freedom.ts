@@ -10,6 +10,7 @@ export default {
     [Features.NewSignup]: false,
     [Features.HideSignup]: true,
     [Features.NoPublicMarketplace]: true,
+    [Features.ZScore]: false,
   },
   locales: ['en', 'pt', 'es'],
   endpointOverrides: {},

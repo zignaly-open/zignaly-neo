@@ -10,6 +10,7 @@ export default {
     [Features.Rewards]: false,
     [Features.Trader]: false,
     [Features.NewSignup]: false,
+    [Features.ZScore]: false,
   },
   locales: ['en', 'pt'],
   endpointOverrides: {},

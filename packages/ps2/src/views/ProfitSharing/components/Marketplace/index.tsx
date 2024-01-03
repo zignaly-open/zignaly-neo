@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   useMarketplaceMobileActiveRow,
   useMarketplace,
@@ -36,6 +36,8 @@ import {
   useFilteredServices,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 // import TopServicesCards from '../TopServicesCards';
 
 const sx = {
@@ -62,11 +64,44 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
-  const returnsPeriod = tablePersist.filters.find(
-    (f) => f.id === 'pnlPeriod',
-  )?.value;
+  const returnsPeriod = tablePersist.filters.find((f) => f.id === 'pnlPeriod')
+    ?.value as string;
+  const isZScoreOn = isFeatureOn(Features.ZScore);
 
   useEffect(() => () => setActiveRow(null), []);
+
+  const createPnLColumn = useCallback(
+    (months: number, showChart = false) => {
+      const days = months * 30;
+      const id = `pnlPercent${days}t`;
+      return columnHelper.accessor((row) => Number(row[id]), {
+        id,
+        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
+          count: months,
+        }),
+        cell: (props) => (
+          <>
+            {showChart && (
+              <ZigChartMiniSuspensed
+                id={`marketplace-table__pnl${days}t-${props.row.original.id}-chart`}
+                midLine
+                data={[0, ...(props.row.original.sparklines as number[])]}
+              />
+            )}
+            <ChangeIndicator
+              decimalScale={md ? undefined : 0}
+              type={'default'}
+              id={`marketplace-table__pnl${days}t-${props.row.original.id}`}
+              style={showChart ? null : sx.changeIndicator}
+              value={props.getValue()}
+            />
+          </>
+        ),
+      });
+    },
+    [t, md],
+  );
+
   const columns = useMemo(
     () => [
       columnHelper.accessor('name', {
@@ -150,94 +185,16 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(xl || returnsPeriod === 'pnlPercent180t'
-        ? [
-            columnHelper.accessor((row) => Number(row.pnlPercent180t), {
-              id: 'pnlPercent180t',
-              header: t(
-                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
-                {
-                  count: 6,
-                },
-              ),
-              cell: (props) => (
-                <ChangeIndicator
-                  decimalScale={xl ? undefined : 0}
-                  type={'default'}
-                  id={`marketplace-table__pnl180t-${props.row.original.id}`}
-                  style={sx.changeIndicator}
-                  value={props.getValue()}
-                />
-              ),
-            }),
-          ]
+      ...(xl || returnsPeriod === 'pnlPercent180t' || (!isZScoreOn && lg)
+        ? [createPnLColumn(6)]
         : []),
-      ...(xl || returnsPeriod === 'pnlPercent90t'
-        ? [
-            columnHelper.accessor((row) => Number(row.pnlPercent90t), {
-              id: 'pnlPercent90t',
-              header: t(
-                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
-                {
-                  count: 3,
-                },
-              ),
-              cell: (props) => (
-                <ChangeIndicator
-                  decimalScale={xl ? undefined : 0}
-                  type={'default'}
-                  id={`marketplace-table__pnl90t-${props.row.original.id}`}
-                  style={sx.changeIndicator}
-                  value={props.getValue()}
-                />
-              ),
-            }),
-          ]
+      ...(xl || returnsPeriod === 'pnlPercent90t' || (!isZScoreOn && lg)
+        ? [createPnLColumn(3)]
         : []),
-      ...(lg || returnsPeriod === 'pnlPercent30t'
-        ? [
-            columnHelper.accessor((row) => Number(row.pnlPercent30t), {
-              id: 'pnlPercent30t',
-              header: t(
-                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
-                {
-                  count: 1,
-                },
-              ),
-              cell: (props) => (
-                <>
-                  {+props.getValue() ||
-                  Object.keys(props.row.original.sparklines).length > 1 ? (
-                    <>
-                      {lg && (
-                        <ZigChartMiniSuspensed
-                          id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
-                          midLine
-                          data={[
-                            0,
-                            ...(props.row.original.sparklines as number[]),
-                          ]}
-                        />
-                      )}
-                      <ChangeIndicator
-                        value={props.getValue()}
-                        style={lg ? null : sx.changeIndicator}
-                        type={lg ? 'graph' : 'default'}
-                        decimalScale={xl ? undefined : 0}
-                        id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
-                      />
-                    </>
-                  ) : (
-                    <ZigTypography variant='body2' color='neutral400'>
-                      {t('tableHeader.1-mo.no-data')}
-                    </ZigTypography>
-                  )}
-                </>
-              ),
-            }),
-          ]
+      ...(lg || returnsPeriod === 'pnlPercent30t' || !isZScoreOn
+        ? [createPnLColumn(1, lg || (!isZScoreOn && md))]
         : []),
-      ...(!lg && sm
+      ...(!lg && (sm || !isZScoreOn)
         ? [
             columnHelper.accessor((row) => +row.invested, {
               id: 'investedUSDT',
@@ -259,28 +216,36 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      columnHelper.accessor((row) => row.zscore, {
-        id: 'zscore',
-        header: () => (
-          <div id={'marketplace-table__header-zscore'}>{t('table.zscore')}</div>
-        ),
-        cell: (props) => (
-          <Box id={`marketplace-table__zscore-${props.row.original.id}`}>
-            <ZScore value={props.getValue()} mini={!sm} />
-          </Box>
-        ),
-      }),
-      columnHelper.accessor((row) => row.zrisk, {
-        id: 'zrisk',
-        header: () => (
-          <div id={'marketplace-table__header-zrisk'}>{t('table.risk')}</div>
-        ),
-        cell: (props) => (
-          <Box id={`marketplace-table__zrisk-${props.row.original.id}`}>
-            <ZigRisk value={props.getValue()} />
-          </Box>
-        ),
-      }),
+      ...(isZScoreOn
+        ? [
+            columnHelper.accessor((row) => row.zscore, {
+              id: 'zscore',
+              header: () => (
+                <div id={'marketplace-table__header-zscore'}>
+                  {t('table.zscore')}
+                </div>
+              ),
+              cell: (props) => (
+                <Box id={`marketplace-table__zscore-${props.row.original.id}`}>
+                  <ZScore value={props.getValue()} mini={!sm} />
+                </Box>
+              ),
+            }),
+            columnHelper.accessor((row) => row.zrisk, {
+              id: 'zrisk',
+              header: () => (
+                <div id={'marketplace-table__header-zrisk'}>
+                  {t('table.risk')}
+                </div>
+              ),
+              cell: (props) => (
+                <Box id={`marketplace-table__zrisk-${props.row.original.id}`}>
+                  <ZigRisk value={props.getValue()} />
+                </Box>
+              ),
+            }),
+          ]
+        : []),
       columnHelper.display({
         header: '',
         id: 'action',
@@ -383,7 +348,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             initialState={{
               sorting: [
                 {
-                  id: 'zscore',
+                  id: isZScoreOn ? 'zscore' : returnsPeriod,
                   desc: true,
                 },
               ],

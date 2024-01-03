@@ -11,6 +11,8 @@ export default {
     [Features.NewSignup]: false,
     [Features.Kyc]: true,
     [Features.Subscriptions]: true,
+    [Features.NoPublicMarketplace]: false,
+    [Features.ZScore]: false,
   },
   endpointOverrides: {},
   mainAppLink: ROUTE_DASHBOARD,

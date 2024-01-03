@@ -217,13 +217,14 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       {referrals.length ? (
         <ZigTable
           initialState={{
-            sorting: tablePersist.sorting ?? [
+            sorting: [
               {
                 id: 'date',
                 desc: true,
               },
             ],
           }}
+          sorting={tablePersist.sorting}
           columns={columns}
           data={filteredHistory}
           columnVisibility={false}
