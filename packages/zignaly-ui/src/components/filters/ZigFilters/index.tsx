@@ -72,14 +72,13 @@ const ZigFilters = ({
 
   const containerRef = useRef<HTMLElement>(null);
   const rightRef = useRef<HTMLElement>(null);
-  // Hook to wrap middle item if right item is wrapped
-  // And to apply a space-between alignement
+  // Hook to wrap middle item if right item is wrapped, and to apply a space-between alignment
   const isWrapped = useDetectWrapping(containerRef) && md;
 
   return (
     <Box
       display="flex"
-      width={1}
+      flex={1}
       alignItems="center"
       justifyContent="center"
       flexWrap="wrap"
