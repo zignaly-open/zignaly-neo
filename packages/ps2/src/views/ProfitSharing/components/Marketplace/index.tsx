@@ -34,7 +34,6 @@ import { usePersistTable } from 'apis/settings/use';
 import MarketplaceFilters from '../MarketplaceFilters';
 import {
   useFilteredServices,
-  useReturnsPeriod,
   useServiceFilters,
 } from '../MarketplaceFilters/use';
 // import TopServicesCards from '../TopServicesCards';
@@ -399,7 +398,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
 };
 
 const MarketplaceContainer = () => {
-  const marketplaceEndpoint = useMarketplace();
+  const marketplaceEndpoint = useMarketplace({ geek: true });
   return (
     <PageContainer>
       <LayoutContentWrapper

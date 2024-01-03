@@ -100,7 +100,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
               label: t('filters.exchange'),
               options: exchanges.map((exchange) => ({
                 value: exchange,
-                label: exchange,
+                label: exchange.charAt(0).toUpperCase() + exchange.slice(1),
               })),
               id: 'exchange',
             },
@@ -152,7 +152,9 @@ export const useFilteredServices = (
               !filter.value || (filter.value as string[]).includes(service.ssc)
             );
           } else if (filter.id === 'type') {
-            const serviceType = service.type.split('_')[1];
+            const serviceType = service.geekMode.isSpotOnly
+              ? 'spot'
+              : 'futures';
             return (
               !filter.value || (filter.value as string[]).includes(serviceType)
             );

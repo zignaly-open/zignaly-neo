@@ -35,4 +35,14 @@ export type MarketplaceService = {
   zscore: number;
   zservice: number;
   exchange: string;
+  geekMode: {
+    idleDays: number;
+    investorsGrowthPct: number;
+    isSpotOnly: boolean;
+    lossDays: number;
+    maxDrawdownPct: number;
+    profitFactor: number;
+    sharpeRatio: number;
+    winDays: number;
+  };
 };
