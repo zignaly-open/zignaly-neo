@@ -30,7 +30,7 @@ const CheckboxFilterDropdown = ({
       filter.value?.includes(option.value as string),
     );
     return options.length > 0 ? options.length : stringNone;
-  }, [filter.value]);
+  }, [filter.value, filter.options]);
 
   const longestWidth = useLongestString([stringAll, stringNone]);
 

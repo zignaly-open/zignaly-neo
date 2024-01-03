@@ -200,7 +200,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             columnHelper.accessor((row) => Number(row.pnlPercent30t), {
               id: 'pnlPercent30t',
               header: t(
-                md ? 'table.n-months-pnl' : 'table.n-month-pnl-mobile',
+                md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile',
                 {
                   count: 1,
                 },

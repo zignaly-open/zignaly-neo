@@ -13,26 +13,27 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
   const md = useMediaQuery((theme) => theme.breakpoints.up('md'));
   const lg = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
-  const coins = SERVICES_COINS.filter((coin) =>
-    services.find((service) => service.ssc === coin),
-  );
-
-  const maxPnL = services.reduce((prev, current) => {
-    return +current.pnlPercent180t > prev
-      ? parseInt(current.pnlPercent180t)
-      : prev;
-  }, 100);
-
-  const exchanges = services.reduce((prev, current) => {
-    return prev.includes(current.exchange) ? prev : [...prev, current.exchange];
-  }, []);
-
-  const returnsPeriods = ['pnlPercent180t', 'pnlPercent90t'];
-  if (!lg) {
-    returnsPeriods.push('pnlPercent30t');
-  }
-
   return useMemo(() => {
+    const coins = SERVICES_COINS.filter((coin) =>
+      services.find((service) => service.ssc === coin),
+    );
+
+    const maxPnL = services.reduce((prev, current) => {
+      return +current.pnlPercent180t > prev
+        ? parseInt(current.pnlPercent180t)
+        : prev;
+    }, 100);
+
+    const exchanges = services.reduce((prev, current) => {
+      return prev.includes(current.exchange)
+        ? prev
+        : [...prev, current.exchange];
+    }, []);
+
+    const returnsPeriods = ['pnlPercent180t', 'pnlPercent90t'];
+    if (!lg) {
+      returnsPeriods.push('pnlPercent30t');
+    }
     return [
       {
         type: 'slider',
@@ -59,9 +60,16 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         type: 'select',
         options: returnsPeriods.map((o) => ({
           value: o,
-          label: t(md ? 'table.n-months' : 'table.n-months-pnl', {
-            count: getMonthsFromColumnId(o),
-          }),
+          label: t(
+            md
+              ? lg
+                ? 'table.n-months'
+                : 'table.n-months-mobile'
+              : 'table.n-months-pnl',
+            {
+              count: getMonthsFromColumnId(o),
+            },
+          ),
         })),
         label: t('filters.period-pnl'),
         primary: true,
@@ -120,7 +128,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         id: 'type',
       },
     ] as ZigFiltersType;
-  }, [t, coins, maxPnL]);
+  }, [t, services, risks, md, lg]);
 };
 
 export const useFilteredServices = (
