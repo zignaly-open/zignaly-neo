@@ -32,6 +32,7 @@ const EditProfileForm = () => {
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
@@ -43,6 +44,7 @@ const EditProfileForm = () => {
       country: user.country || '',
     },
   });
+  const country = watch('country');
 
   const filterCountries = useCallback(
     (
@@ -193,6 +195,8 @@ const EditProfileForm = () => {
                     // @ts-ignore
                     filterOption={filterCountries}
                     id={'edit-profile__country-select'}
+                    value={country}
+                    isClearable
                     label={
                       <>
                         {t('edit-profile.country')}
