@@ -87,7 +87,7 @@ const mapBackendConfigToFrontendConfig = ({
 
 export const getWhitelabelConfig = async (
   domain: string,
-): Promise<WhitelabelFrontendConfig> => {
+): Promise<WhitelabelFrontendConfig | null> => {
   const cached = getCacheValue(domain);
   if (cached) return cached;
   // TODO: process it somehow
@@ -95,11 +95,11 @@ export const getWhitelabelConfig = async (
     let { data: whitelabel } = await axios.get(
       `${BASE_API}wl/config?domain=${domain}`,
     );
-    console.error(whitelabel);
     whitelabel = mapBackendConfigToFrontendConfig(whitelabel);
     setCacheValue(domain, whitelabel);
     return whitelabel;
   } catch (e) {
     console.error(e);
+    return null;
   }
 };

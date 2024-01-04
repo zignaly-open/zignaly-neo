@@ -51,9 +51,19 @@ const getWlConfigForReq = (req: express.Request) => {
 };
 
 async function serveNewIndexHtml(req: Request, res: Response) {
-  res.send(await generateIndexHtml(await getWlConfigForReq(req))).status(200);
+  let wlConfig = await getWlConfigForReq(req);
+  if (!wlConfig) {
+    res.send('Config not found').status(500);
+  } else {
+    res.send(await generateIndexHtml(wlConfig)).status(200);
+  }
 }
 
 async function serveNewManifestJson(req: Request, res: Response) {
-  res.send(await generateManifest(await getWlConfigForReq(req))).status(200);
+  let wlConfig = await getWlConfigForReq(req);
+  if (!wlConfig) {
+    res.json({}).status(500);
+  } else {
+    res.send(await generateManifest(wlConfig)).status(200);
+  }
 }
