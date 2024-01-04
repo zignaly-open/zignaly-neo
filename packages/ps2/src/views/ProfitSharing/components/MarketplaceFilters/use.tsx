@@ -1,12 +1,6 @@
 import React, { useCallback } from 'react';
 import { useMediaQuery } from '@mui/material';
-import {
-  ZigFilter,
-  ZigFiltersType,
-  ZigRisk,
-  filterFns,
-  getRisk,
-} from '@zignaly-open/ui';
+import { ZigFiltersType, ZigRisk, getRisk } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
