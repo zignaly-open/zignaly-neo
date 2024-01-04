@@ -62,6 +62,8 @@ const mapBackendConfigToFrontendConfig = ({
   privacyPolicy,
   subscriptionPurchaseLink,
   mainAppLink,
+  logo,
+  favicon,
 
   // just to remove those
   settingFee,
@@ -73,6 +75,8 @@ const mapBackendConfigToFrontendConfig = ({
   ({
     ...config,
     locales,
+    logo: logo + '/public',
+    favicon: favicon + '/public',
     featureOverrides,
     translationOverrides:
       (translationOw && translationOverridesMap[config.slug]) || null,
