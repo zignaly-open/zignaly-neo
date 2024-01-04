@@ -14,7 +14,6 @@ export default {
     [Features.NoPublicMarketplace]: false,
     [Features.ZScore]: false,
   },
-  endpointOverrides: {},
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
   subscriptionPurchaseLink: 'http://shop.quantwise.ai/',

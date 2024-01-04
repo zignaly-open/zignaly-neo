@@ -13,7 +13,6 @@ export default {
     [Features.ZScore]: false,
   },
   locales: ['en', 'pt', 'es'],
-  endpointOverrides: {},
   minInvestment: {
     USDT: 2,
     ETH: 0.0001,

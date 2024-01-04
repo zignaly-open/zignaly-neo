@@ -33,15 +33,32 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         : [...prev, current.exchange];
     }, []);
 
-    const returnsPeriods = [];
-    if (isFeatureOn(Features.ZScore) || !lg) {
-      returnsPeriods.push('pnlPercent180t', 'pnlPercent90t');
-      if (isFeatureOn(Features.ZScore) && !lg) {
-        returnsPeriods.push('pnlPercent30t');
-      }
+    const returnsPeriods = ['pnlPercent180t', 'pnlPercent90t'];
+    if (isFeatureOn(Features.ZScore)) {
+      returnsPeriods.push('pnlPercent30t');
     }
 
     return [
+      {
+        id: 'pnlPeriod',
+        value: 'pnlPercent180t',
+        type: 'select',
+        options: returnsPeriods.map((o) => ({
+          value: o,
+          label: t(
+            md
+              ? lg
+                ? 'table.n-months'
+                : 'table.n-months-mobile'
+              : 'table.n-months-pnl',
+            {
+              count: getMonthsFromColumnId(o),
+            },
+          ),
+        })),
+        label: t('filters.period-pnl'),
+        mobile: true,
+      },
       {
         type: 'slider',
         value: [null, null],
@@ -71,31 +88,6 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         id: 'risk',
         primary: true,
       },
-      ...(returnsPeriods.length > 1
-        ? [
-            {
-              id: 'pnlPeriod',
-              value: 'pnlPercent180t',
-              type: 'select',
-              options: returnsPeriods.map((o) => ({
-                value: o,
-                label: t(
-                  md
-                    ? lg
-                      ? 'table.n-months'
-                      : 'table.n-months-mobile'
-                    : 'table.n-months-pnl',
-                  {
-                    count: getMonthsFromColumnId(o),
-                  },
-                ),
-              })),
-              label: t('filters.period-pnl'),
-              primary: true,
-              mobile: true,
-            },
-          ]
-        : []),
       {
         type: 'slider',
         value: [0, 100],

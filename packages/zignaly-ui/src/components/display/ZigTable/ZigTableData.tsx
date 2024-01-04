@@ -8,6 +8,7 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
+  VisibilityState,
 } from "@tanstack/react-table";
 import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
@@ -36,6 +37,7 @@ function ZigTableData<T extends object>({
   emptyMessage,
   state = {},
   onSortingChange,
+  onColumnVisibilityChange,
   sorting,
   ...rest
 }: ZigTablePropsData<T>) {
@@ -44,7 +46,7 @@ function ZigTableData<T extends object>({
     initialState.sorting ?? [],
   );
 
-  const [columnVisibility, setColumnVisibility] = React.useState(
+  const [internalColumnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
   );
 
@@ -65,11 +67,13 @@ function ZigTableData<T extends object>({
     columns,
     state: {
       sorting: properSorting,
-      columnVisibility,
+      columnVisibility: state.columnVisibility ?? internalColumnVisibility,
       ...(pagination && { pagination }),
       ...state,
     },
-    onColumnVisibilityChange: setColumnVisibility,
+    onColumnVisibilityChange: state.columnVisibility
+      ? onColumnVisibilityChange
+      : setColumnVisibility,
     onSortingChange: sorting
       ? (v) => {
           onSortingChange?.((v as unknown as () => SortingState)());

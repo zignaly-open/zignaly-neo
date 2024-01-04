@@ -13,7 +13,6 @@ export default {
     [Features.ZScore]: false,
   },
   locales: ['en', 'pt'],
-  endpointOverrides: {},
   links: {
     tos: 'https://www.lastra.app/termos',
     privacyPolicy: 'https://www.lastra.app/politica-privacidade/',

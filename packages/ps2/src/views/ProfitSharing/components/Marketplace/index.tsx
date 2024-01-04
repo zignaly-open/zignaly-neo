@@ -38,6 +38,7 @@ import {
 } from '../MarketplaceFilters/use';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
+import { useUpdateEffect } from 'react-use';
 // import TopServicesCards from '../TopServicesCards';
 
 const sx = {
@@ -68,10 +69,28 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     ?.value as string;
   const isZScoreOn = isFeatureOn(Features.ZScore);
 
+  const defaultColumnVisibility = useMemo(
+    () => ({
+      pnlPercent180t: md || returnsPeriod === 'pnlPercent180t',
+      pnlPercent90t:
+        xl || (!isZScoreOn && lg) || (!md && returnsPeriod === 'pnlPercent90t'),
+      pnlPercent30t:
+        lg || !isZScoreOn || (!md && returnsPeriod === 'pnlPercent30t'),
+    }),
+    [md, lg, xl, returnsPeriod],
+  );
+  const [columnVisibility, setColumnVisibility] = useState(
+    defaultColumnVisibility,
+  );
+  console.log(columnVisibility);
+  useUpdateEffect(() => {
+    setColumnVisibility(defaultColumnVisibility);
+  }, [defaultColumnVisibility]);
+
   useEffect(() => () => setActiveRow(null), []);
 
   const createPnLColumn = useCallback(
-    (months: number, showChart = false) => {
+    (months: number, showChart: boolean) => {
       const days = months * 30;
       const id = `pnlPercent${days}t`;
       return columnHelper.accessor((row) => Number(row[id]), {
@@ -185,15 +204,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      ...(xl || returnsPeriod === 'pnlPercent180t' || (!isZScoreOn && lg)
-        ? [createPnLColumn(6)]
-        : []),
-      ...(xl || returnsPeriod === 'pnlPercent90t' || (!isZScoreOn && lg)
-        ? [createPnLColumn(3)]
-        : []),
-      ...(lg || returnsPeriod === 'pnlPercent30t' || !isZScoreOn
-        ? [createPnLColumn(1, lg || (!isZScoreOn && md))]
-        : []),
+      createPnLColumn(6, false),
+      createPnLColumn(3, false),
+      createPnLColumn(1, lg || (!isZScoreOn && md)),
       ...(!lg && (sm || !isZScoreOn)
         ? [
             columnHelper.accessor((row) => +row.invested, {
@@ -292,7 +305,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           ]
         : []),
     ],
-    [t, sm, md, lg, xl, returnsPeriod],
+    [t, sm, md, lg, xl],
   );
 
   return (
@@ -343,7 +356,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             columns={columns}
             data={filteredServices}
             emptyMessage={t('table-search-empty-message')}
-            columnVisibility={false}
+            columnVisibility={md}
             enableSortingRemoval={false}
             initialState={{
               sorting: [
@@ -353,8 +366,12 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 },
               ],
             }}
+            state={{
+              columnVisibility,
+            }}
             sorting={tablePersist.sorting}
             onSortingChange={tablePersist.sortTable}
+            onColumnVisibilityChange={setColumnVisibility}
           />
         </TableWrapper>
       )}
