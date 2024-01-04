@@ -119,7 +119,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
     [t, md],
   );
-  console.log(lg || (!isZScoreOn && md));
+
   const columns = useMemo(
     () => [
       columnHelper.accessor('name', {
