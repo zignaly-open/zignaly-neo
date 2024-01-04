@@ -24,8 +24,7 @@ export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
 // Filters
 export { default as ZigSearch } from "./components/filters/ZigSearch";
 export { default as ZigFilters } from "./components/filters/ZigFilters";
-export { filterFns, loadFilters, pruneFilters } from "./components/filters/ZigFilters/util";
-export * from "./components/filters/ZigFilters/types";
+export * from "./components/filters/ZigFilters";
 
 // TODO: fix storybook & refactor
 export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";

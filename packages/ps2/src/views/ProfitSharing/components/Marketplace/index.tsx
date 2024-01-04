@@ -82,7 +82,6 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   const [columnVisibility, setColumnVisibility] = useState(
     defaultColumnVisibility,
   );
-  console.log(columnVisibility);
   useUpdateEffect(() => {
     setColumnVisibility(defaultColumnVisibility);
   }, [defaultColumnVisibility]);

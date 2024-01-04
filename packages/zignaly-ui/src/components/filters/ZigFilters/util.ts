@@ -2,12 +2,10 @@ import { CheckboxFilter, SliderFilter, ZigFilter, ZigFiltersPruned, ZigFiltersTy
 
 export const filterFns = {
   // https://github.com/TanStack/table/blob/main/packages/table-core/src/filterFns.ts
-  inNumberRange: (value: [number | null, number | null], filterValue: number) => {
-    if (!Array.isArray(value)) return false;
-    const [min, max] = value;
-    return (
-      ((!min && min !== 0) || filterValue >= min) && ((!max && max !== 0) || filterValue <= max)
-    );
+  inNumberRange: (value: number, filterValue: [number | null, number | null]) => {
+    if (!Array.isArray(filterValue)) return false;
+    const [min, max] = filterValue;
+    return ((!min && min !== 0) || value >= min) && ((!max && max !== 0) || value <= max);
   },
   includesString: (value: string, filterValue: string) => {
     return value.toLowerCase().includes(filterValue.toLowerCase());
@@ -79,4 +77,18 @@ export const pruneFilters = (filters: ZigFiltersType): ZigFiltersPruned => {
     value,
     type,
   }));
+};
+
+export const filterData = (filter: ZigFilter, value: string | number) => {
+  if (!filter || filter.value === "" || filter.value === null || filter.value === undefined)
+    return true;
+
+  if (filter.type === "slider")
+    return filterFns.inNumberRange(value as number, filter.value as [number, number]);
+  else if (filter.type === "checkbox") return filter.value.includes(value);
+  else if (filter.type === "select") return filter.value === value;
+  else if (filter.type === "text") {
+    return filterFns.includesString(value as string, filter.value);
+  }
+  return true;
 };

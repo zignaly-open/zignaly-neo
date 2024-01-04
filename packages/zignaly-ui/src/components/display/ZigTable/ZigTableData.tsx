@@ -8,7 +8,6 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
-  VisibilityState,
 } from "@tanstack/react-table";
 import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";

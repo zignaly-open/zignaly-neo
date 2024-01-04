@@ -8,6 +8,7 @@ import {
   ZigButton,
   ZigFilters,
   ZigFiltersType,
+  useFilteredCollection,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { RewardType, StatusType } from '../constants';
@@ -150,14 +151,9 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   );
 
   const tablePersist = usePersistTable(TableId.Referrals, defaultFilters);
-  const filteredHistory = useMemo(
-    () =>
-      referrals.filter((r) =>
-        tablePersist.filters.every(
-          ({ id, value }) => !value || r[id] === value,
-        ),
-      ),
-    [referrals, tablePersist.filters],
+  const filteredHistory = useFilteredCollection(
+    referrals,
+    tablePersist.filters,
   );
 
   const exporter = () =>

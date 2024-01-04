@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { ZigFiltersType, ZigRisk, filterFns, getRisk } from '@zignaly-open/ui';
+import {
+  ZigFilter,
+  ZigFiltersType,
+  ZigRisk,
+  filterFns,
+  getRisk,
+} from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SERVICES_COINS } from './contants';
 import { getMonthsFromColumnId } from './util';
-import { useRisks } from '@zignaly-open/ui';
+import { useRisks, useFilteredCollection } from '@zignaly-open/ui';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 
@@ -149,56 +155,29 @@ export const useFilteredServices = (
   filters: ZigFiltersType,
   searchFilter = '',
 ) => {
+  const fullFilters = [
+    ...filters,
+    {
+      id: 'search',
+      type: 'text',
+      value: searchFilter,
+    },
+  ];
+
   const risks = useRisks();
+  const filterColumnMap = useCallback(
+    (service: MarketplaceService) => ({
+      returns: +service.pnlPercent180t,
+      coin: service.ssc,
+      type: service.geekMode.isSpotOnly ? 'spot' : 'futures',
+      fee: service.successFee,
+      exchange: service.exchange,
+      risk: getRisk(service.zrisk, risks).id,
+      zscore: service.zscore,
+      search: [service.name, service.ownerName],
+    }),
+    [],
+  );
 
-  return useMemo(() => {
-    return services.filter((service) => {
-      return (
-        filters?.every((filter) => {
-          if (filter.id === 'returns') {
-            return filterFns.inNumberRange(
-              filter.value as [number, number],
-              +service.pnlPercent180t,
-            );
-          } else if (filter.id === 'coin') {
-            return (
-              !filter.value || (filter.value as string[]).includes(service.ssc)
-            );
-          } else if (filter.id === 'type') {
-            const serviceType = service.geekMode.isSpotOnly
-              ? 'spot'
-              : 'futures';
-            return (
-              !filter.value || (filter.value as string[]).includes(serviceType)
-            );
-          } else if (filter.id === 'fee') {
-            return filterFns.inNumberRange(
-              filter.value as [number, number],
-              service.successFee,
-            );
-          } else if (filter.id === 'exchange') {
-            return (
-              !filter.value ||
-              (filter.value as string[]).includes(service.exchange)
-            );
-          } else if (filter.id === 'risk') {
-            const serviceRisk = getRisk(service.zrisk, risks);
-
-            return (
-              !(filter.value as number[])?.length ||
-              (filter.value as number[])?.includes(serviceRisk.id)
-            );
-          } else if (filter.id === 'zscore') {
-            return filterFns.inNumberRange(
-              filter.value as [number, number],
-              service.zscore,
-            );
-          }
-          return true;
-        }) &&
-        (filterFns.includesString(service.name, searchFilter) ||
-          filterFns.includesString(service.ownerName, searchFilter))
-      );
-    });
-  }, [services, filters, searchFilter]);
+  return useFilteredCollection(services, fullFilters, filterColumnMap);
 };
