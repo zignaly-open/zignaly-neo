@@ -3,19 +3,34 @@
   "version": "0.6.18",
   "description": "A library of interface resources designed by Zignaly.",
   "module": "./lib/packages/zignaly-ui/src/index.js",
-  "main": "./lib/cjs.js",
+  "main": "./lib/index.cjs",
   "publishConfig": {
     "access": "public"
   },
   "exports": {
-    "./icons": { "import": "./lib/icons.js" },
-    "./fonts": { "import": "./lib/fonts.js" },
-    "./charts": { "import": "./lib/charts.js" },
-    ".": { "import": "./lib/index.js" }
+    "./icons": {
+      "import": "./lib/icons.js",
+      "require": "./lib/icons.cjs"
+    },
+    "./fonts": {
+      "import": "./lib/fonts.js",
+      "require": "./lib/fonts.cjs"
+    },
+    "./charts": {
+      "import": "./lib/import.js",
+      "require": "./lib/charts.cjs"
+    },
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    }
   },
   "typesVersions": {
     "*": {
-      "*": ["./lib/*", "./lib/index.d.ts"]
+      "*": [
+        "./lib/*",
+        "./lib/index.d.ts"
+      ]
     }
   },
   "sideEffects": false,

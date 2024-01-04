@@ -28,6 +28,18 @@ export default {
         "react-dom": "ReactDOM",
         "styled-components": "styled",
       },
+    },
+    {
+      dir: "lib",
+      format: "cjs",
+      preserveModules: true,
+      interop: 'compat',
+      entryFileNames: '[name].cjs',
+      globals: {
+        react: "React",
+        "react-dom": "ReactDOM",
+        "styled-components": "styled",
+      },
     }
   ],
   plugins: [
