@@ -17,7 +17,7 @@
       "require": "./lib/fonts.cjs"
     },
     "./charts": {
-      "import": "./lib/import.js",
+      "import": "./lib/charts.js",
       "require": "./lib/charts.cjs"
     },
     ".": {

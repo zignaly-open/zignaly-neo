@@ -4,6 +4,15 @@ import { ThemeStyledComponents } from "../types";
 // @ts-ignore
 import { isWebpSupported } from "react-image-webp/dist/utils";
 
+// thanks Jest, very cool
+const tryIsWebpSupported = () => {
+  try {
+    return isWebpSupported();
+  } catch {
+    return false;
+  }
+};
+
 const dark: ThemeStyledComponents = {
   mode: "dark",
   fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"],
@@ -38,7 +47,7 @@ const dark: ThemeStyledComponents = {
   },
   backgrounds: {
     body: `url(${
-      isWebpSupported()
+      tryIsWebpSupported()
         ? "https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/4048a0ac-9c9d-4298-4146-fb7b1524d900/public"
         : "https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/b182ff22-04bd-4ccf-0b61-cf2450910e00/public"
     }) #070819`,
