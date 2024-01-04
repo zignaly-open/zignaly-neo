@@ -47,10 +47,7 @@ server.listen(port, (err: unknown) => {
 });
 
 const getWlConfigForReq = (req: express.Request) => {
-  let host = req.get('host');
-  // testing purposes
-  host = 'app.zignaly.com';
-  return getWhitelabelConfig(host);
+  return getWhitelabelConfig(req.get('host'));
 };
 
 async function serveNewIndexHtml(req: Request, res: Response) {
