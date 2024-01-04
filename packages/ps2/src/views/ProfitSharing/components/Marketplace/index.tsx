@@ -119,7 +119,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     },
     [t, md],
   );
-
+  console.log(lg || (!isZScoreOn && md));
   const columns = useMemo(
     () => [
       columnHelper.accessor('name', {
@@ -167,7 +167,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           />
         ),
       }),
-      ...(lg
+      ...(lg || (!isZScoreOn && md)
         ? [
             columnHelper.accessor((row) => row.investedUSDT, {
               id: 'investedUSDT',
@@ -206,7 +206,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       createPnLColumn(6, false),
       createPnLColumn(3, false),
       createPnLColumn(1, lg || (!isZScoreOn && md)),
-      ...(!lg && (sm || !isZScoreOn)
+      ...(!lg && (sm || (!isZScoreOn && !md))
         ? [
             columnHelper.accessor((row) => +row.invested, {
               id: 'investedUSDT',
