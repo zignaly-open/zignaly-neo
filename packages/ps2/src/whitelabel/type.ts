@@ -13,7 +13,6 @@ export enum Features {
   ZScore,
 }
 
-// yes, the trailing slash IS important
 export type OverrideableEndpoints = '';
 
 export type WhitelabelOverride = {

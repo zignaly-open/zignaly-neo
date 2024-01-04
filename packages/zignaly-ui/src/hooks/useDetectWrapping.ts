@@ -4,7 +4,7 @@ export const useDetectWrapping = (containerRef: React.RefObject<HTMLElement>) =>
   const [wrap, setWrap] = useState(false);
 
   useEffect(() => {
-    const calculateWidth = () => {
+    const detectWrap = () => {
       const children = containerRef.current?.children;
       if (children) {
         const totalChildrenWidth = Array.from(children).reduce(
@@ -17,16 +17,12 @@ export const useDetectWrapping = (containerRef: React.RefObject<HTMLElement>) =>
       }
     };
 
-    calculateWidth(); // Initial calculation
+    detectWrap();
 
-    const resizeHandler = () => {
-      calculateWidth(); // Recalculate on window resize
-    };
-
-    window.addEventListener("resize", resizeHandler);
+    window.addEventListener("resize", detectWrap);
 
     return () => {
-      window.removeEventListener("resize", resizeHandler);
+      window.removeEventListener("resize", detectWrap);
     };
   }, []);
 

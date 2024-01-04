@@ -45,16 +45,9 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         type: 'select',
         options: returnsPeriods.map((o) => ({
           value: o,
-          label: t(
-            md
-              ? lg
-                ? 'table.n-months'
-                : 'table.n-months-mobile'
-              : 'table.n-months-pnl',
-            {
-              count: getMonthsFromColumnId(o),
-            },
-          ),
+          label: t('table.n-months-pnl', {
+            count: getMonthsFromColumnId(o),
+          }),
         })),
         label: t('filters.period-pnl'),
         mobile: true,
@@ -149,14 +142,17 @@ export const useFilteredServices = (
   filters: ZigFiltersType,
   searchFilter = '',
 ) => {
-  const fullFilters = [
-    ...filters,
-    {
-      id: 'search',
-      type: 'text',
-      value: searchFilter,
-    },
-  ];
+  const fullFilters = useMemo(
+    () => [
+      ...filters,
+      {
+        id: 'search',
+        type: 'text',
+        value: searchFilter,
+      },
+    ],
+    [searchFilter],
+  );
 
   const risks = useRisks();
   const filterColumnMap = useCallback(
