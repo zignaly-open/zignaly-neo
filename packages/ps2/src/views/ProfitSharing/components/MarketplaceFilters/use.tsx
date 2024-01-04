@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
-import { useMediaQuery } from '@mui/material';
-import { ZigFiltersType, ZigRisk, getRisk } from '@zignaly-open/ui';
+import { TextFilter, ZigFiltersType, ZigRisk, getRisk } from '@zignaly-open/ui';
 import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,8 +12,6 @@ import { Features } from 'whitelabel/type';
 export const useServiceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
   const risks = useRisks();
-  const md = useMediaQuery((theme) => theme.breakpoints.up('md'));
-  const lg = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   return useMemo(() => {
     const coins = SERVICES_COINS.filter((coin) =>
@@ -134,7 +131,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         id: 'type',
       },
     ] as ZigFiltersType;
-  }, [t, services, risks, md, lg]);
+  }, [t, services, risks]);
 };
 
 export const useFilteredServices = (
@@ -149,7 +146,7 @@ export const useFilteredServices = (
         id: 'search',
         type: 'text',
         value: searchFilter,
-      },
+      } as TextFilter,
     ],
     [searchFilter],
   );

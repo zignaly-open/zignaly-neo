@@ -67,6 +67,6 @@ export type SelectFilter = BaseFilter & {
 
 export type TextFilter = BaseFilter & {
   type: "text";
-  label: string;
+  label?: string;
   value: string | null;
 };
