@@ -94,7 +94,7 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
       )}'));
       </script>
       ${
-        wlConfig.tools.twitter_tracker
+        wlConfig.tools?.twitter_tracker
           ? `
           <script>
             !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
