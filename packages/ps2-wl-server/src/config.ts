@@ -39,6 +39,7 @@ export type WhitelabelBackendConfig = Pick<
 export type WhitelabelFrontendConfig = WhitelabelOverride & {
   imageDeliveryImages: {
     logo: string;
+    banner: string;
     favicon: string;
   };
 };
@@ -69,6 +70,7 @@ const mapBackendConfigToFrontendConfig = ({
   mainAppLink,
   logo,
   favicon,
+  image: banner,
 
   // just to remove those
   settingFee,
@@ -85,6 +87,7 @@ const mapBackendConfigToFrontendConfig = ({
     imageDeliveryImages: {
       logo,
       favicon,
+      banner,
     },
     featureOverrides,
     translationOverrides:

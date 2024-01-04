@@ -14,33 +14,34 @@ const veryDumbSanitizeAttribute = (string: string): string =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
 export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
-  const { title } = wlConfig;
+  const { title, imageDeliveryImages } = wlConfig;
   return JSON.stringify({
     short_name: title,
     name: title,
-    icons: [
-      {
-        src: 'favicon.ico',
-        sizes: '32x32 24x24 16x16',
-        type: 'image/x-icon',
-      },
-      // TODO
-      {
-        src: '/images/whitelabel/zignaly/logo64.png',
-        type: 'image/png',
-        sizes: '64x64',
-      },
-      {
-        src: '/images/whitelabel/zignaly/logo192.png',
-        type: 'image/png',
-        sizes: '192x192',
-      },
-      {
-        src: '/images/whitelabel/zignaly/logo512.png',
-        type: 'image/png',
-        sizes: '512x512',
-      },
-    ],
+    icons: imageDeliveryImages
+      ? [
+          {
+            src: `${imageDeliveryImages.favicon}/32x32`,
+            sizes: '32x32 24x24 16x16',
+            type: 'image/x-icon',
+          },
+          {
+            src: `${imageDeliveryImages.favicon}/64x64`,
+            type: 'image/png',
+            sizes: '64x64',
+          },
+          {
+            src: `${imageDeliveryImages.favicon}/192x192`,
+            type: 'image/png',
+            sizes: '192x192',
+          },
+          {
+            src: `${imageDeliveryImages.favicon}/512x512`,
+            type: 'image/png',
+            sizes: '512x512',
+          },
+        ]
+      : [],
     start_url: '/',
     display: 'standalone',
     theme_color: '#7682F7',
@@ -81,7 +82,11 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
       <meta property="og:type" content="website">
       <meta property="og:title" content="${title}">
       <meta property="og:description" content="${description}">
-<!--      <meta property="og:image" content="https://app.zignaly.com/images/zignaly-social.png">-->
+      ${
+        wlConfig.imageDeliveryImages?.banner
+          ? `<meta property="og:image" content="${wlConfig.imageDeliveryImages?.banner}/banner">`
+          : ''
+      }
       <meta property="og:image:width" content="1200"/>
       <meta property="og:image:height" content="630"/>
       <meta property="og:image:alt" content="${domain}"/>
@@ -92,7 +97,11 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
       <meta property="twitter:url" content="https://${domain}/profit-sharing">
       <meta name="twitter:title" content="${title}">
       <meta name="twitter:description" content="${description}">
-<!--      <meta name="twitter:image" content="https://app.zignaly.com/images/zignaly-social.png">-->
+       ${
+         wlConfig.imageDeliveryImages?.banner
+           ? `<meta name="twitter:image" content="${wlConfig.imageDeliveryImages?.banner}/banner">`
+           : ''
+       }
       ${twitterAcc ? `<meta name="twitter:site" content="@${twitterAcc}">` : ''}
       <script type="text/javascript">
       window.__zignalyWhitelabelConfig = JSON.parse(decodeURIComponent('${encodeURIComponent(
