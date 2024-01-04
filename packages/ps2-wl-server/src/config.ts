@@ -36,7 +36,12 @@ export type WhitelabelBackendConfig = Pick<
   marketplaceMinScore: number;
 };
 
-export type WhitelabelFrontendConfig = WhitelabelOverride;
+export type WhitelabelFrontendConfig = WhitelabelOverride & {
+  imageDeliveryImages: {
+    logo: string;
+    favicon: string;
+  };
+};
 
 const setCacheValue = (
   domain: string,
@@ -77,6 +82,10 @@ const mapBackendConfigToFrontendConfig = ({
     locales,
     logo: logo + '/public',
     favicon: favicon + '/public',
+    imageDeliveryImages: {
+      logo,
+      favicon,
+    },
     featureOverrides,
     translationOverrides:
       (translationOw && translationOverridesMap[config.slug]) || null,

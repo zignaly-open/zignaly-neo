@@ -55,8 +55,8 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
     wlConfig.description,
   ].map(veryDumbSanitizeAttribute);
   const twitterAcc =
-    wlConfig.social?.twitter &&
-    wlConfig.social?.twitter.match(
+    wlConfig.social?.twitter && // because ts
+    wlConfig.social?.twitter?.match(
       /(?:https?:\/\/|^)(?:twitter|x)\.com\/([a-zA-Z\d-_]{1,15})/,
     )?.[1];
 
@@ -64,10 +64,16 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
     '</head>',
     `
       <title>${title}</title>
-<!--      <link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/whitelabel/zignaly/favicon-16x16.png">     -->
-<!--      <link rel="icon" type="image/png" sizes="32x32" href="/images/whitelabel/zignaly/favicon-32x32.png">-->
-<!--      <link rel="icon" type="image/png" sizes="16x16" href="/images/whitelabel/zignaly/favicon-16x16.png">-->
-<!--      <link rel="apple-touch-icon" href="/images/whitelabel/zignaly/logo192.png"/>-->
+      ${
+        wlConfig.imageDeliveryImages?.favicon
+          ? ` 
+            <link rel="shortcut icon" type="image/png" sizes="16x16" href="${wlConfig.imageDeliveryImages?.favicon}/16x16">     
+            <link rel="icon" type="image/png" sizes="32x32" href="${wlConfig.imageDeliveryImages?.favicon}/32x32">
+            <link rel="icon" type="image/png" sizes="16x16" href="${wlConfig.imageDeliveryImages?.favicon}/16x16">
+            <link rel="apple-touch-icon" href="${wlConfig.imageDeliveryImages?.favicon}/192x192"/>
+          `
+          : ''
+      }
       <link rel="manifest" href="/manifest.json"/>
       
       <!-- Facebook Meta Tags -->
