@@ -71,7 +71,7 @@ jobs:
           directory: packages/ps2-wl-server
           file_name: .env
       - name: Add a workaround for type imports
-        run: echo "//@ts-nocheck\n\n$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
+        run: echo "//@ts-nocheck"'\n\n'"$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
       - name: AWS CodeDeploy
         uses: sourcetoad/aws-codedeploy-action@v1
         with:
