@@ -148,7 +148,7 @@ export const useFilteredServices = (
         value: searchFilter,
       } as TextFilter,
     ],
-    [searchFilter],
+    [filters, searchFilter],
   );
 
   const risks = useRisks();

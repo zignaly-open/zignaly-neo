@@ -6,7 +6,8 @@ import { filterData } from "./util";
  * Filter a collection of objects based on a set of filters.
  * @param collection
  * @param filters
- * @param filtersDataMap Function that maps data with filters. If not provided, the properties will be fetched by filter id.
+ * @param filtersDataMap Function that maps data with filters. If not provided, the properties
+ * will be fetched by filter id. Map to an array if it can match multiple values.
  */
 export const useFilteredCollection = <T extends object>(
   collection: T[],
