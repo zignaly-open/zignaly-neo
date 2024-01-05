@@ -6,7 +6,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
   marketplace: builder.query<MarketplaceService[], void>({
     providesTags: ['Marketplace'],
     query: () => ({
-      url: 'marketplace/',
+      url: 'market/',
     }),
   }),
 }));
