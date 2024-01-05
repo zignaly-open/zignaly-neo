@@ -7,4 +7,8 @@ export type CheckboxFilterDropdownProps = {
   minSpace?: number;
   mobile?: boolean;
   prefixId?: string;
+  /**
+   * If one selected value, show full value instead of count.
+   */
+  showFullSingleValue?: boolean;
 };

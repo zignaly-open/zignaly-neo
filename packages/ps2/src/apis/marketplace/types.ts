@@ -29,4 +29,20 @@ export type MarketplaceService = {
   fundsAllocated: string;
   description: string;
   createdAt: string;
+  zbalanced: number;
+  zprofit: number;
+  zrisk: number;
+  zscore: number;
+  zservice: number;
+  exchange: string;
+  geekMode: {
+    idleDays: number;
+    investorsGrowthPct: number;
+    isSpotOnly: boolean;
+    lossDays: number;
+    maxDrawdownPct: number;
+    profitFactor: number;
+    sharpeRatio: number;
+    winDays: number;
+  };
 };
