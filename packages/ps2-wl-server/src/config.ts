@@ -1,7 +1,14 @@
-// @ts-nocheck
-
 import axios from 'axios';
 import { CACHE_TTL, BASE_API } from './constants';
+// ok here's the problem
+// we want the types to be here in order to validate ourselves
+// but we deploy only this module. Problem? Yes
+// how do we solve this?
+// *breathe in*
+// *slowly breathe out*
+// WE APPEND a TS NOCHECK WHEN DOING CODEDEPLOY
+// I am sorry
+// I will figure a cleaner way to do this
 import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
 import * as translationOverridesMap from './translationOverrides';
 
