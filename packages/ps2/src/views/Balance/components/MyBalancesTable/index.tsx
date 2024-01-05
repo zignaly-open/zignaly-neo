@@ -204,47 +204,50 @@ const MyBalancesTable = (): JSX.Element => {
                   {!!allowedDeposits[exchangeType]?.includes(
                     row.original.coin,
                   ) && (
-                    <ZigButton
-                      narrow={exchangeType === 'spot' && hasNonZeroBalance}
-                      tooltip={hasNonZeroBalance && t('deposit')}
-                      id={`balance-row__deposit-${row.original.coin}`}
-                      onClick={() =>
-                        showDepositModal({
-                          selectedCoin: row.original.coin,
-                        })
-                      }
-                      variant='outlined'
-                      sx={{ maxHeight: '20px', mr: 1 }}
-                    >
-                      {exchangeType === 'futures' || !hasNonZeroBalance ? (
-                        t('deposit')
-                      ) : (
-                        <Add
-                          sx={{ height: '18px', width: '22px' }}
-                          color={'neutral300'}
-                        />
-                      )}
-                    </ZigButton>
+                    <>
+                      <ZigButton
+                        narrow={exchangeType === 'spot' && hasNonZeroBalance}
+                        tooltip={hasNonZeroBalance && t('deposit')}
+                        id={`balance-row__deposit-${row.original.coin}`}
+                        onClick={() =>
+                          showDepositModal({
+                            selectedCoin: row.original.coin,
+                          })
+                        }
+                        variant='outlined'
+                        sx={{ maxHeight: '20px', mr: 1 }}
+                      >
+                        {exchangeType === 'futures' || !hasNonZeroBalance ? (
+                          t('deposit')
+                        ) : (
+                          <Add
+                            sx={{ height: '18px', width: '22px' }}
+                            color={'neutral300'}
+                          />
+                        )}
+                      </ZigButton>
+
+                      <Box>
+                        <ZigButton
+                          narrow
+                          tooltip={t('withdraw')}
+                          id={`balance-row__withdrawal-${row.original.coin}`}
+                          onClick={() =>
+                            openWithdrawModal({
+                              selectedCoin: row.original.coin,
+                            })
+                          }
+                          sx={{ maxHeight: '20px', mr: 1 }}
+                          variant='outlined'
+                        >
+                          <Remove
+                            sx={{ height: '18px', width: '22px' }}
+                            color={'neutral300'}
+                          />
+                        </ZigButton>
+                      </Box>
+                    </>
                   )}
-                  <Box>
-                    <ZigButton
-                      narrow
-                      tooltip={t('withdraw')}
-                      id={`balance-row__withdrawal-${row.original.coin}`}
-                      onClick={() =>
-                        openWithdrawModal({
-                          selectedCoin: row.original.coin,
-                        })
-                      }
-                      sx={{ maxHeight: '20px', mr: 1 }}
-                      variant='outlined'
-                    >
-                      <Remove
-                        sx={{ height: '18px', width: '22px' }}
-                        color={'neutral300'}
-                      />
-                    </ZigButton>
-                  </Box>
                   {exchangeType === 'spot' &&
                     Number(row.original.balance.balanceTotal) > 0 &&
                     allowedDeposits.spot.includes(row.original.coin) && (
