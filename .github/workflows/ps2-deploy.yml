@@ -70,15 +70,8 @@ jobs:
           envkey_BASE_API: ${{ vars.PS2_BASE_API }}
           directory: packages/ps2-wl-server
           file_name: .env
-
-      #      - name: AWS Deploy
-#        uses: jakejarvis/s3-sync-action@master
-#        env:
-#          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-#          AWS_REGION: 'us-east-1'
-#          SOURCE_DIR: 'packages/ps2/build'
+      - name: Add a workaround for type imports
+        run: echo "//@ts-nocheck\n\n$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
       - name: AWS CodeDeploy
         uses: sourcetoad/aws-codedeploy-action@v1
         with:
