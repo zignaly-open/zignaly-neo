@@ -20,6 +20,7 @@ const CheckboxFilterDropdown = ({
   minSpace,
   mobile,
   prefixId,
+  showFullSingleValue,
 }: CheckboxFilterDropdownProps) => {
   const stringAll = "All";
   const stringNone = "None";
@@ -29,10 +30,18 @@ const CheckboxFilterDropdown = ({
     const options = filter.options.filter((option) =>
       filter.value?.includes(option.value as string),
     );
-    return options.length > 0 ? options.length : stringNone;
+    return options.length > 0
+      ? options.length === 1 && showFullSingleValue
+        ? options[0].label
+        : options.length
+      : stringNone;
   }, [filter.value, filter.options]);
 
-  const longestWidth = useLongestString([stringAll, stringNone]);
+  const longestWidth = useLongestString([
+    stringAll,
+    stringNone,
+    ...(showFullSingleValue ? filter.options.map((o) => o.label) : []),
+  ]);
 
   if (mobile) {
     return (
