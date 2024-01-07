@@ -23,7 +23,7 @@ const GlobalFonts = () => {
   const isAvenir = (font: string) => font === 'Avenir Next';
   const fontsToLoad = [
     theme.typography.fontFamily.split(',')[0],
-    whitelabel.themeOverrides?.fontFamilyH1H6?.split(',')?.[0],
+    whitelabel.themeOverrides?.fontFamilyH1H6?.[0],
   ]
     .filter(Boolean)
     .filter((x) => !userHasFont(x));
