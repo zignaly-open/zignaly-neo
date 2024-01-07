@@ -11,6 +11,7 @@ import { CACHE_TTL, BASE_API } from './constants';
 // I will figure a cleaner way to do this
 import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
 import * as translationOverridesMap from './translationOverrides';
+import { ThemeOverridesType } from '@zignaly-open/ui';
 
 const whitelabelCache = {};
 
@@ -38,6 +39,12 @@ export type WhitelabelBackendConfig = Pick<
   settings: WhitelabelOverride['featureOverrides'] & { translationOw: boolean };
   mainAppLink?: string;
   tos?: string;
+  theme: string;
+  themeOverride: {
+    background: string;
+    backgroundImage: string;
+    themeOverrides: ThemeOverridesType;
+  };
   privacyPolicy?: string;
   subscriptionPurchaseLink?: string;
   marketplaceMinScore: number;
@@ -67,6 +74,24 @@ const getCacheValue = (domain: string): WhitelabelFrontendConfig | null => {
   return null;
 };
 
+// oh yes baby we're mutating that object
+const getThemeOverridesWithBackground = (
+  themeOverride: WhitelabelBackendConfig['themeOverride'],
+) => {
+  const { themeOverrides = {} } = themeOverride;
+  if (!themeOverrides.backgrounds) themeOverrides.backgrounds = {};
+  if (themeOverride?.backgroundImage) {
+    themeOverrides.backgrounds.body = `url(${themeOverride?.backgroundImage}) ${
+      themeOverride?.background || '#111'
+    }`;
+  } else if (themeOverride?.background) {
+    themeOverrides.backgrounds.body = themeOverride.background;
+  } else {
+    // Do nothing
+  }
+  return themeOverrides;
+};
+
 const mapBackendConfigToFrontendConfig = ({
   settings: { translationOw, ...featureOverrides },
   languages: locales,
@@ -84,6 +109,9 @@ const mapBackendConfigToFrontendConfig = ({
   monthlyFee,
   type,
 
+  theme = 'dark',
+  themeOverride,
+
   ...config
 }: WhitelabelBackendConfig): WhitelabelFrontendConfig =>
   ({
@@ -96,6 +124,8 @@ const mapBackendConfigToFrontendConfig = ({
       favicon,
       banner,
     },
+    baseTheme: theme,
+    themeOverrides: getThemeOverridesWithBackground(themeOverride),
     featureOverrides,
     translationOverrides:
       (translationOw && translationOverridesMap[config.slug]) || null,
