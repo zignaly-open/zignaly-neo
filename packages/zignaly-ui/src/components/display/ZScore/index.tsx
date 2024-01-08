@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
-import { Chip } from "@mui/material";
+import { Chip, useTheme } from "@mui/material";
 import { ZScoreProps } from "./types";
 import { ZScoreIcon } from "icons";
 
 const ZScore = ({ value, mini = false, ...rest }: ZScoreProps) => {
+  const theme = useTheme();
   const sx = useMemo(
     () => ({
       "&": {
@@ -17,8 +18,12 @@ const ZScore = ({ value, mini = false, ...rest }: ZScoreProps) => {
         margin: 0,
         padding: 0,
       },
+      "& .MuiChip-label": {
+        fontSize: `${16}px`,
+        color: theme.palette.neutral000,
+      },
     }),
-    [mini],
+    [mini, theme],
   );
 
   return (
