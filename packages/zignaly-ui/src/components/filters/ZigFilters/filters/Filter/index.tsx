@@ -12,6 +12,9 @@ const Filter = ({ filter, onChange, mobile }: FilterProps) => {
       return <CheckBoxFilter filter={filter} onChange={onChange} mobile={mobile} />;
     case "select":
       return <SelectFilter filter={filter} onChange={onChange} mobile={mobile} />;
+    case "text":
+      // todo if needed
+      return <></>;
   }
 };
 

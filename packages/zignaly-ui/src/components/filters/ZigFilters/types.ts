@@ -29,7 +29,7 @@ export type BaseFilter = {
   mobile?: boolean | "md";
 };
 
-export type ZigFilter = SliderFilter | CheckboxFilter | SelectFilter;
+export type ZigFilter = SliderFilter | CheckboxFilter | SelectFilter | TextFilter;
 
 export type ZigFiltersType = ZigFilter[];
 
@@ -42,6 +42,7 @@ export type SliderFilter = BaseFilter & {
   step?: number;
   allowNoMin?: boolean;
   allowNoMax?: boolean;
+  showPct?: boolean;
 };
 
 export type CheckboxFilter = BaseFilter & {
@@ -62,4 +63,10 @@ export type SelectFilter = BaseFilter & {
     value: string | number | null;
     label: string;
   }[];
+};
+
+export type TextFilter = BaseFilter & {
+  type: "text";
+  label?: string;
+  value: string | null;
 };

@@ -41,7 +41,7 @@ export const Layout = styled.div<LayoutProps>`
   display: flex;
   cursor: pointer;
   user-select: none;
-  align-items: flex-start;
+  align-items: center;
 
   ${({ isActive, theme }) => `
     ${styledIf(

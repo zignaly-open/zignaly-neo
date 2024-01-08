@@ -9,6 +9,7 @@ module.exports = async ({ config }) => {
       theme: resolve("../src/theme"),
       utils: resolve("../src/utils"),
       icons: resolve("../src/icons"),
+      hooks: resolve("../src/hooks"),
     },
   });
 
