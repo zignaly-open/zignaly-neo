@@ -160,7 +160,7 @@ exports[`components/display/ZigTable/ZigTableData should render table without cr
             <span
               class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
             >
-              3000
+              800000
             </span>
           </td>
         </tr>
@@ -192,7 +192,7 @@ exports[`components/display/ZigTable/ZigTableData should render table without cr
             <span
               class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
             >
-              50000
+              5000
             </span>
           </td>
         </tr>
@@ -261,6 +261,7 @@ exports[`components/display/ZigTable/ZigTableData should render table without cr
         </span>
         <h3
           class="MuiTypography-root MuiTypography-h3 css-1hbb7p8-MuiTypography-root"
+          id="test-table__current-page"
         >
           1
         </h3>

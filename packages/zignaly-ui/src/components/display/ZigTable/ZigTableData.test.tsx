@@ -48,6 +48,7 @@ describe("components/display/ZigTable/ZigTableData", () => {
         columns={columns}
         prefixId={"test"}
         onSortingChange={onSortingChange}
+        sorting={[{ id: "name", desc: true }]}
       />,
     );
     const headerCell = screen.getByText("Price");
