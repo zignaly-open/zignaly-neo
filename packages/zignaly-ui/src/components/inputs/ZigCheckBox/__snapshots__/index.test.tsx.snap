@@ -120,6 +120,7 @@ exports[`components/inputs/ZigCheckBox renders correctly with outlined variant a
 <input
   class="PrivateSwitchBase-input css-1m9pwf3"
   data-indeterminate="false"
+  id="test"
   type="checkbox"
 />
 `;
@@ -127,6 +128,7 @@ exports[`components/inputs/ZigCheckBox renders correctly with outlined variant a
 exports[`components/inputs/ZigCheckBox renders correctly with outlined variant and label 2`] = `
 <span
   class="MuiTypography-root MuiTypography-body2 css-15j243s-MuiTypography-root"
+  id="test-label"
 >
   Test Label
 </span>

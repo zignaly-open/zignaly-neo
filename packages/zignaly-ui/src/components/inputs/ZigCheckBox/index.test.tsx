@@ -14,8 +14,10 @@ describe("components/inputs/ZigCheckBox", () => {
   });
 
   it("renders correctly with outlined variant and label", () => {
-    renderWithProvidersUi(<ZigCheckBox variant="outlined" label="Test Label" />);
-    const checkboxElement = screen.getByRole("checkbox");
+    const { container } = renderWithProvidersUi(
+      <ZigCheckBox variant="outlined" label="Test Label" id={"test"} />,
+    );
+    const checkboxElement = container.querySelector("#test") as Element;
     const labelElement = screen.getByText("Test Label");
     expect(checkboxElement).toBeInTheDocument();
     expect(labelElement).toBeInTheDocument();
