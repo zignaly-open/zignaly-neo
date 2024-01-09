@@ -78,6 +78,7 @@ const getCacheValue = (domain: string): WhitelabelFrontendConfig | null => {
 const getThemeOverridesWithBackground = (
   themeOverride: WhitelabelBackendConfig['themeOverride'],
 ) => {
+  if (!themeOverride) return undefined;
   const { themeOverrides = {} } = themeOverride;
   if (!themeOverrides.backgrounds) themeOverrides.backgrounds = {};
   if (themeOverride?.backgroundImage) {

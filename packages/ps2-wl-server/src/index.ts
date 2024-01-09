@@ -47,13 +47,13 @@ server.listen(port, (err: unknown) => {
 });
 
 const getWlConfigForReq = (req: express.Request) =>
-  getWhitelabelConfig('wl.zignaly.com');
-// getWhitelabelConfig(req.get('host'));
+  // getWhitelabelConfig('wl.zignaly.com');
+  getWhitelabelConfig(req.get('host'));
 
 async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
-    res.send('Config not found').status(500);
+    res.send('Config not found or invalid').status(500);
   } else {
     res.send(await generateIndexHtml(wlConfig)).status(200);
   }
