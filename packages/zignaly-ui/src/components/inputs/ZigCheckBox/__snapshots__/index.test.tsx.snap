@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/inputs/ZigCheckBox renders correctly with default props 1`] = `
+<input
+  class="PrivateSwitchBase-input css-1m9pwf3"
+  data-indeterminate="false"
+  id="test"
+  type="checkbox"
+/>
+`;
+
+exports[`components/inputs/ZigCheckBox renders correctly with default props 2`] = `
+CSSStyleDeclaration {
+  "0": "font",
+  "1": "text-rendering",
+  "10": "padding",
+  "11": "background-color",
+  "12": "border",
+  "13": "cursor",
+  "14": "margin",
+  "15": "box-sizing",
+  "16": "position",
+  "17": "opacity",
+  "18": "width",
+  "19": "height",
+  "2": "letter-spacing",
+  "20": "top",
+  "21": "left",
+  "22": "z-index",
+  "23": "visibility",
+  "3": "word-spacing",
+  "4": "line-height",
+  "5": "text-transform",
+  "6": "text-indent",
+  "7": "text-shadow",
+  "8": "display",
+  "9": "text-align",
+  "_importants": {
+    "background-color": "",
+    "border": "",
+    "box-sizing": "",
+    "color": "",
+    "cursor": "",
+    "display": "",
+    "font": "",
+    "height": "",
+    "left": "",
+    "letter-spacing": "",
+    "line-height": "",
+    "margin": "",
+    "opacity": "",
+    "padding": "",
+    "position": "",
+    "text-align": "",
+    "text-indent": "",
+    "text-rendering": "",
+    "text-shadow": "",
+    "text-transform": "",
+    "top": "",
+    "visibility": undefined,
+    "width": "",
+    "word-spacing": "",
+    "z-index": "",
+  },
+  "_length": 24,
+  "_onChange": [Function],
+  "_values": {
+    "background-color": "white",
+    "border": "2px inset",
+    "border-bottom": "2px inset",
+    "border-bottom-style": "inset",
+    "border-bottom-width": "2px",
+    "border-left": "2px inset",
+    "border-left-style": "inset",
+    "border-left-width": "2px",
+    "border-right": "2px inset",
+    "border-right-style": "inset",
+    "border-right-width": "2px",
+    "border-style": "inset",
+    "border-top": "2px inset",
+    "border-top-style": "inset",
+    "border-top-width": "2px",
+    "border-width": "2px",
+    "box-sizing": "border-box",
+    "cursor": "inherit",
+    "display": "inline-block",
+    "font": "-webkit-small-control",
+    "font-family": "-webkit-small-control",
+    "height": "100%",
+    "left": "0px",
+    "letter-spacing": "normal",
+    "line-height": "normal",
+    "margin": "0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "0px",
+    "opacity": "0",
+    "padding": "0px",
+    "padding-bottom": "0px",
+    "padding-left": "0px",
+    "padding-right": "0px",
+    "padding-top": "0px",
+    "position": "absolute",
+    "text-align": "start",
+    "text-indent": "0",
+    "text-rendering": "auto",
+    "text-shadow": "none",
+    "text-transform": "none",
+    "top": "0px",
+    "visibility": "visible",
+    "width": "100%",
+    "word-spacing": "normal",
+    "z-index": "1",
+  },
+}
+`;
+
+exports[`components/inputs/ZigCheckBox renders correctly with outlined variant and label 1`] = `
+<input
+  class="PrivateSwitchBase-input css-1m9pwf3"
+  data-indeterminate="false"
+  type="checkbox"
+/>
+`;
+
+exports[`components/inputs/ZigCheckBox renders correctly with outlined variant and label 2`] = `
+<span
+  class="MuiTypography-root MuiTypography-body2 css-15j243s-MuiTypography-root"
+>
+  Test Label
+</span>
+`;
