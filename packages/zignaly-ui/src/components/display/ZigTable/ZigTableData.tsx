@@ -12,7 +12,6 @@ import {
 import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
-import CheckBox from "../../inputs/CheckBox";
 import { ZigTablePropsData } from "./types";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
@@ -21,6 +20,7 @@ import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
 import { useUpdateEffect } from "react-use";
+import { ZigCheckBox } from "../../../index";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -159,12 +159,16 @@ function ZigTableData<T extends object>({
                         .map((column) => {
                           return {
                             element: (
-                              <CheckBox
-                                value={column.getIsVisible()}
+                              <ZigCheckBox
+                                variant={"outlined"}
+                                checked={column.getIsVisible()}
                                 label={column.columnDef.header as string}
                                 onChange={(v) => {
-                                  if (v || table.getVisibleLeafColumns().length > 2) {
-                                    column.toggleVisibility(v);
+                                  if (
+                                    v.target.checked ||
+                                    table.getVisibleLeafColumns().length > 2
+                                  ) {
+                                    column.toggleVisibility(v.target.checked);
                                   }
                                 }}
                               />
