@@ -11,9 +11,8 @@ export default {
     [Features.NewSignup]: false,
     [Features.Kyc]: true,
     [Features.Subscriptions]: true,
-  },
-  endpointOverrides: {
-    'marketplace/': 'market',
+    [Features.NoPublicMarketplace]: false,
+    [Features.ZScore]: false,
   },
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
