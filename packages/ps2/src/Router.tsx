@@ -19,6 +19,8 @@ import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
 import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
+import TermsOfService from './views/Legal/TermsOfService';
+import Privacy from './views/Legal/Privacy';
 
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
@@ -212,6 +214,8 @@ const Router: React.FC = () => {
         <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
       </Route>
 
+      <Route path={Routes.ROUTE_LEGAL_TOS} element={<TermsOfService />} />
+      <Route path={Routes.ROUTE_LEGAL_PRIVACY} element={<Privacy />} />
       <Route path={Routes.ROUTE_404} element={<NotFound />} />
 
       <Route
