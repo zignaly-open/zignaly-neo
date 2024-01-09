@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import {
   ZigButton,
   ZigInput,
@@ -32,7 +32,7 @@ const EditProfileForm = () => {
   const {
     handleSubmit,
     control,
-    watch,
+    setValue,
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
@@ -41,10 +41,13 @@ const EditProfileForm = () => {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
       bio: user.about || '',
-      country: user.country || '',
+      country: '',
     },
   });
-  const country = watch('country');
+
+  useEffect(() => {
+    setValue('country', user.country);
+  }, [user.country]);
 
   const filterCountries = useCallback(
     (
@@ -195,7 +198,6 @@ const EditProfileForm = () => {
                     // @ts-ignore
                     filterOption={filterCountries}
                     id={'edit-profile__country-select'}
-                    value={country}
                     isClearable
                     label={
                       <>
