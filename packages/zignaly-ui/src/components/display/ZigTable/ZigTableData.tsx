@@ -210,6 +210,7 @@ function ZigTableData<T extends object>({
                     {row.getVisibleCells().map((cell, index) => {
                       return (
                         <td
+                          id={prefixId && `${prefixId}__${cell.column.id}-${cell.row.id}`}
                           key={cell.id}
                           colSpan={
                             enableColumnVisibility && row.getVisibleCells().length === index + 1
@@ -277,7 +278,11 @@ function ZigTableData<T extends object>({
             >
               <ZigTypography color="neutral300">Page</ZigTypography>
 
-              <ZigTypography variant="h3" color="neutral100">
+              <ZigTypography
+                variant="h3"
+                color="neutral100"
+                id={prefixId && `${prefixId}-table__current-page`}
+              >
                 {table.getState().pagination.pageIndex + 1}
               </ZigTypography>
 
