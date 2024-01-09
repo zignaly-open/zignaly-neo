@@ -86,9 +86,9 @@ jobs:
           max_polling_iterations: 60
           excluded_files: '.git/* *node_modules/*'
           directory: ./packages/ps2-wl-server
-#      - name: Invalidate Cloudflare
-#        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
-#        uses: strrife/cloudflare-chunked-purge-action@master
-#        env:
-#          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
-#          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN }}
+      - name: Invalidate Cloudflare
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN }}
