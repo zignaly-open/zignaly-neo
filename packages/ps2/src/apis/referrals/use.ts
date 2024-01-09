@@ -15,6 +15,7 @@ import { useIsAuthenticated } from 'apis/user/use';
 import { useServiceDetails } from 'apis/service/use';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
+import { round } from 'lodash-es';
 
 const DEFAULT_SERVICE_COMMISSION = 10;
 const DEFAULT_USER_BOOST = 2;
@@ -88,12 +89,15 @@ export function useTiersData(serviceId?: string) {
     getBoostedCommissionPct(lastTier?.commissionPct, boost, traderBoost),
   );
 
-  const maxCommissionWithoutTraderBoost = maxCommission / (traderBoost + 1);
+  const maxCommissionWithoutTraderBoost = round(
+    maxCommission / (traderBoost + 1),
+    2,
+  );
 
   const commission = Math.floor(
     getBoostedCommissionPct(currentTier?.commissionPct, boost, traderBoost),
   );
-  const commissionWithoutTraderBoost = commission / (traderBoost + 1);
+  const commissionWithoutTraderBoost = round(commission / (traderBoost + 1), 2);
 
   useInterval(
     () => {

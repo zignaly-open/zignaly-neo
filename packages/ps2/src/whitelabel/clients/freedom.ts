@@ -10,11 +10,9 @@ export default {
     [Features.NewSignup]: false,
     [Features.HideSignup]: true,
     [Features.NoPublicMarketplace]: true,
+    [Features.ZScore]: false,
   },
   locales: ['en', 'pt', 'es'],
-  endpointOverrides: {
-    'marketplace/': 'market',
-  },
   minInvestment: {
     USDT: 2,
     ETH: 0.0001,

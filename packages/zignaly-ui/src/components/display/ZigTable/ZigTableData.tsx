@@ -19,7 +19,6 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
-import { useUpdateEffect } from "react-use";
 import { ZigCheckBox } from "../../../index";
 
 function ZigTableData<T extends object>({
@@ -37,6 +36,7 @@ function ZigTableData<T extends object>({
   emptyMessage,
   state = {},
   onSortingChange,
+  onColumnVisibilityChange,
   sorting,
   ...rest
 }: ZigTablePropsData<T>) {
@@ -44,25 +44,40 @@ function ZigTableData<T extends object>({
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
-  useUpdateEffect(() => {
-    onSortingChange?.(internalSorting);
-  }, [internalSorting]);
 
-  const [columnVisibility, setColumnVisibility] = React.useState(
+  const [internalColumnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
   );
+
+  const properSorting = React.useMemo(() => {
+    let sortingResult = internalSorting;
+    // Make sure sorting columns exist or reset it
+    if (sorting?.length) {
+      sortingResult = sorting.filter((s) => columns.find((c) => c.id === s.id));
+      if (!sortingResult.length) {
+        sortingResult = initialState.sorting ?? [];
+      }
+    }
+    return sortingResult;
+  }, [sorting, columns, initialState.sorting, internalSorting]);
 
   const table = useReactTable({
     data,
     columns,
     state: {
-      sorting: sorting ?? internalSorting,
-      columnVisibility,
+      sorting: properSorting,
+      columnVisibility: state.columnVisibility ?? internalColumnVisibility,
       ...(pagination && { pagination }),
       ...state,
     },
-    onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: setInternalSorting,
+    onColumnVisibilityChange: state.columnVisibility
+      ? onColumnVisibilityChange
+      : setColumnVisibility,
+    onSortingChange: sorting
+      ? (v) => {
+          onSortingChange?.((v as unknown as () => SortingState)());
+        }
+      : setInternalSorting,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),
