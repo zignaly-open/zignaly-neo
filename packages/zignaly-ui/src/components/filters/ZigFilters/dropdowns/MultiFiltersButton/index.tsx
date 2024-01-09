@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import ZigButton from "components/inputs/ZigButton";
 import MobileFilterDrawer from "../atoms/MobileFilterDrawer";
 import Filter from "../../filters/Filter";
+import { useRendersCount, useWindowSize } from "react-use";
 
 const MultiFiltersButton = ({
   resetFilters,
@@ -29,6 +30,9 @@ const MultiFiltersButton = ({
   }, [filters, defaultFilters]);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { height } = useWindowSize();
+  const renders = useRendersCount();
+  const hasScrollbar = height < document.body.scrollHeight;
 
   if (mobile) {
     return (
@@ -42,8 +46,14 @@ const MultiFiltersButton = ({
           prefixId={prefixId}
         />
         <ZigButton
+          id={`${prefixId}__multi-dropdown-mobile`}
           variant="outlined"
-          sx={{ py: "3px", px: filtersChangedCount > 0 ? "10px" : "12px", minWidth: 0 }}
+          sx={{
+            py: "5px",
+            px: filtersChangedCount > 0 ? "10px" : "12px",
+            minWidth: 0,
+            mr: hasScrollbar || renders <= 1 ? "13px" : 0,
+          }}
           onClick={() => {
             setDrawerOpen(true);
           }}

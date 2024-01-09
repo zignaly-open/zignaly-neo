@@ -17,7 +17,7 @@ const SelectFilterDropdown = ({
   const displayValue = useMemo(() => {
     const option = filter.options.find((option) => option.value === filter.value);
     return option?.label ?? "";
-  }, [filter.value]);
+  }, [filter.value, filter.options]);
 
   const longestWidth = useLongestString(filter.options.map((o) => o.label));
 

@@ -10,7 +10,7 @@ const SelectFilter = ({ filter, onChange, mobile }: SelectFilterProps) => {
   return (
     <Box display={"flex"} flexDirection={"column"}>
       {label && (
-        <ZigTypography component={"div"} pb={1} id={`filter-select_${id}__label`}>
+        <ZigTypography component={"div"} pb={1} id={`filter-select-${id}__label`}>
           {label}
         </ZigTypography>
       )}
@@ -20,7 +20,7 @@ const SelectFilter = ({ filter, onChange, mobile }: SelectFilterProps) => {
           paddingY={mobile ? "7px" : "6px"}
           key={option.value}
           onClick={() => onChange({ ...filter, value: option.value })}
-          id={`filter-select_${id}__option-${i}`}
+          id={`filter-select-${id}__option-${i}`}
         >
           <Box
             display="flex"

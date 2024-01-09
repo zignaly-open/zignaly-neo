@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +25,6 @@ import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
-import { useDebounce } from 'react-use';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useOpenDepositModal } from '../../DepositModal';
 import { Add } from '@mui/icons-material';
@@ -33,6 +32,7 @@ import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
 import { useCanInvestIn } from '../../../../../../util/walls/util';
 import { getMinInvestmentAmount } from '../../../../../../whitelabel';
+import { debounce } from 'lodash-es';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -53,13 +53,9 @@ function EditInvestmentForm({
     handleSubmit,
     control,
     formState: { isValid, errors },
-    watch,
   } = useForm<EditFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    defaultValues: {
-      profitPercentage: details?.profitPercentage,
-    },
     resolver: yupResolver(
       editInvestmentValidation({
         max: new BigNumber(service.maximumSbt)
@@ -76,7 +72,6 @@ function EditInvestmentForm({
 
   const toast = useToast();
   const checkCanInvest = useCanInvestIn(close);
-
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
@@ -95,22 +90,14 @@ function EditInvestmentForm({
     }
   };
 
-  const profitPercent = watch('profitPercentage');
-  const isFirstRun = useRef(true);
-
-  useDebounce(
-    async () => {
-      if (isFirstRun.current) {
-        isFirstRun.current = false;
-        return;
-      }
+  const updateProfitPercentage = useCallback(
+    debounce(async (value: number) => {
       await editPercent({
-        profitPercentage: profitPercent,
+        profitPercentage: value,
       });
       toast.success(t('edit-investment:percentageChangedSuccess'));
-    },
-    1000,
-    [profitPercent],
+    }, 1000),
+    [],
   );
 
   const renderDepositCoin = () => (
@@ -154,21 +141,15 @@ function EditInvestmentForm({
           >
             {t('form.profits.title')}
           </ZigTypography>
-          <Controller
-            name='profitPercentage'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSlider
-                prefixId={'edit-investment-modal-slider'}
-                {...field}
-                labels={{
-                  start: t('form.profits.left'),
-                  end: t('form.profits.right'),
-                  invertSliderValues: true,
-                }}
-              />
-            )}
+          <ZigSlider
+            prefixId={'edit-investment-modal-slider'}
+            labels={{
+              start: t('form.profits.left'),
+              end: t('form.profits.right'),
+              invertSliderValues: true,
+            }}
+            defaultValue={details?.profitPercentage}
+            onChangeCommitted={(_, v) => updateProfitPercentage(v as number)}
           />
         </Box>
       </Field>

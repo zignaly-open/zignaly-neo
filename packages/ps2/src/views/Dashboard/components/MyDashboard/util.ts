@@ -15,10 +15,7 @@ export const formatLocalizedDistance = (date1: Date, date2: Date) =>
     locale: dateFnsLocaleMapping?.[i18n.language] || dateFnsLocaleMapping.en,
   });
 
-export const formatMonthDayYear = (date: Date) =>
-  format(date, 'PP', {
-    locale: dateFnsLocaleMapping?.[i18n.language] || dateFnsLocaleMapping.en,
-  });
+export const formatMonthDayYear = (date: Date) => format(date, 'dd/MM/yy');
 
 export const formatMonthDay = (date: Date) =>
   formatMonthDayYear(date).replace(/, \d{4}$/, '');

@@ -81,7 +81,7 @@ const EditServiceProfileContainer: React.FC<{
   const submit = async (data: EditServiceForm) => {
     const { commission: c, ...rest } = data;
     await Promise.all([
-      edit({ id: service.id, ...rest, level: visibility }),
+      edit({ id: service.id, ...rest, level: visibility, commission: c }),
       ...(isFeatureOn(Features.Referrals)
         ? [
             updateCommission({
@@ -280,7 +280,9 @@ const EditServiceProfileContainer: React.FC<{
                         'edit-service-profile__service-commission-slider'
                       }
                       successFee={+successFee}
-                      zglySuccessFee={service?.zglySuccessFee}
+                      zglySuccessFee={
+                        service?.zglySuccessFee || whitelabel.defaultSuccessFee
+                      }
                       {...field}
                     />
                   )}

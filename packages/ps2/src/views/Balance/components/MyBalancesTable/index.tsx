@@ -226,25 +226,29 @@ const MyBalancesTable = (): JSX.Element => {
                       )}
                     </ZigButton>
                   )}
-                  <Box>
-                    <ZigButton
-                      narrow
-                      tooltip={t('withdraw')}
-                      id={`balance-row__withdrawal-${row.original.coin}`}
-                      onClick={() =>
-                        openWithdrawModal({
-                          selectedCoin: row.original.coin,
-                        })
-                      }
-                      sx={{ maxHeight: '20px', mr: 1 }}
-                      variant='outlined'
-                    >
-                      <Remove
-                        sx={{ height: '18px', width: '22px' }}
-                        color={'neutral300'}
-                      />
-                    </ZigButton>
-                  </Box>
+                  {Object.keys(coinsEndpoint?.data || {}).includes(
+                    row.original.coin,
+                  ) && (
+                    <Box>
+                      <ZigButton
+                        narrow
+                        tooltip={t('withdraw')}
+                        id={`balance-row__withdrawal-${row.original.coin}`}
+                        onClick={() =>
+                          openWithdrawModal({
+                            selectedCoin: row.original.coin,
+                          })
+                        }
+                        sx={{ maxHeight: '20px', mr: 1 }}
+                        variant='outlined'
+                      >
+                        <Remove
+                          sx={{ height: '18px', width: '22px' }}
+                          color={'neutral300'}
+                        />
+                      </ZigButton>
+                    </Box>
+                  )}
                   {exchangeType === 'spot' &&
                     Number(row.original.balance.balanceTotal) > 0 &&
                     allowedDeposits.spot.includes(row.original.coin) && (
@@ -272,7 +276,7 @@ const MyBalancesTable = (): JSX.Element => {
           ]
         : []),
     ],
-    [t, exchangeType, hasNonZeroBalance, md, sm, lg],
+    [t, exchangeType, hasNonZeroBalance, md, sm, lg, coinsEndpoint?.data],
   );
 
   return (

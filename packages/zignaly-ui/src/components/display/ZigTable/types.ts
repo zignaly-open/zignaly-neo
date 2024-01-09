@@ -12,7 +12,7 @@ interface ZigTablePropsBase<T extends object>
   emptyMessage?: string;
   onRowClick?: (id: string) => void;
   /**
-   * Controlled sorting state. For uncontrolled, pass it to `initialState`.
+   * Controlled sorting state. For uncontrolled, use `initialState`.
    */
   sorting?: SortingState;
 }

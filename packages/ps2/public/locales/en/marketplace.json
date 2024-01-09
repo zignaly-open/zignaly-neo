@@ -15,9 +15,10 @@
     "currency": "Base Currency",
     "assets": "Assets in Pool",
     "assets-mobile": "Assets",
+    "zscore": "Z-Score",
+    "risk": "Risk",
     "nb-investors": "# of investors",
-    "n-month-pnl-mobile_one": "{{count}}M",
-    "n-months-pnl-mobile_other": "P&L {{count}}M",
+    "n-months-pnl-mobile": "{{count}}M P&L",
     "n-months-pnl_one": "{{count}} month PNL",
     "n-months-pnl_other": "{{count}} months PNL",
     "n-months_one": "{{count}} month",
@@ -32,11 +33,12 @@
     "edit": "Click to edit"
   },
   "filters": {
-    "period": "Period",
+    "period-pnl": "PNL Period",
     "returns-months": "{{count}} Months Returns",
     "coins": "Coins",
     "type": "Type",
     "fee": "Service Fee",
+    "exchange": "Exchange",
     "spot": "Spot",
     "futures": "Futures",
     "all": "All"
