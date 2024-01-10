@@ -86,6 +86,22 @@ const example: ThemeStyledComponents = {
     ],
     redCard: ["rgba(137, 38, 38, 0.38)", "rgba(96, 28, 28, 0.44)", "rgba(204, 147, 147, 0.69)"],
   },
+  zscore: {
+    riskGradient: ["#2394c1", "#28bef9", "#2ed3d2"],
+    riskGradient2: ["#2ed3d2", "#2fdd88", "#1cfd90"],
+    red: "#CC3993",
+    green: "#039179",
+    greenGradient: ["rgba(18, 33, 59, 0.52)", "rgba(33, 81, 78, 0.69)"],
+    redGradient: ["rgba(31, 18, 59, 0.52)", "rgba(74, 33, 81, 0.69)"],
+    redMiniGradient: ["rgba(18, 20, 39, 0)", "rgba(21, 21, 57, 0.5)", "rgba(86, 36, 108, 1)"],
+    greenCard: [
+      "rgba(16, 33, 33, 0.68)",
+      "rgba(0, 45, 20, 0.44)",
+      "rgba(7, 47, 30, 0.44)",
+      "rgba(56, 235, 170, 0.69)",
+    ],
+    redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
+  },
 };
 
 export default example;

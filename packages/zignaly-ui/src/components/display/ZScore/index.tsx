@@ -20,6 +20,7 @@ const ZScore = ({ value, mini = false, ...rest }: ZScoreProps) => {
       },
       "& .MuiChip-label": {
         fontSize: `${16}px`,
+        fontWeight: 600,
         color: theme.palette.neutral000,
       },
     }),

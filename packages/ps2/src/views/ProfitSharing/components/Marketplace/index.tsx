@@ -39,6 +39,8 @@ import {
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateEffect } from 'react-use';
+import { useZModal } from 'components/ZModal/use';
+import ZScoreModal from 'views/TraderService/components/ZScoreModal';
 // import TopServicesCards from '../TopServicesCards';
 
 const sx = {
@@ -85,6 +87,8 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   useUpdateEffect(() => {
     setColumnVisibility(defaultColumnVisibility);
   }, [defaultColumnVisibility]);
+
+  const { showModal } = useZModal();
 
   useEffect(() => () => setActiveRow(null), []);
 
@@ -239,7 +243,15 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
               ),
               cell: (props) => (
                 <Box id={`marketplace-table__zscore-${props.row.original.id}`}>
-                  <ZScore value={props.getValue()} mini={!sm} />
+                  <ZScore
+                    value={props.getValue()}
+                    mini={!sm}
+                    onClick={() =>
+                      showModal(ZScoreModal, {
+                        serviceId: props.row.original.id,
+                      })
+                    }
+                  />
                 </Box>
               ),
             }),

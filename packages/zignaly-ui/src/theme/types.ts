@@ -37,6 +37,7 @@ export type ThemeStyledComponents = {
   >;
   boxShadows: CustomPalette["boxShadows"];
   chart: CustomPalette["chart"];
+  zscore: CustomPalette["zscore"];
   mode: "dark" | "light";
 };
 

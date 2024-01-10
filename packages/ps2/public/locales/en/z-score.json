@@ -1,0 +1,27 @@
+{
+  "z-score": "Z-Score",
+  "description": "We objectively rank trading services based on P&L, Risk, service management and profit:risk balance.",
+  "profits": {
+    "name": "Profits",
+    "days-profit": "Days in profit",
+    "beats-market": "Beats the market",
+    "sortino-ratio": "Sortino ratio"
+  },
+  "risk": {
+    "name": "Risk",
+    "max-drawdown": "Max drawdown",
+    "spot-only": "Spot only",
+    "sharpe-ratio": "Sharpe ratio",
+    "paid-claims": "Paid claims"
+  },
+  "service": {
+    "name": "Service",
+    "assets": "Assets",
+    "asset-growth": "Asset growth",
+    "investors": "Investors"
+  },
+  "balance": {
+    "name": "Balance",
+    "balanced-profit": "Balanced profit+risk"
+  }
+}

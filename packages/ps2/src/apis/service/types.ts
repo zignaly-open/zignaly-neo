@@ -187,3 +187,44 @@ export type CreateServicePayload = {
   exchangeInternalId: string;
   successFee: number;
 };
+
+export type ZScoreCategoryInfo = {
+  balanced: number;
+  profits: number;
+  riskManagement: number;
+  serviceManagement: number;
+};
+
+type Returns = {
+  condition: string;
+  pct: number;
+  gives: number;
+  ofMax: number;
+  zscore: number;
+  maxZscore: number;
+};
+
+type ZScoreDetails = {
+  profits: {
+    returns: Returns;
+  };
+};
+
+export type ZScoreInfoDetails = {
+  name: string;
+  category: Record<'maxZscore' | 'zScore', ZScoreCategoryInfo>;
+  // stats?: Stats;
+  scoreDetails: ZScoreDetails;
+};
+
+export type ZScoreInfo = {
+  id: number;
+  serviceId: string;
+  version: number;
+  zscore: number;
+  zprofit: number;
+  zrisk: number;
+  zservice: number;
+  zbalanced: number;
+  info: ZScoreInfoDetails;
+};

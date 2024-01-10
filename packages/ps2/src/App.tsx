@@ -61,15 +61,13 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
           />
           <PersistGate persistor={persistor}>
             <BrowserRouter>
-              <ZigErrorBoundary>
-                <Suspense fallback={zigSuspenseFallback}>
-                  <ModalProvider
-                    fallback={<ZModal allowUnauth wide open isLoading />}
-                  >
-                    {children}
-                  </ModalProvider>
-                </Suspense>
-              </ZigErrorBoundary>
+              <Suspense fallback={zigSuspenseFallback}>
+                <ModalProvider
+                  fallback={<ZModal allowUnauth wide open isLoading />}
+                >
+                  {children}
+                </ModalProvider>
+              </Suspense>
             </BrowserRouter>
           </PersistGate>
         </ThemeProviderMui>

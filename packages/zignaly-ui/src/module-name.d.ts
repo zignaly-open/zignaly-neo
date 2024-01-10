@@ -71,6 +71,8 @@ declare module "@mui/material/styles" {
       string[]
     > &
       Record<"red" | "green", string>;
+
+    zscore: Record<"riskGradient" | "riskGradient2", string[]>;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

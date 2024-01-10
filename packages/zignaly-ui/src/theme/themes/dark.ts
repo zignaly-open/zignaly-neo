@@ -80,6 +80,26 @@ const dark: ThemeStyledComponents = {
     ],
     redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
   },
+  zscore: {
+    profits: {
+      gradient: ["#2bc5f2", "#19dcd1", "#0ceaae"],
+      icon: "#29cdbb",
+      text: "#90d2bf",
+    },
+    risk: {
+      gradient: ["#4c18b3", "#5451d7", "#5199ea"],
+    },
+    service: {
+      gradient: ["#6e0a83", "#d94097", "#f24196"],
+      icon: "#734c9a",
+      text: "#ba7af0",
+    },
+    balance: {
+      gradient: ["#46835e", "#7fce87", "#88c489"],
+      icon: "#a2b88d",
+      text: "#a2b88d",
+    },
+  },
 };
 
 export default dark;
