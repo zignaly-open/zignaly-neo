@@ -50,6 +50,7 @@ export const GlobalAppStyle: React.FC = () => {
             background: theme.palette.backgrounds.body,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
+            color: theme.palette.neutral000,
             backgroundPositionX: "center",
             backgroundPositionY: "top",
           },
