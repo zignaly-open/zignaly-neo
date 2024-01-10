@@ -193,3 +193,19 @@ export const useCanDeposit = createUseAccessCheck(Level.Normal);
 export const useCanInvestIn = createUseAccessCheck(Level.Normal);
 export const useCanInvestOut = createUseAccessCheck(Level.KycExpired);
 export const useCanWithdraw = createUseAccessCheck(Level.SubscriptionExpired);
+
+export const withModalRequiresAuthentication = <
+  T extends { close: () => void },
+>(
+  Component: React.FC<T>,
+): React.FC<T> => {
+  return (props) => {
+    const isAuthenticated = useIsAuthenticated();
+    if (isAuthenticated) {
+      return <Component {...props} />;
+    } else {
+      props.close();
+      return null;
+    }
+  };
+};

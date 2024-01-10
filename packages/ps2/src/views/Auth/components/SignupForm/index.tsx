@@ -12,8 +12,12 @@ import {
 } from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ROUTE_LOGIN } from '../../../../routes';
+import { generatePath, useLocation, useNavigate } from 'react-router-dom';
+import {
+  ROUTE_LEGAL_PRIVACY,
+  ROUTE_LEGAL_TOS,
+  ROUTE_LOGIN,
+} from '../../../../routes';
 import {
   ErrorMessage,
   ZigAlertMessage,
@@ -179,16 +183,14 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
               <ZigLink
-                href={
-                  whitelabel.links?.tos || 'https://zignaly.com/legal/terms'
-                }
+                href={whitelabel.links?.tos || generatePath(ROUTE_LEGAL_TOS)}
                 target='_blank'
                 rel='noopener'
               />
               <ZigLink
                 href={
                   whitelabel.links?.privacyPolicy ||
-                  'https://zignaly.com/legal/privacy'
+                  generatePath(ROUTE_LEGAL_PRIVACY)
                 }
                 target='_blank'
                 rel='noopener'

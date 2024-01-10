@@ -7,7 +7,7 @@ import alias from "@rollup/plugin-alias";
 import path from "node:path";
 import url from "@rollup/plugin-url";
 import svgr from "@svgr/rollup";
-import {fileURLToPath} from "url";
+import { fileURLToPath } from "url";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -35,8 +35,8 @@ export default {
     external({
       includeDependencies: true
     }),
-    resolve({browser: true}),
-    typescript(),
+    resolve({ browser: true }),
+    typescript({ emitDeclarationOnly: true }),
     commonjs({
       include: /\/node_modules\//,
     }),
@@ -50,6 +50,6 @@ export default {
       },
     }),
     url(),
-    svgr({icon: true}),
+    svgr({ icon: true }),
   ],
 }

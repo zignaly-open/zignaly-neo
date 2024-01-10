@@ -23,6 +23,11 @@
     "title": "Error Occurred",
     "description": "Something went wrong. Please try again later or contact support. Or abandon the industrial society and build a cabin in the woods."
   },
+  "error-boundary": {
+    "title": "Something went wrong",
+    "description-1": "<0>Refreshing this page</0> could help. If it does not, you can contact support.",
+    "description-2": "Or abandon the industrial society and <0>move to a cabin in the woods</0>."
+  },
   "main-menu": {
     "dropdown-link-forTrading": "Manage your Services",
     "dropdown-link-helpDocs": "Help Docs"

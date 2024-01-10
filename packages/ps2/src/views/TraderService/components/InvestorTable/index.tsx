@@ -224,24 +224,31 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             },
           }) => (
             <Tooltip
+              componentsProps={{ tooltip: { sx: { maxWidth: '310px' } } }}
               title={
-                accountId === exchange.internalId
-                  ? t('it-is-you-0-fee')
-                  : t(
-                      `success-fee-explainer${
-                        ownerSfDiscount ? '-with-discount' : ''
-                      }`,
-                      {
-                        discounted: ownerSuccessFee,
-                        owner: ownerSuccessFee + ownerSfDiscount,
-                        serviceTotal: service?.successFee,
-                        zignalyFee: getServiceZignalyFee(
-                          ownerSuccessFee,
-                          service?.zglySuccessFee,
-                        ),
-                        discount: ownerSfDiscount,
-                      },
-                    )
+                <Box whiteSpace={'nowrap'}>
+                  {accountId === exchange.internalId
+                    ? t('it-is-you-0-fee')
+                    : t(
+                        `success-fee-explainer${
+                          ownerSfDiscount
+                            ? !ownerSuccessFee
+                              ? '-max-discounted'
+                              : '-with-discount'
+                            : ''
+                        }`,
+                        {
+                          discounted: ownerSuccessFee,
+                          owner: ownerSuccessFee + ownerSfDiscount,
+                          serviceTotal: service?.successFee,
+                          zignalyFee: getServiceZignalyFee(
+                            ownerSuccessFee,
+                            service?.zglySuccessFee,
+                          ),
+                          discount: ownerSfDiscount,
+                        },
+                      )}
+                </Box>
               }
             >
               <ZigTypography

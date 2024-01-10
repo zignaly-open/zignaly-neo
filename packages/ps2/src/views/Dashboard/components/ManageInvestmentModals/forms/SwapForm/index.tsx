@@ -115,7 +115,10 @@ function SwapForm({
             error={t(errors.fromCoinAmount?.message)}
             labelInline={false}
             withCoinSelector
-            tokenOptions={coinsAllowedSwapFrom}
+            tokenOptions={coinsAllowedSwapFrom.map((c) => ({
+              ...c,
+              value: c.coin,
+            }))}
             id={'swap-coins-modal__from-input-amount'}
             label={t('service-swap.convert-to-coin', { coin: coinSwapTo })}
             showMaxButton={false}
@@ -134,6 +137,8 @@ function SwapForm({
         mt={1.5}
         ml={3}
         sx={sm && { textAlign: 'center' }}
+        justifyContent={'center'}
+        display={'flex'}
       >
         <ZigButton
           id={'swap-coins-modal__continue'}

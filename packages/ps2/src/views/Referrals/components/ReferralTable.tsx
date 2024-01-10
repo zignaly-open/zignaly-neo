@@ -8,6 +8,7 @@ import {
   ZigButton,
   ZigFilters,
   ZigFiltersType,
+  useFilteredCollection,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { RewardType, StatusType } from '../constants';
@@ -135,7 +136,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         label: t('table.filter-type'),
         options: rewardTypeOptions,
         id: 'type',
-        showInBar: true,
+        primary: true,
       },
       {
         type: 'select',
@@ -143,21 +144,16 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         label: t('table.filter-status'),
         options: statusOptions,
         id: 'status',
-        showInBar: true,
+        primary: true,
       },
     ],
     [rewardTypeOptions, statusOptions, t],
   );
 
   const tablePersist = usePersistTable(TableId.Referrals, defaultFilters);
-  const filteredHistory = useMemo(
-    () =>
-      referrals.filter((r) =>
-        tablePersist.filters.every(
-          ({ id, value }) => !value || r[id] === value,
-        ),
-      ),
-    [referrals, tablePersist.filters],
+  const filteredHistory = useFilteredCollection(
+    referrals,
+    tablePersist.filters,
   );
 
   const exporter = () =>
@@ -187,7 +183,9 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         <>
           <ZigFilters
             leftComponent={
-              <ZigTypography variant={'h2'}>{t('table.title')}</ZigTypography>
+              <ZigTypography whiteSpace={'nowrap'} variant={'h2'}>
+                {t('table.title')}
+              </ZigTypography>
             }
             rightComponent={
               <ZigButton
@@ -208,7 +206,6 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             defaultFilters={defaultFilters}
             filters={tablePersist.filters}
             onChange={tablePersist.filterTable}
-            sx={{ mb: '36px' }}
           />
         </>
       )}
@@ -216,13 +213,14 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       {referrals.length ? (
         <ZigTable
           initialState={{
-            sorting: tablePersist.sorting ?? [
+            sorting: [
               {
                 id: 'date',
                 desc: true,
               },
             ],
           }}
+          sorting={tablePersist.sorting}
           columns={columns}
           data={filteredHistory}
           columnVisibility={false}

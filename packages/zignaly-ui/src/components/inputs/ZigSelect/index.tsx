@@ -2,11 +2,10 @@ import React, { useMemo } from "react";
 import { StyledSelectWrapper, ZigSelectGlobalStyle } from "./styles";
 import { ZigSelectOption, ZigSelectProps } from "./types";
 import Select, { StylesConfig } from "react-select";
-import Theme from "../../../theme/theme";
 import { useTheme } from "styled-components";
 import ZigTypography from "../../display/ZigTypography";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
-import { Box } from "@mui/material";
+import { Box, Theme } from "@mui/material";
 
 const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
   ...userStyles,
@@ -95,7 +94,7 @@ function ZigSelect<T>({
           }}
           // if you want to use this inside of a modal, pass it `menuPosition="fixed"`, `menuShouldScrollIntoView={false}` and `menuShouldBlockScroll`
           isOptionDisabled={(option) => !!(option as ZigSelectOption<T>).disabled}
-          options={options as unknown as { label: string; value: number }[]}
+          options={options}
           isDisabled={disabled}
           onChange={(v) => {
             onChange?.((v as ZigSelectOption<T>)?.value, (v as ZigSelectOption<T>) || null);

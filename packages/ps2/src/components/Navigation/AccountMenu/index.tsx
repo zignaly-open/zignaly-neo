@@ -78,11 +78,13 @@ function AccountMenu(): React.ReactElement | null {
             </ZigTypography>
           </LoginButton>
         </Link>
-        <Link to={ROUTE_SIGNUP}>
-          <ZigButton id={'menu__signup'} variant={'contained'}>
-            {t('account-menu.isAuth-button-signUp')}
-          </ZigButton>
-        </Link>
+        {!isFeatureOn(Features.HideSignup) && (
+          <Link to={ROUTE_SIGNUP}>
+            <ZigButton id={'menu__signup'} variant={'contained'}>
+              {t('account-menu.isAuth-button-signUp')}
+            </ZigButton>
+          </Link>
+        )}
       </>
     );
   } else if (!md) return null;

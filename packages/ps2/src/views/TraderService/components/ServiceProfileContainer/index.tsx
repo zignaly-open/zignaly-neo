@@ -14,6 +14,8 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { subMonths } from 'date-fns';
 import ServicePercentageInfo from './atoms/ServicePercentageInfo';
+import Stub from '../../../../components/Stub';
+import ZigErrorBoundary from 'util/ZigErrorBoundary';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -80,7 +82,18 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
           sx={{ gap: { lg: '75px', xl: '90px' }, flexWrap: { lg: 'nowrap' } }}
         >
           <Grid item xs={12} lg={8}>
-            <ServiceGrowthChart service={service} />
+            <ZigErrorBoundary
+              fallback={
+                <Box sx={{ background: 'rgba(0,0,0,.2)' }}>
+                  <Stub
+                    title={<>{t('chart-crashed.title')}</>}
+                    description={<>{t('chart-crashed.description')}</>}
+                  />
+                </Box>
+              }
+            >
+              <ServiceGrowthChart service={service} />
+            </ZigErrorBoundary>
             {!lg && (
               <Box paddingTop={3}>
                 <ServiceSummary service={service} />

@@ -14,7 +14,7 @@ import {
   SubNavList,
 } from "./styles";
 import { useTheme } from "styled-components";
-import Theme from "theme/theme";
+import { Theme } from "@mui/material";
 
 const ZigDropdown: (
   props: ZigDropdownProps,

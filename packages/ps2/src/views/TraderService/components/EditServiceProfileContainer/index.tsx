@@ -26,7 +26,7 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
-import { isFeatureOn } from 'whitelabel';
+import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
 
@@ -81,7 +81,7 @@ const EditServiceProfileContainer: React.FC<{
   const submit = async (data: EditServiceForm) => {
     const { commission: c, ...rest } = data;
     await Promise.all([
-      edit({ id: service.id, ...rest, level: visibility }),
+      edit({ id: service.id, ...rest, level: visibility, commission: c }),
       ...(isFeatureOn(Features.Referrals)
         ? [
             updateCommission({
@@ -247,7 +247,9 @@ const EditServiceProfileContainer: React.FC<{
                 render={({ field }) => (
                   <SuccessFeeInputWrapper
                     prefixId={'edit-service-profile__service-success-fee'}
-                    zglyFee={service?.zglySuccessFee}
+                    zglyFee={
+                      service?.zglySuccessFee || whitelabel.defaultSuccessFee
+                    }
                     value={successFee}
                     showZeroFeeExplainer
                   >
@@ -278,7 +280,9 @@ const EditServiceProfileContainer: React.FC<{
                         'edit-service-profile__service-commission-slider'
                       }
                       successFee={+successFee}
-                      zglySuccessFee={service?.zglySuccessFee}
+                      zglySuccessFee={
+                        service?.zglySuccessFee || whitelabel.defaultSuccessFee
+                      }
                       {...field}
                     />
                   )}

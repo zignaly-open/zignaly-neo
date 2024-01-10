@@ -266,7 +266,7 @@ function WithdrawForm({
             )}
           </div>
 
-          {!!networkObject?.memoRegex && (
+          {(networkObject?.memoRegex || networkObject?.specialTips) && (
             <Controller
               name='tag'
               control={control}

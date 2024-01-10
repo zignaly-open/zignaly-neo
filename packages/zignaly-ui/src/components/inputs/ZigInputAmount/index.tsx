@@ -130,14 +130,13 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             error={!!error}
             placeholder={placeholder}
             InputProps={{
-              endAdornment:
-                (balance || handleMax) && showMaxButton ? (
-                  <InputAdornment position="end">
-                    <MaxButton variant="outlined" onClick={handleMax} id={id && `${id}-max-button`}>
-                      Max
-                    </MaxButton>
-                  </InputAdornment>
-                ) : null,
+              endAdornment: showMaxButton ? (
+                <InputAdornment position="end">
+                  <MaxButton variant="outlined" onClick={handleMax} id={id && `${id}-max-button`}>
+                    Max
+                  </MaxButton>
+                </InputAdornment>
+              ) : null,
             }}
             onChange={handleChange}
           />
@@ -160,9 +159,9 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
                 hoverBackground={false}
                 placeholder={"Select coin"}
                 showBorder={false}
-                value={tokenOptions?.find((token) => token.coin === coin?.coin)}
-                onChange={(v1, v2) => {
-                  onTokenChange?.(v2);
+                value={tokenOptions?.find((token) => token.value === coinVal)?.value}
+                onChange={(_, v) => {
+                  onTokenChange?.(v);
                 }}
                 options={tokenOptions}
               />

@@ -25,7 +25,7 @@ export const usePersistTable: IOverload = (
 ) => {
   const tableData = useSelector(
     (store: RootState) =>
-      store.settings.table[id] ?? { filters: undefined, sorting: undefined },
+      store.settings.table[id] ?? { filters: [], sorting: [] },
   );
   const { sorting, filters } = tableData;
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export const usePersistTable: IOverload = (
   }, [filters, defaultFilters]);
 
   return {
-    sorting,
+    sorting: sorting ?? [],
     // loadFilters initially will apply saved filters to default filters.
     // And also convert redux pruned data to full filters.
     // We don't store the full filters data in redux to avoid bloating the store with data that can be outdated.

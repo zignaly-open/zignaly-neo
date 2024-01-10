@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/inputs/ZigLink renders with default props 1`] = `
+<a
+  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-94cnhm-MuiTypography-root-MuiLink-root"
+  href="#"
+  id="link-test"
+  rel="noopener noreferrer"
+  target="_blank"
+/>
+`;
+
+exports[`components/inputs/ZigLink renders with default props 2`] = `
+CSSStyleDeclaration {
+  "0": "margin",
+  "1": "letter-spacing",
+  "2": "color",
+  "3": "text-decoration",
+  "4": "cursor",
+  "5": "visibility",
+  "_importants": {
+    "color": "",
+    "cursor": "",
+    "font": "",
+    "letter-spacing": "",
+    "margin": "",
+    "text-decoration": "",
+    "visibility": undefined,
+  },
+  "_length": 6,
+  "_onChange": [Function],
+  "_values": {
+    "color": "rgb(38, 196, 193)",
+    "cursor": "pointer",
+    "letter-spacing": "0.55px",
+    "margin": "0px",
+    "margin-bottom": "0px",
+    "margin-left": "0px",
+    "margin-right": "0px",
+    "margin-top": "0px",
+    "text-decoration": "none",
+    "visibility": "visible",
+  },
+}
+`;

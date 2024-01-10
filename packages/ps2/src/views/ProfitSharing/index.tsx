@@ -7,7 +7,7 @@ import { zigSuspenseFallback } from '../../util/suspense';
 
 const ProfitSharing: React.FC = () => {
   const { t } = useTranslation('pages');
-  useMarketplace();
+  useMarketplace({ geek: true });
   useTitle(t('profit-sharing.title'));
   return (
     // hack to make marketplace and marketplace.json load simultaneously

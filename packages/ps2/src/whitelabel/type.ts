@@ -5,13 +5,15 @@ export enum Features {
   Rewards,
   Referrals,
   Trader,
+  HideSignup,
   NewSignup,
+  NoPublicMarketplace,
   Subscriptions,
   Kyc,
+  ZScore,
 }
 
-// yes, the trailing slash IS important
-export type OverrideableEndpoints = 'marketplace/';
+export type OverrideableEndpoints = '';
 
 export type WhitelabelOverride = {
   title: string;

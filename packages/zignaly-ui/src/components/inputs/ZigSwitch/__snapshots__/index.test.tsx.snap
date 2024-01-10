@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ZigSwitch should render without crashing 1`] = `
+<span
+  class="MuiSwitch-root MuiSwitch-sizeMedium css-1xgfkn7-MuiSwitch-root"
+>
+  <span
+    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-1hphgtg-MuiButtonBase-root-MuiSwitch-switchBase"
+  >
+    <input
+      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+      type="checkbox"
+    />
+    <span
+      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+    />
+  </span>
+  <span
+    class="MuiSwitch-track css-dnkzfa-MuiSwitch-track"
+  />
+</span>
+`;

@@ -8,6 +8,8 @@ module.exports = async ({ config }) => {
       components: resolve("../src/components"),
       theme: resolve("../src/theme"),
       utils: resolve("../src/utils"),
+      icons: resolve("../src/icons"),
+      hooks: resolve("../src/hooks"),
     },
   });
 

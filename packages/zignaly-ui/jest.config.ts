@@ -20,6 +20,7 @@ const config: Config.InitialOptions = {
     "^theme(.*)$": "<rootDir>/src/theme$1",
     "^utils(.*)$": "<rootDir>/src/utils$1",
     "^icons(.*)$": "<rootDir>/src/icons$1",
+    "^hooks(.*)$": "<rootDir>/src/hooks$1",
   },
 };
 
