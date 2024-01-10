@@ -104,9 +104,10 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
        }
       ${twitterAcc ? `<meta name="twitter:site" content="@${twitterAcc}">` : ''}
       <script type="text/javascript">
-      window.__zignalyWhitelabelConfig = JSON.parse(decodeURIComponent('${encodeURIComponent(
-        JSON.stringify(wlConfig),
-      )}'));
+      window.__zignalyWhitelabelConfig = ${
+        // escaping the closing script tags that w absolutely should not have here btw
+        JSON.stringify(wlConfig).replace(/<\/script/g, '<"+"/script')
+      };
       </script>
       ${
         wlConfig.tools?.twitter_tracker
