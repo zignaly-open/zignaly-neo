@@ -22,10 +22,10 @@ describe("components/filters/CheckBoxFilter", () => {
     const { container } = renderWithProvidersUi(
       <CheckBoxFilter filter={typeFilter} onChange={onChange} />,
     );
-    fireEvent.click(container.querySelector("#filter-checkbox-type__option-1-checkbox")!);
+    fireEvent.click(container.querySelector("#filter-checkbox-type__option-1")!);
     expect(onChange).toBeCalledWith({ ...typeFilter, value: ["spot"] });
 
-    fireEvent.click(container.querySelector("#filter-checkbox-type__option-2-checkbox")!);
+    fireEvent.click(container.querySelector("#filter-checkbox-type__option-2")!);
     expect(onChange).toBeCalledWith({ ...typeFilter, value: null });
   });
 
@@ -35,7 +35,7 @@ describe("components/filters/CheckBoxFilter", () => {
     const { container } = renderWithProvidersUi(
       <CheckBoxFilter filter={testFilter} onChange={onChange} />,
     );
-    fireEvent.click(container.querySelector("#filter-checkbox-type__option-1-checkbox")!);
+    fireEvent.click(container.querySelector("#filter-checkbox-type__option-1")!);
     expect(onChange).toBeCalledWith({ ...typeFilter, value: ["spot", "test"] });
   });
 });
