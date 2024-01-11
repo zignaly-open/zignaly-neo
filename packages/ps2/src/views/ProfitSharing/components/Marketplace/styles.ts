@@ -26,4 +26,8 @@ export const TableWrapper = styled('div')`
       border-right: 1px solid ${({ theme }) => theme.palette.neutral700};
     }
   }
+
+  tbody tr {
+    height: 90px;
+  }
 `;
