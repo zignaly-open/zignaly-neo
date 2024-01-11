@@ -39,5 +39,4 @@ export default {
   slug: 'freedom',
   logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',
   social: {},
-  defaultSuccessFee: 10,
 } as WhitelabelOverride;

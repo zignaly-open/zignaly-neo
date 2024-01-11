@@ -281,7 +281,7 @@ const EditServiceProfileContainer: React.FC<{
                       }
                       successFee={+successFee}
                       zglySuccessFee={
-                        service?.zglySuccessFee || whitelabel.defaultSuccessFee
+                        service?.zglySuccessFee || whitelabel.zignalySuccessFee
                       }
                       {...field}
                     />
