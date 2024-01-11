@@ -9,6 +9,7 @@ import {
   ZigSlider,
   ZigModalActions,
   ZigModalForm,
+  ZigCheckBox,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
 import {
@@ -19,7 +20,6 @@ import {
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box } from '@mui/material';
-import { CheckBox } from '@zignaly-open/ui';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { Add } from '@mui/icons-material';
@@ -196,10 +196,11 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
           name='understandRisk'
           defaultValue={false}
           render={({ field: { onChange, value } }) => (
-            <CheckBox
+            <ZigCheckBox
               id={'invest-modal__understand-risk'}
               onChange={onChange}
               value={value}
+              variant={'outlined'}
               label={t('invest-modal.i-understand-risk')}
             />
           )}

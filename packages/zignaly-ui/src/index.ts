@@ -72,8 +72,7 @@ export { default as DateLabel } from "./components/display/ZigTable/components/D
 export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
-// TODO: @Nikita9901 pls replace with mui and add stories
-export { default as CheckBox } from "./components/inputs/CheckBox";
+export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
