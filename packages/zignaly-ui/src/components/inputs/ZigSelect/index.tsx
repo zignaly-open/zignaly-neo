@@ -62,12 +62,31 @@ function ZigSelect<T>({
   id,
   showBorder = true,
   hoverBackground = true,
+  canClear = false,
   sx,
   styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
   const theme = useTheme() as Theme;
   const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
+  const processedOptions = useMemo(
+    () => [
+      ...(canClear
+        ? [
+            {
+              value: "",
+              label: (
+                <ZigTypography color={"neutral400"} sx={{ opacity: 0.5 }}>
+                  {placeholder}
+                </ZigTypography>
+              ),
+            },
+          ]
+        : []),
+      ...(options ?? []),
+    ],
+    [options, canClear],
+  );
 
   return (
     // @ts-ignore
@@ -94,7 +113,7 @@ function ZigSelect<T>({
           }}
           // if you want to use this inside of a modal, pass it `menuPosition="fixed"`, `menuShouldScrollIntoView={false}` and `menuShouldBlockScroll`
           isOptionDisabled={(option) => !!(option as ZigSelectOption<T>).disabled}
-          options={options}
+          options={processedOptions}
           isDisabled={disabled}
           onChange={(v) => {
             onChange?.((v as ZigSelectOption<T>)?.value, (v as ZigSelectOption<T>) || null);

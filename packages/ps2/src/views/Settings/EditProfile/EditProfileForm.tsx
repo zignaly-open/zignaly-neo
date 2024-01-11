@@ -193,9 +193,9 @@ const EditProfileForm = () => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     filterOption={filterCountries}
+                    canClear
                     // necessary because field.value resets to default value: user.country, not undefined
                     value={watch('country')}
-                    isClearable
                     id={'edit-profile__country-select'}
                     label={
                       <>
