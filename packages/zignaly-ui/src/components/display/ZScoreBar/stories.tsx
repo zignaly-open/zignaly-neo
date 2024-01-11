@@ -10,15 +10,34 @@ const meta: Meta<ZScoreProps> = {
 };
 export default meta;
 
-export const Default: Story = {
+export const Profits: Story = {
   args: {
-    value: 90,
+    value: 10,
+    max: 20,
+    category: "profits",
   },
 };
 
-export const Mini: Story = {
+export const Risk: Story = {
   args: {
-    value: 23,
-    mini: true,
+    value: 12,
+    max: 20,
+    category: "risk",
+  },
+};
+
+export const Service: Story = {
+  args: {
+    value: 3,
+    max: 20,
+    category: "service",
+  },
+};
+
+export const Balance: Story = {
+  args: {
+    value: 20,
+    max: 20,
+    category: "balanced",
   },
 };

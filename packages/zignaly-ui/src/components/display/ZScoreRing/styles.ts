@@ -19,33 +19,12 @@ const ringAnimation = keyframes`
   }
 `;
 
-// const barAnimation = keyframes`
-//   from {
-//       stroke-dasharray: 0, 150;
-
-//   }
-//   to {
-//     opacity: 1;
-//   }
-// `;
-
 export const AnimatedRingSvg = styled("svg")`
-  & g {
+  g {
     transform-origin: center;
   }
 
-  /* .subrings & {
-    height: 114px;
-    width: 114px;
-    display: block;
-    transform: rotate(36deg);
-  } */
-
-  /* .bar-svg .stroke-anim {
-    animation: BarProgress 1s ease-out forwards;
-  } */
-
-  & circle {
+  circle {
     fill: none;
     stroke-linecap: round;
   }

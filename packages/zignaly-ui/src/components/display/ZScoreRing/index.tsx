@@ -13,7 +13,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
 
   const pct = Math.min((value / max) * 100, 100);
   const normalizedPct = 0.8 * pct;
-  const colors = zscore[category];
+  const colors = zscore.ring[category];
   const gradientScale = chroma.scale(colors.gradient);
   const gradientforValue = gradientScale(normalizedPct / 100).hex();
 
@@ -21,7 +21,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
     profits: { text: "Profits", icon: ZigScoreCoinsIcon },
     risk: { text: "Risk", icon: null },
     service: { text: "Service", icon: ZigScoreWalletIcon },
-    balance: { text: "Balance", icon: ZigScoreBalanceIcon },
+    balanced: { text: "Balance", icon: ZigScoreBalanceIcon },
   };
   const categoryData = categoriesData[category];
 

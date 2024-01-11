@@ -5,6 +5,7 @@ import ZModal from 'components/ZModal';
 import { Box, Grid, LinearProgress } from '@mui/material';
 import { useScoreQuery } from 'apis/service/api';
 import {
+  ZScoreBar,
   ZScoreRing,
   ZigCircularScoreIcon,
   ZigScoreRing,
@@ -47,6 +48,8 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
             value={data.zprofit}
             max={maxZscore.profits}
           />
+          {t('profits.name')}
+          {/* <ZScoreBar value={data.} */}
         </Grid>
         <Grid
           item
@@ -85,14 +88,11 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
           // mb={{ sm: 3, md: 0 }}
         >
           <ZScoreRing
-            category='balance'
+            category='balanced'
             value={data.zbalanced}
             max={maxZscore.balanced}
           />
         </Grid>
-        <Box sx={{ width: '100%' }}>
-          <StyledLinearProgress variant='determinate' value={50} />
-        </Box>
       </Grid>
     </ZModal>
   );

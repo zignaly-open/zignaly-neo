@@ -1,4 +1,3 @@
-import { Chip } from "@mui/material";
-import { ComponentProps } from "react";
+import { RiskCategory } from "../ZScoreRing/types";
 
-export type ZScoreProps = { value: number; mini?: boolean } & ComponentProps<typeof Chip>;
+export type ZScoreBarProps = { value: number; max: number; category: RiskCategory };

@@ -38,6 +38,6 @@ export const Balance: Story = {
   args: {
     value: 20,
     max: 20,
-    category: "balance",
+    category: "balanced",
   },
 };
