@@ -6,7 +6,7 @@ export const getTraderBoost = (
   serviceCommission: number,
   zignalyCommission = whitelabel.zignalySuccessFee,
 ) => {
-  if (zignalyCommission < whitelabel.defaultSuccessFee) return 0;
+  if (zignalyCommission < whitelabel.zignalySuccessFee) return 0;
   return (
     serviceCommission / whitelabel.zignalySuccessFee +
     (zignalyCommission - whitelabel.zignalySuccessFee) /
