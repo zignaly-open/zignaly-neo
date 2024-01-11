@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import Router from './Router';
 import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
-// import * as Sentry from '@sentry/browser';
 import {
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
@@ -9,7 +8,6 @@ import {
   ToastContainer,
 } from '@zignaly-open/ui';
 import { ThemeChartGradients } from '@zignaly-open/ui/charts';
-
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
@@ -29,6 +27,7 @@ import ZModal from './components/ZModal';
 import ZigErrorBoundary from './util/ZigErrorBoundary';
 import './util/i18n/i18nextWhitelabel';
 
+// import * as Sentry from '@sentry/browser';
 // TODO: use Sentry
 // if (
 //   process.env.NODE_ENV === 'production' &&
