@@ -49,103 +49,100 @@ const ExtraNavigationDropdown: React.FC = () => {
     onClose();
   };
 
-  let options: ZigDropdownProps['options'] = [
-    ...(whitelabel.links?.helpUrl
-      ? ([
-          {
-            label: t('main-menu.dropdown-link-helpDocs'),
-            id: 'menu-dropdown__help-docs',
-            target: '_blank',
-            href: whitelabel.links.helpUrl,
-          },
-          {
-            separator: true,
-            customStyle: `margin-top: 11px; margin-bottom: 12px;`,
-          },
-        ] as ZigDropdownProps['options'])
-      : []),
-    {
-      id: 'menu-dropdown__language-switcher',
-      label: (
-        <>
-          <GlobeLanguagesStyled
-            // yeah, why not change the icon to a shade slightly different from the text
-            color={theme.palette.neutral300}
-            width={'26px'}
-            height={'26px'}
-          />
-          <LabelButton variant={'body1'} color={'neutral400'}>
-            {LocalizationLanguages[i18n.language?.split('_')[0]]?.label}
-          </LabelButton>
-        </>
-      ),
-      children: languageMap.map((language, index) => ({
-        id: `menu-dropdown-languages__${index.toString()}`,
-        active: i18n.language === language.locale,
-        label: language.label,
-        onClick: () => handleSelectLanguage(language.locale),
-      })),
-    },
-    {
-      element: socialNetworksLinks.length > 0 && (
-        <Networks key={'--social-networks'}>
-          {socialNetworksLinks.map((socialNetwork, index) => {
-            const IconComponent = socialNetwork.image;
-            return (
-              <NavLink
-                onClick={onClose}
-                href={socialNetwork.path}
-                key={`--social-network-nav-link-${index.toString()}`}
-                id={`menu-dropdown__social-network-${index.toString()}`}
-                target={'_blank'}
-              >
-                <IconComponent height={'22px'} width={'22px'} />
-              </NavLink>
-            );
-          })}
-        </Networks>
-      ),
-    },
-  ];
+  const separatorElement = {
+    separator: true,
+    customStyle: `margin-top: 11px; margin-bottom: 12px;`,
+  };
 
-  if (languageMap.length === 1) {
-    options = options.filter(
-      (x) => x.id !== 'menu-dropdown__language-switcher',
-    );
-  }
-  if (!md) {
-    options = [
-      {
-        label: t('navigation-menu.become-trader'),
-        id: 'menu-dropdown__become-trader',
-        href: ROUTE_BECOME_TRADER,
-        onClick: () => navigate(ROUTE_BECOME_TRADER),
-      },
-      ...options,
-    ];
-  }
-  if (isAuthenticated && traderServices?.length && !isFetching) {
-    options = [
-      {
-        label: t('main-menu.dropdown-link-forTrading'),
-        id: 'menu-dropdown__for-trading',
-        href:
-          service &&
-          generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-            serviceId: service.serviceId?.toString(),
-          }),
-        onClick: () =>
-          navigate(
-            service
-              ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                  serviceId: service.serviceId?.toString(),
-                })
-              : ROUTE_BECOME_TRADER,
-          ),
-      },
-      ...options,
-    ];
-  }
+  const helperElement = !!whitelabel.links?.helpUrl && {
+    label: t('main-menu.dropdown-link-helpDocs'),
+    id: 'menu-dropdown__help-docs',
+    target: '_blank',
+    href: whitelabel.links.helpUrl,
+  };
+
+  const socialLinks = socialNetworksLinks.length > 0 && {
+    element: (
+      <Networks key={'--social-networks'}>
+        {socialNetworksLinks.map((socialNetwork, index) => {
+          const IconComponent = socialNetwork.image;
+          return (
+            <NavLink
+              onClick={onClose}
+              href={socialNetwork.path}
+              key={`--social-network-nav-link-${index.toString()}`}
+              id={`menu-dropdown__social-network-${index.toString()}`}
+              target={'_blank'}
+            >
+              <IconComponent height={'22px'} width={'22px'} />
+            </NavLink>
+          );
+        })}
+      </Networks>
+    ),
+  };
+
+  const languageElement = languageMap.length > 1 && {
+    id: 'menu-dropdown__language-switcher',
+    label: (
+      <>
+        <GlobeLanguagesStyled
+          // yeah, why not change the icon to a shade slightly different from the text
+          color={theme.palette.neutral300}
+          width={'26px'}
+          height={'26px'}
+        />
+        <LabelButton variant={'body1'} color={'neutral400'}>
+          {LocalizationLanguages[i18n.language?.split('_')[0]]?.label}
+        </LabelButton>
+      </>
+    ),
+    customStyle: !socialLinks ? `margin-bottom: 6px` : undefined,
+    children: languageMap.map((language, index) => ({
+      id: `menu-dropdown-languages__${index.toString()}`,
+      active: i18n.language === language.locale,
+      label: language.label,
+      onClick: () => handleSelectLanguage(language.locale),
+    })),
+  };
+
+  const manageService = isAuthenticated &&
+    !!traderServices?.length &&
+    !isFetching && {
+      label: t('main-menu.dropdown-link-forTrading'),
+      id: 'menu-dropdown__for-trading',
+      href:
+        service &&
+        generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+          serviceId: service.serviceId?.toString(),
+        }),
+      onClick: () =>
+        navigate(
+          service
+            ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                serviceId: service.serviceId?.toString(),
+              })
+            : ROUTE_BECOME_TRADER,
+        ),
+    };
+
+  const becomeTrader = !md && {
+    label: t('navigation-menu.become-trader'),
+    id: 'menu-dropdown__become-trader',
+    href: ROUTE_BECOME_TRADER,
+    onClick: () => navigate(ROUTE_BECOME_TRADER),
+  };
+
+  const options: ZigDropdownProps['options'] = [
+    manageService,
+    becomeTrader,
+    helperElement,
+    !!(manageService || becomeTrader || helperElement) &&
+      !!(languageElement || socialLinks) &&
+      separatorElement,
+    languageElement,
+    socialLinks,
+  ].filter(Boolean);
 
   return (
     <ZigDropdown
