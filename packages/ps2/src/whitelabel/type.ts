@@ -16,6 +16,7 @@ interface TranslationOverrides {
 }
 
 export type WhitelabelOverride = {
+  name: string;
   title: string;
   domain: string;
   description?: string;

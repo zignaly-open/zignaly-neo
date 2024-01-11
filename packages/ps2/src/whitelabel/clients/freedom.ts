@@ -2,6 +2,7 @@ import { Features, WhitelabelOverride } from '../type';
 
 export default {
   title: 'OBSIDIAN FREEDOM',
+  name: 'OBSIDIAN FREEDOM',
   domain: 'freedom.wl.zignaly.com',
   featureOverrides: {
     [Features.Referrals]: false,

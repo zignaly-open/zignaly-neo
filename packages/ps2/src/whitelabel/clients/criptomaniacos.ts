@@ -2,6 +2,7 @@ import { Features, WhitelabelOverride } from '../type';
 
 export default {
   title: 'Lastra',
+  name: 'Lastra',
   domain: 'lastra.zignaly.com',
   featureOverrides: {
     [Features.Referrals]: false,
