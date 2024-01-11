@@ -72,8 +72,7 @@ export { default as CoinLabel } from "./components/display/ZigTable/components/C
 // Chart
 export * from "./components/display/ZigChart";
 
-// TODO: @Nikita9901 pls replace with mui and add stories
-export { default as CheckBox } from "./components/inputs/CheckBox";
+export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Icons
 export * from "./icons";
