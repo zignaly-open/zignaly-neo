@@ -17,7 +17,7 @@ function ZigCheckBox({ variant = "contained", label, id, ...props }: ZigCheckBox
         <Checkbox
           {...props}
           id={id && `${id}-input`}
-          sx={{ padding: "0 9px" }}
+          sx={{ padding: 0, margin: "0 9px" }}
           checkedIcon={
             variant === "outlined" ? (
               <Wrapper>
