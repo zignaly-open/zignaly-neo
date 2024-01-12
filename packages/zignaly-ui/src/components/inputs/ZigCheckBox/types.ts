@@ -4,4 +4,5 @@ import { ReactNode } from "react";
 export type ZigCheckBoxProps = CheckboxProps & {
   variant?: "contained" | "outlined";
   label?: ReactNode;
+  id?: string;
 };

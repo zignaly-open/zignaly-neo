@@ -8,13 +8,15 @@ import { FormControlLabel } from "@mui/material";
 import { ZigTypography } from "../../../index";
 import { ZigCheckBoxProps } from "./types";
 
-function ZigCheckBox({ variant = "contained", label, ...props }: ZigCheckBoxProps) {
+function ZigCheckBox({ variant = "contained", label, id, ...props }: ZigCheckBoxProps) {
   return (
     <FormControlLabel
+      id={id}
       sx={{ alignItems: "flex-start" }}
       control={
         <Checkbox
           {...props}
+          id={id && `${id}-input`}
           sx={{ padding: "0 9px" }}
           checkedIcon={
             variant === "outlined" ? (
@@ -31,11 +33,7 @@ function ZigCheckBox({ variant = "contained", label, ...props }: ZigCheckBoxProp
       label={
         variant === "outlined"
           ? label && (
-              <ZigTypography
-                variant={"body2"}
-                color={"neutral300"}
-                id={props?.id && `${props?.id}-label`}
-              >
+              <ZigTypography variant={"body2"} color={"neutral300"} id={id && `${id}-label`}>
                 {label}
               </ZigTypography>
             )
