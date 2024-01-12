@@ -11,9 +11,11 @@ import { ZigCheckBoxProps } from "./types";
 function ZigCheckBox({ variant = "contained", label, ...props }: ZigCheckBoxProps) {
   return (
     <FormControlLabel
+      sx={{ alignItems: "flex-start" }}
       control={
         <Checkbox
           {...props}
+          sx={{ padding: "0 9px" }}
           checkedIcon={
             variant === "outlined" ? (
               <Wrapper>
