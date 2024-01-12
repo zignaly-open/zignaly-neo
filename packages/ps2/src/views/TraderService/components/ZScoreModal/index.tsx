@@ -102,7 +102,12 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       {data && (
         <>
           <ZigTypography textAlign='center'>{t('description')}</ZigTypography>
-          <Grid container columnSpacing={'22px'} rowSpacing={'22px'}>
+          <Grid
+            container
+            columnSpacing={'22px'}
+            rowSpacing={'22px'}
+            justifyContent={'center'}
+          >
             {['profits', 'risk', 'service', 'balanced'].map(
               (category: ZScoreRiskCategory) => (
                 <Grid
@@ -112,7 +117,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   md={6}
                   display={'flex'}
                   justifyContent={'center'}
-                  // mb={{ sm: 3, md: 0 }}
+                  width={1}
                 >
                   <Box display={'flex'} flexDirection={'column'} flex={1}>
                     <ZScoreRing
