@@ -36,6 +36,14 @@ export const StyledLinearProgress = styled(LinearProgress)<{ value: number; cate
     background-color: #242842;
     animation: ${({ value }) => barAnimation(value)} 1s ease-out forwards;
   }
+  /* revert MuiLinearProgress styleOverrides */
+  &::before {
+    content: none;
+  }
+  .MuiLinearProgress-bar {
+    background-image: none;
+    inset: 0px;
+  }
 `;
 
 export const BarThumb = styled("span")<{ value: number }>`
