@@ -96,7 +96,7 @@ i18n
       cookieOptions: { path: '/', sameSite: 'strict' },
     },
     interpolation: {
-      defaultVariables: { whitelabel: whitelabel.name },
+      defaultVariables: { whitelabel: whitelabel.name || whitelabel.title },
       escapeValue: false,
       format: (value: string | number, format?: string): string => {
         if (format === 'prettyNumber' && typeof value === 'number') {
