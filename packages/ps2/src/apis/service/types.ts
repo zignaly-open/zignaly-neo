@@ -188,14 +188,14 @@ export type CreateServicePayload = {
   successFee: number;
 };
 
-export type ZScoreCategoryInfo = {
+type ZScoreCategoryInfo = {
   balanced: number;
   profits: number;
   riskManagement: number;
   serviceManagement: number;
 };
 
-type Returns = {
+type ZScoreCategoryItemDetails = {
   condition: string;
   pct: number;
   gives: number;
@@ -204,17 +204,30 @@ type Returns = {
   maxZscore: number;
 };
 
-type ZScoreDetails = {
-  profits: {
-    returns: Returns;
-  };
+type ZScoreCategoryDetails = {
+  profits: Record<
+    'returns' | 'benchmark' | 'profitDays' | 'sortino',
+    ZScoreCategoryItemDetails
+  >;
+  serviceManagement: Record<
+    'sbtGrowth' | 'investors' | 'sbtMin' | 'age',
+    ZScoreCategoryItemDetails
+  >;
+  riskManagement: Record<
+    'spotOnly' | 'drawdown' | 'paidClaims' | 'sharpe',
+    ZScoreCategoryItemDetails
+  >;
+  balanced: Record<'balanced' | 'riskRewardRatio', ZScoreCategoryItemDetails>;
 };
+
+// export type ZScoreRiskCategory = 'profits' | 'risk' | 'service' | 'balanced';
 
 export type ZScoreInfoDetails = {
   name: string;
   category: Record<'maxZscore' | 'zScore', ZScoreCategoryInfo>;
   // stats?: Stats;
-  scoreDetails: ZScoreDetails;
+  // scoreDetails: Record<ZScoreRiskCategory, ZScoreCategoryDetails>;
+  scoreDetails: ZScoreCategoryDetails;
 };
 
 export type ZScoreInfo = {

@@ -9,16 +9,18 @@ const ZScoreBar = ({ value, max = 100, ...props }: ZScoreBarProps) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Box sx={{ width: "100%", mr: 1, position: "relative" }}>
+      <Box sx={{ flex: 1, mr: "13px", position: "relative" }}>
         <BarThumb value={pct} />
         <StyledLinearProgress variant="determinate" value={pct} {...props} />
       </Box>
       <Box sx={{ minWidth: 35 }}>
-        <ZigTypography variant="body2" color="text.secondary">{`${Math.round(
-          value,
-        )}%`}</ZigTypography>
+        <ZigTypography variant="body2" color="neutral300">{`${Math.round(value)}%`}</ZigTypography>
+        <ZigTypography color="neutral400" fontSize={15} fontWeight={600}>
+          /{`${Math.round(max)}%`}
+        </ZigTypography>
       </Box>
     </Box>
   );
 };
 export default ZScoreBar;
+export * from "./util";

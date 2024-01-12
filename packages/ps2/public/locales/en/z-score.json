@@ -18,7 +18,8 @@
     "name": "Service",
     "assets": "Assets",
     "asset-growth": "Asset growth",
-    "investors": "Investors"
+    "investors": "Investors",
+    "age": "Age"
   },
   "balance": {
     "name": "Balance",
