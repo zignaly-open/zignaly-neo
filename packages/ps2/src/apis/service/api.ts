@@ -11,7 +11,6 @@ import {
   CreateServicePayload,
   ServiceTypesInfo,
   Service,
-  ZScoreDetails,
   ZScoreInfo,
 } from './types';
 import { injectEndpoints, providesList } from 'apis/util';

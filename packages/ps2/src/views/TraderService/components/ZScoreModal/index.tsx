@@ -7,16 +7,16 @@ import { useScoreQuery } from 'apis/service/api';
 import {
   ZScoreBar,
   ZScoreRing,
+  ZScoreRiskCategory,
   ZigTypography,
   roundScorePct,
 } from '@zignaly-open/ui';
 import { useZScoreConfig } from './use';
 import { round } from 'lodash-es';
 import { formatDuration } from 'date-fns';
-import { numericFormatter } from 'react-number-format';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
-const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
+const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
   const { t } = useTranslation(['z-score', 'common']);
   const { isLoading, data } = useScoreQuery(serviceId);
 
@@ -28,34 +28,23 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
 
   const zScoreConfig = useZScoreConfig();
 
-  const renderValue = useCallback(
-    (valueId: string, type?: string) => {
-      const value = stats[valueId];
-      const formattedValue = (() => {
-        switch (type) {
-          case 'pct':
-            return round(value, 1) + '%';
-          case 'bool':
-            return value ? t('yes') : t('no');
-          case 'duration-day':
-            return formatDuration({ days: value });
-          case 'amount':
-            return '$' + formatCompactNumber(value, 0);
-          default:
-            return round(value, 2);
-        }
-      })();
-      return (
-        <ZigTypography color='paleBlue' fontSize={15} fontWeight={600} ml='6px'>
-          {formattedValue}
-        </ZigTypography>
-      );
-    },
-    [stats],
-  );
+  const formatValue = (value: number, type?: string) => {
+    switch (type) {
+      case 'pct':
+        return round(value, 1) + '%';
+      case 'bool':
+        return value ? t('yes') : t('no');
+      case 'duration-day':
+        return formatDuration({ days: value });
+      case 'amount':
+        return '$' + formatCompactNumber(value, 0);
+      default:
+        return round(value, 2);
+    }
+  };
 
   const renderScoreBars = useCallback(
-    (category: string) => {
+    (category: ZScoreRiskCategory) => {
       const { items } = zScoreConfig[category];
       const details = scoreDetails[zScoreConfig[category].scoreCategoryId];
 
@@ -86,7 +75,14 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
                   {t(item.label)}
                   {':'}
                 </ZigTypography>
-                {renderValue(item.valueId, item.valueType)}
+                <ZigTypography
+                  color='paleBlue'
+                  fontSize={15}
+                  fontWeight={600}
+                  ml='6px'
+                >
+                  {formatValue(stats[item.valueId] as number, item.valueType)}
+                </ZigTypography>
               </Box>
               <ZScoreBar
                 value={numbers[index]}
@@ -102,40 +98,34 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
   );
 
   return (
-    <ZModal
-      // titleStyles={{ fontSize: '26px', textTransform: 'unset !important' }}
-      // width={838}
-      {...props}
-      wide
-      close={close}
-      title={t('zscore')}
-      isLoading={isLoading}
-    >
+    <ZModal {...props} wide title={t('zscore')} isLoading={isLoading}>
       {data && (
         <>
           <ZigTypography textAlign='center'>{t('description')}</ZigTypography>
           <Grid container columnSpacing={'22px'} rowSpacing={'22px'}>
-            {['profits', 'risk', 'service', 'balanced'].map((category) => (
-              <Grid
-                key={category}
-                item
-                sm={12}
-                md={6}
-                display={'flex'}
-                justifyContent={'center'}
-                // mb={{ sm: 3, md: 0 }}
-              >
-                <Box display={'flex'} flexDirection={'column'} flex={1}>
-                  <ZScoreRing
-                    sx={{ alignSelf: 'center' }}
-                    category={category}
-                    value={data[zScoreConfig[category].scoreId]}
-                    max={maxZscore[zScoreConfig[category].scoreCategoryId]}
-                  />
-                  {renderScoreBars(category)}
-                </Box>
-              </Grid>
-            ))}
+            {['profits', 'risk', 'service', 'balanced'].map(
+              (category: ZScoreRiskCategory) => (
+                <Grid
+                  key={category}
+                  item
+                  sm={12}
+                  md={6}
+                  display={'flex'}
+                  justifyContent={'center'}
+                  // mb={{ sm: 3, md: 0 }}
+                >
+                  <Box display={'flex'} flexDirection={'column'} flex={1}>
+                    <ZScoreRing
+                      sx={{ alignSelf: 'center' }}
+                      category={category}
+                      value={data[zScoreConfig[category].scoreId]}
+                      max={maxZscore[zScoreConfig[category].scoreCategoryId]}
+                    />
+                    {renderScoreBars(category)}
+                  </Box>
+                </Grid>
+              ),
+            )}
           </Grid>
         </>
       )}

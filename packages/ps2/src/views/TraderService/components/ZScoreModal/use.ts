@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
+import { ZScoreConfig } from './types';
 
-export const useZScoreConfig = () => {
+export const useZScoreConfig = (): ZScoreConfig => {
   const { t } = useTranslation('z-score');
 
   return {

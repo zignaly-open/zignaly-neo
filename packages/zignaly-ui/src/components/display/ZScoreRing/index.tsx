@@ -135,3 +135,4 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
 };
 
 export default ZScoreRing;
+export * from "./types";

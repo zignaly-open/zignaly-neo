@@ -220,12 +220,10 @@ type ZScoreCategoryDetails = {
   balanced: Record<'balanced' | 'riskRewardRatio', ZScoreCategoryItemDetails>;
 };
 
-// export type ZScoreRiskCategory = 'profits' | 'risk' | 'service' | 'balanced';
-
 export type ZScoreInfoDetails = {
   name: string;
   category: Record<'maxZscore' | 'zScore', ZScoreCategoryInfo>;
-  stats: Record<string, unknown>;
+  stats: Record<string, number | string>;
   scoreDetails: ZScoreCategoryDetails;
 };
 

@@ -1,8 +1,8 @@
 import { AdditionalProps } from "components/types";
-import { RiskCategory } from "../ZScoreRing/types";
+import { ZScoreRiskCategory } from "../ZScoreRing";
 
 export type ZScoreBarProps = {
   value: number;
   max: number;
-  category: RiskCategory;
+  category: ZScoreRiskCategory;
 } & AdditionalProps;
