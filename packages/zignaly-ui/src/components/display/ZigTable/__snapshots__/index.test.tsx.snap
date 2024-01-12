@@ -910,74 +910,13 @@ exports[`components/display/ZigTable should render ZigTableRtkInfiniteQuery with
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr
-          style="cursor: unset; position: relative; transform: scale(1);"
-        >
-          <td
-            id="test__name-0"
-          >
-            <span
-              class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
-            >
-              Ethereum
-            </span>
-          </td>
-          <td
-            id="test__symbol-0"
-          >
-            <span
-              class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
-            >
-              ETH
-            </span>
-          </td>
-          <td
-            colspan="2"
-            id="test__price-0"
-          >
-            <span
-              class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
-            >
-              800000
-            </span>
-          </td>
-        </tr>
-        <tr
-          style="cursor: unset; position: relative; transform: scale(1);"
-        >
-          <td
-            id="test__name-1"
-          >
-            <span
-              class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
-            >
-              Bitcoin
-            </span>
-          </td>
-          <td
-            id="test__symbol-1"
-          >
-            <span
-              class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
-            >
-              BTC
-            </span>
-          </td>
-          <td
-            colspan="2"
-            id="test__price-1"
-          >
-            <span
-              class="MuiTypography-root MuiTypography-body1 css-18ygdn1-MuiTypography-root"
-            >
-              5000
-            </span>
-          </td>
-        </tr>
-      </tbody>
+      <tbody />
     </table>
   </div>
+  <span
+    class="MuiTypography-root MuiTypography-body1 css-5wa3he-MuiTypography-root"
+    id="table__empty-message"
+  />
   <div
     class="MuiBox-root css-54rtym"
   >
@@ -1139,7 +1078,7 @@ exports[`components/display/ZigTable should render ZigTableRtkInfiniteQuery with
                   <div
                     class="zig-react-select__single-value css-tcq528-singleValue"
                   >
-                    10
+                    30
                   </div>
                   <div
                     class="zig-react-select__input-container css-1u4kn00-Component"

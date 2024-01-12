@@ -52,7 +52,7 @@ describe("components/display/ZigTable", () => {
   it("should render ZigTableRtkInfiniteQuery without crashing", () => {
     const useQuery = jest.fn();
     const { container } = renderWithProvidersUi(
-      <ZigTable useInfiniteQuery={useQuery} data={testData} columns={columns} prefixId={"test"} />,
+      <ZigTable useInfiniteQuery={useQuery} columns={columns} prefixId={"test"} />,
     );
     const tableElement = container.querySelector("#test__table");
     expect(tableElement).toBeInTheDocument();
