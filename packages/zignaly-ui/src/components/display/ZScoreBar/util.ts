@@ -1,3 +1,6 @@
+/**
+ * Round a set of numbers to 100%, handling rounding errors.
+ */
 export const roundScorePct = (numbers: number[]) => {
   const total = numbers.reduce((acc, num) => acc + num, 0);
   const roundedValues = numbers.map((num) => Math.round((num / total) * 100));

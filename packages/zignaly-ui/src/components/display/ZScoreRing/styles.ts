@@ -35,13 +35,6 @@ export const AnimatedRingCircle1 = styled("circle", { shouldForwardProp: () => t
   animation: ${ringAnimation} 1s ease-out forwards;
 `;
 
-/* export const AnimatedRingCircle2 = styled(AnimatedRingCircle1)`
-  opacity: 0.5;
-  animation: ${ringAnimation} 1s ease-out forwards;
-  animation-delay: 01s;
-  /* animation-duration: 2s; 
-`; */
-
 export const AnimatedHandle = styled("circle", { shouldForwardProp: () => true })`
   opacity: 0;
   animation: ${handleAnimation} 1s ease-out forwards;

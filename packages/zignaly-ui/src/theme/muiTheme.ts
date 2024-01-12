@@ -197,38 +197,38 @@ const createMuiTheme = ({
           `,
         },
       },
-      // MuiLinearProgress: {
-      //   styleOverrides: {
-      //     root: {
-      //       backgroundColor: "rgb(19,28,53)",
-      //       borderRadius: 9,
-      //       height: 18,
+      MuiLinearProgress: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgb(19,28,53)",
+            borderRadius: 9,
+            height: 18,
 
-      //       "&:before": {
-      //         content: "''",
-      //         position: "absolute",
-      //         zIndex: 2,
-      //         borderRadius: 9,
-      //         padding: "3px",
-      //         background: "linear-gradient(90deg, #7319DB, #05EAC1)",
-      //         mask: "linear-gradient(#fff 0 0, #fff 0 0), content-box, linear-gradient(#fff 0 0, #fff 0 0)",
-      //         WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-      //         WebkitMaskComposite: "destination-out",
-      //         maskComposite: "exclude",
-      //         outline: "solid 2px rgb(19,28,53)",
-      //         outlineOffset: "-4px",
-      //         inset: "-1px",
-      //       },
+            "&:before": {
+              content: "''",
+              position: "absolute",
+              zIndex: 2,
+              borderRadius: 9,
+              padding: "3px",
+              background: "linear-gradient(90deg, #7319DB, #05EAC1)",
+              mask: "linear-gradient(#fff 0 0, #fff 0 0), content-box, linear-gradient(#fff 0 0, #fff 0 0)",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "destination-out",
+              maskComposite: "exclude",
+              outline: "solid 2px rgb(19,28,53)",
+              outlineOffset: "-4px",
+              inset: "-1px",
+            },
 
-      //       [`& .${linearProgressClasses.bar}`]: {
-      //         borderRadius: 7,
-      //         inset: "2px",
-      //         width: "calc(100% - 4px)",
-      //         backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
-      //       },
-      //     },
-      //   },
-      // },
+            [`& .${linearProgressClasses.bar}`]: {
+              borderRadius: 7,
+              inset: "2px",
+              width: "calc(100% - 4px)",
+              backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
+            },
+          },
+        },
+      },
       MuiIconButton: {
         styleOverrides: {
           root: {
