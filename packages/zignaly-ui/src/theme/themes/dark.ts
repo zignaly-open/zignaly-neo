@@ -100,7 +100,7 @@ const dark: ThemeStyledComponents = {
         icon: "#a2b88d",
         text: "#a2b88d",
       },
-    }
+    },
     bar: {
       profits: "linear-gradient(to right, #0e272e, #2acbfe 47%, #0ceaae 88%)",
       risk: "linear-gradient(to right, #210f45, #5533cf, #50a9ee)",

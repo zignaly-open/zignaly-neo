@@ -116,7 +116,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             cx="50%"
             cy="50%"
             stroke={lighten(gradientforValue, 0.55)}
-            stroke-dasharray="0.5 99"
+            stroke-dasharray="0 100"
             stroke-dashoffset={-normalizedPct}
           />
           <AnimatedHandle
@@ -125,7 +125,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             cx="50%"
             cy="50%"
             stroke={darken(gradientforValue, 0.1)}
-            stroke-dasharray="0.5 99"
+            stroke-dasharray="0 100"
             stroke-dashoffset={-normalizedPct}
           />
         </g>

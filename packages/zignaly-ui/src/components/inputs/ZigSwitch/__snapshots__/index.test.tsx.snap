@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/ZigSwitch should render without crashing 1`] = `
+exports[`components/inputs/ZigSwitch should render without crashing 1`] = `
 <span
   class="MuiSwitch-root MuiSwitch-sizeMedium css-1xgfkn7-MuiSwitch-root"
 >

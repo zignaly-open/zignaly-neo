@@ -72,8 +72,21 @@ declare module "@mui/material/styles" {
     > &
       Record<"red" | "green", string>;
 
-    zscore: Record<"riskGradient" | "riskGradient2", string[]>;
+    zscore: ZScoreTheme;
   }
+
+  type RingTheme = {
+    gradient: string[];
+    icon: string;
+    text: string;
+  };
+
+  type ZScoreTheme = {
+    ring:
+      | Record<"profits" | "service" | "balanced", RingTheme>
+      | Record<"risk", Omit<RingTheme, "icon" | "text">>;
+    bar: Record<"profits" | "service" | "balanced" | "risk", string>;
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface Palette extends CustomPalette {}

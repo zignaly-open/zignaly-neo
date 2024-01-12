@@ -1,5 +1,4 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import { linearProgressClasses } from "@mui/material";
 import { ThemeExport, ThemeStyledComponents, ThemeStyledComponentsOverrides } from "./types";
 import { DeepPartial } from "react-hook-form";
 

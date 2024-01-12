@@ -87,20 +87,32 @@ const example: ThemeStyledComponents = {
     redCard: ["rgba(137, 38, 38, 0.38)", "rgba(96, 28, 28, 0.44)", "rgba(204, 147, 147, 0.69)"],
   },
   zscore: {
-    riskGradient: ["#2394c1", "#28bef9", "#2ed3d2"],
-    riskGradient2: ["#2ed3d2", "#2fdd88", "#1cfd90"],
-    red: "#CC3993",
-    green: "#039179",
-    greenGradient: ["rgba(18, 33, 59, 0.52)", "rgba(33, 81, 78, 0.69)"],
-    redGradient: ["rgba(31, 18, 59, 0.52)", "rgba(74, 33, 81, 0.69)"],
-    redMiniGradient: ["rgba(18, 20, 39, 0)", "rgba(21, 21, 57, 0.5)", "rgba(86, 36, 108, 1)"],
-    greenCard: [
-      "rgba(16, 33, 33, 0.68)",
-      "rgba(0, 45, 20, 0.44)",
-      "rgba(7, 47, 30, 0.44)",
-      "rgba(56, 235, 170, 0.69)",
-    ],
-    redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
+    ring: {
+      profits: {
+        gradient: ["#2bc5f2", "#19dcd1", "#0ceaae"],
+        icon: "#29cdbb",
+        text: "#90d2bf",
+      },
+      risk: {
+        gradient: ["#4c18b3", "#5451d7", "#5199ea"],
+      },
+      service: {
+        gradient: ["#6e0a83", "#d94097", "#f24196"],
+        icon: "#734c9a",
+        text: "#ba7af0",
+      },
+      balanced: {
+        gradient: ["#46835e", "#7fce87", "#88c489"],
+        icon: "#a2b88d",
+        text: "#a2b88d",
+      },
+    },
+    bar: {
+      profits: "linear-gradient(to right, #0e272e, #2acbfe 47%, #0ceaae 88%)",
+      risk: "linear-gradient(to right, #210f45, #5533cf, #50a9ee)",
+      service: "linear-gradient(to right, #1f1030, #6d0b82 42%, #dd4393 76%, #f24196)",
+      balanced: "linear-gradient(to right, #10341d, #46995c 42%, #76dd88 76%, #88c489)",
+    },
   },
 };
 
