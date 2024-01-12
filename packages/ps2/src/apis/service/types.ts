@@ -225,8 +225,7 @@ type ZScoreCategoryDetails = {
 export type ZScoreInfoDetails = {
   name: string;
   category: Record<'maxZscore' | 'zScore', ZScoreCategoryInfo>;
-  // stats?: Stats;
-  // scoreDetails: Record<ZScoreRiskCategory, ZScoreCategoryDetails>;
+  stats: Record<string, unknown>;
   scoreDetails: ZScoreCategoryDetails;
 };
 

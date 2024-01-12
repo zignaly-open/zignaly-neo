@@ -18,11 +18,12 @@
     "name": "Service",
     "assets": "Assets",
     "asset-growth": "Asset growth",
-    "investors": "Investors",
+    "investors": "Investors growth",
     "age": "Age"
   },
   "balance": {
     "name": "Balance",
-    "balanced-profit": "Balanced profit+risk"
+    "balanced-profit-risk": "Balanced profit+risk",
+    "ratio": "Risk/reward ratio"
   }
 }

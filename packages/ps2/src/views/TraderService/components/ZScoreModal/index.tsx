@@ -10,33 +10,84 @@ import {
   ZigTypography,
   roundScorePct,
 } from '@zignaly-open/ui';
-import { zscoreCategories } from './constants';
+import { useZScoreConfig } from './use';
+import { round } from 'lodash-es';
+import { formatDuration } from 'date-fns';
+import { numericFormatter } from 'react-number-format';
+import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
 const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
-  const { t } = useTranslation('z-score');
+  const { t } = useTranslation(['z-score', 'common']);
   const { isLoading, data } = useScoreQuery(serviceId);
 
   const {
     scoreDetails,
     category: { maxZscore },
+    stats,
   } = data?.info || { category: {} };
+
+  const zScoreConfig = useZScoreConfig();
+
+  const renderValue = useCallback(
+    (valueId: string, type?: string) => {
+      const value = stats[valueId];
+      const formattedValue = (() => {
+        switch (type) {
+          case 'pct':
+            return round(value, 1) + '%';
+          case 'bool':
+            return value ? t('yes') : t('no');
+          case 'duration-day':
+            return formatDuration({ days: value });
+          case 'amount':
+            return '$' + formatCompactNumber(value, 0);
+          default:
+            return round(value, 2);
+        }
+      })();
+      return (
+        <ZigTypography color='paleBlue' fontSize={15} fontWeight={600} ml='6px'>
+          {formattedValue}
+        </ZigTypography>
+      );
+    },
+    [stats],
+  );
 
   const renderScoreBars = useCallback(
     (category: string) => {
-      const { items } = zscoreCategories[category];
-      const details = scoreDetails[zscoreCategories[category].scoreCategoryId];
+      const { items } = zScoreConfig[category];
+      const details = scoreDetails[zScoreConfig[category].scoreCategoryId];
 
-      const numbers = items.map((item) => details[item.id].gives);
+      // Make sure the numbers total don't exceed the max due to rounding
       const numbersMax = roundScorePct(
         items.map((item) => details[item.id].ofMax),
+      );
+      const numbers = items.map((item, i) =>
+        details[item.id].gives > numbersMax[i]
+          ? numbersMax[i]
+          : details[item.id].gives,
       );
 
       return (
         <Box display={'flex'} flexDirection={'column'}>
           {items.map((item, index) => (
             <div key={item.id}>
-              {t(item.label)}
-              <ZigTypography>{details[item.id]}</ZigTypography>
+              <Box
+                display={'flex'}
+                alignItems={'center'}
+                sx={{ '> span': { lineHeight: '14px' } }}
+              >
+                <ZigTypography
+                  color='neutral200'
+                  fontSize={14}
+                  fontWeight={500}
+                >
+                  {t(item.label)}
+                  {':'}
+                </ZigTypography>
+                {renderValue(item.valueId, item.valueType)}
+              </Box>
               <ZScoreBar
                 value={numbers[index]}
                 max={numbersMax[index]}
@@ -47,7 +98,7 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
         </Box>
       );
     },
-    [scoreDetails],
+    [scoreDetails, zScoreConfig],
   );
 
   return (
@@ -78,8 +129,8 @@ const ZScoreModal = ({ serviceId, close, ...props }: ZScoreModalProps) => {
                   <ZScoreRing
                     sx={{ alignSelf: 'center' }}
                     category={category}
-                    value={data[zscoreCategories[category].scoreId]}
-                    max={maxZscore[zscoreCategories[category].scoreCategoryId]}
+                    value={data[zScoreConfig[category].scoreId]}
+                    max={maxZscore[zScoreConfig[category].scoreCategoryId]}
                   />
                   {renderScoreBars(category)}
                 </Box>
