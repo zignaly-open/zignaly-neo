@@ -1,6 +1,7 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { ThemeExport, ThemeStyledComponents, ThemeStyledComponentsOverrides } from "./types";
 import { DeepPartial } from "react-hook-form";
+import { linearProgressClasses } from "@mui/material";
 
 const {
   palette: { augmentColor },
