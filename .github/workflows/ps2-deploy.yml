@@ -72,20 +72,20 @@ jobs:
           file_name: .env
       - name: Add a workaround for type imports
         run: echo "//@ts-nocheck"$'\n'"$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
-      - name: AWS CodeDeploy
-        uses: sourcetoad/aws-codedeploy-action@v1
-        with:
-          aws_access_key: ${{ secrets.AWS_CODEDEPLOY_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_CODEDEPLOY_SECRET_KEY }}
-          aws_region: ap-northeast-1
-          codedeploy_name: zignaly
-          codedeploy_group: zignaly-staticContent-test
-          codedeploy_register_only: false
-          s3_bucket: ${{ secrets.AWS_CODEDEPLOY_BUCKET }}
-          s3_folder: ${{ inputs.deploy-env }}
-          max_polling_iterations: 60
-          excluded_files: '.git/* *node_modules/*'
-          directory: ./packages/ps2-wl-server
+#      - name: AWS CodeDeploy
+#        uses: sourcetoad/aws-codedeploy-action@v1
+#        with:
+#          aws_access_key: ${{ secrets.AWS_CODEDEPLOY_ACCESS_KEY }}
+#          aws_secret_key: ${{ secrets.AWS_CODEDEPLOY_SECRET_KEY }}
+#          aws_region: ap-northeast-1
+#          codedeploy_name: zignaly
+#          codedeploy_group: zignaly-staticContent-test
+#          codedeploy_register_only: false
+#          s3_bucket: ${{ secrets.AWS_CODEDEPLOY_BUCKET }}
+#          s3_folder: ${{ inputs.deploy-env }}
+#          max_polling_iterations: 60
+#          excluded_files: '.git/* *node_modules/*'
+#          directory: ./packages/ps2-wl-server
       - name: AWS Deploy
         uses: jakejarvis/s3-sync-action@master
         env:
