@@ -1,9 +1,10 @@
 name: PS2 Production deploy
 on:
   push:
-    tags:
-      - 'release-ps2-*'
-      - 'release-ps2_zig-*'
+    #tags:
+    #  - 'release-ps2-*'
+    branches:
+      - feat/wl-server-2-prod
 
 jobs:
   deploy:
@@ -11,4 +12,4 @@ jobs:
     uses: ./.github/workflows/ps2-deploy.yml
     secrets: inherit
     with:
-      deploy-env: production
+      deploy-env: wl-prod
