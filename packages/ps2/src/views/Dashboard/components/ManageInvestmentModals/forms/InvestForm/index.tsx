@@ -197,6 +197,8 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
           defaultValue={false}
           render={({ field: { onChange, value } }) => (
             <ZigCheckBox
+              wrapperSx={{ alignItems: 'flex-start' }}
+              sx={{ margin: '0 9px', padding: 0 }}
               id={'invest-modal__understand-risk'}
               onChange={onChange}
               value={value}

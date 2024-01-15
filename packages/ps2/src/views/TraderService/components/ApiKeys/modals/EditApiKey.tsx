@@ -193,8 +193,8 @@ function EditApiKeysModal({
           >
             {t('api-keys.api-settings')}
           </ZigTypography>
-          <Grid container mt={'10px'}>
-            <Grid item xs={12} md={6} mb={'20px'}>
+          <Grid container>
+            <Grid item xs={12} md={6}>
               <Tooltip title={t('api-keys.cant-disable-read')}>
                 <ZigCheckBox
                   className={

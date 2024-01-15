@@ -175,6 +175,7 @@ function ZigTableData<T extends object>({
                           return {
                             element: (
                               <ZigCheckBox
+                                sx={{ margin: "0 9px", padding: 0 }}
                                 variant={"outlined"}
                                 checked={column.getIsVisible()}
                                 label={column.columnDef.header as string}
