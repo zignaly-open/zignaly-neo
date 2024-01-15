@@ -21,7 +21,7 @@ const ErrorStub: React.FC = () => {
 
           {
             // not everyone has a sense of humor
-            whitelabel.name !== 'zignaly' && (
+            [whitelabel.name, whitelabel.title].includes('Zignaly') && (
               <ZigTypography component={'p'}>
                 <Trans t={t} i18nKey={'common:error-boundary.description-2'}>
                   <ZigLink href={CABIN_IN_THE_WOODS_URL} />
