@@ -77,7 +77,7 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_CODEDEPLOY_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_CODEDEPLOY_SECRET_KEY }}
-          aws_region: ap-northeast-1
+          aws_region: us-east-1
           codedeploy_name: zignaly
           codedeploy_group: zignaly-staticContent-test
           codedeploy_register_only: false
