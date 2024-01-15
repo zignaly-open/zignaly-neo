@@ -18,13 +18,14 @@ import {
 import { ServiceCardProps } from './types';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 
-const ServiceCard = ({ service }: ServiceCardProps) => {
+const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation(['marketplace', 'service']);
 
   return (
     <Card>
       <ChartBox>
         <ZigChartMiniSuspensed
+          id={prefixId && `${prefixId}__chart-${service.id}`}
           data={[0, ...service.sparklines]}
           midLine={false}
           height={104}
@@ -53,10 +54,13 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           />
         </BottomPnLContainer>
       </ChartBox>
-      <ServiceName
-        service={marketplaceServiceToInvestmentType(service) as Investment}
-        showCoin={false}
-      />
+      <Box height={70}>
+        <ServiceName
+          prefixId={prefixId}
+          service={marketplaceServiceToInvestmentType(service) as Investment}
+          showCoin={false}
+        />
+      </Box>
       <Box
         display='flex'
         flexDirection='row'
@@ -66,7 +70,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         mb={3}
         px={2}
       >
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' flex={1}>
           <ValueContainer>
             <ChangeIndicator
               style={{
@@ -84,12 +88,13 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             {t('service:periods.90d')}
           </ZigTypography>
         </Box>
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' flex={1}>
           <AssetContainer>
             <AssetsInPool
+              prefixId={prefixId}
+              serviceId={service.id}
               shorten
               assetsValue={service.investedUSDT}
-              serviceId={service.id}
             />
           </AssetContainer>
           <ZigTypography
@@ -101,9 +106,14 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             {t('card.assets')}
           </ZigTypography>
         </Box>
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' flex={1}>
           <ValueContainer>
-            <ZigTypography color='neutral200' fontSize={17} fontWeight={500}>
+            <ZigTypography
+              color='neutral200'
+              fontSize={17}
+              fontWeight={500}
+              id={prefixId && `${prefixId}__investors-${service.id}`}
+            >
               {service.investors}
             </ZigTypography>
           </ValueContainer>
@@ -118,7 +128,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </Box>
       </Box>
       <ButtonContainer>
-        <MarketplaceAction service={service} prefixId='marketplace-card' />
+        <MarketplaceAction service={service} prefixId={prefixId} />
       </ButtonContainer>
     </Card>
   );

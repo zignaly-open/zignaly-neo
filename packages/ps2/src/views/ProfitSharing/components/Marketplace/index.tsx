@@ -41,7 +41,7 @@ import { Features } from 'whitelabel/type';
 import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
 import ZScoreModal from 'views/TraderService/components/ZScoreModal';
-// import TopServicesCards from '../TopServicesCards';
+import TopServicesCards from '../TopServicesCards';
 
 const sx = {
   changeIndicator: {
@@ -347,12 +347,13 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         onSearchChange={setSearchFilter}
         searchFilter={searchFilter}
       />
-      {/* <TopServicesCards
-              services={services
-                ?.slice()
-                .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
-                .slice(0, 3)}
-              /> */}
+      <TopServicesCards
+        prefixId={'marketplace'}
+        services={services
+          ?.slice()
+          .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
+          .slice(0, 3)}
+      />
       {filteredServices && (
         <TableWrapper>
           <ZigTable
