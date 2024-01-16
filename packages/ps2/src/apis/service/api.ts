@@ -11,6 +11,7 @@ import {
   CreateServicePayload,
   ServiceTypesInfo,
   Service,
+  ZScoreInfo,
 } from './types';
 import { injectEndpoints, providesList } from 'apis/util';
 import baseApiPs2 from '../baseApiPs2';
@@ -120,6 +121,11 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       body: payload,
     }),
   }),
+  score: builder.query<ZScoreInfo, string>({
+    query: (id) => ({
+      url: `services/${id}/score-info`,
+    }),
+  }),
 }));
 
 export const {
@@ -137,4 +143,5 @@ export const {
   useTraderServicesQuery,
   useTraderServiceEditSuccessFeeMutation,
   useTraderServiceEditMutation,
+  useScoreQuery,
 } = api;
