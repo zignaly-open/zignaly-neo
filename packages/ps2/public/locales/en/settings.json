@@ -58,7 +58,9 @@
   },
   "disable-2fa": {
     "title": "Disable 2FA",
-    "description": "Your account is secured with Two-Factor Authentication (2FA). To disable 2FA, enter the code from your authenticator app.",
+    "congrats": "Congratulations!",
+    "description-basic": "Your account is secured with Two-Factor Authentication (2FA). To disable 2FA, click the button below.",
+    "description-after-click": "Your account is secured with Two-Factor Authentication (2FA). To disable 2FA, enter the code from your authenticator app.",
     "success": "2FA has been disabled successfully.",
     "security": "For security, we recommend to have 2FA enabled in your account."
   }

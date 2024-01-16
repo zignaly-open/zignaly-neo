@@ -35,7 +35,7 @@
     "33": "Unknown provider",
     "34": "Order would trigger immediately",
     "35": "Position closed",
-    "36": "Error enabling 2FA",
+    "36": "Error in 2FA",
     "37": "2FA code incorrect",
     "38": "The take profit price has already been reached",
     "39": "Take Profit value has to be greater than 1",

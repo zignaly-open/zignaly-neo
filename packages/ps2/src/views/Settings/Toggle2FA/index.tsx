@@ -1,11 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from '@mui/material';
 import Enable2FAForm from './Enable2FaForm';
 import Disable2FAForm from './Disable2FaForm';
 import { useCurrentUser } from 'apis/user/use';
 import { useTitle } from 'util/title';
-import { PageContainer, ZigTypography } from '@zignaly-open/ui';
+import { PageContainer } from '@zignaly-open/ui';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
 
 const Toggle2FA: React.FC = () => {
@@ -15,16 +14,6 @@ const Toggle2FA: React.FC = () => {
   return (
     <PageContainer style={{ maxWidth: '615px' }}>
       <PageWithHeaderContainer hasHeader>
-        <Box
-          sx={{
-            textAlign: 'center',
-          }}
-        >
-          <ZigTypography variant={'h1'} id={'two-fa__title'}>
-            {t('enable-2fa.title')}
-          </ZigTypography>
-        </Box>
-
         {user['2FAEnable'] ? (
           <Disable2FAForm
             close={() => {

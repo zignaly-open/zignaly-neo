@@ -36,9 +36,9 @@ const useInfinitePaginatedQuery = <T extends object, V extends object>({
   );
 
   useEffect(() => {
-    if (from.current && queryResponse.data)
-      from.current[pagination.pageIndex + 1] = queryResponse.data?.metadata?.from || "";
-  }, [queryResponse.data]);
+    if (from.current && queryResponse?.data)
+      from.current[pagination.pageIndex + 1] = queryResponse?.data?.metadata?.from || "";
+  }, [queryResponse?.data]);
 
   useEffect(reset, [pagination.pageSize]);
   useDeepCompareEffect(reset, [queryExtraParams]);

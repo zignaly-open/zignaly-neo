@@ -12,7 +12,6 @@ import {
 import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
-import CheckBox from "../../inputs/CheckBox";
 import { ZigTablePropsData } from "./types";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
@@ -20,6 +19,7 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
+import { ZigCheckBox } from "../../../index";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -174,12 +174,17 @@ function ZigTableData<T extends object>({
                         .map((column) => {
                           return {
                             element: (
-                              <CheckBox
-                                value={column.getIsVisible()}
+                              <ZigCheckBox
+                                sx={{ margin: "0 9px", padding: 0 }}
+                                variant={"outlined"}
+                                checked={column.getIsVisible()}
                                 label={column.columnDef.header as string}
                                 onChange={(v) => {
-                                  if (v || table.getVisibleLeafColumns().length > 2) {
-                                    column.toggleVisibility(v);
+                                  if (
+                                    v.target.checked ||
+                                    table.getVisibleLeafColumns().length > 2
+                                  ) {
+                                    column.toggleVisibility(v.target.checked);
                                   }
                                 }}
                               />
@@ -210,6 +215,7 @@ function ZigTableData<T extends object>({
                     {row.getVisibleCells().map((cell, index) => {
                       return (
                         <td
+                          id={prefixId && `${prefixId}__${cell.column.id}-${cell.row.id}`}
                           key={cell.id}
                           colSpan={
                             enableColumnVisibility && row.getVisibleCells().length === index + 1
@@ -277,7 +283,11 @@ function ZigTableData<T extends object>({
             >
               <ZigTypography color="neutral300">Page</ZigTypography>
 
-              <ZigTypography variant="h3" color="neutral100">
+              <ZigTypography
+                variant="h3"
+                color="neutral100"
+                id={prefixId && `${prefixId}-table__current-page`}
+              >
                 {table.getState().pagination.pageIndex + 1}
               </ZigTypography>
 
