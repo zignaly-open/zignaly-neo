@@ -144,12 +144,19 @@ export const getWhitelabelConfig = async (
 ): Promise<WhitelabelFrontendConfig | null> => {
   const cached = getCacheValue(domain);
   if (cached) return cached;
-  // TODO: process it somehow
+  const url = `${BASE_API}wl/config?domain=${domain}`;
+
+  let response;
+
   try {
-    let { data: whitelabel } = await axios.get(
-      `${BASE_API}wl/config?domain=${domain}`,
-    );
-    whitelabel = mapBackendConfigToFrontendConfig(whitelabel);
+    response = await axios.get(url);
+  } catch (e) {
+    console.error(`Could not load the config from ${url}`);
+    return null;
+  }
+
+  try {
+    const whitelabel = mapBackendConfigToFrontendConfig(response.data);
     setCacheValue(domain, whitelabel);
     return whitelabel;
   } catch (e) {
