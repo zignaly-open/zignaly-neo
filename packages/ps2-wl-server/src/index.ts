@@ -53,7 +53,7 @@ const getWlConfigForReq = (req: express.Request) =>
 async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
-    res.send('Config not found or invalid').status(500);
+    res.send('Config not found or invalid for ' + req.get('host')).status(500);
   } else {
     res.send(await generateIndexHtml(wlConfig)).status(200);
   }
