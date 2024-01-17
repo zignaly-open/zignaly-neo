@@ -79,7 +79,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_CODEDEPLOY_SECRET_KEY }}
           aws_region: ap-northeast-1
           codedeploy_name: zignaly
-          codedeploy_group: zignaly-staticContent-test
+          codedeploy_group: ${{ secrets.AWS_CODEDEPLOY_GROUP }}
           codedeploy_register_only: false
           s3_bucket: ${{ secrets.AWS_CODEDEPLOY_BUCKET }}
           s3_folder: ${{ inputs.deploy-env }}
