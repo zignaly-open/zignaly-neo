@@ -1,6 +1,5 @@
 {
   "card": {
-    "top-rated": "Top Rated",
     "assets": "Assets",
     "investors": "Investors"
   },
@@ -21,6 +20,12 @@
     "n-months-pnl-mobile": "{{count}}M P&L",
     "n-months-pnl_one": "{{count}} month PNL",
     "n-months-pnl_other": "{{count}} months PNL",
+    "n-years-pnl-mobile": "{{count}}Y P&L",
+    "n-years-pnl_one": "{{count}} year PNL",
+    "n-years-pnl_other": "{{count}} years PNL",
+    "n-weeks-pnl-mobile": "{{count}}W P&L",
+    "n-weeks-pnl_one": "{{count}} week PNL",
+    "n-weeks-pnl_other": "{{count}} week PNL",
     "n-months_one": "{{count}} month",
     "n-months_other": "{{count}} months",
     "view-profile": "View profile",

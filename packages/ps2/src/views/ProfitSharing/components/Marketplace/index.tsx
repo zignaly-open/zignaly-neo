@@ -93,21 +93,26 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
   useEffect(() => () => setActiveRow(null), []);
 
   const createPnLColumn = useCallback(
-    (months: number, showChart: boolean) => {
-      const days = months * 30;
+    (days: number, showChart: boolean) => {
+      const period = days >= 365 ? 'year' : days >= 30 ? 'month' : 'week';
+      const count =
+        days >= 365 ? days / 365 : days >= 30 ? days / 30 : days / 7;
       const id = `pnlPercent${days}t`;
       return columnHelper.accessor((row) => Number(row[id]), {
         id,
-        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
-          count: months,
-        }),
+        header: t(
+          md ? `table.n-${period}s-pnl` : `table.n-${period}s-pnl-mobile`,
+          {
+            count,
+          },
+        ),
         cell: (props) => (
           <>
             {showChart && (
               <ZigChartMiniSuspensed
                 id={`marketplace-table__pnl${days}t-${props.row.original.id}-chart`}
                 midLine
-                data={[0, ...(props.row.original.sparklines as number[])]}
+                data={[0, ...props.row.original.sparklines]}
               />
             )}
             <ChangeIndicator
@@ -207,9 +212,11 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      createPnLColumn(6, false),
-      createPnLColumn(3, false),
-      createPnLColumn(1, lg || (!isZScoreOn && md)),
+      createPnLColumn(365, false),
+      createPnLColumn(180, false),
+      createPnLColumn(90, false),
+      createPnLColumn(30, lg || (!isZScoreOn && md)),
+      createPnLColumn(7, false),
       ...(!lg && (sm || (!isZScoreOn && !md))
         ? [
             columnHelper.accessor((row) => +row.invested, {
@@ -339,6 +346,15 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           {t('invest-in-services-explainer')}
         </ZigTypography>
       </Box>
+      {isZScoreOn && lg && (
+        <TopServicesCards
+          prefixId={'marketplace'}
+          services={services
+            ?.slice()
+            .sort((a, b) => b.zscore - a.zscore)
+            .slice(0, 3)}
+        />
+      )}
       <MarketplaceFilters
         resultsCount={filteredServices?.length}
         filters={tablePersist.filters}
@@ -346,13 +362,6 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         onFiltersChange={tablePersist.filterTable}
         onSearchChange={setSearchFilter}
         searchFilter={searchFilter}
-      />
-      <TopServicesCards
-        prefixId={'marketplace'}
-        services={services
-          ?.slice()
-          .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
-          .slice(0, 3)}
       />
       {filteredServices && (
         <TableWrapper>

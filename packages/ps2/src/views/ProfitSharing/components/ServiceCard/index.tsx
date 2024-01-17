@@ -1,5 +1,10 @@
 import { Box } from '@mui/material';
-import { ChangeIndicator, ZigTypography } from '@zignaly-open/ui';
+import {
+  ChangeIndicator,
+  ZScore,
+  ZigRisk,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import AssetsInPool from 'components/AssetsInPool';
@@ -10,120 +15,82 @@ import MarketplaceAction from '../MarketplaceAction';
 import {
   ValueContainer,
   Card,
-  BottomPnLContainer,
   ButtonContainer,
-  AssetContainer,
-  ChartBox,
+  StyledServiceName,
 } from './styles';
 import { ServiceCardProps } from './types';
-import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
+import { useZModal } from 'components/ZModal/use';
+import ZScoreModal from 'views/TraderService/components/ZScoreModal';
+import ZigChartMiniSuspensed from 'components/ZigChartMiniSuspensed';
 
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation(['marketplace', 'service']);
 
   return (
     <Card>
-      <ChartBox>
-        <ZigChartMiniSuspensed
-          id={prefixId && `${prefixId}__chart-${service.id}`}
-          data={[0, ...service.sparklines]}
-          midLine={false}
-          height={104}
-          width={360}
-          gradientVariant='card'
-          chartProps={{
-            padding: 0,
-          }}
-        />
-        <BottomPnLContainer
-          display='flex'
-          justifyContent='flex-end'
-          alignItems='center'
-          gap={1}
-          flex={1}
-          negative={+service.pnlPercent30t < 0}
-        >
-          <ZigTypography fontSize='11px' color='neutral200'>
-            {t('service:periods.30d')}
-          </ZigTypography>
-          <ChangeIndicator
-            style={{
-              fontSize: '13px',
-            }}
-            value={service.pnlPercent30t}
-          />
-        </BottomPnLContainer>
-      </ChartBox>
-      <Box height={70}>
-        <ServiceName
-          prefixId={prefixId}
-          service={marketplaceServiceToInvestmentType(service) as Investment}
-          showCoin={false}
-        />
-      </Box>
+      <StyledServiceName
+        prefixId={prefixId}
+        service={marketplaceServiceToInvestmentType(service) as Investment}
+        showCoin={false}
+        zscore={service.zscore}
+        activeLink={false}
+      />
+
       <Box
         display='flex'
         flexDirection='row'
         justifyContent='space-between'
+        alignItems={'flex-end'}
         width={1}
-        mt={2.5}
-        mb={3}
+        mt={'30px'}
+        mb={'24px'}
         px={2}
       >
-        <Box display='flex' flexDirection='column' flex={1}>
-          <ValueContainer>
-            <ChangeIndicator
-              style={{
-                fontSize: '17px',
+        <ZigRisk value={service.zrisk} />
+        <Box display={'flex'} flexDirection={'column'}>
+          <ChangeIndicator
+            // decimalScale={md ? undefined : 0}
+            type={'default'}
+            id={`service-card__pnl365-${service.id}`}
+            style={{
+              fontSize: '18px',
+              lineHeight: '32px',
+            }}
+            value={service.pnlPercent365t}
+          />
+          <ZigTypography variant='h5' color={'neutral100'} mt='4px'>
+            APY
+          </ZigTypography>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'}>
+          <Box position={'relative'}>
+            <ZigChartMiniSuspensed
+              id={prefixId && `${prefixId}__card-chart-${service.id}`}
+              data={[0, ...service.sparklines]}
+              midLine={false}
+              height={32}
+              width={88}
+              gradientVariant='card'
+              chartProps={{
+                padding: 0,
               }}
-              value={service.pnlPercent90t}
+              sx={{ mb: '4px' }}
             />
-          </ValueContainer>
-          <ZigTypography
-            fontSize={11}
-            fontWeight={500}
-            color='neutral300'
-            lineHeight='11px'
-          >
-            {t('service:periods.90d')}
-          </ZigTypography>
-        </Box>
-        <Box display='flex' flexDirection='column' flex={1}>
-          <AssetContainer>
-            <AssetsInPool
-              prefixId={prefixId}
-              serviceId={service.id}
-              shorten
-              assetsValue={service.investedUSDT}
-            />
-          </AssetContainer>
-          <ZigTypography
-            fontSize={11}
-            fontWeight={500}
-            color='neutral300'
-            lineHeight='11px'
-          >
-            {t('card.assets')}
-          </ZigTypography>
-        </Box>
-        <Box display='flex' flexDirection='column' flex={1}>
-          <ValueContainer>
-            <ZigTypography
-              color='neutral200'
-              fontSize={17}
-              fontWeight={500}
-              id={prefixId && `${prefixId}__investors-${service.id}`}
-            >
-              {service.investors}
-            </ZigTypography>
-          </ValueContainer>
-          <ZigTypography
-            fontSize={11}
-            fontWeight={500}
-            color='neutral300'
-            lineHeight='11px'
-          >
-            {t('card.investors')}
+            <Box position={'absolute'} bottom={0} left={0} right={0}>
+              <ChangeIndicator
+                // decimalScale={md ? undefined : 0}
+                type={'default'}
+                id={`service-card__pnl90-${service.id}`}
+                style={{
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                }}
+                value={service.pnlPercent90t}
+              />
+            </Box>
+          </Box>
+          <ZigTypography variant='h5' color={'neutral100'}>
+            APY
           </ZigTypography>
         </Box>
       </Box>

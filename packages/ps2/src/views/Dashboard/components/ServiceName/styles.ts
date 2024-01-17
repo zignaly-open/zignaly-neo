@@ -7,6 +7,7 @@ export const Icon = styled('div')`
   margin-left: 5px;
   display: flex;
   align-items: center;
+  position: relative;
   @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     margin-right: 10px;
   }
