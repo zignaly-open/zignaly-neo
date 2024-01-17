@@ -2,7 +2,7 @@
 
 exports[`components/inputs/ZigButton renders ZigButton contained variant by default 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root css-z3a501-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-z3a501-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r4:"
   tabindex="0"
   type="button"
@@ -154,7 +154,7 @@ CSSStyleDeclaration {
 
 exports[`components/inputs/ZigButton renders ZigButton large size 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonBase-root css-172u00w-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-172u00w-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r2:"
   tabindex="0"
   type="button"
@@ -306,7 +306,7 @@ CSSStyleDeclaration {
 
 exports[`components/inputs/ZigButton renders ZigButton medium size 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root css-z3a501-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-z3a501-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r1:"
   tabindex="0"
   type="button"
@@ -458,7 +458,7 @@ CSSStyleDeclaration {
 
 exports[`components/inputs/ZigButton renders ZigButton outlined variant 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root css-uqq2v3-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-19wldtv-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r5:"
   tabindex="0"
   type="button"
@@ -604,7 +604,7 @@ CSSStyleDeclaration {
 
 exports[`components/inputs/ZigButton renders ZigButton small size 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButtonBase-root css-25ezg8-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall css-25ezg8-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r0:"
   tabindex="0"
   type="button"
@@ -755,7 +755,7 @@ CSSStyleDeclaration {
 
 exports[`components/inputs/ZigButton renders ZigButton text variant 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-oq91cm-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiLoadingButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-oq91cm-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r6:"
   tabindex="0"
   type="button"
@@ -897,7 +897,7 @@ CSSStyleDeclaration {
 
 exports[`components/inputs/ZigButton renders ZigButton xlarge size 1`] = `
 <button
-  class="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeXlarge MuiButton-containedSizeXlarge MuiButtonBase-root css-q0r81f-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeXlarge MuiButton-containedSizeXlarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeXlarge MuiButton-containedSizeXlarge css-q0r81f-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
   id=":r3:"
   tabindex="0"
   type="button"

@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 import React from "react";
 import { CheckBoxFilterProps } from "./type";
 import ZigTypography from "components/display/ZigTypography";
-import CheckBox from "components/inputs/CheckBox";
 import { CheckboxFilter } from "../../types";
+import ZigCheckBox from "../../../../inputs/ZigCheckBox";
 
 const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
   const { label, options, value, id } = filter;
@@ -36,11 +36,13 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
       )}
       {options.map((option, i) => (
         <Box py="6px" key={option.value}>
-          <CheckBox
+          <ZigCheckBox
+            variant={"outlined"}
+            sx={{ margin: "0 9px", padding: 0 }}
             id={`filter-checkbox-${id}__option-${i}`}
-            value={!value || value?.includes(option.value)}
+            checked={!value || value?.includes(option.value)}
             label={option.label}
-            onChange={(checked) => handleChange(option.value, checked)}
+            onChange={(checked) => handleChange(option.value, checked.target.checked)}
           />
         </Box>
       ))}

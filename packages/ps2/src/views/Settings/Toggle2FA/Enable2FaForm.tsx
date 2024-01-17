@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import {
   ZigButton,
   ZigCopyText,
@@ -133,34 +133,47 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
   }
 
   return (
-    <ZigModalForm>
-      <ZigTypography
-        color='neutral300'
-        textAlign={'center'}
-        id={'enable-two-fa_description'}
+    <>
+      <Box
+        sx={{
+          textAlign: 'center',
+        }}
       >
-        <Trans i18nKey='enable-2fa.description' t={t}>
-          <Link
-            href={HELP_CREATE_ENABLE_2FA_URL}
-            target='_blank'
-            rel='noopener'
-            underline={'none'}
-          />
-        </Trans>
-      </ZigTypography>
-
-      <ZigModalActions align='center'>
-        <ZigButton
-          onClick={() => load2FAInfo()}
-          loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}
-          variant='contained'
-          size='xlarge'
-          id={'enable-two-fa__submit'}
+        <ZigTypography variant={'h1'} id={'two-fa__title'}>
+          {t('enable-2fa.title')}
+        </ZigTypography>
+      </Box>
+      <ZigModalForm>
+        <ZigTypography
+          color='neutral300'
+          textAlign={'center'}
+          id={'enable-two-fa_description'}
         >
-          {t('enable-2fa.setup-2fa')}
-        </ZigButton>
-      </ZigModalActions>
-    </ZigModalForm>
+          <Trans i18nKey='enable-2fa.description' t={t}>
+            <Link
+              href={HELP_CREATE_ENABLE_2FA_URL}
+              target='_blank'
+              rel='noopener'
+              underline={'none'}
+            />
+          </Trans>
+        </ZigTypography>
+
+        <ZigModalActions align='center'>
+          <ZigButton
+            onClick={() => load2FAInfo()}
+            loading={
+              load2FAInfoResult.isLoading || load2FAInfoResult.isFetching
+            }
+            variant='contained'
+            size='xlarge'
+            id={'enable-two-fa__submit'}
+          >
+            {t('enable-2fa.setup-2fa')}
+          </ZigButton>
+        </ZigModalActions>
+      </ZigModalForm>
+    </>
   );
 };
 
