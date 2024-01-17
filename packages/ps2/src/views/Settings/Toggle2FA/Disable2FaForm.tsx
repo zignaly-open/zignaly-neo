@@ -61,7 +61,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           textAlign: 'center',
         }}
       >
-        <ShieldIcon />
+        <ShieldIcon id={'two-fa__shield-icon'} />
         <ZigTypography variant={'h1'} id={'two-fa__title'} sx={{ mt: 3 }}>
           {t('disable-2fa.congrats')}
         </ZigTypography>
