@@ -34,7 +34,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         service={marketplaceServiceToInvestmentType(service) as Investment}
         showCoin={false}
         zscore={service.zscore}
-        activeLink={false}
+        activeLink
       />
 
       <Box
