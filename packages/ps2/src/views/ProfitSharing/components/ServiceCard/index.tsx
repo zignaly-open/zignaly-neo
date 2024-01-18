@@ -3,7 +3,6 @@ import {
   ChangeIndicator,
   ZigCalendar3MIcon,
   ZigRisk,
-  ZigStockTypography,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
@@ -127,7 +126,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         </Box>
       </Box>
       <ButtonContainer>
-        <MarketplaceAction service={service} prefixId={prefixId} />
+        <MarketplaceAction service={service} prefixId={prefixId} showRocket />
       </ButtonContainer>
     </Card>
   );
