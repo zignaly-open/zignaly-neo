@@ -80,7 +80,7 @@ export const ServiceName = ({
           flexDirection: 'column',
           display: 'flex',
           alignItems: 'flex-start',
-          cursor: activeLink && zscore ? 'pointer' : 'auto',
+          cursor: activeLink && zscore ? 'pointer' : 'inherit',
         }}
         {...(zscore !== undefined && linkProps)}
       >
