@@ -1,13 +1,13 @@
 import React from 'react';
 import { createGlobalStyle, css } from 'styled-components';
-import { getGlobalAppStyle } from '@zignaly-open/ui';
+import { ZigTypography, getGlobalAppStyle } from '@zignaly-open/ui';
 // TODO: fix this, smth weird with type defs not loading
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { isWebpSupported } from 'react-image-webp/dist/utils';
 import { whitelabel } from './whitelabel';
 import { GlobalStyles } from '@mui/system';
-import { useTheme } from '@mui/material';
+import { styled, useTheme } from '@mui/material';
 import GoogleFontLoader from 'react-google-font-loader';
 
 const GlobalAppStyle = getGlobalAppStyle({

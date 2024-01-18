@@ -1,5 +1,11 @@
 import { Box, Tooltip } from '@mui/material';
-import { ChangeIndicator, ZigRisk, ZigTypography } from '@zignaly-open/ui';
+import {
+  ChangeIndicator,
+  ZigCalendar3MIcon,
+  ZigRisk,
+  ZigStockTypography,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import React from 'react';
@@ -15,6 +21,7 @@ import { ServiceCardProps } from './types';
 import ZigChartMiniSuspensed from 'components/ZigChartMiniSuspensed';
 import { InfoOutlined } from '@mui/icons-material';
 import { differenceInDays } from 'date-fns';
+import { ZigCalendar1YIcon } from '@zignaly-open/ui';
 
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation('marketplace');
@@ -54,21 +61,30 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               over1Year ? service.pnlPercent365t : +service.pnlPercent90t * 4
             }
           />
-          <ZigTypography
-            variant='h5'
-            color={'neutral100'}
+          <Box
             display={'flex'}
-            justifyContent={'center'}
             alignItems={'center'}
-            gap={'3px'}
+            justifyContent={'center'}
+            gap={1}
           >
-            {t('card.apy')}
-            {!over1Year && (
-              <Tooltip title={t('card.apy-calculated-tooltip')}>
-                <InfoOutlined color='neutral300' sx={{ fontSize: '10px' }} />
-              </Tooltip>
-            )}
-          </ZigTypography>
+            <ZigCalendar1YIcon fontSize='19px' />
+            <ZigTypography
+              variant='h5'
+              color={'neutral100'}
+              display={'flex'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              gap={'3px'}
+              mt='2px'
+            >
+              {t('card.apy')}
+              {!over1Year && (
+                <Tooltip title={t('card.apy-calculated-tooltip')}>
+                  <InfoOutlined color='neutral300' sx={{ fontSize: '10px' }} />
+                </Tooltip>
+              )}
+            </ZigTypography>
+          </Box>
         </Box>
         <Box display={'flex'} flexDirection={'column'}>
           <Box position={'relative'}>
@@ -97,9 +113,17 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               />
             </ChangeIndicatorContainer>
           </Box>
-          <ZigTypography variant='h5' color={'neutral100'}>
-            {t('table.n-months-pnl-mobile', { count: 3 })}
-          </ZigTypography>
+          <Box
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'center'}
+            gap={1}
+          >
+            <ZigCalendar3MIcon fontSize='19px' />
+            <ZigTypography variant='h5' color={'neutral100'} mt='2px'>
+              {t('card.pnl')}
+            </ZigTypography>
+          </Box>
         </Box>
       </Box>
       <ButtonContainer>
