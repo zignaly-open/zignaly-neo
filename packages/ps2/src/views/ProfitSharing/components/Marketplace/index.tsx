@@ -116,11 +116,11 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
               />
             )}
             <ChangeIndicator
-              decimalScale={md ? undefined : 0}
-              type={'default'}
+              decimalScale={md ? 1 : 0}
               id={`marketplace-table__pnl${days}t-${props.row.original.id}`}
               style={showChart ? null : sx.changeIndicator}
               value={props.getValue()}
+              type={showChart ? 'graph' : 'default'}
             />
           </>
         ),

@@ -80,7 +80,6 @@ const dark: ThemeStyledComponents = {
     ],
     redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
   },
-<<<<<<< Updated upstream
   zscore: {
     ring: {
       profits: {
@@ -109,8 +108,6 @@ const dark: ThemeStyledComponents = {
       balanced: "linear-gradient(to right, #10341d, #46995c 42%, #76dd88 76%, #88c489)",
     },
   },
-=======
->>>>>>> Stashed changes
 };
 
 export default dark;

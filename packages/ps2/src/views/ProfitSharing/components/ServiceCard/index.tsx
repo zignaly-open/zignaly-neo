@@ -22,10 +22,10 @@ import { ServiceCardProps } from './types';
 import { useZModal } from 'components/ZModal/use';
 import ZScoreModal from 'views/TraderService/components/ZScoreModal';
 import ZigChartMiniSuspensed from 'components/ZigChartMiniSuspensed';
+import { NumericFormat } from 'react-number-format';
 
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation(['marketplace', 'service']);
-
   return (
     <Card>
       <StyledServiceName
@@ -44,16 +44,15 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         width={1}
         mt={'30px'}
         mb={'24px'}
-        px={2}
       >
         <ZigRisk value={service.zrisk} />
         <Box display={'flex'} flexDirection={'column'}>
           <ChangeIndicator
-            // decimalScale={md ? undefined : 0}
+            decimalScale={1}
             type={'default'}
             id={`service-card__pnl365-${service.id}`}
             style={{
-              fontSize: '18px',
+              fontSize: '24px',
               lineHeight: '32px',
             }}
             value={service.pnlPercent365t}
@@ -74,11 +73,11 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               chartProps={{
                 padding: 0,
               }}
-              sx={{ mb: '4px' }}
+              sx={{ mb: '4px', opacity: 0.5 }}
             />
             <Box position={'absolute'} bottom={0} left={0} right={0}>
               <ChangeIndicator
-                // decimalScale={md ? undefined : 0}
+                decimalScale={1}
                 type={'default'}
                 id={`service-card__pnl90-${service.id}`}
                 style={{

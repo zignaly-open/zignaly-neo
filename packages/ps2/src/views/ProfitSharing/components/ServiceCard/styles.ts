@@ -12,6 +12,9 @@ export const StyledServiceName = styled(ServiceName)`
     width: 75px;
     height: 75px;
   }
+  .MuiTypography-body1 {
+    font-size: 18px;
+  }
 `;
 
 export const Card = styled(Box)`
