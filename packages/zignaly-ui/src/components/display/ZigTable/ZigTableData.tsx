@@ -243,7 +243,7 @@ function ZigTableData<T extends object>({
           </tbody>
         </Table>
       </TableContainer>
-      {!data.length && !loading && (
+      {!table?.getRowModel()?.rows?.length && !loading && (
         <ZigTypography
           variant="body1"
           textAlign="center"
