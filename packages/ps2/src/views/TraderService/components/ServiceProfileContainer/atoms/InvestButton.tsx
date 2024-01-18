@@ -6,7 +6,7 @@ import {
   useCurrentBalance,
   useInvestedAccountsCount,
 } from '../../../../../apis/investment/use';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigRocketIcon, ZigTypography } from '@zignaly-open/ui';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
@@ -17,7 +17,14 @@ const InvestButton: React.FC<{
   service: Service;
   modalRoute?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ prefixId, modalRoute, service, showMultipleAccountButton }) => {
+  showRocket?: boolean;
+}> = ({
+  prefixId,
+  modalRoute,
+  service,
+  showMultipleAccountButton,
+  showRocket,
+}) => {
   const { t } = useTranslation([
     'service',
     // we need these two otherwise a Suspense will trigger when we load the other ns
@@ -53,10 +60,16 @@ const InvestButton: React.FC<{
         variant='contained'
         size={'large'}
         disabled={maxReached}
-        sx={{ flexDirection: 'column', minWidth: 165, padding: '6px 26px' }}
+        sx={{
+          flexDirection: 'row',
+          gap: '5px',
+          minWidth: 165,
+          padding: '6px 26px',
+        }}
         tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
+        endIcon={showRocket && <ZigRocketIcon width={'34px'} height={'34px'} />}
       >
-        <>
+        <div>
           <ZigTypography
             variant='body2'
             color='neutral000'
@@ -82,7 +95,7 @@ const InvestButton: React.FC<{
               })}
             </ZigTypography>
           )}
-        </>
+        </div>
       </ZigButton>
 
       {showOtherAccounts && (

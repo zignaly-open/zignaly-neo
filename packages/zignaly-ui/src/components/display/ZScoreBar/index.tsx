@@ -4,11 +4,11 @@ import { ZScoreBarProps } from "./types";
 import { BarThumb, StyledLinearProgress, TypographyPct } from "./styles";
 import ZigTypography from "../ZigTypography";
 
-const ZScoreBar = ({ value, max = 100, ...props }: ZScoreBarProps) => {
+const ZScoreBar = ({ value, max = 100, id, ...props }: ZScoreBarProps) => {
   const pct = Math.min((value / max) * 100, 100);
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
+    <Box sx={{ display: "flex", alignItems: "center" }} id={id}>
       <Box sx={{ flex: 1, mr: "13px", position: "relative" }}>
         <BarThumb value={pct} />
         <StyledLinearProgress variant="determinate" value={pct} {...props} />

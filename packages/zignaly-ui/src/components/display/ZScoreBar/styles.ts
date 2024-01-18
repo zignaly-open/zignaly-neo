@@ -41,6 +41,7 @@ export const StyledLinearProgress = styled(LinearProgress)<{ value: number; cate
     content: none;
   }
   .MuiLinearProgress-bar {
+    width: auto;
     background-image: none;
     inset: 0px;
   }

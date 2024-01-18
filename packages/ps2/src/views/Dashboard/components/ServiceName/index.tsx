@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, TruncatedServiceName } from './styles';
 import { ServiceNameProps } from './types';
-import { Avatar, ZigTypography } from '@zignaly-open/ui';
+import { Avatar, ZScore, ZigTypography } from '@zignaly-open/ui';
 import Box from '@mui/system/Box/Box';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { generatePath, Link } from 'react-router-dom';
@@ -9,6 +9,8 @@ import { getServiceLogo } from '../../../../util/images';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@mui/material';
 import { StyledVerifiedIcon } from './styles';
+import ZScoreModal from 'views/TraderService/components/ZScoreModal';
+import { useZModal } from 'components/ZModal/use';
 
 export const ServiceName = ({
   prefixId,
@@ -18,6 +20,8 @@ export const ServiceName = ({
   showOwner = true,
   truncateServiceName = false,
   activeLink = true,
+  className = '',
+  zscore,
 }: ServiceNameProps) => {
   const { t } = useTranslation('table');
   const linkProps = activeLink
@@ -28,12 +32,13 @@ export const ServiceName = ({
         }),
       }
     : {};
+  const { showModal } = useZModal();
 
   return (
     <Box
       id={prefixId && `${prefixId}__service-${service.serviceId}`}
       sx={{
-        cursor: 'pointer',
+        cursor: activeLink ? 'pointer' : 'auto',
         alignItems: 'center',
         flexDirection: 'row',
         display: 'flex',
@@ -41,6 +46,7 @@ export const ServiceName = ({
         width: size === 'x-large' ? 300 : size === 'large' ? 200 : 130,
         paddingRight: truncateServiceName && '5px',
       }}
+      className={className}
       {...linkProps}
     >
       <Icon>
@@ -49,6 +55,25 @@ export const ServiceName = ({
           image={getServiceLogo(service.serviceLogo)}
           id={prefixId && `${prefixId}__logo-${service.serviceId}`}
         />
+        {zscore !== undefined && (
+          <ZScore
+            id={prefixId && `${prefixId}__zscore-${service.serviceId}`}
+            value={zscore}
+            onClick={() =>
+              showModal(ZScoreModal, {
+                serviceId: service.serviceId,
+              })
+            }
+            sx={{
+              position: 'absolute',
+              left: 0,
+              bottom: 0,
+              right: 0,
+              zIndex: 1,
+              transform: 'translateY(50%)',
+            }}
+          />
+        )}
       </Icon>
       <Box
         sx={{

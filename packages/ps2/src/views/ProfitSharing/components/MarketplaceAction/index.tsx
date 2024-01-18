@@ -78,6 +78,7 @@ const MarketplaceAction = ({
   service,
   prefixId = 'marketplace-table',
   fullSize = true,
+  showRocket = false,
 }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
@@ -118,7 +119,11 @@ const MarketplaceAction = ({
                   />
                 )
               ) : (
-                <InvestButton prefixId={prefixId} service={traderService} />
+                <InvestButton
+                  prefixId={prefixId}
+                  service={traderService}
+                  showRocket={showRocket}
+                />
               )}
             </>
           </Suspense>

@@ -4,4 +4,5 @@ export type MarketplaceActionType = {
   service: MarketplaceService;
   prefixId?: string;
   fullSize?: boolean;
+  showRocket?: boolean;
 };

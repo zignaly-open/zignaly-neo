@@ -53,14 +53,27 @@ export const Subtitle = muiStyled(ZigTypography)`
 export const Indicator = styled(CaretTriangleIcon)<{ isPositive: boolean }>`
   margin-right: 6px;
   vertical-align: middle;
+  margin-left: 6px;
+  width: 8px;
+  height: 8px;
 
   ${({ isPositive }) => `
     transform: ${isPositive ? "rotateX(0deg)" : "rotateX(180deg)"};
   `}
+`;
 
-  &.graph {
-    margin-left: 6px;
-    width: 8px;
-    height: 8px;
+export const ValueIndicator = styled(ZigTypography)<{
+  smallPct: boolean;
+}>`
+  display: inline;
+  font-size: 15px !important;
+  line-height: 24px !important;
+  font-weight: 500;
+
+  span::after {
+    content: "${({ smallPct }) => (smallPct ? "%" : "")}";
+    font-size: 70%;
+    transform: translateY(-13%);
+    display: inline-block;
   }
 `;
