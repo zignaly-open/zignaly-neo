@@ -1,7 +1,7 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import { linearProgressClasses } from "@mui/material";
 import { ThemeExport, ThemeStyledComponents, ThemeStyledComponentsOverrides } from "./types";
 import { DeepPartial } from "react-hook-form";
+import { linearProgressClasses } from "@mui/material";
 
 const {
   palette: { augmentColor },
@@ -12,6 +12,7 @@ const createMuiTheme = ({
   palette,
   mode,
   chart,
+  zscore,
   backgrounds,
   boxShadows,
   fontFamily,
@@ -38,6 +39,7 @@ const createMuiTheme = ({
       backgrounds,
       boxShadows,
       chart,
+      zscore,
     },
     typography: {
       fontFamily: fontFamily.join(","),

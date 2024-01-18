@@ -58,6 +58,10 @@ export type {
 export { default as ZScore } from "./components/display/ZScore";
 export { default as ZigRisk } from "./components/display/ZigRisk";
 export * from "./components/display/ZigRisk";
+export { default as ZScoreRing } from "./components/display/ZScoreRing";
+export * from "./components/display/ZScoreRing";
+export { default as ZScoreBar } from "./components/display/ZScoreBar";
+export * from "./components/display/ZScoreBar";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";
@@ -72,8 +76,7 @@ export { default as CoinLabel } from "./components/display/ZigTable/components/C
 // Chart
 export * from "./components/display/ZigChart";
 
-// TODO: @Nikita9901 pls replace with mui and add stories
-export { default as CheckBox } from "./components/inputs/CheckBox";
+export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Icons
 export * from "./icons";
