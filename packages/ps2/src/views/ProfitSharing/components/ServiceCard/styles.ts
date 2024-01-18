@@ -1,7 +1,6 @@
-import { Box, css } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { ServiceName } from 'views/Dashboard/components/ServiceName';
-import InvestButton from 'views/TraderService/components/ServiceProfileContainer/atoms/InvestButton';
 
 export const StyledServiceName = styled(ServiceName)`
   &:nth-child(1) {

@@ -4,7 +4,7 @@ import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SERVICES_COINS } from './contants';
-import { getMonthsFromColumnId, getPeriodCountFromDays } from './util';
+import { getPeriodCountFromDays } from './util';
 import { useRisks, useFilteredCollection } from '@zignaly-open/ui';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';

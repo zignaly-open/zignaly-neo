@@ -1,7 +1,5 @@
-import { Box, Collapse, Grid } from '@mui/material';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Grid } from '@mui/material';
+import React from 'react';
 import ServiceCard from '../ServiceCard';
 import { TopServicesCardsProps } from './types';
 

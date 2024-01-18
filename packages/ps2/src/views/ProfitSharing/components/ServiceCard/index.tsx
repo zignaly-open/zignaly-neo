@@ -1,32 +1,26 @@
-import { Box } from '@mui/material';
-import {
-  ChangeIndicator,
-  ZScore,
-  ZigRisk,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { Box, Tooltip } from '@mui/material';
+import { ChangeIndicator, ZigRisk, ZigTypography } from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
-import AssetsInPool from 'components/AssetsInPool';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ServiceName } from 'views/Dashboard/components/ServiceName';
 import MarketplaceAction from '../MarketplaceAction';
 import {
-  ValueContainer,
   Card,
   ButtonContainer,
   StyledServiceName,
   ChangeIndicatorContainer,
 } from './styles';
 import { ServiceCardProps } from './types';
-import { useZModal } from 'components/ZModal/use';
-import ZScoreModal from 'views/TraderService/components/ZScoreModal';
 import ZigChartMiniSuspensed from 'components/ZigChartMiniSuspensed';
-import { NumericFormat } from 'react-number-format';
+import { InfoOutlined } from '@mui/icons-material';
+import { differenceInDays } from 'date-fns';
 
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
-  const { t } = useTranslation(['marketplace', 'service']);
+  const { t } = useTranslation('marketplace');
+  const over1Year =
+    differenceInDays(new Date(), new Date(service.createdAt)) >= 365;
+
   return (
     <Card>
       <StyledServiceName
@@ -56,10 +50,24 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               fontSize: '24px',
               lineHeight: '33px',
             }}
-            value={+service.pnlPercent90t * 4}
+            value={
+              over1Year ? service.pnlPercent365t : +service.pnlPercent90t * 4
+            }
           />
-          <ZigTypography variant='h5' color={'neutral100'}>
-            APY
+          <ZigTypography
+            variant='h5'
+            color={'neutral100'}
+            display={'flex'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            gap={'3px'}
+          >
+            {t('card.apy')}
+            {!over1Year && (
+              <Tooltip title={t('card.apy-calculated-tooltip')}>
+                <InfoOutlined color='neutral300' sx={{ fontSize: '10px' }} />
+              </Tooltip>
+            )}
           </ZigTypography>
         </Box>
         <Box display={'flex'} flexDirection={'column'}>
@@ -90,7 +98,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             </ChangeIndicatorContainer>
           </Box>
           <ZigTypography variant='h5' color={'neutral100'}>
-            3M PNL
+            {t('table.n-months-pnl-mobile', { count: 3 })}
           </ZigTypography>
         </Box>
       </Box>

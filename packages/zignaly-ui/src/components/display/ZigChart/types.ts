@@ -22,7 +22,7 @@ export type ChartEvent = {
 
 export type GradientVariant = "mini" | "full" | "card";
 
-export interface ChartMiniProps extends AdditionalProps {
+export type ChartMiniProps = AdditionalProps & {
   readonly data: AxisFormat[] | number[];
   precision?: number;
   midLine?: boolean | null;
@@ -30,8 +30,7 @@ export interface ChartMiniProps extends AdditionalProps {
   width?: number;
   gradientVariant?: GradientVariant;
   chartProps?: VictoryChartProps;
-  id?: string;
-}
+};
 
 export interface ChartLargeProps {
   readonly data: AxisFormat[] | number[];

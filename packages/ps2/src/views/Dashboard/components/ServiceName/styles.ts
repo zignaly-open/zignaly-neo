@@ -23,7 +23,9 @@ export const StyledVerifiedIcon = styled(VerifiedIcon)`
   display: inline-block;
 `;
 
-export const TruncatedServiceName = styled(ZigTypography)<{
+export const TruncatedServiceName = styled(ZigTypography, {
+  shouldForwardProp: (prop) => prop !== 'truncate',
+})<{
   truncate: boolean;
 }>`
   ${({ truncate }) =>

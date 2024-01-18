@@ -1,6 +1,7 @@
 {
   "card": {
-    "apy": "APY"
+    "apy": "APY",
+    "apy-calculated-tooltip": "Estimation calculated from the last 3 months of P&L."
   },
   "table-search-empty-message": "No services meet your specified criteria. Please consider refining your search or exploring different options",
   "invest-in-services": "Invest in Profit Sharing",
