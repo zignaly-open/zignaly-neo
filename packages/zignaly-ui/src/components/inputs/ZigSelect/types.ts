@@ -26,6 +26,5 @@ export type ZigSelectProps<T> = Omit<
   disabled?: boolean;
   menuPlacement?: MenuPlacement;
   hoverBackground?: boolean;
-  canClear?: boolean;
   sx?: SxProps;
 };

@@ -32,7 +32,6 @@ const EditProfileForm = () => {
   const {
     handleSubmit,
     control,
-    watch,
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
@@ -68,8 +67,16 @@ const EditProfileForm = () => {
   );
 
   const countryOptions = useMemo(
-    () =>
-      Object.entries(Countries.getNames(i18n.language.split('_')[0])).map(
+    () => [
+      {
+        value: '',
+        label: (
+          <ZigTypography color={'neutral400'} sx={{ opacity: 0.5 }}>
+            {t('edit-profile.country')}
+          </ZigTypography>
+        ),
+      },
+      ...Object.entries(Countries.getNames(i18n.language.split('_')[0])).map(
         ([value, label]) => ({
           value,
           text: label,
@@ -81,6 +88,7 @@ const EditProfileForm = () => {
           ),
         }),
       ),
+    ],
     [i18n.language],
   );
   const [updateUser, updateUserStatus] = useUpdateUserMutation();
@@ -193,9 +201,6 @@ const EditProfileForm = () => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     filterOption={filterCountries}
-                    canClear
-                    // necessary because field.value resets to default value: user.country, not undefined
-                    value={watch('country')}
                     id={'edit-profile__country-select'}
                     label={
                       <>
