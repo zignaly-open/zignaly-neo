@@ -17,6 +17,7 @@ import {
   Card,
   ButtonContainer,
   StyledServiceName,
+  ChangeIndicatorContainer,
 } from './styles';
 import { ServiceCardProps } from './types';
 import { useZModal } from 'components/ZModal/use';
@@ -53,11 +54,11 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             id={`service-card__pnl365-${service.id}`}
             style={{
               fontSize: '24px',
-              lineHeight: '32px',
+              lineHeight: '33px',
             }}
-            value={service.pnlPercent365t}
+            value={+service.pnlPercent90t * 4}
           />
-          <ZigTypography variant='h5' color={'neutral100'} mt='4px'>
+          <ZigTypography variant='h5' color={'neutral100'}>
             APY
           </ZigTypography>
         </Box>
@@ -73,9 +74,9 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               chartProps={{
                 padding: 0,
               }}
-              sx={{ mb: '4px', opacity: 0.5 }}
+              sx={{ mb: '4px', opacity: 0.6 }}
             />
-            <Box position={'absolute'} bottom={0} left={0} right={0}>
+            <ChangeIndicatorContainer>
               <ChangeIndicator
                 decimalScale={1}
                 type={'default'}
@@ -86,10 +87,10 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
                 }}
                 value={service.pnlPercent90t}
               />
-            </Box>
+            </ChangeIndicatorContainer>
           </Box>
           <ZigTypography variant='h5' color={'neutral100'}>
-            APY
+            3M PNL
           </ZigTypography>
         </Box>
       </Box>

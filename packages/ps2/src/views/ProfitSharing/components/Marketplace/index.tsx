@@ -38,10 +38,11 @@ import {
 } from '../MarketplaceFilters/use';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
-import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
 import ZScoreModal from 'views/TraderService/components/ZScoreModal';
 import TopServicesCards from '../TopServicesCards';
+import { getPeriodCountFromDays } from '../MarketplaceFilters/util';
+import { usePeriodVisibility } from './use';
 
 const sx = {
   changeIndicator: {
@@ -67,37 +68,18 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
-  const returnsPeriod = tablePersist.filters.find((f) => f.id === 'pnlPeriod')
-    ?.value as string;
-  const isZScoreOn = isFeatureOn(Features.ZScore);
-
-  const defaultColumnVisibility = useMemo(
-    () => ({
-      pnlPercent180t: md || returnsPeriod === 'pnlPercent180t',
-      pnlPercent90t:
-        xl || (!isZScoreOn && lg) || (!md && returnsPeriod === 'pnlPercent90t'),
-      pnlPercent30t:
-        lg || !isZScoreOn || (!md && returnsPeriod === 'pnlPercent30t'),
-    }),
-    [md, lg, xl, returnsPeriod],
-  );
-  const [columnVisibility, setColumnVisibility] = useState(
-    defaultColumnVisibility,
-  );
-  useUpdateEffect(() => {
-    setColumnVisibility(defaultColumnVisibility);
-  }, [defaultColumnVisibility]);
-
+  const { columnVisibility, setColumnVisibility, returnsPeriod } =
+    usePeriodVisibility(tablePersist.filters);
   const { showModal } = useZModal();
+  const isZScoreOn = isFeatureOn(Features.ZScore);
 
   useEffect(() => () => setActiveRow(null), []);
 
   const createPnLColumn = useCallback(
     (days: number, showChart: boolean) => {
-      const period = days >= 365 ? 'year' : days >= 30 ? 'month' : 'week';
-      const count =
-        days >= 365 ? days / 365 : days >= 30 ? days / 30 : days / 7;
+      const { period, count } = getPeriodCountFromDays(days);
       const id = `pnlPercent${days}t`;
+
       return columnHelper.accessor((row) => Number(row[id]), {
         id,
         header: t(

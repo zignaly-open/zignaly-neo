@@ -41,3 +41,13 @@ export const ButtonContainer = styled(Box)`
     max-height: 66px;
   }
 `;
+
+export const ChangeIndicatorContainer = styled(Box)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .MuiTypography-root {
+    backdrop-filter: blur(1px);
+  }
+`;
