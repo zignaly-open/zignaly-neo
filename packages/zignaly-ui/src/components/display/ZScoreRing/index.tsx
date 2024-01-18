@@ -5,6 +5,7 @@ import { ZigScoreBalanceIcon, ZigScoreCoinsIcon, ZigScoreWalletIcon } from "icon
 import { AnimatedHandle, AnimatedRingCircle1, AnimatedRingSvg } from "./styles";
 import chroma from "chroma-js";
 import ZigTypography from "../ZigTypography";
+import { useRisk } from "../ZigRisk";
 
 const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
   const {
@@ -24,6 +25,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
     balanced: { text: "Balance", icon: ZigScoreBalanceIcon },
   };
   const categoryData = categoriesData[category];
+  const risk = useRisk(value);
 
   return (
     <Box width={"112px"} height={"112px"} position={"relative"} {...rest}>
@@ -40,7 +42,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
       >
         {categoryData.icon && (
           <Box display={"flex"} justifyContent={"center"} mb={"7px"}>
-            <categoryData.icon color={colors.icon} height={14} />
+            <categoryData.icon color={colors.icon} height={16} width={"auto"} />
           </Box>
         )}
         <ZigTypography variant="h4" color={colors.text}>
@@ -68,7 +70,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
         </Box>
         {!categoryData.icon && category === "risk" && (
           <ZigTypography color="#b9b147" variant={"h5"}>
-            Average Risk
+            {risk?.label}
           </ZigTypography>
         )}
       </Box>

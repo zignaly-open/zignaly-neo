@@ -19,7 +19,7 @@ import { differenceInDays } from 'date-fns';
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation('marketplace');
   const over1Year =
-    differenceInDays(new Date(), new Date(service.createdAt)) >= 365;
+    differenceInDays(new Date(), new Date(service.createdAt)) > 365;
 
   return (
     <Card>

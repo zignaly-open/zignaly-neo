@@ -42,27 +42,27 @@ export const useZScoreConfig = (): ZScoreConfig => {
       scoreCategoryId: 'riskManagement',
       items: [
         {
-          id: 'spotOnly',
-          label: t('risk.spot-only'),
-          valueId: 'isSpotOnly',
-          valueType: 'bool',
-        },
-        {
           id: 'drawdown',
           label: t('risk.max-drawdown'),
           valueId: 'maxDrawdownPct',
           valueType: 'pct',
         },
         {
-          id: 'paidClaims',
-          label: t('risk.paid-claims'),
-          valueId: 'daysAgoLastPaid',
-          valueType: 'duration-day',
+          id: 'spotOnly',
+          label: t('risk.spot-only'),
+          valueId: 'isSpotOnly',
+          valueType: 'bool',
         },
         {
           id: 'sharpe',
           label: t('risk.sharpe-ratio'),
           valueId: 'sharpeRatio',
+        },
+        {
+          id: 'paidClaims',
+          label: t('risk.paid-claims'),
+          valueId: 'daysAgoLastPaid',
+          valueType: 'duration-day',
         },
       ],
     },

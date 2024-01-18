@@ -59,7 +59,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       );
 
       return (
-        <Box display={'flex'} flexDirection={'column'}>
+        <Box display={'flex'} flexDirection={'column'} mt='3px'>
           {items.map((item, index) => (
             <div key={item.id}>
               <Box
@@ -98,7 +98,13 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
   );
 
   return (
-    <ZModal {...props} wide title={t('zscore')} isLoading={isLoading}>
+    <ZModal
+      {...props}
+      wide
+      title={t('z-score')}
+      isLoading={isLoading}
+      allowUnauth
+    >
       {data && (
         <>
           <ZigTypography textAlign='center'>{t('description')}</ZigTypography>
