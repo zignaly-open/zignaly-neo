@@ -337,47 +337,45 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             .slice(0, 3)}
         />
       )}
-      <MarketplaceFilters
-        resultsCount={filteredServices?.length}
-        filters={tablePersist.filters}
-        defaultFilters={defaultFilters}
-        onFiltersChange={tablePersist.filterTable}
-        onSearchChange={setSearchFilter}
-        searchFilter={searchFilter}
-      />
-      {filteredServices && (
-        <TableWrapper>
-          <ZigTable
-            onRowClick={
-              !md
-                ? (id: string) => {
-                    if (id !== activeRow) setActiveRow(id);
-                  }
-                : undefined
-            }
-            prefixId={TableId.Marketplace}
-            columns={columns}
-            data={filteredServices}
-            emptyMessage={t('table-search-empty-message')}
-            columnVisibility={md}
-            enableSortingRemoval={false}
-            initialState={{
-              sorting: [
-                {
-                  id: isZScoreOn ? 'zscore' : returnsPeriod,
-                  desc: true,
-                },
-              ],
-            }}
-            state={{
-              columnVisibility,
-            }}
-            sorting={tablePersist.sorting}
-            onSortingChange={tablePersist.sortTable}
-            onColumnVisibilityChange={setColumnVisibility}
-          />
-        </TableWrapper>
-      )}
+      <TableWrapper>
+        <MarketplaceFilters
+          resultsCount={filteredServices?.length}
+          filters={tablePersist.filters}
+          defaultFilters={defaultFilters}
+          onFiltersChange={tablePersist.filterTable}
+          onSearchChange={setSearchFilter}
+          searchFilter={searchFilter}
+        />
+        <ZigTable
+          onRowClick={
+            !md
+              ? (id: string) => {
+                  if (id !== activeRow) setActiveRow(id);
+                }
+              : undefined
+          }
+          prefixId={TableId.Marketplace}
+          columns={columns}
+          data={filteredServices}
+          emptyMessage={t('table-search-empty-message')}
+          columnVisibility={md}
+          enableSortingRemoval={false}
+          initialState={{
+            sorting: [
+              {
+                id: isZScoreOn ? 'zscore' : returnsPeriod,
+                desc: true,
+              },
+            ],
+          }}
+          state={{
+            columnVisibility,
+          }}
+          sorting={tablePersist.sorting}
+          onSortingChange={tablePersist.sortTable}
+          onColumnVisibilityChange={setColumnVisibility}
+        />
+      </TableWrapper>
     </>
   );
 };
