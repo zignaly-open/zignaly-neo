@@ -57,6 +57,7 @@ export const ServiceName = ({
         />
         {zscore !== undefined && (
           <ZScore
+            id={prefixId && `${prefixId}__zscore-${service.serviceId}`}
             value={zscore}
             onClick={() =>
               showModal(ZScoreModal, {
