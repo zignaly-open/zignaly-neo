@@ -82,7 +82,7 @@ export const InvestButtonContainer = styled(Box)`
   flex-direction: column;
   justify-content: center;
   @media (max-width: ${({ theme }) => theme.breakpoints.values.xl}px) {
-    padding: 15px 5px;
+    padding: 15px 8px;
   }
 `;
 

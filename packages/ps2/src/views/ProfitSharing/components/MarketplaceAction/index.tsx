@@ -101,12 +101,12 @@ const MarketplaceAction = ({
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
-        {isLoading ? (
-          loadingSpinner
-        ) : (
-          <Suspense fallback={loadingSpinner}>
-            <Box display='flex' gap='25px' alignItems={'center'}>
+      {isLoading ? (
+        loadingSpinner
+      ) : (
+        <Suspense fallback={loadingSpinner}>
+          <Box display='flex' gap='25px' alignItems={'center'}>
+            <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
               {isAuthenticated && investedAmount ? (
                 fullSizeInvested ? (
                   <InvestedButtonBase
@@ -129,33 +129,33 @@ const MarketplaceAction = ({
                   fullSize={fullSizeInvest}
                 />
               )}
-              {showArrow && (
-                <Box
-                  component={Link}
-                  to={generatePath(ROUTE_TRADING_SERVICE, {
-                    serviceId: service.id,
-                  })}
-                  sx={{
-                    alignItems: 'flex-start',
-                    display: 'flex',
-                    width: '10px',
-                    mb: isAuthenticated && investedAmount ? 0 : '28px',
-                  }}
-                  id={`marketplace-table__link-${service.id}`}
-                >
-                  <ArrowForwardIosIcon
-                    sx={{
-                      color: 'links',
-                      width: '20px',
-                      height: '20px',
-                    }}
-                  />
-                </Box>
-              )}
             </Box>
-          </Suspense>
-        )}
-      </Box>
+            {showArrow && (
+              <Box
+                component={Link}
+                to={generatePath(ROUTE_TRADING_SERVICE, {
+                  serviceId: service.id,
+                })}
+                sx={{
+                  alignItems: 'flex-start',
+                  display: 'flex',
+                  width: '10px',
+                  mb: isAuthenticated && investedAmount ? 0 : '28px',
+                }}
+                id={`marketplace-table__link-${service.id}`}
+              >
+                <ArrowForwardIosIcon
+                  sx={{
+                    color: 'links',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                />
+              </Box>
+            )}
+          </Box>
+        </Suspense>
+      )}
     </Box>
   );
 };

@@ -36,7 +36,7 @@ export const Card = styled(Box)`
 `;
 
 export const ButtonContainer = styled(Box)`
-  > div > div > div {
+  > div > div > div > div {
     max-height: 66px;
   }
 `;
