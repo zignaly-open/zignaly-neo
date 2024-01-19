@@ -17,11 +17,12 @@ import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
 import { CenteredLoader, ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { Link, generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useTranslation } from 'react-i18next';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
 import { ZigTableMobileActionRow } from '../../../../components/ZigTableMobileActionRow';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const loadingSpinner = (
   <LoaderWrapper>
@@ -79,6 +80,7 @@ const MarketplaceAction = ({
   prefixId = 'marketplace-table',
   fullSizeInvested = true,
   showRocket = false,
+  showArrow = false,
   fullSizeInvest = true,
 }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
@@ -104,7 +106,7 @@ const MarketplaceAction = ({
           loadingSpinner
         ) : (
           <Suspense fallback={loadingSpinner}>
-            <>
+            <Box display='flex' gap='25px' alignItems={'center'}>
               {isAuthenticated && investedAmount ? (
                 fullSizeInvested ? (
                   <InvestedButtonBase
@@ -127,7 +129,30 @@ const MarketplaceAction = ({
                   fullSize={fullSizeInvest}
                 />
               )}
-            </>
+              {showArrow && (
+                <Box
+                  component={Link}
+                  to={generatePath(ROUTE_TRADING_SERVICE, {
+                    serviceId: service.id,
+                  })}
+                  sx={{
+                    alignItems: 'flex-start',
+                    display: 'flex',
+                    width: '10px',
+                    mb: isAuthenticated && investedAmount ? 0 : '28px',
+                  }}
+                  id={`marketplace-table__link-${service.id}`}
+                >
+                  <ArrowForwardIosIcon
+                    sx={{
+                      color: 'links',
+                      width: '20px',
+                      height: '20px',
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
           </Suspense>
         )}
       </Box>

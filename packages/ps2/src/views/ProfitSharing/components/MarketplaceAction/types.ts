@@ -6,4 +6,5 @@ export type MarketplaceActionType = {
   fullSizeInvest?: boolean;
   fullSizeInvested?: boolean;
   showRocket?: boolean;
+  showArrow?: boolean;
 };

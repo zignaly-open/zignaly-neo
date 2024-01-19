@@ -69,7 +69,7 @@ export const Separator = styled('span')`
   height: 15px;
 `;
 
-export const InvestButtonContainer = styled('div')`
+export const InvestButtonContainer = styled(Box)`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
   align-items: center;
