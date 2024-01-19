@@ -26,9 +26,6 @@ import MarketplaceAction, {
 } from '../MarketplaceAction';
 import { TableWrapper } from './styles';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
-import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_TRADING_SERVICE } from '../../../../routes';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
 import { usePersistTable } from 'apis/settings/use';
 import MarketplaceFilters from '../MarketplaceFilters';
@@ -264,39 +261,11 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
         id: 'action',
         cell: ({ row }) =>
           md ? (
-            <Box display={'flex'} gap='25px'>
-              <Box display={'flex'} flex={1} justifyContent={'center'}>
-                <MarketplaceAction
-                  service={row.original}
-                  fullSizeInvest={false}
-                />
-              </Box>
-              {lg && (
-                <Box
-                  component={Link}
-                  to={generatePath(ROUTE_TRADING_SERVICE, {
-                    serviceId: row.original?.id?.toString(),
-                  })}
-                  sx={{
-                    cursor: 'pointer',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    display: 'flex',
-                    textAlign: 'start',
-                    width: '10px',
-                  }}
-                  id={`marketplace-table__link-${row.original.id}`}
-                >
-                  <ArrowForwardIosIcon
-                    sx={{
-                      color: theme.palette.links,
-                      width: '20px',
-                      height: '20px',
-                    }}
-                  />
-                </Box>
-              )}
-            </Box>
+            <MarketplaceAction
+              service={row.original}
+              fullSizeInvest={false}
+              showArrow={lg}
+            />
           ) : (
             <MobileMarketplaceAction service={row.original} rowId={row.id} />
           ),

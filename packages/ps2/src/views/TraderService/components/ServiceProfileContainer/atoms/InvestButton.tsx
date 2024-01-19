@@ -103,12 +103,12 @@ const InvestButton: React.FC<{
           variant={'caption'}
           component='p'
           color='neutral300'
-          fontWeight={500}
+          fontWeight={400}
           mt='12px'
         >
           {maxReached
             ? t('invest-button.max-reached')
-            : t('invest-button.x-success-fee', {
+            : t('invest-button.success-fee', {
                 fee: service.successFee,
               })}
         </ZigTypography>
