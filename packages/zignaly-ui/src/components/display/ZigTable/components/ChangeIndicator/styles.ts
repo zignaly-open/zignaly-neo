@@ -1,19 +1,18 @@
-import styled from "styled-components";
 import { ReactComponent as CaretTriangleIcon } from "assets/icons/caret-triangle-icon.svg";
-import muiStyled from "@emotion/styled";
 import ZigTypography from "../../../ZigTypography";
+import { styled } from "@mui/material";
 
-export const Layout = styled.div`
+export const Layout = styled("div")`
   display: grid;
   grid-row: auto;
   justify-content: center;
 `;
 
-export const Container = styled.div`
+export const Container = styled("div")`
   text-align: center;
 `;
 
-export const TropyContainer = styled.div`
+export const TropyContainer = styled("div")`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +20,7 @@ export const TropyContainer = styled.div`
   margin-left: 5px;
 `;
 
-export const Value = muiStyled(ZigTypography)<{ isPositive: boolean }>`
+export const Value = styled(ZigTypography)<{ isPositive: boolean }>`
   display: inline;
   ${(props) => `
     font-size: 12px;
@@ -32,21 +31,21 @@ export const Value = muiStyled(ZigTypography)<{ isPositive: boolean }>`
   `}
 `;
 
-export const Row = styled.div`
+export const Row = styled("div")`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-export const Inline = styled.div`
+export const Inline = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
-export const Subtitle = muiStyled(ZigTypography)`
+export const Subtitle = styled(ZigTypography)`
   display: block;
 `;
 
@@ -62,7 +61,9 @@ export const Indicator = styled(CaretTriangleIcon)<{ isPositive: boolean }>`
   `}
 `;
 
-export const ValueIndicator = styled(ZigTypography)<{
+export const ValueIndicator = styled(ZigTypography, {
+  shouldForwardProp: (p) => p !== "smallPct",
+})<{
   smallPct: boolean;
 }>`
   display: inline;
