@@ -11,7 +11,7 @@ jobs:
     name: PS2 WL Server Deploy
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    environment: ${{ inputs.deploy-env }}
+    environment: wl-staging
     env:
       HAS_CLOUDFLARE: ${{ secrets.CF_ZONE != '' }}
     steps:
