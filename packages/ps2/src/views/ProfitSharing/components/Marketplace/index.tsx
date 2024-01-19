@@ -262,25 +262,20 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       columnHelper.display({
         header: '',
         id: 'action',
-        cell: (props) =>
+        cell: ({ row }) =>
           md ? (
-            <MarketplaceAction service={props.row.original} />
-          ) : (
-            <MobileMarketplaceAction
-              service={props.row.original}
-              rowId={props.row.id}
-            />
-          ),
-      }),
-      ...(lg
-        ? [
-            columnHelper.display({
-              id: 'link',
-              cell: ({ row }) => (
+            <Box display={'flex'} gap='25px'>
+              <Box display={'flex'} flex={1} justifyContent={'center'}>
+                <MarketplaceAction
+                  service={row.original}
+                  fullSizeInvest={false}
+                />
+              </Box>
+              {lg && (
                 <Box
                   component={Link}
                   to={generatePath(ROUTE_TRADING_SERVICE, {
-                    serviceId: row?.original?.id?.toString(),
+                    serviceId: row.original?.id?.toString(),
                   })}
                   sx={{
                     cursor: 'pointer',
@@ -300,10 +295,12 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                     }}
                   />
                 </Box>
-              ),
-            }),
-          ]
-        : []),
+              )}
+            </Box>
+          ) : (
+            <MobileMarketplaceAction service={row.original} rowId={row.id} />
+          ),
+      }),
     ],
     [t, sm, md, lg, xl],
   );

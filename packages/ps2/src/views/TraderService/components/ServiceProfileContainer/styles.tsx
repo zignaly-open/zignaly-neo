@@ -72,7 +72,6 @@ export const Separator = styled('span')`
 export const InvestButtonContainer = styled('div')`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
-  min-width: 170px;
   align-items: center;
   padding: 15px 25px;
   position: relative;
