@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ZScoreConfig } from './types';
 
-export const useZScoreConfig = (benchmark: string): ZScoreConfig => {
+export const useZScoreConfig = (): ZScoreConfig => {
   const { t } = useTranslation('z-score');
 
   return {
@@ -27,7 +27,6 @@ export const useZScoreConfig = (benchmark: string): ZScoreConfig => {
           label: t('profits.beats-market'),
           valueId: 'beatsMarket',
           valueType: 'bool',
-          tooltip: t('profits.beats-market-tooltip', { benchmark }),
         },
         {
           id: 'sortino',
