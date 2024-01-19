@@ -7,6 +7,7 @@ import intercomPlugin from '@analytics/intercom';
 import { getUnixTime } from 'date-fns';
 import googleAnalytics from '@analytics/google-analytics';
 import { whitelabel } from '../whitelabel';
+import i18next from './i18n/i18next';
 
 let analytics: AnalyticsInstance | null = null;
 
@@ -52,6 +53,7 @@ export const trackNewSession = (
     analytics?.identify(userId, {
       email,
       name: firstName,
+      language: i18next.language,
       created_at: getUnixTime(new Date(createdAt)),
     });
     if (window.intercomSettings) {
