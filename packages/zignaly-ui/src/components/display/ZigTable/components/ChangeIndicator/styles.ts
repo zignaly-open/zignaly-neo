@@ -12,25 +12,6 @@ export const Container = styled("div")`
   text-align: center;
 `;
 
-export const TropyContainer = styled("div")`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 5px;
-`;
-
-export const Value = styled(ZigTypography)<{ isPositive: boolean }>`
-  display: inline;
-  ${(props) => `
-    font-size: 12px;
-    font-weight: 500;
-    color: ${
-      props.isPositive ? props.theme.palette.greenGraph : props.theme.palette.redGraphOrError
-    };
-  `}
-`;
-
 export const Row = styled("div")`
   display: flex;
   flex-direction: column;
