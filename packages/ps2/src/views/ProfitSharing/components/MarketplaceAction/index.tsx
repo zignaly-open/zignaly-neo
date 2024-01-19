@@ -43,7 +43,7 @@ export const MobileMarketplaceAction = ({
   return (
     rowId === activeRow && (
       <ZigTableMobileActionRow safariHeight={93}>
-        <MarketplaceAction service={service} fullSize={false} />
+        <MarketplaceAction service={service} fullSizeInvested={false} />
         <ZigButton
           size={'large'}
           variant={'outlined'}
@@ -77,8 +77,9 @@ export const MobileMarketplaceAction = ({
 const MarketplaceAction = ({
   service,
   prefixId = 'marketplace-table',
-  fullSize = true,
+  fullSizeInvested = true,
   showRocket = false,
+  fullSizeInvest = true,
 }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
@@ -98,14 +99,14 @@ const MarketplaceAction = ({
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ minWidth: 170 }}>
+      <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
         {isLoading ? (
           loadingSpinner
         ) : (
           <Suspense fallback={loadingSpinner}>
             <>
               {isAuthenticated && investedAmount ? (
-                fullSize ? (
+                fullSizeInvested ? (
                   <InvestedButtonBase
                     prefixId={prefixId}
                     service={traderService}
@@ -123,6 +124,7 @@ const MarketplaceAction = ({
                   prefixId={prefixId}
                   service={traderService}
                   showRocket={showRocket}
+                  fullSize={fullSizeInvest}
                 />
               )}
             </>

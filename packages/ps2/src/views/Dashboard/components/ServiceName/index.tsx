@@ -38,7 +38,7 @@ export const ServiceName = ({
     <Box
       id={prefixId && `${prefixId}__service-${service.serviceId}`}
       sx={{
-        cursor: activeLink ? 'pointer' : 'auto',
+        cursor: activeLink && zscore === undefined ? 'pointer' : 'auto',
         alignItems: 'center',
         flexDirection: 'row',
         display: 'flex',
@@ -47,7 +47,7 @@ export const ServiceName = ({
         paddingRight: truncateServiceName && '5px',
       }}
       className={className}
-      {...linkProps}
+      {...(zscore === undefined && linkProps)}
     >
       <Icon>
         <Avatar
@@ -80,7 +80,9 @@ export const ServiceName = ({
           flexDirection: 'column',
           display: 'flex',
           alignItems: 'flex-start',
+          cursor: activeLink && zscore ? 'pointer' : 'inherit',
         }}
+        {...(zscore !== undefined && linkProps)}
       >
         <TruncatedServiceName
           id={prefixId && `${prefixId}__name-${service.serviceId}`}

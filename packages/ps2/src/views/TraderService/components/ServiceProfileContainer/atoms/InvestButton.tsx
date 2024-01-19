@@ -18,12 +18,14 @@ const InvestButton: React.FC<{
   modalRoute?: string;
   showMultipleAccountButton?: boolean;
   showRocket?: boolean;
+  fullSize?: boolean;
 }> = ({
   prefixId,
   modalRoute,
   service,
   showMultipleAccountButton,
   showRocket,
+  fullSize,
 }) => {
   const { t } = useTranslation([
     'service',
@@ -63,7 +65,6 @@ const InvestButton: React.FC<{
         sx={{
           flexDirection: 'row',
           gap: '5px',
-          minWidth: 165,
           padding: '6px 26px',
         }}
         tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
@@ -77,18 +78,17 @@ const InvestButton: React.FC<{
             letterSpacing={1.1}
           >
             {t(
-              maxReached
+              maxReached && fullSize
                 ? 'invest-button.max-reached'
                 : 'invest-button.invest-now',
             )}
           </ZigTypography>
-          {!maxReached && (
+          {!maxReached && fullSize && (
             <ZigTypography
               variant={'caption'}
               component='p'
               color='neutral150'
               fontWeight={500}
-              sx={{ textTransform: 'lowercase !important' }}
             >
               {t('invest-button.x-success-fee', {
                 fee: service.successFee,
@@ -97,6 +97,22 @@ const InvestButton: React.FC<{
           )}
         </div>
       </ZigButton>
+
+      {!fullSize && (
+        <ZigTypography
+          variant={'caption'}
+          component='p'
+          color='neutral300'
+          fontWeight={500}
+          mt='12px'
+        >
+          {maxReached
+            ? t('invest-button.max-reached')
+            : t('invest-button.x-success-fee', {
+                fee: service.successFee,
+              })}
+        </ZigTypography>
+      )}
 
       {showOtherAccounts && (
         <Box
