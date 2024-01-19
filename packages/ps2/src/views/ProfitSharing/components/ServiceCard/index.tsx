@@ -98,6 +98,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
                 padding: 0,
               }}
               sx={{ mb: '4px', opacity: 0.6 }}
+              stub={false}
             />
             <ChangeIndicatorContainer>
               <ChangeIndicator
