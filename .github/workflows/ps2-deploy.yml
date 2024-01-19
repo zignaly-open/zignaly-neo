@@ -76,13 +76,13 @@ jobs:
       - name: AWS CodeDeploy
         uses: sourcetoad/aws-codedeploy-action@v1
         with:
-          aws_access_key: ${{ secrets.AWS_CODEDEPLOY_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_CODEDEPLOY_SECRET_KEY }}
-          aws_region: ap-northeast-1
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_region: ${{ secrets.CODEPLOY_REGION }}
           codedeploy_name: zignaly
-          codedeploy_group: ${{ secrets.AWS_CODEDEPLOY_GROUP }}
+          codedeploy_group: ${{ secrets.CODEDEPLOY_GROUP }}
           codedeploy_register_only: false
-          s3_bucket: ${{ secrets.AWS_CODEDEPLOY_BUCKET }}
+          s3_bucket: ${{ secrets.CODEDEPLOY_BUCKET }}
           s3_folder: ${{ inputs.deploy-env }}
           max_polling_iterations: 60
           excluded_files: '.git/* *node_modules/*'
@@ -90,9 +90,9 @@ jobs:
       - name: AWS Deploy
         uses: jakejarvis/s3-sync-action@master
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_CDN }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_CDN }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_CDN }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
           AWS_REGION: 'us-east-1'
           SOURCE_DIR: 'packages/ps2/build'
       - name: Invalidate Cloudflare
