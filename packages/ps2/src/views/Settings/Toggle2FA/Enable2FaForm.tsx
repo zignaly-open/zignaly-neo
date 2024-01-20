@@ -59,9 +59,22 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
       });
   };
 
+  const title = (
+    <Box
+      sx={{
+        textAlign: 'center',
+      }}
+    >
+      <ZigTypography variant={'h1'} id={'two-fa__title'}>
+        {t('enable-2fa.title')}
+      </ZigTypography>
+    </Box>
+  );
+
   if (!load2FAInfoResult.isFetching && load2FAInfoResult.data) {
     return (
       <>
+        {title}
         <ZigModalForm onSubmit={handleSubmit(onSubmit)}>
           <ZigTypography
             whiteSpace='pre-line'
@@ -134,15 +147,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          textAlign: 'center',
-        }}
-      >
-        <ZigTypography variant={'h1'} id={'two-fa__title'}>
-          {t('enable-2fa.title')}
-        </ZigTypography>
-      </Box>
+      {title}
       <ZigModalForm>
         <ZigTypography
           color='neutral300'
