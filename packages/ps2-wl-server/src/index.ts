@@ -25,8 +25,8 @@ import { BUILD_PATH } from './constants';
 const port = 2000;
 const server = express();
 
-server.use('index.html', serveNewIndexHtml);
-server.use('manifest.json', serveNewManifestJson);
+server.use('/index.html', serveNewIndexHtml);
+server.use('/manifest.json', serveNewManifestJson);
 
 // This should not be used in prod
 // In prod, the reverse proxy should serve static and this script should not be processing those requests
@@ -48,8 +48,8 @@ server.listen(port, (err: unknown) => {
 
 const getWlConfigForReq = (req: express.Request) =>
   // getWhitelabelConfig('wl.zigbids.com');
-  // getWhitelabelConfig('wl-staging.zigbids.com');
-  getWhitelabelConfig(req.get('host'));
+  getWhitelabelConfig('wl-staging.zigbids.com');
+// getWhitelabelConfig(req.get('host'));
 
 async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
@@ -61,6 +61,7 @@ async function serveNewIndexHtml(req: Request, res: Response) {
 }
 
 async function serveNewManifestJson(req: Request, res: Response) {
+  console.error('manifest');
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
     res.json({}).status(500);
