@@ -47,7 +47,8 @@ server.listen(port, (err: unknown) => {
 });
 
 const getWlConfigForReq = (req: express.Request) =>
-  // getWhitelabelConfig('wl.zignaly.com');
+  // getWhitelabelConfig('wl.zigbids.com');
+  // getWhitelabelConfig('wl-staging.zigbids.com');
   getWhitelabelConfig(req.get('host'));
 
 async function serveNewIndexHtml(req: Request, res: Response) {
