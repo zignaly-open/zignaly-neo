@@ -50,8 +50,9 @@ export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
 }
 
 export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
-  const [title, domain, description] = [
+  const [title, name, domain, description] = [
     wlConfig.title,
+    wlConfig.name,
     wlConfig.domain,
     wlConfig.description,
   ].map(veryDumbSanitizeAttribute);
@@ -64,7 +65,7 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
   return indexHtml.replace(
     '</head>',
     `
-      <title>${title}</title>
+      <title>${name}</title>
       ${
         wlConfig.imageDeliveryImages?.favicon
           ? ` 
