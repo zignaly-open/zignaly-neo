@@ -14,9 +14,9 @@ const veryDumbSanitizeAttribute = (string: string): string =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
 export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
-  const { title, imageDeliveryImages } = wlConfig;
+  const { title, name, imageDeliveryImages } = wlConfig;
   return JSON.stringify({
-    short_name: title,
+    short_name: name,
     name: title,
     icons: imageDeliveryImages
       ? [
