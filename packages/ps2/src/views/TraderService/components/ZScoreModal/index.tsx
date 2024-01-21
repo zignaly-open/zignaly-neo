@@ -59,7 +59,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       );
 
       return (
-        <Box display={'flex'} flexDirection={'column'}>
+        <Box display={'flex'} flexDirection={'column'} mt='3px'>
           {items.map((item, index) => (
             <div key={item.id}>
               <Box
@@ -71,6 +71,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   color='neutral200'
                   fontSize={14}
                   fontWeight={500}
+                  id={`zscore-modal__label-${category}`}
                 >
                   {t(item.label)}
                   {':'}
@@ -80,6 +81,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   fontSize={15}
                   fontWeight={600}
                   ml='6px'
+                  id={`zscore-modal__value-${category}`}
                 >
                   {formatValue(stats[item.valueId] as number, item.valueType)}
                 </ZigTypography>
@@ -88,6 +90,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                 value={numbers[index]}
                 max={numbersMax[index]}
                 category={category}
+                id={`zscore-modal__bar-${category}`}
               />
             </div>
           ))}
@@ -98,7 +101,13 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
   );
 
   return (
-    <ZModal {...props} wide title={t('zscore')} isLoading={isLoading}>
+    <ZModal
+      {...props}
+      wide
+      title={t('z-score')}
+      isLoading={isLoading}
+      allowUnauth
+    >
       {data && (
         <>
           <ZigTypography textAlign='center'>{t('description')}</ZigTypography>
@@ -121,6 +130,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                 >
                   <Box display={'flex'} flexDirection={'column'} flex={1}>
                     <ZScoreRing
+                      id={`zscore-modal__ring-${category}`}
                       sx={{ alignSelf: 'center' }}
                       category={category}
                       value={data[zScoreConfig[category].scoreId]}

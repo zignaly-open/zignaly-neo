@@ -69,10 +69,9 @@ export const Separator = styled('span')`
   height: 15px;
 `;
 
-export const InvestButtonContainer = styled('div')`
+export const InvestButtonContainer = styled(Box)`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
-  min-width: 170px;
   align-items: center;
   padding: 15px 25px;
   position: relative;
@@ -83,7 +82,7 @@ export const InvestButtonContainer = styled('div')`
   flex-direction: column;
   justify-content: center;
   @media (max-width: ${({ theme }) => theme.breakpoints.values.xl}px) {
-    padding: 15px 5px;
+    padding: 15px 8px;
   }
 `;
 

@@ -8,4 +8,6 @@ export interface ServiceNameProps {
   showOwner?: boolean;
   truncateServiceName?: boolean;
   activeLink?: boolean;
+  className?: string;
+  zscore?: number;
 }

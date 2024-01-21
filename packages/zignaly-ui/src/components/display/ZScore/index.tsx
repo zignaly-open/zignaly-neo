@@ -3,7 +3,7 @@ import { Chip, useTheme } from "@mui/material";
 import { ZScoreProps } from "./types";
 import { ZScoreIcon } from "icons";
 
-const ZScore = ({ value, mini = false, ...rest }: ZScoreProps) => {
+const ZScore = ({ value, mini = false, sx: sxProp, ...rest }: ZScoreProps) => {
   const theme = useTheme();
   const sx = useMemo(
     () => ({
@@ -28,7 +28,12 @@ const ZScore = ({ value, mini = false, ...rest }: ZScoreProps) => {
   );
 
   return (
-    <Chip sx={sx} icon={mini ? undefined : <ZScoreIcon />} label={Math.round(value)} {...rest} />
+    <Chip
+      sx={{ ...sx, ...sxProp }}
+      icon={mini ? undefined : <ZScoreIcon />}
+      label={Math.round(value)}
+      {...rest}
+    />
   );
 };
 export default ZScore;

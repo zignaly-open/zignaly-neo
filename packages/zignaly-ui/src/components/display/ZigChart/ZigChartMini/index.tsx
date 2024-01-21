@@ -5,7 +5,6 @@ import { ChartMiniProps } from "../types";
 import { useChartData } from "../hooks";
 
 const ZigChartMini = ({
-  id,
   data,
   midLine,
   height,
@@ -13,11 +12,12 @@ const ZigChartMini = ({
   gradientVariant = "mini",
   chartProps = {},
   precision,
+  ...additionalProps
 }: ChartMiniProps) => {
   const { data: processedData, color, gradient } = useChartData(data, gradientVariant, precision);
 
   return (
-    <ChartLayoutMini height={height} id={id}>
+    <ChartLayoutMini height={height} {...additionalProps}>
       <VictoryChart
         height={height}
         width={width}
