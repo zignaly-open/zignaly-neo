@@ -32,7 +32,6 @@ export const useZScoreConfig = (): ZScoreConfig => {
           id: 'sortino',
           label: t('profits.sortino-ratio'),
           valueId: 'sortinoRatio',
-          valueType: 'pct',
         },
       ],
     },
@@ -74,7 +73,7 @@ export const useZScoreConfig = (): ZScoreConfig => {
         {
           id: 'sbtMin',
           label: t('service.assets'),
-          valueId: 'sbtMin',
+          valueId: 'sbtEnd',
           valueType: 'amount',
         },
         {

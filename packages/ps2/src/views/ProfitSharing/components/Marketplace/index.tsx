@@ -294,16 +294,16 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           {t('invest-in-services-explainer')}
         </ZigTypography>
       </Box>
-      {isZScoreOn && lg && (
-        <TopServicesCards
-          prefixId={'marketplace'}
-          services={services
-            ?.slice()
-            .sort((a, b) => b.zscore - a.zscore)
-            .slice(0, 3)}
-        />
-      )}
       <TableWrapper>
+        {isZScoreOn && lg && (
+          <TopServicesCards
+            prefixId={'marketplace'}
+            services={services
+              ?.slice()
+              .sort((a, b) => b.zscore - a.zscore)
+              .slice(0, 3)}
+          />
+        )}
         <MarketplaceFilters
           resultsCount={filteredServices?.length}
           filters={tablePersist.filters}
