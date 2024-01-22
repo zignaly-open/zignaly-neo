@@ -73,7 +73,7 @@ export const useZScoreConfig = (): ZScoreConfig => {
         {
           id: 'sbtMin',
           label: t('service.assets'),
-          valueId: 'sbtMin',
+          valueId: 'sbtEnd',
           valueType: 'amount',
         },
         {
