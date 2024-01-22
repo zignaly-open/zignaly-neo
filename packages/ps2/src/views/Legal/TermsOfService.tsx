@@ -1,8 +1,10 @@
 import React from 'react';
-import { PageContainer, ZigTypography } from '@zignaly-open/ui';
-import { useTranslation } from 'react-i18next';
+import { PageContainer, ZigLink, ZigTypography } from '@zignaly-open/ui';
+import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from '../../util/title';
 import { LegalTitle, LegalWrapper } from './components';
+import { generatePath } from 'react-router-dom';
+import { ROUTE_LEGAL_PRIVACY } from '../../routes';
 
 const TermsOfService: React.FC = () => {
   const { t } = useTranslation('legal');
@@ -20,7 +22,15 @@ const TermsOfService: React.FC = () => {
               // eslint-disable-next-line react/no-array-index-key
               key={'tos-p-' + index}
             >
-              {x}
+              <Trans
+                t={t}
+                components={{
+                  privacylink: (
+                    <ZigLink href={generatePath(ROUTE_LEGAL_PRIVACY)} />
+                  ),
+                }}
+                i18nKey={`tos-text.${index}`}
+              ></Trans>
             </ZigTypography>
           ),
         )}

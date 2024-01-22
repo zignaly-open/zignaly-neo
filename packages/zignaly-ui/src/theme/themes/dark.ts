@@ -98,6 +98,35 @@ const dark: ThemeStyledComponents = {
     ],
     redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
   },
+  zscore: {
+    ring: {
+      profits: {
+        gradient: ["#2bc5f2", "#19dcd1", "#0ceaae"],
+        icon: "#29cdbb",
+        text: "#90d2bf",
+      },
+      risk: {
+        gradient: ["#4c18b3", "#5451d7", "#5199ea"],
+        text: "#8491EF",
+      },
+      service: {
+        gradient: ["#6e0a83", "#d94097", "#f24196"],
+        icon: "#734c9a",
+        text: "#ba7af0",
+      },
+      balanced: {
+        gradient: ["#46835e", "#7fce87", "#88c489"],
+        icon: "#a2b88d",
+        text: "#a2b88d",
+      },
+    },
+    bar: {
+      profits: "linear-gradient(to right, #0e272e, #2acbfe 47%, #0ceaae 88%)",
+      risk: "linear-gradient(to right, #210f45, #5533cf, #50a9ee)",
+      service: "linear-gradient(to right, #1f1030, #6d0b82 42%, #dd4393 76%, #f24196)",
+      balanced: "linear-gradient(to right, #10341d, #46995c 42%, #76dd88 76%, #88c489)",
+    },
+  },
 };
 
 export default dark;

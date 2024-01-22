@@ -38,6 +38,7 @@ const CheckBoxFilter = ({ filter, onChange }: CheckBoxFilterProps) => {
         <Box py="6px" key={option.value}>
           <ZigCheckBox
             variant={"outlined"}
+            sx={{ margin: "0 9px", padding: 0 }}
             id={`filter-checkbox-${id}__option-${i}`}
             checked={!value || value?.includes(option.value)}
             label={option.label}

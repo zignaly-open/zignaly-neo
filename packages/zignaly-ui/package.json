@@ -112,7 +112,7 @@
     "react-image-webp": "^0.8.0",
     "react-hook-form": "7.34.2",
     "react-loader-spinner": "6.0.0-0",
-    "react-number-format": "5.1.2",
+    "react-number-format": "^5.3.1",
     "react-portal": "4.2.2",
     "react-select": "^5.6.0",
     "react-spring": "9.4.4",

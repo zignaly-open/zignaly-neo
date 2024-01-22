@@ -195,3 +195,54 @@ export type CreateServicePayload = {
   exchangeInternalId: string;
   successFee: number;
 };
+
+type ZScoreCategoryInfo = {
+  balanced: number;
+  profits: number;
+  riskManagement: number;
+  serviceManagement: number;
+};
+
+type ZScoreCategoryItemDetails = {
+  condition: string;
+  pct: number;
+  gives: number;
+  ofMax: number;
+  zscore: number;
+  maxZscore: number;
+};
+
+type ZScoreCategoryDetails = {
+  profits: Record<
+    'returns' | 'benchmark' | 'profitDays' | 'sortino',
+    ZScoreCategoryItemDetails
+  >;
+  serviceManagement: Record<
+    'sbtGrowth' | 'investors' | 'sbtMin' | 'age',
+    ZScoreCategoryItemDetails
+  >;
+  riskManagement: Record<
+    'spotOnly' | 'drawdown' | 'paidClaims' | 'sharpe',
+    ZScoreCategoryItemDetails
+  >;
+  balanced: Record<'balanced' | 'riskRewardRatio', ZScoreCategoryItemDetails>;
+};
+
+export type ZScoreInfoDetails = {
+  name: string;
+  category: Record<'maxZscore' | 'zScore', ZScoreCategoryInfo>;
+  stats: Record<string, number | string>;
+  scoreDetails: ZScoreCategoryDetails;
+};
+
+export type ZScoreInfo = {
+  id: number;
+  serviceId: string;
+  version: number;
+  zscore: number;
+  zprofit: number;
+  zrisk: number;
+  zservice: number;
+  zbalanced: number;
+  info: ZScoreInfoDetails;
+};

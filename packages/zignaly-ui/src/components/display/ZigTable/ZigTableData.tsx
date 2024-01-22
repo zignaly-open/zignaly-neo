@@ -51,15 +51,16 @@ function ZigTableData<T extends object>({
 
   const properSorting = React.useMemo(() => {
     let sortingResult = internalSorting;
-    // Make sure sorting columns exist or reset it
+    // Controlled sorting
     if (sorting?.length) {
+      // Make sure sorting columns exist or reset it
       sortingResult = sorting.filter((s) => columns.find((c) => c.id === s.id));
       if (!sortingResult.length) {
         sortingResult = initialState.sorting ?? [];
       }
     }
     return sortingResult;
-  }, [sorting, columns, initialState.sorting, internalSorting]);
+  }, [sorting, internalSorting]);
 
   const table = useReactTable({
     data,
@@ -175,6 +176,7 @@ function ZigTableData<T extends object>({
                           return {
                             element: (
                               <ZigCheckBox
+                                sx={{ margin: "0 9px", padding: 0 }}
                                 variant={"outlined"}
                                 checked={column.getIsVisible()}
                                 label={column.columnDef.header as string}
@@ -242,7 +244,7 @@ function ZigTableData<T extends object>({
           </tbody>
         </Table>
       </TableContainer>
-      {!data.length && !loading && (
+      {!table?.getRowModel()?.rows?.length && !loading && (
         <ZigTypography
           variant="body1"
           textAlign="center"

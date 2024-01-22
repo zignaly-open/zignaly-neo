@@ -7,6 +7,7 @@ export const Icon = styled('div')`
   margin-left: 5px;
   display: flex;
   align-items: center;
+  position: relative;
   @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
     margin-right: 10px;
   }
@@ -22,7 +23,9 @@ export const StyledVerifiedIcon = styled(VerifiedIcon)`
   display: inline-block;
 `;
 
-export const TruncatedServiceName = styled(ZigTypography)<{
+export const TruncatedServiceName = styled(ZigTypography, {
+  shouldForwardProp: (prop) => prop !== 'truncate',
+})<{
   truncate: boolean;
 }>`
   ${({ truncate }) =>
