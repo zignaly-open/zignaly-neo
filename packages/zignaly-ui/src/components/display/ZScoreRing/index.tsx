@@ -92,7 +92,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             cx="50%"
             cy="50%"
             stroke="#242842"
-            stroke-dasharray="80,20"
+            strokeDasharray="80,20"
           />
           {pct > 50 && (
             <AnimatedRingCircle1
@@ -101,7 +101,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
               cx="50%"
               cy="50%"
               stroke={`url('#${category}-2')`}
-              stroke-dasharray={`${normalizedPct} ${100 - normalizedPct}`}
+              strokeDasharray={`${normalizedPct} ${100 - normalizedPct}`}
             />
           )}
           <AnimatedRingCircle1
@@ -110,7 +110,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             cx="50%"
             cy="50%"
             stroke={`url('#${category}-1')`}
-            stroke-dasharray={pct > 50 ? "40 60" : `${normalizedPct} ${100 - normalizedPct}`}
+            strokeDasharray={pct > 50 ? "40 60" : `${normalizedPct} ${100 - normalizedPct}`}
           />
           <AnimatedHandle
             stroke-width="5"
@@ -118,8 +118,8 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             cx="50%"
             cy="50%"
             stroke={lighten(gradientforValue, 0.55)}
-            stroke-dasharray="0 100"
-            stroke-dashoffset={-normalizedPct}
+            strokeDasharray="0 100"
+            strokeDashoffset={-normalizedPct}
           />
           <AnimatedHandle
             stroke-width="3.2"
@@ -127,8 +127,8 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             cx="50%"
             cy="50%"
             stroke={darken(gradientforValue, 0.1)}
-            stroke-dasharray="0 100"
-            stroke-dashoffset={-normalizedPct}
+            strokeDasharray="0 100"
+            strokeDashoffset={-normalizedPct}
           />
         </g>
       </AnimatedRingSvg>
