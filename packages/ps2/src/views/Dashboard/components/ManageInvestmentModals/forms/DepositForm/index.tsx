@@ -139,6 +139,10 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
     setCoinParam(coin);
   }, [coin]);
 
+  const specialTips = coinObject?.networks?.find(
+    (n) => n.network === network,
+  )?.specialTips;
+
   useEffect(() => {
     if (!coin && coinOptions && selectedCoin) {
       const match = coinOptions.find((x) => x.value === selectedCoin);
@@ -307,15 +311,9 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
               />
             </Grid>
 
-            {!!coinObject?.networks?.find((n) => n.network === network)
-              ?.specialTips && (
+            {!!specialTips && (
               <Grid item xs={12}>
-                <ZigAlertMessage
-                  text={
-                    coinObject?.networks?.find((n) => n.network === network)
-                      ?.specialTips
-                  }
-                />
+                <ZigAlertMessage text={specialTips} />
               </Grid>
             )}
 
