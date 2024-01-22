@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 
 const mockChartData = [10, 20, 25, 15, 35];
 
-describe("ZigChartMini component tests", () => {
+describe("ZigChartMini", () => {
   it("renders ZigChartMini component with data", () => {
     const { container } = renderWithProvidersUi(
       <Box width={"500px"}>
