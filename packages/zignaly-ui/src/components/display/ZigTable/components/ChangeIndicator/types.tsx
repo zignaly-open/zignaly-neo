@@ -10,4 +10,5 @@ export interface ChangeIndicatorProps {
   stableCoinOperative?: boolean;
   id?: string;
   decimalScale?: number;
+  smallPct?: boolean;
 }

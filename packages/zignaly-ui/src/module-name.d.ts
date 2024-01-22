@@ -84,7 +84,7 @@ declare module "@mui/material/styles" {
   type ZScoreTheme = {
     ring:
       | Record<"profits" | "service" | "balanced", RingTheme>
-      | Record<"risk", Omit<RingTheme, "icon" | "text">>;
+      | Record<"risk", Omit<RingTheme, "icon">>;
     bar: Record<"profits" | "service" | "balanced" | "risk", string>;
   };
 

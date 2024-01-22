@@ -26,9 +26,6 @@ import MarketplaceAction, {
 } from '../MarketplaceAction';
 import { TableWrapper } from './styles';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
-import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_TRADING_SERVICE } from '../../../../routes';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { TableId } from 'apis/settings/types';
 import { usePersistTable } from 'apis/settings/use';
 import MarketplaceFilters from '../MarketplaceFilters';
@@ -38,10 +35,11 @@ import {
 } from '../MarketplaceFilters/use';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
-import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
 import ZScoreModal from 'views/TraderService/components/ZScoreModal';
-// import TopServicesCards from '../TopServicesCards';
+import TopServicesCards from '../TopServicesCards';
+import { getPeriodCountFromDays } from '../MarketplaceFilters/util';
+import { usePeriodVisibility } from './use';
 
 const sx = {
   changeIndicator: {
@@ -67,55 +65,41 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
     tablePersist.filters,
     searchFilter,
   );
-  const returnsPeriod = tablePersist.filters.find((f) => f.id === 'pnlPeriod')
-    ?.value as string;
-  const isZScoreOn = isFeatureOn(Features.ZScore);
-
-  const defaultColumnVisibility = useMemo(
-    () => ({
-      pnlPercent180t: md || returnsPeriod === 'pnlPercent180t',
-      pnlPercent90t:
-        xl || (!isZScoreOn && lg) || (!md && returnsPeriod === 'pnlPercent90t'),
-      pnlPercent30t:
-        lg || !isZScoreOn || (!md && returnsPeriod === 'pnlPercent30t'),
-    }),
-    [md, lg, xl, returnsPeriod],
-  );
-  const [columnVisibility, setColumnVisibility] = useState(
-    defaultColumnVisibility,
-  );
-  useUpdateEffect(() => {
-    setColumnVisibility(defaultColumnVisibility);
-  }, [defaultColumnVisibility]);
-
+  const { columnVisibility, setColumnVisibility, returnsPeriod } =
+    usePeriodVisibility(tablePersist.filters);
   const { showModal } = useZModal();
+  const isZScoreOn = isFeatureOn(Features.ZScore);
 
   useEffect(() => () => setActiveRow(null), []);
 
   const createPnLColumn = useCallback(
-    (months: number, showChart: boolean) => {
-      const days = months * 30;
+    (days: number, showChart: boolean) => {
+      const { period, count } = getPeriodCountFromDays(days);
       const id = `pnlPercent${days}t`;
+
       return columnHelper.accessor((row) => Number(row[id]), {
         id,
-        header: t(md ? 'table.n-months-pnl' : 'table.n-months-pnl-mobile', {
-          count: months,
-        }),
+        header: t(
+          md ? `table.n-${period}s-pnl` : `table.n-${period}s-pnl-mobile`,
+          {
+            count,
+          },
+        ),
         cell: (props) => (
           <>
             {showChart && (
               <ZigChartMiniSuspensed
                 id={`marketplace-table__pnl${days}t-${props.row.original.id}-chart`}
                 midLine
-                data={[0, ...(props.row.original.sparklines as number[])]}
+                data={[0, ...props.row.original.sparklines]}
               />
             )}
             <ChangeIndicator
-              decimalScale={md ? undefined : 0}
-              type={'default'}
+              decimalScale={md ? 1 : 0}
               id={`marketplace-table__pnl${days}t-${props.row.original.id}`}
               style={showChart ? null : sx.changeIndicator}
               value={props.getValue()}
+              type={showChart ? 'graph' : 'default'}
             />
           </>
         ),
@@ -207,9 +191,11 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      createPnLColumn(6, false),
-      createPnLColumn(3, false),
-      createPnLColumn(1, lg || (!isZScoreOn && md)),
+      createPnLColumn(365, false),
+      createPnLColumn(180, false),
+      createPnLColumn(90, false),
+      createPnLColumn(30, lg || (!isZScoreOn && md)),
+      createPnLColumn(7, false),
       ...(!lg && (sm || (!isZScoreOn && !md))
         ? [
             columnHelper.accessor((row) => +row.invested, {
@@ -273,48 +259,17 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
       columnHelper.display({
         header: '',
         id: 'action',
-        cell: (props) =>
+        cell: ({ row }) =>
           md ? (
-            <MarketplaceAction service={props.row.original} />
-          ) : (
-            <MobileMarketplaceAction
-              service={props.row.original}
-              rowId={props.row.id}
+            <MarketplaceAction
+              service={row.original}
+              fullSizeInvest={false}
+              showArrow={lg}
             />
+          ) : (
+            <MobileMarketplaceAction service={row.original} rowId={row.id} />
           ),
       }),
-      ...(lg
-        ? [
-            columnHelper.display({
-              id: 'link',
-              cell: ({ row }) => (
-                <Box
-                  component={Link}
-                  to={generatePath(ROUTE_TRADING_SERVICE, {
-                    serviceId: row?.original?.id?.toString(),
-                  })}
-                  sx={{
-                    cursor: 'pointer',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    display: 'flex',
-                    textAlign: 'start',
-                    width: '10px',
-                  }}
-                  id={`marketplace-table__link-${row.original.id}`}
-                >
-                  <ArrowForwardIosIcon
-                    sx={{
-                      color: theme.palette.links,
-                      width: '20px',
-                      height: '20px',
-                    }}
-                  />
-                </Box>
-              ),
-            }),
-          ]
-        : []),
     ],
     [t, sm, md, lg, xl],
   );
@@ -339,53 +294,54 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           {t('invest-in-services-explainer')}
         </ZigTypography>
       </Box>
-      <MarketplaceFilters
-        resultsCount={filteredServices?.length}
-        filters={tablePersist.filters}
-        defaultFilters={defaultFilters}
-        onFiltersChange={tablePersist.filterTable}
-        onSearchChange={setSearchFilter}
-        searchFilter={searchFilter}
-      />
-      {/* <TopServicesCards
-              services={services
-                ?.slice()
-                .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
-                .slice(0, 3)}
-              /> */}
-      {filteredServices && (
-        <TableWrapper>
-          <ZigTable
-            onRowClick={
-              !md
-                ? (id: string) => {
-                    if (id !== activeRow) setActiveRow(id);
-                  }
-                : undefined
-            }
-            prefixId={TableId.Marketplace}
-            columns={columns}
-            data={filteredServices}
-            emptyMessage={t('table-search-empty-message')}
-            columnVisibility={md}
-            enableSortingRemoval={false}
-            initialState={{
-              sorting: [
-                {
-                  id: isZScoreOn ? 'zscore' : returnsPeriod,
-                  desc: true,
-                },
-              ],
-            }}
-            state={{
-              columnVisibility,
-            }}
-            sorting={tablePersist.sorting}
-            onSortingChange={tablePersist.sortTable}
-            onColumnVisibilityChange={setColumnVisibility}
-          />
-        </TableWrapper>
+      {isZScoreOn && lg && (
+        <TopServicesCards
+          prefixId={'marketplace'}
+          services={services
+            ?.slice()
+            .sort((a, b) => b.zscore - a.zscore)
+            .slice(0, 3)}
+        />
       )}
+      <TableWrapper>
+        <MarketplaceFilters
+          resultsCount={filteredServices?.length}
+          filters={tablePersist.filters}
+          defaultFilters={defaultFilters}
+          onFiltersChange={tablePersist.filterTable}
+          onSearchChange={setSearchFilter}
+          searchFilter={searchFilter}
+        />
+        <ZigTable
+          onRowClick={
+            !md
+              ? (id: string) => {
+                  if (id !== activeRow) setActiveRow(id);
+                }
+              : undefined
+          }
+          prefixId={TableId.Marketplace}
+          columns={columns}
+          data={filteredServices}
+          emptyMessage={t('table-search-empty-message')}
+          columnVisibility={md}
+          enableSortingRemoval={false}
+          initialState={{
+            sorting: [
+              {
+                id: isZScoreOn ? 'zscore' : returnsPeriod,
+                desc: true,
+              },
+            ],
+          }}
+          state={{
+            columnVisibility,
+          }}
+          sorting={tablePersist.sorting}
+          onSortingChange={tablePersist.sortTable}
+          onColumnVisibilityChange={setColumnVisibility}
+        />
+      </TableWrapper>
     </>
   );
 };

@@ -4,7 +4,7 @@ import { MarketplaceService } from 'apis/marketplace/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SERVICES_COINS } from './contants';
-import { getMonthsFromColumnId } from './util';
+import { getPeriodCountFromDays } from './util';
 import { useRisks, useFilteredCollection } from '@zignaly-open/ui';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
@@ -30,22 +30,30 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         : [...prev, current.exchange];
     }, []);
 
-    const returnsPeriods = ['pnlPercent180t', 'pnlPercent90t'];
-    if (isFeatureOn(Features.ZScore)) {
-      returnsPeriods.push('pnlPercent30t');
-    }
+    const returnsPeriods = [
+      'pnlPercent365t',
+      'pnlPercent180t',
+      'pnlPercent90t',
+      // Add 1M option if no zscore. Otherwise 1M is always showed because enough space on mobile.
+      ...(isFeatureOn(Features.ZScore) ? ['pnlPercent30t'] : []),
+      'pnlPercent7t',
+    ];
 
     return [
       {
         id: 'pnlPeriod',
         value: 'pnlPercent180t',
         type: 'select',
-        options: returnsPeriods.map((o) => ({
-          value: o,
-          label: t('table.n-months-pnl', {
-            count: getMonthsFromColumnId(o),
-          }),
-        })),
+        options: returnsPeriods.map((o) => {
+          const days = parseInt(o.match(/\d+/)[0]);
+          const { period, count } = getPeriodCountFromDays(days);
+          return {
+            value: o,
+            label: t(`table.n-${period}s-pnl`, {
+              count,
+            }),
+          };
+        }),
         label: t('filters.period-pnl'),
         mobile: true,
       },
