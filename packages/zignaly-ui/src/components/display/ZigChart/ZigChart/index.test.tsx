@@ -10,7 +10,7 @@ const mockEvents = [
   { x: 2, label: "Event 2" },
 ];
 
-describe("ZigChart component tests", () => {
+describe("ZigChart", () => {
   it("renders ZigChart component with data", () => {
     const { container } = renderWithProvidersUi(
       <Box width={"500px"}>
