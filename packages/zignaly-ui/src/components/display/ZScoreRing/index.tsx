@@ -69,7 +69,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
           </ZigTypography>
         </Box>
         {!categoryData.icon && category === "risk" && (
-          <ZigTypography color="#b9b147" variant={"h5"}>
+          <ZigTypography color={risk?.color} variant={"h5"}>
             {risk?.label}
           </ZigTypography>
         )}

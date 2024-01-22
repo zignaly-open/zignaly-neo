@@ -32,7 +32,6 @@ export const useZScoreConfig = (): ZScoreConfig => {
           id: 'sortino',
           label: t('profits.sortino-ratio'),
           valueId: 'sortinoRatio',
-          valueType: 'pct',
         },
       ],
     },
