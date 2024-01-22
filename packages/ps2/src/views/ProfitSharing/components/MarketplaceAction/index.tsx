@@ -98,6 +98,8 @@ const MarketplaceAction = ({
   const investedAmount = investment
     ? new BigNumber(investment.invested).plus(investment.pending)
     : 0;
+  // Margin to keep arrow aligned with button, and button aligned with other columns
+  const subMargin = isAuthenticated && investedAmount ? 0 : '28px';
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -105,7 +107,12 @@ const MarketplaceAction = ({
         loadingSpinner
       ) : (
         <Suspense fallback={loadingSpinner}>
-          <Box display='flex' gap='25px' alignItems={'center'}>
+          <Box
+            display='flex'
+            gap='25px'
+            alignItems={'center'}
+            mt={showArrow ? subMargin : 0}
+          >
             <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
               {isAuthenticated && investedAmount ? (
                 fullSizeInvested ? (
@@ -140,7 +147,7 @@ const MarketplaceAction = ({
                   alignItems: 'flex-start',
                   display: 'flex',
                   width: '10px',
-                  mb: isAuthenticated && investedAmount ? 0 : '28px',
+                  mb: subMargin,
                 }}
                 id={`marketplace-table__link-${service.id}`}
               >
