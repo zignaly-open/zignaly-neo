@@ -14,6 +14,9 @@ export const StyledServiceName = styled(ServiceName)`
   .MuiTypography-body1 {
     font-size: 18px;
   }
+  .MuiTypography-body2 {
+    font-size: 12px;
+  }
 `;
 
 export const Card = styled(Box)`
