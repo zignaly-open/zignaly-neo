@@ -9,7 +9,7 @@ jest.mock("./ZigChart/util", () => ({
   })),
 }));
 
-describe("useChartData hook tests", () => {
+describe("useChartData", () => {
   it("renders with default values", () => {
     const { result } = renderHook(() => useChartData([]));
 
