@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { EditKeyValidation } from '../validations';
 import {
   ZigButton,
+  ZigCheckBox,
   ZigCopyText,
   ZigInput,
   ZigModalActions,
@@ -19,7 +20,6 @@ import {
 } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import { useToast } from '../../../../../util/hooks/useToast';
-import Checkbox from '@mui/material/Checkbox';
 import {
   FormControlLabel,
   Grid,
@@ -196,24 +196,19 @@ function EditApiKeysModal({
           <Grid container>
             <Grid item xs={12} md={6}>
               <Tooltip title={t('api-keys.cant-disable-read')}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      className={
-                        isCreate
-                          ? 'create-new-key-modal__enabled-read'
-                          : 'edit-key-modal__enabled-read'
-                      }
-                      id={
-                        isCreate
-                          ? 'create-new-key-modal__enabled-read'
-                          : 'edit-key-modal__enabled-read'
-                      }
-                      disabled={isLoading}
-                      checked
-                      onChange={() => {}}
-                    />
+                <ZigCheckBox
+                  className={
+                    isCreate
+                      ? 'create-new-key-modal__enabled-read'
+                      : 'edit-key-modal__enabled-read'
                   }
+                  id={
+                    isCreate
+                      ? 'create-new-key-modal__enabled-read'
+                      : 'edit-key-modal__enabled-read'
+                  }
+                  disabled={isLoading}
+                  checked
                   label={
                     <span
                       id={
@@ -229,9 +224,10 @@ function EditApiKeysModal({
               </Tooltip>
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormControlLabel
-                control={
-                  <Checkbox
+              <Controller
+                control={control}
+                render={({ field }) => (
+                  <ZigCheckBox
                     className={
                       isCreate
                         ? 'create-new-key-modal__can-trade'
@@ -242,28 +238,29 @@ function EditApiKeysModal({
                         ? 'create-new-key-modal__can-trade'
                         : 'edit-key-modal__can-trade'
                     }
-                    {...register('canTrade')}
                     checked={watch('canTrade')}
                     disabled={isLoading}
-                  />
-                }
-                label={
-                  <span
-                    id={
-                      isCreate
-                        ? 'create-new-key-modal__can-trade-label'
-                        : 'edit-key-modal__can-trade-label'
+                    label={
+                      <span
+                        id={
+                          isCreate
+                            ? 'create-new-key-modal__can-trade-label'
+                            : 'edit-key-modal__can-trade-label'
+                        }
+                      >
+                        {t('api-keys.permissions-enable.canTrade')}
+                      </span>
                     }
-                  >
-                    {t('api-keys.permissions-enable.canTrade')}
-                  </span>
-                }
+                    {...field}
+                  />
+                )}
+                name={'canTrade'}
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormControlLabel
-                control={
-                  <Checkbox
+              <Controller
+                render={({ field }) => (
+                  <ZigCheckBox
                     className={
                       isCreate
                         ? 'create-new-key-modal__futures-trade'
@@ -274,22 +271,24 @@ function EditApiKeysModal({
                         ? 'create-new-key-modal__futures-trade'
                         : 'edit-key-modal__futures-trade'
                     }
-                    {...register('futuresTrade')}
                     checked={watch('futuresTrade')}
                     disabled={isLoading}
-                  />
-                }
-                label={
-                  <span
-                    id={
-                      isCreate
-                        ? 'create-new-key-modal__futures-trade-label'
-                        : 'edit-key-modal__futures-trade-label'
+                    label={
+                      <span
+                        id={
+                          isCreate
+                            ? 'create-new-key-modal__futures-trade-label'
+                            : 'edit-key-modal__futures-trade-label'
+                        }
+                      >
+                        {t('api-keys.permissions-enable.futuresTrade')}
+                      </span>
                     }
-                  >
-                    {t('api-keys.permissions-enable.futuresTrade')}
-                  </span>
-                }
+                    {...field}
+                  />
+                )}
+                name={'futuresTrade'}
+                control={control}
               />
             </Grid>
           </Grid>

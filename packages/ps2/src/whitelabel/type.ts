@@ -9,6 +9,7 @@ export enum Features {
   LoginOnlyAccess = 'loginOnly',
   Subscriptions = 'subscriptions',
   Kyc = 'kyc',
+  ZScore = 'zscore',
 }
 
 interface TranslationOverrides {

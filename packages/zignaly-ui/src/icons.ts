@@ -55,3 +55,4 @@ export { ReactComponent as ZigSwapCircleIcon } from "assets/icons/swap-circle-ic
 export { ReactComponent as ZigResetIcon } from "assets/icons/reset-icon.svg";
 export { ReactComponent as ZigArrowDescIcon } from "assets/icons/arrow-desc-icon.svg";
 export { ReactComponent as ZigSettingsIcon } from "assets/icons/settings-icon.svg";
+export { ReactComponent as ZScoreIcon } from "assets/icons/zscore-icon.svg";

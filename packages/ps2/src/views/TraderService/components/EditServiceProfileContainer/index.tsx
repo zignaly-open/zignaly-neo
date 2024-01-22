@@ -280,7 +280,9 @@ const EditServiceProfileContainer: React.FC<{
                         'edit-service-profile__service-commission-slider'
                       }
                       successFee={+successFee}
-                      zglySuccessFee={service?.zglySuccessFee}
+                      zglySuccessFee={
+                        service?.zglySuccessFee || whitelabel.zignalySuccessFee
+                      }
                       {...field}
                     />
                   )}

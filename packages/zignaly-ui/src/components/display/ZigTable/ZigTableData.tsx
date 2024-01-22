@@ -12,7 +12,6 @@ import {
 import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
-import CheckBox from "../../inputs/CheckBox";
 import { ZigTablePropsData } from "./types";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
@@ -20,7 +19,7 @@ import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
-import { useUpdateEffect } from "react-use";
+import { ZigCheckBox } from "../../../index";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -37,6 +36,7 @@ function ZigTableData<T extends object>({
   emptyMessage,
   state = {},
   onSortingChange,
+  onColumnVisibilityChange,
   sorting,
   ...rest
 }: ZigTablePropsData<T>) {
@@ -44,25 +44,40 @@ function ZigTableData<T extends object>({
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
-  useUpdateEffect(() => {
-    onSortingChange?.(internalSorting);
-  }, [internalSorting]);
 
-  const [columnVisibility, setColumnVisibility] = React.useState(
+  const [internalColumnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
   );
+
+  const properSorting = React.useMemo(() => {
+    let sortingResult = internalSorting;
+    // Make sure sorting columns exist or reset it
+    if (sorting?.length) {
+      sortingResult = sorting.filter((s) => columns.find((c) => c.id === s.id));
+      if (!sortingResult.length) {
+        sortingResult = initialState.sorting ?? [];
+      }
+    }
+    return sortingResult;
+  }, [sorting, columns, initialState.sorting, internalSorting]);
 
   const table = useReactTable({
     data,
     columns,
     state: {
-      sorting: sorting ?? internalSorting,
-      columnVisibility,
+      sorting: properSorting,
+      columnVisibility: state.columnVisibility ?? internalColumnVisibility,
       ...(pagination && { pagination }),
       ...state,
     },
-    onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: setInternalSorting,
+    onColumnVisibilityChange: state.columnVisibility
+      ? onColumnVisibilityChange
+      : setColumnVisibility,
+    onSortingChange: sorting
+      ? (v) => {
+          onSortingChange?.((v as unknown as () => SortingState)());
+        }
+      : setInternalSorting,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),
@@ -159,12 +174,16 @@ function ZigTableData<T extends object>({
                         .map((column) => {
                           return {
                             element: (
-                              <CheckBox
-                                value={column.getIsVisible()}
+                              <ZigCheckBox
+                                variant={"outlined"}
+                                checked={column.getIsVisible()}
                                 label={column.columnDef.header as string}
                                 onChange={(v) => {
-                                  if (v || table.getVisibleLeafColumns().length > 2) {
-                                    column.toggleVisibility(v);
+                                  if (
+                                    v.target.checked ||
+                                    table.getVisibleLeafColumns().length > 2
+                                  ) {
+                                    column.toggleVisibility(v.target.checked);
                                   }
                                 }}
                               />
@@ -195,6 +214,7 @@ function ZigTableData<T extends object>({
                     {row.getVisibleCells().map((cell, index) => {
                       return (
                         <td
+                          id={prefixId && `${prefixId}__${cell.column.id}-${cell.row.id}`}
                           key={cell.id}
                           colSpan={
                             enableColumnVisibility && row.getVisibleCells().length === index + 1
@@ -262,7 +282,11 @@ function ZigTableData<T extends object>({
             >
               <ZigTypography color="neutral300">Page</ZigTypography>
 
-              <ZigTypography variant="h3" color="neutral100">
+              <ZigTypography
+                variant="h3"
+                color="neutral100"
+                id={prefixId && `${prefixId}-table__current-page`}
+              >
                 {table.getState().pagination.pageIndex + 1}
               </ZigTypography>
 

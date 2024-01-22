@@ -26,8 +26,7 @@ export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
 // Filters
 export { default as ZigSearch } from "./components/filters/ZigSearch";
 export { default as ZigFilters } from "./components/filters/ZigFilters";
-export { filterFns, loadFilters, pruneFilters } from "./components/filters/ZigFilters/util";
-export * from "./components/filters/ZigFilters/types";
+export * from "./components/filters/ZigFilters";
 
 // TODO: fix storybook & refactor
 export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";
@@ -59,6 +58,9 @@ export type {
   ZigDropdownProps,
   ZigDropdownOptionType,
 } from "./components/display/ZigDropdown";
+export { default as ZScore } from "./components/display/ZScore";
+export { default as ZigRisk } from "./components/display/ZigRisk";
+export * from "./components/display/ZigRisk";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";
@@ -70,8 +72,7 @@ export { default as DateLabel } from "./components/display/ZigTable/components/D
 export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
-// TODO: @Nikita9901 pls replace with mui and add stories
-export { default as CheckBox } from "./components/inputs/CheckBox";
+export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";

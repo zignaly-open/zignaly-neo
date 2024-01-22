@@ -45,6 +45,7 @@ describe("components/filters/ZigFilters/filters/CheckboxFilterDropdown", () => {
         resetFilter={onChange}
         filter={{ ...typeFilter, value: ["spot"] }}
         onChange={onChange}
+        showFullSingleValue
       />,
     );
 

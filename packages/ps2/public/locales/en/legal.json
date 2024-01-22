@@ -1,0 +1,551 @@
+{
+  "privacy-title": "Privacy Policy",
+  "privacy-text": [
+    {
+      "description": [
+        "Highend Technologies LLC (“<b>Zignaly</b>”, “<b>we</b>”, “<b>our</b>” or “<b>us</b>”) collects information about you from various sources to provide the Services to you, to protect our legitimate interests, to analyze and improve our Services, to communicate with you, and to comply with our legal and regulatory obligations. This Privacy Policy (“ Privacy Policy ”) covers our treatment of the personally identifiable information that we gather when you access or use our Services.",
+        "From time to time, we may revise or amend this Privacy Policy to reflect changes in law, our Personal Data collection and use practices, the features on the Services, or advances in technology. This Privacy Policy does not cover the practices of entities we do not own or control, or people we do not manage.",
+        "Our Privacy Policy applies to all Services we offer, but excludes any products, applications or services that have separate privacy policies which do not incorporate this Privacy Policy. For the purposes of data protection laws of the European Union (“ EU ”), and other relevant jurisdictions where Customers are located (“ Data Protection Laws ”), Zignaly is a data controller (i.e., the company who is responsible for, and controls the processing of, your Personal Data).",
+        "The access and/or use of our Services implies acceptance of this Privacy Policy as well as the conditions and provisions included in the Terms of Service . The terms used in this Privacy Policy shall have the same meanings as in the Terms of Service except as otherwise provided herein. For the avoidance of doubt the term “ Services ” shall mean all the services provided by Zignaly, including but not limited to the Website https://zignaly.com, desktop and mobile applications, Copy Trading Software, Crypto Trading Bot, Profit Sharing Software; Trading Terminal; and any other service provided by Zignaly from time to time (the “ Services ”)",
+        "<b>What data we collect</b>",
+        "To, the fullest extent permitted under applicable Data Protection Laws, we collect the following data and information (collectively, “ Personal Data ”):"
+      ]
+    },
+    {
+      "list": [
+        "Full name, date of birth, gender, country of residence, username, passwords, tax numbers, and data included in government-issued identification documents;",
+        "Financial information, sources of wealth or funds or income, level of activity anticipated, distributed ledger network wallet addresses;",
+        "Personal Documents such as government-issued IDs, passport, bank statements, utility bills, internet bills, income, account balances, financial transaction history, credit history, tax information, and credit scores, and other forms of identification, address verification and source of funds and wealth verification;",
+        "Corporate information such as legal entity name, doing business as name, legal domicile, fiscal domicile, object;",
+        "Corporate documents such as certificate of registration, constitution, memorandum & articles of association, bylaws, statues, incumbency certificate, register of directors, register of shareholders, register of authorized signatories, registry excerpts, financial statements;",
+        "Information about how you access and use our Services, such as your actions on the Services, including your interactions with others on the Services, photos or media you upload to the Services, your username, and other Customer Content you provide. We may access your device camera roll and camera with your permission. If you need to update your permissions, you can do so in your device’s settings;",
+        "Contact lists on your mobile device or in your email accounts so that you can identify your contacts on the Services and direct the invitation of your contacts. We only access your contact list information with your explicit permission;",
+        "Communications between Zignaly and you including emails, social media messages, job applications, customer support inquiries;",
+        "Current and historical information concerning your geographic location, GPS location, transaction location, and IP addresses that you use when you use and/or access our Services. We may use third-party services such as the Google Maps API to gather information about your location. Google uses various technologies to determine your location, including IP address, GPS, and other sensors that may, for example, provide Google with information on nearby devices, Wi-Fi access points, and cell towers (see Google’s Privacy Policy to learn more);",
+        "Information about your device and its software, such as your IP address, browser type, Internet service provider, platform type, device type, operating system, date and time stamp, a unique ID (that allows us to uniquely identify your browser, mobile device, or your account), and other similar information."
+      ]
+    },
+    {
+      "description": [
+        "We may monitor, record, and store your personal information in order to protect your safety or the safety of other Customers, comply with relevant laws, to assist with regulatory or law enforcement efforts, to protect and defend our rights and property, or for other reasons relating to our provision of the Services. By using the Services, you consent to the recording, storage, and disclosure of such information you send or receive for these purposes.",
+        "The Services are not available to anyone under the age of eighteen (18) (“ Minors ”). Zignaly has implemented the appropriate controls to ensure that Minors do not use or have access to our Services. Therefore, Zignaly will never knowingly and intentionally collect Personal Data from Minors. If you are a parent or guardian of a Minor and you believe or are aware that a Minor has provided us with Personal Data, please contact us immediately. If we become aware that we have collected Personal Data from Minors with or without verification of parental consent, we will take measures to delete that information from our systems.",
+        "<b>How we collect Personal Data</b>",
+        "To the fullest extent permitted under applicable Data Protection Laws, we collect Personal Data about you and any other party whose details you provide to us when you:"
+      ]
+    },
+    {
+      "list": [
+        "Access or use our Services;",
+        "Create an Account;",
+        "Complete online forms (including call back requests), take part in surveys, post on any forums, download information such as white papers or other publications or participate in any other interactive areas that appear within our Services;",
+        "Interact with us using social media;",
+        "Provide your contact details to us when registering to use or access any services we make available or when you update those details; and",
+        "Contact us or otherwise connect with us, online or offline."
+      ]
+    },
+    {
+      "description": [
+        "We will also collect Personal Data where you only partially complete and/or abandon any information inputted through our Services and/or other online forms and may use this information to contact you to remind you to complete any outstanding information and/or for marketing purposes.",
+        "We may also collect information from your devices (including mobile devices) and applications you or your users use to access and use our Services (for example, we may collect the device identification number and type, location information and connection information such as statistics on your page views, traffic to and from the Services, referral URL, ad data, your Internet Protocol (IP) address, your browsing history and your web log information) and we will ask for your permission before we do so. We may do this using cookies or similar technologies (as described below).",
+        "If you intend to give us Personal Data about someone else, you are responsible for ensuring that you comply with any obligation and consent obligations under applicable Data Protections Laws. Insofar as required by applicable Data Protection Laws, you must ensure that beforehand you have their explicit consent to do so and that you explain to them how we collect, use, disclose and retain their Personal Data, or direct them to read our Privacy Policy."
+      ]
+    },
+    {
+      "title": "How we use your Personal Data"
+    },
+    {
+      "description": [
+        "To the fullest extent permitted under applicable under Data Protection Laws, we use your information to:"
+      ]
+    },
+    {
+      "list": [
+        "Provide any information or Services that you have requested or ordered;",
+        "Compare information for accuracy and to verify it with third parties;",
+        "Provide, maintain, protect and improve our Services;",
+        "Manage, monitor, and administer your use of the Services and provide an enhanced, personal, user experience;",
+        "Manage our relationship with you (for example, customer services and technical support activities);",
+        "Undertake internal testing of the Services or systems to test and improve their security and performance (in these circumstances, we would de-identify any information used for such testing purposes);",
+        "Provide you with any information that we are required to send you to comply with our regulatory or legal obligations;",
+        "Comply with applicable Know Your Customer, Anti-Money Laundering, Counter-Terrorism Financing, and Anti-Corruption laws and regulations;",
+        "Detect, prevent, investigate or remediate, crime, illegal or Prohibited Activities or to otherwise protect our legal rights (including liaison with regulators and law enforcement agencies for these purposes);",
+        "Contact you to see if you would like to take part in our customer research (for example, feedback on your use of our Services);",
+        "Monitor, carry out statistical analysis and benchmarking (provided that in such circumstances it is on an aggregated basis which will not be linked back to you or any living individual);",
+        "Deliver advertising, marketing (including but not limited to in-product messaging) or information which may be useful to you;",
+        "Deliver joint content and services with third parties with whom you have a separate relationship (for example, social media providers); and",
+        "In addition to the legal and commercial uses listed above, we may be required to provide any and all of your Personal Data to governmental authorities as necessary to comply with the law. To the extent required by Data Protection Laws, or where we have a legitimate and lawful purpose for doing so, we retain information about you after your withdrawal of funds through the Services, the closure of your Account, if the registration of an Account is declined or if you decide not to proceed with the registration of an Account."
+      ]
+    },
+    {
+      "description": [
+        "Our Services may contain technology that enables us to:"
+      ]
+    },
+    {
+      "list": [
+        "Check specific information from your device or systems directly relevant to your use of the Services, applications or Services against our records to make sure the Services services are being used in accordance with our end-user agreements and to troubleshoot any problems;",
+        "Obtain information relating to any technical errors or other issues with our Services;",
+        "Collect information about how you use the features of our Services; and",
+        "Gather statistical information about the operating system and environment from which you access our Services."
+      ]
+    },
+    {
+      "description": [
+        "If you become a follower in Zignaly’s social networks, the processing of Personal Data will be governed by the policies of the Social Network, as well as by their terms of use, privacy policies and regulations that belong to the social network that corresponds in each case and that you have previously accepted.",
+        "Zignaly will treat your Personal Data in order to correctly manage your presence in the social network, inform him of Zignaly activities, Services, as well as for any other purpose that the rules of the social networks allow.",
+        "In no case will Zignaly use the profiles of followers in social networks to send advertising individually.",
+        "<b>Parties with whom we may share your Personal Data</b>",
+        "We may share your Personal Data with:"
+      ]
+    },
+    {
+      "list": [
+        "Third-Party Internet and Marketing Services Vendors including but not limited to MailChimp, Active Campaign, Facebook, Twitter, Discord, Telegram, GoogleCloud, Google Analytics;",
+        "Government and State Authorities to respond to subpoenas, court orders, legal process, law-enforcement requests, legal claims, or government inquiries and to protect and defend the rights, interests, safety, and security of Zignaly, our affiliates, Customers, or the public;",
+        "Zignaly Entities and Zignaly’s Affiliated Entities;",
+        "Third-Parties in connection to corporate transactions such as the sale of a website, a merger, consolidation, reorganization, financing, change or control or acquisition of all or a portion of our business by another company or third party, asset sale, initial public offering, or in the unlikely event of bankruptcy or similar proceeding."
+      ]
+    },
+    {
+      "description": [
+        "<b>Data Retention</b>",
+        "We will retain your Personal Data for as long as it is necessary for the purposes of performing a contract, comply with our legal and regulatory obligations, and protecting our legitimate interests. Specifically, we reserve the right to retain your Personal Data for the purposes of complying with applicable Know Your Customer, Anti-Money Laundering, Counter-Terrorism Financing, and Anti-Corruption laws and regulations for a period of at least seven (7) years, and for the purposes of legal proceedings, complaints and disputes for as long as this is necessary to protect our legitimate interests.",
+        "<b>Persons who may access your Personal Data</b>",
+        "Zignaly’s authorized personnel, including but not limited to our Compliance Officers, shall have access to your Personal Data on a need-to-know basis. Our Compliance Officers and other authorized personnel are bound to confidentiality and non-disclosure agreements, and subject to strict company policies related to the access and use of the data.",
+        "We may engage from time to time to third-party service providers to assist Zignaly with the implementation of the KYC/AML & CTF Policy as well as the compliance with applicable Know Your Customer, Anti-Money Laundering, Counter-Terrorism Financing, and Anti-Corruption laws and regulations. Where applicable, we will enter into a data processing agreement with these third-parties to ensure data security and protection of your Personal Data against Data Beaches. Such Data Processors will only process your Personal Data to the extent required for the provision of services for which they are engaged.",
+        "We may provide your Personal Data to competent authorities upon their request to the extent legally required or to the extent necessary to defend our rights in legal proceedings or investigations."
+      ]
+    },
+    {
+      "title": "Data Security"
+    },
+    {
+      "description": [
+        "To protect your Personal Data, Zignaly takes all reasonable precautions and follows the best practices of the industry to prevent the loss, misuse, improper access, disclosure, alteration or destruction of the same.",
+        "In addition to the purposes described in this section, we may also use information we gather to deliver targeted and interest-based advertising, marketing (including in-product messaging) or information to you which may be useful, based on your use of the Services or any other information we have about you (depending on the Services, you may able to configure these features to suit your preferences).",
+        "<b>Legal basis for processing in the EU</b>",
+        "In the EU, we collect your Personal Data for the following purposes:"
+      ]
+    },
+    {
+      "list": [
+        "Based on your consent, for marketing purposes, which can be revoked at any time;",
+        "Where necessary to perform any contract we enter into, or have entered into, with you to provide Services or provide access to our Services;",
+        "Where necessary for our legitimate business interests (or those of a third party) when your interests and fundamental rights do not override those interests; and",
+        "Where we need to comply with a legal or regulatory obligation either in the EU or elsewhere."
+      ]
+    },
+    {
+      "description": [
+        "You have the following rights:"
+      ]
+    },
+    {
+      "list": [
+        "The right to access your own Personal Data;",
+        "The right to have your Personal Data rectified if it is inaccurate or incomplete;",
+        "The right to request deletion or removal of your Personal Data where there is no good reason for processing to continue;",
+        "The right to restrict processing of your Personal Data where there is no good reason for processing to continue;",
+        "The right to data portability to enable moving, copying or transferring of Personal Data from one platform to another;",
+        "The right to object to the processing of your Personal Data in certain circumstances; and",
+        "Rights relating to profiling and automated decision making resulting from the processing of your Personal Data."
+      ]
+    },
+    {
+      "description": [
+        "The exercise of these rights is personal and therefore must be exercised directly by the interested party, requesting it directly to Zignaly, which means that any Customer, user, subscriber or collaborator who has provided their data at any time can contact Zignaly and request information about the data that it has stored and how it has been obtained, request the rectification of the same, request the portability of your Personal Data, oppose the processing, limit its use or request the cancellation of that data in Zignaly’s files.",
+        "To exercise the rights of access, rectification, cancellation, portability and opposition, you must send an email to the Data Protection Officer of Zignaly legal@test.zignaly.com together with a valid proof of identity such as a Government-issued ID document."
+      ]
+    },
+    {
+      "title": "Content from other Services"
+    },
+    {
+      "description": [
+        "The Services may include embedded content (for example, videos, images, articles, etc.). The embedded content of other internet websites behaves in exactly the same way as if you had visited other internet websites.",
+        "These internet websites may collect data about you, use cookies, embed an additional third-party tracking code, and monitor your interaction using this code."
+      ]
+    },
+    {
+      "title": "Cookies policy"
+    },
+    {
+      "description": [
+        "Our Services uses cookies. By accessing our Services we will inform you, through a pop-up banner, of our use of cookies.",
+        "1. About cookies",
+        "Cookies are files, often with unique identifiers, that web servers send to Internet browsers and can then be sent back to the server each time the browser requests a page from the server.",
+        "Web servers use cookies to identify and track users while browsing the different pages of Services, as well as to identify users returning to Services.",
+        "Cookies can be “persistent” cookies or “session cookies”. A persistent cookie consists of a text file sent by a web server to an Internet browser, which is stored by the browser and remains valid until the defined expiration date (unless the user deletes it before the expiration date ). On the other hand, a session cookie expires at the end of the user’s session, when the Internet browser is closed.",
+        "2. Cookies from the Services",
+        "On our Services, including our Website, and mobile applications, we use session and persistent cookies.",
+        "We will send you the following cookies:"
+      ]
+    },
+    {
+      "list": [
+        "Session Cookies",
+        "Google Analytics: This cookie allows us to identify unique users, unique sessions, regulate the rate of requests and store information about user sessions and campaigns."
+      ]
+    },
+    {
+      "description": [
+        "Cookie 1 is a session cookie, while Cookie 2 is a persistent cookie.",
+        "How we use cookies",
+        "Cookies do not contain personally identifiable information, but we have the possibility of linking the Personal Data we store about you with the information obtained and stored from cookies.",
+        "We use the information we obtain from the use of our cookies for the following purposes:"
+      ]
+    },
+    {
+      "list": [
+        "Recognize your computer when you access and/or use our Services.",
+        "Improve the usability of the Services.",
+        "Analyze the use of our Services.",
+        "Manage the Services.",
+        "Third party cookies"
+      ]
+    },
+    {
+      "description": [
+        "When you use the Services, you may also be sent third-party cookies.",
+        "Our service providers can send you cookies. They use the information they obtain through their cookies for the following purposes:"
+      ]
+    },
+    {
+      "list": [
+        "Track your browser on different Services.",
+        "Create a profile of your Internet browsing.",
+        "Select specific ads that may be of interest.",
+        "Deletion and blocking of cookies"
+      ]
+    },
+    {
+      "description": [
+        "You can, at any time, restrict, block or delete cookies from the Services. To do this, you must modify the configuration of your browser regarding the use of cookies through the “Preferences”, “Options” or “Tools” menu (the name of the menus or the procedure to access the cookie options vary depending on the browser used). Most browsers allow you to refuse to accept cookies and to delete cookies. The methods for doing so vary from browser to browser, and from version to version. You can however obtain up-to-date information about blocking and deleting cookies via these links:"
+      ]
+    },
+    {
+      "list": [
+        "https://support.google.com/chrome/answer/95647 (Chrome);",
+        "https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-Services-preferences (Firefox);",
+        "https://help.opera.com/en/latest/security-and-privacy/ (Opera);",
+        "https://support.microsoft.com/en-gb/help/17442/windows-internet-explorer-delete-manage-cookies (Internet Explorer);",
+        "https://support.apple.com/en-gb/guide/safari/manage-cookies-and-Services-data-sfri11471/mac (Safari); and",
+        "https://privacy.microsoft.com/en-us/windows-10-microsoft-edge-and-privacy (Edge)."
+      ]
+    },
+    {
+      "title": "Navigation"
+    },
+    {
+      "description": [
+        "When accessing and/or using the Services, non-identifying data may be collected, which may include the IP address, geolocation, a record of how services and Services are used, browsing habits and other data that cannot be used to identify the User.",
+        "The Services use the following third-party analysis services: Google Analytics",
+        "Zignaly uses the information obtained to obtain statistical data, analyze trends, administer the Services, study navigation patterns and to gather demographic information."
+      ]
+    },
+    {
+      "title": "Accuracy and veracity of Personal Data"
+    },
+    {
+      "description": [
+        "You agree that the information provided to Zignaly is correct, complete, accurate and current. You are solely responsible for the veracity and correctness of the data you submit when access and/or using the Services, exonerating Zignaly from any responsibility in this regard."
+      ]
+    },
+    {
+      "title": "Acceptance and consent"
+    },
+    {
+      "description": [
+        "You declare to have been informed of the conditions on protection of Personal Data, You accept and consent to the treatment of the same by Zignaly in the manner and for the purposes indicated in this Privacy Policy."
+      ]
+    },
+    {
+      "title": "Revocability"
+    },
+    {
+      "description": [
+        "To exercise the rights of access, rectification, cancellation, portability and opposition, you must send an email to legal@test.zignaly.com along with your valid proof of ID such as a Government-issued identification document. The exercise of your rights do not include any Personal Data that Zignaly is obliged to keep for administrative, performance of contracts, legal or security purposes."
+      ]
+    },
+    {
+      "title": "Change of Operatorship"
+    },
+    {
+      "description": [
+        "In case of incorporation, acquisition, merger or any other causes that cause the change of Operatorship of the Services, you expressly consent that your registration data and information are transferred by Zignaly to the new Operator. When and if this occurs, Zignaly will comply, in any case, with the duty of information to you."
+      ]
+    },
+    {
+      "title": "Changes to the Privacy Policy"
+    },
+    {
+      "description": [
+        "Zignaly reserves the right to modify this Privacy Policy to adapt it to legislative developments, as well as to industry practices. Zignaly may notify you of changes to this Privacy Policy by email or through the Services."
+      ]
+    },
+    {
+      "title": "Services Operator"
+    },
+    {
+      "description": [
+        "The Services are operated by Highend Technologies LLC, a Saint Vincent and the Grenadines limited liability company with its office address at First Floor, First St. Vincent Bank Ltd Building, James Street, Kingstown, Saint Vincent and the Grenadines.."
+      ]
+    },
+    {
+      "title": "Contact"
+    },
+    {
+      "description": [
+        "In case you have any questions or complaints about the Privacy Policy, you can contact our data protection officer via email to legal@test.zignaly.com"
+      ]
+    }
+  ],
+  "tos-title": "Terms of Service Agreement",
+  "tos-text": [
+    "These Terms of Service is a legal and binding contract between Highend Technologies LLC, a Saint Vincent and the Grenadines limited liability company with Limited Liability Company Number 852 LLC 2021, its successors and assigns (hereinafter ” Zignaly “, “ our ”, “ us ” or “ we ”), and the party or parties (the ” User “, “ you ” or “ your ”) accessing and/or using the Services.",
+    "The Terms of Service, together with all other agreements, acknowledgments and authorizations by User in connection with the registration or maintenance of an account with Zignaly and the use of the Services, including but not limited to the API License Agreement, the Risk Warning and the Privacy Policy, which are found on our website (together the “ Terms ”) represent the terms with which Zignaly will provide the Services to the User. The Terms sets out the respective rights and obligations of both parties in connection with the Services and both parties will accept and be bound by these terms on acceptance of the terms and conditions contained herein. User agrees that the following rights and obligations will govern the relationship between Zignaly and User.",
+    "PLEASE READ THE TERMS CAREFULLY AS THEY GOVERN YOUR RELATIONSHIP WITH ZIGNALY. IF YOU DISAGREE WITH ANY PART OF THE TERMS THEN YOU SHALL NOT ACCESS ANY SERVICES AND PRODUCTS OFFERED BY OR THROUGH ZIGNALY. THIS AGREEMENT CONTAINS A BINDING ARBITRATION CLAUSE AND CLASS ACTION WAIVER THAT IMPACT YOUR RIGHTS ABOUT HOW TO RESOLVE DISPUTES. PLEASE READ IT CAREFULLY.",
+    "BY REGISTERING AND/OR MAINTAINING AN ACCOUNT AND/OR ACCESSING AND/OR USING OUR SERVICES YOU ACKNOWLEDGE THAT (I) YOU HAVE READ AND UNDERSTAND YOUR OBLIGATIONS AND RIGHTS UNDER THE TERMS AND AGREE AND ACKNOWLEDGE THAT THIS TERMS OF SERVICE, THE API LICENSE AGREEMENT, THE RISK WARNING AND THE PRIVACY POLICY WILL COMPRISE THE FULL TERMS AND CONDITIONS OF YOUR RELATIONSHIP WITH ZIGNALY; (II) YOU AGREE THAT YOU ARE FULLY RESPONSIBLE FOR MAKING ALL DECISIONS AS TO TRANSACTIONS EFFECTED FOR YOUR ACCOUNT; (III) YOU ARE AWARE OF THE RISKS ASSOCIATED WITH TRADING IN DIGITAL ASSETS AND DIGITAL ASSET DERIVATIVES; (IV) YOU ASSUME ALL RISKS RELATED TO THE USE OF YOUR ACCOUNT AND TRADING IN DIGITAL ASSETS AND DIGITAL ASSET DERIVATIVES; (V) YOU ARE AWARE AND ASSUME ALL THE RISKS RELATED TO THE USE OF TRADING BOTS, PAMM ACCOUNTS AND SOCIAL TRADING (VI) ZIGNALY SHALL NOT BE LIABLE FOR ANY SUCH RISKS OR ADVERSE OUTCOMES; AND (VI) YOU DECLARE THAT YOU HAVE CONSIDERED THE FOREGOING FACTORS AND IN VIEW OF YOUR PRESENT AND ANTICIPATED FINANCIAL RESOURCES, YOU ARE WILLING AND ABLE TO ASSUME THE SUBSTANTIAL FINANCIAL RISKS OF TRADING IN DIGITAL ASSETS, FUTURES, DIGITAL ASSET DERIVATIVES AND THE USE OF TRADING BOTS, PAMM ACCOUNTS AND SOCIAL TRADING.",
+    "IT IS YOUR RESPONSIBILITY TO FIND OUT ALL NECESSARY INFORMATION ABOUT TRADING IN DIGITAL ASSETS, DIGITAL ASSET DERIVATIVES, PAMM ACCOUNTS AND SOCIAL TRADING AND THE TERMS AND MAKE SURE THAT ALL RISKS AND ARRANGEMENTS ARE DISCUSSED AND CLEARLY UNDERSTOOD PRIOR TO ANY TRADING ACTIVITY OR USE OF THE SERVICES.",
+    "1.DEFINITIONS AND INTERPRETATION",
+    "1.1. Definitions",
+    "“Account” shall mean the Account opened by Zignaly for the User which provides access to the Services.",
+    "“Agreement” shall include these Terms of Service and all other agreements and authorizations executed by User in connection with the registration or maintenance of an account with Zignaly and the use of the Services.",
+    "“API” shall mean Application Programming Interfaces provided by Zignaly.",
+    "“Content” shall mean any information or documents or images on the Website, and its related sites and mobile applications, data available through any APIs, and any information, documents or images on Zignaly accounts in any third-party social media platforms, including but not limited to Twitter, Instagram, Telegram, Facebook, Discord, Github, Medium, YouTube, and Reddit.",
+    "“Copy Trader” shall mean a User which permits other Users to replicate his or her or its trading activities in the Trading Terminal via the Copy Trading Software.",
+    "“Copy Trading Software ” shall mean Zignaly’s copy-trading software which allows Users to automatically replicate a given Copy Trader’s trading activities in Digital Assets and Digital Asset Derivatives through the Trading Terminal.",
+    "“Crypto Trading Bot” shall mean Zignaly’s software which allows Users to connect with Signal Providers and receive trading signals from such Signal Providers such as recommendations to enter or exit trading positions in Digital Assets and Digital Asset Derivatives.",
+    "“Digital Asset Derivatives” shall mean contracts between two or more parties whose value is based on an underlying Digital Asset. Digital Asset Derivatives include but are not limited to Options, Perpetual Swaps, Futures, and other instruments such as forwards, and contracts for difference.",
+    "“Digital Asset Exchange” shall mean the digital asset exchanges and digital assets trading platforms operated by third-parties which are accessible through the Trading Terminal.",
+    "“Digital Assets” shall mean encrypted currencies or digital assets or digital tokens or Digital currencies or cryptocurrencies which are based on distributed ledger technology and can be digitally traded, or transferred. For the avoidance of doubt, Bitcoin and Ether are Digital Assets.",
+    "“Exchange Master Account” shall mean an account maintained by Zignaly in a Digital Asset Exchange.",
+    "“Exchange Sub-Account” shall mean a User’s segregated account maintained under the Exchange Master Account accessible through the User’s Account.",
+    "“External Exchange Account” shall mean an account maintained by a User in a Digital Asset Exchange which is connected to the User Account.",
+    "“Intellectual Property Rights” shall include, but not limited to, any registered or unregistered patents, database rights, data protection rights, trademarks, trade secrets, trade names, corporate names, service marks, tag lines and descriptors, domain names, design, structure, layouts, graphical images, typography, color palettes, and copyrightable works, including but not limited to software applications, underlying source code, stationery, signage, promotional items, advertising and marketing materials, press releases, photographs, forms, and electronic media.",
+    "“KYC/AML & CTF Policy” shall mean the policies and procedures implemented by Zignaly to detect and prevent money laundering, terrorist financing, and corruption.",
+    "“PAMM Account” shall mean accounts which allow Users to attach Digital Assets to a specific User who manages the Digital Assets on behalf of the relevant Users.",
+    "“PAMM Manager” shall be a User who manages PAMM Accounts.",
+    "“Profit-Sharing Software” shall mean Zignaly’s profit sharing software which allows Users to maintain a PAMM Account.",
+    "“Prohibited Activities” shall mean the activities listed in Section 5.3. of these Terms of Service.",
+    "“Prohibited Jurisdiction” shall mean (i) the People’s Republic of China, Afghanistan, Belarus, Canada, Central African Republic, Congo, the Democratic Republic of the Congo, Republic of the Cote D’Ivoire, Crimea region of Ukraine, Cuba, El Salvador, Eswatini, Gambia, Iran, Iraq, Liberia, Libya, Mainland China, Malawi, Mali, Moldova, Myanmar, Niger, North Korea, Palestinian Territory, Russian-controlled regions of Ukraine (currently including the Crimea, Donetsk, and Luhansk regions), Saint Vincent and the Grenadines, Singapore, South Sudan, Sudan, Syria, United Kingdom, United States, Uzbekistan, Venezuela, Yemen, Zambia, Zimbabwe; (ii) any state, country or other jurisdiction that is sanctioned and/or embargoed by the United States of America, the <0>European Union<0> and/or Switzerland; (iii) a jurisdiction where it would be illegal according to local law or regulation for you to access or use the Website; or (iv) where the provision or availability of the Website is prohibited or contrary to local law or regulation, or could subject Zignaly to any local registration, regulatory or licensing requirements.",
+    "“Services” shall mean all the services provided by Zignaly, as described in Section 6 herein.",
+    "“Signal Providers” shall mean Users which provide trading signals such as recommendations to enter or exit trading positions in Digital Assets and Digital Asset Derivatives to other Users.",
+    "“Trading Terminal” shall mean Zignaly’s trading software, web-based applications, mobile applications and APIs which allows Users to connect with Digital Asset Exchanges either via an Exchange Sub-Account or via an External Exchange Account and place orders for buying and selling Digital Assets and Digital Asset Derivatives in such Digital Asset Exchanges.",
+    "“U.S.” or “US ” or “ United States ” shall mean all states of the United States of America, the District of Columbia; the Commonwealth of Puerto Rico; the U.S. Virgin Islands; Guam; the Commonwealth of the Northern Mariana Islands; and all other territories and possessions of the United States of America.",
+    "“US Person” shall mean (i) a U.S. citizen; (ii) a U.S. lawful permanent resident; (iii) a protected individual under section 1324b(a)(3) of the U.S. Immigration and Nationality Act, or individual who holds a passport issued by the United States Government; (iv) a corporation, company, partnership, or other legal entity established or organized in or under the Laws of the United States; (v) an individual, a corporation, company, partnership, or other legal entity which engages in a trade or business in the United States and generates income from sources within the United States connected with the conduct of that trade or business; (vi) any estate of a decedent who was a U.S. citizen or a U.S. lawful permanent resident; or a protected individual under section 1324b(a)(3) of the U.S. Immigration and Nationality Act; (vii) any trust if a court within the United States is able to exercise primary supervision over the administration of the trust, and/or one or more US Persons have the authority to control all substantial decisions of the trust, and/or one or US Persons are designated as settlors, trustees, protectors or beneficiaries; (viii) any Person organized or incorporated outside the United States and the Territory or Insular Possession of the United States in which any of the foregoing, whether singularly or in the aggregate, directly or indirectly holds a 50 percent or greater equity interest by votes or value, holds a majority of seats or memberships on the board of directors of the entity, or authorizes, establishes, directs, or otherwise controls the actions, policies, personnel decisions, or day-to-day operations of the Person; or (ix) any person who is subject to taxes in the US.",
+    "“User”, “you”, or “your” shall mean the party (or parties) who have agreed to be bound by the Terms.",
+    "“User Content” shall mean any content, feedback, suggestions, ideas, or other information or materials about Zignaly, or the Services, that you provide to Zignaly through the Website, the Services, or any other means including but not limited to blogs, message boards, forums and APIs (whether or not submitted through a third party).",
+    "“Website ” shall mean https://zignaly.com any subdomains, related domains, mobile applications, and all their downloadable material and e-mails.",
+    "“Zignaly ” shall, where the context so permits or requires, mean Highend Technologies LLC, or its subsidiaries and affiliates and their successors and assigns.",
+    "1.2. Construction. In this Agreement, unless the context otherwise requires",
+    "a) words importing the singular include the plural and vice versa;",
+    "b) words importing a gender include both gender and the neuter;",
+    "c) words importing persons include companies, associations and bodies of persons whether corporate or not;",
+    "d)the words: “may” shall be construed as permissive; “shall” or “will” shall be construed as imperative;",
+    "e) the term “include” or “includes” means includes, without limitation, and “including” means including, without limitation;",
+    "f) the terms “hereof”, “herein” and “hereunder” refer to the Terms as a whole and not to any particular provision of the Terms; and",
+    "g) the headings contained in these Terms are for reference purposes only, and shall not affect in any way the meaning or interpretation of the Terms.",
+    "2. AGREEMENT",
+    "Zignaly reserves the right, at its sole discretion, to modify or replace these Terms at any time, with or without notice to the User. Any such modification will be effective immediately upon public posting. Your continued use of our Services following any such modification constitutes your acceptance of these modified Terms. If you do not agree to any modification to these Terms, you must stop using the Services. Zignaly encourages you to frequently review the Terms to ensure you understand the terms and conditions that apply to your purchase of, access to, and use of, the Service.",
+    "3. DISCLAIMER",
+    "Zignaly does not provide financial advice, investment management or any consulting or advisory services. Zignaly is not a Bank, Investment Manager, or any other Financial Institution and does not provide financial services. Zignaly is a software as a service provider that enables a platform for Users to connect with PAMM Managers, Copy-Traders, Signal Service Providers and Digital Asset Exchanges. Your access or use of the Services is at your sole risk, and you are solely responsible for any losses, damages or costs resulting from using or accessing the Services. The Services do not constitute investment advice or any marketing, or promotion or offer of any product or investment to you or any third party. The Services are provided on an “AS IS” and “AS AVAILABLE” basis. The Services are provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance. Zignaly shall in no event be held liable for any loss or other damages, including but not limited to special, incidental, consequential, or other damages. Without limiting the foregoing, Zignaly does not represent or warrant that the Services are accurate, complete, reliable, current or error-free, or free of viruses or other harmful components. By accessing and/or using our Services, you agree that Zignaly shall not have any liability, contingent or otherwise, to you or to any third parties, for the correctness, quality, accuracy, security, completeness, reliability, performance, timeliness, pricing or continued availability of the Services or for delays or omissions of the Services, or for the failure of any connection or communication service to provide or maintain your access to the Services, or for any interruption in or disruption of your access or any erroneous communications between Zignaly and you, regardless of cause.",
+    "4. COMMUNICATION",
+    "a) You understand, acknowledge and agree that the method of communication between Zignaly and you shall be electronically via email or via the Website. We will use the email address or your username registered on your account as our means of communicating with you. You agree to keep your email address up-to-date, check your email frequently and immediately notify us if there are any changes.",
+    "b) You understand, acknowledge and agree that delivery of any communication to the email address registered in your account is considered valid, and will be deemed to have been acknowledged as authorized, correct, approved, and confirmed by you unless we have received written notice to the contrary within three (3) business days from the date the communication was sent. If any email communication is returned as undeliverable, Zignaly retains the right to block your access to your Account until you provide and confirm a new and valid email address.",
+    "c) You understand, acknowledge and agree that Zignaly shall not be responsible to you for information obtained through non-official channels of Zignaly. If you have any questions or concerns related to the truthfulness of information sent in the name of Zignaly, please contact us immediately.",
+    "d) You understand, acknowledge and agree that it is a violation of these Terms to make any misstatement of a material fact to Zignaly, or the Zignaly Entities.",
+    "5. USER REPRESENTATIONS AND WARRANTIES; ELIGIBILITY",
+    "By accessing and/or using the Services, you represent and warrant that:",
+    "a) you are at least 18 years old or of legal age to form a binding contract under applicable law, are an individual, legal person or other organization with full legal capacity and authority to enter into these Terms;",
+    "b) if you are entering into these Terms on behalf of a legal entity of which you are an employee or agent, you have all necessary rights and authority to bind such legal entity, and (i) you are legally permitted to use the Services in your jurisdiction, and (ii) you are legally permitted to own cryptocurrencies in your jurisdiction;",
+    "c) you are responsible for ensuring compliance with the laws of your jurisdiction and acknowledge that Zignaly is not liable for your compliance with such laws,",
+    "d) your use of the Services does not constitute a breach of the laws of your jurisdiction;",
+    "e) you understand the inherent risks associated with Digital Assets, and trading Digital Assets, and Digital Asset Derivatives;",
+    "f) you have a working understanding of the usage of Digital Assets, smart contract based tokens, and blockchain-based software systems;",
+    "g) you have sufficient investment knowledge and experience and the capacity to take risks arising from trading in Digital Assets, and Digital Asset Derivatives;",
+    "h) you have knowledge and experience in highly volatile markets;",
+    "i) you understand and have sufficient knowledge and experience with using PAMM Accounts, and its risks associated;",
+    "j) you understand and have sufficient knowledge about how Social Trading works, and its risks associated;",
+    "k) you trade with funds you can afford to lose, and have a high-risk tolerance;",
+    "l) you will not carry out any activity that (i) involves proceeds from any illegal or unlawful activity (including money laundering or terrorism financing); or (iii) violates, or could violate, any applicable law;",
+    "m) you will not be involved or initiate any form of market manipulation;",
+    "n) you will not use, or misuse, the Services in any way which may impair the functionality of the Services, or other systems used to deliver the Services or impair the ability of any other user to use the Services or Trading Platform;",
+    "o) you will not transmit or input into the Website any files that may damage any other person’s computing devices or software; content that may be offensive; or material or data in violation of any law;",
+    "p) you own and have full control of the Digital Asset wallet address used for withdrawals of your Account;",
+    "q) you are the legal owner (or an authorized agent of the legal owner) of the funds you deposit to your Account, and that these funds are derived from a legitimate source;",
+    "r) you will not use any method or services to mask your internet protocol address or your internet traffic or current location or real internet connection, including but not limited to virtual private networks, proxy servers, Tor browser;",
+    "s) you are not a national and/or resident of a Prohibited Jurisdiction;",
+    "t) you are not by reason of your nationality, domicile, citizenship, residence or otherwise subject to the laws of a Prohibited Jurisdiction;",
+    "u) you are are not, and have not been involved in a transaction with a person who is, on any trade or economic sanctions lists, including, but not limited to, the UN Security Council Sanctions list, designated as a “Specially Designated National” by OFAC (Office of Foreign Assets Control of the U.S. Treasury Department) or placed on the U.S. Commerce Department’s “Denied Persons List”. Zignaly maintains the right to restrict or deny the provision of Services in certain countries and/or to certain natural persons and/or juristic persons at its sole discretion.",
+    "6. SERVICES; PAMM MANAGERS, COPY TRADERS AND SIGNAL PROVIDERS",
+    "6.1. Services. Subject to your compliance with the Terms, your Zignaly Account provides access to the following Services, unless otherwise noted:",
+    "a) the Website;",
+    "b) Copy Trading Software;",
+    "c) Crypto Trading Bot;",
+    "d) Profit Sharing Software;",
+    "e) Trading Terminal; and",
+    "f) any other service provided by Zignaly from time to time.",
+    "6.2. Margin Trading. Digital Asset Exchanges available through the Trading Terminal may provide Users the ability to borrow funds for trading Digital Assets and Digital Asset Derivatives (“ Margin Trading ”). Margin Trading carries significant risk, as it could result in infinite losses. Therefore, The Digital Asset Exchanges may require the User to deposit a collateral (“ Margin ”), and minimum amount of funds as Margin to maintain a Margin Trading position (“ Minimum Margin Requirement ”). Margin Trading may work to your advantage or disadvantage, which may result in major gains but also major losses, and you may lose your Margin or your positions be liquidated due to market fluctuations. By conducting Margin Trading through the Services, you acknowledge and agree that:",
+    "a) the provision of financing for Margin Trading is provided by the Digital Asset Exchange at its absolute discretion;",
+    "b) Zignaly does not have discretion on the availability of Margin Trading, the Minimum Margin Requirements, or the forced-liquidation of your positions, and therefore, we shall assume no liability or damage caused by your use of Margin Trading through the Account;",
+    "c) you have read and understood all the terms and conditions of Margin Trading from the relevant Digital Asset Exchange;",
+    "d) failure to meet Minimum Margin Requirements may result in the liquidation of any open positions with a resultant loss; and",
+    "e) Digital Asset Exchanges may establish rules and policies for the provision of Margin Trading, including but not limited to minimum account size, investment time period, commissions and fees, leverage size per trade, mark ups, rules relating to stop losses and limits, rules relating to rollovers, rules relating to margin calls, or any other financial arrangement, and that Zignaly has absolutely no discretion over such rules and provisions.",
+    "6.3. Trading Fees . Digital Asset Exchanges charge applicable non-refundable fees for opening and closing trading positions via the Trading Terminal (“ Trading Fees ”). Such Trading Fees are at the sole discretion of the relevant Digital Asset Exchange. The User acknowledges and understands that Zignaly does not have any discretion or control over the Trading Fees. The User further acknowledges, understands and agrees that is his or her sole responsibility to understand the relevant Digital Asset Exchange’s Trading Fees. The User agrees to pay all applicable non-refundable fees and commissions and the User authorises Zignaly to automatically deduct the Trading Fees directly from the balance of the Digital Asset Wallet of your Account. The User understands, acknowledges and agrees that Zignaly may, at its own discretion, charge Fees at any time for using the Services.",
+    "6.4. Profit Sharing Software, Copy Trading Software, Crypto Trading Bot. The Services provide functionalities which enable the User to deposit funds into a PAMM Account for a PAMM Manager to manage on his behalf, to automatically replicate the trading activity of one or more chosen Copy Traders or to receive recommendations or trading signals from Signal Providers. The User himself is responsible for choosing the PAMM Manager, Copy Trader or Signal Provider, as the case may be. Zignaly bears no responsibility for the actions of the chosen PAMM Manager, Copy Trader and/or Signal Provider.",
+    "6.5. PAMM Managers, Signal Providers, Copy Traders. PAMM Managers, Signal Providers and/or Copy Traders are not employees or contractors of Zignaly and are not affiliated with Zignaly in any other way. Zignaly does not authorise the PAMM Manager, Signal Provider and/or Copy Traders to solicit any third parties on behalf of Zignaly to make Investments. Zignaly has no obligation to reveal any personal information about PAMM Managers, Signal Providers and/or Copy Traders.",
+    "6.6. No Investment Services. Zignaly does not provide asset management, portfolio management, personalised investment recommendations or advisory services to Users within the scope of the Services. Any information provided by Zignaly to the Users with regards to the copy trading or trading signals activities is not, and should not be, considered as advice of any kind.",
+    "6.7. No interference. Users may not interfere in the trading operations of PAMM Managers, Signal Providers or Copy Traders, and/or challenge their trading strategy.",
+    "6.8. Becoming a PAMM Manager, Copy Trader or Signal Provider. Any User may become a PAMM Manager, Copy Trader or Signal Provider subject to his registration by Zignaly.",
+    "6.9. PAMM Manager, Copy Trader, Signal Provider Merits. Zignaly will not evaluate the merits, expertise, experience or performance of any PAMM Manager, Copy Trader or Signal Provider. The availability of a Copy Trader and/or Sigal Provider through the Services does not indicate our approval or disapproval of their merits. Zignaly is not responsible for the competency of the PAMM Manager, Copy Trader and/or Signal Provider, his business and ethics merits and bears no responsibility to the Users for any possible loss or lost profit. Zignaly is not responsible for ensuring that the PAMM Manager, Copy Trader and/or the Signal Provider is licensed or authorised (if required) to carry out the trading activities. Zignaly is not responsible for providing the PAMM Manager, Copy Trader and/or Signal Provider with premises, data systems,any secretarial, book-keeping or recordkeeping services to assist in exercising the management of the Account.",
+    "6.10. Zignaly’s right to pause, stop or block. Zignaly reserves the right to pause, stop or block any PAMM Manager, Signal Provider and/or Copy Trader from managing PAMM Accounts, being copied or provide trading signals, or any User from using the PAMM Account, copying the trading activity of a Copy Trader and/or having access to the trading signals of the Signal Provider under the PAMM Account, Copy Trading Software and/or Crypto Trading Bot functionality at any time upon its sole discretion. Zignaly shall not be obliged to give reasons for such a decision, and shall not be liable for any outcome arising from exercising such rights.",
+    "6.11. PAMM Manager, Signal Provider, and Copy Trader’s Account.",
+    "a) Users wishing to register as a PAMM Manager or Signal Provider or Copy Trader should specify the name, and short description of their Account. The name and description of the Account must not contain any of the following: i) obscene language or any elements that are insulting in nature, including racial, religious, nationalistic and ethnic slurs; ii) guarantees of profits or other promises; iii) direct or indirect references to Zignaly’s competitors; iv) ames of government bodies or officials; v) references to other Accounts. Zignaly reserves the right to change the name of the Account at its own discretion and without prior warning.",
+    "b) Zignaly reserves the right to close a PAMM Manager, Signal Provider or Copy Trader’s Account without prior notice or explanation when i) fraudulent activity is suspected; ii) the User’s username or Account description contains elements as set out in Section 6.12(a) and Zignaly’s request to change that username or description has not been satisfied; or iii) Zignaly deems it necessary in its sole discretion.",
+    "6.12. Representations and Warranties of PAMM Managers, Copy Traders and Signal Providers. A User registered by Zignaly as PAMM Managers, Copy Traders and Signal Providers represents and warrants that:",
+    "a) carrying out trading activities on the Account does not violate the requirements of any applicable law (including but not limited to currency, taxation, civil (commercial), banking or any other legislation) of the country of residence of the User;",
+    "b) possesses all necessary authorisations, approvals, permits, licenses, registrations and consents from each relevant regulatory body/authority necessary to enable him to lawfully accept these Terms and to perform the entire duties and obligations hereunder and the User shall at all times whilst these Terms remain in effect, comply with all relevant rules and the conditions attaching to such authorisations, approvals, permits, licenses or consents and with any laws, rules, regulations or requirements of all relevant governments, agencies, bodies or institutions so far as they relate to the performance by the User of his duties and obligations hereunder, and he covenants to inform Zignaly of any actual or likely change in such status;",
+    "c) understands and acknowledges the risks and consequences of performance by him of duties and obligations hereunder;",
+    "d) all personal data submitted by the User to Zignaly is valid and accurate;",
+    "e) the acceptance of these Terms and the performance of his obligations hereunder do not conflict with, nor result in a breach of, or constitute a default under, the terms of any other, agreement, arrangement or understanding to which the User may be a party;",
+    "f) has a practical experience in effecting trading transactions in the Digital Assets and Digital Asset Derivatives;",
+    "g) shall operate in good faith;",
+    "h)shall assure full confidentiality of access details to the Account; and",
+    "i) shall not “churn the trading account” (or in other words open and close many trades for the purpose of gaining commission rebates).",
+    "6.13. Undertakings of PAMM Managers, Copy Traders and Signal Providers. User registered by Zignaly as a PAMM Manager, Signal Provider and/or Copy Trader undertakes:",
+    "a) not to use Zignaly’s name, trademark, logo or any other intellectual property in any documents, websites or any other material without the prior written consent of Zignaly;",
+    "b) not to write and/or distribute and/or assist in writing and distribution of any materials concerning Zignaly (notes, articles, etc.) to any printed and electronic media (including but not limited to blogs, Internet forums, etc.) without prior written consent of Zignaly;",
+    "c) not to give any guarantees and/or make any promises, any statements and/or representations on behalf of Zignaly regarding the Account, particularly, using Zignaly’ name and/or trademark of Zignaly;",
+    "d) not to make any false or misleading statement about his Account;",
+    "e) not to make any other actions which may cause any damage to Zignaly or entail any claims against Zignaly laid by third parties;",
+    "f) not to make any claim to Zignaly for any costs incurred by the Signal Provider and/or Copy Traer;",
+    "g) to disclose to Zignaly details of any investigation by any regulatory body/authority into the PAMM Manager’s, Signal Provider’s and/or Copy Trader’s affairs and the details of any past investigation into the PAMM Manager’s, Copy Trader’s and Signal Provider’s affairs by any regulatory body/authority and details of any sanctions or penalties imposed on the PAMM Manager, Copy Trader and/or Signal Provider by any legal or regulatory body/authority within the past 5 (five) years;",
+    "h) not to represent himself as Zignaly’s affiliate or agent or contractor or employee, publicly or otherwise, in contracts and agreements either verbally or in writing;",
+    "i) not to assume any obligations before third parties on behalf of Zignaly and shall not put Zignaly under any obligations; and",
+    "j) to resolve all disputes and claims from third parties related to his activities in the capacity of PAMM Manager, Signal Provider and/or Copy Trader individually, using his own efforts and at his own expense.",
+    "If in the result of the Signal Provider’s failure to fulfil any of the obligations listed in this Section any claims or actions are laid against Zignaly, the PAMM Manager, Copy Trader and/or Signal Provider undertakes to reimburse all the costs incurred by Zignaly in full measure. In such events, all PAMM Managers, Copy Traders’ and/or Signal Providers’ withdrawal requests will be cancelled by Zignaly and will not be executed until the full resolution of all disputes.",
+    "6.14. Success Fees and Subscription Fees. PAMM Managers may charge commissions in the form of Success Fees on trading profits (“ Success Fees” ). Success Fees are set by PAMM Managers at their own discretion. Copy Traders and Signal Providers may charge monthly subscription payments (“ Subscription Fees ”) to Users at their own discretion. Users accessing and using PAMM Accounts, Crypto Trading Bot and/or the Copy Trading Software agree to pay the Success Fees and/or Subscription Fees, and authorize Zignaly to deduct such Success Fees from their trading profits or Account’s Digital Asset Wallet balance, as the case may be. PAMM Managers, Copy Traders and Signal Providers acknowledge, understand and agree that Zignaly may impose limits on the Subscription and/or Success Fees and/or may deny eligibility of PAMM Managers, Copy Traders or Signal Providers to receive Success Fees and/ or Subscription Fees at Zignaly’s own discretion without prior notice and without any liability whatsoever. PAMM Managers, Copy Traders and Signal Providers acknowledge, understand and agree that they shall have no claim to Zignaly in the event of Zignaly changing the eligibility to receive Success Fees and/or Subscription Fees, or denying eligibility or payment of any Success Fees and/or Subscription Fees. Users, PAMM Managers, Copy Traders and Signal Providers acknowledge and agree that Zignaly reserves the right to charge and receive commissions from the Success Fees, the Subscription Fees, or the trading profits accrued by the User arising from the use of the Crypto Trading Bot, the Copy Trading Software, or the PAMM Account.",
+    "6.15. Claims. If Zignaly has grounds for supposing the action of a PAMM Manager as a violation of these Terms, Zignaly reserves the right on its discretion to use the Digital Assets of the PAMM Manager to meet the claims of Users who have placed their Digital Assets to the PAMM Account managed by the PAMM Manager..",
+    "6.16. No Complaints. Zignaly will not accept any complaints nor compensation requests for the performance of the Copy Traders, Signal Providers, PAMM Managers, and/or PAMM Accounts.",
+    "7. ACCOUNT",
+    "7.1. Identity Verification . When you use or access the Services or register an Account, we will ask for your name, physical address, mailing address, date of birth, and other information, and documents that will allow us to identify you in line with the KYC/AML & CTF Policy. When you register and maintain an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your Account. You also agree to provide us, when registering an Account and as requested on an ongoing basis, with any additional information For the purposes of identity verification and the detection and prevention of money laundering, terrorist financing, fraud, or any other financial crime, including without limitation, a copy of your government-issued photo ID, a photography of you holding your government-issued photo ID, a video-verification of you holding your government-issued photo ID, evidence of your residential address (such as a utility bill), evidence of the source of funds, evidence of the source of wealth, and evidence of your good character. You authorize us to keep a record of such information and to make the inquiries, whether directly or through third parties, that we consider necessary to verify your identity or protect you and others against fraud or other financial crime, and to take action we reasonably deem necessary based on the results of such inquiries. When we carry out these inquiries, you acknowledge and agree that your personal information may be disclosed to regulatory or enforcement agencies.",
+    "7.2. Security of your Account . You are exclusively responsible for maintaining the confidentiality and security of the credentials for accessing your Account or devices you use to access and/or use the Services, and for ensuring that no unauthorized person has access to your Account, or any device that you utilize in connection with the Services. We shall not be liable for any loss or damage arising from your failure to protect your Account.",
+    "7.3. Prohibited Activities . In connection with your access and/or use of the Account or the Services, you shall not:",
+    "a)use the Services for resale or commercial purposes, including transactions on behalf of other persons or entities;",
+    "b) violate or assist any party in violating any law, statute, ordinance, regulation or any rule of any self-regulatory or similar organization of which you are or are required to be a member through your access and/or use of the Services;",
+    "c) engage in any trading activity which, in our sole discretion, amounts to or may amount to market abuse including without limitation pumping and dumping, entering fictitious transactions or wash trading, front running, bear raiding or engaging in disorderly market conduct;",
+    "d) enter into non-competitive transactions on the Trading Platform for the purpose of assisting another person to engage in transactions that are in violation of the Terms or any applicable laws or regulations;",
+    "e) engage in any trading, practice, or conduct on the Trading Platform that is commonly known as “spoofing” (bidding or offering with the intent to cancel the bid or offer before execution).",
+    "f) engage in any money laundering, terrorism financing or fraduluent activity;",
+    "g) infringe upon our Intellectual Property Rights or any third party’s copyright, patent, trademark, or other intellectual property rights;",
+    "h) take any action that imposes an unreasonable or disproportionately large load on our infrastructure, or detrimentally interfere with, intercept, or expropriate any system, data or information;",
+    "i) transmit or upload any material to the Website and/or through the Services, that contains viruses, Trojan horses, worms, or any other harmful or deleterious programs;",
+    "j) attempt to gain unauthorized access to or use of the Website, the Services, the APIs, other Accounts, or computer systems connected to the Services;",
+    "k) use any deep linking, web crawlers, bots, spiders or other automatic devices, programs, scripts, algorithms or methods, or any similar or equivalent manual processes to access, obtain, copy or monitor any part of the properties, or replicate or bypass the navigational structure or presentation of the Website, the Trading Platform or the Services;",
+    "l) probe, scan or test the vulnerabilities of the Website and/or the Services or any network connected to the properties, or violate any security or authentication measures on the Website and/or the Services;",
+    "m) provide false, inaccurate, incomplete or misleading information;",
+    "n) distribute unsolicited or unauthorized advertising or promotional material, written media releases, public announcements and public disclosures, junk mail, spam or chain letters;",
+    "o) use a web crawler or similar technique to access our Services or to extract data;",
+    "p) reverse engineer or disassemble any aspect of the Website, APIs, or the Services in an effort to access any source code, underlying ideas and concepts and algorithms;",
+    "q) perform any unauthorized vulnerability, penetration or similar testing on the API;",
+    "r) attempt to gain unauthorized access to or use of the Website, other Accounts, computer systems, or networks connected to the Website, through password mining or any other means;",
+    "s) transfer any rights granted to you under these Terms; or",
+    "t) engage in any behavior which violates the Terms or is otherwise deemed unacceptable by us in our sole discretion.",
+    "7.4. Digital Assets Wallet. Zignaly does not hold custody of the Digital Assets held in the Digital Assets’ wallet accessible through your Account. Digital Assets are held in the Digital Asset Exchange, accessible either through your External Exchange Account or your Exchange Sub-Account. Using the Digital Assets’ wallet of your Account is at all times your responsibility and is at your own risk. is at all times your responsibility and is at your own risk. We shall not be liable for, and you shall assume full liability for, the loss of Digital Assets held in or transferred from or to your Account, including, but not limited to, unauthorized access by a third party, loss or violation of your passwords, private keys or mistakes or errors derived from transferring from and to wrongs Digital Asset public keys or addresses, or derived from a mismatch between the distributed ledger network of the sender address or public key and the recipient address or public key (“ Blockchain Mismatch ”). In the case of a loss of Digital Assets due to Blockchain Mismatch occurs when transferring Digital Assets to your Account, Zignaly is not responsible for any losses or fortaking any actions to attempt to recover such Digital Assets. The User acknowledges, understands and agrees that Digital Assets lost due to a Blockchain Mismatch are not recoverable by Zignaly.",
+    "7.5. Withdrawal of Digital Assets. You may withdraw your available Digital Assets from your Account, provided that i) you execute a withdrawal request; and (ii) your withdrawal request exceeds the minimum withdrawal requirement as determined by Zignaly from time to time. We are not responsible, nor liable, for any distributed ledger network fees (also known as “gas”) that may apply to your withdrawal request or otherwise your transfer of Digital Assets from your Account. You acknowledge, understand and agree that we may not be able to immediately execute any withdrawal request. Although we shall use our best efforts to execute a withdrawal request within reasonable time, we make no commitment or guarantee with respect to the processing time to execute a withdrawal request. We are not liable for any damages incurred due to a delay in executing your withdrawal request.",
+    "7.6. Dormant Accounts and Unclaimed Property. In the event, there are Digital Assets in your Exchange Sub-Account, and we are unable to contact you and have no record of your access and/or use of the Services for a period of time, we may be required by law to report these Digital Assets as unclaimed property to the relevant Digital Asset Exchange or the relevant jurisdiction. If this occurs, we will attempt to locate you at the last known address in our records (if any), but if we are unable to locate you, we are not responsible for the actions taken by the Digital Asset Exchange, and we may need to report the Digital Assets to the applicable jurisdiction as unclaimed property. We reserve the right to deduct a dormancy fee or other administrative charges from such unclaimed Digital Assets.",
+    "7.7. Account History. A historical record of your transactions on your Account (” Account History “) may be available on your Account. You acknowledge, understand and agree that the Account History shall not be treated as a valuation of your Account. We use commercially reasonable efforts to ensure that the information contained in your Account History and any notices Zignaly provides to you are accurate and reliable; however, errors may occur from time to time and such errors do not impact the actual means and results of a given transaction. It is your sole responsibility to review your Account History and any notices. Any transaction listed in your Account History, or other communication including, but not limited to, orders, trades or other receipts sent to your email on record shall be deemed and treated as authorized, correct, approved, and confirmed by you unless we receive written notice to the contrary within three (3) business days from the date the transaction was listed or the communication was sent (as the case may be).",
+    "7.8. Forks. Digital Assets are based on an open source protocol. Anyone may clone the source code of the Digital Asset and develop a diverging blockchain protocol without prior permission by anyone else, also known as “Forks”. Forks can be made to any Digital Asset that may change the usability, functions, value or even name of a given Digital Asset. Such Forks may result in multiple versions of a Digital Asset Asset and could lead to the dominance of one or more such versions of a Digital Asset Asset (each a “ Dominant Digital Asset ”) and the partial or total abandonment or loss of value of any other versions of such Digital Asset (each a “ Non Dominant Digital Asset ”). Zignaly is under no obligation and may not be able to support a Fork of a Digital Asset that you hold through your Account, whether or not any resulting version of such forked Digital Asset is a Dominant Digital Asset or Non-Dominant Digital Asset or holds value at or following such Fork. Furthermore, as Zignaly does not hold custody of the Digital Assets, we cannot guarantee and assume no responsibility on whether a given Digital Asset Exchange supports a given Fork. If the Digital Asset Exchange does not support the Fork, you may not be able to receive the Digital Assets arising from such Fork. Forks of Digital Assets can be frequent, contentious and unpredictable, and therefore cannot be consistently supported on Zignaly. When trading or holding Digital Assets using your Account, you should operate under the assumption that Zignaly and/or the Digital Asset Exchanges will never support any Fork of such Digital Asset. If Zignaly or the Digital Asset Exchanges elect, in their sole discretion, to support a Fork of a Digital Asset, it may choose to do so by making a public announcement through the Website or the Digital Asset Exchanges respective sites, or otherwise notifying Users, and shall bear no liability for any real or potential losses that may result based on the decision to support such Fork or the timing of implementation of support. If Zignaly and/or the Digital Asset Exchanges, in their sole discretion, do not elect to support a Fork of a given Digital Asset, including the determination to support, continue to support, or cease to support any Dominant Digital Asset or Non Dominant Digital Asset, Zignaly assumes no responsibility or liability whatsoever for any losses or other issues that might arise from an unsupported Fork of a Digital Asset",
+    "8. GENERAL USE, PROHIBITED USE AND TERMINATION",
+    "8.1. Limited License . We grant you a revocable, limited, royalty-free, non-exclusive, non-transferable, and non-sublicensable license to access and use the Services through your Internet compatible devices for your personal/internal purposes subject to the terms of this Agreement, to access and use the Website and the Services solely for approved purposes as permitted by Zignaly from time to time. You hereby agree that when you use the Services, Zignaly does not transfer the Services or any Intellectual Property Rights to you.",
+    "8.2. Accuracy of the Website, the Services, and Related Medi a. Although we intend to provide accurate and timely information, the Content may not always be entirely accurate, complete or current and may also include technical inaccuracies or typographical errors. In an effort to continue to provide you with as complete and accurate information as possible, information may be changed or updated from time to time without notice, including without limitation information regarding our terms, policies, products and services. Accordingly, you should verify all information before relying on it, and all decisions based on information contained on the Website, the Trading Platform or otherwise drawn from the Content are your sole responsibility and we shall have no liability for such decisions. Links to unaffiliated third-party materials (including without limitation websites and unaffiliated third parties) may be provided as a convenience but are not controlled by us. You acknowledge and agree that we are not responsible for any aspect of the information, content, or services contained in any unaffiliated third-party materials or on any unaffiliated third party sites accessible or linked to the Website or the Services.",
+    "8.3. Unaffiliated Third-Party Access. If, to the extent permitted by Zignaly from time to time, you grant express permission to an unaffiliated third party to access to your Account, you acknowledge that granting permission to an unaffiliated third party to take specific actions on your behalf does not relieve you of any of your responsibilities under the Terms. You are fully responsible for all acts or omissions of any unaffiliated third party with access to your Account. Further, you acknowledge and agree that you will not hold Zignaly responsible for, and will indemnify Zignaly from, any liability arising out of or related to any act or omission of any unaffiliated third party with access to your Account.",
+    "8.4. Prohibited Use . In connection with your use of the Services, and your interactions with other users, and any unaffiliated third parties, you agree and represent you will not engage in any Prohibited Activities. We reserve the right at all times to monitor, review, retain and/or disclose any information as necessary to satisfy any applicable law, regulation, sanctions programs, legal process or governmental request. We reserve the right to cancel and/or suspend your Account if we determine, in our sole discretion, that your Account is associated with a Prohibited Activity.",
+    "8.5. Suspension, Termination, and Cancellation .",
+    "a) We may suspend, freeze, restrict, or terminate your access to any or all of the Services, and/or deactivate or cancel your Account if (i) we are so required by a facially valid subpoena, court order, or binding order of a government authority; (ii) we reasonably suspect you of using your Account in connection with a Prohibited Activity; (iii) use of your Account is subject to any pending litigation, investigation, or government proceeding and/or we perceive a heightened risk of legal or regulatory non-compliance associated with your Account activity; (iv) you take any action that Zignaly deems as breaching the Terms.",
+    "b) If Zignaly suspends, freezes, restricts or terminates your Account, and/or your access and/or use of the Services for any reason, we may provide you with notice of our actions unless a court order or other legal process prohibits Zignaly from providing you with such notice. You acknowledge that Zignaly’s decision to take certain actions, including limiting access to, suspending, or closing your Account, may be based on confidential criteria that are essential to our risk management and security protocols. You agree that Zignaly is under no obligation to disclose the details of its risk management and security procedures to you.",
+    "c) You acknowledge, understand and agree that if we determine, in our sole discretion, that you have breached the Terms, we have the right to debit from your Account (i) the value of any trading fee discounts or rebates that you have received in connection with the Terms at any time after one year preceding the date on which we become aware of you having breached the Terms and (ii) any other damages suffered by us as a result of you breaching the Terms.",
+    "d) You further acknowledge and agree that if we determine, in our sole discretion, that you have colluded, coordinated, and/or collaborated with any other User or person to breach the Terms, you and that User or person will be jointly and severally liable for the whole value of any trading fee discounts, rebates, and/or damages to which we are entitled under the Terms and any such amounts may be debited, in our sole discretion, from your account, that User’s or person’s account. We will deduct any such amounts from the respective Account(s) sufficient Digital Assets calculated by using the prevailing market price.",
+    "e) You acknowledge, understand and agree that Zignaly has the right to investigate any violation of these Terms, unilaterally determine whether you have violated these Terms, and take actions under relevant laws and regulations without your consent or prior notice.",
+    "8.6. Account Balance After Account Termination . When the Account is terminated, the remaining Account balance will be used to settle the charges and liabilities owed to Zignaly. Upon payment of all outstanding charges and liabilities owed to Zignaly (if any), User will have ten (10) business days to withdraw the Digital Assets from the Account. In case that the Account termination is due to fraud, violation of the law, money laundering, terrorist financing or a breach of these terms, we reserve the right to maintain full custody of the Digital Assets which may be seized by government or enforcement authorities.",
+    "8.7. Relationship of the Parties . Nothing in this Agreement shall be deemed or is intended to be deemed, nor shall it cause you and Zignaly to be treated as partners, joint ventures, or otherwise as joint associates for profit, or either you or Zignaly to be treated as the agent of the other.",
+    "8.8. Password Security; Contact Information . You are responsible for maintaining adequate security and control of any and all user IDs, passwords that you use to access the Services. You are strongly encouraged to use two-factor authentication in accessing the Website and the Services, and may adjust their security features in their user settings. If you suspect or become aware of any unauthorized use of your Account, you should notify Zignaly immediately. Zignaly assumes no liability for any loss or damage arising from the access and/or use of your Account by you or any third party with or without your authorization.",
+    "8.9. Taxes . It is your sole responsibility to determine whether, and to what extent, any taxes apply to any transactions you conduct in connection with the Services, and to withhold, collect, report and remit the correct amounts of taxes to the appropriate tax authorities.",
+    "9. INTELLECTUAL PROPERTY",
+    "9.1. All rights reserved . All Intellectual Property Rights relating to the Website, the Content, the User Content, and the Services are the property of Zignaly. You acknowledge that all Intellectual Property Rights of Zignaly in the Website, the Content, the User Content, and the Services shall remain the property of Zignaly.",
+    "9.2. No right to use. You are not granted any right to use, and may not use, any of the Intellectual Property Rights of Zignaly other than as set out in these Terms and subject to the following:",
+    "a) you may only view and use the Services, the Website, the Content or the User Content for your own personal use and may not copy, reproduce, republish, upload, repost, modify, transmit, distribute or otherwise use the use the Services, the Website, the Content or the User Content in any way for non-personal, public or commercial use without the prior written consent of Zignaly;",
+    "b) you may not remove or modify any copyright, trademark or other proprietary notices that have been placed in any part of the Website, the Content, the User Content, and the Services;",
+    "c) you may not modify, publish, transmit, participate in the transfer or sale of, create derivative works from, or in any way exploit, any of the Content or the User Content;",
+    "d) except as otherwise expressly permitted under copyright law, no copying, redistribution, retransmission, publication or commercial exploitation of downloaded material will be permitted without our express permission;",
+    "e) in the event of any permitted copying, redistribution or publication of copyright material, no changes in or deletion of author attribution, trademark legend or copyright notice shall be made; and",
+    "f) you may not use any data mining, robots or similar data-gathering or extraction methods.",
+    "9.3. User Content . By submitting any User Content you warrant that you are entitled to, and have all necessary Intellectual Property Rights over. We reserve the right to disclose your identity to any third party who claims that any of your User Content constitutes a violation of their Intellectual Property Rights or of their right to privacy. You hereby transfer all rights, ownership and interests of your User Content and all related intellectual property rights to Zignaly. You have no right and hereby waive any request for acknowledgment or compensation based on any User Content, or any modifications based on any User Content.",
+    "10. RISK DISCLOSURES",
+    "Trading Digital Assets and/or Digital Asset Derivatives is risky and you should never trade more than you can afford to lose. The following list of risks associated with Digital Assets, and Digital Asset Derivatives, and the Services is not exhaustive. Please read the Risk Warning for further information.",
+    "a) Digital Asset prices are highly volatile and trading in Digital Assets is extremely risky. In addition, several factors may affect market liquidity for a particular Digital Asset, such as regulatory activity, market manipulation, the acts or omissions of the issuer of the Digital Asset, or unexplainable price volatility. By using the Services, you accept the risk of trading Digital Assets, and Digital Asset Derivatives. In entering into any transaction, you represent that you have been, are, and will be solely responsible for making your own independent appraisal of the risks of the transaction and the underlying Digital Asset.",
+    "b) We do not advise on the merits of any particular Digital Assets, Digital Asset Derivatives, Copy Traders, PAMM Managers, Signal Providers and/or Digital Asset Exchanges. We do not advise on transactions, or associated risks, or provide any other financial, investment or legal advice in connection with the Services. To the extent that we do provide trading data, post market commentary, articles, or make social media posts, the act of doing so is incidental to your relationship with us and such information may not be considered as investment or financial advice and should not be construed as such. BUYING OR SELLING DIGITAL ASSETS AND/OR DIGITAL ASSET DERIVATIVES IS SOLELY THE USER’S DECISION AND WE WILL NOT BE LIABLE FOR ANY CONSEQUENT LOSS.",
+    "c) The availability of a Copy Trader or a Signal Provider via the Services does not indicate our approval or disapproval of their merits. We give no warranty as to the suitability or reliability of the Copy Trader or Signal Providers, and we owe no fiduciary duty in our relations with you. You must conduct your own due diligence.",
+    "d) No brokerage of transactions or provision of investment advice. We provide a software and platform for connecting Users to Copy Traders, Signal Providers, PAMM Managers and Digital Asset Exchanges. Although we may have a certain degree of control over your Exchange Sub-Accounts maintained under our Exchange Master Account, and that your trades executed under the Exchange Sub-Accounts are booked in your segregated account of the Exchange Master Account , we do not broker transactions on your behalf. Our Relationship does not constitute a Broker-Client Relationship. We do not act as a principal, counterparty, or market-maker in the transactions effected through trading using the Services or in providing financing for financed trading on the Trading Terminal.",
+    "e) Users choosing to configure any number or type of trading signals made available by Signal Providers do so with the understanding that Zignaly may not be held responsible for any delayed, failed, or incorrectly transmitted notification. A trading signal may not successfully reach the user for any number of reasons, such as the failure of servers. Even without such failure or delay of an alert, the validity and usefulness of the information represented in a successfully transmitted alert of a trading signal may be diminished due to market volatility, incorrect pricing or other information sourced from a Digital Asset Exchange, or other unforeseen technical issues or market conditions. In particular, a Digital Asset or Digital Asset Derivative may be temporarily or permanently delisted from a Digital Asset Exchange without notice, or support for certain Digital Assets, Digital Asset Derivatives and/or Digital Asset Exchanges may become unavailable, in which case related trading signals may have diminished utility.",
+    "f) Zignaly expressly states to the User that it does not guarantee profit or the recurrence of rates of return that have been made by the PAMM Manager, Copy Trader and/or Signal Provider in the past and warns that no positive record of trading strategy implementation ensures the repeat of trading success in the future.",
+    "g) A PAMM Manager can disrupt the obligation to manage the PAMM Accounts with respect to the best interests of Users, which we may not have the information, so that the funds invested to a PAMM Account, can be lost.",
+    "h) The User bears financial responsibility for any losses incurred on the Account as a result of the trading signals of the Signal Providers and/or the trading activities of the Copy Traders and/or the PAMM Managers.",
+    "i) The User accepts full responsibility for any and all financial losses such as direct losses or profit losses resulting from the following risks: i) risk that the PAMM Manager, Copy Trader and/or Signal Provider does not possess the necessary qualification (if required) or knowledge necessary to carry out trading activities; ii) risk that the PAMM Manager, Copy Trader and/or Signal Provider may carry out fraudulent operations using the Services functionality; iii) risk that the Copy Trader, PAMM Manager, Signal Provider may lose control over the Account and third parties may gain access to the Account; iv) risk that the User may misunderstand or misinterpret these Terms; v) risk of the Copy Trader, User, PAMM Manager, Signal Provider Account closure.",
+    "j)We do not guarantee continuous, uninterrupted or secure access to any part of the Services, and operation of our Website or Services may be interfered with by numerous factors outside of our control, including regulatory reasons and issues with various Blockchain networks.",
+    "k) Zignaly provides the Trading Terminal, an interface that connects users to Digital Asset Exchanges. However, Zignaly does not operate a Digital Asset Exchange. We do not administer the underlying trading platforms of the Digital Asset Exchanges for the bids or offers and we do not enforce contracts among parties engaged in financing activities available on those Digital Asset Exchanges through the Trading Terminal. The underlying trading platform of the Trading Terminal is administered and operated by the Digital Asset Exchange. We shall in no event be held liable for any loss or other damages, including but not limited to special, incidental, consequential, or other damages arising from the acts of any operator of the Digital Asset Exchange. You are responsible for understanding the Terms and Conditions of the operators of the Digital Asset Exchanges.",
+    "l) Zignaly does not provide custodial services. Digital Assets maintained in your Zignaly account are either maintained in your External Exchange Account and/or your Exchange Sub-Account under the Exchange Master Account from a Digital Asset Exchange. You acknowledge, understand and agree that Zignaly shall not be held liable for losses arising from any security issues of the Digital Asset Exchanges or from any actions taken by the Digital Asset Exchanges.",
+    "m) Although Zignaly uses its best efforts to conduct comprehensive due diligence on the Digital Asset Exchanges available in the Trading Terminal, these Digital Asset Exchanges may be unregulated exchanges and their practices may vary widely, including as to their security, encryption, and liability for losses. Digital Asset Exchanges may not be required to comply with any rules regarding wash trading, insider trading, promoting price discovery, insuring losses, protecting against fraud, ensuring anti-money laundering compliance, and many other salient features. Digital Asset Exchanges may carry on fraudulent operations or fronts for fraudulent schemes and be in a jurisdiction where there is no likelihood of recovery or recompense. Digital Asset Exchanges could provide incorrect, delayed, or otherwise flawed data for a variety of reasons, including as a result of software bugs and the aforementioned limited oversight on markets for cryptocurrencies. Such poor data could misinform the User trading strategies or engender inaccurate price discovery mechanisms. Errors, fraud, and other issues with Digital Asset Exchanges have resulted in extensive, irretrievable losses on multiple occasions in the recent past. The underlying software and mechanisms for the Digital Asset Exchanges could malfunction, executing trades for the Users at faulty prices and adversely affecting the Users’ investments. Digital Asset Exchanges could choose to roll back trades to the benefit of other parties but to the detriment of the Users. In general, errors and unreviewable decisions by the exchanges could adversely impact the value of the investment of the Users.",
+    "11. LIQUIDATION OF ACCOUNTS AND PAYMENT OF DEFICIT BALANCES",
+    "In the event of:",
+    "a) the death or judicial declaration of incompetence of the User;",
+    "b) the filing of a petition in bankruptcy, or a petition for the appointment of a receiver, or the institution of any insolvency or similar proceeding by or against User;",
+    "c) User’s failure to provide us with any information requested pursuant to these Terms or any applicable law; or",
+    "d) any abuse of trading practices, manipulations and/or fraud by User or any other person authorized to use the account; or",
+    "e) any other circumstances or developments that we deem appropriate for its protection, and in Zignaly’s sole discretion,",
+    "Zignaly reserves the right to satisfy any obligation User may have, either directly or by way of guaranty of suretyship, out of any of User’s funds held in the Exchange Sub-Account. This action may be taken without prior notice of sale or purchase or other notice to User, User’s personal representatives, heirs, executors, administrators, trustees, legatees or assigns and regardless of whether the ownership interest shall be solely User’s or held jointly with others.",
+    "12. INDEMNIFICATION",
+    "You agree to indemnify and hold Zignaly, its subsidiaries, affiliates, agents, employees, agents, successors and assigns (” Zignaly Entities” ) harmless from and against any and all liabilities, losses, damages, costs and expenses, including attorney’s fees, incurred by any of Zignaly Entities arising out of User’s failure to fully and timely perform User’s obligations herein or under any Third Party License or should any of User’s representations and warranties fail to be true and correct. You also agree to pay Zignaly Entities promptly all damages, costs and expenses, including attorney’s fees, incurred in the enforcement of any of the provisions of these Terms and any other agreements between Zignaly and the User. In addition to any limitations of liability specified elsewhere in these Terms, Zignaly Entities shall not be held liable and are released from all claims and losses incurred in such regard if the claim or loss was caused or contributed to by:",
+    "a) The actions or omission to act on the part of User;",
+    "b) Any act or omission by any person obtaining access to User’s account, whether or not User has authorized such access or not;",
+    "c) System malfunction, equipment failure (whether User’s equipment or Zignaly’s equipment), system interruption or system unavailability;",
+    "d) Delays, failure or errors in implementing any instruction;",
+    "e) Inaccurate or incomplete instructions received by Zignaly’s from User, or",
+    "f) Any reliance or use by User or any other third party with access to User’s account of any financial and market data, quotes, news, analyst opinions, research reports, graphs or any other data or information whatsoever available through the trading platform or any Third Party License, whether to complete a transaction on the trading platform or for any other purpose whatsoever.",
+    "Zignaly Entities reserve the right to exercise sole control over the defense, at your expense, of any claim subject to indemnification under this section.",
+    "13. DISCLAIMER OF WARRANTIES / LIMITATION OF LIABILITY",
+    "13.1 Zignaly Entities shall not be responsible for any loss or damage caused, directly or indirectly, by any events, actions or omissions beyond the control of Zignaly including, without limitation, loss or damage resulting, directly or indirectly, from any delays or inaccuracies in the transmission of orders and/or information due to breakdown or failure of transmission or communication facilities, or electrical power outage.",
+    "13.2. Neither Zignaly nor any of its subsidiaries, affiliates or agents warrants that the Website and/or the Services will be available without interruption or will be error free and such Website and/or Services are being provided “AS IS” without any representation or warranty of any kind whatsoever except as otherwise set forth herein.",
+    "13.3. Under no circumstances shall Zignaly or any of its subsidiaries, affiliates or agents be liable for any direct, indirect, punitive, incidental, special, or consequential damages that result from the use of, or inability to use, the Website and/or Services including but not limited to lost profits, loss of business, trading loss, loss of data or use of data, any unauthorized access to, alteration, theft or destruction of User’s computers, computer systems, data files, programs or information, or costs of procurement of substitute goods or services.",
+    "13.4. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, YOU EXPRESSLY UNDERSTAND AND AGREE THAT IN NO EVENT WILL ZIGNALY ENTITIES AND THEIR RESPECTIVE SHAREHOLDERS, MEMBERS, DIRECTORS, OFFICERS, EMPLOYEES, ATTORNEYS, AGENTS, REPRESENTATIVES, SUPPLIERS OR CONTRACTORS BE LIABLE FOR ANY INCIDENTAL, INDIRECT, SPECIAL, PUNITIVE, CONSEQUENTIAL OR SIMILAR DAMAGES OR LIABILITIES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF DATA, INFORMATION, REVENUE, PROFITS OR OTHER BUSINESSES OR FINANCIAL BENEFITS) ARISING OUT OF THE SERVICES, ANY PERFORMANCE OR NON-PERFORMANCE OF THE SERVICES, OR ANY OTHER PRODUCT, SERVICE OR OTHER ITEM PROVIDED BY OR ON BEHALF OF ZIGNALY ENTITIES WHETHER UNDER CONTRACT, STATUTE, STRICT LIABILITY OR OTHER THEORY EVEN IF THE ZIGNALY ENTITIES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES EXCEPT TO THE EXTENT OF A FINAL JUDICIAL DETERMINATION THAT SUCH DAMAGES WERE A RESULT OF ZIGNALY ENTITIES GROSS NEGLIGENCE, FRAUD, WILLFUL MISCONDUCT OR INTENTIONAL VIOLATION OF LAW.",
+    "NOTWITHSTANDING THE FOREGOING, IN NO EVENT WILL THE LIABILITY OF ZIGNALY ENTITIES AND THEIR RESPECTIVE SHAREHOLDERS, MEMBERS, DIRECTORS, OFFICERS, EMPLOYEES, ATTORNEYS, AGENTS, REPRESENTATIVES, SUPPLIERS OR CONTRACTORS ARISING OUT OF THE SERVICES OFFERED BY OR ON BEHALF OF ZIGNALY ENTITIES, ANY PERFORMANCE OR NON-PERFORMANCE OF THE SERVICES, OR ANY OTHER PRODUCT, SERVICE OR OTHER ITEM, WHETHER UNDER CONTRACT, STATUTE, STRICT LIABILITY OR OTHER THEORY, EXCEED THE AMOUNT OF THE FEES PAID BY YOU TO ZIGNALY ENTITIES UNDER THESE TERMS IN THE TWELVE-MONTH PERIOD IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM FOR LIABILITY.",
+    "IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE SERVICES OR WITH THIS AGREEMENT, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USE OF THE SERVICES AND CLOSE YOUR ACCOUNT. THE SERVICES ARE PROVIDED “AS IS” AND WITHOUT ANY REPRESENTATION OR WARRANTY, WHETHER EXPRESS OR IMPLIED. ZIGNALY ENTITIES SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT. THE ZIGNALY ENTITIES MAKE NO WARRANTY THAT (I) THE SERVICES WILL MEET YOUR REQUIREMENTS, (II) THE SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, OR (III) THE QUALITY, SUITABILITY AND PERFORMANCE OF ANY DIGITAL ASSETS, DIGITAL ASSET DERIVATIVES, THE SERVICES, INFORMATION, OR OTHER MATERIAL PURCHASED OR OBTAINED BY YOU WILL MEET YOUR EXPECTATIONS. THE SERVICES ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS WITHOUT ANY REPRESENTATION OR WARRANTY, WHETHER EXPRESS, IMPLIED OR STATUTORY. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ZIGNALY ENTITIES SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND/OR NON-INFRINGEMENT. ZIGNALY ENTITIES DO NOT MAKE ANY REPRESENTATIONS OR WARRANTIES THAT ACCESS TO THE WEBSITE, ANY PART OF THE SERVICES, THE TRADING PLATFORM, MOBILE APPLICATIONS OR ANY OF THE MATERIALS CONTAINED THEREIN, WILL BE CONTINUOUS, UNINTERRUPTED, TIMELY, OR ERROR-FREE. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU.",
+    "14. NO WAIVER",
+    "From time to time, Zignaly may fail to require or strictly enforce compliance with relation to any provision in these Terms. Zignaly may also fail to exercise any or all of its rights empowered herein. Any such failure shall not be construed as a waiver or relinquishment of Zignaly’s right to assert or rely upon any such provision or right in that or in any other instance. If applicable, an express waiver given by Zignaly of any condition, provision, or requirement of these Terms shall not constitute a waiver of any future obligation to comply with such condition, provision or requirement.",
+    "15. GOVERNING LAW AND JURISDICTION",
+    "These Terms, and any terms announced on the Website are governed and shall be governed by and construed in accordance with the laws of Saint Vincent and the Grenadines without giving effect to any conflict of laws principles that may provide for the application of the law of another jurisdiction.",
+    "You agree to submit any Dispute (as defined below) to arbitration in accordance with the terms of Section 16. To the extent that the agreement to arbitrate is ineffective or void, you agree to submit to the non-exclusive jurisdiction of the courts of Saint Vincent and the Grenadines.",
+    "16. SUBMISSION TO ARBITRATION",
+    "Any dispute, claim, suit, action, cause of action, demand, or proceeding arising out of or related to these Terms, and any terms announced on the Website (including with respect of their validity, existence, or termination), any Services, action or transaction under or contemplated by these Terms, (any “Dispute”) that is not settled by you and Zignaly within 30 days from the date that either party notifies the other party in writing of the Dispute shall be referred to and finally settled by arbitration. Further, the parties hereby agree that:",
+    "a) To attempt informal resolution prior to any demand for arbitration for at least 30 days before initiating any arbitration or court proceeding. Such informal negotiations commence upon receipt of written notice from you. If we cannot resolve the dispute on an informal basis, you and we agree that any dispute arising under this Agreement shall be finally settled in binding arbitration, on an individual basis;",
+    "b) That any dispute, controversy or claim arising out of or relating to the Terms, or the breach, termination or invalidity thereof, shall be settled by arbitration in accordance with the London International Arbitration Centre (“IAC”) rules;",
+    "c) That the number of arbitrators shall be one;",
+    "d) That the place of arbitration shall be the IAC, unless the Parties agree otherwise;",
+    "e) That the language to be used in the arbitral proceedings shall be English;",
+    "f) That the courts in Saint Vincent and the Grenadines have exclusive jurisdiction over any appeals of an arbitration award and over any suit between the parties not subject to arbitration;",
+    "g) That the arbitrator has the authority to grant any remedy that would otherwise be available in court; and",
+    "h) That the parties shall split the costs and expenses of any arbitration and bear their own legal costs and expenses.",
+    "17. WAIVER OF CLASS ACTION RIGHTS AND CLASS WIDE ARBITRATION",
+    "You and Zignaly agree that any claims relating to these Terms or to your relationship with Zignaly as a User of the Services (whether based in contract, tort, statute, fraud, misrepresentation, or any other legal theory, and whether the claims arise during or after the termination of these Terms) shall be brought against the other party in an arbitration on an individual basis only and not as a plaintiff or class member in a purported class or representative action. You and Zignaly further agree to waive any right for such claims to be brought, heard, or arbitrated as a class, collective, representative, or private attorney general action, to the extent permissible by applicable law. You agree not to join with any other individual or entity or group of individuals or entities for the purpose of seeking to resolve the respective Disputes on a consolidated or representative basis.",
+    "18. PRIVACY POLICY",
+    "The Privacy Policy of Zignaly can be found here",
+    "19. MISCELLANEOUS",
+    "17.1. Assignment . You may not assign any rights and/or licenses granted under these Terms. We reserve the right to assign our rights without restriction, including without limitation to any of our affiliates or subsidiaries, or to any successor in interest of any business associated with the Services. Any attempted transfer or assignment in violation hereof shall be null and void. Subject to the foregoing, this Agreement will bind and inure to the benefit of the parties, their successors and permitted assigns.",
+    "17.2. Severability . If any provision of the Terms shall be determined to be invalid or unenforceable under any rule, law or regulation or any governmental agency, local, state, or federal, such provision will be changed and interpreted to accomplish the objectives of the provision to the greatest extent possible under any applicable law and the validity or enforceability of any other provision of the Terms shall not be affected.",
+    "17.3. Force Majeure. We shall have no liability for any failure or delay resulting from any abnormal or unforeseeable circumstances outside our reasonable control, the consequences of which would have been unavoidable despite all efforts to the contrary, including without limitation governmental action or acts of terrorism, war, earthquake, fire, flood, or other acts of God, labor conditions, delays or failures caused by problems with another system or network, mechanical breakdown or data-processing failures or where we are bound by other legal obligations.",
+    "17.4. Survival. Upon termination of your account or this Agreement for any other reason, all rights and obligations of the parties that by their nature are continuing will survive such termination.",
+    "17.5. Third Party Rights . The Terms are not intended and shall not be construed to create any rights or remedies in any parties other than you and us and any affiliates which each shall be a third party beneficiary of the Terms, and no other person shall assert any rights as a third party beneficiary hereunder.",
+    "USER ACKNOWLEDGES HAVING RECEIVED, READ AND UNDERSTOOD THE FOREGOING TERMS AND HEREBY AGREES TO BE BOUND BY ALL OF THE TERMS AND CONDITIONS HEREOF."
+  ]
+}

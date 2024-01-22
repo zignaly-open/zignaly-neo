@@ -323,6 +323,9 @@ export const OlList = styled('ol')`
   & li {
     list-style: decimal;
   }
+  li {
+    padding-left: 5px;
+  }
   margin-left: 20px;
 `;
 
