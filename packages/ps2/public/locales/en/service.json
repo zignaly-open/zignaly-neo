@@ -28,7 +28,13 @@
     "base-currency": "Base currency:",
     "funds-allocated": "Funds allocated:",
     "success-fee": "Success fee:",
+    "exchange": "Exchange:",
     "tags": "Tags:"
+  },
+  "exchanges": {
+    "binance": "Binance",
+    "deribit": "Deribit",
+    "bybit": "ByBit"
   },
   "periods": {
     "7d-full": "1 Week",

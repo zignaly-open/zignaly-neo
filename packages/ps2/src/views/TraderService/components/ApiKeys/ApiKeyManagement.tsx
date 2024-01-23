@@ -11,6 +11,8 @@ import EditApiKey from './modals/EditApiKey';
 import { ServiceApiKey } from 'apis/serviceApiKey/types';
 import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
+import { useServiceDetails } from '../../../../apis/service/use';
+import { servicesThatAllowKeyCreation } from '../../../../apis/service/constants';
 
 const ApiKeyManagement: React.FC = () => {
   const { t } = useTranslation(['management', 'action']);
@@ -21,6 +23,7 @@ const ApiKeyManagement: React.FC = () => {
     isFetching,
     data: keys,
   } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
+  const { data: serviceData } = useServiceDetails(serviceId);
 
   return (
     <>
@@ -50,6 +53,16 @@ const ApiKeyManagement: React.FC = () => {
         >
           <ZigButton
             id={'service-api__create-key'}
+            disabled={
+              !servicesThatAllowKeyCreation?.includes(serviceData?.exchange)
+            }
+            tooltip={
+              servicesThatAllowKeyCreation?.includes(serviceData?.exchange)
+                ? null
+                : t('no-api-key-management-in-this-exchange', {
+                    exchange: serviceData?.exchange,
+                  })
+            }
             onClick={() =>
               showModal(CreateApiKey, {
                 serviceId,

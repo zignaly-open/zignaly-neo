@@ -1,3 +1,5 @@
+import { ExchangeName } from '../service/types';
+
 export type MarketplaceState = {
   mobileActiveRow?: string | null;
 };
@@ -34,7 +36,7 @@ export type MarketplaceService = {
   zrisk: number;
   zscore: number;
   zservice: number;
-  exchange: string;
+  exchange: ExchangeName;
   geekMode: {
     idleDays: number;
     investorsGrowthPct: number;

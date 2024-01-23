@@ -44,6 +44,7 @@
   "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, {{ whitelabel }} will take control of your service.",
   "previousValue": "Previous Value:",
   "loading-arialLabel": "Loading management",
+  "no-api-key-management-in-this-exchange": "This option is not automatically supported yet for {{exchange}} services. Please reach our team to assist you.",
   "api-keys": {
     "title": "Trade with API",
     "description": "Create the Binance API keys for your Profit Sharing service and connect them to your favourite tool or application.",
