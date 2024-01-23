@@ -41,7 +41,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       case 'duration-day':
         return formatDuration({ days: value });
       case 'amount':
-        return '$' + formatCompactNumber(value, 0);
+        return '$' + formatCompactNumber(value, 2);
       default:
         return round(value, 2);
     }
