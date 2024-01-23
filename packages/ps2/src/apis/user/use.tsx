@@ -108,6 +108,7 @@ export const useSignup = (): [
   (payload: SignupPayload) => Promise<void>,
 ] => {
   const [loading, setLoading] = useState(false);
+  const { i18n } = useTranslation();
   const [signup] = useSignupMutation();
   const startSession = useStartSession(SessionsTypes.Signup);
 
@@ -116,7 +117,10 @@ export const useSignup = (): [
     async (payload: SignupPayload) => {
       setLoading(true);
       try {
-        const user = await signup(payload).unwrap();
+        const user = await signup({
+          ...payload,
+          language: i18n.language,
+        }).unwrap();
         await startSession({ ...user, emailUnconfirmed: true });
       } finally {
         setLoading(false);
