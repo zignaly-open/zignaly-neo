@@ -13,7 +13,7 @@ export default {
   },
   locales: ['en', 'pt', 'es'],
   endpointOverrides: {
-    'marketplace/': 'market',
+    marketplace: 'market',
   },
   minInvestment: {
     USDT: 2,

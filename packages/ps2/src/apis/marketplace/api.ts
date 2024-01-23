@@ -8,7 +8,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     providesTags: ['Marketplace'],
     query: () => ({
       // yes, / is required and it won't work withouy it
-      url: maybeOverrideEndpoint('marketplace/'),
+      url: maybeOverrideEndpoint('marketplace'),
     }),
   }),
 }));

@@ -13,7 +13,7 @@ export default {
   },
   locales: ['en', 'pt'],
   endpointOverrides: {
-    'marketplace/': 'market',
+    marketplace: 'market',
   },
   links: {
     tos: 'https://www.lastra.app/termos',

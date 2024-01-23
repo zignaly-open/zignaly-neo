@@ -13,7 +13,7 @@ export default {
     [Features.Subscriptions]: true,
   },
   endpointOverrides: {
-    'marketplace/': 'market',
+    marketplace: 'market',
   },
   mainAppLink: ROUTE_DASHBOARD,
   logo: '/images/whitelabel/qauntwise.svg',
