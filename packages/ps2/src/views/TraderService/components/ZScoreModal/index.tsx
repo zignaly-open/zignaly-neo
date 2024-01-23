@@ -25,6 +25,10 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
     category: { maxZscore },
     stats,
   } = data?.info || { category: {} };
+  const statsAugmented = {
+    ...stats,
+    beatsMarket: scoreDetails?.profits.benchmark.gives > 0,
+  };
 
   const zScoreConfig = useZScoreConfig();
 
@@ -37,7 +41,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       case 'duration-day':
         return formatDuration({ days: value });
       case 'amount':
-        return '$' + formatCompactNumber(value, 0);
+        return '$' + formatCompactNumber(value, 2);
       default:
         return round(value, 2);
     }
@@ -83,7 +87,10 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   ml='6px'
                   id={`zscore-modal__value-${category}`}
                 >
-                  {formatValue(stats[item.valueId] as number, item.valueType)}
+                  {formatValue(
+                    statsAugmented[item.valueId] as number,
+                    item.valueType,
+                  )}
                 </ZigTypography>
               </Box>
               <ZScoreBar

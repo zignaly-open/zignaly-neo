@@ -20,6 +20,9 @@ const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
  */
 const getYDomain = (data: AxisFormat[]) => {
   const values = data.map((s) => s.y);
+  if (values.length === 0) {
+    return [0, 0] as [number, number];
+  }
   // Add 0 to min values to show chart under 0 axis
   const ranges = [Math.min(0, ...values), Math.max(...values)];
   if (ranges[0] < 0 && ranges[1] > 0) {
@@ -65,8 +68,8 @@ export function useChartData(
     return [chart.map((c) => ({ ...c, y0: yDomain[0] })), yDomain];
   }, [data]);
 
-  const firstTimestamp = processedData[0].y;
-  const lastTimeStamp = processedData[data.length - 1].y;
+  const firstTimestamp = processedData[0]?.y;
+  const lastTimeStamp = processedData[data.length - 1]?.y;
   const isGreen = firstTimestamp <= lastTimeStamp;
 
   return {

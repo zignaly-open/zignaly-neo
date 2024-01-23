@@ -7,7 +7,7 @@ const TopServicesCards = ({ prefixId, services }: TopServicesCardsProps) => {
   return (
     <Grid
       container
-      columnSpacing={'48px'}
+      columnSpacing={1}
       rowSpacing={3}
       justifyContent='space-around'
       mb={'28px'}

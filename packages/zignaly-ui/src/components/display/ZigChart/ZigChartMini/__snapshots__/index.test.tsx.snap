@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ZigChartMini component tests renders ZigChartMini component with data 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-qxh7fn"
+  >
+    <div
+      class="css-1ryu3yr"
+      height="300"
+      id="test"
+    >
+      <div
+        class="VictoryContainer"
+        style="height: 100%; width: 100%; user-select: none; pointer-events: none; position: relative;"
+      >
+        <svg
+          height="300"
+          role="img"
+          style="pointer-events: all; width: 100%; height: 100%;"
+          viewBox="0 0 400 300"
+          width="400"
+        >
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: transparent; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              x2="400"
+              y1="288.99999999999994"
+              y2="288.99999999999994"
+            />
+            <g
+              role="presentation"
+            >
+              <text
+                direction="inherit"
+                dx="0"
+                id="chart-axis-0-tickLabels-0"
+                x="100"
+                y="311.9699999999999"
+              >
+                <tspan
+                  dx="0"
+                  dy="0"
+                  style="fill: transparent; font-family: 'Gill Sans', 'Seravek', 'Trebuchet MS', sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent;"
+                  text-anchor="middle"
+                  x="100"
+                >
+                  1.0
+                </tspan>
+              </text>
+            </g>
+            <g
+              role="presentation"
+            >
+              <text
+                direction="inherit"
+                dx="0"
+                id="chart-axis-0-tickLabels-1"
+                x="200"
+                y="311.9699999999999"
+              >
+                <tspan
+                  dx="0"
+                  dy="0"
+                  style="fill: transparent; font-family: 'Gill Sans', 'Seravek', 'Trebuchet MS', sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent;"
+                  text-anchor="middle"
+                  x="200"
+                >
+                  2.0
+                </tspan>
+              </text>
+            </g>
+            <g
+              role="presentation"
+            >
+              <text
+                direction="inherit"
+                dx="0"
+                id="chart-axis-0-tickLabels-2"
+                x="300"
+                y="311.9699999999999"
+              >
+                <tspan
+                  dx="0"
+                  dy="0"
+                  style="fill: transparent; font-family: 'Gill Sans', 'Seravek', 'Trebuchet MS', sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent;"
+                  text-anchor="middle"
+                  x="300"
+                >
+                  3.0
+                </tspan>
+              </text>
+            </g>
+            <g
+              role="presentation"
+            >
+              <text
+                direction="inherit"
+                dx="0"
+                id="chart-axis-0-tickLabels-3"
+                x="400"
+                y="311.9699999999999"
+              >
+                <tspan
+                  dx="0"
+                  dy="0"
+                  style="fill: transparent; font-family: 'Gill Sans', 'Seravek', 'Trebuchet MS', sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent;"
+                  text-anchor="middle"
+                  x="400"
+                >
+                  4.0
+                </tspan>
+              </text>
+            </g>
+          </g>
+          <g
+            clip-path="url(#victory-clip-2)"
+            style="height: 100%; width: 100%; user-select: none;"
+          >
+            <defs>
+              <clippath
+                id="victory-clip-2"
+              >
+                <rect
+                  height="285"
+                  vector-effect="non-scaling-stroke"
+                  width="400"
+                  x="0"
+                  y="5"
+                />
+              </clippath>
+            </defs>
+            <g>
+              <path
+                d="M0,208.14285714285714C33.333333333333336,177.82142857142856,66.66666666666666,147.49999999999997,100,127.28571428571426C133.33333333333334,107.07142857142856,166.66666666666666,86.85714285714285,200,86.85714285714285C233.33333333333334,86.85714285714285,266.6666666666667,167.7142857142857,300,167.7142857142857C333.3333333333333,167.7142857142857,366.6666666666667,86.85714285714286,400,6.000000000000003L400,288.99999999999994C366.6666666666667,288.99999999999994,333.3333333333333,288.99999999999994,300,288.99999999999994C266.6666666666667,288.99999999999994,233.33333333333334,288.99999999999994,200,288.99999999999994C166.66666666666666,288.99999999999994,133.33333333333334,288.99999999999994,100,288.99999999999994C66.66666666666666,288.99999999999994,33.333333333333336,288.99999999999994,0,288.99999999999994Z"
+                role="presentation"
+                shape-rendering="auto"
+                style="fill: url(#chart-gradient-mini-green); stroke-width: 2; stroke: none;"
+              />
+              <path
+                d="M0,208.14285714285714C33.333333333333336,177.82142857142856,66.66666666666666,147.49999999999997,100,127.28571428571426C133.33333333333334,107.07142857142856,166.66666666666666,86.85714285714285,200,86.85714285714285C233.33333333333334,86.85714285714285,266.6666666666667,167.7142857142857,300,167.7142857142857C333.3333333333333,167.7142857142857,366.6666666666667,86.85714285714286,400,6.000000000000003"
+                role="presentation"
+                shape-rendering="auto"
+                style="fill: none; stroke-width: 2; stroke: #039179;"
+              />
+            </g>
+          </g>
+          <g
+            clip-path="url(#victory-clip-3)"
+            style="height: 100%; width: 100%; user-select: none;"
+          >
+            <defs>
+              <clippath
+                id="victory-clip-3"
+              >
+                <rect
+                  height="285"
+                  vector-effect="non-scaling-stroke"
+                  width="400"
+                  x="0"
+                  y="5"
+                />
+              </clippath>
+            </defs>
+            <path
+              d="M0,288.99999999999994L400,288.99999999999994"
+              role="presentation"
+              shape-rendering="auto"
+              style="fill: transparent; stroke: grey; stroke-dasharray: 6; stroke-width: 2; stroke-opacity: 0.7;"
+            />
+          </g>
+        </svg>
+        <div
+          style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+        >
+          <svg
+            height="300"
+            style="overflow: visible; width: 100%; height: 100%;"
+            viewBox="0 0 400 300"
+            width="400"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

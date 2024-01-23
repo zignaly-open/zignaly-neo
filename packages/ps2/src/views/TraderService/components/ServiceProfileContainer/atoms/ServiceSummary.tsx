@@ -10,7 +10,7 @@ import { subMonths, subYears } from 'date-fns';
 import { numericFormatter } from 'react-number-format';
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
-  const { t } = useTranslation(['service', 'marketplace']);
+  const { t, i18n } = useTranslation(['service', 'marketplace']);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -220,6 +220,27 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               {service.tags?.length ? service.tags?.join(', ') : <>&mdash;</>}
             </ZigTypography>
           </ZigTypography>
+
+          {!!service.exchange && (
+            <ZigTypography
+              fontSize={12}
+              color={'neutral300'}
+              sx={{ mt: 0.5 }}
+              component={'p'}
+              id={'service-profile__exchange'}
+            >
+              {t('summary.exchange')}{' '}
+              <ZigTypography
+                fontSize={12}
+                color={'neutral200'}
+                id={'service-profile__exchange'}
+              >
+                {i18n.exists(`service:exchanges.${service.exchange}`)
+                  ? t(`exchanges.${service.exchange}`)
+                  : service.exchange}
+              </ZigTypography>
+            </ZigTypography>
+          )}
         </Grid>
       </Grid>
     </Box>
