@@ -34,7 +34,7 @@
   "exchanges": {
     "binance": "Binance",
     "deribit": "Deribit",
-    "bybit": "ByBit"
+    "bybit": "Bybit"
   },
   "periods": {
     "7d-full": "1 Week",
