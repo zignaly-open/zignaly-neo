@@ -3,21 +3,22 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { InvestorCounts } from './styles';
 import {
-  ZigUserIcon,
-  ZigTypography,
   ChangeIndicator,
-  ZigTable,
   createColumnHelper,
-  ZigTablePriceLabel,
-  ZigDropdown,
-  ZigDotsVerticalIcon,
-  ZigSearch,
   downloadTableCsv,
   ZigButton,
+  ZigDotsVerticalIcon,
+  ZigDropdown,
+  ZigFilters,
+  // ZigSearch,
+  ZigTable,
+  ZigTablePriceLabel,
+  ZigTypography,
+  ZigUserIcon,
 } from '@zignaly-open/ui';
 import {
-  useTraderServiceInvestors,
   useServiceDetails,
+  useTraderServiceInvestors,
   useTraderServiceManagement,
 } from '../../../../apis/service/use';
 import {
@@ -38,6 +39,9 @@ import {
   connectionStateName,
 } from '../ConnectionStateLabel/types';
 import { OpenInNew } from '@mui/icons-material';
+import { useFilteredInvestors, useInvestorFilters } from './use';
+import { usePersistTable } from '../../../../apis/settings/use';
+import { TableId } from '../../../../apis/settings/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -90,6 +94,20 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const { t } = useTranslation('investors');
   const toast = useToast();
   const exchange = useActiveExchange();
+
+  const defaultFilters = useInvestorFilters(
+    investorsEndpoint?.data,
+    service?.successFee,
+  );
+  const tablePersist = usePersistTable(TableId.Investors, defaultFilters);
+
+  const filteredInvestors = useFilteredInvestors(
+    investorsEndpoint?.data,
+    tablePersist.filters,
+    service,
+    searchFilter,
+  );
+
   const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
@@ -337,7 +355,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Investor[],
         TraderServiceManagement,
       ]) => {
-        const processedInvestorsList = investors.map((inv) => ({
+        const processedInvestorsList = filteredInvestors.map((inv) => ({
           ...inv,
           successFee: inv.accountType === 'owner' ? '0' : management.successFee,
         }));
@@ -366,10 +384,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 justifyContent={'flex-end'}
                 gap={2}
               >
-                <ZigSearch
-                  value={searchFilter}
-                  onChange={setSearchFilter}
-                  id={`service-investors__search`}
+                <ZigFilters
+                  onChange={tablePersist.filterTable}
+                  filters={tablePersist.filters}
+                  defaultFilters={defaultFilters}
+                  onSearchChange={setSearchFilter}
+                  search={searchFilter}
+                  sx={{ mb: 0 }}
                 />
 
                 <ZigButton

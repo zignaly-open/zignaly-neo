@@ -43,5 +43,9 @@
   "first-grade-math-explainer": "Apply a discount on your Success Fee besides the {{zignalyFee}}% charged by ZIGDAO",
   "success-fee-explainer": "You get {{owner}}%, ZIGDAO gets {{zignalyFee}}%",
   "success-fee-explainer-max-discounted": "You get {{discounted}}%, you gave full discount: {{discount}}%, ZIGDAO gets {{zignalyFee}}%",
-  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{serviceTotal}}% - {{discount}}% discount - {{zignalyFee}}% ZIGDAO)"
+  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{serviceTotal}}% - {{discount}}% discount - {{zignalyFee}}% ZIGDAO)",
+  "filters": {
+    "status": "Status",
+    "success-fee": "Success fee"
+  }
 }

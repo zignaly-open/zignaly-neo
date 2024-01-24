@@ -15,7 +15,7 @@ export const useFilteredCollection = <T extends object>(
   filtersDataMap?: (data: T) => object,
 ) => {
   return useMemo(() => {
-    return collection.filter((data) => {
+    return collection?.filter((data) => {
       const values = filtersDataMap ? filtersDataMap(data) : data;
       return filters?.every((filter) => {
         // Ignore filters with no column match
