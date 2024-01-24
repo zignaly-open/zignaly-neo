@@ -20,7 +20,7 @@ import express, { Request, Response } from 'express';
 import serveStatic from 'serve-static';
 import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
-import { BUILD_PATH } from './constants';
+import { BUILD_PATH, PS2_ENV } from './constants';
 
 const port = 2000;
 const server = express();
@@ -47,14 +47,14 @@ server.listen(port, (err: unknown) => {
 });
 
 const getWlConfigForReq = (req: express.Request) =>
-  // getWhitelabelConfig('wl.zigbids.com');
-  getWhitelabelConfig('wl-staging.zigbids.com');
-// getWhitelabelConfig(req.get('host'));
+  getWhitelabelConfig(req.get('host'));
 
 async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
-    res.send('Config not found or invalid for ' + req.get('host')).status(500);
+    res
+      .send(`${PS2_ENV} config not found or invalid for ${req.get('host')}`)
+      .status(500);
   } else {
     res.send(await generateIndexHtml(wlConfig)).status(200);
   }
