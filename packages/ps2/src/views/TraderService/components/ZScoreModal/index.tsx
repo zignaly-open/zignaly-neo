@@ -53,7 +53,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
 
       return (
         <Box display={'flex'} flexDirection={'column'} mt='3px'>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <div key={item.id}>
               <Box
                 display={'flex'}
