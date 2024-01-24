@@ -14,7 +14,7 @@ const ZScoreBar = ({ value, max = 100, id, ...props }: ZScoreBarProps) => {
         <BarThumb value={pct} />
         <StyledLinearProgress variant="determinate" value={pct} {...props} />
       </Box>
-      <Box sx={{ minWidth: 45 }} display={"flex"} justifyContent={"flex-start"}>
+      <Box sx={{ minWidth: 53 }} display={"flex"} justifyContent={"flex-start"}>
         <ZigTypography variant="body2" color="neutral000" fontSize={15} fontWeight={600}>{`${round(
           value,
           1,
