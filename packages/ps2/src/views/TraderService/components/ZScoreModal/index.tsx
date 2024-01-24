@@ -83,8 +83,8 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                 </ZigTypography>
               </Box>
               <ZScoreBar
-                value={details[item.id].gives}
-                max={details[item.id].ofMax}
+                value={details[item.id].zscore}
+                max={details[item.id].maxZscore}
                 category={category}
                 id={`zscore-modal__bar-${category}`}
               />
