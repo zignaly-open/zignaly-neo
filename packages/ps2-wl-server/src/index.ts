@@ -22,6 +22,13 @@ import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
 import { BUILD_PATH, PS2_ENV } from './constants';
 
+try {
+  // https://github.com/TypeStrong/ts-node/issues/2026
+  process.setUncaughtExceptionCaptureCallback(console.error);
+} catch (e) {
+  console.error(e);
+}
+
 const port = 2000;
 const server = express();
 
