@@ -1,6 +1,5 @@
 import { LinearProgress } from "@mui/material";
 import { keyframes, styled } from "@mui/system";
-import ZigTypography from "../ZigTypography";
 
 const barAnimation = (position: number) => keyframes`
   from {
@@ -60,15 +59,4 @@ export const BarThumb = styled("span")<{ value: number }>`
   animation: ${({ value }) => thumbAnimation(value)} 1s ease-out forwards,
     ${opacityAnimation} 1s ease-out forwards;
   opacity: 0;
-`;
-
-export const TypographyPct = styled(ZigTypography)`
-  position: relative;
-
-  &::after {
-    content: "%";
-    font-size: 7px;
-    position: relative;
-    top: -5px;
-  }
 `;
