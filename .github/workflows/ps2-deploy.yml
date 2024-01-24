@@ -72,10 +72,10 @@ jobs:
           envkey_PS2_ENV: ${{ inputs.deploy-env }}
           directory: packages/ps2-wl-server
           file_name: .env
-      - name: Add a workaround for type imports
-        run: echo "//@ts-nocheck"$'\n'"$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
       - name: TS check
         run: cd packages/ps2-wl-server && tsc --noemit
+      - name: Add a workaround for type imports
+        run: echo "//@ts-nocheck"$'\n'"$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
       - name: AWS CodeDeploy
         uses: sourcetoad/aws-codedeploy-action@v1
         with:
