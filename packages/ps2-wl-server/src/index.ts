@@ -53,14 +53,17 @@ server.listen(port, (err: unknown) => {
   console.log(`> Ready on :${port}`);
 });
 
+const getHost = (req: express.Request) =>
+  process.env.FORCE_USE_HOST || req.get('host');
+
 const getWlConfigForReq = (req: express.Request) =>
-  getWhitelabelConfig(req.get('host'));
+  getWhitelabelConfig(getHost(req));
 
 async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
     res
-      .send(`${PS2_ENV} config not found or invalid for ${req.get('host')}`)
+      .send(`${PS2_ENV} config not found or invalid for ${getHost(req)}`)
       .status(500);
   } else {
     res.send(await generateIndexHtml(wlConfig)).status(200);
