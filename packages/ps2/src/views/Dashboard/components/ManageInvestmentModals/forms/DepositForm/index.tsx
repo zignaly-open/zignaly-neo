@@ -14,6 +14,7 @@ import {
   ZigListIcon,
   trimZeros,
   ZigModalForm,
+  ZigAlertMessage,
 } from '@zignaly-open/ui';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
@@ -137,6 +138,10 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
     // Because switching coin will change the network
     setCoinParam(coin);
   }, [coin]);
+
+  const specialTips = coinObject?.networks?.find(
+    (n) => n.network === network,
+  )?.specialTips;
 
   useEffect(() => {
     if (!coin && coinOptions && selectedCoin) {
@@ -305,6 +310,12 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                 }
               />
             </Grid>
+
+            {!!specialTips && (
+              <Grid item xs={12}>
+                <ZigAlertMessage text={specialTips} />
+              </Grid>
+            )}
 
             {!!depositInfo?.tag && (
               <Grid item xs={12}>
