@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { ZScoreBarProps } from "./types";
-import { BarThumb, StyledLinearProgress, TypographyPct } from "./styles";
+import { BarThumb, StyledLinearProgress } from "./styles";
 import ZigTypography from "../ZigTypography";
 
 const ZScoreBar = ({ value, max = 100, id, ...props }: ZScoreBarProps) => {
@@ -20,12 +20,11 @@ const ZScoreBar = ({ value, max = 100, id, ...props }: ZScoreBarProps) => {
           fontSize={15}
           fontWeight={600}
         >{`${Math.round(value)}`}</ZigTypography>
-        <TypographyPct color="paleBlue" fontSize={11} fontWeight={500}>
+        <ZigTypography color="paleBlue" fontSize={11} fontWeight={500}>
           /{`${Math.round(max)}`}
-        </TypographyPct>
+        </ZigTypography>
       </Box>
     </Box>
   );
 };
 export default ZScoreBar;
-export * from "./util";
