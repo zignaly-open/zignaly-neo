@@ -90,11 +90,10 @@ export const InvestedInlineButton: React.FC<{
         <Box display={'flex'} alignItems={'center'}>
           <Box display={'flex'} flexDirection={'column'}>
             <ZigTypography
-              variant='body2'
+              variant='caption'
               color='neutral150'
-              fontWeight={400}
+              fontWeight={500}
               letterSpacing={1.1}
-              lineHeight={'20px'}
             >
               {t('invested-label')}
             </ZigTypography>
@@ -102,7 +101,7 @@ export const InvestedInlineButton: React.FC<{
               value={investedAmount}
               coin={service.ssc}
               color={'links'}
-              variant={'h2'}
+              variant='body2'
               coinProps={{
                 color: 'links',
                 fontWeight: 500,
