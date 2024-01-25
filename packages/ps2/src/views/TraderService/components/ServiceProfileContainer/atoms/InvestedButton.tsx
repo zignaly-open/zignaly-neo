@@ -17,6 +17,7 @@ import {
 import { Box } from '@mui/system';
 import OtherAccountsButton from './OtherAccountsButton';
 import EditIcon from '@mui/icons-material/Edit';
+import { Divider } from '@mui/material';
 
 const BigNumber: React.FC<{
   ssc?: string;
@@ -44,15 +45,86 @@ const BigNumber: React.FC<{
 const InvestedButton: React.FC<{
   prefixId?: string;
   service: Service;
-}> = ({ prefixId, service }) => {
+  variant: 'component' | 'button';
+}> = ({ prefixId, service, variant }) => {
   const { investedAmount } = useIsInvestedInService(service.id);
+
   return (
     <InvestedButtonBase
       prefixId={prefixId}
       showMultipleAccountButton
       service={service}
       investedAmount={investedAmount}
+      variant={variant}
     />
+  );
+};
+
+export const InvestedInlineButton: React.FC<{
+  service: Service;
+  id: string;
+  investedAmount: string;
+}> = ({ id, investedAmount, service }) => {
+  const { showModal } = useZModal({ disableAutoDestroy: true });
+
+  const { t } = useTranslation(['service', 'action']);
+  return (
+    <Box
+      display={'flex'}
+      justifyContent={'center'}
+      flexDirection={'column'}
+      alignItems={'center'}
+    >
+      <ZigButton
+        id={id}
+        size={'large'}
+        onClick={() => {
+          showModal(EditInvestmentModal, { serviceId: service?.id });
+        }}
+        sx={{
+          flexDirection: 'column',
+          minWidth: 165,
+          padding: '6px 26px',
+        }}
+      >
+        <Box display={'flex'} alignItems={'center'}>
+          <Box display={'flex'} flexDirection={'column'}>
+            <ZigTypography
+              variant='body2'
+              color='neutral150'
+              fontWeight={400}
+              letterSpacing={1.1}
+              lineHeight={'20px'}
+            >
+              {t('invested-label')}
+            </ZigTypography>
+            <ZigPriceLabel
+              value={investedAmount}
+              coin={service.ssc}
+              color={'links'}
+              variant={'h2'}
+              coinProps={{
+                color: 'links',
+                fontWeight: 500,
+              }}
+              sx={{
+                filter: 'brightness(1.3)',
+              }}
+            />
+          </Box>
+          <Divider flexItem orientation='vertical' sx={{ mx: 2 }} />
+
+          <ZigTypography
+            variant={'h3'}
+            color='neutral000'
+            fontWeight={600}
+            sx={{ textTransform: 'uppercase !important' }}
+          >
+            {t('edit', { ns: 'action' })}
+          </ZigTypography>
+        </Box>
+      </ZigButton>
+    </Box>
   );
 };
 
@@ -125,7 +197,14 @@ export const InvestedButtonBase: React.FC<{
   service: Service;
   investedAmount: string;
   showMultipleAccountButton?: boolean;
-}> = ({ prefixId, service, investedAmount, showMultipleAccountButton }) => {
+  variant: 'component' | 'button';
+}> = ({
+  prefixId,
+  service,
+  investedAmount,
+  showMultipleAccountButton,
+  variant,
+}) => {
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
     skip: !showMultipleAccountButton,
@@ -138,6 +217,17 @@ export const InvestedButtonBase: React.FC<{
   const showOtherAccounts =
     investedFromAccounts > 1 && showMultipleAccountButton;
 
+  const id = prefixId && `${prefixId}__invested-${service.id}`;
+  if (variant === 'button') {
+    return (
+      <InvestedInlineButton
+        service={service}
+        id={id}
+        investedAmount={investedAmount}
+      />
+    );
+  }
+
   return (
     <InvestButtonContainer>
       <TopDivider>
@@ -146,7 +236,7 @@ export const InvestedButtonBase: React.FC<{
         </ZigTypography>
       </TopDivider>
 
-      <Box id={prefixId && `${prefixId}__invested-${service.id}`}>
+      <Box id={id}>
         <BigNumber ssc={service.ssc} value={investedAmount} green />
       </Box>
       <Box
