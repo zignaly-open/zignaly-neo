@@ -5,8 +5,7 @@ import {
 } from '../../apis/service/use';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { ErrorMessage, PageContainer } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
-import { PageWithHeaderContainer } from './components/styles';
+import { ErrorWrapper, PageWithHeaderContainer } from './components/styles';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../routes';
 
 const Unactivated: React.FC = () => {
@@ -22,16 +21,11 @@ const Unactivated: React.FC = () => {
   return (
     <PageContainer>
       <PageWithHeaderContainer>
-        <Box
-          bgcolor={'rgba(87,24,62,0.43)'}
-          padding={'15px 15px'}
-          borderRadius={'5px'}
-          border={'1px solid redGraphOrError'}
-        >
+        <ErrorWrapper>
           <ErrorMessage
             text={'This service is inactive. Check other services'}
           />
-        </Box>
+        </ErrorWrapper>
       </PageWithHeaderContainer>
     </PageContainer>
   );
