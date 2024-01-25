@@ -105,7 +105,7 @@ export type SignupPayload = {
   email: string;
   password: string;
   newPageAB?: boolean;
-  language?: string;
+  locale?: string;
   ref?: string;
   subtrack?: string;
 };
