@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZScoreConfigItem, ZScoreModalProps } from './types';
+import { ZScoreModalProps } from './types';
 import ZModal from 'components/ZModal';
 import { Box, Grid } from '@mui/material';
 import { useScoreQuery } from 'apis/service/api';
@@ -30,20 +30,6 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
   };
 
   const zScoreConfig = useZScoreConfig();
-
-  // Calculate total based on each category. Using the value from score-info would sometimes
-  // give a different result to do individual rounding.
-  const getTotal = useCallback(
-    (category: string) => {
-      const details = scoreDetails[zScoreConfig[category].scoreCategoryId];
-      const { items } = zScoreConfig[category];
-      return (items as ZScoreConfigItem[]).reduce(
-        (acc, item) => acc + Math.round(details[item.id].zscore),
-        0,
-      );
-    },
-    [scoreDetails, zScoreConfig],
-  );
 
   const formatValue = (value: number, type?: string) => {
     switch (type) {
@@ -143,7 +129,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                       id={`zscore-modal__ring-${category}`}
                       sx={{ alignSelf: 'center' }}
                       category={category}
-                      value={getTotal(category)}
+                      value={data[zScoreConfig[category].scoreId]}
                       max={maxZscore[zScoreConfig[category].scoreCategoryId]}
                     />
                     {renderScoreBars(category)}
