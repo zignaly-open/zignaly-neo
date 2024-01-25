@@ -127,7 +127,12 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         </Box>
       </Box>
       <ButtonContainer>
-        <MarketplaceAction service={service} prefixId={prefixId} showRocket />
+        <MarketplaceAction
+          service={service}
+          prefixId={prefixId}
+          showRocket
+          investedVariant='button'
+        />
       </ButtonContainer>
     </Card>
   );
