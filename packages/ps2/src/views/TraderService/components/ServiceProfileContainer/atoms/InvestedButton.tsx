@@ -107,6 +107,9 @@ export const InvestedInlineButton: React.FC<{
                 color: 'links',
                 fontWeight: 500,
               }}
+              sx={{
+                filter: 'brightness(1.3)',
+              }}
             />
           </Box>
           <Divider flexItem orientation='vertical' sx={{ mx: 2 }} />
