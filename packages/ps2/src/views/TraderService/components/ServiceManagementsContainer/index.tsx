@@ -76,6 +76,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   return (
     <LayoutContentWrapper
       endpoint={endpoints}
+      unmountOnRefetch
       content={([service, management, balance]: [
         Service,
         TraderServiceManagement,
