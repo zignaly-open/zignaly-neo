@@ -1,7 +1,7 @@
 import { Box, Tooltip } from '@mui/material';
 import {
   ChangeIndicator,
-  ZigCalendar3MIcon,
+  ZigCalendar1MIcon,
   ZigRisk,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -104,12 +104,12 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               <ChangeIndicator
                 decimalScale={1}
                 type={'default'}
-                id={`service-card__pnl90-${service.id}`}
+                id={`service-card__pnl30-${service.id}`}
                 style={{
                   fontSize: '16px',
                   lineHeight: '28px',
                 }}
-                value={service.pnlPercent90t}
+                value={service.pnlPercent30t}
               />
             </ChangeIndicatorContainer>
           </Box>
@@ -119,7 +119,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             justifyContent={'center'}
             gap={1}
           >
-            <ZigCalendar3MIcon fontSize='19px' />
+            <ZigCalendar1MIcon fontSize='19px' />
             <ZigTypography variant='h5' color={'neutral100'} mt='2px'>
               {t('card.pnl')}
             </ZigTypography>

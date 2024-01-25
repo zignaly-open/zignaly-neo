@@ -95,10 +95,9 @@ const MarketplaceAction = ({
 
   const traderService = marketplaceServiceToServiceType(service) as Service;
   const investment = investments?.find((x) => x.serviceId === service.id);
-  // const investedAmount = investment
-  //   ? new BigNumber(investment.invested).plus(investment.pending)
-  //   : 0;
-  const investedAmount = 10000;
+  const investedAmount = investment
+    ? new BigNumber(investment.invested).plus(investment.pending)
+    : 0;
   // Margin to keep arrow aligned with button, and button aligned with other columns
   const subMargin = isAuthenticated && investedAmount ? 0 : '28px';
 
