@@ -11,7 +11,8 @@
 		"max-reached": "Fundos Máximos Atingidos",
 		"max-reached-tooltip": "Não são permitidos investimentos neste serviço por atingir o Limite Máximo de Fundos. Descubra outros Serviços de Profit Sharing no nosso Marketplace.",
 		"all-accounts": "Ver todos ({{count}})",
-		"x-success-fee": "{{fee}}% Success fee"
+		"x-success-fee": "{{fee}}% success fee",
+		"success-fee": "Taxa de Sucesso: {{fee}}%"
 	},
 	"owner-verified": "O Gestor foi verificado",
 	"owner-from": "O Gestor é de {{country}}",
@@ -26,7 +27,8 @@
 		"base-currency": "Moeda base:",
 		"funds-allocated": "Fundos alocados:",
 		"success-fee": "Success fee:",
-		"tags": "Tags:"
+		"tags": "Tags:",
+		"exchange": "Exchange:"
 	},
 	"periods": {
 		"7d-full": "1 Semana",
@@ -89,6 +91,14 @@
 		"validation": {
 			"name-length": "Deve ter entre 5 e 50 caracteres",
 			"success-fee-range": "Deve ser 0 ou um número inteiro entre 10 e 75"
+		},
+		"commission": {
+			"title": "Participe da promoção de recomendação do {{ whitelabel }}:",
+			"description": "{{ whitelabel }} está oferecendo aos referenciadores até 100% de suas próprias taxas de sucesso. Para atrair mais investidores para o seu serviço, você pode igualar a oferta de {{ whitelabel }} ou superá-la.",
+			"max-success-fee": "Taxa máxima de sucesso paga aos referenciadores:",
+			"promo-preview": "Visualização da promoção:",
+			"how-it-works": "Ver como funciona",
+			"increase-success-fee": "Aumente sua taxa de sucesso para oferecer um bônus e atrair mais usuários para seu serviço"
 		}
 	},
 	"create": {
@@ -109,8 +119,24 @@
 		"please-verify": "*Por favor, reveja as tuas informações. O tipo e a base não podem ser alterados posteriormente",
 		"zero-fee": "Se você escolher success fee = 0, a ZIGDAO também não cobrará nenhuma taxa",
 		"total-fee": "Taxa total",
-		"you-receive": "Você recebe"
+		"you-receive": "Você recebe",
+		"exchange": "Exchange:",
+		"bybit-warning": "Por favor, preencha o seguinte <0>form<\/0> para fazer parte do Bybit Beta.",
+		"exchanges": {
+			"bybit": "Bybit",
+			"binance": "Binance"
+		}
 	},
 	"you-receive": "Você recebe",
-	"z-score": "Pontuação Z"
+	"z-score": "Pontuação Z",
+	"failed-to-load": "Falha ao carregar. <0>Tentar Novamente<\/0>",
+	"chart-crashed": {
+		"title": "Não foi possível apresentar o gráfico",
+		"description": "Lamentamos, mas o gráfico não pôde ser apresentado devido a alguns problemas técnicos"
+	},
+	"exchanges": {
+		"binance": "Binance",
+		"deribit": "Deribit",
+		"bybit": "Bybit"
+	}
 }

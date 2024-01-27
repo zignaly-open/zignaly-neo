@@ -81,10 +81,11 @@
 		"ip-restrictions-ranges": "Desculpe, não oferecemos suporte a faixas de IP",
 		"ip-restrictions-duplicates": "Alguns ips são listados duas vezes, por favor remova os duplicados",
 		"ip-restrictions-allowed": "Endereços IP",
-		"ip-restrictions-allowed-explainer": "Ao introduzir mais do que um endereço IP, separá-los por favor com vírgulas",
+		"ip-restrictions-allowed-explainer": "Se introduzir mais do que um endereço IP, separe-os por vírgulas ou espaços",
 		"ip-restrictions-on": "Restringir o acesso apenas a IPs confiáveis (recomendado)",
 		"delete-api-key-toast": "A chave de API foi excluída com sucesso"
 	},
 	"positive-claim": "Os usuários estão investindo {{ claim }} {{ coin }} na próxima contabilidade.",
-	"negative-claim": "Os usuários estão solicitando a retirada de {{claim }} {{ coin }}."
+	"negative-claim": "Os usuários estão solicitando a retirada de {{claim }} {{ coin }}.",
+	"no-api-key-management-in-this-exchange": "Esta opção ainda não é suportada automaticamente para os serviços {{exchange}}. Contacte a nossa equipa para o ajudar-lo."
 }

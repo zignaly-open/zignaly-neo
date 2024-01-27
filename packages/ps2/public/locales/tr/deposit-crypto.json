@@ -1,6 +1,6 @@
 {
 	"title": "Kripto Para Yatırma",
-	"description": "Zignaly Hesabınıza Kripto Para Yatırın. Zignaly, resmi olarak Binance Broker'ıdır <0><\/0>. Paranız Binance'te güvendedir. <1>Daha fazla bilgi<\/1>.",
+	"description": "{{ whitelabel }} Hesabınıza Kripto Yatırın. {{ whitelabel }}, resmi bir <0>Binance Broker<\/0> olan ZIGDAO tarafından desteklenmektedir. Fonlarınız Binance'te güvende olacak. <1>Daha fazla bilgi<\/1>.",
 	"coinSelector": {
 		"label": "Coin:",
 		"placeholder": "Coin arama"
@@ -8,7 +8,7 @@
 	"balances": {
 		"loadingAriaLabel": "Coin bakiyeleri yükleniyor",
 		"total": "Bakiye:",
-		"balanceLocked": "Emirler:",
+		"balanceLocked": "Emirlerde yer alan:",
 		"balanceFree": "Mevcut:"
 	},
 	"networkSelector": {
@@ -29,9 +29,10 @@
 	},
 	"depositQR": {
 		"address": "{{coin}} Adresi",
-		"memo": "{{coin}} MEMO\/Etiket"
+		"memo": "{{coin}} MEMO\/Etiket",
+		"scan": "Mobil para yatırma işlemlerini tarayın"
 	},
-	"no-network": "Bu ağda yatırma işlemi yapılamıyor",
+	"no-network": "Cüzdan şu anda bakımdadır. İşlemdeki fonunuz blok zincirinde onaylandıktan sonra güvendedir ve para yatırma işlemleri yeniden başladıktan kısa bir süre sonra yatırılacaktır.",
 	"buy-crypto": "Kripto Satın Al",
 	"service-deposit": {
 		"title": "Bu Hizmete Yatırım Yapmak İçin {{coin}} Yatırın",
@@ -42,5 +43,16 @@
 			"deposit": "{{coin}} yatırın",
 			"purchase": "Satın Al {{coin}}"
 		}
-	}
+	},
+	"history": "Geçmiş",
+	"network-unavailable": "Ağ kullanılamıyor",
+	"service-swap": {
+		"title": "Trader ile Yatırım Yapmak için {{coin}} Yatırın",
+		"description": "Trader {{coin}} ile işlem yapıyor, kâr paylaşımı için trader'ın kullandığı kripto cinsinden yatırmalısınız. Lütfen hesabınıza {{coin}} yatırın veya diğer coinleri {{ coin }}'e dönüştürün.",
+		"convert-to-coin": "{{ coin }}'e dönüştür",
+		"deposit-purchase": "{{ coin }} yatırın veya satın alın",
+		"convert": "Dönüştür",
+		"confirm-swap-title": "Takası onaylayın"
+	},
+	"buy-crypto-description": "Üçüncü taraf ortağımız Changelly\/MoonPay'i kullanarak {{ whitelabel }} adresinden kolayca kripto satın alın."
 }

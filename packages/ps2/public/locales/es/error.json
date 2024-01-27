@@ -3,8 +3,8 @@
 		"9000": "Falta una cuenta de exchange en tu cuenta, por favor comunícate con soporte.",
 		"9001": "Este campo es obligatorio",
 		"required": "Este campo es obligatorio",
-		"9002": "Por favor introduce un correo electrónico válido",
-		"email-invalid": "Por favor introduce un correo electrónico válido",
+		"9002": "Por favor introduce un email válido",
+		"email-invalid": "Por favor introduce un email válido",
 		"9003": "Este campo es obligatorio",
 		"failed-verification": "Error al verificar",
 		"noidea": "¡Algo salió mal!",
@@ -44,8 +44,8 @@
 		"33": "Proveedor desconocido",
 		"34": "La orden se activaría inmediatamente",
 		"35": "Posición cerrada",
-		"36": "Error al activar 2FA",
-		"37": "Código Erróneo",
+		"36": "Error en 2FA",
+		"37": "Código 2FA incorrecto",
 		"wrong-code": "Código Erróneo",
 		"38": "El precio de take profit ya se ha alcanzado",
 		"39": "El valor de Take Profit tiene que ser mayor que 1",
@@ -88,7 +88,7 @@
 		"76": "Error de captcha, por favor, inténtalo de nuevo.",
 		"77": "Número máximo de cuentas broker alcanzadas para el exchange",
 		"78": "No se ha podido eliminar una cuenta con un saldo superior a 0.",
-		"79": "El seguidor seleccionado no puede ser suspendido por ser del personal o colaborador de Zignaly.",
+		"79": "El seguidor seleccionado no puede ser suspendido por ser personal o colaborador de {{ whitelabel }}.",
 		"80": "No puedes suspenderte a ti mismo.",
 		"81": "Las cuentas de exchange de futuros sólo pueden conectarse a un proveedor o copy-trader. Es necesario crear otra cuenta de exchange para utilizar un proveedor\/copytrader diferente.",
 		"82": "Es necesario tener una descripción y un logo antes ser listado en el marketplace",
@@ -155,7 +155,7 @@
 		"1055": "Los datos del servicio no son válidos",
 		"1056": "Exchange Inválido para Servicio",
 		"1057": "Tipo Invalido para el Servicio",
-		"1058": "El Success Fee puede ser 0 o un valor flotante entre 10 a 75",
+		"1058": "La Comisión por Beneficios puede ser 0 o un valor flotante entre 10 a 75",
 		"1059": "Error de migración: saldo insuficiente",
 		"1060": "Saldo bloqueado para la moneda del servicio",
 		"1061": "Saldo no vacío para otras monedas",
@@ -173,12 +173,59 @@
 		"did-you-mean": "¿Quisiste decir {{suggested}} ?",
 		"password-requirements": "Al menos {{length}} caracteres, con una letra, un número y un símbolo",
 		"occurred": "Se ha producido un error",
-		"login-session-expired": "Sesión caducada, por favor inicia sesión de nuevo"
+		"login-session-expired": "Sesión caducada, por favor inicia sesión de nuevo",
+		"1086": "Código de email incorrecto",
+		"1095": "Código de suscripción no válido",
+		"1097": "Formato de código no válido: debe ser AA-XXXX-XXXX-XXXX",
+		"1096": "Ya has canjeado este código"
 	},
 	"something-went-wrong": "Algo salió mal",
 	"404": {
 		"title": "Página no encontrada",
 		"subtitle": "Esta página no está disponible o no existe.",
 		"button-back": "Ir al inicio"
+	},
+	"access": {
+		"banned": {
+			"title": "Estás baneado",
+			"description": "Tus acciones traviesas resultaron en un baneo. Santa también ha sido informado.",
+			"action": "Lo siento mucho"
+		},
+		"mail-not-verified": {
+			"title": "Verifica tu dirección de email",
+			"description": "Antes de poder iniciar sesión, deberás verificar tu dirección de email",
+			"action": "Entiendo"
+		},
+		"kyc-pending": {
+			"title": "Verifica tu cuenta (KYC\/KYB)",
+			"description": "Verifica tu cuenta para empezar a acceder a todos los servicios. El proceso es fácil y rápido y te llevará aproximadamente 2 minutos.",
+			"action": "Iniciar Verificación"
+		},
+		"no-subscription": {
+			"title": "Activa tu Suscripción",
+			"description": "Para empezar a invertir en un servicio necesitas primero un código de suscripción.",
+			"explainer-1": "Canjear código de suscripción",
+			"explainer-2": "No tengo ningún código de suscripción.",
+			"cta-1": "Canjear",
+			"cta-2": "Comprar"
+		},
+		"expired-subscription": {
+			"title": "Suscripción Caducada",
+			"description": "Su suscripción ha caducado, por favor compra el código de renovación para continuar.",
+			"explainer-1": "Canjear código de suscripción",
+			"explainer-2": "No tengo ningún código de suscripción.",
+			"cta-1": "Canjear",
+			"cta-2": "Comprar"
+		},
+		"frozen": {
+			"title": "Cuenta Congelada",
+			"description": "Estamos verificando una transferencia reciente en su cuenta que requiere aprobación manual. En cuanto todo haya sido verificado y aprobado por nuestro equipo podrás gestionar tu cuenta con normalidad.",
+			"action": "Entendido"
+		},
+		"kyc-expired": {
+			"title": "Verificación (KYC\/KYB) Caducada",
+			"description": "Tu verificación (KYC\/KYB) ha caducado y debes volver a enviarla para seguir accediendo a todos los servicios.",
+			"action": "Revisar KYC"
+		}
 	}
 }

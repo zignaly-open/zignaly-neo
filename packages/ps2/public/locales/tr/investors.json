@@ -1,5 +1,5 @@
 {
-	"no-investors": "Bu hizmetin henüz bir yatırımcısı yok",
+	"no-investors": "Belirttiğiniz kriterlere uygun yatırımcı yok. Lütfen aramanızı daraltmayı düşünün. E-posta veya Kullanıcı Kimliğine göre arama yapabilirsiniz.",
 	"failed-to-load": "Veriler yüklenemedi",
 	"title": "Yatırımcılar",
 	"tableHeader": {
@@ -12,7 +12,8 @@
 		"feesZIG": "ZIG olarak ücretler",
 		"status": "Durum",
 		"invested": "Yatırım yapılan bakiye",
-		"pending": "Bekliyor"
+		"pending": "Bekliyor",
+		"P&L-percent": "Kâr ve Zarar (PNL) %'si"
 	},
 	"loading-arialLabel": "Yatırımcılar yükleniyor",
 	"status": {
@@ -25,5 +26,22 @@
 		"owner": "Sahip"
 	},
 	"number-of-investors_one": "{{count}} Yatırımcı",
-	"number-of-investors_other": "{{count}} Yatırımcı"
+	"number-of-investors_other": "{{count}} Yatırımcı",
+	"change-fee": "Başarım ücretini düzenle",
+	"change-fee-modal": {
+		"title": "Başarım Ücreti İndirimi",
+		"desc": "Kıymetli yatırımcılarınıza Başarım Ücreti indirimi sunarak onları taçlandırın",
+		"input-desc": "Başarım Ücretinde Uygulanacak İndirim",
+		"discount": "İndirim",
+		"new-success-fee": "Başarım Ücreti",
+		"fee-edited": "Başarım Ücreti başarıyla düzenlendi",
+		"validate-must-be-between": "Bir tamsayı olmalıdır (0 - {{max}} ). Veya ücretsiz yapmak için {{full}}",
+		"already-0": "Hadi ama, hizmetiniz zaten ücretsiz, daha fazla indirim yapamayız"
+	},
+	"first-grade-math-explainer": "ZIGDAO tarafından tahsil edilen % {{zignalyFee}} dışında Başarım Ücretinize bir indirim uygulayın",
+	"success-fee-explainer": "Siz % {{owner}} alırsınız, ZIGDAO % {{zignalyFee}} alır",
+	"success-fee-explainer-with-discount": "% {{discounted}} ( % {{serviceTotal}} - % {{discount}} indirim - {{zignalyFee}} %ZIGDAO) alırsınız",
+	"it-is-you": "İşte bu sensin! Ve bu arada bugün harika görünüyorsun",
+	"it-is-you-0-fee": "Bu sizsiniz, dolayısıyla başarı ücreti %0'dır",
+	"success-fee-explainer-max-discounted": "{{discounted}}% aldığınızda, tam indirim veriyorsunuz: {{discount}}%, ZIGDAO ise {{zignalyFee}}% alıyor"
 }

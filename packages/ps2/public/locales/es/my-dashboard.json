@@ -3,11 +3,14 @@
 	"tableHeader": {
 		"summary": {
 			"title": "Mi Valor Actual",
-			"subtitle": "Rentabilidad"
+			"subtitle": "Rentabilidad",
+			"title-mobile": "Invertido",
+			"subtitle-mobile": "P&L"
 		},
 		"serviceName": {
 			"title": "Nombre del Servicio",
-			"subtitle": "Gestor\/Moneda base"
+			"subtitle": "Gestor\/Moneda base",
+			"title-mobile": "Servicio"
 		},
 		"1-mo": {
 			"title": "1 mes",
@@ -48,8 +51,6 @@
 			"description": "Invierte en los servicios y espera a ver crecer tus beneficios día a día",
 			"time": "Lleva 2 minutos"
 		},
-		"bottom-title": "Servicios en mi Portafolio",
-		"bottom-description": "Todavía no sigues ningún servicio, invierte en ellos para obtener beneficios.",
 		"start-investing": "Comienza a invertir ahora"
 	}
 }
