@@ -2,11 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import { WhitelabelFrontendConfig } from './config';
 import { BUILD_PATH } from './constants';
+import logger from './logger';
 
 const indexHtml = fs.readFileSync(path.join(BUILD_PATH, 'index.html'), 'utf8');
 
 if (!indexHtml) {
-  console.error('build/index.html is missing, aborting');
+  logger.error('build/index.html is missing, aborting');
   process.exit(1);
 }
 

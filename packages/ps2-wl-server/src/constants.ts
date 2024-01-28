@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
+import logger from './logger';
 dotenv.config();
 
 const { BASE_API: initialValueBaseApi } = process.env;
 
 if (!initialValueBaseApi) {
-  console.error('`BASE_API` should be defined');
+  logger.error('`BASE_API` should be defined');
   process.exit(1);
 }
 

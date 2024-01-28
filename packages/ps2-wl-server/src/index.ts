@@ -21,12 +21,14 @@ import serveStatic from 'serve-static';
 import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
 import { BUILD_PATH, PS2_ENV } from './constants';
+import logger from './logger';
 
 try {
   // https://github.com/TypeStrong/ts-node/issues/2026
+  // needed for the new versions of node
   process.setUncaughtExceptionCaptureCallback(console.error);
 } catch (e) {
-  console.error(e);
+  // Do nothing lol
 }
 
 const port = 2000;
@@ -50,7 +52,7 @@ server.use('*', serveNewIndexHtml);
 server.listen(port, (err: unknown) => {
   if (err) throw err;
   /* eslint no-console: "off" */
-  console.log(`> Ready on :${port}`);
+  logger.info(`Started the PS2 WL server on ${PS2_ENV}:${port}`);
 });
 
 const getHost = (req: express.Request) =>

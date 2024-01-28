@@ -12,6 +12,7 @@ import { CACHE_TTL, BASE_API } from './constants';
 import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
 import * as translationOverridesMap from './translationOverrides';
 import { ThemeOverridesType } from '@zignaly-open/ui';
+import logger from './logger';
 
 const whitelabelCache: Record<
   string,
@@ -155,13 +156,19 @@ export const getWhitelabelConfig = async (
   const cached = getCacheValue(domain);
   if (cached) return cached;
   const url = `${BASE_API}wl/config?domain=${domain}`;
+  if (/^[\d.:]+$/.test(domain)) {
+    // this is a keepalive check
+    // yes I am too lazy to write a full ip+port regex
+    // no harm in that
+    return null;
+  }
 
   let response;
 
   try {
     response = await axios.get(url);
   } catch (e) {
-    console.error(`Could not load the config from ${url}`);
+    logger.error(`Could not load the config from ${url}`);
     return null;
   }
 
