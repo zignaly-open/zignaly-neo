@@ -50,7 +50,7 @@ function SwapCoinsForm({
       .map(([c, balance]) => ({
         value: c,
         coin: c,
-        available: balance?.balanceFree || 0,
+        available: +balance?.balanceFree || 0,
         label: (
           <CoinOption
             key={c}

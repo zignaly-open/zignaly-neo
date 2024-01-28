@@ -1,10 +1,6 @@
 import { Box, Tooltip } from '@mui/material';
-import {
-  ChangeIndicator,
-  ZigCalendar1MIcon,
-  ZigRisk,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ChangeIndicator, ZigRisk, ZigTypography } from '@zignaly-open/ui';
+import { ZigCalendar1MIcon } from '@zignaly-open/ui/icons';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import React from 'react';
@@ -20,7 +16,7 @@ import { ServiceCardProps } from './types';
 import ZigChartMiniSuspensed from 'components/ZigChartMiniSuspensed';
 import { InfoOutlined } from '@mui/icons-material';
 import { differenceInDays } from 'date-fns';
-import { ZigCalendar1YIcon } from '@zignaly-open/ui';
+import { ZigCalendar1YIcon } from '@zignaly-open/ui/icons';
 
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation('marketplace');
