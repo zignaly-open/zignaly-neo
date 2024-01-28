@@ -1,15 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import { WhitelabelFrontendConfig } from './config';
-import { BUILD_PATH } from './constants';
-import logger from './logger';
-
-const indexHtml = fs.readFileSync(path.join(BUILD_PATH, 'index.html'), 'utf8');
-
-if (!indexHtml) {
-  logger.error('build/index.html is missing, aborting');
-  process.exit(1);
-}
+import { INDEX_HTML } from './constants';
 
 const veryDumbSanitizeAttribute = (string: string): string =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
@@ -63,7 +53,7 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
       /(?:https?:\/\/|^)(?:twitter|x)\.com\/([a-zA-Z\d-_]{1,15})/,
     )?.[1];
 
-  return indexHtml.replace(
+  return INDEX_HTML.replace(
     '</head>',
     `
       <title>${name}</title>

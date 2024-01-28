@@ -1,19 +1,19 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
-import logger from './logger';
 dotenv.config();
 
 const { BASE_API: initialValueBaseApi } = process.env;
 
-if (!initialValueBaseApi) {
-  logger.error('`BASE_API` should be defined');
-  process.exit(1);
-}
-
 export const BASE_API =
+  initialValueBaseApi &&
   initialValueBaseApi + (initialValueBaseApi.endsWith('/') ? '' : '/');
 export const CACHE_TTL = 10 * 60_000;
 export const BUILD_PATH = path.join(fs.realpathSync('.'), 'build');
 
-export const { PS2_ENV } = process.env;
+export const { PS2_ENV, SLACK_WEBHOOK } = process.env;
+
+export const INDEX_HTML = fs.readFileSync(
+  path.join(BUILD_PATH, 'index.html'),
+  'utf8',
+);

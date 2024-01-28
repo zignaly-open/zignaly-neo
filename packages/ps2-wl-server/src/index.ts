@@ -22,6 +22,7 @@ import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
 import { BUILD_PATH, PS2_ENV } from './constants';
 import logger from './logger';
+import runEnvChecks from './checks';
 
 try {
   // https://github.com/TypeStrong/ts-node/issues/2026
@@ -30,6 +31,8 @@ try {
 } catch (e) {
   // Do nothing lol
 }
+
+runEnvChecks();
 
 const port = 2000;
 const server = express();

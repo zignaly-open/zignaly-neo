@@ -177,7 +177,7 @@ export const getWhitelabelConfig = async (
     setCacheValue(domain, whitelabel);
     return whitelabel;
   } catch (e) {
-    console.error(e);
+    logger.error(e.stack);
     return null;
   }
 };

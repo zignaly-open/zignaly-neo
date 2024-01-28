@@ -1,6 +1,6 @@
 import winston from 'winston';
-import { PS2_ENV } from './constants';
 import SlackHook from 'winston-slack-webhook-transport';
+import { SLACK_WEBHOOK, PS2_ENV } from './constants';
 
 const logger = winston.createLogger({
   format: winston.format.combine(
@@ -12,10 +12,11 @@ const logger = winston.createLogger({
   ),
 });
 
-process.env.SLACK_WEBHOOK &&
+SLACK_WEBHOOK &&
   logger.add(
     new SlackHook({
-      webhookUrl: process.env.SLACK_WEBHOOK,
+      level: 'warn',
+      webhookUrl: SLACK_WEBHOOK,
     }),
   );
 
