@@ -11,7 +11,7 @@ import { whitelabel } from '../whitelabel';
 let analytics: AnalyticsInstance | null = null;
 
 if (
-  process.env.NODE_ENV !== 'test' &&
+  typeof jest === 'undefined' &&
   process.env.REACT_APP_ENABLE_TRACKING === 'true'
 ) {
   const customerIoPlugin = customerIo({
