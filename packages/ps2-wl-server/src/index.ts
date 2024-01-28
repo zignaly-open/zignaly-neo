@@ -27,7 +27,8 @@ import runEnvChecks from './checks';
 try {
   // https://github.com/TypeStrong/ts-node/issues/2026
   // needed for the new versions of node
-  process.setUncaughtExceptionCaptureCallback(console.error);
+  process.on('uncaughtException', (e) => logger.error(e.stack));
+  process.setUncaughtExceptionCaptureCallback((e) => logger.error(e.stack));
 } catch (e) {
   // Do nothing lol
 }
