@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ZigChart component tests renders ZigChart component with data 1`] = `
+exports[`ZigChart renders ZigChart component with data 1`] = `
 <div>
   <div
     class="MuiBox-root css-qxh7fn"
