@@ -37,7 +37,7 @@ const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation(['my-balances', 'action']);
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
-  const { exchangeType, internalId } = useActiveExchange();
+  const exchange = useActiveExchange();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -50,18 +50,18 @@ const MyBalancesTable = (): JSX.Element => {
   // Trigger balance update to be sure that balance widget matches coins data
   useBalanceQuery(
     {
-      exchangeInternalId: internalId,
+      exchangeInternalId: exchange?.internalId,
     },
     {
       refetchOnMountOrArgChange: true,
-      skip: !internalId,
+      skip: !exchange?.internalId,
     },
   );
   const getFilteredData = useCallback(
     (coins: CoinDetails, balances: CoinBalances) => {
       // Populate coins that can be deposited
       const depositCoinsBalances: CoinBalances = Object.fromEntries(
-        allowedDeposits[exchangeType].map((coin) => [
+        allowedDeposits[exchange?.exchangeType]?.map((coin) => [
           coin,
           {
             balanceFree: '',
@@ -85,12 +85,12 @@ const MyBalancesTable = (): JSX.Element => {
       )
         .filter(
           ([coin, balance]) =>
-            allowedDeposits[exchangeType]?.includes(coin) ||
+            allowedDeposits[exchange?.exchangeType]?.includes(coin) ||
             +balance.balanceTotal > 0,
         )
         .map(([coin, balance]) => ({ coin, balance }));
     },
-    [exchangeType, t],
+    [exchange?.exchangeType, t],
   );
   const hasNonZeroBalance = useMemo(() => {
     if (coinsEndpoint?.isSuccess && balancesEndpoint?.isSuccess) {
@@ -201,11 +201,13 @@ const MyBalancesTable = (): JSX.Element => {
                   justifyContent='flex-end'
                   alignItems={'center'}
                 >
-                  {!!allowedDeposits[exchangeType]?.includes(
+                  {!!allowedDeposits[exchange?.exchangeType]?.includes(
                     row.original.coin,
                   ) && (
                     <ZigButton
-                      narrow={exchangeType === 'spot' && hasNonZeroBalance}
+                      narrow={
+                        exchange?.exchangeType === 'spot' && hasNonZeroBalance
+                      }
                       tooltip={hasNonZeroBalance && t('deposit')}
                       id={`balance-row__deposit-${row.original.coin}`}
                       onClick={() =>
@@ -216,7 +218,8 @@ const MyBalancesTable = (): JSX.Element => {
                       variant='outlined'
                       sx={{ maxHeight: '20px', mr: 1 }}
                     >
-                      {exchangeType === 'futures' || !hasNonZeroBalance ? (
+                      {exchange?.exchangeType === 'futures' ||
+                      !hasNonZeroBalance ? (
                         t('deposit')
                       ) : (
                         <Add
@@ -249,7 +252,7 @@ const MyBalancesTable = (): JSX.Element => {
                       </ZigButton>
                     </Box>
                   )}
-                  {exchangeType === 'spot' &&
+                  {exchange?.exchangeType === 'spot' &&
                     Number(row.original.balance.balanceTotal) > 0 &&
                     allowedDeposits.spot.includes(row.original.coin) && (
                       <ZigButton
@@ -276,7 +279,15 @@ const MyBalancesTable = (): JSX.Element => {
           ]
         : []),
     ],
-    [t, exchangeType, hasNonZeroBalance, md, sm, lg, coinsEndpoint?.data],
+    [
+      t,
+      exchange?.exchangeType,
+      hasNonZeroBalance,
+      md,
+      sm,
+      lg,
+      coinsEndpoint?.data,
+    ],
   );
 
   return (
@@ -341,7 +352,7 @@ const MyBalancesTable = (): JSX.Element => {
                   {t('action:buy-crypto')}
                 </Box>
               </ZigButton>
-              {exchangeType === 'spot' && hasNonZeroBalance && (
+              {exchange?.exchangeType === 'spot' && hasNonZeroBalance && (
                 <ZigButton
                   variant={'outlined'}
                   onClick={() => {

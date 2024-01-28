@@ -19,15 +19,18 @@ import { ButtonWrapper } from './styles';
 
 const BalanceButton = () => {
   const { t } = useTranslation('common');
-  const { internalId } = useActiveExchange();
+  const exchange = useActiveExchange();
   const openDepositModal = useOpenDepositModal();
-  const { data: investments } = useInvestmentsQuery(internalId);
+  const { data: investments } = useInvestmentsQuery(exchange?.internalId, {
+    skip: !exchange?.internalId,
+  });
   const { data: balance } = useBalanceQuery(
     {
-      exchangeInternalId: internalId,
+      exchangeInternalId: exchange?.internalId,
     },
     {
       pollingInterval: 60 * 1000,
+      skip: !exchange?.internalId,
     },
   );
 
@@ -67,6 +70,8 @@ const BalanceButton = () => {
         {v}
       </Link>
     );
+
+  if (!exchange) return null;
 
   return linkWrap(
     <ButtonWrapper>

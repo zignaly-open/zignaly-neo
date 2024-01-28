@@ -91,7 +91,7 @@ const InvestInYourServiceForm: React.FC<{
       amount: amountToInvest,
       ssc: service.baseCurrency,
       successFee: service.successFee,
-      exchangeInternalId: exchange.internalId,
+      exchangeInternalId: exchange!.internalId,
     } as CreateServicePayload);
 
     if ('data' in result) {

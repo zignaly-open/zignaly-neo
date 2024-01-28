@@ -16,7 +16,7 @@ function ExportModal({
 }: ExportModalProps): React.ReactElement {
   const { t } = useTranslation('transactions-history');
   const [exportCsv, exportStatus] = useTransactionsHistoryCsvMutation();
-  const { internalId, createdAt } = useActiveExchange();
+  const exchange = useActiveExchange();
   const toast = useToast();
 
   return (
@@ -27,10 +27,13 @@ function ExportModal({
           <ZigButton
             id={'export-transactions__proceed'}
             onClick={() =>
+              exchange &&
               exportCsv({
-                exchangeInternalId: internalId,
+                exchangeInternalId: exchange?.internalId,
                 type,
-                days: differenceInDays(new Date(), new Date(createdAt)) + 1,
+                days:
+                  differenceInDays(new Date(), new Date(exchange?.createdAt)) +
+                  1,
               }).then(() => {
                 toast.success(t('export.success'));
                 close();

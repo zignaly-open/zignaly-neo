@@ -41,7 +41,7 @@ export function useDepositModalContent({
   close: () => void;
 }): UseModalReturn {
   const { t } = useTranslation(['deposit-crypto', 'swap-coins']);
-  const { exchangeType, internalId } = useActiveExchange();
+  const exchange = useActiveExchange();
   const [convertPreviewData, setConvertPreviewData] =
     useState<ConvertPreviewType>();
   const [confirmSwapData, setConfirmSwapData] = useState<ConfirmSwapDataType>();
@@ -60,7 +60,8 @@ export function useDepositModalContent({
       );
   }, [balances]);
   const showSwap =
-    exchangeType === 'spot' && coinOptionsAllowedSwapFrom.length !== 0;
+    exchange?.exchangeType === 'spot' &&
+    coinOptionsAllowedSwapFrom.length !== 0;
 
   const [view, setView] = useState<ChooseDepositTypeViews>();
   useEffect(() => {
@@ -109,7 +110,7 @@ export function useDepositModalContent({
             close();
             openInvestModal(serviceId);
           }}
-          internalId={internalId}
+          internalId={exchange?.internalId}
           toCoin={coin}
           {...confirmSwapData}
         />
