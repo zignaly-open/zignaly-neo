@@ -44,7 +44,7 @@
 		"33": "Provedor desconhecido",
 		"34": "A ordem seria acionada imediatamente",
 		"35": "Posição fechada",
-		"36": "Erro ao ativar 2FA",
+		"36": "Erro em 2FA",
 		"37": "Código 2FA incorreto",
 		"wrong-code": "Código Errado",
 		"38": "O preço do take profit já foi alcançado",
@@ -176,7 +176,8 @@
 		"login-session-expired": "Sessão expirou, por favor façao login novamente",
 		"1086": "Código de e-mail incorreto",
 		"1095": "Código de assinatura inválido",
-		"1097": "Formato de código inválido: deve ser AA-XXXX-XXXX-XXXX"
+		"1097": "Formato de código inválido: deve ser AA-XXXX-XXXX-XXXX",
+		"1096": "Você já resgatou este código"
 	},
 	"something-went-wrong": "Algo deu errado",
 	"404": {
@@ -219,7 +220,7 @@
 		"frozen": {
 			"title": "Conta Congelada",
 			"description": "Estamos verificando uma transferência recente na sua conta que requer aprovação manual. Assim que tudo for verificado e aprovado por nossa equipe você poderá gerir sua conta normalmente.",
-			"action": "OK :("
+			"action": "Entendido"
 		},
 		"kyc-expired": {
 			"title": "Verificação (KYC\/KYB) Expirada",

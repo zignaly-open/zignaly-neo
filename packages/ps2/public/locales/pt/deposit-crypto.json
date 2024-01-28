@@ -32,7 +32,7 @@
 		"memo": "{{coin}} MEMO\/Tag",
 		"scan": "Digitalizar para depósitos no aplicativo móvel"
 	},
-	"no-network": "O depósito não está disponível nesta rede",
+	"no-network": "A carteira está atualmente em manutenção. Os seus fundos em trânsito estão seguros uma vez confirmados no blockchain e serão creditados pouco depois de os depósitos terem sido retomados.",
 	"buy-crypto": "Compre Cripto",
 	"service-deposit": {
 		"title": "Deposita {{coin}} para investir neste serviço",
@@ -47,7 +47,12 @@
 	"history": "Histórico",
 	"network-unavailable": "Rede indisponível",
 	"service-swap": {
-		"convert": "Converter"
+		"title": "Deposite {{coin}} para investir com o Trader",
+		"description": "O trader está tradeando com {{coin}} , então você deve depositar a mesma criptomoeda que o trader está usando para compartilhar os lucros com ele. Deposite {{coin}} em sua conta ou converta outras moedas em {{ coin }}.",
+		"convert-to-coin": "Converter para {{ coin }}",
+		"deposit-purchase": "Deposite ou compre {{ coin }}",
+		"convert": "Converter",
+		"confirm-swap-title": "Confirmar Troca"
 	},
 	"buy-crypto-description": "Compre agora Crypto facilmente em {{ whitelabel }} usando nosso parceiro terceirizado Changelly\/MoonPay."
 }

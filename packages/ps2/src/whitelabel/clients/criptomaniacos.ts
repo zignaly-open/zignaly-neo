@@ -9,6 +9,7 @@ export default {
     [Features.Rewards]: false,
     [Features.CreateService]: false,
     [Features.NewSignup]: false,
+    [Features.ZScore]: false,
   },
   locales: ['en', 'pt'],
   links: {

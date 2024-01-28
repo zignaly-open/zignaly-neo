@@ -18,11 +18,12 @@ import BigNumber from 'bignumber.js';
 import { CenteredLoader, ZigButton } from '@zignaly-open/ui';
 import { ZigCrossIcon } from '@zignaly-open/ui/icons';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { Link, generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useTranslation } from 'react-i18next';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
 import { ZigTableMobileActionRow } from '../../../../components/ZigTableMobileActionRow';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const loadingSpinner = (
   <LoaderWrapper>
@@ -44,7 +45,7 @@ export const MobileMarketplaceAction = ({
   return (
     rowId === activeRow && (
       <ZigTableMobileActionRow safariHeight={93}>
-        <MarketplaceAction service={service} fullSize={false} />
+        <MarketplaceAction service={service} investedVariant={'mobile'} />
         <ZigButton
           size={'large'}
           variant={'outlined'}
@@ -78,7 +79,10 @@ export const MobileMarketplaceAction = ({
 const MarketplaceAction = ({
   service,
   prefixId = 'marketplace-table',
-  fullSize = true,
+  investedVariant,
+  showRocket = false,
+  showArrow = false,
+  fullSizeInvest = true,
 }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
@@ -95,36 +99,72 @@ const MarketplaceAction = ({
   const investedAmount = investment
     ? new BigNumber(investment.invested).plus(investment.pending)
     : 0;
+  // Margin to keep arrow aligned with button, and button aligned with other columns
+  const subMargin = isAuthenticated && investedAmount ? 0 : '28px';
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ minWidth: 170 }}>
-        {isLoading ? (
-          loadingSpinner
-        ) : (
-          <Suspense fallback={loadingSpinner}>
-            <>
+      {isLoading ? (
+        loadingSpinner
+      ) : (
+        <Suspense fallback={loadingSpinner}>
+          <Box
+            display='flex'
+            gap='25px'
+            alignItems={'center'}
+            mt={showArrow ? subMargin : 0}
+          >
+            <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
               {isAuthenticated && investedAmount ? (
-                fullSize ? (
-                  <InvestedButtonBase
-                    prefixId={prefixId}
-                    service={traderService}
-                    investedAmount={investedAmount.toString()}
-                  />
-                ) : (
+                investedVariant === 'mobile' ? (
                   <MobileInvestedButton
                     service={traderService}
                     id={prefixId && `${prefixId}__edit-investment`}
                     investedAmount={investedAmount.toString()}
                   />
+                ) : (
+                  <InvestedButtonBase
+                    variant={investedVariant}
+                    prefixId={prefixId}
+                    service={traderService}
+                    investedAmount={investedAmount.toString()}
+                  />
                 )
               ) : (
-                <InvestButton prefixId={prefixId} service={traderService} />
+                <InvestButton
+                  prefixId={prefixId}
+                  service={traderService}
+                  showRocket={showRocket}
+                  fullSize={fullSizeInvest}
+                />
               )}
-            </>
-          </Suspense>
-        )}
-      </Box>
+            </Box>
+            {showArrow && (
+              <Box
+                component={Link}
+                to={generatePath(ROUTE_TRADING_SERVICE, {
+                  serviceId: service.id,
+                })}
+                sx={{
+                  alignItems: 'flex-start',
+                  display: 'flex',
+                  width: '10px',
+                  mb: subMargin,
+                }}
+                id={`marketplace-table__link-${service.id}`}
+              >
+                <ArrowForwardIosIcon
+                  sx={{
+                    color: 'links',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                />
+              </Box>
+            )}
+          </Box>
+        </Suspense>
+      )}
     </Box>
   );
 };

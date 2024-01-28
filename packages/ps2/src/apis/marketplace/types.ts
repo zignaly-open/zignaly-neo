@@ -1,3 +1,5 @@
+import { ExchangeName } from '../service/types';
+
 export type MarketplaceState = {
   mobileActiveRow?: string | null;
 };
@@ -29,4 +31,20 @@ export type MarketplaceService = {
   fundsAllocated: string;
   description: string;
   createdAt: string;
+  zbalanced: number;
+  zprofit: number;
+  zrisk: number;
+  zscore: number;
+  zservice: number;
+  exchange: ExchangeName;
+  geekMode: {
+    idleDays: number;
+    investorsGrowthPct: number;
+    isSpotOnly: boolean;
+    lossDays: number;
+    maxDrawdownPct: number;
+    profitFactor: number;
+    sharpeRatio: number;
+    winDays: number;
+  };
 };

@@ -2,7 +2,7 @@
 	"service-by": "tarafından <0>{{name}}<\/0>",
 	"service-age": "<0>{{date}}<\/0 > önce başlatıldı",
 	"link-copied": "Bağlantı panoya kopyalandı!",
-	"logo-alt": "{{name}} Zignaly - Profit Sharing \/ Alım Satım Hizmeti Profil Logosu",
+	"logo-alt": "{{ whitelabel }} - {{name}} 'nin Profit Sharing \/ Copy Trade Hizmeti Profili Logosu",
 	"liquidated": "Likidite edilmiş",
 	"invested-label": "Yatırım yapılan bakiye",
 	"copy-link": "Bağlantıyı kopyala",
@@ -11,7 +11,8 @@
 		"max-reached": "Fonlar maksimum değere ulaştı",
 		"max-reached-tooltip": "Bu serviste Maksimum Fon Limitine ulaşıldığı için yatırımlara izin verilmemekte. Pazar yerimizdeki diğer Profit Sharing Servislerine göz atın.",
 		"all-accounts": "Tümünü gör ({{count}})",
-		"x-success-fee": "% {{fee}} Başarım ücreti"
+		"x-success-fee": "% {{fee}} Başarım ücreti",
+		"success-fee": "Başarım Ücreti: {{fee}}%"
 	},
 	"owner-verified": "Yönetici doğrulandı",
 	"owner-from": "Yönetici nereli? {{country}} ",
@@ -26,7 +27,8 @@
 		"base-currency": "Temel birim:",
 		"funds-allocated": "Tahsis edilen fonlar:",
 		"success-fee": "Başarı ücreti",
-		"tags": "Etiketler:"
+		"tags": "Etiketler:",
+		"exchange": "Borsa:"
 	},
 	"periods": {
 		"7d-full": "1 hafta",
@@ -70,7 +72,7 @@
 		"name": "Servis adı:",
 		"logo": "Logoyu Düzenle",
 		"description": "Açıklama:",
-		"success-fee-desc": "Yatırımcılarınızdan tahsil edeceğiniz kâr tutarı (%5 Zignaly payı dahil)",
+		"success-fee-desc": "Yatırımcılarınızdan alacağınız kar miktarı %({{ zignalyFee }} ZIGDAO masrafı dahil)",
 		"pool-size": "Maksimum havuz büyüklüğü:",
 		"pool-size-desc": "Yatırımcılardan kabul edeceğiniz maksimum meblağ",
 		"visibility": {
@@ -89,6 +91,14 @@
 		"validation": {
 			"name-length": "5 ila 50 karakter arasında olmalıdır",
 			"success-fee-range": "0 veya 10 ile 75 arasında bir tamsayı olmalıdır"
+		},
+		"commission": {
+			"title": "{{whitelabel }} referans programına katılın:",
+			"description": "{{whitelabel }} referanslara kendi başarım ücretlerinin %100'üne kadarını teklif ediyor. Hizmetinize daha fazla yatırımcı çekmek için {{whitelabel }}'ın teklifi yineleyebilir veya artırabilirsiniz.",
+			"max-success-fee": "Referanslara ödenen maksimum başarım ücreti:",
+			"promo-preview": "Tanıtım önizlemesi:",
+			"how-it-works": "Nasıl çalıştığını görün",
+			"increase-success-fee": "Başarı ücretinizi bonus sunarak daha fazla kullanıcının dikkatini çekmek için artırın"
 		}
 	},
 	"create": {
@@ -104,11 +114,29 @@
 			"spot": "Spot",
 			"futures": "Vadeli İşlemler"
 		},
-		"minimum-balance": "Alım Satım yapmak ve yatırımcıların yatırım yapmasına izin vermek için, hizmetinize en az {{ minValue }} {{ minValueCoin }} yatırmanız gerekir.",
+		"minimum-balance": "Trade etmek ve yatırımcıların servisinize yatırım yapması için hizmetinizde en az \n {{ minValue }} {{ minValueCoin }}  bulunmalıdır",
 		"profits-explainer": "Alım satım ve başarı ücretlerinden elde ettiğiniz kârın ne kadarının otomatik olarak transfer edilmesini istediğinize karar verin.",
-		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, Zignaly de bu servisten bir komisyon kesmeyecektir",
+		"please-verify": "*Lütfen bilgilerinizi gözden geçirin. Tür ve taban daha sonra değiştirilemez",
+		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, ZIGDAO da bu servisten bir komisyon almayacaktır",
 		"total-fee": "Toplam komisyon",
-		"you-receive": "Size ulaşacak miktar"
+		"you-receive": "Size ulaşacak miktar",
+		"exchange": "Borsa:",
+		"bybit-warning": "Bybit Beta'nın bir parçası olmak için lütfen aşağıdaki <0>form<\/0> formunu doldurun.",
+		"exchanges": {
+			"bybit": "Bybit",
+			"binance": "Binance"
+		}
 	},
-	"you-receive": "Size ulaşacak miktar"
+	"you-receive": "Size ulaşacak miktar",
+	"z-score": "Z-Skoru",
+	"failed-to-load": "Yükleme başarısız oldu. <0>Tekrar dene<\/0>",
+	"chart-crashed": {
+		"title": "Grafik oluşturulamadı",
+		"description": "Üzgünüz, ancak bazı teknik sorunlar nedeniyle grafik oluşturulamadı"
+	},
+	"exchanges": {
+		"binance": "Binance",
+		"deribit": "Deribit",
+		"bybit": "Bybit"
+	}
 }

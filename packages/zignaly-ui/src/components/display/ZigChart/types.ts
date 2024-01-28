@@ -1,3 +1,4 @@
+import { AdditionalProps } from "components/types";
 import { VictoryChartProps } from "victory";
 
 export type ChartColors = {
@@ -21,7 +22,7 @@ export type ChartEvent = {
 
 export type GradientVariant = "mini" | "full" | "card";
 
-export interface ChartMiniProps {
+export type ChartMiniProps = AdditionalProps & {
   readonly data: AxisFormat[] | number[];
   precision?: number;
   midLine?: boolean | null;
@@ -29,8 +30,7 @@ export interface ChartMiniProps {
   width?: number;
   gradientVariant?: GradientVariant;
   chartProps?: VictoryChartProps;
-  id?: string;
-}
+};
 
 export interface ChartLargeProps {
   readonly data: AxisFormat[] | number[];

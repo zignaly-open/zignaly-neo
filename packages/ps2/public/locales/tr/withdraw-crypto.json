@@ -1,6 +1,5 @@
 {
 	"title": "Kripto Çekme",
-	"description": "Kriptonuzu harici bir hesaba çekin",
 	"coinSelector": {
 		"label": "Coin:",
 		"placeholder": "Coin arama"
@@ -12,11 +11,11 @@
 	"withdrawAddress": {
 		"label": "Bu Adrese Çekin:",
 		"placeholder": "Cüzdan adresini buraya yapıştırın",
-		"warning": "Bu adrese yalnızca {{network}} {{coin}} token'larını gönderin",
+		"warning": "Bir {{network}} {{coin}} adresi sağladığınızdan emin olun.",
 		"invalid": "Geçersiz adres"
 	},
 	"amountToWithdraw": {
-		"label": "Çekilecek Tutar:",
+		"label": "Miktar:",
 		"labelBalance": "Kullanılabilir Bakiye:",
 		"minimum": "Minimum:",
 		"fee": "Komisyon:"
@@ -28,22 +27,25 @@
 	"withdrawMemo": {
 		"label": "MEMO\/Etiket:",
 		"placeholder": "Cüzdan MEMO\/Etiketini buraya yapıştırın",
-		"invalid": "MEMO\/Etiket geçersiz, lütfen hedef cüzdan ağı bilgilerinizi gözden geçirin"
+		"invalid": "MEMO\/Etiket geçersiz, lütfen hedef cüzdan ağı bilgilerinizi gözden geçirin",
+		"required": "Hem bir not\/etiket hem de bir adres gereklidir"
 	},
 	"confirmation": {
 		"title": "Çekme İşlemini Onayla",
 		"description": "Lütfen bilgilerin doğru olduğunu onaylayın ve çekim işleminizi tamamlayın.",
 		"receive": "Alacağınız Meblağ",
-		"network": "Çekim Yapılacak Ağ:",
-		"address": "Çekim Yapılacak Adres:",
+		"network": "Çekilecek Ağ",
+		"address": "Çekim adresi:",
 		"amount": "Çekilecek Miktar:",
-		"networkFee": "Ağ Ücreti:",
-		"continue": "Doğrulamaya Geçin",
-		"withdrawNow": "Şimdi Çek"
+		"networkFee": "Yaklaşık Ağ Ücreti:",
+		"continue": "Devam et",
+		"withdrawNow": "Şimdi çek"
 	},
 	"success": {
 		"title": "Çekim Başarılı",
 		"description": "Çekim talebiniz gönderildi ve kısa süre içinde işleme alınacak."
 	},
-	"notEnoughZig": "Çekim masrafını karşılamak için yeterli ZIG'iniz yok."
+	"notEnoughZig": "Çekim masrafını karşılamak için yeterli ZIG'iniz yok.",
+	"history": "Geçmiş",
+	"description": "Kriptonuzu harici bir hesaba çekin"
 }

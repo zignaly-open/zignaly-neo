@@ -44,8 +44,8 @@
 		"33": "Bilinmeyen sağlayıcı",
 		"34": "Emir derhal tetiklenmeli",
 		"35": "Pozisyon kapalı",
-		"36": "2FA etkinleştirilirken hata oluştu",
-		"37": "Yanlış Kod",
+		"36": "2FA'da hata",
+		"37": "2FA kodu yanlış",
 		"wrong-code": "Yanlış Kod",
 		"38": "Kar alma (TP) fiyatına zaten ulaşıldı",
 		"39": "Kar Al (TP) değeri 1'den büyük olmalıdır",
@@ -88,7 +88,7 @@
 		"76": "Captcha hatası, lütfen tekrar deneyin.",
 		"77": "Borsa için maksimum kullanıcı broker hesabına ulaşıldı",
 		"78": "Bakiyesi 0'dan büyük olan bir hesap kaldırılamadı.",
-		"79": "Seçili takipçi, Zignaly çalışanlarından veya katkıda bulunanlardan olduğu için askıya alınamaz.",
+		"79": "Seçilen takipçi {{ whitelabel }} personelinden veya katılımcısından olduğu için askıya alınamaz.",
 		"80": "Kendinizi askıya alamazsınız.",
 		"81": "Vadeli işlem türündeki borsa hesapları yalnızca bir trader'a bağlanabilir. Farklı bir hizmet sağlayıcı kullanmak için başka bir borsa hesabı oluşturmanız gerekir.",
 		"82": "Listelenmeden önce bir açıklama ve logoya sahip olmalısınız",
@@ -173,12 +173,59 @@
 		"did-you-mean": "{{suggested}} mi demek istediniz?",
 		"password-requirements": "Harf, sayı ve sembol içeren en az {{length}} karakter olmalı",
 		"occurred": "Hata oluştu",
-		"login-session-expired": "Oturumun süresi doldu, lütfen tekrar giriş yapın"
+		"login-session-expired": "Oturumun süresi doldu, lütfen tekrar giriş yapın",
+		"1086": "E-posta kodu yanlış",
+		"1095": "Geçersiz abonelik kodu",
+		"1097": "Geçersiz kod biçimi: AA-XXXX-XXXX-XXXX olmalıdır",
+		"1096": "Bu kodu zaten kullandınız"
 	},
 	"something-went-wrong": "Bir şeyler ters gitti",
 	"404": {
 		"title": "Sayfa bulunamadı",
 		"subtitle": "Bu sayfa mevcut değil veya bulunamıyor.",
 		"button-back": "Ana sayfaya git"
+	},
+	"access": {
+		"banned": {
+			"title": "Engellendiniz",
+			"description": "Yaramazlıklarınız engellenmenize neden oldu. Şirin Baba da bilgilendirildi.",
+			"action": "Çok üzgünüm."
+		},
+		"mail-not-verified": {
+			"title": "E-posta adresinizi doğrulayın",
+			"description": "Giriş yapabilmeniz için önce e-posta adresinizi doğrulamanız gerekir",
+			"action": "Anladım."
+		},
+		"kyc-pending": {
+			"title": "Hesabınızı doğrulayın (KYC\/KYB)",
+			"description": "Tüm hizmetlere erişmeye başlamak için hesabınızı doğrulayın. İşlem kolay ve hızlıdır ve yaklaşık 2 dakikanızı alacaktır.",
+			"action": "Doğrulamayı Başlat"
+		},
+		"no-subscription": {
+			"title": "Aboneliğinizi Etkinleştirin",
+			"description": "Bir hizmete yatırım yapmaya başlamak için önce bir abonelik koduna ihtiyacınız vardır.",
+			"explainer-1": "Abonelik kodunu kullanın",
+			"explainer-2": "Herhangi bir abonelik kodum yok",
+			"cta-1": "Kodu kullanın",
+			"cta-2": "Satın alın"
+		},
+		"expired-subscription": {
+			"title": "Abonelik Süresi Doldu",
+			"description": "Aboneliğinizin süresi doldu, devam etmek için lütfen yenileme kodunu satın alın.",
+			"explainer-1": "Abonelik kodunu kullanın",
+			"explainer-2": "Herhangi bir abonelik kodum yok",
+			"cta-1": "Kodu kullanın",
+			"cta-2": "Satın alın"
+		},
+		"frozen": {
+			"title": "Hesap Dondurulmuş",
+			"description": "Hesabınızda manuel onay gerektiren yeni bir transferi doğruluyoruz. Her şey ekibimiz tarafından doğrulanıp onaylandıktan sonra hesabınızı normal şekilde yönetebileceksiniz.",
+			"action": "Anlaşıldı"
+		},
+		"kyc-expired": {
+			"title": "Doğrulama (KYC\/KYB) Süresi Doldu",
+			"description": "Doğrulamanızın (KYC\/KYB) süresi doldu ve tüm hizmetlere erişmeye devam etmek için yeniden göndermeniz gerekiyor.",
+			"action": "KYC'yi İncele"
+		}
 	}
 }

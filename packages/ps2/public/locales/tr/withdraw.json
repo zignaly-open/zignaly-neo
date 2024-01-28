@@ -3,6 +3,7 @@
 	"button": "Çekim",
 	"form": {
 		"label": "Çekilecek miktar:",
-		"labelBalance": "Mevcut:"
-	}
+		"available": "Kullanılabilir Bakiye:"
+	},
+	"min-investment": "Minimum yatırım {{ minInvestment, prettyNumberFull }} {{ minAmountCoin }}. Profesyonel ipucu: hala hepsini çekebilirsiniz"
 }

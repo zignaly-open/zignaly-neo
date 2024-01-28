@@ -1,67 +1,11 @@
 {
-	"title": "Arkadaşlarınızı Davet Edin ve Ömür Boyu Gelir Elde Edin",
-	"description": "Bir trader'ı Zignaly'ye davet ettiğinizde arkadaşlarınız tarafından veya trader hizmetinin tüm yatırımcıları tarafından ödenen işlem ve başarı ücretlerinden bir yüzde alın",
+	"title": "{{commission}} % {{ whitelabel }} Referans Programı",
+	"description": "{{ whitelabel }}'ın başarı ücretlerinden < 0 {{commission}} > kazanın < \/0 > ARTI bir yatırımcı < 0 > ile {{multiplier}} x'e katlayın. < \/0 > Bu % {{maxCommission}} demek!!",
 	"share-your-link": "Bağlantınızı paylaşın:",
 	"what-you-get": "Sizin alacağınız",
 	"what-they-get": "Onların alacağı",
-	"how-to-earn": "Nasıl kazanılır",
-	"how-to-earn-steps": {
-		"step-1": {
-			"title": "Arkadaşlarınızı Davet Edin",
-			"description": "Arkadaşlarınızın Zignaly'e kaydolması için yukarıdaki referans bağlantınızı <0>tek bir tıklama<\/0> ile paylaşın"
-		},
-		"step-2": {
-			"title": "Bir servise yatırım yaparlar",
-			"description": "Arkadaşlarınızın bir Profit Sharing servisine herhangi bir miktarda yatırım yapmasını sağlayın"
-		},
-		"step-3": {
-			"title": "İkiniz de Kazanın",
-			"description": "Sürekli kazanabilirsiniz: Siz Zignaly'ye ödenen Başarım Ücretlerinin % {{successFee}} kadarını kazanacaksınız. Onlar ise herhangi bir miktarda yatırım yaparlarsa {{reward}}$ değerinde ZIG cinsinden ödül kazanacaklar"
-		}
-	},
-	"they-get-invest": "<0>İlk Para Yatırma Ücretinde <\/0><1>${{value}}<\/1><2> alırlar",
-	"they-get-invest-modal": "Davetliniz İlk Para Yatırma Işleminde <0>${{value}}<\/0> Ücret Kuponu alır.",
-	"invite-traders-for-percent": "<0>Trader'ları Davet Edin<\/0><1>yatırımcılarının tüm başarım ücretlerinden<\/1><2>%{{value}}kazanın<\/2>",
-	"invite-traders-for-percent-modal": "Zignaly'nin Başarım Ücretlerinden Elde Ettiği Gelirin <0>%{{value}}<\/0> kadarını davet ettiğinden ömür boyu kazanmak için trader'ları davet edin.",
-	"invite-friends-for-percent": "<0>Arkadaşlarınızı Davet Edin<\/0><1>ve başarım ücretlerinden %{{value}} kadarını <\/1><2>kazanın<\/2>",
-	"invite-friends-for-percent-modal": "Başarım Ücretlerinden alınan Zignaly'nin gelir payının  <0>%{{value}}<\/0> kadarını ömür boyu davetliden almak için arkadaşlarınızı davet edin.",
-	"invite-traders-for-percent-rebate": "<0>Trader'ları Davet Edin ve<\/0><1>%{{value}}<\/1><2>oranında alım satım indirim ücretlerinden faydalanalım<\/2>",
-	"invite-traders-for-percent-rebate-modal": "Zignaly'e ait İndirim Ücretlerinden elde ettiği Gelirinden <0>%{{value}}<\/0> kadarını ömür boyu davetliden almak için trader'ları davet edin.",
-	"invite-friends-for-percent-rebate": "<0>Arkadaşlarınızı Davet Edin<\/0><1>alım-satım indirim ücretlerinden %{{value}}<\/1><2>kadarını kazanın<\/2>",
-	"invite-friends-for-percent-rebate-modal": "Zignaly'nin İndirim Ücretlerinden elde ettiği gelirin <0>%{{value}}<\/0> kadarını ömür boyu kazanmak için arkadaşlarını davet et.",
-	"invite-for-deposit": "<0>Arkadaşlarınızı Davet Edin<\/0><1>tek seferde {{threshold}}$ üzerinde bir tutar ile fon yatırdıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-deposit-modal": "<0>Arkadaşlarınızı Davet Edin<\/0><1>tek seferde {{threshold}}$ üzerinde bir tutar ile fon yatırdıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-investment": "<0>Arkadaşlarınızı Davet Edin<\/0><1>tek seferde toplamda {{threshold}}$ üzerinde bir tutar ile yatırım yaptıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-investment-modal": "<0>Arkadaşlarınızı Davet Edin<\/0><1>tek seferde toplamda {{threshold}}$ üzerinde bir tutar ile yatırım yaptıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-total-investment": "<0>Arkadaşlarınızı Davet Edin<\/0><1>toplamda {{threshold}}$ üzerinde bir tutar ile yatırım yaptıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-total-investment-modal": "<0>Arkadaşlarınızı Davet Edin<\/0><1> {{threshold}}$ üzerinde bir tutar ile yatırım yaptıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-total-investment-days_one": "<0>Arkadaşlarınızı Davet Edin<\/0><1> en az {{count}} gün boyunca toplamda {{threshold}}$ üzerinde bir tutar ile yatırım yaptıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-total-investment-days_other": "<0>Arkadaşlarınızı Davet Edin<\/0><1> en az {{count}} gün boyunca {{threshold}}$ üzerinde bir tutar ile yatırım yaptıklarında<\/1><2>{{value}} {{symbol}} kazanın<\/2>",
-	"invite-for-total-investment-modal-days_one": "Arkadaşlarınızı davet edin, <0>{{value}} {{symbol}}<\/0> en az {{count}} gün boyunca toplam {{threshold}} üzerinde bir tutarda yatırım yaptıklarında kazanın.",
-	"invite-for-total-investment-modal-days_other": "Arkadaşlarını davet et, en az {{count}}gün boyunca {{threshold}}$ tutarında yatırım yaptıklarında <0>{{value}} {{symbol}}<\/0>kazan.",
-	"invite-for-balance": "<0>Arkadaşlarını davet et<\/0><2> onların bakiyeleri {{threshold}}$ üzerinde değere ulaştığında<\/2><1>{{value}} {{symbol}}<\/1>kazan",
-	"invite-for-balance-modal": "Arkadaşlarını davet et, bakiyeleri {{threshold}}$'ın üzerinde değere ulaştığında <0>{{value}} {{symbol}}<\/0> kazan.",
-	"invite-for-signup": "<0>Arkadaşlarını davet et<\/0><1>{{value}}<\/1><2> onlar hesap oluşturup doğruladıklarında sen  {{symbol}} kazan<\/2>",
-	"invite-for-signup-modal": "Arkadaşlarını davet et <0>{{value}}<\/0> ve onlar bir hesap oluşturup doğruladıklarında <0>{{symbol}}<\/0>kazan.",
-	"terms": {
-		"title": "Sabit Şartlar:",
-		"1": "Zignaly, uygunsuz, dürüst olmayan veya istismar edici faaliyetlerde bulunan katılımcıları diskalifiye etme hakkını saklı tutar.",
-		"2": "Zignaly, referans programının Hüküm ve Koşullarını önceden haber vermeksizin istediği zaman değiştirme hakkını saklı tutar.",
-		"3": "Bu şartları ihlal eden katılımcılar, referans kazançlarını elde etmeye uygun olmayacaktır; herhangi bir hileli veya kötü niyetli davranış, ilişkili tüm hesapların derhal feshedilmesiyle sonuçlanacaktır.",
-		"4": "Zignaly'nin logosunun kullanıldığı ücretli çevrimiçi reklamlar kesinlikle yasaktır.",
-		"5": "Tüm yönlendirme, Zignaly tarafından kazanılan ve gerçekleştirilen gelire göre hesaplanır. Zignaly'nin tüm hesaplamaları nihaidir.",
-		"6": "İndirim yapılması durumunda, kazancınız indirimden sonra hesaplanacaktır."
-	},
-	"when-invite-friends": "Arkadaşlarınızı davet ettiğinizde",
-	"when-invite-traders": "Trader'ları davet ettiğinizde",
-	"invitee-gets": "Davetli alır",
 	"export": "Aktar",
-	"full-rewards": "Tüm şartlar",
-	"full-rewards-title": "Referans kazanç koşulları",
-	"total-invitees": "Toplam Davetli",
-	"total-rewards": "Toplam Kazanç",
 	"my-referrals": "Referanslarım",
-	"pending-rewards": "Bekleyen Kazançlar",
 	"filter-any": "Filtrele",
 	"table": {
 		"title": "Kazanç Geçmişi",
@@ -71,7 +15,8 @@
 		"user-trader": "Kullanıcı\/Trader",
 		"reward-type": "Kazanç Türü",
 		"filter-status": "Durum",
-		"filter-type": "Tip"
+		"filter-type": "Tip",
+		"subtrack": "Subtrack"
 	},
 	"statusTypes": {
 		"Completed": "Tamamlandı",
@@ -90,10 +35,6 @@
 		"SUCCESS_FEE_REWARD": "Başarım Ücreti Kazancı",
 		"REBATE_COMMISSION_REWARD": "Ücret iadesi kazancı"
 	},
-	"invite-traders-for-revenue": "<0>Trader'ları Davet Edin<\/0><1>Zignaly'nin Gelirinden<\/1><2>%{{value}}<\/2>kazanın",
-	"invite-traders-for-revenue-modal": "Trader'ları, Zignaly'nin trader Profit Sharing servisinden elde ettiği Gelirin <0>%{{value}}<\/0> kadarını ömür boyu almak üzere davet edin.",
-	"invite-friends-for-revenue": "<0>Arkadaşlarınızı Davet Edin<\/0><1>Zignaly'nin Gelirinden<\/1><2>%{{value}}<\/2>kazanın",
-	"invite-friends-for-revenue-modal": "Davet edilen kişiden ömür boyu kazanılan Zignaly Gelirinin <0>%{{value}}<\/0> kadarını almak için arkadaşlarınızı davet edin.",
 	"create-invite": {
 		"create-invite": "Davetiye Paylaş",
 		"invite-friends": "Arkadaşlarınızı Davet Edin",
@@ -102,17 +43,43 @@
 		"deposit-trader-cta": "Servisinizi <0>450.000'den fazla<\/0> yatırımcıya sunma şansını yakalayın!",
 		"friend-cta": "Kayıt olun ve\n20$ değerinde ZIG kazanın",
 		"trader-cta": "Yatırımcı akışı ve \nyanında 20$ kazanmak \nister misin?",
-		"scan-qr": "QR kodunu tara ve Zignaly'de bana katıl!",
+		"scan-qr": "QR kodunu tarayın ve {{ whitelabel }}'da bana katılın!",
 		"customize-text": "Davetiyenizi özelleştirin:",
-		"invite-text-friend": "Birlikte kazanalım! Zignaly'de bana katıl ve favori Profit Sharing servislerine yatırım yap! İlk para yatırma işleminde {{reward}} dolarlık ücret kuponu kazan!",
-		"invite-text-trader": "Gel birlikte kazanalım! Zignaly'de bana katıl ve kendi Kripto fonunu oluştur!",
+		"invite-text-friend": "Birlikte kazanalım! Bana {{ whitelabel }} adresinden katılın ve favori Kripto Fon Yöneticilerinizle yatırım yapın!",
+		"invite-text-trader": "Birlikte kazanalım! Bana {{ whitelabel }} adresinden katılın ve kendi Kripto Fonunuzu oluşturun!",
 		"scan-join": "QR kodunu tarayın ve <0>app.zignaly.com<\/0> adresinde bana katılın",
 		"invite-code": "Kod: <0>{{code}}<\/0>",
-		"ugly-friend-cta": "İlk para yatırma işleminizde <0>{{reward}}$<\/0> ücret kuponu kazanın",
-		"ugly-trader-cta": "Zignaly'de Kripto <0>Fonu Yöneticisi<\/0> Olun!"
+		"ugly-friend-cta": "İncelenmiş ve seçilmiş kripto fon yöneticileri pazarında yatırım yapın",
+		"ugly-trader-cta": "{{ whitelabel }} ile Kripto <0>Fonu Yöneticisi<\/0> Olun!"
 	},
 	"share": {
-		"email-subject": "Zignaly, trade yapmanın yeni bir yolu",
+		"email-subject": "{{ whitelabel }}, trade yapmanın yeni bir yolu",
 		"facebook-hashtags": "#kripto #trade"
-	}
+	},
+	"limited-time": "Sınırlı süre",
+	"start-earning": "Şimdi Kazanmaya Başlayın",
+	"start-earning-steps": {
+		"step-1": {
+			"title": "Davet Bağlantınızı Paylaşın",
+			"description": "Referans bağlantınızı {{ whitelabel }}'e kaydolacak arkadaşlarınıza gönderin"
+		},
+		"step-2": {
+			"title": "{{ whitelabel }} üzerine yatırım yapanlar",
+			"description": "Arkadaşlarınızın {{ whitelabel }} üzerinde en az bir yatırımcıya yatırım yapmasını sağlayın"
+		},
+		"step-3": {
+			"title": "Siz Kazanın, Onlar Biriktirsin",
+			"description": "Başarı ücretlerinin bir kısmını size ödüyoruz ve onlara ücret indirimi sağlıyoruz"
+		}
+	},
+	"share-link": "Davet bağlantınızı paylaşın:",
+	"signups": "Kayıtlar",
+	"invested": "Yatırım yapılan bakiye",
+	"total-earned": "Toplam Kazanç",
+	"how-to-earn": "% {{commission}} Nasıl Kazanılır?",
+	"earnings": "Kazançlar",
+	"1-week": "1 hafta",
+	"how-it-works": "Nasıl çalışır",
+	"invite-people-1-week": "1 hafta içinde {{invite}} kişiyi davet ederseniz < 0 > % {{commission}} < \/0 > kazanırsınız",
+	"invite-people": "{ {{invite}} kişiyi davet ederseniz < 0 > % {{commission}} < \/0 > kazanırsınız"
 }

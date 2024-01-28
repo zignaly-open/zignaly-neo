@@ -33,8 +33,13 @@
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "ISC",
   "devDependencies": {
+    "http-server": "^14.1.1",
     "husky": "^8.0.1",
+    "lerna": "^6.4.1",
     "lint-staged": "^13.0.0",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "http-server": "^14.1.1"

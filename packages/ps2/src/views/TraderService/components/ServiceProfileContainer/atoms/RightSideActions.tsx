@@ -91,27 +91,34 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
             !tiers.isError && (
               <InviteButton service={service} tiersData={tiers} fullSize={sm} />
             )}
-          {state === RightSideActionStates.Invested ? (
-            sm ? (
-              <InvestedButton prefixId={'service-profile'} service={service} />
+          <Box minWidth={170}>
+            {state === RightSideActionStates.Invested ? (
+              sm ? (
+                <InvestedButton
+                  prefixId={'service-profile'}
+                  service={service}
+                  variant='component'
+                />
+              ) : (
+                <MobileInvestedButton
+                  service={service}
+                  id={'service-profile__invested'}
+                  investedAmount={investedAmount.toString()}
+                  showMultipleAccountButton
+                />
+              )
             ) : (
-              <MobileInvestedButton
-                service={service}
-                id={'service-profile__invested'}
-                investedAmount={investedAmount.toString()}
-                showMultipleAccountButton
-              />
-            )
-          ) : (
-            <Box mt={!sm && '2px'}>
-              <InvestButton
-                modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
-                prefixId={'service-profile'}
-                showMultipleAccountButton
-                service={service}
-              />
-            </Box>
-          )}
+              <Box mt={!sm && '2px'}>
+                <InvestButton
+                  modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+                  prefixId={'service-profile'}
+                  showMultipleAccountButton
+                  service={service}
+                  fullSize
+                />
+              </Box>
+            )}
+          </Box>
         </Box>
       )}
     </RightSideActionWrapper>
