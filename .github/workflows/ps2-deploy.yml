@@ -70,6 +70,7 @@ jobs:
         with:
           envkey_BASE_API: ${{ vars.PS2_BASE_API }}
           envkey_PS2_ENV: ${{ inputs.deploy-env }}
+          envkey_SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           directory: packages/ps2-wl-server
           file_name: .env
       - name: TS check
