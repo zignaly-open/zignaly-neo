@@ -86,9 +86,12 @@ export type TransferPayload = {
   amount: string;
 };
 
+export type ExchangeName = 'bybit' | 'binance' | 'deribit';
+
 export type Service = {
   createdAt: string;
   description: string;
+  exchange: ExchangeName;
   exchangeInternalId: string;
   fundsAllocated: string;
   id: string;

@@ -1,3 +1,4 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { SortingState } from '@tanstack/react-table';
 import { loadFilters, pruneFilters } from '@zignaly-open/ui';
 import { ZigFiltersType } from '@zignaly-open/ui/lib/components/filters/ZigFilters/types';
@@ -16,6 +17,23 @@ type IOverload = {
   (id: TableId): PersistTableDataPruned;
 };
 
+const createTableDataSelector = (id: TableId) => {
+  // Memoize the selector to avoid re-render issues.
+  return createSelector(
+    (store: RootState) => store.settings.table[id],
+    (tableDataState) => {
+      return tableDataState ?? { filters: [], sorting: [] };
+    },
+  );
+};
+
+const useTableData = (id: TableId) => {
+  const selectTableData = useMemo(() => {
+    return createTableDataSelector(id);
+  }, [id]);
+  return useSelector(selectTableData);
+};
+
 /**
  * A hook to persist table sorting and filtering.
  */
@@ -23,11 +41,7 @@ export const usePersistTable: IOverload = (
   id: TableId,
   defaultFilters?: ZigFiltersType,
 ) => {
-  const tableData = useSelector(
-    (store: RootState) =>
-      store.settings.table[id] ?? { filters: [], sorting: [] },
-  );
-  const { sorting, filters } = tableData;
+  const { sorting, filters } = useTableData(id);
   const dispatch = useDispatch();
   const properFilters = useMemo(() => {
     return defaultFilters

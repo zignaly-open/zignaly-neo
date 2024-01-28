@@ -64,7 +64,6 @@ export * from "./components/display/ZigRisk";
 export { default as ZScoreRing } from "./components/display/ZScoreRing";
 export * from "./components/display/ZScoreRing";
 export { default as ZScoreBar } from "./components/display/ZScoreBar";
-export * from "./components/display/ZScoreBar";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";

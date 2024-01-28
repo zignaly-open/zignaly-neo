@@ -31,5 +31,7 @@
 	"update-password": "Atualizar Senha",
 	"edit-profile": "Editar Perfil",
 	"2fa": "Autenticação de Dois Factores",
-	"subscriptions": "Assinaturas"
+	"subscriptions": "Assinaturas",
+	"tos": "Termos de Serviço",
+	"privacy": "Política de Privacidade"
 }

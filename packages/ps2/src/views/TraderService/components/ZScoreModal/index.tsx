@@ -9,7 +9,6 @@ import {
   ZScoreRing,
   ZScoreRiskCategory,
   ZigTypography,
-  roundScorePct,
 } from '@zignaly-open/ui';
 import { useZScoreConfig } from './use';
 import { round } from 'lodash-es';
@@ -41,7 +40,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       case 'duration-day':
         return formatDuration({ days: value });
       case 'amount':
-        return '$' + formatCompactNumber(value, 0);
+        return '$' + formatCompactNumber(value, 2);
       default:
         return round(value, 2);
     }
@@ -52,19 +51,9 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       const { items } = zScoreConfig[category];
       const details = scoreDetails[zScoreConfig[category].scoreCategoryId];
 
-      // Make sure the numbers total don't exceed the max due to rounding
-      const numbersMax = roundScorePct(
-        items.map((item) => details[item.id].ofMax),
-      );
-      const numbers = items.map((item, i) =>
-        details[item.id].gives > numbersMax[i]
-          ? numbersMax[i]
-          : details[item.id].gives,
-      );
-
       return (
         <Box display={'flex'} flexDirection={'column'} mt='3px'>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <div key={item.id}>
               <Box
                 display={'flex'}
@@ -94,8 +83,8 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                 </ZigTypography>
               </Box>
               <ZScoreBar
-                value={numbers[index]}
-                max={numbersMax[index]}
+                value={details[item.id].zscore}
+                max={details[item.id].maxZscore}
                 category={category}
                 id={`zscore-modal__bar-${category}`}
               />

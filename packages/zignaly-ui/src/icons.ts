@@ -60,5 +60,6 @@ export { ReactComponent as ZigScoreCoinsIcon } from "assets/icons/risk/coins-ico
 export { ReactComponent as ZigScoreWalletIcon } from "assets/icons/risk/wallet-icon.svg";
 export { ReactComponent as ZigScoreBalanceIcon } from "assets/icons/risk/balance-icon.svg";
 export { ReactComponent as ZigCalendar1YIcon } from "assets/icons/calendar-1Y-icon.svg";
+export { ReactComponent as ZigCalendar1MIcon } from "assets/icons/calendar-1M-icon.svg";
 export { ReactComponent as ZigCalendar3MIcon } from "assets/icons/calendar-3M-icon.svg";
 export { ReactComponent as ZigRocketIcon } from "assets/icons/rocket-icon.svg";

@@ -1,6 +1,6 @@
 {
   "z-score": "Z-Score",
-  "description": "We objectively rank trading services based on P&L, Risk, service management and profit:risk balance.",
+  "description": "We objectively rank trading services based on P&L, risk management, service management, and profit:risk balance.",
   "profits": {
     "name": "Profits",
     "days-profit": "Days in profit",

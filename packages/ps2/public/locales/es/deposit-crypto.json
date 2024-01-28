@@ -1,6 +1,6 @@
 {
 	"title": "Depositar Cripto",
-	"description": "Deposita Cripto en tu cuenta Zignaly. Zignaly es un Broker oficial de Binance <0><\/0>. Tus fondos estarán seguros en Binance. <1>Más info<\/1>.",
+	"description": "Deposita Cripto en tu cuenta  {{ whitelabel }}. {{ whitelabel }} es un <0>Broker oficial de Binance<\/0>. Tus fondos estarán seguros en Binance. <1>Más info<\/1>.",
 	"coinSelector": {
 		"label": "Moneda:",
 		"placeholder": "Buscar una moneda"
@@ -8,7 +8,7 @@
 	"balances": {
 		"loadingAriaLabel": "Cargando saldo de monedas",
 		"total": "Saldo:",
-		"balanceLocked": "En Órdenes:",
+		"balanceLocked": "En órdenes:",
 		"balanceFree": "Disponible:"
 	},
 	"networkSelector": {
@@ -29,9 +29,10 @@
 	},
 	"depositQR": {
 		"address": "{{coin}} Dirección",
-		"memo": "{{coin}} MEMO\/Tag"
+		"memo": "{{coin}} MEMO\/Tag",
+		"scan": "Escanear para depósitos en dispositivos móviles"
 	},
-	"no-network": "El depósito no está disponible en esta red",
+	"no-network": "La billetera se encuentra actualmente en mantenimiento. Sus fondos en tránsito están seguros una vez confirmados en la cadena de bloques y se acreditarán poco después de que se reanuden los depósitos.",
 	"buy-crypto": "Comprar Criptomonedas",
 	"service-deposit": {
 		"title": "Deposita {{coin}} para Invertir en este Servicio",
@@ -42,5 +43,16 @@
 			"deposit": "Deposita {{coin}}",
 			"purchase": "Compra {{coin}}"
 		}
-	}
+	},
+	"history": "Historial",
+	"network-unavailable": "Red no disponible",
+	"service-swap": {
+		"title": "Deposita {{coin}} para invertir con el Trader",
+		"description": "El trader está operando con {{coin}}, por lo que debe depositar la misma criptomoneda que el trader está utilizando con el fin de compartir ganancias con ellos. Por favor, deposita {{coin}} en tu cuenta o convierte otras monedas a {{ coin }}.",
+		"convert-to-coin": "Convertir a {{ coin }}",
+		"deposit-purchase": "Depositar o comprar {{ coin }}",
+		"convert": "Convertir",
+		"confirm-swap-title": "Confirmar Intercambio"
+	},
+	"buy-crypto-description": "Comprar ahora Cripto fácilmente desde {{ whitelabel }} utilizando nuestro colaborador externo Changelly\/MoonPay."
 }
