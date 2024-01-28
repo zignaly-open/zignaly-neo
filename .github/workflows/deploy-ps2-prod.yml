@@ -1,10 +1,8 @@
 name: PS2 Production deploy
 on:
   push:
-    #tags:
-    #  - 'release-ps2-*'
-    branches:
-      - feat/wl-server-2
+    tags:
+      - 'release-ps2-*'
 
 jobs:
   deploy:
