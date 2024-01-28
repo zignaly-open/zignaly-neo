@@ -1,9 +1,4 @@
 {
-	"card": {
-		"top-rated": "En İyi Servisler",
-		"assets": "Varlıklar",
-		"investors": "Yatırımcılar"
-	},
 	"invest-in-services": "Profit Sharing'e yatırım yap",
 	"invest-in-services-explainer": "Profesyonel trader'lardan oluşan seçkimizden seçtiklerinize yatırım yapın ve kârınızdan yalnızca bir pay ödeyin. Ortalama yatırım yapılan tutar 200 dolardır, ancak dilerseniz 1 dolar ile de başlayabilirsiniz.",
 	"table": {
@@ -20,6 +15,38 @@
 		"n-years_other": "{{count}} yıllık",
 		"account-age": "Hesap yaşı",
 		"x-investors_one": "{{count}} yatırımcı",
-		"x-investors_other": "{{count}} yatırımcı"
+		"x-investors_other": "{{count}} yatırımcı",
+		"service-name-mobile": "Servis adı",
+		"assets-mobile": "Varlıklar",
+		"view-profile": "Profili görüntüle",
+		"invested": "{{ invested }} yatırıldı",
+		"edit": "Düzenlemek için tıklayın",
+		"zscore": "Z-Skoru",
+		"risk": "Risk",
+		"n-months-pnl-mobile": "{{count}}A P&L",
+		"n-years-pnl-mobile": "{{count}}Y P&L",
+		"n-years-pnl_one": "{{count}} yıllık PNL",
+		"n-years-pnl_other": "{{count}} yıllık PNL",
+		"n-weeks-pnl-mobile": "{{count}}H P&L",
+		"n-weeks-pnl_one": "{{count}} haftalık PNL",
+		"n-weeks-pnl_other": "{{count}} haftalık PNL"
+	},
+	"n-profit-sharing-services": "{{count}} Profit Sharing Hizmetleri",
+	"filters": {
+		"returns-months": "{{count}} Aylık Geri Dönüş",
+		"type": "Tip",
+		"fee": "Servis ücreti",
+		"spot": "Spot",
+		"futures": "Vadeli İşlemler",
+		"all": "Tümü",
+		"coins": "Koinler",
+		"period-pnl": "PNL Dönemi",
+		"exchange": "Borsa"
+	},
+	"table-search-empty-message": "Belirttiğiniz kriterlere uygun hizmet yok. Lütfen aramanızı daraltmayı veya farklı seçenekleri keşfetmeyi düşünün",
+	"card": {
+		"apy": "APY",
+		"pnl": "PNL",
+		"apy-calculated-tooltip": "Tahmin, son 3 aylık Kâr ve Zarar (P&L) tablosu üzerinden hesaplanmıştır."
 	}
 }

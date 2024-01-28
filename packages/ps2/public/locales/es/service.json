@@ -2,7 +2,7 @@
 	"service-by": "por <0>{{name}}<\/0>",
 	"service-age": "Comenzó hace <0>{{date}}<\/0>",
 	"link-copied": "¡Enlace copiado al portapapeles!",
-	"logo-alt": "Zignaly - Profit Sharing \/ Copy Trading Service Logo de {{name}}",
+	"logo-alt": "{{ whitelabel }} - Profit Sharing \/ Copy Trading Service Logo de {{name}}",
 	"liquidated": "Liquidado",
 	"invested-label": "Invertido",
 	"copy-link": "Copiar link",
@@ -11,7 +11,8 @@
 		"max-reached": "Fondos Máximos Alcanzados",
 		"max-reached-tooltip": "No se permiten inversiones en este servicio porque ha alcanzado el Límite Máximo de Fondos. Descubra otros servicios de Profit Sharing en nuestro Marketplace.",
 		"all-accounts": "Ver todo ({{count}})",
-		"x-success-fee": "{{fee}}% Success fee"
+		"x-success-fee": "{{fee}}% comisión por beneficios",
+		"success-fee": "Comisión por Beneficios: {{fee}}%"
 	},
 	"owner-verified": "El Gestor ha sido verificado",
 	"owner-from": "El Gestor es de {{country}}",
@@ -25,8 +26,9 @@
 	"summary": {
 		"base-currency": "Moneda base:",
 		"funds-allocated": "Fondos asignados:",
-		"success-fee": "Success fee:",
-		"tags": "Tags:"
+		"success-fee": "Comisión por Beneficios:",
+		"tags": "Tags:",
+		"exchange": "Exchange:"
 	},
 	"periods": {
 		"7d-full": "1 Semana",
@@ -70,7 +72,7 @@
 		"name": "Nombre del Servicio:",
 		"logo": "Editar Logo",
 		"description": "Descripción:",
-		"success-fee-desc": "Importe de los beneficios que cobrarás a tus inversores (incluida la comisión del 5% de Zignaly)",
+		"success-fee-desc": "Cantidad de beneficios que cobrará a sus inversores (incluida {{ zignalyFee }}% Tarifa de ZIGDAO)",
 		"pool-size": "Tamaño máximo del pool:",
 		"pool-size-desc": "Máximo que aceptarás de los inversores",
 		"visibility": {
@@ -89,6 +91,14 @@
 		"validation": {
 			"name-length": "Debe tener entre 5 y 50 caracteres",
 			"success-fee-range": "Debe ser 0 o un número entero entre 10 y 75"
+		},
+		"commission": {
+			"title": "Participe en la promoción de referidos de {{ whitelabel }}:",
+			"description": "{{ whitelabel }} ofrece a los recomendantes hasta el 100% de su propia comisión por beneficios. Para atraer a más inversores a tu servicio, puede igualar la oferta de {{ whitelabel }} o superarla.",
+			"max-success-fee": "Comisión por beneficios máxima pagada a los recomendantes:",
+			"promo-preview": "Vista previa de la promoción:",
+			"how-it-works": "Mira cómo funciona",
+			"increase-success-fee": "Aumenta tu comisión por beneficios para ofrecer una bonificación y atraer más usuarios a tu servicio"
 		}
 	},
 	"create": {
@@ -104,11 +114,29 @@
 			"spot": "Spot",
 			"futures": "Futuros"
 		},
-		"minimum-balance": "Para operar y permitir que los inversores inviertan, necesitas invertir al menos {{ minValue }} {{ minValueCoin }} en tu servicio",
-		"profits-explainer": "Decide cuánto de tus beneficios provenientes de trading y del success fee deseas solicitar que se retiren automáticamente.",
-		"zero-fee": "Si eliges success fee = 0, Zignaly tampoco cobrará ninguna comisión",
+		"minimum-balance": "Para operar y permitir que los inversores inviertan, necesitas invertir al menos\n{{ minValue }} {{ minValueCoin }} en tu servicio",
+		"profits-explainer": "Decide cuánto de tus beneficios provenientes de trading y de la comisión por beneficios deseas solicitar que se retiren automáticamente.",
+		"please-verify": "*Por favor, revisa tu información. Tipo y base no se pueden cambiar posteriormente",
+		"zero-fee": "Si eliges comisión por beneficios = 0, Zignaly tampoco cobrará ninguna comisión",
 		"total-fee": "Tasa total",
-		"you-receive": "Recibes"
+		"you-receive": "Recibes",
+		"exchange": "Exchange:",
+		"bybit-warning": "Por favor rellena el siguiente <0>form<\/0> para formar parte de Bybit Beta.",
+		"exchanges": {
+			"bybit": "Bybit",
+			"binance": "Binance"
+		}
 	},
-	"you-receive": "Recibes"
+	"you-receive": "Recibes",
+	"z-score": "Z-Score",
+	"failed-to-load": "No se ha podido cargar. <0>Retry<\/0>",
+	"chart-crashed": {
+		"title": "No se ha podido mostrar el gráfico",
+		"description": "Lo sentimos, pero el gráfico no ha podido mostrarse debido a problemas técnicos."
+	},
+	"exchanges": {
+		"binance": "Binance",
+		"deribit": "Deribit",
+		"bybit": "Bybit"
+	}
 }

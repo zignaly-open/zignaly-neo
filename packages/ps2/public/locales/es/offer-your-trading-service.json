@@ -17,7 +17,7 @@
 		"title": "Beneficios del Servicio de Profit Sharing",
 		"list": {
 			"item1": "Opera desde cualquier herramienta que permita Binance API Keys",
-			"item2": "Elige tu propio success fee",
+			"item2": "Elige tu propia comisión por beneficios",
 			"item3": "Solicite ser listado en nuestro <0>marketplace<\/0> o mantenlo privado"
 		},
 		"action": "Crea tu servicio"
@@ -45,11 +45,11 @@
 			},
 			"item2": {
 				"title": "GESTIÓN DE FONDOS",
-				"description": "Puedes gestionar miles de inversores sin preocuparte de la contabilidad y el soporte de cada uno. El equipo de Zignaly se encargará de ello."
+				"description": "Puedes gestionar miles de inversores sin preocuparte de la contabilidad y el soporte de cada uno. El equipo de {{ whitelabel }} se encargará de ello."
 			},
 			"item3": {
 				"title": "PAGOS DIARIOS",
-				"description": "Recibe diariamente el success fee por tus servicios de Profit Sharing."
+				"description": "Recibe diariamente la comisión por beneficios por tus servicios de Profit Sharing."
 			},
 			"item4": {
 				"title": "EQUIPO DE SUCCESS TRADER",
@@ -58,7 +58,7 @@
 		}
 	},
 	"howWorks": {
-		"title": "Razones por las que los mejores traders ofrecen sus servicios en Zignaly",
+		"title": "Razones por las que los mejores traders ofrecen sus servicios en {{ whitelabel }}",
 		"list": {
 			"item1": {
 				"title": "Fondos del Pool",
@@ -70,7 +70,7 @@
 			},
 			"item3": {
 				"title": "Dividir Ganancias",
-				"description": "Elije el success fee que desees. La cuota de Zignaly es siempre del 5%, que debe incluirse."
+				"description": "Elige la comisión por beneficios deseado. La parte de {{ whitelabel }}  siempre es {{ zignalyFee }}%, que debe incluirse."
 			}
 		}
 	}

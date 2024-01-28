@@ -1,5 +1,5 @@
 {
-	"title": "Convida Amigos e Ganha uma Renda Vitalícia",
+	"title": "{{commission}} % {{ whitelabel }} Programa de Referência",
 	"description": "Ganhe até <0>{{commission}}% das taxas de sucesso de {{ whitelabel }}<\/0> MAIS uma correspondência de trader <0>até {{multiplier}}x.<\/0> Isso é {{maxCommission}}%!!",
 	"share-your-link": "Compartilha o teu link:",
 	"what-you-get": "O que você recebe",
@@ -15,7 +15,8 @@
 		"user-trader": "Usuário\/Trader",
 		"reward-type": "Tipo de Ganho",
 		"filter-status": "Status",
-		"filter-type": "Tipo"
+		"filter-type": "Tipo",
+		"subtrack": "Subtrack"
 	},
 	"statusTypes": {
 		"Completed": "Completado",
@@ -54,6 +55,30 @@
 		"email-subject": "{{ whitelabel }}, uma nova forma de operar",
 		"facebook-hashtags": "#cripto #trading"
 	},
+	"limited-time": "Tempo limitado",
+	"start-earning": "Comece a Ganhar Agora",
+	"start-earning-steps": {
+		"step-1": {
+			"title": "Compartilhe Seu Link de Convite",
+			"description": "Envie seu link de indicação para amigos que se inscreverão no {{ whitelabel }}"
+		},
+		"step-2": {
+			"title": "Amigos Investem em {{ whitelabel }}",
+			"description": "Faça com que seus amigos invistam em pelo menos um trader em {{ whitelabel }}"
+		},
+		"step-3": {
+			"title": "Você Ganha e Eles Poupam",
+			"description": "Pagamos a você parte das suas taxas de sucesso e damos-lhes um desconto de taxa"
+		}
+	},
+	"share-link": "Compartilhe o link do seu convite:",
+	"signups": "Inscrições",
 	"invested": "Investido",
-	"1-week": "1 Semana"
+	"total-earned": "Total Ganho",
+	"how-to-earn": "Como Ganhar {{commission}}%",
+	"earnings": "Ganhos",
+	"1-week": "1 Semana",
+	"how-it-works": "Como funciona",
+	"invite-people-1-week": "Ganhe <0>{{commission}}%<\/0> se você convidar {{invite}} pessoas em 1 semana",
+	"invite-people": "Ganhe <0>{{commission}}%<\/0> se você convidar {{invite}} pessoas"
 }

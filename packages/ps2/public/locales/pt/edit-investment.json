@@ -62,7 +62,7 @@
 			},
 			"button": "Voltar",
 			"hoverTooltip": "Passe o cursor sobre a quantidade para ver os decimais completos",
-			"waiting-for-next-accounting-tooltip": "Receberá os seus fundos depois que o gestor do fundo os liberar e a contabilidade diária for realizada. Por favor, considere que o seu investimento está em risco até que o saldo seja transferido para você. Dependendo do gestor do fundo e a sua estratégia, isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído."
+			"waiting-for-next-accounting-tooltip": "Você receberá seus fundos assim que o gestor do fundo os liberar e a contabilidade diária for realizada. Por favor, entenda que seu investimento pode permanecer exposto até que o saldo seja transferido para você. A duração pode variar dependendo da estratégia do gestor do fundo, normalmente demorando alguns dias, mas possivelmente mais."
 		},
 		"editInvestments": {
 			"title": "Editar Investimento Com",
@@ -81,9 +81,11 @@
 		"transfer-error": "Valor inválido. Por favor, escreva a palavra correcta.",
 		"transfer-label": "Transferência",
 		"max-funds": "Excede os fundos máximos permitidos neste serviço. Investir no máximo {{max}} {{coin}}.",
-		"max-reached": "Não é possível investir neste serviço porque atingiu o limite Máximo de Fundos.",
+		"max-reached": "Máximo de fundos em serviço atingido. Experimente um serviço diferente",
 		"type-transfer-placeholder": "Digite “{{word}}” aqui",
-		"i-understand-risk": "Entendo e aceito que os meus fundos serão transferidos para a conta do Pool do Serviço e que os meus fundos estão em risco"
+		"i-understand-risk": "Entendo e aceito que os meus fundos serão transferidos para a conta do Pool do Serviço e que os meus fundos estão em risco",
+		"min-not-reached": "Investimento mínimo {{ valor, prettyNumberFull }} {{ coin }}",
+		"min-not-reached-invested": "Investimento mínimo {{ value, prettyNumberFull }} {{ coin }} (você precisa de pelo menos {{ newMin, prettyNumberFull }} {{ coin }})"
 	},
 	"withdrawal-request": "Pedido de Retirada",
 	"withdrawal-success": {

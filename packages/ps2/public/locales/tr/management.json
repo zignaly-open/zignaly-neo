@@ -18,7 +18,7 @@
 		"labelBalance": "Güncel Minimum Bakiye",
 		"save": "Sakla"
 	},
-	"controlledZignaly": "Zignaly kontrolünde",
+	"controlledZignaly": "{{ whitelabel }} tarafından kontrol edilmekte",
 	"transfer": {
 		"title": "Transfer",
 		"loading": "Yükleniyor",
@@ -36,7 +36,7 @@
 		"title": "Fon Transferi",
 		"description": "Hizmetinizdeki İşlem Hesabı ile Yedek Hesap arasında fon transferi yapın"
 	},
-	"hardDiconnectWarning": "Çıkışlarınız %{perc} oranına ulaştı. Eğer Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, Zignaly hizmetinizin kontrolünü ele alacaktır.",
+	"hardDiconnectWarning": "Çıkışlarınız %{perc} oranına ulaştı. Eğer Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, {{ whitelabel }} hizmetinizin kontrolünü ele alacaktır.",
 	"previousValue": "Önceki değer:",
 	"loading-arialLabel": "Yükleme yönetimi",
 	"standbyFunds": "Beklemedeki Fonlar",
@@ -55,7 +55,7 @@
 		"cant-disable-read": "Okuma iznini devre dışı bırakamazsınız",
 		"restrict-ip": "IP'yi Kısıtla",
 		"api-secret": "API Sırrı",
-		"zignaly-code": "Zignaly Kodu",
+		"zignaly-code": "{{ whitelabel }} Kodu",
 		"api-secret-explainer": "Yalnızca anahtar oluşturulurken görünür. Kaybolursa, yeni bir API anahtarı oluşturmanız gerekecektir",
 		"permission-label": "İzinler",
 		"permissions": {
@@ -81,7 +81,11 @@
 		"ip-restrictions-ranges": "Üzgünüz, IP aralıklarını desteklemiyoruz",
 		"ip-restrictions-duplicates": "Bazı IP'ler iki kez listelenmiş, lütfen kopyaları kaldırın",
 		"ip-restrictions-allowed": "IP Adresleri",
-		"ip-restrictions-allowed-explainer": "Birden fazla IP adresi girerken, lütfen virgülle ayırın",
-		"ip-restrictions-on": "Erişimi yalnızca güvenilir IP'lerle kısıtlayın (önerilir)"
-	}
+		"ip-restrictions-allowed-explainer": "Birden fazla IP adresi girerken, lütfen bunları virgül veya boşlukla ayırın",
+		"ip-restrictions-on": "Erişimi yalnızca güvenilir IP'lerle kısıtlayın (önerilir)",
+		"delete-api-key-toast": "API Anahtarı başarıyla silindi"
+	},
+	"positive-claim": "Kullanıcılar bir sonraki hesaplamada {{ claim }} {{ coin }} yatırım yapmış olacak.",
+	"negative-claim": "Kullanıcılar {{ claim }} {{ coin }} çekmek istiyor.",
+	"no-api-key-management-in-this-exchange": "Bu seçenek {{exchange}} servisleri için henüz otomatik olarak desteklenmemektedir. Lütfen size yardımcı olması için ekibimize ulaşın."
 }

@@ -3,11 +3,14 @@
 	"tableHeader": {
 		"summary": {
 			"title": "Mevcut Değer",
-			"subtitle": "Getiriler"
+			"subtitle": "Getiriler",
+			"title-mobile": "Yatırım yapılan bakiye",
+			"subtitle-mobile": "PnL"
 		},
 		"serviceName": {
 			"title": "Hizmet Adı",
-			"subtitle": "Yönetici\/Baz birim"
+			"subtitle": "Yönetici\/Baz birim",
+			"title-mobile": "Servis"
 		},
 		"1-mo": {
 			"title": "1 ay",
@@ -48,8 +51,6 @@
 			"description": "Servislere yatırım yapın ve getirilerinizin her geçen gün arttığını görmek için bekleyin",
 			"time": "2 dakika sürer"
 		},
-		"bottom-title": "Portföy Servislerim",
-		"bottom-description": "Henüz herhangi bir servisi takip etmiyorsunuz, kar elde etmek için onlara yatırım yapın.",
 		"start-investing": "Şimdi yatırım yapmaya başlayın"
 	}
 }

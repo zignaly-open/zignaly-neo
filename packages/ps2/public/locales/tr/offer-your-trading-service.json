@@ -45,7 +45,7 @@
 			},
 			"item2": {
 				"title": "FON YÖNETİMİ",
-				"description": "Endişeye mahal yok! Binlerce yatırımcının hesaplama işlemleri ve destek isteklerini nasıl idare edeceğim diye düşünmenize gerek yok. Zignaly ekibi yanınızda!"
+				"description": "Endişeye mahal yok! Binlerce yatırımcının hesaplama işlemleri ve destek isteklerini nasıl idare edeceğim diye düşünmenize gerek yok. {{ whitelabel }} ekibi bununla ilgilenecektir!"
 			},
 			"item3": {
 				"title": "GÜNLÜK ÖDEMELER",
@@ -58,7 +58,7 @@
 		}
 	},
 	"howWorks": {
-		"title": "En iyi trader'ların Zignaly'de servislerini sunma sebepleri",
+		"title": "En iyi trader'ların hizmetlerini {{whitelabel }} ile  sunmalarının nedenleri",
 		"list": {
 			"item1": {
 				"title": "Havuz Fonları",
@@ -70,7 +70,7 @@
 			},
 			"item3": {
 				"title": "Bölünmüş Kâr",
-				"description": "İstediğiniz başarı komisyon ücretini belirleyin. Zignaly'nin dahil edilmesi gerekli payı %5'tir."
+				"description": "İstediğiniz başarı ücretini seçin. {{ whitelabel }}'ın payı her zaman {{ zignalyFee }}%'dir ve dahil edilmelidir."
 			}
 		}
 	}
