@@ -15,7 +15,7 @@ const logger = winston.createLogger({
 SLACK_WEBHOOK &&
   logger.add(
     new SlackHook({
-      level: 'warn',
+      // level: 'warn',
       webhookUrl: SLACK_WEBHOOK,
     }),
   );
