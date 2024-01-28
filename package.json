@@ -36,15 +36,11 @@
     "http-server": "^14.1.1",
     "husky": "^8.0.1",
     "lerna": "^6.4.1",
-    "lint-staged": "^13.0.0",
-    "http-server": "^14.1.1"
+    "lint-staged": "^13.0.0"
   },
   "dependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "http-server": "^14.1.1"
-  },
-  "dependencies": {
     "lerna": "^6.4.1",
     "env-cmd": "^10.1.0"
   },
