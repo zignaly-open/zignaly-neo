@@ -20,7 +20,14 @@ import express, { Request, Response } from 'express';
 import serveStatic from 'serve-static';
 import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
-import { BUILD_PATH } from './constants';
+import { BUILD_PATH, PS2_ENV } from './constants';
+
+try {
+  // https://github.com/TypeStrong/ts-node/issues/2026
+  process.setUncaughtExceptionCaptureCallback(console.error);
+} catch (e) {
+  console.error(e);
+}
 
 const port = 2000;
 const server = express();
@@ -46,15 +53,18 @@ server.listen(port, (err: unknown) => {
   console.log(`> Ready on :${port}`);
 });
 
+const getHost = (req: express.Request) =>
+  process.env.FORCE_USE_HOST || req.get('host');
+
 const getWlConfigForReq = (req: express.Request) =>
-  // getWhitelabelConfig('wl.zigbids.com');
-  getWhitelabelConfig('wl-staging.zigbids.com');
-// getWhitelabelConfig(req.get('host'));
+  getWhitelabelConfig(getHost(req));
 
 async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
-    res.send('Config not found or invalid for ' + req.get('host')).status(500);
+    res
+      .send(`${PS2_ENV} config not found or invalid for ${getHost(req)}`)
+      .status(500);
   } else {
     res.send(await generateIndexHtml(wlConfig)).status(200);
   }

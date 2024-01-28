@@ -13,7 +13,10 @@ import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
 import * as translationOverridesMap from './translationOverrides';
 import { ThemeOverridesType } from '@zignaly-open/ui';
 
-const whitelabelCache = {};
+const whitelabelCache: Record<
+  string,
+  { expiry: number; value: WhitelabelFrontendConfig | null }
+> = {};
 
 export type WhitelabelBackendConfig = Pick<
   WhitelabelOverride,
@@ -129,7 +132,14 @@ const mapBackendConfigToFrontendConfig = ({
     themeOverrides: getThemeOverridesWithBackground(themeOverride),
     featureOverrides,
     translationOverrides:
-      (translationOw && translationOverridesMap[config.slug]) || null,
+      (translationOw &&
+        (
+          translationOverridesMap as Record<
+            string,
+            WhitelabelOverride['translationOverrides']
+          >
+        )[config.slug]) ||
+      null,
     links: {
       tos,
       privacyPolicy,

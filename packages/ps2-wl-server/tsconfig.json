@@ -15,7 +15,6 @@
       "esnext"
     ],
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "pretty": true,
     "removeComments": true,

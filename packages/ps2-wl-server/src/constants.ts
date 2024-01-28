@@ -14,3 +14,5 @@ export const BASE_API =
   initialValueBaseApi + (initialValueBaseApi.endsWith('/') ? '' : '/');
 export const CACHE_TTL = 10 * 60_000;
 export const BUILD_PATH = path.join(fs.realpathSync('.'), 'build');
+
+export const { PS2_ENV } = process.env;
