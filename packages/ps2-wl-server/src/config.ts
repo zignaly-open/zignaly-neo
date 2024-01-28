@@ -2,11 +2,19 @@ import axios from 'axios';
 import { CACHE_TTL, BASE_API } from './constants';
 // ok here's the problem
 // we want the types to be here in order to validate ourselves
-// but we deploy only this module. Problem? Yes
+// but we deploy only this module. Like, we literally pretend this is standalone.
+// we do this for performance reasons and to not ship more than we need.
+//
+// Problem? Yes
+//
 // how do we solve this?
 // *breathe in*
 // *slowly breathe out*
+//
 // WE APPEND a TS NOCHECK WHEN DOING CODEDEPLOY
+//
+// God have mercy on my soul
+//
 // I am sorry
 // I will figure a cleaner way to do this
 import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
@@ -31,7 +39,7 @@ export type WhitelabelBackendConfig = Pick<
   | 'description'
 > & {
   name: string;
-  type: 'lite' | 'heavy'; // this is wrong but let the future me figure out what is the other type
+  type: 'lite' | 'heavy'; // this could be wrong but let the future me figure out what is the other type
   settingFee: number;
   monthlyFee: number;
   image: string;
