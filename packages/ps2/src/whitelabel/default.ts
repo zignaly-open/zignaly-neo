@@ -1,7 +1,7 @@
 import { Features } from './type';
 
 const defaultFeatureState: Record<Features, boolean> = {
-  [Features.AccessLevels]: true,
+  [Features.AccessLevels]: false,
   [Features.Rewards]: true,
   [Features.Referrals]: true,
   [Features.CreateService]: true,
