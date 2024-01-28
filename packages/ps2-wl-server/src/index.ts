@@ -71,7 +71,6 @@ async function serveNewIndexHtml(req: Request, res: Response) {
 }
 
 async function serveNewManifestJson(req: Request, res: Response) {
-  console.error('manifest');
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
     res.json({}).status(500);
