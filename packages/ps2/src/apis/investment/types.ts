@@ -1,4 +1,4 @@
-import { ChartDataFormat } from '../service/types';
+import type { ZigChartAxisFormat } from '@zignaly-open/ui/charts';
 
 export interface InvestmentState {
   selectedInvestment?: InvestmentServiceDetails;
@@ -47,7 +47,7 @@ export type Investment = InvestmentServiceDetails & {
   pendingUSDT: string;
   version: number;
   accountId: string;
-  sparklines: ChartDataFormat | number[];
+  sparklines: ZigChartAxisFormat[] | number[];
   createdAt: string;
   ownerSfDiscount: string;
   updatedAt: string;

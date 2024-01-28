@@ -1,4 +1,5 @@
 import { ExchangeType } from '../user/types';
+import type { ZigChartAxisFormat } from '@zignaly-open/ui/charts';
 
 type TraderServiceStatus = 'FULL' | string;
 
@@ -138,17 +139,8 @@ export type TraderServiceChart = {
   summaryPct: string;
 };
 
-// well yes, technically this is a copied type from zignaly ui
-// I do not want to deal with the problems from importing the ui/chart here
-// as this could affect the bundle size
-// so, sorry not sorry
-export type ChartDataFormat = {
-  x: number | string;
-  y: number;
-}[];
-
 export type TraderServiceChartProcessed = {
-  data: ChartDataFormat;
+  data: ZigChartAxisFormat[];
   summary: string | number;
   percentDiff?: number | string;
   migrationDate?: string;
