@@ -91,7 +91,7 @@ Customizable fonts will be implemented over the next 2 days.
 
 ## How to deploy
 
-Please go [here](./packages/ps2/docs/deploy.md) for a guide on how to manually trigger a deploy and [here](./packages/ps2/docs/new-env.md) to set up a new environment.
+Please go [here](./packages/ps2/docs/deploy.md) for a guide on how to manually trigger a deploy and [here](./packages/ps2/docs/ps2-new-env) to set up a new environment.
 
 ### Deploy to master
 
