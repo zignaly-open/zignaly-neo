@@ -15,19 +15,17 @@ export const useFilteredCollection = <T extends object>(
   filtersDataMap?: (data: T) => object,
 ) => {
   return useMemo(() => {
-    return (
-      collection?.filter((data) => {
-        const values = filtersDataMap ? filtersDataMap(data) : data;
-        return filters?.every((filter) => {
-          // Ignore filters with no column match
-          if (!values.hasOwnProperty(filter.id)) return true;
+    return (collection?.filter((data) => {
+      const values = filtersDataMap ? filtersDataMap(data) : data;
+      return filters?.every((filter) => {
+        // Ignore filters with no column match
+        if (!values.hasOwnProperty(filter.id)) return true;
 
-          const value = values[filter.id];
-          return Array.isArray(value)
-            ? value.some((v) => filterData(filter, v))
-            : filterData(filter, value);
-        });
-      }) || []
-    );
+        const value = values[filter.id];
+        return Array.isArray(value)
+          ? value.some((v) => filterData(filter, v))
+          : filterData(filter, value);
+      });
+    }) || []) as T[];
   }, [collection, filters, filtersDataMap]) as T[];
 };
