@@ -31,11 +31,6 @@
     "exchange": "Exchange:",
     "tags": "Tags:"
   },
-  "exchanges": {
-    "binance": "Binance",
-    "deribit": "Deribit",
-    "bybit": "Bybit"
-  },
   "periods": {
     "7d-full": "1 Week",
     "30d-full": "1 Month",
