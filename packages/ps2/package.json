@@ -7,6 +7,9 @@
     "start": "react-app-rewired start",
     "analyze": "rm -rf ./build/*; lerna run build --scope=@zignaly-open/ps2 --include-dependencies; source-map-explorer 'build/static/js/*.js'",
     "build": "react-app-rewired build && generate-version",
+    "build:whitelabel-config": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' node --loader=ts-node/esm src/util/buildWhitelabelConfigs.ts > ../ps2-wl-server/src/wl-config.json",
+    "build:whitelabel-dist": "cp -r build ../ps2-wl-server",
+    "build:whitelabel": "npm-run-all build build:whitelabel-config build:whitelabel-dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noemit",
@@ -15,10 +18,16 @@
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
+
   "jest": {
     "transformIgnorePatterns": [
       "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@zignaly-open/ui/icons": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/icons.cjs",
+      "@zignaly-open/ui/charts": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/charts.cjs",
+      "@zignaly-open/ui/fonts": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/fonts.cjs"
+    }
   },
   "browserslist": {
     "production": [
@@ -69,6 +78,7 @@
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.2",
+    "jest-svg-transformer": "^1.0.0",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
     "msw": "^1.2.1",
@@ -80,7 +90,6 @@
     "react-google-font-loader": "^1.1.0",
     "react-hook-form": "^7.32.0",
     "react-i18next": "^13.2.2",
-    "react-image-webp": "^0.8.0",
     "react-lazily": "^0.9.2",
     "react-mailcheck": "^1.2.0",
     "react-markdown": "^8.0.4",

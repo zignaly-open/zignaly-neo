@@ -3,18 +3,17 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { InvestorCounts } from './styles';
 import {
-  ZigUserIcon,
   ZigTypography,
   ChangeIndicator,
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
   ZigDropdown,
-  ZigDotsVerticalIcon,
   ZigSearch,
   downloadTableCsv,
   ZigButton,
 } from '@zignaly-open/ui';
+import { ZigUserIcon, ZigDotsVerticalIcon } from '@zignaly-open/ui/icons';
 import {
   useTraderServiceInvestors,
   useServiceDetails,

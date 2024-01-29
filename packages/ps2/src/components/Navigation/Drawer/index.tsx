@@ -16,14 +16,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
+import { Avatar, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
-  Avatar,
-  ZigButton,
-  ZigGlobeLanguages,
+  ZigGlobeLanguagesIcon,
   ZigPlusIcon,
-  ZigTypography,
   ZigUserIcon,
-} from '@zignaly-open/ui';
+} from '@zignaly-open/ui/icons';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
   useChangeLocale,
@@ -157,7 +155,7 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                {!isFeatureOn(Features.HideSignup) && (
+                {!isFeatureOn(Features.LoginOnlyAccess) && (
                   <Link to={ROUTE_SIGNUP}>
                     <ZigButton id={'drawer__signup'} variant='contained'>
                       {t('account-menu.isAuth-button-signUp')}
@@ -212,7 +210,7 @@ const ZigDrawer = () => {
                       )}
                     </List>
                   </Collapse>
-                  {isFeatureOn(Features.Trader) && (
+                  {isFeatureOn(Features.CreateService) && (
                     <ListItem disablePadding onClick={handleDrawerToggle}>
                       <ListItemButton
                         id='drawer__become-trader'
@@ -255,8 +253,7 @@ const ZigDrawer = () => {
                   )}
                 </>
               ) : (
-                (!isFeatureOn(Features.NoPublicMarketplace) ||
-                  isAuthenticated) && (
+                (!isFeatureOn(Features.LoginOnlyAccess) || isAuthenticated) && (
                   <ListItem disablePadding onClick={handleDrawerToggle}>
                     <ListItemButton
                       to={ROUTE_PROFIT_SHARING}
@@ -270,7 +267,7 @@ const ZigDrawer = () => {
                   </ListItem>
                 )
               )}
-              {whitelabel.intercomId && (
+              {!!whitelabel.tools?.intercom && (
                 <ListItem disablePadding>
                   <ListItemButton
                     id='drawer__help-chat'
@@ -298,13 +295,19 @@ const ZigDrawer = () => {
                   </ListItemButton>
                 </ListItem>
               )}
-              <ListItem disablePadding onClick={handleDrawerToggle}>
-                <ListItemButton target='_blank' href={whitelabel.helpUrl}>
-                  <ListItemText
-                    primary={t('main-menu.dropdown-link-helpDocs')}
-                  />
-                </ListItemButton>
-              </ListItem>
+
+              {!!whitelabel.links?.helpUrl && (
+                <ListItem disablePadding onClick={handleDrawerToggle}>
+                  <ListItemButton
+                    target='_blank'
+                    href={whitelabel.links.helpUrl}
+                  >
+                    <ListItemText
+                      primary={t('main-menu.dropdown-link-helpDocs')}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
 
               {isAuthenticated && (
                 <ListItem>
@@ -325,7 +328,7 @@ const ZigDrawer = () => {
               <ListItem disablePadding>
                 <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
                   <ListItemIcon sx={{ minWidth: '48px' }}>
-                    <ZigGlobeLanguages
+                    <ZigGlobeLanguagesIcon
                       color={theme.palette.neutral300}
                       width={'26px'}
                       height={'26px'}

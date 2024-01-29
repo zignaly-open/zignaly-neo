@@ -1,12 +1,7 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ZigArrowLeftIcon,
-  ZigArrowRightIcon,
-  ZigButton,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowLeftIcon, ZigArrowRightIcon } from '@zignaly-open/ui/icons';
 import EditIcon from '@mui/icons-material/Edit';
 import {
   BottomContainer,

@@ -1,5 +1,6 @@
 import React from 'react';
-import { ZigButton, ZigInviteIcon } from '@zignaly-open/ui';
+import { ZigButton } from '@zignaly-open/ui';
+import { ZigInviteIcon } from '@zignaly-open/ui/icons';
 import ReferralsInviteModal from '../../ReferralsInviteModal';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';

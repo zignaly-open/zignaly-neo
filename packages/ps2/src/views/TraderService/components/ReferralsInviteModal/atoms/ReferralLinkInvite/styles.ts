@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
-import { ZigInviteIcon } from '@zignaly-open/ui';
+import { ZigInviteIcon } from '@zignaly-open/ui/icons';
 
 export const InviteBox = styled(Box)`
   border-radius: 5px;

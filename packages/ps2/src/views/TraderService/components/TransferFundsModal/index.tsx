@@ -8,10 +8,10 @@ import {
   ZigTypography,
   ZigButton,
   ZigInputAmount,
-  ZigTransferIcon,
   ZigModalActions,
   ZigModalForm,
 } from '@zignaly-open/ui';
+import { ZigTransferIcon } from '@zignaly-open/ui/icons';
 import { TransferFormData, TransferModalProps } from './types';
 import { transferModalValidation } from './validation';
 import {

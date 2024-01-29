@@ -65,6 +65,7 @@ declare module '@mui/material/styles' {
     // is too much of a hassle (see a).).
     backgrounds: Record<
       | 'headerMenuItemHover'
+      | 'body'
       | 'modal'
       | 'investorsIcon'
       | 'withdrawalHighlight'
