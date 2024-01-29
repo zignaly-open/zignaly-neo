@@ -21,8 +21,8 @@ const adjustDecimals = (value: BigNumber, decimals: number) => {
 // Fix -0.01 until -0.05 to be -0.0 instead of 0
 // Also remove negative sign when hideNegativeSign is true, used when showing the indicator arrow instead
 const adjustNumber = (value: BigNumber, decimals: number, hideNegativeSign?: boolean) => {
-  if (hideNegativeSign) return value.abs();
   if (decimals === 1 && value.lt(0) && value.gte(-0.05)) return 0;
+  if (hideNegativeSign) return value.abs();
   return value;
 };
 
@@ -38,6 +38,7 @@ const ChangeIndicator = ({
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
   hideNegativeSign = false,
+  indicatorPostion = "right",
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -59,6 +60,9 @@ const ChangeIndicator = ({
           color={color}
           smallPct={smallPct && type !== "only_number" && !isNil(value)}
         >
+          {!isZero && type === "graph" && indicatorPostion === "left" && (
+            <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
+          )}
           <NumericFormat
             style={style}
             value={adjustNumber(bigNumberValue, decimalScale, hideNegativeSign).toFixed()}
@@ -70,7 +74,7 @@ const ChangeIndicator = ({
             id={id}
           />
         </ValueIndicator>
-        {!isZero && type === "graph" && (
+        {!isZero && type === "graph" && indicatorPostion === "right" && (
           <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
         )}
       </Inline>

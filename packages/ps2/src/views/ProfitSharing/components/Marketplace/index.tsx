@@ -108,6 +108,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 style={showChart ? null : sx.changeIndicator}
                 value={props.getValue()}
                 type={showChart ? 'graph' : 'default'}
+                indicatorPostion='left'
               />
             </>
           ) : (
