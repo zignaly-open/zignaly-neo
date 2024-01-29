@@ -14,7 +14,7 @@ import ApiKeyEntry from './components/ApiKeyEntry';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
 import { PageWithHeaderContainer } from '../styles';
-import Deactivated from '../../Deactivated';
+import Deactivated from '../DeactivatedService';
 
 const ApiKeyManagement: React.FC = () => {
   const { t } = useTranslation(['management', 'action', 'service']);

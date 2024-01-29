@@ -7,4 +7,3 @@ export { default as ServiceApi } from './ServiceApi';
 export { default as Signals } from './Signals';
 export { default as EditService } from './EditService';
 export { default as Manual } from './Manual';
-export { default as Deactivated } from './Deactivated';

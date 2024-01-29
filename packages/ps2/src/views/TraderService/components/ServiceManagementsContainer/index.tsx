@@ -33,7 +33,7 @@ import {
 import { useZModal } from '../../../../components/ZModal/use';
 import { Tooltip, useTheme } from '@mui/material';
 import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
-import Deactivated from '../../Deactivated';
+import Deactivated from '../DeactivatedService';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme();
