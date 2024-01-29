@@ -13,7 +13,7 @@ export const useFilteredCollection = <T extends object>(
   collection: T[],
   filters: ZigFiltersType,
   filtersDataMap?: (data: T) => object,
-) => {
+): T[] => {
   return useMemo(() => {
     return (collection?.filter((data) => {
       const values = filtersDataMap ? filtersDataMap(data) : data;
