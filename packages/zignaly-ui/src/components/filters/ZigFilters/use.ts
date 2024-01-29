@@ -27,5 +27,5 @@ export const useFilteredCollection = <T extends object>(
           : filterData(filter, value);
       });
     }) || []) as T[];
-  }, [collection, filters, filtersDataMap]) as T[];
+  }, [collection, filters, filtersDataMap]);
 };
