@@ -70,7 +70,7 @@ export const useFilteredInvestors = (
       ownerSuccessFee: getServiceTotalFee(
         investor.ownerSuccessFee,
         service?.zglySuccessFee,
-        investor.account_id === exchange.internalId ||
+        investor.account_id === exchange?.internalId ||
           investor.accountType === 'owner',
       ),
       search: [investor.email, investor.userId],
