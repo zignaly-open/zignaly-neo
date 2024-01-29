@@ -9,7 +9,6 @@ import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
 
 // Fix 1 decimal issue making 1.95 until 1.99 to be 2.0 instead of 2
-// -0.95 until -0.99 to be -1.0 instead of -1
 // https://github.com/s-yadav/react-number-format/issues/820
 const adjustDecimals = (value: BigNumber, decimals: number) => {
   const decimalPart = value.abs().mod(1);
