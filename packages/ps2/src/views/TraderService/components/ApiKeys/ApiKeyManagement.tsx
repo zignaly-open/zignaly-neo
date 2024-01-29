@@ -13,6 +13,8 @@ import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { servicesThatAllowKeyCreation } from '../../../../apis/service/constants';
+import { PageWithHeaderContainer } from '../styles';
+import Deactivated from '../../Deactivated';
 
 const ApiKeyManagement: React.FC = () => {
   const { t } = useTranslation(['management', 'action']);
@@ -25,8 +27,10 @@ const ApiKeyManagement: React.FC = () => {
   } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
   const { data: serviceData } = useServiceDetails(serviceId);
 
+  if (!serviceData?.activated) return <Deactivated />;
+
   return (
-    <>
+    <PageWithHeaderContainer>
       <TitleBox
         sx={{
           display: 'flex',
@@ -104,7 +108,7 @@ const ApiKeyManagement: React.FC = () => {
           ))}
         </ApiKeysContainer>
       )}
-    </>
+    </PageWithHeaderContainer>
   );
 };
 

@@ -21,7 +21,6 @@ import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
 import TermsOfService from './views/Legal/TermsOfService';
 import Privacy from './views/Legal/Privacy';
-import ServiceActiveWall from './util/walls/ServiceActiveWall';
 
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
@@ -47,7 +46,6 @@ const {
   Signals,
   EditService,
   Manual,
-  Unactivated,
 } = lazily(() => import('./views/TraderService/routes'));
 
 const { Kyc, SettingsHeader, UpdatePassword, Toggle2FA, EditProfile } = lazily(
@@ -127,45 +125,39 @@ const Router: React.FC = () => {
             }
           />
         </Route>
-        <Route element={<ServiceActiveWall />}>
-          <Route element={<ServiceOwnerWall />}>
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
-              element={<Management />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_INVESTORS}
-              element={<Investors />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_POSITIONS}
-              element={<Positions />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_COINS}
-              element={<Coins />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_MANUAL}
-              element={<Manual />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_API}
-              element={<ServiceApi />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_SIGNALS}
-              element={<Signals />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_EDIT}
-              element={<EditService />}
-            />
-            <Route
-              path={Routes.ROUTE_TRADING_SERVICE_UNACTIVATED}
-              element={<Unactivated />}
-            />
-          </Route>
+        <Route element={<ServiceOwnerWall />}>
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
+            element={<Management />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_INVESTORS}
+            element={<Investors />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_POSITIONS}
+            element={<Positions />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_COINS}
+            element={<Coins />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_MANUAL}
+            element={<Manual />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_API}
+            element={<ServiceApi />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_SIGNALS}
+            element={<Signals />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_EDIT}
+            element={<EditService />}
+          />
         </Route>
       </Route>
 

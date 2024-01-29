@@ -38,6 +38,7 @@ import {
   connectionStateName,
 } from '../ConnectionStateLabel/types';
 import { OpenInNew } from '@mui/icons-material';
+import Deactivated from '../../Deactivated';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -328,6 +329,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       }),
     ];
   }, [service]);
+  if (!service?.activated) return <Deactivated />;
 
   return (
     <LayoutContentWrapper

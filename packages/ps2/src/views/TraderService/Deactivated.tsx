@@ -4,11 +4,11 @@ import {
   useTraderServiceTitle,
 } from '../../apis/service/use';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
-import { ErrorMessage, PageContainer } from '@zignaly-open/ui';
+import { ErrorMessage } from '@zignaly-open/ui';
 import { ErrorWrapper, PageWithHeaderContainer } from './components/styles';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../routes';
 
-const Unactivated: React.FC = () => {
+const Deactivated: React.FC = () => {
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const { data } = useServiceDetails(serviceId);
@@ -19,16 +19,12 @@ const Unactivated: React.FC = () => {
   }, [data?.activated]);
   useTraderServiceTitle('profit-sharing.signals', serviceId);
   return (
-    <PageContainer>
-      <PageWithHeaderContainer>
-        <ErrorWrapper>
-          <ErrorMessage
-            text={'This service is inactive. Check other services'}
-          />
-        </ErrorWrapper>
-      </PageWithHeaderContainer>
-    </PageContainer>
+    <PageWithHeaderContainer>
+      <ErrorWrapper>
+        <ErrorMessage text={'This service is inactive. Check other services'} />
+      </ErrorWrapper>
+    </PageWithHeaderContainer>
   );
 };
 
-export default Unactivated;
+export default Deactivated;
