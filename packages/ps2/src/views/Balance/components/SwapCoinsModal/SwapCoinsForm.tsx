@@ -7,8 +7,8 @@ import {
   ZigInputAmount,
   ZigModalActions,
   ZigModalForm,
-  ZigSwapCircleIcon,
 } from '@zignaly-open/ui';
+import { ZigSwapCircleIcon } from '@zignaly-open/ui/icons';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
 import CoinOption from '../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
@@ -50,7 +50,7 @@ function SwapCoinsForm({
       .map(([c, balance]) => ({
         value: c,
         coin: c,
-        available: balance?.balanceFree || 0,
+        available: +balance?.balanceFree || 0,
         label: (
           <CoinOption
             key={c}

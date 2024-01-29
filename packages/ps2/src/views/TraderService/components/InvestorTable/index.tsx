@@ -3,22 +3,20 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { InvestorCounts } from './styles';
 import {
+  ZigTypography,
   ChangeIndicator,
+  ZigTable,
   createColumnHelper,
-  downloadTableCsv,
-  ZigButton,
-  ZigDotsVerticalIcon,
+  ZigTablePriceLabel,
   ZigDropdown,
   ZigFilters,
-  // ZigSearch,
-  ZigTable,
-  ZigTablePriceLabel,
-  ZigTypography,
-  ZigUserIcon,
+  downloadTableCsv,
+  ZigButton,
 } from '@zignaly-open/ui';
+import { ZigUserIcon, ZigDotsVerticalIcon } from '@zignaly-open/ui/icons';
 import {
-  useServiceDetails,
   useTraderServiceInvestors,
+  useServiceDetails,
   useTraderServiceManagement,
 } from '../../../../apis/service/use';
 import {

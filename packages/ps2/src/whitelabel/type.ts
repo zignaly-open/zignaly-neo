@@ -1,45 +1,50 @@
 import { ThemeOverridesType } from '@zignaly-open/ui';
 
 export enum Features {
-  AccessLevels,
-  Rewards,
-  Referrals,
-  Trader,
-  HideSignup,
-  NewSignup,
-  NoPublicMarketplace,
-  Subscriptions,
-  Kyc,
-  ZScore,
+  AccessLevels = 'accessLevels',
+  Rewards = 'rewards',
+  Referrals = 'referrals',
+  CreateService = 'createServices',
+  NewSignup = 'newSignup',
+  LoginOnlyAccess = 'loginOnly',
+  Subscriptions = 'subscriptions',
+  Kyc = 'kyc',
+  ZScore = 'zscore',
 }
 
-export type OverrideableEndpoints = '';
+interface TranslationOverrides {
+  [x: string]: string | TranslationOverrides;
+}
 
 export type WhitelabelOverride = {
+  name: string;
   title: string;
-  helpUrl: string;
+  domain: string;
+  description?: string;
   locales?: string[];
-  promptMobile?: boolean;
-  endpointOverrides?: Record<OverrideableEndpoints, string>;
-  translationOverrides?: boolean;
+  translationOverrides?: TranslationOverrides;
   minInvestment?: Partial<
     Record<'USDT' | 'ETH' | 'BTC' | 'USDC' | 'BNB', number>
   >;
-  featureOverrides: Partial<Record<Features, boolean>>;
-  xSource?: string;
-  subscriptionPurchaseLink?: string;
-  mainAppLink?: string;
+  featureOverrides?: Partial<Record<Features, boolean>>;
+  slug?: string;
   logo?: string;
   links?: {
     tos?: string;
+    helpUrl?: string;
+    mainAppLink?: string;
     privacyPolicy?: string;
+    subscriptionPurchaseLink?: string;
   };
   background?: string;
-  loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
   baseTheme?: string;
   themeOverrides?: ThemeOverridesType;
-  intercomId?: string;
+  tools?: {
+    twitter_tracker?: string;
+    intercom?: string;
+    google_tag_manager?: string;
+  };
   social: Partial<
     Record<
       | 'telegram'
@@ -52,5 +57,5 @@ export type WhitelabelOverride = {
       string | void
     >
   >;
-  defaultSuccessFee?: number;
+  zignalySuccessFee?: number;
 };

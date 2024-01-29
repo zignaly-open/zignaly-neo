@@ -1,5 +1,6 @@
 import React from 'react';
-import { ZigClockAltIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import { ZigClockAltIcon } from '@zignaly-open/ui/icons';
 import { LimitedTimeChip, LimitedTimeChipArrow } from '../styles';
 import { useTranslation } from 'react-i18next';
 

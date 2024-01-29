@@ -2,7 +2,7 @@ import React from "react";
 import { ChartGradientColor } from "./types";
 import { useTheme } from "@mui/material";
 
-const ChartGradients = () => {
+const ThemeChartGradients = () => {
   const {
     palette: { chart },
   } = useTheme();
@@ -45,4 +45,4 @@ const ChartGradients = () => {
   );
 };
 
-export default ChartGradients;
+export default ThemeChartGradients;

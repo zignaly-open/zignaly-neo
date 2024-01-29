@@ -20,7 +20,7 @@ exports[`components/display/ZigProgressBar renders 1`] = `
         class="sc-hKMtZM jhmszV"
       />
       <span
-        class="MuiTypography-root MuiTypography-body1 sc-eCYdqJ cGxjhi css-l00qwn-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 sc-eCYdqJ cVgrQQ css-l00qwn-MuiTypography-root"
         value="10"
       >
         10

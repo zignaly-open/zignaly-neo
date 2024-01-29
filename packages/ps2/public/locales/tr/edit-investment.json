@@ -3,18 +3,17 @@
 	"addMoreInvestmentSuccess": "Başarılı bir şekilde {{serviceName}} hizmetine {{amount}} {{currency}}yatırım yaptınız.",
 	"withdrawInvestmentSuccess": "Çekim talebi başarıyla alındı.",
 	"validation-indicateAnAmount": "Bir miktar belirtmelisiniz.",
-	"error-blockedInvestment": "Fonlarınız hizmet dışına transfer edilmek üzere beklemektedir.",
 	"form": {
 		"title": "Yatırılan Miktar:",
 		"profits": {
 			"title": "Kârla ne yapılsın?",
 			"left": "Yeniden yatırım",
 			"right": "Çekim",
-			"title-confirmation": "Çekilecek kâr yüzdesi:"
+			"pct-withdraw": "Çekilecek Kâr Yüzdesi:"
 		},
 		"inputAmount": {
-			"label": "Yatırım Yapılacak Miktar:",
-			"labelBalance": "Mevcut:"
+			"label": "Yatırılacak tutarı girin",
+			"labelMinDeposit": "En düşük yatırma miktarı"
 		},
 		"link": {
 			"investMore": "Daha fazla yatırım yapın",
@@ -23,8 +22,10 @@
 		"button": {
 			"continue-to-confirmation": "Onay aşamasına geçin",
 			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın",
-			"addInvestment": "Yatırıma Ekleme Yap"
-		}
+			"addInvestment": "Yatırıma Ekleme Yap",
+			"transfer-now": "Transferi şimdi yap"
+		},
+		"transferOutAll": "Yatırımınızın tamamı çekilmeyi beklemektedir ve trader fonları serbest bıraktığında günlük hesaplama işleminin ardından kısa süre içinde işleme alınacaktır."
 	},
 	"pendingMajorThan": {
 		"type": "Yeni yatırım",
@@ -59,7 +60,9 @@
 				"type": "Tip",
 				"status": "Durum"
 			},
-			"button": "Geri"
+			"button": "Geri",
+			"hoverTooltip": "Tam ondalık sayıları görmek için miktarın üzerine gelin",
+			"waiting-for-next-accounting-tooltip": "Fon yöneticisi fonları serbest bıraktığında ve günlük hesaplama yapıldığında fonlarınızı alacaksınız. Bakiye size aktarılana kadar yatırımınızın açıkta kalabileceğini lütfen unutmayın. Bu süre fon yöneticisinin stratejisine bağlı olarak değişebilir, genellikle birkaç gün sürer ancak muhtemelen daha uzun sürebilir."
 		},
 		"editInvestments": {
 			"title": "Yatırımı Düzenle",
@@ -73,19 +76,22 @@
 	},
 	"invest-modal": {
 		"invest-with": "İle yatırım yapın",
-		"amount-to-invest": "Yatırılacak tutarı girin",
-		"type-transfer": "Transferi tamamlamak için aşağıdaki alana <0>“ {{word}} ”</0> kelimesini yazın:",
+		"amount-to-invest": "Yatırım Yapılacak Miktar:",
+		"type-transfer": "Aktarımı kabul etmek için aşağıdaki alana <0>\"{{word}}\"<\/0> kelimesini yazın:",
 		"transfer-error": "Geçersiz giriş. Lütfen doğru kelimeyi yazın.",
 		"transfer-label": "Transfer",
-		"i-understand-margin": "{{coin}} bakiyemin tamamının artık marjın bir parçası olduğunu ve risk altında olduğunu anlıyorum",
-		"i-understand-money-transferred": "Paramın trader'ın havuzuna aktarılacağını ve artık mevcut bakiyemde görünmeyeceğini anlıyor ve onaylıyorum.",
 		"max-funds": "Bu tutar hizmette izin verilen maksimum fon miktarını aşıyor. Maksimum yatırabiliceğiniz miktar  {{max}} {{coin}}.",
-		"max-reached": "Maksimum Fon sınırına ulaştığı için bu hizmete yatırım yapılamıyor."
+		"max-reached": "Bu servisteki maksimum fon sınırına ulaşıldı. Farklı bir hizmet deneyin",
+		"type-transfer-placeholder": "Buraya \" {{word}} \" yazın",
+		"i-understand-risk": "Paramın Hizmet Havuzu hesabına aktarılacağını ve paramın risk altında olduğunu anlıyor ve kabul ediyorum.",
+		"min-not-reached": "Minimum yatırım {{ value, prettyNumberFull }} {{ coin }}",
+		"min-not-reached-invested": "Minimum yatırım {{ value, prettyNumberFull }} {{ coin }} (en az {{ newMin, prettyNumberFull }} {{ coin }} gerekir)"
 	},
 	"withdrawal-request": "Çekim Talebi",
 	"withdrawal-success": {
 		"title": "Çekim Talep Edildi",
 		"description": "Fon yöneticisi fonları serbest bıraktıktan ve günlük hesaplama işlemi yapıldıktan sonra fonlarınızı alabileceksiniz. Lütfen bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Fon yöneticisine bağlı olarak,  genellikle bu durum birkaç gün sürer ancak tamamlanması daha uzun sürebilir. Zignaly bu zaman dilimini kontrol etmez, bu yüzden lütfen sabırlı olun.",
 		"button": "Kapat"
-	}
+	},
+	"investorDetail-successFee-discounted": "< 0 > %{{oldFee}}  < \/0 > % {{fee}} Başarım ücreti"
 }

@@ -1,7 +1,7 @@
 {
 	"update-password": {
 		"title": "Actualiza Contraseña",
-		"description": "Actualiza la contraseña de tu Cuenta de Zignaly.\nPor tu seguridad, se cerrará tu sesión después de hacer clic en Actualizar contraseña.",
+		"description": "Actualiza tu contraseña.\nPor tu seguridad, se cerrará tu sesión después de hacer clic en Actualizar contraseña.",
 		"current-password": "Contraseña Actual:",
 		"new-password": "Nueva Contraseña:",
 		"success": "La contraseña se ha actualizado correctamente. Por favor, conéctate de nuevo."
@@ -22,8 +22,46 @@
 	},
 	"disable-2fa": {
 		"title": "Deshabilitar 2FA",
-		"description": "Tu cuenta está protegida con la Autenticación de Dos Factores (2FA). Para desactivar 2FA, introduce el código de tu aplicación de autenticación.",
 		"success": "2FA se ha desactivado correctamente.",
-		"security": "Por seguridad, te recomendamos tener habilitado 2FA en tu cuenta."
+		"security": "Por seguridad, te recomendamos tener habilitado 2FA en tu cuenta.",
+		"congrats": "¡Felicidades!",
+		"description-basic": "Tu cuenta está protegida con la autenticación de dos factores (2FA). Para desactivar 2FA, haz clic en el botón de abajo.",
+		"description-after-click": "Tu cuenta está protegida con la Autenticación de Dos Factores (2FA). Para desactivar 2FA, introduce el código de tu aplicación de autenticación."
+	},
+	"header": {
+		"2fa": "2FA",
+		"edit-profile": "Editar Perfil",
+		"edit-password": "Contraseña",
+		"verification": "Verificación",
+		"verification-kyc": "KYC",
+		"verification-kyb": "KYB"
+	},
+	"edit-profile": {
+		"title": "Editar Perfil",
+		"description": "Personaliza los datos de tu perfil de usuario",
+		"username": "Nombre de usuario",
+		"visible-if-trader": "(Visible si eres el gestor de un servicio)",
+		"internal-use": "(Para uso interno)",
+		"user-id": "ID de Usuario:",
+		"about-you": "Sobre ti",
+		"update-profile": "Actualizar perfil",
+		"success": "Perfil actualizado correctamente",
+		"edit-avatar": "Editar Avatar",
+		"change-email": "No es posible cambiar el email",
+		"country": "Seleccionar país",
+		"email": "Email:",
+		"status-box": {
+			"2fa": "2FA",
+			"kyc": "KYC",
+			"enable-2fa-cta": "Habilitar",
+			"enabled": "Habilitado",
+			"disabled": "Deshabilitado",
+			"pass-kyc-cta": "Verificar",
+			"verified": "Verificado",
+			"not-verified": "No verificado",
+			"pending": "Pendiente",
+			"rejected": "Rechazado"
+		},
+		"tell-me-the-story-of-your-left": "Cuéntanos sobre ti"
 	}
 }

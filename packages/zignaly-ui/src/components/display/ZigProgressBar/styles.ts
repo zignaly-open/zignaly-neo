@@ -1,4 +1,3 @@
-import croma from "chroma-js";
 import styled from "styled-components";
 import { styled as muiStyled } from "@mui/system";
 import ZigTypography from "../ZigTypography";
@@ -50,33 +49,22 @@ export const Label = muiStyled(ZigTypography)`
   }
 `;
 
-const gradient = croma.scale(["#567734", "#948d23", "#8e3b24", "#8c1954"]);
-
 export const LabelTooltip = styled(Label)<{ value: number }>`
   border-radius: 3px;
   pointer-events: none;
-  background: ${(props) =>
-    gradient(props.value / 100)
-      .brighten(1)
-      .toString()};
+  background: ${(props) => props.theme.palette.neutral600};
 
   top: -38px;
   line-height: 1 !important;
   padding: 5px 6px;
   position: relative;
   display: block;
-  color: ${(props) =>
-    gradient(props.value / 100)
-      .darken(1.5)
-      .toString()};
+  color: ${(props) => props.theme.palette.neutral600};
 
   &:before {
     content: "";
     border: 4px solid transparent;
-    border-top-color: ${(props) =>
-      gradient(props.value / 100)
-        .brighten(1)
-        .toString()};
+    border-top-color: ${(props) => props.theme.palette.neutral600};
     position: absolute;
     top: 100%;
     left: calc(50% - 4px);

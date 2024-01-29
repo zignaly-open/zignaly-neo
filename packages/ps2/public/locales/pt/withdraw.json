@@ -4,5 +4,6 @@
 	"form": {
 		"label": "Quantidade a retirar:",
 		"available": "Disponível:"
-	}
+	},
+	"min-investment": "Investimento mínimo {{ minInvestment, prettyNumberFull }} {{ minAmountCoin }}. Dica pro: ainda pode retirar todo"
 }

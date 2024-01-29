@@ -34,9 +34,8 @@ export { ReactComponent as ZigSwapIcon } from "assets/icons/swap-icon.svg";
 export { ReactComponent as ZigSwapVertIcon } from "assets/icons/swap-vert-icon.svg";
 export { ReactComponent as ZigErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
-export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg";
 export { ReactComponent as ZigMonoIcon } from "assets/icons/zig-mono-icon.svg";
-export { ReactComponent as ZigGlobeLanguages } from "assets/icons/globe-languages.svg";
+export { ReactComponent as ZigGlobeLanguagesIcon } from "assets/icons/globe-languages.svg";
 export { ReactComponent as ZigTimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as ZigSearchIcon } from "assets/icons/search-icon.svg";
 export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
@@ -61,5 +60,6 @@ export { ReactComponent as ZigScoreCoinsIcon } from "assets/icons/risk/coins-ico
 export { ReactComponent as ZigScoreWalletIcon } from "assets/icons/risk/wallet-icon.svg";
 export { ReactComponent as ZigScoreBalanceIcon } from "assets/icons/risk/balance-icon.svg";
 export { ReactComponent as ZigCalendar1YIcon } from "assets/icons/calendar-1Y-icon.svg";
+export { ReactComponent as ZigCalendar1MIcon } from "assets/icons/calendar-1M-icon.svg";
 export { ReactComponent as ZigCalendar3MIcon } from "assets/icons/calendar-3M-icon.svg";
 export { ReactComponent as ZigRocketIcon } from "assets/icons/rocket-icon.svg";

@@ -1,4 +1,5 @@
-import { ZigTypography, ZigButton, ZigCopyIcon } from '@zignaly-open/ui';
+import { ZigTypography, ZigButton } from '@zignaly-open/ui';
+import { ZigCopyIcon } from '@zignaly-open/ui/icons';
 import React from 'react';
 import { InviteBox, InviteUrlInput, StyledInviteIcon } from './styles';
 import { useTranslation } from 'react-i18next';

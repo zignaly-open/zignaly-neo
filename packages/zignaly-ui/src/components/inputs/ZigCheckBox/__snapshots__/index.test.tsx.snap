@@ -1,128 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/inputs/ZigCheckBox renders correctly with default props 1`] = `
-<input
-  class="PrivateSwitchBase-input css-1m9pwf3"
-  data-indeterminate="false"
+<label
+  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-jzcd7z-MuiFormControlLabel-root"
   id="test"
-  type="checkbox"
-/>
+>
+  <span
+    class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-arbg3y-MuiButtonBase-root-MuiCheckbox-root"
+  >
+    <input
+      class="PrivateSwitchBase-input css-1m9pwf3"
+      data-indeterminate="false"
+      id="test-input"
+      type="checkbox"
+    />
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="CheckBoxOutlineBlankIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+      />
+    </svg>
+  </span>
+</label>
 `;
 
 exports[`components/inputs/ZigCheckBox renders correctly with default props 2`] = `
 CSSStyleDeclaration {
-  "0": "font",
-  "1": "text-rendering",
-  "10": "padding",
-  "11": "background-color",
-  "12": "border",
-  "13": "cursor",
-  "14": "margin",
-  "15": "box-sizing",
-  "16": "position",
-  "17": "opacity",
-  "18": "width",
-  "19": "height",
-  "2": "letter-spacing",
-  "20": "top",
-  "21": "left",
-  "22": "z-index",
-  "23": "visibility",
-  "3": "word-spacing",
-  "4": "line-height",
-  "5": "text-transform",
-  "6": "text-indent",
-  "7": "text-shadow",
-  "8": "display",
-  "9": "text-align",
+  "0": "cursor",
+  "1": "display",
+  "2": "align-items",
+  "3": "vertical-align",
+  "4": "margin-left",
+  "5": "margin-right",
+  "6": "visibility",
   "_importants": {
-    "background-color": "",
-    "border": "",
-    "box-sizing": "",
-    "color": "",
+    "align-items": "",
     "cursor": "",
     "display": "",
-    "font": "",
-    "height": "",
-    "left": "",
-    "letter-spacing": "",
-    "line-height": "",
-    "margin": "",
-    "opacity": "",
-    "padding": "",
-    "position": "",
-    "text-align": "",
-    "text-indent": "",
-    "text-rendering": "",
-    "text-shadow": "",
-    "text-transform": "",
-    "top": "",
+    "margin-left": "",
+    "margin-right": "",
+    "vertical-align": "",
     "visibility": undefined,
-    "width": "",
-    "word-spacing": "",
-    "z-index": "",
   },
-  "_length": 24,
+  "_length": 7,
   "_onChange": [Function],
   "_values": {
-    "background-color": "white",
-    "border": "2px inset",
-    "border-bottom": "2px inset",
-    "border-bottom-style": "inset",
-    "border-bottom-width": "2px",
-    "border-left": "2px inset",
-    "border-left-style": "inset",
-    "border-left-width": "2px",
-    "border-right": "2px inset",
-    "border-right-style": "inset",
-    "border-right-width": "2px",
-    "border-style": "inset",
-    "border-top": "2px inset",
-    "border-top-style": "inset",
-    "border-top-width": "2px",
-    "border-width": "2px",
-    "box-sizing": "border-box",
-    "cursor": "inherit",
-    "display": "inline-block",
-    "font": "-webkit-small-control",
-    "font-family": "-webkit-small-control",
-    "height": "100%",
-    "left": "0px",
-    "letter-spacing": "normal",
-    "line-height": "normal",
-    "margin": "0px",
-    "margin-bottom": "0px",
-    "margin-left": "0px",
-    "margin-right": "0px",
-    "margin-top": "0px",
-    "opacity": "0",
-    "padding": "0px",
-    "padding-bottom": "0px",
-    "padding-left": "0px",
-    "padding-right": "0px",
-    "padding-top": "0px",
-    "position": "absolute",
-    "text-align": "start",
-    "text-indent": "0",
-    "text-rendering": "auto",
-    "text-shadow": "none",
-    "text-transform": "none",
-    "top": "0px",
+    "align-items": "center",
+    "cursor": "pointer",
+    "display": "inline-flex",
+    "margin-left": "-11px",
+    "margin-right": "16px",
+    "vertical-align": "middle",
     "visibility": "visible",
-    "width": "100%",
-    "word-spacing": "normal",
-    "z-index": "1",
   },
 }
 `;
 
 exports[`components/inputs/ZigCheckBox renders correctly with outlined variant and label 1`] = `
-<input
-  class="PrivateSwitchBase-input css-1m9pwf3"
-  data-indeterminate="false"
+<label
+  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-jzcd7z-MuiFormControlLabel-root"
   id="test"
-  type="checkbox"
-/>
+>
+  <span
+    class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-arbg3y-MuiButtonBase-root-MuiCheckbox-root"
+  >
+    <input
+      class="PrivateSwitchBase-input css-1m9pwf3"
+      data-indeterminate="false"
+      id="test-input"
+      type="checkbox"
+    />
+    <div
+      class="MuiBox-root css-13jg4bh"
+    />
+  </span>
+  <span
+    class="MuiTypography-root MuiTypography-body2 css-15j243s-MuiTypography-root"
+    id="test-label"
+  >
+    Test Label
+  </span>
+</label>
 `;
 
 exports[`components/inputs/ZigCheckBox renders correctly with outlined variant and label 2`] = `

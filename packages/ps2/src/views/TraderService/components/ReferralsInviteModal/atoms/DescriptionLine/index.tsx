@@ -1,5 +1,6 @@
 import { Box, Tooltip, useTheme } from '@mui/material';
-import { ZigTypography, ZigArrowDescIcon } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowDescIcon } from '@zignaly-open/ui/icons';
 import React from 'react';
 
 export const DescriptionLine = ({

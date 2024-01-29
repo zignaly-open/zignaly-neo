@@ -31,7 +31,10 @@
 		"portfolio": "Portföyüm",
 		"marketplace": "Pazaryeri",
 		"balance": "Bakiyeler",
-		"rewards": "Ödüller"
+		"rewards": "Ödüller",
+		"dropdown-link-kyc": "KYC",
+		"notAuth-dropdown-link-profile": "Profil",
+		"subscriptions": "Abonelikler"
 	},
 	"account-selector": {
 		"type": {
@@ -42,23 +45,26 @@
 	},
 	"navigation-menu": {
 		"profit-sharing": "En İyi Trader'lara Göz Atın",
-		"become-trader": "Trade Servisinizi Sunun"
+		"become-trader": "Trade Servisinizi Sunun",
+		"ping-us": "Destekle Sohbet"
 	},
 	"amount": "Miktar",
 	"new-version": "Yeni sürüm, güncellemek için tıklayın",
 	"validation": {
-		"insufficient-amount": "Yetersiz fon",
+		"insufficient-amount": "Kullanılabilir bakiyeyi aşıyor",
 		"invalid-value": "Geçersiz değer",
-		"negative-amount": ">= 0 olmalıdır",
+		"negative-amount": "> 0 olmalıdır",
 		"invalid-amount": "Bir miktar belirtmelisiniz",
-		"negative-zeroable-amount": "> 0 olmalıdır",
-		"max-decimals": "Lütfen sayıları 8 ondalık basamaktan fazla olmayacak şekilde girin.",
+		"negative-zeroable-amount": ">= 0 olmalıdır",
+		"max-decimals": "Lütfen sayıları {{maxDecimals}} ondalık basamaktan daha fazla olmayacak şekilde girin.",
 		"max-allowed-length": "{{ maxLength }} karakterlerinin altında olmalıdır",
 		"min-amount": "Minimum miktar {{amount}} {{coin}} .",
 		"insufficient-amount-min": "Minimum tutar: {{ minValue }} {{ minValueCoin }}",
 		"invalid-characters": "Geçersiz karakter kullanımı",
 		"letter-number": "En az bir harf veya rakam içermelidir",
-		"min-invest-amount-for-owner": "Sahibin bakiyesi {{minAmount}} {{minAmountCoin}} üzerinde olmalıdır."
+		"min-invest-amount-for-owner": "Sahibin bakiyesi {{minAmount}} {{minAmountCoin}} üzerinde olmalıdır.",
+		"insufficient-amount-max": "Maksimum miktar: {{ maxValue }} {{ coin }}",
+		"2fa-invalid-format": "Kod 6 haneli bir sayı olmalıdır"
 	},
 	"back": "Geri",
 	"close": "Kapat",
@@ -78,11 +84,11 @@
 	"type-to-confirm": "Onaylamak için \"{{word}}\" yazın",
 	"ok": "Tamam",
 	"balance": {
-		"total": "Toplam",
-		"available": "Uygun",
+		"available": "Kullanılabilir Bakiye:",
 		"deposit-funds": "Para Yatırma",
 		"find-traders": "Yatırım yapacak trader'lar bulun",
-		"my-portfolio": "Portföyüm"
+		"my-portfolio": "Portföyüm",
+		"portfolio": "Portföy:"
 	},
 	"follow-us": "Bizi takip edin",
 	"portfolio": "Portföy",
@@ -92,8 +98,15 @@
 			"description": "İlk para yatırma işleminde"
 		},
 		"referrals": {
-			"title": "%{{commission}} kazanın",
+			"title": "% {{commission}} kazanın",
 			"description": "Arkadaşlarınızı Davet Edin"
 		}
+	},
+	"kyc-updated": "KYC durumu güncellendi!",
+	"coin": "Coin",
+	"error-boundary": {
+		"title": "Bir şeyler ters gitti",
+		"description-1": "<0>Bu sayfayı yenilemek<\/0> yardımcı olabilir. Eğer yardımcı olmazsa, destek ekibiyle iletişime geçebilirsiniz.",
+		"description-2": "Ya da sanayi toplumunu terk edip <0>ormanda bir kulübeye taşının<\/0>."
 	}
 }

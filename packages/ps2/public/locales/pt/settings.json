@@ -22,9 +22,11 @@
 	},
 	"disable-2fa": {
 		"title": "Desativar 2FA",
-		"description": "Tua conta é protegida com a Autenticação de Dois Fatores (2FA). Para desativar o 2FA, introduz o código do aplicativo autenticador.",
 		"success": "2FA foi desativado com sucesso.",
-		"security": "Por segurança, recomendamos ter o 2FA ativado na tua conta."
+		"security": "Por segurança, recomendamos ter o 2FA ativado na tua conta.",
+		"congrats": "Parabéns!",
+		"description-basic": "A sua conta está protegida com a autenticação de dois factores (2FA). Para desativar a 2FA, clique no botão abaixo.",
+		"description-after-click": "Tua conta é protegida com a Autenticação de Dois Fatores (2FA). Para desativar o 2FA, introduz o código do aplicativo autenticador."
 	},
 	"header": {
 		"2fa": "2FA",
@@ -40,14 +42,14 @@
 		"username": "Nome do usuário",
 		"visible-if-trader": "(Visível se você for gestor de um serviço)",
 		"internal-use": "(Para uso interno)",
-		"user-id": "ID do usuário",
+		"user-id": "ID do Usuário:",
 		"about-you": "Sobre você",
 		"update-profile": "Atualizar perfil",
 		"success": "Perfil atualizado com sucesso",
 		"edit-avatar": "Editar Avatar",
 		"change-email": "Não é possível alterar o e-mail",
-		"country": "País",
-		"email": "Email",
+		"country": "Selecionar país",
+		"email": "Email:",
 		"status-box": {
 			"2fa": "2FA",
 			"kyc": "KYC",

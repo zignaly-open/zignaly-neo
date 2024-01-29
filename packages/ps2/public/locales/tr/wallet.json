@@ -5,7 +5,7 @@
 	"successFee": "Başarım Ücreti indirimi:",
 	"tradingFee": "İşlem ücretleri geri ödemesi:",
 	"successFeeTooltip": "Herhangi bir Profit Sharing (kâr paylaşım) Hizmetinin başarım ücretini ZIG ile ödeyin, ödeme tutarında indirim kazanın.",
-	"tradingFeeTooltip": "Zignaly, USDT cinsinden yeni işlemlerinizin tüm işlem ücretlerini hesabınıza iade edecek ve size eşdeğer tutardan ZIG'deki indirim düşülerek ödeme yapacaktır.",
+	"tradingFeeTooltip": "{{ whitelabel }} yeni işlemlerinizin USDT cinsinden tüm işlem ücretlerini hesabınıza iade edecek ve ZIG cinsinden indirim eksi eşdeğer tutarı sizden tahsil edecektir.",
 	"withdraw": "Çekim",
 	"savingMoney": "ZIG ile TASARRUF EDİYORSUNUZ!",
 	"saveMoney": "ZIG ile TASARRUF EDİN!",
@@ -85,7 +85,7 @@
 		"confirm": "ZIG satın almayı onaylayın",
 		"deposit": {
 			"title": "ZIG satın almak için {{coin}} yatırın",
-			"description": "ZIG satın almak için Zignaly hesabınıza {{coin}} yatırın. Büyük miktarda ZIG alımları için ({{max}} {{coin}}'den fazla), lütfen <0>ZIG'in listelenmiş olduğu borsalardan<\/0> birini kullanın.",
+			"description": "ZIG satın almak için {{ whitelabel }} Borsa Hesabınıza {{coin}} yatırın. Büyük ZIG alımları için ({{max}} {{coin}}'den fazla), lütfen <0>mevcut borsalardan birini kullanın.<\/0>",
 			"external": "Harici bir cüzdandan kripto aktarın",
 			"depositCoin": "{{coin}} yatırın",
 			"buyCoin": "{{coin}} satın al",
