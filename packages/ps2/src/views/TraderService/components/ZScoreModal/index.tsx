@@ -64,7 +64,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   color='neutral200'
                   fontSize={14}
                   fontWeight={500}
-                  id={`zscore-modal__label-${category}`}
+                  id={`zscore-modal__label-${category}-${item.id}`}
                 >
                   {t(item.label)}
                   {':'}
@@ -74,7 +74,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   fontSize={15}
                   fontWeight={600}
                   ml='6px'
-                  id={`zscore-modal__value-${category}`}
+                  id={`zscore-modal__value-${category}-${item.id}`}
                 >
                   {formatValue(
                     statsAugmented[item.valueId] as number,
@@ -86,7 +86,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                 value={details[item.id].zscore}
                 max={details[item.id].maxZscore}
                 category={category}
-                id={`zscore-modal__bar-${category}`}
+                id={`zscore-modal__bar-${category}-${item.id}`}
               />
             </div>
           ))}
@@ -106,7 +106,9 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
     >
       {data && (
         <>
-          <ZigTypography textAlign='center'>{t('description')}</ZigTypography>
+          <ZigTypography textAlign='center' id={'zscore-modal__description'}>
+            {t('description')}
+          </ZigTypography>
           <Grid
             container
             columnSpacing={'22px'}
