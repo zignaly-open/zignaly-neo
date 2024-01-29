@@ -66,9 +66,7 @@ function ServiceHeader() {
               {myServicesList?.map((service: TraderService) => (
                 <Link
                   id={`service-management-header__choose-${service?.serviceId}`}
-                  to={currentPath
-                    ?.replace(serviceId, service?.serviceId)
-                    ?.replace('/unactivated', '/management')}
+                  to={currentPath?.replace(serviceId, service?.serviceId)}
                   key={`--route-key-${service?.serviceId}`}
                 >
                   <ServiceOption active={serviceId === service?.serviceId}>

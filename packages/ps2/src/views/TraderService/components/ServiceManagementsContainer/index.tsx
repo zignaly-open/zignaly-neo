@@ -152,65 +152,65 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     .toNumber()}
                   max={50}
                 /> */}
-            </Box>
-            <MiddleContainer>
-              <ZigArrowLeftIcon
-                height={24}
-                width={24}
-                color={theme.palette.neutral600}
-              />
-              <HorizontalConnection />
-              <ZigButton
-                id={'service-manage-funds__transfer'}
-                variant='outlined'
-                {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
-                  exchange,
-                  t,
-                )}
-                size='large'
-                onClick={onClickTransfers}
-              >
-                {t('transfer.title')}
-              </ZigButton>
-              <HorizontalConnection />
-              <ZigArrowRightIcon
-                height={24}
-                width={24}
-                color={theme.palette.neutral600}
-              />
-            </MiddleContainer>
-            <Box>
-              <Circle />
-              <ZigTypography
-                variant='h2'
-                color='neutral100'
-                id={'service-manage-funds__standby-funds-title'}
-              >
-                {t('standbyFunds')}
-              </ZigTypography>
-              <ZigTypography
-                color='neutral200'
-                id={'service-manage-funds__standby-funds-description'}
-              >
-                {t('standbyFunds-desc')}
-              </ZigTypography>
-              <TradingFunds>
-                <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={
-                    'service-manage-funds__standby-funds-available-withdrawals-label'
-                  }
+              </Box>
+              <MiddleContainer>
+                <ZigArrowLeftIcon
+                  height={24}
+                  width={24}
+                  color={theme.palette.neutral600}
+                />
+                <HorizontalConnection />
+                <ZigButton
+                  id={'service-manage-funds__transfer'}
+                  variant='outlined'
+                  {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                    exchange,
+                    t,
+                  )}
+                  size='large'
+                  onClick={onClickTransfers}
                 >
-                  {t('availableWithdrawals')}
-                  <InlinePriceLabel
-                    id={
-                      'service-manage-funds__standby-funds-available-withdrawals'
-                    }
-                    value={parseFloat(balance.scaSscSum)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
+                  {t('transfer.title')}
+                </ZigButton>
+                <HorizontalConnection />
+                <ZigArrowRightIcon
+                  height={24}
+                  width={24}
+                  color={theme.palette.neutral600}
+                />
+              </MiddleContainer>
+              <Box>
+                <Circle />
+                <ZigTypography
+                  variant='h2'
+                  color='neutral100'
+                  id={'service-manage-funds__standby-funds-title'}
+                >
+                  {t('standbyFunds')}
                 </ZigTypography>
+                <ZigTypography
+                  color='neutral200'
+                  id={'service-manage-funds__standby-funds-description'}
+                >
+                  {t('standbyFunds-desc')}
+                </ZigTypography>
+                <TradingFunds>
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
+                    id={
+                      'service-manage-funds__standby-funds-available-withdrawals-label'
+                    }
+                  >
+                    {t('availableWithdrawals')}
+                    <InlinePriceLabel
+                      id={
+                        'service-manage-funds__standby-funds-available-withdrawals'
+                      }
+                      value={parseFloat(balance.scaSscSum)}
+                      coin={service?.ssc ?? 'USDT'}
+                    />
+                  </ZigTypography>
 
                   <ZigTypography
                     color='neutral400'
@@ -251,34 +251,34 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     </Tooltip>
                   </ZigTypography>
 
-                <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={'service-manage-funds__standby-funds-min-balance-label'}
-                >
-                  {t('minBalance.title')}
-                  <InlinePriceLabel
-                    id={'service-manage-funds__standby-funds-min-balance'}
-                    value={parseFloat(management.minimumSca)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
-                  <ZigButton
-                    sx={{ ml: 1.5 }}
-                    variant={'text'}
-                    id={'service-manage-funds__standby-funds-edit'}
-                    startIcon={
-                      <EditIcon sx={{ width: '12px', height: '12px' }} />
-                    }
-                    onClick={onClickMinBalance}
-                    {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
-                      exchange,
-                      t,
-                    )}
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
+                    id={'service-manage-funds__standby-funds-min-balance-label'}
                   >
-                    {t('action:edit')}
-                  </ZigButton>
-                </ZigTypography>
-                {/* <LineSeparator />
+                    {t('minBalance.title')}
+                    <InlinePriceLabel
+                      id={'service-manage-funds__standby-funds-min-balance'}
+                      value={parseFloat(management.minimumSca)}
+                      coin={service?.ssc ?? 'USDT'}
+                    />
+                    <ZigButton
+                      sx={{ ml: 1.5 }}
+                      variant={'text'}
+                      id={'service-manage-funds__standby-funds-edit'}
+                      startIcon={
+                        <EditIcon sx={{ width: '12px', height: '12px' }} />
+                      }
+                      onClick={onClickMinBalance}
+                      {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                        exchange,
+                        t,
+                      )}
+                    >
+                      {t('action:edit')}
+                    </ZigButton>
+                  </ZigTypography>
+                  {/* <LineSeparator />
                   <ZigTypography color='neutral400' variant='body2'>
                     {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
