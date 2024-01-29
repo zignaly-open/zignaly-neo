@@ -9,7 +9,7 @@ import {
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ZigRocketIcon } from '@zignaly-open/ui/icons';
 import OtherAccountsButton from './OtherAccountsButton';
-import { Box } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
 
@@ -34,6 +34,7 @@ const InvestButton: React.FC<{
     // and the page will scroll to top
     'deposit-crypto',
     'edit-investment',
+    'error',
   ]);
   const isAuthenticated = useIsAuthenticated();
   const openInvestModal = useOpenInvestDepositModal(modalRoute);
@@ -55,14 +56,14 @@ const InvestButton: React.FC<{
     investedFromAccounts >= 1 && showMultipleAccountButton;
   const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
-  return (
+  const investButtonComponent = (
     <Box display={'flex'} flexDirection={'column'} position={'relative'}>
       <ZigButton
         id={prefixId && `${prefixId}__invest-${service.id}`}
         onClick={onClickMakeInvestment}
         variant='contained'
         size={'large'}
-        disabled={maxReached}
+        disabled={maxReached || !service.activated}
         sx={{
           flexDirection: 'row',
           gap: '5px',
@@ -129,6 +130,13 @@ const InvestButton: React.FC<{
         </Box>
       )}
     </Box>
+  );
+  return service.activated ? (
+    investButtonComponent
+  ) : (
+    <Tooltip title={t('error:access.deactivated-service')} arrow>
+      {investButtonComponent}
+    </Tooltip>
   );
 };
 
