@@ -11,7 +11,7 @@ import { subMonths, subYears } from 'date-fns';
 import { numericFormatter } from 'react-number-format';
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
-  const { t, i18n } = useTranslation(['service', 'marketplace']);
+  const { t } = useTranslation(['service', 'marketplace']);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -236,9 +236,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
                 color={'neutral200'}
                 id={'service-profile__exchange'}
               >
-                {i18n.exists(`service:exchanges.${service.exchange}`)
-                  ? t(`exchanges.${service.exchange}`)
-                  : service.exchange}
+                {t(`common:${service.exchange}`)}
               </ZigTypography>
             </ZigTypography>
           )}

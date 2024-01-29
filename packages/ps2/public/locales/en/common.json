@@ -108,5 +108,8 @@
   },
   "follow-us": "Follow us",
   "portfolio": "Portfolio",
-  "kyc-updated": "KYC status updated!"
+  "kyc-updated": "KYC status updated!",
+  "binance": "Binance",
+  "bybit": "Bybit",
+  "deribit": "Deribit"
 }

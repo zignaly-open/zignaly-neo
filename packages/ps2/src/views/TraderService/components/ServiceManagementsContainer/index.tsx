@@ -32,7 +32,7 @@ import {
 } from '../../../../apis/service/types';
 import { useZModal } from '../../../../components/ZModal/use';
 import { Tooltip, useTheme } from '@mui/material';
-import { servicesThatAllowKeyCreation } from '../../../../apis/service/constants';
+import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme();
@@ -58,15 +58,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   };
 
   const { exchange } = (endpoints[0]?.data || {}) as Service;
-  const extraDisablePropsForEditButtons =
-    servicesThatAllowKeyCreation?.includes(exchange)
-      ? {}
-      : {
-          disabled: true,
-          tooltip: t('no-api-key-management-in-this-exchange', {
-            exchange,
-          }),
-        };
 
   return (
     <LayoutContentWrapper
@@ -164,7 +155,10 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               <ZigButton
                 id={'service-manage-funds__transfer'}
                 variant='outlined'
-                {...extraDisablePropsForEditButtons}
+                {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                  exchange,
+                  t,
+                )}
                 size='large'
                 onClick={onClickTransfers}
               >
@@ -268,7 +262,10 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       <EditIcon sx={{ width: '12px', height: '12px' }} />
                     }
                     onClick={onClickMinBalance}
-                    {...extraDisablePropsForEditButtons}
+                    {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                      exchange,
+                      t,
+                    )}
                   >
                     {t('action:edit')}
                   </ZigButton>
