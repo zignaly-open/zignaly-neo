@@ -58,6 +58,8 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             value={
               over1Year ? service.pnlPercent365t : +service.pnlPercent90t * 4
             }
+            hideNegativeSign
+            indicatorPostion='left'
           />
           <Box
             display={'flex'}
@@ -110,6 +112,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
                   lineHeight: '28px',
                 }}
                 hideNegativeSign
+                indicatorPostion='left'
                 value={service.pnlPercent30t}
               />
             </ChangeIndicatorContainer>
