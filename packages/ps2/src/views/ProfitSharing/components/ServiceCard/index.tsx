@@ -102,13 +102,14 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             />
             <ChangeIndicatorContainer>
               <ChangeIndicator
+                type='graph'
                 decimalScale={1}
-                type={'default'}
                 id={`service-card__pnl30-${service.id}`}
                 style={{
                   fontSize: '16px',
                   lineHeight: '28px',
                 }}
+                hideNegativeSign
                 value={service.pnlPercent30t}
               />
             </ChangeIndicatorContainer>

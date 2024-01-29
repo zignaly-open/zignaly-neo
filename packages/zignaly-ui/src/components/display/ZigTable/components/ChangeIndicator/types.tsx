@@ -11,4 +11,5 @@ export interface ChangeIndicatorProps {
   id?: string;
   decimalScale?: number;
   smallPct?: boolean;
+  hideNegativeSign?: boolean;
 }
