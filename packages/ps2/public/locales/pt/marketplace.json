@@ -1,9 +1,4 @@
 {
-	"card": {
-		"top-rated": "Melhor Classificado",
-		"assets": "Ativos",
-		"investors": "Investidores"
-	},
 	"invest-in-services": "Invista em Profit Sharing",
 	"invest-in-services-explainer": "Invista com a nossa seleção de traders profissionais e pague apenas uma parte dos teus lucros. O investimento médio é de $200, mas você pode começar com apenas $1.",
 	"table": {
@@ -21,6 +16,37 @@
 		"account-age": "Idade da conta",
 		"x-investors_one": "{{count}} investidor",
 		"x-investors_other": "{{count}} investidores",
-		"assets-mobile": "Ativos"
+		"service-name-mobile": "Serviço",
+		"assets-mobile": "Ativos",
+		"view-profile": "Ver perfil",
+		"invested": "{{ invested }} investido",
+		"edit": "Clique para editar",
+		"zscore": "Pontuação Z",
+		"risk": "Risco",
+		"n-months-pnl-mobile": "{{count}} Mês P&L",
+		"n-years-pnl-mobile": "{{count}} A P&L",
+		"n-years-pnl_one": "{{count}} ano PNL",
+		"n-years-pnl_other": "{{count}} anos PNL",
+		"n-weeks-pnl-mobile": "{{count}} S P&L",
+		"n-weeks-pnl_one": "{{count}} semana PNL",
+		"n-weeks-pnl_other": "{{count}} semana PNL"
+	},
+	"n-profit-sharing-services": "{{count}} Serviços de Profit Sharing",
+	"filters": {
+		"returns-months": "{{count}} Meses de Retorno",
+		"type": "Tipo",
+		"fee": "Taxa do Serviço",
+		"spot": "Spot",
+		"futures": "Futuros",
+		"all": "Todos",
+		"coins": "Moedas",
+		"period-pnl": "Período PNL",
+		"exchange": "Exchange"
+	},
+	"table-search-empty-message": "Nenhum serviço corresponde aos critérios especificados. Por favor, considere refinar a sua pesquisa ou explorar outras opções",
+	"card": {
+		"apy": "APY",
+		"pnl": "PNL",
+		"apy-calculated-tooltip": "Estimativa calculada a partir dos últimos 3 meses de P&L."
 	}
 }

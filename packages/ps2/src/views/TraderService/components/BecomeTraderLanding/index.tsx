@@ -109,7 +109,7 @@ const BecomeTraderLanding: React.FC = () => {
         title: t('howWorks.list.item3.title'),
         id: 'become-trader__reasons-split-profits',
         description: t('howWorks.list.item3.description', {
-          zignalyFee: whitelabel.defaultSuccessFee,
+          zignalyFee: whitelabel.zignalySuccessFee,
         }),
         image: 'split-profits.png',
       },

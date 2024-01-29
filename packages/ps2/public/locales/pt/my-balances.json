@@ -6,7 +6,8 @@
 		"lockedBalance": "Saldo Bloqueado",
 		"valueBTC": "Valor em BTC",
 		"valueUSD": "Valor em USD",
-		"balance-mobile": "Saldo"
+		"balance-mobile": "Saldo",
+		"valueUSD-mobile": "Valor em USD"
 	},
 	"table-search-placeholder": "Digite para pesquisar moedas.",
 	"loading-arialLabel": "Carregando...",

@@ -12,12 +12,12 @@ import { ServiceApiKey } from 'apis/serviceApiKey/types';
 import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
 import { useServiceDetails } from '../../../../apis/service/use';
-import { servicesThatAllowKeyCreation } from '../../../../apis/service/constants';
+import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
 import { PageWithHeaderContainer } from '../styles';
 import Deactivated from '../../Deactivated';
 
 const ApiKeyManagement: React.FC = () => {
-  const { t } = useTranslation(['management', 'action']);
+  const { t } = useTranslation(['management', 'action', 'service']);
   const { serviceId } = useParams();
   const { showModal } = useZModal();
   const {
@@ -57,16 +57,10 @@ const ApiKeyManagement: React.FC = () => {
         >
           <ZigButton
             id={'service-api__create-key'}
-            disabled={
-              !servicesThatAllowKeyCreation?.includes(serviceData?.exchange)
-            }
-            tooltip={
-              servicesThatAllowKeyCreation?.includes(serviceData?.exchange)
-                ? null
-                : t('no-api-key-management-in-this-exchange', {
-                    exchange: serviceData?.exchange,
-                  })
-            }
+            {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+              serviceData?.exchange,
+              t,
+            )}
             onClick={() =>
               showModal(CreateApiKey, {
                 serviceId,

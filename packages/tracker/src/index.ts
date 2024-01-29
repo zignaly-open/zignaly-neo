@@ -31,7 +31,11 @@ const triggerTz = async (
   userId?: string,
   referrer?: string,
 ) => {
-  if (process.env.REACT_APP_ENABLE_TRACKING !== 'true') return;
+  if (
+    process.env.REACT_APP_ENABLE_TRACKING !== 'true' ||
+    typeof jest !== 'undefined'
+  )
+    return;
 
   const data = {
     action: 'sData',

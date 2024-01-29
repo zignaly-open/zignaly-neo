@@ -14,12 +14,14 @@
 		"withdrawal": "Çekim",
 		"psDeposit": "Profit Sharing'e yatırın",
 		"psWithdraw": "Yatırım azaltıldı",
-		"reward": "Komisyon",
 		"ps2": "PS Dahili Transfer",
 		"psds": "Profit Sharing'ten Para Çekimi",
 		"buyZig": "Zig Satın Alın",
 		"traderFee": "Trader Başarım Ücreti",
-		"user": "Dahili Transfer"
+		"user": "Dahili Transfer",
+		"voucher-refund": "Hediye Çeki iadesi",
+		"system": "Sistem",
+		"referral": "Referans"
 	},
 	"filter": {
 		"max": "(maksimum son 3 ay)",
@@ -28,7 +30,9 @@
 	"status": {
 		"pending": "Bekliyor",
 		"completed": "Tamamlandı",
-		"error": "Hata"
+		"error": "Hata",
+		"reviewing": "İşlem sürüyor",
+		"reviewing-tooltip": "Transfer inceleniyor ve kısa sürede tamamlanacak."
 	},
 	"details": {
 		"from": "Şuradan:",

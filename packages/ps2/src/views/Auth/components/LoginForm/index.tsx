@@ -123,7 +123,11 @@ const LoginForm: React.FC = () => {
             {t('login-form.submit')}
           </ZigButton>
 
-          {!isFeatureOn(Features.HideSignup) && (
+          {/*
+          Why does the "Login only" config control if signup is shown (but technically available)?
+          Nein, you do not ask zis kind ov qvestionz, vee are just folloving ze orderz
+          */}
+          {!isFeatureOn(Features.LoginOnlyAccess) && (
             <ZigTypography variant={'body2'} align={'center'}>
               <Trans i18nKey={'login-form.link.signup'} t={t}>
                 <ZigLink

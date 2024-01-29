@@ -3,12 +3,11 @@ on:
   push:
     tags:
       - 'release-ps2-*'
-      - 'release-ps2_zig-*'
 
 jobs:
   deploy:
-    name: PS2 Staging deploy
+    name: PS2 WL Server prod deploy
     uses: ./.github/workflows/ps2-deploy.yml
     secrets: inherit
     with:
-      deploy-env: production
+      deploy-env: wl-prod

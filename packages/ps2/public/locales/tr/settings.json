@@ -1,7 +1,7 @@
 {
 	"update-password": {
 		"title": "Şifreyi Güncelle",
-		"description": "Zignaly Hesabınızın şifresini güncelleyin.\nGüvenliğiniz için, Şifreyi güncelle seçeneğine tıkladıktan sonra çıkış yapacaksınız.",
+		"description": "Şifrenizi güncelleyin.\nGüvenliğiniz için, Şifreyi güncelle seçeneğine tıkladıktan sonra oturumu kapatacaksınız.",
 		"current-password": "Mevcut Şifre:",
 		"new-password": "Yeni Parola:",
 		"success": "Şifre başarıyla güncellendi. Lütfen tekrar giriş yapın."
@@ -22,8 +22,46 @@
 	},
 	"disable-2fa": {
 		"title": "2FA'yı devre dışı bırak",
-		"description": "Hesabınız İki Faktörlü Kimlik Doğrulama (2FA) ile güvence altına alınmıştır. 2FA'yı devre dışı bırakmak için kimlik doğrulayıcı uygulamanızdan kodu girin.",
 		"success": "2FA başarıyla devre dışı bırakıldı.",
-		"security": "Güvenliğiniz için, hesabınızda 2FA'yı etkinleştirmenizi öneririz."
+		"security": "Güvenliğiniz için, hesabınızda 2FA'yı etkinleştirmenizi öneririz.",
+		"congrats": "Tebrikler!",
+		"description-basic": "Hesabınız İki Faktörlü Kimlik Doğrulama (2FA) ile güvence altına alınmıştır. 2FA'yı devre dışı bırakmak için aşağıdaki butona tıklayın.",
+		"description-after-click": "Hesabınız İki Faktörlü Kimlik Doğrulama (2FA) ile güvence altına alınmıştır. 2FA'yı devre dışı bırakmak için kimlik doğrulayıcı uygulamanızdan kodu girin."
+	},
+	"header": {
+		"2fa": "2FA",
+		"edit-profile": "Profili Düzenle",
+		"edit-password": "Parola",
+		"verification": "Doğrulama",
+		"verification-kyc": "KYC",
+		"verification-kyb": "KYB"
+	},
+	"edit-profile": {
+		"title": "Profili Düzenle",
+		"description": "Kullanıcı profili verilerinizi özelleştirin",
+		"username": "Kullanıcı adı",
+		"visible-if-trader": "(Bir hizmetin yöneticisiyseniz görünür)",
+		"internal-use": "(Dahili kullanım için)",
+		"user-id": "Kullanıcı Kimliği",
+		"about-you": "Hakkınızda",
+		"update-profile": "Profili Güncelle",
+		"success": "Profil başarıyla güncellendi",
+		"edit-avatar": "Avatarı Düzenle",
+		"change-email": "E-posta adresini değiştirmek mümkün değil",
+		"country": "Ülke",
+		"email": "E-posta",
+		"status-box": {
+			"2fa": "2FA",
+			"kyc": "KYC",
+			"enable-2fa-cta": "Aktif",
+			"enabled": "Aktif",
+			"disabled": "Devre dışı",
+			"pass-kyc-cta": "Doğrulama",
+			"verified": "Doğrulanmış",
+			"not-verified": "Doğrulanmadı",
+			"pending": "Bekliyor",
+			"rejected": "Reddedildi"
+		},
+		"tell-me-the-story-of-your-left": "Bize kendinizden bahsedin"
 	}
 }

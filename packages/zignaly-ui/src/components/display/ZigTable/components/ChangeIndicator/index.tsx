@@ -6,12 +6,24 @@ import { Layout, Row, Container, Indicator, Subtitle, Inline, ValueIndicator } f
 import { ChangeIndicatorProps } from "./types";
 import { Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
+import { isNil } from "lodash-es";
 
-// Fix 1 decimal issue making 1.95 to be 2.0
+// Fix 1 decimal issue making 1.95 until 1.99 to be 2.0 instead of 2
 // https://github.com/s-yadav/react-number-format/issues/820
-const checkDecimals = (value: number, decimals: number) => {
-  const decimalPart = value % 1;
-  return decimals === 1 && decimalPart > 0.95 ? 0 : decimals;
+const adjustDecimals = (value: BigNumber, decimals: number) => {
+  const decimalPart = value.abs().mod(1);
+
+  if (decimals == 1 && decimalPart.gt(0.95)) return 0;
+
+  return decimals;
+};
+
+// Fix -0.01 until -0.05 to be -0.0 instead of 0
+// Also remove negative sign when hideNegativeSign is true, used when showing the indicator arrow instead
+const adjustNumber = (value: BigNumber, decimals: number, hideNegativeSign?: boolean) => {
+  if (decimals === 1 && value.lt(0) && value.gte(-0.05)) return 0;
+  if (hideNegativeSign) return value.abs();
+  return value;
 };
 
 const ChangeIndicator = ({
@@ -25,6 +37,8 @@ const ChangeIndicator = ({
   labelTooltip = "",
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
+  hideNegativeSign = false,
+  indicatorPostion = "right",
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -44,20 +58,23 @@ const ChangeIndicator = ({
         <ValueIndicator
           variant={type === "graph" ? "body2" : "body1"}
           color={color}
-          smallPct={smallPct && type !== "only_number"}
+          smallPct={smallPct && type !== "only_number" && !isNil(value)}
         >
+          {!isZero && type === "graph" && indicatorPostion === "left" && (
+            <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
+          )}
           <NumericFormat
             style={style}
-            value={bigNumberValue.toFixed()}
+            value={adjustNumber(bigNumberValue, decimalScale, hideNegativeSign).toFixed()}
             displayType={"text"}
             suffix={type === "only_number" || smallPct ? "" : "%"}
             thousandSeparator={","}
-            decimalScale={checkDecimals(+bigNumberValue, decimalScale)}
+            decimalScale={adjustDecimals(bigNumberValue, decimalScale)}
             fixedDecimalScale={stableCoinOperative}
             id={id}
           />
         </ValueIndicator>
-        {!isZero && type === "graph" && (
+        {!isZero && type === "graph" && indicatorPostion === "right" && (
           <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
         )}
       </Inline>

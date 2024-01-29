@@ -1,7 +1,8 @@
 import React from 'react';
 import { Inline, PendingTransaction } from '../styles';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { ZigRefreshIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigRefreshIcon } from '@zignaly-open/ui/icons';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import { useTranslation } from 'react-i18next';
 import {

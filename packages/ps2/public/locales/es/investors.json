@@ -1,5 +1,5 @@
 {
-	"no-investors": "Este servicio aún no tiene inversores",
+	"no-investors": "Ningún inversor cumple los criterios especificados. Considera la posibilidad de refinar tu búsqueda. Puedes buscar por correo electrónico o ID de usuario.",
 	"failed-to-load": "No se han podido cargar los datos",
 	"title": "Inversores",
 	"tableHeader": {
@@ -8,11 +8,12 @@
 		"P&L": "P&L",
 		"P&LTotal": "P&L Totales",
 		"totalFeesPaid": "Total de Comisiones Pagadas",
-		"successFee": "Success Fee",
+		"successFee": "Comisión por Beneficios",
 		"feesZIG": "Comisiones en ZIG",
 		"status": "Estatus",
 		"invested": "Invertido",
-		"pending": "Pendiente"
+		"pending": "Pendiente",
+		"P&L-percent": "P&L %"
 	},
 	"loading-arialLabel": "Cargando inversores",
 	"status": {
@@ -25,5 +26,22 @@
 		"owner": "Propietario"
 	},
 	"number-of-investors_one": "{{count}} Inversor",
-	"number-of-investors_other": "{{count}} Inversores"
+	"number-of-investors_other": "{{count}} Inversores",
+	"change-fee": "Editar comisión por beneficios",
+	"change-fee-modal": {
+		"title": "Descuento en Comisión por Beneficios:",
+		"desc": "Reconoce a sus valiosos inversores ofreciéndoles un descuento en la Comisión por Beneficios",
+		"input-desc": "Descuento que se aplicará sobre la Comisión por Beneficios",
+		"discount": "Descuento",
+		"new-success-fee": "Comisión por Beneficios",
+		"fee-edited": "Comisión por Beneficios editado correctamente",
+		"validate-must-be-between": "Debe ser un número entero (0 a {{max}}). O {{full}} para que sea gratis",
+		"already-0": "Vamos, tu servicio ya es gratuito, no podemos descontar nada más"
+	},
+	"first-grade-math-explainer": "Aplica un descuento en tu Comisión por Beneficios además del {{zignalyFee}}% cobrado por Zignaly",
+	"success-fee-explainer": "Obtienes {{owner}}%, ZIGDAO obtiene {{zignalyFee}}%",
+	"success-fee-explainer-with-discount": "Obtienes {{discounted}}% ({{serviceTotal}}% - {{discount}}% descuento - {{zignalyFee}}% ZIGDAO)",
+	"it-is-you": "¡Eres tu! Por cierto te ves increíble hoy",
+	"it-is-you-0-fee": "Eres tú, así que la comisión por beneficios es del 0%",
+	"success-fee-explainer-max-discounted": "Obtienes {{discounted}}%, diste el descuento completo: {{discount}}%, ZIGDAO obtiene {{zignalyFee}}%"
 }

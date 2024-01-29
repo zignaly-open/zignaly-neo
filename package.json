@@ -13,12 +13,15 @@
   },
   "postinstall": "husky install",
   "scripts": {
-    "prepare": "lerna run prepare; node scripts/fix-locales.js",
+    "prepare": "lerna run prepare; node util/fix-locales.js",
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
     "storybook": "lerna run storybook --scope=*/ui",
     "backoffice": "lerna run start --scope=@zignaly-open/backoffice --include-dependencies --stream --parallel",
     "ps2": "lerna run start --scope=@zignaly-open/ps2 --include-dependencies --stream --parallel",
+    "ps2-wl-build": "yarn lerna run build:whitelabel --scope=@zignaly-open/ps2",
+    "ps2-wl-server": "yarn ps2-wl-build && yarn lerna run dev --scope=@zignaly-open/ps2-wl-server",
+    "ps2-wl-prod": "yarn lerna run start --scope=@zignaly-open/ps2-wl-server",
     "ps2-analyze": "lerna run analyze --scope=@zignaly-open/ps2",
     "ps2-build": "lerna run build --scope=@zignaly-open/ps2 --include-dependencies",
     "ps2-run-bundled": "yarn ps2-build && npx http-server -p 7070 ./packages/ps2/build --proxy http://localhost:7070?",
@@ -38,8 +41,8 @@
   "dependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "env-cmd": "^10.1.0",
-    "sib-api-v3-typescript": "^2.2.2"
+    "lerna": "^6.4.1",
+    "env-cmd": "^10.1.0"
   },
   "resolutions": {
     "react": "18.2.0",

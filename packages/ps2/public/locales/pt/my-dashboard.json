@@ -4,11 +4,13 @@
 		"summary": {
 			"title": "Meu Valor Atual",
 			"subtitle": "Rentabilidade",
-			"title-mobile": "Investido"
+			"title-mobile": "Investido",
+			"subtitle-mobile": "P&L"
 		},
 		"serviceName": {
 			"title": "Nome do Serviço",
-			"subtitle": "Manager\/Moeda base"
+			"subtitle": "Manager\/Moeda base",
+			"title-mobile": "Serviço"
 		},
 		"1-mo": {
 			"title": "1 mês",

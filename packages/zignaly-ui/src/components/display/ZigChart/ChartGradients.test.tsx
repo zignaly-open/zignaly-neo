@@ -1,10 +1,10 @@
 import React from "react";
-import { ChartGradients } from ".";
 import { renderWithProvidersUi } from "../../../utils/testConfig";
+import ThemeChartGradients from "./ThemeChartGradients";
 
 describe("ChartGradients component tests", () => {
   it("renders ChartGradients component", () => {
-    const { container } = renderWithProvidersUi(<ChartGradients />);
+    const { container } = renderWithProvidersUi(<ThemeChartGradients />);
     expect(container).toMatchSnapshot();
   });
 });

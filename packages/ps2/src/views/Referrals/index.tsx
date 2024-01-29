@@ -6,13 +6,8 @@ import {
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
 import { Box, Grid } from '@mui/material';
-import {
-  PageContainer,
-  ZigArrowDescIcon,
-  ZigPriceLabel,
-  ZigTypography,
-  ZigUserFilledIcon,
-} from '@zignaly-open/ui';
+import { PageContainer, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowDescIcon, ZigUserFilledIcon } from '@zignaly-open/ui/icons';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';

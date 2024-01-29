@@ -6,7 +6,8 @@ import {
   useCurrentBalance,
   useInvestedAccountsCount,
 } from '../../../../../apis/investment/use';
-import { ZigButton, ZigRocketIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigRocketIcon } from '@zignaly-open/ui/icons';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';

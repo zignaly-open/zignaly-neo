@@ -11,7 +11,7 @@
 	"withdrawAddress": {
 		"label": "Retirar para o Endereço:",
 		"placeholder": "Cole o endereço da carteira aqui",
-		"warning": "Só enviar {{network}} {{coin}} para este endereço",
+		"warning": "Certifique-se de que fornece um endereço de {{network}} {{coin}}.",
 		"invalid": "Endereço inválido"
 	},
 	"amountToWithdraw": {
@@ -27,7 +27,8 @@
 	"withdrawMemo": {
 		"label": "MEMO\/Tag:",
 		"placeholder": "Cole o MEMO\/Tag da carteira aqui",
-		"invalid": "MEMO\/Tag é inválido, por favor, reveja os detalhes da rede da sua carteira de destino"
+		"invalid": "MEMO\/Tag é inválido, por favor, reveja os detalhes da rede da sua carteira de destino",
+		"required": "Tanto um memo\/tag quanto um endereço são necessários"
 	},
 	"confirmation": {
 		"title": "Confirmar Retirada",

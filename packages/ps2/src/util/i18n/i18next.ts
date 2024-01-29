@@ -16,7 +16,6 @@ import dateLocaleTr from 'date-fns/locale/tr';
 import dateLocaleRu from 'date-fns/locale/ru';
 import dateLocaleVi from 'date-fns/locale/vi';
 
-import HttpBackend from 'i18next-http-backend';
 import { whitelabel } from '../../whitelabel';
 
 Countries.registerLocale(CountriesEn);
@@ -73,12 +72,10 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     backend: {
-      backends: [HttpBackend],
-      backendOptions: [
-        {
-          loadPath: '/locales/{{lng}}/{{ns}}.json',
-        },
-      ],
+      loadPath:
+        ((typeof process.env.PUBLIC_URL === 'string' &&
+          (process.env.PUBLIC_URL as string)) ||
+          '') + '/locales/{{lng}}/{{ns}}.json',
     },
     debug: false,
     ns: ['common', 'error', 'pages'],
@@ -96,7 +93,7 @@ i18n
       cookieOptions: { path: '/', sameSite: 'strict' },
     },
     interpolation: {
-      defaultVariables: { whitelabel: whitelabel.name || whitelabel.title },
+      defaultVariables: { whitelabel: whitelabel.name },
       escapeValue: false,
       format: (value: string | number, format?: string): string => {
         if (format === 'prettyNumber' && typeof value === 'number') {

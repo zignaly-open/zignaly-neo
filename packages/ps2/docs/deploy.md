@@ -8,11 +8,7 @@ OK, you gotta deploy. Like, ASAP. Ideally yesterday. [Twice](https://www.urbandi
 2. Publish the release
 3. You are done.
 
-What's the proper tag?
-
-- `release-ps2-*`, i.e. `release-ps2-got-myself-a-911-turbo-s` to deploy ALL PS2 envs. So, our [PS2 app](https://app.zignaly.com) and all the whitelabels which are deployed through us). 
-- `release-ps2_zig-*`, i.e. `release-ps2)_zig-wheres-my-starbux-daydate` to deploy only our [PS2 app](https://app.zignaly.com) 
-- `release-ps2_cm-*`, i.e. `release-ps2_cm-when-moon` to deploy only the Criptomaniacos whitelabel.
+What's the proper tag? It's `release-ps2-*`, i.e. `release-ps2-got-myself-a-911-turbo-s` to deploy ALL PS2 envs. So, our [PS2 app](https://app.zignaly.com) and all the whitelabels which are deployed through us). 
 
 
 ### How to trigger a Staging deploy

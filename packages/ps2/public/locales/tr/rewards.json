@@ -25,12 +25,12 @@
 		"voucher_pending": "Bonusu Yatırın"
 	},
 	"full-terms": {
-		"1": "Zignaly, kullanıcının uygunsuz, dürüst olmayan veya taciz edici faaliyetlerde bulunduğu tespit edilirse Ücret Kuponları'nı iptal etme hakkını saklı tutar.",
-		"2": "Zignaly, Ödül programının Hüküm ve Koşullarını istediği zaman önceden haber vermeksizin değiştirme hakkını saklı tutar.",
-		"3": "\"Ücret Kuponları\", Başarım Ücreti'nin Zignaly'ye ait kısmında kullanılmak üzere geçerlidir.",
+		"1": "{{ whitelabel }}, kullanıcının uygunsuz, dürüst olmayan veya taciz edici faaliyetlerde bulunduğu tespit edilirse Ücret Kuponları'nı iptal etme hakkını saklı tutar.",
+		"2": "{{ whitelabel }} ödül programının Hüküm ve Koşullarını istediği zaman önceden haber vermeksizin değiştirme hakkını saklı tutar.",
+		"3": "\"Ücret Kuponları\", \"Başarım Ücreti\"nin {{ whitelabel }} kısmı için geçerlidir.",
 		"4": "\"Ücret Kuponları\" devredilemez ve yalnızca bunları alan asıl kullanıcı tarafından kullanılabilir.",
-		"5": "Zignaly logolu ücretli çevrimiçi reklamlar kesinlikle yasaktır.",
-		"6": "Zignaly tarafından yapılan tüm ödül hesaplamaları nihaidir.",
+		"5": "{{ whitelabel }} logosunu taşıyan ücretli çevrimiçi reklamlar kesinlikle yasaktır.",
+		"6": "{{ whitelabel }} tarafından yapılan tüm ödül hesaplamaları nihaidir.",
 		"7": "Bu şartları ihlal ettiği tespit edilen katılımcılar ödüllerden yararlanamayacaktır; herhangi bir hileli veya suistimal edici davranış, ödenmemiş tüm ödüllerin derhal feshedilmesiyle sonuçlanacaktır.",
 		"title": "Genel Koşullar"
 	},

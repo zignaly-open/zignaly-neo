@@ -3,6 +3,7 @@
 	"button": "Retirar",
 	"form": {
 		"label": "Cantidad a retirar:",
-		"labelBalance": "Disponible:"
-	}
+		"available": "Disponible:"
+	},
+	"min-investment": "Inversión mínima {{ minInvestment, PrettyNumberFull }} {{ minAmountCoin }}. Consejo pro: aún puedes retirar todo"
 }

@@ -63,7 +63,7 @@ function InvestorEditFee({
     defaultValues: {
       value: previousValue,
       maxDiscount: {
-        max: Math.max(0, serviceTotalFee - 2 * whitelabel.defaultSuccessFee),
+        max: Math.max(0, serviceTotalFee - 2 * whitelabel.zignalySuccessFee),
         full: serviceTotalFee,
       },
     },

@@ -14,12 +14,14 @@
 		"withdrawal": "Retirada",
 		"psDeposit": "Profit Sharing Depósito",
 		"psWithdraw": "Investimento reduzido",
-		"reward": "Comissão",
 		"ps2": "PS Transferência Interna",
 		"psds": "Profit Sharing Retiro",
 		"buyZig": "Comprar Zig",
 		"traderFee": "Success Fee do Trader",
-		"user": "Transferência Interna"
+		"user": "Transferência Interna",
+		"voucher-refund": "Reembolso de voucher",
+		"system": "Sistema",
+		"referral": "Indicação"
 	},
 	"filter": {
 		"max": "(últimos 3 meses máx.)",

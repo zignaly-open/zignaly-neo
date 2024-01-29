@@ -1,10 +1,7 @@
 import React from 'react';
 import { Box, Tooltip, useTheme } from '@mui/material';
-import {
-  ZigClockIcon,
-  ZigTypography,
-  ZigUserFilledIcon,
-} from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import { ZigClockIcon, ZigUserFilledIcon } from '@zignaly-open/ui/icons';
 import { MAX_FEES_AMOUNT, getMaxEarnings } from '../../util';
 import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';
@@ -116,7 +113,7 @@ const CellLabelTraderBoost = ({ traderBoost }: { traderBoost: number }) => {
         {t('trader-boost')}
         <Tooltip
           title={t('tooltips.trader-boost', {
-            commission: traderBoost * whitelabel.defaultSuccessFee,
+            commission: traderBoost * whitelabel.zignalySuccessFee,
           })}
         >
           <TooltipIcon />
@@ -248,7 +245,7 @@ const TiersTable = ({
             {t('max-earnings-from-fees', {
               amount: numericFormatter(
                 (
-                  Math.round(MAX_FEES_AMOUNT * whitelabel.defaultSuccessFee) /
+                  Math.round(MAX_FEES_AMOUNT * whitelabel.zignalySuccessFee) /
                   100
                 ).toString(),
                 {

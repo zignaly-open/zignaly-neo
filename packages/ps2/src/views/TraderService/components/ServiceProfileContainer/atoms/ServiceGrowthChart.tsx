@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import {
   GraphChartType,
   GraphTimeframe,
@@ -8,7 +8,6 @@ import {
 import {
   getPrecisionForCoin,
   ZigButtonGroupInput,
-  ZigChart,
   ZigPriceLabel,
   CenteredLoader,
   ZigSelect,
@@ -33,6 +32,9 @@ import {
   formatLocalizedDate,
 } from 'views/Dashboard/components/MyDashboard/util';
 import BigNumber from 'bignumber.js';
+import { lazily } from 'react-lazily';
+
+const { ZigChart } = lazily(() => import('@zignaly-open/ui/charts'));
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const theme = useTheme();
@@ -261,41 +263,43 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <Box width={lg || !sm ? '100%' : '90%'}>
-            <ZigChart
-              id={'service-profile__graph'}
-              bars={[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
-                chartType,
-              )}
-              onlyIntegerTicks={chartType === GraphChartType.investors}
-              events={events}
-              yAxisFormatter={(v) =>
-                `${formatCompactNumber(v, isPercent ? 2 : 8)}${
-                  isPercent ? `%` : ``
-                }`
-              }
-              data={data?.data}
-              tooltipFormatter={(v) =>
-                `${formatLocalizedDate(
-                  (v as typeof v & { date?: Date }).date,
-                  'PP',
-                )}\n${numericFormatter(new BigNumber(v.y).toFormat(), {
-                  ...(isPercent
-                    ? {
-                        decimalScale: 2,
-                        suffix: '%',
-                      }
-                    : {
-                        thousandSeparator: true,
-                        decimalScale: getPrecisionForCoin(service.ssc) ?? 8,
-                        suffix:
-                          chartType === GraphChartType.investors
-                            ? ''
-                            : ` ${service.ssc}`,
-                      }),
-                })}`
-              }
-              precision={precision}
-            />
+            <Suspense fallback={<CenteredLoader />}>
+              <ZigChart
+                id={'service-profile__graph'}
+                bars={[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
+                  chartType,
+                )}
+                onlyIntegerTicks={chartType === GraphChartType.investors}
+                events={events}
+                yAxisFormatter={(v) =>
+                  `${formatCompactNumber(v, isPercent ? 2 : 8)}${
+                    isPercent ? `%` : ``
+                  }`
+                }
+                data={data?.data}
+                tooltipFormatter={(v) =>
+                  `${formatLocalizedDate(
+                    (v as typeof v & { date?: Date }).date,
+                    'PP',
+                  )}\n${numericFormatter(new BigNumber(v.y).toFormat(), {
+                    ...(isPercent
+                      ? {
+                          decimalScale: 2,
+                          suffix: '%',
+                        }
+                      : {
+                          thousandSeparator: true,
+                          decimalScale: getPrecisionForCoin(service.ssc) ?? 8,
+                          suffix:
+                            chartType === GraphChartType.investors
+                              ? ''
+                              : ` ${service.ssc}`,
+                        }),
+                  })}`
+                }
+                precision={precision}
+              />
+            </Suspense>
           </Box>
         )}
       </ChartWrapper>

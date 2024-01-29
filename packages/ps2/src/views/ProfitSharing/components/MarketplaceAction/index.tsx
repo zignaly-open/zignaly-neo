@@ -15,7 +15,8 @@ import { Service } from '../../../../apis/service/types';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
-import { CenteredLoader, ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
+import { CenteredLoader, ZigButton } from '@zignaly-open/ui';
+import { ZigCrossIcon } from '@zignaly-open/ui/icons';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { Link, generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
@@ -44,7 +45,7 @@ export const MobileMarketplaceAction = ({
   return (
     rowId === activeRow && (
       <ZigTableMobileActionRow safariHeight={93}>
-        <MarketplaceAction service={service} fullSizeInvested={false} />
+        <MarketplaceAction service={service} investedVariant={'mobile'} />
         <ZigButton
           size={'large'}
           variant={'outlined'}
@@ -78,7 +79,7 @@ export const MobileMarketplaceAction = ({
 const MarketplaceAction = ({
   service,
   prefixId = 'marketplace-table',
-  fullSizeInvested = true,
+  investedVariant,
   showRocket = false,
   showArrow = false,
   fullSizeInvest = true,
@@ -115,16 +116,17 @@ const MarketplaceAction = ({
           >
             <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
               {isAuthenticated && investedAmount ? (
-                fullSizeInvested ? (
-                  <InvestedButtonBase
-                    prefixId={prefixId}
-                    service={traderService}
-                    investedAmount={investedAmount.toString()}
-                  />
-                ) : (
+                investedVariant === 'mobile' ? (
                   <MobileInvestedButton
                     service={traderService}
                     id={prefixId && `${prefixId}__edit-investment`}
+                    investedAmount={investedAmount.toString()}
+                  />
+                ) : (
+                  <InvestedButtonBase
+                    variant={investedVariant}
+                    prefixId={prefixId}
+                    service={traderService}
                     investedAmount={investedAmount.toString()}
                   />
                 )

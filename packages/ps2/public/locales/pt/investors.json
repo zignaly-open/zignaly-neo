@@ -1,5 +1,5 @@
 {
-	"no-investors": "Este serviço ainda não tem investidores",
+	"no-investors": "Nenhum investidor preenche os critérios especificados. Considere a possibilidade de refinar a sua pesquisa. Pode pesquisar por e-mail ou ID de usuário.",
 	"failed-to-load": "Falha em carregar os dados",
 	"title": "Investidores",
 	"tableHeader": {
@@ -12,7 +12,8 @@
 		"feesZIG": "Taxas em ZIG",
 		"status": "Estado",
 		"invested": "Investido",
-		"pending": "Pendente"
+		"pending": "Pendente",
+		"P&L-percent": "P&L %"
 	},
 	"loading-arialLabel": "Carregando investidores",
 	"status": {
@@ -39,7 +40,8 @@
 	},
 	"first-grade-math-explainer": "Aplique um desconto na sua Taxa de Sucesso além da {{zignalyFee}}% cobrada pela ZIGDAO",
 	"success-fee-explainer": "Você obtém {{owner}}%, ZIGDAO recebe {{zignalyFee}}%",
-	"success-fee-explainer-with-discount": "Você recebe {{discounted}}% ({{owner}}% - {{discount}}% de desconto), ZIGDAO recebe {{zignalyFee}}%",
+	"success-fee-explainer-with-discount": "Você recebe {{discounted}}% ({{serviceTotal}}% - {{discount}}% de desconto, {{zignalyFee}}% ZIGDAO)",
 	"it-is-you": "É você! Aliás, você está incrível hoje",
-	"it-is-you-0-fee": "É você, então a taxa de sucesso é 0%"
+	"it-is-you-0-fee": "É você, então a taxa de sucesso é 0%",
+	"success-fee-explainer-max-discounted": "Você ganha {{discounted}}%, deu desconto total: {{discount}}%, ZIGDAO ganha {{zignalyFee}}%"
 }
