@@ -46,7 +46,10 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         mt={'30px'}
         mb={'24px'}
       >
-        <ZigRisk value={service.zrisk} />
+        <ZigRisk
+          value={service.zrisk}
+          id={`service-card__risk-${service.id}`}
+        />
         <Box display={'flex'} flexDirection={'column'}>
           <ChangeIndicator
             decimalScale={1}
@@ -75,6 +78,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               alignItems={'center'}
               gap={'3px'}
               mt='2px'
+              id={`service-card__pnl365-label-${service.id}`}
             >
               {t('card.apy')}
               {!over1Year && (
@@ -121,7 +125,12 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             gap={1}
           >
             <ZigCalendar1MIcon fontSize='19px' />
-            <ZigTypography variant='h5' color={'neutral100'} mt='2px'>
+            <ZigTypography
+              variant='h5'
+              color={'neutral100'}
+              mt='2px'
+              id={`service-card__pnl30-label-${service.id}`}
+            >
               {t('card.pnl')}
             </ZigTypography>
           </Box>
