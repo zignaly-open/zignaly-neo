@@ -9,7 +9,7 @@ import {
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ZigRocketIcon } from '@zignaly-open/ui/icons';
 import OtherAccountsButton from './OtherAccountsButton';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
 
@@ -56,8 +56,13 @@ const InvestButton: React.FC<{
     investedFromAccounts >= 1 && showMultipleAccountButton;
   const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
-  const investButtonComponent = (
-    <Box display={'flex'} flexDirection={'column'} position={'relative'}>
+  return (
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      position={'relative'}
+      alignItems={'center'}
+    >
       <ZigButton
         id={prefixId && `${prefixId}__invest-${service.id}`}
         onClick={onClickMakeInvestment}
@@ -69,7 +74,13 @@ const InvestButton: React.FC<{
           gap: '5px',
           padding: '6px 26px',
         }}
-        tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
+        tooltip={
+          maxReached
+            ? t('invest-button.max-reached-tooltip')
+            : !service.activated
+            ? t('error:access.deactivated-service')
+            : null
+        }
         endIcon={showRocket && <ZigRocketIcon width={'34px'} height={'34px'} />}
       >
         <div>
@@ -130,13 +141,6 @@ const InvestButton: React.FC<{
         </Box>
       )}
     </Box>
-  );
-  return service.activated ? (
-    investButtonComponent
-  ) : (
-    <Tooltip title={t('error:access.deactivated-service')} arrow>
-      {investButtonComponent}
-    </Tooltip>
   );
 };
 

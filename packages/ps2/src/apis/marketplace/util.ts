@@ -24,5 +24,5 @@ export function marketplaceServiceToInvestmentType(
 export function marketplaceServiceToServiceType(
   service: MarketplaceService,
 ): Partial<Service> {
-  return service;
+  return { ...service, activated: true };
 }
