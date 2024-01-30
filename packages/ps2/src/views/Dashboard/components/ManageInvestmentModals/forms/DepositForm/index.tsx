@@ -312,8 +312,11 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
             </Grid>
 
             {!!specialTips && (
-              <Grid item xs={12}>
-                <ZigAlertMessage text={specialTips} />
+              <Grid item xs={12} mt={'-20px'}>
+                <ZigAlertMessage
+                  text={specialTips}
+                  id={'deposit-modal__special-tip'}
+                />
               </Grid>
             )}
 

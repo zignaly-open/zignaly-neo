@@ -271,8 +271,11 @@ function WithdrawForm({
           </div>
 
           {!!specialTips && (
-            <Box>
-              <ZigAlertMessage text={specialTips} />
+            <Box mt={'-20px'}>
+              <ZigAlertMessage
+                text={specialTips}
+                id={'withdraw-modal__special-tip'}
+              />
             </Box>
           )}
 
