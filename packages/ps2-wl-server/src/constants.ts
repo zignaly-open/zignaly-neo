@@ -9,7 +9,7 @@ export const BASE_API =
   initialValueBaseApi &&
   initialValueBaseApi + (initialValueBaseApi.endsWith('/') ? '' : '/');
 
-export const CACHE_TTL = WL_CACHE_TTL_OVERRIDE || 10 * 60_000;
+export const CACHE_TTL = +WL_CACHE_TTL_OVERRIDE || 10 * 60_000;
 
 export const BUILD_PATH = path.join(fs.realpathSync('.'), 'build');
 
