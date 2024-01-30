@@ -1,4 +1,5 @@
 {
+  "page-x-of-all": "<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <2>{{totalPages}}</2>",
   "footer": {
     "elements": {
       "show": "Showing",

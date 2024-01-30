@@ -20,6 +20,7 @@ import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
 import { ZigCheckBox } from "../../../index";
+import { Trans, useTranslation } from "react-i18next";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -41,6 +42,7 @@ function ZigTableData<T extends object>({
   ...rest
 }: ZigTablePropsData<T>) {
   const theme = useTheme();
+  const { t } = useTranslation("table");
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
@@ -282,30 +284,39 @@ function ZigTableData<T extends object>({
               px={2}
               id={prefixId && `${prefixId}-table__pages`}
             >
-              <ZigTypography color="neutral300">Page</ZigTypography>
-
-              <ZigTypography
-                variant="h3"
-                color="neutral100"
-                id={prefixId && `${prefixId}-table__current-page`}
-              >
-                {table.getState().pagination.pageIndex + 1}
-              </ZigTypography>
-
-              {table.getPageCount() !== -1 && (
-                <>
-                  <ZigTypography whiteSpace="nowrap" color="neutral300">
-                    out of
-                  </ZigTypography>
-                  <ZigTypography
-                    color="neutral100"
-                    fontWeight={600}
-                    id={prefixId && `${prefixId}-table__total-page-count`}
-                  >
-                    {table.getPageCount() || 1}
-                  </ZigTypography>
-                </>
-              )}
+              sdfvsdfv
+              <Trans
+                i18nKey="myKey" // optional -> fallbacks to defaults if not provided
+                defaults="hello <italic>beautiful</italic> <bold>{{what}}</bold>" // optional defaultValue
+                values={{ what: "world" }}
+                components={{ italic: <i />, bold: <strong /> }}
+              />
+              <Trans
+                t={t}
+                i18nKey={"tabsvdfvsdfvsdfvsdfvle:page-x-of-all"}
+                defaults="<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>"
+                values={{
+                  currentPage: table.getState().pagination.pageIndex + 1,
+                  totalPages: table.getPageCount() || 1,
+                }}
+                components={{
+                  text: <ZigTypography whiteSpace="nowrap" color="neutral300" />,
+                  current: (
+                    <ZigTypography
+                      variant="h3"
+                      color="neutral100"
+                      id={prefixId && `${prefixId}-table__current-page`}
+                    />
+                  ),
+                  total: (
+                    <ZigTypography
+                      color="neutral100"
+                      fontWeight={600}
+                      id={prefixId && `${prefixId}-table__total-page-count`}
+                    />
+                  ),
+                }}
+              />
             </Box>
             {loading && <Loader width={24} height={24} />}
             <IconButton
@@ -344,7 +355,9 @@ function ZigTableData<T extends object>({
                 onChange={table.setPageSize}
               />
             </SmallSelectWrapper>
-            <ZigTypography color="neutral300">items</ZigTypography>
+            <ZigTypography color="neutral300">
+              items {t("common:infinitely-better", { defaultValue: "Suka blyat" })}
+            </ZigTypography>
           </Box>
         </Box>
       )}
