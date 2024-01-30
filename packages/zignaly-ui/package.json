@@ -111,6 +111,7 @@
     "lodash-es": "^4.17.21",
     "qrcode.react": "3.0.2",
     "react-device-detect": "^2.2.3",
+    "react-i18next": "14.0.1",
     "react-image-webp": "^0.8.0",
     "react-hook-form": "7.34.2",
     "react-loader-spinner": "6.0.0-0",
