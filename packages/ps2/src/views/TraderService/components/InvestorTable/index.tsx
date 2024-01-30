@@ -349,10 +349,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
     <LayoutContentWrapper
       unmountOnRefetch
       endpoint={[investorsEndpoint, managementEndpoint, serviceDetailsEndpoint]}
-      content={([investors, management]: [
-        Investor[],
-        TraderServiceManagement,
-      ]) => {
+      content={([, management]: [Investor[], TraderServiceManagement]) => {
         const processedInvestorsList = filteredInvestors.map((inv) => ({
           ...inv,
           successFee: inv.accountType === 'owner' ? '0' : management.successFee,
@@ -361,21 +358,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         return (
           <PageWithHeaderContainer>
             <InvestorCounts>
-              <ZigUserIcon
-                width={'17px'}
-                height={'20px'}
-                color={theme.palette.backgrounds.investorsIcon}
-                id={`service-investors__investors-number-icon`}
-              />
-              <ZigTypography
-                variant={'h3'}
-                color={'contrasting'}
-                id={`service-investors__investors-number`}
-              >
-                {t('number-of-investors', {
-                  count: investors?.length,
-                })}
-              </ZigTypography>
               <Box
                 display={'flex'}
                 flex={1}
@@ -383,6 +365,44 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 gap={2}
               >
                 <ZigFilters
+                  leftComponent={
+                    <Box gap={'12px'} display={'flex'} alignItems={'center'}>
+                      <ZigUserIcon
+                        width={'17px'}
+                        height={'20px'}
+                        color={theme.palette.backgrounds.investorsIcon}
+                        id={`service-investors__investors-number-icon`}
+                      />
+                      <ZigTypography
+                        variant={'h3'}
+                        color={'contrasting'}
+                        id={`service-investors__investors-number`}
+                      >
+                        {t('number-of-investors', {
+                          count: filteredInvestors?.length,
+                        })}
+                      </ZigTypography>
+                    </Box>
+                  }
+                  rightComponent={
+                    <ZigButton
+                      id={`service-investors__export`}
+                      onClick={() => exporter(processedInvestorsList)}
+                      variant={'text'}
+                      sx={{
+                        '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                          fill: theme.palette.links,
+                        },
+                      }}
+                      endIcon={
+                        <OpenInNew
+                          sx={{ width: '17.33px', height: '17.33px' }}
+                        />
+                      }
+                    >
+                      {t('action:export')}
+                    </ZigButton>
+                  }
                   onChange={tablePersist.filterTable}
                   filters={tablePersist.filters}
                   defaultFilters={defaultFilters}
@@ -390,22 +410,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                   search={searchFilter}
                   sx={{ mb: 0 }}
                 />
-
-                <ZigButton
-                  id={`service-investors__export`}
-                  onClick={() => exporter(processedInvestorsList)}
-                  variant={'text'}
-                  sx={{
-                    '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                      fill: theme.palette.links,
-                    },
-                  }}
-                  endIcon={
-                    <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
-                  }
-                >
-                  {t('action:export')}
-                </ZigButton>
               </Box>
             </InvestorCounts>
 
