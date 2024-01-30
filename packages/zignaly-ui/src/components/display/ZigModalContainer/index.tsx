@@ -69,4 +69,5 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
 });
 
 export { ZigModalActions, ZigModalForm } from "./styles";
+export { ModalContainerProps } from "./types";
 export default ModalContainer;

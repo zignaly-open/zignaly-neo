@@ -28,6 +28,7 @@
     "base-currency": "Base currency:",
     "funds-allocated": "Funds allocated:",
     "success-fee": "Success fee:",
+    "exchange": "Exchange:",
     "tags": "Tags:"
   },
   "periods": {

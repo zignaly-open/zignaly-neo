@@ -5,12 +5,15 @@
 		"availableBalance": "Mevcut Bakiye",
 		"lockedBalance": "Kilitli Bakiye",
 		"valueBTC": "BTC cinsinden değer",
-		"valueUSD": "ABD Doları cinsinden değer"
+		"valueUSD": "ABD Doları cinsinden değer",
+		"balance-mobile": "Bakiye",
+		"valueUSD-mobile": "USD Değeri"
 	},
 	"table-search-placeholder": "Coin aramak için buraya yazın.",
 	"loading-arialLabel": "Yükleniyor...",
 	"my-coins": "Koinlerim",
 	"deposits-withdrawals": "İşlem Geçmişi",
 	"withdraw": "Çekim",
-	"deposit": "Yatır"
+	"deposit": "Yatır",
+	"swap": "Takas"
 }

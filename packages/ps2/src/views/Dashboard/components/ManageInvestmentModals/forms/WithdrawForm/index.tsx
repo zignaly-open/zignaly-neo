@@ -8,10 +8,11 @@ import {
   ZigInput,
   CenteredLoader,
   ZigInputAmount,
-  ZigListIcon,
   ZigModalActions,
   ZigModalForm,
+  ZigAlertMessage,
 } from '@zignaly-open/ui';
+import { ZigListIcon } from '@zignaly-open/ui/icons';
 import { WithdrawFormData } from './types';
 import { Box, useMediaQuery } from '@mui/material';
 import {
@@ -160,6 +161,9 @@ function WithdrawForm({
       trigger('address');
     }
   }, [network]);
+  const specialTips = coinObject?.networks?.find(
+    (n) => n.network === network,
+  )?.specialTips;
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
@@ -265,6 +269,12 @@ function WithdrawForm({
               </Box>
             )}
           </div>
+
+          {!!specialTips && (
+            <Box>
+              <ZigAlertMessage text={specialTips} />
+            </Box>
+          )}
 
           {(networkObject?.memoRegex || networkObject?.specialTips) && (
             <Controller

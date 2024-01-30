@@ -97,6 +97,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
                 <InvestedButton
                   prefixId={'service-profile'}
                   service={service}
+                  variant='component'
                 />
               ) : (
                 <MobileInvestedButton

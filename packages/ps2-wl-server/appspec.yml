@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+    - source: /
+      destination: /zignaly/{directory}/deploy
+file_exists_behavior: OVERWRITE
+hooks:
+    BeforeInstall:
+        - location: scripts/BeforeInstall.sh
+          timeout: 300
+          runas: admin
+    AfterInstall:
+        - location: scripts/AfterInstall.sh
+          runas: admin
+          timeout: 1200
+    ApplicationStart:
+        - location: scripts/ApplicationStart.sh
+          runas: admin
+          timeout: 1200

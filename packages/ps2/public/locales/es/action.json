@@ -16,5 +16,6 @@
 	"claim": "Reclamar",
 	"deposit-coin": "Deposita {{coin}}",
 	"more": "más",
-	"less": "menos"
+	"less": "menos",
+	"buy-crypto": "Compra cripto"
 }

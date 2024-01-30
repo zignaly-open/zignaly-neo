@@ -13,8 +13,8 @@ const TermsOfService: React.FC = () => {
     <PageContainer>
       <LegalWrapper id='legal-tos'>
         <LegalTitle variant={'h1'}>{t('tos-title')}</LegalTitle>
-        {t('tos-text', { returnObjects: true }).map(
-          (x: string, index: number) => (
+        {(t('tos-text', { returnObjects: true }) as string[]).map(
+          (x, index) => (
             <ZigTypography
               component={'p'}
               variant={'body1'}

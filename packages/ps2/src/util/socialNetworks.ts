@@ -4,7 +4,7 @@ import {
   ZigLogoDiscordIcon,
   ZigLogoTwitterIcon,
   ZigLogoLinkedInIcon,
-} from '@zignaly-open/ui';
+} from '@zignaly-open/ui/icons';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { whitelabel } from '../whitelabel';

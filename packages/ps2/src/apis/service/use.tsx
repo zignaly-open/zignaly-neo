@@ -61,7 +61,7 @@ export const useServiceDetails: typeof useTraderServiceDetailsQuery = (
 ) => {
   const isAuthenticated = useIsAuthenticated();
   const doNotLoadServicesForUnauth =
-    !isAuthenticated && isFeatureOn(Features.NoPublicMarketplace);
+    !isAuthenticated && isFeatureOn(Features.LoginOnlyAccess);
   return useTraderServiceDetailsQuery(serviceId, {
     ...(options || {}),
     skip: options?.skip || doNotLoadServicesForUnauth,

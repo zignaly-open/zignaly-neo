@@ -13,6 +13,18 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
   const { t } = useTranslation('marketplace');
   const risks = useRisks();
 
+  const renderRisk = useCallback(
+    (zrisk: number) => (
+      <ZigRisk
+        value={zrisk}
+        width={30}
+        height={16}
+        sx={{ flexDirection: 'row', gap: '10px' }}
+      />
+    ),
+    [risks],
+  );
+
   return useMemo(() => {
     const coins = SERVICES_COINS.filter((coin) =>
       services.find((service) => service.ssc === coin),
@@ -74,14 +86,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         label: t('table.risk'),
         options: risks.map((risk) => ({
           value: risk.id,
-          label: (
-            <ZigRisk
-              value={risk.zrisk}
-              width={30}
-              height={16}
-              sx={{ flexDirection: 'row', gap: '10px' }}
-            />
-          ),
+          label: renderRisk(risk.zrisk),
         })),
         id: 'risk',
         primary: true,

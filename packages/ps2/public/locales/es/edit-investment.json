@@ -3,18 +3,17 @@
 	"addMoreInvestmentSuccess": "Has invertido {{amount}} {{currency}} con éxito en el servicio {{serviceName}}.",
 	"withdrawInvestmentSuccess": "Retiro solicitado con éxito.",
 	"validation-indicateAnAmount": "Debes indicar una cantidad.",
-	"error-blockedInvestment": "Todos tus fondos están pendientes de ser transferidos desde del servicio.",
 	"form": {
 		"title": "Monto Invertido:",
 		"profits": {
 			"title": "Qué hacer con las ganancias:",
 			"left": "Reinvertir",
 			"right": "Retirar",
-			"title-confirmation": "Porcentaje de ganancias a Retirar:"
+			"pct-withdraw": "% de Ganancias a Retirar:"
 		},
 		"inputAmount": {
-			"label": "Monto a Invertir:",
-			"labelBalance": "Disponible:"
+			"label": "Importe a invertir",
+			"labelMinDeposit": "Depósito mínimo:"
 		},
 		"link": {
 			"investMore": "Invertir más",
@@ -23,8 +22,10 @@
 		"button": {
 			"continue-to-confirmation": "Continuar con la Confirmación",
 			"invest-now": "Invierte {{amount}} {{coin}} ahora",
-			"addInvestment": "Añadir a la Inversión"
-		}
+			"addInvestment": "Añadir a la Inversión",
+			"transfer-now": "Transferir ahora"
+		},
+		"transferOutAll": "Toda su inversión está pendiente de retiro y se procesará en breve durante la contabilidad diaria, una vez que el trader libere los fondos."
 	},
 	"pendingMajorThan": {
 		"type": "Nueva inversión",
@@ -44,7 +45,7 @@
 		"status_other": "Tienes {{count}} transacciones pendientes",
 		"link-label": "Ver"
 	},
-	"investorDetail-successFee": "{{fee}}% Success Fee",
+	"investorDetail-successFee": "{{fee}}% Comisión por Beneficios",
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Solicitud de Retiro",
@@ -59,10 +60,12 @@
 				"type": "Tipo",
 				"status": "Estatus"
 			},
-			"button": "Volver"
+			"button": "Volver",
+			"hoverTooltip": "Pase el cursor sobre la cantidad para ver los decimales completos",
+			"waiting-for-next-accounting-tooltip": "Recibirás tus fondos después de que el gestor de fondos los libere y se lleve a cabo la contabilidad diaria. Ten en cuenta que tu inversión puede permanecere expuesta hasta que se te transfiera el saldo. La duración puede variar en función de la estrategia del gestor del fondo, normalmente tardando unos días, pero posiblemente más."
 		},
 		"editInvestments": {
-			"title": "Editar Inversión",
+			"title": "Editar Inversión Con",
 			"loading": "Cargando editar inversión"
 		}
 	},
@@ -73,19 +76,22 @@
 	},
 	"invest-modal": {
 		"invest-with": "Invertir con",
-		"amount-to-invest": "Importe a invertir",
-		"type-transfer": "Escribe la palabra <0>\" {{word}} \"</0> en el campo a continuación para completar la transferencia:",
+		"amount-to-invest": "Monto a Invertir:",
+		"type-transfer": "Escriba la palabra <0>\"{{word}}\"<\/0> en el campo siguiente para aceptar la transferencia:",
 		"transfer-error": "Valor no válido. Por favor escribe la palabra correcta.",
 		"transfer-label": "Transferencia",
-		"i-understand-margin": "Entiendo que todo mi saldo de {{coin}} ahora es parte del colateral y está en riesgo",
-		"i-understand-money-transferred": "Entiendo y confirmo que mis fondos sean transferidos al pool del trader y que no será visible en mi saldo disponible",
 		"max-funds": "Excede los fondos máximos permitidos en este servicio. Invertir máx. {{max}} {{coin}}.",
-		"max-reached": "No puedes invertir en este servicio porque se ha alcanzado el límite máximo de fondos."
+		"max-reached": "Fondos máximos en servicio alcanzados. Prueba un servicio diferente",
+		"type-transfer-placeholder": "Escribe \" {{word}} \" aquí",
+		"i-understand-risk": "Entiendo y acepto que mis fondos se transferirán a la cuenta del Pool del Servicio y que mis fondos están en riesgo",
+		"min-not-reached": "Inversión mínima {{ value, prettyNumberFull }} {{ coin }}",
+		"min-not-reached-invested": "Inversión mínima {{ value, prettyNumberFull }} {{ coin }} (necesitas al menos {{ newMin, PrettyNumberFull }} {{ coin }})"
 	},
 	"withdrawal-request": "Solicitud de Retiro",
 	"withdrawal-success": {
 		"title": "Retiro Solicitado",
-		"description": "Recibirás tus fondos después de que el gestor de fondos los libere y se lleve a cabo la contabilidad diaria. Ten en cuenta que tu inversión está en riesgo hasta que se le transfiera el saldo. Dependiendo del gestor del fondo, esto suele tardar unos días, pero puede llevar más tiempo. Zignaly no controla este plazo, así que por favor se paciente.",
+		"description": "Recibirás tus fondos después de que el gestor de fondos los libere y se lleve a cabo la contabilidad diaria. Ten en cuenta que tu inversión está en riesgo hasta que se le transfiera el saldo. Dependiendo del gestor del fondo, esto suele tardar unos días, pero puede llevar más tiempo. Nosotros no controlamos este plazo, así que por favor se paciente.",
 		"button": "Cerrar"
-	}
+	},
+	"investorDetail-successFee-discounted": "<0>{{oldFee}}%<\/0> {{fee}}% Comisión por Beneficios"
 }

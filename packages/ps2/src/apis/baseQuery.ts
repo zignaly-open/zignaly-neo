@@ -23,7 +23,7 @@ const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
     baseUrl,
     prepareHeaders: (headers, { getState, endpoint }) => {
       const token = (getState() as RootState).user.accessToken;
-      const { xSource } = whitelabel;
+      const { slug: xSource } = whitelabel;
       xSource && headers.set('x-source', xSource);
       if (token && !['login', 'signup'].includes(endpoint)) {
         headers.set('authorization', `Bearer ${token}`);

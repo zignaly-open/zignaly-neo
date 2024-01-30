@@ -1,12 +1,7 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ZigArrowLeftIcon,
-  ZigArrowRightIcon,
-  ZigButton,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowLeftIcon, ZigArrowRightIcon } from '@zignaly-open/ui/icons';
 import EditIcon from '@mui/icons-material/Edit';
 import {
   BottomContainer,
@@ -37,6 +32,7 @@ import {
 } from '../../../../apis/service/types';
 import { useZModal } from '../../../../components/ZModal/use';
 import { Tooltip, useTheme } from '@mui/material';
+import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme();
@@ -60,6 +56,8 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
       serviceId,
     });
   };
+
+  const { exchange } = (endpoints[0]?.data || {}) as Service;
 
   return (
     <LayoutContentWrapper
@@ -157,6 +155,10 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               <ZigButton
                 id={'service-manage-funds__transfer'}
                 variant='outlined'
+                {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                  exchange,
+                  t,
+                )}
                 size='large'
                 onClick={onClickTransfers}
               >
@@ -260,6 +262,10 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       <EditIcon sx={{ width: '12px', height: '12px' }} />
                     }
                     onClick={onClickMinBalance}
+                    {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                      exchange,
+                      t,
+                    )}
                   >
                     {t('action:edit')}
                   </ZigButton>

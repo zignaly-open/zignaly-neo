@@ -6,7 +6,8 @@ import {
 } from 'date-fns';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { ZigClockIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import { ZigClockIcon } from '@zignaly-open/ui/icons';
 
 const BoostTimer = ({
   boostEndsDate,

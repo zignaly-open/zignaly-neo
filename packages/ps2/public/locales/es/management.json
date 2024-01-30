@@ -18,7 +18,7 @@
 		"labelBalance": "Saldo Mínimo Actual",
 		"save": "Guardar"
 	},
-	"controlledZignaly": "Controlado por Zignaly",
+	"controlledZignaly": "Controlado por {{ whitelabel }}",
 	"transfer": {
 		"title": "Transferir",
 		"loading": "Cargando",
@@ -36,7 +36,7 @@
 		"title": "Transferir Fondos",
 		"description": "Transfiere fondos inmediatamente entre la Cuenta de Trading y la Cuenta de Standby en tu servicio"
 	},
-	"hardDiconnectWarning": "Tus desconexiones forzosas han alcanzado el {perc}%. Si las desconexiones forzosas alcanzan el {maxPerc}% de los fondos del servicio, Zignaly tomará el control de tu servicio.",
+	"hardDiconnectWarning": "Tus desconexiones forzosas han alcanzado el {perc}%. Si las desconexiones forzosas alcanzan el {maxPerc}% de los fondos del servicio, {{ whitelabel }} tomará el control de tu servicio.",
 	"previousValue": "Valor Anterior:",
 	"loading-arialLabel": "Cargando gestión",
 	"standbyFunds": "Fondos Standby",
@@ -55,7 +55,7 @@
 		"cant-disable-read": "No se puede deshabilitar el permiso de lectura",
 		"restrict-ip": "Restringir IP",
 		"api-secret": "API Secreta",
-		"zignaly-code": "Código Zignaly",
+		"zignaly-code": "Código {{ whitelabel }}",
 		"api-secret-explainer": "Solo visible en la generación de llave. Si lo pierdes, tendrás que generar una nueva llave API",
 		"permission-label": "Permisos",
 		"permissions": {
@@ -81,7 +81,11 @@
 		"ip-restrictions-ranges": "Lo sentimos, no admitimos rangos de IP",
 		"ip-restrictions-duplicates": "Algunas IPs aparecen dos veces, por favor, elimina los duplicados",
 		"ip-restrictions-allowed": "Direcciones IP",
-		"ip-restrictions-allowed-explainer": "Al introducir más de una dirección IP, sepáralas con comas",
-		"ip-restrictions-on": "Restringir el acceso sólo a IP de confianza (recomendado)"
-	}
+		"ip-restrictions-allowed-explainer": "Si introduce más de una dirección IP, por favor sepárelas con comas o espacios.",
+		"ip-restrictions-on": "Restringir el acceso sólo a IP de confianza (recomendado)",
+		"delete-api-key-toast": "La Clave API se ha eliminado correctamente"
+	},
+	"positive-claim": "Los usuarios están invirtiendo {{ claim }} {{ coin }} en la próxima contabilidad.",
+	"negative-claim": "Los usuarios solicitan retirar {{ claim }} {{ coin }}.",
+	"no-api-key-management-in-this-exchange": "Esta opción aún no se admite automáticamente para {{exchange}}. Ponte en contacto con nuestro equipo para que te ayude."
 }

@@ -31,7 +31,7 @@ const CommissionReferralSharing = ({
 }) => {
   const { t } = useTranslation(['service', 'referrals-trader']);
   const [enable, setEnable] = useState(value > 0);
-  const min = whitelabel.defaultSuccessFee;
+  const min = whitelabel.zignalySuccessFee;
   const max = successFee - zglySuccessFee;
   const currentBoost = 1 + getTraderBoost(value || min, zglySuccessFee);
 

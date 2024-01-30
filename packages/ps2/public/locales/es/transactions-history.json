@@ -14,12 +14,14 @@
 		"withdrawal": "Retiro",
 		"psDeposit": "Depósitos Profit Sharing",
 		"psWithdraw": "Inversión Reducida",
-		"reward": "Comisión",
 		"ps2": "PS Transferencia Interna",
 		"psds": "Retiros Profit Sharing",
 		"buyZig": "Comprar Zig",
-		"traderFee": "Success Fee del Trader",
-		"user": "Transferencia Interna"
+		"traderFee": "Comisión por Beneficios del Trader",
+		"user": "Transferencia Interna",
+		"voucher-refund": "Reembolso de vale",
+		"system": "Sistema",
+		"referral": "Referido"
 	},
 	"filter": {
 		"max": "(últimos 3 meses máximo)",
@@ -28,7 +30,9 @@
 	"status": {
 		"pending": "Pendiente",
 		"completed": "Completo",
-		"error": "Error"
+		"error": "Error",
+		"reviewing": "En curso",
+		"reviewing-tooltip": "La transferencia está siendo revisada y se completará en breve."
 	},
 	"details": {
 		"from": "De:",
@@ -38,8 +42,8 @@
 	},
 	"export": {
 		"title": "Informe del Historial de Transacciones",
-		"description": "Estamos creando un informe que incluye todas las transacciones desde que se creó esta cuenta. Te enviaremos un correo electrónico en los próximos 10 minutos con los pasos para descargar tu informe con el historial de transacciones.",
-		"success": "Tu solicitud se ha procesado correctamente. Por favor, revisa tu correo electrónico para obtener el enlace de descarga."
+		"description": "Estamos creando un informe que incluye todas las transacciones desde que se creó esta cuenta. Te enviaremos un email en los próximos 10 minutos con los pasos para descargar tu informe con el historial de transacciones.",
+		"success": "Tu solicitud se ha procesado correctamente. Por favor, revisa tu email para obtener el enlace de descarga."
 	},
 	"external": "Dirección Externa",
 	"deleted": "Cuenta de Exchange Eliminada",

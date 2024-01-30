@@ -20,7 +20,7 @@
     "success": "Profile updated successfully",
     "edit-avatar": "Edit Avatar",
     "change-email": "It's not possible to change the email",
-    "country": "Country",
+    "country": "Select country",
     "email": "Email:",
     "status-box": {
       "2fa": "2FA",

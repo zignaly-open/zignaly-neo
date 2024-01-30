@@ -1,7 +1,8 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { trimZeros, ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
+import { trimZeros, ZigTypography } from '@zignaly-open/ui';
+import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
@@ -220,6 +221,25 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               {service.tags?.length ? service.tags?.join(', ') : <>&mdash;</>}
             </ZigTypography>
           </ZigTypography>
+
+          {!!service.exchange && (
+            <ZigTypography
+              fontSize={12}
+              color={'neutral300'}
+              sx={{ mt: 0.5 }}
+              component={'p'}
+              id={'service-profile__exchange'}
+            >
+              {t('summary.exchange')}{' '}
+              <ZigTypography
+                fontSize={12}
+                color={'neutral200'}
+                id={'service-profile__exchange'}
+              >
+                {t(`common:${service.exchange}`)}
+              </ZigTypography>
+            </ZigTypography>
+          )}
         </Grid>
       </Grid>
     </Box>

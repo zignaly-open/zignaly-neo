@@ -16,14 +16,16 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  ZigArrowBottomIcon,
   ZigButton,
   ZigDropdown,
   ZigDropdownHandleType,
-  ZigLoginUserIcon,
-  ZigPlusIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
+import {
+  ZigArrowBottomIcon,
+  ZigLoginUserIcon,
+  ZigPlusIcon,
+} from '@zignaly-open/ui/icons';
 import {
   ROUTE_2FA,
   ROUTE_DASHBOARD,
@@ -78,7 +80,7 @@ function AccountMenu(): React.ReactElement | null {
             </ZigTypography>
           </LoginButton>
         </Link>
-        {!isFeatureOn(Features.HideSignup) && (
+        {!isFeatureOn(Features.LoginOnlyAccess) && (
           <Link to={ROUTE_SIGNUP}>
             <ZigButton id={'menu__signup'} variant={'contained'}>
               {t('account-menu.isAuth-button-signUp')}

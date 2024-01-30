@@ -4,7 +4,7 @@ export type MarketplaceActionType = {
   service: MarketplaceService;
   prefixId?: string;
   fullSizeInvest?: boolean;
-  fullSizeInvested?: boolean;
+  investedVariant?: 'mobile' | 'button' | 'component';
   showRocket?: boolean;
   showArrow?: boolean;
 };

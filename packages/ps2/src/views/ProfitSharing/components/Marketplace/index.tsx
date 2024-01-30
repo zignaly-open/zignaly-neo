@@ -40,6 +40,7 @@ import ZScoreModal from 'views/TraderService/components/ZScoreModal';
 import TopServicesCards from '../TopServicesCards';
 import { getPeriodCountFromDays } from '../MarketplaceFilters/util';
 import { usePeriodVisibility } from './use';
+import { differenceInDays } from 'date-fns';
 
 const sx = {
   changeIndicator: {
@@ -85,24 +86,35 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             count,
           },
         ),
-        cell: (props) => (
-          <>
-            {showChart && (
-              <ZigChartMiniSuspensed
-                id={`marketplace-table__pnl${days}t-${props.row.original.id}-chart`}
-                midLine
-                data={[0, ...props.row.original.sparklines]}
+        cell: (props) => {
+          const oldEnough =
+            differenceInDays(
+              new Date(),
+              new Date(props.row.original.createdAt),
+            ) > days;
+
+          return oldEnough ? (
+            <>
+              {showChart && (
+                <ZigChartMiniSuspensed
+                  id={`marketplace-table__pnl${days}t-${props.row.original.id}-chart`}
+                  midLine
+                  data={[0, ...props.row.original.sparklines]}
+                />
+              )}
+              <ChangeIndicator
+                decimalScale={md ? 1 : 0}
+                id={`marketplace-table__pnl${days}t-${props.row.original.id}`}
+                style={showChart ? null : sx.changeIndicator}
+                value={props.getValue()}
+                type={showChart ? 'graph' : 'default'}
+                indicatorPostion='left'
               />
-            )}
-            <ChangeIndicator
-              decimalScale={md ? 1 : 0}
-              id={`marketplace-table__pnl${days}t-${props.row.original.id}`}
-              style={showChart ? null : sx.changeIndicator}
-              value={props.getValue()}
-              type={showChart ? 'graph' : 'default'}
-            />
-          </>
-        ),
+            </>
+          ) : (
+            <ZigTypography color={'neutral400'}>{'—'}</ZigTypography>
+          );
+        },
       });
     },
     [t, md],
@@ -294,16 +306,16 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
           {t('invest-in-services-explainer')}
         </ZigTypography>
       </Box>
-      {isZScoreOn && lg && (
-        <TopServicesCards
-          prefixId={'marketplace'}
-          services={services
-            ?.slice()
-            .sort((a, b) => b.zscore - a.zscore)
-            .slice(0, 3)}
-        />
-      )}
       <TableWrapper>
+        {isZScoreOn && lg && (
+          <TopServicesCards
+            prefixId={'marketplace'}
+            services={services
+              ?.slice()
+              .sort((a, b) => b.zscore - a.zscore)
+              .slice(0, 3)}
+          />
+        )}
         <MarketplaceFilters
           resultsCount={filteredServices?.length}
           filters={tablePersist.filters}

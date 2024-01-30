@@ -56,7 +56,7 @@ export function useDepositModalContent({
         label: <ZigTypography>{c}</ZigTypography>,
       }))
       .filter(
-        (c) => allowedDeposits.spot.includes(c.coin) && c.availableInUsd >= 10,
+        (c) => allowedDeposits.spot.includes(c.coin) && +c.availableInUsd >= 10,
       );
   }, [balances]);
   const showSwap =

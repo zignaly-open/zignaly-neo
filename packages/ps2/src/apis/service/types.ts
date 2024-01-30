@@ -1,5 +1,5 @@
-import { ZigChartAxisFormatType } from '@zignaly-open/ui';
 import { ExchangeType } from '../user/types';
+import type { ZigChartAxisFormat } from '@zignaly-open/ui/charts';
 
 type TraderServiceStatus = 'FULL' | string;
 
@@ -87,9 +87,12 @@ export type TransferPayload = {
   amount: string;
 };
 
+export type ExchangeName = 'bybit' | 'binance' | 'deribit';
+
 export type Service = {
   createdAt: string;
   description: string;
+  exchange: ExchangeName;
   exchangeInternalId: string;
   fundsAllocated: string;
   id: string;
@@ -137,7 +140,7 @@ export type TraderServiceChart = {
 };
 
 export type TraderServiceChartProcessed = {
-  data: ZigChartAxisFormatType[];
+  data: ZigChartAxisFormat[];
   summary: string | number;
   percentDiff?: number | string;
   migrationDate?: string;

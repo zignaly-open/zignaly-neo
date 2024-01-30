@@ -11,9 +11,11 @@ import EditApiKey from './modals/EditApiKey';
 import { ServiceApiKey } from 'apis/serviceApiKey/types';
 import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
+import { useServiceDetails } from '../../../../apis/service/use';
+import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
 
 const ApiKeyManagement: React.FC = () => {
-  const { t } = useTranslation(['management', 'action']);
+  const { t } = useTranslation(['management', 'action', 'service']);
   const { serviceId } = useParams();
   const { showModal } = useZModal();
   const {
@@ -21,6 +23,7 @@ const ApiKeyManagement: React.FC = () => {
     isFetching,
     data: keys,
   } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
+  const { data: serviceData } = useServiceDetails(serviceId);
 
   return (
     <>
@@ -50,6 +53,10 @@ const ApiKeyManagement: React.FC = () => {
         >
           <ZigButton
             id={'service-api__create-key'}
+            {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+              serviceData?.exchange,
+              t,
+            )}
             onClick={() =>
               showModal(CreateApiKey, {
                 serviceId,

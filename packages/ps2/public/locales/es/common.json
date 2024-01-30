@@ -31,7 +31,10 @@
 		"portfolio": "Mi Portafolio",
 		"marketplace": "Marketplace",
 		"balance": "Saldos",
-		"rewards": "Recompensas"
+		"rewards": "Recompensas",
+		"dropdown-link-kyc": "KYC",
+		"notAuth-dropdown-link-profile": "Perfil",
+		"subscriptions": "Suscripciones"
 	},
 	"account-selector": {
 		"type": {
@@ -42,23 +45,26 @@
 	},
 	"navigation-menu": {
 		"profit-sharing": "Encuentra los Mejores Traders",
-		"become-trader": "Ofrece tus Servicios de Trading"
+		"become-trader": "Ofrece tus Servicios de Trading",
+		"ping-us": "Chat de Ayuda"
 	},
 	"amount": "Cantidad",
 	"new-version": "Nueva versión, haz clic para actualizar",
 	"validation": {
-		"insufficient-amount": "Fondos insuficientes",
+		"insufficient-amount": "Excede el saldo disponible",
 		"invalid-value": "Valor inválido",
-		"negative-amount": "Debe ser >= 0",
+		"negative-amount": "Debe ser > 0",
 		"invalid-amount": "Debes indicar una cantidad",
-		"negative-zeroable-amount": "Debe ser > 0",
-		"max-decimals": "Por favor ingresa números que no tengan más de 8 decimales.",
-		"max-allowed-length": "Debe ser inferior a {{ maxLength }} caracteres",
+		"negative-zeroable-amount": "Debe ser >= 0",
+		"max-decimals": "Por favor ingrese números que no tengan más de {{maxDecimals}} decimales.",
+		"max-allowed-length": "No debe superar {{ maxLength }} caracteres",
 		"min-amount": "La cantidad mínima es {{amount}} {{coin}}.",
 		"insufficient-amount-min": "Cantidad mínima: {{ minValue }} {{ minValueCoin }}",
 		"invalid-characters": "Caracteres inválidos",
 		"letter-number": "Debe contener al menos una letra o un número",
-		"min-invest-amount-for-owner": "El saldo del propietario debe ser superior a {{minAmount}} {{minAmountCoin}}"
+		"min-invest-amount-for-owner": "El saldo del propietario debe ser superior a {{minAmount}} {{minAmountCoin}}",
+		"insufficient-amount-max": "Cantidad máxima: {{ maxValue }} {{ coin }}",
+		"2fa-invalid-format": "El código debe ser un número de 6 dígitos"
 	},
 	"back": "Volver",
 	"close": "Cerrar",
@@ -78,11 +84,11 @@
 	"type-to-confirm": "Escribe \"{{word}}\" para confirmar",
 	"ok": "OK",
 	"balance": {
-		"total": "Total",
-		"available": "Disponible",
+		"available": "Disponible:",
 		"deposit-funds": "Deposita Fondos",
 		"find-traders": "Encuentra traders en los que invertir",
-		"my-portfolio": "Mi Portafolio"
+		"my-portfolio": "Mi Portafolio",
+		"portfolio": "Portafolio:"
 	},
 	"follow-us": "Síguenos",
 	"portfolio": "Portafolio",
@@ -92,8 +98,15 @@
 			"description": "En el 1er depósito"
 		},
 		"referrals": {
-			"title": "Gana un {{commission}}%",
+			"title": "Gana {{commission}}%",
 			"description": "Invita Amigos"
 		}
+	},
+	"kyc-updated": "¡Estado de KYC actualizado!",
+	"coin": "Moneda",
+	"error-boundary": {
+		"title": "Algo salió mal",
+		"description-1": "<0>Actualizar esta página<\/0> podría ayudar. Si no lo hace, puedes ponerte en contacto con soporte",
+		"description-2": "O abandonar la sociedad industrial y mudarse <0>a una cabaña en el bosque<\/0>."
 	}
 }

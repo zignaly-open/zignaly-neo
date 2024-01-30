@@ -8,6 +8,7 @@ import {
 export enum TableId {
   Marketplace = 'marketplace',
   Referrals = 'referrals',
+  Investors = 'investors',
 }
 
 export type SettingsState = {

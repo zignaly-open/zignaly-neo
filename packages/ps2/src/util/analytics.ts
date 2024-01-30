@@ -1,5 +1,5 @@
 import Analytics, { AnalyticsInstance } from 'analytics';
-import * as Sentry from '@sentry/browser';
+// import * as Sentry from '@sentry/browser';
 import { SessionsTypes, UserData } from '../apis/user/types';
 import googleTagManager from '@analytics/google-tag-manager';
 import customerIo from '@analytics/customerio';
@@ -11,7 +11,7 @@ import { whitelabel } from '../whitelabel';
 let analytics: AnalyticsInstance | null = null;
 
 if (
-  process.env.NODE_ENV !== 'test' &&
+  typeof jest === 'undefined' &&
   process.env.REACT_APP_ENABLE_TRACKING === 'true'
 ) {
   const customerIoPlugin = customerIo({
@@ -28,16 +28,17 @@ if (
   analytics = Analytics({
     app: 'zignaly',
     plugins: [
-      googleTagManager({
-        containerId: process.env.REACT_APP_GTM_ID,
-      }),
+      whitelabel.tools?.google_tag_manager &&
+        googleTagManager({
+          containerId: whitelabel.tools?.google_tag_manager,
+        }),
       googleAnalytics({
         measurementIds: [process.env.REACT_APP_GA_ID],
       }),
       customerIoPlugin,
-      whitelabel.intercomId &&
+      whitelabel.tools?.intercom &&
         intercomPlugin({
-          appId: whitelabel.intercomId,
+          appId: whitelabel.tools?.intercom,
         }),
     ].filter(Boolean),
   });
@@ -57,7 +58,7 @@ export const trackNewSession = (
     if (window.intercomSettings) {
       window.intercomSettings.user_hash = intercomHash;
     }
-    Sentry.setUser({ email, id: userId });
+    // Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
       twq(userId).trackVerify();
@@ -69,7 +70,7 @@ export const trackNewSession = (
 };
 
 export const trackEndSession = () => {
-  Sentry.configureScope((scope) => scope?.setUser(null));
+  // Sentry.configureScope((scope) => scope?.setUser(null));
 };
 
 export const trackPage = () => {

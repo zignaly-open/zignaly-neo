@@ -15,7 +15,8 @@ import { Service } from '../../../../apis/service/types';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
-import { CenteredLoader, ZigButton, ZigCrossIcon } from '@zignaly-open/ui';
+import { CenteredLoader, ZigButton } from '@zignaly-open/ui';
+import { ZigCrossIcon } from '@zignaly-open/ui/icons';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { Link, generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
@@ -44,7 +45,7 @@ export const MobileMarketplaceAction = ({
   return (
     rowId === activeRow && (
       <ZigTableMobileActionRow safariHeight={93}>
-        <MarketplaceAction service={service} fullSizeInvested={false} />
+        <MarketplaceAction service={service} investedVariant={'mobile'} />
         <ZigButton
           size={'large'}
           variant={'outlined'}
@@ -78,7 +79,7 @@ export const MobileMarketplaceAction = ({
 const MarketplaceAction = ({
   service,
   prefixId = 'marketplace-table',
-  fullSizeInvested = true,
+  investedVariant,
   showRocket = false,
   showArrow = false,
   fullSizeInvest = true,
@@ -98,6 +99,8 @@ const MarketplaceAction = ({
   const investedAmount = investment
     ? new BigNumber(investment.invested).plus(investment.pending)
     : 0;
+  // Margin to keep arrow aligned with button, and button aligned with other columns
+  const subMargin = isAuthenticated && investedAmount ? 0 : '28px';
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -105,19 +108,25 @@ const MarketplaceAction = ({
         loadingSpinner
       ) : (
         <Suspense fallback={loadingSpinner}>
-          <Box display='flex' gap='25px' alignItems={'center'}>
+          <Box
+            display='flex'
+            gap='25px'
+            alignItems={'center'}
+            mt={showArrow ? subMargin : 0}
+          >
             <Box sx={{ minWidth: fullSizeInvest ? 170 : 115 }}>
               {isAuthenticated && investedAmount ? (
-                fullSizeInvested ? (
-                  <InvestedButtonBase
-                    prefixId={prefixId}
-                    service={traderService}
-                    investedAmount={investedAmount.toString()}
-                  />
-                ) : (
+                investedVariant === 'mobile' ? (
                   <MobileInvestedButton
                     service={traderService}
                     id={prefixId && `${prefixId}__edit-investment`}
+                    investedAmount={investedAmount.toString()}
+                  />
+                ) : (
+                  <InvestedButtonBase
+                    variant={investedVariant}
+                    prefixId={prefixId}
+                    service={traderService}
                     investedAmount={investedAmount.toString()}
                   />
                 )
@@ -140,7 +149,7 @@ const MarketplaceAction = ({
                   alignItems: 'flex-start',
                   display: 'flex',
                   width: '10px',
-                  mb: isAuthenticated && investedAmount ? 0 : '28px',
+                  mb: subMargin,
                 }}
                 id={`marketplace-table__link-${service.id}`}
               >

@@ -1,0 +1,24 @@
+{
+  "name": "@zignaly-open/ps2-wl-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
+    "dev": "nodemon --watch ./src -e ts exec 'npm start'"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.22"
+  },
+  "dependencies": {
+    "@types/express": "4.17.21",
+    "axios": "1.6.2",
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "serve-static": "1.15.0",
+    "ts-node": "10.9.2",
+    "typescript": "4.9.4",
+    "winston": "^3.11.0",
+    "winston-slack-webhook-transport": "^2.3.4"
+  }
+}

@@ -9,7 +9,6 @@ import {
   ZScoreRing,
   ZScoreRiskCategory,
   ZigTypography,
-  roundScorePct,
 } from '@zignaly-open/ui';
 import { useZScoreConfig } from './use';
 import { round } from 'lodash-es';
@@ -25,6 +24,10 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
     category: { maxZscore },
     stats,
   } = data?.info || { category: {} };
+  const statsAugmented = {
+    ...stats,
+    beatsMarket: scoreDetails?.profits.benchmark.gives > 0,
+  };
 
   const zScoreConfig = useZScoreConfig();
 
@@ -37,7 +40,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       case 'duration-day':
         return formatDuration({ days: value });
       case 'amount':
-        return '$' + formatCompactNumber(value, 0);
+        return '$' + formatCompactNumber(value, 2);
       default:
         return round(value, 2);
     }
@@ -48,19 +51,9 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
       const { items } = zScoreConfig[category];
       const details = scoreDetails[zScoreConfig[category].scoreCategoryId];
 
-      // Make sure the numbers total don't exceed the max due to rounding
-      const numbersMax = roundScorePct(
-        items.map((item) => details[item.id].ofMax),
-      );
-      const numbers = items.map((item, i) =>
-        details[item.id].gives > numbersMax[i]
-          ? numbersMax[i]
-          : details[item.id].gives,
-      );
-
       return (
         <Box display={'flex'} flexDirection={'column'} mt='3px'>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <div key={item.id}>
               <Box
                 display={'flex'}
@@ -71,7 +64,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   color='neutral200'
                   fontSize={14}
                   fontWeight={500}
-                  id={`zscore-modal__label-${category}`}
+                  id={`zscore-modal__label-${category}-${item.id}`}
                 >
                   {t(item.label)}
                   {':'}
@@ -81,16 +74,19 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   fontSize={15}
                   fontWeight={600}
                   ml='6px'
-                  id={`zscore-modal__value-${category}`}
+                  id={`zscore-modal__value-${category}-${item.id}`}
                 >
-                  {formatValue(stats[item.valueId] as number, item.valueType)}
+                  {formatValue(
+                    statsAugmented[item.valueId] as number,
+                    item.valueType,
+                  )}
                 </ZigTypography>
               </Box>
               <ZScoreBar
-                value={numbers[index]}
-                max={numbersMax[index]}
+                value={details[item.id].zscore}
+                max={details[item.id].maxZscore}
                 category={category}
-                id={`zscore-modal__bar-${category}`}
+                id={`zscore-modal__bar-${category}-${item.id}`}
               />
             </div>
           ))}
@@ -110,7 +106,9 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
     >
       {data && (
         <>
-          <ZigTypography textAlign='center'>{t('description')}</ZigTypography>
+          <ZigTypography textAlign='center' id={'zscore-modal__description'}>
+            {t('description')}
+          </ZigTypography>
           <Grid
             container
             columnSpacing={'22px'}
