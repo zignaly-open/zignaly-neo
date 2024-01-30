@@ -68,7 +68,7 @@ const InvestButton: React.FC<{
         onClick={onClickMakeInvestment}
         variant='contained'
         size={'large'}
-        disabled={maxReached || !service.activated}
+        disabled={maxReached || service.activated === false}
         sx={{
           flexDirection: 'row',
           gap: '5px',
@@ -77,7 +77,7 @@ const InvestButton: React.FC<{
         tooltip={
           maxReached
             ? t('invest-button.max-reached-tooltip')
-            : !service.activated
+            : service.activated === false
             ? t('error:access.deactivated-service')
             : null
         }

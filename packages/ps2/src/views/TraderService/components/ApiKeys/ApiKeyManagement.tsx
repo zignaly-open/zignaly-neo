@@ -27,7 +27,7 @@ const ApiKeyManagement: React.FC = () => {
   } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
   const { data: serviceData } = useServiceDetails(serviceId);
 
-  if (!serviceData?.activated) return <Deactivated />;
+  if (serviceData?.activated === false) return <Deactivated />;
 
   return (
     <PageWithHeaderContainer>

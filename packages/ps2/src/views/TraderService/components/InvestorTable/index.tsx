@@ -345,7 +345,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       }),
     ];
   }, [service]);
-  if (!service?.activated) return <Deactivated />;
+  if (service?.activated === false) return <Deactivated />;
 
   return (
     <LayoutContentWrapper
