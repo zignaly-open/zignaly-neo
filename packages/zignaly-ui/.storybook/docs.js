@@ -3,7 +3,8 @@ import { DocsContainer as BaseContainer } from "@storybook/addon-docs/blocks";
 import theme from "./theme";
 import { ThemeProvider } from "styled-components";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
-import { ChartGradients, getZignalyThemeExport } from "../src";
+import { getZignalyThemeExport } from "../src";
+import { ThemeChartGradients } from "../src/charts";
 import GlobalStyle from "@zignaly-open/ps2/src/styles";
 
 const { mui: darkMui, legacyStyledComponentsDoNotUse: dark } = getZignalyThemeExport("dark");
@@ -31,7 +32,7 @@ export const DocsContainer = ({ children, context }) => {
       <ThemeProvider theme={dark}>
         <ThemeProviderMui theme={darkMui}>
           <GlobalStyle darkMode />
-          <ChartGradients />
+          <ThemeChartGradients />
           {children}
         </ThemeProviderMui>
       </ThemeProvider>
