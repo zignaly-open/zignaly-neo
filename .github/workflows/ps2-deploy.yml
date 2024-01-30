@@ -69,6 +69,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_BASE_API: ${{ vars.PS2_BASE_API }}
+          envkey_WL_CACHE_TTL_OVERRIDE: ${{ vars.PS2_WL_CACHE_TTL_OVERRIDE }}
           envkey_PS2_ENV: ${{ inputs.deploy-env }}
           envkey_SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           directory: packages/ps2-wl-server
