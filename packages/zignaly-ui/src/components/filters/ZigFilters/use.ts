@@ -13,9 +13,9 @@ export const useFilteredCollection = <T extends object>(
   collection: T[],
   filters: ZigFiltersType,
   filtersDataMap?: (data: T) => object,
-) => {
+): T[] => {
   return useMemo(() => {
-    return collection.filter((data) => {
+    return (collection?.filter((data) => {
       const values = filtersDataMap ? filtersDataMap(data) : data;
       return filters?.every((filter) => {
         // Ignore filters with no column match
@@ -26,6 +26,6 @@ export const useFilteredCollection = <T extends object>(
           ? value.some((v) => filterData(filter, v))
           : filterData(filter, value);
       });
-    });
+    }) || []) as T[];
   }, [collection, filters, filtersDataMap]);
 };
