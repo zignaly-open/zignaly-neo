@@ -2,12 +2,8 @@ import React from 'react';
 import { useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Layout, Data, Inline, TypeText } from './styles';
-import {
-  Avatar,
-  ZigTypography,
-  ZigArrowBottomIcon,
-  ZigButton,
-} from '@zignaly-open/ui';
+import { Avatar, ZigTypography, ZigButton } from '@zignaly-open/ui';
+import { ZigArrowBottomIcon } from '@zignaly-open/ui/icons';
 import { useActiveExchange, useCurrentUser } from '../../../../apis/user/use';
 import AccountSelector from 'components/AccountSelector';
 

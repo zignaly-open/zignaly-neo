@@ -2,13 +2,13 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   createColumnHelper,
   PageContainer,
-  ZigDotsVerticalIcon,
   ZigDropdown,
   ZigInput,
   ZigSelect,
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
+import { ZigDotsVerticalIcon } from '@zignaly-open/ui/icons';
 import {
   useBanMutation,
   useDisable2FAMutation,

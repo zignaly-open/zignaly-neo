@@ -1,7 +1,8 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { trimZeros, ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
+import { trimZeros, ZigTypography } from '@zignaly-open/ui';
+import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
@@ -10,7 +11,7 @@ import { subMonths, subYears } from 'date-fns';
 import { numericFormatter } from 'react-number-format';
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
-  const { t, i18n } = useTranslation(['service', 'marketplace']);
+  const { t } = useTranslation(['service', 'marketplace']);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -235,9 +236,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
                 color={'neutral200'}
                 id={'service-profile__exchange'}
               >
-                {i18n.exists(`service:exchanges.${service.exchange}`)
-                  ? t(`exchanges.${service.exchange}`)
-                  : service.exchange}
+                {t(`common:${service.exchange}`)}
               </ZigTypography>
             </ZigTypography>
           )}

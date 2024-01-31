@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { ZigCoinIcon, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigPriceLabel, ZigTypography, ZigCoinIcon } from '@zignaly-open/ui';
 import React from 'react';
 
 export const AmountInvested = ({

@@ -3,11 +3,11 @@ import {
   MarginContainer,
   PageContainer,
   ZigButton,
-  ZigPlusIcon,
   ZigTab,
   ZigTabPanel,
   ZigTabs,
 } from '@zignaly-open/ui';
+import { ZigPlusIcon } from '@zignaly-open/ui/icons';
 import MyBalancesTable from './components/MyBalancesTable';
 import TransactionHistoryTable from './components/TransactionsHistoryTable';
 import BalanceAccountSelector from './components/BalanceAccountSelector';

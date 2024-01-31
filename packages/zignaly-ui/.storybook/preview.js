@@ -1,7 +1,7 @@
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { DocsContainer } from "@storybook/addon-docs/blocks";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
-import { ChartGradients } from "../src";
+import { ThemeChartGradients } from "../src/charts";
 import theme from "./theme";
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
@@ -20,7 +20,7 @@ const withStyledTheme = (storyFn) => {
     <ThemeProvider theme={dark.legacyStyledComponentsDoNotUse}>
       <ThemeProviderMui theme={dark.mui}>
         <GlobalStyle darkMode />
-        <ChartGradients />
+        <ThemeChartGradients />
         {storyFn()}
       </ThemeProviderMui>
     </ThemeProvider>

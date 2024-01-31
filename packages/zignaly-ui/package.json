@@ -3,10 +3,35 @@
   "version": "0.6.18",
   "description": "A library of interface resources designed by Zignaly.",
   "module": "./lib/packages/zignaly-ui/src/index.js",
-  "main": "./lib/cjs.js",
-  "types": "./lib/index.d.ts",
+  "main": "./lib/index.cjs",
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./icons": {
+      "import": "./lib/icons.js",
+      "require": "./lib/icons.cjs"
+    },
+    "./fonts": {
+      "import": "./lib/fonts.js",
+      "require": "./lib/fonts.cjs"
+    },
+    "./charts": {
+      "import": "./lib/charts.js",
+      "require": "./lib/charts.cjs"
+    },
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./lib/*",
+        "./lib/index.d.ts"
+      ]
+    }
   },
   "sideEffects": false,
   "scripts": {
@@ -86,6 +111,7 @@
     "lodash-es": "^4.17.21",
     "qrcode.react": "3.0.2",
     "react-device-detect": "^2.2.3",
+    "react-image-webp": "^0.8.0",
     "react-hook-form": "7.34.2",
     "react-loader-spinner": "6.0.0-0",
     "react-number-format": "^5.3.1",

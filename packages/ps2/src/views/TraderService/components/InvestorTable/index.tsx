@@ -3,18 +3,17 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { InvestorCounts } from './styles';
 import {
-  ZigUserIcon,
   ZigTypography,
   ChangeIndicator,
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
   ZigDropdown,
-  ZigDotsVerticalIcon,
-  ZigSearch,
+  ZigFilters,
   downloadTableCsv,
   ZigButton,
 } from '@zignaly-open/ui';
+import { ZigUserIcon, ZigDotsVerticalIcon } from '@zignaly-open/ui/icons';
 import {
   useTraderServiceInvestors,
   useServiceDetails,
@@ -38,6 +37,9 @@ import {
   connectionStateName,
 } from '../ConnectionStateLabel/types';
 import { OpenInNew } from '@mui/icons-material';
+import { useFilteredInvestors, useInvestorFilters } from './use';
+import { usePersistTable } from '../../../../apis/settings/use';
+import { TableId } from '../../../../apis/settings/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -90,6 +92,20 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const { t } = useTranslation('investors');
   const toast = useToast();
   const exchange = useActiveExchange();
+
+  const defaultFilters = useInvestorFilters(
+    investorsEndpoint?.data,
+    service?.successFee,
+  );
+  const tablePersist = usePersistTable(TableId.Investors, defaultFilters);
+
+  const filteredInvestors = useFilteredInvestors(
+    investorsEndpoint?.data,
+    tablePersist.filters,
+    service,
+    searchFilter,
+  );
+
   const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
@@ -333,11 +349,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
     <LayoutContentWrapper
       unmountOnRefetch
       endpoint={[investorsEndpoint, managementEndpoint, serviceDetailsEndpoint]}
-      content={([investors, management]: [
-        Investor[],
-        TraderServiceManagement,
-      ]) => {
-        const processedInvestorsList = investors.map((inv) => ({
+      content={([, management]: [Investor[], TraderServiceManagement]) => {
+        const processedInvestorsList = filteredInvestors.map((inv) => ({
           ...inv,
           successFee: inv.accountType === 'owner' ? '0' : management.successFee,
         }));
@@ -345,48 +358,58 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         return (
           <PageWithHeaderContainer>
             <InvestorCounts>
-              <ZigUserIcon
-                width={'17px'}
-                height={'20px'}
-                color={theme.palette.backgrounds.investorsIcon}
-                id={`service-investors__investors-number-icon`}
-              />
-              <ZigTypography
-                variant={'h3'}
-                color={'contrasting'}
-                id={`service-investors__investors-number`}
-              >
-                {t('number-of-investors', {
-                  count: investors?.length,
-                })}
-              </ZigTypography>
               <Box
                 display={'flex'}
                 flex={1}
                 justifyContent={'flex-end'}
                 gap={2}
               >
-                <ZigSearch
-                  value={searchFilter}
-                  onChange={setSearchFilter}
-                  id={`service-investors__search`}
-                />
-
-                <ZigButton
-                  id={`service-investors__export`}
-                  onClick={() => exporter(processedInvestorsList)}
-                  variant={'text'}
-                  sx={{
-                    '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                      fill: theme.palette.links,
-                    },
-                  }}
-                  endIcon={
-                    <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                <ZigFilters
+                  leftComponent={
+                    <Box gap={'12px'} display={'flex'} alignItems={'center'}>
+                      <ZigUserIcon
+                        width={'17px'}
+                        height={'20px'}
+                        color={theme.palette.backgrounds.investorsIcon}
+                        id={`service-investors__investors-number-icon`}
+                      />
+                      <ZigTypography
+                        variant={'h3'}
+                        color={'contrasting'}
+                        id={`service-investors__investors-number`}
+                      >
+                        {t('number-of-investors', {
+                          count: filteredInvestors?.length,
+                        })}
+                      </ZigTypography>
+                    </Box>
                   }
-                >
-                  {t('action:export')}
-                </ZigButton>
+                  rightComponent={
+                    <ZigButton
+                      id={`service-investors__export`}
+                      onClick={() => exporter(processedInvestorsList)}
+                      variant={'text'}
+                      sx={{
+                        '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                          fill: theme.palette.links,
+                        },
+                      }}
+                      endIcon={
+                        <OpenInNew
+                          sx={{ width: '17.33px', height: '17.33px' }}
+                        />
+                      }
+                    >
+                      {t('action:export')}
+                    </ZigButton>
+                  }
+                  onChange={tablePersist.filterTable}
+                  filters={tablePersist.filters}
+                  defaultFilters={defaultFilters}
+                  onSearchChange={setSearchFilter}
+                  search={searchFilter}
+                  sx={{ mb: 0 }}
+                />
               </Box>
             </InvestorCounts>
 

@@ -1,10 +1,7 @@
 import { InfoOutlined, Verified } from '@mui/icons-material';
 import { Box, Tooltip, useTheme } from '@mui/material';
-import {
-  ZigPriceLabel,
-  ZigTypography,
-  ZigUserFilledIcon,
-} from '@zignaly-open/ui';
+import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigUserFilledIcon } from '@zignaly-open/ui/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import BoostChip from '../BoostChip';

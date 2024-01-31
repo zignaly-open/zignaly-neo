@@ -29,7 +29,7 @@ const ServiceProfile: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const isOwner = useIsServiceOwner(serviceId);
 
-  if (!isAuthenticated && isFeatureOn(Features.NoPublicMarketplace)) {
+  if (!isAuthenticated && isFeatureOn(Features.LoginOnlyAccess)) {
     return (
       <Navigate
         to={getNotLoggedInNavigationRoute()}

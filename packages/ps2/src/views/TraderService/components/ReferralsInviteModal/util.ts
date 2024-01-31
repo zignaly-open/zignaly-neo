@@ -4,13 +4,13 @@ export const MAX_FEES_AMOUNT = 100000;
 
 export const getTraderBoost = (
   serviceCommission: number,
-  zignalyCommission = whitelabel.defaultSuccessFee,
+  zignalyCommission = whitelabel.zignalySuccessFee,
 ) => {
-  if (zignalyCommission < whitelabel.defaultSuccessFee) return 0;
+  if (zignalyCommission < whitelabel.zignalySuccessFee) return 0;
   return (
-    serviceCommission / whitelabel.defaultSuccessFee +
-    (zignalyCommission - whitelabel.defaultSuccessFee) /
-      whitelabel.defaultSuccessFee
+    serviceCommission / whitelabel.zignalySuccessFee +
+    (zignalyCommission - whitelabel.zignalySuccessFee) /
+      whitelabel.zignalySuccessFee
   );
 };
 
@@ -19,7 +19,7 @@ export const getServiceCommission = (
   zignalyCommission: number,
 ) => {
   return (
-    whitelabel.defaultSuccessFee *
+    whitelabel.zignalySuccessFee *
     getTraderBoost(serviceCommission, zignalyCommission)
   );
 };
@@ -45,6 +45,6 @@ export const getMaxEarnings = (
   );
   return (
     MAX_FEES_AMOUNT *
-      (((whitelabel.defaultSuccessFee / 100) * boostedCommission) / 100) || 0
+      (((whitelabel.zignalySuccessFee / 100) * boostedCommission) / 100) || 0
   );
 };

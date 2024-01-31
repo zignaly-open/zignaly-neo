@@ -1,12 +1,12 @@
 import { MarketplaceService } from '../../../../apis/marketplace/types';
-import { ZigChartAxisFormatType } from '@zignaly-open/ui';
+import type { ZigChartAxisFormat } from '@zignaly-open/ui/charts';
 
 export type MarketplaceTableDataType = {
   service: MarketplaceService;
   actionService: MarketplaceService;
   '30d': {
     pnl30d: string;
-    data: ZigChartAxisFormatType[] | number[];
+    data: ZigChartAxisFormat[] | number[];
   };
   '90d': {
     roi: string;

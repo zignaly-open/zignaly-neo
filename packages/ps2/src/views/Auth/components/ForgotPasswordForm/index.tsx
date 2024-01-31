@@ -102,7 +102,7 @@ const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
           >
             {t('reset-password.send-instructions')}
           </ZigButton>
-          {!isFeatureOn(Features.HideSignup) && (
+          {!isFeatureOn(Features.LoginOnlyAccess) && (
             <Box display='flex' flexDirection='column' alignItems='center'>
               <ZigTypography variant='body2'>
                 {t('reset-password.found-password')}

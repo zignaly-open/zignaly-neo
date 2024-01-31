@@ -111,7 +111,7 @@ const InvestInYourServiceForm: React.FC<{
           serviceLogo: '',
           successFee: service.successFee,
           serviceName: service.serviceName,
-          zglyFee: whitelabel.defaultSuccessFee,
+          zglyFee: whitelabel.zignalySuccessFee,
         }}
       />
 
