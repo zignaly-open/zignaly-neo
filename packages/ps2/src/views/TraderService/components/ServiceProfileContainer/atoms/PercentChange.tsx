@@ -43,7 +43,7 @@ const PercentChange: React.FC<{
     // todo: maybe replace with ChangeIndicator
     <PercentChangeContainer component={'div'} color={color} id={id}>
       <ZigTypography variant={variant}>
-        {+value > 19 ? (
+        {+value > 0 ? (
           <ArrowDropUp
             sx={{
               color: (theme) => theme.palette[color],
