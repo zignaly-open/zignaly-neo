@@ -56,7 +56,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
-  const { exchangeType } = useActiveExchange();
+  const { exchangeType } = useActiveExchange()!;
   const toast = useToast();
   const trackEvent = useTrackEvent();
   const navigate = useNavigate();

@@ -50,7 +50,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const managementEndpoint = useTraderServiceManagement(serviceId);
 
   const { data: service } = serviceDetailsEndpoint;
-
+  const exchange = useActiveExchange();
   const exporter = useCallback(
     (investors: Investor[]) =>
       downloadTableCsv(
@@ -65,8 +65,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           r.sfOwnerAt,
           getServiceTotalFee(
             r.ownerSuccessFee,
-            service?.zglySuccessFee,
-            r.account_id === exchange.internalId || r.accountType === 'owner',
+            service?.zglySuccessFee || 0,
+            r.account_id === exchange?.internalId || r.accountType === 'owner',
           ),
           t(connectionStateName[r.accountType]),
         ]),
@@ -91,7 +91,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
-  const exchange = useActiveExchange();
 
   const defaultFilters = useInvestorFilters(
     investorsEndpoint?.data,
@@ -117,7 +116,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             original: { account_id: accountId },
           },
         }) =>
-          accountId === exchange.internalId ? (
+          accountId === exchange?.internalId ? (
             <Tooltip title={t('it-is-you')}>
               <ZigTypography id={`service-investors-table__email-${accountId}`}>
                 {getValue()}
@@ -135,7 +134,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             original: { account_id: accountId },
           },
         }) =>
-          accountId === exchange.internalId ? (
+          accountId === exchange?.internalId ? (
             <Tooltip title={t('it-is-you')}>
               <ZigTypography
                 id={`service-investors-table__userId-${accountId}`}
@@ -223,7 +222,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           getServiceTotalFee(
             row.ownerSuccessFee,
             service?.zglySuccessFee,
-            row.account_id === exchange.internalId ||
+            row.account_id === exchange?.internalId ||
               row.accountType === 'owner',
           ),
         {
@@ -243,7 +242,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               componentsProps={{ tooltip: { sx: { maxWidth: '310px' } } }}
               title={
                 <Box whiteSpace={'nowrap'}>
-                  {accountId === exchange.internalId
+                  {accountId === exchange?.internalId
                     ? t('it-is-you-0-fee')
                     : t(
                         `success-fee-explainer${
@@ -300,7 +299,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             },
           },
         }) =>
-          accountId !== exchange.internalId &&
+          accountId !== exchange?.internalId &&
           accountType !== ConnectionStateLabelId.DISCONNECTED &&
           accountType !== 'owner' && (
             <ZigDropdown

@@ -44,7 +44,7 @@ function WithdrawForm({
   });
   const { data: coins, isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
-  const { internalId } = useActiveExchange();
+  const { internalId } = useActiveExchange()!;
   const [withdraw, withdrawStatus] = useWithdrawMutation();
 
   const checkWithdraw = useCheckWithdraw({
