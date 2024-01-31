@@ -84,7 +84,11 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         </Box>
         <Box display={'flex'} flexDirection={'column'}>
           <Box position={'relative'} width={88} height={38}>
-            <ChartImage width={'100%'} height={'100%'} />
+            <ChartImage
+              width={'100%'}
+              height={'100%'}
+              id={`service-card__pnl90-chart-${service.id}`}
+            />
             <ChangeIndicatorContainer>
               <ChangeIndicator
                 type='graph'
