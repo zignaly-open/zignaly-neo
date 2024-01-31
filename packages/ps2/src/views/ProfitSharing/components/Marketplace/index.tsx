@@ -203,11 +203,9 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
             }),
           ]
         : []),
-      createPnLColumn(365, false),
       createPnLColumn(180, false),
       createPnLColumn(90, false),
       createPnLColumn(30, lg || (!isZScoreOn && md)),
-      createPnLColumn(7, false),
       ...(!lg && (sm || (!isZScoreOn && !md))
         ? [
             columnHelper.accessor((row) => +row.invested, {
