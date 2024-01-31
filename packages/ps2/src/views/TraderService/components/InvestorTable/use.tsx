@@ -27,10 +27,12 @@ export const useInvestorFilters = (
       [
         {
           type: 'slider',
-          value: [0, serviceSuccessFee],
+          value: [null, null],
           label: t('filters.success-fee'),
           min: 0,
           max: serviceSuccessFee,
+          allowNoMin: true,
+          allowNoMax: true,
           id: 'ownerSuccessFee',
           primary: true,
         },
