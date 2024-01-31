@@ -99,7 +99,10 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     query: ({ locale }) => ({
       url: `/user/save_locale`,
       method: 'POST',
-      body: { locale },
+      body: {
+        // this should be redundant because we only have 2-letter lcoales
+        locale: locale?.slice(0, 2),
+      },
     }),
   }),
 
