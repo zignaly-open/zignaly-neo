@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { InvestorCounts } from './styles';
@@ -343,9 +343,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       }),
     ];
   }, [service]);
-  useEffect(() => {
-    tablePersist.filterTable(defaultFilters);
-  }, [serviceId]);
 
   return (
     <LayoutContentWrapper
