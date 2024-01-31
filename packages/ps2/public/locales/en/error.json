@@ -222,6 +222,7 @@
       "action": "Review KYC"
     }
   },
+  "missing-exchange": "There is an issue with your account. Please reach our support",
   "something-went-wrong": "Something went wrong",
   "404": {
     "title": "Page not found",

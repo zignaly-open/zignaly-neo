@@ -26,6 +26,7 @@ import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
 import ZigErrorBoundary from './util/ZigErrorBoundary';
 import './util/i18n/i18nextWhitelabel';
+import MissingExchangeChecker from 'components/Navigation/Checkers/MissingExchangeChecker';
 
 // import * as Sentry from '@sentry/browser';
 // TODO: use Sentry
@@ -91,6 +92,7 @@ function App() {
             <Tracker />
             <UpdateChecker />
             <UserKycChecker />
+            <MissingExchangeChecker />
             <DateLocaleFixer />
             <ThemeChartGradients />
             <Router />
