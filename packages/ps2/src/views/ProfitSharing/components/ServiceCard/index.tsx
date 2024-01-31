@@ -62,7 +62,6 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             value={
               over1Year ? service.pnlPercent365t : +service.pnlPercent90t * 4
             }
-            hideNegativeSign
             indicatorPostion='left'
           />
           <Box
@@ -92,8 +91,8 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
           </Box>
         </Box>
         <Box display={'flex'} flexDirection={'column'}>
-          <Box position={'relative'}>
-            <ZigChartMiniSuspensed
+          <Box position={'relative'} width={88} height={32}>
+            {/* <ZigChartMiniSuspensed
               id={prefixId && `${prefixId}__card-chart-${service.id}`}
               data={[0, ...service.sparklines]}
               midLine={false}
@@ -105,7 +104,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
               }}
               sx={{ mb: '4px', opacity: 0.6 }}
               stub={false}
-            />
+            /> */}
             <ChangeIndicatorContainer>
               <ChangeIndicator
                 type='graph'
@@ -115,7 +114,6 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
                   fontSize: '16px',
                   lineHeight: '28px',
                 }}
-                hideNegativeSign
                 indicatorPostion='left'
                 value={service.pnlPercent30t}
               />

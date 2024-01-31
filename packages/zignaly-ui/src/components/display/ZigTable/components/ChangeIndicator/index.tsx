@@ -2,9 +2,9 @@ import React from "react";
 import { NumericFormat } from "react-number-format";
 import { useTheme } from "styled-components";
 import BigNumber from "bignumber.js";
-import { Layout, Row, Container, Indicator, Subtitle, Inline, ValueIndicator } from "./styles";
+import { Container, Indicator, Layout, ValueIndicator } from "./styles";
 import { ChangeIndicatorProps } from "./types";
-import { Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
 
@@ -37,7 +37,6 @@ const ChangeIndicator = ({
   labelTooltip = "",
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
-  hideNegativeSign = false,
   indicatorPostion = "right",
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
@@ -54,18 +53,22 @@ const ChangeIndicator = ({
       : theme.palette.redGraphOrError;
 
     return (
-      <Inline>
+      <Box display="flex" justifyContent={"center"} alignItems={"center"}>
         <ValueIndicator
           variant={type === "graph" ? "body2" : "body1"}
           color={color}
           smallPct={smallPct && type !== "only_number" && !isNil(value)}
+          style={style}
         >
           {!isZero && type === "graph" && indicatorPostion === "left" && (
-            <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
+            <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />
           )}
           <NumericFormat
-            style={style}
-            value={adjustNumber(bigNumberValue, decimalScale, hideNegativeSign).toFixed()}
+            value={adjustNumber(
+              bigNumberValue,
+              decimalScale,
+              type === "graph" && indicatorPostion === "left",
+            ).toFixed()}
             displayType={"text"}
             suffix={type === "only_number" || smallPct ? "" : "%"}
             thousandSeparator={","}
@@ -73,37 +76,33 @@ const ChangeIndicator = ({
             fixedDecimalScale={stableCoinOperative}
             id={id}
           />
+          {!isZero && type === "graph" && indicatorPostion === "right" && (
+            <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />
+          )}
         </ValueIndicator>
-        {!isZero && type === "graph" && indicatorPostion === "right" && (
-          <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
-        )}
-      </Inline>
+      </Box>
     );
   };
 
   return (
-    <Layout>
-      <Container>
-        <Tooltip title={labelTooltip}>
-          <Row>
-            {!isNaN(+value) ? (
-              <>
-                {renderIndicator()}
-                {label && (
-                  <Subtitle variant="caption" color="neutral400">
-                    <>{label}</>
-                  </Subtitle>
-                )}
-              </>
-            ) : (
-              <ZigTypography variant={"body2"} color={"neutral400"}>
-                -
+    <Tooltip title={labelTooltip}>
+      <Box justifyContent={"center"}>
+        {!isNaN(+value) ? (
+          <>
+            {renderIndicator()}
+            {label && (
+              <ZigTypography display={"block"} variant="caption" color="neutral400">
+                <>{label}</>
               </ZigTypography>
             )}
-          </Row>
-        </Tooltip>
-      </Container>
-    </Layout>
+          </>
+        ) : (
+          <ZigTypography variant={"body2"} color={"neutral400"}>
+            -
+          </ZigTypography>
+        )}
+      </Box>
+    </Tooltip>
   );
 };
 

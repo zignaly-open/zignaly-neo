@@ -40,9 +40,10 @@ const PercentChange: React.FC<{
     );
 
   return tooltipWrap(
+    // todo: maybe replace with ChangeIndicator
     <PercentChangeContainer component={'div'} color={color} id={id}>
       <ZigTypography variant={variant}>
-        {+value > 0 ? (
+        {+value > 19 ? (
           <ArrowDropUp
             sx={{
               color: (theme) => theme.palette[color],
