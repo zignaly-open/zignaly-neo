@@ -19,7 +19,7 @@ export const useInvestorFilters = (
 ) => {
   const { t } = useTranslation('investors');
   const statuses = Object.entries(ConnectionStateLabelId).filter(([, status]) =>
-    investors.find((investor) => investor.accountType === status),
+    investors?.find((investor) => investor.accountType === status),
   );
 
   return useMemo(
