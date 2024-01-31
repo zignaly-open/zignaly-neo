@@ -1,7 +1,7 @@
 import { Box, Tooltip } from '@mui/material';
 import {
   ChangeIndicator,
-  ZigCalendar1MIcon,
+  ZigCalendar3MIcon,
   ZigRisk,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -10,22 +10,19 @@ import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import MarketplaceAction from '../MarketplaceAction';
-import {
-  Card,
-  ButtonContainer,
-  StyledServiceName,
-  ChangeIndicatorContainer,
-} from './styles';
+import { Card, StyledServiceName, ChangeIndicatorContainer } from './styles';
 import { ServiceCardProps } from './types';
-import ZigChartMiniSuspensed from 'components/ZigChartMiniSuspensed';
 import { InfoOutlined } from '@mui/icons-material';
 import { differenceInDays } from 'date-fns';
 import { ZigCalendar1YIcon } from '@zignaly-open/ui';
+import { ReactComponent as ChartRed } from 'images/chart-red.svg';
+import { ReactComponent as ChartGreen } from 'images/chart-green.svg';
 
 const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation('marketplace');
   const over1Year =
     differenceInDays(new Date(), new Date(service.createdAt)) > 365;
+  const ChartImage = +service.pnlPercent90t > 0 ? ChartGreen : ChartRed;
 
   return (
     <Card>
@@ -91,31 +88,19 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
           </Box>
         </Box>
         <Box display={'flex'} flexDirection={'column'}>
-          <Box position={'relative'} width={88} height={32}>
-            {/* <ZigChartMiniSuspensed
-              id={prefixId && `${prefixId}__card-chart-${service.id}`}
-              data={[0, ...service.sparklines]}
-              midLine={false}
-              height={32}
-              width={88}
-              gradientVariant='card'
-              chartProps={{
-                padding: 0,
-              }}
-              sx={{ mb: '4px', opacity: 0.6 }}
-              stub={false}
-            /> */}
+          <Box position={'relative'} width={88} height={38}>
+            <ChartImage width={'100%'} height={'100%'} />
             <ChangeIndicatorContainer>
               <ChangeIndicator
                 type='graph'
                 decimalScale={1}
-                id={`service-card__pnl30-${service.id}`}
+                id={`service-card__pnl90-${service.id}`}
                 style={{
                   fontSize: '16px',
                   lineHeight: '28px',
                 }}
                 indicatorPostion='left'
-                value={service.pnlPercent30t}
+                value={service.pnlPercent90t}
               />
             </ChangeIndicatorContainer>
           </Box>
@@ -124,27 +109,26 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             alignItems={'center'}
             justifyContent={'center'}
             gap={1}
+            pl='14px'
           >
-            <ZigCalendar1MIcon fontSize='19px' />
+            <ZigCalendar3MIcon fontSize='19px' />
             <ZigTypography
               variant='h5'
               color={'neutral100'}
               mt='2px'
-              id={`service-card__pnl30-label-${service.id}`}
+              id={`service-card__pnl90-label-${service.id}`}
             >
               {t('card.pnl')}
             </ZigTypography>
           </Box>
         </Box>
       </Box>
-      <ButtonContainer>
-        <MarketplaceAction
-          service={service}
-          prefixId={prefixId}
-          showRocket
-          investedVariant='button'
-        />
-      </ButtonContainer>
+      <MarketplaceAction
+        service={service}
+        prefixId={prefixId}
+        showRocket
+        investedVariant='button'
+      />
     </Card>
   );
 };

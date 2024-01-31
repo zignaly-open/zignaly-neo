@@ -2,18 +2,22 @@ import React from "react";
 import { NumericFormat } from "react-number-format";
 import { useTheme } from "styled-components";
 import BigNumber from "bignumber.js";
-import { Container, Indicator, Layout, ValueIndicator } from "./styles";
+import { Indicator, ValueIndicator } from "./styles";
 import { ChangeIndicatorProps } from "./types";
 import { Box, Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
 
-// Fix 1 decimal issue making 1.95 until 1.99 to be 2.0 instead of 2
+// Fix for react-number-format not showing .0 decimal
 // https://github.com/s-yadav/react-number-format/issues/820
 const adjustDecimals = (value: BigNumber, decimals: number) => {
   const decimalPart = value.abs().mod(1);
-
-  if (decimals == 1 && decimalPart.gt(0.95)) return 0;
+  if (decimals == 1) {
+    // Fix for .95 until .99 rounded as .0 instead of integer
+    if (decimalPart.gt(0.95)) return 0;
+    // Fix for .01 until .05 rounded as .0 instead of integer
+    else if (decimalPart.lt(0.05)) return 0;
+  }
 
   return decimals;
 };
@@ -59,6 +63,7 @@ const ChangeIndicator = ({
           color={color}
           smallPct={smallPct && type !== "only_number" && !isNil(value)}
           style={style}
+          whiteSpace={"nowrap"}
         >
           {!isZero && type === "graph" && indicatorPostion === "left" && (
             <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />

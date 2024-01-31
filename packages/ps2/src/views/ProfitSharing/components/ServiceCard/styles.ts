@@ -38,15 +38,9 @@ export const Card = styled(Box)`
   text-align: center;
 `;
 
-export const ButtonContainer = styled(Box)`
-  > div > div > div > div {
-    max-height: 66px;
-  }
-`;
-
 export const ChangeIndicatorContainer = styled(Box)`
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 14px;
   right: 0;
 `;
