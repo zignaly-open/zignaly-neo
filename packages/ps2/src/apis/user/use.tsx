@@ -119,7 +119,8 @@ export const useSignup = (): [
       try {
         const user = await signup({
           ...payload,
-          locale: i18n.language,
+          // this should be redundant because we only have 2-letter locales
+          locale: i18n.language?.slice(0, 2),
         }).unwrap();
         await startSession({ ...user, emailUnconfirmed: true });
       } finally {
