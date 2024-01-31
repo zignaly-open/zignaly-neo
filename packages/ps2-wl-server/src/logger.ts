@@ -1,6 +1,7 @@
 import winston from 'winston';
 import SlackHook from 'winston-slack-webhook-transport';
-import { SLACK_WEBHOOK, PS2_ENV } from './constants';
+import WinstonLimit from './winston-limit';
+import { SLACK_WEBHOOK, PS2_ENV, SLACK_LOG_THROTTLE } from './constants';
 
 const logger = winston.createLogger({
   format: winston.format.combine(
@@ -14,9 +15,12 @@ const logger = winston.createLogger({
 
 SLACK_WEBHOOK &&
   logger.add(
-    new SlackHook({
+    new WinstonLimit({
       level: 'warn',
-      webhookUrl: SLACK_WEBHOOK,
+      timeout: SLACK_LOG_THROTTLE,
+      transport: new SlackHook({
+        webhookUrl: SLACK_WEBHOOK,
+      }),
     }),
   );
 
