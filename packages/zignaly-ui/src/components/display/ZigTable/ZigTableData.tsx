@@ -284,16 +284,9 @@ function ZigTableData<T extends object>({
               px={2}
               id={prefixId && `${prefixId}-table__pages`}
             >
-              sdfvsdfv
-              <Trans
-                i18nKey="myKey" // optional -> fallbacks to defaults if not provided
-                defaults="hello <italic>beautiful</italic> <bold>{{what}}</bold>" // optional defaultValue
-                values={{ what: "world" }}
-                components={{ italic: <i />, bold: <strong /> }}
-              />
               <Trans
                 t={t}
-                i18nKey={"tabsvdfvsdfvsdfvsdfvle:page-x-of-all"}
+                i18nKey={"table:page-x-of-all"}
                 defaults="<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>"
                 values={{
                   currentPage: table.getState().pagination.pageIndex + 1,
@@ -355,9 +348,7 @@ function ZigTableData<T extends object>({
                 onChange={table.setPageSize}
               />
             </SmallSelectWrapper>
-            <ZigTypography color="neutral300">
-              items {t("common:infinitely-better", { defaultValue: "Suka blyat" })}
-            </ZigTypography>
+            <ZigTypography color="neutral300">items</ZigTypography>
           </Box>
         </Box>
       )}
