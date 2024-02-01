@@ -39,7 +39,7 @@ letterMapping = {
 
 const messWithString = (string) =>
   string.replace(
-    /(^|\}\})(.*?)(\{\{|$)/gi,
+    /(^|\}\}|\>)(.*?)(\{\{|\<|$)/gi,
     (_, open, match, close) =>
       open +
       match
