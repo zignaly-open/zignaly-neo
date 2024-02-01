@@ -182,24 +182,24 @@ const ZigFilters = ({
         gap={1.5}
         ref={rightRef}
       >
-        <>
-          {rightComponent}
+        <Box
+          sx={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            bottom: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
           {search !== undefined && onSearchChange && md && (
-            <Box mr={"42px"}>
-              <ZigSearch
-                value={search}
-                onChange={onSearchChange}
-                sx={{
-                  position: "absolute",
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                }}
-                id={`${prefixId}__search`}
-              />
+            <Box mr={"10px"}>
+              <ZigSearch value={search} onChange={onSearchChange} id={`${prefixId}__search`} />
             </Box>
           )}
-        </>
+          {rightComponent}
+        </Box>
         {!md && secondaryFilters.length > 0 && (
           <MultiFiltersButton
             resetFilters={resetSecondaryFilters}
