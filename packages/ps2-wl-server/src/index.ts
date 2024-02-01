@@ -16,11 +16,11 @@ This is just one of the options along with going full SSR (nextjs, likely).
 If you still see this in the code, it means we had good business reasons to choose it over SSR
 
 */
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import serveStatic from 'serve-static';
 import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
-import { BUILD_PATH, PS2_ENV } from './constants';
+import { BASE_API, BUILD_PATH, PS2_ENV } from './constants';
 import logger from './logger';
 import runEnvChecks from './checks';
 
@@ -37,6 +37,16 @@ runEnvChecks();
 
 const port = 2000;
 const server = express();
+
+server.use(
+  '/report/:token',
+  (req: Request, res: Response, next: NextFunction) => {
+    const { token } = req.params;
+    if (/^[a-z\d]{10,}$/i.test(token)) {
+      res.redirect(`${BASE_API}report/${req.params.token}`);
+    } else next();
+  },
+);
 
 server.use('/index.html', serveNewIndexHtml);
 server.use('/manifest.json', serveNewManifestJson);

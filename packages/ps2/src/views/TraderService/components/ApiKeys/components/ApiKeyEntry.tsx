@@ -21,11 +21,14 @@ import {
 import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
 import EditIcon from '@mui/icons-material/Edit';
+import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../../util';
+import { useServiceDetails } from '../../../../../apis/service/use';
 
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const { t, i18n } = useTranslation(['management', 'action']);
   const { serviceId } = useParams();
   const refetchIfDesynchronized = useRefetchIfDesynchronizedState();
+  const { data: serviceData } = useServiceDetails(serviceId);
   const { showModal } = useZModal();
   const askConfirm = useZTypeWordConfirm();
   const toast = useToast();
@@ -121,12 +124,20 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
             startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
             variant={'outlined'}
+            {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+              serviceData?.exchange,
+              t,
+            )}
           >
             {t('action:edit')}
           </ZigButton>
           <ZigButton
             id={`service-api__api-key-delete-${apiKey.id}`}
             sx={{ mr: 2 }}
+            {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+              serviceData?.exchange,
+              t,
+            )}
             onClick={() =>
               askConfirm({
                 title: t('api-keys.delete-title', {

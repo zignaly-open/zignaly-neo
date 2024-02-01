@@ -9,7 +9,7 @@ import {
   createColumnHelper,
   ZigTablePriceLabel,
   ZigDropdown,
-  ZigSearch,
+  ZigFilters,
   downloadTableCsv,
   ZigButton,
 } from '@zignaly-open/ui';
@@ -37,6 +37,9 @@ import {
   connectionStateName,
 } from '../ConnectionStateLabel/types';
 import { OpenInNew } from '@mui/icons-material';
+import { useFilteredInvestors, useInvestorFilters } from './use';
+import { usePersistTable } from '../../../../apis/settings/use';
+import { TableId } from '../../../../apis/settings/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -47,7 +50,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const managementEndpoint = useTraderServiceManagement(serviceId);
 
   const { data: service } = serviceDetailsEndpoint;
-
+  const exchange = useActiveExchange();
   const exporter = useCallback(
     (investors: Investor[]) =>
       downloadTableCsv(
@@ -62,8 +65,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           r.sfOwnerAt,
           getServiceTotalFee(
             r.ownerSuccessFee,
-            service?.zglySuccessFee,
-            r.account_id === exchange.internalId || r.accountType === 'owner',
+            service?.zglySuccessFee || 0,
+            r.account_id === exchange?.internalId || r.accountType === 'owner',
           ),
           t(connectionStateName[r.accountType]),
         ]),
@@ -88,7 +91,20 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
-  const exchange = useActiveExchange();
+
+  const defaultFilters = useInvestorFilters(
+    investorsEndpoint?.data,
+    service?.successFee,
+  );
+  const tablePersist = usePersistTable(TableId.Investors, defaultFilters);
+
+  const filteredInvestors = useFilteredInvestors(
+    investorsEndpoint?.data,
+    tablePersist.filters,
+    service,
+    searchFilter,
+  );
+
   const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
@@ -100,7 +116,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             original: { account_id: accountId },
           },
         }) =>
-          accountId === exchange.internalId ? (
+          accountId === exchange?.internalId ? (
             <Tooltip title={t('it-is-you')}>
               <ZigTypography id={`service-investors-table__email-${accountId}`}>
                 {getValue()}
@@ -118,7 +134,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             original: { account_id: accountId },
           },
         }) =>
-          accountId === exchange.internalId ? (
+          accountId === exchange?.internalId ? (
             <Tooltip title={t('it-is-you')}>
               <ZigTypography
                 id={`service-investors-table__userId-${accountId}`}
@@ -206,7 +222,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           getServiceTotalFee(
             row.ownerSuccessFee,
             service?.zglySuccessFee,
-            row.account_id === exchange.internalId ||
+            row.account_id === exchange?.internalId ||
               row.accountType === 'owner',
           ),
         {
@@ -226,7 +242,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               componentsProps={{ tooltip: { sx: { maxWidth: '310px' } } }}
               title={
                 <Box whiteSpace={'nowrap'}>
-                  {accountId === exchange.internalId
+                  {accountId === exchange?.internalId
                     ? t('it-is-you-0-fee')
                     : t(
                         `success-fee-explainer${
@@ -283,7 +299,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             },
           },
         }) =>
-          accountId !== exchange.internalId &&
+          accountId !== exchange?.internalId &&
           accountType !== ConnectionStateLabelId.DISCONNECTED &&
           accountType !== 'owner' && (
             <ZigDropdown
@@ -332,11 +348,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
     <LayoutContentWrapper
       unmountOnRefetch
       endpoint={[investorsEndpoint, managementEndpoint, serviceDetailsEndpoint]}
-      content={([investors, management]: [
-        Investor[],
-        TraderServiceManagement,
-      ]) => {
-        const processedInvestorsList = investors.map((inv) => ({
+      content={([, management]: [Investor[], TraderServiceManagement]) => {
+        const processedInvestorsList = filteredInvestors.map((inv) => ({
           ...inv,
           successFee: inv.accountType === 'owner' ? '0' : management.successFee,
         }));
@@ -344,48 +357,58 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         return (
           <PageWithHeaderContainer>
             <InvestorCounts>
-              <ZigUserIcon
-                width={'17px'}
-                height={'20px'}
-                color={theme.palette.backgrounds.investorsIcon}
-                id={`service-investors__investors-number-icon`}
-              />
-              <ZigTypography
-                variant={'h3'}
-                color={'contrasting'}
-                id={`service-investors__investors-number`}
-              >
-                {t('number-of-investors', {
-                  count: investors?.length,
-                })}
-              </ZigTypography>
               <Box
                 display={'flex'}
                 flex={1}
                 justifyContent={'flex-end'}
                 gap={2}
               >
-                <ZigSearch
-                  value={searchFilter}
-                  onChange={setSearchFilter}
-                  id={`service-investors__search`}
-                />
-
-                <ZigButton
-                  id={`service-investors__export`}
-                  onClick={() => exporter(processedInvestorsList)}
-                  variant={'text'}
-                  sx={{
-                    '.MuiSvgIcon-root.MuiSvgIcon-root': {
-                      fill: theme.palette.links,
-                    },
-                  }}
-                  endIcon={
-                    <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                <ZigFilters
+                  leftComponent={
+                    <Box gap={'12px'} display={'flex'} alignItems={'center'}>
+                      <ZigUserIcon
+                        width={'17px'}
+                        height={'20px'}
+                        color={theme.palette.backgrounds.investorsIcon}
+                        id={`service-investors__investors-number-icon`}
+                      />
+                      <ZigTypography
+                        variant={'h3'}
+                        color={'contrasting'}
+                        id={`service-investors__investors-number`}
+                      >
+                        {t('number-of-investors', {
+                          count: filteredInvestors?.length,
+                        })}
+                      </ZigTypography>
+                    </Box>
                   }
-                >
-                  {t('action:export')}
-                </ZigButton>
+                  rightComponent={
+                    <ZigButton
+                      id={`service-investors__export`}
+                      onClick={() => exporter(processedInvestorsList)}
+                      variant={'text'}
+                      sx={{
+                        '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                          fill: theme.palette.links,
+                        },
+                      }}
+                      endIcon={
+                        <OpenInNew
+                          sx={{ width: '17.33px', height: '17.33px' }}
+                        />
+                      }
+                    >
+                      {t('action:export')}
+                    </ZigButton>
+                  }
+                  onChange={tablePersist.filterTable}
+                  filters={tablePersist.filters}
+                  defaultFilters={defaultFilters}
+                  onSearchChange={setSearchFilter}
+                  search={searchFilter}
+                  sx={{ mb: 0 }}
+                />
               </Box>
             </InvestorCounts>
 

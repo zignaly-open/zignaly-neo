@@ -248,7 +248,9 @@ const EditServiceProfileContainer: React.FC<{
                   <SuccessFeeInputWrapper
                     prefixId={'edit-service-profile__service-success-fee'}
                     zglyFee={
-                      service?.zglySuccessFee || whitelabel.zignalySuccessFee
+                      service?.zglySuccessFee ||
+                      service?.storedZglySuccessFee ||
+                      whitelabel.zignalySuccessFee
                     }
                     value={successFee}
                     showZeroFeeExplainer

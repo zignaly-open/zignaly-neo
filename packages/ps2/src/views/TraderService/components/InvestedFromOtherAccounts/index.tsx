@@ -77,7 +77,7 @@ function InvestedFromOtherAccounts({
                 id: 'internalId',
                 accessorKey: 'internalId',
                 cell: ({ getValue }) =>
-                  getValue() === activeExchange.internalId ? (
+                  getValue() === activeExchange?.internalId ? (
                     <ZigTypography color='neutral500'>
                       {t('other-accounts.active')}
                     </ZigTypography>

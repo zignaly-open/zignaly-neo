@@ -3,13 +3,13 @@ import path from 'path';
 import fs from 'fs';
 dotenv.config();
 
-const { BASE_API: initialValueBaseApi } = process.env;
+const { BASE_API: initialValueBaseApi, WL_CACHE_TTL_OVERRIDE } = process.env;
 
 export const BASE_API =
   initialValueBaseApi &&
   initialValueBaseApi + (initialValueBaseApi.endsWith('/') ? '' : '/');
 
-export const CACHE_TTL = 10 * 60_000;
+export const CACHE_TTL = +WL_CACHE_TTL_OVERRIDE || 10 * 60_000;
 
 export const BUILD_PATH = path.join(fs.realpathSync('.'), 'build');
 

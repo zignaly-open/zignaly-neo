@@ -23,6 +23,6 @@
     "allowSyntheticDefaultImports": true,
     "pretty": true,
     "removeComments": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   }
 }

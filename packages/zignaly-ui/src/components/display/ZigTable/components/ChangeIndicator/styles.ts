@@ -1,41 +1,11 @@
-import { ReactComponent as CaretTriangleIcon } from "assets/icons/caret-triangle-icon.svg";
 import ZigTypography from "../../../ZigTypography";
 import { styled } from "@mui/material";
+import { ArrowDropUp } from "@mui/icons-material";
 
-export const Layout = styled("div")`
-  display: grid;
-  grid-row: auto;
-  justify-content: center;
-`;
-
-export const Container = styled("div")`
-  text-align: center;
-`;
-
-export const Row = styled("div")`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Inline = styled("div")`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Subtitle = styled(ZigTypography)`
-  display: block;
-`;
-
-export const Indicator = styled(CaretTriangleIcon)<{ isPositive: boolean }>`
-  margin-right: 6px;
-  vertical-align: middle;
-  margin-left: 6px;
-  width: 8px;
-  height: 8px;
+export const Indicator = styled(ArrowDropUp)<{ isPositive: boolean }>`
+  width: 14px;
+  height: 15.5px;
+  margin: 0 -2px;
 
   ${({ isPositive }) => `
     transform: ${isPositive ? "rotateX(0deg)" : "rotateX(180deg)"};
@@ -47,10 +17,11 @@ export const ValueIndicator = styled(ZigTypography, {
 })<{
   smallPct: boolean;
 }>`
-  display: inline;
-  font-size: 15px !important;
-  line-height: 24px !important;
+  display: inline-flex;
+  font-size: 15px;
+  line-height: 24px;
   font-weight: 500;
+  align-items: center;
 
   span::after {
     content: "${({ smallPct }) => (smallPct ? "%" : "")}";
