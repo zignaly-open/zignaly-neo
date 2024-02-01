@@ -183,19 +183,22 @@ const ZigFilters = ({
         ref={rightRef}
       >
         <>
+          {rightComponent}
           {search !== undefined && onSearchChange && md && (
-            <Box>
+            <Box mr={"42px"}>
               <ZigSearch
                 value={search}
                 onChange={onSearchChange}
                 sx={{
-                  marginLeft: "auto",
+                  position: "absolute",
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
                 }}
                 id={`${prefixId}__search`}
               />
             </Box>
           )}
-          {rightComponent}
         </>
         {!md && secondaryFilters.length > 0 && (
           <MultiFiltersButton
