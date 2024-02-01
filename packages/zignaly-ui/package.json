@@ -107,13 +107,14 @@
     "date-fns": "2.28.0",
     "download-csv": "^1.1.1",
     "ethers": "5.5.2",
+    "i18next": "^23.8.2",
     "jest": "^29.0.3",
     "lodash-es": "^4.17.21",
     "qrcode.react": "3.0.2",
     "react-device-detect": "^2.2.3",
+    "react-hook-form": "7.34.2",
     "react-i18next": "14.0.1",
     "react-image-webp": "^0.8.0",
-    "react-hook-form": "7.34.2",
     "react-loader-spinner": "6.0.0-0",
     "react-number-format": "^5.3.1",
     "react-portal": "4.2.2",
@@ -182,9 +183,9 @@
     "@emotion/styled": "11.9.3",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
-    "react-i18next": "14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "14.0.1",
     "styled-components": "5.3.5"
   }
 }
