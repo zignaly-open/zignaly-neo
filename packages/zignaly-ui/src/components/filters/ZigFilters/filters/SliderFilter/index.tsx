@@ -16,6 +16,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
     allowNoMax = false,
     id,
     showPct = true,
+    disabled,
   } = filter;
   // Value used for displaying the slider values before it's committed
   const [internalValue, setInternalValue] = useState(value);
@@ -59,6 +60,7 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
         </ZigTypography>
       )}
       <StyledZigSlider
+        disabled={disabled}
         value={sliderValue}
         min={allowNoMin ? min - step : min}
         max={allowNoMax ? max + step : max}
