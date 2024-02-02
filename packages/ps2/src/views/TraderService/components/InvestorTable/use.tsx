@@ -18,16 +18,21 @@ export const useInvestorFilters = (
   serviceSuccessFee: number,
 ) => {
   const { t } = useTranslation('investors');
+  const statuses = Object.entries(ConnectionStateLabelId).filter(([, status]) =>
+    investors?.find((investor) => investor.accountType === status),
+  );
 
   return useMemo(
     () =>
       [
         {
           type: 'slider',
-          value: [0, serviceSuccessFee],
+          value: [null, null],
           label: t('filters.success-fee'),
           min: 0,
           max: serviceSuccessFee,
+          allowNoMin: true,
+          allowNoMax: true,
           id: 'ownerSuccessFee',
           primary: true,
         },
@@ -35,7 +40,7 @@ export const useInvestorFilters = (
           type: 'checkbox',
           value: null,
           label: t('filters.status'),
-          options: Object.entries(ConnectionStateLabelId).map(([, value]) => {
+          options: statuses.map(([, value]) => {
             return { label: t(connectionStateName[value]), value: value };
           }),
           id: 'status',

@@ -185,7 +185,7 @@ const ZigFilters = ({
         <>
           {rightComponent}
           {search !== undefined && onSearchChange && md && (
-            <Box mr="42px">
+            <Box mr={"42px"}>
               <ZigSearch
                 value={search}
                 onChange={onSearchChange}

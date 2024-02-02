@@ -129,6 +129,7 @@ export type Service = {
   pnlSsc180t: string;
   pnlSsc365t: string;
   zglySuccessFee: number;
+  storedZglySuccessFee: number;
   activated: boolean;
 };
 

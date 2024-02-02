@@ -80,26 +80,30 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
         id: 'returns',
         primary: true,
       },
-      {
-        type: 'checkbox',
-        value: null,
-        label: t('table.risk'),
-        options: risks.map((risk) => ({
-          value: risk.id,
-          label: renderRisk(risk.zrisk),
-        })),
-        id: 'risk',
-        primary: true,
-      },
-      {
-        type: 'slider',
-        value: [0, 100],
-        label: t('table.zscore'),
-        showPct: false,
-        min: 0,
-        max: 100,
-        id: 'zscore',
-      },
+      ...(isFeatureOn(Features.ZScore)
+        ? [
+            {
+              type: 'checkbox',
+              value: null,
+              label: t('table.risk'),
+              options: risks.map((risk) => ({
+                value: risk.id,
+                label: renderRisk(risk.zrisk),
+              })),
+              id: 'risk',
+              primary: true,
+            },
+            {
+              type: 'slider',
+              value: [0, 100],
+              label: t('table.zscore'),
+              showPct: false,
+              min: 0,
+              max: 100,
+              id: 'zscore',
+            },
+          ]
+        : []),
       {
         type: 'slider',
         value: [0, 75],
@@ -130,6 +134,7 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
               label: t('filters.coins'),
               options: coins.map((coin) => ({ value: coin, label: coin })),
               id: 'coin',
+              primary: !isFeatureOn(Features.ZScore),
             },
           ]
         : []),

@@ -56,7 +56,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
-  const { exchangeType } = useActiveExchange();
+  const { exchangeType } = useActiveExchange()!;
   const toast = useToast();
   const trackEvent = useTrackEvent();
   const navigate = useNavigate();
@@ -312,8 +312,11 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
             </Grid>
 
             {!!specialTips && (
-              <Grid item xs={12}>
-                <ZigAlertMessage text={specialTips} />
+              <Grid item xs={12} mt={'-20px'}>
+                <ZigAlertMessage
+                  text={specialTips}
+                  id={'deposit-modal__special-tip'}
+                />
               </Grid>
             )}
 

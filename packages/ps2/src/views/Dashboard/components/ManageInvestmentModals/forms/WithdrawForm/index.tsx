@@ -44,7 +44,7 @@ function WithdrawForm({
   });
   const { data: coins, isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
-  const { internalId } = useActiveExchange();
+  const { internalId } = useActiveExchange()!;
   const [withdraw, withdrawStatus] = useWithdrawMutation();
 
   const checkWithdraw = useCheckWithdraw({
@@ -271,8 +271,11 @@ function WithdrawForm({
           </div>
 
           {!!specialTips && (
-            <Box>
-              <ZigAlertMessage text={specialTips} />
+            <Box mt={'-20px'}>
+              <ZigAlertMessage
+                text={specialTips}
+                id={'withdraw-modal__special-tip'}
+              />
             </Box>
           )}
 
