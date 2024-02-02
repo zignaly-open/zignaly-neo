@@ -33,6 +33,7 @@ const ZigDropdown: (
       vertical: "top",
       horizontal: "right",
     },
+    disabled,
   }: ZigDropdownProps,
   innerRef: React.Ref<ZigDropdownHandle>,
 ) => {
@@ -41,7 +42,7 @@ const ZigDropdown: (
   const isOpen = !!anchorEl;
   const theme = useTheme() as Theme;
   const handleToggle = (event: React.MouseEvent<HTMLElement>) =>
-    setAnchorEl((v) => (v ? null : event.currentTarget));
+    !disabled ? setAnchorEl((v) => (v ? null : event.currentTarget)) : () => {};
 
   const handleClose = () => {
     setChildDropdownShown(null);
