@@ -43,6 +43,7 @@ export type SliderFilter = BaseFilter & {
   allowNoMin?: boolean;
   allowNoMax?: boolean;
   showPct?: boolean;
+  disabled?: boolean;
 };
 
 export type CheckboxFilter = BaseFilter & {
