@@ -18,7 +18,6 @@
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
-
   "jest": {
     "transformIgnorePatterns": [
       "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
@@ -105,6 +104,8 @@
     "react-use": "^17.4.0",
     "redux-persist": "^6.0.0",
     "remark-breaks": "^3.0.2",
+    "slate": "^0.101.5",
+    "slate-react": "^0.101.6",
     "source-map-explorer": "^2.5.3",
     "styled-components": "^5.3.5",
     "typescript": "4.9.4",
