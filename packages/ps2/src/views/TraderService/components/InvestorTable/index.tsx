@@ -191,6 +191,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             <ChangeIndicator
               value={props.row.original.pnlPctLc}
               id={`service-investors-table__p&l-change-${props.row.original.account_id}`}
+              indicatorPostion='left'
             />
           </>
         ),

@@ -6,6 +6,7 @@ import {
   ZigTablePriceLabel,
   ZigButton,
   getPrecisionForCoin,
+  ZScore,
 } from '@zignaly-open/ui';
 import { ZigPlusIcon } from '@zignaly-open/ui/icons';
 import React, { useEffect, useMemo } from 'react';
@@ -20,7 +21,7 @@ import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useZRouteModal } from '../../../../components/ZModal/use';
+import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import {
@@ -34,6 +35,9 @@ import { generatePath, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { MobilePortfolioAction } from './MobilePortfolioAction';
 import { useMarketplaceMobileActiveRow } from '../../../../apis/marketplace/use';
+import { Features } from 'whitelabel/type';
+import { isFeatureOn } from 'whitelabel';
+import ZScoreModal from 'views/TraderService/components/ZScoreModal';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -57,6 +61,8 @@ const MyDashboard: React.FC = () => {
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   useEffect(() => () => setActiveRow(null), []);
+  const isZScoreOn = isFeatureOn(Features.ZScore);
+  const { showModal } = useZModal();
 
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
@@ -255,6 +261,27 @@ const MyDashboard: React.FC = () => {
               },
               sortingFn: 'auto',
             }),
+            ...(lg && isZScoreOn
+              ? [
+                  columnHelper.accessor((row) => '', {
+                    id: 'zscore',
+                    header: t('table.zscore'),
+                    cell: ({ getValue, row: { original } }) => (
+                      <Box id={`portfolio-table__zscore-${original.serviceId}`}>
+                        <ZScore
+                          value={getValue()}
+                          mini={!sm}
+                          onClick={() =>
+                            showModal(ZScoreModal, {
+                              serviceId: original.serviceId,
+                            })
+                          }
+                        />
+                      </Box>
+                    ),
+                  }),
+                ]
+              : []),
             columnHelper.display({
               id: 'link',
               cell: ({ row }) => (
