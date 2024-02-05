@@ -63,6 +63,7 @@ export { default as ZigRisk } from "./components/display/ZigRisk";
 export * from "./components/display/ZigRisk";
 export { default as ZScoreRing } from "./components/display/ZScoreRing";
 export * from "./components/display/ZScoreRing";
+export { default as ZScoreRings } from "./components/display/ZScoreRings";
 export { default as ZScoreBar } from "./components/display/ZScoreBar";
 
 // Table

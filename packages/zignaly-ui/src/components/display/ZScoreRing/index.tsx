@@ -2,7 +2,7 @@ import React from "react";
 import { Box, darken, lighten, useTheme } from "@mui/material";
 import { ZScoreRingProps } from "./types";
 import { ZigScoreBalanceIcon, ZigScoreCoinsIcon, ZigScoreWalletIcon } from "icons";
-import { AnimatedHandle, AnimatedRingCircle1, AnimatedRingSvg } from "./styles";
+import { AnimatedHandle, AnimatedRingCircle, AnimatedRingSvg } from "./styles";
 import chroma from "chroma-js";
 import ZigTypography from "../ZigTypography";
 import { useRisk } from "../ZigRisk";
@@ -58,13 +58,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
           >
             {Math.round(value)}
           </ZigTypography>
-          <ZigTypography
-            component={"span"}
-            fontWeight={500}
-            fontSize={17}
-            color="#neutral400"
-            lineHeight={"22px"}
-          >
+          <ZigTypography component={"span"} fontWeight={500} fontSize={17} lineHeight={"22px"}>
             /{max}
           </ZigTypography>
         </Box>
@@ -95,7 +89,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             strokeDasharray="80,20"
           />
           {pct > 50 && (
-            <AnimatedRingCircle1
+            <AnimatedRingCircle
               stroke-width="3.4"
               r="15.915"
               cx="50%"
@@ -104,7 +98,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
               strokeDasharray={`${normalizedPct} ${100 - normalizedPct}`}
             />
           )}
-          <AnimatedRingCircle1
+          <AnimatedRingCircle
             stroke-width="3.4"
             r="15.915"
             cx="50%"

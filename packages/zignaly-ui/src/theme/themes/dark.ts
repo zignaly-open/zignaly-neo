@@ -106,7 +106,7 @@ const dark: ThemeStyledComponents = {
         text: "#90d2bf",
       },
       risk: {
-        gradient: ["#4c18b3", "#5451d7", "#5199ea"],
+        gradient: ["#4c18b3", "#5352D8", "#526BDD"],
         text: "#8491EF",
       },
       service: {

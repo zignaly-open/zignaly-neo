@@ -16,6 +16,7 @@ import { subMonths } from 'date-fns';
 import ServicePercentageInfo from './atoms/ServicePercentageInfo';
 import Stub from '../../../../components/Stub';
 import ZigErrorBoundary from 'util/ZigErrorBoundary';
+import ServiceZScoreDetails from './atoms/ServiceZScoreDetails';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -117,6 +118,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
               }}
             >
               <ServiceSummary service={service} />
+              <ServiceZScoreDetails service={service} />
             </Grid>
           )}
         </Grid>
