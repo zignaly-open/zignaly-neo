@@ -67,6 +67,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
           <>~</>
         )}
       {!!prefix && <>{prefix}</>}
+      {/* eslint-disable-next-line i18next/no-literal-string */}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat

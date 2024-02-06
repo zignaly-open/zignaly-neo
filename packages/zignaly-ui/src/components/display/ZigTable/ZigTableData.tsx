@@ -42,7 +42,7 @@ function ZigTableData<T extends object>({
   ...rest
 }: ZigTablePropsData<T>) {
   const theme = useTheme();
-  const { t } = useTranslation("zignaly-ui");
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigTable" });
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
@@ -286,7 +286,7 @@ function ZigTableData<T extends object>({
             >
               <Trans
                 t={t}
-                i18nKey={"table.page-x-of-all"}
+                i18nKey={"page-x-of-all"}
                 defaults="<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>"
                 values={{
                   currentPage: table.getState().pagination.pageIndex + 1,
@@ -338,17 +338,33 @@ function ZigTableData<T extends object>({
             justifyContent={["center", "flex-end"]}
             marginTop={[1, 0]}
           >
-            <ZigTypography color="neutral300">Displaying</ZigTypography>
-            <SmallSelectWrapper>
-              <ZigSelect
-                menuPlacement={"top"}
-                id={prefixId && `${prefixId}-table__items-per-page`}
-                options={pageSizeOptions}
-                value={table.getState().pagination.pageSize}
-                onChange={table.setPageSize}
-              />
-            </SmallSelectWrapper>
-            <ZigTypography color="neutral300">items</ZigTypography>
+            <Trans
+              t={t}
+              i18nKey={"displaying-x-items"}
+              defaults="<text>Displaying</text> <selector /> <text>items</text>"
+              count={table.getState().pagination.pageSize}
+              components={{
+                text: <ZigTypography color="neutral300" />,
+                selector: (
+                  <SmallSelectWrapper>
+                    <ZigSelect
+                      menuPlacement={"top"}
+                      id={prefixId && `${prefixId}-table__items-per-page`}
+                      options={pageSizeOptions}
+                      value={table.getState().pagination.pageSize}
+                      onChange={table.setPageSize}
+                    />
+                  </SmallSelectWrapper>
+                ),
+                total: (
+                  <ZigTypography
+                    color="neutral100"
+                    fontWeight={600}
+                    id={prefixId && `${prefixId}-table__total-page-count`}
+                  />
+                ),
+              }}
+            />
           </Box>
         </Box>
       )}
