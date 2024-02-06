@@ -3,6 +3,10 @@ import { precisionNumberToDecimals } from 'util/numbers';
 import * as yup from 'yup';
 import { inputAmountValidation } from 'util/validation';
 
+// Let's hope this doesn't change in the future, or they add a better property
+export const MEMO_SPECIAL_TIP =
+  'Both a memo/tag and an address are required to successfully deposit your assets to Binance.';
+
 export const withdrawAmountValidation = (
   coin: string,
   balance: string,
@@ -34,7 +38,7 @@ export const withdrawAmountValidation = (
           'withdraw-crypto:withdrawMemo.invalid',
         ),
     }),
-    ...(network?.specialTips &&
+    ...(network?.specialTips === MEMO_SPECIAL_TIP &&
       !network?.memoRegex && {
         tag: yup.string().required('withdraw-crypto:withdrawMemo.required'),
       }),
