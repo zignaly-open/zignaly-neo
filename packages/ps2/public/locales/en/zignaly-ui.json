@@ -1,0 +1,5 @@
+{
+  "zigtable": {
+    "page-x-of-all": "<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>"
+  }
+}

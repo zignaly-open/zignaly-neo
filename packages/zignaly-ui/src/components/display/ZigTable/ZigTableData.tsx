@@ -42,7 +42,7 @@ function ZigTableData<T extends object>({
   ...rest
 }: ZigTablePropsData<T>) {
   const theme = useTheme();
-  const { t } = useTranslation("table");
+  const { t } = useTranslation("zignaly-ui");
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
@@ -286,7 +286,7 @@ function ZigTableData<T extends object>({
             >
               <Trans
                 t={t}
-                i18nKey={"table:page-x-of-all"}
+                i18nKey={"table.page-x-of-all"}
                 defaults="<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>"
                 values={{
                   currentPage: table.getState().pagination.pageIndex + 1,

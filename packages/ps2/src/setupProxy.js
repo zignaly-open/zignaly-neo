@@ -10,6 +10,9 @@ module.exports = function (app) {
       pathRewrite: {
         '^/new_api': '',
       },
+      onProxyReq: (proxyReq) => {
+        proxyReq.setHeader('Origin', 'https://wl-staging.zigbids.com');
+      },
     }),
   );
 };
