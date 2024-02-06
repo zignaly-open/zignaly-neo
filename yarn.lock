@@ -18583,7 +18583,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@18.2.0, react-dom@^17.0.0:
+react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -18629,14 +18629,6 @@ react-i18next@14.0.1:
   dependencies:
     "@babel/runtime" "^7.22.5"
     html-parse-stringify "^3.0.1"
-
-react-image-webp@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.npmjs.org/react-image-webp/-/react-image-webp-0.8.0.tgz"
-  integrity sha512-9CxV/wVFcHxIiyNPzN338WQ2xJIkMTR5mO4TYtNcHMURxuAb/Hp3HB3V3TEnbaKBlofF273ZLF8wbBu3bHI1aw==
-  dependencies:
-    react "^17.0.0"
-    react-dom "^17.0.0"
 
 react-inspector@^6.0.0:
   version "6.0.1"
@@ -18975,7 +18967,7 @@ react-use@^17.4.0:
     ts-easing "^0.2.0"
     tslib "^2.1.0"
 
-react@18.2.0, react@^17.0.0:
+react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==

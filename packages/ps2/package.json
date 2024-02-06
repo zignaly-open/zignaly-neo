@@ -21,7 +21,7 @@
 
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
+      "node_modules/(?!lodash-es|react-markdown)"
     ],
     "moduleNameMapper": {
       "@zignaly-open/ui/icons": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/icons.cjs",
