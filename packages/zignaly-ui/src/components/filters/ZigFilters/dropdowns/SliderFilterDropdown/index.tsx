@@ -41,6 +41,7 @@ const SliderFilterDropdown = ({
   return (
     <ZigDropdown
       id={`${prefixId}__dropdown-${filter.id}`}
+      disabled={filter.disabled}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel minSpace={minSpace} label={filter.label} value={displayValue} />

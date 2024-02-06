@@ -35,6 +35,7 @@ export const useInvestorFilters = (
           allowNoMax: true,
           id: 'ownerSuccessFee',
           primary: true,
+          disabled: !serviceSuccessFee,
         },
         {
           type: 'checkbox',
