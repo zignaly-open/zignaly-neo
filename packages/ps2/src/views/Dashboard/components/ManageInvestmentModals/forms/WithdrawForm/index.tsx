@@ -21,7 +21,7 @@ import {
 } from '../../../../../../apis/coin/use';
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { withdrawAmountValidation } from './validations';
+import { MEMO_SPECIAL_TIP, withdrawAmountValidation } from './validations';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
@@ -279,7 +279,8 @@ function WithdrawForm({
             </Box>
           )}
 
-          {(networkObject?.memoRegex || networkObject?.specialTips) && (
+          {(networkObject?.memoRegex ||
+            networkObject?.specialTips === MEMO_SPECIAL_TIP) && (
             <Controller
               name='tag'
               control={control}
