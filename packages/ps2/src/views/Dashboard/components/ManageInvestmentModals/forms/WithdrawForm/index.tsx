@@ -280,7 +280,7 @@ function WithdrawForm({
           )}
 
           {(networkObject?.memoRegex ||
-            networkObject?.specialTips?.startsWith(MEMO_SPECIAL_TIP)) && (
+            networkObject?.specialTips === MEMO_SPECIAL_TIP) && (
             <Controller
               name='tag'
               control={control}
