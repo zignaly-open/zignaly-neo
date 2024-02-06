@@ -107,7 +107,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
               </>
             )}
           </Grid>
-          {lg && (
+          {true && (
             <Grid
               item
               xs={12}
@@ -117,7 +117,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                 minWidth: { lg: '422px' },
               }}
             >
-              <ServiceSummary service={service} />
+              {lg && <ServiceSummary service={service} />}
               <ServiceZScoreDetails service={service} />
             </Grid>
           )}

@@ -3,50 +3,67 @@ import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import {
   Loader,
-  trimZeros,
-  ZigTypography,
   ZScoreRings,
+  ZScoreRiskCategory,
+  ZigTypography,
 } from '@zignaly-open/ui';
-import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
-import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
-import AssetsInPool from '../../../../../components/AssetsInPool';
-import ServicePercentageInfo from './ServicePercentageInfo';
-import { subMonths, subYears } from 'date-fns';
-import { numericFormatter } from 'react-number-format';
 import { useScoreQuery } from 'apis/service/api';
+import ZScoreBars from '../../ZScoreModal/atoms/ZScoreBars';
+import { ZScoreIcon } from '@zignaly-open/ui/icons';
 
 const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
-  const { isLoading, data } = useScoreQuery(service.id);
+  const { data } = useScoreQuery(service.id);
   const {
-    scoreDetails,
     category: { zscore, maxZscore },
-    stats,
   } = data?.info || { category: {} };
-  const statsAugmented = {
-    ...stats,
-    beatsMarket: scoreDetails?.profits.benchmark.gives > 0,
-  };
 
   return (
-    <Box>
+    <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+      <Box display={'flex'} alignItems={'center'} gap={'8px'} mb='4px'>
+        <ZScoreIcon width={22} height={22} />
+        <ZigTypography
+          variant={'h2'}
+          color={'neutral200'}
+          id={'service-profile__z-score'}
+        >
+          {t('z-score')}
+        </ZigTypography>
+      </Box>
       {data ? (
-        <Grid container py={2} mb={!sm && '25px'}>
-          <Grid item xs={12}>
-            <ZScoreRings
-              profits={zscore.profits}
-              profitsMax={maxZscore.profits}
-              risk={zscore.riskManagement}
-              riskMax={maxZscore.riskManagement}
-              service={zscore.serviceManagement}
-              serviceMax={maxZscore.serviceManagement}
-              zScore={data.zscore}
-            />
-          </Grid>
-        </Grid>
+        <>
+          <ZScoreRings
+            profits={zscore.profits}
+            profitsMax={maxZscore.profits}
+            risk={zscore.riskManagement}
+            riskMax={maxZscore.riskManagement}
+            service={zscore.serviceManagement}
+            serviceMax={maxZscore.serviceManagement}
+            zScore={data.zscore}
+          />
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            bgcolor={'neutral800'}
+            width={306}
+            gap={'22px'}
+            p='22px 40px'
+          >
+            {Object.values(ZScoreRiskCategory).map((category) => (
+              <ZScoreBars
+                key={category}
+                prefixId='service-profile'
+                category={category}
+                scoreInfo={data.info}
+                scoreData={data}
+              />
+            ))}
+          </Box>
+        </>
       ) : (
         <Loader />
       )}

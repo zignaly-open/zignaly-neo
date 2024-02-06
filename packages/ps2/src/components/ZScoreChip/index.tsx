@@ -4,6 +4,7 @@ import { ZigMonoIcon } from '@zignaly-open/ui/icons';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 
+// todo: remove if not used in service referrals
 const ZScoreChip = ({
   score,
   prefixId,
