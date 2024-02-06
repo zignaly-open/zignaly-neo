@@ -9,47 +9,11 @@ import {
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ZigRocketIcon } from '@zignaly-open/ui/icons';
 import { ReactComponent as ZigRocketExhaustIcon } from './assets/rocket-icon-exhaust.svg';
-import ZigRocketStarBackground from './assets/rocket-icon-star-background.svg';
 import OtherAccountsButton from './OtherAccountsButton';
-import { Box, keyframes } from '@mui/material';
+import { Box } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
-
-const rocketLaunch = keyframes`
-    0% {
-        transform: translate(0, 0)
-    }
-
-    20% {
-        transform: rotate(0deg) translate(0, 0)
-    }
-
-    40% {
-        transform: rotate(-2deg) translate(2px, -2px)
-    }
-
-    60% {
-        transform: rotate(2deg) translate(-2px, 2px)
-    }
-
-    80% {
-        transform: rotate(-2deg) translate(2px, -2px)
-    }
-
-    100% {
-        transform: rotate(0deg) translate(0, 0)
-    }
-`;
-
-const spaceMoving = keyframes`
-    0% {
-        background-position-y: 0
-    }
-    
-    100% {
-        background-position-y: 64px
-    }
-`;
+import { animatedRocketStyle } from './rocket';
 
 const InvestButton: React.FC<{
   prefixId?: string;
@@ -105,38 +69,7 @@ const InvestButton: React.FC<{
           flexDirection: 'row',
           gap: '5px',
           padding: '6px 26px',
-          '.MuiButton-endIcon': {
-            position: 'relative',
-            '&:after': {
-              position: 'absolute',
-              pointerEvents: 'none',
-              content: '""',
-              top: '-20px',
-              left: '-20px',
-              right: '-20px',
-              bottom: '-20px',
-              opacity: 0,
-              transform: 'rotate(45deg)',
-              background: `url(${ZigRocketStarBackground})`,
-              transition: 'opacity .3s',
-              backgroundRepeat: 'repeat-y',
-            },
-          },
-          '.MuiButton-endIcon svg.zignaly-rocket': {
-            position: 'relative',
-            zIndex: 2,
-          },
-          '.MuiButton-endIcon svg.zignaly-rocket-exhaust': {
-            position: 'absolute',
-            zIndex: 1,
-          },
-          '&:hover .MuiButton-endIcon svg.zignaly-rocket-exhaust': {
-            animation: `${rocketLaunch} .3s infinite ease`,
-          },
-          '&:hover .MuiButton-endIcon:after': {
-            opacity: 0.8,
-            animation: `${spaceMoving} .8s infinite linear`,
-          },
+          ...(showRocket ? animatedRocketStyle : {}),
         }}
         tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
         endIcon={
