@@ -23,7 +23,9 @@ export const useOperatorOptions = () => {
 
 export const useDepositStatusOptions = () => {
   const { t } = useTranslation('transfers');
-  return useMemo<{ value: DepositStatuses | ''; label: JSX.Element }[]>(
+  return useMemo<
+    { value: DepositStatuses | ''; label: JSX.Element | string }[]
+  >(
     () => [
       { value: '', label: t('common:all') },
       ...Object.entries<string>(
@@ -43,7 +45,9 @@ export const useDepositStatusOptions = () => {
 
 export const useWithdrawalStatusOptions = () => {
   const { t } = useTranslation('transfers');
-  return useMemo<{ value: WithdrawalStatuses | ''; label: JSX.Element }[]>(
+  return useMemo<
+    { value: WithdrawalStatuses | ''; label: JSX.Element | string }[]
+  >(
     () => [
       { value: '', label: t('common:all') },
       ...Object.entries<string>(
