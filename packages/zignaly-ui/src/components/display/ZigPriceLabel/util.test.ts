@@ -7,6 +7,7 @@ const shortenAndCheck = (n: number, [suffix, precision]: [string, number]) => {
 };
 
 describe("shortenNumber", () => {
+  // eslint-disable-next-line jest/expect-expect
   it("should shorten correctly", () => {
     shortenAndCheck(0, ["", 3]);
     shortenAndCheck(1000000, ["M", 2]);

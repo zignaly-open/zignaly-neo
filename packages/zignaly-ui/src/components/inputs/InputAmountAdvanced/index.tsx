@@ -22,6 +22,7 @@ import { Box } from "@mui/material";
 import ZigCoinIcon from "components/display/ZigCoinIcon";
 import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
+import { useTranslation } from "react-i18next";
 
 // FIXME this component still needs Jesus
 // TODO: rename to ZigInoutAmount, add stories
@@ -57,7 +58,7 @@ function InputAmount({
       token: tokens[0],
     },
   });
-
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigInputAmount" });
   const didMountRef = useRef(false);
 
   useDeepCompareEffect(() => {
@@ -145,7 +146,7 @@ function InputAmount({
             )}
             {value?.token && tokens && showMaxButton && (
               <MaxButton id={id && `${id}-max`} onClick={onClickMaxValue}>
-                MAX
+                {t("max")}
               </MaxButton>
             )}
           </Side>

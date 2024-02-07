@@ -26,7 +26,3 @@ afterEach(() => {
 
 // Clean up after the tests are finished.
 afterAll(() => server.close());
-
-jest.mock('react-image-webp/dist/utils', () => ({
-  isWebpSupported: () => () => true,
-}));

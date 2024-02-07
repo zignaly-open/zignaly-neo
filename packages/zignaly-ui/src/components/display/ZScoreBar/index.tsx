@@ -20,7 +20,7 @@ const ZScoreBar = ({ value, max = 100, id, ...props }: ZScoreBarProps) => {
           1,
         )}`}</ZigTypography>
         <ZigTypography color="paleBlue" fontSize={11} fontWeight={500}>
-          /{`${Math.round(max)}`}
+          {`/${Math.round(max)}`}
         </ZigTypography>
       </Box>
     </Box>
