@@ -263,7 +263,7 @@ const MyDashboard: React.FC = () => {
             }),
             ...(lg && isZScoreOn
               ? [
-                  columnHelper.accessor((row) => '', {
+                  columnHelper.accessor((row) => row.zscore, {
                     id: 'zscore',
                     header: t('table.zscore'),
                     cell: ({ getValue, row: { original } }) => (

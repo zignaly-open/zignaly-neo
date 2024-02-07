@@ -17,6 +17,8 @@ import ServicePercentageInfo from './atoms/ServicePercentageInfo';
 import Stub from '../../../../components/Stub';
 import ZigErrorBoundary from 'util/ZigErrorBoundary';
 import ServiceZScoreDetails from './atoms/ServiceZScoreDetails';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -103,18 +105,22 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
             <ServiceDescription service={service} />
             <ServiceManagerDescription service={service} />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            lg={4}
-            pt={{ xs: 3, lg: 0 }}
-            sx={{
-              minWidth: { lg: '422px' },
-            }}
-          >
-            {lg && <ServiceSummary service={service} />}
-            <ServiceZScoreDetails service={service} />
-          </Grid>
+          {(lg || isFeatureOn(Features.ZScore)) && (
+            <Grid
+              item
+              xs={12}
+              lg={4}
+              pt={{ xs: 3, lg: 0 }}
+              sx={{
+                minWidth: { lg: '422px' },
+              }}
+            >
+              {lg && <ServiceSummary service={service} />}
+              {isFeatureOn(Features.ZScore) && (
+                <ServiceZScoreDetails service={service} />
+              )}
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Box>

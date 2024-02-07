@@ -1,14 +1,15 @@
 import React from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { ZScoreRingsProps } from "./types";
 import ZigTypography from "../ZigTypography";
 import RingsConnector from "./atoms/RingsConnector";
 import { AnimatedRingCircle, AnimatedRingSvg } from "../ZScoreRing/styles";
 import { GradientDefs } from "../ZScoreRing/atoms";
+import { ZScoreRiskCategory } from "../ZScoreRing/types";
 
 const ZScoreRings = (props: ZScoreRingsProps) => {
   const { zScore, profits, risk, service, ...rest } = props;
-  const categories = ["profits", "risk", "service"];
+  const categories = ["profits", "risk", "service"] as ZScoreRiskCategory[];
   const prefixId = "zscore-rings";
 
   return (

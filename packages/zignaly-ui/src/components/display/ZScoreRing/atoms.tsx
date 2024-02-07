@@ -1,11 +1,12 @@
-import { useTheme } from "@mui/material";
 import React from "react";
+import { useTheme } from "@mui/material";
+import { ZScoreRiskCategory } from "./types";
 
 export const GradientDefs = ({
   category,
   prefixId = "zscore-ring",
 }: {
-  category: string;
+  category: `${ZScoreRiskCategory}`;
   prefixId?: string;
 }) => {
   const {
