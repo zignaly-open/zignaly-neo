@@ -176,6 +176,7 @@
     "noidea": "Something went wrong!",
     "paymentnotcompleted": "Payment not completed.",
     "wrong-code": "Wrong Code",
+    "wrong-value": "Wrong Value",
     "login-session-expired": "Session expired, please log in again",
     "XX": "Transaction error. Please try again."
   },
