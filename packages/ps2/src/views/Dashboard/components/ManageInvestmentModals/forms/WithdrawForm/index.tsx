@@ -138,7 +138,8 @@ function WithdrawForm({
   const depositEndpoint = useDepositInfo(
     coin,
     coinObject?.networks?.find((n) => n.value === network)?.network,
-    true,
+    // Lightning deposit not supported atm
+    network !== 'LIGHTNING',
   );
   const memoRequired =
     !!networkObject?.memoRegex ||
