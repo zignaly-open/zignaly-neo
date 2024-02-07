@@ -16,6 +16,9 @@ const tryIsWebpSupported = () => {
 const dark: ThemeStyledComponents = {
   mode: "dark",
   fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"],
+  // having this key is important
+  // without it overriding would not work
+  fontFamilyH1H6: undefined,
   palette: {
     neutral900: "#06061A",
     neutral800: "#12152c",

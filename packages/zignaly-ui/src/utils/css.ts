@@ -744,11 +744,3 @@ export const ToasterStyle = css`
     }
   }
 `;
-
-export const userHasFont = (font: string): boolean => {
-  try {
-    return document.fonts.check("14px " + font);
-  } catch (e) {
-    return false;
-  }
-};
