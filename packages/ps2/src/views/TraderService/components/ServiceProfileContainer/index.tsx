@@ -100,27 +100,21 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                 <ServiceSummary service={service} />
               </Box>
             )}
-            {sm && (
-              <>
-                <ServiceDescription service={service} />
-                <ServiceManagerDescription service={service} />
-              </>
-            )}
+            <ServiceDescription service={service} />
+            <ServiceManagerDescription service={service} />
           </Grid>
-          {true && (
-            <Grid
-              item
-              xs={12}
-              lg={4}
-              pt={{ xs: 3, lg: 0 }}
-              sx={{
-                minWidth: { lg: '422px' },
-              }}
-            >
-              {lg && <ServiceSummary service={service} />}
-              <ServiceZScoreDetails service={service} />
-            </Grid>
-          )}
+          <Grid
+            item
+            xs={12}
+            lg={4}
+            pt={{ xs: 3, lg: 0 }}
+            sx={{
+              minWidth: { lg: '422px' },
+            }}
+          >
+            {lg && <ServiceSummary service={service} />}
+            <ServiceZScoreDetails service={service} />
+          </Grid>
         </Grid>
       </Grid>
     </Box>

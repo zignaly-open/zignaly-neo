@@ -1,16 +1,15 @@
 import React from "react";
 import { Box, useTheme } from "@mui/material";
 import { ZScoreRingsProps } from "./types";
-import { AnimatedRingCircle, AnimatedRingSvg } from "./styles";
 import ZigTypography from "../ZigTypography";
 import RingsConnector from "./atoms/RingsConnector";
+import { AnimatedRingCircle, AnimatedRingSvg } from "../ZScoreRing/styles";
+import { GradientDefs } from "../ZScoreRing/atoms";
 
 const ZScoreRings = (props: ZScoreRingsProps) => {
   const { zScore, profits, risk, service, ...rest } = props;
-  const {
-    palette: { zscore },
-  } = useTheme();
   const categories = ["profits", "risk", "service"];
+  const prefixId = "zscore-rings";
 
   return (
     <div>
@@ -44,50 +43,34 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
           </Box>
         </Box>
         <AnimatedRingSvg viewBox="0 0 37 37">
-          <defs>
-            {categories.map((category) => {
-              const colors = zscore.ring[category];
-              return (
-                <>
-                  <linearGradient id={`${category}-1`} gradientTransform="rotate(180 0.5 0.5)">
-                    <stop offset="0.0" stop-color={colors.gradient[0]} />
-                    <stop offset="0.75" stop-color={colors.gradient[1]} />
-                  </linearGradient>
-                  <linearGradient id={`${category}-2`} gradientTransform="rotate(-36 0.5 0.5)">
-                    <stop offset="0" stop-color={colors.gradient[1]} />
-                    <stop offset="0.75" stop-color={colors.gradient[2]} />
-                  </linearGradient>
-                </>
-              );
-            })}
-          </defs>
           {categories.map((category, index) => {
             const pct = Math.min((props[category] / props[`${category}Max`]) * 100, 100);
 
             return (
-              <g transform={`rotate(90) scale(${1 - index * 0.25})`} key={category}>
-                <circle strokeWidth={3 + index} r="15.915" cx="50%" cy="50%" stroke="#242842" />
-                {pct > 50 && (
-                  <>
+              <>
+                <GradientDefs prefixId={"zscore-rings"} key={category} category={category} />
+                <g transform={`rotate(90) scale(${1 - index * 0.25})`} key={category}>
+                  <circle strokeWidth={3 + index} r="15.915" cx="50%" cy="50%" stroke="#242842" />
+                  {pct > 50 && (
                     <AnimatedRingCircle
                       strokeWidth={3 + index}
                       r="15.915"
                       cx="50%"
                       cy="50%"
-                      stroke={`url('#${category}-2')`}
+                      stroke={`url('#${prefixId}-${category}-2')`}
                       strokeDasharray={`${pct} ${100 - pct}`}
                     />
-                  </>
-                )}
-                <AnimatedRingCircle
-                  strokeWidth={3 + index}
-                  r="15.915"
-                  cx="50%"
-                  cy="50%"
-                  stroke={`url('#${category}-1')`}
-                  strokeDasharray={pct > 50 ? "50 50" : `${pct} ${100 - pct}`}
-                />
-              </g>
+                  )}
+                  <AnimatedRingCircle
+                    strokeWidth={3 + index}
+                    r="15.915"
+                    cx="50%"
+                    cy="50%"
+                    stroke={`url('#${prefixId}-${category}-1')`}
+                    strokeDasharray={pct > 50 ? "50 50" : `${pct} ${100 - pct}`}
+                  />
+                </g>
+              </>
             );
           })}
         </AnimatedRingSvg>
@@ -98,4 +81,3 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
 };
 
 export default ZScoreRings;
-export * from "./types";

@@ -9,13 +9,15 @@ import {
 } from '@zignaly-open/ui';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useScoreQuery } from 'apis/service/api';
-import ZScoreBars from '../../ZScoreModal/atoms/ZScoreBars';
+import ZScoreBarsCategory from '../../ZScoreModal/atoms/ZScoreBars';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
 
 const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
+
   const { data } = useScoreQuery(service.id);
   const {
     category: { zscore, maxZscore },
@@ -23,7 +25,7 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
 
   return (
     <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-      <Box display={'flex'} alignItems={'center'} gap={'8px'} mb='4px'>
+      <Box display={'flex'} alignItems={'center'} gap={'14px'} mb='6px'>
         <ZScoreIcon width={22} height={22} />
         <ZigTypography
           variant={'h2'}
@@ -46,26 +48,36 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
           />
           <Box
             display={'flex'}
-            flexDirection={'column'}
-            justifyContent={'center'}
             bgcolor={'neutral800'}
-            width={306}
-            gap={'22px'}
-            p='22px 40px'
+            width={lg ? 320 : 1}
+            py={'22px'}
+            px={{ xs: '20px', md: '34px' }}
           >
-            {Object.values(ZScoreRiskCategory).map((category) => (
-              <ZScoreBars
-                key={category}
-                prefixId='service-profile'
-                category={category}
-                scoreInfo={data.info}
-                scoreData={data}
-              />
-            ))}
+            <Grid
+              container
+              display={'flex'}
+              flexDirection={'row'}
+              justifyContent={'center'}
+              columnSpacing={'22px'}
+              rowSpacing={'22px'}
+            >
+              {Object.values(ZScoreRiskCategory).map((category) => (
+                <Grid item xs={lg || !sm ? 12 : 6} key={category}>
+                  <ZScoreBarsCategory
+                    prefixId='service-profile'
+                    category={category}
+                    scoreInfo={data.info}
+                    scoreData={data}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Box>
         </>
       ) : (
-        <Loader />
+        <Box mt={4}>
+          <Loader />
+        </Box>
       )}
     </Box>
   );

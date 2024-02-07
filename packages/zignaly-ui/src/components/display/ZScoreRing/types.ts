@@ -10,5 +10,5 @@ export enum ZScoreRiskCategory {
 export type ZScoreRingProps = {
   value: number;
   max: number;
-  category: ZScoreRiskCategory;
+  category: ZScoreRiskCategory[keyof ZScoreRiskCategory];
 } & AdditionalProps;

@@ -16,7 +16,7 @@ import { useZScoreConfig } from '../use';
 import { round } from 'lodash-es';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
-const ZScoreBars: React.FC<{
+const ZScoreBarsCategory: React.FC<{
   category: ZScoreRiskCategory;
   scoreData: ZScoreInfo;
   scoreInfo: ZScoreInfoDetails;
@@ -105,4 +105,4 @@ const ZScoreBars: React.FC<{
   );
 };
 
-export default ZScoreBars;
+export default ZScoreBarsCategory;
