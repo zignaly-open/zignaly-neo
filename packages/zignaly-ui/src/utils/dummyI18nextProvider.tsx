@@ -18,3 +18,9 @@ export const storybookI18nextDecorator = (story: () => JSX.Element) => (
   // @ts-ignore
   <I18nextProvider i18n={i18n}>{story()}</I18nextProvider>
 );
+
+export const JestI18nextDecorator: React.FC<{ children: JSX.Element }> = ({ children }) => (
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
+);
