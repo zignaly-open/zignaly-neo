@@ -9,7 +9,7 @@ import {
 } from '@zignaly-open/ui';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useScoreQuery } from 'apis/service/api';
-import ZScoreBarsCategory from '../../ZScoreModal/atoms/ZScoreBars';
+import ZScoreBarsCategory from '../../ZScoreModal/atoms/ZScoreBarsCategory';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
 
 const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {

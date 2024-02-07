@@ -5,7 +5,7 @@ import ZModal from 'components/ZModal';
 import { Grid } from '@mui/material';
 import { useScoreQuery } from 'apis/service/api';
 import { ZScoreRiskCategory, ZigTypography } from '@zignaly-open/ui';
-import ZScoreBarsCategory from './atoms/ZScoreBars';
+import ZScoreBarsCategory from './atoms/ZScoreBarsCategory';
 
 const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
   const { t } = useTranslation(['z-score', 'common']);
