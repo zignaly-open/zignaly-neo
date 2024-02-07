@@ -2,7 +2,10 @@ import { Divider } from "@mui/material";
 import { styled, Box } from "@mui/system";
 import ZigButton from "../ZigButton";
 
-export const Layout = styled(Box)<{
+export const Layout = styled(Box, {
+  shouldForwardProp: (p) =>
+    !["labelInline", "withCoinSelector", "error"].includes(p as unknown as string),
+})<{
   withCoinSelector?: boolean;
   error: boolean;
   labelInline: boolean;
