@@ -87,7 +87,13 @@ const RichDescriptionEditor = ({
   const Icon = isTruncated ? ExpandMore : ExpandLess;
 
   return (
-    <Box display={'flex'} flexDirection={'column'} id={id} sx={sx}>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      id={id}
+      sx={sx}
+      width={'100%'}
+    >
       {typeof label === 'string' ? (
         <ZigTypography variant={'h2'} sx={{ mb: 2 }} align='center'>
           {label}

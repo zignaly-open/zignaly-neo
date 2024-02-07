@@ -83,13 +83,7 @@ export function deserialize(serialized: string) {
     const obj = JSON.parse(serialized);
 
     if (Array.isArray(obj)) {
-      return obj.map((item: RichEditorElement) => {
-        return {
-          type: 'paragraph',
-          align: item.align || undefined,
-          children: item.children || [],
-        };
-      });
+      return obj;
     } else {
       return [
         {
