@@ -11,6 +11,7 @@ import { changeEvent } from "utils/event";
 import BigNumber from "bignumber.js";
 import { trimZeros } from "utils/numbers";
 import ZigSelect from "../ZigSelect";
+import { useTranslation } from "react-i18next";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
@@ -38,6 +39,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     selectSx,
     ...rest
   } = props;
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigInputAmount" });
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
   const handleMax = () => {
@@ -133,7 +135,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               endAdornment: showMaxButton ? (
                 <InputAdornment position="end">
                   <MaxButton variant="outlined" onClick={handleMax} id={id && `${id}-max-button`}>
-                    Max
+                    {t("max")}
                   </MaxButton>
                 </InputAdornment>
               ) : null,

@@ -8,10 +8,12 @@ import {
 } from '../../../../../apis/investment/use';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ZigRocketIcon } from '@zignaly-open/ui/icons';
+import { ReactComponent as ZigRocketExhaustIcon } from './assets/rocket-icon-exhaust.svg';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 import { useOpenInvestDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 import useMaybeNavigateNotLoggedIn from 'util/hooks/useMaybeNavigateNotLoggedIn';
+import { animatedRocketStyle } from './rocket';
 
 const InvestButton: React.FC<{
   prefixId?: string;
@@ -67,9 +69,25 @@ const InvestButton: React.FC<{
           flexDirection: 'row',
           gap: '5px',
           padding: '6px 26px',
+          ...(showRocket ? animatedRocketStyle : {}),
         }}
         tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
-        endIcon={showRocket && <ZigRocketIcon width={'34px'} height={'34px'} />}
+        endIcon={
+          showRocket && (
+            <>
+              <ZigRocketIcon
+                className='zignaly-rocket'
+                width={'34px'}
+                height={'34px'}
+              />
+              <ZigRocketExhaustIcon
+                className='zignaly-rocket-exhaust'
+                width={'34px'}
+                height={'34px'}
+              />
+            </>
+          )
+        }
       >
         <div>
           <ZigTypography

@@ -65,7 +65,10 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             color="#neutral400"
             lineHeight={"22px"}
           >
-            /{max}
+            {
+              // eslint-disable-next-line i18next/no-literal-string
+              `/${max}`
+            }
           </ZigTypography>
         </Box>
         {!categoryData.icon && category === "risk" && (

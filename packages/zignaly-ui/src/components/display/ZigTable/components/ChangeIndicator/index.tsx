@@ -103,7 +103,10 @@ const ChangeIndicator = ({
           </>
         ) : (
           <ZigTypography variant={"body2"} color={"neutral400"}>
-            -
+            {
+              // eslint-disable-next-line i18next/no-literal-string
+              "-"
+            }
           </ZigTypography>
         )}
       </Box>

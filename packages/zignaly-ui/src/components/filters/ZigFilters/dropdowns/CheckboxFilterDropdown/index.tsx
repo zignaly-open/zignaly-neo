@@ -52,7 +52,7 @@ const CheckboxFilterDropdown = ({
         label={
           typeof displayValue === "number" ? (
             <Box display={"flex"} gap="6px" alignItems={"center"}>
-              {filter.label}: <FiltersCount>{displayValue}</FiltersCount>
+              {`${filter.label}:`} <FiltersCount>{displayValue}</FiltersCount>
             </Box>
           ) : (
             `${filter.label}: ${displayValue}`

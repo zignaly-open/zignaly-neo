@@ -36,7 +36,7 @@ i18n
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     debug: false,
-    ns: ['common', 'error'],
+    ns: ['common', 'error', 'zignaly-ui'],
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
     fallbackNS: 'common',

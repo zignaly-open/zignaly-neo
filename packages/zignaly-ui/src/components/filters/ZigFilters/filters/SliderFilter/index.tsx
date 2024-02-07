@@ -4,6 +4,7 @@ import { SliderFilterProps } from "./type";
 import { StyledZigSlider, Value } from "./styles";
 import ZigTypography from "components/display/ZigTypography";
 import { SliderFilter as SliderFilterType } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
   const {
@@ -17,6 +18,8 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
     id,
     showPct = true,
   } = filter;
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
+
   // Value used for displaying the slider values before it's committed
   const [internalValue, setInternalValue] = useState(value);
   // Value used for the slider itself, handling no min/max values
@@ -75,14 +78,14 @@ const SliderFilter = ({ filter, onChange }: SliderFilterProps) => {
               showPct={showPct && internalValue[0] !== null}
               id={`filter-slider-${id}__value-1`}
             >
-              {internalValue[0] === null ? "Min" : internalValue[0]}
+              {internalValue[0] === null ? t("min", { defaultValue: "Min" }) : internalValue[0]}
             </Value>
-            <ZigTypography fontSize={15}>to</ZigTypography>
+            <ZigTypography fontSize={15}>{t("to", { defaultValue: "to" })}</ZigTypography>
             <Value
               showPct={showPct && internalValue[1] !== null}
               id={`filter-slider-${id}__value-2`}
             >
-              {internalValue[1] === null ? "Max" : internalValue[1]}
+              {internalValue[1] === null ? t("max", { defaultValue: "Max" }) : internalValue[1]}
             </Value>
           </>
         ) : (

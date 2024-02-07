@@ -18,9 +18,10 @@
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
+
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!lodash-es|react-markdown|react-image-webp)"
+      "node_modules/(?!lodash-es|react-markdown)"
     ],
     "moduleNameMapper": {
       "@zignaly-open/ui/icons": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/icons.cjs",
@@ -74,9 +75,9 @@
     "copy-to-clipboard": "^3.3.2",
     "date-fns": "^2.30.0",
     "i18n-iso-countries": "^7.5.0",
-    "i18next": "^23.5.1",
-    "i18next-browser-languagedetector": "^7.1.0",
-    "i18next-http-backend": "^2.2.2",
+    "i18next": "23.8.1",
+    "i18next-browser-languagedetector": "7.1.0",
+    "i18next-http-backend": "2.2.2",
     "image-extensions": "^1.1.0",
     "jest-svg-transformer": "^1.0.0",
     "js-cookie": "^3.0.1",
@@ -89,7 +90,7 @@
     "react-dom": "18.2.0",
     "react-google-font-loader": "^1.1.0",
     "react-hook-form": "^7.32.0",
-    "react-i18next": "^13.2.2",
+    "react-i18next": "14.0.1",
     "react-lazily": "^0.9.2",
     "react-mailcheck": "^1.2.0",
     "react-markdown": "^8.0.4",
