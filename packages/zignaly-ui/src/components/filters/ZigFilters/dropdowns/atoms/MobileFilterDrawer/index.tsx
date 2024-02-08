@@ -5,6 +5,7 @@ import ZigButton from "components/inputs/ZigButton";
 import React, { Suspense, lazy, useMemo, useState } from "react";
 import { MobileFilterDrawerProps } from "./type";
 import Filter from "components/filters/ZigFilters/filters/Filter";
+import { useTranslation } from "react-i18next";
 const SwipeableDrawer = lazy(() => import("@mui/material/SwipeableDrawer"));
 
 const MobileFilterDrawer = ({
@@ -17,6 +18,7 @@ const MobileFilterDrawer = ({
 }: MobileFilterDrawerProps) => {
   const isMulti = Array.isArray(filtersProp);
   const filters = isMulti ? filtersProp : [filtersProp];
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
   const [expanded, setExpanded] = useState<string | false>(
     filters.length === 1 ? filters[0].id : false,
   );
@@ -58,7 +60,7 @@ const MobileFilterDrawer = ({
             </Box>
             <Box flex={1} justifyContent={"flex-end"} display={"flex"}>
               <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__dropdown-reset`}>
-                Reset
+                {t("reset", { defaultValue: "Reset" })}
               </ZigButton>
             </Box>
           </Box>
@@ -89,7 +91,7 @@ const MobileFilterDrawer = ({
           sx={{ alignSelf: "center", m: "8px 0 24px" }}
           id={`${prefixId}__multi-dropdown-show`}
         >
-          Show Results
+          {t("show-results", { defaultValue: "Show Results" })}
         </ZigButton>
       </SwipeableDrawer>
     </Suspense>

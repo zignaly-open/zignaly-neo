@@ -14,7 +14,12 @@ type Props = {
   hoverBackground?: boolean;
 };
 
-export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
+export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box, {
+  shouldForwardProp: (p) =>
+    !["error", "small", "outlined", "showBorder", "hoverBackground", "width"].includes(
+      p as unknown as string,
+    ),
+})<Props>`
   gap: 10px;
   display: flex;
   flex-direction: column;

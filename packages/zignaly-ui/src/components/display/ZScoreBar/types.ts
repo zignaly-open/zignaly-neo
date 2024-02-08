@@ -4,5 +4,5 @@ import { ZScoreRiskCategory } from "../ZScoreRing";
 export type ZScoreBarProps = {
   value: number;
   max: number;
-  category: ZScoreRiskCategory;
+  category: `${ZScoreRiskCategory}`;
 } & AdditionalProps;

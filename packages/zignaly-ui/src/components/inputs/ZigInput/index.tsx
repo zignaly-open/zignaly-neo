@@ -81,6 +81,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       />
     );
   }),
+  { shouldForwardProp: (p) => p !== "labelInline" },
 )`
   // TODO: move to darkMui
   ${(props) => props.wide && "display: block;"}

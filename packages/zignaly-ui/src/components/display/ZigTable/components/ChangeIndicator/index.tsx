@@ -41,7 +41,7 @@ const ChangeIndicator = ({
   labelTooltip = "",
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
-  indicatorPostion = "right",
+  indicatorPostion = "left",
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -103,7 +103,10 @@ const ChangeIndicator = ({
           </>
         ) : (
           <ZigTypography variant={"body2"} color={"neutral400"}>
-            -
+            {
+              // eslint-disable-next-line i18next/no-literal-string
+              "-"
+            }
           </ZigTypography>
         )}
       </Box>
