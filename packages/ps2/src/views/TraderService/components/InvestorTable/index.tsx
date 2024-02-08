@@ -40,6 +40,7 @@ import { OpenInNew } from '@mui/icons-material';
 import { useFilteredInvestors, useInvestorFilters } from './use';
 import { usePersistTable } from '../../../../apis/settings/use';
 import { TableId } from '../../../../apis/settings/types';
+import Deactivated from '../DeactivatedService';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -344,6 +345,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       }),
     ];
   }, [service]);
+  if (service?.activated === false) return <Deactivated />;
 
   return (
     <LayoutContentWrapper

@@ -13,6 +13,8 @@ import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
+import { PageWithHeaderContainer } from '../styles';
+import Deactivated from '../DeactivatedService';
 
 const ApiKeyManagement: React.FC = () => {
   const { t } = useTranslation(['management', 'action', 'service']);
@@ -25,8 +27,10 @@ const ApiKeyManagement: React.FC = () => {
   } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
   const { data: serviceData } = useServiceDetails(serviceId);
 
+  if (serviceData?.activated === false) return <Deactivated />;
+
   return (
-    <>
+    <PageWithHeaderContainer>
       <TitleBox
         sx={{
           display: 'flex',
@@ -98,7 +102,7 @@ const ApiKeyManagement: React.FC = () => {
           ))}
         </ApiKeysContainer>
       )}
-    </>
+    </PageWithHeaderContainer>
   );
 };
 

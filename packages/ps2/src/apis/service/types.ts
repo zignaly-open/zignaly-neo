@@ -130,6 +130,7 @@ export type Service = {
   pnlSsc365t: string;
   zglySuccessFee: number;
   storedZglySuccessFee: number;
+  activated: boolean;
 };
 
 export type TraderServiceChart = {
