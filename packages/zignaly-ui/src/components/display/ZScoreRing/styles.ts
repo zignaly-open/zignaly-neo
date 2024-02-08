@@ -30,7 +30,7 @@ export const AnimatedRingSvg = styled("svg")`
   }
 `;
 
-export const AnimatedRingCircle1 = styled("circle", { shouldForwardProp: () => true })`
+export const AnimatedRingCircle = styled("circle", { shouldForwardProp: () => true })`
   opacity: 0.5;
   animation: ${ringAnimation} 1s ease-out forwards;
 `;
