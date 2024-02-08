@@ -3,6 +3,7 @@ import { SwapCoinsModalProps, CoinsSelect } from './types';
 import {
   CenteredLoader,
   trimZeros,
+  ZigAlertMessage,
   ZigButton,
   ZigInputAmount,
   ZigModalActions,
@@ -23,6 +24,7 @@ import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
 import { allowedDeposits } from '../../../../util/coins';
+import { useOpenWithdrawModal } from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 
 function SwapCoinsForm({
   setStep,
@@ -31,7 +33,7 @@ function SwapCoinsForm({
   refetchBalance,
   close,
 }: SwapCoinsModalProps) {
-  const { t } = useTranslation('swap-coins');
+  const { t } = useTranslation(['swap-coins', 'action']);
   const exchange = useActiveExchange();
   const [confirmationData, setConfirmationData] = useState<{
     fromCoinAmount: number;
@@ -60,7 +62,7 @@ function SwapCoinsForm({
           />
         ),
       }))
-      .filter((c) => c.available > 0 && allowedDeposits.spot.includes(c.coin));
+      .filter((c) => c.available > 0);
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
@@ -74,6 +76,7 @@ function SwapCoinsForm({
     {} as CoinsSelect,
   );
   const [minAmount, setMinAmount] = useState<number>(0);
+  const openWithdrawModal = useOpenWithdrawModal();
 
   const {
     handleSubmit,
@@ -250,6 +253,26 @@ function SwapCoinsForm({
           />
         )}
       />
+      {!coinOptionsAllowedSwapTo.length && (
+        <Box display={'flex'} gap={'30px'} justifyContent={'center'}>
+          <ZigAlertMessage
+            text={t('empty-list-warning', { coin: selectedFromToken.coin })}
+          />
+          <ZigButton
+            narrow
+            id={`balance-row__withdrawal-${selectedFromToken.coin}`}
+            onClick={() =>
+              openWithdrawModal({
+                selectedCoin: selectedFromToken.coin,
+              })
+            }
+            sx={{ maxHeight: '20px', mr: 1 }}
+            variant='outlined'
+          >
+            {t('action:withdraw')}
+          </ZigButton>
+        </Box>
+      )}
 
       <ZigModalActions position={'relative'}>
         <ZigButton
