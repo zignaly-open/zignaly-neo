@@ -194,21 +194,24 @@ exports[`components/display/ZigTable/ZigTableRtkFiniteQuery should render table 
         id="test-table__pages"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 css-1fd2nuh-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1xdzqt9-MuiTypography-root"
         >
           Page
         </span>
+         
         <h3
           class="MuiTypography-root MuiTypography-h3 css-1hbb7p8-MuiTypography-root"
           id="test-table__current-page"
         >
           1
         </h3>
+         
         <span
           class="MuiTypography-root MuiTypography-body1 css-1xdzqt9-MuiTypography-root"
         >
           out of
         </span>
+         
         <span
           class="MuiTypography-root MuiTypography-body1 css-cfpb58-MuiTypography-root"
           id="test-table__total-page-count"
@@ -267,6 +270,7 @@ exports[`components/display/ZigTable/ZigTableRtkFiniteQuery should render table 
       >
         Displaying
       </span>
+       
       <div
         class="css-51rdm7"
       >
@@ -349,6 +353,7 @@ exports[`components/display/ZigTable/ZigTableRtkFiniteQuery should render table 
           </div>
         </div>
       </div>
+       
       <span
         class="MuiTypography-root MuiTypography-body1 css-1fd2nuh-MuiTypography-root"
       >

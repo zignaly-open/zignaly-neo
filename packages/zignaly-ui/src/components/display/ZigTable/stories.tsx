@@ -12,6 +12,7 @@ import ZigButton from "components/inputs/ZigButton";
 import { Box } from "@mui/material";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
+import { storybookI18nextDecorator } from "../../../utils/dummyI18nextProvider";
 
 type ZigTableProps = React.ComponentProps<typeof ZigTable>;
 type Story = StoryObj<ZigTableProps>;
@@ -228,6 +229,7 @@ export default {
   component: ZigTable,
   decorators: [
     (story: () => JSX.Element) => <div style={{ paddingBottom: "2rem" }}>{story()}</div>,
+    storybookI18nextDecorator,
   ],
 } as Meta<ZigTableProps>;
 

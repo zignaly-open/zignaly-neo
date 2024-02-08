@@ -78,7 +78,7 @@ i18n
           '') + '/locales/{{lng}}/{{ns}}.json',
     },
     debug: false,
-    ns: ['common', 'error', 'pages'],
+    ns: ['common', 'error', 'pages', 'zignaly-ui'],
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
     fallbackNS: 'common',

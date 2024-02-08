@@ -118,7 +118,13 @@ const ZigSliderInput = ({
             color={labels.left ? "highlighted" : "neutral200"}
             id={prefixId && `${prefixId}__left-label-value`}
           >
-            {isRangeMode ? 100 - value : 0}%
+            {isRangeMode ? 100 - value : 0}
+            {
+              // yeah sure we can use a translation for this but this means one more default value EVERYWHERE we use %
+              // weighing all pros and cons: miss me with that
+              // eslint-disable-next-line i18next/no-literal-string
+              "%"
+            }
           </Label>
         </TextContainer>
         <Bar ref={sliderRef}>
@@ -133,7 +139,11 @@ const ZigSliderInput = ({
                   color={"highlighted"}
                   id={prefixId && `${prefixId}__dot-label`}
                 >
-                  {value}%
+                  {value}
+                  {
+                    // eslint-disable-next-line i18next/no-literal-string
+                    "%"
+                  }
                 </DotLabel>
               )}
             </Dot>
@@ -157,7 +167,11 @@ const ZigSliderInput = ({
             color={labels.right ? "highlighted" : "neutral200"}
             id={prefixId && `${prefixId}__right-label-value`}
           >
-            {isRangeMode ? value : 100}%
+            {isRangeMode ? value : 100}
+            {
+              // eslint-disable-next-line i18next/no-literal-string
+              "%"
+            }
           </Label>
         </TextContainer>
       </Layout>

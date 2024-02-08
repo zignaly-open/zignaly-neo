@@ -28,6 +28,7 @@ export type ZigDropdownProps = {
   anchorOrigin?: PopoverOrigin;
   anchorPosition?: PopoverPosition;
   transformOrigin?: PopoverOrigin;
+  disabled?: boolean;
 };
 
 export type ZigDropdownHandle = {

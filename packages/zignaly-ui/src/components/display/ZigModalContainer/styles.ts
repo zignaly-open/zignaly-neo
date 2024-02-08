@@ -102,7 +102,9 @@ export const Body = styled("div", {
   }
 `;
 
-export const Header = styled(Box)<{ compact: boolean }>`
+export const Header = styled(Box, { shouldForwardProp: (p) => p !== "compact" })<{
+  compact: boolean;
+}>`
   display: flex;
   z-index: 996;
   position: relative;

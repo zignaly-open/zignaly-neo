@@ -3,10 +3,16 @@ import { precisionNumberToDecimals } from 'util/numbers';
 import * as yup from 'yup';
 import { inputAmountValidation } from 'util/validation';
 
+// Let's hope this doesn't change in the future, or they add a better property.
+// But we also fetch deposit address to check if a memo is required
+export const MEMO_SPECIAL_TIP =
+  'Both a memo/tag and an address are required to successfully deposit your assets to Binance.';
+
 export const withdrawAmountValidation = (
   coin: string,
   balance: string,
   network: CoinNetwork,
+  memoRequired: boolean,
 ) => {
   return yup.object().shape({
     amount: inputAmountValidation({
@@ -25,18 +31,18 @@ export const withdrawAmountValidation = (
         RegExp(network?.addressRegex),
         'withdraw-crypto:withdrawAddress.invalid',
       ),
-    ...(network?.memoRegex && {
-      tag: yup
-        .string()
-        .required('error:error.required')
-        .matches(
-          RegExp(network.memoRegex),
-          'withdraw-crypto:withdrawMemo.invalid',
-        ),
-    }),
-    ...(network?.specialTips &&
-      !network?.memoRegex && {
-        tag: yup.string().required('withdraw-crypto:withdrawMemo.required'),
-      }),
+    ...(network?.memoRegex
+      ? {
+          tag: yup
+            .string()
+            .required('error:error.required')
+            .matches(
+              RegExp(network.memoRegex),
+              'withdraw-crypto:withdrawMemo.invalid',
+            ),
+        }
+      : memoRequired && {
+          tag: yup.string().required('withdraw-crypto:withdrawMemo.required'),
+        }),
   });
 };
