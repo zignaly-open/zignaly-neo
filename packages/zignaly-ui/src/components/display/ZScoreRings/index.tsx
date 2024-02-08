@@ -39,7 +39,7 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
               {Math.round(zScore)}
             </ZigTypography>
             <ZigTypography component={"span"} fontWeight={400} fontSize={9} lineHeight={"12px"}>
-              /100
+              {"/100"}
             </ZigTypography>
           </Box>
         </Box>
