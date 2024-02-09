@@ -59,6 +59,7 @@ const MyDashboard: React.FC = () => {
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const xl = useMediaQuery(theme.breakpoints.up('xl'));
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   useEffect(() => () => setActiveRow(null), []);
   const isZScoreOn = isFeatureOn(Features.ZScore);
@@ -210,19 +211,23 @@ const MyDashboard: React.FC = () => {
         : []),
       ...(md
         ? [
-            columnHelper.accessor((row) => +row.pnl90dPct, {
-              header: t('tableHeader.3-mos-title'),
-              id: 'pnl90dPct',
-              cell: ({ getValue, row: { original } }) => (
-                <ChangeIndicator
-                  id={`portfolio-table__pnl90dPct-${original.serviceId}`}
-                  normalized
-                  type='default'
-                  value={new BigNumber(getValue()).toFixed()}
-                />
-              ),
-              sortingFn: 'auto',
-            }),
+            ...(xl || !isFeatureOn(Features.ZScore)
+              ? [
+                  columnHelper.accessor((row) => +row.pnl90dPct, {
+                    header: t('tableHeader.3-mos-title'),
+                    id: 'pnl90dPct',
+                    cell: ({ getValue, row: { original } }) => (
+                      <ChangeIndicator
+                        id={`portfolio-table__pnl90dPct-${original.serviceId}`}
+                        normalized
+                        type='default'
+                        value={new BigNumber(getValue()).toFixed()}
+                      />
+                    ),
+                    sortingFn: 'auto',
+                  }),
+                ]
+              : []),
             columnHelper.accessor((row) => +row.pnl180dPct, {
               header: t('tableHeader.6-mos-title'),
               id: 'pnl180dPct',
@@ -261,16 +266,16 @@ const MyDashboard: React.FC = () => {
               },
               sortingFn: 'auto',
             }),
-            ...(lg && isZScoreOn
+            ...(isZScoreOn && md
               ? [
                   columnHelper.accessor((row) => row.zscore, {
                     id: 'zscore',
-                    header: t('table.zscore'),
+                    header: t('tableHeader.zscore'),
                     cell: ({ getValue, row: { original } }) => (
                       <Box id={`portfolio-table__zscore-${original.serviceId}`}>
                         <ZScore
                           value={getValue()}
-                          mini={!sm}
+                          mini={!lg}
                           onClick={() =>
                             showModal(ZScoreModal, {
                               serviceId: original.serviceId,
@@ -291,12 +296,12 @@ const MyDashboard: React.FC = () => {
                     serviceId: row?.original?.serviceId?.toString(),
                   })}
                   sx={{
+                    width: 1,
                     cursor: 'pointer',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     flexDirection: 'row',
                     display: 'flex',
-                    textAlign: 'start',
-                    width: '0px',
                   }}
                   id={`portfolio-table__link-${row.original.serviceId}`}
                 >
