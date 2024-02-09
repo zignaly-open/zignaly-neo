@@ -78,7 +78,7 @@ const RichDescriptionEditor = ({
   const ref = useRef(null);
   const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
   const [isTruncated, setIsTruncated] = useState(true);
-  
+
   useEffect(() => {
     setShouldShowReadMore(
       readMore && ref.current.scrollHeight > ref.current.clientHeight,
