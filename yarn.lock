@@ -7971,6 +7971,13 @@
   resolved "https://registry.npmjs.org/@webpack-cli/serve/-/serve-1.7.0.tgz"
   integrity sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==
 
+"@xfuturum/is-font-installed@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@xfuturum/is-font-installed/-/is-font-installed-1.0.0.tgz#c1fef6fb3b170ab778fe4c536f4de41045d7c148"
+  integrity sha512-r9lfYybBwBIL6DCCsb0UVhjKryQ4z4lWLRbg/9W61N46WHXZl0v2uKTKZIo9nMosG/fq+x5mXFcuIV5svT7eig==
+  dependencies:
+    typescript "^5.3.3"
+
 "@xmldom/xmldom@^0.8.3":
   version "0.8.7"
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.7.tgz#8b1e39c547013941974d83ad5e9cf5042071a9a0"
@@ -21285,7 +21292,7 @@ typescript@4.9.4:
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
-"typescript@^4.6.4 || ^5.2.2":
+"typescript@^4.6.4 || ^5.2.2", typescript@^5.3.3:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.3.tgz#b3ce6ba258e72e6305ba66f5c9b452aaee3ffe37"
   integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
