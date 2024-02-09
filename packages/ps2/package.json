@@ -67,7 +67,7 @@
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
     "@types/react-share": "^4.0.0",
-    "@xfuturum/is-font-installed": "1.0.0",
+    "@xfuturum/is-font-installed": "1.0.1",
     "@zignaly-open/tracker": "^0.1.3",
     "@zignaly-open/ui": "^0.6.18",
     "analytics": "^0.8.9",
