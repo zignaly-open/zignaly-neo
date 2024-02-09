@@ -120,9 +120,8 @@ function SwapCoinsForm({
     }
   }, [minAmount]);
 
-  const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
-    selectedFromToken.coin,
-  );
+  const { data: allowedCoinsSwapTo, isFetching: isFetchingAssets } =
+    useQuoteAssetsCoin(selectedFromToken.coin);
   const coinOptionsAllowedSwapTo = useMemo(() => {
     if (!allowedCoinsSwapTo) return [];
 
@@ -253,7 +252,7 @@ function SwapCoinsForm({
           />
         )}
       />
-      {!coinOptionsAllowedSwapTo.length && (
+      {!coinOptionsAllowedSwapTo.length && !isFetchingAssets && (
         <Box display={'flex'} gap={'30px'} justifyContent={'center'}>
           <ZigAlertMessage
             text={t('empty-list-warning', { coin: selectedFromToken.coin })}
