@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
 import { Editable } from 'slate-react';
+
 export const StyledEditable = styled(Editable)<{
   readOnly: boolean;
   error: boolean;
