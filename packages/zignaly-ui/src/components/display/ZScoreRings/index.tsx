@@ -35,6 +35,7 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
               fontSize={19}
               color="neutral000"
               lineHeight={"14px"}
+              id={`${prefixId}__zscore`}
             >
               {Math.round(zScore)}
             </ZigTypography>

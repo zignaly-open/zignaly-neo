@@ -117,7 +117,9 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
             >
               {lg && <ServiceSummary service={service} />}
               {isFeatureOn(Features.ZScore) && (
-                <ServiceZScoreDetails service={service} />
+                <Box mb={{ xs: 4, md: 0 }}>
+                  <ServiceZScoreDetails service={service} />
+                </Box>
               )}
             </Grid>
           )}
