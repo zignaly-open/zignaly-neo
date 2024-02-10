@@ -4,5 +4,12 @@
     "profile-config": "Profile Config",
     "communication-config": "Communications",
     "settings-config": "Settings"
+  },
+  "apply": "Apply",
+  "sizes": {
+    "preview-size": "Preview Size:",
+    "mobile": "Mobile",
+    "tabled": "Tablet",
+    "desktop": "Desktop"
   }
 }

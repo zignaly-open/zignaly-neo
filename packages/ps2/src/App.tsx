@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import Router from './Router';
-import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import {
+  getZignalyThemeExport,
+  ThemeOverridesType,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
   // has to be imported from the same module from where we call the show toast
@@ -27,6 +28,7 @@ import ZModal from './components/ZModal';
 import ZigErrorBoundary from './util/ZigErrorBoundary';
 import './util/i18n/i18nextWhitelabel';
 import MissingExchangeChecker from 'components/Navigation/Checkers/MissingExchangeChecker';
+import { whitelabel } from './whitelabel';
 
 // import * as Sentry from '@sentry/browser';
 // TODO: use Sentry
@@ -44,41 +46,103 @@ import MissingExchangeChecker from 'components/Navigation/Checkers/MissingExchan
 
 export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
   children,
-}) => (
-  <Provider store={store}>
-    <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
-      <ThemeInheritorMui theme={themeMui}>
-        <ThemeProviderMui theme={themeMui}>
-          <GlobalStyle />
-          <ToastContainer
-            position='top-right'
-            autoClose={5000}
-            hideProgressBar
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            closeButton={false}
-            pauseOnHover
-            theme='dark'
-          />
-          <PersistGate persistor={persistor}>
-            <BrowserRouter>
-              <ZigErrorBoundary>
-                <Suspense fallback={zigSuspenseFallback}>
-                  <ModalProvider
-                    fallback={<ZModal allowUnauth wide open isLoading />}
-                  >
-                    {children}
-                  </ModalProvider>
-                </Suspense>
-              </ZigErrorBoundary>
-            </BrowserRouter>
-          </PersistGate>
-        </ThemeProviderMui>
-      </ThemeInheritorMui>
-    </ThemeInheritorStyled>
-  </Provider>
-);
+}) => {
+  const [backofficeDebugConfigOverrides, setBackofficeDebugConfigOverrides] =
+    useState<ThemeOverridesType>(null);
+
+  useEffect(() => {
+    window.addEventListener(
+      'message',
+      function (event) {
+        // @ts-ignore
+        const origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // TODO: check domains
+        // TODO: DO NOT FORGET
+        // if (origin !== 'http://localhost:8000') return;
+        if (
+          typeof event.data == 'object' &&
+          event.data.call == 'passDebugTemplateOverride'
+        ) {
+          setBackofficeDebugConfigOverrides(event.data.overrides);
+        }
+      },
+      false,
+    );
+  }, []);
+
+  const { mui: themeMui, legacyStyledComponentsDoNotUse } = useMemo(() => {
+    return getZignalyThemeExport(whitelabel?.theme || 'dark', [
+      whitelabel.themeOverrides,
+      // backofficeDebugConfigOverrides,
+    ] as unknown as ThemeOverridesType[]);
+  }, [backofficeDebugConfigOverrides]);
+
+  return (
+    <Provider store={store}>
+      <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+        <ThemeInheritorMui theme={themeMui}>
+          <ThemeProviderMui theme={themeMui}>
+            <GlobalStyle />
+            <ToastContainer
+              position='top-right'
+              autoClose={5000}
+              hideProgressBar
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              closeButton={false}
+              pauseOnHover
+              theme='dark'
+            />
+            <PersistGate persistor={persistor}>
+              <BrowserRouter>
+                <ZigErrorBoundary>
+                  <Suspense fallback={zigSuspenseFallback}>
+                    <ModalProvider
+                      fallback={<ZModal allowUnauth wide open isLoading />}
+                    >
+                      {children}
+                    </ModalProvider>
+                  </Suspense>
+                </ZigErrorBoundary>
+              </BrowserRouter>
+            </PersistGate>
+          </ThemeProviderMui>
+        </ThemeInheritorMui>
+      </ThemeInheritorStyled>
+    </Provider>
+  );
+};
 
 function App() {
   useReferralCookie();
