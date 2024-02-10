@@ -8,6 +8,10 @@ import Users from './components/Users';
 import Withdrawals from './components/Transfers/Withdrawals';
 import Deposits from './components/Transfers/Deposits';
 import Logs from './components/Logs';
+import ThemeConfig from './components/Config/ThemeConfig';
+import SettingsConfig from 'components/Config/SettingsConfig';
+import ProfileConfig from 'components/Config/ProfileConfig';
+import CommunicationConfig from './components/Config/CommunicationConfig';
 
 const Router: React.FC = () => (
   <RouterRoutes>
@@ -16,6 +20,28 @@ const Router: React.FC = () => (
       <Route path={Routes.ROUTE_DEPOSITS} element={<Deposits />} />
       <Route path={Routes.ROUTE_WITHDRAWALS} element={<Withdrawals />} />
       <Route path={Routes.ROUTE_LOGS} element={<Logs />} />
+      <Route path={Routes.ROUTE_CONFIG}>
+        <Route
+          path={Routes.ROUTE_CONFIG}
+          element={<Navigate to={Routes.ROUTE_CONFIG_PROFILE} />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_THEME}
+          element={<ThemeConfig />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_SETTINGS}
+          element={<SettingsConfig />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_PROFILE}
+          element={<ProfileConfig />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_COMMUNICATION}
+          element={<CommunicationConfig />}
+        ></Route>
+      </Route>
     </Route>
 
     <Route element={<UnauthenticatedWall />}>

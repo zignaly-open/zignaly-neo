@@ -13,6 +13,7 @@
     "logout": "Logout",
     "withdrawals": "Withdrawals",
     "logs": "Logs",
+    "config": "Config",
     "deposits": "Deposits",
     "users": "Users"
   },

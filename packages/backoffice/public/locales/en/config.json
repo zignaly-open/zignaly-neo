@@ -1,0 +1,8 @@
+{
+  "navigation": {
+    "theme-config": "Theme Config",
+    "profile-config": "Profile Config",
+    "communication-config": "Communications",
+    "settings-config": "Settings"
+  }
+}

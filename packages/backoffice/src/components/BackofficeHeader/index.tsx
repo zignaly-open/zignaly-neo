@@ -4,6 +4,7 @@ import { NavigationLink } from './atoms';
 import { Box, Toolbar } from '@mui/material';
 import { Container, StyledAppBar } from './styles';
 import {
+  ROUTE_CONFIG,
   ROUTE_DEPOSITS,
   ROUTE_LOGIN,
   ROUTE_LOGS,
@@ -49,6 +50,9 @@ const BackofficeHeader: React.FC = () => {
                     </NavigationLink>
                     <NavigationLink to={ROUTE_LOGS} key='--route-logs'>
                       {t('navigation.logs')}
+                    </NavigationLink>
+                    <NavigationLink to={ROUTE_CONFIG} key='--route-config'>
+                      {t('navigation.config')}
                     </NavigationLink>
                   </>
                 ) : (
