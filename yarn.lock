@@ -7971,10 +7971,10 @@
   resolved "https://registry.npmjs.org/@webpack-cli/serve/-/serve-1.7.0.tgz"
   integrity sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==
 
-"@xfuturum/is-font-installed@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@xfuturum/is-font-installed/-/is-font-installed-1.0.1.tgz#66ff33aefbd2f09019df53ada12170eee3488bd9"
-  integrity sha512-E0qmTn29ncWc+h2AtryxdCZwICnXqq2qxX9bzxUceiNNHIXuqTiTiDGbR3T+AgIFOS9pSgorutBDl8JPAp/IHQ==
+"@xfuturum/is-font-installed@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@xfuturum/is-font-installed/-/is-font-installed-1.0.2.tgz#1e05c39bec25c0ac8d21a13585303542fe55f08c"
+  integrity sha512-bil5QamJAKK0HCZk0HiNO+fZy7ujzgAq2Bg/Z/+SLZDR4E7TxgTDXrzBxcQ8OPAONc+bn5aqnLfRQPu7uOhrtA==
 
 "@xmldom/xmldom@^0.8.3":
   version "0.8.7"
