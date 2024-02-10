@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, Grid, useMediaQuery } from '@mui/material';
+import { Box, Divider, Grid, useMediaQuery, useTheme } from '@mui/material';
 import {
   ZigButton,
   ZigModalActions,
@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { SwapCoinsConfirmFormProps } from './types';
 import { useToast } from '../../../../util/hooks/useToast';
 import { useConvertMutation } from '../../../../apis/coin/api';
-import theme from '../../../../theme';
 
 const SwapCoinsConfirmForm = ({
   toCoin,
@@ -25,6 +24,7 @@ const SwapCoinsConfirmForm = ({
   internalId,
 }: SwapCoinsConfirmFormProps) => {
   const { t } = useTranslation('swap-coins');
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const [convert, convertStatus] = useConvertMutation();
   const handleConvert = () =>

@@ -6,8 +6,7 @@ import React, { useMemo } from 'react';
 import { useIsAuthenticated } from '../../../../../apis/user/use';
 import { useIsInvestedInService } from '../../../../../apis/investment/use';
 import { Service } from '../../../../../apis/service/types';
-import { useMediaQuery } from '@mui/material';
-import theme from '../../../../../theme';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { RightSideActionWrapper } from '../styles';
 import { Loader, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ROUTE_PROFIT_SHARING_SERVICE_INVEST } from '../../../../../routes';
@@ -29,6 +28,7 @@ enum RightSideActionStates {
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
   const isInvested = useIsInvestedInService(service.id);
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation('service');
