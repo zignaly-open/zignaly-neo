@@ -1,8 +1,6 @@
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import React, { Suspense } from 'react';
 import Router from './Router';
 import {
-  getZignalyThemeExport,
-  ThemeOverridesType,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
   // has to be imported from the same module from where we call the show toast
@@ -28,7 +26,7 @@ import ZModal from './components/ZModal';
 import ZigErrorBoundary from './util/ZigErrorBoundary';
 import './util/i18n/i18nextWhitelabel';
 import MissingExchangeChecker from 'components/Navigation/Checkers/MissingExchangeChecker';
-import { whitelabel } from './whitelabel';
+import { useWlInstanceThemeWithDebugStyling } from './theme';
 
 // import * as Sentry from '@sentry/browser';
 // TODO: use Sentry
@@ -47,65 +45,8 @@ import { whitelabel } from './whitelabel';
 export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => {
-  const [backofficeDebugConfigOverrides, setBackofficeDebugConfigOverrides] =
-    useState<ThemeOverridesType>(null);
-
-  useEffect(() => {
-    window.addEventListener(
-      'message',
-      function (event) {
-        // @ts-ignore
-        const origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // if (origin !== 'http://localhost:8000') return;
-        if (
-          typeof event.data == 'object' &&
-          event.data.call == 'passDebugTemplateOverride'
-        ) {
-          setBackofficeDebugConfigOverrides(event.data.overrides);
-        }
-      },
-      false,
-    );
-  }, []);
-
-  const { mui: themeMui, legacyStyledComponentsDoNotUse } = useMemo(() => {
-    return getZignalyThemeExport(whitelabel?.theme || 'dark', [
-      whitelabel.themeOverrides,
-      // backofficeDebugConfigOverrides,
-    ] as unknown as ThemeOverridesType[]);
-  }, [backofficeDebugConfigOverrides]);
+  const { mui: themeMui, legacyStyledComponentsDoNotUse } =
+    useWlInstanceThemeWithDebugStyling();
 
   return (
     <Provider store={store}>
