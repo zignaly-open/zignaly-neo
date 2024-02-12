@@ -15,7 +15,8 @@
     "save-and-close": "Save and Close",
     "copied": "Copied to clipboard",
     "proceed": "Proceed",
-    "export": "Export All",
+    "export": "Export",
+    "export-all": "Export All",
     "hide": "Hide",
     "show": "Show"
 }
