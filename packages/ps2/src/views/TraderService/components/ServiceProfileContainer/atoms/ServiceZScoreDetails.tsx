@@ -49,6 +49,7 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
             service={zscore.serviceManagement}
             serviceMax={maxZscore.serviceManagement}
             zScore={data.zscore}
+            id={'service-profile__zscore-rings'}
           />
           <Box
             display={'flex'}
