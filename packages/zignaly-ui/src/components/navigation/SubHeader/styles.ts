@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
-import { Theme } from "@mui/system";
+import { Box, Theme } from "@mui/system";
 import { lighten } from "@mui/material/styles";
 
 // FIXME
@@ -19,14 +19,16 @@ export const Layout = styled("div")`
   z-index: 50;
 `;
 
-export const Container = styled("div")`
-  display: grid;
-  grid-template-columns: 25% repeat(4, minmax(0%, 100%));
-
-  > div:first-of-type > div:first-of-type,
-  > div:last-of-type > div:first-of-type {
-    border-left: 1px dotted ${({ theme }) => theme.palette.neutral600};
+export const Container = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  & > * {
+    flex: 1;
     border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
+  }
+  &:first-child {
+    border-left: 1px dotted ${({ theme }) => theme.palette.neutral600};
   }
 `;
 

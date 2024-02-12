@@ -3,16 +3,19 @@ import { Layout, Container } from "./styles";
 import { MarginContainer } from "../../styled";
 import { RouteDropdown, ServiceListOption } from "./atoms";
 import { SubHeaderDropdown, SubHeaderElement, SubHeaderRoute } from "./types";
+import { SxProps } from "@mui/system";
 
 function SubHeader({
   routes,
+  containerSx,
 }: {
+  containerSx?: SxProps;
   routes: (SubHeaderElement | SubHeaderRoute | SubHeaderDropdown)[];
 }) {
   return (
     <Layout>
       <MarginContainer>
-        <Container>
+        <Container sx={containerSx}>
           {routes.map((r) => {
             if ("element" in r) {
               return <React.Fragment key={r.id}>{r.element}</React.Fragment>;
@@ -30,3 +33,4 @@ function SubHeader({
 }
 
 export default SubHeader;
+export { SubHeaderRoute };

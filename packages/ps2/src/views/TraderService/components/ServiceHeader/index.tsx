@@ -1,20 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MarginContainer, ZigTypography } from '@zignaly-open/ui';
-import {
-  Layout,
-  Container,
-  Options,
-  ServiceDropDown,
-  ServiceOption,
-} from './styles';
+import { SubHeader, ZigTypography } from '@zignaly-open/ui';
+import { Options, ServiceDropDown, ServiceOption } from './styles';
 import {
   useIsServiceOwner,
   useTraderServices,
 } from '../../../../apis/service/use';
 import { TraderService } from '../../../../apis/service/types';
 import { generatePath, Link, useParams, useLocation } from 'react-router-dom';
-import { RouteDropdown, RouteGroup } from './atoms';
 import {
   ROUTE_TRADING_SERVICE,
   ROUTE_TRADING_SERVICE_API,
@@ -24,13 +17,14 @@ import {
 } from '../../../../routes';
 import { Check } from '@mui/icons-material';
 import { Box } from '@mui/material';
+import { useConvertRouteToSubHeaderFormat } from './util';
 
-// TODO: make a generic component
 function ServiceHeader() {
   const menuDropDownRef = useRef(null);
   const { t } = useTranslation('service-header');
   const { serviceId } = useParams();
   const currentPath = useLocation()?.pathname;
+  const routeToSubHeaderRoute = useConvertRouteToSubHeaderFormat();
   const isOwner = useIsServiceOwner(serviceId);
 
   const { data: myServicesList } = useTraderServices();
@@ -44,15 +38,10 @@ function ServiceHeader() {
     }
   }, [serviceId]);
 
-  if (!isOwner) {
-    // Show nothing for non-service owners
-    return <></>;
-  }
-
-  return (
-    <Layout>
-      <MarginContainer>
-        <Container>
+  const options = useMemo(
+    () => [
+      {
+        element: (
           <ServiceDropDown
             id={'service-management-header__choose-service'}
             ref={menuDropDownRef}
@@ -86,65 +75,60 @@ function ServiceHeader() {
               ))}
             </Options>
           </ServiceDropDown>
-
-          <RouteGroup
-            routes={[
-              {
-                name: t('managements-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                  serviceId,
-                }),
-                id: `service-management-header__manage-funds`,
-              },
-            ]}
-          />
-
-          <RouteGroup
-            routes={[
-              {
-                name: t('dropdown.trade.links.api'),
-                path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
-                id: `service-management-header__service-api`,
-              },
-            ]}
-          />
-
-          <RouteGroup
-            routes={[
-              {
-                name: t('investors-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
-                  serviceId,
-                }),
-                id: `service-management-header__investors`,
-              },
-            ]}
-          />
-
-          <RouteDropdown
-            id={'service-management-header__choose-option'}
-            title={t('dropdown.profile.title')}
-            routes={[
-              {
-                name: t('dropdown.profile.links.profile'),
-                path: generatePath(ROUTE_TRADING_SERVICE, {
-                  serviceId,
-                }),
-                id: `service-management-header__service-profile`,
-              },
-              {
-                name: t('dropdown.profile.links.profile-edit'),
-                path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
-                  serviceId,
-                }),
-                id: `service-management-header__edit-service`,
-              },
-            ]}
-          />
-        </Container>
-      </MarginContainer>
-    </Layout>
+        ),
+        id: 'service-management-header__choose-service',
+      },
+      routeToSubHeaderRoute({
+        name: t('managements-label'),
+        path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+          serviceId,
+        }),
+        id: `service-management-header__manage-funds`,
+      }),
+      routeToSubHeaderRoute({
+        name: t('dropdown.trade.links.api'),
+        path: generatePath(ROUTE_TRADING_SERVICE_API, {
+          serviceId,
+        }),
+        id: `service-management-header__service-api`,
+      }),
+      routeToSubHeaderRoute({
+        name: t('investors-label'),
+        path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
+          serviceId,
+        }),
+        id: `service-management-header__investors`,
+      }),
+      {
+        id: 'service-management-header__choose-option',
+        name: t('dropdown.profile.title'),
+        routes: [
+          {
+            name: t('dropdown.profile.links.profile'),
+            path: generatePath(ROUTE_TRADING_SERVICE, {
+              serviceId,
+            }),
+            id: `service-management-header__service-profile`,
+          },
+          {
+            name: t('dropdown.profile.links.profile-edit'),
+            path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
+              serviceId,
+            }),
+            id: `service-management-header__edit-service`,
+          },
+        ].map(routeToSubHeaderRoute),
+      },
+    ],
+    [menuDropDownRef, activeService, myServicesList, t, currentPath],
   );
+
+  if (!isOwner) {
+    // Show nothing for non-service owners
+    return <></>;
+  }
+
+  return <SubHeader routes={options} />;
 }
 
 export default ServiceHeader;
