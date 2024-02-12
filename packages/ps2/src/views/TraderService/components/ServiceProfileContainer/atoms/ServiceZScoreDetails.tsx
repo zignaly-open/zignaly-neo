@@ -26,11 +26,15 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
   return (
     <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
       <Box display={'flex'} alignItems={'center'} gap={'14px'} mb='6px'>
-        <ZScoreIcon width={22} height={22} />
+        <ZScoreIcon
+          width={22}
+          height={22}
+          id={'service-profile__zscore-icon'}
+        />
         <ZigTypography
           variant={'h2'}
-          color={'neutral200'}
-          id={'service-profile__z-score'}
+          color={'neutral100'}
+          id={'service-profile__zscore'}
         >
           {t('z-score')}
         </ZigTypography>
@@ -45,13 +49,18 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
             service={zscore.serviceManagement}
             serviceMax={maxZscore.serviceManagement}
             zScore={data.zscore}
+            id={'service-profile__zscore-rings'}
           />
           <Box
             display={'flex'}
             bgcolor={'neutral800'}
-            width={lg ? 320 : 1}
+            borderRadius={'9px'}
+            border={'1px solid'}
+            borderColor={'neutral750'}
+            width={lg ? 328 : 1}
+            maxWidth={600}
             py={'22px'}
-            px={{ xs: '20px', md: '34px' }}
+            px={{ xs: '20px', md: '38px' }}
           >
             <Grid
               container

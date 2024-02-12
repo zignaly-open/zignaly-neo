@@ -8,7 +8,7 @@ import { GradientDefs } from "../ZScoreRing/atoms";
 import { ZScoreRiskCategory } from "../ZScoreRing/types";
 
 const ZScoreRings = (props: ZScoreRingsProps) => {
-  const { zScore, profits, risk, service, ...rest } = props;
+  const { zScore, profits, risk, service, profitsMax, riskMax, serviceMax, ...rest } = props;
   const categories = ["profits", "risk", "service"] as ZScoreRiskCategory[];
   const prefixId = "zscore-rings";
 
@@ -35,6 +35,7 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
               fontSize={19}
               color="neutral000"
               lineHeight={"14px"}
+              id={`${prefixId}__zscore`}
             >
               {Math.round(zScore)}
             </ZigTypography>
@@ -48,8 +49,8 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
             const pct = Math.min((props[category] / props[`${category}Max`]) * 100, 100);
 
             return (
-              <>
-                <GradientDefs prefixId={"zscore-rings"} key={category} category={category} />
+              <React.Fragment key={category}>
+                <GradientDefs prefixId={"zscore-rings"} category={category} />
                 <g transform={`rotate(90) scale(${1 - index * 0.25})`} key={category}>
                   <circle strokeWidth={3 + index} r="15.915" cx="50%" cy="50%" stroke="#242842" />
                   {pct > 50 && (
@@ -71,7 +72,7 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
                     strokeDasharray={pct > 50 ? "50 50" : `${pct} ${100 - pct}`}
                   />
                 </g>
-              </>
+              </React.Fragment>
             );
           })}
         </AnimatedRingSvg>
