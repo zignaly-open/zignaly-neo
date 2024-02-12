@@ -83,7 +83,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
         <GradientDefs prefixId={prefixId} category={category} />
         <g transform="rotate(90)">
           <circle
-            stroke-width="3.4"
+            strokeWidth="3.4"
             r="15.915"
             cx="50%"
             cy="50%"
@@ -92,7 +92,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
           />
           {pct > 50 && (
             <AnimatedRingCircle
-              stroke-width="3.4"
+              strokeWidth="3.4"
               r="15.915"
               cx="50%"
               cy="50%"
@@ -101,7 +101,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             />
           )}
           <AnimatedRingCircle
-            stroke-width="3.4"
+            strokeWidth="3.4"
             r="15.915"
             cx="50%"
             cy="50%"
@@ -109,7 +109,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             strokeDasharray={pct > 50 ? "40 60" : `${normalizedPct} ${100 - normalizedPct}`}
           />
           <AnimatedHandle
-            stroke-width="5"
+            strokeWidth="5"
             r="15.915"
             cx="50%"
             cy="50%"
@@ -118,7 +118,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             strokeDashoffset={-normalizedPct}
           />
           <AnimatedHandle
-            stroke-width="3.2"
+            strokeWidth="3.2"
             r="15.915"
             cx="50%"
             cy="50%"

@@ -24,12 +24,7 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
   } = data?.info || { category: {} };
 
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      alignItems={'center'}
-      mt={lg ? '38px' : 0}
-    >
+    <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
       <Box display={'flex'} alignItems={'center'} gap={'14px'} mb='6px'>
         <ZScoreIcon
           width={22}
@@ -54,6 +49,7 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
             service={zscore.serviceManagement}
             serviceMax={maxZscore.serviceManagement}
             zScore={data.zscore}
+            id={'service-profile__zscore-rings'}
           />
           <Box
             display={'flex'}
