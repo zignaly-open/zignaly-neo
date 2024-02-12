@@ -3,6 +3,10 @@ import { Box } from '@mui/material';
 import { ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { ZigInputProps } from '@zignaly-open/ui/components/inputs/ZigInput/types';
 import { useTranslation } from 'react-i18next';
+import { useFormContext } from 'react-hook-form';
+
+const urlRegex =
+  /^(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})([\/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)$/;
 
 export const SectionHeader: React.FC<{
   title: string;
@@ -16,7 +20,7 @@ export const SectionHeader: React.FC<{
   </Box>
 );
 
-export const GridInput: React.FC<
+export const GridUrlInput: React.FC<
   ZigInputProps & {
     label: string;
     image: JSX.Element;
@@ -24,6 +28,7 @@ export const GridInput: React.FC<
   }
 > = ({ label, image, id, ...rest }) => {
   const { t } = useTranslation('config');
+  const { setValue } = useFormContext();
   return (
     <ZigInput
       id={id}
@@ -46,6 +51,15 @@ export const GridInput: React.FC<
         </ZigTypography>
       }
       {...rest}
+      onBlur={(e) => {
+        const v = e.target.value?.trim();
+        let newValue: string = null;
+        if (v !== e.target.value) newValue = v;
+        if (v && !/^https?:\/\//.test(v) && urlRegex.test(v))
+          newValue = 'https://' + v;
+        if (newValue !== null) setValue(e.target.name, newValue);
+        rest.onBlur(e);
+      }}
     />
   );
 };
