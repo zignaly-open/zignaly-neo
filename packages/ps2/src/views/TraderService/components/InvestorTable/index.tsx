@@ -345,7 +345,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       }),
     ];
   }, [service]);
-  if (service?.activated === false) return <Deactivated />;
 
   return (
     <LayoutContentWrapper
@@ -359,6 +358,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
         return (
           <PageWithHeaderContainer>
+            {service?.activated === false && <Deactivated />}
             <InvestorCounts>
               <Box
                 display={'flex'}
