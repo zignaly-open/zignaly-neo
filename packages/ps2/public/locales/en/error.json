@@ -221,7 +221,8 @@
       "title": "Verification (KYC/KYB) Expired",
       "description": "Your verification (KYC/KYB) has expired and you need to resubmit it to continue accessing all the services.",
       "action": "Review KYC"
-    }
+    },
+    "deactivated-service": "This service is inactive. Check other services"
   },
   "missing-exchange": "There is an issue with your account. Please contact our support",
   "something-went-wrong": "Something went wrong",

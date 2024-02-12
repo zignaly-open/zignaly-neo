@@ -83,6 +83,7 @@ declare module '@mui/material/styles' {
       | 'breakLineSignUp'
       | 'mobileButtonsWrapper'
       | 'toastSuccess'
+      | 'toastError'
       | 'coinIconPlaceholder',
       string
     >;

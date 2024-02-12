@@ -1,8 +1,14 @@
 import { AdditionalProps } from "components/types";
 
-export type ZScoreRiskCategory = "profits" | "risk" | "service" | "balanced";
+export enum ZScoreRiskCategory {
+  Profits = "profits",
+  Risk = "risk",
+  Service = "service",
+  Balanced = "balanced",
+}
+
 export type ZScoreRingProps = {
   value: number;
   max: number;
-  category: ZScoreRiskCategory;
+  category: `${ZScoreRiskCategory}`;
 } & AdditionalProps;

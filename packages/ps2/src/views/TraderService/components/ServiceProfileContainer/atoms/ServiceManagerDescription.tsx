@@ -26,35 +26,33 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
         emptyText={t('about-trader-empty')}
         subtitle={
           <Box
-            sx={{
-              flexDirection: 'row',
-              display: 'flex',
-              flex: 1,
-              alignItems: 'flex-start',
-            }}
+            display='flex'
+            columnGap={2}
+            rowGap='6px'
+            flexWrap={'wrap'}
+            alignItems='center'
+            mb={2}
           >
-            <ZigTypography
-              variant={'h2'}
-              sx={{
-                mb: 1,
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              id={'service-profile__service-owner-name'}
-            >
-              {service.ownerName}
-
-              {service.ownerVerified && (
-                <Tooltip title={t('owner-verified')}>
-                  <StyledVerifiedIcon
-                    sx={{ ml: 1 }}
-                    width={13}
-                    height={13}
-                    id={'service-profile__verified-icon'}
-                  />
-                </Tooltip>
-              )}
-
+            <Box display='flex' alignItems='center' gap='10px'>
+              <Box display='flex' alignItems='center' gap='3px'>
+                <ZigTypography
+                  variant={'h2'}
+                  id={'service-profile__service-owner-name'}
+                  whiteSpace={'nowrap'}
+                >
+                  {service.ownerName}
+                </ZigTypography>
+                {service.ownerVerified && (
+                  <Tooltip title={t('owner-verified')}>
+                    <StyledVerifiedIcon
+                      sx={{ ml: 0 }}
+                      width={13}
+                      height={13}
+                      id={'service-profile__verified-icon'}
+                    />
+                  </Tooltip>
+                )}
+              </Box>
               {service.ownerCountry && flagInFolder && (
                 <Tooltip
                   title={t('owner-from', {
@@ -62,7 +60,10 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                       country || service.ownerCountry?.toLocaleUpperCase(),
                   })}
                 >
-                  <span id={'service-profile__country-flag'}>
+                  <span
+                    id={'service-profile__country-flag'}
+                    style={{ fontSize: 0, lineHeight: 0 }}
+                  >
                     <Flag
                       country={service.ownerCountry}
                       onError={() => {
@@ -72,24 +73,21 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                   </span>
                 </Tooltip>
               )}
-              <ZigTypography
-                sx={{
-                  ml: 2,
-                  position: 'relative',
-                  top: '2px',
-                }}
-                variant={'body2'}
-                color='neutral400'
-                component={'span'}
-                id={'service-profile__trader-joined-time'}
-              >
-                {t('about-trader-joined-time', {
-                  date: formatLocalizedDistance(
-                    new Date(),
-                    new Date(service.ownerCreatedAt),
-                  ),
-                })}
-              </ZigTypography>
+            </Box>
+
+            <ZigTypography
+              variant={'body2'}
+              color='neutral400'
+              component={'span'}
+              id={'service-profile__trader-joined-time'}
+              whiteSpace={'nowrap'}
+            >
+              {t('about-trader-joined-time', {
+                date: formatLocalizedDistance(
+                  new Date(),
+                  new Date(service.ownerCreatedAt),
+                ),
+              })}
             </ZigTypography>
           </Box>
         }

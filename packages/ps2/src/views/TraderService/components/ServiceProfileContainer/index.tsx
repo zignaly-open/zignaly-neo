@@ -16,6 +16,15 @@ import { subMonths } from 'date-fns';
 import ServicePercentageInfo from './atoms/ServicePercentageInfo';
 import Stub from '../../../../components/Stub';
 import ZigErrorBoundary from 'util/ZigErrorBoundary';
+import ServiceZScoreDetails from './atoms/ServiceZScoreDetails';
+import { isFeatureOn } from 'whitelabel';
+import { Features } from 'whitelabel/type';
+
+const MIN_RIGHT_COLUMN_WIDTH = '422px';
+const rightColumnSx = {
+  gap: { lg: '75px', xl: '90px' },
+  flexWrap: { lg: 'nowrap' },
+};
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -77,48 +86,54 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
             </Box>
           </Grid>
         )}
-        <Grid
-          container
-          sx={{ gap: { lg: '75px', xl: '90px' }, flexWrap: { lg: 'nowrap' } }}
-        >
-          <Grid item xs={12} lg={8}>
-            <ZigErrorBoundary
-              fallback={
-                <Box sx={{ background: 'rgba(0,0,0,.2)' }}>
-                  <Stub
-                    title={<>{t('chart-crashed.title')}</>}
-                    description={<>{t('chart-crashed.description')}</>}
-                  />
-                </Box>
-              }
-            >
-              <ServiceGrowthChart service={service} />
-            </ZigErrorBoundary>
-            {!lg && (
-              <Box paddingTop={3}>
+        <Grid container>
+          <Grid item container sx={rightColumnSx}>
+            <Grid item xs={12} lg={8}>
+              <ZigErrorBoundary
+                fallback={
+                  <Box sx={{ background: 'rgba(0,0,0,.2)' }}>
+                    <Stub
+                      title={<>{t('chart-crashed.title')}</>}
+                      description={<>{t('chart-crashed.description')}</>}
+                    />
+                  </Box>
+                }
+              >
+                <ServiceGrowthChart service={service} />
+              </ZigErrorBoundary>
+            </Grid>
+            {lg && (
+              <Grid item xs={12} lg={4} minWidth={MIN_RIGHT_COLUMN_WIDTH}>
                 <ServiceSummary service={service} />
-              </Box>
-            )}
-            {sm && (
-              <>
-                <ServiceDescription service={service} />
-                <ServiceManagerDescription service={service} />
-              </>
+              </Grid>
             )}
           </Grid>
-          {lg && (
-            <Grid
-              item
-              xs={12}
-              lg={4}
-              pt={{ xs: 3, lg: 0 }}
-              sx={{
-                minWidth: { lg: '422px' },
-              }}
-            >
-              <ServiceSummary service={service} />
+          <Grid item container sx={rightColumnSx}>
+            <Grid item xs={12} lg={8}>
+              {!lg && (
+                <Box paddingTop={3}>
+                  <ServiceSummary service={service} />
+                </Box>
+              )}
+              <ServiceDescription service={service} />
+              <ServiceManagerDescription service={service} />
             </Grid>
-          )}
+
+            {isFeatureOn(Features.ZScore) && (
+              <Grid
+                item
+                xs={12}
+                lg={4}
+                pt={{ xs: 3, lg: 8 }}
+                pb={{ xs: 5, sm: 0 }}
+                sx={{
+                  minWidth: { lg: MIN_RIGHT_COLUMN_WIDTH },
+                }}
+              >
+                <ServiceZScoreDetails service={service} />
+              </Grid>
+            )}
+          </Grid>
         </Grid>
       </Grid>
     </Box>
