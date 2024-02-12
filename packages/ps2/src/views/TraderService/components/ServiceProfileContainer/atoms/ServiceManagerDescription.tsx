@@ -31,29 +31,28 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
             rowGap='6px'
             flexWrap={'wrap'}
             alignItems='center'
-            mb={1}
+            mb={2}
           >
-            <Box display='flex' alignItems='center' gap='3px'>
-              <ZigTypography
-                variant={'h2'}
-                id={'service-profile__service-owner-name'}
-                whiteSpace={'nowrap'}
-              >
-                {service.ownerName}
-              </ZigTypography>
-              {service.ownerVerified && (
-                <Tooltip title={t('owner-verified')}>
-                  <StyledVerifiedIcon
-                    sx={{ ml: 0 }}
-                    width={13}
-                    height={13}
-                    id={'service-profile__verified-icon'}
-                  />
-                </Tooltip>
-              )}
-            </Box>
-
-            <Box display={'flex'} alignItems={'center'} mb='1px' gap={'10px'}>
+            <Box display='flex' alignItems='center' gap='10px'>
+              <Box display='flex' alignItems='center' gap='3px'>
+                <ZigTypography
+                  variant={'h2'}
+                  id={'service-profile__service-owner-name'}
+                  whiteSpace={'nowrap'}
+                >
+                  {service.ownerName}
+                </ZigTypography>
+                {service.ownerVerified && (
+                  <Tooltip title={t('owner-verified')}>
+                    <StyledVerifiedIcon
+                      sx={{ ml: 0 }}
+                      width={13}
+                      height={13}
+                      id={'service-profile__verified-icon'}
+                    />
+                  </Tooltip>
+                )}
+              </Box>
               {service.ownerCountry && flagInFolder && (
                 <Tooltip
                   title={t('owner-from', {
@@ -74,20 +73,22 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                   </span>
                 </Tooltip>
               )}
-              <ZigTypography
-                variant={'body2'}
-                color='neutral400'
-                component={'span'}
-                id={'service-profile__trader-joined-time'}
-              >
-                {t('about-trader-joined-time', {
-                  date: formatLocalizedDistance(
-                    new Date(),
-                    new Date(service.ownerCreatedAt),
-                  ),
-                })}
-              </ZigTypography>
             </Box>
+
+            <ZigTypography
+              variant={'body2'}
+              color='neutral400'
+              component={'span'}
+              id={'service-profile__trader-joined-time'}
+              whiteSpace={'nowrap'}
+            >
+              {t('about-trader-joined-time', {
+                date: formatLocalizedDistance(
+                  new Date(),
+                  new Date(service.ownerCreatedAt),
+                ),
+              })}
+            </ZigTypography>
           </Box>
         }
       />
