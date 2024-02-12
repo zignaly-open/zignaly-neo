@@ -8,7 +8,7 @@ import React, {
 import { withReact, Slate } from 'slate-react';
 import { createEditor, Descendant } from 'slate';
 import { withHistory } from 'slate-history';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   BlockButton,
   Leaf,
@@ -66,6 +66,8 @@ const RichDescriptionEditor = ({
     (p: RenderElementType) => <Element {...p}>{p.children}</Element>,
     [],
   );
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
   const renderLeaf = useCallback(
     (p: RenderLeafType) => <Leaf {...p}>{p.children}</Leaf>,
     [],
@@ -105,6 +107,7 @@ const RichDescriptionEditor = ({
       <HideReadMoreEffects
         ref={ref}
         truncate={shouldShowReadMore && isTruncated}
+        lines={lg ? 9 : 5}
       >
         <Slate
           editor={editor}
