@@ -108,7 +108,7 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
-export const HideReadMoreEffects = styled('div')<{
+export const HideReadMoreEffects = styled(Box)<{
   truncate: boolean;
 }>`
   transition: all 0.3s;
