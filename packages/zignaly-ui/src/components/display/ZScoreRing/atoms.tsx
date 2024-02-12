@@ -17,12 +17,12 @@ export const GradientDefs = ({
   return (
     <defs>
       <linearGradient id={`${prefixId}-${category}-1`} gradientTransform="rotate(180 0.5 0.5)">
-        <stop offset="0.0" stop-color={colors.gradient[0]} />
-        <stop offset="0.75" stop-color={colors.gradient[1]} />
+        <stop offset="0.0" stopColor={colors.gradient[0]} />
+        <stop offset="0.75" stopColor={colors.gradient[1]} />
       </linearGradient>
       <linearGradient id={`${prefixId}-${category}-2`} gradientTransform="rotate(-36 0.5 0.5)">
-        <stop offset="0" stop-color={colors.gradient[1]} />
-        <stop offset="0.75" stop-color={colors.gradient[2]} />
+        <stop offset="0" stopColor={colors.gradient[1]} />
+        <stop offset="0.75" stopColor={colors.gradient[2]} />
       </linearGradient>
     </defs>
   );
