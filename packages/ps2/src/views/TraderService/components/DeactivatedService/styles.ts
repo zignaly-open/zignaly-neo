@@ -2,7 +2,7 @@ import { Box, styled } from '@mui/material';
 
 export const ErrorWrapper = styled(Box)`
   background-color: ${({ theme }) => theme.palette.backgrounds.toastError};
-  margin: 30px auto;
+  margin: 0 auto 40px auto;
   padding: 15px 30px;
   box-shadow: 4px 6px 4px ${({ theme }) => theme.palette.neutral900}44;
   width: fit-content;

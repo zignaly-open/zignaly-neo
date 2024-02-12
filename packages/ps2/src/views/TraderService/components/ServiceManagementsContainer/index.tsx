@@ -69,9 +69,9 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
         TraderServiceManagement,
         TraderServiceBalance,
       ]) => {
-        if (service?.activated === false) return <Deactivated />;
         return (
           <Layout>
+            {service?.activated === false && <Deactivated />}
             <Box>
               <ZigTypography
                 variant='h2'
