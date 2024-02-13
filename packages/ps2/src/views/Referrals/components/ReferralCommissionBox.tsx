@@ -8,7 +8,7 @@ import {
   StyledReferralLinkInvite,
   StyledShareCommissionSlider,
 } from '../styles';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import CurrentCommission from 'views/TraderService/components/ReferralsInviteModal/atoms/CurrentCommission';
 import ReferralLinkInvite from 'views/TraderService/components/ReferralsInviteModal/atoms/ReferralLinkInvite';
@@ -26,6 +26,8 @@ const ReferralCommissionBox = ({
   tiersData: TiersData;
   rewardsData: ReferralRewards;
 }) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation('referrals');
   const baseUrl =
     window.location.protocol +
@@ -56,14 +58,15 @@ const ReferralCommissionBox = ({
   }
 
   const CustomSlider = useCallback(() => {
-    const Wrapper =
-      referral.invitedCount > 0
-        ? AltShareCommissionSlider
-        : StyledShareCommissionSlider;
+    const Wrapper = sm
+      ? Box
+      : referral.invitedCount > 0
+      ? AltShareCommissionSlider
+      : StyledShareCommissionSlider;
     const FixBorder = referral.invitedCount > 0 ? BorderFixAlt : BorderFix;
     return (
       <Wrapper>
-        <FixBorder />
+        {!sm && <FixBorder />}
         <ShareCommissionSlider
           discountPct={referral.discountPct}
           max={
@@ -77,15 +80,19 @@ const ReferralCommissionBox = ({
   }, [referral.discountPct, maxCommission, commissionWithoutTraderBoost]);
 
   return (
-    <CommissionBox>
+    <CommissionBox
+      sx={{
+        width: sm ? '100%' : '850px',
+      }}
+    >
       <Box
         display='flex'
         gap='42px'
-        marginLeft={referral.invitedCount > 0 ? '36px' : 0}
+        marginLeft={!sm && referral.invitedCount > 0 ? '36px' : 0}
       >
         <Box
           display='flex'
-          {...(referral.invitedCount > 0
+          {...(referral.invitedCount > 0 || sm
             ? {
                 flexDirection: 'column',
               }
@@ -112,7 +119,7 @@ const ReferralCommissionBox = ({
           </StyledCurrentCommission>
           <CustomSlider />
         </Box>
-        {referral.invitedCount > 0 && (
+        {!sm && referral.invitedCount > 0 && (
           <ReferralTiersCard tiersData={tiersData} />
         )}
       </Box>

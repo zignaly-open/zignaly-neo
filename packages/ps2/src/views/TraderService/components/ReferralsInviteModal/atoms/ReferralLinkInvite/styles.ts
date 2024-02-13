@@ -26,7 +26,7 @@ export const StyledInviteIcon = styled(ZigInviteIcon)`
 
 export const InviteUrlInput = styled('input')`
   font-family: inherit;
-  width: 370px;
+  max-width: 370px;
   overflow: hidden;
   text-overflow: ellipsis;
   border: none;

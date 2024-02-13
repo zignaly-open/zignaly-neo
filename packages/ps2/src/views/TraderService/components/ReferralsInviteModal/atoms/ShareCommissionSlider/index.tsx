@@ -5,7 +5,7 @@ import { SliderContainer, ContainerArrow, StyledZigSlider } from './styles';
 import { useDebounce } from 'react-use';
 import { useUpdateDiscountMutation } from 'apis/referrals/api';
 import { useToast } from 'util/hooks/useToast';
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import { round } from 'lodash-es';
 import { InfoOutlined } from '@mui/icons-material';
 
@@ -16,6 +16,8 @@ export const ShareCommissionSlider = ({
   discountPct: number;
   max: number;
 }) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation(['referrals-trader', 'common']);
   const [value, setValue] = useState(Math.round((discountPct * max) / 100));
   const [updateDiscount] = useUpdateDiscountMutation();
@@ -38,11 +40,15 @@ export const ShareCommissionSlider = ({
   );
 
   return (
-    <SliderContainer>
-      <ContainerArrow />
+    <SliderContainer
+      sx={{
+        ...(sm && { border: 'none!important' }),
+      }}
+    >
+      {!sm && <ContainerArrow />}
       <Box position={'relative'}>
         <ZigTypography
-          fontSize={16}
+          fontSize={sm ? 14 : 16}
           letterSpacing={'0.48px'}
           textAlign={'center'}
           color={'neutral100'}

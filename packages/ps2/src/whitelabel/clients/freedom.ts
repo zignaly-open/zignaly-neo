@@ -51,11 +51,4 @@ export default {
     helpUrl: null,
     subscriptionPurchaseLink: null,
   },
-  translationOverrides: true,
-  xSource: 'freedom',
-  mainAppLink: ROUTE_DASHBOARD,
-  logo: '/images/whitelabel/freedom/obsidian-logo-smaller.png',
-  manifest: '/whitelabel/freedom.json',
-  social: {},
-  defaultSuccessFee: 10,
 } as WhitelabelOverride;
