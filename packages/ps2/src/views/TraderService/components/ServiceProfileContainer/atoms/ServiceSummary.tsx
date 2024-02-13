@@ -19,7 +19,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
     <Box>
       {sm && (
         <>
-          <GridWithBottomBorder container>
+          <GridWithBottomBorder container pb={2.5}>
             <GridCell item xs={6}>
               <ZigTypography
                 color={'neutral300'}
