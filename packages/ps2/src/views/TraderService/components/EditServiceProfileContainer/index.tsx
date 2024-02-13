@@ -29,6 +29,7 @@ import CommissionReferralSharing from './atoms/CommissionReferralSharing';
 import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
+import Deactivated from '../DeactivatedService';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -153,6 +154,7 @@ const EditServiceProfileContainer: React.FC<{
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form'>
+      {service?.activated === false && <Deactivated />}
       <ZigTypography
         textAlign='center'
         variant='h1'
