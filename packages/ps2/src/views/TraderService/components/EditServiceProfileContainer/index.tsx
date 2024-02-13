@@ -34,6 +34,7 @@ import {
   deserialize,
   serialize,
 } from './atoms/RichDescriptionEditor/atoms/util';
+import Deactivated from '../DeactivatedService';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -165,6 +166,7 @@ const EditServiceProfileContainer: React.FC<{
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form'>
+      {service?.activated === false && <Deactivated />}
       <ZigTypography
         textAlign='center'
         variant='h1'
