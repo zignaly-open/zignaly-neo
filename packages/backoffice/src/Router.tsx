@@ -1,5 +1,10 @@
 import React from 'react';
-import { Navigate, Route, Routes as RouterRoutes } from 'react-router-dom';
+import {
+  Navigate,
+  Outlet,
+  Route,
+  Routes as RouterRoutes,
+} from 'react-router-dom';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall';
 import Login from 'components/Login';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
@@ -12,6 +17,7 @@ import ThemeConfig from './components/Config/ThemeConfig';
 import SettingsConfig from 'components/Config/SettingsConfig';
 import ProfileConfig from 'components/Config/ProfileConfig';
 import CommunicationConfig from './components/Config/CommunicationConfig';
+import WhitelabelConfigHeader from './components/Config/SubHeader';
 
 const Router: React.FC = () => (
   <RouterRoutes>
@@ -20,7 +26,15 @@ const Router: React.FC = () => (
       <Route path={Routes.ROUTE_DEPOSITS} element={<Deposits />} />
       <Route path={Routes.ROUTE_WITHDRAWALS} element={<Withdrawals />} />
       <Route path={Routes.ROUTE_LOGS} element={<Logs />} />
-      <Route path={Routes.ROUTE_CONFIG}>
+      <Route
+        path={Routes.ROUTE_CONFIG}
+        element={
+          <>
+            <WhitelabelConfigHeader />
+            <Outlet />
+          </>
+        }
+      >
         <Route
           path={Routes.ROUTE_CONFIG}
           element={<Navigate to={Routes.ROUTE_CONFIG_PROFILE} />}

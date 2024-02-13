@@ -1,12 +1,12 @@
 import React, { useMemo, useRef, useState } from 'react';
 import {
-  PageContainer,
   ZigButtonGroupInput,
   ZigTypography,
   ZigButton,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
+import { ConfigWrapper } from '../styled';
 
 export default function ThemeConfig() {
   const { t } = useTranslation('config');
@@ -45,14 +45,7 @@ export default function ThemeConfig() {
   const iframe = useRef(null);
   const domain = 'http://localhost:3000';
   return (
-    <PageContainer
-      style={{
-        marginTop: '32px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <ConfigWrapper>
       <ZigTypography sx={{ mb: 4 }} variant={'h1'}>
         {t('navigation.theme-config')}
       </ZigTypography>
@@ -117,6 +110,6 @@ export default function ThemeConfig() {
           src={domain}
         ></iframe>
       </Box>
-    </PageContainer>
+    </ConfigWrapper>
   );
 }
