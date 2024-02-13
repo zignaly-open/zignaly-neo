@@ -3,13 +3,13 @@ import { injectEndpoints } from 'apis/util';
 import { WhitelabelConfig } from './types';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  config: builder.query<WhitelabelConfig, string>({
+  wlConfig: builder.query<WhitelabelConfig, string>({
     query: (slug) => ({
       url: `wl_configuration/${slug}`,
       method: 'GET',
     }),
   }),
-  saveConfig: builder.mutation<
+  saveWlConfig: builder.mutation<
     WhitelabelConfig,
     { slug: string; data: WhitelabelConfig }
   >({
@@ -21,4 +21,4 @@ export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
   }),
 }));
 
-export const { useSaveConfigMutation, useConfigQuery } = api;
+export const { useSaveWlConfigMutation, useWlConfigQuery } = api;
