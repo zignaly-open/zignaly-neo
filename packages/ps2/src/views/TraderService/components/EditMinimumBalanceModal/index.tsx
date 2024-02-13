@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MinBalanceModalProps } from './types';
@@ -7,9 +7,9 @@ import { MinBalanceModalValidation } from './validation';
 import BigNumber from 'bignumber.js';
 import {
   ZigButton,
-  InputAmountAdvanced,
   ZigTypography,
   ZigModalActions,
+  ZigInputAmount,
 } from '@zignaly-open/ui';
 import {
   useServiceDetails,
@@ -17,11 +17,10 @@ import {
   useTraderServiceUpdateMinimum,
 } from '../../../../apis/service/use';
 import { Box } from '@mui/material';
-import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from 'components/ZModal';
 
-type EditMinBalanceFormValues = { amountValue: InputAmountAdvancedValueType };
+type EditMinBalanceFormValues = { amountValue: string };
 
 function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   const { t } = useTranslation(['management', 'common']);
@@ -40,14 +39,11 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   const {
     handleSubmit,
     control,
-    formState: { isValid, errors, isDirty },
+    formState: { isValid, errors },
   } = useForm<EditMinBalanceFormValues>({
     mode: 'onChange',
     defaultValues: {
-      amountValue: {
-        token: coin,
-        value: minimumBalance,
-      },
+      amountValue: '',
     },
     resolver: yupResolver(MinBalanceModalValidation),
   });
@@ -56,7 +52,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
     useTraderServiceUpdateMinimum(serviceId);
 
   const onSubmit = useCallback(({ amountValue }: EditMinBalanceFormValues) => {
-    update(amountValue.value?.toString()).then(() => {
+    update(amountValue.toString()).then(() => {
       toast.success(t('management:minBalance.success'));
       close();
     });
@@ -79,30 +75,30 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
         </ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <InputAmountAdvanced
-          id={'edit-minimum-balance-modal__input-amount'}
-          label={t('common:amount') + ':'}
-          placeholder={t('minBalanceModal.placeholder')}
-          labelBalance={t('minBalanceModal.labelBalance')}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
+        <Controller
           control={control}
           name={'amountValue'}
-          fullWidth={true}
-          showMaxButton={false}
-          error={
-            isDirty &&
-            t(
-              (
-                errors?.amountValue as FieldErrorsImpl<InputAmountAdvancedValueType>
-              )?.value?.message,
-            )
-          }
-          enableMaxAmountMessage={false}
-          tokens={[coin]}
-          showUnit
+          render={({ field }) => (
+            <ZigInputAmount
+              id={'edit-minimum-balance-modal__input-amount'}
+              label={t('common:amount') + ':'}
+              placeholder={t('minBalanceModal.placeholder')}
+              fullWidth={true}
+              showMaxButton={false}
+              error={t(errors?.amountValue?.message)}
+              coin={coin.id}
+              extraInfo={{
+                others: [
+                  {
+                    label: t('minBalanceModal.labelBalance'),
+                    value: minimumBalance,
+                  },
+                ],
+              }}
+              {...field}
+            />
+          )}
         />
-
         <ZigModalActions>
           <ZigButton
             id={'edit-minimum-balance-modal__save'}

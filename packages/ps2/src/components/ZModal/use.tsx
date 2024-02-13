@@ -9,6 +9,7 @@ import TypeTextConfirmModal, {
 } from './modals/TypeTextConfirmModal';
 import { generatePath, Params, useNavigate } from 'react-router-dom';
 import { UseZModalOptions } from './types';
+import PromptModal, { PromptModalProps } from './modals/PromptModal';
 
 export function useZModal(options?: UseZModalOptions) {
   const { customClose, ...modalOptions } = options || {};
@@ -73,4 +74,9 @@ export function useZTypeWordConfirm(): (
 ) => ShowFnOutput<void> {
   const { showModal } = useZModal();
   return (props) => showModal(TypeTextConfirmModal, props);
+}
+
+export function useZPrompt(): (props: PromptModalProps) => ShowFnOutput<void> {
+  const { showModal } = useZModal();
+  return (props) => showModal(PromptModal, props);
 }
