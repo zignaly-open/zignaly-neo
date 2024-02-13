@@ -108,7 +108,7 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
-export const HideReadMoreEffects = styled('div')<{
+export const HideReadMoreEffects = styled(Box)<{
   truncate: boolean;
   lines: number;
 }>`
@@ -125,6 +125,7 @@ export const HideReadMoreEffects = styled('div')<{
       -webkit-line-clamp: ${lines};
       ${isSafari ? `max-height: 150px;` : ''};
       height: 100%;
+      width: 100%;
       -webkit-box-orient: vertical;
       display: ${isSafari ? 'block' : '-webkit-box'};
       overflow-y: hidden;
