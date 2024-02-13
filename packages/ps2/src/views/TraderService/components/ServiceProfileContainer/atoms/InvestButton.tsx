@@ -59,12 +59,7 @@ const InvestButton: React.FC<{
   const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      position={'relative'}
-      alignItems={'center'}
-    >
+    <Box display={'flex'} flexDirection={'column'} position={'relative'}>
       <ZigButton
         id={prefixId && `${prefixId}__invest-${service.id}`}
         onClick={onClickMakeInvestment}
