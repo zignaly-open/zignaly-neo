@@ -62,7 +62,7 @@ const ZScoreBarsCategory: React.FC<{
           scoreInfo.category?.maxZscore[zScoreConfig[category].scoreCategoryId]
         }
       />
-      <Box display={'flex'} flexDirection={'column'} mt='3px'>
+      <Box display={'flex'} flexDirection={'column'} mt='7px'>
         {items.map((item) => (
           <div key={item.id}>
             <Box
