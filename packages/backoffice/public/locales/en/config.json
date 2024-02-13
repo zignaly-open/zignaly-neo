@@ -5,6 +5,16 @@
     "communication-config": "Communications",
     "settings-config": "Settings"
   },
+  "socials": {
+    "social": "Socials",
+    "support": "Support",
+    "emails": "Transactional Emails",
+    "social-description": "Select the socials you want to showcase on your page – choose only those you'd like to be visible!",
+    "support-description": "Please provide the links for the following:",
+    "emails-description": "Transactional emails, such as those containing verification codes, are sent automatically to users. If you’d like to update these fields, please reach out to our team.",
+    "email-sent-from": "Sent from:",
+    "email-reply-to": "Reply to:"
+  },
   "apply": "Apply",
   "sizes": {
     "preview-size": "Preview Size:",

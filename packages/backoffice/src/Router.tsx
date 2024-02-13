@@ -18,6 +18,7 @@ import SettingsConfig from 'components/Config/SettingsConfig';
 import ProfileConfig from 'components/Config/ProfileConfig';
 import CommunicationConfig from './components/Config/CommunicationConfig';
 import WhitelabelConfigHeader from './components/Config/SubHeader';
+import WhitelabelConfigLoader from './components/Config/WhitelabelConfigLoader';
 
 const Router: React.FC = () => (
   <RouterRoutes>
@@ -31,7 +32,9 @@ const Router: React.FC = () => (
         element={
           <>
             <WhitelabelConfigHeader />
-            <Outlet />
+            <WhitelabelConfigLoader>
+              <Outlet />
+            </WhitelabelConfigLoader>
           </>
         }
       >
