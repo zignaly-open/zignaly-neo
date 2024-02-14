@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { useToast, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { ConfigWrapper } from '../styled';
 import { Grid, Tooltip } from '@mui/material';
@@ -71,17 +71,33 @@ export default function CommunicationConfig() {
     [data],
   );
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm<Partial<WhitelabelConfig>>({
     defaultValues,
   });
 
   const [save, { isLoading }] = useSaveCurrentWlConfig();
 
   // validation
-  // save
   // ts
-  const submit = (values) => {
-    console.error(values);
+  // rtk cache
+
+  const toast = useToast();
+
+  const submit = (values: Partial<WhitelabelConfig>) => {
+    save(values)
+      .unwrap()
+      .then(() => {
+        toast.success(t('saved'));
+      })
+      .catch((e) => {
+        toast.error(
+          t('failed') +
+            ' ' +
+            (e?.data?.error?.code
+              ? t(`error:error.${e?.data?.error?.code}`)
+              : ''),
+        );
+      });
   };
 
   return (
@@ -106,6 +122,7 @@ export default function CommunicationConfig() {
                     id={'socials_' + s.key}
                     image={s.image}
                     label={t('socials.networks.' + s.key)}
+                    disabled={isLoading}
                     {...field}
                   />
                 )}
@@ -127,6 +144,7 @@ export default function CommunicationConfig() {
                   id={'socials_support-url'}
                   image={<ContactSupportIcon fill={'#fff'} />}
                   label={t('socials.support-url')}
+                  disabled={isLoading}
                   {...field}
                 />
               )}
@@ -142,6 +160,7 @@ export default function CommunicationConfig() {
                   id={'socials_support-help-center'}
                   image={<HelpIcon fill={'#fff'} />}
                   label={t('socials.support-help-center')}
+                  disabled={isLoading}
                   {...field}
                 />
               )}
@@ -181,6 +200,7 @@ export default function CommunicationConfig() {
 
         <Box sx={{ textAlign: 'right', mt: 4 }}>
           <ZigButton
+            disabled={isLoading}
             size='large'
             variant='outlined'
             sx={{ mr: 2 }}
@@ -188,7 +208,12 @@ export default function CommunicationConfig() {
           >
             {t('cancel')}
           </ZigButton>
-          <ZigButton size='large' variant='contained' type={'submit'}>
+          <ZigButton
+            disabled={isLoading}
+            size='large'
+            variant='contained'
+            type={'submit'}
+          >
             {t('save')}
           </ZigButton>
         </Box>

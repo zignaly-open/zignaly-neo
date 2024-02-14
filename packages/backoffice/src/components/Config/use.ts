@@ -6,7 +6,9 @@ export function useCurrentWlConfig(): ReturnType<typeof useWlConfigQuery> {
 }
 
 export function useSaveCurrentWlConfig(): [
-  (payload: Partial<WhitelabelConfig>) => void,
+  (
+    payload: Partial<WhitelabelConfig>,
+  ) => ReturnType<ReturnType<typeof useSaveWlConfigMutation>[0]>,
   ReturnType<typeof useSaveWlConfigMutation>[1],
 ] {
   const { data: originalValue } = useCurrentWlConfig();

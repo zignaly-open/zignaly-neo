@@ -8,11 +8,13 @@ export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
       url: `wl_configuration/${slug}`,
       method: 'GET',
     }),
+    providesTags: ['WlConfig'],
   }),
   saveWlConfig: builder.mutation<
     WhitelabelConfig,
     { slug: string; data: WhitelabelConfig }
   >({
+    invalidatesTags: ['WlConfig'],
     query: ({ slug, data }) => ({
       url: `wl_configuration/${slug}`,
       method: 'POST',
