@@ -23,6 +23,7 @@ import {
 } from '../../../types';
 import { useZPrompt } from '../../../../../../../components/ZModal/use';
 import { useTranslation } from 'react-i18next';
+import { ZigLink } from '@zignaly-open/ui';
 
 export const BlockButton = ({
   format,
@@ -173,6 +174,9 @@ export const Leaf = ({ attributes, children, leaf }: RenderLeafType) => {
   if (leaf.underline) {
     children = <u>{children}</u>;
   }
+  if (leaf.link) {
+    children = <ZigLink href={leaf.text}>{children}</ZigLink>;
+  }
 
   return <span {...attributes}>{children}</span>;
 };
@@ -225,10 +229,7 @@ export const Element = ({
       );
     case 'image':
       return (
-        <Image
-          attributes={attributes}
-          element={element as RichEditorElement & { url: string }}
-        >
+        <Image attributes={attributes} element={element}>
           {children}
         </Image>
       );
@@ -241,11 +242,7 @@ export const Element = ({
   }
 };
 
-const Image = ({
-  attributes,
-  children,
-  element,
-}: RenderElementType & { element: RichEditorElement & { url: string } }) => {
+const Image = ({ attributes, children, element }: RenderElementType) => {
   const editor = useSlateStatic();
   const path = ReactEditor.findPath(editor as ReactEditor, element);
 
