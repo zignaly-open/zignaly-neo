@@ -1,11 +1,11 @@
-import React from 'react';
-import { ZigTypography } from '@zignaly-open/ui';
+import React, { useMemo } from 'react';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { ConfigWrapper } from '../styled';
 import { Grid, Tooltip } from '@mui/material';
 import { GridInput, SectionHeader } from '../atoms';
 import { Controller, useForm } from 'react-hook-form';
-import { useCurrentWlConfig } from '../use';
+import { useCurrentWlConfig, useSaveCurrentWlConfig } from '../use';
 import { WhitelabelConfig } from '../../../apis/config/types';
 import {
   ZigLogoDiscordIcon,
@@ -19,6 +19,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import { Box } from '@mui/system';
 
 const socialNetworks = [
   {
@@ -58,26 +59,37 @@ const socialNetworks = [
 export default function CommunicationConfig() {
   const { t } = useTranslation('config');
   const { data } = useCurrentWlConfig();
-  const { control, handleSubmit } = useForm({
-    defaultValues: {
+  const defaultValues = useMemo(
+    () => ({
       social: socialNetworks.reduce((memo, { key }) => {
         memo[key] = data?.social?.[key];
         return memo;
       }, {}) as Record<keyof WhitelabelConfig['social'], string>,
       supportUrl: data?.supportUrl,
       supportHelpCenter: data?.supportHelpCenter,
-    },
+    }),
+    [data],
+  );
+
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues,
   });
 
-  // @ts-ignore
-  const isSaving = false;
+  const [save, { isLoading }] = useSaveCurrentWlConfig();
+
+  // validation
+  // save
+  // ts
+  const submit = (values) => {
+    console.error(values);
+  };
 
   return (
     <ConfigWrapper>
-      <ZigTypography sx={{ mb: 4 }} variant={'h1'}>
+      <ZigTypography sx={{ mb: 2 }} variant={'h1'}>
         {t('navigation.communication-config')}
       </ZigTypography>
-      <form onSubmit={handleSubmit(console.error)}>
+      <form onSubmit={handleSubmit(submit)}>
         <SectionHeader
           title={t('socials.social')}
           description={t('socials.social-description')}
@@ -166,6 +178,20 @@ export default function CommunicationConfig() {
             </ZigTypography>
           </Grid>
         </Grid>
+
+        <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <ZigButton
+            size='large'
+            variant='outlined'
+            sx={{ mr: 2 }}
+            onClick={() => reset(defaultValues)}
+          >
+            {t('cancel')}
+          </ZigButton>
+          <ZigButton size='large' variant='contained' type={'submit'}>
+            {t('save')}
+          </ZigButton>
+        </Box>
       </form>
     </ConfigWrapper>
   );

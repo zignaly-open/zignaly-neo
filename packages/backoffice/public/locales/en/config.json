@@ -1,4 +1,6 @@
 {
+  "save": "Save Settings",
+  "cancel": "Reset",
   "navigation": {
     "theme-config": "Theme Config",
     "profile-config": "Profile Config",
