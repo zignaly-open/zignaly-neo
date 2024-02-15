@@ -20,7 +20,7 @@
     "title": "Edit Minimum Balance",
     "desc": "Set up the minimum balance that you want to keep in the Standby Account. If the balance is above the minimum, during the accounting the difference will be automatically transferred to the Trading Account.",
     "placeholder": "0.0",
-    "labelBalance": "Current Minimum Balance",
+    "labelBalance": "Current Minimum Balance:",
     "save": "Save"
   },
   "controlledZignaly": "Controlled by {{ whitelabel }}",

@@ -15,7 +15,7 @@
 		"title": "Editar Saldo Mínimo",
 		"desc": "Configure o saldo mínimo que deseja manter na Conta Standby. Se o saldo estiver acima do mínimo, durante a contabilização a diferença será automaticamente transferida para a Conta de Trading.",
 		"placeholder": "0.0",
-		"labelBalance": "Saldo Mínimo Atual",
+		"labelBalance": "Saldo Mínimo Atual:",
 		"save": "Guardar"
 	},
 	"controlledZignaly": "Controlado por {{ whitelabel }}",
