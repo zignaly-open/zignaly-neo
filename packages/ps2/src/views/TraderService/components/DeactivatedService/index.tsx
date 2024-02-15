@@ -8,7 +8,7 @@ const Deactivated: React.FC = () => {
 
   return (
     <ErrorWrapper>
-      <ErrorMessage text={t('access.deactivated-service')} />
+      <ErrorMessage text={t('access.deactivated-service')} variant={'body1'} />
     </ErrorWrapper>
   );
 };

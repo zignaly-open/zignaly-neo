@@ -9,7 +9,7 @@ import ZigTypography from "../ZigTypography";
 import { useTheme } from "@mui/material";
 
 // TODO(Vetle): Refactor usage of Dark theme when light theme is ready
-function ZigAlertMessage({ text, error, warning, id }: ZigAlertMessageProps) {
+function ZigAlertMessage({ text, error, warning, id, variant = "body1" }: ZigAlertMessageProps) {
   const { palette } = useTheme();
   return (
     <Layout id={id}>
@@ -21,7 +21,7 @@ function ZigAlertMessage({ text, error, warning, id }: ZigAlertMessageProps) {
         />
       </Icon>
       <ZigTypography
-        variant="body2"
+        variant={variant}
         sx={{
           color: error ? palette.redGraphOrError : warning ? palette.yellow : palette.neutral400,
         }}
@@ -35,6 +35,8 @@ function ZigAlertMessage({ text, error, warning, id }: ZigAlertMessageProps) {
 export default ZigAlertMessage;
 
 // added for backwards compatibility
-export const ErrorMessage: React.FC<Pick<ZigAlertMessageProps, "text" | "id">> = ({ text, id }) => (
-  <ZigAlertMessage text={text} error id={id} />
-);
+export const ErrorMessage: React.FC<Pick<ZigAlertMessageProps, "text" | "id" | "variant">> = ({
+  text,
+  id,
+  variant = "body2",
+}) => <ZigAlertMessage text={text} error id={id} variant={variant} />;
