@@ -37,7 +37,7 @@ export type RichEditorElement = {
 };
 
 export type RenderElementType = RenderElementProps & {
-  element: RichEditorElement & { url?: string };
+  element: RichEditorElement;
 };
 export type RenderLeafType = RenderLeafProps & {
   leaf: {
