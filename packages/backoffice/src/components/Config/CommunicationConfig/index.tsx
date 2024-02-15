@@ -16,10 +16,11 @@ import {
 } from '@zignaly-open/ui/icons';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import HelpIcon from '@mui/icons-material/Help';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { Box } from '@mui/system';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { CommunicationConfigValidation } from './validations';
 
 const socialNetworks = [
   {
@@ -37,10 +38,6 @@ const socialNetworks = [
   {
     key: 'instagram',
     image: <InstagramIcon style={{ fill: '#fff' }} />,
-  },
-  {
-    key: 'facebook',
-    image: <FacebookIcon style={{ fill: '#039BE5' }} />,
   },
   {
     key: 'youtube',
@@ -71,8 +68,9 @@ export default function CommunicationConfig() {
     [data],
   );
 
-  const { control, handleSubmit, reset } = useForm<Partial<WhitelabelConfig>>({
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<Partial<WhitelabelConfig>>({
     defaultValues,
+    resolver: yupResolver(CommunicationConfigValidation),
   });
 
   const [save, { isLoading }] = useSaveCurrentWlConfig();
@@ -91,8 +89,8 @@ export default function CommunicationConfig() {
         toast.error(
           t('failed') +
             ' ' +
-            (e?.data?.error?.code
-              ? t(`error:error.${e?.data?.error?.code}`)
+            (e?.data?.error?.msg
+              ? t(`error:error.${e?.data?.error?.msg}`)
               : ''),
         );
       });
@@ -117,6 +115,7 @@ export default function CommunicationConfig() {
                 render={({ field }) => (
                   <GridInput
                     id={'socials_' + s.key}
+                    error={t(errors.socials?[s.key])}
                     image={s.image}
                     label={t('socials.networks.' + s.key)}
                     disabled={isLoading}
@@ -138,6 +137,7 @@ export default function CommunicationConfig() {
               control={control}
               render={({ field }) => (
                 <GridInput
+                  error={t(errors.supportUrl?.message)}
                   id={'socials_support-url'}
                   image={<ContactSupportIcon fill={'#fff'} />}
                   label={t('socials.support-url')}
@@ -154,6 +154,7 @@ export default function CommunicationConfig() {
               control={control}
               render={({ field }) => (
                 <GridInput
+                  error={t(errors.supportHelpCenter?.message)}
                   id={'socials_support-help-center'}
                   image={<HelpIcon fill={'#fff'} />}
                   label={t('socials.support-help-center')}

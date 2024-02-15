@@ -11,6 +11,7 @@
   },
   "placeholder": "Not specified",
   "socials": {
+    "validation-url": "Should be a valid URL",
     "social": "Socials",
     "support": "Support",
     "emails": "Transactional Emails",
