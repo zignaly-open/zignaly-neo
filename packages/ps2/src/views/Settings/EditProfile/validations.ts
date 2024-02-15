@@ -1,4 +1,6 @@
+import { Node } from 'slate';
 import * as yup from 'yup';
+import { RichEditorElement } from '../../TraderService/components/EditServiceProfileContainer/types';
 
 export const EditProfileValidation = yup
   .object({
@@ -12,12 +14,15 @@ export const EditProfileValidation = yup
         },
       ),
     bio: yup
-      .string()
+      .array()
       .test(
         'maxlength',
         'common:validation.max-allowed-length',
-        function (val) {
-          return val.length <= 2000;
+        function (val: RichEditorElement[]) {
+          const bioText = val
+            .map((n: RichEditorElement) => Node.string(n))
+            .join('');
+          return bioText.length <= 2000;
         },
       ),
   })

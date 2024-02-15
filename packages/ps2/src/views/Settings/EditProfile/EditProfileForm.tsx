@@ -41,6 +41,7 @@ const EditProfileForm = () => {
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
+    reValidateMode: 'onChange',
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
       username: user.userName || '',
@@ -235,7 +236,6 @@ const EditProfileForm = () => {
                 render={({ field }) => (
                   <RichDescriptionEditor
                     id={'edit-profile__about-you'}
-                    value={field.value}
                     setValue={setValue.bind(null, 'bio')}
                     label={
                       <ZigTypography
