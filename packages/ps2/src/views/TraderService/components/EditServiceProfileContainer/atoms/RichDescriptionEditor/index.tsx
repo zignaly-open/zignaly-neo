@@ -59,7 +59,7 @@ const RichDescriptionEditor = ({
   id: string;
   label?: string | JSX.Element;
   error?: string;
-  value: Descendant[];
+  value: Partial<Descendant>[];
   readOnly?: boolean;
   readMore?: boolean;
   setValue?: (v: Descendant[]) => void;

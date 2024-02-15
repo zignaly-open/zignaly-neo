@@ -59,7 +59,7 @@ export const withImages = (editor: ReactEditor) => {
   return editor;
 };
 
-export function serialize(obj: Descendant[]) {
+export function serialize(obj: Partial<Descendant>[]) {
   return JSON.stringify(obj, (key, value) => {
     if (value && typeof value === 'object' && value.type === 'paragraph') {
       const { type, ...rest } = value;
