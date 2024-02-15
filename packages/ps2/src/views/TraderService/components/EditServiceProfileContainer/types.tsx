@@ -29,11 +29,21 @@ export type EditServiceForm = EditServicePayload & {
   commission: number;
 };
 
-export type RichEditorElement = BaseElement & { type?: string; align?: string };
+export type RichEditorElement = BaseElement & {
+  type?: string;
+  align?: string;
+  url?: string;
+};
 
 export type RenderElementType = RenderElementProps & {
-  element: RichEditorElement;
+  element: RichEditorElement & { url?: string };
 };
 export type RenderLeafType = RenderLeafProps & {
-  leaf: { bold: boolean; code: boolean; italic: boolean; underline: boolean };
+  leaf: {
+    bold: boolean;
+    code: boolean;
+    italic: boolean;
+    underline: boolean;
+    link: boolean;
+  };
 };
