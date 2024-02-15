@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
@@ -7,16 +7,12 @@ import { deserialize } from '../../EditServiceProfileContainer/atoms/RichDescrip
 
 const ServiceDescription: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation('service');
-  const value = useMemo(
-    () => deserialize(service.description),
-    [service.description],
-  );
 
   return (
     <Box>
       <RichDescriptionEditor
         id={'service-profile__description'}
-        value={value}
+        value={deserialize(service?.description)}
         readMore
         readOnly
         label={t('strategy')}

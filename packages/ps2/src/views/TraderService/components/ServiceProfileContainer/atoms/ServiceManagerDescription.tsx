@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/system';
@@ -17,16 +17,12 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   const { t, i18n } = useTranslation('service');
   const country = Countries.getName(service.ownerCountry, i18n.language);
   const [flagInFolder, setFlagInFolder] = useState(true);
-  const value = useMemo(
-    () => deserialize(service.ownerDescription),
-    [service.ownerDescription],
-  );
 
   return (
     <Box>
       <RichDescriptionEditor
         id={'service-profile__about-manager'}
-        value={value}
+        value={deserialize(service?.ownerDescription)}
         readMore
         readOnly
         label={t('about-trader')}
