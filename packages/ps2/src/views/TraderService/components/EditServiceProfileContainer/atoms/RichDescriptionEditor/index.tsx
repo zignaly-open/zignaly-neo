@@ -42,6 +42,7 @@ import { RenderElementType, RenderLeafType } from '../../types';
 import { SxProps } from '@mui/system';
 import { HideReadMoreEffects } from '../../../ServiceProfileContainer/styles';
 import { useTranslation } from 'react-i18next';
+import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 
 const RichDescriptionEditor = ({
   id,
@@ -53,7 +54,8 @@ const RichDescriptionEditor = ({
   readMore,
   subtitle,
   sx,
-}: {
+  ...props
+}: Partial<ControllerRenderProps> & {
   id: string;
   label?: string | JSX.Element;
   error?: string;
@@ -156,6 +158,7 @@ const RichDescriptionEditor = ({
           )}
 
           <StyledEditable
+            {...props}
             id={id}
             error={!!error}
             renderElement={renderElement}
