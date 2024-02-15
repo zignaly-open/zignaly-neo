@@ -78,8 +78,6 @@ export default function CommunicationConfig() {
   const [save, { isLoading }] = useSaveCurrentWlConfig();
 
   // validation
-  // ts
-  // rtk cache
 
   const toast = useToast();
 
@@ -114,8 +112,7 @@ export default function CommunicationConfig() {
           {socialNetworks.map((s) => (
             <Grid item xs={12} sm={6} md={4} key={s.key}>
               <Controller
-                // @ts-ignore
-                name={'social.' + (s.key as keyof WhitelabelConfig['social'])}
+                name={('social.' + s.key) as keyof WhitelabelConfig}
                 control={control}
                 render={({ field }) => (
                   <GridInput
