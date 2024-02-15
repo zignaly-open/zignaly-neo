@@ -20,7 +20,7 @@ export const EditProfileValidation = yup
         'common:validation.max-allowed-length',
         function (val: RichEditorElement[]) {
           const bioText = val
-            .map((n: RichEditorElement) => Node.string(n))
+            .map((n: Required<RichEditorElement>) => Node.string(n))
             .join('');
           return bioText.length <= 2000;
         },

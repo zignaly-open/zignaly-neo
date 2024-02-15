@@ -1,4 +1,4 @@
-import { BaseEditor, Descendant, Transforms } from 'slate';
+import { BaseEditor, Transforms } from 'slate';
 import imageExtensions from 'image-extensions';
 import { ReactEditor } from 'slate-react';
 import { RichEditorElement } from '../../../types';
@@ -26,7 +26,7 @@ export const isImageUrl = (url: string) => {
 export const withImages = (editor: ReactEditor) => {
   const { insertData, isVoid } = editor;
 
-  editor.isVoid = (element: RichEditorElement) => {
+  editor.isVoid = (element: Required<RichEditorElement>) => {
     return element.type === 'image' ? true : isVoid(element);
   };
 
@@ -59,7 +59,7 @@ export const withImages = (editor: ReactEditor) => {
   return editor;
 };
 
-export function serialize(obj: Partial<Descendant>[]) {
+export function serialize(obj: RichEditorElement[]) {
   return JSON.stringify(obj, (key, value) => {
     if (value && typeof value === 'object' && value.type === 'paragraph') {
       const { type, ...rest } = value;

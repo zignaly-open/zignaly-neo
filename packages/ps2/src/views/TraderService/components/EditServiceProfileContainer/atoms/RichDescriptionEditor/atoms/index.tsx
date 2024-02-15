@@ -67,7 +67,7 @@ export const BlockButton = ({
     const isList = LIST_TYPES.includes(formatToggle);
 
     Transforms.unwrapNodes(editorToggle, {
-      match: (n: RichEditorElement) =>
+      match: (n: Required<RichEditorElement>) =>
         !Editor.isEditor(n) &&
         SlateElement.isElement(n) &&
         LIST_TYPES.includes(n.type) &&
@@ -84,7 +84,7 @@ export const BlockButton = ({
         type: isActive ? 'paragraph' : isList ? 'list-item' : formatToggle,
       };
     }
-    Transforms.setNodes<RichEditorElement>(editorToggle, newProperties);
+    Transforms.setNodes(editorToggle, newProperties);
 
     if (!isActive && isList) {
       const block = { type: formatToggle, children: [] as Descendant[] };

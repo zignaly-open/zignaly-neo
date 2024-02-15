@@ -2,7 +2,7 @@ import {
   EditServicePayload,
   TraderServiceAccessLevel,
 } from 'apis/service/types';
-import { BaseElement } from 'slate';
+import { Descendant } from 'slate';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
 
 export const VISIBILITY_LABEL = {
@@ -29,10 +29,11 @@ export type EditServiceForm = EditServicePayload & {
   commission: number;
 };
 
-export type RichEditorElement = BaseElement & {
+export type RichEditorElement = {
   type?: string;
   align?: string;
   url?: string;
+  children?: Descendant[];
 };
 
 export type RenderElementType = RenderElementProps & {
