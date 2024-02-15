@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import MarkdownSection from './MarkdownSection';
 import { Box } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 import Countries from 'i18n-iso-countries';
@@ -9,6 +8,8 @@ import { StyledVerifiedIcon } from '../styles';
 import { Tooltip } from '@mui/material';
 import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
 import Flag from '../../../../../components/Flag';
+import RichDescriptionEditor from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor';
+import { deserialize } from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   service,
@@ -16,14 +17,20 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   const { t, i18n } = useTranslation('service');
   const country = Countries.getName(service.ownerCountry, i18n.language);
   const [flagInFolder, setFlagInFolder] = useState(true);
+  const value = useMemo(
+    () => deserialize(service.ownerDescription),
+    [service.ownerDescription],
+  );
 
   return (
     <Box>
-      <MarkdownSection
+      <RichDescriptionEditor
         id={'service-profile__about-manager'}
-        content={service.ownerDescription}
-        title={t('about-trader')}
-        emptyText={t('about-trader-empty')}
+        value={value}
+        readMore
+        readOnly
+        label={t('about-trader')}
+        sx={{ mt: 8 }}
         subtitle={
           <Box
             display='flex'
