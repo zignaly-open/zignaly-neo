@@ -217,7 +217,6 @@ const EditServiceProfileContainer: React.FC<{
                   }
                   error={t(errors.description?.message)}
                   value={field.value}
-                  sx={{ color: 'neutral200' }}
                   {...field}
                 />
               )}

@@ -33,6 +33,7 @@ import {
   LooksTwo,
   ExpandMore,
   ExpandLess,
+  Link,
 } from '@mui/icons-material';
 import { withImages } from './atoms/util';
 import { ErrorMessage, ZigButton, ZigTypography } from '@zignaly-open/ui';
@@ -50,6 +51,7 @@ const RichDescriptionEditor = ({
   setValue,
   readOnly,
   readMore,
+  subtitle,
   sx,
 }: {
   id: string;
@@ -60,6 +62,7 @@ const RichDescriptionEditor = ({
   readMore?: boolean;
   setValue?: (v: Descendant[]) => void;
   sx?: SxProps;
+  subtitle?: JSX.Element | string;
 }) => {
   const { t } = useTranslation('action');
   const renderElement = useCallback(
@@ -91,19 +94,28 @@ const RichDescriptionEditor = ({
 
   return (
     <Box
-      display={'flex'}
-      flexDirection={'column'}
-      id={id}
-      sx={sx}
-      width={'100%'}
+      sx={{
+        color: 'neutral200',
+        fontSize: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        ...sx,
+      }}
     >
       {typeof label === 'string' ? (
-        <ZigTypography variant={'h2'} sx={{ mb: 2 }} align='center'>
+        <ZigTypography
+          variant={'h2'}
+          sx={{ mb: 2 }}
+          align='center'
+          id={id && `${id}-title`}
+        >
           {label}
         </ZigTypography>
       ) : (
         label
       )}
+      {subtitle}
       <HideReadMoreEffects
         ref={ref}
         truncate={shouldShowReadMore && isTruncated}
@@ -120,6 +132,7 @@ const RichDescriptionEditor = ({
               <MarkButton format='italic' icon={<FormatItalicOutlined />} />
               <MarkButton format='underline' icon={<FormatUnderlined />} />
               <MarkButton format='code' icon={<Code />} />
+              <MarkButton format='link' icon={<Link />} />
               <BlockButton format='heading-one' icon={<LooksOne />} />
               <BlockButton format='heading-two' icon={<LooksTwo />} />
               <BlockButton
@@ -143,6 +156,7 @@ const RichDescriptionEditor = ({
           )}
 
           <StyledEditable
+            id={id}
             error={!!error}
             renderElement={renderElement}
             renderLeaf={renderLeaf}
@@ -161,6 +175,7 @@ const RichDescriptionEditor = ({
           }
           onClick={() => setIsTruncated((v) => !v)}
           id={id && `${id}-more-less-button`}
+          sx={{ justifyContent: 'left' }}
         >
           {isTruncated ? t('more') : t('less')}
         </ZigButton>

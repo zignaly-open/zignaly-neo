@@ -20,7 +20,7 @@ const ServiceDescription: React.FC<{ service: Service }> = ({ service }) => {
         readMore
         readOnly
         label={t('strategy')}
-        sx={{ mt: 8, color: 'neutral200' }}
+        sx={{ mt: 8 }}
       />
     </Box>
   );
