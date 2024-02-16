@@ -9,10 +9,10 @@ import { filterData } from "./util";
  * @param filtersDataMap Function that maps data with filters. If not provided, the properties
  * will be fetched by filter id. Map to an array if it can match multiple values.
  */
-export const useFilteredCollection = <T extends Record<string, string | number | boolean>>(
+export const useFilteredCollection = <T extends Record<string, ZigFilter["value"]>>(
   collection: T[],
   filters: ZigFiltersType,
-  filtersDataMap?: (data: T) => Record<ZigFilter["id"], string | number | boolean>,
+  filtersDataMap?: (data: T) => Record<ZigFilter["id"], ZigFilter["value"]>,
 ): T[] => {
   return useMemo(() => {
     return (collection?.filter((data) => {

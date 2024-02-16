@@ -79,7 +79,7 @@ export const pruneFilters = (filters: ZigFiltersType): ZigFiltersPruned => {
   }));
 };
 
-export const filterData = (filter: ZigFilter, value: string | number | boolean) => {
+export const filterData = (filter: ZigFilter, value: ZigFilter["value"]) => {
   if (!filter || filter.value === "" || filter.value === null || filter.value === undefined)
     return true;
 
