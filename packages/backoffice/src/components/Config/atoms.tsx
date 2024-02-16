@@ -24,7 +24,7 @@ export const SectionHeader: React.FC<{
 export const GridUrlInput: React.FC<
   ZigInputProps & {
     label: string;
-    image: JSX.Element;
+    image?: JSX.Element;
     id: string;
   }
 > = ({ label, image, id, ...rest }) => {
@@ -47,7 +47,7 @@ export const GridUrlInput: React.FC<
             },
           }}
         >
-          {image}
+          {image || null}
           {label + ':'}
         </ZigTypography>
       }

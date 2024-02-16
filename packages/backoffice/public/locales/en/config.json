@@ -4,12 +4,24 @@
   "failed": "Could not save the settings.",
   "cancel": "Reset",
   "navigation": {
-    "theme-config": "Theme Config",
-    "profile-config": "Profile Config",
+    "theme-config": "Theme",
+    "profile-config": "Profile",
     "communication-config": "Communications",
     "settings-config": "Settings"
   },
   "placeholder": "Introduce here your URL",
+  "profile": {
+    "language-title": "Language",
+    "language-description": "Select the languages that will be visible on your page:",
+    "tos": "Terms of Service and Privacy Policy",
+    "tos-description": "Add the links to your specific Terms of Service and Privacy Policy",
+    "tos-url": "Term of Service URL",
+    "privacy-url": "Privacy Policy URL",
+    "name": "Name",
+    "gtm": "Google Tag Manager",
+    "gtm-placeholder": "GTM-XXXXXXX",
+    "profile": "Profile"
+  },
   "settings": {
     "validation-number": "Must be a number",
     "validation-number-gt-0": "Must be >= 0",
