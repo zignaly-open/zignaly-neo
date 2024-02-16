@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { useToast, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { ConfigWrapper } from '../styled';
+import { ConfigWrapper } from './styled';
 import { Grid, Tooltip } from '@mui/material';
-import { GridUrlInput, SectionHeader } from '../atoms';
+import { GridUrlInput, SectionHeader } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig, useSaveCurrentWlConfig } from '../use';
-import { WhitelabelConfig } from '../../../apis/config/types';
+import { useCurrentWlConfig, useSaveCurrentWlConfig } from './use';
+import { WhitelabelConfig } from '../../apis/config/types';
 import {
   ZigLogoDiscordIcon,
   ZigLogoLinkedInIcon,
@@ -83,9 +83,6 @@ export default function CommunicationConfig() {
   } = formMethods;
 
   const [save, { isLoading }] = useSaveCurrentWlConfig();
-
-  // validation
-
   const toast = useToast();
 
   const submit = (values: Partial<WhitelabelConfig>) => {

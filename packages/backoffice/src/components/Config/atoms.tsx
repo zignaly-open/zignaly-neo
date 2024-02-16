@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import { ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { Box, SxProps } from '@mui/material';
+import { ZigInput, ZigSwitch, ZigTypography } from '@zignaly-open/ui';
 import { ZigInputProps } from '@zignaly-open/ui/components/inputs/ZigInput/types';
 import { useTranslation } from 'react-i18next';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const urlRegex =
   /^(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})([\/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)$/;
@@ -11,8 +11,9 @@ const urlRegex =
 export const SectionHeader: React.FC<{
   title: string;
   description: string;
-}> = ({ title, description }) => (
-  <Box sx={{ mt: 8, mb: 4 }}>
+  sx?: SxProps;
+}> = ({ title, description, sx }) => (
+  <Box sx={{ mt: 8, mb: 4, ...(sx || {}) }}>
     <ZigTypography variant={'h2'}>{title}</ZigTypography>
     <ZigTypography sx={{ mt: 0.5 }} component={'p'}>
       {description}
@@ -61,5 +62,32 @@ export const GridUrlInput: React.FC<
         rest.onBlur(e);
       }}
     />
+  );
+};
+
+export const SettingEnableSection: React.FC<{
+  title: string;
+  description: string;
+  id: string;
+  name: string;
+}> = ({ title, description, name, id }) => {
+  const { control } = useFormContext();
+  return (
+    <>
+      <SectionHeader
+        title={title}
+        description={description}
+        sx={{ mb: 0.5, mt: 6 }}
+      />
+      <Box sx={{ ml: -1 }}>
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <ZigSwitch checked={value} onChange={onChange} id={id} />
+          )}
+        />
+      </Box>
+    </>
   );
 };

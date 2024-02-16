@@ -4,6 +4,7 @@ export enum Features {
   AccessLevels = 'accessLevels',
   Rewards = 'rewards',
   Referrals = 'referrals',
+  MinInvestment = 'minInvestment',
   CreateService = 'createServices',
   NewSignup = 'newSignup',
   LoginOnlyAccess = 'loginOnly',

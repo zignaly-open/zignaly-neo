@@ -20,5 +20,6 @@ export const isFeatureOn = (feature: Features): boolean => {
 };
 
 export function getMinInvestmentAmount(coin: string): number {
+  if (!isFeatureOn(Features.MinInvestment)) return 0;
   return whitelabel.minInvestment?.[coin] || 0;
 }
