@@ -79,13 +79,13 @@ export const pruneFilters = (filters: ZigFiltersType): ZigFiltersPruned => {
   }));
 };
 
-export const filterData = (filter: ZigFilter, value: string | number) => {
+export const filterData = (filter: ZigFilter, value: string | number | boolean) => {
   if (!filter || filter.value === "" || filter.value === null || filter.value === undefined)
     return true;
 
   if (filter.type === "slider")
     return filterFns.inNumberRange(value as number, filter.value as [number, number]);
-  else if (filter.type === "checkbox") return filter.value.includes(value);
+  else if (filter.type === "checkbox") return filter.value.includes(value as string | number);
   else if (filter.type === "select") return filter.value === value;
   else if (filter.type === "text") {
     return filterFns.includesString(value as string, filter.value);
