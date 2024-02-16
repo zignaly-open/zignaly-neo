@@ -41,3 +41,30 @@ export const SettingsConfigValidation = yup
     }),
   })
   .required();
+
+export const ProfileConfigValidation = yup
+  .object({
+    marketplaceMinScore: yup
+      .number()
+      .typeError('config:settings.validation-number')
+      .test('range', 'config:settings.validation-number-0-100', (v) => v > 0),
+    minInvestment: yup.object({
+      BTC: yup
+        .number()
+        .typeError('config:settings.validation-number')
+        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+      ETH: yup
+        .number()
+        .typeError('config:settings.validation-number')
+        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+      USDT: yup
+        .number()
+        .typeError('config:settings.validation-number')
+        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+      BNB: yup
+        .number()
+        .typeError('config:settings.validation-number')
+        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+    }),
+  })
+  .required();

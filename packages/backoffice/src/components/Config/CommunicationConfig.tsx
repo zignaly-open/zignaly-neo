@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
-import { useToast, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { ConfigWrapper } from './styled';
 import { Grid, Tooltip } from '@mui/material';
 import { GridUrlInput, SectionHeader } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig, useSaveCurrentWlConfig } from './use';
+import { useCurrentWlConfig } from './use';
 import { WhitelabelConfig } from '../../apis/config/types';
 import {
   ZigLogoDiscordIcon,
@@ -21,6 +21,7 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { CommunicationConfigValidation } from './validations';
+import { useSaveConfig } from './util';
 
 const socialNetworks = [
   {
@@ -82,25 +83,7 @@ export default function CommunicationConfig() {
     formState: { errors },
   } = formMethods;
 
-  const [save, { isLoading }] = useSaveCurrentWlConfig();
-  const toast = useToast();
-
-  const submit = (values: Partial<WhitelabelConfig>) => {
-    save(values)
-      .unwrap()
-      .then(() => {
-        toast.success(t('saved'));
-      })
-      .catch((e) => {
-        toast.error(
-          t('failed') +
-            ' ' +
-            (e?.data?.error?.msg
-              ? t(`error:error.${e?.data?.error?.msg}`)
-              : ''),
-        );
-      });
-  };
+  const { submit, isLoading } = useSaveConfig();
 
   return (
     <ConfigWrapper>

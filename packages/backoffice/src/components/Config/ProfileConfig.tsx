@@ -14,7 +14,7 @@ import { useCurrentWlConfig } from './use';
 import { WhitelabelConfig } from '../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { SettingsConfigValidation } from './validations';
+import { ProfileConfigValidation } from './validations';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
 import { useSaveConfig } from './util';
 // TODO: sort pout the types
@@ -28,23 +28,17 @@ const grayscaleIconStyle = {
   opacity: 0.5,
 };
 
-export default function SettingsConfig() {
+export default function ProfileConfig() {
   const { t } = useTranslation('config');
   const { data } = useCurrentWlConfig() as unknown as {
     data: WhitelabelConfig;
   };
-  const defaultValues = useMemo(
-    () => ({
-      settings: data?.settings || {},
-      marketplaceMinScore: data?.marketplaceMinScore || 0,
-      minInvestment: data?.minInvestment || {},
-    }),
-    [data],
-  );
+
+  const defaultValues = useMemo(() => ({}), [data]);
 
   const formMethods = useForm<Partial<WhitelabelConfig>>({
     defaultValues,
-    resolver: yupResolver(SettingsConfigValidation),
+    resolver: yupResolver(ProfileConfigValidation),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
@@ -57,10 +51,7 @@ export default function SettingsConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig((v) => {
-    v.marketplaceMinScore = +v.marketplaceMinScore;
-    return v;
-  });
+  const { submit, isLoading } = useSaveConfig();
 
   return (
     <ConfigWrapper>
