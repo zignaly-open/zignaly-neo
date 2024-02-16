@@ -56,11 +56,11 @@ function WithdrawForm({
     checkWithdraw(async (code) => {
       await withdraw({
         asset: coin,
-        network: confirmationData.network,
+        network: confirmationData!.network,
         exchangeInternalId: internalId,
-        address: confirmationData.address,
-        tag: confirmationData.tag,
-        amount: confirmationData.amount,
+        address: confirmationData!.address,
+        tag: confirmationData!.tag,
+        amount: confirmationData!.amount,
         code,
       }).unwrap();
 

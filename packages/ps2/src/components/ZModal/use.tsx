@@ -16,7 +16,7 @@ export function useZModal(options?: UseZModalOptions) {
   const { userId } = useCurrentUser();
   const ourShowModal = useCallback(
     (
-      Component: ComponentType & { trackId?: string },
+      Component: ComponentType<never> & { trackId?: string },
       props?: Record<string, unknown>,
       opts?: Record<string, unknown>,
     ) => {

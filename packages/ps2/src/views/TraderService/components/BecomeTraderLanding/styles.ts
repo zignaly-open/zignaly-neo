@@ -59,7 +59,7 @@ export const WrapperAction = styled.div`
 export const InfoBar = styled.div`
   padding: 28px 0;
   margin-bottom: 28px;
-  background: ${({ theme }) => theme.palette.neutral800}};
+  background: ${({ theme }) => theme.palette.neutral800};
 `;
 
 export const InfoBarList = styled.ul<{ itemsLength: number }>`
