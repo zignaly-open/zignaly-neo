@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import {
-  CoinLabel,
   ZigButton,
   ZigCheckBox,
   ZigInput,
@@ -12,32 +11,24 @@ import { Grid, InputAdornment } from '@mui/material';
 import { GridUrlInput, SectionHeader, SettingEnableSection } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useCurrentWlConfig } from './use';
-import { WhitelabelConfig } from '../../apis/config/types';
+import { WhitelabelBackendConfig } from '../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { ProfileConfigValidation } from './validations';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
 import { useSaveConfig } from './util';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import { supportedLanguages } from '@zignaly-open/ps2-definitions';
 import HelpIcon from '@mui/icons-material/Help';
-// TODO: sort pout the types
-// import { Features } from '@zignaly-open/ps2/src/whitelabel/type';
-
-// TODO: import from a package
-const currenciesConfiguredForMin = ['USDT', 'ETH', 'BNB', 'BTC'];
 
 const grayscaleIconStyle = {
   filter: 'grayscale(100%)',
   opacity: 0.5,
 };
 
-// TODO: import from a package
-const languagesWeSupport = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
-
 export default function ProfileConfig() {
   const { t } = useTranslation('config');
   const { data } = useCurrentWlConfig() as unknown as {
-    data: WhitelabelConfig;
+    data: WhitelabelBackendConfig;
   };
 
   const defaultValues = useMemo(
@@ -46,7 +37,7 @@ export default function ProfileConfig() {
       privacyPolicy: data.privacyPolicy,
       tos: data.tos,
       tools: data.tools || {},
-      languagesMap: languagesWeSupport.reduce((memo, cur) => {
+      languagesMap: supportedLanguages.reduce((memo, cur) => {
         memo[cur] = data.languages?.includes(cur);
         return memo;
       }, {}),
@@ -55,7 +46,7 @@ export default function ProfileConfig() {
   );
 
   const formMethods = useForm<
-    Partial<WhitelabelConfig> & { languagesMap: Record<string, boolean> }
+    Partial<WhitelabelBackendConfig> & { languagesMap: Record<string, boolean> }
   >({
     defaultValues,
     resolver: yupResolver(ProfileConfigValidation),
@@ -199,7 +190,7 @@ export default function ProfileConfig() {
             sx={{ mb: 0.5, mt: 6 }}
           />
 
-          {languagesWeSupport.map((l) => (
+          {supportedLanguages.map((l) => (
             <Controller
               control={control}
               key={l}

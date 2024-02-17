@@ -6,7 +6,7 @@ import { Grid, Tooltip } from '@mui/material';
 import { GridUrlInput, SectionHeader } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useCurrentWlConfig } from './use';
-import { WhitelabelConfig } from '../../apis/config/types';
+import { WhitelabelBackendConfig } from '../../apis/config/types';
 import {
   ZigLogoDiscordIcon,
   ZigLogoLinkedInIcon,
@@ -62,14 +62,14 @@ export default function CommunicationConfig() {
       social: socialNetworks.reduce((memo, { key }) => {
         memo[key] = data?.social?.[key];
         return memo;
-      }, {}) as Record<keyof WhitelabelConfig['social'], string>,
+      }, {}) as Record<keyof WhitelabelBackendConfig['social'], string>,
       supportUrl: data?.supportUrl,
       supportHelpCenter: data?.supportHelpCenter,
     }),
     [data],
   );
 
-  const formMethods = useForm<Partial<WhitelabelConfig>>({
+  const formMethods = useForm<Partial<WhitelabelBackendConfig>>({
     defaultValues,
     resolver: yupResolver(CommunicationConfigValidation),
     mode: 'onBlur',
@@ -100,7 +100,7 @@ export default function CommunicationConfig() {
             {socialNetworks.map((s) => (
               <Grid item xs={12} sm={6} md={4} key={s.key}>
                 <Controller
-                  name={('social.' + s.key) as keyof WhitelabelConfig}
+                  name={('social.' + s.key) as keyof WhitelabelBackendConfig}
                   control={control}
                   render={({ field }) => (
                     <GridUrlInput

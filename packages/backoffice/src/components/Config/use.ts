@@ -1,5 +1,5 @@
 import { useSaveWlConfigMutation, useWlConfigQuery } from 'apis/config/api';
-import { WhitelabelConfig } from '../../apis/config/types';
+import { WhitelabelBackendConfig } from '../../apis/config/types';
 
 export function useCurrentWlConfig(): ReturnType<typeof useWlConfigQuery> {
   return useWlConfigQuery('z01');
@@ -7,7 +7,7 @@ export function useCurrentWlConfig(): ReturnType<typeof useWlConfigQuery> {
 
 export function useSaveCurrentWlConfig(): [
   (
-    payload: Partial<WhitelabelConfig>,
+    payload: Partial<WhitelabelBackendConfig>,
   ) => ReturnType<ReturnType<typeof useSaveWlConfigMutation>[0]>,
   ReturnType<typeof useSaveWlConfigMutation>[1],
 ] {

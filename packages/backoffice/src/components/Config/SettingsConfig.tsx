@@ -11,17 +11,15 @@ import { Grid, InputAdornment } from '@mui/material';
 import { SettingEnableSection } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useCurrentWlConfig } from './use';
-import { WhitelabelConfig } from '../../apis/config/types';
+import { WhitelabelBackendConfig } from '../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { SettingsConfigValidation } from './validations';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
 import { useSaveConfig } from './util';
-// TODO: sort pout the types
-// import { Features } from '@zignaly-open/ps2/src/whitelabel/type';
+import { allowedDeposits, Features } from '@zignaly-open/ps2-definitions';
 
-// TODO: import from a package
-const currenciesConfiguredForMin = ['USDT', 'ETH', 'BNB', 'BTC'];
+const currenciesConfiguredForMin = allowedDeposits.spot;
 
 const grayscaleIconStyle = {
   filter: 'grayscale(100%)',
@@ -31,7 +29,7 @@ const grayscaleIconStyle = {
 export default function SettingsConfig() {
   const { t } = useTranslation('config');
   const { data } = useCurrentWlConfig() as unknown as {
-    data: WhitelabelConfig;
+    data: WhitelabelBackendConfig;
   };
   const defaultValues = useMemo(
     () => ({
@@ -42,7 +40,7 @@ export default function SettingsConfig() {
     [data],
   );
 
-  const formMethods = useForm<Partial<WhitelabelConfig>>({
+  const formMethods = useForm<Partial<WhitelabelBackendConfig>>({
     defaultValues,
     resolver: yupResolver(SettingsConfigValidation),
     mode: 'onBlur',
@@ -72,28 +70,21 @@ export default function SettingsConfig() {
           <SettingEnableSection
             title={t('settings.referrals')}
             description={t('settings.referrals-description')}
-            name={'settings.referrals'}
+            name={'settings.' + Features.Referrals}
             id={'settings-referrals-toggle'}
-          />
-
-          <SettingEnableSection
-            title={t('settings.rewards')}
-            description={t('settings.rewards-description')}
-            name={'settings.rewards'}
-            id={'settings-rewards-toggle'}
           />
 
           <SettingEnableSection
             title={t('settings.login-only')}
             description={t('settings.login-only-description')}
-            name={'settings.loginOnly'}
+            name={'settings.' + Features.LoginOnlyAccess}
             id={'settings-login-only-toggle'}
           />
 
           <SettingEnableSection
             title={t('settings.zscore')}
             description={t('settings.zscore-description')}
-            name={'settings.zscore'}
+            name={'settings.' + Features.ZScore}
             id={'settings-zscore-toggle'}
           />
 
@@ -128,7 +119,7 @@ export default function SettingsConfig() {
           <SettingEnableSection
             title={t('settings.min-investment')}
             description={t('settings.min-investment-description')}
-            name={'settings.minInvestment'}
+            name={'settings.' + Features.MinInvestment}
             id={'settings-min-investment-toggle'}
           />
 
@@ -136,7 +127,9 @@ export default function SettingsConfig() {
             {currenciesConfiguredForMin.map((coin) => (
               <Grid item xs={12} sm={6} md={6} lg={3} key={`${coin}-min`}>
                 <Controller
-                  name={`minInvestment.${coin}` as keyof WhitelabelConfig}
+                  name={
+                    `minInvestment.${coin}` as keyof WhitelabelBackendConfig
+                  }
                   control={control}
                   render={({ field }) => (
                     <ZigInput

@@ -17,50 +17,17 @@ import { CACHE_TTL, BASE_API } from './constants';
 //
 // I am sorry
 // I will figure a cleaner way to do this
-import type { WhitelabelOverride } from '@zignaly-open/ps2/src/whitelabel/type';
+import type {
+  WhitelabelOverride,
+  WhitelabelBackendConfig,
+} from '@zignaly-open/ps2-definitions';
 import * as translationOverridesMap from './translationOverrides';
-import { ThemeOverridesType } from '@zignaly-open/ui';
 import logger from './logger';
 
 const whitelabelCache: Record<
   string,
   { expiry: number; value: WhitelabelFrontendConfig | null }
 > = {};
-
-export type WhitelabelBackendConfig = Pick<
-  WhitelabelOverride,
-  | 'minInvestment'
-  | 'social'
-  | 'domain'
-  | 'tools'
-  | 'slug'
-  | 'zignalySuccessFee'
-  | 'title'
-  | 'description'
-> & {
-  name: string;
-  type: 'lite' | 'heavy'; // this could be wrong but let the future me figure out what is the other type
-  settingFee: number;
-  monthlyFee: number;
-  image: string;
-  logo: string;
-  favicon: string;
-  supportUrl: string;
-  supportHelpCenter: string;
-  languages: WhitelabelOverride['locales'];
-  settings: WhitelabelOverride['featureOverrides'] & { translationOw: boolean };
-  mainAppLink?: string;
-  tos?: string;
-  theme: string;
-  themeOverride: {
-    background: string;
-    backgroundImage: string;
-    themeOverrides: ThemeOverridesType;
-  };
-  privacyPolicy?: string;
-  subscriptionPurchaseLink?: string;
-  marketplaceMinScore: number;
-};
 
 export type WhitelabelFrontendConfig = WhitelabelOverride & {
   imageDeliveryImages: {

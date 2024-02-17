@@ -1,18 +1,20 @@
 import { useSaveCurrentWlConfig } from './use';
 import { useToast } from '@zignaly-open/ui';
-import { WhitelabelConfig } from '../../apis/config/types';
+import { WhitelabelBackendConfig } from '../../apis/config/types';
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
 
 export function useSaveConfig(
-  transform?: (v: Partial<WhitelabelConfig>) => Partial<WhitelabelConfig>,
+  transform?: (
+    v: Partial<WhitelabelBackendConfig>,
+  ) => Partial<WhitelabelBackendConfig>,
 ) {
   const { t } = useTranslation('config');
   const [save, { isLoading }] = useSaveCurrentWlConfig();
   const toast = useToast();
 
   const submit = useCallback(
-    (values: Partial<WhitelabelConfig>) => {
+    (values: Partial<WhitelabelBackendConfig>) => {
       save(transform ? transform(values) : values)
         .unwrap()
         .then(() => {

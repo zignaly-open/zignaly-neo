@@ -1,9 +1,9 @@
 import baseApiBackoffice from '../baseApiBackoffice';
 import { injectEndpoints } from 'apis/util';
-import { WhitelabelConfig } from './types';
+import { WhitelabelBackendConfig } from './types';
 
 export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
-  wlConfig: builder.query<WhitelabelConfig, string>({
+  wlConfig: builder.query<WhitelabelBackendConfig, string>({
     query: (slug) => ({
       url: `wl_configuration/${slug}`,
       method: 'GET',
@@ -11,8 +11,8 @@ export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
     providesTags: ['WlConfig'],
   }),
   saveWlConfig: builder.mutation<
-    WhitelabelConfig,
-    { slug: string; data: WhitelabelConfig }
+    WhitelabelBackendConfig,
+    { slug: string; data: WhitelabelBackendConfig }
   >({
     invalidatesTags: ['WlConfig'],
     query: ({ slug, data }) => ({
