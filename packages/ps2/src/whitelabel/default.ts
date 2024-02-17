@@ -8,6 +8,7 @@ const defaultFeatureState: Record<Features, boolean> = {
   [Features.LoginOnlyAccess]: false,
   [Features.NewSignup]: true,
   [Features.Subscriptions]: false,
+  [Features.MinInvestment]: false,
   [Features.Kyc]: false,
   [Features.ZScore]: true,
 };

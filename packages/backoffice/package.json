@@ -59,6 +59,7 @@
     "@types/react-share": "^4.0.0",
     "@zignaly-open/tracker": "^0.1.3",
     "@zignaly-open/ui": "^0.6.18",
+    "@zignaly-open/ps2-definitions": "^0.1.0",
     "analytics": "^0.8.9",
     "async-mutex": "^0.3.2",
     "bignumber.js": "^9.1.0",

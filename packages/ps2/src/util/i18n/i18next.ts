@@ -17,7 +17,11 @@ import dateLocaleRu from 'date-fns/locale/ru';
 import dateLocaleVi from 'date-fns/locale/vi';
 
 import { whitelabel } from '../../whitelabel';
+import { supportedLanguages as ps2SupportedLanguages } from '@zignaly-open/ps2-definitions';
 
+// why do we have the supported languages linst in ps2-definitions but we have the countied initialized here?
+// well, because we do not need the countries in multiple modules
+// also TODO: dynamic import
 Countries.registerLocale(CountriesEn);
 Countries.registerLocale(CountriesPt);
 Countries.registerLocale(CountriesTr);
@@ -29,7 +33,7 @@ Countries.registerLocale(CountriesVi);
 // if (CountriesEn.countries.RU)
 //   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
-export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'].filter(
+export const supportedLanguages = ps2SupportedLanguages.filter(
   (l) => !whitelabel?.locales || whitelabel?.locales.includes(l),
 );
 
