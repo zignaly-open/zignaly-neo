@@ -7,23 +7,19 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { ConfigWrapper } from './styled';
-import { Grid, InputAdornment } from '@mui/material';
-import { GridUrlInput, SectionHeader, SettingEnableSection } from './atoms';
+import { Grid } from '@mui/material';
+import { GridUrlInput, SectionHeader } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useCurrentWlConfig } from './use';
 import { WhitelabelBackendConfig } from '../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { ProfileConfigValidation } from './validations';
-import { ZScoreIcon } from '@zignaly-open/ui/icons';
 import { useSaveConfig } from './util';
-import { supportedLanguages } from '@zignaly-open/ps2-definitions';
-import HelpIcon from '@mui/icons-material/Help';
-
-const grayscaleIconStyle = {
-  filter: 'grayscale(100%)',
-  opacity: 0.5,
-};
+import {
+  LocalizationLanguages,
+  supportedLanguages,
+} from '@zignaly-open/ps2-definitions';
 
 export default function ProfileConfig() {
   const { t } = useTranslation('config');
@@ -55,7 +51,6 @@ export default function ProfileConfig() {
   });
 
   const {
-    watch,
     control,
     handleSubmit,
     reset,
@@ -109,80 +104,7 @@ export default function ProfileConfig() {
                 )}
               />
             </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Controller
-                name={'supportHelpCenter'}
-                control={control}
-                render={({ field }) => (
-                  <GridUrlInput
-                    error={t(errors.supportHelpCenter?.message)}
-                    id={'socials_support-help-center'}
-                    image={<HelpIcon fill={'#fff'} />}
-                    label={t('socials.support-help-center')}
-                    disabled={isLoading}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
           </Grid>
-
-          <SettingEnableSection
-            title={t('settings.referrals')}
-            description={t('settings.referrals-description')}
-            name={'settings.referrals'}
-            id={'settings-referrals-toggle'}
-          />
-
-          <SettingEnableSection
-            title={t('settings.rewards')}
-            description={t('settings.rewards-description')}
-            name={'settings.rewards'}
-            id={'settings-rewards-toggle'}
-          />
-
-          <SettingEnableSection
-            title={t('settings.login-only')}
-            description={t('settings.login-only-description')}
-            name={'settings.loginOnly'}
-            id={'settings-login-only-toggle'}
-          />
-
-          <SettingEnableSection
-            title={t('settings.zscore')}
-            description={t('settings.zscore-description')}
-            name={'settings.zscore'}
-            id={'settings-zscore-toggle'}
-          />
-
-          <Box sx={{ mt: 1 }}>
-            <Controller
-              name={'marketplaceMinScore'}
-              control={control}
-              render={({ field }) => (
-                <ZigInput
-                  disabled={!watch('settings.zscore')}
-                  id={'settings-min-zscore'}
-                  placeholder={t('placeholder')}
-                  label={t('settings.min-zscore') + ':'}
-                  type={'number'}
-                  error={t(errors.marketplaceMinScore?.message)}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment
-                        position='end'
-                        sx={watch('settings.zscore') ? {} : grayscaleIconStyle}
-                      >
-                        <ZScoreIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...field}
-                />
-              )}
-            />
-          </Box>
 
           <SectionHeader
             title={t('profile.language-title')}
@@ -190,24 +112,50 @@ export default function ProfileConfig() {
             sx={{ mb: 0.5, mt: 6 }}
           />
 
-          {supportedLanguages.map((l) => (
-            <Controller
-              control={control}
-              key={l}
-              name={`languagesMap.${l}`}
-              defaultValue={false}
-              render={({ field: { onChange, value } }) => (
-                <ZigCheckBox
-                  wrapperSx={{ alignItems: 'flex-start' }}
-                  id={`profile_language-${l}`}
-                  onChange={onChange}
-                  value={value}
-                  variant={'outlined'}
-                  label={l}
-                />
-              )}
-            />
-          ))}
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            {supportedLanguages.map((l) => (
+              <Controller
+                control={control}
+                key={l}
+                name={`languagesMap.${l}`}
+                defaultValue={false}
+                render={({ field: { onChange, value } }) => {
+                  const localized = LocalizationLanguages[l];
+                  return (
+                    <ZigCheckBox
+                      wrapperSx={{ alignItems: 'flex-end', mt: 2 }}
+                      id={`profile_language-${l}`}
+                      onChange={onChange}
+                      checked={value}
+                      disabled={l === 'en'}
+                      variant={'outlined'}
+                      label={
+                        <ZigTypography
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            position: 'relative',
+                            top: -5,
+                          }}
+                        >
+                          {!!localized?.country && (
+                            <img
+                              height={18}
+                              src={`https://app.zignaly.com/images/country-flags/${localized?.country}.svg`}
+                              alt={localized?.label || l}
+                            />
+                          )}
+                          <ZigTypography sx={{ ml: 1 }}>
+                            {localized?.label || l}
+                          </ZigTypography>
+                        </ZigTypography>
+                      }
+                    />
+                  );
+                }}
+              />
+            ))}
+          </Box>
 
           <SectionHeader
             title={t('profile.tos')}

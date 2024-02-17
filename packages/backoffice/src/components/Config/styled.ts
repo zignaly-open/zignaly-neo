@@ -6,4 +6,8 @@ export const ConfigWrapper = styled(PageContainer)`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  form {
+    width: 100%;
+  }
 `;
