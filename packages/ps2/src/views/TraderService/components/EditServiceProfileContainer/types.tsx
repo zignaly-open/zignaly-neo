@@ -2,8 +2,7 @@ import {
   EditServicePayload,
   TraderServiceAccessLevel,
 } from 'apis/service/types';
-import { Descendant } from 'slate';
-import { RenderElementProps, RenderLeafProps } from 'slate-react';
+import { Element as SlateElement } from 'slate';
 
 export const VISIBILITY_LABEL = {
   [TraderServiceAccessLevel.Solo]: {
@@ -25,26 +24,19 @@ export const VISIBILITY_LABEL = {
 };
 
 export type EditServiceForm = EditServicePayload & {
-  description: RichEditorElement[];
+  description: SlateElement[];
   commission: number;
 };
 
-export type RichEditorElement = {
-  type?: string;
-  align?: string;
-  url?: string;
-  children?: Descendant[];
-};
-
-export type RenderElementType = RenderElementProps & {
-  element: RichEditorElement;
-};
-export type RenderLeafType = RenderLeafProps & {
-  leaf: {
-    bold: boolean;
-    code: boolean;
-    italic: boolean;
-    underline: boolean;
-    link: boolean;
-  };
-};
+export type SlateElementTypeFieldTypes =
+  | 'block-quote'
+  | 'bulleted-list'
+  | 'heading'
+  | 'heading-two'
+  | 'list-item'
+  | 'numbered-list'
+  | 'image'
+  | 'left'
+  | 'center'
+  | 'right'
+  | 'justify';

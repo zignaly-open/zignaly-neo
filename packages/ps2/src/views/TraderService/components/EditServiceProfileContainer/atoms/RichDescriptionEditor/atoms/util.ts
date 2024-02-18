@@ -1,16 +1,10 @@
-import { BaseEditor, Transforms } from 'slate';
+import { Editor, Transforms, Element as SlateElement } from 'slate';
 import imageExtensions from 'image-extensions';
-import { ReactEditor } from 'slate-react';
-import { RichEditorElement } from '../../../types';
 
-export const insertImage = (editor: BaseEditor, url: string) => {
+export const insertImage = (editor: Editor, url: string) => {
   const text = { text: '' };
-  const image: {
-    type: string;
-    url: string;
-    children: Array<{ text: string }>;
-  } = { type: 'image', url, children: [text] };
-  Transforms.insertNodes(editor, image);
+  const image = { type: 'image', url, children: [text] };
+  Transforms.insertNodes(editor, image as SlateElement);
 };
 
 export const isImageUrl = (url: string) => {
@@ -23,10 +17,10 @@ export const isImageUrl = (url: string) => {
   }
 };
 
-export const withImages = (editor: ReactEditor) => {
+export const withImages = (editor: Editor) => {
   const { insertData, isVoid } = editor;
 
-  editor.isVoid = (element: Required<RichEditorElement>) => {
+  editor.isVoid = (element) => {
     return element.type === 'image' ? true : isVoid(element);
   };
 
@@ -59,7 +53,7 @@ export const withImages = (editor: ReactEditor) => {
   return editor;
 };
 
-export function serialize(obj: RichEditorElement[]) {
+export function serialize(obj: SlateElement[]) {
   return JSON.stringify(obj, (key, value) => {
     if (value && typeof value === 'object' && value.type === 'paragraph') {
       const { type, ...rest } = value;
@@ -69,7 +63,7 @@ export function serialize(obj: RichEditorElement[]) {
   });
 }
 
-export function deserialize(serialized: string) {
+export function deserialize(serialized: string): SlateElement[] {
   if (!serialized) {
     return [
       {

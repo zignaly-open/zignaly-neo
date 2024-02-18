@@ -1,6 +1,5 @@
-import { Node } from 'slate';
+import { Node, Element as SlateElement } from 'slate';
 import * as yup from 'yup';
-import { RichEditorElement } from '../../TraderService/components/EditServiceProfileContainer/types';
 
 export const EditProfileValidation = yup
   .object({
@@ -18,10 +17,8 @@ export const EditProfileValidation = yup
       .test(
         'maxlength',
         'common:validation.max-allowed-length',
-        function (val: RichEditorElement[]) {
-          const bioText = val
-            .map((n: Required<RichEditorElement>) => Node.string(n))
-            .join('');
+        function (val: SlateElement[]) {
+          const bioText = val.map((n: SlateElement) => Node.string(n)).join('');
           return bioText.length <= 2000;
         },
       ),
