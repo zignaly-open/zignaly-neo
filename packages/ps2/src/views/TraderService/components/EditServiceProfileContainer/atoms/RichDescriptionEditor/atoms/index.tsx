@@ -10,13 +10,20 @@ import {
 import { Box } from '@mui/material';
 import React, { CSSProperties } from 'react';
 import { Editor, Element as SlateElement, Transforms } from 'slate';
-import { insertImage, isImageUrl } from './util';
+import {
+  insertImage,
+  insertLink,
+  isImageUrl,
+  isLinkActive,
+  unwrapLink,
+} from './util';
 import { ZigCrossIcon } from '@zignaly-open/ui/icons';
 import { SlateElementTypeFieldTypes } from '../../../types';
 import { useZPrompt } from '../../../../../../../components/ZModal/use';
 import { useTranslation } from 'react-i18next';
 import { ZigLink } from '@zignaly-open/ui';
 import { ImageElement } from '../../../../../../../customSlateTypes';
+import { LIST_TYPES, TEXT_ALIGN_TYPES } from '../constants';
 
 export const BlockButton = ({
   format,
@@ -26,9 +33,6 @@ export const BlockButton = ({
   icon: JSX.Element;
 }) => {
   const editor = useSlate();
-
-  const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
-  const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 
   const isBlockActive = (
     editorActive: Editor,
@@ -77,7 +81,7 @@ export const BlockButton = ({
       };
     } else {
       newProperties = {
-        type: isActive ? 'paragraph' : isList ? 'list-item' : formatToggle,
+        type: isActive ? 'paragraph' : isList ? 'list_item' : formatToggle,
       };
     }
     Transforms.setNodes(editorToggle, newProperties);
@@ -167,13 +171,6 @@ export const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
     children = <em>{children}</em>;
   }
 
-  if (leaf.underline) {
-    children = <u>{children}</u>;
-  }
-  if (leaf.link) {
-    children = <ZigLink href={leaf.text}>{children}</ZigLink>;
-  }
-
   return <span {...attributes}>{children}</span>;
 };
 
@@ -187,37 +184,61 @@ export const Element = ({
     listStyleType: 'unset',
   } as CSSProperties;
   switch (element.type) {
-    case 'block-quote':
+    case 'block_quote':
       return (
         <blockquote style={style} {...attributes}>
           {children}
         </blockquote>
       );
-    case 'bulleted-list':
+    case 'ul_list':
       return (
         <ul style={{ ...style, listStyleType: 'disc' }} {...attributes}>
           {children}
         </ul>
       );
-    case 'heading':
+    case 'heading_one':
       return (
         <h1 style={style} {...attributes}>
           {children}
         </h1>
       );
-    case 'heading-two':
+    case 'heading_two':
       return (
         <h2 style={style} {...attributes}>
           {children}
         </h2>
       );
-    case 'list-item':
+    case 'heading_three':
+      return (
+        <h3 style={style} {...attributes}>
+          {children}
+        </h3>
+      );
+    case 'heading_four':
+      return (
+        <h4 style={style} {...attributes}>
+          {children}
+        </h4>
+      );
+    case 'heading_five':
+      return (
+        <h5 style={style} {...attributes}>
+          {children}
+        </h5>
+      );
+    case 'heading_six':
+      return (
+        <h6 style={style} {...attributes}>
+          {children}
+        </h6>
+      );
+    case 'list_item':
       return (
         <li style={{ ...style, marginLeft: '25px' }} {...attributes}>
           {children}
         </li>
       );
-    case 'numbered-list':
+    case 'ol_list':
       return (
         <ol style={{ ...style, listStyleType: 'decimal' }} {...attributes}>
           {children}
@@ -228,6 +249,13 @@ export const Element = ({
         <Image attributes={attributes} element={element}>
           {children}
         </Image>
+      );
+
+    case 'link':
+      return (
+        <ZigLink {...attributes} href={element.link}>
+          {children}
+        </ZigLink>
       );
     default:
       return (
@@ -253,7 +281,8 @@ const Image = ({
       {children}
       <Box contentEditable={false} sx={{ position: 'relative' }}>
         <img
-          src={element.url}
+          alt={element.link}
+          src={element.link}
           style={{
             display: 'block',
             maxWidth: '100%',
@@ -275,6 +304,44 @@ const Image = ({
         </Box>
         <p></p>
       </Box>
+    </Box>
+  );
+};
+
+export const InsertLinkButton = ({ icon }: { icon: JSX.Element }) => {
+  const editor = useSlateStatic();
+  return (
+    <Box
+      sx={{
+        color: isLinkActive(editor) ? 'neutral 100' : 'neutral500',
+      }}
+      onMouseDown={(event) => {
+        event.preventDefault();
+        const url = window.prompt('Enter the URL of the link:');
+        if (!url) return;
+        insertLink(editor, url);
+      }}
+    >
+      {icon}
+    </Box>
+  );
+};
+
+export const RemoveLinkButton = ({ icon }: { icon: JSX.Element }) => {
+  const editor = useSlateStatic();
+
+  return (
+    <Box
+      sx={{
+        color: isLinkActive(editor) ? 'neutral 100' : 'neutral500',
+      }}
+      onMouseDown={() => {
+        if (isLinkActive(editor)) {
+          unwrapLink(editor);
+        }
+      }}
+    >
+      {icon}
     </Box>
   );
 };

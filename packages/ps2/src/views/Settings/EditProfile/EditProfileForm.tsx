@@ -22,8 +22,8 @@ import { Box } from '@mui/system';
 import { ServiceLogoStatus } from './atoms';
 import RichDescriptionEditor from '../../TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor';
 import {
-  deserialize,
-  serialize,
+  deserializeSlate,
+  serializeSlate,
 } from '../../TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
 
 const EditProfileForm = () => {
@@ -46,7 +46,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: deserialize(user.about || ''),
+      bio: deserializeSlate(user.about || ''),
       country: user.country || '',
     },
   });
@@ -104,7 +104,7 @@ const EditProfileForm = () => {
   const onSubmit = (data: EditProfileFormType) =>
     updateUser({
       userName: data.username,
-      about: serialize(data.bio),
+      about: serializeSlate(data.bio),
       countryCode: data.country,
       imageUrl: data.imageUrl,
     })

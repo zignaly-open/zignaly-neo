@@ -31,8 +31,8 @@ import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
 import {
-  deserialize,
-  serialize,
+  deserializeSlate,
+  serializeSlate,
 } from './atoms/RichDescriptionEditor/atoms/util';
 import Deactivated from '../DeactivatedService';
 
@@ -55,7 +55,7 @@ const EditServiceProfileContainer: React.FC<{
   const { t } = useTranslation('service');
   const defaultValues = {
     name: service.name,
-    description: deserialize(service.description),
+    description: deserializeSlate(service.description),
     maximumSbt: service.maximumSbt,
     successFee: service.successFee || 0,
     logo: service.logo,
@@ -90,7 +90,7 @@ const EditServiceProfileContainer: React.FC<{
     await Promise.all([
       edit({
         id: service.id,
-        description: serialize(description),
+        description: serializeSlate(description),
         ...rest,
         level: visibility,
         commission: c,

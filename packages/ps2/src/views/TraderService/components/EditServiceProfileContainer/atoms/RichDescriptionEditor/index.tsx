@@ -14,13 +14,10 @@ import {
 } from 'slate-react';
 import {
   createEditor,
-  Descendant,
   Editor,
   Element as SlateElement,
   Node as SlateNode,
-  Range,
-  Transforms,
-  Point,
+  Descendant,
 } from 'slate';
 import { withHistory } from 'slate-history';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
@@ -30,6 +27,8 @@ import {
   MarkButton,
   Element,
   InsertImageButton,
+  InsertLinkButton,
+  RemoveLinkButton,
 } from './atoms';
 import {
   FormatBoldOutlined,
@@ -41,16 +40,20 @@ import {
   FormatAlignJustify,
   FormatAlignLeft,
   FormatAlignRight,
-  FormatUnderlined,
   Code,
   Image,
   LooksOne,
   LooksTwo,
+  Looks3,
+  Looks4,
+  Looks5,
+  Looks6,
   ExpandMore,
   ExpandLess,
   Link,
+  LinkOff,
 } from '@mui/icons-material';
-import { withImages } from './atoms/util';
+import { withImages, withInlines, withShortcuts } from './atoms/util';
 import {
   ErrorMessage,
   ZigButton,
@@ -58,24 +61,11 @@ import {
   ZigSwitch,
 } from '@zignaly-open/ui';
 import { StyledEditable } from './styles';
-import { SlateElementTypeFieldTypes } from '../../types';
 import { SxProps } from '@mui/system';
 import { HideReadMoreEffects } from '../../../ServiceProfileContainer/styles';
 import { useTranslation } from 'react-i18next';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
-
-const SHORTCUTS = {
-  '*': 'list-item',
-  '-': 'list-item',
-  '+': 'list-item',
-  '>': 'block-quote',
-  '#': 'heading',
-  '##': 'heading-two',
-  '###': 'heading-three',
-  '####': 'heading-four',
-  '#####': 'heading-five',
-  '######': 'heading-six',
-};
+import { SHORTCUTS } from './constants';
 
 const RichDescriptionEditor = ({
   id,
@@ -92,7 +82,7 @@ const RichDescriptionEditor = ({
   id: string;
   label?: string | JSX.Element;
   error?: string;
-  value: SlateElement[];
+  value: Descendant[];
   readOnly?: boolean;
   readMore?: boolean;
   setValue?: (v: Descendant[]) => void;
@@ -100,19 +90,23 @@ const RichDescriptionEditor = ({
   subtitle?: JSX.Element | string;
 }) => {
   const { t } = useTranslation('action');
-  const renderElement = useCallback(
-    (p: RenderElementProps) => <Element {...p}>{p.children}</Element>,
-    [],
-  );
   const theme = useTheme();
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+
   const renderLeaf = useCallback(
     (p: RenderLeafProps) => <Leaf {...p}>{p.children}</Leaf>,
     [],
   );
+  const renderElement = useCallback(
+    (p: RenderElementProps) => <Element {...p}>{p.children}</Element>,
+    [],
+  );
 
   const editor = useMemo(
-    () => withShortcuts(withImages(withHistory(withReact(createEditor())))),
+    () =>
+      withShortcuts(
+        withInlines(withImages(withHistory(withReact(createEditor())))),
+      ),
     [],
   );
 
@@ -199,28 +193,26 @@ const RichDescriptionEditor = ({
             <Box display={'flex'} alignItems={'center'}>
               <MarkButton format='bold' icon={<FormatBoldOutlined />} />
               <MarkButton format='italic' icon={<FormatItalicOutlined />} />
-              <MarkButton format='underline' icon={<FormatUnderlined />} />
               <MarkButton format='code' icon={<Code />} />
-              <MarkButton format='link' icon={<Link />} />
-              <BlockButton format='heading' icon={<LooksOne />} />
-              <BlockButton format='heading-two' icon={<LooksTwo />} />
+              <BlockButton format='heading_one' icon={<LooksOne />} />
+              <BlockButton format='heading_two' icon={<LooksTwo />} />
+              <BlockButton format='heading_three' icon={<Looks3 />} />
+              <BlockButton format='heading_four' icon={<Looks4 />} />
+              <BlockButton format='heading_five' icon={<Looks5 />} />
+              <BlockButton format='heading_six' icon={<Looks6 />} />
               <BlockButton
-                format='block-quote'
+                format='block_quote'
                 icon={<FormatQuoteOutlined />}
               />
-              <BlockButton
-                format='numbered-list'
-                icon={<FormatListNumbered />}
-              />
-              <BlockButton
-                format='bulleted-list'
-                icon={<FormatListBulleted />}
-              />
+              <BlockButton format='ol_list' icon={<FormatListNumbered />} />
+              <BlockButton format='ul_list' icon={<FormatListBulleted />} />
               <BlockButton format='left' icon={<FormatAlignLeft />} />
               <BlockButton format='center' icon={<FormatAlignCenter />} />
               <BlockButton format='right' icon={<FormatAlignRight />} />
               <BlockButton format='justify' icon={<FormatAlignJustify />} />
               <InsertImageButton icon={<Image />} />
+              <InsertLinkButton icon={<Link />} />
+              <RemoveLinkButton icon={<LinkOff />} />
               <ZigSwitch sx={{ marginLeft: 'auto' }} />
             </Box>
           )}
@@ -254,100 +246,6 @@ const RichDescriptionEditor = ({
       )}
     </Box>
   );
-};
-
-const withShortcuts = (editor: Editor) => {
-  const { deleteBackward, insertText } = editor;
-
-  editor.insertText = (text) => {
-    const { selection } = editor;
-
-    if (text.endsWith(' ') && selection && Range.isCollapsed(selection)) {
-      const { anchor } = selection;
-      const block = Editor.above(editor, {
-        match: (n) => SlateElement.isElement(n) && Editor.isBlock(editor, n),
-      });
-      const path = block ? block[1] : [];
-      const start = Editor.start(editor, path);
-      const range = { anchor, focus: start };
-      const beforeText = Editor.string(editor, range) + text.slice(0, -1);
-      const type = SHORTCUTS[beforeText];
-
-      if (type as SlateElementTypeFieldTypes) {
-        Transforms.select(editor, range);
-
-        if (!Range.isCollapsed(range)) {
-          Transforms.delete(editor);
-        }
-
-        const newProperties: Partial<SlateElement> = {
-          type,
-        };
-        Transforms.setNodes<SlateElement>(editor, newProperties, {
-          match: (n) => SlateElement.isElement(n) && Editor.isBlock(editor, n),
-        });
-
-        if (type === 'list-item') {
-          const list: SlateElement = {
-            type: 'bulleted-list',
-            children: [],
-          };
-          Transforms.wrapNodes(editor, list, {
-            match: (n: SlateElement) =>
-              !Editor.isEditor(n) &&
-              SlateElement.isElement(n) &&
-              n.type === 'list-item',
-          });
-        }
-
-        return;
-      }
-    }
-
-    insertText(text);
-  };
-  editor.deleteBackward = (...args) => {
-    const { selection } = editor;
-
-    if (selection && Range.isCollapsed(selection)) {
-      const match = Editor.above(editor, {
-        match: (n) => SlateElement.isElement(n) && Editor.isBlock(editor, n),
-      });
-
-      if (match) {
-        const [block, path] = match;
-        const start = Editor.start(editor, path);
-
-        if (
-          !Editor.isEditor(block) &&
-          SlateElement.isElement(block) &&
-          block.type !== 'paragraph' &&
-          Point.equals(selection.anchor, start)
-        ) {
-          const newProperties: Partial<SlateElement> = {
-            type: 'paragraph',
-          };
-          Transforms.setNodes(editor, newProperties);
-
-          if (block.type === 'list-item') {
-            Transforms.unwrapNodes(editor, {
-              match: (n) =>
-                !Editor.isEditor(n) &&
-                SlateElement.isElement(n) &&
-                n.type === 'bulleted-list',
-              split: true,
-            });
-          }
-
-          return;
-        }
-      }
-
-      deleteBackward(...args);
-    }
-  };
-
-  return editor;
 };
 
 export default RichDescriptionEditor;

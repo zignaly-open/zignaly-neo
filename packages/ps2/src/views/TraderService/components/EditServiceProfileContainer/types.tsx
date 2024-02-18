@@ -29,14 +29,19 @@ export type EditServiceForm = EditServicePayload & {
 };
 
 export type SlateElementTypeFieldTypes =
-  | 'block-quote'
-  | 'bulleted-list'
-  | 'heading'
-  | 'heading-two'
-  | 'list-item'
-  | 'numbered-list'
+  | 'block_quote'
+  | 'ul_list'
+  | 'heading_one'
+  | 'heading_two'
+  | 'heading_three'
+  | 'heading_four'
+  | 'heading_five'
+  | 'heading_six'
+  | 'list_item'
+  | 'ol_list'
   | 'image'
   | 'left'
   | 'center'
   | 'right'
-  | 'justify';
+  | 'justify'
+  | 'link';

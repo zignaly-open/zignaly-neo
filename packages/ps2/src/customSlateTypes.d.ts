@@ -5,28 +5,53 @@ import { HistoryEditor } from 'slate-history';
 export type CustomDescendant = CustomText;
 
 export type BlockQuoteElement = {
-  type: 'block-quote';
+  type: 'block_quote';
   align?: string;
   children: CustomDescendant[];
 };
 
 export type BulletedListElement = {
-  type: 'bulleted-list';
+  type: 'ul_list';
   align?: string;
   children: CustomDescendant[];
 };
 
 export type HeadingElement = {
-  type: 'heading';
+  type: 'heading_one';
   align?: string;
   children: CustomDescendant[];
 };
 
 export type HeadingTwoElement = {
-  type: 'heading-two';
+  type: 'heading_two';
   align?: string;
   children: CustomDescendant[];
 };
+
+export type HeadingThreeElement = {
+  type: 'heading_three';
+  align?: string;
+  children: CustomDescendant[];
+};
+
+export type HeadingFourElement = {
+  type: 'heading_four';
+  align?: string;
+  children: CustomDescendant[];
+};
+
+export type HeadingFiveElement = {
+  type: 'heading_five';
+  align?: string;
+  children: CustomDescendant[];
+};
+
+export type HeadingSixElement = {
+  type: 'heading_six';
+  align?: string;
+  children: CustomDescendant[];
+};
+
 export type LeftAlignElement = {
   type: 'left';
   align?: string;
@@ -52,19 +77,19 @@ export type CenterAlignElement = {
 
 export type ImageElement = {
   type: 'image';
-  url: string;
+  link: string;
   align?: string;
   children: EmptyText[];
 };
 
 export type ListItemElement = {
-  type: 'list-item';
+  type: 'list_item';
   align?: string;
   children: CustomDescendant[];
 };
 
 export type NumberedListItemElement = {
-  type: 'numbered-list';
+  type: 'ol_list';
   align?: string;
   children: CustomDescendant[];
 };
@@ -75,11 +100,22 @@ export type ParagraphElement = {
   children: CustomDescendant[];
 };
 
+export type LinkElement = {
+  type: 'link';
+  link: string;
+  align?: string;
+  children: CustomDescendant[];
+};
+
 type CustomElement =
   | BlockQuoteElement
   | BulletedListElement
   | HeadingElement
   | HeadingTwoElement
+  | HeadingThreeElement
+  | HeadingFourElement
+  | HeadingFiveElement
+  | HeadingSixElement
   | ImageElement
   | ListItemElement
   | ParagraphElement
@@ -87,14 +123,13 @@ type CustomElement =
   | RightAlignElement
   | CenterAlignElement
   | JustifyAlignElement
-  | NumberedListItemElement;
+  | NumberedListItemElement
+  | LinkElement;
 
 export type CustomText = {
   bold?: boolean;
   italic?: boolean;
   code?: boolean;
-  underline?: boolean;
-  link?: boolean;
   text: string;
 };
 

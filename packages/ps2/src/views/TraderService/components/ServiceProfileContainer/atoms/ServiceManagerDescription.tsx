@@ -9,7 +9,7 @@ import { Tooltip } from '@mui/material';
 import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
 import Flag from '../../../../../components/Flag';
 import RichDescriptionEditor from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor';
-import { deserialize } from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
+import { deserializeSlate } from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   service,
@@ -22,7 +22,7 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
     <Box>
       <RichDescriptionEditor
         id={'service-profile__about-manager'}
-        value={deserialize(service?.ownerDescription)}
+        value={deserializeSlate(service?.ownerDescription)}
         readMore
         readOnly
         label={t('about-trader')}
