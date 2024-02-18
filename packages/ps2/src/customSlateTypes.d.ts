@@ -1,5 +1,5 @@
 import { BaseEditor, BaseRange, Range, Element } from 'slate';
-import { ReactEditor, RenderLeafProps } from 'slate-react';
+import { ReactEditor } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
 
 export type CustomDescendant = CustomText;
