@@ -123,8 +123,7 @@ export const unwrapLink = (editor: Editor) => {
 export const withInlines = (editor: Editor) => {
   const { insertData, insertText, isInline } = editor;
 
-  editor.isInline = (element) =>
-    ['link', 'button', 'badge'].includes(element.type) || isInline(element);
+  editor.isInline = (element) => element.type === 'link' || isInline(element);
 
   editor.insertText = (text) => {
     if (text && isUrl(text)) {
