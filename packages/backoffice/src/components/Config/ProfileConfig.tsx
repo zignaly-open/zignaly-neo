@@ -7,7 +7,7 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { ConfigWrapper } from './styled';
-import { Grid } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import { GridUrlInput, SectionHeader } from './atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useCurrentWlConfig } from './use';
@@ -30,13 +30,18 @@ export default function ProfileConfig() {
   const defaultValues = useMemo(
     () => ({
       name: data.name,
+      description: data.description,
+      title: data.title,
       privacyPolicy: data.privacyPolicy,
       tos: data.tos,
-      tools: data.tools || {},
-      languagesMap: supportedLanguages.reduce((memo, cur) => {
-        memo[cur] = data.languages?.includes(cur);
-        return memo;
-      }, {}),
+      tools: data.tools || ({} as typeof data.tools),
+      languagesMap: supportedLanguages.reduce(
+        (memo: Record<string, boolean>, cur: string) => {
+          memo[cur] = data.languages?.includes(cur);
+          return memo;
+        },
+        {},
+      ),
     }),
     [data],
   );
@@ -104,12 +109,86 @@ export default function ProfileConfig() {
                 )}
               />
             </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <ZigTypography>{t('profile.subdomain')}</ZigTypography>
+              <ZigTypography variant={'body2'} component={'p'}>
+                {t('profile.subdomain-explainer')}
+              </ZigTypography>
+              <Tooltip title={t('contact-support-to-change')}>
+                <ZigTypography
+                  variant={'body1'}
+                  component={'p'}
+                  sx={{ fontSize: '16px', mt: 1 }}
+                  color={'neutral400'}
+                >
+                  {data.domain}
+                </ZigTypography>
+              </Tooltip>
+            </Grid>
+          </Grid>
+
+          <SectionHeader title={t('profile.meta')} sx={{ mb: 0.5, mt: 8 }} />
+
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={6} md={4}></Grid>
+            <Grid item xs={12} sm={6} md={8}>
+              <Controller
+                name={'title'}
+                control={control}
+                render={({ field }) => (
+                  <ZigInput
+                    error={t(errors.title?.message)}
+                    id={'profile_wl-title'}
+                    wide
+                    placeholder={t('profile.meta-title')}
+                    label={
+                      <>
+                        <ZigTypography>
+                          {t('profile.meta-title')}
+                          <ZigTypography variant={'body2'} component={'div'}>
+                            {t('profile.meta-title-description')}
+                          </ZigTypography>
+                        </ZigTypography>
+                      </>
+                    }
+                    disabled={isLoading}
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={12}>
+              <Controller
+                name={'description'}
+                control={control}
+                render={({ field }) => (
+                  <ZigInput
+                    error={t(errors.description?.message)}
+                    id={'profile_wl-title'}
+                    wide
+                    placeholder={t('profile.meta-title')}
+                    label={
+                      <>
+                        <ZigTypography>
+                          {t('profile.meta-title')}
+                          <ZigTypography variant={'body2'} component={'div'}>
+                            {t('profile.meta-title-description')}
+                          </ZigTypography>
+                        </ZigTypography>
+                      </>
+                    }
+                    disabled={isLoading}
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
           </Grid>
 
           <SectionHeader
             title={t('profile.language-title')}
             description={t('profile.language-description')}
-            sx={{ mb: 0.5, mt: 6 }}
+            sx={{ mb: 0.5, mt: 8 }}
           />
 
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -160,7 +239,7 @@ export default function ProfileConfig() {
           <SectionHeader
             title={t('profile.tos')}
             description={t('profile.tos-description')}
-            sx={{ mb: 0.5, mt: 6 }}
+            sx={{ mb: 0.5, mt: 8 }}
           />
 
           <Controller

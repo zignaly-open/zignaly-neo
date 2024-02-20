@@ -10,14 +10,16 @@ const urlRegex =
 
 export const SectionHeader: React.FC<{
   title: string;
-  description: string;
+  description?: string;
   sx?: SxProps;
 }> = ({ title, description, sx }) => (
   <Box sx={{ mt: 8, mb: 4, ...(sx || {}) }}>
     <ZigTypography variant={'h2'}>{title}</ZigTypography>
-    <ZigTypography sx={{ mt: 0.5 }} component={'p'}>
-      {description}
-    </ZigTypography>
+    {!!description && (
+      <ZigTypography sx={{ mt: 0.5 }} component={'p'}>
+        {description}
+      </ZigTypography>
+    )}
   </Box>
 );
 
