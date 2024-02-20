@@ -44,27 +44,28 @@ export const SettingsConfigValidation = yup
 
 export const ProfileConfigValidation = yup
   .object({
-    marketplaceMinScore: yup
-      .number()
-      .typeError('config:settings.validation-number')
-      .test('range', 'config:settings.validation-number-0-100', (v) => v > 0),
-    minInvestment: yup.object({
-      BTC: yup
-        .number()
-        .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
-      ETH: yup
-        .number()
-        .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
-      USDT: yup
-        .number()
-        .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
-      BNB: yup
-        .number()
-        .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+    name: yup.string().required('common:required'),
+
+    title: yup
+      .string()
+      .required('common:required')
+      .test('max', 'config:should-be-under-x-chars', (v) => v.length < 100),
+    description: yup
+      .string()
+      .required('common:required')
+      .test('max', 'config:should-be-under-x-chars', (v) => v.length < 500),
+
+    privacyPolicy: yup.string().url('config:socials.validation-url'),
+    tos: yup.string().url('config:socials.validation-url'),
+
+    tools: yup.object({
+      google_tag_manager: yup
+        .string()
+        .test(
+          'format',
+          'config:gtm-pattern',
+          (v) => !v || /^GTM-[A-Z\d]{6,10}$/.test(v),
+        ),
     }),
   })
   .required();

@@ -3,6 +3,8 @@
   "saved": "Settings updated",
   "failed": "Could not save the settings.",
   "cancel": "Reset",
+  "gtm-pattern": "Should be smth like GTM-1234567",
+  "should-be-under-x-chars": "The text is longer than {{max}} characters",
   "navigation": {
     "theme-config": "Theme",
     "profile-config": "Profile",

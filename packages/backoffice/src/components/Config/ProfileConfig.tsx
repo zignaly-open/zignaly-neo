@@ -47,7 +47,10 @@ export default function ProfileConfig() {
   );
 
   const formMethods = useForm<
-    Partial<WhitelabelBackendConfig> & { languagesMap: Record<string, boolean> }
+    Partial<WhitelabelBackendConfig> & {
+      name: string;
+      languagesMap: Record<string, boolean>;
+    }
   >({
     defaultValues,
     resolver: yupResolver(ProfileConfigValidation),
@@ -62,7 +65,14 @@ export default function ProfileConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig();
+  const { submit, isLoading } = useSaveConfig(({ languagesMap, ...v }) => {
+    return {
+      ...v,
+      languages: Object.entries(languagesMap)
+        .filter((e) => e[1])
+        .map(([x]) => x),
+    };
+  });
 
   return (
     <ConfigWrapper>
@@ -81,7 +91,7 @@ export default function ProfileConfig() {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
-                    error={t(errors.name?.message)}
+                    error={t(errors.name?.message as string)}
                     id={'profile_wl-name'}
                     wide
                     placeholder={t('profile.name')}
@@ -98,7 +108,10 @@ export default function ProfileConfig() {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
-                    error={t(errors.tools?.google_tag_manager?.message)}
+                    error={t(
+                      // @ts-ignore
+                      errors.tools?.google_tag_manager?.message as string,
+                    )}
                     id={'profile_wl-gtm'}
                     wide
                     placeholder={t('profile.gtm-placeholder')}
@@ -137,7 +150,7 @@ export default function ProfileConfig() {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
-                    error={t(errors.title?.message)}
+                    error={t(errors.title?.message as string, { max: 100 })}
                     id={'profile_wl-title'}
                     wide
                     placeholder={t('profile.meta-title')}
@@ -163,7 +176,9 @@ export default function ProfileConfig() {
                 control={control}
                 render={({ field }) => (
                   <ZigInput
-                    error={t(errors.description?.message)}
+                    error={t(errors.description?.message as string, {
+                      max: 500,
+                    })}
                     id={'profile_wl-title'}
                     wide
                     placeholder={t('profile.meta-title')}
@@ -192,7 +207,7 @@ export default function ProfileConfig() {
           />
 
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            {supportedLanguages.map((l) => (
+            {supportedLanguages.map((l: string) => (
               <Controller
                 control={control}
                 key={l}
@@ -248,7 +263,7 @@ export default function ProfileConfig() {
             render={({ field }) => (
               <GridUrlInput
                 sx={{ mt: 2 }}
-                error={t(errors.tos?.message)}
+                error={t(errors.tos?.message as string)}
                 id={'profile_tos'}
                 label={t('profile.tos-url')}
                 placeholder={t('profile.tos-url')}
@@ -263,7 +278,7 @@ export default function ProfileConfig() {
             control={control}
             render={({ field }) => (
               <GridUrlInput
-                error={t(errors.privacyPolicy?.message)}
+                error={t(errors.privacyPolicy?.message as string)}
                 id={'profile_privacy-policy'}
                 sx={{ mt: 2 }}
                 label={t('profile.privacy-url')}
