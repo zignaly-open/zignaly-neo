@@ -28,7 +28,9 @@ export const useInvestments = useInvestmentsQuery;
 
 export const useSingleInvestment = (serviceId: string): Investment => {
   const exchange = useActiveExchange();
-  const { data: investments } = useInvestments(exchange?.internalId);
+  const { data: investments } = useInvestments(exchange?.internalId, {
+    skip: !exchange?.internalId,
+  });
   return investments?.find((x) => x.serviceId === serviceId);
 };
 
@@ -42,7 +44,7 @@ export function useInvestmentDetails(
       exchangeInternalId: exchange?.internalId,
       serviceId,
     },
-    options,
+    { ...(options || {}), skip: options?.skip || !exchange?.internalId },
   );
 }
 
@@ -154,7 +156,7 @@ export function useUpdateTakeProfitPercentage(serviceId: string): {
       await update({
         profitPercentage,
         serviceId,
-        exchangeInternalId: exchange.internalId,
+        exchangeInternalId: exchange!.internalId,
       }).unwrap();
     },
   };
@@ -181,7 +183,7 @@ export function useInvestInService(serviceId: string): {
         profitPercentage,
         serviceId,
         amount,
-        exchangeInternalId: exchange.internalId,
+        exchangeInternalId: exchange!.internalId,
       }).unwrap();
       refetchInvestedState();
     },
@@ -208,7 +210,7 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
       await update({
         profitPercentage,
         serviceId,
-        exchangeInternalId: exchange.internalId,
+        exchangeInternalId: exchange!.internalId,
         amount: amount.toString(),
       }).unwrap();
 
@@ -237,7 +239,7 @@ export function useWithdrawInvestment(): {
     withdraw: async ({ serviceId, amount }) => {
       await withdraw({
         serviceId,
-        exchangeInternalId: exchange.internalId,
+        exchangeInternalId: exchange!.internalId,
         amount: amount.toString(),
       }).unwrap();
       refetch();

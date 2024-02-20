@@ -33,6 +33,7 @@ import {
 import { useZModal } from '../../../../components/ZModal/use';
 import { Tooltip, useTheme } from '@mui/material';
 import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
+import Deactivated from '../DeactivatedService';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme();
@@ -62,80 +63,87 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   return (
     <LayoutContentWrapper
       endpoint={endpoints}
+      unmountOnRefetch
       content={([service, management, balance]: [
         Service,
         TraderServiceManagement,
         TraderServiceBalance,
-      ]) => (
-        <Layout>
-          <Box>
-            <ZigTypography
-              variant='h2'
-              color='neutral100'
-              id={'service-manage-funds__total-funds-label'}
-            >
-              {t('totalFunds')}
-            </ZigTypography>
-            <ZigPriceLabel
-              id={'service-manage-funds__total-funds'}
-              variant={'bigNumber'}
-              coinProps={{
-                color: 'highlighted',
-                variant: 'body1',
-              }}
-              value={parseFloat(balance.sbt)}
-              coin={service?.ssc ?? 'USDT'}
-            />
-          </Box>
-          <TopConnector />
-          <TopHorizontalConnection />
-          <BottomContainer>
+      ]) => {
+        return (
+          <Layout>
+            {service?.activated === false && <Deactivated />}
             <Box>
-              <Circle />
               <ZigTypography
                 variant='h2'
                 color='neutral100'
-                id={'service-manage-funds__trading-funds-title'}
+                id={'service-manage-funds__total-funds-label'}
               >
-                {t('tradingFunds')}
+                {t('totalFunds')}
               </ZigTypography>
-              <ZigTypography
-                color='neutral200'
-                id={'service-manage-funds__trading-funds-description'}
-              >
-                {t('tradingFunds-desc')}
-              </ZigTypography>
-              <TradingFunds>
+              <ZigPriceLabel
+                id={'service-manage-funds__total-funds'}
+                variant={'bigNumber'}
+                coinProps={{
+                  color: 'highlighted',
+                  variant: 'body1',
+                }}
+                value={parseFloat(balance.sbt)}
+                coin={service?.ssc ?? 'USDT'}
+              />
+            </Box>
+            <TopConnector />
+            <TopHorizontalConnection />
+            <BottomContainer>
+              <Box>
+                <Circle />
                 <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={
-                    'service-manage-funds__trading-funds-available-trading-label'
-                  }
+                  variant='h2'
+                  color='neutral100'
+                  id={'service-manage-funds__trading-funds-title'}
                 >
-                  {t('availableTrading')}
-                  <InlinePriceLabel
-                    id={'service-manage-funds__trading-funds-available-trading'}
-                    value={parseFloat(balance.staSscFree)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
+                  {t('tradingFunds')}
                 </ZigTypography>
                 <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={
-                    'service-manage-funds__trading-funds-allocated-trading-label'
-                  }
+                  color='neutral200'
+                  id={'service-manage-funds__trading-funds-description'}
                 >
-                  {t('allocatedTrading')}
-                  <InlinePriceLabel
-                    id={'service-manage-funds__trading-funds-allocated-trading'}
-                    value={parseFloat(balance.staSscSum)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
+                  {t('tradingFunds-desc')}
                 </ZigTypography>
-              </TradingFunds>
-              {/* <LabelHardDisc color='neutral200'>
+                <TradingFunds>
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
+                    id={
+                      'service-manage-funds__trading-funds-available-trading-label'
+                    }
+                  >
+                    {t('availableTrading')}
+                    <InlinePriceLabel
+                      id={
+                        'service-manage-funds__trading-funds-available-trading'
+                      }
+                      value={parseFloat(balance.staSscFree)}
+                      coin={service?.ssc ?? 'USDT'}
+                    />
+                  </ZigTypography>
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
+                    id={
+                      'service-manage-funds__trading-funds-allocated-trading-label'
+                    }
+                  >
+                    {t('allocatedTrading')}
+                    <InlinePriceLabel
+                      id={
+                        'service-manage-funds__trading-funds-allocated-trading'
+                      }
+                      value={parseFloat(balance.staSscSum)}
+                      coin={service?.ssc ?? 'USDT'}
+                    />
+                  </ZigTypography>
+                </TradingFunds>
+                {/* <LabelHardDisc color='neutral200'>
                   {t('instantWithdrawn')}
                 </LabelHardDisc>
                 <ZigProgressBar
@@ -144,133 +152,133 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     .toNumber()}
                   max={50}
                 /> */}
-            </Box>
-            <MiddleContainer>
-              <ZigArrowLeftIcon
-                height={24}
-                width={24}
-                color={theme.palette.neutral600}
-              />
-              <HorizontalConnection />
-              <ZigButton
-                id={'service-manage-funds__transfer'}
-                variant='outlined'
-                {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
-                  exchange,
-                  t,
-                )}
-                size='large'
-                onClick={onClickTransfers}
-              >
-                {t('transfer.title')}
-              </ZigButton>
-              <HorizontalConnection />
-              <ZigArrowRightIcon
-                height={24}
-                width={24}
-                color={theme.palette.neutral600}
-              />
-            </MiddleContainer>
-            <Box>
-              <Circle />
-              <ZigTypography
-                variant='h2'
-                color='neutral100'
-                id={'service-manage-funds__standby-funds-title'}
-              >
-                {t('standbyFunds')}
-              </ZigTypography>
-              <ZigTypography
-                color='neutral200'
-                id={'service-manage-funds__standby-funds-description'}
-              >
-                {t('standbyFunds-desc')}
-              </ZigTypography>
-              <TradingFunds>
-                <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={
-                    'service-manage-funds__standby-funds-available-withdrawals-label'
-                  }
+              </Box>
+              <MiddleContainer>
+                <ZigArrowLeftIcon
+                  height={24}
+                  width={24}
+                  color={theme.palette.neutral600}
+                />
+                <HorizontalConnection />
+                <ZigButton
+                  id={'service-manage-funds__transfer'}
+                  variant='outlined'
+                  {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                    exchange,
+                    t,
+                  )}
+                  size='large'
+                  onClick={onClickTransfers}
                 >
-                  {t('availableWithdrawals')}
-                  <InlinePriceLabel
+                  {t('transfer.title')}
+                </ZigButton>
+                <HorizontalConnection />
+                <ZigArrowRightIcon
+                  height={24}
+                  width={24}
+                  color={theme.palette.neutral600}
+                />
+              </MiddleContainer>
+              <Box>
+                <Circle />
+                <ZigTypography
+                  variant='h2'
+                  color='neutral100'
+                  id={'service-manage-funds__standby-funds-title'}
+                >
+                  {t('standbyFunds')}
+                </ZigTypography>
+                <ZigTypography
+                  color='neutral200'
+                  id={'service-manage-funds__standby-funds-description'}
+                >
+                  {t('standbyFunds-desc')}
+                </ZigTypography>
+                <TradingFunds>
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
                     id={
-                      'service-manage-funds__standby-funds-available-withdrawals'
-                    }
-                    value={parseFloat(balance.scaSscSum)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
-                </ZigTypography>
-
-                <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={
-                    'service-manage-funds__standby-funds-needed-snapshots-label'
-                  }
-                >
-                  {t('neededSnapshot')}
-                  <Tooltip
-                    title={
-                      <MuiBox sx={{ whiteSpace: 'nowrap' }}>
-                        {t(
-                          `${
-                            management?.claims >= 0 ? 'positive' : 'negative'
-                          }-claim`,
-                          {
-                            claim: Math.abs(management?.claims),
-                            coin: service?.ssc ?? 'USDT',
-                          },
-                        )}
-                      </MuiBox>
+                      'service-manage-funds__standby-funds-available-withdrawals-label'
                     }
                   >
-                    <div>
-                      <InlinePriceLabel
-                        id={
-                          'service-manage-funds__standby-funds-needed-snapshots'
-                        }
-                        value={
-                          management?.claims < 0
-                            ? parseFloat((-management?.claims).toString())
-                            : 0
-                        }
-                        coin={service?.ssc ?? 'USDT'}
-                      />
-                    </div>
-                  </Tooltip>
-                </ZigTypography>
+                    {t('availableWithdrawals')}
+                    <InlinePriceLabel
+                      id={
+                        'service-manage-funds__standby-funds-available-withdrawals'
+                      }
+                      value={parseFloat(balance.scaSscSum)}
+                      coin={service?.ssc ?? 'USDT'}
+                    />
+                  </ZigTypography>
 
-                <ZigTypography
-                  color='neutral400'
-                  variant='body2'
-                  id={'service-manage-funds__standby-funds-min-balance-label'}
-                >
-                  {t('minBalance.title')}
-                  <InlinePriceLabel
-                    id={'service-manage-funds__standby-funds-min-balance'}
-                    value={parseFloat(management.minimumSca)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
-                  <ZigButton
-                    sx={{ ml: 1.5 }}
-                    variant={'text'}
-                    id={'service-manage-funds__standby-funds-edit'}
-                    startIcon={
-                      <EditIcon sx={{ width: '12px', height: '12px' }} />
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
+                    id={
+                      'service-manage-funds__standby-funds-needed-snapshots-label'
                     }
-                    onClick={onClickMinBalance}
-                    {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
-                      exchange,
-                      t,
-                    )}
                   >
-                    {t('action:edit')}
-                  </ZigButton>
-                </ZigTypography>
-                {/* <LineSeparator />
+                    {t('neededSnapshot')}
+                    <Tooltip
+                      title={
+                        <MuiBox sx={{ whiteSpace: 'nowrap' }}>
+                          {t(
+                            `${
+                              management?.claims >= 0 ? 'positive' : 'negative'
+                            }-claim`,
+                            {
+                              claim: Math.abs(management?.claims),
+                              coin: service?.ssc ?? 'USDT',
+                            },
+                          )}
+                        </MuiBox>
+                      }
+                    >
+                      <div>
+                        <InlinePriceLabel
+                          id={
+                            'service-manage-funds__standby-funds-needed-snapshots'
+                          }
+                          value={
+                            management?.claims < 0
+                              ? parseFloat((-management?.claims).toString())
+                              : 0
+                          }
+                          coin={service?.ssc ?? 'USDT'}
+                        />
+                      </div>
+                    </Tooltip>
+                  </ZigTypography>
+
+                  <ZigTypography
+                    color='neutral400'
+                    variant='body2'
+                    id={'service-manage-funds__standby-funds-min-balance-label'}
+                  >
+                    {t('minBalance.title')}
+                    <InlinePriceLabel
+                      id={'service-manage-funds__standby-funds-min-balance'}
+                      value={parseFloat(management.minimumSca)}
+                      coin={service?.ssc ?? 'USDT'}
+                    />
+                    <ZigButton
+                      sx={{ ml: 1.5 }}
+                      variant={'text'}
+                      id={'service-manage-funds__standby-funds-edit'}
+                      startIcon={
+                        <EditIcon sx={{ width: '12px', height: '12px' }} />
+                      }
+                      onClick={onClickMinBalance}
+                      {...getButtonDisabledPropsForExchangesWithoutApiKeyManagement(
+                        exchange,
+                        t,
+                      )}
+                    >
+                      {t('action:edit')}
+                    </ZigButton>
+                  </ZigTypography>
+                  {/* <LineSeparator />
                   <ZigTypography color='neutral400' variant='body2'>
                     {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
@@ -278,12 +286,13 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       coin={service?.ssc ?? 'USDT'}
                     />
                   </ZigTypography> */}
-              </TradingFunds>
-            </Box>
-          </BottomContainer>
-          <ManagementHelper />
-        </Layout>
-      )}
+                </TradingFunds>
+              </Box>
+            </BottomContainer>
+            <ManagementHelper />
+          </Layout>
+        );
+      }}
     />
   );
 }

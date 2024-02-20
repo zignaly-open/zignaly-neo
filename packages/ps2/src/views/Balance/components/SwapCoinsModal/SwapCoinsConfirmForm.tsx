@@ -120,7 +120,9 @@ const SwapCoinsConfirmForm = ({
           showTooltip
           id={'swap-coins-confirm-modal__rate-from'}
         />
-        &nbsp;{'='}&nbsp;
+        <Box height={'10px'} mt={'3px'}>
+          &nbsp;{'='}&nbsp;
+        </Box>
         <ZigPriceLabel
           coin={toCoin}
           value={rate}

@@ -79,10 +79,10 @@ async function serveNewIndexHtml(req: Request, res: Response) {
   let wlConfig = await getWlConfigForReq(req);
   if (!wlConfig) {
     res
-      .send(`${PS2_ENV} config not found or invalid for ${getHost(req)}`)
-      .status(500);
+      .status(500)
+      .send(`${PS2_ENV} config not found or invalid for ${getHost(req)}`);
   } else {
-    res.send(await generateIndexHtml(wlConfig)).status(200);
+    res.status(200).send(await generateIndexHtml(wlConfig));
   }
 }
 
@@ -91,6 +91,6 @@ async function serveNewManifestJson(req: Request, res: Response) {
   if (!wlConfig) {
     res.json({}).status(500);
   } else {
-    res.send(await generateManifest(wlConfig)).status(200);
+    res.status(200).send(await generateManifest(wlConfig));
   }
 }

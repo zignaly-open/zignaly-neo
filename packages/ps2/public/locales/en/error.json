@@ -176,6 +176,7 @@
     "noidea": "Something went wrong!",
     "paymentnotcompleted": "Payment not completed.",
     "wrong-code": "Wrong Code",
+    "wrong-value": "Wrong Value",
     "login-session-expired": "Session expired, please log in again",
     "XX": "Transaction error. Please try again."
   },
@@ -220,8 +221,10 @@
       "title": "Verification (KYC/KYB) Expired",
       "description": "Your verification (KYC/KYB) has expired and you need to resubmit it to continue accessing all the services.",
       "action": "Review KYC"
-    }
+    },
+    "deactivated-service": "This service is inactive. Actions can no longer be performed. Please check out other services"
   },
+  "missing-exchange": "There is an issue with your account. Please contact our support",
   "something-went-wrong": "Something went wrong",
   "404": {
     "title": "Page not found",

@@ -61,4 +61,5 @@ export type Investment = InvestmentServiceDetails & {
   pnl90dPct: string;
   pnl180dSum: string;
   pnl180dPct: string;
+  zscore: number;
 };

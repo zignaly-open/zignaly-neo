@@ -129,6 +129,8 @@ export type Service = {
   pnlSsc180t: string;
   pnlSsc365t: string;
   zglySuccessFee: number;
+  storedZglySuccessFee: number;
+  activated: boolean;
 };
 
 export type TraderServiceChart = {
@@ -225,7 +227,7 @@ type ZScoreCategoryDetails = {
 
 export type ZScoreInfoDetails = {
   name: string;
-  category: Record<'maxZscore' | 'zScore', ZScoreCategoryInfo>;
+  category: Record<'maxZscore' | 'zscore', ZScoreCategoryInfo>;
   stats: Record<string, number | string>;
   scoreDetails: ZScoreCategoryDetails;
 };

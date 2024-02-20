@@ -63,6 +63,7 @@ export { default as ZigRisk } from "./components/display/ZigRisk";
 export * from "./components/display/ZigRisk";
 export { default as ZScoreRing } from "./components/display/ZScoreRing";
 export * from "./components/display/ZScoreRing";
+export { default as ZScoreRings } from "./components/display/ZScoreRings";
 export { default as ZScoreBar } from "./components/display/ZScoreBar";
 
 // Table
@@ -79,7 +80,7 @@ export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
-export { NiceScrollbar, userHasFont } from "utils/css";
+export { NiceScrollbar } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this

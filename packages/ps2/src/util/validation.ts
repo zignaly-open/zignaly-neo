@@ -100,9 +100,17 @@ export const inputAmountTokenValidation = yup.object().shape({
   value: inputAmountNumberValidationGt0,
 });
 
-export const inputAmountZeroableValidation = yup.object().shape({
-  value: inputAmountNumberValidationGte0,
-});
+export const inputAmountZeroableValidation = () =>
+  yup
+    .string()
+    .typeError('common:validation.invalid-value')
+    .concat(inputAmountNumberValidation)
+    .concat(inputAmountNumberValidationGte0)
+    .test(
+      'number',
+      i18n.t('common:validation.max-decimals', { maxDecimals: 8 }),
+      (val) => checkDecimals(val, 8),
+    );
 
 export const inputAmountTokenMaxValidation = yup.object().shape({
   value: inputAmountNumberValidationMaxToken,

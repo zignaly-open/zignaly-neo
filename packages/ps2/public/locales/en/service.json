@@ -76,6 +76,11 @@
     "success-fee-desc": "Amount of profits you will charge your investors (including {{ zignalyFee }}% ZIGDAO fee)",
     "pool-size": "Maximum pool size:",
     "pool-size-desc": "Max you'll accept from investors",
+    "insert-image-modal": {
+      "title": "Type Image URL",
+      "placeholder": "Input url",
+      "warning": "URL should end with image extension (.jpg, .png, .jpeg and etc.)"
+    },
     "visibility": {
       "visibility": "Visibility:",
       "unlisted": "Unpublished Draft",

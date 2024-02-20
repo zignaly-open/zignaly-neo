@@ -2,18 +2,22 @@ import React from "react";
 import { NumericFormat } from "react-number-format";
 import { useTheme } from "styled-components";
 import BigNumber from "bignumber.js";
-import { Layout, Row, Container, Indicator, Subtitle, Inline, ValueIndicator } from "./styles";
+import { Indicator, ValueIndicator } from "./styles";
 import { ChangeIndicatorProps } from "./types";
-import { Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
 
-// Fix 1 decimal issue making 1.95 until 1.99 to be 2.0 instead of 2
+// Fix for react-number-format not showing .0 decimal
 // https://github.com/s-yadav/react-number-format/issues/820
 const adjustDecimals = (value: BigNumber, decimals: number) => {
   const decimalPart = value.abs().mod(1);
-
-  if (decimals == 1 && decimalPart.gt(0.95)) return 0;
+  if (decimals == 1) {
+    // Fix for .95 until .99 rounded as .0 instead of integer
+    if (decimalPart.gt(0.95)) return 0;
+    // Fix for .01 until .05 rounded as .0 instead of integer
+    else if (decimalPart.lt(0.05)) return 0;
+  }
 
   return decimals;
 };
@@ -37,8 +41,7 @@ const ChangeIndicator = ({
   labelTooltip = "",
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
-  hideNegativeSign = false,
-  indicatorPostion = "right",
+  indicatorPostion = "left",
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -54,18 +57,23 @@ const ChangeIndicator = ({
       : theme.palette.redGraphOrError;
 
     return (
-      <Inline>
+      <Box display="flex" justifyContent={"center"} alignItems={"center"}>
         <ValueIndicator
           variant={type === "graph" ? "body2" : "body1"}
           color={color}
           smallPct={smallPct && type !== "only_number" && !isNil(value)}
+          style={style}
+          whiteSpace={"nowrap"}
         >
           {!isZero && type === "graph" && indicatorPostion === "left" && (
-            <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
+            <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />
           )}
           <NumericFormat
-            style={style}
-            value={adjustNumber(bigNumberValue, decimalScale, hideNegativeSign).toFixed()}
+            value={adjustNumber(
+              bigNumberValue,
+              decimalScale,
+              type === "graph" && indicatorPostion === "left",
+            ).toFixed()}
             displayType={"text"}
             suffix={type === "only_number" || smallPct ? "" : "%"}
             thousandSeparator={","}
@@ -73,37 +81,36 @@ const ChangeIndicator = ({
             fixedDecimalScale={stableCoinOperative}
             id={id}
           />
+          {!isZero && type === "graph" && indicatorPostion === "right" && (
+            <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />
+          )}
         </ValueIndicator>
-        {!isZero && type === "graph" && indicatorPostion === "right" && (
-          <Indicator width="5" height="5" isPositive={isPositiveValue} color={color} />
-        )}
-      </Inline>
+      </Box>
     );
   };
 
   return (
-    <Layout>
-      <Container>
-        <Tooltip title={labelTooltip}>
-          <Row>
-            {!isNaN(+value) ? (
-              <>
-                {renderIndicator()}
-                {label && (
-                  <Subtitle variant="caption" color="neutral400">
-                    <>{label}</>
-                  </Subtitle>
-                )}
-              </>
-            ) : (
-              <ZigTypography variant={"body2"} color={"neutral400"}>
-                -
+    <Tooltip title={labelTooltip}>
+      <Box justifyContent={"center"}>
+        {!isNaN(+value) ? (
+          <>
+            {renderIndicator()}
+            {label && (
+              <ZigTypography display={"block"} variant="caption" color="neutral400">
+                <>{label}</>
               </ZigTypography>
             )}
-          </Row>
-        </Tooltip>
-      </Container>
-    </Layout>
+          </>
+        ) : (
+          <ZigTypography variant={"body2"} color={"neutral400"}>
+            {
+              // eslint-disable-next-line i18next/no-literal-string
+              "-"
+            }
+          </ZigTypography>
+        )}
+      </Box>
+    </Tooltip>
   );
 };
 

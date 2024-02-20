@@ -1,39 +1,40 @@
 {
-    "title": "My Portfolio",
-    "tableHeader": {
-      "summary": {
-        "title": "My Current Value",
-        "subtitle": "Returns",
-        "title-mobile": "Invested",
-        "subtitle-mobile": "P&L"
-      },
-      "serviceName": {
-        "title": "Service Name",
-        "subtitle": "Manager/Base currency",
-        "title-mobile": "Service"
-      },
-      "1-mo": {
-        "title": "1 mo.",
-        "no-data": "No data to show yet"
-      },
-      "dailyAvg-title": "Daily avg.",
-      "3-mos-title": "3 mos.",
-      "6-mos-title": "6 mos.",
-      "all": {
-        "title": "All",
-        "subtitle": "Investing since"
-      }
+  "title": "My Portfolio",
+  "tableHeader": {
+    "summary": {
+      "title": "My Current Value",
+      "subtitle": "Returns",
+      "title-mobile": "Invested",
+      "subtitle-mobile": "P&L"
     },
-    "tooltip-date": "You are investing in this service since {{date}}",
-    "table-search-emptyMessage": "You are not connected to any service yet.",
-    "something-went-wrong": "Something went wrong",
-    "loading-arialLabel": "Loading my portfolio",
-    "slider-input": {
-      "labels": {
-        "left": "Reinvest",
-        "right": "Withdraw"
-      }
+    "serviceName": {
+      "title": "Service Name",
+      "subtitle": "Manager/Base currency",
+      "title-mobile": "Service"
     },
+    "1-mo": {
+      "title": "1 mo.",
+      "no-data": "No data to show yet"
+    },
+    "dailyAvg-title": "Daily avg.",
+    "3-mos-title": "3 mos.",
+    "6-mos-title": "6 mos.",
+    "all": {
+      "title": "All",
+      "subtitle": "Investing since"
+    },
+    "zscore": "Z-Score"
+  },
+  "tooltip-date": "You are investing in this service since {{date}}",
+  "table-search-emptyMessage": "You are not connected to any service yet.",
+  "something-went-wrong": "Something went wrong",
+  "loading-arialLabel": "Loading my portfolio",
+  "slider-input": {
+    "labels": {
+      "left": "Reinvest",
+      "right": "Withdraw"
+    }
+  },
   "how-to-invest-steps": {
     "title": "How to invest",
     "step-1": {
