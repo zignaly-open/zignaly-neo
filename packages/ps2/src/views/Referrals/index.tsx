@@ -199,18 +199,8 @@ const Referrals: React.FC = () => {
                   onOpen={toggleDrawer(true)}
                 >
                   <Puller />
-
-                  <Box
-                    sx={{
-                      position: 'relative',
-                      width: '100%',
-                      height: 300,
-                    }}
-                  >
-                    <Box>
-                      <ReferralHowToEarn tiersData={tiersData} />
-                    </Box>
-                  </Box>
+                  <Box mt={2}></Box>
+                  <ReferralHowToEarn tiersData={tiersData} />
                 </SwipeableDrawer>
               )}
               <ZigTypography

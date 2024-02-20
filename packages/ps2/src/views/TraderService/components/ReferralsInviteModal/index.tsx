@@ -212,7 +212,14 @@ const ReferralsInviteModal = ({
               </Box>
             </Box>
           )}
-          <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+          <Box
+            sx={{
+              transform: sm ? 'scale(0.65)' : 'scale(1)',
+            }}
+            width={'100%'}
+            display={'flex'}
+            justifyContent={'center'}
+          >
             <Tiers
               tiers={tiers}
               referral={referral}
