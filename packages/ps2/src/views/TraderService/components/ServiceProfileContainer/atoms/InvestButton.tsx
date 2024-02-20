@@ -36,6 +36,7 @@ const InvestButton: React.FC<{
     // and the page will scroll to top
     'deposit-crypto',
     'edit-investment',
+    'error',
   ]);
   const isAuthenticated = useIsAuthenticated();
   const openInvestModal = useOpenInvestDepositModal(modalRoute);
@@ -64,14 +65,20 @@ const InvestButton: React.FC<{
         onClick={onClickMakeInvestment}
         variant='contained'
         size={'large'}
-        disabled={maxReached}
+        disabled={maxReached || service.activated === false}
         sx={{
           flexDirection: 'row',
           gap: '5px',
           padding: '6px 26px',
           ...(showRocket ? animatedRocketStyle : {}),
         }}
-        tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
+        tooltip={
+          maxReached
+            ? t('invest-button.max-reached-tooltip')
+            : service.activated === false
+            ? t('error:access.deactivated-service')
+            : null
+        }
         endIcon={
           showRocket && (
             <>

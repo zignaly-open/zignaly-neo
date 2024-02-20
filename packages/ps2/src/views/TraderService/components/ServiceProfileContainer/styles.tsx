@@ -108,8 +108,9 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
-export const HideReadMoreEffects = styled('div')<{
+export const HideReadMoreEffects = styled(Box)<{
   truncate: boolean;
+  lines: number;
 }>`
   transition: all 0.3s;
   margin-bottom: 7px;
@@ -118,12 +119,13 @@ export const HideReadMoreEffects = styled('div')<{
     padding-inline-start: 20px !important;
   }
 
-  ${({ truncate }) =>
+  ${({ truncate, lines }) =>
     truncate &&
     css`
-      -webkit-line-clamp: 5;
+      -webkit-line-clamp: ${lines};
       ${isSafari ? `max-height: 150px;` : ''};
       height: 100%;
+      width: 100%;
       -webkit-box-orient: vertical;
       display: ${isSafari ? 'block' : '-webkit-box'};
       overflow-y: hidden;

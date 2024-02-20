@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
 import breaks from 'remark-breaks';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 const MarkdownSection: React.FC<{
   title: string;
@@ -21,6 +22,8 @@ const MarkdownSection: React.FC<{
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
   const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
   const [isTruncated, setIsTruncated] = useState(true);
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
 
   useEffect(() => {
     setShouldShowReadMore(
@@ -44,6 +47,7 @@ const MarkdownSection: React.FC<{
       <HideReadMoreEffects
         ref={ref}
         truncate={shouldShowReadMore && isTruncated}
+        lines={lg ? 9 : 5}
       >
         {chunks ? (
           <MarkdownContainer id={id}>

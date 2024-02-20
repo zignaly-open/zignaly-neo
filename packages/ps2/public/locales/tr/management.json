@@ -15,7 +15,7 @@
 		"title": "Minimum Bakiyeyi Düzenle",
 		"desc": "Bekleme Hesabında tutmak istediğiniz minimum bakiyeyi ayarlayın. Bakiye minimumun üzerindeyse, hesaplama sırasında fark otomatik olarak Alım-Satım Hesabına aktarılacaktır.",
 		"placeholder": "0.0",
-		"labelBalance": "Güncel Minimum Bakiye",
+		"labelBalance": "Güncel Minimum Bakiye:",
 		"save": "Sakla"
 	},
 	"controlledZignaly": "{{ whitelabel }} tarafından kontrol edilmekte",

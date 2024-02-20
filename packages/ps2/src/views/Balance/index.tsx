@@ -127,7 +127,7 @@ const MyBalances: React.FC = () => {
                           });
                         }}
                       >
-                        {t('action:export')}
+                        {t('action:export-all')}
                       </ZigButton>
                       <StyledZigSelect
                         id={'balances-transaction__select-type'}
