@@ -1,8 +1,8 @@
-import en from "./i18n/en.json";
-import es from "./i18n/es.json";
-import tr from "./i18n/tr.json";
-import vi from "./i18n/vi.json";
-import ru from "./i18n/ru.json";
+import en from "./i18n/static/en.json";
+import es from "./i18n/static/es.json";
+import tr from "./i18n/static/tr.json";
+import vi from "./i18n/static/vi.json";
+import ru from "./i18n/static/ru.json";
 import { i18n } from "i18next";
 
 export function addZignalyUiResources(i18nInstance: i18n) {
