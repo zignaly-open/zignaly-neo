@@ -30,7 +30,7 @@ export const StyledLinearProgress = styled(LinearProgress)<{ value: number; cate
   animation: ${opacityAnimation} 1s ease-out forwards;
   opacity: 0.5;
   border-radius: 1.5px;
-  height: 3px;
+  height: 4px;
   > span {
     background-color: #242842;
     animation: ${({ value }) => barAnimation(value)} 1s ease-out forwards;

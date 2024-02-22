@@ -41,7 +41,7 @@ export default {
     [Features.CreateService]: true,
     [Features.NewSignup]: true,
     [Features.LoginOnlyAccess]: false,
-    [Features.Kyc]: false,
+    [Features.Kyc]: true,
     [Features.ZScore]: true,
     [Features.AccessLevels]: false,
     [Features.Subscriptions]: false,
