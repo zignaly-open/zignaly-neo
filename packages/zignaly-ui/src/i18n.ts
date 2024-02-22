@@ -1,4 +1,4 @@
-import en from "./i18n/static/en.json";
+import en from "./i18n/static/en/en.json";
 import es from "./i18n/static/es.json";
 import tr from "./i18n/static/tr.json";
 import vi from "./i18n/static/vi.json";
