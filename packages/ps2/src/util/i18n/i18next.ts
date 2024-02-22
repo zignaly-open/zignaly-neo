@@ -15,6 +15,7 @@ import dateLocalePt from 'date-fns/locale/pt';
 import dateLocaleTr from 'date-fns/locale/tr';
 import dateLocaleRu from 'date-fns/locale/ru';
 import dateLocaleVi from 'date-fns/locale/vi';
+import { addZignalyUiResources } from '@zignaly-open/ui/i18n';
 
 import { whitelabel } from '../../whitelabel';
 
@@ -114,5 +115,7 @@ i18n
       useSuspense: true,
     },
   });
+
+addZignalyUiResources(i18n);
 
 export default i18n;

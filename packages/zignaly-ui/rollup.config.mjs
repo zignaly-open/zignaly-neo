@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import external from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import json from "@rollup/plugin-json";
 import alias from "@rollup/plugin-alias";
 import path from "node:path";
 import url from "@rollup/plugin-url";
@@ -16,6 +17,7 @@ export default {
     index: "src/index.ts",
     fonts: "src/fonts.ts",
     charts: "src/charts.ts",
+    i18n: "src/i18n.ts",
     icons: "src/icons.ts"
   },
   output: [
@@ -46,12 +48,12 @@ export default {
     external({
       includeDependencies: true
     }),
+    json(),
     resolve({ browser: true }),
     typescript({ emitDeclarationOnly: true }),
     commonjs({
       include: /\/node_modules\//,
     }),
-
     alias({
       entries: {
         assets: path.resolve(__dirname, "./src/assets"),
