@@ -28,10 +28,6 @@ export { default as ZigSearch } from "./components/filters/ZigSearch";
 export { default as ZigFilters } from "./components/filters/ZigFilters";
 export * from "./components/filters/ZigFilters";
 
-// TODO: fix storybook & refactor
-export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";
-export type { InputAmountAdvancedValueType } from "./components/inputs/InputAmountAdvanced";
-
 export { default as ZigInputAmount } from "./components/inputs/ZigInputAmount";
 
 // Basic display components
