@@ -88,6 +88,7 @@ export { MarginContainer, PageContainer } from "./components/styled";
 // Navigation
 // TODO: @cwagner22 pls fix/bring to proper shape
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
+export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";
 
 // hooks
