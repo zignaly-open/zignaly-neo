@@ -327,9 +327,7 @@ export const InsertLinkButton = ({ icon }: { icon: JSX.Element }) => {
           confirmAction: (url: string) => {
             url && insertLink(editor, url);
           },
-          rulesFunction: (url) => {
-            return isUrl(url);
-          },
+          rulesFunction: (url) => isUrl(url),
           placeholder: t('edit.insert-link-modal.placeholder'),
         });
       }}
