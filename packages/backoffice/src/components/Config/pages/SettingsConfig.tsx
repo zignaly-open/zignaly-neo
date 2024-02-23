@@ -15,7 +15,7 @@ import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { SettingsConfigValidation } from '../validations';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
-import { useSaveConfig } from '../util';
+import { useSaveConfig } from '../use';
 import { allowedDeposits, Features } from '@zignaly-open/ps2-definitions';
 import { useParams } from 'react-router-dom';
 import { useWlConfigQuery } from '../../../apis/config/api';

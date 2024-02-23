@@ -14,7 +14,7 @@ import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { ProfileConfigValidation } from '../validations';
-import { useSaveConfig } from '../util';
+import { useSaveConfig } from '../use';
 import {
   LocalizationLanguages,
   supportedLanguages,

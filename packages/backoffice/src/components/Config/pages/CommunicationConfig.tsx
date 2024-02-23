@@ -20,7 +20,7 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { CommunicationConfigValidation } from '../validations';
-import { useSaveConfig } from '../util';
+import { useSaveConfig } from '../use';
 import { useWlConfigQuery } from '../../../apis/config/api';
 import { useParams } from 'react-router-dom';
 
