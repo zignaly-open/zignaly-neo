@@ -14,5 +14,7 @@ export type SubHeaderElement = {
 export type SubHeaderDropdown = {
   id: string;
   name: string;
+  secondaryTitle?: string;
   routes: SubHeaderRoute[];
+  isCompactElements?: boolean;
 };

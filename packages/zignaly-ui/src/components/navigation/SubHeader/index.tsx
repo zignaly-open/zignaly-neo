@@ -20,8 +20,17 @@ function SubHeader({
             if ("element" in r) {
               return <React.Fragment key={r.id}>{r.element}</React.Fragment>;
             } else if ("routes" in r) {
-              const { id, name, routes } = r as SubHeaderDropdown;
-              return <RouteDropdown id={id} title={name} routes={routes} />;
+              const { id, name, routes, isCompactElements, secondaryTitle } =
+                r as SubHeaderDropdown;
+              return (
+                <RouteDropdown
+                  id={id}
+                  title={name}
+                  routes={routes}
+                  secondaryTitle={secondaryTitle}
+                  isCompactElements={isCompactElements}
+                />
+              );
             } else {
               return <ServiceListOption key={r.id} route={r} />;
             }

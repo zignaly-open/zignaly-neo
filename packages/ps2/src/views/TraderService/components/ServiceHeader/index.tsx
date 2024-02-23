@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SubHeader, ZigTypography } from '@zignaly-open/ui';
-import { Options, ServiceDropDown, ServiceOption } from './styles';
+import { SubHeader } from '@zignaly-open/ui';
 import {
   useIsServiceOwner,
   useTraderServices,
 } from '../../../../apis/service/use';
 import { TraderService } from '../../../../apis/service/types';
-import { generatePath, Link, useParams, useLocation } from 'react-router-dom';
+import { generatePath, useParams, useLocation } from 'react-router-dom';
 import {
   ROUTE_TRADING_SERVICE,
   ROUTE_TRADING_SERVICE_API,
@@ -15,8 +14,6 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_EDIT,
 } from '../../../../routes';
-import { Check } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import { useConvertRouteToSubHeaderFormat } from './util';
 
 function ServiceHeader() {
@@ -41,42 +38,17 @@ function ServiceHeader() {
   const options = useMemo(
     () => [
       {
-        element: (
-          <ServiceDropDown
-            id={'service-management-header__choose-service'}
-            ref={menuDropDownRef}
-            title={activeService?.serviceName}
-            secondaryTitle={t('dropdown.manageServices')}
-            dropDownOptions={{
-              maxHeight: '300px',
-            }}
-          >
-            <Options>
-              {myServicesList?.map((service: TraderService) => (
-                <Link
-                  id={`service-management-header__choose-${service?.serviceId}`}
-                  to={currentPath.replace(serviceId, service?.serviceId)}
-                  key={`--route-key-${service?.serviceId}`}
-                >
-                  <ServiceOption active={serviceId === service?.serviceId}>
-                    <Box
-                      display='flex'
-                      alignItems='center'
-                      justifyContent='space-between'
-                      flex={1}
-                    >
-                      <ZigTypography color='inherit' variant={'body1'}>
-                        {service?.serviceName}
-                      </ZigTypography>
-                      {serviceId === service?.serviceId && <Check />}
-                    </Box>
-                  </ServiceOption>
-                </Link>
-              ))}
-            </Options>
-          </ServiceDropDown>
-        ),
         id: 'service-management-header__choose-service',
+        name: activeService?.serviceName,
+        secondaryTitle: t('dropdown.manageServices'),
+        isCompactElements: true,
+        routes: myServicesList
+          ?.map((service: TraderService) => ({
+            id: `service-management-header__choose-${service?.serviceId}`,
+            name: service?.serviceName,
+            path: currentPath.replace(serviceId, service?.serviceId),
+          }))
+          .map(routeToSubHeaderRoute),
       },
       routeToSubHeaderRoute({
         name: t('managements-label'),

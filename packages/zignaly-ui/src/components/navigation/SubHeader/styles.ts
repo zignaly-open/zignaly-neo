@@ -79,8 +79,8 @@ export const MenuLink = styled("a")<{ isSubOption: boolean }>`
   ${({ isSubOption, theme }) =>
     !isSubOption &&
     `
-    &:not(:last-of-type) {
+  &:not(:last-of-type) {
       border-right: 1px dotted ${theme.palette.neutral600};
-    }
+  }
   `}
 `;
