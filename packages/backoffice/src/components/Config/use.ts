@@ -1,27 +1,51 @@
-import { useSaveWlConfigMutation, useWlConfigQuery } from 'apis/config/api';
+import { useToast } from '@zignaly-open/ui';
 import { WhitelabelBackendConfig } from '../../apis/config/types';
+import { useTranslation } from 'react-i18next';
+import { useCallback } from 'react';
+import {
+  useSaveWlConfigMutation,
+  useWlConfigQuery,
+} from '../../apis/config/api';
 
-export function useCurrentWlConfig(): ReturnType<typeof useWlConfigQuery> {
-  return useWlConfigQuery('z01');
-}
+export function useSaveConfig(
+  wl: string,
+  transform?: (
+    v: Partial<WhitelabelBackendConfig>,
+  ) => Partial<WhitelabelBackendConfig>,
+) {
+  const { t } = useTranslation('config');
+  const { data: originalValue } = useWlConfigQuery(wl);
+  const [action, { isLoading }] = useSaveWlConfigMutation();
+  const toast = useToast();
 
-export function useSaveCurrentWlConfig(): [
-  (
-    payload: Partial<WhitelabelBackendConfig>,
-  ) => ReturnType<ReturnType<typeof useSaveWlConfigMutation>[0]>,
-  ReturnType<typeof useSaveWlConfigMutation>[1],
-] {
-  const { data: originalValue } = useCurrentWlConfig();
-  const [action, state] = useSaveWlConfigMutation();
-  return [
-    (data) =>
+  const submit = useCallback(
+    (values: Partial<WhitelabelBackendConfig>) => {
       action({
-        slug: 'z01',
+        slug: wl,
         data: {
           ...(originalValue || {}),
-          ...data,
-        },
-      }),
-    state,
-  ];
+          ...(transform ? transform(values) : values),
+        } as WhitelabelBackendConfig,
+      })
+        .unwrap()
+        .then(() => {
+          toast.success(t('saved'));
+        })
+        .catch((e) => {
+          toast.error(
+            t('failed') +
+              ' ' +
+              (e?.data?.error?.msg
+                ? t(`error:error.${e?.data?.error?.msg}`)
+                : ''),
+          );
+        });
+    },
+    [t],
+  );
+
+  return {
+    isLoading,
+    submit,
+  };
 }

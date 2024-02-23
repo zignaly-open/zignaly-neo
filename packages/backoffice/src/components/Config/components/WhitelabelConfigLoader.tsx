@@ -1,16 +1,16 @@
 import React from 'react';
 import { Loader, ZigTypography } from '@zignaly-open/ui';
-import { useCurrentWlConfig } from '../use';
 import { useUserInfoQuery } from '../../../apis/session/api';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useWlConfigQuery } from '../../../apis/config/api';
 
 function WhitelabelConfigLoader({ children }: { children: JSX.Element }) {
   const { isLoading: isLoadingUserData, data } = useUserInfoQuery();
-  const { isLoading } = useCurrentWlConfig();
-  const { t } = useTranslation('config');
   const { wl } = useParams();
+  const { isLoading } = useWlConfigQuery(wl);
+  const { t } = useTranslation('config');
 
   if (data && !data.projectIds?.includes(wl)) {
     // means user navigated to a page with wl in path that does not exist

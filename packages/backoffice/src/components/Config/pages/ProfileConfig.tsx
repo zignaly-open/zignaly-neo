@@ -10,7 +10,6 @@ import { ConfigWrapper } from '../styled';
 import { Grid, Tooltip } from '@mui/material';
 import { GridUrlInput, SectionHeader } from '../atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig } from '../use';
 import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
@@ -20,6 +19,8 @@ import {
   LocalizationLanguages,
   supportedLanguages,
 } from '@zignaly-open/ps2-definitions';
+import { useParams } from 'react-router-dom';
+import { useWlConfigQuery } from '../../../apis/config/api';
 
 type FormType = Partial<WhitelabelBackendConfig> & {
   name: string;
@@ -27,9 +28,8 @@ type FormType = Partial<WhitelabelBackendConfig> & {
 };
 export default function ProfileConfig() {
   const { t } = useTranslation('config');
-  const { data } = useCurrentWlConfig() as unknown as {
-    data: WhitelabelBackendConfig;
-  };
+  const { wl } = useParams();
+  const { data } = useWlConfigQuery(wl);
 
   const defaultValues = useMemo(
     () => ({
@@ -64,7 +64,7 @@ export default function ProfileConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig((payload) => {
+  const { submit, isLoading } = useSaveConfig(wl, (payload) => {
     // since we're making the languagesMap as a separate type
     const { languagesMap, ...v } = payload as unknown as FormType;
     return {

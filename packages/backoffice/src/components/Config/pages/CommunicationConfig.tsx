@@ -5,7 +5,6 @@ import { ConfigWrapper } from '../styled';
 import { Grid, Tooltip } from '@mui/material';
 import { GridUrlInput, SectionHeader } from '../atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig } from '../use';
 import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import {
   ZigLogoDiscordIcon,
@@ -22,6 +21,8 @@ import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { CommunicationConfigValidation } from '../validations';
 import { useSaveConfig } from '../util';
+import { useWlConfigQuery } from '../../../apis/config/api';
+import { useParams } from 'react-router-dom';
 
 const socialNetworks = [
   {
@@ -56,7 +57,8 @@ const socialNetworks = [
 
 export default function CommunicationConfig() {
   const { t } = useTranslation('config');
-  const { data } = useCurrentWlConfig();
+  const { wl } = useParams();
+  const { data } = useWlConfigQuery(wl);
   const defaultValues = useMemo(
     () => ({
       social: socialNetworks.reduce((memo, { key }) => {
@@ -83,7 +85,7 @@ export default function CommunicationConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig();
+  const { submit, isLoading } = useSaveConfig(wl);
 
   return (
     <ConfigWrapper>

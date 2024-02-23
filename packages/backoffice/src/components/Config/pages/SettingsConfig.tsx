@@ -10,7 +10,6 @@ import { ConfigWrapper } from '../styled';
 import { Grid, InputAdornment } from '@mui/material';
 import { SettingEnableSection } from '../atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig } from '../use';
 import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
@@ -18,6 +17,8 @@ import { SettingsConfigValidation } from '../validations';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
 import { useSaveConfig } from '../util';
 import { allowedDeposits, Features } from '@zignaly-open/ps2-definitions';
+import { useParams } from 'react-router-dom';
+import { useWlConfigQuery } from '../../../apis/config/api';
 
 const currenciesConfiguredForMin = allowedDeposits.spot;
 
@@ -28,9 +29,9 @@ const grayscaleIconStyle = {
 
 export default function SettingsConfig() {
   const { t } = useTranslation('config');
-  const { data } = useCurrentWlConfig() as unknown as {
-    data: WhitelabelBackendConfig;
-  };
+  const { wl } = useParams();
+  const { data } = useWlConfigQuery(wl);
+
   const defaultValues = useMemo(
     () => ({
       settings: data?.settings || {},
@@ -55,7 +56,7 @@ export default function SettingsConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig((v) => {
+  const { submit, isLoading } = useSaveConfig(wl, (v) => {
     v.marketplaceMinScore = +v.marketplaceMinScore;
     return v;
   });

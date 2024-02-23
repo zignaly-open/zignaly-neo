@@ -94,4 +94,6 @@ export type WhitelabelBackendConfig = Pick<
   privacyPolicy?: string;
   subscriptionPurchaseLink?: string;
   marketplaceMinScore: number;
+  emailOrigin: string;
+  replyTo: string;
 };
