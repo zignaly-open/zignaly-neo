@@ -13,6 +13,7 @@
   },
   "managing-whitelabel": "Manage whitelabel",
   "placeholder": "Introduce here your URL",
+  "wl-not-found": "Uh-oh, \"{{ wl }}\" whitelabel not found",
   "profile": {
     "meta": "Meta",
     "meta-title": "Meta Title",

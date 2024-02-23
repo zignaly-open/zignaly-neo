@@ -7,7 +7,11 @@ import { Loader } from '@zignaly-open/ui';
 const RedirectToFirstWlConfig = () => {
   const { data } = useUserInfoQuery();
   return data?.projectIds?.[0] ? (
-    <Navigate to={generatePath(Routes.ROUTE_CONFIG_PROFILE, { wl: 'z01' })} />
+    <Navigate
+      to={generatePath(Routes.ROUTE_CONFIG_PROFILE, {
+        wl: data?.projectIds?.[0],
+      })}
+    />
   ) : (
     <Loader />
   );
