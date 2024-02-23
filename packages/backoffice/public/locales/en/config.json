@@ -11,6 +11,7 @@
     "communication-config": "Communications",
     "settings-config": "Settings"
   },
+  "managing-whitelabel": "Manage whitelabel",
   "placeholder": "Introduce here your URL",
   "profile": {
     "meta": "Meta",

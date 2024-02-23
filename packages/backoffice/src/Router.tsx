@@ -19,6 +19,7 @@ import ProfileConfig from 'components/Config/ProfileConfig';
 import CommunicationConfig from './components/Config/CommunicationConfig';
 import WhitelabelConfigHeader from './components/Config/SubHeader';
 import WhitelabelConfigLoader from './components/Config/WhitelabelConfigLoader';
+import RedirectToFirstWlConfig from './components/Config/RedirectToFirstWlConfig';
 
 const Router: React.FC = () => (
   <RouterRoutes>
@@ -28,7 +29,11 @@ const Router: React.FC = () => (
       <Route path={Routes.ROUTE_WITHDRAWALS} element={<Withdrawals />} />
       <Route path={Routes.ROUTE_LOGS} element={<Logs />} />
       <Route
-        path={Routes.ROUTE_CONFIG}
+        path={Routes.ROUTE_CONFIG_REDIRECT}
+        element={<RedirectToFirstWlConfig />}
+      ></Route>
+      <Route
+        path={Routes.ROUTE_CONFIG_PARENT}
         element={
           <>
             <WhitelabelConfigHeader />
@@ -38,10 +43,6 @@ const Router: React.FC = () => (
           </>
         }
       >
-        <Route
-          path={Routes.ROUTE_CONFIG}
-          element={<Navigate to={Routes.ROUTE_CONFIG_PROFILE} />}
-        ></Route>
         <Route
           path={Routes.ROUTE_CONFIG_THEME}
           element={<ThemeConfig />}

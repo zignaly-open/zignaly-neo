@@ -21,6 +21,10 @@ import {
   supportedLanguages,
 } from '@zignaly-open/ps2-definitions';
 
+type FormType = Partial<WhitelabelBackendConfig> & {
+  name: string;
+  languagesMap: Record<string, boolean>;
+};
 export default function ProfileConfig() {
   const { t } = useTranslation('config');
   const { data } = useCurrentWlConfig() as unknown as {
@@ -46,12 +50,7 @@ export default function ProfileConfig() {
     [data],
   );
 
-  const formMethods = useForm<
-    Partial<WhitelabelBackendConfig> & {
-      name: string;
-      languagesMap: Record<string, boolean>;
-    }
-  >({
+  const formMethods = useForm<FormType>({
     defaultValues,
     resolver: yupResolver(ProfileConfigValidation),
     mode: 'onBlur',
@@ -65,7 +64,9 @@ export default function ProfileConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig(({ languagesMap, ...v }) => {
+  const { submit, isLoading } = useSaveConfig((payload) => {
+    // since we're making the languagesMap as a separate type
+    const { languagesMap, ...v } = payload as unknown as FormType;
     return {
       ...v,
       languages: Object.entries(languagesMap)
