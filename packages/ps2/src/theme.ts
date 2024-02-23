@@ -10,41 +10,18 @@ export function useWlInstanceThemeWithDebugStyling() {
     window.addEventListener(
       'message',
       function (event) {
-        // const origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // TODO: check domains
-        // TODO: DO NOT FORGET
-        // if (origin !== 'http://localhost:8000') return;
-
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+        if (
+          ![
+            // TODO: make sure this is the full list of backoffice urls we support
+            'http://localhost:3001',
+            'https://bo.staging-zignaly.icu',
+            'https://bo.zignaly.com',
+          ].includes(origin)
+        )
+          return;
         if (
           typeof event.data == 'object' &&
           event.data.call == 'passDebugTemplateOverride'
