@@ -1,7 +1,7 @@
 import React from 'react';
 import { Loader, ZigTypography } from '@zignaly-open/ui';
-import { useCurrentWlConfig } from './use';
-import { useUserInfoQuery } from '../../apis/session/api';
+import { useCurrentWlConfig } from '../use';
+import { useUserInfoQuery } from '../../../apis/session/api';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';

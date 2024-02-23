@@ -1,7 +1,7 @@
 import React from 'react';
 import { generatePath, Navigate } from 'react-router-dom';
-import * as Routes from '../../routes';
-import { useUserInfoQuery } from '../../apis/session/api';
+import * as Routes from '../../../routes';
+import { useUserInfoQuery } from '../../../apis/session/api';
 import { Loader } from '@zignaly-open/ui';
 
 const RedirectToFirstWlConfig = () => {

@@ -13,13 +13,13 @@ import Users from './components/Users';
 import Withdrawals from './components/Transfers/Withdrawals';
 import Deposits from './components/Transfers/Deposits';
 import Logs from './components/Logs';
-import ThemeConfig from './components/Config/ThemeConfig';
-import SettingsConfig from 'components/Config/SettingsConfig';
-import ProfileConfig from 'components/Config/ProfileConfig';
-import CommunicationConfig from './components/Config/CommunicationConfig';
-import WhitelabelConfigHeader from './components/Config/SubHeader';
-import WhitelabelConfigLoader from './components/Config/WhitelabelConfigLoader';
-import RedirectToFirstWlConfig from './components/Config/RedirectToFirstWlConfig';
+import ThemeConfig from './components/Config/pages/ThemeConfig';
+import SettingsConfig from './components/Config/pages/SettingsConfig';
+import ProfileConfig from './components/Config/pages/ProfileConfig';
+import CommunicationConfig from './components/Config/pages/CommunicationConfig';
+import WhitelabelConfigHeader from './components/Config/components/SubHeader';
+import WhitelabelConfigLoader from './components/Config/components/WhitelabelConfigLoader';
+import RedirectToFirstWlConfig from './components/Config/pages/RedirectToFirstWlConfig';
 
 const Router: React.FC = () => (
   <RouterRoutes>
@@ -31,7 +31,7 @@ const Router: React.FC = () => (
       <Route
         path={Routes.ROUTE_CONFIG_REDIRECT}
         element={<RedirectToFirstWlConfig />}
-      ></Route>
+      />
       <Route
         path={Routes.ROUTE_CONFIG_PARENT}
         element={

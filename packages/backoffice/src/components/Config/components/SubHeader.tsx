@@ -12,8 +12,8 @@ import {
   ROUTE_CONFIG_COMMUNICATION,
   ROUTE_CONFIG_SETTINGS,
   ROUTE_CONFIG_THEME,
-} from '../../routes';
-import { useUserInfoQuery } from '../../apis/session/api';
+} from '../../../routes';
+import { useUserInfoQuery } from '../../../apis/session/api';
 
 function WhitelabelConfigHeader() {
   const { t } = useTranslation('config');

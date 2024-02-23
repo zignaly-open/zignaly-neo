@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { ConfigWrapper } from './styled';
+import { ConfigWrapper } from '../styled';
 import { Grid, Tooltip } from '@mui/material';
-import { GridUrlInput, SectionHeader } from './atoms';
+import { GridUrlInput, SectionHeader } from '../atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig } from './use';
-import { WhitelabelBackendConfig } from '../../apis/config/types';
+import { useCurrentWlConfig } from '../use';
+import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import {
   ZigLogoDiscordIcon,
   ZigLogoLinkedInIcon,
@@ -20,8 +20,8 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { CommunicationConfigValidation } from './validations';
-import { useSaveConfig } from './util';
+import { CommunicationConfigValidation } from '../validations';
+import { useSaveConfig } from '../util';
 
 const socialNetworks = [
   {

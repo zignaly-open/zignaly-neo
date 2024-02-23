@@ -6,7 +6,7 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
-import { ConfigWrapper } from './styled';
+import { ConfigWrapper } from '../styled';
 
 export default function ThemeConfig() {
   const { t } = useTranslation('config');

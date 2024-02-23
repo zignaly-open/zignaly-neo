@@ -6,16 +6,16 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { ConfigWrapper } from './styled';
+import { ConfigWrapper } from '../styled';
 import { Grid, Tooltip } from '@mui/material';
-import { GridUrlInput, SectionHeader } from './atoms';
+import { GridUrlInput, SectionHeader } from '../atoms';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { useCurrentWlConfig } from './use';
-import { WhitelabelBackendConfig } from '../../apis/config/types';
+import { useCurrentWlConfig } from '../use';
+import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { ProfileConfigValidation } from './validations';
-import { useSaveConfig } from './util';
+import { ProfileConfigValidation } from '../validations';
+import { useSaveConfig } from '../util';
 import {
   LocalizationLanguages,
   supportedLanguages,
