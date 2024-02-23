@@ -1,50 +1,74 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SubHeader } from '@zignaly-open/ui';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  generatePath,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import {
   ROUTE_CONFIG_PROFILE,
   ROUTE_CONFIG_COMMUNICATION,
   ROUTE_CONFIG_SETTINGS,
   ROUTE_CONFIG_THEME,
 } from '../../routes';
+import { useUserInfoQuery } from '../../apis/session/api';
 
 function WhitelabelConfigHeader() {
   const { t } = useTranslation('config');
   const currentPath = useLocation()?.pathname;
   const navigate = useNavigate();
+  const { data: userInfo } = useUserInfoQuery();
+  const { wl: activeWl } = useParams();
+  const options = userInfo?.projectIds || [];
 
   const routes = useMemo(
     () => [
       {
-        name: t('navigation.profile-config'),
-        onClick: () => navigate(ROUTE_CONFIG_PROFILE),
-        active: currentPath === ROUTE_CONFIG_PROFILE,
-        id: `settings__edit-profile`,
+        id: 'settings__choose-wl',
+        secondaryTitle: t('managing-whitelabel'),
+        isCompactElements: true,
+        name: activeWl,
+        routes: options?.map((service: string) => ({
+          id: 'settings__choose-wl' + service,
+          name: service,
+          onClick: () =>
+            navigate(generatePath(ROUTE_CONFIG_PROFILE, { wl: service })),
+          active: activeWl === service,
+        })),
       },
-      {
-        name: t('navigation.communication-config'),
-        onClick: () => navigate(ROUTE_CONFIG_COMMUNICATION),
-        active: currentPath === ROUTE_CONFIG_COMMUNICATION,
-        id: `settings__edit-2fa`,
-      },
-      {
-        name: t('navigation.settings-config'),
-        onClick: () => navigate(ROUTE_CONFIG_SETTINGS),
-        active: currentPath === ROUTE_CONFIG_SETTINGS,
-        id: `settings__edit-password`,
-      },
-      {
-        name: t('navigation.theme-config'),
-        onClick: () => navigate(ROUTE_CONFIG_THEME),
-        active: currentPath === ROUTE_CONFIG_THEME,
-        id: `settings__edit-password`,
-      },
+      ...[
+        {
+          name: t('navigation.profile-config'),
+          path: ROUTE_CONFIG_PROFILE,
+          id: `settings__edit-profile`,
+        },
+        {
+          name: t('navigation.communication-config'),
+          path: ROUTE_CONFIG_COMMUNICATION,
+          id: `settings__edit-2fa`,
+        },
+        {
+          name: t('navigation.settings-config'),
+          path: ROUTE_CONFIG_SETTINGS,
+          id: `settings__edit-password`,
+        },
+        {
+          name: t('navigation.theme-config'),
+          path: ROUTE_CONFIG_THEME,
+          id: `settings__edit-password`,
+        },
+      ].map(({ path, ...x }) => ({
+        ...x,
+        onClick: () => navigate(generatePath(path, { wl: activeWl })),
+        active: currentPath === generatePath(path, { wl: activeWl }),
+      })),
     ],
-    [t, currentPath],
+    [t, currentPath, options],
   );
 
-  return <SubHeader containerSx={{ maxWidth: 900 }} routes={routes} />;
+  return <SubHeader routes={routes} />;
 }
 
 export default WhitelabelConfigHeader;
