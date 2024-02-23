@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next';
 import { ZigLink } from '@zignaly-open/ui';
 import { ImageElement } from '../../../../../../../customSlateTypes';
 import { LIST_TYPES, TEXT_ALIGN_TYPES } from '../constants';
+import isUrl from 'is-url';
 
 export const BlockButton = ({
   format,
@@ -310,6 +311,10 @@ const Image = ({
 
 export const InsertLinkButton = ({ icon }: { icon: JSX.Element }) => {
   const editor = useSlateStatic();
+
+  const { t } = useTranslation('service');
+
+  const askUrl = useZPrompt();
   return (
     <Box
       sx={{
@@ -317,9 +322,16 @@ export const InsertLinkButton = ({ icon }: { icon: JSX.Element }) => {
       }}
       onMouseDown={(event) => {
         event.preventDefault();
-        const url = window.prompt('Enter the URL of the link:');
-        if (!url) return;
-        insertLink(editor, url);
+        askUrl({
+          title: t('edit.insert-link-modal.title'),
+          confirmAction: (url: string) => {
+            url && insertLink(editor, url);
+          },
+          rulesFunction: (url) => {
+            return isUrl(url);
+          },
+          placeholder: t('edit.insert-link-modal.placeholder'),
+        });
       }}
     >
       {icon}
