@@ -17,16 +17,16 @@ export const useZScoreConfig = (): ZScoreConfig => {
           valueType: 'pct',
         },
         {
-          id: 'profitDays',
-          label: t('profits.days-profit'),
-          valueId: 'winDays',
-          valueType: 'duration-day',
-        },
-        {
           id: 'benchmark',
           label: t('profits.beats-market'),
           valueId: 'beatsMarket',
           valueType: 'bool',
+        },
+        {
+          id: 'profitDays',
+          label: t('profits.days-profit'),
+          valueId: 'winDays',
+          valueType: 'duration-day',
         },
         {
           id: 'sortino',
@@ -41,27 +41,27 @@ export const useZScoreConfig = (): ZScoreConfig => {
       scoreCategoryId: 'riskManagement',
       items: [
         {
-          id: 'drawdown',
-          label: t('risk.max-drawdown'),
-          valueId: 'maxDrawdownPct',
-          valueType: 'pct',
-        },
-        {
           id: 'spotOnly',
           label: t('risk.spot-only'),
           valueId: 'isSpotOnly',
           valueType: 'bool',
         },
         {
-          id: 'sharpe',
-          label: t('risk.sharpe-ratio'),
-          valueId: 'sharpeRatio',
+          id: 'drawdown',
+          label: t('risk.max-drawdown'),
+          valueId: 'maxDrawdownPct',
+          valueType: 'pct',
         },
         {
           id: 'paidClaims',
           label: t('risk.paid-claims'),
           valueId: 'daysAgoLastPaid',
           valueType: 'duration-day',
+        },
+        {
+          id: 'sharpe',
+          label: t('risk.sharpe-ratio'),
+          valueId: 'sharpeRatio',
         },
       ],
     },
@@ -71,16 +71,16 @@ export const useZScoreConfig = (): ZScoreConfig => {
       scoreCategoryId: 'serviceManagement',
       items: [
         {
-          id: 'sbtMin',
-          label: t('service.assets'),
-          valueId: 'sbtEnd',
-          valueType: 'amount',
-        },
-        {
           id: 'sbtGrowth',
           label: t('service.asset-growth'),
           valueId: 'sbtGrowthPct',
           valueType: 'pct',
+        },
+        {
+          id: 'sbtMin',
+          label: t('service.assets'),
+          valueId: 'sbtEnd',
+          valueType: 'amount',
         },
         {
           id: 'investors',
