@@ -5,8 +5,20 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { withReact, Slate } from 'slate-react';
-import { createEditor, Descendant } from 'slate';
+import {
+  withReact,
+  Slate,
+  ReactEditor,
+  RenderElementProps,
+  RenderLeafProps,
+} from 'slate-react';
+import {
+  createEditor,
+  Editor,
+  Element as SlateElement,
+  Node as SlateNode,
+  Descendant,
+} from 'slate';
 import { withHistory } from 'slate-history';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -15,6 +27,8 @@ import {
   MarkButton,
   Element,
   InsertImageButton,
+  InsertLinkButton,
+  RemoveLinkButton,
 } from './atoms';
 import {
   FormatBoldOutlined,
@@ -26,21 +40,32 @@ import {
   FormatAlignJustify,
   FormatAlignLeft,
   FormatAlignRight,
-  FormatUnderlined,
   Code,
   Image,
   LooksOne,
   LooksTwo,
+  Looks3,
+  Looks4,
+  Looks5,
+  Looks6,
   ExpandMore,
   ExpandLess,
+  Link,
+  LinkOff,
 } from '@mui/icons-material';
-import { withImages } from './atoms/util';
-import { ErrorMessage, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { withImages, withInlines, withShortcuts } from './atoms/util';
+import {
+  ErrorMessage,
+  ZigButton,
+  ZigTypography,
+  ZigSwitch,
+} from '@zignaly-open/ui';
 import { StyledEditable } from './styles';
-import { RenderElementType, RenderLeafType } from '../../types';
 import { SxProps } from '@mui/system';
 import { HideReadMoreEffects } from '../../../ServiceProfileContainer/styles';
 import { useTranslation } from 'react-i18next';
+import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
+import { SHORTCUTS } from './constants';
 
 const RichDescriptionEditor = ({
   id,
@@ -50,8 +75,10 @@ const RichDescriptionEditor = ({
   setValue,
   readOnly,
   readMore,
+  subtitle,
   sx,
-}: {
+  ...props
+}: Partial<ControllerRenderProps> & {
   id: string;
   label?: string | JSX.Element;
   error?: string;
@@ -60,20 +87,26 @@ const RichDescriptionEditor = ({
   readMore?: boolean;
   setValue?: (v: Descendant[]) => void;
   sx?: SxProps;
+  subtitle?: JSX.Element | string;
 }) => {
   const { t } = useTranslation('action');
-  const renderElement = useCallback(
-    (p: RenderElementType) => <Element {...p}>{p.children}</Element>,
-    [],
-  );
   const theme = useTheme();
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
+
   const renderLeaf = useCallback(
-    (p: RenderLeafType) => <Leaf {...p}>{p.children}</Leaf>,
+    (p: RenderLeafProps) => <Leaf {...p}>{p.children}</Leaf>,
     [],
   );
+  const renderElement = useCallback(
+    (p: RenderElementProps) => <Element {...p}>{p.children}</Element>,
+    [],
+  );
+
   const editor = useMemo(
-    () => withImages(withHistory(withReact(createEditor()))),
+    () =>
+      withShortcuts(
+        withInlines(withImages(withHistory(withReact(createEditor())))),
+      ),
     [],
   );
 
@@ -89,21 +122,63 @@ const RichDescriptionEditor = ({
 
   const Icon = isTruncated ? ExpandMore : ExpandLess;
 
+  const handleDOMBeforeInput = useCallback(() => {
+    queueMicrotask(() => {
+      const pendingDiffs = ReactEditor.androidPendingDiffs(editor);
+
+      const scheduleFlush = pendingDiffs?.some(({ diff, path }) => {
+        if (!diff.text.endsWith(' ')) {
+          return false;
+        }
+
+        const { text } = SlateNode.leaf(editor, path);
+        const beforeText = text.slice(0, diff.start) + diff.text.slice(0, -1);
+        if (!(beforeText in SHORTCUTS)) {
+          return;
+        }
+
+        const blockEntry = Editor.above(editor, {
+          at: path,
+          match: (n) => SlateElement.isElement(n) && Editor.isBlock(editor, n),
+        });
+        if (!blockEntry) {
+          return false;
+        }
+
+        const [, blockPath] = blockEntry;
+        return Editor.isStart(editor, Editor.start(editor, path), blockPath);
+      });
+
+      if (scheduleFlush) {
+        ReactEditor.androidScheduleFlush(editor);
+      }
+    });
+  }, [editor]);
+
   return (
     <Box
-      display={'flex'}
-      flexDirection={'column'}
-      id={id}
-      sx={sx}
-      width={'100%'}
+      sx={{
+        color: 'neutral200',
+        fontSize: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        ...sx,
+      }}
     >
       {typeof label === 'string' ? (
-        <ZigTypography variant={'h2'} sx={{ mb: 2 }} align='center'>
+        <ZigTypography
+          variant={'h2'}
+          sx={{ mb: 2 }}
+          align='center'
+          id={id && `${id}-title`}
+        >
           {label}
         </ZigTypography>
       ) : (
         label
       )}
+      {subtitle}
       <HideReadMoreEffects
         ref={ref}
         truncate={shouldShowReadMore && isTruncated}
@@ -115,34 +190,37 @@ const RichDescriptionEditor = ({
           initialValue={value}
         >
           {!readOnly && (
-            <Box display={'flex'}>
+            <Box display={'flex'} alignItems={'center'}>
               <MarkButton format='bold' icon={<FormatBoldOutlined />} />
               <MarkButton format='italic' icon={<FormatItalicOutlined />} />
-              <MarkButton format='underline' icon={<FormatUnderlined />} />
               <MarkButton format='code' icon={<Code />} />
-              <BlockButton format='heading-one' icon={<LooksOne />} />
-              <BlockButton format='heading-two' icon={<LooksTwo />} />
+              <BlockButton format='heading_one' icon={<LooksOne />} />
+              <BlockButton format='heading_two' icon={<LooksTwo />} />
+              <BlockButton format='heading_three' icon={<Looks3 />} />
+              <BlockButton format='heading_four' icon={<Looks4 />} />
+              <BlockButton format='heading_five' icon={<Looks5 />} />
+              <BlockButton format='heading_six' icon={<Looks6 />} />
               <BlockButton
-                format='block-quote'
+                format='block_quote'
                 icon={<FormatQuoteOutlined />}
               />
-              <BlockButton
-                format='numbered-list'
-                icon={<FormatListNumbered />}
-              />
-              <BlockButton
-                format='bulleted-list'
-                icon={<FormatListBulleted />}
-              />
+              <BlockButton format='ol_list' icon={<FormatListNumbered />} />
+              <BlockButton format='ul_list' icon={<FormatListBulleted />} />
               <BlockButton format='left' icon={<FormatAlignLeft />} />
               <BlockButton format='center' icon={<FormatAlignCenter />} />
               <BlockButton format='right' icon={<FormatAlignRight />} />
               <BlockButton format='justify' icon={<FormatAlignJustify />} />
               <InsertImageButton icon={<Image />} />
+              <InsertLinkButton icon={<Link />} />
+              <RemoveLinkButton icon={<LinkOff />} />
+              <ZigSwitch sx={{ marginLeft: 'auto' }} />
             </Box>
           )}
 
           <StyledEditable
+            {...props}
+            id={id}
+            onDOMBeforeInput={handleDOMBeforeInput}
             error={!!error}
             renderElement={renderElement}
             renderLeaf={renderLeaf}
@@ -161,6 +239,7 @@ const RichDescriptionEditor = ({
           }
           onClick={() => setIsTruncated((v) => !v)}
           id={id && `${id}-more-less-button`}
+          sx={{ justifyContent: 'left' }}
         >
           {isTruncated ? t('more') : t('less')}
         </ZigButton>

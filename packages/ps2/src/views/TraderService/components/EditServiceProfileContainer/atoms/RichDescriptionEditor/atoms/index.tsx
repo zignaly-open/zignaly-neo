@@ -1,5 +1,7 @@
 import {
   ReactEditor,
+  RenderElementProps,
+  RenderLeafProps,
   useFocused,
   useSelected,
   useSlate,
@@ -7,37 +9,34 @@ import {
 } from 'slate-react';
 import { Box } from '@mui/material';
 import React, { CSSProperties } from 'react';
+import { Editor, Element as SlateElement, Transforms } from 'slate';
 import {
-  BaseEditor,
-  Descendant,
-  Editor,
-  Element as SlateElement,
-  Transforms,
-} from 'slate';
-import { insertImage, isImageUrl } from './util';
+  insertImage,
+  insertLink,
+  isImageUrl,
+  isLinkActive,
+  unwrapLink,
+} from './util';
 import { ZigCrossIcon } from '@zignaly-open/ui/icons';
-import {
-  RenderElementType,
-  RenderLeafType,
-  RichEditorElement,
-} from '../../../types';
+import { SlateElementTypeFieldTypes } from '../../../types';
 import { useZPrompt } from '../../../../../../../components/ZModal/use';
 import { useTranslation } from 'react-i18next';
+import { ZigLink } from '@zignaly-open/ui';
+import { ImageElement } from '../../../../../../../customSlateTypes';
+import { LIST_TYPES, TEXT_ALIGN_TYPES } from '../constants';
+import isUrl from 'is-url';
 
 export const BlockButton = ({
   format,
   icon,
 }: {
-  format: string;
+  format: SlateElementTypeFieldTypes;
   icon: JSX.Element;
 }) => {
   const editor = useSlate();
 
-  const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
-  const LIST_TYPES = ['numbered-list', 'bulleted-list'];
-
   const isBlockActive = (
-    editorActive: BaseEditor,
+    editorActive: Editor,
     formatActive: string,
     blockType = 'type',
   ) => {
@@ -57,7 +56,10 @@ export const BlockButton = ({
     return !!match;
   };
 
-  const toggleBlock = (editorToggle: BaseEditor, formatToggle: string) => {
+  const toggleBlock = (
+    editorToggle: Editor,
+    formatToggle: SlateElementTypeFieldTypes,
+  ) => {
     const isActive = isBlockActive(
       editorToggle,
       formatToggle,
@@ -66,27 +68,27 @@ export const BlockButton = ({
     const isList = LIST_TYPES.includes(formatToggle);
 
     Transforms.unwrapNodes(editorToggle, {
-      match: (n: RichEditorElement) =>
+      match: (n: SlateElement) =>
         !Editor.isEditor(n) &&
         SlateElement.isElement(n) &&
         LIST_TYPES.includes(n.type) &&
         !TEXT_ALIGN_TYPES.includes(formatToggle),
       split: true,
     });
-    let newProperties: Partial<RichEditorElement>;
+    let newProperties: Partial<SlateElement>;
     if (TEXT_ALIGN_TYPES.includes(formatToggle)) {
       newProperties = {
         align: isActive ? undefined : formatToggle,
       };
     } else {
       newProperties = {
-        type: isActive ? 'paragraph' : isList ? 'list-item' : formatToggle,
+        type: isActive ? 'paragraph' : isList ? 'list_item' : formatToggle,
       };
     }
-    Transforms.setNodes<RichEditorElement>(editorToggle, newProperties);
+    Transforms.setNodes(editorToggle, newProperties);
 
     if (!isActive && isList) {
-      const block = { type: formatToggle, children: [] as Descendant[] };
+      const block = { type: formatToggle, children: [] } as SlateElement;
       Transforms.wrapNodes(editorToggle, block);
     }
   };
@@ -124,12 +126,12 @@ export const MarkButton = ({
 }) => {
   const editor = useSlate();
 
-  const isMarkActive = (editorActive: BaseEditor, formatActive: string) => {
+  const isMarkActive = (editorActive: Editor, formatActive: string) => {
     const marks = Editor.marks(editorActive);
     return marks ? marks[formatActive] === true : false;
   };
 
-  const toggleMark = (editorToggle: BaseEditor, formatToggle: string) => {
+  const toggleMark = (editorToggle: Editor, formatToggle: string) => {
     const isActive = isMarkActive(editorToggle, formatToggle);
 
     if (isActive) {
@@ -157,21 +159,17 @@ export const MarkButton = ({
   );
 };
 
-export const Leaf = ({ attributes, children, leaf }: RenderLeafType) => {
+export const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
 
-  if (leaf.code) {
+  if (leaf?.code) {
     children = <code>{children}</code>;
   }
 
   if (leaf.italic) {
     children = <em>{children}</em>;
-  }
-
-  if (leaf.underline) {
-    children = <u>{children}</u>;
   }
 
   return <span {...attributes}>{children}</span>;
@@ -181,43 +179,67 @@ export const Element = ({
   attributes,
   children,
   element,
-}: RenderElementType) => {
+}: RenderElementProps) => {
   const style = {
     textAlign: element.align,
     listStyleType: 'unset',
   } as CSSProperties;
   switch (element.type) {
-    case 'block-quote':
+    case 'block_quote':
       return (
         <blockquote style={style} {...attributes}>
           {children}
         </blockquote>
       );
-    case 'bulleted-list':
+    case 'ul_list':
       return (
         <ul style={{ ...style, listStyleType: 'disc' }} {...attributes}>
           {children}
         </ul>
       );
-    case 'heading-one':
+    case 'heading_one':
       return (
         <h1 style={style} {...attributes}>
           {children}
         </h1>
       );
-    case 'heading-two':
+    case 'heading_two':
       return (
         <h2 style={style} {...attributes}>
           {children}
         </h2>
       );
-    case 'list-item':
+    case 'heading_three':
+      return (
+        <h3 style={style} {...attributes}>
+          {children}
+        </h3>
+      );
+    case 'heading_four':
+      return (
+        <h4 style={style} {...attributes}>
+          {children}
+        </h4>
+      );
+    case 'heading_five':
+      return (
+        <h5 style={style} {...attributes}>
+          {children}
+        </h5>
+      );
+    case 'heading_six':
+      return (
+        <h6 style={style} {...attributes}>
+          {children}
+        </h6>
+      );
+    case 'list_item':
       return (
         <li style={{ ...style, marginLeft: '25px' }} {...attributes}>
           {children}
         </li>
       );
-    case 'numbered-list':
+    case 'ol_list':
       return (
         <ol style={{ ...style, listStyleType: 'decimal' }} {...attributes}>
           {children}
@@ -225,12 +247,16 @@ export const Element = ({
       );
     case 'image':
       return (
-        <Image
-          attributes={attributes}
-          element={element as RichEditorElement & { url: string }}
-        >
+        <Image attributes={attributes} element={element}>
           {children}
         </Image>
+      );
+
+    case 'link':
+      return (
+        <ZigLink {...attributes} href={element.link}>
+          {children}
+        </ZigLink>
       );
     default:
       return (
@@ -245,7 +271,7 @@ const Image = ({
   attributes,
   children,
   element,
-}: RenderElementType & { element: RichEditorElement & { url: string } }) => {
+}: RenderElementProps & { element: ImageElement }) => {
   const editor = useSlateStatic();
   const path = ReactEditor.findPath(editor as ReactEditor, element);
 
@@ -256,7 +282,8 @@ const Image = ({
       {children}
       <Box contentEditable={false} sx={{ position: 'relative' }}>
         <img
-          src={element.url}
+          alt={element.link}
+          src={element.link}
           style={{
             display: 'block',
             maxWidth: '100%',
@@ -282,6 +309,53 @@ const Image = ({
   );
 };
 
+export const InsertLinkButton = ({ icon }: { icon: JSX.Element }) => {
+  const editor = useSlateStatic();
+
+  const { t } = useTranslation('service');
+
+  const askUrl = useZPrompt();
+  return (
+    <Box
+      sx={{
+        color: isLinkActive(editor) ? 'neutral 100' : 'neutral500',
+      }}
+      onMouseDown={(event) => {
+        event.preventDefault();
+        askUrl({
+          title: t('edit.insert-link-modal.title'),
+          confirmAction: (url: string) => {
+            url && insertLink(editor, url);
+          },
+          rulesFunction: (url) => isUrl(url),
+          placeholder: t('edit.insert-link-modal.placeholder'),
+        });
+      }}
+    >
+      {icon}
+    </Box>
+  );
+};
+
+export const RemoveLinkButton = ({ icon }: { icon: JSX.Element }) => {
+  const editor = useSlateStatic();
+
+  return (
+    <Box
+      sx={{
+        color: isLinkActive(editor) ? 'neutral 100' : 'neutral500',
+      }}
+      onMouseDown={() => {
+        if (isLinkActive(editor)) {
+          unwrapLink(editor);
+        }
+      }}
+    >
+      {icon}
+    </Box>
+  );
+};
+
 export const InsertImageButton = ({ icon }: { icon: JSX.Element }) => {
   const editor = useSlateStatic();
   const { t } = useTranslation('service');
@@ -298,7 +372,7 @@ export const InsertImageButton = ({ icon }: { icon: JSX.Element }) => {
         askUrl({
           title: t('edit.insert-image-modal.title'),
           confirmAction: (url: string) => {
-            url && insertImage(editor as ReactEditor, url);
+            url && insertImage(editor, url);
           },
           rulesFunction: (url) => {
             return isImageUrl(url);

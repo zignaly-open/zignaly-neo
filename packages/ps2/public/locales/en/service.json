@@ -81,6 +81,10 @@
       "placeholder": "Input url",
       "warning": "URL should end with image extension (.jpg, .png, .jpeg and etc.)"
     },
+    "insert-link-modal": {
+      "title": "Type Link URL",
+      "placeholder": "Input url"
+    },
     "visibility": {
       "visibility": "Visibility:",
       "unlisted": "Unpublished Draft",
