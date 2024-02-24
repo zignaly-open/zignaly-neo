@@ -70,6 +70,7 @@ const InvestButton: React.FC<{
           flexDirection: 'row',
           gap: '5px',
           padding: '6px 26px',
+          width: '100%',
           ...(showRocket ? animatedRocketStyle : {}),
         }}
         tooltip={
