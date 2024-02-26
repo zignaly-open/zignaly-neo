@@ -54,12 +54,7 @@ import {
   LinkOff,
 } from '@mui/icons-material';
 import { withImages, withInlines, withShortcuts } from './atoms/util';
-import {
-  ErrorMessage,
-  ZigButton,
-  ZigTypography,
-  ZigSwitch,
-} from '@zignaly-open/ui';
+import { ErrorMessage, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { StyledEditable } from './styles';
 import { SxProps } from '@mui/system';
 import { HideReadMoreEffects } from '../../../ServiceProfileContainer/styles';
@@ -171,7 +166,7 @@ const RichDescriptionEditor = ({
           variant={'h2'}
           sx={{ mb: 2 }}
           align='center'
-          id={id && `${id}-title`}
+          id={id && `${id}-label`}
         >
           {label}
         </ZigTypography>
@@ -190,7 +185,7 @@ const RichDescriptionEditor = ({
           initialValue={value}
         >
           {!readOnly && (
-            <Box display={'flex'} alignItems={'center'}>
+            <Box display={'flex'} alignItems={'center'} flexWrap={'wrap'}>
               <MarkButton format='bold' icon={<FormatBoldOutlined />} />
               <MarkButton format='italic' icon={<FormatItalicOutlined />} />
               <MarkButton format='code' icon={<Code />} />
@@ -213,7 +208,6 @@ const RichDescriptionEditor = ({
               <InsertImageButton icon={<Image />} />
               <InsertLinkButton icon={<Link />} />
               <RemoveLinkButton icon={<LinkOff />} />
-              <ZigSwitch sx={{ marginLeft: 'auto' }} />
             </Box>
           )}
 

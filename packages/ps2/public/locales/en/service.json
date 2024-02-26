@@ -83,7 +83,8 @@
     },
     "insert-link-modal": {
       "title": "Type Link URL",
-      "placeholder": "Input url"
+      "placeholder": "Input url",
+      "warning": "Please insert the full URL starting with \"https://...\""
     },
     "visibility": {
       "visibility": "Visibility:",
