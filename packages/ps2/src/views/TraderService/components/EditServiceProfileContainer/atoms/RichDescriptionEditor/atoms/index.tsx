@@ -329,6 +329,7 @@ export const InsertLinkButton = ({ icon }: { icon: JSX.Element }) => {
           },
           rulesFunction: (url) => isUrl(url),
           placeholder: t('edit.insert-link-modal.placeholder'),
+          warning: t('edit.insert-link-modal.warning'),
         });
       }}
     >
