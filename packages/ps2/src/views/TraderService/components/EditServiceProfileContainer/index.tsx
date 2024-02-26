@@ -211,7 +211,10 @@ const EditServiceProfileContainer: React.FC<{
                   setValue={setValue.bind(null, 'description')}
                   id={'edit-service-profile__service-description'}
                   label={
-                    <ZigTypography mb={'10px'}>
+                    <ZigTypography
+                      mb={'10px'}
+                      id={'edit-service-profile__service-description-label'}
+                    >
                       {t('edit.description')}
                     </ZigTypography>
                   }
