@@ -49,6 +49,7 @@
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
     "@hookform/resolvers": "^2.9.7",
+    "@khmyznikov/pwa-install": "^0.2.7",
     "@livesession/sdk": "^1.1.4",
     "@mui/icons-material": "5.14.19",
     "@mui/lab": "^5.0.0-alpha.154",

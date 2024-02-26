@@ -4,21 +4,21 @@ First, define an environment [here](https://github.com/zignaly-open/zignaly-neo/
 
 Next we define the variables and secrets. Variables are public, secrets are - imagine my shock - not public. It makes no sense to have things like the google tag manager id or sentry dns id because one would be able to easily retrieve them anyways (unless they are not your 80-year-old granny who is not very tech-savvy) from the compiled code or the network request the app is sending.
 
-*Optional*</opt2> means that the variable/secret is kinda option, but 99% you'll need it.
+*Optional** means that the variable/secret is kinda option, but 99% you'll need it.
 
 
 | Name                        | Type     |                           Description                            |     Optional |
 |-----------------------------|----------|:----------------------------------------------------------------:|-------------:|
 | `AWS_ACCESS_KEY`            | Secret   |     AWS S3 Access key used both for Codedeploy and S3 upload     | **Required** |
 | `AWS_SECRET_KEY`            | Secret   |     AWS S3 Secret key used both for Codedeploy and S3 upload     | **Required** |
-| `AWS_S3_BUCKET`             | Secret   | AWS S3 Bucket name to which the static content would be uploaded | **Required** |
-| `CF_ZONE`                   | Secret   |                  CloudFlare Zone to invalidate                   |  *Optional** |
-| `CF_TOKEN`                  | Secret   |                  CloudFlare Token to invalidate                  |  *Optional** |
+| `AWS_S3_BUCKET`             | Secret   | AWS S3 Bucket name to which the static content would be uploaded | *Optional*\* |
+| `CF_ZONE`                   | Secret   |                  CloudFlare Zone to invalidate                   | *Optional*\* |
+| `CF_TOKEN`                  | Secret   |                  CloudFlare Token to invalidate                  | *Optional*\* |
 | `CODEDEPLOY_BUCKET`         | Secret   |             CodeDeploy bucket for the WL server code             | **Required** |
 | `CODEDEPLOY_GROUP`          | Secret   |            CodeDeploy group for the WL server deploy             | **Required** |
 | `CODEPLOY_REGION`           | Secret   |            Believe it or not, it's CodeDeploy region             | **Required** |
 | `SLACK_WEBHOOK`             | Secret   |          Slack webhook to report PS2 WL Server logs to           |   *Optional* |
-| `CDN_URL`                   | Variable | "CDN" that we serve the static content from for all whitelabels  | **Required** |
+| `CDN_URL`                   | Variable | "CDN" that we serve the static content from for all whitelabels  | *Optional*\* |
 | `PS2_BASE_API`              | Variable |          Base API path, e.g. `https://api.zignaly.com/`          | **Required** |
 | `PS2_REFERRAL_API`          | Variable |     Referral API path, e.g. `https://referrals.zignaly.com/`     |   *Optional* |
 | `DEV_ONLY_WHITELABEL`       | Variable |  [Dev only](../src/whitelabel) var to force a whitelabel config  |   *Dev only* |
@@ -32,6 +32,12 @@ Next we define the variables and secrets. Variables are public, secrets are - im
 | `IPGEOLOCATION_API_KEY`     | Variable |   API key for ipgeolocation.io to detect user default currency   |   *Optional* |
 | `PS2_WL_CACHE_TTL_OVERRIDE` | Variable |       How long we keep WL config in cache. Default 10 min        |   *Optional* |
 | `PS2_WL_SLACK_LOG_THROTTLE` | Variable |      How long till we send the same error log. Default 100s      |   *Optional* |
+
+
+Let's go over technically optional but realistically not so optional ars.
+
+* `CF_ZONE` and `CF_TOKEN` - plain and simple, to have CloudFlare or not have Cloudflare
+* `AWS_S3_BUCKET` and `CDN_URL` - if the `CDN_URL` is not set, then it means we serve from the dynamic server and we do not need to upload stuff to the static content s3. 
 
 
 Now what?

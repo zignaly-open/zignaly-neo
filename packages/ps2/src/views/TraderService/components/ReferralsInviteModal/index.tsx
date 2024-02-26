@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ZigTypography, trimZeros } from '@zignaly-open/ui';
 import { ReferralsInviteModalProps } from './types';
 import ZModal from 'components/ZModal';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import Tiers from './atoms/TiersTable';
 import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
@@ -12,12 +12,19 @@ import ReferralLinkInvite from './atoms/ReferralLinkInvite';
 import { useTiersData } from 'apis/referrals/use';
 import CurrentCommission from './atoms/CurrentCommission';
 import ReferralTermsButton from './atoms/ReferralTermsButton';
+import {
+  CommissionBox,
+  StyledCurrentCommission,
+  StyledReferralLinkInvite,
+} from 'views/Referrals/styles';
 
 const ReferralsInviteModal = ({
   service,
   close,
   ...props
 }: ReferralsInviteModalProps) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation(['referrals-trader', 'service']);
   const tiersData = useTiersData(service.id);
   const {
@@ -33,6 +40,69 @@ const ReferralsInviteModal = ({
     isLoading,
   } = tiersData;
 
+  const ComissionSection = () => {
+    return sm ? (
+      <CommissionBox sx={{ width: '100%' }}>
+        <Box display='flex' gap='42px'>
+          <Box
+            display='flex'
+            {...(referral.invitedCount > 0 || sm
+              ? {
+                  flexDirection: 'column',
+                }
+              : {
+                  alignItems: 'center',
+                  gap: '30px',
+                })}
+          >
+            <StyledCurrentCommission>
+              <CurrentCommission
+                tiersData={tiersData}
+                showReferrals={referral.investorsCount > 0}
+                showMaxCommission={inviteLeft > 0}
+              />
+            </StyledCurrentCommission>
+
+            <ShareCommissionSlider
+              discountPct={referral.discountPct}
+              max={maxCommission}
+            />
+
+            <Box sx={{ mx: 'auto', mt: 2, width: '85%' }}>
+              <StyledReferralLinkInvite>
+                <ReferralLinkInvite
+                  serviceId={service.id}
+                  referralCode={referral.referralCode}
+                />
+              </StyledReferralLinkInvite>
+            </Box>
+          </Box>
+        </Box>
+      </CommissionBox>
+    ) : (
+      <Grid
+        item
+        sm={12}
+        md={8}
+        display='flex'
+        flexDirection={'column'}
+        alignItems={'center'}
+      >
+        <CurrentCommission
+          tiersData={tiersData}
+          showReferrals={referral.investorsCount > 0}
+          showMaxCommission={inviteLeft > 0}
+        />
+        <Box px='20px'>
+          <ShareCommissionSlider
+            discountPct={referral.discountPct}
+            max={maxCommission}
+          />
+        </Box>
+      </Grid>
+    );
+  };
+
   return (
     <ZModal
       titleStyles={{ fontSize: '26px', textTransform: 'unset !important' }}
@@ -43,47 +113,30 @@ const ReferralsInviteModal = ({
         commission: maxCommission,
       })}
       isLoading={isLoading}
+      mobileFullScreen
     >
       {!isLoading && (
         <>
-          <Grid container mt={'38px'}>
+          <Grid container mt={'38px'} justifyContent={'center'}>
             <Grid
               item
               sm={12}
               md={4}
               display={'flex'}
               justifyContent={'center'}
-              mb={{ sm: 3, md: 0 }}
             >
               <TraderCard service={service} traderBoost={traderBoost} />
             </Grid>
-            <Grid
-              item
-              sm={12}
-              md={8}
-              display='flex'
-              flexDirection={'column'}
-              alignItems={'center'}
-            >
-              <CurrentCommission
-                tiersData={tiersData}
-                showReferrals={referral.investorsCount > 0}
-                showMaxCommission={inviteLeft > 0}
-              />
-              <Box px='20px'>
-                <ShareCommissionSlider
-                  discountPct={referral.discountPct}
-                  max={maxCommission}
-                />
-              </Box>
-            </Grid>
+            <ComissionSection />
           </Grid>
-          <Box mt='44px'>
-            <ReferralLinkInvite
-              serviceId={service.id}
-              referralCode={referral.referralCode}
-            />
-          </Box>
+          {!sm && (
+            <Box mt='44px'>
+              <ReferralLinkInvite
+                serviceId={service.id}
+                referralCode={referral.referralCode}
+              />
+            </Box>
+          )}
           {inviteLeft > 0 && (
             <Box
               display='flex'
@@ -159,7 +212,14 @@ const ReferralsInviteModal = ({
               </Box>
             </Box>
           )}
-          <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+          <Box
+            sx={{
+              transform: sm ? 'scale(0.65)' : 'scale(1)',
+            }}
+            width={'100%'}
+            display={'flex'}
+            justifyContent={'center'}
+          >
             <Tiers
               tiers={tiers}
               referral={referral}

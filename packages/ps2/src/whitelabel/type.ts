@@ -29,6 +29,7 @@ export type WhitelabelOverride = {
   featureOverrides?: Partial<Record<Features, boolean>>;
   slug?: string;
   logo?: string;
+  manifest?: string;
   links?: {
     tos?: string;
     helpUrl?: string;

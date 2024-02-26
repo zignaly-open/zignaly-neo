@@ -2,6 +2,46 @@
 <html lang="en" translate="no">
 <head>
     <meta charset="utf-8"/>
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon512_maskable.png"/>
+    <meta name="msapplication-TileColor" content="#101225">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">  
+      <link rel="apple-touch-startup-image" href="apple-splash-2048-2732.jpeg"
+        media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1668-2388.jpeg"
+        media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1536-2048.jpeg"
+        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1668-2224.jpeg"
+        media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1620-2160.jpeg"
+        media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1290-2796.jpeg"
+        media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1179-2556.jpeg"
+        media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1284-2778.jpeg"
+        media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1170-2532.jpeg"
+        media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1125-2436.jpeg"
+        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1242-2688.jpeg"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-828-1792.jpeg"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-1242-2208.jpeg"
+        media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-750-1334.jpeg"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+      <link rel="apple-touch-startup-image" href="apple-splash-640-1136.jpeg"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#ffffff">
@@ -10,6 +50,32 @@
       <meta name="googlebot" content="noindex">
     <% } %>
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Zignaly</title>
+    <% if (process.env.REACT_APP_ENABLE_TRACKING === 'true') { %>
+    <!-- Twitter conversion tracking base code -->
+    <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    twq('config','og0cu');
+    </script>
+    <!-- End Twitter conversion tracking base code -->
+    <% } %>
+    <script>navigator.serviceWorker.register("%PUBLIC_URL%/serviceWorker.js")</script>
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>

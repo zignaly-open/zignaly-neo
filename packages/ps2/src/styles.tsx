@@ -8,6 +8,24 @@ import GoogleFontLoader from 'react-google-font-loader';
 import { lazily } from 'react-lazily';
 import isFontInstalled from '@xfuturum/is-font-installed';
 
+const PWAStyle = createGlobalStyle`
+  @media (max-width: 450px) {
+    html {
+      min-height: calc(100% + env(safe-area-inset-top));
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);    
+    }
+
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      -webkit-touch-callout: none;
+    }
+  }
+`;
+
 const { AvenirNext } = lazily(() => import('@zignaly-open/ui/fonts'));
 
 const IntercomStyle = createGlobalStyle`
@@ -57,6 +75,7 @@ export default () => {
     <>
       <GlobalFonts />
       <GlobalAppStyle />
+      <PWAStyle />
       {!!whitelabel.tools?.intercom && <IntercomStyle />}
       <GlobalStyles
         styles={{ body: { fontFamily: theme.typography.fontFamily } }}

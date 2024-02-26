@@ -1,5 +1,5 @@
 import { InfoOutlined, Verified } from '@mui/icons-material';
-import { Box, Tooltip, useTheme } from '@mui/material';
+import { Box, Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { ZigUserFilledIcon } from '@zignaly-open/ui/icons';
 import React from 'react';
@@ -35,6 +35,7 @@ const CurrentCommission = ({
     inviteLeft,
   } = tiersData;
   const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <Box
       width={1}
@@ -156,7 +157,7 @@ const CurrentCommission = ({
             </Box>
           </Box>
         )}
-        {isNumber(earnings) && (
+        {!sm && isNumber(earnings) && (
           <Box display='flex' flexDirection={'column'}>
             <ZigTypography
               textTransform='uppercase'

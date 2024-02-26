@@ -24,4 +24,11 @@ export const BoostBox = styled(Box)`
     height: 15px;
     width: auto;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
+    box-shadow: unset;
+    background-color: unset;
+    padding: 0;
+    height: auto;
+  }
 `;

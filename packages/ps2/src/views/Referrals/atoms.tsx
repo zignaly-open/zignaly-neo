@@ -10,6 +10,7 @@ export const TotalBox: React.FC<{
     <ZigTypography
       textTransform={'uppercase'}
       fontWeight={500}
+      textAlign={'center'}
       className='referral-box__label'
     >
       {label}

@@ -54,4 +54,7 @@ export default {
     helpUrl: 'https://help.zignaly.com/en/',
     subscriptionPurchaseLink: null,
   },
+  defaultSuccessFee: 5,
+  intercomId: 'nc3z6oqm',
+  manifest: '/manifest.json',
 } as WhitelabelOverride;

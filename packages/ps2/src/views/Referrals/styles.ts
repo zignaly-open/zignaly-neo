@@ -10,7 +10,6 @@ import {
 export const CommissionBox = styled(Box)`
   border-radius: 17px;
   background-image: linear-gradient(to bottom, #18194b, #12374e);
-  width: 850px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -241,7 +240,7 @@ export const StyledCurrentCommission = styled('div')`
 `;
 
 export const TotalBoxBox = styled(Paper)`
-  width: 250px;
+  max-width: 250px;
   min-height: 160px;
   margin: 16px;
   border-width: 0;
@@ -251,6 +250,12 @@ export const TotalBoxBox = styled(Paper)`
   justify-content: space-around;
   align-items: center;
   border-radius: 11px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
+    margin: 0px 8px;
+    padding: 8px 12px;
+    width: 33%;
+  }
 `;
 
 export const TotalBoxValue = styled(ZigTypography)`
@@ -282,7 +287,6 @@ export const StepBox = styled(Box)`
 
   img {
     width: 100%;
-    height: 265px;
     object-fit: contain;
   }
 `;
