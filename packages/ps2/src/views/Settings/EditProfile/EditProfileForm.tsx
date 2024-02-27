@@ -20,11 +20,6 @@ import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import Flag from '../../../components/Flag';
 import { Box } from '@mui/system';
 import { ServiceLogoStatus } from './atoms';
-import RichDescriptionEditor from '../../TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor';
-import {
-  deserializeSlate,
-  serializeSlate,
-} from '../../TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -37,7 +32,6 @@ const EditProfileForm = () => {
   const {
     handleSubmit,
     control,
-    setValue,
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
@@ -46,7 +40,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: deserializeSlate(user.about || ''),
+      bio: user.about || '',
       country: user.country || '',
     },
   });
@@ -104,7 +98,7 @@ const EditProfileForm = () => {
   const onSubmit = (data: EditProfileFormType) =>
     updateUser({
       userName: data.username,
-      about: serializeSlate(data.bio),
+      about: data.bio,
       countryCode: data.country,
       imageUrl: data.imageUrl,
     })
@@ -234,14 +228,13 @@ const EditProfileForm = () => {
                 name='bio'
                 control={control}
                 render={({ field }) => (
-                  <RichDescriptionEditor
+                  <ZigInput
                     id={'edit-profile__about-you'}
-                    setValue={setValue.bind(null, 'bio')}
+                    wide
+                    multiline
+                    rows={12}
                     label={
-                      <ZigTypography
-                        id={'edit-profile__about-you-label'}
-                        mb={1}
-                      >
+                      <ZigTypography id={'edit-profile__about-you-label'}>
                         {t('edit-profile.about-you')}
                         <ZigTypography
                           sx={{ pl: 1 }}
@@ -253,6 +246,9 @@ const EditProfileForm = () => {
                         </ZigTypography>
                       </ZigTypography>
                     }
+                    placeholder={t(
+                      'edit-profile.tell-me-the-story-of-your-left',
+                    )}
                     error={t(errors.bio?.message, { maxLength: 2000 })}
                     {...field}
                   />
