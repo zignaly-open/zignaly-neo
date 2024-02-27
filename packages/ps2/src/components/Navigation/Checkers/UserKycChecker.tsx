@@ -26,9 +26,9 @@ const UserKycChecker: React.FC = () => {
   const getStatuses = useCallback(() => {
     return loadKyc()
       .unwrap()
-      .then(({ status, KYCMonitoring }) => ({
-        statusSerialized: status.map((x) => x.status || '').join(''),
-        shouldCheck: KYCMonitoring,
+      .then(({ statuses, kycMonitoring }) => ({
+        statusSerialized: statuses.map((x) => x.status || '').join(''),
+        shouldCheck: kycMonitoring,
       }));
   }, []);
 
@@ -54,8 +54,9 @@ const UserKycChecker: React.FC = () => {
         }, KYC_CHECK_INTERVAL);
       };
 
+      oldStatus.current = await getStatuses();
+      console.log(oldStatus.current);
       if (shouldCheck) {
-        oldStatus.current = await getStatuses();
         pollKyc();
       }
     })();

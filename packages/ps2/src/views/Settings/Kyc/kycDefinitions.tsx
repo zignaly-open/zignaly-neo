@@ -14,39 +14,39 @@ const goldRestriction = {
   coin: 'USDT',
 };
 
-const kycConfig: Record<'KYC' | 'KYB', KycDefinitionConfig[]> = {
-  KYC: [
-    {
-      color: '#E1E9F0',
-      icon: <SilverIcon />,
-      restriction: silverRestriction,
-      requirements: `requirements-level-1`,
-      label: `name-level-1`,
-    },
-    {
-      color: '#FFD232',
-      icon: <GoldIcon />,
-      restriction: goldRestriction,
-      requirements: `requirements-level-2`,
-      label: `name-level-2`,
-    },
-  ],
-  KYB: [
-    {
-      color: '#E1E9F0',
-      icon: <SilverIcon />,
-      restriction: silverRestriction,
-      requirements: `requirements-level-1-corp`,
-      label: `name-level-1`,
-    },
-    {
-      color: '#FFD232',
-      icon: <GoldIcon />,
-      restriction: goldRestriction,
-      requirements: `requirements-level-2-corp`,
-      label: `name-level-2`,
-    },
-  ],
-};
+// const kycConfig: Record<'KYC' | 'KYB', KycDefinitionConfig[]> = {
+//   KYC: [
+//     {
+//       color: '#E1E9F0',
+//       icon: <SilverIcon />,
+//       restriction: silverRestriction,
+//       requirements: `requirements-level-1`,
+//       label: `name-level-1`,
+//     },
+//     // {
+//     //   color: '#FFD232',
+//     //   icon: <GoldIcon />,
+//     //   restriction: goldRestriction,
+//     //   requirements: `requirements-level-2`,
+//     //   label: `name-level-2`,
+//     // },
+//   ],
+//   KYB: [
+//     {
+//       color: '#E1E9F0',
+//       icon: <SilverIcon />,
+//       restriction: silverRestriction,
+//       requirements: `requirements-level-1-corp`,
+//       label: `name-level-1`,
+//     },
+//     {
+//       color: '#FFD232',
+//       icon: <GoldIcon />,
+//       restriction: goldRestriction,
+//       requirements: `requirements-level-2-corp`,
+//       label: `name-level-2`,
+//     },
+//   ],
+// };
 
-export default kycConfig;
+// export default kycConfig;

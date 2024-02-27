@@ -1,6 +1,9 @@
 import {
+  KycLevels,
+  KycLevelsRaw,
   KycLinkResponse,
   KycResponse,
+  KycStatusResponse,
   LoginPayload,
   LoginResponse,
   SessionResponse,
@@ -119,25 +122,41 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
-  kycStatus: builder.query<KycResponse, string>({
-    query: (level) => ({
-      url: `user/kyc/${level}`,
+  kycLink: builder.query<KycLinkResponse, { category: string; level: number }>({
+    query: ({ category, level }) => ({
+      url: `user/kyc/${category}/${level}/link`,
     }),
   }),
 
-  kycStatuses: builder.query<
-    { status: KycResponse[]; KYCMonitoring: boolean },
-    void
+  kycStatus: builder.query<
+    KycStatusResponse,
+    { category: string; level: number }
   >({
+    query: ({ category, level }) => ({
+      url: `user/kyc/${category}/${level}/status`,
+    }),
+  }),
+
+  kycStatuses: builder.query<KycResponse, void>({
     query: () => ({
       url: `user/kyc`,
     }),
   }),
 
-  kycLink: builder.query<KycLinkResponse, string>({
-    query: (level) => ({
-      url: `user/kyc/${level}/link`,
+  kycLevels: builder.query<KycLevels, void>({
+    query: () => ({
+      url: `user/kyc/levels`,
     }),
+    transformResponse: (response: KycLevelsRaw) =>
+      response.levels.reduce((acc, curr) => {
+        const categoryObj = acc.find((c) => c.category === curr.category);
+        if (categoryObj) {
+          categoryObj.levels.push(curr);
+        } else {
+          acc.push({ category: curr.category, levels: [curr] });
+        }
+        return acc;
+      }, []),
   }),
 
   activateExchange: builder.mutation<void, { exchangeInternalId: string }>({
@@ -293,6 +312,7 @@ export const {
   useKycStatusesQuery,
   useLazyKycStatusesQuery,
   useKycStatusQuery,
+  useKycLevelsQuery,
   useEnable2FAMutation,
   useBalanceQuery,
   useLazyBalanceQuery,

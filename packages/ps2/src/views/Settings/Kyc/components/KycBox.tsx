@@ -11,7 +11,12 @@ import { useTranslation } from 'react-i18next';
 import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
 import { KycBoxListEntry } from './atoms';
-import { KycResponse, UserData } from '../../../../apis/user/types';
+import {
+  KycResponse,
+  KycStatus,
+  KycStatusResponse,
+  UserData,
+} from '../../../../apis/user/types';
 import { useDispatch } from 'react-redux';
 import { useCurrentUser } from 'apis/user/use';
 import { setUser } from 'apis/user/store';
@@ -29,20 +34,19 @@ const iconWrapStyle = {
 };
 
 const KycBox: React.FC<{
-  level: string;
+  level: number;
   labelColor: string;
   balanceRestriction?: string;
   disabledMessage?: string;
   title: string;
   icon: JSX.Element;
-  response: KycResponse;
+  response: KycStatusResponse;
   items: Record<
     string,
     string | { title: string; items: Record<string, string> }
   >;
 }> = ({
   icon,
-  level,
   response,
   balanceRestriction,
   disabledMessage,
@@ -58,6 +62,7 @@ const KycBox: React.FC<{
   const showModal = useZAlert();
   const dispatch = useDispatch();
   const user = useCurrentUser();
+  const { level, category } = response;
 
   const infoIconStyle = {
     height: '15.6px',
@@ -65,7 +70,7 @@ const KycBox: React.FC<{
   };
 
   const openKyc = useCallback(async () => {
-    await getCerificationLinkUrl(level)
+    await getCerificationLinkUrl({ category, level })
       .unwrap()
       .then(({ link: kycLink }) => {
         // Force KYCMonitoring to true to trigger UserKycChecker
@@ -136,9 +141,9 @@ const KycBox: React.FC<{
             </>
           )}
 
-          {response?.status === 'approved' && (
+          {response?.status === KycStatus.APPROVED && (
             <ZigTypography
-              sx={{ mt: 2, ...iconWrapStyle }}
+              sx={iconWrapStyle}
               component={'p'}
               color={'greenGraph'}
               fontWeight={500}
@@ -149,9 +154,9 @@ const KycBox: React.FC<{
             </ZigTypography>
           )}
 
-          {response?.status === 'pending' && (
+          {response?.status === KycStatus.PENDING && (
             <ZigTypography
-              sx={{ mt: 2, ...iconWrapStyle }}
+              sx={iconWrapStyle}
               component={'p'}
               color={'yellow'}
               fontWeight={500}
@@ -165,10 +170,12 @@ const KycBox: React.FC<{
             </ZigTypography>
           )}
 
-          {response?.status === 'rejected' && (
+          {[KycStatus.REJECTED, KycStatus.REJECTED_RETRY].includes(
+            response?.status,
+          ) && (
             <ZigTypography
               component={'p'}
-              sx={{ mt: 2, ...iconWrapStyle }}
+              sx={iconWrapStyle}
               color={'redGraphOrError'}
               fontWeight={500}
               variant={'body1'}
@@ -180,7 +187,9 @@ const KycBox: React.FC<{
                   title={
                     <span style={{ whiteSpace: 'pre-line' }}>
                       {`${response?.reason}\n${
-                        response.canBeRetried ? t('resubmit-issues') : ''
+                        response?.status === KycStatus.REJECTED_RETRY
+                          ? t('resubmit-issues')
+                          : ''
                       }`}
                     </span>
                   }
@@ -191,11 +200,13 @@ const KycBox: React.FC<{
             </ZigTypography>
           )}
 
-          {((!!response?.canBeRetried && response?.status === 'rejected') ||
-            !response?.status ||
-            response?.status === 'init') && (
+          {[
+            KycStatus.REJECTED_RETRY,
+            KycStatus.INIT,
+            KycStatus.NOT_STARTED,
+          ].includes(response?.status) && (
             <ZigButton
-              sx={{ mt: 2.5, ...iconWrapStyle }}
+              sx={{ mt: 0.5, ...iconWrapStyle }}
               variant={'contained'}
               tooltip={disabledMessage || undefined}
               disabled={!!disabledMessage}

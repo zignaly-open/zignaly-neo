@@ -9,14 +9,30 @@ import {
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import KycBox from './components/KycBox';
-import kycConfig from './kycDefinitions';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
-import { useKycStatusesQuery, useLazyUserQuery } from '../../../apis/user/api';
+import {
+  useKycLevelsQuery,
+  useKycStatusQuery,
+  useKycStatusesQuery,
+  useLazyUserQuery,
+} from '../../../apis/user/api';
 import LayoutContentWrapper from '../../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../../apis/user/use';
-import { KycResponse } from '../../../apis/user/types';
+import {
+  KycLevels,
+  KycResponse,
+  KycStatus,
+  KycStatusResponse,
+} from '../../../apis/user/types';
+import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
 
-const Kyc: React.FC = () => {
+const Kyc = ({
+  statuses,
+  kycLevels,
+}: {
+  statuses: KycStatusResponse[];
+  kycLevels: KycLevels;
+}) => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
   const currentUser = useCurrentUser();
@@ -24,95 +40,108 @@ const Kyc: React.FC = () => {
   useEffect(() => {
     currentUser.KYCMonitoring && loadUser();
   }, []);
+  const [tab, switchToTab] = useState(kycLevels[0].category);
+  const correctOrder = statuses
+    .filter((x) => x.category === tab)
+    .sort((a, b) => a.level - b.level);
+  const kycTabLevels = kycLevels.find((l) => l.category === tab)?.levels;
+
+  return (
+    <PageContainer style={{ maxWidth: '815px' }}>
+      <PageWithHeaderContainer hasHeader>
+        <Box
+          sx={{
+            textAlign: 'center',
+            pb: 4,
+          }}
+        >
+          <ZigTypography variant={'h1'} id={'kyc__title'}>
+            {t('title')}
+          </ZigTypography>
+          <ZigTypography
+            variant={'body1'}
+            id={'kyc__description'}
+            color='neutral300'
+            component={'p'}
+          >
+            {t('description')}
+            <br />
+            {t('description-explainer')}
+          </ZigTypography>
+        </Box>
+
+        {kycLevels.length > 1 && (
+          <ZigTabs
+            sx={{
+              mt: 0,
+              mb: 4,
+              ml: 'auto',
+              mr: 'auto',
+            }}
+            onChange={(_, newValue) => switchToTab(newValue)}
+            value={tab}
+          >
+            {kycLevels.map((l) => (
+              <ZigTab
+                key={l.category}
+                label={t(`tabs.${l.category.toLowerCase()}`)}
+                value={l.category}
+              />
+            ))}
+          </ZigTabs>
+        )}
+        {kycTabLevels?.map((l, i) => {
+          const previousLevelMissing =
+            correctOrder[i - 1] &&
+            correctOrder[i - 1].status !== KycStatus.APPROVED;
+          const differentTypeStarted = statuses.find(
+            (x) =>
+              x.category !== tab &&
+              (x.status === KycStatus.REJECTED_RETRY ||
+                [KycStatus.APPROVED, KycStatus.PENDING].includes(x.status)),
+          );
+
+          return (
+            <KycBox
+              disabledMessage={
+                (differentTypeStarted &&
+                  t(
+                    'different-type-started-' + differentTypeStarted.category,
+                  )) ||
+                (previousLevelMissing && t('complete-previous-level-first'))
+              }
+              labelColor={'#E1E9F0'}
+              // balanceRestriction={t(
+              //   `balance-range-from${l.restriction.to ? '-to' : ''}`,
+              //   l.restriction,
+              // )}
+              response={correctOrder[i]}
+              items={{ a: l.requirements }}
+              // items={t(l.requirements, { returnObjects: true })}
+              title={t(l.name)}
+              key={correctOrder[i].level}
+              icon={<SilverIcon />}
+            />
+          );
+        })}
+      </PageWithHeaderContainer>
+    </PageContainer>
+  );
+};
+
+const KycContainer = () => {
   const statusesEndpoint = useKycStatusesQuery();
-  const [tab, switchToTab] = useState<'KYC' | 'KYB'>('KYC');
+  const kycLevelsEndpoint = useKycLevelsQuery();
 
   return (
     <LayoutContentWrapper
-      endpoint={statusesEndpoint}
+      endpoint={[statusesEndpoint, kycLevelsEndpoint]}
       hasHeader
-      content={({ status }: { status: KycResponse[] }) => {
-        const correctOrder = status
-          .filter((x) => x.category === tab)
-          .sort((a, b) => a.order - b.order);
-        return (
-          <PageContainer style={{ maxWidth: '815px' }}>
-            <PageWithHeaderContainer hasHeader>
-              <Box
-                sx={{
-                  textAlign: 'center',
-                  pb: 4,
-                }}
-              >
-                <ZigTypography variant={'h1'} id={'kyc__title'}>
-                  {t('title')}
-                </ZigTypography>
-                <ZigTypography
-                  variant={'body1'}
-                  id={'kyc__description'}
-                  color='neutral300'
-                  component={'p'}
-                >
-                  {t('description')}
-                  <br />
-                  {t('description-explainer')}
-                </ZigTypography>
-              </Box>
-
-              <ZigTabs
-                sx={{
-                  mt: 0,
-                  mb: 4,
-                  ml: 'auto',
-                  mr: 'auto',
-                }}
-                onChange={(_, newValue) => switchToTab(newValue)}
-                value={tab}
-              >
-                <ZigTab label={t('tabs.kyc')} value={'KYC'} />
-                <ZigTab label={t('tabs.kyb')} value={'KYB'} />
-              </ZigTabs>
-              {kycConfig[tab]?.map((c, i) => {
-                const previousLevelMissing =
-                  correctOrder[i - 1] &&
-                  correctOrder[i - 1].status !== 'approved';
-                const differentTypeStarted = status.some(
-                  (x) =>
-                    x.category === (tab === 'KYC' ? 'KYB' : 'KYC') &&
-                    ((x.status === 'rejected' && x.canBeRetried) ||
-                      ['approved', 'pending'].includes(x.status)),
-                );
-                return (
-                  <KycBox
-                    disabledMessage={
-                      (differentTypeStarted &&
-                        t(
-                          'different-type-started-' +
-                            (tab === 'KYC' ? 'KYB' : 'KYC'),
-                        )) ||
-                      (previousLevelMissing &&
-                        t('complete-previous-level-first'))
-                    }
-                    labelColor={c.color}
-                    balanceRestriction={t(
-                      `balance-range-from${c.restriction.to ? '-to' : ''}`,
-                      c.restriction,
-                    )}
-                    response={correctOrder[i]}
-                    items={t(c.requirements, { returnObjects: true })}
-                    title={t(c.label)}
-                    key={correctOrder[i].level}
-                    icon={c.icon}
-                    level={correctOrder[i].level}
-                  />
-                );
-              }) || false}
-            </PageWithHeaderContainer>
-          </PageContainer>
-        );
+      content={([{ statuses }, kycLevels]: [KycResponse, KycLevels]) => {
+        return <Kyc statuses={statuses} kycLevels={kycLevels} />;
       }}
     />
   );
 };
 
-export default Kyc;
+export default KycContainer;
