@@ -152,7 +152,7 @@ export const KYCStatusBox = ({
   const isSuccess =
     isPartiallyApproved &&
     kycStatuses.every((x) =>
-      [KycStatus.APPROVED, KycStatus.INIT, , KycStatus.NOT_STARTED].includes(
+      [KycStatus.APPROVED, KycStatus.INIT, KycStatus.NOT_STARTED].includes(
         x.status,
       ),
     );

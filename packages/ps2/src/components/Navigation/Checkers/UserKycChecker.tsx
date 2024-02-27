@@ -23,7 +23,10 @@ const UserKycChecker: React.FC = () => {
   const { data: traderServices, isLoading: isLoadingServices } =
     useTraderServices();
   const isAuthenticated = useIsAuthenticated();
-  const { t } = useTranslation(['kyc', 'common']);
+  const { t } = useTranslation([
+    ...(isFeatureOn(Features.Kyc) ? ['kyc'] : []),
+    'common',
+  ]);
   const [loadUser] = useLazyUserQuery();
   const [loadKyc] = useLazyKycStatusesQuery();
   const shouldCheck =
