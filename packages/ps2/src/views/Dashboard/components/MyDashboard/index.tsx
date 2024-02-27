@@ -266,7 +266,7 @@ const MyDashboard: React.FC = () => {
               },
               sortingFn: 'auto',
             }),
-            ...(isZScoreOn && md
+            ...(isZScoreOn && md && false
               ? [
                   columnHelper.accessor((row) => row.zscore, {
                     id: 'zscore',
