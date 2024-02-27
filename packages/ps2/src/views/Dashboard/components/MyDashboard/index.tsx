@@ -62,7 +62,8 @@ const MyDashboard: React.FC = () => {
   const xl = useMediaQuery(theme.breakpoints.up('xl'));
   const [activeRow, setActiveRow] = useMarketplaceMobileActiveRow();
   useEffect(() => () => setActiveRow(null), []);
-  const isZScoreOn = isFeatureOn(Features.ZScore);
+  // const isZScoreOn = isFeatureOn(Features.ZScore);
+  const isZScoreOn = false;
   const { showModal } = useZModal();
 
   const columnHelper = createColumnHelper<Investment>();
@@ -266,7 +267,7 @@ const MyDashboard: React.FC = () => {
               },
               sortingFn: 'auto',
             }),
-            ...(isZScoreOn && md && false
+            ...(isZScoreOn && md
               ? [
                   columnHelper.accessor((row) => row.zscore, {
                     id: 'zscore',
