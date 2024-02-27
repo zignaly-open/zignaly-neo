@@ -82,7 +82,7 @@ const ZScoreBarsCategory: React.FC<{
               <ZigTypography
                 color='paleBlue'
                 fontSize={15}
-                fontWeight={600}
+                fontWeight={400}
                 ml='6px'
                 id={`${prefixId}__value-${category}-${item.id}`}
               >
