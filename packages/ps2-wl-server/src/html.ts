@@ -5,10 +5,11 @@ const veryDumbSanitizeAttribute = (string: string): string =>
   string.replaceAll(/"/g, "'").replaceAll(/[<>]+/g, '');
 
 export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
-  const { title, name, imageDeliveryImages } = wlConfig;
+  const { title, name, description, imageDeliveryImages } = wlConfig;
   return JSON.stringify({
     short_name: name,
     name: title,
+    description,
     icons: imageDeliveryImages
       ? [
           {
@@ -35,8 +36,108 @@ export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
       : [],
     start_url: '/',
     display: 'standalone',
-    theme_color: '#7682F7',
-    background_color: '#080810',
+    orientation: 'portrait',
+    dir: 'auto',
+
+    protocol_handlers: [
+      {
+        protocol: 'web+zignaly',
+        url: '/',
+      },
+    ],
+
+    theme_color: '#101225', // TODO
+    background_color: '#101225', // TODO
+
+    // TODO
+    // icons: [
+    //   {
+    //     purpose: 'maskable',
+    //     sizes: '512x512',
+    //     src: 'icon512_maskable.png',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     purpose: 'any',
+    //     sizes: '512x512',
+    //     src: 'icon512_rounded.png',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/android-chrome-192x192.png',
+    //     sizes: '192x192',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/android-chrome-512x512.png',
+    //     sizes: '512x512',
+    //     type: 'image/png',
+    //   },
+    // ],
+
+    // TODO
+    // screenshots: [
+    //   {
+    //     src: '/screenshots/splash.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/login.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/home.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/portfolio.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/balances.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/marketplace.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/profile.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    //   {
+    //     src: '/screenshots/drawer.png',
+    //     sizes: '1280x720',
+    //     type: 'image/png',
+    //   },
+    // ],
+
+    shortcuts: [
+      {
+        name: 'Marketplace',
+        url: '/profit-sharing',
+        description:
+          'Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1.',
+      },
+      {
+        name: 'My Portfolio',
+        url: '/my-portfolio',
+        description: 'Track your investments and see how much you are earning.',
+      },
+      {
+        name: 'My Balances',
+        url: '/my-balances',
+        description: 'See your balances and deposit or withdraw funds.',
+      },
+    ],
+    display_override: [],
   });
 }
 
@@ -68,7 +169,45 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
           : ''
       }
       <link rel="manifest" href="/manifest.json"/>
+        
+      <meta name="msapplication-TileColor" content="${
+        // TODO
+        '#101225'
+      }">
+      <meta name="theme-color" content="#ffffff">
+    
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-2048-2732.jpeg"-->
+<!--        media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1668-2388.jpeg"-->
+<!--        media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1536-2048.jpeg"-->
+<!--        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1668-2224.jpeg"-->
+<!--        media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1620-2160.jpeg"-->
+<!--        media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1290-2796.jpeg"-->
+<!--        media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1179-2556.jpeg"-->
+<!--        media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1284-2778.jpeg"-->
+<!--        media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1170-2532.jpeg"-->
+<!--        media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1125-2436.jpeg"-->
+<!--        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1242-2688.jpeg"-->
+<!--        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-828-1792.jpeg"-->
+<!--        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-1242-2208.jpeg"-->
+<!--        media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-750-1334.jpeg"-->
+<!--        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
+<!--      <link rel="apple-touch-startup-image" href="apple-splash-640-1136.jpeg"-->
+<!--        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
       
+            
       <!-- Facebook Meta Tags -->
       <meta property="og:url" content="https://${domain}/profit-sharing">
       <meta property="og:type" content="website">
