@@ -12,7 +12,6 @@ import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
 import { KycBoxListEntry } from './atoms';
 import {
-  KycResponse,
   KycStatus,
   KycStatusResponse,
   UserData,
@@ -34,7 +33,6 @@ const iconWrapStyle = {
 };
 
 const KycBox: React.FC<{
-  level: number;
   labelColor: string;
   balanceRestriction?: string;
   disabledMessage?: string;

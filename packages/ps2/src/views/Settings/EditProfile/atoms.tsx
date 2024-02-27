@@ -2,12 +2,7 @@ import React, { useMemo } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ProfileStatusBoxContainer } from './styles';
 import { Box, Tooltip, useMediaQuery, useTheme } from '@mui/material';
-import {
-  KycLevels,
-  KycResponse,
-  KycStatus,
-  KycStatusResponse,
-} from 'apis/user/types';
+import { KycStatus, KycStatusResponse } from 'apis/user/types';
 import { useTranslation } from 'react-i18next';
 import { InfoOutlined } from '@mui/icons-material';
 import { Control, Controller } from 'react-hook-form';
@@ -20,7 +15,6 @@ import { useCurrentUser } from '../../../apis/user/use';
 import { useKycStatusesQuery } from '../../../apis/user/api';
 import { find, groupBy } from 'lodash-es';
 import { EditProfileFormType } from './types';
-import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
 
 export const ProfileStatusBox: React.FC<{
   isSuccess: boolean;
@@ -72,7 +66,6 @@ export const ServiceLogoStatus = ({
   });
   const kycStatuses = data?.statuses;
 
-  console.log(kycStatuses);
   const kycStarted = useMemo(() => {
     if (!kycStatuses) return null;
     const kycStatusesCateg = groupBy(kycStatuses, 'category');
@@ -89,25 +82,7 @@ export const ServiceLogoStatus = ({
       return kycStatusesCateg[kycStatuses[0].category];
     }
 
-    // if (!kycStatuses) return null;
-    // // const kycStatusesCateg = groupBy(kycStatuses?.statuses, 'category');
-    // const res = kycStatuses.find(
-    //   (kyc) =>
-    //     // return x.some(
-    //     // (kyc) =>
-    //     [
-    //       KycStatus.REJECTED_RETRY,
-    //       KycStatus.APPROVED,
-    //       KycStatus.PENDING,
-    //     ].includes(kyc.status),
-    //   // );
-    //   // }
-    // );
-    // if (!res) {
-    //   return kycStatuses[0];
-    //   // return kycStatusesCateg[kycStatuses?.statuses[0].category];
-    // }
-    // return res;
+    return res;
   }, [kycStatuses]);
 
   return (
@@ -144,7 +119,6 @@ export const ServiceLogoStatus = ({
             <KYCStatusBox
               id={'edit-profile__kyc'}
               kycStatuses={kycStarted}
-              //todo
               cta={() => navigate(generatePath(ROUTE_KYC))}
             />
           )}
@@ -156,12 +130,10 @@ export const ServiceLogoStatus = ({
 
 export const KYCStatusBox = ({
   kycStatuses,
-  kycLevels,
   cta,
   id,
 }: {
   kycStatuses: KycStatusResponse[];
-  kycLevels: KycLevels;
   cta: () => void;
   id?: string;
 }) => {
@@ -179,14 +151,14 @@ export const KYCStatusBox = ({
   const isPending = kycStatuses[0].status === KycStatus.PENDING;
   const isSuccess =
     isPartiallyApproved &&
-    kycStatuses.every(
-      (x) =>
-        x.status === KycStatus.APPROVED ||
-        x.status === KycStatus.INIT ||
-        !x.status,
+    kycStatuses.every((x) =>
+      [KycStatus.APPROVED, KycStatus.INIT, , KycStatus.NOT_STARTED].includes(
+        x.status,
+      ),
     );
-  const isNotStarted =
-    !kycStatuses[0].status || kycStatuses[0].status === KycStatus.INIT;
+  const isNotStarted = [KycStatus.NOT_STARTED, KycStatus.INIT].includes(
+    kycStatuses[0].status,
+  );
   const retry = kycStatuses.some((x) => x.status === KycStatus.REJECTED_RETRY);
 
   let color = theme.palette.red;
@@ -219,22 +191,15 @@ export const KYCStatusBox = ({
       >
         {t(`header.verification-${kycStatuses[0].category.toLowerCase()}`)}
       </ZigTypography>
-      {/* {kycLevels.map((l, i) => { */}
       {kycStatuses.map((kyc, i) => {
-        {
-          /* {stat.map((l, i) => { */
-        }
-        // if (!kycStatuses[i]) return null;
-        // const { status, reason, canBeRetried } = kycStatuses[i];
-        const { status, reason, canBeRetried } = kyc;
-        const label = '';
+        const { status, reason } = kyc;
         if (i > 0 && (!status || status === KycStatus.INIT)) return null;
         return (
           <Box
             display='flex'
             flexDirection={'column'}
             alignItems={'center'}
-            key={label}
+            key={`${kyc.category}-${kyc.level}`}
           >
             {i > 0 && (
               <Box
@@ -245,13 +210,13 @@ export const KYCStatusBox = ({
                 marginBottom={'12px'}
               />
             )}
-            {!isNotStarted && (
+            {/* {!isNotStarted && (
               <Box sx={{ '> svg': { width: '16px', height: '16px' } }}>
                 <Tooltip title={t(label, { ns: 'kyc' })}>
                   <SilverIcon />
                 </Tooltip>
               </Box>
-            )}
+            )} */}
             <ZigTypography
               component={'p'}
               fontWeight={600}

@@ -1,18 +1,18 @@
-import React from 'react';
-import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
-import { ReactComponent as GoldIcon } from '../../../images/kyc/gold.svg';
-import { KycDefinitionConfig } from './types';
+// import React from 'react';
+// import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
+// import { ReactComponent as GoldIcon } from '../../../images/kyc/gold.svg';
+// import { KycDefinitionConfig } from './types';
 
-const silverRestriction = {
-  from: '0',
-  to: '100k',
-  coin: 'USDT',
-};
+// const silverRestriction = {
+//   from: '0',
+//   to: '100k',
+//   coin: 'USDT',
+// };
 
-const goldRestriction = {
-  from: '100k',
-  coin: 'USDT',
-};
+// const goldRestriction = {
+//   from: '100k',
+//   coin: 'USDT',
+// };
 
 // const kycConfig: Record<'KYC' | 'KYB', KycDefinitionConfig[]> = {
 //   KYC: [

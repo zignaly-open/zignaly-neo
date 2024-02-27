@@ -12,7 +12,6 @@ import KycBox from './components/KycBox';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
 import {
   useKycLevelsQuery,
-  useKycStatusQuery,
   useKycStatusesQuery,
   useLazyUserQuery,
 } from '../../../apis/user/api';
@@ -25,13 +24,17 @@ import {
   KycStatusResponse,
 } from '../../../apis/user/types';
 import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
+import { useTraderServices } from 'apis/service/use';
+import { TraderService } from 'apis/service/types';
 
 const Kyc = ({
   statuses,
   kycLevels,
+  traderServices,
 }: {
   statuses: KycStatusResponse[];
   kycLevels: KycLevels;
+  traderServices: TraderService[];
 }) => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
@@ -108,7 +111,9 @@ const Kyc = ({
                   t(
                     'different-type-started-' + differentTypeStarted.category,
                   )) ||
-                (previousLevelMissing && t('complete-previous-level-first'))
+                (previousLevelMissing && t('complete-previous-level-first')) ||
+                (traderServices.length > 0 && t('without-services')) ||
+                (currentUser.exchanges.length > 1 && t('multiple-accounts'))
               }
               labelColor={'#E1E9F0'}
               // balanceRestriction={t(
@@ -132,13 +137,24 @@ const Kyc = ({
 const KycContainer = () => {
   const statusesEndpoint = useKycStatusesQuery();
   const kycLevelsEndpoint = useKycLevelsQuery();
+  const traderServicesEndpoint = useTraderServices();
 
   return (
     <LayoutContentWrapper
-      endpoint={[statusesEndpoint, kycLevelsEndpoint]}
+      endpoint={[statusesEndpoint, kycLevelsEndpoint, traderServicesEndpoint]}
       hasHeader
-      content={([{ statuses }, kycLevels]: [KycResponse, KycLevels]) => {
-        return <Kyc statuses={statuses} kycLevels={kycLevels} />;
+      content={([{ statuses }, kycLevels, traderServices]: [
+        KycResponse,
+        KycLevels,
+        TraderService[],
+      ]) => {
+        return (
+          <Kyc
+            statuses={statuses}
+            kycLevels={kycLevels}
+            traderServices={traderServices}
+          />
+        );
       }}
     />
   );
