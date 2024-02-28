@@ -71,7 +71,7 @@ const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
               flexDirection={'row'}
               justifyContent={'center'}
               columnSpacing={'22px'}
-              rowSpacing={'22px'}
+              rowSpacing={'18px'}
             >
               {Object.values(ZScoreRiskCategory).map((category) => (
                 <Grid item xs={lg || !sm ? 12 : 6} key={category}>

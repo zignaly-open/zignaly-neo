@@ -79,7 +79,6 @@ declare module "@mui/material/styles" {
   type RingTheme = {
     gradient: string[];
     icon: string;
-    text: string;
   };
 
   type ZScoreTheme = {
