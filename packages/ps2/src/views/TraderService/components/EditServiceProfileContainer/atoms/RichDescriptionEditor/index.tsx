@@ -40,7 +40,6 @@ import {
   FormatAlignJustify,
   FormatAlignLeft,
   FormatAlignRight,
-  Code,
   Image,
   LooksOne,
   LooksTwo,
@@ -181,14 +180,13 @@ const RichDescriptionEditor = ({
       >
         <Slate
           editor={editor}
-          onChange={readOnly ? null : (v) => setValue(v)}
+          onChange={readOnly ? null : setValue}
           initialValue={value}
         >
           {!readOnly && (
             <Box display={'flex'} alignItems={'center'} flexWrap={'wrap'}>
               <MarkButton format='bold' icon={<FormatBoldOutlined />} />
               <MarkButton format='italic' icon={<FormatItalicOutlined />} />
-              <MarkButton format='code' icon={<Code />} />
               <BlockButton format='heading_one' icon={<LooksOne />} />
               <BlockButton format='heading_two' icon={<LooksTwo />} />
               <BlockButton format='heading_three' icon={<Looks3 />} />
