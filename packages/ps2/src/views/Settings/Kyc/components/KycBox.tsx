@@ -204,7 +204,7 @@ const KycBox: React.FC<{
             KycStatus.NOT_STARTED,
           ].includes(response?.status) && (
             <ZigButton
-              sx={{ mt: 0.5, ...iconWrapStyle }}
+              sx={{ mt: 1, ...iconWrapStyle }}
               variant={'contained'}
               tooltip={disabledMessage || undefined}
               disabled={!!disabledMessage}

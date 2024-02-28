@@ -143,7 +143,6 @@ export type KycStatusResponse = {
   category: 'KYC' | 'KYB';
   reason?: string;
   level: number;
-  last_checked_at: string;
 };
 
 export type KycResponse = {

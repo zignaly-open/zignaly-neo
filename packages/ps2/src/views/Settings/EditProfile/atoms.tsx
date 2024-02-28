@@ -62,7 +62,8 @@ export const ServiceLogoStatus = ({
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { data } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc),
+    skip:
+      !isFeatureOn(Features.Kyc) || !user.exchanges?.some((e) => e.activated),
   });
   const kycStatuses = data?.statuses;
 
