@@ -156,7 +156,7 @@ export type KycLevelsRaw = {
       level: number;
       category: 'KYC' | 'KYB';
       name: string;
-      requirements: string;
+      requirements: (string | { title: string; items: string[] })[];
     },
   ];
 };
