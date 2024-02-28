@@ -79,7 +79,7 @@
     "insert-image-modal": {
       "title": "Type Image URL",
       "placeholder": "Input url",
-      "warning": "URL should end with image extension (.jpg, .png, .jpeg and etc.)"
+      "warning": "URL should end with image extension (.jpg, .png, .jpeg, etc.)"
     },
     "insert-link-modal": {
       "title": "Type Link URL",
