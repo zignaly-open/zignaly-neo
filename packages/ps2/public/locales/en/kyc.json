@@ -24,6 +24,15 @@
     "pending": "Pending",
     "rejected": "Rejected"
   },
+  "levels": {
+    "placeholder": "Level {{level}}",
+    "basic": "Basic"
+  },
+  "requirements": {
+    "identity": "Identity Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification"
+  },
   "requirements-level-1": {
     "identity": "Identity Document",
     "phone-and-mail": "Phone and Email Verification",

@@ -12,6 +12,7 @@ import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
 import { KycBoxListEntry } from './atoms';
 import {
+  KycLevels,
   KycStatus,
   KycStatusResponse,
   UserData,
@@ -39,10 +40,7 @@ const KycBox: React.FC<{
   title: string;
   icon: JSX.Element;
   response: KycStatusResponse;
-  items: Record<
-    string,
-    string | { title: string; items: Record<string, string> }
-  >;
+  items: KycLevels[number]['levels'][number]['requirements'];
 }> = ({
   icon,
   response,
@@ -220,20 +218,25 @@ const KycBox: React.FC<{
       <Grid item sm={12} md={7}>
         <Paper sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}>
           <OlList>
-            {Object.entries(items).map(([k, v]) => (
-              <li style={{ marginTop: 4, marginBottom: 4 }} key={k}>
-                {typeof v === 'string' ? (
-                  <KycBoxListEntry>{v}</KycBoxListEntry>
+            {items.map((k) => (
+              <li
+                style={{ marginTop: 4, marginBottom: 4 }}
+                key={typeof k === 'string' ? k : k.title}
+              >
+                {typeof k === 'string' ? (
+                  <KycBoxListEntry>{t(`requirements.${k}`)}</KycBoxListEntry>
                 ) : (
                   <>
-                    <KycBoxListEntry>{v.title}</KycBoxListEntry>
+                    <KycBoxListEntry>{k.title}</KycBoxListEntry>
                     <UlList>
-                      {Object.entries(v.items).map(([itemKey, text]) => (
+                      {k.items.map((itemKey) => (
                         <li
                           style={{ marginTop: 4, marginBottom: 4 }}
                           key={k + '_' + itemKey}
                         >
-                          <KycBoxListEntry>{text}</KycBoxListEntry>
+                          <KycBoxListEntry>
+                            {t(`requirements.${itemKey}`)}
+                          </KycBoxListEntry>
                         </li>
                       ))}
                     </UlList>
