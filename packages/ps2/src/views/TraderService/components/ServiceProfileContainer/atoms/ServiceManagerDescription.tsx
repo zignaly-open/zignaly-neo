@@ -8,8 +8,7 @@ import { StyledVerifiedIcon } from '../styles';
 import { Tooltip } from '@mui/material';
 import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
 import Flag from '../../../../../components/Flag';
-import RichDescriptionEditor from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor';
-import { deserializeSlate } from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
+import MarkdownSection from './MarkdownSection';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   service,
@@ -20,13 +19,11 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
 
   return (
     <Box>
-      <RichDescriptionEditor
+      <MarkdownSection
         id={'service-profile__about-manager'}
-        value={deserializeSlate(service?.ownerDescription)}
-        readMore
-        readOnly
-        label={t('about-trader')}
-        sx={{ mt: 8 }}
+        content={service.ownerDescription}
+        title={t('about-trader')}
+        emptyText={t('about-trader-empty')}
         subtitle={
           <Box
             display='flex'
