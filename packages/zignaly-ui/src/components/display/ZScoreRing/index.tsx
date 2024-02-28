@@ -47,7 +47,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             <categoryData.icon color={colors.icon} height={16} width={"100%"} />
           </Box>
         )}
-        <ZigTypography variant="h4" color={colors.text}>
+        <ZigTypography variant="h4" color="neutral100">
           {categoryData.text}
         </ZigTypography>
         <Box display={"flex"}>
