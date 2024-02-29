@@ -40,6 +40,7 @@ export type ThemeStyledComponents = {
   chart: CustomPalette["chart"];
   zscore: CustomPalette["zscore"];
   mode: "dark" | "light";
+  imageColorOverride?: string;
 };
 
 // https://stackoverflow.com/a/61132308/2044039

@@ -74,6 +74,8 @@ declare module "@mui/material/styles" {
       Record<"red" | "green", string>;
 
     zscore: ZScoreTheme;
+
+    imageColorOverride?: string;
   }
 
   type RingTheme = {

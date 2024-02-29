@@ -113,11 +113,6 @@ export const Feature = styled.li`
   gap: 22px;
 `;
 
-export const FeatureImage = styled.img`
-  width: 80px;
-  height: 80px;
-`;
-
 export const FeatureData = styled.div`
   display: flex;
   flex-direction: column;
@@ -144,13 +139,6 @@ export const Box = styled.div`
   background-color: ${({ theme }) => theme.palette.neutral750};
   border-radius: 4px;
   width: 100%;
-`;
-
-export const StepImage = styled.img`
-  margin: 24px 0;
-  width: 100%;
-  object-fit: contain;
-  height: 120px;
 `;
 
 export const Separator = styled.li`

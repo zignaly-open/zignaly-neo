@@ -17,6 +17,7 @@ const createMuiTheme = ({
   boxShadows,
   fontFamily,
   fontFamilyH1H6,
+  imageColorOverride,
 }: ThemeStyledComponents) =>
   createTheme({
     palette: {
@@ -40,6 +41,7 @@ const createMuiTheme = ({
       boxShadows,
       chart,
       zscore,
+      imageColorOverride,
     },
     typography: {
       fontFamily: fontFamily.join(","),

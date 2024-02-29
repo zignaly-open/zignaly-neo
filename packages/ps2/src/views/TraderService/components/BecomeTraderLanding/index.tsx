@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigImageColorOverride,
+  ZigLink,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import {
   Layout,
   Header,
@@ -19,11 +24,9 @@ import {
   Section,
   FeaturesList,
   Feature,
-  FeatureImage,
   FeatureData,
   StepList,
   Step,
-  StepImage,
   Box,
   Separator,
 } from './styles';
@@ -246,9 +249,11 @@ const BecomeTraderLanding: React.FC = () => {
                       >
                         {howWorkItem.title.toUpperCase()}
                       </ZigTypography>
-                      <StepImage
+                      <ZigImageColorOverride
+                        width={300}
+                        height={150}
+                        href={'/images/service-provider/' + howWorkItem.image}
                         id={howWorkItem.id && `${howWorkItem.id}-image`}
-                        src={'/images/service-provider/' + howWorkItem.image}
                       />
                     </Center>
                     <ZigTypography
@@ -278,9 +283,11 @@ const BecomeTraderLanding: React.FC = () => {
           <FeaturesList itemsLength={featuresItems.length}>
             {featuresItems.map((feature, index) => (
               <Feature key={`--features-item-${index.toString()}`}>
-                <FeatureImage
+                <ZigImageColorOverride
+                  width={80}
+                  height={80}
+                  href={'/images/service-provider/' + feature.image}
                   id={feature.id && `${feature.id}-image`}
-                  src={'/images/service-provider/' + feature.image}
                 />
                 <FeatureData>
                   <ZigTypography
