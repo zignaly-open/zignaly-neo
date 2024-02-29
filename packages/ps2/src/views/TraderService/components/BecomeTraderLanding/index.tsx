@@ -250,7 +250,7 @@ const BecomeTraderLanding: React.FC = () => {
                         {howWorkItem.title.toUpperCase()}
                       </ZigTypography>
                       <ZigImageColorOverride
-                        width={307}
+                        width={306}
                         height={120}
                         href={'/images/service-provider/' + howWorkItem.image}
                         id={howWorkItem.id && `${howWorkItem.id}-image`}
