@@ -1,10 +1,16 @@
 import React from "react";
 import { useTheme } from "@mui/material";
 
-const ZigImageColorOverride = ({ width, height, id, ...rest }: React.SVGProps<SVGImageElement>) => {
+const ZigImageColorOverride = ({
+  width,
+  height,
+  id,
+  style,
+  ...rest
+}: React.SVGProps<SVGImageElement>) => {
   const theme = useTheme();
   return (
-    <svg width={width} height={height} id={id && id}>
+    <svg width={width} height={height} id={id && id} style={style}>
       <defs>
         <filter id="imageColorOverride">
           <feFlood flood-color={theme.palette.imageColorOverride} result="flood" />

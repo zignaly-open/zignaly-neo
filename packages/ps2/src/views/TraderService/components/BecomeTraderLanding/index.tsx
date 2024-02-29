@@ -254,6 +254,7 @@ const BecomeTraderLanding: React.FC = () => {
                         height={150}
                         href={'/images/service-provider/' + howWorkItem.image}
                         id={howWorkItem.id && `${howWorkItem.id}-image`}
+                        style={{ margin: '24px 0' }}
                       />
                     </Center>
                     <ZigTypography
