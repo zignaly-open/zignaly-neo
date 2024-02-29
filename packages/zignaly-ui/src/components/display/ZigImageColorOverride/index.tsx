@@ -23,7 +23,7 @@ const ZigImageColorOverride = ({ width, height, id, ...rest }: React.SVGProps<SV
       <image
         width="100%"
         height="100%"
-        filter={theme.palette.imageColorOverride ? "url(#imageColorOverride)" : null}
+        filter={theme.palette.imageColorOverride ? "url(#imageColorOverride)" : undefined}
         {...rest}
       />
     </svg>
