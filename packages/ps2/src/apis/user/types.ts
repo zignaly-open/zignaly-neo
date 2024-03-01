@@ -11,9 +11,9 @@ export interface UserState {
 export enum UserAccessLevel {
   Banned = -100,
   NotVerified = 100,
+  Frozen = 300,
   KycPending = 350,
   NoSubscription = 375,
-  Frozen = 400,
   KycExpired = 450,
   SubscriptionExpired = 475,
   Normal = 500,
