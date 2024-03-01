@@ -2,7 +2,7 @@ import { Alert } from '@mui/material';
 import { useTraderServices } from 'apis/service/use';
 import { useKycStatusesQuery } from 'apis/user/api';
 import { KycStatus } from 'apis/user/types';
-import { useCurrentUser } from 'apis/user/use';
+import { useCurrentUser, useIsAuthenticated } from 'apis/user/use';
 import AnchorLink from 'components/AnchorLink';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -14,21 +14,26 @@ const KycBanner = () => {
   const { t } = useTranslation('kyc');
   const { data: traderServices, isLoading: isLoadingServices } =
     useTraderServices();
-  const { KYCMonitoring: isPending, exchanges } = useCurrentUser();
+  const { exchanges } = useCurrentUser();
+  const isAuthenticated = useIsAuthenticated();
   const { data: statusesRes } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc) || !isPending,
+    skip:
+      !isAuthenticated ||
+      !isFeatureOn(Features.Kyc) ||
+      !exchanges?.[0].activated,
   });
 
   if (
-    statusesRes?.statuses.some(
-      (s) =>
-        s.category === 'KYC' &&
-        s.level === 1 &&
-        [KycStatus.NOT_STARTED, KycStatus.INIT].includes(s.status),
-    ) &&
+    exchanges?.length === 1 &&
+    (!exchanges[0].activated ||
+      statusesRes?.statuses.some(
+        (s) =>
+          s.category === 'KYC' &&
+          s.level === 1 &&
+          [KycStatus.NOT_STARTED, KycStatus.INIT].includes(s.status),
+      )) &&
     !isLoadingServices &&
-    !traderServices?.length &&
-    exchanges.length === 1
+    !traderServices?.length
   ) {
     return (
       <Alert severity='warning'>
