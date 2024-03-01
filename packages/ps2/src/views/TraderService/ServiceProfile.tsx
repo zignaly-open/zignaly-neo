@@ -1,5 +1,4 @@
 import React from 'react';
-import ServiceHeader from './components/ServiceHeader';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import ServiceProfileContainer from './components/ServiceProfileContainer';
 import { PageWithHeaderContainer } from 'views/TraderService/components/styles';
@@ -42,7 +41,6 @@ const ServiceProfile: React.FC = () => {
 
   return (
     <>
-      <ServiceHeader />
       <PageContainer>
         <LayoutContentWrapper
           endpoint={serviceDetailsEndpoint}
