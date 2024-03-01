@@ -31,7 +31,7 @@ const KycBanner = () => {
     exchanges.length === 1
   ) {
     return (
-      <Alert severity='warning' style={{ width: '100%' }}>
+      <Alert severity='warning'>
         <Trans
           i18nKey='reminder'
           t={t}

@@ -1,5 +1,5 @@
 import { BrandImage, HeaderLinksContainer } from '@zignaly-open/ui';
-import React, { Suspense, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
 import {
@@ -62,72 +62,74 @@ const Header: React.FC = () => {
     return menuItems;
   }, [t, isAuthenticated, md]);
 
-  const [bannerRef, { height }] = useMeasure();
+  const [headerRef, { height }] = useMeasure();
+
+  useEffect(() => {
+    if (height) {
+      document.body.style.setProperty('--header-height', `${height}px`);
+    }
+  }, [height]);
 
   return (
-    <Box sx={{ display: 'flex' }} pb={`${height}px`}>
-      <StyledAppBar>
-        <Box flex={1} display={'flex'} flexDirection={'column'}>
-          <Box flex={1} display={'flex'} ref={bannerRef}>
-            <KycBanner />
-          </Box>
-          <Toolbar sx={{ flex: 1 }}>
-            <Container>
-              {sm ? (
-                <Box display='flex' alignItems='center' gap='28px'>
-                  {!logoRoute.startsWith('http') ? (
-                    <NavigationLink
-                      id='menu__logo'
-                      style={{ display: 'flex' }}
-                      to={logoRoute}
-                      key='--route-main'
-                    >
-                      {logo}
-                    </NavigationLink>
-                  ) : (
-                    <a
-                      style={{ display: 'flex' }}
-                      href={logoRoute}
-                      key='logo'
-                      rel={'noopener'}
-                    >
-                      {logo}
-                    </a>
-                  )}
-                  {!!navigationLinks.length && (
-                    <HeaderLinksContainer key='links'>
-                      {navigationLinks.map(({ id, to, key, text }) => (
-                        <NavigationLink id={id} to={to} key={key}>
-                          {text}
-                        </NavigationLink>
-                      ))}
-                    </HeaderLinksContainer>
-                  )}
-                  <ExtraNavigationDropdown />
-                </Box>
-              ) : (
-                <Drawer />
-              )}
-              <Box
-                alignItems='center'
-                display='flex'
-                gap='28px'
-                sx={{
-                  // Center balance widget on mobile
-                  ...(isAuthenticated &&
-                    !sm && { flex: 1, justifyContent: 'center' }),
-                }}
-              >
-                <Suspense>
-                  {isAuthenticated && <HeaderWidgetButtons />}
-                  <AccountMenu />
-                </Suspense>
+    <StyledAppBar ref={headerRef}>
+      <Box display={'flex'} flexDirection={'column'} flex={1}>
+        <KycBanner />
+        <Toolbar sx={{ flex: 1 }}>
+          <Container>
+            {sm ? (
+              <Box display='flex' alignItems='center' gap='28px'>
+                {!logoRoute.startsWith('http') ? (
+                  <NavigationLink
+                    id='menu__logo'
+                    style={{ display: 'flex' }}
+                    to={logoRoute}
+                    key='--route-main'
+                  >
+                    {logo}
+                  </NavigationLink>
+                ) : (
+                  <a
+                    style={{ display: 'flex' }}
+                    href={logoRoute}
+                    key='logo'
+                    rel={'noopener'}
+                  >
+                    {logo}
+                  </a>
+                )}
+                {!!navigationLinks.length && (
+                  <HeaderLinksContainer key='links'>
+                    {navigationLinks.map(({ id, to, key, text }) => (
+                      <NavigationLink id={id} to={to} key={key}>
+                        {text}
+                      </NavigationLink>
+                    ))}
+                  </HeaderLinksContainer>
+                )}
+                <ExtraNavigationDropdown />
               </Box>
-            </Container>
-          </Toolbar>
-        </Box>
-      </StyledAppBar>
-    </Box>
+            ) : (
+              <Drawer />
+            )}
+            <Box
+              alignItems='center'
+              display='flex'
+              gap='28px'
+              sx={{
+                // Center balance widget on mobile
+                ...(isAuthenticated &&
+                  !sm && { flex: 1, justifyContent: 'center' }),
+              }}
+            >
+              <Suspense>
+                {isAuthenticated && <HeaderWidgetButtons />}
+                <AccountMenu />
+              </Suspense>
+            </Box>
+          </Container>
+        </Toolbar>
+      </Box>
+    </StyledAppBar>
   );
 };
 

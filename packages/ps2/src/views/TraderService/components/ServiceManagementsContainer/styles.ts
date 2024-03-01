@@ -6,7 +6,7 @@ export const Layout = styled('div')`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 108px;
+  margin-top: 56px;
 `;
 
 export const Box = styled('div')`

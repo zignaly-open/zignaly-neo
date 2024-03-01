@@ -18,6 +18,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 function SettingsHeader() {
   const { t } = useTranslation(['settings', 'pages']);
   const user = useCurrentUser();
+
   return (
     <Layout>
       <MarginContainer>

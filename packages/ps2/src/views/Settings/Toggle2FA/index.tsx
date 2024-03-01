@@ -13,7 +13,7 @@ const Toggle2FA: React.FC = () => {
   const user = useCurrentUser();
   return (
     <PageContainer style={{ maxWidth: '615px' }}>
-      <PageWithHeaderContainer hasHeader>
+      <PageWithHeaderContainer>
         {user['2FAEnable'] ? (
           <Disable2FAForm
             close={() => {
