@@ -1,0 +1,17 @@
+{
+  "ZigInputAmount": {
+    "max": "CH-Ṁáx"
+  },
+  "ZigFilters": {
+    "show-results": "CH-Ŝĥöw Ѓëŝülṫŝ",
+    "reset": "CH-Ѓëŝëṫ",
+    "min": "CH-Ṁïń",
+    "to": "CH-ṫö",
+    "max": "CH-Ṁáx"
+  },
+  "ZigTable": {
+    "page-x-of-all": "CH-<text>Ṗáĝë</text> <current>{{currentPage}}</current> <text>öüṫ öḟ</text> <total>{{totalPages}}</total>",
+    "displaying-x-items_one": "CH-<text>Ḋïŝṗláyïńĝ</text> <selector/> <text>ïṫëṁ</text>",
+    "displaying-x-items": "CH-<text>Ḋïŝṗláyïńĝ</text> <selector/> <text>ïṫëṁŝ</text>"
+  }
+}
