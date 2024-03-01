@@ -94,15 +94,16 @@ const KycBox: React.FC<{
     <Grid
       container
       sx={{
-        mt: 3,
+        mt: 1,
         mb: 6,
         opacity: disabledMessage ? 0.5 : 1,
         minHeight: 200,
       }}
+      rowSpacing={3}
     >
       <Grid
         item
-        sm={12}
+        xs={12}
         md={5}
         sx={{
           display: 'flex',
@@ -215,7 +216,7 @@ const KycBox: React.FC<{
           )}
         </Box>
       </Grid>
-      <Grid item sm={12} md={7}>
+      <Grid item xs={12} md={7}>
         <Paper sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}>
           <OlList>
             {items.map((k) => (
