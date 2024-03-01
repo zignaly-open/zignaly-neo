@@ -2,7 +2,7 @@ import { Alert } from '@mui/material';
 import { useTraderServices } from 'apis/service/use';
 import { useKycStatusesQuery } from 'apis/user/api';
 import { KycStatus } from 'apis/user/types';
-import { useCurrentUser } from 'apis/user/use';
+import { useCurrentUser, useIsAuthenticated } from 'apis/user/use';
 import AnchorLink from 'components/AnchorLink';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -14,9 +14,10 @@ const KycBanner = () => {
   const { t } = useTranslation('kyc');
   const { data: traderServices, isLoading: isLoadingServices } =
     useTraderServices();
-  const { KYCMonitoring: isPending, exchanges } = useCurrentUser();
+  const { exchanges } = useCurrentUser();
+  const isAuthenticated = useIsAuthenticated();
   const { data: statusesRes } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc) || !isPending,
+    skip: !isAuthenticated || !isFeatureOn(Features.Kyc),
   });
 
   if (
@@ -28,7 +29,7 @@ const KycBanner = () => {
     ) &&
     !isLoadingServices &&
     !traderServices?.length &&
-    exchanges.length === 1
+    exchanges?.length === 1
   ) {
     return (
       <Alert severity='warning'>
