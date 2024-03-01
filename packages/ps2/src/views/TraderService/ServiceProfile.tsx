@@ -85,7 +85,7 @@ const ServiceProfile: React.FC = () => {
             }
 
             return (
-              <PageWithHeaderContainer hasHeader={isOwner}>
+              <PageWithHeaderContainer>
                 <ServiceProfileContainer service={service} />
               </PageWithHeaderContainer>
             );
