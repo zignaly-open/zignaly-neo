@@ -17,19 +17,23 @@ const KycBanner = () => {
   const { exchanges } = useCurrentUser();
   const isAuthenticated = useIsAuthenticated();
   const { data: statusesRes } = useKycStatusesQuery(undefined, {
-    skip: !isAuthenticated || !isFeatureOn(Features.Kyc),
+    skip:
+      !isAuthenticated ||
+      !isFeatureOn(Features.Kyc) ||
+      !exchanges?.[0].activated,
   });
 
   if (
-    statusesRes?.statuses.some(
-      (s) =>
-        s.category === 'KYC' &&
-        s.level === 1 &&
-        [KycStatus.NOT_STARTED, KycStatus.INIT].includes(s.status),
-    ) &&
+    exchanges?.length === 1 &&
+    (!exchanges[0].activated ||
+      statusesRes?.statuses.some(
+        (s) =>
+          s.category === 'KYC' &&
+          s.level === 1 &&
+          [KycStatus.NOT_STARTED, KycStatus.INIT].includes(s.status),
+      )) &&
     !isLoadingServices &&
-    !traderServices?.length &&
-    exchanges?.length === 1
+    !traderServices?.length
   ) {
     return (
       <Alert severity='warning'>
