@@ -24,6 +24,15 @@
     "pending": "Pending",
     "rejected": "Rejected"
   },
+  "levels": {
+    "placeholder": "Level {{level}}",
+    "basic": "Basic"
+  },
+  "requirements": {
+    "identity": "Identity Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification"
+  },
   "requirements-level-1": {
     "identity": "Identity Document",
     "phone-and-mail": "Phone and Email Verification",
@@ -80,9 +89,5 @@
     "description": "Start the verification process clicking on the button. You will be redirected to an external page to complete the process.",
     "ok": "Get Verified"
   },
-  "modal-push": {
-    "title": "Complete your KYC verification now!",
-    "description": "Ensure your investments continuity. Complete your KYC verification now using our secure Binance-provided tool. Thanks for your cooperation!",
-    "ok": "Pass KYC"
-  }
+  "reminder": "Urgent Reminder: KYC Deadline Approaching - March 12th! <0>Pass your KYC</0>"
 }

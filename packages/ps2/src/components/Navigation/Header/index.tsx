@@ -17,6 +17,8 @@ import Drawer from '../Drawer';
 import HeaderWidgetButtons from '../HeaderWidgetButtons';
 import { isFeatureOn, whitelabel } from '../../../whitelabel';
 import { Features } from 'whitelabel/type';
+import KycBanner from '../KycBanner';
+import { useMeasure } from 'react-use';
 
 type HeaderMenuItem = {
   id: string;
@@ -60,63 +62,70 @@ const Header: React.FC = () => {
     return menuItems;
   }, [t, isAuthenticated, md]);
 
+  const [bannerRef, { height }] = useMeasure();
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} pb={`${height}px`}>
       <StyledAppBar>
-        <Toolbar sx={{ flex: 1 }}>
-          <Container>
-            {sm ? (
-              <Box display='flex' alignItems='center' gap='28px'>
-                {!logoRoute.startsWith('http') ? (
-                  <NavigationLink
-                    id='menu__logo'
-                    style={{ display: 'flex' }}
-                    to={logoRoute}
-                    key='--route-main'
-                  >
-                    {logo}
-                  </NavigationLink>
-                ) : (
-                  <a
-                    style={{ display: 'flex' }}
-                    href={logoRoute}
-                    key='logo'
-                    rel={'noopener'}
-                  >
-                    {logo}
-                  </a>
-                )}
-                {!!navigationLinks.length && (
-                  <HeaderLinksContainer key='links'>
-                    {navigationLinks.map(({ id, to, key, text }) => (
-                      <NavigationLink id={id} to={to} key={key}>
-                        {text}
-                      </NavigationLink>
-                    ))}
-                  </HeaderLinksContainer>
-                )}
-                <ExtraNavigationDropdown />
+        <Box flex={1} display={'flex'} flexDirection={'column'}>
+          <Box flex={1} display={'flex'} ref={bannerRef}>
+            <KycBanner />
+          </Box>
+          <Toolbar sx={{ flex: 1 }}>
+            <Container>
+              {sm ? (
+                <Box display='flex' alignItems='center' gap='28px'>
+                  {!logoRoute.startsWith('http') ? (
+                    <NavigationLink
+                      id='menu__logo'
+                      style={{ display: 'flex' }}
+                      to={logoRoute}
+                      key='--route-main'
+                    >
+                      {logo}
+                    </NavigationLink>
+                  ) : (
+                    <a
+                      style={{ display: 'flex' }}
+                      href={logoRoute}
+                      key='logo'
+                      rel={'noopener'}
+                    >
+                      {logo}
+                    </a>
+                  )}
+                  {!!navigationLinks.length && (
+                    <HeaderLinksContainer key='links'>
+                      {navigationLinks.map(({ id, to, key, text }) => (
+                        <NavigationLink id={id} to={to} key={key}>
+                          {text}
+                        </NavigationLink>
+                      ))}
+                    </HeaderLinksContainer>
+                  )}
+                  <ExtraNavigationDropdown />
+                </Box>
+              ) : (
+                <Drawer />
+              )}
+              <Box
+                alignItems='center'
+                display='flex'
+                gap='28px'
+                sx={{
+                  // Center balance widget on mobile
+                  ...(isAuthenticated &&
+                    !sm && { flex: 1, justifyContent: 'center' }),
+                }}
+              >
+                <Suspense>
+                  {isAuthenticated && <HeaderWidgetButtons />}
+                  <AccountMenu />
+                </Suspense>
               </Box>
-            ) : (
-              <Drawer />
-            )}
-            <Box
-              alignItems='center'
-              display='flex'
-              gap='28px'
-              sx={{
-                // Center balance widget on mobile
-                ...(isAuthenticated &&
-                  !sm && { flex: 1, justifyContent: 'center' }),
-              }}
-            >
-              <Suspense>
-                {isAuthenticated && <HeaderWidgetButtons />}
-                <AccountMenu />
-              </Suspense>
-            </Box>
-          </Container>
-        </Toolbar>
+            </Container>
+          </Toolbar>
+        </Box>
       </StyledAppBar>
     </Box>
   );

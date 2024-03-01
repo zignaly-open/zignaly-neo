@@ -9,5 +9,5 @@ export const junkyard = {
     sessionStorage.getItem(name),
 };
 
-export type junkyardResidentLocalStorage = 'hasLoggedIn' | 'kycPushed';
+export type junkyardResidentLocalStorage = 'hasLoggedIn';
 export type junkyardResidentSessionStorage = 'missedRoute';

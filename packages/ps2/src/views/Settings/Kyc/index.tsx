@@ -131,9 +131,11 @@ const Kyc = ({
               //   l.restriction,
               // )}
               response={correctOrder[i]}
-              items={{ a: l.requirements }}
+              items={l.requirements}
               // items={t(l.requirements, { returnObjects: true })}
-              title={t(l.name)}
+              title={t(`levels.${l.level}`, {
+                defaultValue: t('levels.placeholder', { level: l.level }),
+              })}
               key={correctOrder[i].level}
               icon={<SilverIcon />}
             />

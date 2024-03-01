@@ -189,12 +189,10 @@ const createMuiTheme = ({
             align-items: center;
             flex-direction: row;
             &, & > .MuiToolbar-root {
-              height: 52px;
               min-height: 52px;
             }
             border: none;
             z-index: 12;
-            
           `,
         },
       },

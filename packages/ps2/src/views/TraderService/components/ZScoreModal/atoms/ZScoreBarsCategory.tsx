@@ -21,7 +21,8 @@ const ZScoreBarsCategory: React.FC<{
   scoreData: ZScoreInfo;
   scoreInfo: ZScoreInfoDetails;
   prefixId: string;
-}> = ({ category, scoreData, scoreInfo, prefixId = '' }) => {
+  compact?: boolean;
+}> = ({ category, scoreData, scoreInfo, prefixId = '', compact = false }) => {
   const { t } = useTranslation('z-score');
 
   const zScoreConfig = useZScoreConfig();
@@ -62,7 +63,12 @@ const ZScoreBarsCategory: React.FC<{
           scoreInfo.category?.maxZscore[zScoreConfig[category].scoreCategoryId]
         }
       />
-      <Box display={'flex'} flexDirection={'column'} mt='10px' gap='10px'>
+      <Box
+        display={'flex'}
+        flexDirection={'column'}
+        mt='10px'
+        gap={compact ? 0 : '10px'}
+      >
         {items.map((item) => (
           <div key={item.id}>
             <Box
