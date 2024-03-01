@@ -287,7 +287,6 @@ function ZigTableData<T extends object>({
               <Trans
                 t={t}
                 i18nKey={"page-x-of-all"}
-                defaults="<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>"
                 values={{
                   currentPage: table.getState().pagination.pageIndex + 1,
                   totalPages: table.getPageCount() || 1,
@@ -341,7 +340,6 @@ function ZigTableData<T extends object>({
             <Trans
               t={t}
               i18nKey={"displaying-x-items"}
-              defaults="<text>Displaying</text> <selector /> <text>items</text>"
               count={table.getState().pagination.pageSize}
               components={{
                 text: <ZigTypography color="neutral300" />,

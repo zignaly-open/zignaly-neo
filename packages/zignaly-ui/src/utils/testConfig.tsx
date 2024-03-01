@@ -4,7 +4,7 @@ import { ThemeProvider, ThemeProviderMui as ThemeInheritorMui } from "../index";
 import React from "react";
 import { getZignalyThemeExport } from "../theme";
 import mediaQuery from "css-mediaquery";
-import { JestI18nextDecorator } from "./dummyI18nextProvider";
+import { JestI18nextDecorator } from "../i18n/dummyI18nextProvider";
 
 export const renderWithProvidersUi = (ui: JSX.Element, renderOptions = {}) => {
   const { mui, legacyStyledComponentsDoNotUse } = getZignalyThemeExport();
