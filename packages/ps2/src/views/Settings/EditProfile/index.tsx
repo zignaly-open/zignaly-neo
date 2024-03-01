@@ -11,7 +11,7 @@ const EditProfile: React.FC = () => {
   useTitle(t('pages:edit-profile'));
   return (
     <PageContainer style={{ maxWidth: '915px' }}>
-      <PageWithHeaderContainer hasHeader>
+      <PageWithHeaderContainer>
         <Box
           sx={{
             textAlign: 'center',

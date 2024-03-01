@@ -60,7 +60,7 @@ const Kyc = ({
 
   return (
     <PageContainer style={{ maxWidth: '815px' }}>
-      <PageWithHeaderContainer hasHeader>
+      <PageWithHeaderContainer>
         <Box
           sx={{
             textAlign: 'center',
