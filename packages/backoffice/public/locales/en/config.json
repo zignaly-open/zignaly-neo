@@ -29,6 +29,7 @@
     "tos-url": "Term of Service URL",
     "privacy-url": "Privacy Policy URL",
     "name": "Name",
+    "uploads-not-ready": "Please contact support to change the image",
     "gtm": "Google Tag Manager",
     "gtm-placeholder": "GTM-XXXXXXX",
     "profile": "Profile"

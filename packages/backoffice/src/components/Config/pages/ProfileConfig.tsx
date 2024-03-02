@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import {
   ZigButton,
   ZigCheckBox,
+  ZigImageInput,
   ZigInput,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -33,6 +34,7 @@ export default function ProfileConfig() {
 
   const defaultValues = useMemo(
     () => ({
+      image: data.image,
       name: data.name,
       description: data.description,
       title: data.title,
@@ -86,6 +88,28 @@ export default function ProfileConfig() {
             {t('profile.profile')}
           </ZigTypography>
           <Grid container spacing={4}>
+            <Grid item xs={12} sm={6} md={4}>
+              <Controller
+                name={'image'}
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <ZigImageInput
+                    buttonLabel={'label'}
+                    uploadFn={async (file: File) => {
+                      console.error(file);
+                      alert('I do nothing');
+                    }}
+                    disabled
+                    buttonTooltip={t('profile:uploads-not-ready')}
+                    renderer={(url: string) => (
+                      <img src={url} width={200} height={105} alt={''} />
+                    )}
+                    value={value && value + '/banner'}
+                    onChange={onChange}
+                  />
+                )}
+              />
+            </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'name'}
