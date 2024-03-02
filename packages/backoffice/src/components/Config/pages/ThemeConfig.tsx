@@ -5,10 +5,20 @@ import {
   ZigButton,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { ConfigWrapper } from '../styled';
+import { WhitelabelBackendConfig } from '@zignaly-open/ps2-definitions';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { ProfileConfigValidation } from '../validations';
+import { useSaveConfig } from '../use';
+import { useParams } from 'react-router-dom';
+import { useWlConfigQuery } from '../../../apis/config/api';
+import ZigColorInput from '../components/ZigColorInput';
 
 export default function ThemeConfig() {
+  const { wl } = useParams();
+  const { data } = useWlConfigQuery(wl);
   const { t } = useTranslation('config');
   const sizes = useMemo(
     () =>
@@ -44,72 +54,108 @@ export default function ThemeConfig() {
   const activeSize = sizes.find((x) => x.value === size) || sizes[2];
   const iframe = useRef(null);
   const domain = 'http://localhost:3000';
+
+  const defaultValues = useMemo(
+    () => ({ themeOverride: data.themeOverride }),
+    [data],
+  );
+
+  console.error(data);
+
+  const formMethods = useForm<{
+    themeOverride: WhitelabelBackendConfig['themeOverride'];
+  }>({
+    defaultValues,
+    resolver: yupResolver(ProfileConfigValidation),
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+  });
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = formMethods;
+
+  const { submit, isLoading } = useSaveConfig(wl);
+
   return (
     <ConfigWrapper>
       <ZigTypography sx={{ mb: 4 }} variant={'h1'}>
         {t('navigation.theme-config')}
       </ZigTypography>
+      <form onSubmit={handleSubmit(submit)}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Controller
+              name={'themeOverride.themeOverrides.palette.neutral200'}
+              control={control}
+              render={({ field }) => <ZigColorInput {...field} />}
+            />
+          </Grid>
+        </Grid>
+        <Box
+          sx={{
+            textAlign: 'left',
+            mb: 3,
+            flexDirection: 'row',
+            display: 'flex',
+            alignItems: 'flex-end',
+            flex: 1,
+            width: '100%',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box>
+            <ZigButtonGroupInput
+              value={size}
+              options={sizes}
+              onChange={(v) => setSize(v)}
+              label={t('sizes.preview-size')}
+            />
+          </Box>
 
-      <Box
-        sx={{
-          textAlign: 'left',
-          mb: 3,
-          flexDirection: 'row',
-          display: 'flex',
-          alignItems: 'flex-end',
-          flex: 1,
-          width: '100%',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box>
-          <ZigButtonGroupInput
-            value={size}
-            options={sizes}
-            onChange={(v) => setSize(v)}
-            label={t('sizes.preview-size')}
-          />
-        </Box>
-
-        <ZigButton
-          onClick={() => {
-            iframe.current.contentWindow.postMessage(
-              {
-                call: 'passDebugTemplateOverride',
-                overrides: {
-                  palette: {
-                    neutral300: ['#f00', '#f0f', '#0f0', '#0ff'][
-                      Math.floor(Math.random() * 4)
-                    ],
+          <ZigButton
+            type={'button'}
+            onClick={() => {
+              iframe.current.contentWindow.postMessage(
+                {
+                  call: 'passDebugTemplateOverride',
+                  overrides: {
+                    palette: {
+                      neutral300: ['#f00', '#f0f', '#0f0', '#0ff'][
+                        Math.floor(Math.random() * 4)
+                      ],
+                    },
                   },
                 },
-              },
-              '*',
-            );
-          }}
-          disabled={!iframe.current}
-        >
-          {t('apply')}
-        </ZigButton>
-      </Box>
+                '*',
+              );
+            }}
+            disabled={!iframe.current}
+          >
+            {t('apply')}
+          </ZigButton>
+        </Box>
 
-      <Box
-        sx={{
-          backgroundImage:
-            'repeating-linear-gradient(-55deg, #000, #000 20px, #ffb101 20px, #ffb101 40px)',
-          p: 1,
-        }}
-      >
-        <iframe
-          ref={iframe}
-          style={{
-            border: 'none',
-            height: activeSize.height,
-            width: activeSize.width,
+        <Box
+          sx={{
+            backgroundImage:
+              'repeating-linear-gradient(-55deg, #000, #000 20px, #ffb101 20px, #ffb101 40px)',
+            p: 1,
           }}
-          src={domain}
-        ></iframe>
-      </Box>
+        >
+          <iframe
+            ref={iframe}
+            style={{
+              border: 'none',
+              height: activeSize.height,
+              width: activeSize.width,
+            }}
+            src={domain}
+          ></iframe>
+        </Box>
+      </form>
     </ConfigWrapper>
   );
 }
