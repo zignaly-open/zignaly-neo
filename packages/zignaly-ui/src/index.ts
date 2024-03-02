@@ -19,6 +19,7 @@ export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete"
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
+export { default as ZigImageInput } from "./components/inputs/ZigImageInput";
 export { default as ZigSlider } from "./components/inputs/ZigSlider";
 export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
 export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
