@@ -5,6 +5,7 @@ import { LogoContainer } from "./styles";
 import { ErrorMessage, ZigTypography } from "../../../index";
 import ZigButton from "../ZigButton";
 import ZigAlertMessage from "../../display/ZigAlertMessage";
+import { useTranslation } from "react-i18next";
 
 export type ZigImageInputProps = {
   label?: string | JSX.Element;
@@ -39,6 +40,7 @@ const ZigImageInput = ({
   id,
   sx,
 }: ZigImageInputProps) => {
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigImageInput" });
   const theme = useTheme();
   const [uploading, setUploading] = useState(false);
 
@@ -120,7 +122,7 @@ const ZigImageInput = ({
           tooltip={buttonTooltip}
           id={id && `${id}-edit`}
         >
-          {buttonLabel}
+          {buttonLabel || t("image-input-" + (value ? "edit" : "add"))}
           <input hidden type="file" onChange={uploadLogo} />
         </ZigButton>
 
@@ -129,7 +131,8 @@ const ZigImageInput = ({
             <ErrorMessage text={error} id={id && `${id}-error`} />
           </Box>
         ) : (
-          !!info && (typeof info === "string" ? <ZigAlertMessage text={info} /> : info)
+          !!info &&
+          (typeof info === "string" ? <ZigAlertMessage variant={"body2"} text={info} /> : info)
         )}
       </Box>
     </Box>

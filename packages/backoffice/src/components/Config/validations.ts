@@ -45,7 +45,9 @@ export const SettingsConfigValidation = yup
 export const ProfileConfigValidation = yup
   .object({
     name: yup.string().required('common:required'),
-
+    image: yup.string().required('common:required'),
+    favicon: yup.string().required('common:required'),
+    logo: yup.string().required('common:required'),
     title: yup
       .string()
       .required('common:required')

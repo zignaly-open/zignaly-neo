@@ -27,6 +27,14 @@ type FormType = Partial<WhitelabelBackendConfig> & {
   name: string;
   languagesMap: Record<string, boolean>;
 };
+
+const customNotWorkingUpload = async (file: File) => {
+  // eslint-disable-next-line no-console
+  console.error(file);
+  alert('I do nothing');
+  return '';
+};
+
 export default function ProfileConfig() {
   const { t } = useTranslation('config');
   const { wl } = useParams();
@@ -34,6 +42,8 @@ export default function ProfileConfig() {
 
   const defaultValues = useMemo(
     () => ({
+      favicon: data.favicon,
+      logo: data.logo,
       image: data.image,
       name: data.name,
       description: data.description,
@@ -90,26 +100,77 @@ export default function ProfileConfig() {
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
-                name={'image'}
+                name={'logo'}
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <ZigImageInput
-                    buttonLabel={'label'}
-                    uploadFn={async (file: File) => {
-                      console.error(file);
-                      alert('I do nothing');
-                    }}
+                    label={t('profile.dark-logo')}
+                    description={t('profile.dark-logo-explainer')}
+                    info={t('profile.optimal-size', { size: '600x100' })}
+                    uploadFn={customNotWorkingUpload}
                     disabled
-                    buttonTooltip={t('profile:uploads-not-ready')}
+                    buttonTooltip={t('profile.uploads-not-ready')}
                     renderer={(url: string) => (
-                      <img src={url} width={200} height={105} alt={''} />
+                      <img src={url} height={50} alt={''} />
                     )}
-                    value={value && value + '/banner'}
+                    error={t(errors.image?.message as string)}
+                    value={value && value + '/original'}
                     onChange={onChange}
                   />
                 )}
               />
             </Grid>
+
+            {/*We do not have the light logo lol*/}
+            {/*<Grid item xs={12} sm={6} md={4}>*/}
+            {/*  <Controller*/}
+            {/*    name={'image'}*/}
+            {/*    control={control}*/}
+            {/*    render={({ field: { value, onChange } }) => (*/}
+            {/*      <ZigImageInput*/}
+            {/*        label={t('profile.light-logo')}*/}
+            {/*        description={t('profile.light-logo-explainer')}*/}
+            {/*        info={t('profile.optimal-size', { size: '1200x627' })}*/}
+            {/*        uploadFn={async (file: File) => {*/}
+            {/*          // eslint-disable-next-line no-console*/}
+            {/*          console.error(file);*/}
+            {/*          alert('I do nothing');*/}
+            {/*          return '';*/}
+            {/*        }}*/}
+            {/*        disabled*/}
+            {/*        buttonTooltip={t('profile.uploads-not-ready')}*/}
+            {/*        renderer={(url: string) => (*/}
+            {/*          <img src={url} width={200} height={105} alt={''} />*/}
+            {/*        )}*/}
+            {/*        error={t(errors.image?.message as string)}*/}
+            {/*        value={value && value + '/banner'}*/}
+            {/*        onChange={onChange}*/}
+            {/*      />*/}
+            {/*    )}*/}
+            {/*  />*/}
+            {/*</Grid>*/}
+
+            <Grid item xs={12} sm={6} md={8}>
+              <Controller
+                name={'favicon'}
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <ZigImageInput
+                    label={t('profile.favicon')}
+                    description={t('profile.favicon-explainer')}
+                    info={t('profile.optimal-size', { size: '512x512' })}
+                    uploadFn={customNotWorkingUpload}
+                    disabled
+                    buttonTooltip={t('profile.uploads-not-ready')}
+                    size={50}
+                    error={t(errors.image?.message as string)}
+                    value={value && value + '/512x512'}
+                    onChange={onChange}
+                  />
+                )}
+              />
+            </Grid>
+
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'name'}
@@ -168,7 +229,28 @@ export default function ProfileConfig() {
           <SectionHeader title={t('profile.meta')} sx={{ mb: 0.5, mt: 8 }} />
 
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={4}></Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Controller
+                name={'image'}
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <ZigImageInput
+                    label={t('profile.meta-image')}
+                    description={t('profile.meta-image-explainer')}
+                    info={t('profile.optimal-size', { size: '1200x627' })}
+                    uploadFn={customNotWorkingUpload}
+                    disabled
+                    buttonTooltip={t('profile.uploads-not-ready')}
+                    renderer={(url: string) => (
+                      <img src={url} width={200} height={105} alt={''} />
+                    )}
+                    error={t(errors.image?.message as string)}
+                    value={value && value + '/banner'}
+                    onChange={onChange}
+                  />
+                )}
+              />
+            </Grid>
             <Grid item xs={12} sm={6} md={8}>
               <Controller
                 name={'title'}
