@@ -12,14 +12,13 @@ import { useCurrentUser, useIsAuthenticated } from '../../../../apis/user/use';
 import { UseModalReturn } from './types';
 import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
 import {
   useCanInvestIn,
   withModalRequiresAuthentication,
 } from '../../../../util/walls/util';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
-import theme from '../../../../theme';
 import { useCoinBalances } from '../../../../apis/coin/use';
 
 function InvestDepositModal({
@@ -70,6 +69,7 @@ function InvestDepositModal({
 
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn()();
+  const theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down('sm'));
 
   const trackAwareClose = () => {

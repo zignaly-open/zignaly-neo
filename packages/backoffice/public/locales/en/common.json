@@ -6,6 +6,7 @@
   "all": "All",
   "filter": "Filter",
   "clear": "Clear",
+  "required": "Required",
   "type-to-confirm": "Type \"{{word}}\" to confirm",
   "generic-confirm": "Please confirm you'd like to perform this action",
   "navigation": {
@@ -13,6 +14,7 @@
     "logout": "Logout",
     "withdrawals": "Withdrawals",
     "logs": "Logs",
+    "config": "Config",
     "deposits": "Deposits",
     "users": "Users"
   },

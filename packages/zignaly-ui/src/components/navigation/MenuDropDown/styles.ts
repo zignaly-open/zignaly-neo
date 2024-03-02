@@ -77,6 +77,7 @@ export const Button = styled.div<ButtonProps>`
       isActiveDropDown,
       `
       background: ${theme.palette.neutral800};
+      box-shadow: 1px 0 ${theme.backgrounds.secondaryBackground}, -1px 0 ${theme.backgrounds.secondaryBackground};
       border-color: transparent !important;
 
       ${ArrowIcon} {

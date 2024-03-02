@@ -7,9 +7,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { useConvertPreview } from '../../../../../../apis/coin/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from '../../../../../Balance/components/SwapCoinsModal/validation';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ChooseDepositTypeViews } from '../../types';
-import theme from '../../../../../../theme';
 
 function SwapForm({
   coinSwapTo,
@@ -24,6 +23,7 @@ function SwapForm({
       acc.availableInUsd > curr.availableInUsd ? acc : curr,
     ),
   );
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down('md'));
 
   const [minAmount, setMinAmount] = useState<number>(0);

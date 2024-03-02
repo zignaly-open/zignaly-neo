@@ -1,5 +1,10 @@
 import React from 'react';
-import { Navigate, Route, Routes as RouterRoutes } from 'react-router-dom';
+import {
+  Navigate,
+  Outlet,
+  Route,
+  Routes as RouterRoutes,
+} from 'react-router-dom';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall';
 import Login from 'components/Login';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
@@ -8,6 +13,13 @@ import Users from './components/Users';
 import Withdrawals from './components/Transfers/Withdrawals';
 import Deposits from './components/Transfers/Deposits';
 import Logs from './components/Logs';
+import ThemeConfig from './components/Config/pages/ThemeConfig';
+import SettingsConfig from './components/Config/pages/SettingsConfig';
+import ProfileConfig from './components/Config/pages/ProfileConfig';
+import CommunicationConfig from './components/Config/pages/CommunicationConfig';
+import WhitelabelConfigHeader from './components/Config/components/SubHeader';
+import WhitelabelConfigLoader from './components/Config/components/WhitelabelConfigLoader';
+import RedirectToFirstWlConfig from './components/Config/pages/RedirectToFirstWlConfig';
 
 const Router: React.FC = () => (
   <RouterRoutes>
@@ -16,6 +28,38 @@ const Router: React.FC = () => (
       <Route path={Routes.ROUTE_DEPOSITS} element={<Deposits />} />
       <Route path={Routes.ROUTE_WITHDRAWALS} element={<Withdrawals />} />
       <Route path={Routes.ROUTE_LOGS} element={<Logs />} />
+      <Route
+        path={Routes.ROUTE_CONFIG_REDIRECT}
+        element={<RedirectToFirstWlConfig />}
+      />
+      <Route
+        path={Routes.ROUTE_CONFIG_PARENT}
+        element={
+          <>
+            <WhitelabelConfigHeader />
+            <WhitelabelConfigLoader>
+              <Outlet />
+            </WhitelabelConfigLoader>
+          </>
+        }
+      >
+        <Route
+          path={Routes.ROUTE_CONFIG_THEME}
+          element={<ThemeConfig />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_SETTINGS}
+          element={<SettingsConfig />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_PROFILE}
+          element={<ProfileConfig />}
+        ></Route>
+        <Route
+          path={Routes.ROUTE_CONFIG_COMMUNICATION}
+          element={<CommunicationConfig />}
+        ></Route>
+      </Route>
     </Route>
 
     <Route element={<UnauthenticatedWall />}>

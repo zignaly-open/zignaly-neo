@@ -8,7 +8,7 @@ export function NavigationLink({
   ...props
 }: LinkProps): ReactElement {
   const resolved = useResolvedPath(to);
-  const match = useMatch({ path: resolved.pathname, end: true });
+  const match = useMatch({ path: resolved.pathname, end: false });
 
   return (
     <Link className={match ? 'active' : undefined} to={to} {...props}>

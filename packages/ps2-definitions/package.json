@@ -1,0 +1,36 @@
+{
+  "name": "@zignaly-open/ps2-definitions",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "module": "lib/index.es.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepare": "yarn build",
+    "build": "webpack --mode=production --node-env=production"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "fork-ts-checker-webpack-plugin": "7.2.3",
+    "ts-loader": "9.2.8",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
+    "webpack-cli": "4.10.0",
+    "@zignaly-open/ui": "^0.6.18"
+  },
+  "devDependencies": {
+    "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
+    "npm-run-all": "^4.1.5"
+  }
+}

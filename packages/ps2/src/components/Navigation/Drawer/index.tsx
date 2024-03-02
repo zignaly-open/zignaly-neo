@@ -15,6 +15,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useTheme,
 } from '@mui/material';
 import { Avatar, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
@@ -44,7 +45,6 @@ import {
   ROUTE_SUBSCRIPTIONS,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from 'routes';
-import theme from 'theme';
 import { supportedLanguages } from 'util/i18n/i18next';
 import { LocalizationLanguages } from 'util/i18n/languages';
 import socialNetworksLinks from 'util/socialNetworks';
@@ -59,6 +59,7 @@ const drawerWidth = 250;
 const ZigDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const theme = useTheme();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };

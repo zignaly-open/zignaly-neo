@@ -1,6 +1,6 @@
 import React from 'react';
 import { AmountContainer } from './styles';
-import { Grid, Tooltip, useMediaQuery } from '@mui/material';
+import { Grid, Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import {
   ZigButton,
   ZigModalActions,
@@ -13,7 +13,6 @@ import { WithdrawConfirmFormProps } from './types';
 import BigNumber from 'bignumber.js';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import RemoveIcon from '@mui/icons-material/Remove';
-import theme from '../../../../../../theme';
 
 const WithdrawConfirmForm = ({
   action,
@@ -28,6 +27,7 @@ const WithdrawConfirmForm = ({
   feeCoin = coin,
   close,
 }: WithdrawConfirmFormProps) => {
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('withdraw-crypto');
   if (status.isSuccess) {

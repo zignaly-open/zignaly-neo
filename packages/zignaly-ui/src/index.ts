@@ -19,6 +19,7 @@ export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete"
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
+export { default as ZigImageInput } from "./components/inputs/ZigImageInput";
 export { default as ZigSlider } from "./components/inputs/ZigSlider";
 export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
 export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
@@ -93,6 +94,8 @@ export { MarginContainer, PageContainer } from "./components/styled";
 // Navigation
 // TODO: @cwagner22 pls fix/bring to proper shape
 export { default as Header } from "./components/navigation/Header";
+export { default as SubHeader } from "./components/navigation/SubHeader";
+export type { SubHeaderRoute as SubHeaderRouteType } from "./components/navigation/SubHeader";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";

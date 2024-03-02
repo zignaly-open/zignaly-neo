@@ -1,7 +1,6 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
-import { Box, Tooltip, useMediaQuery } from '@mui/material';
-import theme from '../../../../../theme';
+import { Box, Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import {
   GreySubHeader,
@@ -17,6 +16,7 @@ import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDash
 const ServiceInformation: React.FC<{
   service?: Service;
 }> = ({ service }) => {
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
   const createdAt = new Date(service?.createdAt);
