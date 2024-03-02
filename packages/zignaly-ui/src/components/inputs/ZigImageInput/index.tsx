@@ -8,6 +8,7 @@ import ZigAlertMessage from "../../display/ZigAlertMessage";
 
 export type ZigImageInputProps = {
   label?: string | JSX.Element;
+  buttonLabel?: string | JSX.Element;
   description?: string | JSX.Element;
   info?: string | JSX.Element;
   value: string;
@@ -24,6 +25,7 @@ export type ZigImageInputProps = {
 
 const ZigImageInput = ({
   label,
+  buttonLabel,
   description,
   value,
   info,
@@ -118,7 +120,7 @@ const ZigImageInput = ({
           tooltip={buttonTooltip}
           id={id && `${id}-edit`}
         >
-          {label}
+          {buttonLabel}
           <input hidden type="file" onChange={uploadLogo} />
         </ZigButton>
 
