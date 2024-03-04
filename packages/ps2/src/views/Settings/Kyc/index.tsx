@@ -19,7 +19,6 @@ import LayoutContentWrapper from '../../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../../apis/user/use';
 import {
   KycLevels,
-  KycResponse,
   KycStatus,
   KycStatusResponse,
 } from '../../../apis/user/types';
@@ -28,11 +27,11 @@ import { useTraderServices } from 'apis/service/use';
 import { TraderService } from 'apis/service/types';
 
 const Kyc = ({
-  statuses,
   kycLevels,
   traderServices,
+  statusesEndpoint,
 }: {
-  statuses: KycStatusResponse[];
+  statusesEndpoint: ReturnType<typeof useKycStatusesQuery>;
   kycLevels: KycLevels;
   traderServices: TraderService[];
 }) => {
@@ -44,6 +43,16 @@ const Kyc = ({
     currentUser.KYCMonitoring && loadUser();
   }, []);
   const [tab, switchToTab] = useState(kycLevels[0].category);
+
+  // Default state in case exchange is not activated, or too many exchanges
+  const statuses: KycStatusResponse[] = statusesEndpoint.data?.statuses || [
+    {
+      status: KycStatus.NOT_STARTED,
+      category: tab,
+      level: 1,
+      reason: '',
+    },
+  ];
   const correctOrder = statuses
     .filter((x) => x.category === tab)
     .sort((a, b) => a.level - b.level);
@@ -51,7 +60,7 @@ const Kyc = ({
 
   return (
     <PageContainer style={{ maxWidth: '815px' }}>
-      <PageWithHeaderContainer hasHeader>
+      <PageWithHeaderContainer>
         <Box
           sx={{
             textAlign: 'center',
@@ -113,7 +122,8 @@ const Kyc = ({
                   )) ||
                 (previousLevelMissing && t('complete-previous-level-first')) ||
                 (traderServices.length > 0 && t('without-services')) ||
-                (currentUser.exchanges.length > 1 && t('multiple-accounts'))
+                (currentUser.exchanges.length > 1 && t('multiple-accounts')) ||
+                statusesEndpoint.error?.data?.error?.msg
               }
               labelColor={'#E1E9F0'}
               // balanceRestriction={t(
@@ -121,9 +131,11 @@ const Kyc = ({
               //   l.restriction,
               // )}
               response={correctOrder[i]}
-              items={{ a: l.requirements }}
+              items={l.requirements}
               // items={t(l.requirements, { returnObjects: true })}
-              title={t(l.name)}
+              title={t(`levels.${l.level}`, {
+                defaultValue: t('levels.placeholder', { level: l.level }),
+              })}
               key={correctOrder[i].level}
               icon={<SilverIcon />}
             />
@@ -135,23 +147,23 @@ const Kyc = ({
 };
 
 const KycContainer = () => {
-  const statusesEndpoint = useKycStatusesQuery();
+  const { exchanges } = useCurrentUser();
+  const statusesEndpoint = useKycStatusesQuery(undefined, {
+    skip: !exchanges?.some((e) => e.activated),
+  });
   const kycLevelsEndpoint = useKycLevelsQuery();
   const traderServicesEndpoint = useTraderServices();
 
   return (
     <LayoutContentWrapper
-      endpoint={[statusesEndpoint, kycLevelsEndpoint, traderServicesEndpoint]}
+      loading={statusesEndpoint.isLoading}
+      endpoint={[kycLevelsEndpoint, traderServicesEndpoint]}
       hasHeader
-      content={([{ statuses }, kycLevels, traderServices]: [
-        KycResponse,
-        KycLevels,
-        TraderService[],
-      ]) => {
+      content={([kycLevels, traderServices]: [KycLevels, TraderService[]]) => {
         return (
           <Kyc
-            statuses={statuses}
             kycLevels={kycLevels}
+            statusesEndpoint={statusesEndpoint}
             traderServices={traderServices}
           />
         );

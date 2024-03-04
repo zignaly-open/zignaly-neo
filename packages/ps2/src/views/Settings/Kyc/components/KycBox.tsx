@@ -12,6 +12,7 @@ import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
 import { KycBoxListEntry } from './atoms';
 import {
+  KycLevels,
   KycStatus,
   KycStatusResponse,
   UserData,
@@ -39,10 +40,7 @@ const KycBox: React.FC<{
   title: string;
   icon: JSX.Element;
   response: KycStatusResponse;
-  items: Record<
-    string,
-    string | { title: string; items: Record<string, string> }
-  >;
+  items: KycLevels[number]['levels'][number]['requirements'];
 }> = ({
   icon,
   response,
@@ -96,15 +94,16 @@ const KycBox: React.FC<{
     <Grid
       container
       sx={{
-        mt: 3,
+        mt: 1,
         mb: 6,
         opacity: disabledMessage ? 0.5 : 1,
         minHeight: 200,
       }}
+      rowSpacing={3}
     >
       <Grid
         item
-        sm={12}
+        xs={12}
         md={5}
         sx={{
           display: 'flex',
@@ -204,7 +203,7 @@ const KycBox: React.FC<{
             KycStatus.NOT_STARTED,
           ].includes(response?.status) && (
             <ZigButton
-              sx={{ mt: 0.5, ...iconWrapStyle }}
+              sx={{ mt: 1, ...iconWrapStyle }}
               variant={'contained'}
               tooltip={disabledMessage || undefined}
               disabled={!!disabledMessage}
@@ -217,23 +216,28 @@ const KycBox: React.FC<{
           )}
         </Box>
       </Grid>
-      <Grid item sm={12} md={7}>
+      <Grid item xs={12} md={7}>
         <Paper sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}>
           <OlList>
-            {Object.entries(items).map(([k, v]) => (
-              <li style={{ marginTop: 4, marginBottom: 4 }} key={k}>
-                {typeof v === 'string' ? (
-                  <KycBoxListEntry>{v}</KycBoxListEntry>
+            {items.map((k) => (
+              <li
+                style={{ marginTop: 4, marginBottom: 4 }}
+                key={typeof k === 'string' ? k : k.title}
+              >
+                {typeof k === 'string' ? (
+                  <KycBoxListEntry>{t(`requirements.${k}`)}</KycBoxListEntry>
                 ) : (
                   <>
-                    <KycBoxListEntry>{v.title}</KycBoxListEntry>
+                    <KycBoxListEntry>{k.title}</KycBoxListEntry>
                     <UlList>
-                      {Object.entries(v.items).map(([itemKey, text]) => (
+                      {k.items.map((itemKey) => (
                         <li
                           style={{ marginTop: 4, marginBottom: 4 }}
                           key={k + '_' + itemKey}
                         >
-                          <KycBoxListEntry>{text}</KycBoxListEntry>
+                          <KycBoxListEntry>
+                            {t(`requirements.${itemKey}`)}
+                          </KycBoxListEntry>
                         </li>
                       ))}
                     </UlList>

@@ -23,7 +23,7 @@ export default {
   },
   minInvestment: { BNB: 0, BTC: 0, ETH: 0, BUSD: 0, USDT: 0 },
   marketplaceMinScore: 0,
-  locales: ['en', 'es', 'tr'],
+  locales: ['en', 'es', 'tr', 'ru'],
   logo: 'https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/30c2f30a-5bea-43f9-63c8-29506dfab200/public',
   favicon:
     'https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/a482eb98-06a3-423a-cf4c-e5c201c70e00/public',
@@ -43,7 +43,7 @@ export default {
     [Features.LoginOnlyAccess]: false,
     [Features.Kyc]: false,
     [Features.ZScore]: true,
-    [Features.AccessLevels]: false,
+    [Features.AccessLevels]: true,
     [Features.Subscriptions]: false,
   },
   translationOverrides: null,

@@ -28,7 +28,7 @@ const ZScoreRings = (props: ZScoreRingsProps) => {
           right={0}
           bottom={0}
         >
-          <Box display={"flex"} flexDirection={"column"}>
+          <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
             <ZigTypography
               component={"span"}
               fontWeight={600}

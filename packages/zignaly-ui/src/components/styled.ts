@@ -12,7 +12,7 @@ export const MarginContainer = styled("div")`
 
 export const PageContainer = styled(MarginContainer)`
   @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-    padding: 52px 22px 40px;
+    padding: 0 22px 40px;
   }
-  padding: 52px 16px 40px;
+  padding: 0 4px 40px;
 `;

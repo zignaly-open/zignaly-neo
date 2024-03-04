@@ -45,6 +45,7 @@ const ZScoreModal = ({ serviceId, ...props }: ZScoreModalProps) => {
                   category={category}
                   scoreInfo={data.info}
                   scoreData={data}
+                  compact
                 />
               </Grid>
             ))}

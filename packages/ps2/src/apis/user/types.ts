@@ -11,9 +11,9 @@ export interface UserState {
 export enum UserAccessLevel {
   Banned = -100,
   NotVerified = 100,
+  Frozen = 300,
   KycPending = 350,
   NoSubscription = 375,
-  Frozen = 400,
   KycExpired = 450,
   SubscriptionExpired = 475,
   Normal = 500,
@@ -143,7 +143,6 @@ export type KycStatusResponse = {
   category: 'KYC' | 'KYB';
   reason?: string;
   level: number;
-  last_checked_at: string;
 };
 
 export type KycResponse = {
@@ -157,7 +156,7 @@ export type KycLevelsRaw = {
       level: number;
       category: 'KYC' | 'KYB';
       name: string;
-      requirements: string;
+      requirements: (string | { title: string; items: string[] })[];
     },
   ];
 };

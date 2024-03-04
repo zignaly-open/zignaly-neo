@@ -9,19 +9,10 @@ import {
 } from '../../../apis/user/api';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
-import { KycStatus } from 'apis/user/types';
-import { useZAlert } from 'components/ZModal/use';
-import { useNavigate } from 'react-router-dom';
-import { ROUTE_KYC } from 'routes';
-import { useTraderServices } from 'apis/service/use';
-import { junkyard } from 'util/junkyard';
-import { differenceInDays } from 'date-fns';
 
 const UserKycChecker: React.FC = () => {
   const toast = useToast();
-  const { KYCMonitoring: isPending, exchanges } = useCurrentUser();
-  const { data: traderServices, isLoading: isLoadingServices } =
-    useTraderServices();
+  const { KYCMonitoring: isPending } = useCurrentUser();
   const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation([
     ...(isFeatureOn(Features.Kyc) ? ['kyc'] : []),
@@ -29,11 +20,7 @@ const UserKycChecker: React.FC = () => {
   ]);
   const [loadUser] = useLazyUserQuery();
   const [loadKyc] = useLazyKycStatusesQuery();
-  const shouldCheck =
-    isAuthenticated &&
-    isPending &&
-    isFeatureOn(Features.Kyc) &&
-    !isLoadingServices;
+  const shouldCheck = isAuthenticated && isPending && isFeatureOn(Features.Kyc);
 
   const oldStatusesSerialized = useRef<string>();
 
@@ -47,12 +34,7 @@ const UserKycChecker: React.FC = () => {
       }));
   }, []);
 
-  const showAlert = useZAlert();
-  const navigate = useNavigate();
-
   useEffect(() => {
-    // Ignore double renders in strict mode
-    let ignore = false;
     let timeoutId: NodeJS.Timeout = null;
 
     (async () => {
@@ -73,40 +55,13 @@ const UserKycChecker: React.FC = () => {
         }, KYC_CHECK_INTERVAL);
       };
 
-      if (ignore || !shouldCheck) return;
-      const statusesRes = await getStatuses();
-      oldStatusesSerialized.current = statusesRes.statusesSerialized;
-
-      const kycPushedDate = junkyard.get('kycPushed');
-
-      if (
-        statusesRes.statuses.some(
-          (s) =>
-            s.category === 'KYC' &&
-            s.level === 1 &&
-            [KycStatus.NOT_STARTED, KycStatus.INIT].includes(s.status),
-        ) &&
-        (!kycPushedDate ||
-          differenceInDays(new Date(), new Date(kycPushedDate)) >= 1) &&
-        !traderServices.length &&
-        exchanges.length === 1
-      ) {
-        junkyard.set('kycPushed', new Date().toISOString());
-        showAlert({
-          title: t('modal-push.title'),
-          okLabel: t('modal-push.ok'),
-          description: t('modal-push.description'),
-          okAction: () => {
-            navigate(ROUTE_KYC);
-          },
-        });
-      }
-
+      if (!shouldCheck) return;
+      const { statusesSerialized } = await getStatuses();
+      oldStatusesSerialized.current = statusesSerialized;
       pollKyc();
     })();
 
     return () => {
-      ignore = true;
       clearTimeout(timeoutId);
     };
   }, [shouldCheck]);

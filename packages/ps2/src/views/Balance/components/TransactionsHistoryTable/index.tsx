@@ -32,14 +32,14 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   useRefetchBalance();
 
   const defineSign = useCallback(
-    (typeTransaction: string, fromId: string) => {
+    (typeTransaction: string, fromId: string, toId: string) => {
       if (
         [
           TRANSACTION_TYPE.PS_DEPOSIT,
           TRANSACTION_TYPE.WITHDRAW,
           TRANSACTION_TYPE.BUYZIG,
         ].includes(typeTransaction) ||
-        fromId === exchange?.internalId
+        (fromId === exchange?.internalId && fromId !== toId)
       )
         return -1;
       else return 1;
@@ -105,7 +105,10 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
               exact
               coin={original.asset}
               alwaysShowSign
-              value={defineSign(original.txType, original.from) * getValue()}
+              value={
+                defineSign(original.txType, original.from, original.to) *
+                getValue()
+              }
             />
             {!md && (
               <ZigTypography
