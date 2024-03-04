@@ -110,12 +110,18 @@ const KycBox: React.FC<{
           flexDirection: 'row',
         }}
       >
-        <Box sx={{ width: '32px', pt: 1.5, mr: 2.5 }}>{icon}</Box>
+        <Box
+          sx={{ width: '32px', pt: 1.5, mr: 2.5 }}
+          id={`kyc__level-${response.level}-icon`}
+        >
+          {icon}
+        </Box>
         <Box>
           <ZigTypography
             variant={'h2'}
             sx={{ mb: 0.5 }}
             color={labelColor || 'neutral100'}
+            id={`kyc__level-${response.level}-level`}
           >
             {title}
           </ZigTypography>
@@ -145,6 +151,7 @@ const KycBox: React.FC<{
               color={'greenGraph'}
               fontWeight={500}
               variant={'body1'}
+              id={`kyc__level-${response.level}-status-verified`}
             >
               {t('status.verified')}
               <CheckCircleOutlineIcon sx={{ ...largeIconStyle, ml: 1 }} />
@@ -158,6 +165,7 @@ const KycBox: React.FC<{
               color={'yellow'}
               fontWeight={500}
               variant={'body1'}
+              id={`kyc__level-${response.level}-status-pending`}
             >
               <DataUsageTwoToneIcon sx={largeIconStyle} />
               {t('status.pending')}
@@ -176,6 +184,7 @@ const KycBox: React.FC<{
               color={'redGraphOrError'}
               fontWeight={500}
               variant={'body1'}
+              id={`kyc__level-${response.level}-status-rejected`}
             >
               <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
               {t('status.rejected')}
@@ -210,6 +219,7 @@ const KycBox: React.FC<{
               loading={loadingVerification}
               onClick={openKyc}
               size={'large'}
+              id={`kyc__level-${response.level}-verify`}
             >
               {t('verify')}
             </ZigButton>
@@ -217,7 +227,10 @@ const KycBox: React.FC<{
         </Box>
       </Grid>
       <Grid item xs={12} md={7}>
-        <Paper sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}>
+        <Paper
+          sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}
+          id={`kyc__level-${response.level}-requirements`}
+        >
           <OlList>
             {items.map((k) => (
               <li
