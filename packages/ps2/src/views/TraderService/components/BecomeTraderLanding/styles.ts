@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Layout = styled.div`
-  padding-top: 120px;
+  padding-top: 68px;
 `;
 
 export const Header = styled.div`

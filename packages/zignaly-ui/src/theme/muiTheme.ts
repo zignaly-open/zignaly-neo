@@ -188,7 +188,7 @@ const createMuiTheme = ({
             display: flex;
             align-items: center;
             flex-direction: row;
-            &, & > .MuiToolbar-root {
+            &, .MuiToolbar-root {
               min-height: 52px;
             }
             border: none;

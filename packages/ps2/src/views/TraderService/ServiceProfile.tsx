@@ -1,10 +1,8 @@
 import React from 'react';
-import ServiceHeader from './components/ServiceHeader';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import ServiceProfileContainer from './components/ServiceProfileContainer';
 import { PageWithHeaderContainer } from 'views/TraderService/components/styles';
 import {
-  useIsServiceOwner,
   useServiceDetails,
   useTraderServiceTitle,
 } from '../../apis/service/use';
@@ -27,7 +25,6 @@ const ServiceProfile: React.FC = () => {
   useTraderServiceTitle('profit-sharing.service', serviceId);
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
-  const isOwner = useIsServiceOwner(serviceId);
 
   if (!isAuthenticated && isFeatureOn(Features.LoginOnlyAccess)) {
     return (
@@ -42,7 +39,6 @@ const ServiceProfile: React.FC = () => {
 
   return (
     <>
-      <ServiceHeader />
       <PageContainer>
         <LayoutContentWrapper
           endpoint={serviceDetailsEndpoint}
@@ -87,7 +83,7 @@ const ServiceProfile: React.FC = () => {
             }
 
             return (
-              <PageWithHeaderContainer hasHeader={isOwner}>
+              <PageWithHeaderContainer>
                 <ServiceProfileContainer service={service} />
               </PageWithHeaderContainer>
             );

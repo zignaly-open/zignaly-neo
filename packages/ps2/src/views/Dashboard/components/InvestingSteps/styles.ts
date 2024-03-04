@@ -1,10 +1,5 @@
 import { styled } from '@mui/material';
-import { PageContainer } from '@zignaly-open/ui';
 import Box from '@mui/system/Box/Box';
-
-export const Layout = styled(PageContainer)`
-  padding-top: 120px;
-`;
 
 export const StepBox = styled(Box)`
   padding: 16px;

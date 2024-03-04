@@ -33,6 +33,7 @@ import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
 import { whitelabel } from '../../../../whitelabel';
+import { useCanCreateService } from '../../../../util/walls/util';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation(['offer-your-trading-service', 'service']);
@@ -117,11 +118,15 @@ const BecomeTraderLanding: React.FC = () => {
     [t],
   );
 
+  const checkCanInvest = useCanCreateService();
+
   const onClickCreateService = () => {
-    if (isAuthenticated) {
-      showModal(CreateServiceModal);
-    } else {
+    if (!isAuthenticated) {
       navigateIfNotLoggedIn();
+    } else if (!checkCanInvest()) {
+      // Do nothing, the KYC modal will take care of itself
+    } else {
+      showModal(CreateServiceModal);
     }
   };
 

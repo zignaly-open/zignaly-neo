@@ -43,7 +43,7 @@ export default {
     [Features.LoginOnlyAccess]: false,
     [Features.Kyc]: false,
     [Features.ZScore]: true,
-    [Features.AccessLevels]: false,
+    [Features.AccessLevels]: true,
     [Features.Subscriptions]: false,
   },
   translationOverrides: null,

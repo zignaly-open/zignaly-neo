@@ -7,6 +7,7 @@ import { Loader, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useDepositInfo } from 'apis/coin/use';
 import useCurrency from './useCurrency';
+import { useCanDeposit } from '../../../../util/walls/util';
 
 function BuyModal(props: DialogProps): React.ReactElement {
   const { t } = useTranslation(['deposit-crypto']);
@@ -39,9 +40,10 @@ function BuyModal(props: DialogProps): React.ReactElement {
 BuyModal.trackId = 'buy';
 
 export const useOpenBuyModal = (): ((props?: Partial<DialogProps>) => void) => {
+  const checkCanDeposit = useCanDeposit();
   const { showModal } = useZModal({ disableAutoDestroy: true });
   return (props) => {
-    showModal(BuyModal, props);
+    checkCanDeposit() && showModal(BuyModal, props);
   };
 };
 
