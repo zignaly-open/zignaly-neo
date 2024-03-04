@@ -36,10 +36,6 @@ import {
   FormatQuoteOutlined,
   FormatListNumbered,
   FormatListBulleted,
-  FormatAlignCenter,
-  FormatAlignJustify,
-  FormatAlignLeft,
-  FormatAlignRight,
   Image,
   LooksOne,
   LooksTwo,
@@ -199,10 +195,6 @@ const RichDescriptionEditor = ({
               />
               <BlockButton format='ol_list' icon={<FormatListNumbered />} />
               <BlockButton format='ul_list' icon={<FormatListBulleted />} />
-              <BlockButton format='left' icon={<FormatAlignLeft />} />
-              <BlockButton format='center' icon={<FormatAlignCenter />} />
-              <BlockButton format='right' icon={<FormatAlignRight />} />
-              <BlockButton format='justify' icon={<FormatAlignJustify />} />
               <InsertImageButton icon={<Image />} />
               <InsertLinkButton icon={<Link />} />
               <RemoveLinkButton icon={<LinkOff />} />

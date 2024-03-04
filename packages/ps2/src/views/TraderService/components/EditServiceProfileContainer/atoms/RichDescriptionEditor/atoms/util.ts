@@ -230,7 +230,7 @@ export const withImages = (editor: Editor) => {
 };
 
 export function serializeSlate(obj: SlateElement[]) {
-  return obj.map((v) => serialize(v)).join('\n');
+  return obj.map((v) => serialize(v)).join('');
 }
 
 export function deserializeSlate(serialized: string): SlateElement[] {

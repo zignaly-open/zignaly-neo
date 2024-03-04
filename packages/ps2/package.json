@@ -109,7 +109,6 @@
     "remark-breaks": "^3.0.2",
     "remark-parse": "^11.0.0",
     "remark-slate": "^1.8.6",
-    "remark-slate-transformer": "^0.9.0",
     "slate": "^0.101.5",
     "slate-history": "^0.100.0",
     "slate-react": "^0.101.6",
