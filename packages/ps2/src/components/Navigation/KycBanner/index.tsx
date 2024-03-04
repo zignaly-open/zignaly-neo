@@ -36,7 +36,7 @@ const KycBanner = () => {
     !traderServices?.length
   ) {
     return (
-      <Alert severity='warning'>
+      <Alert severity='warning' id='kyc-banner'>
         <Trans
           i18nKey='reminder'
           t={t}
