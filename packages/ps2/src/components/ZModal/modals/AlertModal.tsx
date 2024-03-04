@@ -29,13 +29,18 @@ function AlertModal({
     <ZModal wide allowUnauth {...props} close={close} title={title}>
       <div>
         {!!description && (
-          <ZigTypography sx={{ textAlign: 'center' }} component={'p'}>
+          <ZigTypography
+            sx={{ textAlign: 'center' }}
+            component={'p'}
+            id='alert__description'
+          >
             {description}
           </ZigTypography>
         )}
 
         <Box sx={{ mt: '35px', textAlign: 'center' }}>
           <ZigButton
+            id='alert__button'
             sx={{ mr: 1 }}
             variant={'contained'}
             type='submit'

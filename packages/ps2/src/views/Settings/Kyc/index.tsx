@@ -23,17 +23,13 @@ import {
   KycStatusResponse,
 } from '../../../apis/user/types';
 import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
-import { useTraderServices } from 'apis/service/use';
-import { TraderService } from 'apis/service/types';
 
 const Kyc = ({
   kycLevels,
-  traderServices,
   statusesEndpoint,
 }: {
   statusesEndpoint: ReturnType<typeof useKycStatusesQuery>;
   kycLevels: KycLevels;
-  traderServices: TraderService[];
 }) => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
@@ -121,7 +117,6 @@ const Kyc = ({
                     'different-type-started-' + differentTypeStarted.category,
                   )) ||
                 (previousLevelMissing && t('complete-previous-level-first')) ||
-                (traderServices.length > 0 && t('without-services')) ||
                 (currentUser.exchanges.length > 1 && t('multiple-accounts')) ||
                 statusesEndpoint.error?.data?.error?.msg
               }
@@ -152,20 +147,15 @@ const KycContainer = () => {
     skip: !exchanges?.some((e) => e.activated),
   });
   const kycLevelsEndpoint = useKycLevelsQuery();
-  const traderServicesEndpoint = useTraderServices();
 
   return (
     <LayoutContentWrapper
       loading={statusesEndpoint.isLoading}
-      endpoint={[kycLevelsEndpoint, traderServicesEndpoint]}
+      endpoint={[kycLevelsEndpoint]}
       hasHeader
-      content={([kycLevels, traderServices]: [KycLevels, TraderService[]]) => {
+      content={([kycLevels]: [KycLevels]) => {
         return (
-          <Kyc
-            kycLevels={kycLevels}
-            statusesEndpoint={statusesEndpoint}
-            traderServices={traderServices}
-          />
+          <Kyc kycLevels={kycLevels} statusesEndpoint={statusesEndpoint} />
         );
       }}
     />
