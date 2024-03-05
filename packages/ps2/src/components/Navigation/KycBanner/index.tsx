@@ -17,7 +17,7 @@ const KycBanner = () => {
     skip:
       !isAuthenticated ||
       !isFeatureOn(Features.Kyc) ||
-      !exchanges?.[0].activated,
+      !exchanges?.[0]?.activated,
   });
 
   if (
