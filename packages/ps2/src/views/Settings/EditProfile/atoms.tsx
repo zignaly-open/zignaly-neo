@@ -61,14 +61,14 @@ export const ServiceLogoStatus = ({
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const exchangeActivated = user.exchanges?.some((e) => e.activated);
   const { data } = useKycStatusesQuery(undefined, {
-    skip:
-      !isFeatureOn(Features.Kyc) || !user.exchanges?.some((e) => e.activated),
+    skip: !isFeatureOn(Features.Kyc) || !exchangeActivated,
   });
   const kycStatuses = data?.statuses;
 
   const kycStarted = useMemo(() => {
-    if (!kycStatuses) return null;
+    if (!kycStatuses) return undefined;
     const kycStatusesCateg = groupBy(kycStatuses, 'category');
     const res = find(kycStatusesCateg, (x) => {
       return x.some((kyc) =>
@@ -116,7 +116,7 @@ export const ServiceLogoStatus = ({
             )}
           />
 
-          {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
+          {isFeatureOn(Features.Kyc) && (kycStatuses || !exchangeActivated) && (
             <KYCStatusBox
               id={'edit-profile__kyc'}
               kycStatuses={kycStarted}
@@ -130,7 +130,15 @@ export const ServiceLogoStatus = ({
 };
 
 export const KYCStatusBox = ({
-  kycStatuses,
+  kycStatuses = [
+    {
+      // Default value since BE returns an error when exchange is not activated, or in some other cases
+      status: KycStatus.NOT_STARTED,
+      category: 'KYC',
+      level: 1,
+      reason: '',
+    },
+  ],
   cta,
   id,
 }: {
