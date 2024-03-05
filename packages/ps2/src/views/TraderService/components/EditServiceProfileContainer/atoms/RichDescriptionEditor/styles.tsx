@@ -1,23 +1,58 @@
 import { styled } from '@mui/material';
-import { Editable } from 'slate-react';
+import MDEditor from '@uiw/react-md-editor';
 
-export const StyledEditable = styled(Editable)<{
-  readOnly: boolean;
+export const StyledEditor = styled(MDEditor)<{
   error: boolean;
 }>`
-  margin-bottom: 5px;
-  &:focus-visible {
-    outline: none;
+  button {
+    width: 20px;
+    height: 20px;
   }
-  ${({ readOnly, theme, error }) =>
-    !readOnly &&
-    `background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
+  .w-md-editor-text {
+    * {
+      font-size: 16px;
+      line-height: 25px;
+    }
+  }
+  .w-md-editor-toolbar {
+    button {
+      width: 25px;
+      height: 25px;
+      svg {
+        width: 15px;
+        height: 15px;
+        color: ${({ theme }) => theme.palette.neutral200} !important;
+      }
+    }
+  }
+  .w-md-editor-toolbar-child {
+    width: 70px;
+    button:hover {
+      background: unset;
+    }
+  }
+  .w-md-editor-toolbar,
+  .w-md-editor-input,
+  .w-md-editor-preview {
+    background: linear-gradient(
+      90deg,
+      rgb(16 18 37) 0%,
+      rgb(16 18 37) 35%,
+      rgb(16 18 37) 100%
+    );
+    color: ${({ theme }) => theme.palette.neutral200};
+    font-size: 16px;
+  }
+  margin-bottom: 5px;
+  padding: 0;
+
+  ${({ theme, error }) =>
+    `
       border: 1px solid ${
         error ? theme.palette.redGraphOrError : theme.palette.neutral600
       };
       border-radius: 5px;
-      padding: 0 10px;
-      min-height: 350px;
+      min-height: 400px;
       ${
         !error &&
         `&:hover, &:focus{

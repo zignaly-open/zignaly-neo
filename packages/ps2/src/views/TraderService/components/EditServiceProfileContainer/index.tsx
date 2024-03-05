@@ -26,15 +26,11 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
-import RichDescriptionEditor from './atoms/RichDescriptionEditor';
+import RichTextEditor from './atoms/RichDescriptionEditor';
 import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
 import Deactivated from '../DeactivatedService';
-import {
-  deserializeSlate,
-  serializeSlate,
-} from './atoms/RichDescriptionEditor/atoms/util';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -55,7 +51,7 @@ const EditServiceProfileContainer: React.FC<{
   const { t } = useTranslation('service');
   const defaultValues = {
     name: service.name,
-    description: deserializeSlate(service.description),
+    description: service.description,
     maximumSbt: service.maximumSbt,
     successFee: service.successFee || 0,
     logo: service.logo,
@@ -86,11 +82,10 @@ const EditServiceProfileContainer: React.FC<{
   const successFee = watch('successFee');
 
   const submit = async (data: EditServiceForm) => {
-    const { commission: c, description, ...rest } = data;
+    const { commission: c, ...rest } = data;
     await Promise.all([
       edit({
         id: service.id,
-        description: serializeSlate(description),
         ...rest,
         level: visibility,
         commission: c,
@@ -207,7 +202,7 @@ const EditServiceProfileContainer: React.FC<{
               name='description'
               control={control}
               render={({ field }) => (
-                <RichDescriptionEditor
+                <RichTextEditor
                   setValue={setValue.bind(null, 'description')}
                   id={'edit-service-profile__service-description'}
                   label={

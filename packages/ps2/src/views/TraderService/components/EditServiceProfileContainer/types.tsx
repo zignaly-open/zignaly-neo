@@ -2,7 +2,6 @@ import {
   EditServicePayload,
   TraderServiceAccessLevel,
 } from 'apis/service/types';
-import { Element as SlateElement } from 'slate';
 
 export const VISIBILITY_LABEL = {
   [TraderServiceAccessLevel.Solo]: {
@@ -24,24 +23,5 @@ export const VISIBILITY_LABEL = {
 };
 
 export type EditServiceForm = EditServicePayload & {
-  description: SlateElement[];
   commission: number;
 };
-
-export type SlateElementTypeFieldTypes =
-  | 'block_quote'
-  | 'ul_list'
-  | 'heading_one'
-  | 'heading_two'
-  | 'heading_three'
-  | 'heading_four'
-  | 'heading_five'
-  | 'heading_six'
-  | 'list_item'
-  | 'ol_list'
-  | 'image'
-  | 'left'
-  | 'center'
-  | 'right'
-  | 'justify'
-  | 'link';

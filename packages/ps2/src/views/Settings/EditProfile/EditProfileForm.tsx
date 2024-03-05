@@ -20,11 +20,7 @@ import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import Flag from '../../../components/Flag';
 import { Box } from '@mui/system';
 import { ServiceLogoStatus } from './atoms';
-import {
-  deserializeSlate,
-  serializeSlate,
-} from '../../TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
-import RichDescriptionEditor from 'views/TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor';
+import RichTextEditor from 'views/TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -46,7 +42,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName || '',
       imageUrl: user.imageUrl || '',
-      bio: deserializeSlate(user.about || ''),
+      bio: user.about || '',
       country: user.country || '',
     },
   });
@@ -104,7 +100,7 @@ const EditProfileForm = () => {
   const onSubmit = (data: EditProfileFormType) =>
     updateUser({
       userName: data.username,
-      about: serializeSlate(data.bio),
+      about: data.bio,
       countryCode: data.country,
       imageUrl: data.imageUrl,
     })
@@ -234,7 +230,7 @@ const EditProfileForm = () => {
                 name='bio'
                 control={control}
                 render={({ field }) => (
-                  <RichDescriptionEditor
+                  <RichTextEditor
                     id={'edit-profile__about-you'}
                     setValue={setValue.bind(null, 'bio')}
                     label={

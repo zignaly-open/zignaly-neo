@@ -150,8 +150,11 @@ export const MarkdownContainer = styled('div')`
     padding-inline-start: 15px;
   }
 
-  li {
+  ul > li {
     list-style-type: disc;
+  }
+  ol > li {
+    list-style-type: decimal;
   }
 
   img {
