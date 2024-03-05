@@ -10,7 +10,6 @@ export type ThemeStyledComponents = {
     | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
     | "body"
     | "selectInputFill"
-    | "inputTextFill"
     | "toastSuccess"
     | "toastError"
     | "greyedOutBorder"
@@ -20,19 +19,14 @@ export type ThemeStyledComponents = {
     | "activeTab" // why have a dedicated color used only once? because fuck me, that's why
     | "modal"
     | "secondaryBackground"
-    | "sliderMark"
     | "tableRow"
-    | "sliderThumb"
     | "tableHeader"
     | "input2fa"
     | "input2faGradient"
-    | "input2faGradientBorder"
     | "buttonPrimary"
     | "header"
     | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
-    | "input"
     | "breakLineSignUp"
-    | "mobileButtonsWrapper"
     | "coinIconPlaceholder",
     string
   >;
