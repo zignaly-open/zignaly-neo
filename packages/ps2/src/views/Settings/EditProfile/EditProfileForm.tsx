@@ -34,7 +34,6 @@ const EditProfileForm = () => {
     handleSubmit,
     control,
     formState: { errors, isValid },
-    setValue,
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -232,7 +231,6 @@ const EditProfileForm = () => {
                 render={({ field }) => (
                   <RichTextEditor
                     id={'edit-profile__about-you'}
-                    setValue={setValue.bind(null, 'bio')}
                     label={
                       <ZigTypography
                         id={'edit-profile__about-you-label'}

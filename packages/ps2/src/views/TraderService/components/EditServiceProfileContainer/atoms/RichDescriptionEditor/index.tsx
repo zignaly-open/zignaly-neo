@@ -11,8 +11,6 @@ const RichTextEditor = ({
   id,
   label,
   error,
-  value,
-  setValue,
   subtitle,
   sx,
   placeholder,
@@ -21,8 +19,6 @@ const RichTextEditor = ({
   id: string;
   label?: string | JSX.Element;
   error?: string;
-  value: string;
-  setValue?: (v: string) => void;
   sx?: SxProps;
   placeholder?: string;
   subtitle?: JSX.Element | string;
@@ -54,8 +50,6 @@ const RichTextEditor = ({
       <StyledEditor
         id={id}
         height={400}
-        value={value}
-        onChange={setValue}
         error={!!error}
         placeholder={placeholder}
         components={{

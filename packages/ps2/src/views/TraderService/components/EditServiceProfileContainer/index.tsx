@@ -63,7 +63,6 @@ const EditServiceProfileContainer: React.FC<{
     control,
     watch,
     formState: { errors },
-    setValue,
     reset,
   } = useForm<EditServiceForm>({
     mode: 'onTouched',
@@ -203,7 +202,6 @@ const EditServiceProfileContainer: React.FC<{
               control={control}
               render={({ field }) => (
                 <RichTextEditor
-                  setValue={setValue.bind(null, 'description')}
                   id={'edit-service-profile__service-description'}
                   label={
                     <ZigTypography
@@ -214,7 +212,6 @@ const EditServiceProfileContainer: React.FC<{
                     </ZigTypography>
                   }
                   error={t(errors.description?.message)}
-                  value={field.value}
                   {...field}
                 />
               )}
