@@ -15,6 +15,7 @@ const RichTextEditor = ({
   setValue,
   subtitle,
   sx,
+  placeholder,
   ...props
 }: Partial<ControllerRenderProps> & {
   id: string;
@@ -23,6 +24,7 @@ const RichTextEditor = ({
   value: string;
   setValue?: (v: string) => void;
   sx?: SxProps;
+  placeholder?: string;
   subtitle?: JSX.Element | string;
 }) => {
   return (
@@ -55,6 +57,7 @@ const RichTextEditor = ({
         value={value}
         onChange={setValue}
         error={!!error}
+        placeholder={placeholder}
         components={{
           preview: (source) => (
             <MarkdownSection content={source} readMore={false} sx={{ m: 0 }} />

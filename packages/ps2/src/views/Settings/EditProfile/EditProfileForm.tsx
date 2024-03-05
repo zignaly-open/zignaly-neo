@@ -250,6 +250,9 @@ const EditProfileForm = () => {
                       </ZigTypography>
                     }
                     error={t(errors.bio?.message, { maxLength: 2000 })}
+                    placeholder={t(
+                      'edit-profile.tell-me-the-story-of-your-left',
+                    )}
                     {...field}
                   />
                 )}
