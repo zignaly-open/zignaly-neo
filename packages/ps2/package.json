@@ -66,7 +66,6 @@
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
     "@types/react-share": "^4.0.0",
-    "@uiw/react-markdown-preview": "^5.0.7",
     "@uiw/react-md-editor": "^4.0.3",
     "@xfuturum/is-font-installed": "1.0.2",
     "@zignaly-open/tracker": "^0.1.3",
