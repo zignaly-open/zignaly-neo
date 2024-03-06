@@ -1,26 +1,19 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
-import RichDescriptionEditor from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor';
-import { deserialize } from '../../EditServiceProfileContainer/atoms/RichDescriptionEditor/atoms/util';
+import MarkdownSection from './MarkdownSection';
 
 const ServiceDescription: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation('service');
-  const value = useMemo(
-    () => deserialize(service.description),
-    [service.description],
-  );
 
   return (
     <Box>
-      <RichDescriptionEditor
+      <MarkdownSection
         id={'service-profile__description'}
-        value={value}
-        readMore
-        readOnly
-        label={t('strategy')}
-        sx={{ mt: 8, color: 'neutral200' }}
+        content={service.description}
+        title={t('strategy')}
+        emptyText={t('strategy-empty')}
       />
     </Box>
   );

@@ -35,6 +35,7 @@ const EditProfileForm = () => {
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
     mode: 'onBlur',
+    reValidateMode: 'onChange',
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
       username: user.userName || '',
@@ -116,7 +117,7 @@ const EditProfileForm = () => {
               <ServiceLogoStatus control={control} />
             </Box>
           )}
-          <Grid container>
+          <Grid container maxWidth={md ? '605px' : '100%'}>
             <Grid container alignItems={'center'}>
               {!md && (
                 <Grid sm={3} xs={12} p={1} pb={2} order={!sm && 3}>

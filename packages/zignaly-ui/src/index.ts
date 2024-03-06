@@ -20,17 +20,12 @@ export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
 export { default as ZigSlider } from "./components/inputs/ZigSlider";
-export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
 export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
 
 // Filters
 export { default as ZigSearch } from "./components/filters/ZigSearch";
 export { default as ZigFilters } from "./components/filters/ZigFilters";
 export * from "./components/filters/ZigFilters";
-
-// TODO: fix storybook & refactor
-export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";
-export type { InputAmountAdvancedValueType } from "./components/inputs/InputAmountAdvanced";
 
 export { default as ZigInputAmount } from "./components/inputs/ZigInputAmount";
 
@@ -92,7 +87,6 @@ export { MarginContainer, PageContainer } from "./components/styled";
 
 // Navigation
 // TODO: @cwagner22 pls fix/bring to proper shape
-export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";

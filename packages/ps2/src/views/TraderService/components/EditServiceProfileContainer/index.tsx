@@ -26,14 +26,9 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
-import RichDescriptionEditor from './atoms/RichDescriptionEditor';
 import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
-import {
-  deserialize,
-  serialize,
-} from './atoms/RichDescriptionEditor/atoms/util';
 import Deactivated from '../DeactivatedService';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
@@ -55,7 +50,7 @@ const EditServiceProfileContainer: React.FC<{
   const { t } = useTranslation('service');
   const defaultValues = {
     name: service.name,
-    description: deserialize(service.description),
+    description: service.description,
     maximumSbt: service.maximumSbt,
     successFee: service.successFee || 0,
     logo: service.logo,
@@ -67,7 +62,6 @@ const EditServiceProfileContainer: React.FC<{
     control,
     watch,
     formState: { errors },
-    setValue,
     reset,
   } = useForm<EditServiceForm>({
     mode: 'onTouched',
@@ -86,11 +80,10 @@ const EditServiceProfileContainer: React.FC<{
   const successFee = watch('successFee');
 
   const submit = async (data: EditServiceForm) => {
-    const { commission: c, description, ...rest } = data;
+    const { commission: c, ...rest } = data;
     await Promise.all([
       edit({
         id: service.id,
-        description: serialize(description),
         ...rest,
         level: visibility,
         commission: c,
@@ -207,17 +200,13 @@ const EditServiceProfileContainer: React.FC<{
               name='description'
               control={control}
               render={({ field }) => (
-                <RichDescriptionEditor
-                  setValue={setValue.bind(null, 'description')}
+                <ZigInput
                   id={'edit-service-profile__service-description'}
-                  label={
-                    <ZigTypography mb={'10px'}>
-                      {t('edit.description')}
-                    </ZigTypography>
-                  }
+                  fullWidth
+                  label={t('edit.description')}
                   error={t(errors.description?.message)}
-                  value={field.value}
-                  sx={{ color: 'neutral200' }}
+                  multiline
+                  rows={18}
                   {...field}
                 />
               )}

@@ -3,9 +3,9 @@ import { PageContainer } from '@zignaly-open/ui';
 
 export const Layout = styled(PageContainer)`
   @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-    padding: 120px 52px 0 52px;
+    padding: 68px 52px 0 52px;
   }
-  padding-top: 100px;
+  padding-top: 48px;
 `;
 
 export const Heading = styled('div')`

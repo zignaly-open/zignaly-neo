@@ -2,9 +2,8 @@ import React, { useMemo } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ProfileStatusBoxContainer } from './styles';
 import { Box, Tooltip, useMediaQuery, useTheme } from '@mui/material';
-import { KycResponse } from 'apis/user/types';
+import { KycStatus, KycStatusResponse } from 'apis/user/types';
 import { useTranslation } from 'react-i18next';
-import kycConfig from '../Kyc/kycDefinitions';
 import { InfoOutlined } from '@mui/icons-material';
 import { Control, Controller } from 'react-hook-form';
 import ServiceLogo from '../../TraderService/components/ServiceLogo';
@@ -62,24 +61,30 @@ export const ServiceLogoStatus = ({
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
-  const { data: kycStatuses } = useKycStatusesQuery(undefined, {
-    skip: !isFeatureOn(Features.Kyc),
+  const exchangeActivated = user.exchanges?.some((e) => e.activated);
+  const { data } = useKycStatusesQuery(undefined, {
+    skip: !isFeatureOn(Features.Kyc) || !exchangeActivated,
   });
+  const kycStatuses = data?.statuses;
 
   const kycStarted = useMemo(() => {
-    const kycStatusesCateg = groupBy(kycStatuses?.status, 'category');
+    if (!kycStatuses) return undefined;
+    const kycStatusesCateg = groupBy(kycStatuses, 'category');
     const res = find(kycStatusesCateg, (x) => {
-      return x.some(
-        (kyc) =>
-          (kyc.status === 'rejected' && kyc.canBeRetried) ||
-          ['approved', 'pending'].includes(kyc.status),
+      return x.some((kyc) =>
+        [
+          KycStatus.REJECTED_RETRY,
+          KycStatus.APPROVED,
+          KycStatus.PENDING,
+        ].includes(kyc.status),
       );
     });
     if (!res) {
-      return kycStatusesCateg[kycStatuses?.status[0].category];
+      return kycStatusesCateg[kycStatuses[0].category];
     }
+
     return res;
-  }, [kycStatuses?.status]);
+  }, [kycStatuses]);
 
   return (
     <>
@@ -111,7 +116,7 @@ export const ServiceLogoStatus = ({
             )}
           />
 
-          {isFeatureOn(Features.Kyc) && !!kycStatuses && kycStarted && (
+          {isFeatureOn(Features.Kyc) && (kycStatuses || !exchangeActivated) && (
             <KYCStatusBox
               id={'edit-profile__kyc'}
               kycStatuses={kycStarted}
@@ -125,11 +130,19 @@ export const ServiceLogoStatus = ({
 };
 
 export const KYCStatusBox = ({
-  kycStatuses,
+  kycStatuses = [
+    {
+      // Default value since BE returns an error when exchange is not activated, or in some other cases
+      status: KycStatus.NOT_STARTED,
+      category: 'KYC',
+      level: 1,
+      reason: '',
+    },
+  ],
   cta,
   id,
 }: {
-  kycStatuses: KycResponse[];
+  kycStatuses: KycStatusResponse[];
   cta: () => void;
   id?: string;
 }) => {
@@ -141,37 +154,40 @@ export const KYCStatusBox = ({
     color: theme.palette.backgrounds.investorsIcon,
   };
 
-  const isPartiallyApproved = kycStatuses.some((x) => x.status === 'approved');
-  const isPending = kycStatuses[0].status === 'pending';
+  const isPartiallyApproved = kycStatuses.some(
+    (x) => x.status === KycStatus.APPROVED,
+  );
+  const isPending = kycStatuses[0].status === KycStatus.PENDING;
   const isSuccess =
     isPartiallyApproved &&
-    kycStatuses.every(
-      (x) => x.status === 'approved' || x.status === 'init' || !x.status,
+    kycStatuses.every((x) =>
+      [KycStatus.APPROVED, KycStatus.INIT, KycStatus.NOT_STARTED].includes(
+        x.status,
+      ),
     );
-  const isNotStarted =
-    !kycStatuses[0].status || kycStatuses[0].status === 'init';
-  const retry = kycStatuses.some(
-    (x) => x.status === 'rejected' && x.canBeRetried,
+  const isNotStarted = [KycStatus.NOT_STARTED, KycStatus.INIT].includes(
+    kycStatuses[0].status,
   );
+  const retry = kycStatuses.some((x) => x.status === KycStatus.REJECTED_RETRY);
 
   let color = theme.palette.red;
   if (isSuccess) color = theme.palette.greenGraph;
   else if (isPending) color = theme.palette.yellow;
   else if (isPartiallyApproved) color = '#BAA9A9';
 
-  const getStatus = (status: KycResponse['status']) =>
-    status === 'approved'
+  const getStatus = (status: KycStatus) =>
+    status === KycStatus.APPROVED
       ? 'edit-profile.status-box.verified'
-      : status === 'pending'
+      : status === KycStatus.PENDING
       ? 'edit-profile.status-box.pending'
-      : status === 'rejected'
+      : status === KycStatus.REJECTED || status === KycStatus.REJECTED_RETRY
       ? 'edit-profile.status-box.rejected'
       : 'edit-profile.status-box.not-verified';
 
-  const getStatusColor = (status: KycResponse['status']) =>
-    status === 'approved'
+  const getStatusColor = (status: KycStatus) =>
+    status === KycStatus.APPROVED
       ? theme.palette.greenGraph
-      : status === 'pending'
+      : status === KycStatus.PENDING
       ? theme.palette.yellow
       : theme.palette.red;
 
@@ -184,15 +200,15 @@ export const KYCStatusBox = ({
       >
         {t(`header.verification-${kycStatuses[0].category.toLowerCase()}`)}
       </ZigTypography>
-      {kycConfig[kycStatuses[0].category].map((x, i) => {
-        const { status, reason, canBeRetried } = kycStatuses[i];
-        if (i > 0 && (!status || status === 'init')) return null;
+      {kycStatuses.map((kyc, i) => {
+        const { status, reason } = kyc;
+        if (i > 0 && (!status || status === KycStatus.INIT)) return null;
         return (
           <Box
             display='flex'
             flexDirection={'column'}
             alignItems={'center'}
-            key={x.label}
+            key={`${kyc.category}-${kyc.level}`}
           >
             {i > 0 && (
               <Box
@@ -203,11 +219,13 @@ export const KYCStatusBox = ({
                 marginBottom={'12px'}
               />
             )}
-            {!isNotStarted && (
+            {/* {!isNotStarted && (
               <Box sx={{ '> svg': { width: '16px', height: '16px' } }}>
-                <Tooltip title={t(x.label, { ns: 'kyc' })}>{x.icon}</Tooltip>
+                <Tooltip title={t(label, { ns: 'kyc' })}>
+                  <SilverIcon />
+                </Tooltip>
               </Box>
-            )}
+            )} */}
             <ZigTypography
               component={'p'}
               fontWeight={600}
@@ -218,17 +236,20 @@ export const KYCStatusBox = ({
               id={id && `${id}-current-status`}
             >
               {t(getStatus(status))}
-              {status === 'pending' && (
+              {status === KycStatus.PENDING && (
                 <Tooltip title={t('progress-explainer', { ns: 'kyc' })}>
                   <InfoOutlined sx={infoIconStyle} />
                 </Tooltip>
               )}
-              {status === 'rejected' && (
+              {(status === KycStatus.REJECTED ||
+                status === KycStatus.REJECTED_RETRY) && (
                 <Tooltip
                   title={
                     <span style={{ whiteSpace: 'pre-line' }}>
                       {`${reason}\n${
-                        canBeRetried ? t('resubmit-issues', { ns: 'kyc' }) : ''
+                        status === KycStatus.REJECTED_RETRY
+                          ? t('resubmit-issues', { ns: 'kyc' })
+                          : ''
                       }`}
                     </span>
                   }

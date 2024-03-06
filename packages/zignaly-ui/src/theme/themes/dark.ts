@@ -89,21 +89,17 @@ const dark: ThemeStyledComponents = {
       profits: {
         gradient: ["#2bc5f2", "#19dcd1", "#0ceaae"],
         icon: "#29cdbb",
-        text: "#90d2bf",
       },
       risk: {
         gradient: ["#4c18b3", "#5352D8", "#526BDD"],
-        text: "#8491EF",
       },
       service: {
         gradient: ["#6e0a83", "#d94097", "#f24196"],
         icon: "#734c9a",
-        text: "#ba7af0",
       },
       balanced: {
         gradient: ["#46835e", "#7fce87", "#88c489"],
         icon: "#a2b88d",
-        text: "#a2b88d",
       },
     },
     bar: {

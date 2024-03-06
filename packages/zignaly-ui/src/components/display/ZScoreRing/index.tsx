@@ -47,7 +47,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             <categoryData.icon color={colors.icon} height={16} width={"100%"} />
           </Box>
         )}
-        <ZigTypography variant="h4" color={colors.text}>
+        <ZigTypography variant="h4" color="neutral100">
           {categoryData.text}
         </ZigTypography>
         <Box display={"flex"}>
@@ -60,13 +60,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
           >
             {Math.round(value)}
           </ZigTypography>
-          <ZigTypography
-            component={"span"}
-            fontWeight={500}
-            fontSize={17}
-            color="#neutral400"
-            lineHeight={"22px"}
-          >
+          <ZigTypography component={"span"} fontWeight={400} fontSize={17} lineHeight={"22px"}>
             {
               // eslint-disable-next-line i18next/no-literal-string
               `/${max}`

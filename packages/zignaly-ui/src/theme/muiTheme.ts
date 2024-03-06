@@ -188,13 +188,11 @@ const createMuiTheme = ({
             display: flex;
             align-items: center;
             flex-direction: row;
-            &, & > .MuiToolbar-root {
-              height: 52px;
+            &, .MuiToolbar-root {
               min-height: 52px;
             }
             border: none;
             z-index: 12;
-            
           `,
         },
       },

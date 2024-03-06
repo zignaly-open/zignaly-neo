@@ -1,5 +1,5 @@
 import { BrandImage, HeaderLinksContainer } from '@zignaly-open/ui';
-import React, { Suspense, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
 import {
@@ -17,6 +17,8 @@ import Drawer from '../Drawer';
 import HeaderWidgetButtons from '../HeaderWidgetButtons';
 import { isFeatureOn, whitelabel } from '../../../whitelabel';
 import { Features } from 'whitelabel/type';
+import KycBanner from '../KycBanner';
+import { useMeasure } from 'react-use';
 
 type HeaderMenuItem = {
   id: string;
@@ -60,9 +62,18 @@ const Header: React.FC = () => {
     return menuItems;
   }, [t, isAuthenticated, md]);
 
+  const [headerRef, { height }] = useMeasure();
+
+  useEffect(() => {
+    if (height) {
+      document.body.style.setProperty('--header-height', `${height}px`);
+    }
+  }, [height]);
+
   return (
-    <Box sx={{ display: 'flex' }}>
-      <StyledAppBar>
+    <StyledAppBar ref={headerRef}>
+      <Box display={'flex'} flexDirection={'column'} flex={1}>
+        <KycBanner />
         <Toolbar sx={{ flex: 1 }}>
           <Container>
             {sm ? (
@@ -117,8 +128,8 @@ const Header: React.FC = () => {
             </Box>
           </Container>
         </Toolbar>
-      </StyledAppBar>
-    </Box>
+      </Box>
+    </StyledAppBar>
   );
 };
 

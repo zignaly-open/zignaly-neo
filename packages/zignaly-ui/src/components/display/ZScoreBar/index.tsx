@@ -20,11 +20,11 @@ const ZScoreBar = ({ value, max = 100, id, ...props }: ZScoreBarProps) => {
         alignItems={"center"}
         justifyContent={"flex-start"}
       >
-        <ZigTypography variant="body2" color="neutral000" fontSize={15} fontWeight={600}>{`${round(
+        <ZigTypography variant="body2" color="neutral000" fontSize={15} fontWeight={500}>{`${round(
           value,
           1,
         )}`}</ZigTypography>
-        <ZigTypography color="paleBlue" fontSize={11} fontWeight={500}>
+        <ZigTypography color="paleBlue" fontSize={12} fontWeight={400}>
           {`/${Math.round(max)}`}
         </ZigTypography>
       </Box>
