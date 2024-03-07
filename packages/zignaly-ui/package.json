@@ -16,6 +16,10 @@
       "import": "./lib/fonts.js",
       "require": "./lib/fonts.cjs"
     },
+    "./i18n": {
+      "import": "./lib/i18n.js",
+      "require": "./lib/i18n.cjs"
+    },
     "./charts": {
       "import": "./lib/charts.js",
       "require": "./lib/charts.cjs"
@@ -86,6 +90,7 @@
     "@rollup/plugin-alias": "^5.0.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
     "@rollup/plugin-url": "^8.0.1",

@@ -1,17 +1,24 @@
 import i18n from "i18next";
 import React from "react";
 import { I18nextProvider, initReactI18next } from "react-i18next";
+import * as allLanguages from "./ns";
+import { addZignalyUiResources } from "../i18n";
 
 i18n.use(initReactI18next).init({
   lng: "en",
   fallbackLng: "en",
-  ns: ["common"],
-  defaultNS: "common",
+  ns: ["zignaly-ui"],
+  defaultNS: "zignaly-ui",
   interpolation: {
     escapeValue: false,
   },
-  resources: { en: { common: { xfuturum: "The technical partner you can rely on" } } },
+  resources: Object.entries(allLanguages).reduce((memo, [l, v]) => {
+    memo[l] = { "zignaly-ui": v };
+    return memo;
+  }, {}),
 });
+
+addZignalyUiResources(i18n);
 
 export const storybookI18nextDecorator = (story: () => JSX.Element) => (
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
