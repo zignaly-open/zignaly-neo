@@ -100,6 +100,7 @@ const dark: ThemeStyledComponents = {
       balanced: "linear-gradient(to right, #10341d, #46995c 42%, #76dd88 76%, #88c489)",
     },
   },
+  imageColorOverride: undefined,
 };
 
 export default dark;

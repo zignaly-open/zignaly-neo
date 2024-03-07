@@ -60,6 +60,7 @@ export { default as ZScoreRing } from "./components/display/ZScoreRing";
 export * from "./components/display/ZScoreRing";
 export { default as ZScoreRings } from "./components/display/ZScoreRings";
 export { default as ZScoreBar } from "./components/display/ZScoreBar";
+export { default as ZigImageColorOverride } from "./components/display/ZigImageColorOverride";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";
