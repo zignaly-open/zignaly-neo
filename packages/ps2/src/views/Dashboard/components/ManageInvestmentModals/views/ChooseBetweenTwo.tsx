@@ -1,8 +1,7 @@
 import React from 'react';
 import { ZigButton, ZigButtonProps, ZigTypography } from '@zignaly-open/ui';
-import { Box, Divider, Grid, useMediaQuery } from '@mui/material';
+import { Box, Divider, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { TypographyProps } from '@mui/system';
-import theme from '../../../../../theme';
 
 type ExtendedTypographyProps = TypographyProps & { id: string };
 export type ChooseBetweenTwoProps = {
@@ -39,6 +38,7 @@ const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
   leftOptionSize = 5,
   rightOptionSize = 5,
 }) => {
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <>

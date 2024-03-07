@@ -17,8 +17,7 @@ import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
 import { usePrefetchTranslation } from '../../../../util/i18n/i18nextHelpers';
-import { Box, useMediaQuery } from '@mui/material';
-import theme from '../../../../theme';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import CriticalError from '../../../../components/Stub/CriticalError';
 
 function EditInvestmentModal({
@@ -44,6 +43,7 @@ function EditInvestmentModal({
     isError: isErrorLoadingService,
     data: service,
   } = useServiceDetails(serviceId);
+  const theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down('sm'));
   useSelectInvestment(service);
   // gotta make sure this is set because right after the setSelectedInvestment the value comes as null

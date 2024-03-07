@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, useTheme } from '@mui/material';
 import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { ZigCaretRightIcon } from '@zignaly-open/ui/icons';
 import { useTranslation } from 'react-i18next';
@@ -10,13 +10,13 @@ import { useActiveExchange } from 'apis/user/use';
 import { useInvestmentsQuery } from 'apis/investment/api';
 import { BalanceStatus } from './types';
 import { useOpenDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import theme from '../../../../theme';
 import { ButtonWrapper } from './styles';
 
 const BalanceButton = () => {
   const { t } = useTranslation('common');
   const exchange = useActiveExchange();
   const openDepositModal = useOpenDepositModal();
+  const theme = useTheme();
   const { data: investments } = useInvestmentsQuery(exchange?.internalId, {
     skip: !exchange?.internalId,
   });

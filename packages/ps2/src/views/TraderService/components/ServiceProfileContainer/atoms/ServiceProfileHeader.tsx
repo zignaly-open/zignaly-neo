@@ -2,8 +2,7 @@ import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useIsInvestedInService } from '../../../../../apis/investment/use';
 import { useActiveExchange } from '../../../../../apis/user/use';
-import { useMediaQuery } from '@mui/material';
-import theme from '../../../../../theme';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useUpdateEffect } from 'react-use';
 import { Box } from '@mui/system';
@@ -13,6 +12,7 @@ import ServiceInformation from './ServiceInformation';
 
 const ServiceProfileHeader: React.FC<{ service: Service }> = ({ service }) => {
   const isInvested = useIsInvestedInService(service.id);
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
   const activeExchange = useActiveExchange();

@@ -5,6 +5,7 @@ const baseApiBackoffice = createApi({
   reducerPath: 'backofficeApi',
   baseQuery: baseQuery(),
   endpoints: () => ({}),
+  tagTypes: ['WlConfig'],
 });
 
 export default baseApiBackoffice;

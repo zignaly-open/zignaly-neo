@@ -2,7 +2,7 @@ name: PS2 Test Backoffice deploy
 on:
   push:
     branches:
-      - feat/backoffice
+      - feat/wl-theme-wysiwyg
       - master
 
 jobs:

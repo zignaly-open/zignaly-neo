@@ -2,6 +2,10 @@
   "ZigInputAmount": {
     "max": "Max"
   },
+  "ZigImageInput": {
+    "image-input-edit": "Edit image",
+    "image-input-add": "Upload image"
+  },
   "ZigFilters": {
     "show-results": "Show Results",
     "reset": "Reset",

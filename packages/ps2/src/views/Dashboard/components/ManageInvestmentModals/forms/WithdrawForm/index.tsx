@@ -14,7 +14,7 @@ import {
 } from '@zignaly-open/ui';
 import { ZigListIcon } from '@zignaly-open/ui/icons';
 import { WithdrawFormData } from './types';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   useCoinBalances,
   useDepositInfo,
@@ -29,7 +29,6 @@ import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheckWithdraw } from 'apis/user/use';
 import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { useNavigate } from 'react-router-dom';
-import theme from '../../../../../../theme';
 
 function WithdrawForm({
   setStep,
@@ -39,6 +38,7 @@ function WithdrawForm({
 }: WithdrawModalProps) {
   const navigate = useNavigate();
   const { t } = useTranslation('withdraw-crypto');
+  const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,

@@ -551,9 +551,14 @@ const overrideTheme = <U>(
 
 export const getMuiAndStyledThemes = (
   baseTheme: ThemeStyledComponents,
-  overrides?: ThemeStyledComponentsOverrides,
+  overrides?: ThemeStyledComponentsOverrides[],
 ): ThemeExport => {
-  const overriden = overrideTheme(baseTheme, overrides) as ThemeStyledComponents;
+  let overriden = baseTheme;
+
+  for (let k of overrides || []) {
+    overriden = overrideTheme(overriden, k || {}) as ThemeStyledComponents;
+  }
+
   return {
     legacyStyledComponentsDoNotUse: overriden,
     mui: createMuiTheme(overriden),
