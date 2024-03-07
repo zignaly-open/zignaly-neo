@@ -7,11 +7,26 @@
     "reset": "CH-Ѓëŝëṫ",
     "min": "CH-Ṁïń",
     "to": "CH-ṫö",
-    "max": "CH-Ṁáx"
+    "max": "CH-Ṁáx",
+    "all": "CH-Áll",
+    "none": "CH-Ńöńë"
   },
   "ZigTable": {
     "page-x-of-all": "CH-<text>Ṗáĝë</text> <current>{{currentPage}}</current> <text>öüṫ öḟ</text> <total>{{totalPages}}</total>",
     "displaying-x-items_one": "CH-<text>Ḋïŝṗláyïńĝ</text> <selector/> <text>ïṫëṁ</text>",
     "displaying-x-items": "CH-<text>Ḋïŝṗláyïńĝ</text> <selector/> <text>ïṫëṁŝ</text>"
+  },
+  "ZigRisk": {
+    "very-low-risk": "CH-Vëѓy löw ѓïŝk",
+    "low-risk": "CH-Löw ѓïŝk",
+    "average-risk": "CH-Ávëѓáĝë ѓïŝk",
+    "risky": "CH-Ѓïŝky",
+    "very-risky": "CH-Vëѓy ѓïŝky"
+  },
+  "ZScoreRing": {
+    "profits": "CH-Ṗѓöḟïṫŝ",
+    "risk": "CH-Ѓïŝk",
+    "service": "CH-Ŝëѓvïĉë",
+    "balance": "CH-Báláńĉë"
   }
 }

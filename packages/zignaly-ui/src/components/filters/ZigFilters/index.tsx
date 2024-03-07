@@ -170,7 +170,7 @@ const ZigFilters = ({
           </Layout>
           {md && (
             <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
-              {t("reset", { defaultValue: "Reset" })}
+              {t("reset")}
             </ZigButton>
           )}
         </Box>

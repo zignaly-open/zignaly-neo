@@ -6,6 +6,7 @@ import theme from "./theme";
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
 import { getZignalyThemeExport } from "@zignaly-open/ui";
+import { storybookI18nextDecorator } from "../src/i18n/dummyI18nextProvider";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,6 +34,7 @@ export const decorators = [
     filesExt: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   }),
   withStyledTheme,
+  storybookI18nextDecorator,
 ];
 
 export const parameters = {
