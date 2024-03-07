@@ -12,7 +12,7 @@ import ZigButton from "components/inputs/ZigButton";
 import { Box } from "@mui/material";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
-import { storybookI18nextDecorator } from "../../../utils/dummyI18nextProvider";
+import { storybookI18nextDecorator } from "../../../i18n/dummyI18nextProvider";
 
 type ZigTableProps = React.ComponentProps<typeof ZigTable>;
 type Story = StoryObj<ZigTableProps>;
