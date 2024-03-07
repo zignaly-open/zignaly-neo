@@ -57,8 +57,6 @@ export const Option = styled('span', {
 
   &:hover {
     background: ${({ theme }) =>
-      theme.palette.backgrounds.manageServiceMenuHover};
-    background: ${({ theme }) =>
       lighten(theme.palette.neutral750, (0x1b - 0x16) / 0xff)};
     & > * {
       color: ${({ theme }) => theme.palette.neutral100};
