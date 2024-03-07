@@ -3,12 +3,7 @@ import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } from "./types";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
-
-const DEFAULT_ITEMS = {
-  balance: "Available:",
-  min: "Min:",
-  max: "Max:",
-};
+import { useTranslation } from "react-i18next";
 
 const extractItem = (
   item?: InputExtraInfoFalseableItem,
@@ -37,6 +32,16 @@ export const InputExtraInfo = (
 ) => {
   const { balance, min, max, coin, extraInfo = {} } = props;
   const { wrapExtraInfo = 2 } = extraInfo;
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigInputAmount" });
+
+  const DEFAULT_ITEMS = useMemo(
+    () => ({
+      balance: t("available"),
+      min: t("min"),
+      max: t("max"),
+    }),
+    [t],
+  );
 
   const items = useMemo(() => {
     // Default items

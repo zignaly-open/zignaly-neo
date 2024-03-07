@@ -1,6 +1,8 @@
 {
   "ZigInputAmount": {
-    "max": "Max"
+    "available": "Available:",
+    "min": "min",
+    "max": "max"
   },
   "ZigFilters": {
     "show-results": "Show Results",
@@ -28,5 +30,8 @@
     "risk": "Risk",
     "service": "Service",
     "balance": "Balance"
+  },
+  "ZigSearch": {
+    "search": "Search"
   }
 }
