@@ -43,7 +43,14 @@ function PromptModal({
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
   return (
-    <ZModal wide {...props} close={close} title={title} id={prefixId}>
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={title}
+      id={prefixId}
+      mobileFullScreen
+    >
       {!!description && (
         <ZigTypography
           sx={{ mb: 1 }}
