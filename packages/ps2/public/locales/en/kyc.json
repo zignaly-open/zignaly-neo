@@ -11,8 +11,7 @@
   "complete-previous-level-first": "Please complete the previous level first",
   "different-type-started-KYC": "You have already started the KYC process as an individual",
   "different-type-started-KYB": "You have already started the KYB process as a business",
-  "multiple-accounts": "At the moment, KYC is only enabled for users with one account",
-  "without-services": "At the moment, KYC is only enabled for users without services",
+  "multiple-accounts": "At the moment, KYC is only enabled for users with one exchange account",
   "progress-explainer": "We're working tirelessly on it, please hold tight. Usually it takes only a few minutes",
   "resubmit-issues": "Resubmit your information addressing the issues.",
   "tabs": {
