@@ -25,7 +25,8 @@
     "moduleNameMapper": {
       "@zignaly-open/ui/icons": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/icons.cjs",
       "@zignaly-open/ui/charts": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/charts.cjs",
-      "@zignaly-open/ui/fonts": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/fonts.cjs"
+      "@zignaly-open/ui/fonts": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/fonts.cjs",
+      "@zignaly-open/ui/i18n": "<rootDir>/../../node_modules/@zignaly-open/ui/lib/i18n.cjs"
     }
   },
   "browserslist": {
