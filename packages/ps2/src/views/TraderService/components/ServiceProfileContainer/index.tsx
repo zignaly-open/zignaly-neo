@@ -130,7 +130,9 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   minWidth: { lg: MIN_RIGHT_COLUMN_WIDTH },
                 }}
               >
-                <ServiceZScoreDetails service={service} />
+                <React.Suspense fallback={null}>
+                  <ServiceZScoreDetails service={service} />
+                </React.Suspense>
               </Grid>
             )}
           </Grid>
