@@ -36,9 +36,9 @@ export const InputExtraInfo = (
 
   const DEFAULT_ITEMS = useMemo(
     () => ({
-      balance: t("available"),
-      min: t("min"),
-      max: t("max"),
+      balance: t("info.available"),
+      min: t("info.min"),
+      max: t("info.max"),
     }),
     [t],
   );

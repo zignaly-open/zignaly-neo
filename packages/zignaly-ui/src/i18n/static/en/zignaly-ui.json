@@ -1,8 +1,11 @@
 {
   "ZigInputAmount": {
-    "available": "Available:",
-    "min": "Min:",
-    "max": "Max:"
+    "max": "Max",
+    "info": {
+      "available": "Available:",
+      "min": "Min:",
+      "max": "Max:"
+    }
   },
   "ZigFilters": {
     "show-results": "Show Results",
