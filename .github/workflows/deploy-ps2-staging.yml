@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - feat/wl-server-2
+      - chore/fixing-cache-clear
 
 jobs:
   deploy:
