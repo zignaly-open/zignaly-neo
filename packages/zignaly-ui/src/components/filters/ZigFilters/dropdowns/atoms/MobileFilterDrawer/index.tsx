@@ -60,7 +60,7 @@ const MobileFilterDrawer = ({
             </Box>
             <Box flex={1} justifyContent={"flex-end"} display={"flex"}>
               <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__dropdown-reset`}>
-                {t("reset", { defaultValue: "Reset" })}
+                {t("reset")}
               </ZigButton>
             </Box>
           </Box>
@@ -91,7 +91,7 @@ const MobileFilterDrawer = ({
           sx={{ alignSelf: "center", m: "8px 0 24px" }}
           id={`${prefixId}__multi-dropdown-show`}
         >
-          {t("show-results", { defaultValue: "Show Results" })}
+          {t("show-results")}
         </ZigButton>
       </SwipeableDrawer>
     </Suspense>

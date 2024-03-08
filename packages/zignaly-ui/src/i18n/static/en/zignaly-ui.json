@@ -1,17 +1,37 @@
 {
   "ZigInputAmount": {
-    "max": "Max"
+    "available": "Available:",
+    "min": "min",
+    "max": "max"
   },
   "ZigFilters": {
     "show-results": "Show Results",
     "reset": "Reset",
     "min": "Min",
     "to": "to",
-    "max": "Max"
+    "max": "Max",
+    "all": "All",
+    "none": "None"
   },
   "ZigTable": {
     "page-x-of-all": "<text>Page</text> <current>{{currentPage}}</current> <text>out of</text> <total>{{totalPages}}</total>",
     "displaying-x-items_one": "<text>Displaying</text> <selector/> <text>item</text>",
     "displaying-x-items": "<text>Displaying</text> <selector/> <text>items</text>"
+  },
+  "ZigRisk": {
+    "very-low-risk": "Very low risk",
+    "low-risk": "Low risk",
+    "average-risk": "Average risk",
+    "risky": "Risky",
+    "very-risky": "Very risky"
+  },
+  "ZScoreRing": {
+    "profits": "Profits",
+    "risk": "Risk",
+    "service": "Service",
+    "balance": "Balance"
+  },
+  "ZigSearch": {
+    "search": "Search"
   }
 }
