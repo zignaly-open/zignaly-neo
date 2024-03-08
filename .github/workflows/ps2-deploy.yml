@@ -104,7 +104,7 @@ jobs:
 
   invalidate:
     name: Invalidate Cloudfront nd Cloudflare
-    needs: build
+#    needs: build
     runs-on: ubuntu-latest
     environment: prod
     steps:
