@@ -43,12 +43,10 @@ export const useServiceFilters = (services: MarketplaceService[]) => {
     }, []);
 
     const returnsPeriods = [
-      'pnlPercent365t',
       'pnlPercent180t',
       'pnlPercent90t',
       // Add 1M option if no zscore. Otherwise 1M is always showed because enough space on mobile.
       ...(isFeatureOn(Features.ZScore) ? ['pnlPercent30t'] : []),
-      'pnlPercent7t',
     ];
 
     return [

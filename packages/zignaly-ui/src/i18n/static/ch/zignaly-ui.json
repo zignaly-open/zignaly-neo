@@ -1,6 +1,8 @@
 {
   "ZigInputAmount": {
-    "max": "CH-Ṁáx"
+    "available": "CH-Áváïláblë:",
+    "min": "CH-ṁïń",
+    "max": "CH-ṁáx"
   },
   "ZigFilters": {
     "show-results": "CH-Ŝĥöw Ѓëŝülṫŝ",
@@ -28,5 +30,8 @@
     "risk": "CH-Ѓïŝk",
     "service": "CH-Ŝëѓvïĉë",
     "balance": "CH-Báláńĉë"
+  },
+  "ZigSearch": {
+    "search": "CH-Ŝëáѓĉĥ"
   }
 }
