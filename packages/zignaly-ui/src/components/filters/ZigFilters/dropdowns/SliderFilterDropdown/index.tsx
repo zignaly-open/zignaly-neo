@@ -7,6 +7,7 @@ import { DropdownResetButton } from "../atoms/DropdownResetButton";
 import { DropdownLabel } from "../atoms/DropdownLabel";
 import MobileFilterButton from "../atoms/MobileFilterButton";
 import { ZigFilter } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const SliderFilterDropdown = ({
   resetFilter,
@@ -16,9 +17,11 @@ const SliderFilterDropdown = ({
   mobile,
   prefixId,
 }: SliderFilterDropdownProps) => {
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
+
   const displayValue = useMemo(() => {
     if (Array.isArray(filter.value)) {
-      if (filter.value[0] === null && filter.value[1] === null) return "All";
+      if (filter.value[0] === null && filter.value[1] === null) return t("all");
       else if (filter.value[0] === null) return `< ${filter.value[1]}%`;
       else if (filter.value[1] === null) return `> ${filter.value[0]}%`;
       else return `${filter.value[0]}%-${filter.value[1]}%`;

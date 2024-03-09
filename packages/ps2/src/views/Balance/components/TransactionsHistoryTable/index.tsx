@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   createColumnHelper,
-  DateLabel,
   ZigTable,
   ZigTablePriceLabel,
   ZigTypography,
@@ -20,6 +19,7 @@ import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
 import { useTransactionsHistoryQuery } from '../../../../apis/coin/api';
 import { TableWrapper } from './styles';
+import DateLabel from './atoms/DateLabel';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const theme = useTheme();

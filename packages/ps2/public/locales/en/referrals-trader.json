@@ -17,6 +17,7 @@
         "number-referrals": "Number of referrals that invested in a service(s)"
     },
     "my-referrals": "My Referrals",
+    "earnings": "Earnings",
     "when-you-invite": "when you invite {{invite}}+ people to {{ whitelabel }}",
     "when-you-invite-in": "when you invite {{invite}} people in:",
     "get-by-inviting": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to {{ whitelabel }}",

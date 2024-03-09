@@ -6,7 +6,6 @@ export const Layout = styled("div")<{ error?: string; loading?: boolean }>`
   width: 100%;
   flex-direction: column;
   .input-box {
-    background: ${(props) => props.theme.palette.backgrounds.input2fa};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,11 +31,6 @@ export const Layout = styled("div")<{ error?: string; loading?: boolean }>`
 
     input {
       background: ${(props) => props.theme.palette.backgrounds.input2fa};
-      background: linear-gradient(
-        90deg,
-        ${(props) => props.theme.palette.backgrounds.input2fa} 0%,
-        ${(props) => props.theme.palette.backgrounds.input2fa} 100%
-      );
       border-radius: 8px;
       border: 1px solid ${(props) => props.theme.palette.neutral600} !important;
       color: ${(props) => `${props.theme.palette.neutral100}`};
@@ -57,7 +51,7 @@ export const Layout = styled("div")<{ error?: string; loading?: boolean }>`
 
     input:not(:placeholder-shown):valid {
       border-width: 1px;
-      border-image-source: ${(props) => props.theme.palette.input2faGradientBorder};
+      border-image-source: ${(props) => props.theme.palette.input2faGradient};
       border-image-slice: 1;
       background-image: linear-gradient(
           to bottom,

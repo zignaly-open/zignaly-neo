@@ -150,8 +150,11 @@ export const MarkdownContainer = styled('div')`
     padding-inline-start: 15px;
   }
 
-  li {
+  ul > li {
     list-style-type: disc;
+  }
+  ol > li {
+    list-style-type: decimal;
   }
 
   img {
@@ -207,8 +210,7 @@ export const RightSideActionWrapper = styled(Box)<{
     width: 100%;
     padding: 10px 3px 5px 3px;
     flex-direction: row;
-    background-color: ${({ theme }) =>
-      theme.palette.backgrounds.mobileButtonsWrapper};
+    background-color: ${({ theme }) => theme.palette.neutral900};
     z-index: 5;
   }
 `;

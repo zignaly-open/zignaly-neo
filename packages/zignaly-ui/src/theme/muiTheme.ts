@@ -17,6 +17,7 @@ const createMuiTheme = ({
   boxShadows,
   fontFamily,
   fontFamilyH1H6,
+  imageColorOverride,
 }: ThemeStyledComponents) =>
   createTheme({
     palette: {
@@ -40,6 +41,7 @@ const createMuiTheme = ({
       boxShadows,
       chart,
       zscore,
+      imageColorOverride,
     },
     typography: {
       fontFamily: fontFamily.join(","),
@@ -78,8 +80,7 @@ const createMuiTheme = ({
           border-radius: 5px;
           display: flex;
           align-items: center;
-          background: ${palette.neutral800};
-          background: ${backgrounds.input};
+          background: ${backgrounds.selectInputFill};
           transition: border-color 0.2s;
           
           &.Mui-disabled {
@@ -124,8 +125,7 @@ const createMuiTheme = ({
             width: 100%;
             box-shadow: none !important;
             resize: none;
-            background: ${backgrounds.input};
-            -webkit-text-fill-color: ${backgrounds.inputTextFill} !important;
+            -webkit-text-fill-color: ${palette.neutral300} !important;
           }
           
           .MuiInput-input {
@@ -510,19 +510,19 @@ const createMuiTheme = ({
             opacity: 1,
           },
           mark: {
-            color: backgrounds.sliderMark,
+            color: palette.neutral300,
             backgroundColor: "currentcolor",
             width: "4px",
             height: "4px",
             borderRadius: "50%",
           },
           thumb: {
-            color: backgrounds.sliderThumb,
+            color: palette.paleBlue,
             width: "17px",
             height: "17px",
           },
           track: {
-            color: backgrounds.sliderThumb,
+            color: palette.paleBlue,
           },
         },
       },

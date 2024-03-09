@@ -15,7 +15,7 @@ exports[`components/display/ZigAlertMessage renders as a warning 1`] = `
     />
   </div>
   <span
-    class="MuiTypography-root MuiTypography-body2 css-13jpils-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-1u7gpsw-MuiTypography-root"
   >
     test text
   </span>
@@ -60,7 +60,7 @@ exports[`components/display/ZigAlertMessage renders as an alert 1`] = `
     />
   </div>
   <span
-    class="MuiTypography-root MuiTypography-body2 css-xsotb5-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-1b8pn8g-MuiTypography-root"
   >
     test text
   </span>

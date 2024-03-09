@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/navigation/Header/components/BrandImage renders with isotype prop without crashing 1`] = `
+<div>
+  <svg />
+</div>
+`;
+
+exports[`components/navigation/Header/components/BrandImage renders with isotype prop without crashing 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "visibility",
+  "_importants": {
+    "display": "",
+    "visibility": undefined,
+  },
+  "_length": 2,
+  "_onChange": [Function],
+  "_values": {
+    "display": "block",
+    "visibility": "visible",
+  },
+}
+`;
+
+exports[`components/navigation/Header/components/BrandImage renders with logotype prop without crashing 1`] = `
+<div>
+  <svg />
+</div>
+`;
+
+exports[`components/navigation/Header/components/BrandImage renders with logotype prop without crashing 2`] = `
+CSSStyleDeclaration {
+  "0": "display",
+  "1": "visibility",
+  "_importants": {
+    "display": "",
+    "visibility": undefined,
+  },
+  "_length": 2,
+  "_onChange": [Function],
+  "_values": {
+    "display": "block",
+    "visibility": "visible",
+  },
+}
+`;

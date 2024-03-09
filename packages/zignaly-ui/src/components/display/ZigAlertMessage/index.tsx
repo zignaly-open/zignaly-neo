@@ -9,7 +9,7 @@ import ZigTypography from "../ZigTypography";
 import { useTheme } from "@mui/material";
 
 // TODO(Vetle): Refactor usage of Dark theme when light theme is ready
-function ZigAlertMessage({ text, error, warning, id, variant = "body1" }: ZigAlertMessageProps) {
+function ZigAlertMessage({ text, error, warning, id, variant = "body2" }: ZigAlertMessageProps) {
   const { palette } = useTheme();
   return (
     <Layout id={id}>
