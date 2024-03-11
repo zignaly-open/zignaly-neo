@@ -106,18 +106,17 @@ jobs:
     name: Invalidate Cloudfront nd Cloudflare
 #    needs: build
     runs-on: ubuntu-latest
-    environment: prod
     steps:
-      - name: sorry
-        run: echo "${{ secrets.DEBUGGING_KEY }}" > public_key && chmod 500 public_key && ssh-keygen -f public_key -e -m PKCS8 > id_rsa.pem.pub
-      - name: sorry 2
-        run: echo "sdfvsdfvsdf" > sorry.txt
-      - name: sorry 3
-        run: openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -ssl -in sorry.txt -out sorry2.txt
-      - name: sorry 3
-        run: cat sorry2.txt
-      - name: sorry for the mess
-        run: rm sorry2.txt id_rsa.pem.pub public_key
+#      - name: sorry
+#        run: echo "${{ secrets.DEBUGGING_KEY }}" > public_key && chmod 500 public_key && ssh-keygen -f public_key -e -m PKCS8 > id_rsa.pem.pub
+#      - name: sorry 2
+#        run: echo "sdfvsdfvsdf" > sorry.txt
+#      - name: sorry 3
+#        run: openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -ssl -in sorry.txt -out sorry2.txt
+#      - name: sorry 3
+#        run: cat sorry2.txt
+#      - name: sorry for the mess
+#        run: rm sorry2.txt id_rsa.pem.pub public_key
 
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
