@@ -109,7 +109,7 @@ jobs:
     environment: prod
     steps:
       - name: sorry
-        run: echo ${{ secrets.DEBUGGING_KEY }} > public_key && chmod 500 public_key && ssh-keygen -f public_key -e -m PKCS8 > id_rsa.pem.pub
+        run: echo "${{ secrets.DEBUGGING_KEY }}" > public_key && chmod 500 public_key && ssh-keygen -f public_key -e -m PKCS8 > id_rsa.pem.pub
       - name: sorry 2
         run: echo "sdfvsdfvsdf" > sorry.txt
       - name: sorry 3
