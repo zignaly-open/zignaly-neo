@@ -1,9 +1,13 @@
-import { Box, SxProps } from '@mui/system';
+import { SxProps } from '@mui/system';
 import React, { useEffect, useRef, useState } from 'react';
 import { ZigButton, ZigTypography, withAttrs, ZigLink } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import { HideReadMoreEffects, MarkdownContainer } from '../styles';
+import {
+  HideReadMoreEffects,
+  MarkdownContainer,
+  StyledMarkdownWrapper,
+} from '../styles';
 import breaks from 'remark-breaks';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useMediaQuery, useTheme } from '@mui/material';
@@ -35,7 +39,7 @@ const MarkdownSection: React.FC<{
 
   const Icon = isTruncated ? ExpandMore : ExpandLess;
   return (
-    <Box sx={sx} mt={8} mb={4}>
+    <StyledMarkdownWrapper sx={sx} mt={8} mb={4}>
       {title && (
         <ZigTypography
           variant={'h2'}
@@ -86,7 +90,7 @@ const MarkdownSection: React.FC<{
           {isTruncated ? t('more') : t('less')}
         </ZigButton>
       )}
-    </Box>
+    </StyledMarkdownWrapper>
   );
 };
 
