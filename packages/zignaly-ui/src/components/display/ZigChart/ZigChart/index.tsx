@@ -7,16 +7,14 @@ import {
   VictoryLabel,
   VictoryBar,
   VictoryVoronoiContainer,
+  CallbackArgs,
 } from "victory";
 import { useAxisStyle, ChartLayoutLarge } from "../styles";
 import { AxisFormat, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import * as d3Scale from "victory-vendor/d3-scale";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTheme } from "@mui/material";
 import { ChartTooltip } from "./atoms";
-import { useChartColor } from "./util";
+import { useChartColor, useTicks } from "./util";
 
 const ZigChart = ({
   id,
@@ -27,6 +25,7 @@ const ZigChart = ({
   bars,
   tickCount = 7,
   onlyIntegerTicks,
+  showCurrentLine = !bars,
   chartProps = {},
   precision = 2,
 }: ChartLargeProps) => {
@@ -34,7 +33,7 @@ const ZigChart = ({
   const axisStyle = useAxisStyle();
   const { data: processedData, color, gradient, yDomain } = useChartData(data, "full", precision);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const width = wrapperRef?.current?.getBoundingClientRect().width;
+  const { width, height } = wrapperRef?.current?.getBoundingClientRect() || { width: 0, height: 0 };
   const pureChartWidth = width ? width - 70 - 2 : 0;
   const chartColors = useChartColor();
   const barChartWidth = pureChartWidth / processedData.length;
@@ -58,11 +57,15 @@ const ZigChart = ({
     [tooltipFormatter],
   );
 
-  const ticks = d3Scale
-    .scaleLinear()
-    .domain(yDomain)
-    .ticks(tickCount)
-    .filter((v) => !onlyIntegerTicks || Number.isInteger(v));
+  const lastDataY = processedData[processedData.length - 1]?.y;
+  const ticks = useTicks(
+    processedData,
+    yDomain,
+    tickCount,
+    onlyIntegerTicks,
+    showCurrentLine,
+    height,
+  );
 
   return (
     <ChartLayoutLarge ref={wrapperRef} id={id}>
@@ -73,7 +76,7 @@ const ZigChart = ({
               voronoiDimension="x"
               labels={getChartTooltip}
               labelComponent={<ChartTooltip color={!bars ? color : undefined} />}
-              voronoiBlacklist={["eventLine", "scatterText"]}
+              voronoiBlacklist={["eventLine", "currentLine"]}
             />
           }
           {...{
@@ -87,7 +90,16 @@ const ZigChart = ({
         >
           <VictoryAxis
             tickValues={ticks}
-            tickLabelComponent={<VictoryLabel textAnchor="start" text={getChartLabel} />}
+            tickLabelComponent={
+              <VictoryLabel
+                style={{
+                  fill: (a: CallbackArgs) =>
+                    a.datum === lastDataY ? `${color}cc` : theme.palette.neutral200,
+                }}
+                textAnchor="start"
+                text={getChartLabel}
+              />
+            }
             dependentAxis
             orientation="right"
             style={axisStyle}
@@ -117,11 +129,29 @@ const ZigChart = ({
             />
           ))}
 
-          <VictoryAxis
-            tickFormat={() => ""}
-            tickLabelComponent={<VictoryLabel />}
-            style={axisStyle}
-          />
+          {showCurrentLine && (
+            <VictoryLine
+              name="currentLine"
+              key={"current-line"}
+              style={{
+                data: {
+                  stroke: `${color}80`,
+                  strokeWidth: 1,
+                  strokeDasharray: "1.75, 0.25",
+                  background: theme.palette.neutral600,
+                },
+              }}
+              data={[
+                { x: 0, y: lastDataY },
+                {
+                  x: processedData.length,
+                  y: lastDataY,
+                },
+              ]}
+            />
+          )}
+
+          <VictoryAxis tickFormat={() => ""} style={axisStyle} />
 
           <VictoryAxis
             offsetY={20}
