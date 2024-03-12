@@ -40,6 +40,7 @@ export const StyledMarkdownWrapper = styled(Box)`
   ul,
   ol {
     margin-bottom: 16px;
+    font-size: 15px;
   }
 `;
 
