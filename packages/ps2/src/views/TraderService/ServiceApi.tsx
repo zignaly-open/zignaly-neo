@@ -1,5 +1,4 @@
 import React from 'react';
-import { PageWithHeaderContainer } from './components/styles';
 import { useParams } from 'react-router-dom';
 import { useTraderServiceTitle } from '../../apis/service/use';
 import ApiKeyManagement from './components/ApiKeys/ApiKeyManagement';
@@ -10,9 +9,7 @@ const ServiceApi: React.FC = () => {
   useTraderServiceTitle('profit-sharing.api-trading', serviceId);
   return (
     <PageContainer>
-      <PageWithHeaderContainer>
-        <ApiKeyManagement />
-      </PageWithHeaderContainer>
+      <ApiKeyManagement />
     </PageContainer>
   );
 };

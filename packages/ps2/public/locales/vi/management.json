@@ -15,7 +15,7 @@
 		"title": "Chỉnh sửa số dư tối thiểu",
 		"desc": "Thiết lập số dư tối thiểu mà bạn muốn giữ trong Tài khoản dự phòng. Nếu số dư cao hơn mức tối thiểu, trong quá trình hạch toán, phần chênh lệch sẽ tự động được chuyển vào Tài khoản giao dịch.",
 		"placeholder": "0.0",
-		"labelBalance": "Số dư tối thiểu hiện tại",
+		"labelBalance": "Số dư tối thiểu hiện tại:",
 		"save": "Lưu"
 	},
 	"controlledZignaly": "Kiểm soát bởi Zignaly",

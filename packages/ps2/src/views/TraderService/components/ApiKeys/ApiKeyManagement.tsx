@@ -1,7 +1,12 @@
 import React from 'react';
-import { ZigButton, CenteredLoader, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  CenteredLoader,
+  ZigTypography,
+  ZigLink,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { ApiKeysContainer, TitleBox } from './atoms';
 import { useParams } from 'react-router-dom';
 import { useServiceApiKeysQuery } from '../../../../apis/serviceApiKey/api';
@@ -13,6 +18,9 @@ import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { getButtonDisabledPropsForExchangesWithoutApiKeyManagement } from '../util';
+import { PageWithHeaderContainer } from '../styles';
+import Deactivated from '../DeactivatedService';
+import { HYPER_TRADER_URL } from '../../../../util/constants';
 
 const ApiKeyManagement: React.FC = () => {
   const { t } = useTranslation(['management', 'action', 'service']);
@@ -26,7 +34,8 @@ const ApiKeyManagement: React.FC = () => {
   const { data: serviceData } = useServiceDetails(serviceId);
 
   return (
-    <>
+    <PageWithHeaderContainer>
+      {serviceData?.activated === false && <Deactivated />}
       <TitleBox
         sx={{
           display: 'flex',
@@ -43,7 +52,9 @@ const ApiKeyManagement: React.FC = () => {
             {t('api-keys.title')}
           </ZigTypography>
           <ZigTypography variant={'body1'} id={'service-api__description'}>
-            {t('api-keys.description')}
+            <Trans t={t} i18nKey={'api-keys.description'}>
+              <ZigLink href={HYPER_TRADER_URL} />
+            </Trans>
           </ZigTypography>
         </Box>
         <Box
@@ -98,7 +109,7 @@ const ApiKeyManagement: React.FC = () => {
           ))}
         </ApiKeysContainer>
       )}
-    </>
+    </PageWithHeaderContainer>
   );
 };
 

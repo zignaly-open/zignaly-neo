@@ -82,9 +82,7 @@ export const Networks = styled('div')`
     line-height: 0;
   }
 
-  span svg {
-    fill: ${({ theme }) => theme.palette.lightGrayBlue};
-    color: ${({ theme }) => theme.palette.lightGrayBlue};
+  svg {
     transition: all 0.15s linear;
   }
 `;

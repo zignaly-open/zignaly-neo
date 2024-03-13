@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Layout = styled.div`
-  padding-top: 120px;
+  padding-top: 68px;
 `;
 
 export const Header = styled.div`
@@ -59,7 +59,7 @@ export const WrapperAction = styled.div`
 export const InfoBar = styled.div`
   padding: 28px 0;
   margin-bottom: 28px;
-  background: ${({ theme }) => theme.palette.neutral800}};
+  background: ${({ theme }) => theme.palette.neutral800};
 `;
 
 export const InfoBarList = styled.ul<{ itemsLength: number }>`
@@ -113,11 +113,6 @@ export const Feature = styled.li`
   gap: 22px;
 `;
 
-export const FeatureImage = styled.img`
-  width: 80px;
-  height: 80px;
-`;
-
 export const FeatureData = styled.div`
   display: flex;
   flex-direction: column;
@@ -144,13 +139,6 @@ export const Box = styled.div`
   background-color: ${({ theme }) => theme.palette.neutral750};
   border-radius: 4px;
   width: 100%;
-`;
-
-export const StepImage = styled.img`
-  margin: 24px 0;
-  width: 100%;
-  object-fit: contain;
-  height: 120px;
 `;
 
 export const Separator = styled.li`

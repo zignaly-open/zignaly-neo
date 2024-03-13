@@ -14,7 +14,7 @@ const lastShownBackendError = { error: '', time: 0, expiry: 10_000 };
 
 const ignoreError = (error: BackendError) => {
   const { code } = error?.data?.error || {};
-  return code === 1091;
+  return [1010, 1091].includes(code);
 };
 
 export const backendError = (

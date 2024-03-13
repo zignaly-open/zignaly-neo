@@ -1,21 +1,11 @@
 import { ThemeStyledComponents } from "../types";
-// TODO: fix this, smth weird with type defs not loading
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { isWebpSupported } from "react-image-webp/dist/utils";
-
-// thanks Jest, very cool
-const tryIsWebpSupported = () => {
-  try {
-    return isWebpSupported();
-  } catch {
-    return false;
-  }
-};
 
 const dark: ThemeStyledComponents = {
   mode: "dark",
   fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"],
+  // having this key is important
+  // without it overriding would not work
+  fontFamilyH1H6: undefined,
   palette: {
     neutral900: "#06061A",
     neutral800: "#12152c",
@@ -38,19 +28,12 @@ const dark: ThemeStyledComponents = {
     yellow: "#AE9C5B",
     red: "#CC394E",
     contrasting: "#F3F4F6",
-    lightGrayBlue: "#707185",
     darkGreen: "#156747",
-    labelCheckbox: "#4f4f5e",
-    checkboxPrimary: "#2a2a36",
     lightGrey: "#9ca3af",
-    paleBlue: "#999fe1", // TODO: fix
+    paleBlue: "#999fe1",
   },
   backgrounds: {
-    body: `url(${
-      tryIsWebpSupported()
-        ? "https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/4048a0ac-9c9d-4298-4146-fb7b1524d900/public"
-        : "https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/b182ff22-04bd-4ccf-0b61-cf2450910e00/public"
-    }) #070819`,
+    body: `url(https://imagedelivery.net/qNg0fDlw9b2DximxcnB4cA/4048a0ac-9c9d-4298-4146-fb7b1524d900/public) #070819`,
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
     selectInputFill: "#101225", // TODO: fix?
     toastSuccess: "#122431",
@@ -58,7 +41,6 @@ const dark: ThemeStyledComponents = {
     toastError: "#231630",
     tableHeader: "#08081d",
     investorsIcon: "#65647E", // TODO: fix?
-    inputTextFill: "#838b95", // TODO: fix? 1 usage
     headerMenuItemHover: "#1c1d35",
     secondaryBackground: "#0f0f25", // TODO: investigate
     dropdown2ndLevel: "rgb(25, 26, 48)", // TODO: fix?
@@ -66,16 +48,11 @@ const dark: ThemeStyledComponents = {
     modal: "#101225",
     activeTab: "#181B2F", // TODO: fix?
     greyedOutBorder: "#464a85", // TODO: fix?
-    sliderMark: "#888999",
-    sliderThumb: "#999ee0",
     manageServiceMenuHover: "#1b213d", // TODO: fix?
     buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
     input2fa: "#0f1124",
     input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
-    input2faGradientBorder: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
-    input: "linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%)",
     breakLineSignUp: "#b7bac7",
-    mobileButtonsWrapper: "#060819",
     coinIconPlaceholder: "#324054",
   },
   boxShadows: {
@@ -103,21 +80,17 @@ const dark: ThemeStyledComponents = {
       profits: {
         gradient: ["#2bc5f2", "#19dcd1", "#0ceaae"],
         icon: "#29cdbb",
-        text: "#90d2bf",
       },
       risk: {
-        gradient: ["#4c18b3", "#5451d7", "#5199ea"],
-        text: "#8491EF",
+        gradient: ["#4c18b3", "#5352D8", "#526BDD"],
       },
       service: {
         gradient: ["#6e0a83", "#d94097", "#f24196"],
         icon: "#734c9a",
-        text: "#ba7af0",
       },
       balanced: {
         gradient: ["#46835e", "#7fce87", "#88c489"],
         icon: "#a2b88d",
-        text: "#a2b88d",
       },
     },
     bar: {
@@ -127,6 +100,7 @@ const dark: ThemeStyledComponents = {
       balanced: "linear-gradient(to right, #10341d, #46995c 42%, #76dd88 76%, #88c489)",
     },
   },
+  imageColorOverride: undefined,
 };
 
 export default dark;

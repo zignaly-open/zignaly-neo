@@ -20,6 +20,7 @@ import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
 import { ZigCheckBox } from "../../../index";
+import { Trans, useTranslation } from "react-i18next";
 
 function ZigTableData<T extends object>({
   prefixId,
@@ -41,6 +42,7 @@ function ZigTableData<T extends object>({
   ...rest
 }: ZigTablePropsData<T>) {
   const theme = useTheme();
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigTable" });
   const [internalSorting, setInternalSorting] = React.useState<SortingState>(
     initialState.sorting ?? [],
   );
@@ -282,30 +284,31 @@ function ZigTableData<T extends object>({
               px={2}
               id={prefixId && `${prefixId}-table__pages`}
             >
-              <ZigTypography color="neutral300">Page</ZigTypography>
-
-              <ZigTypography
-                variant="h3"
-                color="neutral100"
-                id={prefixId && `${prefixId}-table__current-page`}
-              >
-                {table.getState().pagination.pageIndex + 1}
-              </ZigTypography>
-
-              {table.getPageCount() !== -1 && (
-                <>
-                  <ZigTypography whiteSpace="nowrap" color="neutral300">
-                    out of
-                  </ZigTypography>
-                  <ZigTypography
-                    color="neutral100"
-                    fontWeight={600}
-                    id={prefixId && `${prefixId}-table__total-page-count`}
-                  >
-                    {table.getPageCount() || 1}
-                  </ZigTypography>
-                </>
-              )}
+              <Trans
+                t={t}
+                i18nKey={"page-x-of-all"}
+                values={{
+                  currentPage: table.getState().pagination.pageIndex + 1,
+                  totalPages: table.getPageCount() || 1,
+                }}
+                components={{
+                  text: <ZigTypography whiteSpace="nowrap" color="neutral300" />,
+                  current: (
+                    <ZigTypography
+                      variant="h3"
+                      color="neutral100"
+                      id={prefixId && `${prefixId}-table__current-page`}
+                    />
+                  ),
+                  total: (
+                    <ZigTypography
+                      color="neutral100"
+                      fontWeight={600}
+                      id={prefixId && `${prefixId}-table__total-page-count`}
+                    />
+                  ),
+                }}
+              />
             </Box>
             {loading && <Loader width={24} height={24} />}
             <IconButton
@@ -334,17 +337,32 @@ function ZigTableData<T extends object>({
             justifyContent={["center", "flex-end"]}
             marginTop={[1, 0]}
           >
-            <ZigTypography color="neutral300">Displaying</ZigTypography>
-            <SmallSelectWrapper>
-              <ZigSelect
-                menuPlacement={"top"}
-                id={prefixId && `${prefixId}-table__items-per-page`}
-                options={pageSizeOptions}
-                value={table.getState().pagination.pageSize}
-                onChange={table.setPageSize}
-              />
-            </SmallSelectWrapper>
-            <ZigTypography color="neutral300">items</ZigTypography>
+            <Trans
+              t={t}
+              i18nKey={"displaying-x-items"}
+              count={table.getState().pagination.pageSize}
+              components={{
+                text: <ZigTypography color="neutral300" />,
+                selector: (
+                  <SmallSelectWrapper>
+                    <ZigSelect
+                      menuPlacement={"top"}
+                      id={prefixId && `${prefixId}-table__items-per-page`}
+                      options={pageSizeOptions}
+                      value={table.getState().pagination.pageSize}
+                      onChange={table.setPageSize}
+                    />
+                  </SmallSelectWrapper>
+                ),
+                total: (
+                  <ZigTypography
+                    color="neutral100"
+                    fontWeight={600}
+                    id={prefixId && `${prefixId}-table__total-page-count`}
+                  />
+                ),
+              }}
+            />
           </Box>
         </Box>
       )}

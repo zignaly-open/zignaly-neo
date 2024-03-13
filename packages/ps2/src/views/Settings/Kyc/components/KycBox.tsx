@@ -11,7 +11,12 @@ import { useTranslation } from 'react-i18next';
 import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
 import { KycBoxListEntry } from './atoms';
-import { KycResponse, UserData } from '../../../../apis/user/types';
+import {
+  KycLevels,
+  KycStatus,
+  KycStatusResponse,
+  UserData,
+} from '../../../../apis/user/types';
 import { useDispatch } from 'react-redux';
 import { useCurrentUser } from 'apis/user/use';
 import { setUser } from 'apis/user/store';
@@ -29,20 +34,15 @@ const iconWrapStyle = {
 };
 
 const KycBox: React.FC<{
-  level: string;
   labelColor: string;
   balanceRestriction?: string;
   disabledMessage?: string;
   title: string;
   icon: JSX.Element;
-  response: KycResponse;
-  items: Record<
-    string,
-    string | { title: string; items: Record<string, string> }
-  >;
+  response: KycStatusResponse;
+  items: KycLevels[number]['levels'][number]['requirements'];
 }> = ({
   icon,
-  level,
   response,
   balanceRestriction,
   disabledMessage,
@@ -58,6 +58,7 @@ const KycBox: React.FC<{
   const showModal = useZAlert();
   const dispatch = useDispatch();
   const user = useCurrentUser();
+  const { level, category } = response;
 
   const infoIconStyle = {
     height: '15.6px',
@@ -65,7 +66,7 @@ const KycBox: React.FC<{
   };
 
   const openKyc = useCallback(async () => {
-    await getCerificationLinkUrl(level)
+    await getCerificationLinkUrl({ category, level })
       .unwrap()
       .then(({ link: kycLink }) => {
         // Force KYCMonitoring to true to trigger UserKycChecker
@@ -93,27 +94,34 @@ const KycBox: React.FC<{
     <Grid
       container
       sx={{
-        mt: 3,
+        mt: 1,
         mb: 6,
         opacity: disabledMessage ? 0.5 : 1,
         minHeight: 200,
       }}
+      rowSpacing={3}
     >
       <Grid
         item
-        sm={12}
+        xs={12}
         md={5}
         sx={{
           display: 'flex',
           flexDirection: 'row',
         }}
       >
-        <Box sx={{ width: '32px', pt: 1.5, mr: 2.5 }}>{icon}</Box>
+        <Box
+          sx={{ width: '32px', pt: 1.5, mr: 2.5 }}
+          id={`kyc__level-${response.level}-icon`}
+        >
+          {icon}
+        </Box>
         <Box>
           <ZigTypography
             variant={'h2'}
             sx={{ mb: 0.5 }}
             color={labelColor || 'neutral100'}
+            id={`kyc__level-${response.level}-level`}
           >
             {title}
           </ZigTypography>
@@ -136,26 +144,28 @@ const KycBox: React.FC<{
             </>
           )}
 
-          {response?.status === 'approved' && (
+          {response?.status === KycStatus.APPROVED && (
             <ZigTypography
-              sx={{ mt: 2, ...iconWrapStyle }}
+              sx={iconWrapStyle}
               component={'p'}
               color={'greenGraph'}
               fontWeight={500}
               variant={'body1'}
+              id={`kyc__level-${response.level}-status-verified`}
             >
               {t('status.verified')}
               <CheckCircleOutlineIcon sx={{ ...largeIconStyle, ml: 1 }} />
             </ZigTypography>
           )}
 
-          {response?.status === 'pending' && (
+          {response?.status === KycStatus.PENDING && (
             <ZigTypography
-              sx={{ mt: 2, ...iconWrapStyle }}
+              sx={iconWrapStyle}
               component={'p'}
               color={'yellow'}
               fontWeight={500}
               variant={'body1'}
+              id={`kyc__level-${response.level}-status-pending`}
             >
               <DataUsageTwoToneIcon sx={largeIconStyle} />
               {t('status.pending')}
@@ -165,13 +175,16 @@ const KycBox: React.FC<{
             </ZigTypography>
           )}
 
-          {response?.status === 'rejected' && (
+          {[KycStatus.REJECTED, KycStatus.REJECTED_RETRY].includes(
+            response?.status,
+          ) && (
             <ZigTypography
               component={'p'}
-              sx={{ mt: 2, ...iconWrapStyle }}
+              sx={iconWrapStyle}
               color={'redGraphOrError'}
               fontWeight={500}
               variant={'body1'}
+              id={`kyc__level-${response.level}-status-rejected`}
             >
               <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
               {t('status.rejected')}
@@ -180,7 +193,9 @@ const KycBox: React.FC<{
                   title={
                     <span style={{ whiteSpace: 'pre-line' }}>
                       {`${response?.reason}\n${
-                        response.canBeRetried ? t('resubmit-issues') : ''
+                        response?.status === KycStatus.REJECTED_RETRY
+                          ? t('resubmit-issues')
+                          : ''
                       }`}
                     </span>
                   }
@@ -191,40 +206,51 @@ const KycBox: React.FC<{
             </ZigTypography>
           )}
 
-          {((!!response?.canBeRetried && response?.status === 'rejected') ||
-            !response?.status ||
-            response?.status === 'init') && (
+          {[
+            KycStatus.REJECTED_RETRY,
+            KycStatus.INIT,
+            KycStatus.NOT_STARTED,
+          ].includes(response?.status) && (
             <ZigButton
-              sx={{ mt: 2.5, ...iconWrapStyle }}
+              sx={{ mt: 1, ...iconWrapStyle }}
               variant={'contained'}
               tooltip={disabledMessage || undefined}
               disabled={!!disabledMessage}
               loading={loadingVerification}
               onClick={openKyc}
               size={'large'}
+              id={`kyc__level-${response.level}-verify`}
             >
               {t('verify')}
             </ZigButton>
           )}
         </Box>
       </Grid>
-      <Grid item sm={12} md={7}>
-        <Paper sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}>
+      <Grid item xs={12} md={7}>
+        <Paper
+          sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}
+          id={`kyc__level-${response.level}-requirements`}
+        >
           <OlList>
-            {Object.entries(items).map(([k, v]) => (
-              <li style={{ marginTop: 4, marginBottom: 4 }} key={k}>
-                {typeof v === 'string' ? (
-                  <KycBoxListEntry>{v}</KycBoxListEntry>
+            {items.map((k) => (
+              <li
+                style={{ marginTop: 4, marginBottom: 4 }}
+                key={typeof k === 'string' ? k : k.title}
+              >
+                {typeof k === 'string' ? (
+                  <KycBoxListEntry>{t(`requirements.${k}`)}</KycBoxListEntry>
                 ) : (
                   <>
-                    <KycBoxListEntry>{v.title}</KycBoxListEntry>
+                    <KycBoxListEntry>{k.title}</KycBoxListEntry>
                     <UlList>
-                      {Object.entries(v.items).map(([itemKey, text]) => (
+                      {k.items.map((itemKey) => (
                         <li
                           style={{ marginTop: 4, marginBottom: 4 }}
                           key={k + '_' + itemKey}
                         >
-                          <KycBoxListEntry>{text}</KycBoxListEntry>
+                          <KycBoxListEntry>
+                            {t(`requirements.${itemKey}`)}
+                          </KycBoxListEntry>
                         </li>
                       ))}
                     </UlList>

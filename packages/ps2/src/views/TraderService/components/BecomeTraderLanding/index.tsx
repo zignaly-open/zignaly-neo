@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigImageColorOverride,
+  ZigLink,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import {
   Layout,
   Header,
@@ -19,11 +24,9 @@ import {
   Section,
   FeaturesList,
   Feature,
-  FeatureImage,
   FeatureData,
   StepList,
   Step,
-  StepImage,
   Box,
   Separator,
 } from './styles';
@@ -33,6 +36,7 @@ import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
 import { whitelabel } from '../../../../whitelabel';
+import { useCanCreateService } from '../../../../util/walls/util';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation(['offer-your-trading-service', 'service']);
@@ -117,11 +121,15 @@ const BecomeTraderLanding: React.FC = () => {
     [t],
   );
 
+  const checkCanInvest = useCanCreateService();
+
   const onClickCreateService = () => {
-    if (isAuthenticated) {
-      showModal(CreateServiceModal);
-    } else {
+    if (!isAuthenticated) {
       navigateIfNotLoggedIn();
+    } else if (!checkCanInvest()) {
+      // Do nothing, the KYC modal will take care of itself
+    } else {
+      showModal(CreateServiceModal);
     }
   };
 
@@ -246,9 +254,12 @@ const BecomeTraderLanding: React.FC = () => {
                       >
                         {howWorkItem.title.toUpperCase()}
                       </ZigTypography>
-                      <StepImage
+                      <ZigImageColorOverride
+                        width={306}
+                        height={120}
+                        href={'/images/service-provider/' + howWorkItem.image}
                         id={howWorkItem.id && `${howWorkItem.id}-image`}
-                        src={'/images/service-provider/' + howWorkItem.image}
+                        style={{ margin: '24px 0' }}
                       />
                     </Center>
                     <ZigTypography
@@ -278,9 +289,11 @@ const BecomeTraderLanding: React.FC = () => {
           <FeaturesList itemsLength={featuresItems.length}>
             {featuresItems.map((feature, index) => (
               <Feature key={`--features-item-${index.toString()}`}>
-                <FeatureImage
+                <ZigImageColorOverride
+                  width={80}
+                  height={80}
+                  href={'/images/service-provider/' + feature.image}
                   id={feature.id && `${feature.id}-image`}
-                  src={'/images/service-provider/' + feature.image}
                 />
                 <FeatureData>
                   <ZigTypography

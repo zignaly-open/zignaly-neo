@@ -6,7 +6,7 @@ import { GlobalStyles } from '@mui/system';
 import { useTheme } from '@mui/material';
 import GoogleFontLoader from 'react-google-font-loader';
 import { lazily } from 'react-lazily';
-import { userHasFont } from '@zignaly-open/ui';
+import isFontInstalled from '@xfuturum/is-font-installed';
 
 const { AvenirNext } = lazily(() => import('@zignaly-open/ui/fonts'));
 
@@ -21,14 +21,17 @@ const IntercomStyle = createGlobalStyle`
 const GlobalFonts = () => {
   const theme = useTheme();
   const isAvenir = (font: string) => font === 'Avenir Next';
+
   const fontsToLoad = [
     theme.typography.fontFamily.split(',')[0],
     whitelabel.themeOverrides?.fontFamilyH1H6?.[0],
   ]
     .filter(Boolean)
-    .filter((x) => !userHasFont(x));
+    .filter((f) => !isFontInstalled(f));
+
   const shouldLoadAvenir = fontsToLoad.some(isAvenir);
   const googleFonts = fontsToLoad.filter((font) => !isAvenir(font));
+
   return (
     <>
       {shouldLoadAvenir && (

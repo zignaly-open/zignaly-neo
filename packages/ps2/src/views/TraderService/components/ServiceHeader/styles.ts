@@ -12,9 +12,9 @@ const secondaryBackground = ({ theme }: { theme: Theme }) => `
 
 export const Layout = styled('div')`
   flex-direction: row;
-  position: fixed;
-  top: 52px;
+  position: sticky;
   width: 100%;
+  top: var(--header-height, 0);
   right: 0;
   left: 0;
   ${secondaryBackground};
@@ -56,8 +56,6 @@ export const Option = styled('span', {
   }
 
   &:hover {
-    background: ${({ theme }) =>
-      theme.palette.backgrounds.manageServiceMenuHover};
     background: ${({ theme }) =>
       lighten(theme.palette.neutral750, (0x1b - 0x16) / 0xff)};
     & > * {

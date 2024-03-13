@@ -191,8 +191,9 @@ export const useCanLogIn = createUseAccessCheck(Level.KycPending);
 export const useCanInsertCoupon = createUseAccessCheck(Level.NoSubscription);
 export const useCanDeposit = createUseAccessCheck(Level.Normal);
 export const useCanInvestIn = createUseAccessCheck(Level.Normal);
-export const useCanInvestOut = createUseAccessCheck(Level.KycExpired);
-export const useCanWithdraw = createUseAccessCheck(Level.SubscriptionExpired);
+export const useCanCreateService = createUseAccessCheck(Level.Normal);
+export const useCanInvestOut = createUseAccessCheck(Level.KycPending);
+export const useCanWithdraw = createUseAccessCheck(Level.KycPending);
 
 export const withModalRequiresAuthentication = <
   T extends { close: () => void },

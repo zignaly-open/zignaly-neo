@@ -20,17 +20,12 @@ export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
 export { default as ZigSlider } from "./components/inputs/ZigSlider";
-export { default as ZigSliderInput } from "./components/inputs/ZigSliderInput";
 export { default as ZigSwitch } from "./components/inputs/ZigSwitch";
 
 // Filters
 export { default as ZigSearch } from "./components/filters/ZigSearch";
 export { default as ZigFilters } from "./components/filters/ZigFilters";
 export * from "./components/filters/ZigFilters";
-
-// TODO: fix storybook & refactor
-export { default as InputAmountAdvanced } from "./components/inputs/InputAmountAdvanced";
-export type { InputAmountAdvancedValueType } from "./components/inputs/InputAmountAdvanced";
 
 export { default as ZigInputAmount } from "./components/inputs/ZigInputAmount";
 
@@ -63,7 +58,9 @@ export { default as ZigRisk } from "./components/display/ZigRisk";
 export * from "./components/display/ZigRisk";
 export { default as ZScoreRing } from "./components/display/ZScoreRing";
 export * from "./components/display/ZScoreRing";
+export { default as ZScoreRings } from "./components/display/ZScoreRings";
 export { default as ZScoreBar } from "./components/display/ZScoreBar";
+export { default as ZigImageColorOverride } from "./components/display/ZigImageColorOverride";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";
@@ -71,15 +68,14 @@ export type { ColumnDef } from "@tanstack/react-table";
 export { default as ZigTable } from "./components/display/ZigTable";
 export type { ZigTableQueryRef } from "./components/display/ZigTable/types";
 export { downloadTableCsv } from "./components/display/ZigTable/util";
-export { default as DateLabel } from "./components/display/ZigTable/components/DateLabel"; // yes, this is used
-export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
+export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used
 export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
 export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
-export { NiceScrollbar, userHasFont } from "utils/css";
+export { NiceScrollbar } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 
 // TODO: please stop using this
@@ -91,7 +87,6 @@ export { MarginContainer, PageContainer } from "./components/styled";
 
 // Navigation
 // TODO: @cwagner22 pls fix/bring to proper shape
-export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "./components/navigation/Header/styles";

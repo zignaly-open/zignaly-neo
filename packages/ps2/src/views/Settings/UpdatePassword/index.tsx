@@ -11,7 +11,7 @@ const UpdatePassword: React.FC = () => {
   useTitle(t('pages:update-password'));
   return (
     <PageContainer style={{ maxWidth: '615px' }}>
-      <PageWithHeaderContainer hasHeader>
+      <PageWithHeaderContainer>
         <Box
           sx={{
             textAlign: 'center',

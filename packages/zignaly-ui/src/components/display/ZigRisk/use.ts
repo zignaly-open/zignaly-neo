@@ -6,42 +6,45 @@ import { ReactComponent as Risk4Icon } from "assets/icons/risk/risk-4.svg";
 import { ReactComponent as Risk5Icon } from "assets/icons/risk/risk-5.svg";
 import { getRisk } from "./util";
 import { ZigRisk } from "./types";
+import { useTranslation } from "react-i18next";
 
 export const useRisks = () => {
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigRisk" });
+
   return useMemo(
     () =>
       [
         {
           icon: Risk1Icon,
-          label: "Very low risk",
+          label: t("very-low-risk"),
           color: "#24b88e",
           id: 0,
           zrisk: 24,
         },
         {
           icon: Risk2Icon,
-          label: "Low risk",
+          label: t("low-risk"),
           color: "#9fcb6e",
           id: 1,
           zrisk: 18,
         },
         {
           icon: Risk3Icon,
-          label: "Average risk",
+          label: t("average-risk"),
           color: "#c2b864",
           id: 2,
           zrisk: 12,
         },
         {
           icon: Risk4Icon,
-          label: "Risky",
+          label: t("risky"),
           color: "#e7a675",
           id: 3,
           zrisk: 6,
         },
         {
           icon: Risk5Icon,
-          label: "Very risky",
+          label: t("very-risky"),
           color: "#f14a84",
           id: 4,
           zrisk: 0,

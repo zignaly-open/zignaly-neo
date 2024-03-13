@@ -10,6 +10,7 @@ import { FiltersCount } from "../atoms/FilterCount";
 import MobileFilterButton from "../atoms/MobileFilterButton";
 import { Box } from "@mui/material";
 import { ZigFilter } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const FILTERS_COUNT_WIDTH = 16;
 
@@ -22,8 +23,9 @@ const CheckboxFilterDropdown = ({
   prefixId,
   showFullSingleValue,
 }: CheckboxFilterDropdownProps) => {
-  const stringAll = "All";
-  const stringNone = "None";
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
+  const stringAll = t("all");
+  const stringNone = t("none");
 
   const displayValue = useMemo(() => {
     if (!filter.value) return stringAll;
@@ -52,7 +54,7 @@ const CheckboxFilterDropdown = ({
         label={
           typeof displayValue === "number" ? (
             <Box display={"flex"} gap="6px" alignItems={"center"}>
-              {filter.label}: <FiltersCount>{displayValue}</FiltersCount>
+              {`${filter.label}:`} <FiltersCount>{displayValue}</FiltersCount>
             </Box>
           ) : (
             `${filter.label}: ${displayValue}`

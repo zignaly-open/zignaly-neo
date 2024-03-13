@@ -40,6 +40,7 @@ import { OpenInNew } from '@mui/icons-material';
 import { useFilteredInvestors, useInvestorFilters } from './use';
 import { usePersistTable } from '../../../../apis/settings/use';
 import { TableId } from '../../../../apis/settings/types';
+import Deactivated from '../DeactivatedService';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -191,6 +192,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             <ChangeIndicator
               value={props.row.original.pnlPctLc}
               id={`service-investors-table__p&l-change-${props.row.original.account_id}`}
+              indicatorPostion='left'
             />
           </>
         ),
@@ -356,6 +358,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
         return (
           <PageWithHeaderContainer>
+            {service?.activated === false && <Deactivated />}
             <InvestorCounts>
               <Box
                 display={'flex'}

@@ -11,9 +11,9 @@ export interface UserState {
 export enum UserAccessLevel {
   Banned = -100,
   NotVerified = 100,
+  Frozen = 300,
   KycPending = 350,
   NoSubscription = 375,
-  Frozen = 400,
   KycExpired = 450,
   SubscriptionExpired = 475,
   Normal = 500,
@@ -128,14 +128,43 @@ export type SessionResponse = {
   userId: string;
 };
 
-export type KycResponse = {
-  status?: 'rejected' | 'pending' | 'approved' | 'init' | null;
-  reason?: string;
-  canBeRetried?: boolean;
+export enum KycStatus {
+  NOT_STARTED = 'Not started',
+  INIT = 'Init',
+  PENDING = 'Pending',
+  APPROVED = 'Approved',
+  EXPIRED = 'Expired',
+  REJECTED = 'Rejected',
+  REJECTED_RETRY = 'Rejected with retry',
+}
+
+export type KycStatusResponse = {
+  status?: KycStatus;
   category: 'KYC' | 'KYB';
-  level: string;
-  order: number;
+  reason?: string;
+  level: number;
 };
+
+export type KycResponse = {
+  statuses: KycStatusResponse[];
+  kycMonitoring: boolean;
+};
+
+export type KycLevelsRaw = {
+  levels: [
+    {
+      level: number;
+      category: 'KYC' | 'KYB';
+      name: string;
+      requirements: (string | { title: string; items: string[] })[];
+    },
+  ];
+};
+
+export type KycLevels = {
+  category: 'KYC' | 'KYB';
+  levels: KycLevelsRaw['levels'];
+}[];
 
 export type KycLinkResponse = {
   link: string;

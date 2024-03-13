@@ -11,6 +11,7 @@
   "complete-previous-level-first": "Please complete the previous level first",
   "different-type-started-KYC": "You have already started the KYC process as an individual",
   "different-type-started-KYB": "You have already started the KYB process as a business",
+  "multiple-accounts": "At the moment, KYC is only enabled for users with one exchange account",
   "progress-explainer": "We're working tirelessly on it, please hold tight. Usually it takes only a few minutes",
   "resubmit-issues": "Resubmit your information addressing the issues.",
   "tabs": {
@@ -21,6 +22,15 @@
     "verified": "Verified",
     "pending": "Pending",
     "rejected": "Rejected"
+  },
+  "levels": {
+    "placeholder": "Level {{level}}",
+    "basic": "Basic"
+  },
+  "requirements": {
+    "identity": "Identity Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification"
   },
   "requirements-level-1": {
     "identity": "Identity Document",
@@ -77,5 +87,6 @@
     "title": "Start your account verification",
     "description": "Start the verification process clicking on the button. You will be redirected to an external page to complete the process.",
     "ok": "Get Verified"
-  }
+  },
+  "reminder": "Urgent Reminder: KYC Deadline Approaching - March 12th! <0>Pass your KYC</0>"
 }

@@ -1,0 +1,16 @@
+export const ALLOWED_COMMANDS = [
+  'bold',
+  'italic',
+  'hr',
+  'title',
+  'link',
+  'quote',
+  'image',
+  'unordered-list',
+  'ordered-list',
+  'preview',
+  'help',
+  'edit',
+  'live',
+  'fullscreen',
+];

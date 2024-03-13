@@ -9,26 +9,31 @@ import {
 } from '../../../apis/user/api';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
-
-type StatusType = { statusSerialized: string; shouldCheck: boolean };
+import { useDispatch } from 'react-redux';
+import { setUser } from 'apis/user/store';
 
 const UserKycChecker: React.FC = () => {
   const toast = useToast();
   const { KYCMonitoring: isPending } = useCurrentUser();
   const isAuthenticated = useIsAuthenticated();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation([
+    ...(isFeatureOn(Features.Kyc) ? ['kyc'] : []),
+    'common',
+  ]);
   const [loadUser] = useLazyUserQuery();
   const [loadKyc] = useLazyKycStatusesQuery();
   const shouldCheck = isAuthenticated && isPending && isFeatureOn(Features.Kyc);
+  const dispatch = useDispatch();
 
-  const oldStatus = useRef<StatusType>();
+  const oldStatusesSerialized = useRef<string>();
 
   const getStatuses = useCallback(() => {
     return loadKyc()
       .unwrap()
-      .then(({ status, KYCMonitoring }) => ({
-        statusSerialized: status.map((x) => x.status || '').join(''),
-        shouldCheck: KYCMonitoring,
+      .then(({ statuses, kycMonitoring }) => ({
+        statusesSerialized: statuses.map((x) => x.status || '').join(''),
+        statuses,
+        shouldCheck: kycMonitoring,
       }));
   }, []);
 
@@ -38,14 +43,14 @@ const UserKycChecker: React.FC = () => {
     (async () => {
       const pollKyc = () => {
         timeoutId = setTimeout(async () => {
+          if (!isAuthenticated) return;
           const newStatus = await getStatuses();
 
-          if (
-            newStatus.statusSerialized !== oldStatus.current.statusSerialized
-          ) {
-            oldStatus.current = newStatus;
-            toast.info(t('kyc-updated'));
-            loadUser();
+          if (newStatus.statusesSerialized !== oldStatusesSerialized.current) {
+            oldStatusesSerialized.current = newStatus.statusesSerialized;
+            toast.info(t('common:kyc-updated'));
+            const userData = await loadUser().unwrap();
+            dispatch(setUser(userData));
           }
 
           if (newStatus.shouldCheck) {
@@ -54,10 +59,10 @@ const UserKycChecker: React.FC = () => {
         }, KYC_CHECK_INTERVAL);
       };
 
-      if (shouldCheck) {
-        oldStatus.current = await getStatuses();
-        pollKyc();
-      }
+      if (!shouldCheck) return;
+      const { statusesSerialized } = await getStatuses();
+      oldStatusesSerialized.current = statusesSerialized;
+      pollKyc();
     })();
 
     return () => {

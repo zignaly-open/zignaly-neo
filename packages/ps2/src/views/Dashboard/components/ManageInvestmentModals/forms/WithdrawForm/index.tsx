@@ -17,11 +17,12 @@ import { WithdrawFormData } from './types';
 import { Box, useMediaQuery } from '@mui/material';
 import {
   useCoinBalances,
+  useDepositInfo,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { withdrawAmountValidation } from './validations';
+import { MEMO_SPECIAL_TIP, withdrawAmountValidation } from './validations';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
@@ -55,11 +56,11 @@ function WithdrawForm({
     checkWithdraw(async (code) => {
       await withdraw({
         asset: coin,
-        network: confirmationData.network,
+        network: confirmationData!.network,
         exchangeInternalId: internalId,
-        address: confirmationData.address,
-        tag: confirmationData.tag,
-        amount: confirmationData.amount,
+        address: confirmationData!.address,
+        tag: confirmationData!.tag,
+        amount: confirmationData!.amount,
         code,
       }).unwrap();
 
@@ -89,6 +90,7 @@ function WithdrawForm({
           coin,
           coinObject?.available.toString(),
           networkObject,
+          memoRequired,
         ),
       )(data, context, options),
   });
@@ -132,8 +134,21 @@ function WithdrawForm({
   const networkObject =
     network && coinObject?.networks?.find((x) => x.value === network);
 
+  // Use deposit address to check if memo is required, as a last fallback
+  const depositEndpoint = useDepositInfo(
+    coin,
+    coinObject?.networks?.find((n) => n.value === network)?.network,
+    // Lightning deposit not supported atm
+    network !== 'LIGHTNING',
+  );
+  const memoRequired =
+    !!networkObject?.memoRegex ||
+    networkObject?.specialTips === MEMO_SPECIAL_TIP ||
+    (!depositEndpoint.isFetching && !!depositEndpoint.data?.tag);
+
   useEffect(() => {
     if (coin) {
+      // Clear network on coin change
       setValue(
         'network',
         coinObject.networks.length === 1 ? coinObject.networks[0].value : null,
@@ -279,7 +294,7 @@ function WithdrawForm({
             </Box>
           )}
 
-          {(networkObject?.memoRegex || networkObject?.specialTips) && (
+          {memoRequired && (
             <Controller
               name='tag'
               control={control}

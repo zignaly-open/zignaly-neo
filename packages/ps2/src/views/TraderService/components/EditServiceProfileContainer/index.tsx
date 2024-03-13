@@ -26,9 +26,11 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
+import RichTextEditor from './atoms/RichDescriptionEditor';
 import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
+import Deactivated from '../DeactivatedService';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -81,7 +83,12 @@ const EditServiceProfileContainer: React.FC<{
   const submit = async (data: EditServiceForm) => {
     const { commission: c, ...rest } = data;
     await Promise.all([
-      edit({ id: service.id, ...rest, level: visibility, commission: c }),
+      edit({
+        id: service.id,
+        ...rest,
+        level: visibility,
+        commission: c,
+      }),
       ...(isFeatureOn(Features.Referrals)
         ? [
             updateCommission({
@@ -153,6 +160,7 @@ const EditServiceProfileContainer: React.FC<{
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form'>
+      {service?.activated === false && <Deactivated />}
       <ZigTypography
         textAlign='center'
         variant='h1'
@@ -188,21 +196,27 @@ const EditServiceProfileContainer: React.FC<{
               />
             )}
           />
-          <Controller
-            name='description'
-            control={control}
-            render={({ field }) => (
-              <ZigInput
-                id={'edit-service-profile__service-description'}
-                fullWidth
-                label={t('edit.description')}
-                error={t(errors.description?.message)}
-                multiline
-                rows={18}
-                {...field}
-              />
-            )}
-          />
+          <Grid item xs={12} sm={12}>
+            <Controller
+              name='description'
+              control={control}
+              render={({ field }) => (
+                <RichTextEditor
+                  id={'edit-service-profile__service-description'}
+                  label={
+                    <ZigTypography
+                      mb={'10px'}
+                      id={'edit-service-profile__service-description-label'}
+                    >
+                      {t('edit.description')}
+                    </ZigTypography>
+                  }
+                  error={t(errors.description?.message)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
           <Grid item xs={12} sm={6}>
             <Controller
               name='maximumSbt'

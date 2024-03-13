@@ -39,7 +39,7 @@ letterMapping = {
 
 const messWithString = (string) =>
   string.replace(
-    /(^|\}\})(.*?)(\{\{|$)/gi,
+    /(^|\}\}|\>)(.*?)(\{\{|\<|$)/gi,
     (_, open, match, close) =>
       open +
       match
@@ -77,8 +77,11 @@ function mkdir(path) {
   if (!fs.existsSync(path)) fs.mkdirSync(path);
 }
 
-(async () => {
-  const packagesPath = (p) => `${__dirname}/../packages/${p}/public/locales/`;
-  mkdir(packagesPath('ps2') + testLocale);
-  processFiles(getFiles(packagesPath('ps2') + 'en'));
-})();
+function addTestLocalesForPath(i18nPath) {
+  const packagesPath = (p) => `${__dirname}/../packages/${p}/`;
+  mkdir(packagesPath(i18nPath) + testLocale);
+  processFiles(getFiles(packagesPath(i18nPath) + 'en'));
+}
+
+addTestLocalesForPath('ps2/public/locales');
+addTestLocalesForPath('zignaly-ui/src/i18n/static');

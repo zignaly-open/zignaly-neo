@@ -4,11 +4,13 @@ import { Box, Collapse, Fade, IconButton, InputAdornment, useTheme } from "@mui/
 import { Search } from "@mui/icons-material";
 import { ZigCrossIcon, ZigResetIcon } from "../../../icons";
 import { ZigInputStyled } from "./styles";
+import { useTranslation } from "react-i18next";
 
 const ZigSearch = ({ value, onChange, id, sx }: ZigSearchProps) => {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigSearch" });
 
   return (
     <Box
@@ -41,7 +43,7 @@ const ZigSearch = ({ value, onChange, id, sx }: ZigSearchProps) => {
               onChange={(e) => {
                 onChange(e.target.value);
               }}
-              placeholder={"Search"}
+              placeholder={t("search")}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ZigFiltersType } from "./types";
+import { ZigFilter, ZigFiltersType } from "./types";
 import { filterData } from "./util";
 
 /**
@@ -9,10 +9,10 @@ import { filterData } from "./util";
  * @param filtersDataMap Function that maps data with filters. If not provided, the properties
  * will be fetched by filter id. Map to an array if it can match multiple values.
  */
-export const useFilteredCollection = <T extends object>(
+export const useFilteredCollection = <T extends Record<ZigFilter["id"], unknown>>(
   collection: T[],
   filters: ZigFiltersType,
-  filtersDataMap?: (data: T) => object,
+  filtersDataMap?: (data: T) => Record<ZigFilter["id"], unknown>,
 ): T[] => {
   return useMemo(() => {
     return (collection?.filter((data) => {
@@ -24,7 +24,7 @@ export const useFilteredCollection = <T extends object>(
         const value = values[filter.id];
         return Array.isArray(value)
           ? value.some((v) => filterData(filter, v))
-          : filterData(filter, value);
+          : filterData(filter, value as string | number);
       });
     }) || []) as T[];
   }, [collection, filters, filtersDataMap]);

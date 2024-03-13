@@ -17,5 +17,6 @@
     "label": "Swap to:",
     "placeholder": "Amount received"
   },
-  "toast-success": "Successfully converted"
+  "toast-success": "Successfully converted",
+  "empty-list-warning": "{{coin}} cannot be swap but it can be withdrawn"
 }

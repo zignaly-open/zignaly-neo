@@ -1,8 +1,10 @@
 import ZigButton, { ZigButtonProps } from "components/inputs/ZigButton";
 import { ZigResetIcon } from "icons";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const DropdownResetButton = (props: ZigButtonProps) => {
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
   return (
     <ZigButton
       variant={"text"}
@@ -19,7 +21,7 @@ export const DropdownResetButton = (props: ZigButtonProps) => {
       }}
       startIcon={<ZigResetIcon style={{ top: "1px !important" }} />}
     >
-      Reset
+      {t("reset")}
     </ZigButton>
   );
 };

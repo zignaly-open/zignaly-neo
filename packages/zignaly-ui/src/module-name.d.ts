@@ -25,10 +25,7 @@ declare module "@mui/material/styles" {
     red: string;
     contrasting: string;
     paleBlue: string;
-    lightGrayBlue: string;
     darkGreen: string;
-    labelCheckbox: string;
-    checkboxPrimary: string;
     lightGrey: string;
 
     backgrounds: Record<
@@ -74,12 +71,13 @@ declare module "@mui/material/styles" {
       Record<"red" | "green", string>;
 
     zscore: ZScoreTheme;
+
+    imageColorOverride?: string;
   }
 
   type RingTheme = {
     gradient: string[];
     icon: string;
-    text: string;
   };
 
   type ZScoreTheme = {

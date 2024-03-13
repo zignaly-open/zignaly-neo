@@ -1,26 +1,31 @@
-import { Box } from '@mui/system';
+import { Box, SxProps } from '@mui/system';
 import React, { useEffect, useRef, useState } from 'react';
-import { ZigButton, ZigTypography, withAttrs } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography, withAttrs, ZigLink } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
 import breaks from 'remark-breaks';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { useMediaQuery, useTheme } from '@mui/material';
+import remarkGfm from 'remark-gfm';
 
 const MarkdownSection: React.FC<{
-  title: string;
+  title?: string;
   subtitle?: JSX.Element | string;
   readMore?: boolean;
   content: string;
   heightLimit?: number;
-  emptyText: string;
+  emptyText?: string;
+  sx?: SxProps;
   id?: string;
-}> = ({ id, title, subtitle, readMore = true, content, emptyText }) => {
+}> = ({ id, title, subtitle, readMore = true, content, emptyText, sx }) => {
   const { t } = useTranslation('action');
   const ref = useRef(null);
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
   const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
   const [isTruncated, setIsTruncated] = useState(true);
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
 
   useEffect(() => {
     setShouldShowReadMore(
@@ -30,28 +35,33 @@ const MarkdownSection: React.FC<{
 
   const Icon = isTruncated ? ExpandMore : ExpandLess;
   return (
-    <Box mt={8} mb={4}>
-      <ZigTypography
-        variant={'h2'}
-        sx={{ mb: 3 }}
-        align='center'
-        id={id && `${id}-title`}
-      >
-        {title}
-      </ZigTypography>
+    <Box sx={sx} mt={8} mb={4}>
+      {title && (
+        <ZigTypography
+          variant={'h2'}
+          sx={{ mb: 3 }}
+          align='center'
+          id={id && `${id}-title`}
+        >
+          {title}
+        </ZigTypography>
+      )}
+
       {subtitle}
 
       <HideReadMoreEffects
         ref={ref}
         truncate={shouldShowReadMore && isTruncated}
+        lines={lg ? 9 : 5}
       >
         {chunks ? (
           <MarkdownContainer id={id}>
             <ReactMarkdown
-              remarkPlugins={[breaks]}
+              remarkPlugins={[breaks, remarkGfm]}
               linkTarget='_blank'
               components={{
                 p: withAttrs(ZigTypography, { component: 'p' }),
+                a: ZigLink,
               }}
             >
               {content}

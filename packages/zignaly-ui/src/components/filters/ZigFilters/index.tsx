@@ -8,6 +8,7 @@ import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
 import FilterDropdown from "./dropdowns/FilterDropdown";
 import useDetectWrapping from "hooks/useDetectWrapping";
+import { useTranslation } from "react-i18next";
 
 const GAP = 1;
 
@@ -26,6 +27,7 @@ const ZigFilters = ({
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up("md"));
   const lg = useMediaQuery(theme.breakpoints.up("lg"));
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
 
   const [mobileFilters, mainFilters, secondaryFilters] = useMemo(() => {
     return [
@@ -168,7 +170,7 @@ const ZigFilters = ({
           </Layout>
           {md && (
             <ZigButton variant="text" onClick={resetFilters} id={`${prefixId}__reset-all`}>
-              Reset
+              {t("reset")}
             </ZigButton>
           )}
         </Box>

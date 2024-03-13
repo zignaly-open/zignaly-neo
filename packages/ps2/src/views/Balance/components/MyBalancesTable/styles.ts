@@ -6,12 +6,11 @@ export const ButtonsWrapper = styled(Box)`
   bottom: 56px;
   height: 60px;
   width: 100%;
-  padding: 10px 3px 5px 3px;
+  padding: 10px 3px 12px 3px;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  background-color: ${({ theme }) =>
-    theme.palette.backgrounds.mobileButtonsWrapper};
+  background-color: ${({ theme }) => theme.palette.neutral900};
 `;
 export const TableWrapper = styled(Box)`
   td {

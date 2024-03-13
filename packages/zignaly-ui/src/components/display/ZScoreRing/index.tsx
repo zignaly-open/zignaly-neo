@@ -2,10 +2,12 @@ import React from "react";
 import { Box, darken, lighten, useTheme } from "@mui/material";
 import { ZScoreRingProps } from "./types";
 import { ZigScoreBalanceIcon, ZigScoreCoinsIcon, ZigScoreWalletIcon } from "icons";
-import { AnimatedHandle, AnimatedRingCircle1, AnimatedRingSvg } from "./styles";
+import { AnimatedHandle, AnimatedRingCircle, AnimatedRingSvg } from "./styles";
 import chroma from "chroma-js";
 import ZigTypography from "../ZigTypography";
 import { useRisk } from "../ZigRisk";
+import { GradientDefs } from "./atoms";
+import { useTranslation } from "react-i18next";
 
 const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
   const {
@@ -17,15 +19,17 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
   const colors = zscore.ring[category];
   const gradientScale = chroma.scale(colors.gradient);
   const gradientforValue = gradientScale(normalizedPct / 100).hex();
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZScoreRing" });
 
   const categoriesData = {
-    profits: { text: "Profits", icon: ZigScoreCoinsIcon },
-    risk: { text: "Risk", icon: null },
-    service: { text: "Service", icon: ZigScoreWalletIcon },
-    balanced: { text: "Balance", icon: ZigScoreBalanceIcon },
+    profits: { text: t("profits"), icon: ZigScoreCoinsIcon },
+    risk: { text: t("risk"), icon: null },
+    service: { text: t("service"), icon: ZigScoreWalletIcon },
+    balanced: { text: t("balance"), icon: ZigScoreBalanceIcon },
   };
   const categoryData = categoriesData[category];
   const risk = useRisk(value);
+  const prefixId = "zscore-ring";
 
   return (
     <Box width={"112px"} height={"112px"} position={"relative"} {...rest}>
@@ -45,7 +49,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             <categoryData.icon color={colors.icon} height={16} width={"100%"} />
           </Box>
         )}
-        <ZigTypography variant="h4" color={colors.text}>
+        <ZigTypography variant="h4" color="neutral100">
           {categoryData.text}
         </ZigTypography>
         <Box display={"flex"}>
@@ -58,14 +62,11 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
           >
             {Math.round(value)}
           </ZigTypography>
-          <ZigTypography
-            component={"span"}
-            fontWeight={500}
-            fontSize={17}
-            color="#neutral400"
-            lineHeight={"22px"}
-          >
-            /{max}
+          <ZigTypography component={"span"} fontWeight={400} fontSize={17} lineHeight={"22px"}>
+            {
+              // eslint-disable-next-line i18next/no-literal-string
+              `/${max}`
+            }
           </ZigTypography>
         </Box>
         {!categoryData.icon && category === "risk" && (
@@ -75,19 +76,10 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
         )}
       </Box>
       <AnimatedRingSvg viewBox="0 0 37 37" transform="rotate(36)">
-        <defs>
-          <linearGradient id={`${category}-1`} gradientTransform="rotate(180 0.5 0.5)">
-            <stop offset="0.0" stop-color={colors.gradient[0]} />
-            <stop offset="0.75" stop-color={colors.gradient[1]} />
-          </linearGradient>
-          <linearGradient id={`${category}-2`} gradientTransform="rotate(-36 0.5 0.5)">
-            <stop offset="0" stop-color={colors.gradient[1]} />
-            <stop offset="0.75" stop-color={colors.gradient[2]} />
-          </linearGradient>
-        </defs>
+        <GradientDefs prefixId={prefixId} category={category} />
         <g transform="rotate(90)">
           <circle
-            stroke-width="3.4"
+            strokeWidth="3.4"
             r="15.915"
             cx="50%"
             cy="50%"
@@ -95,25 +87,25 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             strokeDasharray="80,20"
           />
           {pct > 50 && (
-            <AnimatedRingCircle1
-              stroke-width="3.4"
+            <AnimatedRingCircle
+              strokeWidth="3.4"
               r="15.915"
               cx="50%"
               cy="50%"
-              stroke={`url('#${category}-2')`}
+              stroke={`url('#${prefixId}-${category}-2')`}
               strokeDasharray={`${normalizedPct} ${100 - normalizedPct}`}
             />
           )}
-          <AnimatedRingCircle1
-            stroke-width="3.4"
+          <AnimatedRingCircle
+            strokeWidth="3.4"
             r="15.915"
             cx="50%"
             cy="50%"
-            stroke={`url('#${category}-1')`}
+            stroke={`url('#${prefixId}-${category}-1')`}
             strokeDasharray={pct > 50 ? "40 60" : `${normalizedPct} ${100 - normalizedPct}`}
           />
           <AnimatedHandle
-            stroke-width="5"
+            strokeWidth="5"
             r="15.915"
             cx="50%"
             cy="50%"
@@ -122,7 +114,7 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
             strokeDashoffset={-normalizedPct}
           />
           <AnimatedHandle
-            stroke-width="3.2"
+            strokeWidth="3.2"
             r="15.915"
             cx="50%"
             cy="50%"
