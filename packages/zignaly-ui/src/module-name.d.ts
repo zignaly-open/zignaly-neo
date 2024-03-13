@@ -60,12 +60,7 @@ declare module "@mui/material/styles" {
     boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;
 
     chart: Record<
-      | "greenGradient"
-      | "greenMiniGradient"
-      | "redGradient"
-      | "redMiniGradient"
-      | "greenCard"
-      | "redCard",
+      "greenGradient" | "greenMiniGradient" | "redGradient" | "redMiniGradient",
       string[]
     > &
       Record<"red" | "green", string>;

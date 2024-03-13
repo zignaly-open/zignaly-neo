@@ -65,8 +65,7 @@ const EditServiceProfileContainer: React.FC<{
     formState: { errors },
     reset,
   } = useForm<EditServiceForm>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'all',
     defaultValues,
     resolver: yupResolver(EditServiceValidation),
   });

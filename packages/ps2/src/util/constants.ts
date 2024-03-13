@@ -38,3 +38,6 @@ export const BITCOIN_URL =
   'https://news.bitcoin.com/zignaly-lists-on-ascendex/';
 
 export const BYBIT_FORM_URL = 'https://form.typeform.com/to/Ya7vwaKa';
+
+export const HYPER_TRADER_URL =
+  'https://help.zignaly.com/en/articles/7914267-hyper-trader-api-connection';

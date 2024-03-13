@@ -108,7 +108,7 @@ jobs:
     name: Invalidate Cloudfront nd Cloudflare
     needs: build
     runs-on: ubuntu-latest
-    environment: prod
+    environment: ${{ inputs.deploy-env }}
     steps:
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2

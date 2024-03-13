@@ -20,17 +20,6 @@ const ThemeChartGradients = () => {
           <stop offset="50%" stopColor={chart.greenMiniGradient[1]} />
           <stop offset="100%" stopColor={chart.greenMiniGradient[2]} />
         </linearGradient>
-        <linearGradient id={ChartGradientColor.RedCard} x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stopColor={chart.redCard[0]} stopOpacity="0.76" />
-          <stop offset="32%" stopColor={chart.redCard[1]} stopOpacity="0.76" />
-          <stop offset="100%" stopColor={chart.redCard[2]} stopOpacity="0.76" />
-        </linearGradient>
-        <linearGradient id={ChartGradientColor.GreenCard} x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stopColor={chart.greenCard[0]} stopOpacity="0.76" />
-          <stop offset="32%" stopColor={chart.greenCard[1]} stopOpacity="0.76" />
-          <stop offset="53%" stopColor={chart.greenCard[2]} stopOpacity="0.76" />
-          <stop offset="100%" stopColor={chart.greenCard[3]} stopOpacity="0.76" />
-        </linearGradient>
         <linearGradient id={ChartGradientColor.RedFull} x1="0" y1="1" x2="0" y2="0">
           <stop offset="0%" stopColor={chart.redGradient[0]} />
           <stop offset="100%" stopColor={chart.redGradient[1]} />

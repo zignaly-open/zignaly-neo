@@ -6,6 +6,7 @@ import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 import { StyledEditor } from './styles';
 import { ALLOWED_COMMANDS } from './constants';
 import MarkdownSection from '../../../ServiceProfileContainer/atoms/MarkdownSection';
+import { bold, italic } from '@uiw/react-md-editor';
 
 const RichTextEditor = ({
   id,
@@ -57,14 +58,45 @@ const RichTextEditor = ({
             <MarkdownSection content={source} readMore={false} sx={{ m: 0 }} />
           ),
         }}
-        commandsFilter={(command) =>
-          ALLOWED_COMMANDS.includes(command.name) ||
-          command.keyCommand === 'divider'
-            ? command.name === 'italic'
-              ? { ...command, prefix: '_' }
+        commandsFilter={(command) => {
+          return ALLOWED_COMMANDS.includes(command.name) ||
+            command.keyCommand === 'divider'
+            ? command.name === 'italic' || command.name === 'bold'
+              ? {
+                  ...command,
+                  execute: (state, api) => {
+                    const state1 = api.setSelectionRange({
+                      start: state.selection.start,
+                      end: state.selectedText.endsWith('\n')
+                        ? state.selection.end - 1
+                        : state.selection.end,
+                    });
+                    api.replaceSelection(
+                      state.selectedText.endsWith('\n')
+                        ? state.selectedText.replace('\n', '')
+                        : state.selectedText,
+                    );
+                    command.name === 'italic'
+                      ? italic.execute(
+                          {
+                            ...state1,
+                            command: state.command,
+                          },
+                          api,
+                        )
+                      : bold.execute(
+                          {
+                            ...state1,
+                            command: state.command,
+                          },
+                          api,
+                        );
+                  },
+                  prefix: command.name === 'italic' ? '_' : '**',
+                }
               : command
-            : false
-        }
+            : false;
+        }}
         {...props}
       />
       {error && <ErrorMessage text={error} id={id && `${id}-error-message`} />}

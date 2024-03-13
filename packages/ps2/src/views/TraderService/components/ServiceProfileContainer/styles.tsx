@@ -36,6 +36,14 @@ export const LiquidatedLabel = muiStyled(Box)`
   }
 `;
 
+export const StyledMarkdownWrapper = styled(Box)`
+  ul,
+  ol {
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+`;
+
 export const StyledVerifiedIcon = styled(VerifiedIcon)`
   fill: ${(props) => props.theme.palette.greenGraph} !important;
   color: ${(props) => props.theme.palette.avatarBack} !important;

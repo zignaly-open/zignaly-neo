@@ -114,7 +114,6 @@ const createMuiTheme = ({
           }
           
           .MuiInput-input {
-            background: transparent;
             border: none;
             color: ${palette.neutral100} !important;
             outline: none;
@@ -126,6 +125,8 @@ const createMuiTheme = ({
             box-shadow: none !important;
             resize: none;
             -webkit-text-fill-color: ${palette.neutral300} !important;
+            // 1Password autofill fix
+            background: linear-gradient(90deg,${backgrounds.selectInputFill} 0%,${backgrounds.selectInputFill} 35%,${backgrounds.selectInputFill} 100%);
           }
           
           .MuiInput-input {
