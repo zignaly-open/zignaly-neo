@@ -8,6 +8,7 @@ import breaks from 'remark-breaks';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import remarkGfm from 'remark-gfm';
+import ZigErrorBoundary from '../../../../../util/ZigErrorBoundary';
 
 const MarkdownSection: React.FC<{
   title?: string;
@@ -19,7 +20,7 @@ const MarkdownSection: React.FC<{
   sx?: SxProps;
   id?: string;
 }> = ({ id, title, subtitle, readMore = true, content, emptyText, sx }) => {
-  const { t } = useTranslation('action');
+  const { t } = useTranslation(['action', 'service']);
   const ref = useRef(null);
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
   const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
@@ -56,16 +57,24 @@ const MarkdownSection: React.FC<{
       >
         {chunks ? (
           <MarkdownContainer id={id}>
-            <ReactMarkdown
-              remarkPlugins={[breaks, remarkGfm]}
-              linkTarget='_blank'
-              components={{
-                p: withAttrs(ZigTypography, { component: 'p' }),
-                a: ZigLink,
-              }}
+            <ZigErrorBoundary
+              fallback={
+                <ZigTypography color={'neutral400'}>
+                  {t('service:markdown-error')}
+                </ZigTypography>
+              }
             >
-              {content}
-            </ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[breaks, remarkGfm]}
+                linkTarget='_blank'
+                components={{
+                  p: withAttrs(ZigTypography, { component: 'p' }),
+                  a: ZigLink,
+                }}
+              >
+                {content}
+              </ReactMarkdown>
+            </ZigErrorBoundary>
           </MarkdownContainer>
         ) : (
           <ZigTypography color={'neutral400'} id={id && `${id}-empty-text`}>
