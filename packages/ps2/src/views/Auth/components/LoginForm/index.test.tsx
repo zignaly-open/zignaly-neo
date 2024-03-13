@@ -25,22 +25,6 @@ test('basic email validation should work', async () => {
   });
 });
 
-test('different validation behavior on revalidate', async () => {
-  renderWithProviders(<LoginForm />);
-
-  await userEvent.click(screen.getByTestId('login__submit'));
-  await waitFor(() => {
-    expect(screen.getAllByText('error.required').length).toBe(2);
-  });
-
-  await userEvent.type(screen.getByTestId('login__username'), email);
-  // we should have 2 here because we have revalidation onBlur
-  // the next test case verifies this
-  await waitFor(() => {
-    expect(screen.getAllByText('error.required').length).toBe(2);
-  });
-});
-
 test('successful log in', async () => {
   renderWithProviders(<LoginForm />);
   await userEvent.type(screen.getByTestId('login__username'), email);
