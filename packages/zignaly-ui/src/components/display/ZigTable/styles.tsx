@@ -40,7 +40,7 @@ export const Table = styled("table", {
 
   td {
     @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-      padding: 12px 22px;
+      padding: 12px 15px;
       height: 95px;
     }
     color: ${({ theme }) => theme.palette.neutral100};
