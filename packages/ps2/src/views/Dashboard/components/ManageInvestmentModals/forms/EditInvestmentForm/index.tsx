@@ -54,7 +54,7 @@ function EditInvestmentForm({
     control,
     formState: { isValid, errors },
   } = useForm<EditFormData>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     resolver: yupResolver(
       editInvestmentValidation({

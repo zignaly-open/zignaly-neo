@@ -49,7 +49,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
     trigger,
     formState: { isValid, errors },
   } = useForm<InvestFormData>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
       amountTransfer: '',

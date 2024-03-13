@@ -21,7 +21,7 @@ const SubscribeForm = () => {
     reset,
     formState: { errors, isValid },
   } = useForm<{ code: string }>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     resolver: yupResolver(SubscriptionCodeValidation),
     defaultValues: {

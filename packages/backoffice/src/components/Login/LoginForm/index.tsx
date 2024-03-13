@@ -17,7 +17,7 @@ const LoginForm: React.FC = () => {
     setError,
     formState: { errors },
   } = useForm<{ email: string; password: string }>({
-    mode: 'onChange',
+    mode: 'all',
     defaultValues: {
       email:
         (process.env.NODE_ENV === 'development' &&

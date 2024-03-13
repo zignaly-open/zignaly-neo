@@ -23,7 +23,7 @@ const ResetPasswordForm = () => {
     control,
     formState: { errors, isValid },
   } = useForm<{ password: string }>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(ResetPasswordValidation),
     defaultValues: {
       password: '',

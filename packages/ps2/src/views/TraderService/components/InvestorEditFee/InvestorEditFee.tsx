@@ -59,7 +59,7 @@ function InvestorEditFee({
     register,
     formState: { isValid, errors },
   } = useForm<EditFeeFormValues>({
-    mode: 'onChange',
+    mode: 'all',
     defaultValues: {
       value: previousValue,
       maxDiscount: {

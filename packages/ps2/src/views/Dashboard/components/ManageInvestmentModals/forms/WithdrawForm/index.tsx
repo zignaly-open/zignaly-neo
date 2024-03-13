@@ -77,7 +77,7 @@ function WithdrawForm({
     trigger,
     formState: { isValid, errors },
   } = useForm<WithdrawFormData>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
       address: '',

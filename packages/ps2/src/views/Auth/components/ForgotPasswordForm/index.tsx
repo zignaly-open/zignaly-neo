@@ -19,7 +19,7 @@ const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
     control,
     formState: { errors, isValid },
   } = useForm<{ email: string }>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(ForgotPasswordValidation),
     defaultValues: {
       email: defaultEmail || '',
