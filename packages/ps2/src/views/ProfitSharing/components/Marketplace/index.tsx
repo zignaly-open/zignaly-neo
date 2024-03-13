@@ -185,7 +185,7 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                     assetsValue={props.getValue()}
                     numberOfInvestors={props.row.original.investors}
                     createdAt={props.row.original.createdAt}
-                    shorten={!xl}
+                    shorten
                   />
                 </Box>
               ),
