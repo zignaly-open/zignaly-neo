@@ -270,7 +270,6 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   chartType,
                 )}
                 onlyIntegerTicks={chartType === GraphChartType.investors}
-                showCurrentLine={chartType === GraphChartType.pnl_pct_compound}
                 events={events}
                 yAxisFormatter={(v) =>
                   `${formatCompactNumber(v, isPercent ? 2 : 8)}${
