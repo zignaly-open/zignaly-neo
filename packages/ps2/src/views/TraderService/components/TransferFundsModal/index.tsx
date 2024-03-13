@@ -55,7 +55,7 @@ function TransferModal({
     trigger,
     formState: { isValid, errors, isDirty },
   } = useForm<TransferFormData>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(transferModalValidation(balanceFrom)),
     defaultValues: {
       amountValue: '',

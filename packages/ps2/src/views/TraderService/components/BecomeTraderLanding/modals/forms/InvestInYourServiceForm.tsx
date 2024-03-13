@@ -50,7 +50,7 @@ const InvestInYourServiceForm: React.FC<{
     formState: { errors },
     watch,
   } = useForm<ServiceInvestType>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     resolver: yupResolver(
       InvestInYourServiceValidation({
