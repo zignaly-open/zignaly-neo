@@ -34,8 +34,7 @@ function CreateApiKeysModal({
     control,
     formState: { errors },
   } = useForm<CreateApiKeyFormType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(CreateKeyValidation),
     defaultValues: {
       alias: '',

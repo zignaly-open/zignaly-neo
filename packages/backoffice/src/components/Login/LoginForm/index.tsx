@@ -17,8 +17,7 @@ const LoginForm: React.FC = () => {
     setError,
     formState: { errors },
   } = useForm<{ email: string; password: string }>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
       email:
         (process.env.NODE_ENV === 'development' &&

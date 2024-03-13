@@ -35,8 +35,7 @@ const EditProfileForm = () => {
     control,
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
-    mode: 'onBlur',
-    reValidateMode: 'onChange',
+    mode: 'onChange',
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
       username: user.userName || '',

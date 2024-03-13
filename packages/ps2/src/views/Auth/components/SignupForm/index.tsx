@@ -42,8 +42,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
     control,
     formState: { errors },
   } = useForm<LoginPayload>({
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(SignupValidation),
     defaultValues: {
       email: '',

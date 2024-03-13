@@ -44,8 +44,7 @@ const CreateServiceForm: React.FC<{
     register,
     formState: { errors },
   } = useForm<ServiceFormData>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(CreateServiceValidation),
     defaultValues: service || {
       serviceName: '',
