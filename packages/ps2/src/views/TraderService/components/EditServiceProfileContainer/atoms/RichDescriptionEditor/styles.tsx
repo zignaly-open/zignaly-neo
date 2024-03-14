@@ -12,6 +12,7 @@ export const StyledEditor = styled(MDEditor)<{
     * {
       font-size: 16px;
       line-height: 25px;
+      color: ${({ theme }) => theme.palette.neutral200} !important;
     }
   }
   .w-md-editor-toolbar {
@@ -27,8 +28,12 @@ export const StyledEditor = styled(MDEditor)<{
   }
   .w-md-editor-toolbar-child {
     width: 70px;
+    button {
+      color: ${({ theme }) => theme.palette.neutral200};
+    }
     button:hover {
       background: unset;
+      color: ${({ theme }) => theme.palette.neutral000};
     }
   }
   .w-md-editor-toolbar,
@@ -42,6 +47,7 @@ export const StyledEditor = styled(MDEditor)<{
     );
     color: ${({ theme }) => theme.palette.neutral200};
     font-size: 16px;
+    scrollbar-width: thin;
   }
   margin-bottom: 5px;
   padding: 0;
