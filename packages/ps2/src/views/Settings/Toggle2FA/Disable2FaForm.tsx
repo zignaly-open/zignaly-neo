@@ -28,7 +28,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
     formState: { errors, isValid },
     setError,
   } = useForm<TwoFAFormType>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(TwoFAValidation),
   });
 

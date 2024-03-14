@@ -88,7 +88,7 @@ function SwapCoinsForm({
     reset,
     formState: { isValid, errors },
   } = useForm<{ toCoinAmount: string; fromCoinAmount: string }>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
       toCoinAmount: '',

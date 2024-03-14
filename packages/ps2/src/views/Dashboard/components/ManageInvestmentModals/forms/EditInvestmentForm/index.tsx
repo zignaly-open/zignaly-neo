@@ -54,7 +54,7 @@ function EditInvestmentForm({
     control,
     formState: { isValid, errors },
   } = useForm<EditFormData>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     resolver: yupResolver(
       editInvestmentValidation({
@@ -138,8 +138,13 @@ function EditInvestmentForm({
             variant={'body2'}
             color='neutral300'
             id='edit-investment-modal__profit-manage-title'
+            textAlign={'center'}
           >
-            {t('form.profits.title')}
+            {t(
+              `form.profits.title${
+                details.accountType === 'owner' ? '-owner' : ''
+              }`,
+            )}
           </ZigTypography>
           <ZigSlider
             prefixId={'edit-investment-modal-slider'}

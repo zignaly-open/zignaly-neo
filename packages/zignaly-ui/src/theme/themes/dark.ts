@@ -67,13 +67,6 @@ const dark: ThemeStyledComponents = {
     greenMiniGradient: ["rgba(17, 27, 47, 0)", "rgba(22, 41, 67, 0.5)", "rgba(39, 110, 107, 1)"],
     redGradient: ["rgba(31, 18, 59, 0.52)", "rgba(74, 33, 81, 0.69)"],
     redMiniGradient: ["rgba(18, 20, 39, 0)", "rgba(21, 21, 57, 0.5)", "rgba(86, 36, 108, 1)"],
-    greenCard: [
-      "rgba(16, 33, 33, 0.68)",
-      "rgba(0, 45, 20, 0.44)",
-      "rgba(7, 47, 30, 0.44)",
-      "rgba(56, 235, 170, 0.69)",
-    ],
-    redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
   },
   zscore: {
     ring: {

@@ -9,6 +9,8 @@ import {
 } from '../../../apis/user/api';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
+import { useDispatch } from 'react-redux';
+import { setUser } from 'apis/user/store';
 
 const UserKycChecker: React.FC = () => {
   const toast = useToast();
@@ -21,6 +23,7 @@ const UserKycChecker: React.FC = () => {
   const [loadUser] = useLazyUserQuery();
   const [loadKyc] = useLazyKycStatusesQuery();
   const shouldCheck = isAuthenticated && isPending && isFeatureOn(Features.Kyc);
+  const dispatch = useDispatch();
 
   const oldStatusesSerialized = useRef<string>();
 
@@ -46,7 +49,8 @@ const UserKycChecker: React.FC = () => {
           if (newStatus.statusesSerialized !== oldStatusesSerialized.current) {
             oldStatusesSerialized.current = newStatus.statusesSerialized;
             toast.info(t('common:kyc-updated'));
-            loadUser();
+            const userData = await loadUser().unwrap();
+            dispatch(setUser(userData));
           }
 
           if (newStatus.shouldCheck) {

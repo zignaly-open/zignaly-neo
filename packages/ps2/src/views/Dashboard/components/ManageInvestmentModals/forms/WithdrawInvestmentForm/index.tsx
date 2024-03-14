@@ -58,7 +58,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     setValue,
     formState: { errors, isValid },
   } = useForm<WithdrawInvestmentFormFormData>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
       amountTransfer: '',
