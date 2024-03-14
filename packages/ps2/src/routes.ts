@@ -39,3 +39,4 @@ export const ROUTE_HELP_INVESTOR = '/help/investor';
 export const ROUTE_LEGAL_TOS = '/legal/terms-of-service';
 export const ROUTE_LEGAL_PRIVACY = '/legal/privacy';
 export const ROUTE_404 = '/404';
+export const ROUTE_OFFLINE = '/offline';

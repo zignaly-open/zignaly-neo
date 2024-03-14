@@ -21,11 +21,12 @@ import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
 import TermsOfService from './views/Legal/TermsOfService';
 import Privacy from './views/Legal/Privacy';
+import NotFound from 'views/Error/404';
+import Offline from 'views/Error/Offline';
 
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
-const NotFound = lazy(() => import('views/404'));
 const ResetPassword = lazy(() => import('views/Auth/ResetPassword'));
 const Referrals = lazy(() => import('./views/Referrals'));
 const Invite = lazy(() => import('./views/Referrals/Invite'));
@@ -217,6 +218,7 @@ const Router: React.FC = () => {
       <Route path={Routes.ROUTE_LEGAL_TOS} element={<TermsOfService />} />
       <Route path={Routes.ROUTE_LEGAL_PRIVACY} element={<Privacy />} />
       <Route path={Routes.ROUTE_404} element={<NotFound />} />
+      <Route path={Routes.ROUTE_OFFLINE} element={<Offline />} />
 
       <Route
         path='/'

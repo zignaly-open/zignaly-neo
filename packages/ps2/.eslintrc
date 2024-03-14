@@ -3,6 +3,16 @@
     "@zignaly-open/zignaly-react"
   ],
   "rules": {
-    "no-param-reassign": "off" // rtk expects you to re-assign states
+    "no-param-reassign": "off", // rtk expects you to re-assign states
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "pascalCase": true
+        },
+        "ignore": ["service-worker.ts"]
+      }
+    ]
   }
 }

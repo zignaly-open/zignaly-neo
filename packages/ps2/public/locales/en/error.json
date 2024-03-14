@@ -226,6 +226,10 @@
   },
   "missing-exchange": "There is an issue with your account. Please contact our support",
   "something-went-wrong": "Something went wrong",
+  "offline": {
+    "title": "Looks like you're offline",
+    "description": "Sorry but an internet connection is needed to use Zignaly"
+  },
   "404": {
     "title": "Page not found",
     "subtitle": "This page is not available or does not exist.",
