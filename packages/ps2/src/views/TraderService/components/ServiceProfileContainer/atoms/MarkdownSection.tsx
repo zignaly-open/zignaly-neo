@@ -65,7 +65,10 @@ const MarkdownSection: React.FC<{
               linkTarget='_blank'
               components={{
                 p: withAttrs(ZigTypography, { component: 'p' }),
-                a: ZigLink,
+                a: withAttrs(ZigLink),
+                img: (props) => (
+                  <img {...props} style={{ maxWidth: '400px' }} />
+                ),
               }}
             >
               {content}
