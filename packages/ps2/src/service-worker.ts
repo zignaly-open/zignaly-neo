@@ -13,6 +13,7 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
+import { PrecacheController } from 'workbox-precaching';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -25,6 +26,25 @@ clientsClaim();
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
+
+const precacheController = new PrecacheController();
+precacheController.addToCacheList([
+  { url: '/styles/example-1.abcd.css', revision: null },
+  { url: '/styles/example-2.1234.css', revision: null },
+  { url: '/scripts/example-1.abcd.js', revision: null },
+  { url: '/scripts/example-2.1234.js', revision: null },
+]);
+
+precacheController.addToCacheList([
+  {
+    url: '/index.html',
+    revision: 'abcd',
+  },
+  {
+    url: '/about.html',
+    revision: '1234',
+  },
+]);
 
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
