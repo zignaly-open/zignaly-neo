@@ -32,10 +32,9 @@ const KycBanner = () => {
       <Alert severity='warning' id='kyc-banner'>
         {
           /* eslint-disable-next-line i18next/no-literal-string */
-          'Urgent Reminder: KYC Deadline Approaching!'
+          'Urgent Reminder: KYC Deadline Approaching! '
         }
         <AnchorLink to={ROUTE_KYC}>
-          &nbsp;
           {
             /* eslint-disable-next-line i18next/no-literal-string */
             'Pass your KYC'
