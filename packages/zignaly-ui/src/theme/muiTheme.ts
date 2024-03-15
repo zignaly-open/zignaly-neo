@@ -556,7 +556,7 @@ export const getMuiAndStyledThemes = (
 ): ThemeExport => {
   let overriden = baseTheme;
 
-  for (let k of overrides || []) {
+  for (const k of overrides || []) {
     overriden = overrideTheme(overriden, k || {}) as ThemeStyledComponents;
   }
 

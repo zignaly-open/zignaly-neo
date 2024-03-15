@@ -195,6 +195,7 @@ export default function ProfileConfig() {
                 render={({ field }) => (
                   <ZigInput
                     error={t(
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                       // @ts-ignore
                       errors.tools?.google_tag_manager?.message as string,
                     )}
