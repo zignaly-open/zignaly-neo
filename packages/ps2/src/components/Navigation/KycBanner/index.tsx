@@ -4,13 +4,11 @@ import { KycStatus } from 'apis/user/types';
 import { useCurrentUser, useIsAuthenticated } from 'apis/user/use';
 import AnchorLink from 'components/AnchorLink';
 import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
 import { ROUTE_KYC } from 'routes';
 import { isFeatureOn } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 
 const KycBanner = () => {
-  const { t } = useTranslation('kyc');
   const { exchanges } = useCurrentUser();
   const isAuthenticated = useIsAuthenticated();
   const { data: statusesRes } = useKycStatusesQuery(undefined, {
@@ -32,11 +30,17 @@ const KycBanner = () => {
   ) {
     return (
       <Alert severity='warning' id='kyc-banner'>
-        <Trans
-          i18nKey='reminder'
-          t={t}
-          components={[<AnchorLink to={ROUTE_KYC} key='1' />]}
-        />
+        {
+          /* eslint-disable-next-line i18next/no-literal-string */
+          'Urgent Reminder: KYC Deadline Approaching!'
+        }
+        <AnchorLink to={ROUTE_KYC}>
+          &nbsp;
+          {
+            /* eslint-disable-next-line i18next/no-literal-string */
+            'Pass your KYC'
+          }
+        </AnchorLink>
       </Alert>
     );
   }
