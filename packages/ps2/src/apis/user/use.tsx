@@ -18,13 +18,13 @@ import {
   useResendCodeMutation,
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
+  useSendCodeWithdrawMutation,
   useSessionQuery,
   useSetLocaleMutation,
   useSignupMutation,
   useVerify2FAMutation,
   useVerifyCodeMutation,
   useVerifyCodeNewUserMutation,
-  useSendCodeWithdrawMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
 import {
@@ -52,6 +52,8 @@ import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
 import { junkyard } from '../../util/junkyard';
 import EmailVerifyWithdrawModal from 'views/Auth/components/EmailVerifyWithdrawModal';
+import { isFeatureOn } from '../../whitelabel';
+import { Features } from '../../whitelabel/type';
 
 const useStartSession = (eventType: SessionsTypes) => {
   const { showModal } = useZModal();
@@ -66,11 +68,10 @@ const useStartSession = (eventType: SessionsTypes) => {
   ) => {
     dispatch(setAccessToken(user.token));
     user.userId && track({ userId: user.userId });
+    const emailUnconfirmed =
+      user.emailUnconfirmed && isFeatureOn(Features.EmailVerification);
     const needsModal =
-      user.ask2FA ||
-      user.isUnknownDevice ||
-      user.disabled ||
-      user.emailUnconfirmed;
+      user.ask2FA || user.isUnknownDevice || user.disabled || emailUnconfirmed;
 
     if (needsModal) {
       let modal: ShowFnOutput<void>;
@@ -96,7 +97,7 @@ const useStartSession = (eventType: SessionsTypes) => {
     startLiveSession(userData);
     trackNewSession(
       userData,
-      user.emailUnconfirmed ? SessionsTypes.Signup : eventType,
+      emailUnconfirmed ? SessionsTypes.Signup : eventType,
     );
     junkyard.set('hasLoggedIn', 'true');
     updateCurrentLocale(userData.locale);
@@ -122,7 +123,10 @@ export const useSignup = (): [
           // this should be redundant because we only have 2-letter locales
           locale: i18n.language?.slice(0, 2),
         }).unwrap();
-        await startSession({ ...user, emailUnconfirmed: true });
+        await startSession({
+          ...user,
+          emailUnconfirmed: isFeatureOn(Features.EmailVerification),
+        });
       } finally {
         setLoading(false);
       }
