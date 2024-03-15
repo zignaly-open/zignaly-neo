@@ -43,6 +43,7 @@ export interface ChartLargeProps {
   chartProps?: VictoryChartProps;
   id?: string;
   precision?: number;
+  showCurrentLine?: boolean;
 }
 
 export interface AxisFormat {

@@ -77,8 +77,7 @@ function EditApiKeysModal({
     register,
     formState: { errors, isValid },
   } = useForm<EditApiKeyFormType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(EditKeyValidation),
     defaultValues,
   });

@@ -21,7 +21,7 @@ export const DropdownResetButton = (props: ZigButtonProps) => {
       }}
       startIcon={<ZigResetIcon style={{ top: "1px !important" }} />}
     >
-      {t("reset", { defaultValue: "Reset" })}
+      {t("reset")}
     </ZigButton>
   );
 };

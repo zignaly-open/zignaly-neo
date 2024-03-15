@@ -7,6 +7,7 @@ export enum Features {
   MinInvestment = 'minInvestment',
   CreateService = 'createServices',
   NewSignup = 'newSignup',
+  EmailVerification = 'emailVerification',
   LoginOnlyAccess = 'loginOnly',
   Subscriptions = 'subscriptions',
   Kyc = 'kyc',

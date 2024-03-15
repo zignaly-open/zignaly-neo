@@ -26,6 +26,7 @@ import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import CommissionReferralSharing from './atoms/CommissionReferralSharing';
+import RichTextEditor from './atoms/RichDescriptionEditor';
 import { isFeatureOn, whitelabel } from 'whitelabel';
 import { Features } from 'whitelabel/type';
 import { useUpdateServiceCommissionMutation } from 'apis/referrals/api';
@@ -64,8 +65,7 @@ const EditServiceProfileContainer: React.FC<{
     formState: { errors },
     reset,
   } = useForm<EditServiceForm>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'all',
     defaultValues,
     resolver: yupResolver(EditServiceValidation),
   });
@@ -200,13 +200,17 @@ const EditServiceProfileContainer: React.FC<{
               name='description'
               control={control}
               render={({ field }) => (
-                <ZigInput
+                <RichTextEditor
                   id={'edit-service-profile__service-description'}
-                  fullWidth
-                  label={t('edit.description')}
+                  label={
+                    <ZigTypography
+                      mb={'10px'}
+                      id={'edit-service-profile__service-description-label'}
+                    >
+                      {t('edit.description')}
+                    </ZigTypography>
+                  }
                   error={t(errors.description?.message)}
-                  multiline
-                  rows={18}
                   {...field}
                 />
               )}

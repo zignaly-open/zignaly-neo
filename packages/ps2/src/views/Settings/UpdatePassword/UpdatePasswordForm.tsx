@@ -23,7 +23,7 @@ const UpdatePasswordForm = () => {
     formState: { errors, isValid },
     setError,
   } = useForm<UpdatePasswordFormType>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(UpdatePasswordValidation),
   });
   const [updatePassword, updatePasswordStatus] = useUpdatePasswordMutation();

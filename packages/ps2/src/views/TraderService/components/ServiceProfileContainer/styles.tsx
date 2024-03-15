@@ -36,6 +36,14 @@ export const LiquidatedLabel = muiStyled(Box)`
   }
 `;
 
+export const StyledMarkdownWrapper = styled(Box)`
+  ul,
+  ol {
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+`;
+
 export const StyledVerifiedIcon = styled(VerifiedIcon)`
   fill: ${(props) => props.theme.palette.greenGraph} !important;
   color: ${(props) => props.theme.palette.avatarBack} !important;
@@ -150,8 +158,11 @@ export const MarkdownContainer = styled('div')`
     padding-inline-start: 15px;
   }
 
-  li {
+  ul > li {
     list-style-type: disc;
+  }
+  ol > li {
+    list-style-type: decimal;
   }
 
   img {
@@ -206,8 +217,7 @@ export const RightSideActionWrapper = styled(Box)<{
     width: 100%;
     padding: 10px 3px 5px 3px;
     flex-direction: row;
-    background-color: ${({ theme }) =>
-      theme.palette.backgrounds.mobileButtonsWrapper};
+    background-color: ${({ theme }) => theme.palette.neutral900};
     z-index: 5;
   }
 `;

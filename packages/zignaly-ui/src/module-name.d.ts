@@ -25,10 +25,7 @@ declare module "@mui/material/styles" {
     red: string;
     contrasting: string;
     paleBlue: string;
-    lightGrayBlue: string;
     darkGreen: string;
-    labelCheckbox: string;
-    checkboxPrimary: string;
     lightGrey: string;
 
     backgrounds: Record<
@@ -63,17 +60,14 @@ declare module "@mui/material/styles" {
     boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;
 
     chart: Record<
-      | "greenGradient"
-      | "greenMiniGradient"
-      | "redGradient"
-      | "redMiniGradient"
-      | "greenCard"
-      | "redCard",
+      "greenGradient" | "greenMiniGradient" | "redGradient" | "redMiniGradient",
       string[]
     > &
       Record<"red" | "green", string>;
 
     zscore: ZScoreTheme;
+
+    imageColorOverride?: string;
   }
 
   type RingTheme = {

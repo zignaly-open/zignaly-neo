@@ -41,7 +41,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
     control,
     formState: { isValid, errors },
   } = useForm<EditMinBalanceFormValues>({
-    mode: 'onChange',
+    mode: 'all',
     defaultValues: {
       amountValue: minimumBalance,
     },

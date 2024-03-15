@@ -20,6 +20,7 @@ import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import Flag from '../../../components/Flag';
 import { Box } from '@mui/system';
 import { ServiceLogoStatus } from './atoms';
+import RichTextEditor from 'views/TraderService/components/EditServiceProfileContainer/atoms/RichDescriptionEditor';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -34,8 +35,7 @@ const EditProfileForm = () => {
     control,
     formState: { errors, isValid },
   } = useForm<EditProfileFormType>({
-    mode: 'onBlur',
-    reValidateMode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
       username: user.userName || '',
@@ -228,13 +228,13 @@ const EditProfileForm = () => {
                 name='bio'
                 control={control}
                 render={({ field }) => (
-                  <ZigInput
+                  <RichTextEditor
                     id={'edit-profile__about-you'}
-                    wide
-                    multiline
-                    rows={12}
                     label={
-                      <ZigTypography id={'edit-profile__about-you-label'}>
+                      <ZigTypography
+                        id={'edit-profile__about-you-label'}
+                        mb={1}
+                      >
                         {t('edit-profile.about-you')}
                         <ZigTypography
                           sx={{ pl: 1 }}
@@ -246,10 +246,10 @@ const EditProfileForm = () => {
                         </ZigTypography>
                       </ZigTypography>
                     }
+                    error={t(errors.bio?.message, { maxLength: 2000 })}
                     placeholder={t(
                       'edit-profile.tell-me-the-story-of-your-left',
                     )}
-                    error={t(errors.bio?.message, { maxLength: 2000 })}
                     {...field}
                   />
                 )}

@@ -47,7 +47,7 @@
   "no-api-key-management-in-this-exchange": "This option is not automatically supported yet for {{exchange}} services. Please reach our team to assist you.",
   "api-keys": {
     "title": "Trade with API",
-    "description": "Create the Binance API keys for your Profit Sharing service and connect them to your favourite tool or application.",
+    "description": "Create the Binance API Keys for your service. APIs allow to perform and manage trades from external trading terminals or directly with the exchange API. If you need a trading terminal recommendation check our article about <0>Hyper Trader</0>.",
     "create-key": "Create API Key",
     "no-keys": "No API keys",
     "no-keys-description": "You have not created any API keys yet",

@@ -3,7 +3,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { NumericFormat } from "react-number-format";
 import ZigTable from ".";
 import ChangeIndicator from "./components/ChangeIndicator";
-import DateLabel from "./components/DateLabel";
 import CoinLabel from "./components/CoinLabel";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { makeCoinsData, makeExchangeOrdersData, makeInvestorsData } from "./makeData";
@@ -13,6 +12,7 @@ import { Box } from "@mui/material";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
 import { storybookI18nextDecorator } from "../../../i18n/dummyI18nextProvider";
+import { format } from "date-fns";
 
 type ZigTableProps = React.ComponentProps<typeof ZigTable>;
 type Story = StoryObj<ZigTableProps>;
@@ -22,7 +22,7 @@ const columnHelperExchangeOrders = createColumnHelper<typeof exchangeOrdersData[
 const exchangeOrdersColumns = [
   columnHelperExchangeOrders.accessor("date", {
     header: "Date",
-    cell: (props) => <DateLabel date={new Date(props.getValue())} />,
+    cell: (props) => format(new Date(props.getValue()), "PP"),
   }),
   columnHelperExchangeOrders.accessor("orderId", {
     header: "Order ID",

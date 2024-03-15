@@ -15,6 +15,7 @@
     "x-success-fee": "{{fee}}% success fee",
     "success-fee": "Success Fee: {{fee}}%"
   },
+  "markdown-error": "This text contains horrors beyond human comprehension (a.k.a. invalid markdown) and can't be displayed",
   "owner-verified": "The Manager has been verified",
   "owner-from": "The Manager is from {{country}}",
   "strategy": "Strategy",
@@ -76,16 +77,6 @@
     "success-fee-desc": "Amount of profits you will charge your investors (including {{ zignalyFee }}% ZIGDAO fee)",
     "pool-size": "Maximum pool size:",
     "pool-size-desc": "Max you'll accept from investors",
-    "insert-image-modal": {
-      "title": "Type Image URL",
-      "placeholder": "Input url",
-      "warning": "URL should end with image extension (.jpg, .png, .jpeg and etc.)"
-    },
-    "insert-link-modal": {
-      "title": "Type Link URL",
-      "placeholder": "Input url",
-      "warning": "Please insert the full URL starting with \"https://...\""
-    },
     "visibility": {
       "visibility": "Visibility:",
       "unlisted": "Unpublished Draft",

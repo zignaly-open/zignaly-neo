@@ -63,7 +63,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const [coinParam, setCoinParam] = useState(null);
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {},
   });

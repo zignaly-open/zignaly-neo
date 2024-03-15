@@ -61,6 +61,7 @@ export { default as ZScoreRing } from "./components/display/ZScoreRing";
 export * from "./components/display/ZScoreRing";
 export { default as ZScoreRings } from "./components/display/ZScoreRings";
 export { default as ZScoreBar } from "./components/display/ZScoreBar";
+export { default as ZigImageColorOverride } from "./components/display/ZigImageColorOverride";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";
@@ -68,8 +69,7 @@ export type { ColumnDef } from "@tanstack/react-table";
 export { default as ZigTable } from "./components/display/ZigTable";
 export type { ZigTableQueryRef } from "./components/display/ZigTable/types";
 export { downloadTableCsv } from "./components/display/ZigTable/util";
-export { default as DateLabel } from "./components/display/ZigTable/components/DateLabel"; // yes, this is used
-export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
+export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used
 export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
 export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";

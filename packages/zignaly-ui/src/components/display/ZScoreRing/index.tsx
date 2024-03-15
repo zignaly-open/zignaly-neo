@@ -7,6 +7,7 @@ import chroma from "chroma-js";
 import ZigTypography from "../ZigTypography";
 import { useRisk } from "../ZigRisk";
 import { GradientDefs } from "./atoms";
+import { useTranslation } from "react-i18next";
 
 const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
   const {
@@ -18,12 +19,13 @@ const ZScoreRing = ({ value, max, category, ...rest }: ZScoreRingProps) => {
   const colors = zscore.ring[category];
   const gradientScale = chroma.scale(colors.gradient);
   const gradientforValue = gradientScale(normalizedPct / 100).hex();
+  const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZScoreRing" });
 
   const categoriesData = {
-    profits: { text: "Profits", icon: ZigScoreCoinsIcon },
-    risk: { text: "Risk", icon: null },
-    service: { text: "Service", icon: ZigScoreWalletIcon },
-    balanced: { text: "Balance", icon: ZigScoreBalanceIcon },
+    profits: { text: t("profits"), icon: ZigScoreCoinsIcon },
+    risk: { text: t("risk"), icon: null },
+    service: { text: t("service"), icon: ZigScoreWalletIcon },
+    balanced: { text: t("balance"), icon: ZigScoreBalanceIcon },
   };
   const categoryData = categoriesData[category];
   const risk = useRisk(value);
