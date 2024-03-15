@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const urlRegex =
-  /^(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})([\/\w-]+)*\/?\??([^#\n\r]*)?#?([^\n\r]*)$/;
+  /^(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})(\/\w[\/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)$/;
 
 export const SectionHeader: React.FC<{
   title: string;
