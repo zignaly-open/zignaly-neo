@@ -60,8 +60,6 @@ export default function ThemeConfig() {
     [data],
   );
 
-  console.error(data);
-
   const formMethods = useForm<{
     themeOverride: WhitelabelBackendConfig['themeOverride'];
   }>({
@@ -71,13 +69,9 @@ export default function ThemeConfig() {
     reValidateMode: 'onBlur',
   });
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = formMethods;
+  const { control, handleSubmit } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig(wl);
+  const { submit } = useSaveConfig(wl);
 
   return (
     <ConfigWrapper>

@@ -11,7 +11,7 @@ function ZigColorInput({
   allowGradient = false,
 }: {
   value: string;
-  allowGradient: boolean;
+  allowGradient?: boolean;
   error?: string;
   onChange: (value: string) => void;
 }) {
