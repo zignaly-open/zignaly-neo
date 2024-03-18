@@ -41,6 +41,7 @@ const ServicePercentageInfo: React.FC<{
               value={percent}
               id={id && `${id}-pct`}
               sx={{ fontSize: '18px' }}
+              showDoc
             />
             {+percent >= 100 && <ZigTrophyIcon />}
           </Box>

@@ -9,7 +9,7 @@ import ServiceDescription from './atoms/ServiceDescription';
 import ServiceManagerDescription from './atoms/ServiceManagerDescription';
 import ServiceSummary from './atoms/ServiceSummary';
 import AssetsInPool from '../../../../components/AssetsInPool';
-import { AssetsInPoolWrapper, ServiceInfoWrapper } from './styles';
+import { ServiceInfoWrapper } from './styles';
 import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { subMonths } from 'date-fns';

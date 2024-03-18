@@ -7,7 +7,8 @@ const PercentChange: React.FC<{
   id?: string;
   value: string | null | number;
   sx?: CSSProperties;
-}> = ({ id, value, sx }) => {
+  showDoc?: boolean;
+}> = ({ id, value, sx, showDoc }) => {
   const { t } = useTranslation('common');
   const isFinite = Number.isFinite(+value || 0);
 
@@ -18,9 +19,11 @@ const PercentChange: React.FC<{
       smallPct
       tooltip={
         isFinite ? (
-          <Trans t={t} i18nKey={'service:calculations-learn-more'}>
-            <ZigLink target={'_blank'} href={HELP_SERVICE_PROFILE_CHART} />
-          </Trans>
+          showDoc ? (
+            <Trans t={t} i18nKey={'service:calculations-learn-more'}>
+              <ZigLink target={'_blank'} href={HELP_SERVICE_PROFILE_CHART} />
+            </Trans>
+          ) : null
         ) : (
           t(`infinitely-${+value > 0 ? 'better' : 'worse'}`)
         )
