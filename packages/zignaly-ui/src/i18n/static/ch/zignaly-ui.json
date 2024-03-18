@@ -7,6 +7,10 @@
       "max": "CH-Ṁáx:"
     }
   },
+  "ZigImageInput": {
+    "image-input-edit": "CH-Ëḋïṫ ïṁáĝë",
+    "image-input-add": "CH-Üṗlöáḋ ïṁáĝë"
+  },
   "ZigFilters": {
     "show-results": "CH-Ŝĥöw Ѓëŝülṫŝ",
     "reset": "CH-Ѓëŝëṫ",

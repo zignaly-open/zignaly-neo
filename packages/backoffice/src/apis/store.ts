@@ -3,6 +3,7 @@ import sessionReducer from './session/store';
 import usersReducer from './users/store';
 import logsReducer from './logs/store';
 import transfersReducer from './transfers/store';
+import configReducer from './config/store';
 import backofficeApi from './baseApiBackoffice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -16,6 +17,7 @@ const persistConfig = {
 
 const appReducer = combineReducers({
   [backofficeApi.reducerPath]: backofficeApi.reducer,
+  config: configReducer,
   transfers: transfersReducer,
   session: sessionReducer,
   logs: logsReducer,

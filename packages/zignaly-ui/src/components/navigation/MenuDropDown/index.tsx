@@ -8,7 +8,7 @@ import ZigTypography from "components/display/ZigTypography";
 
 import { MenuDropDownProps } from "./types";
 
-import { defaultDropDownOptions } from "./types";
+import { defaultDropDownStyle } from "./types";
 
 // TODO: put this to ps2
 // @deprecated
@@ -18,16 +18,16 @@ const MenuDropDown = (
     focused = false,
     secondaryTitle = null,
     children,
-    dropDownOptions,
+    dropDownStyle,
     id,
     className,
   }: MenuDropDownProps,
   innerRef: any,
 ) => {
   // Ref
-  const options = {
-    ...defaultDropDownOptions,
-    ...dropDownOptions,
+  const style = {
+    ...defaultDropDownStyle,
+    ...dropDownStyle,
   };
   const menuRef = useRef(null);
 
@@ -65,7 +65,18 @@ const MenuDropDown = (
               {secondaryTitle}
             </ZigTypography>
           )}
-          <ZigTypography color="neutral300" fontWeight={400} variant={"h3"} component="span">
+          <ZigTypography
+            sx={{
+              fontWeight: 400,
+              color: (theme) =>
+                !secondaryTitle
+                  ? theme.palette.neutral300
+                  : `${theme.palette.neutral100} !important`,
+            }}
+            fontWeight={400}
+            variant={"h3"}
+            component="span"
+          >
             {title}
           </ZigTypography>
         </Field>
@@ -73,7 +84,7 @@ const MenuDropDown = (
           <ArrowBottomIcon />
         </ArrowIcon>
       </Button>
-      {isActiveDropDown && <DropDown maxHeight={options.maxHeight}>{children}</DropDown>}
+      {isActiveDropDown && <DropDown style={style}>{children}</DropDown>}
     </Layout>
   );
 };

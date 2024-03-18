@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { Box, CircularProgress, IconButton } from '@mui/material';
-import { Avatar, ZigButton } from '@zignaly-open/ui';
-import { Close, Edit } from '@mui/icons-material';
-import { LogoContainer } from './styles';
+import React from 'react';
+import { Avatar, ZigImageInput } from '@zignaly-open/ui';
 import { getServiceLogo } from 'util/images';
 import { uploadImage } from 'apis/cloudinary';
 import { AvatarSizes } from '@zignaly-open/ui/lib/components/display/Avatar';
@@ -20,55 +17,25 @@ const ServiceLogo = ({
   onChange: (logo: string) => void;
   id?: string;
 }) => {
-  const [uploading, setUploading] = useState(false);
-
-  async function uploadLogo(e: React.ChangeEvent<HTMLInputElement>) {
-    setUploading(true);
-
-    try {
-      const data = await uploadImage(e.target.files[0]);
-      onChange(data.secure_url);
-    } finally {
-      setUploading(false);
-    }
-  }
-
   return (
-    <Box
-      display='flex'
-      justifyContent='center'
-      alignItems='center'
-      flexDirection='column'
-      gap={1}
-    >
-      <LogoContainer>
+    <ZigImageInput
+      buttonLabel={label}
+      sx={{ alignItems: 'center' }}
+      uploadFn={async (file: File) => {
+        const upload = await uploadImage(file);
+        return upload.secure_url;
+      }}
+      renderer={(url: string) => (
         <Avatar
           size={size || 'xx-large'}
           alt={''}
-          image={getServiceLogo(value)}
+          image={getServiceLogo(url)}
           id={id}
         />
-        {uploading ? (
-          <CircularProgress size={24} />
-        ) : (
-          value && (
-            <IconButton onClick={() => onChange('')}>
-              <Close />
-            </IconButton>
-          )
-        )}
-      </LogoContainer>
-
-      <ZigButton
-        startIcon={<Edit sx={{ width: '12px', height: '12px' }} />}
-        variant='text'
-        component='label'
-        id={id && `${id}-edit`}
-      >
-        {label}
-        <input hidden type='file' onChange={uploadLogo} />
-      </ZigButton>
-    </Box>
+      )}
+      value={getServiceLogo(value)}
+      onChange={onChange}
+    />
   );
 };
 

@@ -4,6 +4,7 @@ import {
   Box,
   Paper,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { useIsAuthenticated } from 'apis/user/use';
 import React, { useEffect, useState } from 'react';
@@ -15,7 +16,6 @@ import {
   ROUTE_PROFIT_SHARING,
   ROUTE_REFERRALS,
 } from 'routes';
-import theme from 'theme';
 import { ReactComponent as BalanceIcon } from 'images/tab-balance.svg';
 import { ReactComponent as MarketplaceIcon } from 'images/tab-marketplace.svg';
 import { ReactComponent as PortfolioIcon } from 'images/tab-portfolio.svg';
@@ -35,6 +35,7 @@ const ZigBottomNavigation = () => {
   const { t } = useTranslation('common');
   const [tabValue, setTabValue] = useState(location.pathname);
   const isAuthenticated = useIsAuthenticated();
+  const theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {

@@ -9,6 +9,7 @@ const defaultFeatureState: Record<Features, boolean> = {
   [Features.EmailVerification]: true,
   [Features.NewSignup]: true,
   [Features.Subscriptions]: false,
+  [Features.MinInvestment]: false,
   [Features.Kyc]: false,
   [Features.ZScore]: true,
 };

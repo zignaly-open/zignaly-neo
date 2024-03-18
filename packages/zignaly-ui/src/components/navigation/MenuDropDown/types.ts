@@ -1,6 +1,6 @@
 import React from "react";
 
-export const defaultDropDownOptions = {
+export const defaultDropDownStyle = {
   maxHeight: "120px",
 };
 
@@ -10,8 +10,6 @@ export type MenuDropDownProps = {
   secondaryTitle?: string | null;
   focused?: boolean;
   children: React.ReactElement | React.ReactElement[];
-  dropDownOptions?: {
-    maxHeight?: string;
-  };
+  dropDownStyle?: Record<string, string>;
   className?: string;
 };

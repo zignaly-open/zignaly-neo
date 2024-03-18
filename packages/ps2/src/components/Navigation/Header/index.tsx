@@ -10,8 +10,7 @@ import {
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
 import { useIsAuthenticated } from '../../../apis/user/use';
-import { Box, Toolbar, useMediaQuery } from '@mui/material';
-import theme from 'theme';
+import { Box, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import HeaderWidgetButtons from '../HeaderWidgetButtons';
@@ -30,6 +29,7 @@ type HeaderMenuItem = {
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
+  const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
   const logoRoute = whitelabel.links?.mainAppLink || ROUTE_DASHBOARD;

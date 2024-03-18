@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import Router from './Router';
-import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import {
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
@@ -27,6 +26,7 @@ import ZModal from './components/ZModal';
 import ZigErrorBoundary from './util/ZigErrorBoundary';
 import './util/i18n/i18nextWhitelabel';
 import MissingExchangeChecker from 'components/Navigation/Checkers/MissingExchangeChecker';
+import { useWlInstanceThemeWithDebugStyling } from './theme';
 
 // import * as Sentry from '@sentry/browser';
 // TODO: use Sentry
@@ -44,41 +44,46 @@ import MissingExchangeChecker from 'components/Navigation/Checkers/MissingExchan
 
 export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
   children,
-}) => (
-  <Provider store={store}>
-    <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
-      <ThemeInheritorMui theme={themeMui}>
-        <ThemeProviderMui theme={themeMui}>
-          <GlobalStyle />
-          <ToastContainer
-            position='top-right'
-            autoClose={5000}
-            hideProgressBar
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            closeButton={false}
-            pauseOnHover
-            theme='dark'
-          />
-          <PersistGate persistor={persistor}>
-            <BrowserRouter>
-              <ZigErrorBoundary>
-                <Suspense fallback={zigSuspenseFallback}>
-                  <ModalProvider
-                    fallback={<ZModal allowUnauth wide open isLoading />}
-                  >
-                    {children}
-                  </ModalProvider>
-                </Suspense>
-              </ZigErrorBoundary>
-            </BrowserRouter>
-          </PersistGate>
-        </ThemeProviderMui>
-      </ThemeInheritorMui>
-    </ThemeInheritorStyled>
-  </Provider>
-);
+}) => {
+  const { mui: themeMui, legacyStyledComponentsDoNotUse } =
+    useWlInstanceThemeWithDebugStyling();
+
+  return (
+    <Provider store={store}>
+      <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+        <ThemeInheritorMui theme={themeMui}>
+          <ThemeProviderMui theme={themeMui}>
+            <GlobalStyle />
+            <ToastContainer
+              position='top-right'
+              autoClose={5000}
+              hideProgressBar
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              closeButton={false}
+              pauseOnHover
+              theme='dark'
+            />
+            <PersistGate persistor={persistor}>
+              <BrowserRouter>
+                <ZigErrorBoundary>
+                  <Suspense fallback={zigSuspenseFallback}>
+                    <ModalProvider
+                      fallback={<ZModal allowUnauth wide open isLoading />}
+                    >
+                      {children}
+                    </ModalProvider>
+                  </Suspense>
+                </ZigErrorBoundary>
+              </BrowserRouter>
+            </PersistGate>
+          </ThemeProviderMui>
+        </ThemeInheritorMui>
+      </ThemeInheritorStyled>
+    </Provider>
+  );
+};
 
 function App() {
   useReferralCookie();

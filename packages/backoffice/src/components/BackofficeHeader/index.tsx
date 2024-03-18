@@ -4,6 +4,7 @@ import { NavigationLink } from './atoms';
 import { Box, Toolbar } from '@mui/material';
 import { Container, StyledAppBar } from './styles';
 import {
+  ROUTE_CONFIG_REDIRECT,
   ROUTE_DEPOSITS,
   ROUTE_LOGIN,
   ROUTE_LOGS,
@@ -12,10 +13,17 @@ import {
 } from '../../routes';
 import { useIsAuthenticated, useLogout } from '../../apis/session/use';
 import { useTranslation } from 'react-i18next';
+import { useUserInfoQuery } from '../../apis/session/api';
 
 const BackofficeHeader: React.FC = () => {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
+
+  // preload this
+  useUserInfoQuery(undefined, {
+    skip: !isAuthenticated,
+  });
+
   const logout = useLogout();
 
   return (
@@ -49,6 +57,12 @@ const BackofficeHeader: React.FC = () => {
                     </NavigationLink>
                     <NavigationLink to={ROUTE_LOGS} key='--route-logs'>
                       {t('navigation.logs')}
+                    </NavigationLink>
+                    <NavigationLink
+                      to={ROUTE_CONFIG_REDIRECT}
+                      key='--route-config'
+                    >
+                      {t('navigation.config')}
                     </NavigationLink>
                   </>
                 ) : (

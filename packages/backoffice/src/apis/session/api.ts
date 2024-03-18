@@ -1,4 +1,4 @@
-import { LoginPayload, LoginResponse } from './types';
+import { LoginPayload, LoginResponse, UserResponse } from './types';
 import baseApiBackoffice from '../baseApiBackoffice';
 import { injectEndpoints } from 'apis/util';
 
@@ -16,6 +16,12 @@ export const api = injectEndpoints(baseApiBackoffice, (builder) => ({
       body: credentials,
     }),
   }),
+  userInfo: builder.query<UserResponse, void>({
+    query: () => ({
+      url: 'user',
+      method: 'GET',
+    }),
+  }),
 }));
 
-export const { useLogoutMutation, useLoginMutation } = api;
+export const { useLogoutMutation, useUserInfoQuery, useLoginMutation } = api;
