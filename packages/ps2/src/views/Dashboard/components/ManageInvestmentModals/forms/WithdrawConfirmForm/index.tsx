@@ -199,6 +199,7 @@ const WithdrawConfirmForm = ({
               variant='body2'
               fontWeight='medium'
               id={'withdraw-modal-confirmation__network-fee-label'}
+              whiteSpace={'nowrap'}
             >
               {t('confirmation.networkFee')}
             </ZigTypography>
