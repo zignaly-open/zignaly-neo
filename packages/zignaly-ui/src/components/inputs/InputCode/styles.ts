@@ -30,7 +30,9 @@ export const Layout = styled("div")<{ error?: string; loading?: boolean }>`
     }
 
     input {
-      background: ${(props) => props.theme.palette.backgrounds.input2fa};
+      // 1Password autofill fix
+      background: ${({ theme }) =>
+        `linear-gradient(90deg, ${theme.palette.backgrounds.input2fa} 0%, ${theme.palette.backgrounds.input2fa} 100%)`};
       border-radius: 8px;
       border: 1px solid ${(props) => props.theme.palette.neutral600} !important;
       color: ${(props) => `${props.theme.palette.neutral100}`};
