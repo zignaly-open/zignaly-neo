@@ -38,7 +38,7 @@ const ChangeIndicator = ({
   normalized = false,
   stableCoinOperative = false,
   sx,
-  labelTooltip = "",
+  tooltip,
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
   indicatorPostion = "left",
@@ -107,7 +107,7 @@ const ChangeIndicator = ({
   ]);
 
   return (
-    <Tooltip title={labelTooltip}>
+    <Tooltip title={tooltip}>
       <Box justifyContent={"center"}>
         {!isNaN(+value) ? (
           <>
