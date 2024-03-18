@@ -5,7 +5,7 @@ export interface ChangeIndicatorProps {
   value: string | number;
   type?: "default" | "graph" | "only_number";
   label?: string;
-  style?: CSSProperties;
+  sx?: CSSProperties;
   normalized?: boolean;
   stableCoinOperative?: boolean;
   id?: string;

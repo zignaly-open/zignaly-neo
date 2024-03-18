@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { NumericFormat } from "react-number-format";
 import { useTheme } from "styled-components";
 import BigNumber from "bignumber.js";
@@ -37,7 +37,7 @@ const ChangeIndicator = ({
   type = "graph",
   normalized = false,
   stableCoinOperative = false,
-  style,
+  sx,
   labelTooltip = "",
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
@@ -47,8 +47,9 @@ const ChangeIndicator = ({
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
   const isPositiveValue = bigNumberValue.isPositive();
   const theme: any = useTheme();
+  const isFinite = Number.isFinite(+value || 0);
 
-  const renderIndicator = () => {
+  const renderIndicator = useCallback(() => {
     const isZero = bigNumberValue.isZero();
     const color = isZero
       ? theme.palette.neutral300
@@ -62,32 +63,48 @@ const ChangeIndicator = ({
           variant={type === "graph" ? "body2" : "body1"}
           color={color}
           smallPct={smallPct && type !== "only_number" && !isNil(value)}
-          style={style}
+          sx={sx}
           whiteSpace={"nowrap"}
         >
           {!isZero && type === "graph" && indicatorPostion === "left" && (
             <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />
           )}
-          <NumericFormat
-            value={adjustNumber(
-              bigNumberValue,
-              decimalScale,
-              type === "graph" && indicatorPostion === "left",
-            ).toFixed()}
-            displayType={"text"}
-            suffix={type === "only_number" || smallPct ? "" : "%"}
-            thousandSeparator={","}
-            decimalScale={adjustDecimals(bigNumberValue, decimalScale)}
-            fixedDecimalScale={stableCoinOperative}
-            id={id}
-          />
+          {isFinite ? (
+            <NumericFormat
+              value={adjustNumber(
+                bigNumberValue,
+                decimalScale,
+                type === "graph" && indicatorPostion === "left",
+              ).toFixed()}
+              displayType={"text"}
+              suffix={type === "only_number" || smallPct ? "" : "%"}
+              thousandSeparator={","}
+              decimalScale={adjustDecimals(bigNumberValue, decimalScale)}
+              fixedDecimalScale={stableCoinOperative}
+              id={id}
+            />
+          ) : (
+            <span>{"∞"}</span>
+          )}
           {!isZero && type === "graph" && indicatorPostion === "right" && (
             <Indicator isPositive={isPositiveValue} color={color} preserveAspectRatio="none" />
           )}
         </ValueIndicator>
       </Box>
     );
-  };
+  }, [
+    bigNumberValue,
+    decimalScale,
+    id,
+    isPositiveValue,
+    label,
+    smallPct,
+    stableCoinOperative,
+    sx,
+    theme,
+    type,
+    value,
+  ]);
 
   return (
     <Tooltip title={labelTooltip}>
@@ -103,10 +120,7 @@ const ChangeIndicator = ({
           </>
         ) : (
           <ZigTypography variant={"body2"} color={"neutral400"}>
-            {
-              // eslint-disable-next-line i18next/no-literal-string
-              "-"
-            }
+            {"-"}
           </ZigTypography>
         )}
       </Box>

@@ -63,3 +63,4 @@ export { ReactComponent as ZigCalendar1YIcon } from "assets/icons/calendar-1Y-ic
 export { ReactComponent as ZigCalendar1MIcon } from "assets/icons/calendar-1M-icon.svg";
 export { ReactComponent as ZigCalendar3MIcon } from "assets/icons/calendar-3M-icon.svg";
 export { ReactComponent as ZigRocketIcon } from "assets/icons/rocket-icon.svg";
+export { ReactComponent as ZigTrophyIcon } from "assets/icons/trophy-icon.svg";

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { trimZeros, ZigTypography } from '@zignaly-open/ui';
+import { trimZeros, ZigRisk, ZigTypography } from '@zignaly-open/ui';
 import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
-import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
+import { GridCell, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
@@ -20,7 +20,17 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
       {sm && (
         <>
           <GridWithBottomBorder container pb={2.5}>
-            <GridCell item xs={6}>
+            <GridCell item xs={4}>
+              <ZigTypography
+                color={'neutral300'}
+                sx={{ mb: '10px' }}
+                id={'service-profile__risk-label'}
+              >
+                {t('risk')}
+              </ZigTypography>
+              <ZigRisk value={service.zrisk} id={'service-profile__risk'} />
+            </GridCell>
+            <GridCell item xs={4}>
               <ZigTypography
                 color={'neutral300'}
                 sx={{ mb: '10px' }}
@@ -28,17 +38,15 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               >
                 {t('assets-in-pool')}
               </ZigTypography>
-              <AssetsInPoolWrapper>
-                <AssetsInPool
-                  serviceId={service.id}
-                  prefixId={'service-profile'}
-                  assetsValue={service.investedUSDT}
-                  convertedValue={+service.invested}
-                  convertedValueCoin={service.ssc}
-                />
-              </AssetsInPoolWrapper>
+              <AssetsInPool
+                serviceId={service.id}
+                prefixId={'service-profile'}
+                assetsValue={service.investedUSDT}
+                convertedValue={+service.invested}
+                convertedValueCoin={service.ssc}
+              />
             </GridCell>
-            <GridCell item xs={6}>
+            <GridCell item xs={4}>
               <ZigTypography
                 color={'neutral300'}
                 sx={{ mb: '10px' }}
