@@ -131,6 +131,12 @@ export type Service = {
   zglySuccessFee: number;
   storedZglySuccessFee: number;
   activated: boolean;
+
+  zscore: number;
+  zprofit: number;
+  zrisk: number;
+  zservice: number;
+  zbalanced: number;
 };
 
 export type TraderServiceChart = {

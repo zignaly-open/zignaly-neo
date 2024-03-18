@@ -1,11 +1,11 @@
 import { CSSProperties } from "react";
 
 export interface ChangeIndicatorProps {
-  labelTooltip?: string;
+  tooltip?: string | JSX.Element;
   value: string | number;
   type?: "default" | "graph" | "only_number";
   label?: string;
-  style?: CSSProperties;
+  sx?: CSSProperties;
   normalized?: boolean;
   stableCoinOperative?: boolean;
   id?: string;

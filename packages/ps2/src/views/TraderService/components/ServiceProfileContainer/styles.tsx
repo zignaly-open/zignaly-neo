@@ -236,13 +236,6 @@ export const ChangeIndicatorSmall = styled(ZigTypography)`
   font-size: 12px !important;
 `;
 
-export const GraphPercentageWrapperBox = styled(Box)`
-  & > * {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-`;
 export const ServiceInfoWrapper = styled(Box)`
   background-color: ${({ theme }) => theme.palette.backgrounds.activeTab};
   padding: 10px;
@@ -264,18 +257,6 @@ export const SqueezedButtonGroupWrapper = styled(Box)`
     min-width: 50px !important;
     padding-left: 18px;
     padding-right: 18px;
-  }
-`;
-
-export const AssetsInPoolWrapper = styled(Box)`
-  & > .MuiBox-root > .MuiBox-root:first-child {
-    margin-bottom: 8px;
-
-    > div:nth-child(2) {
-      width: 14px;
-      height: 13px;
-      margin-top: -7px;
-    }
   }
 `;
 

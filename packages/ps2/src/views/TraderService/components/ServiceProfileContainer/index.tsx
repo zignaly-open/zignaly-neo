@@ -9,7 +9,7 @@ import ServiceDescription from './atoms/ServiceDescription';
 import ServiceManagerDescription from './atoms/ServiceManagerDescription';
 import ServiceSummary from './atoms/ServiceSummary';
 import AssetsInPool from '../../../../components/AssetsInPool';
-import { AssetsInPoolWrapper, ServiceInfoWrapper } from './styles';
+import { ServiceInfoWrapper } from './styles';
 import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { subMonths } from 'date-fns';
@@ -60,20 +60,18 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                 >
                   {t('assets-in-pool')}
                 </ZigTypography>
-                <AssetsInPoolWrapper>
-                  <AssetsInPool
-                    serviceId={service.id}
-                    prefixId={'service-profile'}
-                    assetsValue={service.investedUSDT}
-                    convertedValue={+service.invested}
-                    convertedValueCoin={service.ssc}
-                  />
-                </AssetsInPoolWrapper>
+                <AssetsInPool
+                  serviceId={service.id}
+                  prefixId={'service-profile'}
+                  assetsValue={service.investedUSDT}
+                  convertedValue={+service.invested}
+                  convertedValueCoin={service.ssc}
+                />
               </ServiceInfoWrapper>
               <ServiceInfoWrapper>
                 <ServicePercentageInfo
                   id={'service-profile__pnl30t'}
-                  priceLabelSx={{ fontSize: '18px', lineHeight: '28px' }}
+                  // priceLabelSx={{ fontSize: '18px', lineHeight: '28px' }}
                   title={t('marketplace:table.n-months', { count: 1 })}
                   value={service.pnlSsc30t}
                   percent={service.pnlPercent30t}

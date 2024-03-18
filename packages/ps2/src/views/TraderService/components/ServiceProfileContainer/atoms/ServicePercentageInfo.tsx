@@ -3,8 +3,8 @@ import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import PercentChange from './PercentChange';
 import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { getColorForNumber } from '../../../../../util/numbers';
 import { SxProps } from '@mui/system';
+import { ZigTrophyIcon } from '@zignaly-open/ui/icons';
 
 const ServicePercentageInfo: React.FC<{
   title: string;
@@ -31,20 +31,30 @@ const ServicePercentageInfo: React.FC<{
 
       {canShow ? (
         <>
+          <Box
+            display={'flex'}
+            gap={1}
+            justifyContent={'center'}
+            alignItems={'center'}
+          >
+            <PercentChange
+              value={percent}
+              id={id && `${id}-pct`}
+              sx={{ fontSize: '18px' }}
+              showDoc
+            />
+            {+percent >= 100 && <ZigTrophyIcon />}
+          </Box>
           <ZigPriceLabel
             id={id}
-            sx={priceLabelSx || { mb: 1 }}
             component='div'
             shorten
-            variant={'h1'}
-            color={getColorForNumber(value)}
             value={+value}
             coin={ssc}
-            coinProps={{
-              paddingTop: '3px',
-            }}
+            color='neutral300'
+            coinProps={{ color: 'neutral300' }}
+            sx={priceLabelSx}
           />
-          <PercentChange value={percent} id={id && `${id}-pct`} />
         </>
       ) : (
         <Box

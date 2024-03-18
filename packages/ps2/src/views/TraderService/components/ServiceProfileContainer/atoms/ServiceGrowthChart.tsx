@@ -16,7 +16,6 @@ import {
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   ChartWrapper,
-  GraphPercentageWrapperBox,
   SelectWrapperBox,
   SqueezedButtonGroupWrapper,
 } from '../styles';
@@ -194,15 +193,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             </Box>
 
             {typeof data?.percentDiff !== 'undefined' && (
-              <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+              <Box sx={{ mr: 2 }}>
                 <PercentChange
                   id={'service-profile__percent-change'}
-                  colored
-                  variant='h2'
                   value={data?.percentDiff}
-                  shorten
                 />
-              </GraphPercentageWrapperBox>
+              </Box>
             )}
           </>
         )}

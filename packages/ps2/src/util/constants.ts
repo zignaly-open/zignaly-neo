@@ -18,6 +18,8 @@ export const HELP_CREATE_ENABLE_2FA_URL =
   'https://help.zignaly.com/en/articles/7060936-secure-your-account-with-2fa';
 export const HELP_REFERRAL =
   'https://help.zignaly.com/en/articles/8444336-unlock-more-benefits-with-zignaly-s-referral-program';
+export const HELP_SERVICE_PROFILE_CHART =
+  'https://help.zignaly.com/en/articles/6164630-service-profile-chart';
 
 export const DOWNLOAD_GOOGLE_AUTHENTICATOR_URL =
   'https://support.google.com/accounts/answer/1066447';

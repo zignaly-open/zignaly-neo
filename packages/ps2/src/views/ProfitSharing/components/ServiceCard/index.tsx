@@ -47,7 +47,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             decimalScale={1}
             type={'default'}
             id={`service-card__pnl365-${service.id}`}
-            style={{
+            sx={{
               fontSize: '24px',
               lineHeight: '33px',
             }}
@@ -94,7 +94,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
                 type='graph'
                 decimalScale={1}
                 id={`service-card__pnl90-${service.id}`}
-                style={{
+                sx={{
                   fontSize: '16px',
                   lineHeight: '28px',
                 }}
