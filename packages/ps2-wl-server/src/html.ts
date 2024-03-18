@@ -6,6 +6,7 @@ const veryDumbSanitizeAttribute = (string: string): string =>
 
 export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
   const { title, name, description, imageDeliveryImages } = wlConfig;
+  const mainColor = wlConfig.themeOverrides?.palette?.neutral800 || '#12152c';
   return JSON.stringify({
     short_name: name,
     name: title,
@@ -13,21 +14,25 @@ export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
     icons: imageDeliveryImages
       ? [
           {
+            // TODO: background
             src: `${imageDeliveryImages.favicon}/32x32`,
             sizes: '32x32 24x24 16x16',
             type: 'image/x-icon',
           },
           {
+            // TODO: background
             src: `${imageDeliveryImages.favicon}/64x64`,
             type: 'image/png',
             sizes: '64x64',
           },
           {
+            // TODO: background
             src: `${imageDeliveryImages.favicon}/192x192`,
             type: 'image/png',
             sizes: '192x192',
           },
           {
+            // TODO: background
             src: `${imageDeliveryImages.favicon}/512x512`,
             type: 'image/png',
             sizes: '512x512',
@@ -46,8 +51,8 @@ export function generateManifest(wlConfig: WhitelabelFrontendConfig) {
       },
     ],
 
-    theme_color: '#101225', // TODO
-    background_color: '#101225', // TODO
+    theme_color: mainColor,
+    background_color: mainColor,
 
     // TODO
     // icons: [
@@ -153,6 +158,7 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
     wlConfig.social?.twitter?.match(
       /(?:https?:\/\/|^)(?:twitter|x)\.com\/([a-zA-Z\d-_]{1,15})/,
     )?.[1];
+  const mainColor = wlConfig.themeOverrides?.palette?.neutral800 || '#12152c';
 
   return INDEX_HTML.replace(
     '</head>',
@@ -170,11 +176,8 @@ export function generateIndexHtml(wlConfig: WhitelabelFrontendConfig) {
       }
       <link rel="manifest" href="/manifest.json"/>
         
-      <meta name="msapplication-TileColor" content="${
-        // TODO
-        '#101225'
-      }">
-      <meta name="theme-color" content="#ffffff">
+      <meta name="msapplication-TileColor" content="${mainColor}">
+      <meta name="theme-color" content="${mainColor}">
     
 <!--      <link rel="apple-touch-startup-image" href="apple-splash-2048-2732.jpeg"-->
 <!--        media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">-->
