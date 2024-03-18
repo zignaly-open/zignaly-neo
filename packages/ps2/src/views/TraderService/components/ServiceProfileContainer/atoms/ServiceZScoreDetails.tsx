@@ -11,14 +11,15 @@ import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useScoreQuery } from 'apis/service/api';
 import ZScoreBarsCategory from '../../ZScoreModal/atoms/ZScoreBarsCategory';
 import { ZScoreIcon } from '@zignaly-open/ui/icons';
+import { differenceInDays } from 'date-fns';
 
 const ServiceZScoreDetails: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
-
-  const { data } = useScoreQuery(service.id);
+  const days = differenceInDays(new Date(), new Date(service.createdAt));
+  const { data } = useScoreQuery(service.id, { skip: days < 1 });
   const {
     category: { zscore, maxZscore },
   } = data?.info || { category: {} };
