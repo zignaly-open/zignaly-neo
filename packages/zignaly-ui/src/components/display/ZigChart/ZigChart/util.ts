@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import * as d3Scale from "victory-vendor/d3-scale";
 import { AxisFormat } from "../types";
 
-const THRESHOLD = 16;
+const THRESHOLD = 14;
 
 export function useChartColor(): ChartColors {
   const theme = useTheme();

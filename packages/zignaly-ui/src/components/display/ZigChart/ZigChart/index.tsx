@@ -93,8 +93,11 @@ const ZigChart = ({
             tickLabelComponent={
               <VictoryLabel
                 style={{
-                  fill: (a: CallbackArgs) =>
-                    a.datum === lastDataY ? `${color}cc` : theme.palette.neutral200,
+                  ...axisStyle.tickLabels,
+                  fill: ({ datum }: CallbackArgs) =>
+                    showCurrentLine && datum === lastDataY
+                      ? `${color}cc`
+                      : theme.palette.neutral200,
                 }}
                 textAnchor="start"
                 text={getChartLabel}

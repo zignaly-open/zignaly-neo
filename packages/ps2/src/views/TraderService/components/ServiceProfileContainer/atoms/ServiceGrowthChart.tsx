@@ -268,9 +268,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                 onlyIntegerTicks={chartType === GraphChartType.investors}
                 events={events}
                 yAxisFormatter={(v) =>
-                  `${formatCompactNumber(v, isPercent ? 2 : 8)}${
-                    isPercent ? `%` : ``
-                  }`
+                  `${formatCompactNumber(
+                    v,
+                    isPercent || chartType === GraphChartType.investors
+                      ? 2
+                      : getPrecisionForCoin(service.ssc),
+                  )}${isPercent ? `%` : ``}`
                 }
                 data={data?.data}
                 tooltipFormatter={(v) =>
