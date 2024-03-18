@@ -259,7 +259,7 @@ const MyDashboard: React.FC = () => {
                     normalized
                     value={getValue()}
                     label={formatDateFromString(original.createdAt)}
-                    labelTooltip={t('tooltip-date', {
+                    tooltip={t('tooltip-date', {
                       date: new Date(original.createdAt).toLocaleDateString(),
                     })}
                   />
