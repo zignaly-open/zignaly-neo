@@ -16,6 +16,7 @@ Next we define the variables and secrets. Variables are public, secrets are - im
 | `CF_TOKEN`                  | Secret   |                  CloudFlare Token to invalidate                  |  *Optional** |
 | `CODEDEPLOY_BUCKET`         | Secret   |             CodeDeploy bucket for the WL server code             | **Required** |
 | `CODEDEPLOY_GROUP`          | Secret   |            CodeDeploy group for the WL server deploy             | **Required** |
+| `CODEDEPLOY_APP`          | Secret   |                CodeDeploy app, default `zignaly`                 | *Optional* |
 | `CODEPLOY_REGION`           | Secret   |            Believe it or not, it's CodeDeploy region             | **Required** |
 | `SLACK_WEBHOOK`             | Secret   |          Slack webhook to report PS2 WL Server logs to           |   *Optional* |
 | `CDN_URL`                   | Variable | "CDN" that we serve the static content from for all whitelabels  | **Required** |

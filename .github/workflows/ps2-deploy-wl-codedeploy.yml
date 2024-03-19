@@ -46,7 +46,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           aws_region: ${{ secrets.CODEPLOY_REGION }}
-          codedeploy_name: zignaly
+          codedeploy_name:  ${{ secrets.CODEDEPLOY_APP || 'zignaly' }}
           codedeploy_group: ${{ secrets.CODEDEPLOY_GROUP }}
           codedeploy_register_only: false
           s3_bucket: ${{ secrets.CODEDEPLOY_BUCKET }}
