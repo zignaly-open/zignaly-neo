@@ -12,14 +12,14 @@ jobs:
     secrets: inherit
     with:
       deploy-env: test
-  cdn:
-    name: PS2 Test CDN Deploy
-    uses: ./.github/workflows/ps2-wl-cdn.yml
-    needs:
-      - build
-    secrets: inherit
-    with:
-      deploy-env: test
+#  cdn:
+#    name: PS2 Test CDN Deploy
+#    uses: ./.github/workflows/ps2-wl-cdn.yml
+#    needs:
+#      - build
+#    secrets: inherit
+#    with:
+#      deploy-env: test
   codedeploy:
     name: PS2 Test Codedeploy Deploy
     uses: ./.github/workflows/ps2-wl-codedeploy.yml
@@ -31,7 +31,7 @@ jobs:
   cache:
     name: PS2 Test Cache clear
     needs:
-      - cdn
+#      - cdn
       - codedeploy
     uses: ./.github/workflows/ps2-wl-cache-nuke.yml
     secrets: inherit

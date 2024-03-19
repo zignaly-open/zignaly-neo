@@ -15,6 +15,8 @@ jobs:
     env:
       HAS_CLOUDFLARE: ${{ secrets.CF_ZONE != '' }}
     steps:
+      - name: Prepare the structure
+        run: mkdir -p ./packages/ps2-wl-server
       - name: Restore client build
         uses: actions/cache/restore@v4
         with:
