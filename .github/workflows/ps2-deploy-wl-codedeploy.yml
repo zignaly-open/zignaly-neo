@@ -19,7 +19,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ./packages/ps2-wl-server
-          key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
+          key: build-server-${{ github.run_id }}
+          # Maybe return this - done to ship multiple envs at once
+          # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
       - name: Configure deployment folder
         run: |
           sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/appspec.yml

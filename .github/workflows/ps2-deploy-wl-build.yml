@@ -65,11 +65,15 @@ jobs:
           cache-name: cache-ps2-cdn-build
         with:
           path: ./packages/ps2/build
-          key: build-cdn-${{ github.run_id }}-${{ inputs.deploy-env }}
+          key: build-server-${{ github.run_id }}
+          # Maybe return this - done to ship multiple envs at once
+          # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
       - name: Save server build
         uses: actions/cache/save@v4
         env:
           cache-name: cache-ps2-server-build
         with:
           path: ./packages/ps2-wl-server
-          key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
+          key: build-server-${{ github.run_id }}
+          # Maybe return this - done to ship multiple envs at once
+          # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
