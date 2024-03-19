@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - test
-#      - feat/split-job-deploy
+      - feat/split-job-deploy
 
 jobs:
   deploy:

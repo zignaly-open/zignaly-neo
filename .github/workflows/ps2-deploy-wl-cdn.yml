@@ -12,6 +12,7 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
+    if: ${{ vars.CDN_URL != '' }}
     steps:
       - name: Prepare the structure
         run: mkdir -p ./packages/ps2/build
