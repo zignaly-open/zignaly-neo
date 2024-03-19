@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
     steps:
+      - name: Restore client build
+        uses: actions/cache/restore@v4
+        with:
+          path: ./packages/ps2/build
+          key: build-cdn-${{ github.run_id }}-${{ inputs.deploy-env }}
       - name: AWS Deploy
         uses: jakejarvis/s3-sync-action@master
         env:
