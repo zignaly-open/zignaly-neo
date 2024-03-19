@@ -9,6 +9,7 @@ type Props = {
   error?: string | boolean;
   width?: number;
   small?: boolean;
+  medium?: boolean;
   outlined?: boolean;
   showBorder?: boolean;
   hoverBackground?: boolean;
@@ -16,7 +17,7 @@ type Props = {
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box, {
   shouldForwardProp: (p) =>
-    !["error", "small", "outlined", "showBorder", "hoverBackground", "width"].includes(
+    !["error", "small", "medium", "outlined", "showBorder", "hoverBackground", "width"].includes(
       p as unknown as string,
     ),
 })<Props>`
@@ -29,8 +30,9 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       border: 1px solid
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
       ${({ showBorder }) => !showBorder && "border: none;"};
-      padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
-      min-height: ${({ small }) => (small ? "0" : "60px")};
+      padding: ${({ small, medium }) =>
+        small ? "3px 16px 3px 9px" : medium ? "5px 16px 4px 9px" : "11px 24px 11px 16px"};
+      min-height: ${({ small, medium }) => (small || medium ? "0" : "60px")};
       border-radius: 5px;
       display: flex;
       align-items: center;
@@ -80,11 +82,12 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     }
 
     &__value-container {
-      ${({ small }) =>
-        small &&
-        css`
-          padding: 0 5px;
-        `}
+      ${({ small, medium }) =>
+        small ||
+        (medium &&
+          css`
+            padding: 0 5px;
+          `)}
     }
 
     &__placeholder,
@@ -92,9 +95,9 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     &__input-container,
     &__input {
       font-size: ${({ small }) => (small ? "13px" : "16px")};
-      line-height: ${({ small }) => (small ? "15px" : "20px")};
-      ${({ small }) =>
-        small
+      line-height: ${({ small, medium }) => (small ? "15px" : medium ? "18px" : "20px")};
+      ${({ small, medium }) =>
+        small || medium
           ? css`
               padding-bottom: 1px;
             `
@@ -140,8 +143,8 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
         css`
           padding: 0 2px;
         `};
-      ${({ small }) =>
-        small &&
+      ${({ small, medium }) =>
+        (small || medium) &&
         css`
           padding: 0 4px;
           width: 22px;

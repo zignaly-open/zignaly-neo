@@ -171,6 +171,7 @@ export default function Deposits() {
         }}
       >
         <ZigInput
+          size={'small'}
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.userId}
@@ -189,6 +190,7 @@ export default function Deposits() {
             }}
           >
             <ZigSelect
+              medium
               width={100}
               value={filters.operator}
               onChange={(operator) =>
@@ -197,6 +199,7 @@ export default function Deposits() {
               options={operators}
             />
             <ZigInput
+              size={'small'}
               placeholder={t('table.amount')}
               value={filters.amount}
               onChange={(e) =>
@@ -213,6 +216,7 @@ export default function Deposits() {
         </Box>
         <ZigSelect
           label={t('table.status')}
+          medium
           value={filters.status}
           onChange={(status) => setFilters((old) => ({ ...old, status }))}
           options={statusOptions}

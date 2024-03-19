@@ -198,6 +198,7 @@ export default function Withdrawals() {
         }}
       >
         <ZigInput
+          size={'small'}
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.userId}
@@ -216,6 +217,7 @@ export default function Withdrawals() {
             }}
           >
             <ZigSelect
+              medium
               width={100}
               value={filters.operator}
               onChange={(operator) =>
@@ -224,6 +226,7 @@ export default function Withdrawals() {
               options={operators}
             />
             <ZigInput
+              size={'small'}
               placeholder={t('table.amount')}
               value={filters.amount}
               onChange={(e) =>
@@ -239,6 +242,7 @@ export default function Withdrawals() {
           </Box>
         </Box>
         <ZigSelect
+          medium
           label={t('table.status')}
           value={filters.status}
           onChange={(status) => setFilters((old) => ({ ...old, status }))}

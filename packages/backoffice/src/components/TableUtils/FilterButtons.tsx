@@ -19,14 +19,15 @@ const FilterButtons: React.FC<{ onClick: () => void; onClear: () => void }> = ({
         flexDirection: 'row',
         display: 'flex',
         gap: 2,
+        mb: '1px',
       }}
     >
-      <ZigButton size='xlarge' onClick={onClick} startIcon={<SearchIcon />}>
+      <ZigButton size='medium' onClick={onClick} startIcon={<SearchIcon />}>
         {t('common:filter')}
       </ZigButton>
 
       <ZigButton
-        size='xlarge'
+        size='medium'
         variant={'text'}
         onClick={onClear}
         startIcon={<ClearIcon />}
