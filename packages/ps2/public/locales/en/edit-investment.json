@@ -7,7 +7,7 @@
     "title": "Amount Invested:",
     "profits": {
       "title": "What to do with profits:",
-      "title-owner": "What to do with profits and success fees:",
+      "title-owner": "What to do with profits and fees:",
       "pct-withdraw": "% of Profits to Withdraw:",
       "left": "Reinvest",
       "right": "Withdraw"
