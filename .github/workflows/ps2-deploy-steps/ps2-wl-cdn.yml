@@ -1,0 +1,23 @@
+name: PS2 WL CDN Deploy
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: PS2 WL CDN Deploy
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deploy-env }}
+    steps:
+      - name: AWS Deploy
+        uses: jakejarvis/s3-sync-action@master
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/ps2/build'

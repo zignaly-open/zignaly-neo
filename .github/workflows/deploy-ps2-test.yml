@@ -3,11 +3,30 @@ on:
   push:
     branches:
       - test
+      - feat/split-job-deploy
 
 jobs:
-  deploy:
-    name: PS2 Test deploy
-    uses: ./.github/workflows/ps2-deploy.yml
+  build:
+    name: PS2 Test Build
+    uses: ./.github/workflows/ps2-wl-build/ps2-wl-build.yml
+    secrets: inherit
+    with:
+      deploy-env: test
+  cdn:
+    name: PS2 Test CDN Deploy
+    uses: ./.github/workflows/ps2-wl-build/ps2-wl-cdn.yml
+    secrets: inherit
+    with:
+      deploy-env: test
+  codedeploy:
+    name: PS2 Test Codedeploy Deploy
+    uses: ./.github/workflows/ps2-wl-build/ps2-wl-codedeploy.yml
+    secrets: inherit
+    with:
+      deploy-env: test
+  cache:
+    name: PS2 Test Cache clear
+    uses: ./.github/workflows/ps2-wl-build/ps2-wl-cache-nuke.yml
     secrets: inherit
     with:
       deploy-env: test
