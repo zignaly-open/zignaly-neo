@@ -12,20 +12,19 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
-    if: ${{ vars.CDN_URL != '' }}
     steps:
       - name: Prepare the structure
         run: mkdir -p ./packages/ps2/build
       - name: Restore client build
+        if: ${{ vars.CDN_URL != '' }}
         uses: actions/cache/restore@v4
         with:
           path: ./packages/ps2/build
           key: build-server-${{ github.run_id }}
           # Maybe return this - done to ship multiple envs at once
           # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
-      - name: Make sure there is stuff to build
-        run: ls -lah ./packages/ps2/build
       - name: AWS Deploy
+        if: ${{ vars.CDN_URL != '' }}
         uses: jakejarvis/s3-sync-action@master
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
