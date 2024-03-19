@@ -7,7 +7,12 @@ import ZigTypography from "../../display/ZigTypography";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import { Box, Theme } from "@mui/material";
 
-const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
+const customStyles = (
+  small: boolean,
+  medium: boolean,
+  theme: Theme,
+  userStyles: StylesConfig,
+): StylesConfig => ({
   ...userStyles,
   menuPortal: (base) => ({
     ...base,
@@ -63,11 +68,15 @@ function ZigSelect<T>({
   showBorder = true,
   hoverBackground = true,
   sx,
+  medium = false,
   styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
   const theme = useTheme() as Theme;
-  const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
+  const styles = useMemo(
+    () => customStyles(small, medium, theme, userStyles),
+    [small, theme, userStyles],
+  );
 
   return (
     // @ts-ignore
@@ -75,6 +84,7 @@ function ZigSelect<T>({
       error={error}
       width={width}
       small={small}
+      medium={medium}
       outlined={outlined}
       showBorder={showBorder}
       hoverBackground={hoverBackground}

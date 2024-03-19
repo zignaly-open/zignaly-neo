@@ -121,6 +121,12 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   `}
   }
 
+  .MuiInputBase-sizeSmall {
+    max-height: 36px;
+    padding: ${({ labelInline }) => (labelInline ? "18px 24px 6px" : "5px 10px")} !important;
+    min-height: 36px;
+  }
+
   .MuiInput-root {
     padding: ${({ labelInline }) => (labelInline ? "18px 24px 6px" : "12px 24px")};
     margin-top: ${(props) => (props.label ? "10px" : 0)};
