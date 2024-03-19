@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - test
-      - feat/pwa
+      - feat/pwa3
 
 jobs:
   deploy:

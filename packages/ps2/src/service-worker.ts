@@ -13,7 +13,7 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
-import { PrecacheController } from 'workbox-precaching';
+// import { PrecacheController } from 'workbox-precaching';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -25,26 +25,20 @@ clientsClaim();
 // Their URLs are injected into the manifest variable below.
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
-precacheAndRoute(self.__WB_MANIFEST);
+const shit = [
+  { url: '/manifest.json', revision: null },
+  { url: '/locales/en/auth.json', revision: null },
+  { url: '/locales/en/kyc.json', revision: null },
+  { url: '/locales/en/zignaly-ui.json', revision: null },
+  { url: '/locales/en/settings.json', revision: null },
+  { url: '/locales/en/action.json', revision: null },
+  { url: '/locales/en/common.json', revision: null },
+  { url: '/locales/en/error.json', revision: null },
+  { url: '/locales/en/pages.json', revision: null },
+  ...self.__WB_MANIFEST,
+];
 
-const precacheController = new PrecacheController();
-precacheController.addToCacheList([
-  { url: '/styles/example-1.abcd.css', revision: null },
-  { url: '/styles/example-2.1234.css', revision: null },
-  { url: '/scripts/example-1.abcd.js', revision: null },
-  { url: '/scripts/example-2.1234.js', revision: null },
-]);
-
-precacheController.addToCacheList([
-  {
-    url: '/index.html',
-    revision: 'abcd',
-  },
-  {
-    url: '/about.html',
-    revision: '1234',
-  },
-]);
+precacheAndRoute(shit);
 
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
@@ -110,12 +104,15 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  // console.error(e.request);
   if (e.request.mode === 'navigate') {
     e.respondWith(
       (async () => {
         try {
+          // debugger;
           // First, try to use the navigation preload response if supported.
           const preloadResponse = await e.preloadResponse;
+          console.error(e.request, preloadResponse);
           if (preloadResponse) return preloadResponse;
           // Always try the network first.
           return await fetch(e.request);
@@ -133,15 +130,15 @@ self.addEventListener('fetch', (e) => {
     );
   }
 });
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    (async () => {
-      // Enable navigation preload if it's supported.
-      // See https://developers.google.com/web/updates/2017/02/navigation-preload
-      if ('navigationPreload' in self.registration) {
-        await self.registration.navigationPreload.enable();
-      }
-    })(),
-  );
-});
+//
+// self.addEventListener('activate', (event) => {
+//   event.waitUntil(
+//     (async () => {
+//       // Enable navigation preload if it's supported.
+//       // See https://developers.google.com/web/updates/2017/02/navigation-preload
+//       if ('navigationPreload' in self.registration) {
+//         await self.registration.navigationPreload.enable();
+//       }
+//     })(),
+//   );
+// });
