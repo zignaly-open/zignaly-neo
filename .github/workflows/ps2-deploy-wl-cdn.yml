@@ -13,11 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
     steps:
+      - name: Prepare the structure
+        run: mkdir -p ./packages/ps2/build
       - name: Restore client build
         uses: actions/cache/restore@v4
         with:
           path: ./packages/ps2/build
           key: build-cdn-${{ github.run_id }}-${{ inputs.deploy-env }}
+      - name: Make sure there is stuff to build
+        run: ls -lah ./packages/ps2/build
       - name: AWS Deploy
         uses: jakejarvis/s3-sync-action@master
         env:

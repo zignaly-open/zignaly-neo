@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Prepare the structure
         run: mkdir -p ./packages/ps2-wl-server
-      - name: Restore client build
+      - name: Restore server build
         uses: actions/cache/restore@v4
         with:
           path: ./packages/ps2-wl-server
