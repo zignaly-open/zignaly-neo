@@ -40,6 +40,8 @@ jobs:
           file_name: .env
       - name: Add a workaround for type imports
         run: echo "//@ts-nocheck"$'\n'"$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
+      - name: Make sure we're actually deploying smth
+        run: ls -lah ./packages/ps2-wl-server
       - name: AWS CodeDeploy
         uses: sourcetoad/aws-codedeploy-action@v1
         with:
