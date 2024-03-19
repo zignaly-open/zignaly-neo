@@ -8,25 +8,32 @@ on:
 jobs:
   build:
     name: PS2 Test Build
-    uses: ./.github/workflows/ps2-wl-build/ps2-wl-build.yml
+    uses: ./.github/workflows/ps2-wl-build.yml
     secrets: inherit
     with:
       deploy-env: test
   cdn:
     name: PS2 Test CDN Deploy
-    uses: ./.github/workflows/ps2-wl-build/ps2-wl-cdn.yml
+    uses: ./.github/workflows/ps2-wl-cdn.yml
+    needs:
+      - build
     secrets: inherit
     with:
       deploy-env: test
   codedeploy:
     name: PS2 Test Codedeploy Deploy
-    uses: ./.github/workflows/ps2-wl-build/ps2-wl-codedeploy.yml
+    uses: ./.github/workflows/ps2-wl-codedeploy.yml
+    needs:
+      - build
     secrets: inherit
     with:
       deploy-env: test
   cache:
     name: PS2 Test Cache clear
-    uses: ./.github/workflows/ps2-wl-build/ps2-wl-cache-nuke.yml
+    needs:
+      - cdn
+      - codeploy
+    uses: ./.github/workflows/ps2-wl-cache-nuke.yml
     secrets: inherit
     with:
       deploy-env: test
