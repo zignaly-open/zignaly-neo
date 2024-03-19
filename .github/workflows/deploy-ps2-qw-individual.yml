@@ -1,0 +1,14 @@
+name: PS2 Quantwise Individual deploy
+on:
+  push:
+    tags:
+      - 'release-ps2_qw-*'
+
+jobs:
+  deploy:
+    name: PS2 Test Build
+    uses: ./.github/workflows/ps2-deploy-wl-4-in-1.yml
+    secrets: inherit
+    with:
+      deploy-env: quantwise-prod
+
