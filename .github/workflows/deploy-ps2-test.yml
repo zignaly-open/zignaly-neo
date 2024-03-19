@@ -32,7 +32,7 @@ jobs:
     name: PS2 Test Cache clear
     needs:
       - cdn
-      - codeploy
+      - codedeploy
     uses: ./.github/workflows/ps2-wl-cache-nuke.yml
     secrets: inherit
     with:
