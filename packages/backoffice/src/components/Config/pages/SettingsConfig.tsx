@@ -64,7 +64,7 @@ export default function SettingsConfig() {
   return (
     <ConfigWrapper>
       <ZigTypography sx={{ mb: 2 }} variant={'h1'}>
-        {t('navigation.communication-config')}
+        {t('navigation.settings-config')}
       </ZigTypography>
       <form onSubmit={handleSubmit(submit)}>
         <FormProvider {...formMethods}>
@@ -124,7 +124,7 @@ export default function SettingsConfig() {
             id={'settings-min-investment-toggle'}
           />
 
-          <Grid container spacing={4} sx={{ mt: -2, mb: 3 }}>
+          <Grid container spacing={7.5} sx={{ mt: -2, mb: 3 }}>
             {currenciesConfiguredForMin.map((coin) => (
               <Grid item xs={12} sm={6} md={6} lg={3} key={`${coin}-min`}>
                 <Controller
