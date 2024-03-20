@@ -66,12 +66,12 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   assetsValue={service.investedUSDT}
                   convertedValue={+service.invested}
                   convertedValueCoin={service.ssc}
+                  shorten
                 />
               </ServiceInfoWrapper>
               <ServiceInfoWrapper>
                 <ServicePercentageInfo
                   id={'service-profile__pnl30t'}
-                  // priceLabelSx={{ fontSize: '18px', lineHeight: '28px' }}
                   title={t('marketplace:table.n-months', { count: 1 })}
                   value={service.pnlSsc30t}
                   percent={service.pnlPercent30t}

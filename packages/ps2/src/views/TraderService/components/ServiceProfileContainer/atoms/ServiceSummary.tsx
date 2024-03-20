@@ -44,6 +44,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
                 assetsValue={service.investedUSDT}
                 convertedValue={+service.invested}
                 convertedValueCoin={service.ssc}
+                shorten
               />
             </GridCell>
             <GridCell item xs={4}>

@@ -192,13 +192,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
               </Box>
             </Box>
 
-            {typeof data?.percentDiff !== 'undefined' && (
-              <Box sx={{ mr: 2 }}>
-                <PercentChange
-                  id={'service-profile__percent-change'}
-                  value={data?.percentDiff}
-                />
-              </Box>
+            {(true || typeof data?.percentDiff !== 'undefined') && (
+              <PercentChange
+                sx={{ mr: 2 }}
+                id={'service-profile__percent-change'}
+                value={data?.percentDiff}
+              />
             )}
           </>
         )}
