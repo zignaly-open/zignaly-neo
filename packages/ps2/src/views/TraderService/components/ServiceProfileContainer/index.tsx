@@ -38,8 +38,6 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   return (
     <Box
       sx={{
-        p: 2,
-        pt: 0,
         mt: { xs: '-15px', lg: '-45px' },
       }}
     >
@@ -52,7 +50,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         </Grid>
         {!sm && (
           <Grid item xs={12} md={7} pb={3}>
-            <Box display={'flex'} justifyContent={'center'} gap={'35px'}>
+            <Box display={'flex'} justifyContent={'space-around'} gap={'5px'}>
               <ServiceInfoWrapper>
                 <ServicePercentageInfo
                   id={'service-profile__pnl30t'}
@@ -65,12 +63,25 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   canShow={
                     +new Date(service.createdAt) < +subMonths(new Date(), 1)
                   }
+                  sx={{
+                    color: 'neutral200',
+                    fontSize: '14px',
+                    lineHeight: '24px',
+                  }}
+                  percentSx={{
+                    lineHeight: '28px',
+                  }}
+                  priceLabelSx={{
+                    fontSize: '11px',
+                    color: 'neutral300',
+                  }}
                 />
               </ServiceInfoWrapper>
               <ServiceInfoWrapper>
                 <ZigTypography
-                  color={'neutral300'}
+                  color={'neutral200'}
                   id={'service-profile__assets-in-pool-label'}
+                  fontSize={'14px'}
                 >
                   {t('marketplace:table.assets-mobile')}
                 </ZigTypography>
@@ -81,12 +92,17 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   convertedValue={+service.invested}
                   convertedValueCoin={service.ssc}
                   shorten
+                  priceLabelSx={{
+                    fontSize: '11px',
+                    color: 'neutral300',
+                  }}
                 />
               </ServiceInfoWrapper>
               <ServiceInfoWrapper>
                 <ZigTypography
-                  color={'neutral300'}
+                  color={'neutral200'}
                   id={'service-profile__risk-label'}
+                  fontSize={'14px'}
                 >
                   {t('risk')}
                 </ZigTypography>

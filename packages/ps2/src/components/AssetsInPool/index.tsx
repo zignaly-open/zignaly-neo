@@ -16,8 +16,15 @@ const AssetsInPool = ({
   convertedValueCoin,
   createdAt,
   shorten = false,
+  priceLabelSx,
 }: AssetsInPoolProps) => {
   const { t } = useTranslation('marketplace');
+  const priceSx = {
+    color: 'neutral400',
+    fontSize: '13px',
+    fontWeight: 400,
+    ...priceLabelSx,
+  };
   return (
     <Box justifyContent='center' sx={{ gap: 2 }}>
       <PriceBoxOverride
@@ -73,16 +80,16 @@ const AssetsInPool = ({
       {typeof convertedValue === 'number' && (
         <Box
           justifyContent='center'
-          alignItems='start'
+          alignItems='center'
+          display={'flex'}
           id={prefixId && `${prefixId}__converted-${serviceId}`}
         >
           <ZigPriceLabel
             value={convertedValue}
             coin={convertedValueCoin}
-            color='neutral300'
-            coinProps={{ color: 'neutral300' }}
-            sx={{ fontSize: '13px' }}
             shorten={shorten}
+            coinProps={priceSx}
+            sx={priceSx}
           />
         </Box>
       )}
