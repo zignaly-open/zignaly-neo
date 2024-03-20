@@ -240,10 +240,10 @@ export const ServiceInfoWrapper = styled(Box)`
   background-color: ${({ theme }) => theme.palette.backgrounds.activeTab};
   padding: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 0 1 111px;
   & > :first-child {
     margin-bottom: 0;
     text-align: center;

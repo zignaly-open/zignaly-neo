@@ -11,18 +11,39 @@ const ServicePercentageInfo: React.FC<{
   percent: string;
   ssc: string;
   canShow?: boolean;
+  sx?: SxProps;
   priceLabelSx?: SxProps;
+  percentSx?: SxProps;
   id?: string;
-}> = ({ title, value, ssc, percent, canShow, id, priceLabelSx }) => {
+}> = ({
+  title,
+  value,
+  ssc,
+  percent,
+  canShow,
+  id,
+  priceLabelSx,
+  percentSx,
+  sx,
+}) => {
   const { t } = useTranslation('service');
+  const priceSx = {
+    fontSize: '13px',
+    color: 'neutral300',
+    fontWeight: 400,
+    ...priceLabelSx,
+  };
 
   return (
     <>
       <ZigTypography
         textTransform='capitalize'
-        color={'neutral300'}
-        lineHeight={'23px'}
-        sx={{ mb: '10px' }}
+        sx={{
+          color: 'neutral300',
+          lineHeight: '23px',
+          mb: '10px',
+          ...sx,
+        }}
         id={id && `${id}-label`}
       >
         {title}
@@ -33,7 +54,7 @@ const ServicePercentageInfo: React.FC<{
           <PercentChange
             value={percent}
             id={id && `${id}-pct`}
-            sx={{ fontSize: '18px' }}
+            sx={{ fontSize: '18px', ...percentSx }}
             showSignDoc={+percent * +value < 0}
             showTrophy={+percent >= 100}
           />
@@ -43,9 +64,8 @@ const ServicePercentageInfo: React.FC<{
             shorten
             value={+value}
             coin={ssc}
-            color='neutral300'
-            coinProps={{ color: 'neutral300' }}
-            sx={{ fontSize: '13px', ...priceLabelSx }}
+            coinProps={priceSx}
+            sx={priceSx}
           />
         </>
       ) : (
