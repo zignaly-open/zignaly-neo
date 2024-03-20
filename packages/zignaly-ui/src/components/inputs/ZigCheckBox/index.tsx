@@ -24,6 +24,7 @@ function ZigCheckBox({ variant = "contained", label, id, wrapperSx, ...props }: 
                   cursor: "not-allowed",
                 }
               : {}),
+            ...props.sx,
           }}
           checkedIcon={
             variant === "outlined" ? (
