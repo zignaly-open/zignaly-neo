@@ -7,9 +7,9 @@ import { CoinLabelProps } from "./types";
 /**
  * @deprecated
  */
-const CoinLabel = ({ name = "TEATHER", coin = "USDT" }: CoinLabelProps) => (
+const CoinLabel = ({ name = "TEATHER", coin = "USDT", size }: CoinLabelProps) => (
   <Layout>
-    <Icon coin={coin} />
+    <Icon size={size} coin={coin} />
     <WrapCoin>
       <Coin>{coin}</Coin>
       <Name variant={"body2"} fontWeight={"regular"} color={"neutral300"}>

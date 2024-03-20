@@ -243,8 +243,10 @@ export const ServiceInfoWrapper = styled(Box)`
   justify-content: center;
   display: flex;
   flex-direction: column;
+  flex: 1;
   & > :first-child {
     margin-bottom: 0;
+    text-align: center;
   }
 `;
 

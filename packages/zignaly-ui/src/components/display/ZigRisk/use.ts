@@ -8,7 +8,7 @@ import { getRisk } from "./util";
 import { ZigRisk } from "./types";
 import { useTranslation } from "react-i18next";
 
-export const useRisks = () => {
+export const useRisks = (short = false) => {
   const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigRisk" });
 
   return useMemo(
@@ -16,21 +16,21 @@ export const useRisks = () => {
       [
         {
           icon: Risk1Icon,
-          label: t("very-low-risk"),
+          label: t(`very-low${short ? "" : "-risk"}`),
           color: "#24b88e",
           id: 0,
           zrisk: 24,
         },
         {
           icon: Risk2Icon,
-          label: t("low-risk"),
+          label: t(`low${short ? "" : "-risk"}`),
           color: "#9fcb6e",
           id: 1,
           zrisk: 18,
         },
         {
           icon: Risk3Icon,
-          label: t("average-risk"),
+          label: t(`average${short ? "" : "-risk"}`),
           color: "#c2b864",
           id: 2,
           zrisk: 12,
@@ -54,8 +54,8 @@ export const useRisks = () => {
   );
 };
 
-export const useRisk = (zrisk: number) => {
-  const risks = useRisks();
+export const useRisk = (zrisk: number, short?: boolean) => {
+  const risks = useRisks(short);
 
   return useMemo(() => {
     return getRisk(zrisk, risks);

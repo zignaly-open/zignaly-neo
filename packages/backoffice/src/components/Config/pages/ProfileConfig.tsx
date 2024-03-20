@@ -97,7 +97,7 @@ export default function ProfileConfig() {
           <ZigTypography variant={'h2'} sx={{ mb: 2 }}>
             {t('profile.profile')}
           </ZigTypography>
-          <Grid container spacing={4}>
+          <Grid container spacing={7.5}>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'logo'}
@@ -229,7 +229,7 @@ export default function ProfileConfig() {
 
           <SectionHeader title={t('profile.meta')} sx={{ mb: 0.5, mt: 8 }} />
 
-          <Grid container spacing={4}>
+          <Grid container spacing={7.5}>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'image'}

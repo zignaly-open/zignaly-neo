@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, PriceBoxOverride } from './styles';
+import { PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
 import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { ZigWhaleIcon } from '@zignaly-open/ui/icons';
@@ -27,6 +27,7 @@ const AssetsInPool = ({
           justifyContent: 'center',
           flexDirection: 'row',
           alignItems: 'center',
+          gap: 1,
         }}
       >
         <ZigPriceLabel
@@ -38,9 +39,10 @@ const AssetsInPool = ({
           shorten={shorten}
         />
         {+assetsValue >= 200000 && (
-          <Icon>
-            <ZigWhaleIcon />
-          </Icon>
+          <ZigWhaleIcon
+            style={{ fontSize: '15px', marginTop: '-7px' }}
+            id={prefixId && `${prefixId}__whale-${serviceId}`}
+          />
         )}
       </PriceBoxOverride>
 
@@ -79,6 +81,8 @@ const AssetsInPool = ({
             coin={convertedValueCoin}
             color='neutral300'
             coinProps={{ color: 'neutral300' }}
+            sx={{ fontSize: '13px' }}
+            shorten={shorten}
           />
         </Box>
       )}

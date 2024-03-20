@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { Features } from '@zignaly-open/ps2-definitions';
 
 export const CommunicationConfigValidation = yup
   .object({
@@ -15,29 +16,60 @@ export const CommunicationConfigValidation = yup
   })
   .required();
 
+function checkMinInvestmentIfEnabled(val: number) {
+  const isMinInvestmentOn =
+    this.from[1]?.value?.settings?.[Features.MinInvestment];
+  return !isMinInvestmentOn || val > 0;
+}
+
+function checkMinScoreIfEnabled(val: number) {
+  const isScoreOn = this.parent?.settings?.[Features.ZScore];
+  return !isScoreOn || (val > 0 && val <= 100);
+}
+
 export const SettingsConfigValidation = yup
   .object({
     marketplaceMinScore: yup
       .number()
       .typeError('config:settings.validation-number')
-      .test('range', 'config:settings.validation-number-0-100', (v) => v > 0),
+      .test(
+        'range',
+        'config:settings.validation-number-0-100',
+        checkMinScoreIfEnabled,
+      ),
     minInvestment: yup.object({
       BTC: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        ),
       ETH: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        ),
       USDT: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        ),
       BNB: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        ),
     }),
   })
   .required();

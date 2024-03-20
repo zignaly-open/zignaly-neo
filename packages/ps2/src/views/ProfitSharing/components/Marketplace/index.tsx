@@ -178,7 +178,10 @@ const Marketplace = ({ services }: { services: MarketplaceService[] }) => {
                 ),
               },
               cell: (props) => (
-                <Box id={`marketplace-table__assets-${props.row.original.id}`}>
+                <Box
+                  id={`marketplace-table__assets-${props.row.original.id}`}
+                  sx={{ svg: { fontSize: '21px !important' } }}
+                >
                   <AssetsInPool
                     prefixId={'marketplace-table'}
                     serviceId={props.row.original.id}
