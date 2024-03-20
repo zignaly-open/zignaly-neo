@@ -27,6 +27,16 @@ const grayscaleIconStyle = {
   opacity: 0.5,
 };
 
+const zigInputAmountLike = {
+  '.MuiInputBase-root': {
+    paddingTop: '0 !important',
+    paddingBottom: '0 !important',
+  },
+  '.MuiInputBase-input': {
+    fontSize: '30px !important',
+  },
+};
+
 export default function SettingsConfig() {
   const { t } = useTranslation('config');
   const { wl } = useParams();
@@ -112,6 +122,7 @@ export default function SettingsConfig() {
                   placeholder={t('placeholder')}
                   label={t('settings.min-zscore') + ':'}
                   type={'number'}
+                  sx={zigInputAmountLike}
                   error={t(errors.marketplaceMinScore?.message)}
                   InputProps={{
                     endAdornment: (
@@ -146,6 +157,7 @@ export default function SettingsConfig() {
                   control={control}
                   render={({ field }) => (
                     <ZigInput
+                      sx={zigInputAmountLike}
                       error={t(errors.minInvestment?.[coin]?.message)}
                       id={'settings-min-investment-' + coin}
                       label={
@@ -162,7 +174,7 @@ export default function SettingsConfig() {
                                   : grayscaleIconStyle
                               }
                             >
-                              <CoinLabel coin={coin} name={''} />
+                              <CoinLabel coin={coin} name={''} size={24} />
                             </Box>
                           </InputAdornment>
                         ),

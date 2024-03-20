@@ -5,7 +5,7 @@ export const COIN_SIZES = {
 } as const;
 
 type CoinSizesKeys = keyof typeof COIN_SIZES;
-export type CoinSizes = typeof COIN_SIZES[CoinSizesKeys];
+export type CoinSizes = typeof COIN_SIZES[CoinSizesKeys] | number;
 
 export const sizes = {
   [COIN_SIZES.Small]: 24,
@@ -14,7 +14,7 @@ export const sizes = {
 };
 
 export type ZIGCoinIconProps = {
-  size?: CoinSizes | number;
+  size?: CoinSizes;
   coin: string;
   className?: string;
   bucket?: string;
