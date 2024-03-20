@@ -244,6 +244,8 @@ export const ServiceInfoWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   flex: 0 1 111px;
+  border-radius: 3px;
+
   & > :first-child {
     margin-bottom: 0;
     text-align: center;

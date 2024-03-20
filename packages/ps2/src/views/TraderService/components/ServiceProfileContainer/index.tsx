@@ -73,6 +73,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   }}
                   priceLabelSx={{
                     fontSize: '11px',
+                    color: 'neutral300',
                   }}
                 />
               </ServiceInfoWrapper>
@@ -93,6 +94,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   shorten
                   priceLabelSx={{
                     fontSize: '11px',
+                    color: 'neutral300',
                   }}
                 />
               </ServiceInfoWrapper>

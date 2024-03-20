@@ -29,7 +29,7 @@ const ServicePercentageInfo: React.FC<{
   const { t } = useTranslation('service');
   const priceSx = {
     fontSize: '13px',
-    color: 'neutral300',
+    color: 'neutral400',
     fontWeight: 400,
     ...priceLabelSx,
   };

@@ -20,7 +20,7 @@ const AssetsInPool = ({
 }: AssetsInPoolProps) => {
   const { t } = useTranslation('marketplace');
   const priceSx = {
-    color: 'neutral300',
+    color: 'neutral400',
     fontSize: '13px',
     fontWeight: 400,
     ...priceLabelSx,
