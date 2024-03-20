@@ -12,75 +12,78 @@ function valueToArray<T>(v: T | T[]): T[] {
 }
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  React.forwardRef(({ error, wide, sensitive, labelAction, helperText, id, ...props }, ref) => {
-    const [isShown, setIsShown] = useState(false);
-    const EyeIcon = !isShown ? VisibilityOffIcon : VisibilityIcon;
+  React.forwardRef(
+    ({ error, wide, sensitive, labelAction, helperText, id, size, ...props }, ref) => {
+      const [isShown, setIsShown] = useState(false);
+      const EyeIcon = !isShown ? VisibilityOffIcon : VisibilityIcon;
 
-    return (
-      <TextField
-        id={id}
-        inputRef={ref}
-        {...props}
-        inputProps={{
-          ...(props.inputProps || {}),
-          "data-testid":
-            props?.inputProps?.["data-testid"] ||
-            (process.env.NODE_ENV === "test" && id) ||
-            undefined,
-        }}
-        label={
-          !props.label ? null : (
-            <>
-              {props.label}
-              {labelAction && (
-                <ZigButton
-                  variant={"text"}
-                  sx={{ fontSize: "13px", fontWeight: 400 }}
-                  tabIndex={labelAction.tabIndex}
-                  onClick={labelAction.onClick}
-                  href={labelAction.href}
-                  id={labelAction.id}
-                >
-                  {labelAction.text}
-                </ZigButton>
-              )}
-            </>
-          )
-        }
-        variant={"standard"}
-        error={!!error}
-        helperText={
-          typeof error === "string" && error !== ""
-            ? error && <ErrorMessage text={error} id={id && `${id}-error-message`} />
-            : helperText
-        }
-        type={sensitive ? (!isShown ? "password" : "text") : props.type}
-        InputProps={{
-          disableUnderline: true,
-          ...(props.InputProps || {}),
-          ...(sensitive
-            ? {
-                endAdornment: [
-                  <InputAdornment position="end" key={id + "-sensivive"}>
-                    {!!sensitive && (
-                      <EyeIcon
-                        id={id && `${id}-visibility-icon`}
-                        onClick={() => setIsShown((v) => !v)}
-                        width={40}
-                        height={40}
-                        sx={ZigInputInteractiveAdornmentStyle}
-                      />
-                    )}
-                  </InputAdornment>,
-                  ...valueToArray(props?.InputProps?.endAdornment),
-                ],
-              }
-            : {}),
-        }}
-        InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
-      />
-    );
-  }),
+      return (
+        <TextField
+          id={id}
+          size={size}
+          inputRef={ref}
+          {...props}
+          inputProps={{
+            ...(props.inputProps || {}),
+            "data-testid":
+              props?.inputProps?.["data-testid"] ||
+              (process.env.NODE_ENV === "test" && id) ||
+              undefined,
+          }}
+          label={
+            !props.label ? null : (
+              <>
+                {props.label}
+                {labelAction && (
+                  <ZigButton
+                    variant={"text"}
+                    sx={{ fontSize: "13px", fontWeight: 400 }}
+                    tabIndex={labelAction.tabIndex}
+                    onClick={labelAction.onClick}
+                    href={labelAction.href}
+                    id={labelAction.id}
+                  >
+                    {labelAction.text}
+                  </ZigButton>
+                )}
+              </>
+            )
+          }
+          variant={"standard"}
+          error={!!error}
+          helperText={
+            typeof error === "string" && error !== ""
+              ? error && <ErrorMessage text={error} id={id && `${id}-error-message`} />
+              : helperText
+          }
+          type={sensitive ? (!isShown ? "password" : "text") : props.type}
+          InputProps={{
+            disableUnderline: true,
+            ...(props.InputProps || {}),
+            ...(sensitive
+              ? {
+                  endAdornment: [
+                    <InputAdornment position="end" key={id + "-sensivive"}>
+                      {!!sensitive && (
+                        <EyeIcon
+                          id={id && `${id}-visibility-icon`}
+                          onClick={() => setIsShown((v) => !v)}
+                          width={40}
+                          height={40}
+                          sx={ZigInputInteractiveAdornmentStyle}
+                        />
+                      )}
+                    </InputAdornment>,
+                    ...valueToArray(props?.InputProps?.endAdornment),
+                  ],
+                }
+              : {}),
+          }}
+          InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
+        />
+      );
+    },
+  ),
   { shouldForwardProp: (p) => p !== "labelInline" },
 )`
   // TODO: move to darkMui
@@ -94,11 +97,11 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     width: 100%;
     transition: color 0.2s;
 
-    ${({ theme, labelInline }) =>
+    ${({ theme, labelInline, size }) =>
       !labelInline
         ? `
-    font-size: 15px !important;
-    line-height: 24px;
+    font-size: ${size === "small" ? "13px" : "15px"} !important;
+    line-height: ${size === "small" ? "20px" : "24px"};
     letter-spacing: 0.55px;
     color: ${theme.palette.neutral200} !important;
     
@@ -123,8 +126,9 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
   .MuiInputBase-sizeSmall {
     max-height: 36px;
-    padding: ${({ labelInline }) => (labelInline ? "18px 24px 6px" : "5px 10px")} !important;
+    padding: 11px 18px;
     min-height: 36px;
+    margin-top: ${(props) => (props.label ? "5px !important" : 0)};
   }
 
   .MuiInput-root {

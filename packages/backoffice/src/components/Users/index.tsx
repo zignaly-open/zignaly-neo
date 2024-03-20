@@ -218,7 +218,7 @@ export default function Users() {
           display: 'flex',
           flexDirection: 'row',
           gap: 2,
-          mb: 4,
+          mb: 3,
           width: 1000,
           '& > *': {
             flex: 1,

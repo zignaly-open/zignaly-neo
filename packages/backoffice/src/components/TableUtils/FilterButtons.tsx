@@ -19,7 +19,6 @@ const FilterButtons: React.FC<{ onClick: () => void; onClear: () => void }> = ({
         flexDirection: 'row',
         display: 'flex',
         gap: 2,
-        mb: '1px',
       }}
     >
       <ZigButton size='medium' onClick={onClick} startIcon={<SearchIcon />}>

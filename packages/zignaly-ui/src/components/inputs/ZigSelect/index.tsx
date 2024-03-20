@@ -90,7 +90,11 @@ function ZigSelect<T>({
       hoverBackground={hoverBackground}
     >
       {label && (
-        <ZigTypography color={"neutral200"} id={id && `${id}-label`}>
+        <ZigTypography
+          sx={medium && { fontSize: "13px", lineHeight: "20px" }}
+          color={"neutral200"}
+          id={id && `${id}-label`}
+        >
           {label}
         </ZigTypography>
       )}
