@@ -91,7 +91,7 @@ function ZigSelect<T>({
     >
       {label && (
         <ZigTypography
-          sx={medium && { fontSize: "13px", lineHeight: "20px" }}
+          sx={medium ? { fontSize: "13px", lineHeight: "20px" } : {}}
           color={"neutral200"}
           id={id && `${id}-label`}
         >
