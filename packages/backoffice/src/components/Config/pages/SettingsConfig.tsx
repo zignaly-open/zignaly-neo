@@ -166,7 +166,10 @@ export default function SettingsConfig() {
                       disabled={isLoading || !watch('settings.minInvestment')}
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position='end'>
+                          <InputAdornment
+                            position='end'
+                            sx={{ color: (theme) => theme.palette.neutral100 }}
+                          >
                             <Box
                               sx={
                                 watch('settings.minInvestment')
