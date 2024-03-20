@@ -79,7 +79,7 @@ export default function ThemeConfig() {
         {t('navigation.theme-config')}
       </ZigTypography>
       <form onSubmit={handleSubmit(submit)}>
-        <Grid container spacing={4}>
+        <Grid container spacing={7.5}>
           <Grid item xs={12} sm={6} md={4}>
             <Controller
               name={'themeOverride.themeOverrides.palette.neutral200'}
