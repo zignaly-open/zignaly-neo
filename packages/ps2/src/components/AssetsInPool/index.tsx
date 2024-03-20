@@ -39,7 +39,10 @@ const AssetsInPool = ({
           shorten={shorten}
         />
         {+assetsValue >= 200000 && (
-          <ZigWhaleIcon style={{ fontSize: '15px', marginTop: '-7px' }} />
+          <ZigWhaleIcon
+            style={{ fontSize: '15px', marginTop: '-7px' }}
+            id={prefixId && `${prefixId}__whale-${serviceId}`}
+          />
         )}
       </PriceBoxOverride>
 

@@ -8,4 +8,5 @@ export type ZigRisk = {
   color: string;
   id: number;
   zrisk: number;
+  short?: boolean;
 };

@@ -49,7 +49,7 @@ const PercentChange: React.FC<{
             <InfoOutlined sx={{ color: 'neutral300', fontSize: '10px' }} />
           </Tooltip>
         )}
-        {showTrophy && <ZigTrophyIcon />}
+        {showTrophy && <ZigTrophyIcon id={id && `${id}-trophy`} />}
       </Box>
     </Box>
   );
