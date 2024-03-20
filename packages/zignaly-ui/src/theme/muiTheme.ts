@@ -119,6 +119,11 @@ const createMuiTheme = ({
             outline: none;
             font-weight: 400;
             font-size: 16px;
+            &.MuiInputBase-inputSizeSmall{
+              font-size: 11px;
+              padding: 0;
+              line-height: 14px;
+            }
             line-height: 20px;
             letter-spacing: 0.55px;
             width: 100%;

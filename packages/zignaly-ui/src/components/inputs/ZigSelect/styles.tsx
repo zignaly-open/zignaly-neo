@@ -21,7 +21,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       p as unknown as string,
     ),
 })<Props>`
-  gap: 10px;
+  gap: ${({ medium }) => (medium ? "5px" : "10px")};
   display: flex;
   flex-direction: column;
 
@@ -94,7 +94,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     &__single-value,
     &__input-container,
     &__input {
-      font-size: ${({ small }) => (small ? "13px" : "16px")};
+      font-size: ${({ small, medium }) => (small || medium ? "13px" : "16px")};
       line-height: ${({ small, medium }) => (small ? "15px" : medium ? "18px" : "20px")};
       ${({ small, medium }) =>
         small || medium
