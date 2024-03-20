@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   CoinLabel,
   ZigButton,
@@ -53,6 +53,7 @@ export default function SettingsConfig() {
     control,
     handleSubmit,
     reset,
+    trigger,
     formState: { errors },
   } = formMethods;
 
@@ -60,6 +61,17 @@ export default function SettingsConfig() {
     v.marketplaceMinScore = +v.marketplaceMinScore;
     return v;
   });
+
+  // field revalidation
+  useEffect(() => {
+    trigger('marketplaceMinScore');
+  }, [watch(`settings.${Features.ZScore}`)]);
+
+  useEffect(() => {
+    currenciesConfiguredForMin.every((coin) =>
+      trigger(`minInvestment.${coin}` as keyof WhitelabelBackendConfig),
+    );
+  }, [watch(`settings.${Features.MinInvestment}`)]);
 
   return (
     <ConfigWrapper>
