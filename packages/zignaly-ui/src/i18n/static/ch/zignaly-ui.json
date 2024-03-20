@@ -27,8 +27,11 @@
   },
   "ZigRisk": {
     "very-low-risk": "CH-Vëѓy löw ѓïŝk",
+    "very-low": "CH-Vëѓy löw",
     "low-risk": "CH-Löw ѓïŝk",
+    "low": "CH-Löw",
     "average-risk": "CH-Ávëѓáĝë ѓïŝk",
+    "average": "CH-Ávëѓáĝë",
     "risky": "CH-Ѓïŝky",
     "very-risky": "CH-Vëѓy ѓïŝky"
   },
