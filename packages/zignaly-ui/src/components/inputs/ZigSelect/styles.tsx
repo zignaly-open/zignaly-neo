@@ -94,7 +94,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     &__single-value,
     &__input-container,
     &__input {
-      font-size: ${({ small, medium }) => (small || medium ? "13px" : "16px")};
+      font-size: ${({ small, medium }) => (small ? "13px" : medium ? "11px" : "16px")};
       line-height: ${({ small, medium }) => (small ? "15px" : medium ? "18px" : "20px")};
       ${({ small, medium }) =>
         small || medium
