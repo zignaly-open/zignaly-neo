@@ -197,6 +197,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                 sx={{ mr: 2 }}
                 id={'service-profile__percent-change'}
                 value={data?.percentDiff}
+                shorten
               />
             )}
           </>

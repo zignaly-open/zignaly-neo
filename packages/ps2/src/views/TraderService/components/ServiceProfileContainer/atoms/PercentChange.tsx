@@ -12,7 +12,8 @@ const PercentChange: React.FC<{
   sx?: SxProps;
   showSignDoc?: boolean;
   showTrophy?: boolean;
-}> = ({ id, value, sx = {}, showSignDoc, showTrophy }) => {
+  shorten?: boolean;
+}> = ({ id, value, sx = {}, showSignDoc, showTrophy, shorten }) => {
   const { t } = useTranslation('common');
   const isFinite = Number.isFinite(+value || 0);
 
@@ -42,6 +43,7 @@ const PercentChange: React.FC<{
         value={value}
         smallPct
         sx={{ opacity: 0.9, ...sx }}
+        shorten={shorten}
       />
       <Box display={'flex'} alignItems={'center'} gap={'8px'} mt='-6px'>
         {tooltip && (
