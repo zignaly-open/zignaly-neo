@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - master
-      - feat/wl-server-2
 
 jobs:
   deploy:
-    name: PS2 WL Staging deploy
-    uses: ./.github/workflows/ps2-deploy.yml
+    name: PS2 QW 4-in-1
+    uses: ./.github/workflows/ps2-deploy-wl-4-in-1.yml
     secrets: inherit
     with:
       deploy-env: wl-staging

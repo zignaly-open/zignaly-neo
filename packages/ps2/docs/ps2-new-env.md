@@ -12,11 +12,13 @@ Next we define the variables and secrets. Variables are public, secrets are - im
 | `AWS_ACCESS_KEY`            | Secret   |     AWS S3 Access key used both for Codedeploy and S3 upload     | **Required** |
 | `AWS_SECRET_KEY`            | Secret   |     AWS S3 Secret key used both for Codedeploy and S3 upload     | **Required** |
 | `AWS_S3_BUCKET`             | Secret   | AWS S3 Bucket name to which the static content would be uploaded | **Required** |
-| `CF_ZONE`                   | Secret   |                  CloudFlare Zone to invalidate                   |  *Optional** |
-| `CF_TOKEN`                  | Secret   |                  CloudFlare Token to invalidate                  |  *Optional** |
+| `CF_ZONE_CDN`               | Secret   |          CloudFlare Zone to invalidate the main domain           |  *Optional** |
+| `CF_ZONE`                   | Secret   |              CloudFlare Zone to invalidate  the CDN              |  *Optional** |
+| `CF_TOKEN`                  | Secret   |          CloudFlare Token to invalidate the main domain          |  *Optional** |
+| `CF_TOKEN_CDN`              | Secret   |              CloudFlare Token to invalidate the CDN              |  *Optional** |
 | `CODEDEPLOY_BUCKET`         | Secret   |             CodeDeploy bucket for the WL server code             | **Required** |
 | `CODEDEPLOY_GROUP`          | Secret   |            CodeDeploy group for the WL server deploy             | **Required** |
-| `CODEDEPLOY_APP`          | Secret   |                CodeDeploy app, default `zignaly`                 | *Optional* |
+| `CODEDEPLOY_APP`            | Secret   |                CodeDeploy app, default `zignaly`                 | *Optional* |
 | `CODEPLOY_REGION`           | Secret   |            Believe it or not, it's CodeDeploy region             | **Required** |
 | `SLACK_WEBHOOK`             | Secret   |          Slack webhook to report PS2 WL Server logs to           |   *Optional* |
 | `CDN_URL`                   | Variable | "CDN" that we serve the static content from for all whitelabels  | **Required** |

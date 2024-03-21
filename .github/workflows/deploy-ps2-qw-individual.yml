@@ -1,4 +1,4 @@
-name: PS2 Quantwise Individual deploy
+name: PS2 QW Individual deploy
 on:
   push:
     tags:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: PS2 Test Build
+    name: PS2 QW 4-in-1
     uses: ./.github/workflows/ps2-deploy-wl-4-in-1.yml
     secrets: inherit
     with:
