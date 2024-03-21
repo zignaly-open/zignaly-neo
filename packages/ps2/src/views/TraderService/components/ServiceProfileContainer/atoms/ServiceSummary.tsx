@@ -9,6 +9,7 @@ import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
 import { numericFormatter } from 'react-number-format';
+import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
@@ -176,14 +177,9 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               whiteSpace={'nowrap'}
             >
               {Number(service?.fundsAllocated) < 10
-                ? `${trimZeros(
-                    numericFormatter(
-                      (+service?.invested + service?.pending).toString(),
-                      {
-                        thousandSeparator: true,
-                        decimalScale: 2,
-                      },
-                    ),
+                ? `${formatCompactNumber(
+                    +service?.invested + service?.pending,
+                    2,
                   )} ${service?.ssc || 'USDT'}`
                 : t('common:percent', {
                     value: trimZeros(

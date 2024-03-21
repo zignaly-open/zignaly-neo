@@ -26,7 +26,7 @@ const AssetsInPool = ({
     ...priceLabelSx,
   };
   return (
-    <Box justifyContent='center' sx={{ gap: 2 }}>
+    <Box>
       <PriceBoxOverride
         id={prefixId && `${prefixId}__invested-${serviceId}`}
         sx={{
@@ -47,7 +47,7 @@ const AssetsInPool = ({
         />
         {+assetsValue >= 200000 && (
           <ZigWhaleIcon
-            style={{ fontSize: '15px', marginTop: '-7px' }}
+            style={{ fontSize: '15px', marginTop: '-5px' }}
             id={prefixId && `${prefixId}__whale-${serviceId}`}
           />
         )}
@@ -89,7 +89,7 @@ const AssetsInPool = ({
             coin={convertedValueCoin}
             shorten={shorten}
             coinProps={priceSx}
-            sx={priceSx}
+            sx={{ mt: '3px', ...priceSx }}
           />
         </Box>
       )}
