@@ -1,7 +1,12 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { trimZeros, ZigRisk, ZigTypography } from '@zignaly-open/ui';
+import {
+  trimZeros,
+  ZigRisk,
+  ZigTypography,
+  formatCompactNumber,
+} from '@zignaly-open/ui';
 import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GridCell, GridWithBottomBorder } from '../styles';
@@ -9,7 +14,6 @@ import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
 import { numericFormatter } from 'react-number-format';
-import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);

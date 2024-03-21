@@ -19,10 +19,3 @@ export const formatMonthDayYear = (date: Date) => format(date, 'dd/MM/yy');
 
 export const formatMonthDay = (date: Date) =>
   formatMonthDayYear(date).replace(/, \d{4}$/, '');
-
-export const formatCompactNumber = (value: number | string, precision = 8) =>
-  new Intl.NumberFormat('en-US', {
-    maximumFractionDigits: precision,
-    notation: 'compact',
-    compactDisplay: 'short',
-  }).format(+value);

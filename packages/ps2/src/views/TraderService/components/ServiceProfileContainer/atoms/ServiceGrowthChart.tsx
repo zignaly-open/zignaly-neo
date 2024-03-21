@@ -12,6 +12,7 @@ import {
   CenteredLoader,
   ZigSelect,
   ZigTypography,
+  formatCompactNumber,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -26,10 +27,7 @@ import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
 import { numericFormatter } from 'react-number-format';
-import {
-  formatCompactNumber,
-  formatLocalizedDate,
-} from 'views/Dashboard/components/MyDashboard/util';
+import { formatLocalizedDate } from 'views/Dashboard/components/MyDashboard/util';
 import BigNumber from 'bignumber.js';
 import { lazily } from 'react-lazily';
 

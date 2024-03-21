@@ -7,7 +7,7 @@ import { ChangeIndicatorProps } from "./types";
 import { Box, Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
-import { shortenNumber } from "index";
+import { formatCompactNumber } from "index";
 
 // Fix for react-number-format not showing .0 decimal
 // https://github.com/s-yadav/react-number-format/issues/820
@@ -59,17 +59,22 @@ const ChangeIndicator = ({
       ? theme.palette.greenGraph
       : theme.palette.redGraphOrError;
 
-    const { value: shortened, suffix: shortenSuffix } = shortenNumber(+value);
-
-    const adjustedValue = shorten
-      ? shortened
+    let adjustedValue = shorten
+      ? formatCompactNumber(value, 2)
       : adjustNumber(
           bigNumberValue,
           decimalScale,
           type === "graph" && indicatorPostion === "left",
         ).toFixed();
 
-    const suffix = shorten ? shortenSuffix : type === "only_number" || smallPct ? "" : "%";
+    let suffix = type === "only_number" || smallPct ? "" : "%";
+    if (shorten) {
+      const lastChar = adjustedValue.slice(-1);
+      if (isNaN(Number(lastChar))) {
+        suffix = lastChar + suffix;
+        adjustedValue = adjustedValue.slice(0, -1);
+      }
+    }
 
     return (
       <Box display="flex" justifyContent={"center"} alignItems={"center"}>
