@@ -33,7 +33,7 @@ const zigInputAmountLike = {
     paddingBottom: '0 !important',
   },
   '.MuiInputBase-input': {
-    fontSize: '30px !important',
+    fontSize: '20px !important',
   },
 };
 
@@ -147,7 +147,7 @@ export default function SettingsConfig() {
             id={'settings-min-investment-toggle'}
           />
 
-          <Grid container spacing={7.5} sx={{ mt: -2, mb: 3 }}>
+          <Grid container spacing={7.5} sx={{ mt: -6.5, mb: 3 }}>
             {currenciesConfiguredForMin.map((coin) => (
               <Grid item xs={12} sm={6} md={6} lg={3} key={`${coin}-min`}>
                 <Controller

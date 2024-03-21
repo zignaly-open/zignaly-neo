@@ -293,9 +293,9 @@ export default function ProfileConfig() {
                     label={
                       <>
                         <ZigTypography>
-                          {t('profile.meta-title')}
+                          {t('profile.meta-description')}
                           <ZigTypography variant={'body2'} component={'div'}>
-                            {t('profile.meta-title-description')}
+                            {t('profile.meta-description-description')}
                           </ZigTypography>
                         </ZigTypography>
                       </>
