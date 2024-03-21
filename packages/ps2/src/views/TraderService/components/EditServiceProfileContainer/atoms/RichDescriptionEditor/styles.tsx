@@ -36,6 +36,7 @@ export const StyledEditor = styled(MDEditor)<{
       color: ${({ theme }) => theme.palette.neutral000};
     }
   }
+  box-shadow: none !important;
   .w-md-editor-toolbar,
   .w-md-editor-input,
   .w-md-editor-preview {
