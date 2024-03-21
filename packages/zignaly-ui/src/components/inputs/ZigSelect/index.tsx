@@ -1,5 +1,9 @@
 import React, { useMemo } from "react";
-import { StyledSelectWrapper, ZigSelectGlobalStyle } from "./styles";
+import {
+  StyledSelectWrapper,
+  ZigMediumSelectGlobalStyle,
+  ZigNormalSelectGlobalStyle,
+} from "./styles";
 import { ZigSelectOption, ZigSelectProps } from "./types";
 import Select, { StylesConfig } from "react-select";
 import { useTheme } from "styled-components";
@@ -99,7 +103,7 @@ function ZigSelect<T>({
         </ZigTypography>
       )}
       <Box sx={sx}>
-        {ZigSelectGlobalStyle}
+        {medium ? ZigMediumSelectGlobalStyle : ZigNormalSelectGlobalStyle}
         <Select
           id={id}
           styles={styles}
