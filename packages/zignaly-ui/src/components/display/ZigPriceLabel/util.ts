@@ -49,10 +49,3 @@ export function shortenNumber(value: number): {
     };
   }
 }
-
-export const formatCompactNumber = (value: number | string, precision = 8) =>
-  new Intl.NumberFormat("en-US", {
-    maximumFractionDigits: precision,
-    notation: "compact",
-    compactDisplay: "short",
-  }).format(+value);
