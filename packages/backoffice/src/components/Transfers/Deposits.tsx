@@ -179,7 +179,7 @@ export default function Deposits() {
             setFilters((old) => ({ ...old, userId: e.target.value }))
           }
         />
-        <Box mt={'-3px'}>
+        <Box mt={'-2px'}>
           <ZigTypography fontSize={'13px'} lineHeight={'20px'}>
             {t('table.amount')}
           </ZigTypography>

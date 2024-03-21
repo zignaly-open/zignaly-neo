@@ -154,7 +154,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
   }
 `;
 
-export const ZigSelectGlobalStyle = (
+export const ZigNormalSelectGlobalStyle = (
   <GlobalStyles
     styles={css`
       .zig-react-select {
@@ -162,6 +162,21 @@ export const ZigSelectGlobalStyle = (
           &-list {
             ${NiceScrollbar.toString()};
           }
+          font-size: 11px;
+        }
+      }
+    `}
+  />
+);
+export const ZigMediumSelectGlobalStyle = (
+  <GlobalStyles
+    styles={css`
+      .zig-react-select {
+        &__menu {
+          &-list {
+            ${NiceScrollbar.toString()};
+          }
+          font-size: 11px;
         }
       }
     `}
