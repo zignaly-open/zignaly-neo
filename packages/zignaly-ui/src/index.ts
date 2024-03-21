@@ -75,7 +75,7 @@ export { default as CoinLabel } from "./components/display/ZigTable/components/C
 export { default as ZigCheckBox } from "./components/inputs/ZigCheckBox";
 
 // Utils
-export { sortByValue, trimZeros } from "utils/numbers";
+export { sortByValue, trimZeros, formatCompactNumber } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
 export { getPrecisionForCoin, shortenNumber } from "./components/display/ZigPriceLabel/util";
 

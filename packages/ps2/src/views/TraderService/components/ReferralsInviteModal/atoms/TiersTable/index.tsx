@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Tooltip, useTheme } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, formatCompactNumber } from '@zignaly-open/ui';
 import { ZigClockIcon, ZigUserFilledIcon } from '@zignaly-open/ui/icons';
 import { MAX_FEES_AMOUNT, getMaxEarnings } from '../../util';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +11,6 @@ import TierBar from '../TierBar';
 import { TiersTableProps } from './types';
 import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
-import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 import { Table } from './styles';
 import { whitelabel } from '../../../../../../whitelabel';
 

@@ -12,4 +12,5 @@ export interface ChangeIndicatorProps {
   decimalScale?: number;
   smallPct?: boolean;
   indicatorPostion?: "left" | "right";
+  shorten?: boolean;
 }

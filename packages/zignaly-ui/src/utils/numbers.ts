@@ -9,3 +9,10 @@ export const trimZeros = (v: string | number) => {
 export const numberOfDecimals = (v: string | number) => {
   return (v?.toString()?.split(".")[1] ?? "").length;
 };
+
+export const formatCompactNumber = (value: number | string, precision = 8) =>
+  new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: precision,
+    notation: "compact",
+    compactDisplay: "short",
+  }).format(+value);

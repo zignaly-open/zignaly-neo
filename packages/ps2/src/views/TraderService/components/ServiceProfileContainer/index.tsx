@@ -70,6 +70,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   }}
                   percentSx={{
                     lineHeight: '28px',
+                    mb: '1px',
                   }}
                   priceLabelSx={{
                     fontSize: '11px',
@@ -95,6 +96,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   priceLabelSx={{
                     fontSize: '11px',
                     color: 'neutral300',
+                    mt: '1px',
                   }}
                 />
               </ServiceInfoWrapper>
