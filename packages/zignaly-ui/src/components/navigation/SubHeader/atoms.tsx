@@ -16,7 +16,7 @@ export const ServiceListOption: React.FC<{
       <HeadOption
         isSubOption={isSubGroup}
         active={!!active}
-        sx={isCompactElements ? { height: "38px" } : {}}
+        sx={isCompactElements ? { minHeight: "38px", paddingY: "7px" } : {}}
       >
         <Box
           display="flex"

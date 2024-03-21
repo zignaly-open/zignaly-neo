@@ -61,13 +61,13 @@ export const Option = styled("span", {
 export const HeadOption = styled(Option)<OptionType & { isSubOption?: boolean }>`
   display: flex;
   align-items: center;
-  height: 56px;
+  min-height: 56px;
   ${secondaryBackground};
 
   ${({ isSubOption, theme }) =>
     isSubOption
       ? `
-        padding: 0 10%;
+        padding: 16px 10%;
         background: ${theme.palette.neutral800};
       `
       : `

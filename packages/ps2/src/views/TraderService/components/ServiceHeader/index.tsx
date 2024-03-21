@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SubHeader } from '@zignaly-open/ui';
+import { SubHeader, ZigButton } from '@zignaly-open/ui';
 import {
   useIsServiceOwner,
   useTraderServices,
@@ -48,6 +48,16 @@ function ServiceHeader() {
             name: service?.serviceName,
             path: currentPath.replace(serviceId, service?.serviceId),
           }))
+          // .concat({
+          //   name: 't',
+          //   id: 'aa',
+          //   onClick: () => {
+          //     // navigate(path)
+          //   }
+          //   active: false,
+          //   sideElement,
+          //   a: <ZigButton> {t('service:create.action')}</ZigButton>,
+          // })
           .map(routeToSubHeaderRoute),
       },
       routeToSubHeaderRoute({
