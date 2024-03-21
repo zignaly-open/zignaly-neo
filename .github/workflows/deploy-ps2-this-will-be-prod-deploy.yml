@@ -45,6 +45,16 @@ jobs:
     secrets: inherit
     with:
       deploy-env: wl-staging
+  cache_prod_test:
+    name: PS2 Cache clear test to make sure prod clears
+    needs:
+      - cdn
+      - codedeploy
+      - codedeploy_qw
+    uses: ./.github/workflows/ps2-deploy-wl-cache-nuke.yml
+    secrets: inherit
+    with:
+      deploy-env: wl-prod
   cache_qw:
     name: PS2 Cache clear - QW Server
     needs:
