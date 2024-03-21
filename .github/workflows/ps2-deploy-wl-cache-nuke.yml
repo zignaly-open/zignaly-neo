@@ -32,7 +32,7 @@ jobs:
           CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
           CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN }}
       - name: Invalidate Cloudflare for the CDN
-        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.CF_ZONE_CDN == 'true') }}
+        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.HAS_CLOUDFLARE_CDN == 'true') }}
         uses: strrife/cloudflare-chunked-purge-action@master
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE_CDN }}
@@ -42,7 +42,7 @@ jobs:
         run: sleep 180s
         shell: bash
       - name: Invalidate Cloudflare AGAIN because 2 is better than 1
-        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.CF_ZONE_CDN == 'true') }}
+        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.HAS_CLOUDFLARE_CDN == 'true') }}
         uses: strrife/cloudflare-chunked-purge-action@master
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE_CDN }}
