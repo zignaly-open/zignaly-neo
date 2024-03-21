@@ -8,7 +8,7 @@ export const ConfigWrapper = styled(PageContainer)`
   align-items: center;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-    padding: 0 100px 40px;
+    padding: 0 169px 40px;
   }
 
   form {
