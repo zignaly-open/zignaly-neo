@@ -7,7 +7,7 @@ import { ChangeIndicatorProps } from "./types";
 import { Box, Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
-import { formatCompactNumber } from "index";
+import { formatCompactNumber } from "utils/numbers";
 
 // Fix for react-number-format not showing .0 decimal
 // https://github.com/s-yadav/react-number-format/issues/820
