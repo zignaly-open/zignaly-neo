@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { Features } from '@zignaly-open/ps2-definitions';
+import { checkDecimals } from '@zignaly-open/ui';
 
 export const CommunicationConfigValidation = yup
   .object({
@@ -45,6 +46,14 @@ export const SettingsConfigValidation = yup
           'range',
           'config:settings.validation-number-gt-0',
           checkMinInvestmentIfEnabled,
+        )
+        // have you heard about the horseshoe theory?
+        // Yes we could do it with 1 validation message but calling translate here is problematic
+        // passing 6 or 8 when rendering the translation error seems like a hassle
+        // so we better just have 2 messages lol
+        // and no I am not retarded
+        .test('int', 'config:settings.max-decimals-8', (val) =>
+          checkDecimals(val, 8),
         ),
       ETH: yup
         .number()
@@ -53,6 +62,9 @@ export const SettingsConfigValidation = yup
           'range',
           'config:settings.validation-number-gt-0',
           checkMinInvestmentIfEnabled,
+        )
+        .test('int', 'config:settings.max-decimals-8', (val) =>
+          checkDecimals(val, 8),
         ),
       USDT: yup
         .number()
@@ -61,6 +73,9 @@ export const SettingsConfigValidation = yup
           'range',
           'config:settings.validation-number-gt-0',
           checkMinInvestmentIfEnabled,
+        )
+        .test('int', 'config:settings.max-decimals-6', (val) =>
+          checkDecimals(val, 6),
         ),
       BNB: yup
         .number()
@@ -69,6 +84,9 @@ export const SettingsConfigValidation = yup
           'range',
           'config:settings.validation-number-gt-0',
           checkMinInvestmentIfEnabled,
+        )
+        .test('int', 'config:settings.max-decimals-8', (val) =>
+          checkDecimals(val, 8),
         ),
     }),
   })

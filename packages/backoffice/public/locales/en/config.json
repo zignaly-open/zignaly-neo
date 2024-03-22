@@ -45,6 +45,8 @@
   },
   "settings": {
     "validation-number": "Must be a number",
+    "max-decimals-8": "Max 8 decimals",
+    "max-decimals-6": "Max 6 decimals",
     "validation-number-gt-0": "Must be >= 0",
     "validation-number-0-100": "Must be between 0 and 100",
     "min-investment-amount": "Min {{coin}} amount to invest",
