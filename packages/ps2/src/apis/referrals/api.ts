@@ -9,9 +9,10 @@ import {
   ServiceCommissionPayload,
 } from './types';
 import baseQuery from '../baseQuery';
+import { whitelabel } from '../../whitelabel';
 
 export const api = createApi({
-  baseQuery: baseQuery(process.env.REACT_APP_REFERRALS_API),
+  baseQuery: baseQuery(whitelabel.baseReferralApi),
   reducerPath: 'referralApi',
   tagTypes: ['Referrals', 'Commission'],
   endpoints: (builder) => ({

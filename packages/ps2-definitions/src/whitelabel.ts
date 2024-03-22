@@ -21,6 +21,8 @@ interface TranslationOverrides {
 export type WhitelabelOverride = {
   name: string;
   title: string;
+  baseApi: string;
+  baseReferralApi: string;
   domain: string;
   description?: string;
   locales?: string[];

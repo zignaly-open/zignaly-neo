@@ -31,7 +31,8 @@ jobs:
       - name: Create PS2 WL Server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_BASE_API: ${{ vars.PS2_BASE_API }}
+          envkey_PS2_BASE_API: ${{ vars.PS2_BASE_API }}
+          envkey_PS2_REFERRAL_API: ${{ vars.PS2_REFERRAL_API }}
           envkey_WL_CACHE_TTL_OVERRIDE: ${{ vars.PS2_WL_CACHE_TTL_OVERRIDE }}
           envkey_WL_SLACK_LOG_THROTTLE: ${{ vars.PS2_WL_SLACK_LOG_THROTTLE }}
           envkey_PS2_ENV: ${{ inputs.deploy-env }}

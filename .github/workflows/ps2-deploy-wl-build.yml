@@ -21,10 +21,12 @@ jobs:
           # env-specific
           envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
           envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
-          envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
-          envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
-          envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRAL_API }}
           envkey_REACT_APP_NO_INDEX: ${{ vars.NO_INDEX }}
+          envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
+
+          # still used by the tracker
+          # TODO: remove
+          envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
 
           #constant
           envkey_EXTEND_ESLINT: true

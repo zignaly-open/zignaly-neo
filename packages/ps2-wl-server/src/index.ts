@@ -20,7 +20,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import serveStatic from 'serve-static';
 import { generateIndexHtml, generateManifest } from './html';
 import { getWhitelabelConfig } from './config';
-import { BASE_API, BUILD_PATH, PS2_ENV } from './constants';
+import { PS2_BASE_API, BUILD_PATH, PS2_ENV } from './constants';
 import logger from './logger';
 import runEnvChecks from './checks';
 
@@ -43,7 +43,7 @@ server.use(
   (req: Request, res: Response, next: NextFunction) => {
     const { token } = req.params;
     if (/^[a-z\d]{10,}$/i.test(token)) {
-      res.redirect(`${BASE_API}report/${req.params.token}`);
+      res.redirect(`${PS2_BASE_API}report/${req.params.token}`);
     } else next();
   },
 );

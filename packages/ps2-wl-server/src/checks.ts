@@ -1,9 +1,9 @@
 import logger from './logger';
-import { BASE_API, INDEX_HTML } from './constants';
+import { PS2_BASE_API, INDEX_HTML } from './constants';
 
 export default function runEnvChecks() {
-  if (!BASE_API) {
-    logger.error('`BASE_API` should be defined');
+  if (!PS2_BASE_API) {
+    logger.error('`PS2_BASE_API` should be defined');
     process.exit(1);
   }
 
