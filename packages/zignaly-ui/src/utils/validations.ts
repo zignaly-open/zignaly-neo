@@ -1,8 +1,11 @@
-import * as yup from "yup";
+export const checkDecimals = (val: string | number, maxDecimals: number) => {
+  if (!val) return true;
 
-export const LoginValidation = yup
-  .object({
-    email: yup.string().required("This field is required.").email("You must enter a email"),
-    password: yup.string().required("This field is required."),
-  })
-  .required();
+  const splitValueDot = val.toString().split(".");
+  // Handle incorrect number
+  if (splitValueDot.length > 2) return false;
+
+  const decimals = splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
+
+  return decimals <= maxDecimals;
+};

@@ -147,7 +147,7 @@ export default function SettingsConfig() {
             id={'settings-min-investment-toggle'}
           />
 
-          <Grid container spacing={7.5} sx={{ mt: -6.5, mb: 3 }}>
+          <Grid container spacing={2.5} sx={{ mt: -1.5, mb: 3 }}>
             {currenciesConfiguredForMin.map((coin) => (
               <Grid item xs={12} sm={6} md={6} lg={3} key={`${coin}-min`}>
                 <Controller
@@ -190,7 +190,7 @@ export default function SettingsConfig() {
             ))}
           </Grid>
 
-          <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <Box sx={{ textAlign: 'right', mt: 10 }}>
             <ZigButton
               disabled={isLoading}
               size='large'

@@ -287,6 +287,8 @@ export default function ProfileConfig() {
                     error={t(errors.description?.message as string, {
                       max: 500,
                     })}
+                    multiline
+                    rows={3}
                     id={'profile_wl-title'}
                     wide
                     placeholder={t('profile.meta-title')}
@@ -397,7 +399,7 @@ export default function ProfileConfig() {
             )}
           />
 
-          <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <Box sx={{ textAlign: 'right', mt: 10 }}>
             <ZigButton
               disabled={isLoading}
               size='large'

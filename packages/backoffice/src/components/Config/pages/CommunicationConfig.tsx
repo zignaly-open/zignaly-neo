@@ -188,7 +188,7 @@ export default function CommunicationConfig() {
             </Grid>
           </Grid>
 
-          <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <Box sx={{ textAlign: 'right', mt: 10 }}>
             <ZigButton
               disabled={isLoading}
               size='large'
