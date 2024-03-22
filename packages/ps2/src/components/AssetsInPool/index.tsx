@@ -89,7 +89,7 @@ const AssetsInPool = ({
             coin={convertedValueCoin}
             shorten={shorten}
             coinProps={priceSx}
-            sx={{ mt: '3px', ...priceSx }}
+            sx={{ mt: '5px', ...priceSx }}
           />
         </Box>
       )}
