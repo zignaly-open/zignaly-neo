@@ -54,7 +54,12 @@ const ServicePercentageInfo: React.FC<{
           <PercentChange
             value={percent}
             id={id && `${id}-pct`}
-            sx={{ fontSize: '18px', mb: '5px', ...percentSx }}
+            sx={{
+              fontSize: '18px',
+              lineHeight: '28px',
+              mb: '4px',
+              ...percentSx,
+            }}
             showSignDoc={+percent * +value < 0}
             showTrophy={+percent >= 100}
           />
