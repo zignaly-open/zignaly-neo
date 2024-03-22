@@ -99,4 +99,4 @@ export { useToast, showZigToast, ToastContainer } from "./hooks/useToast";
 export { fixSearchParams } from "./utils/search";
 
 // utils
-export * from "utils/validations";
+export { checkDecimals } from "utils/validations";
