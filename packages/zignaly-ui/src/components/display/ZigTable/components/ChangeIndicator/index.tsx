@@ -59,13 +59,11 @@ const ChangeIndicator = ({
       ? theme.palette.greenGraph
       : theme.palette.redGraphOrError;
 
+    const hideNegativeSign = type === "graph" && indicatorPostion === "left";
+
     let adjustedValue = shorten
-      ? formatCompactNumber(value, 2)
-      : adjustNumber(
-          bigNumberValue,
-          decimalScale,
-          type === "graph" && indicatorPostion === "left",
-        ).toFixed();
+      ? formatCompactNumber(hideNegativeSign ? Math.abs(+value) : value, 2)
+      : adjustNumber(bigNumberValue, decimalScale, hideNegativeSign).toFixed();
 
     let suffix = type === "only_number" || smallPct ? "" : "%";
     if (shorten) {

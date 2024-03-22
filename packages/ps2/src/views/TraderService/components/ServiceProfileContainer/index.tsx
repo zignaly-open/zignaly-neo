@@ -69,7 +69,6 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                     lineHeight: '24px',
                   }}
                   percentSx={{
-                    lineHeight: '28px',
                     mb: '1px',
                   }}
                   priceLabelSx={{
