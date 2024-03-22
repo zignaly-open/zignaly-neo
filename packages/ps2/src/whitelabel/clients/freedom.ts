@@ -3,6 +3,8 @@ import { Features, WhitelabelOverride } from '../type';
 export default {
   slug: 'freedom',
   name: 'Obsidian Freedom',
+  baseApi: process.env.REACT_APP_BASE_API,
+  baseReferralApi: process.env.REACT_APP_REFERRALS_API,
   domain: 'freedom.obsidiangroup.io',
   zignalySuccessFee: 10,
   title: 'Obsidian Freedom: Exclusive Club for Purpose-Driven Change-Makers',
