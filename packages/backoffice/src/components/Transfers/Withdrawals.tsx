@@ -4,7 +4,7 @@ import {
   PageContainer,
   ZigButton,
   ZigInput,
-  ZigPriceLabel,
+  ZigTablePriceLabel,
   ZigSelect,
   ZigTable,
   ZigTableQueryRef,
@@ -85,7 +85,7 @@ export default function Withdrawals() {
       columnHelper.accessor('amount', {
         header: t('table.amount'),
         cell: ({ row }) => (
-          <ZigPriceLabel
+          <ZigTablePriceLabel
             value={row.original.amount}
             coin={row.original.currency}
           />
@@ -103,7 +103,12 @@ export default function Withdrawals() {
         enableSorting: false,
         header: t('table.transactionId'),
         cell: ({ getValue }) => (
-          <Shorten breakLines text={getValue()} width={210} />
+          <Shorten
+            typographyProps={{ variant: 'body2' }}
+            breakLines
+            text={getValue()}
+            width={210}
+          />
         ),
       }),
       columnHelper.accessor('exposureType', {

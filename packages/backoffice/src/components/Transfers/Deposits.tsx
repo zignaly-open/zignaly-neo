@@ -4,7 +4,7 @@ import {
   PageContainer,
   ZigButton,
   ZigInput,
-  ZigPriceLabel,
+  ZigTablePriceLabel,
   ZigSelect,
   ZigTable,
   ZigTableQueryRef,
@@ -78,7 +78,10 @@ export default function Deposits() {
       columnHelper.accessor('amount', {
         header: t('table.amount'),
         cell: ({ row }) => (
-          <ZigPriceLabel value={row.original.amount} coin={row.original.coin} />
+          <ZigTablePriceLabel
+            value={row.original.amount}
+            coin={row.original.coin}
+          />
         ),
       }),
       columnHelper.accessor('status', {
@@ -94,7 +97,7 @@ export default function Deposits() {
         header: t('table.transactionId'),
         cell: ({ getValue }) => (
           <Shorten
-            typographyProps={{ sx: { minWidth: 150 } }}
+            typographyProps={{ sx: { minWidth: 150 }, variant: 'body2' }}
             breakLines
             text={getValue()}
             width={200}
