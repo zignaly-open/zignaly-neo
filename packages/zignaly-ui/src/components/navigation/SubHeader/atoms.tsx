@@ -15,6 +15,7 @@ import { SubHeaderRoute } from "./types";
 import MenuDropDown from "../MenuDropDown";
 import { NavLink } from "components/display/ZigDropdown/styles";
 import { ZigArrowBottomIcon } from "icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const SubHeaderMenuButton = ({ route }: { route: any }) => {
   const { id, name, routes, isCompactElements, secondaryTitle } = route;
@@ -55,44 +56,30 @@ export const SubHeaderMenuButton = ({ route }: { route: any }) => {
   );
 };
 
-export const SubHeaderMenuItem = ({ route, isSubOption, dense }) => {
+export const SubHeaderOption = ({ route, isSubOption, dense }) => {
   const { name, sideElement, active, id, onClick } = route;
-  console.log(id, dense, active, isSubOption);
+
   return (
-    <ZigMenuItemSubHeader
-      isSubOption={isSubOption}
-      id={id}
-      onClick={onClick}
-      component={isSubOption ? "span" : "li"}
-      dense={dense}
-      // todo: support href and styles
-      // target={option?.target}
-      // customStyle={option.customStyle}
-      // href={href}
+    <Box
+      display="flex"
+      alignItems="center"
+      gap={"5px"}
+      justifyContent={isSubOption ? "space-between" : "center"}
+      flex={1}
+      color={active ? "highlighted" : "neutral300"}
     >
-      <Box
-        display="flex"
-        alignItems="center"
-        gap={"5px"}
-        justifyContent={isSubOption ? "space-between" : "center"}
-        flex={1}
-        color={active ? "highlighted" : "neutral300"}
+      <ZigTypography
+        sx={{
+          fontWeight: 400,
+          color: "inherit",
+        }}
+        variant={"h3"}
       >
-        <ZigTypography
-          sx={{
-            fontWeight: 400,
-            color: "inherit",
-            // color: (theme) =>
-            //   !secondaryTitle ? theme.palette.neutral300 : `${theme.palette.neutral100} !important`,
-          }}
-          variant={"h3"}
-        >
-          {name}
-        </ZigTypography>
-        {sideElement}
-        {isSubOption && !!active && <Check />}
-      </Box>
-    </ZigMenuItemSubHeader>
+        {name}
+      </ZigTypography>
+      {sideElement}
+      {isSubOption && !!active && <Check />}
+    </Box>
   );
 };
 
@@ -115,29 +102,6 @@ export const ServiceListOption: React.FC<{
     >
       {name}
     </NavLinkStyled>
-  );
-  return (
-    <MenuLink onClick={onClick} id={id} isSubOption={!!isSubGroup}>
-      <HeadOption
-        isSubOption={isSubGroup}
-        active={!!active}
-        sx={isCompactElements ? { minHeight: "38px", paddingY: "7px" } : {}}
-      >
-        <Box
-          display="flex"
-          alignItems="center"
-          gap={sideElement && "5px"}
-          justifyContent={isSubGroup ? "space-between" : "center"}
-          flex={1}
-        >
-          <ZigTypography color="inherit" fontWeight="inherit" variant={"h3"}>
-            {name}
-          </ZigTypography>
-          {sideElement}
-          {isSubGroup && !!active && <Check />}
-        </Box>
-      </HeadOption>
-    </MenuLink>
   );
 };
 

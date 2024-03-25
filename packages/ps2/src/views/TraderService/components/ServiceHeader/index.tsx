@@ -29,11 +29,11 @@ function ServiceHeader() {
     (s: TraderService) => s.serviceId === serviceId,
   );
 
-  useEffect(() => {
-    if (menuDropDownRef && menuDropDownRef.current) {
-      menuDropDownRef?.current?.setIsDropDownActive(false);
-    }
-  }, [serviceId]);
+  // useEffect(() => {
+  //   if (menuDropDownRef && menuDropDownRef.current) {
+  //     menuDropDownRef?.current?.setIsDropDownActive(false);
+  //   }
+  // }, [serviceId]);
 
   const options = useMemo(
     () => [
@@ -46,56 +46,56 @@ function ServiceHeader() {
           ?.map((service: TraderService) => ({
             id: `service-management-header__choose-${service?.serviceId}`,
             name: service?.serviceName,
-            path: currentPath.replace(serviceId, service?.serviceId),
+            href: currentPath.replace(serviceId, service?.serviceId),
           }))
+          .map(routeToSubHeaderRoute)
           .concat({
             separator: true,
             id: `service-management-header__create-service`,
             element: <ZigButton>{t('aa')}</ZigButton>,
-          })
-          .map(routeToSubHeaderRoute),
+          }),
       },
       routeToSubHeaderRoute({
         name: t('managements-label'),
-        path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+        href: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
           serviceId,
         }),
         id: `service-management-header__manage-funds`,
       }),
       routeToSubHeaderRoute({
         name: t('dropdown.trade.links.api'),
-        path: generatePath(ROUTE_TRADING_SERVICE_API, {
+        href: generatePath(ROUTE_TRADING_SERVICE_API, {
           serviceId,
         }),
         id: `service-management-header__service-api`,
       }),
       routeToSubHeaderRoute({
         name: t('investors-label'),
-        path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
+        href: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
           serviceId,
         }),
         id: `service-management-header__investors`,
       }),
-      {
+      routeToSubHeaderRoute({
         id: 'service-management-header__choose-option',
         name: t('dropdown.profile.title'),
         routes: [
           {
             name: t('dropdown.profile.links.profile'),
-            path: generatePath(ROUTE_TRADING_SERVICE, {
+            href: generatePath(ROUTE_TRADING_SERVICE, {
               serviceId,
             }),
             id: `service-management-header__service-profile`,
           },
           {
             name: t('dropdown.profile.links.profile-edit'),
-            path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
+            href: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
               serviceId,
             }),
             id: `service-management-header__edit-service`,
           },
         ].map(routeToSubHeaderRoute),
-      },
+      }),
     ],
     [menuDropDownRef, activeService, myServicesList, t, currentPath],
   );

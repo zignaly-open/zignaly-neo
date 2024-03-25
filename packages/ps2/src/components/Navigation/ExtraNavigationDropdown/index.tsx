@@ -51,7 +51,7 @@ const ExtraNavigationDropdown: React.FC = () => {
 
   const separatorElement = {
     separator: true,
-    customStyle: `margin-top: 11px; margin-bottom: 12px;`,
+    sx: `margin-top: 11px; margin-bottom: 12px;user-select: none;`,
   };
 
   const helperElement = !!whitelabel.links?.helpUrl && {

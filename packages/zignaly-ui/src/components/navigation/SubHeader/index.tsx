@@ -1,13 +1,19 @@
 import React, { useRef } from "react";
 import { Layout, Container, ButtonTest, ArrowIcon, Field, ZigMenuItemSubHeader } from "./styles";
 import { MarginContainer } from "../../styled";
-import { RouteDropdown, ServiceListOption, SubHeaderMenuButton, SubHeaderMenuItem } from "./atoms";
+import { RouteDropdown, ServiceListOption, SubHeaderMenuButton, SubHeaderOption } from "./atoms";
 import { SubHeaderDropdown, SubHeaderElement, SubHeaderRoute } from "./types";
 import { SxProps } from "@mui/system";
 import ZigDropdown from "components/display/ZigDropdown";
 import ZigButton from "components/inputs/ZigButton";
 import ZigTypography from "components/display/ZigTypography";
 import { ZigArrowBottomIcon } from "icons";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const optionSx = {
+  padding: "7px 10%",
+  height: "56px",
+};
 
 function SubHeader({
   routes,
@@ -40,13 +46,6 @@ function SubHeader({
                       justifyContent: "center",
                     },
                   }}
-                  // // target={option?.target}
-                  // // customStyle={option.customStyle}
-                  // // as={"span"}
-                  // // href={href}
-                  // // onclick={()}
-                  // // onClick={option.onClick && onClick(option.onClick)}
-                  // isSubOption={false}
                 >
                   <ZigDropdown
                     position={i > routes.length / 2 ? "right" : "left"}
@@ -56,29 +55,47 @@ function SubHeader({
                     menuSx={{
                       maxHeight: "300px",
                     }}
+                    // ZigMenuItemSubHeader styles?
                     options={r.routes.map((rr) => ({
-                      id: rr.id,
-                      element: (
-                        <SubHeaderMenuItem
-                          route={rr}
-                          dense={r.isCompactElements}
-                          isSubOption={true}
-                        />
-                      ),
-                      // todo: handle in ZigDropdown
-                      as: "li",
-                      customStyle: {
-                        padding: 0,
-                        "> span": {
-                          padding: "7px 10%",
-                        },
+                      ...((rr.href || rr.onClick) && {
+                        element: (
+                          <SubHeaderOption
+                            route={rr}
+                            dense={r.isCompactElements}
+                            isSubOption={true}
+                          />
+                        ),
+                        keepHover: true,
+                      }),
+                      sx: {
+                        ...optionSx,
+                        ...(r.isCompactElements && { height: "auto" }),
+                        // padding: "7px 34px"
+                        //     padding: 6px 20px;
                       },
+                      ...rr,
                     }))}
                   />
                 </ZigMenuItemSubHeader>
               );
             } else {
-              return <SubHeaderMenuItem key={r.id} route={r} />;
+              return (
+                <ZigMenuItemSubHeader
+                  id={r.id}
+                  // onClick={option.onClick && onClick(option.onClick)}
+                  onClick={r.onClick}
+                  component={"a"}
+                  href={r.href}
+                  target={r.target}
+                  active={r.active}
+                  sx={{
+                    ...optionSx,
+                    ...r.sx,
+                  }}
+                >
+                  <SubHeaderOption key={r.id} route={r} />
+                </ZigMenuItemSubHeader>
+              );
             }
           })}
         </Container>

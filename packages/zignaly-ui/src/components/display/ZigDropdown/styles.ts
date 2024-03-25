@@ -9,9 +9,6 @@ const withSeparator = (props: WithSeparator & { theme: Theme }) =>
     margin: 6px 35px 6px;
   `;
 
-type WithSeparator = { separator?: boolean };
-type WithCustomStyle = { customStyle?: string };
-
 export const ZigDropdownContainer = styled("div")`
   user-select: none;
   min-width: 245px;
@@ -27,14 +24,22 @@ export const Component = styled("div")`
   outline: inherit;
 `;
 
-export const ComponentWrapper = styled("div")<WithSeparator & WithCustomStyle>`
+export const ZigMenuItem = styled(MenuItem)<{ active: boolean }>`
+  color: ${({ active, theme }) => (active ? theme.palette.highlighted : theme.palette.neutral200)};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 28px;
   padding: 6px 32px;
+  letter-spacing: 0.55px;
+  text-decoration: none;
 
-  ${(props) => props.customStyle || ""};
-  ${withSeparator}
+  ${({ theme }) =>
+    css`
+      &:hover {
+        color: ${theme.palette.neutral000};
+      }
+    `}
 `;
-
-export const ZigMenuItem = styled(MenuItem)``;
 
 export const NavLink = styled("span")<
   {

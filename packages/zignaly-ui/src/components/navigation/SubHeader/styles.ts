@@ -90,9 +90,7 @@ export const ZigMenuItemSubHeader = styled(ZigMenuItem)<{ isSubOption: boolean; 
       }
 
       border-right: 1px dotted ${theme.palette.neutral600};
-    `}
-
-  ${({ dense }) =>
+    `}/* ${({ dense }) =>
     !dense
       ? css`
           height: 56px;
@@ -100,7 +98,7 @@ export const ZigMenuItemSubHeader = styled(ZigMenuItem)<{ isSubOption: boolean; 
         `
       : css`
           padding: 7px 34px;
-        `}
+        `} */
 `;
 
 export const NavLinkStyled = styled(NavLink)<{ isSubOption: boolean }>`

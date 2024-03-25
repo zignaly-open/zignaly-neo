@@ -1,24 +1,25 @@
 {
-    "managements-label": "Manage Funds",
-    "investors-label": "Investors",
-    "coins-label": "Coins",
-    "dropdown": {
-      "manageServices": "Manage Service",
-      "trade": {
-        "title": "Trade",
-        "links": {
-          "positions": "My Positions",
-          "manual": "Manual trading",
-          "signals": "Signals Trading",
-          "api": "API Management"
-        }
-      },
-      "profile": {
-        "title": "Profile",
-        "links": {
-          "profile": "View Profile",
-          "profile-edit": "Edit Profile"
-        }
+  "managements-label": "Manage Funds",
+  "investors-label": "Investors",
+  "coins-label": "Coins",
+  "dropdown": {
+    "manageServices": "Manage Service",
+    "createService": "Create Service",
+    "trade": {
+      "title": "Trade",
+      "links": {
+        "positions": "My Positions",
+        "manual": "Manual trading",
+        "signals": "Signals Trading",
+        "api": "API Management"
+      }
+    },
+    "profile": {
+      "title": "Profile",
+      "links": {
+        "profile": "View Profile",
+        "profile-edit": "Edit Profile"
       }
     }
+  }
 }

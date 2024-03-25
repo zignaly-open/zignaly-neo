@@ -9,11 +9,8 @@ export function useConvertRouteToSubHeaderFormat(): (props: {
 }) => SubHeaderRouteType {
   const navigate = useNavigate();
   const currentPath = useLocation()?.pathname;
-  return ({ name, path, id, sideElement }) => ({
-    name,
-    id,
-    onClick: () => navigate(path),
-    active: currentPath === path,
-    sideElement,
+  return (route) => ({
+    active: route.href && route.href === currentPath,
+    ...route,
   });
 }
