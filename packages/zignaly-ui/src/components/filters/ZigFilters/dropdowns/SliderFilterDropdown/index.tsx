@@ -16,6 +16,7 @@ const SliderFilterDropdown = ({
   minSpace = 65,
   mobile,
   prefixId,
+  position,
 }: SliderFilterDropdownProps) => {
   const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
 
@@ -50,6 +51,7 @@ const SliderFilterDropdown = ({
           <DropdownLabel minSpace={minSpace} label={filter.label} value={displayValue} />
         </DropdownItem>
       )}
+      position={position}
       options={[
         {
           element: (

@@ -154,6 +154,7 @@ const ZigFilters = ({
                     separator={md && (inlineMultiFilters || i < mainFilters.length - 1)}
                     mobile={!md}
                     prefixId={prefixId}
+                    position={i === 0 ? "left" : "right"}
                   />
                 ))}
               {inlineMultiFilters && (

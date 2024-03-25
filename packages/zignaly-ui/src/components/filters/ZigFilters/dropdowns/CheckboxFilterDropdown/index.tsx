@@ -22,6 +22,7 @@ const CheckboxFilterDropdown = ({
   mobile,
   prefixId,
   showFullSingleValue,
+  position,
 }: CheckboxFilterDropdownProps) => {
   const { t } = useTranslation("zignaly-ui", { keyPrefix: "ZigFilters" });
   const stringAll = t("all");
@@ -68,6 +69,7 @@ const CheckboxFilterDropdown = ({
   return (
     <ZigDropdown
       id={`${prefixId}__checkbox-${filter.id}`}
+      position={position}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel

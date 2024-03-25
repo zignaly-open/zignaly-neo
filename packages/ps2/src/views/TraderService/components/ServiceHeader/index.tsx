@@ -48,16 +48,11 @@ function ServiceHeader() {
             name: service?.serviceName,
             path: currentPath.replace(serviceId, service?.serviceId),
           }))
-          // .concat({
-          //   name: 't',
-          //   id: 'aa',
-          //   onClick: () => {
-          //     // navigate(path)
-          //   }
-          //   active: false,
-          //   sideElement,
-          //   a: <ZigButton> {t('service:create.action')}</ZigButton>,
-          // })
+          .concat({
+            separator: true,
+            id: `service-management-header__create-service`,
+            element: <ZigButton>{t('aa')}</ZigButton>,
+          })
           .map(routeToSubHeaderRoute),
       },
       routeToSubHeaderRoute({

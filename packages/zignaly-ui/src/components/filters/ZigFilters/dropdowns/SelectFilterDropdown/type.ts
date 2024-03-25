@@ -7,4 +7,5 @@ export type SelectFilterDropdownProps = {
   resetFilter: () => void;
   mobile: boolean;
   prefixId?: string;
+  position?: "left" | "right";
 };

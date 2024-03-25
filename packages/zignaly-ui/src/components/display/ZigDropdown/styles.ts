@@ -1,7 +1,6 @@
-import styled, { css } from "styled-components";
-import { styledIf } from "utils/styled";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/caret-down.svg";
-import { Theme } from "@mui/system";
+import { styled, Theme, css } from "@mui/system";
+import { MenuItem } from "@mui/material";
 
 const withSeparator = (props: WithSeparator & { theme: Theme }) =>
   props.separator &&
@@ -13,12 +12,12 @@ const withSeparator = (props: WithSeparator & { theme: Theme }) =>
 type WithSeparator = { separator?: boolean };
 type WithCustomStyle = { customStyle?: string };
 
-export const ZigDropdownContainer = styled.div`
+export const ZigDropdownContainer = styled("div")`
   user-select: none;
   min-width: 245px;
 `;
 
-export const Component = styled.div`
+export const Component = styled("div")`
   background: none;
   color: inherit;
   border: none;
@@ -28,14 +27,16 @@ export const Component = styled.div`
   outline: inherit;
 `;
 
-export const ComponentWrapper = styled.div<WithSeparator & WithCustomStyle>`
+export const ComponentWrapper = styled("div")<WithSeparator & WithCustomStyle>`
   padding: 6px 32px;
 
   ${(props) => props.customStyle || ""};
   ${withSeparator}
 `;
 
-export const NavLink = styled.span<
+export const ZigMenuItem = styled(MenuItem)``;
+
+export const NavLink = styled("span")<
   {
     notClickable?: boolean;
     active?: boolean;
@@ -68,28 +69,24 @@ export const NavLink = styled.span<
     !notClickable &&
     css`
       &:hover {
-        background: ${theme.backgrounds.headerMenuItemHover};
+        background: ${theme.palette.backgrounds.headerMenuItemHover};
       }
     `}
 
   ${({ active, theme }) => `
-    ${styledIf(
-      active,
-      `
-      color: ${theme.palette.highlighted};
-    `,
-      `
-
-      &:not([disabled]) {
-        cursor: pointer;
-
-        &:hover {
-          color: ${theme.palette.neutral000};
-        }
+  ${
+    active
+      ? `color: ${theme.palette.highlighted};`
+      : `
+    &:not([disabled]) {
+      cursor: pointer;
+      &:hover {
+        color: ${theme.palette.neutral000};
       }
-    `,
-    )}
-  `}
+    }
+  `
+  }
+`}
 
   ${(props) =>
     props.notClickable &&
@@ -101,7 +98,7 @@ export const NavLink = styled.span<
   ${withSeparator};
 `;
 
-export const ComponentSeparator = styled.div<
+export const ComponentSeparator = styled("div")<
   WithSeparator & {
     customStyle?: string;
   }
@@ -110,7 +107,28 @@ export const ComponentSeparator = styled.div<
   ${(props) => props.customStyle || ""};
 `;
 
-export const NavList = styled.div`
+export const NavList = styled("div")<{ matchAnchorWidth?: boolean }>`
+  display: flex;
+  flex-direction: column;
+
+  /* remove? */
+  ${({ matchAnchorWidth }) =>
+    matchAnchorWidth &&
+    `
+      ${NavLink} {
+        max-width: none;
+      }
+    `}
+
+  > *:first-child {
+    margin-top: 6px;
+  }
+  > *:last-child {
+    margin-bottom: 6px;
+  }
+`;
+
+export const SubNavList = styled("div")`
   display: flex;
   flex-direction: column;
   > *:first-child {
@@ -121,22 +139,11 @@ export const NavList = styled.div`
   }
 `;
 
-export const SubNavList = styled.div`
-  display: flex;
-  flex-direction: column;
-  > *:first-child {
-    margin-top: 6px;
-  }
-  > *:last-child {
-    margin-bottom: 6px;
-  }
-`;
-
-export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
+export const ChildContainer = styled("div")<{ active: boolean } & WithSeparator>`
   ${({ active, theme }) =>
     active &&
     css`
-      background: ${theme.backgrounds.dropdown2ndLevel};
+      background: ${theme.palette.backgrounds.dropdown2ndLevel};
       /* When the menu is expanded, replace bottom margin with padding to fit the background until the bottom */
       margin-bottom: 0 !important;
       padding-bottom: 12px;
@@ -145,7 +152,7 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
   ${withSeparator}
 `;
 
-export const SpaceTaker = styled.span`
+export const SpaceTaker = styled("span")`
   display: flex;
   flex: 1;
 `;

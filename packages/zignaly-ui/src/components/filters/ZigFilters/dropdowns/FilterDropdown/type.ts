@@ -7,4 +7,5 @@ export type FilterDropdownProps = {
   separator: boolean;
   mobile: boolean;
   prefixId?: string;
+  position?: "left" | "right";
 };

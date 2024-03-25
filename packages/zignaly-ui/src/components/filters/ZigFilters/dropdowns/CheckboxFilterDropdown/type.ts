@@ -11,4 +11,5 @@ export type CheckboxFilterDropdownProps = {
    * If one selected value, show full value instead of count.
    */
   showFullSingleValue?: boolean;
+  position?: "left" | "right";
 };

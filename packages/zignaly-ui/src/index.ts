@@ -87,7 +87,6 @@ export { styledIf, withAttrs } from "utils/styled";
 export { MarginContainer, PageContainer } from "./components/styled";
 
 // Navigation
-// TODO: @cwagner22 pls fix/bring to proper shape
 export { default as SubHeader } from "./components/navigation/SubHeader";
 export type { SubHeaderRoute as SubHeaderRouteType } from "./components/navigation/SubHeader";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";

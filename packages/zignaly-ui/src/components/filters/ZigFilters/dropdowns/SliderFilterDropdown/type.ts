@@ -7,4 +7,5 @@ export type SliderFilterDropdownProps = {
   minSpace?: number;
   mobile: boolean;
   prefixId?: string;
+  position?: "left" | "right";
 };

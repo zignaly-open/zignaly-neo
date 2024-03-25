@@ -13,6 +13,7 @@ const SelectFilterDropdown = ({
   mobile,
   resetFilter,
   prefixId,
+  position,
 }: SelectFilterDropdownProps) => {
   const displayValue = useMemo(() => {
     const option = filter.options.find((option) => option.value === filter.value);
@@ -36,6 +37,7 @@ const SelectFilterDropdown = ({
   return (
     <ZigDropdown
       id={`${prefixId}__select-${filter.id}`}
+      position={position}
       component={({ open }) => (
         <DropdownItem active={open}>
           <DropdownLabel minSpace={longestWidth} label={filter.label} value={displayValue} />

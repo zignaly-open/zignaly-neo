@@ -13,8 +13,8 @@ import {
   ComponentSeparator,
   SubNavList,
 } from "./styles";
-import { useTheme } from "styled-components";
 import { Theme } from "@mui/material";
+import { DropdownContent, MenuContent } from "./atoms";
 
 const ZigDropdown: (
   props: ZigDropdownProps,
@@ -24,23 +24,25 @@ const ZigDropdown: (
     id = "",
     component,
     options,
+    position = "right",
     anchorOrigin = {
       vertical: "bottom",
-      horizontal: "right",
+      horizontal: position,
     },
     anchorPosition,
     transformOrigin = {
       vertical: "top",
-      horizontal: "right",
+      horizontal: position,
     },
     disabled,
+    matchAnchorWidth = false,
+    menuSx,
   }: ZigDropdownProps,
   innerRef: React.Ref<ZigDropdownHandle>,
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [childDropdownShow, setChildDropdownShown] = React.useState<null | ZigDropdownOption>(null);
   const isOpen = !!anchorEl;
-  const theme = useTheme() as Theme;
   const handleToggle = (event: React.MouseEvent<HTMLElement>) =>
     !disabled ? setAnchorEl((v) => (v ? null : event.currentTarget)) : () => {};
 
@@ -91,15 +93,20 @@ const ZigDropdown: (
           anchorEl={anchorEl}
           open={isOpen}
           disableScrollLock={true}
-          PaperProps={{
-            sx: {
-              minWidth: "220px",
-              backgroundColor: theme.palette.neutral800,
-              whiteSpace: "nowrap",
-              color: "#fff",
-              boxShadow: "0 4px 6px -2px #00000061",
-              borderRadius: "4px 0 4px 4px",
-              border: "none",
+          slotProps={{
+            paper: {
+              sx: {
+                width: matchAnchorWidth ? anchorEl?.offsetWidth : "auto",
+                minWidth: "220px",
+                backgroundColor: "neutral800",
+                color: "#fff",
+                boxShadow: "0 4px 6px -2px #00000061",
+                borderRadius: `${position === "right" ? 4 : 0}px ${
+                  position === "right" ? 0 : 4
+                } 4px 4px`,
+                border: "none",
+                ...menuSx,
+              },
             },
           }}
           onClose={handleClose}
@@ -107,105 +114,14 @@ const ZigDropdown: (
           transformOrigin={transformOrigin}
           anchorOrigin={anchorOrigin}
         >
-          <ZigDropdownContainer id={id}>
-            <NavList>
-              {options.map((entry, i) => {
-                // this is a design requirement
-                if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
-
-                const key =
-                  (entry && "label" in entry && typeof entry.label === "string" && entry.label) ||
-                  entry.id ||
-                  Math.random().toString();
-
-                if ("separator" in entry) {
-                  return (
-                    <ComponentSeparator
-                      id={entry.id || `dropdown-element-${i}`}
-                      separator={entry.separator}
-                      customStyle={entry.customStyle}
-                      key={key}
-                    />
-                  );
-                }
-
-                const option = entry as ZigDropdownOption;
-
-                if (option.element)
-                  return (
-                    <ComponentWrapper
-                      id={option.id || `dropdown-element-${i}`}
-                      customStyle={option.customStyle}
-                      key={key}
-                    >
-                      {option.element}
-                    </ComponentWrapper>
-                  );
-
-                if (option.href || option.onClick)
-                  return (
-                    <NavLink
-                      id={option.id}
-                      key={key}
-                      target={option?.target}
-                      active={option?.active}
-                      customStyle={option.customStyle}
-                      as={"a"}
-                      href={option.href}
-                      onClick={option.onClick && onClick(option.onClick)}
-                    >
-                      {option.label}
-                    </NavLink>
-                  );
-
-                if (option.children)
-                  return (
-                    <ChildContainer key={key} active={childDropdownShow === option}>
-                      <NavLink
-                        active={option?.active}
-                        id={option.id}
-                        customStyle={option.customStyle}
-                        notClickable={!option.children?.length}
-                        onClick={() =>
-                          option.children?.length &&
-                          setChildDropdownShown((v) => (v ? null : option))
-                        }
-                      >
-                        {option.label}
-                        <SpaceTaker />
-
-                        {!!option.children?.length && (
-                          <ArrowBottomIconStyled
-                            color={theme.palette.neutral300}
-                            rotated={childDropdownShow === option}
-                            width={"10.5px"}
-                          />
-                        )}
-                      </NavLink>
-                      {childDropdownShow === option && (
-                        <SubNavList>
-                          {option.children.map((c, index) => (
-                            <NavLink
-                              id={c.id}
-                              active={c?.active || undefined}
-                              key={
-                                "--sub-" +
-                                key +
-                                "--" +
-                                (typeof c.label === "string" ? c.label : `-child-${index}`)
-                              }
-                              onClick={onClick(c.onClick!)}
-                            >
-                              {c.label}
-                            </NavLink>
-                          ))}
-                        </SubNavList>
-                      )}
-                    </ChildContainer>
-                  );
-              })}
-            </NavList>
-          </ZigDropdownContainer>
+          <MenuContent
+            id={id}
+            options={options}
+            setChildDropdownShown={setChildDropdownShown}
+            subDropdown={childDropdownShow}
+            onClick={onClick}
+            matchAnchorWidth={matchAnchorWidth}
+          />
         </Popover>
       )}
     </>

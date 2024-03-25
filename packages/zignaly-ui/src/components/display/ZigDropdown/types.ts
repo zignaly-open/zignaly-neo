@@ -29,6 +29,8 @@ export type ZigDropdownProps = {
   anchorPosition?: PopoverPosition;
   transformOrigin?: PopoverOrigin;
   disabled?: boolean;
+  position?: "left" | "right";
+  menuSx?: SxProps;
 };
 
 export type ZigDropdownHandle = {

@@ -13,6 +13,7 @@ const FilterDropdown = ({
   separator,
   mobile,
   prefixId,
+  position,
 }: FilterDropdownProps) => {
   const Component = useMemo(() => {
     if (filter.type === "slider") {
@@ -35,6 +36,7 @@ const FilterDropdown = ({
         filter={filter as never}
         onChange={onChange}
         prefixId={prefixId}
+        position={position}
       />
       {separator && <VertDivider orientation="vertical" flexItem />}
     </FilterDropdownWrapper>
