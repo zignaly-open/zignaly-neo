@@ -18,5 +18,8 @@
     "deposits": "Deposits",
     "users": "Users"
   },
-  "no-data": "No data to show"
+  "no-data": "No data to show",
+  "error": {
+    "invalid-value": "Invalid value"
+  }
 }
