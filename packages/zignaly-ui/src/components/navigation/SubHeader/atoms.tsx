@@ -73,7 +73,7 @@ export const SubHeaderOption = ({ route, isSubOption, dense }) => {
       gap={"5px"}
       justifyContent={isSubOption ? "space-between" : "center"}
       flex={1}
-      color={active ? "highlighted" : "neutral300"}
+      color={active ? "highlighted" : "inherit"}
     >
       <ZigTypography
         sx={{
@@ -81,7 +81,9 @@ export const SubHeaderOption = ({ route, isSubOption, dense }) => {
           color: "inherit",
         }}
         variant={"h3"}
-        width={1}
+        display="flex"
+        flex={1}
+        justifyContent={isSubOption ? "flex-start" : "center"}
       >
         {label}
       </ZigTypography>

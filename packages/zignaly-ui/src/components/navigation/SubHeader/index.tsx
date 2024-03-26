@@ -11,7 +11,7 @@ import { ZigArrowBottomIcon } from "icons";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const optionSx = {
-  padding: "7px 10%",
+  padding: "6px 28px",
   height: "56px",
 };
 
@@ -40,7 +40,7 @@ function SubHeader({
                   sx={{
                     padding: 0,
                     "> div": {
-                      padding: "6px 28px",
+                      ...optionSx,
                       display: "flex",
                       flex: 1,
                       justifyContent: "center",

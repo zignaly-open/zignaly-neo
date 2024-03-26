@@ -18,6 +18,15 @@ export const Layout = styled("div")`
   left: 0;
   ${secondaryBackground};
   z-index: 50;
+
+  .MuiMenuItem-root {
+    transition: background-color 0.2s;
+    &:not([disabled]) {
+      &:hover {
+        color: ${({ theme }) => theme.palette.neutral100};
+      }
+    }
+  }
 `;
 
 export const Container = styled(Box)`
