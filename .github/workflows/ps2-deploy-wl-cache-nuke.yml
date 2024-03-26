@@ -1,0 +1,50 @@
+name: PS2 WL Cache Nuke
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+
+jobs:
+  invalidate:
+    name: PS2 Invalidate Cloudfront nd Cloudflare
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deploy-env }}
+    env:
+      HAS_CLOUDFLARE: ${{ secrets.CF_ZONE != '' }}
+      HAS_CLOUDFLARE_CDN: ${{ secrets.CF_ZONE_CDN != '' }}
+      HAS_CLOUDFRONT: ${{ vars.CDN_URL != '' }}
+    steps:
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        if: ${{ env.HAS_CLOUDFRONT == 'true' }}
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+          PATHS: '/'
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      - name: Invalidate Cloudflare
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN }}
+      - name: Invalidate Cloudflare for the CDN
+        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.HAS_CLOUDFLARE_CDN == 'true') }}
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE_CDN }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN_CDN }}
+      - name: Wait because Adrian said so
+        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.HAS_CLOUDFLARE == 'true') }}
+        run: sleep 180s
+        shell: bash
+      - name: Invalidate Cloudflare AGAIN because 2 is better than 1
+        if: ${{ (env.HAS_CLOUDFRONT == 'true') && (env.HAS_CLOUDFLARE_CDN == 'true') }}
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE_CDN }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN_CDN }}
+

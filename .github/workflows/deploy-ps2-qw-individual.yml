@@ -1,8 +1,8 @@
-name: PS2 Staging deploy
+name: PS2 QW Individual deploy
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'release-ps2_qw-*'
 
 jobs:
   deploy:
@@ -10,4 +10,5 @@ jobs:
     uses: ./.github/workflows/ps2-deploy-wl-4-in-1.yml
     secrets: inherit
     with:
-      deploy-env: wl-staging
+      deploy-env: quantwise-prod
+

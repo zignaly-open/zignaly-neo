@@ -18,7 +18,7 @@ import { whitelabel } from '../whitelabel';
 
 const mutex = new Mutex();
 
-const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
+const baseQuery = (baseUrl = whitelabel.baseApi) =>
   fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers, { getState, endpoint }) => {

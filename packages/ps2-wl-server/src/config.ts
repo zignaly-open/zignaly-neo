@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CACHE_TTL, BASE_API } from './constants';
+import { CACHE_TTL, PS2_BASE_API, PS2_REFERRAL_API } from './constants';
 // ok here's the problem
 // we want the types to be here in order to validate ourselves
 // but we deploy only this module. Like, we literally pretend this is standalone.
@@ -96,6 +96,8 @@ const mapBackendConfigToFrontendConfig = ({
 }: WhitelabelBackendConfig): WhitelabelFrontendConfig =>
   ({
     ...config,
+    baseApi: PS2_BASE_API,
+    baseReferralApi: PS2_REFERRAL_API,
     locales,
     logo: logo + '/public',
     favicon: favicon + '/public',
@@ -130,7 +132,7 @@ export const getWhitelabelConfig = async (
 ): Promise<WhitelabelFrontendConfig | null> => {
   const cached = getCacheValue(domain);
   if (cached) return cached;
-  const url = `${BASE_API}wl/config?domain=${domain}`;
+  const url = `${PS2_BASE_API}wl/config?domain=${domain}`;
   if (/^[\d.:]+$/.test(domain)) {
     // this is a keepalive check
     // yes I am too lazy to write a full ip+port regex

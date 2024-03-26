@@ -2,6 +2,8 @@ import { Features, WhitelabelOverride } from '../type';
 
 export default {
   slug: 'z01',
+  baseApi: process.env.REACT_APP_BASE_API,
+  baseReferralApi: process.env.REACT_APP_REFERRALS_API,
   name: 'Zignaly',
   domain: 'app.zignaly.com',
   zignalySuccessFee: 5,

@@ -1,0 +1,40 @@
+name: PS2 Deploy 4-in-1
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: PS2 Test Build
+    uses: ./.github/workflows/ps2-deploy-wl-build.yml
+    secrets: inherit
+    with:
+      deploy-env: ${{ inputs.deploy-env }}
+  cdn:
+    name: PS2 Test CDN Deploy
+    uses: ./.github/workflows/ps2-deploy-wl-cdn.yml
+    needs:
+      - build
+    secrets: inherit
+    with:
+      deploy-env: ${{ inputs.deploy-env }}
+  codedeploy:
+    name: PS2 Test Codedeploy Deploy
+    uses: ./.github/workflows/ps2-deploy-wl-codedeploy.yml
+    needs:
+      - build
+    secrets: inherit
+    with:
+      deploy-env: ${{ inputs.deploy-env }}
+  cache:
+    name: PS2 Test Cache clear
+    needs:
+      - cdn
+      - codedeploy
+    uses: ./.github/workflows/ps2-deploy-wl-cache-nuke.yml
+    secrets: inherit
+    with:
+      deploy-env: ${{ inputs.deploy-env }}

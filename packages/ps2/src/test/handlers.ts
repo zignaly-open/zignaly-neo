@@ -6,10 +6,11 @@ import {
   loginResponseMockWrongCredentials,
 } from './mocks/login';
 import { LoginPayload } from '../apis/user/types';
+import { whitelabel } from '../whitelabel';
 
 export const handlers = [
   rest.post<LoginPayload>(
-    process.env.REACT_APP_BASE_API + '/login',
+    whitelabel.baseApi + '/login',
     async (req, res, ctx) => {
       const { email, password } = (await req.json()) as LoginPayload;
       if (email === loginMockEmail && password === loginMockPassword) {

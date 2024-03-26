@@ -1,0 +1,57 @@
+name: PS2 WL Server Deploy
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: PS2 WL Server Deploy
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deploy-env }}
+    steps:
+      - name: Prepare the structure
+        run: mkdir -p ./packages/ps2-wl-server
+      - name: Restore server build
+        uses: actions/cache/restore@v4
+        with:
+          path: ./packages/ps2-wl-server
+          key: build-server-${{ github.run_id }}
+          # Maybe return this - done to ship multiple envs at once
+          # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
+      - name: Configure deployment folder
+        run: |
+          sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/appspec.yml
+          sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/ApplicationStart.sh
+          sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/BeforeInstall.sh
+          sed -i -e 's/{directory}/${{ inputs.deploy-env }}/g' packages/ps2-wl-server/scripts/AfterInstall.sh
+      - name: Create PS2 WL Server .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_PS2_BASE_API: ${{ vars.PS2_BASE_API }}
+          envkey_PS2_REFERRAL_API: ${{ vars.PS2_REFERRAL_API }}
+          envkey_WL_CACHE_TTL_OVERRIDE: ${{ vars.PS2_WL_CACHE_TTL_OVERRIDE }}
+          envkey_WL_SLACK_LOG_THROTTLE: ${{ vars.PS2_WL_SLACK_LOG_THROTTLE }}
+          envkey_PS2_ENV: ${{ inputs.deploy-env }}
+          envkey_SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          directory: packages/ps2-wl-server
+          file_name: .env
+      - name: Add a workaround for type imports
+        run: echo "//@ts-nocheck"$'\n'"$(cat ./packages/ps2-wl-server/src/config.ts)" > ./packages/ps2-wl-server/src/config.ts
+      - name: AWS CodeDeploy
+        uses: sourcetoad/aws-codedeploy-action@v1
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_region: ${{ secrets.CODEPLOY_REGION }}
+          codedeploy_name:  ${{ secrets.CODEDEPLOY_APP || 'zignaly' }}
+          codedeploy_group: ${{ secrets.CODEDEPLOY_GROUP }}
+          codedeploy_register_only: false
+          s3_bucket: ${{ secrets.CODEDEPLOY_BUCKET }}
+          s3_folder: ${{ inputs.deploy-env }}
+          max_polling_iterations: 60
+          excluded_files: '.git/* *node_modules/*'
+          directory: ./packages/ps2-wl-server

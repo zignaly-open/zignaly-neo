@@ -1,0 +1,15 @@
+name: PS2 Staging Backoffice deploy
+on:
+  push:
+    branches:
+       - never
+# TODO: return when we have a separatre bucket
+#      - master
+
+jobs:
+  deploy:
+    name: PS2 Staging Backoffice deploy
+    uses: ./.github/workflows/ps2-deploy-backoffice.yml
+    secrets: inherit
+    with:
+      deploy-env: bo-staging

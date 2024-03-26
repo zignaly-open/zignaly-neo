@@ -1,0 +1,81 @@
+name: PS2 WL Build
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: PS2 WL Build
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deploy-env }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create PS2 .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          # env-specific
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ vars.ENABLE_TRACKING }}
+          envkey_REACT_APP_GA_ID: ${{ vars.GA_ID }}
+          envkey_REACT_APP_NO_INDEX: ${{ vars.NO_INDEX }}
+          envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
+
+          # still used by the tracker
+          # TODO: remove
+          envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
+
+          #constant
+          envkey_EXTEND_ESLINT: true
+          envkey_DISABLE_ESLINT_PLUGIN: true
+          envkey_ESLINT_NO_DEV_ERRORS: true
+
+          # non-env-specific
+          envkey_REACT_APP_SENTRY_DNS: ${{ vars.SENTRY_DNS }}
+          envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
+          envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ vars.LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_IPGEOLOCATION_API_KEY: ${{ vars.IPGEOLOCATION_API_KEY }}
+
+          envkey_PUBLIC_URL: ${{ vars.CDN_URL }}
+
+          directory: packages/ps2
+          file_name: .env
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.15.1' # lol we actually use nodes 16, 18 and 20
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna@6.6.2
+      - name: Restore Lerna modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Bootstrap packages
+        run: lerna bootstrap --scope=@zignaly-open/ps2
+      - name: Build client + wl
+        run: yarn ps2-wl-build
+      - name: TS check
+        run: cd packages/ps2-wl-server && tsc --noemit
+      - name: Save client build
+        uses: actions/cache/save@v4
+        env:
+          cache-name: cache-ps2-cdn-build
+        with:
+          path: ./packages/ps2/build
+          key: build-server-${{ github.run_id }}
+          # Maybe return this - done to ship multiple envs at once
+          # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}
+      - name: Save server build
+        uses: actions/cache/save@v4
+        env:
+          cache-name: cache-ps2-server-build
+        with:
+          path: ./packages/ps2-wl-server
+          key: build-server-${{ github.run_id }}
+          # Maybe return this - done to ship multiple envs at once
+          # key: build-server-${{ github.run_id }}-${{ inputs.deploy-env }}

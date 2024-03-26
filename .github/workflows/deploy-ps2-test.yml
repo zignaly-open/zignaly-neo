@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - test
+#      - feat/split-job-deploy
 
 jobs:
   deploy:
-    name: PS2 Test deploy
-    uses: ./.github/workflows/ps2-deploy.yml
+    name: PS2 Test Build
+    uses: ./.github/workflows/ps2-deploy-wl-4-in-1.yml
     secrets: inherit
     with:
       deploy-env: test
+

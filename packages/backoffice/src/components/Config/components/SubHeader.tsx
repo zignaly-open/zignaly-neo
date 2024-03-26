@@ -11,7 +11,7 @@ import {
   ROUTE_CONFIG_PROFILE,
   ROUTE_CONFIG_COMMUNICATION,
   ROUTE_CONFIG_SETTINGS,
-  ROUTE_CONFIG_THEME,
+  // ROUTE_CONFIG_THEME,
 } from '../../../routes';
 import { useUserInfoQuery } from '../../../apis/session/api';
 
@@ -54,11 +54,11 @@ function WhitelabelConfigHeader() {
           path: ROUTE_CONFIG_SETTINGS,
           id: `settings__edit-password`,
         },
-        {
-          name: t('navigation.theme-config'),
-          path: ROUTE_CONFIG_THEME,
-          id: `settings__edit-password`,
-        },
+        // {
+        //   name: t('navigation.theme-config'),
+        //   path: ROUTE_CONFIG_THEME,
+        //   id: `settings__edit-password`,
+        // },
       ].map(({ path, ...x }) => ({
         ...x,
         onClick: () => navigate(generatePath(path, { wl: activeWl })),
