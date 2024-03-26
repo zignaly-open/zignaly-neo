@@ -6,4 +6,5 @@ export type ZigAlertMessageProps = {
   warning?: boolean;
   id?: string;
   variant?: Variant;
+  size?: "small" | "normal";
 };
