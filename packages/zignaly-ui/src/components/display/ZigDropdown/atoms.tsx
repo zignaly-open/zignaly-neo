@@ -60,10 +60,10 @@ export const MenuOption = ({
     if (option.children) {
       return (
         <ChildContainer active={subDropdown === option}>
-          <NavLink
-            active={option?.active}
+          <ZigMenuItem
+            active={option.active}
             id={option.id}
-            customStyle={option.customStyle}
+            sx={option.sx}
             notClickable={!option.children?.length}
             onClick={() =>
               option.children?.length && setChildDropdownShown((v) => (v ? null : option))
@@ -73,13 +73,9 @@ export const MenuOption = ({
             <SpaceTaker />
 
             {!!option.children?.length && (
-              <ArrowBottomIconStyled
-                style={{ color: "neutral300" }}
-                rotated={subDropdown === option}
-                width={"10.5px"}
-              />
+              <ArrowBottomIconStyled rotated={subDropdown === option} />
             )}
-          </NavLink>
+          </ZigMenuItem>
           {subDropdown === option && (
             <SubNavList>
               {option.children.map((c, index) => (

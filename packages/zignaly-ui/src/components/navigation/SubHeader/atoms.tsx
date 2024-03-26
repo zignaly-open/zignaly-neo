@@ -7,6 +7,7 @@ import {
   MenuLink,
   NavLinkStyled,
   ZigMenuItemSubHeader,
+  ZigArrowBottomIconStyled,
 } from "./styles";
 import { Check } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
@@ -17,9 +18,11 @@ import { NavLink } from "components/display/ZigDropdown/styles";
 import { ZigArrowBottomIcon } from "icons";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const SubHeaderMenuButton = ({ route, sx }: { route: any }) => {
+export const SubHeaderMenuButton = ({ route, sx, open }: { route: any }) => {
   const { id, label, routes, isCompactElements, secondaryTitle } = route;
   const active = routes.some((x) => x.active);
+  const theme = useTheme();
+
   return (
     <Box
       display="flex"
@@ -46,8 +49,6 @@ export const SubHeaderMenuButton = ({ route, sx }: { route: any }) => {
           sx={{
             fontWeight: 400,
             color: !secondaryTitle ? (active ? "highlighted" : "neutral300") : "neutral100",
-            // color: (theme) =>
-            //   !secondaryTitle ? theme.palette.neutral300 : `${theme.palette.neutral100} !important`,
           }}
           fontWeight={400}
           variant={"h3"}
@@ -56,9 +57,7 @@ export const SubHeaderMenuButton = ({ route, sx }: { route: any }) => {
           {label}
         </ZigTypography>
       </Box>
-      <ArrowIcon>
-        <ZigArrowBottomIcon />
-      </ArrowIcon>
+      <ZigArrowBottomIconStyled rotate={open} />
     </Box>
   );
 };

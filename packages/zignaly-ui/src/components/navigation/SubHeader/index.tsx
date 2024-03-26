@@ -51,7 +51,7 @@ function SubHeader({
                   <ZigDropdown
                     position={i > routes.length / 2 ? "right" : "left"}
                     matchAnchorWidth={true}
-                    component={({ open }) => <SubHeaderMenuButton route={r} />}
+                    component={({ open }) => <SubHeaderMenuButton route={r} open={open} />}
                     id={r.id}
                     menuSx={{
                       maxHeight: "300px",

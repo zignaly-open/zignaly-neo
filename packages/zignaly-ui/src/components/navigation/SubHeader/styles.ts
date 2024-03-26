@@ -2,6 +2,7 @@ import { styled } from "@mui/material";
 import { Box, Theme, css } from "@mui/system";
 import { lighten } from "@mui/material/styles";
 import { NavLink, ZigMenuItem } from "components/display/ZigDropdown/styles";
+import { ZigArrowBottomIcon } from "icons";
 
 // FIXME
 const secondaryBackground = ({ theme }: { theme: Theme }) => `
@@ -155,19 +156,12 @@ export const Field = styled("div")`
   }
 `;
 
-export const ArrowIcon = styled("div")`
+export const ZigArrowBottomIconStyled = styled(ZigArrowBottomIcon)<{ rotate?: boolean }>`
   transition: all 0.15s linear;
-  transform-origin: center;
-  width: 28px;
-  height: 28px;
-
-  svg {
-    ${(props: any) => `
-      fill: ${props.theme.palette.neutral300};
-    `}
-    width: 100%;
-    height: 100%;
-  }
+  font-size: 22px;
+  min-width: 1em;
+  fill: ${({ theme }) => theme.palette.neutral300};
+  transform: rotate(${(props) => (props.rotate ? "180deg" : "0deg")});
 `;
 
 export const ButtonTest = styled("div")`
@@ -194,7 +188,7 @@ export const ButtonTest = styled("div")`
       box-shadow: 1px 0 ${theme.palette.backgrounds.secondaryBackground}, -1px 0 ${theme.palette.backgrounds.secondaryBackground};
       border-color: transparent !important;
 
-      svg, ${ArrowIcon} {
+      svgg, ${ZigArrowBottomIconStyled} {
       transform: rotate(-180deg);
       }
     `

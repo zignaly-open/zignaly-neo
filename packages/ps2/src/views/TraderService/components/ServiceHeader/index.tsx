@@ -42,7 +42,7 @@ function ServiceHeader() {
         label: activeService?.serviceName,
         secondaryTitle: t('dropdown.manageServices'),
         isCompactElements: true,
-        // sx: { minWidth: '300px' },
+        sx: { minWidth: '300px' },
         routes: myServicesList
           ?.map((service: TraderService) => ({
             id: `service-management-header__choose-${service?.serviceId}`,

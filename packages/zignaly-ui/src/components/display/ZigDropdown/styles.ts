@@ -1,6 +1,7 @@
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/caret-down.svg";
 import { styled, Theme, css } from "@mui/system";
 import { MenuItem } from "@mui/material";
+import { ZigArrowBottomIcon } from "icons";
 
 const withSeparator = (props: WithSeparator & { theme: Theme }) =>
   props.separator &&
@@ -169,8 +170,6 @@ export const ChildContainer = styled("div")<{ active: boolean } & WithSeparator>
       margin-bottom: 0 !important;
       padding-bottom: 12px;
     `}
-
-  ${withSeparator}
 `;
 
 export const SpaceTaker = styled("span")`
@@ -178,7 +177,9 @@ export const SpaceTaker = styled("span")`
   flex: 1;
 `;
 
-export const ArrowBottomIconStyled = styled(ArrowBottomIcon)<{ rotated?: boolean }>`
+export const ArrowBottomIconStyled = styled(ZigArrowBottomIcon)<{ rotated?: boolean }>`
   transition: 0.15s linear;
   transform: rotate(${(props) => (props.rotated ? "180deg" : "0deg")});
+  fill: ${({ theme }) => theme.palette.neutral300};
+  font-size: 20px;
 `;
