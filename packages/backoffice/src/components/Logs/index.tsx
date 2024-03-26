@@ -26,8 +26,12 @@ const initialFilter: LogFilterType = {
   action: '',
 };
 
-export default function Withdrawals() {
-  const { t } = useTranslation('logs');
+export default function Logs() {
+  const { t } = useTranslation(['logs', 'common']);
+
+  const [errorInputUserId, setErrorInputUserId] = useState<string>('');
+  const [errorInputAgentId, setErrorInputAgentId] = useState<string>('');
+
   const actionOptions = useLogActionOptions();
   const [filters, setFilters] = useState<LogFilterType>(initialFilter);
   const [filtersSubmitted, setFiltersSubmitted] =
@@ -95,18 +99,22 @@ export default function Withdrawals() {
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.userId}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, userId: e.target.value }))
-          }
+          error={errorInputUserId}
+          onChange={(e) => {
+            setErrorInputUserId('');
+            setFilters((old) => ({ ...old, userId: e.target.value }));
+          }}
         />
         <ZigInput
           size={'small'}
           label={t('table.agentId')}
           placeholder={t('table.agentId')}
           value={filters.agentId}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, agentId: e.target.value }))
-          }
+          error={errorInputAgentId}
+          onChange={(e) => {
+            setErrorInputAgentId('');
+            setFilters((old) => ({ ...old, agentId: e.target.value }));
+          }}
         />
         <ZigInput
           size={'small'}
@@ -126,6 +134,20 @@ export default function Withdrawals() {
         />
         <FilterButtons
           onClick={() => {
+            if (
+              !filters.userId.match(/^[0-9a-fA-F]{24}$/) &&
+              filters.userId !== ''
+            ) {
+              setErrorInputUserId(t('error.invalid-value'));
+              return;
+            }
+            if (
+              !filters.agentId.match(/^[0-9a-fA-F]{24}$/) &&
+              filters.agentId !== ''
+            ) {
+              setErrorInputAgentId(t('error.invalid-value'));
+              return;
+            }
             if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
             else setFiltersSubmitted(filters);
           }}

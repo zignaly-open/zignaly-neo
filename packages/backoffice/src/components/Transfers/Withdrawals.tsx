@@ -40,7 +40,9 @@ const initialFilter: TransferFilterType = {
 };
 
 export default function Withdrawals() {
-  const { t } = useTranslation('transfers');
+  const { t } = useTranslation(['transfers', 'common']);
+
+  const [errorInputId, setErrorInputId] = useState<string>('');
 
   const [filters, setFilters] = useState<TransferFilterType>(initialFilter);
   const [filtersSubmitted, setFiltersSubmitted] =
@@ -202,9 +204,11 @@ export default function Withdrawals() {
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.userId}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, userId: e.target.value }))
-          }
+          onChange={(e) => {
+            setErrorInputId('');
+            setFilters((old) => ({ ...old, userId: e.target.value }));
+          }}
+          error={errorInputId}
         />
         <Box mt={'-2px'}>
           <ZigTypography fontSize={'13px'} lineHeight={'20px'}>
@@ -252,6 +256,13 @@ export default function Withdrawals() {
         />
         <FilterButtons
           onClick={() => {
+            if (
+              !filters.userId.match(/^[0-9a-fA-F]{24}$/) &&
+              filters.userId !== ''
+            ) {
+              setErrorInputId(t('error.invalid-value'));
+              return;
+            }
             if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
             else setFiltersSubmitted(filters);
           }}

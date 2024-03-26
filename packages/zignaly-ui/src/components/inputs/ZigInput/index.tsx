@@ -53,7 +53,9 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           error={!!error}
           helperText={
             typeof error === "string" && error !== ""
-              ? error && <ErrorMessage text={error} id={id && `${id}-error-message`} />
+              ? error && (
+                  <ErrorMessage size={"small"} text={error} id={id && `${id}-error-message`} />
+                )
               : helperText
           }
           type={sensitive ? (!isShown ? "password" : "text") : props.type}

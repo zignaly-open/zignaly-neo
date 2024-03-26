@@ -15,10 +15,11 @@ const FilterButtons: React.FC<{ onClick: () => void; onClear: () => void }> = ({
     <Box
       sx={{
         flex: 0,
-        alignSelf: 'flex-end',
         flexDirection: 'row',
         display: 'flex',
         gap: 2,
+        maxHeight: '36px',
+        mt: '25px',
       }}
     >
       <ZigButton size='medium' onClick={onClick} startIcon={<SearchIcon />}>

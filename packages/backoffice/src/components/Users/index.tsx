@@ -38,8 +38,9 @@ const initialFilter: UserFilterType = {
 };
 
 export default function Users() {
-  const { t } = useTranslation('users');
+  const { t } = useTranslation(['users', 'common']);
   const [filters, setFilters] = useState<UserFilterType>(initialFilter);
+  const [errorInputId, setErrorInputId] = useState<string>('');
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<UserFilterType>(filters);
 
@@ -227,12 +228,14 @@ export default function Users() {
       >
         <ZigInput
           size={'small'}
+          error={errorInputId}
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.id}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, id: e.target.value }))
-          }
+          onChange={(e) => {
+            setErrorInputId('');
+            setFilters((old) => ({ ...old, id: e.target.value }));
+          }}
         />
         <ZigInput
           size={'small'}
@@ -263,6 +266,10 @@ export default function Users() {
         />
         <FilterButtons
           onClick={() => {
+            if (!filters.id.match(/^[0-9a-fA-F]{24}$/) && filters.id !== '') {
+              setErrorInputId(t('error.invalid-value'));
+              return;
+            }
             if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
             else setFiltersSubmitted(filters);
           }}
