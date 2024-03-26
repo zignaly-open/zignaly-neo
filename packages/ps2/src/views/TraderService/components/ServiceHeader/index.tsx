@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SubHeader, ZigButton } from '@zignaly-open/ui';
+import { SubHeader, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
   useIsServiceOwner,
   useTraderServices,
@@ -13,6 +13,7 @@ import {
   ROUTE_TRADING_SERVICE_INVESTORS,
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_EDIT,
+  ROUTE_BECOME_TRADER,
 } from '../../../../routes';
 import { useConvertRouteToSubHeaderFormat } from './util';
 
@@ -34,43 +35,62 @@ function ServiceHeader() {
   //     menuDropDownRef?.current?.setIsDropDownActive(false);
   //   }
   // }, [serviceId]);
-
   const options = useMemo(
     () => [
       {
         id: 'service-management-header__choose-service',
-        name: activeService?.serviceName,
+        label: activeService?.serviceName,
         secondaryTitle: t('dropdown.manageServices'),
         isCompactElements: true,
+        // sx: { minWidth: '300px' },
         routes: myServicesList
           ?.map((service: TraderService) => ({
             id: `service-management-header__choose-${service?.serviceId}`,
-            name: service?.serviceName,
+            label: service?.serviceName,
             href: currentPath.replace(serviceId, service?.serviceId),
           }))
           .map(routeToSubHeaderRoute)
           .concat({
             separator: true,
             id: `service-management-header__create-service`,
-            element: <ZigButton>{t('aa')}</ZigButton>,
+            // element: (
+            //   <ZigButton variant='text'>
+            //     {t('dropdown.createService')}
+            //   </ZigButton>
+            // ),
+            label: (
+              <ZigTypography
+                component={'p'}
+                sx={{
+                  textAlign: 'center',
+                  p: '4px 9px 3px',
+                  fontSize: '14px',
+                  width: '100%',
+                }}
+                color={'links'}
+              >
+                {t('dropdown.createService')}
+              </ZigTypography>
+            ),
+            href: generatePath(ROUTE_BECOME_TRADER),
           }),
       },
       routeToSubHeaderRoute({
-        name: t('managements-label'),
+        label: t('managements-label'),
         href: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
           serviceId,
         }),
         id: `service-management-header__manage-funds`,
       }),
       routeToSubHeaderRoute({
-        name: t('dropdown.trade.links.api'),
+        label: t('dropdown.trade.links.api'),
         href: generatePath(ROUTE_TRADING_SERVICE_API, {
           serviceId,
         }),
         id: `service-management-header__service-api`,
       }),
       routeToSubHeaderRoute({
-        name: t('investors-label'),
+        label: t('investors-label'),
         href: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
           serviceId,
         }),
@@ -78,17 +98,17 @@ function ServiceHeader() {
       }),
       routeToSubHeaderRoute({
         id: 'service-management-header__choose-option',
-        name: t('dropdown.profile.title'),
+        label: t('dropdown.profile.title'),
         routes: [
           {
-            name: t('dropdown.profile.links.profile'),
+            label: t('dropdown.profile.links.profile'),
             href: generatePath(ROUTE_TRADING_SERVICE, {
               serviceId,
             }),
             id: `service-management-header__service-profile`,
           },
           {
-            name: t('dropdown.profile.links.profile-edit'),
+            label: t('dropdown.profile.links.profile-edit'),
             href: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
               serviceId,
             }),

@@ -33,13 +33,8 @@ export const MenuOption = ({
           onClick={onClick}
           id={option.id || `dropdown-element-${index}`}
           // as={option.as}
+          preserveStyles={option.preserveStyles ?? false}
           sx={{
-            ...(!option.keepHover && {
-              "&&": {
-                backgroundColor: "inherit",
-                cursor: "auto",
-              },
-            }),
             ...option.sx,
           }}
         >

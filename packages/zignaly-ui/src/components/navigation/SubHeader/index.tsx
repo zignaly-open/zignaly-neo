@@ -31,7 +31,7 @@ function SubHeader({
             if ("element" in r) {
               return <React.Fragment key={r.id}>{r.element}</React.Fragment>;
             } else if ("routes" in r) {
-              const { id, name, routes, isCompactElements, secondaryTitle } =
+              const { id, name, routes, isCompactElements, secondaryTitle, sx } =
                 r as SubHeaderDropdown;
 
               return (
@@ -45,6 +45,7 @@ function SubHeader({
                       flex: 1,
                       justifyContent: "center",
                     },
+                    ...sx,
                   }}
                 >
                   <ZigDropdown
@@ -65,7 +66,7 @@ function SubHeader({
                             isSubOption={true}
                           />
                         ),
-                        keepHover: true,
+                        preserveStyles: true,
                       }),
                       sx: {
                         ...optionSx,

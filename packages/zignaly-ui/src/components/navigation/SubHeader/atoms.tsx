@@ -17,11 +17,18 @@ import { NavLink } from "components/display/ZigDropdown/styles";
 import { ZigArrowBottomIcon } from "icons";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const SubHeaderMenuButton = ({ route }: { route: any }) => {
-  const { id, name, routes, isCompactElements, secondaryTitle } = route;
+export const SubHeaderMenuButton = ({ route, sx }: { route: any }) => {
+  const { id, label, routes, isCompactElements, secondaryTitle } = route;
   const active = routes.some((x) => x.active);
   return (
-    <Box display="flex" justifyContent={"space-between"} alignItems={"center"} gap="8px" flex={1}>
+    <Box
+      display="flex"
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      gap="8px"
+      flex={1}
+      sx={sx}
+    >
       <Box
         display="flex"
         flexDirection={"column"}
@@ -46,7 +53,7 @@ export const SubHeaderMenuButton = ({ route }: { route: any }) => {
           variant={"h3"}
           component="span"
         >
-          {name}
+          {label}
         </ZigTypography>
       </Box>
       <ArrowIcon>
@@ -57,7 +64,7 @@ export const SubHeaderMenuButton = ({ route }: { route: any }) => {
 };
 
 export const SubHeaderOption = ({ route, isSubOption, dense }) => {
-  const { name, sideElement, active, id, onClick } = route;
+  const { label, sideElement, active, id, onClick } = route;
 
   return (
     <Box
@@ -74,8 +81,9 @@ export const SubHeaderOption = ({ route, isSubOption, dense }) => {
           color: "inherit",
         }}
         variant={"h3"}
+        width={1}
       >
-        {name}
+        {label}
       </ZigTypography>
       {sideElement}
       {isSubOption && !!active && <Check />}

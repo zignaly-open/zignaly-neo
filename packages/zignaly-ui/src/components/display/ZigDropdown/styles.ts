@@ -24,7 +24,7 @@ export const Component = styled("div")`
   outline: inherit;
 `;
 
-export const ZigMenuItem = styled(MenuItem)<{ active: boolean }>`
+export const ZigMenuItem = styled(MenuItem)<{ active?: boolean; preserveStyles?: boolean }>`
   color: ${({ active, theme }) => (active ? theme.palette.highlighted : theme.palette.neutral200)};
   font-weight: 400;
   font-size: 14px;
@@ -32,11 +32,27 @@ export const ZigMenuItem = styled(MenuItem)<{ active: boolean }>`
   padding: 6px 32px;
   letter-spacing: 0.55px;
   text-decoration: none;
+  gap: 12px;
 
-  ${({ theme }) =>
+  ${({ notClickable, theme }) =>
+    !notClickable &&
     css`
-      &:hover {
-        color: ${theme.palette.neutral000};
+      &:not([disabled]) {
+        &:hover {
+          background: ${theme.palette.backgrounds.headerMenuItemHover};
+          color: ${theme.palette.neutral000};
+        }
+      }
+    `}
+  ${({ preserveStyles = true }) =>
+    !preserveStyles &&
+    css`
+      && {
+        gap: 0;
+        &:hover {
+          background-color: inherit;
+          cursor: auto;
+        }
       }
     `}
 `;
