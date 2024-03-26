@@ -162,7 +162,6 @@ export const ZigNormalSelectGlobalStyle = (
           &-list {
             ${NiceScrollbar.toString()};
           }
-          font-size: 11px;
         }
       }
     `}
