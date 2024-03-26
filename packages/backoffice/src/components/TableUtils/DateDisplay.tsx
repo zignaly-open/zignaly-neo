@@ -4,9 +4,9 @@ import { format } from 'date-fns';
 import { Box } from '@mui/material';
 
 const DateDisplay: React.FC<{ date: string }> = ({ date }) => {
-  const dateObject = useMemo(() => new Date(date), [date]);
+  const dateObject = useMemo(() => (date ? new Date(date) : ''), [date]);
 
-  return (
+  return dateObject ? (
     <Box display={'flex'} flexDirection={'column'}>
       <ZigTypography
         className={'date__time'}
@@ -24,6 +24,8 @@ const DateDisplay: React.FC<{ date: string }> = ({ date }) => {
         {format(dateObject, 'PP')}
       </ZigTypography>
     </Box>
+  ) : (
+    <></>
   );
 };
 
