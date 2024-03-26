@@ -33,7 +33,7 @@ export const useDepositStatusOptions = () => {
       ).map(([value, label]) => ({
         value: value as unknown as DepositStatuses,
         label: (
-          <ZigTypography color={depositStatusColorMap[value]}>
+          <ZigTypography fontSize={'11px'} color={depositStatusColorMap[value]}>
             {label}
           </ZigTypography>
         ),
@@ -55,7 +55,10 @@ export const useWithdrawalStatusOptions = () => {
       ).map(([value, label]) => ({
         value: value as unknown as WithdrawalStatuses,
         label: (
-          <ZigTypography color={withdrawalStatusColorMap[value]}>
+          <ZigTypography
+            fontSize={'11px'}
+            color={withdrawalStatusColorMap[value]}
+          >
             {label}
           </ZigTypography>
         ),

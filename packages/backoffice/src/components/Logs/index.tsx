@@ -39,16 +39,15 @@ export default function Withdrawals() {
     return [
       columnHelper.accessor('userId', {
         header: t('table.userId'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <ZigTypography variant={'body2'}>{getValue()}</ZigTypography>
+        ),
       }),
       columnHelper.accessor('agentId', {
         header: t('table.agentId'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
-      }),
-      columnHelper.accessor('userEmail', {
-        enableSorting: false,
-        header: t('table.user'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <ZigTypography variant={'body2'}>{getValue()}</ZigTypography>
+        ),
       }),
       columnHelper.accessor('action', {
         header: t('table.action'),

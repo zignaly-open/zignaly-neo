@@ -56,7 +56,9 @@ export default function Users() {
     return [
       columnHelper.accessor('userId', {
         header: t('table.userId'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <ZigTypography variant={'body2'}>{getValue()}</ZigTypography>
+        ),
       }),
       columnHelper.accessor('email', {
         header: t('table.email'),
