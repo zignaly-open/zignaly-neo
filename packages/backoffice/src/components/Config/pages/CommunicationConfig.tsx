@@ -98,7 +98,7 @@ export default function CommunicationConfig() {
             title={t('socials.social')}
             description={t('socials.social-description')}
           />
-          <Grid container spacing={4}>
+          <Grid container spacing={7.5}>
             {socialNetworks.map((s) => (
               <Grid item xs={12} sm={6} md={4} key={s.key}>
                 <Controller
@@ -122,7 +122,7 @@ export default function CommunicationConfig() {
             title={t('socials.support')}
             description={t('socials.support-description')}
           />
-          <Grid container spacing={4}>
+          <Grid container spacing={7.5}>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'supportUrl'}
@@ -188,7 +188,7 @@ export default function CommunicationConfig() {
             </Grid>
           </Grid>
 
-          <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <Box sx={{ textAlign: 'right', mt: 10 }}>
             <ZigButton
               disabled={isLoading}
               size='large'

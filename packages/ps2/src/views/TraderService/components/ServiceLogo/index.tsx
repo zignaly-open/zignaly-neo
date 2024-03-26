@@ -33,6 +33,7 @@ const ServiceLogo = ({
           id={id}
         />
       )}
+      id={'edit-profile__logo'}
       value={getServiceLogo(value)}
       onChange={onChange}
     />

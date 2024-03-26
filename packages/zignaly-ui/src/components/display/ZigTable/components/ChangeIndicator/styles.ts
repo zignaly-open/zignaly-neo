@@ -28,5 +28,6 @@ export const ValueIndicator = styled(ZigTypography, {
     font-size: 70%;
     transform: translateY(-13%);
     display: inline-block;
+    line-height: 1;
   }
 `;

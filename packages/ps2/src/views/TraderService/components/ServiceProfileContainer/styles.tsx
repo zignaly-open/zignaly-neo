@@ -240,11 +240,15 @@ export const ServiceInfoWrapper = styled(Box)`
   background-color: ${({ theme }) => theme.palette.backgrounds.activeTab};
   padding: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   display: flex;
   flex-direction: column;
+  flex: 0 1 111px;
+  border-radius: 3px;
+
   & > :first-child {
     margin-bottom: 0;
+    text-align: center;
   }
 `;
 

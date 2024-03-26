@@ -9,12 +9,12 @@ import {
   ZScoreBar,
   ZScoreRing,
   ZScoreRiskCategory,
+  formatCompactNumber,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { formatDuration } from 'date-fns';
 import { useZScoreConfig } from '../use';
 import { round } from 'lodash-es';
-import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
 const ZScoreBarsCategory: React.FC<{
   category: ZScoreRiskCategory;

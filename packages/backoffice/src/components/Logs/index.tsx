@@ -83,7 +83,7 @@ export default function Withdrawals() {
           display: 'flex',
           flexDirection: 'row',
           gap: 2,
-          mb: 4,
+          mb: 3,
           width: 1000,
           '& > *': {
             flex: 1,
@@ -91,6 +91,7 @@ export default function Withdrawals() {
         }}
       >
         <ZigInput
+          size={'small'}
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.userId}
@@ -99,6 +100,7 @@ export default function Withdrawals() {
           }
         />
         <ZigInput
+          size={'small'}
           label={t('table.agentId')}
           placeholder={t('table.agentId')}
           value={filters.agentId}
@@ -107,6 +109,7 @@ export default function Withdrawals() {
           }
         />
         <ZigInput
+          size={'small'}
           label={t('table.user')}
           placeholder={t('table.user')}
           value={filters.user}
@@ -115,6 +118,7 @@ export default function Withdrawals() {
           }
         />
         <ZigSelect
+          medium
           label={t('table.action')}
           value={filters.action}
           onChange={(action) => setFilters((old) => ({ ...old, action }))}

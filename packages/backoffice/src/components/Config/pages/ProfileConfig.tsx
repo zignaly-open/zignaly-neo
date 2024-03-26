@@ -97,7 +97,7 @@ export default function ProfileConfig() {
           <ZigTypography variant={'h2'} sx={{ mb: 2 }}>
             {t('profile.profile')}
           </ZigTypography>
-          <Grid container spacing={4}>
+          <Grid container spacing={7.5}>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'logo'}
@@ -229,7 +229,7 @@ export default function ProfileConfig() {
 
           <SectionHeader title={t('profile.meta')} sx={{ mb: 0.5, mt: 8 }} />
 
-          <Grid container spacing={4}>
+          <Grid container spacing={7.5}>
             <Grid item xs={12} sm={6} md={4}>
               <Controller
                 name={'image'}
@@ -287,15 +287,17 @@ export default function ProfileConfig() {
                     error={t(errors.description?.message as string, {
                       max: 500,
                     })}
+                    multiline
+                    rows={3}
                     id={'profile_wl-title'}
                     wide
                     placeholder={t('profile.meta-title')}
                     label={
                       <>
                         <ZigTypography>
-                          {t('profile.meta-title')}
+                          {t('profile.meta-description')}
                           <ZigTypography variant={'body2'} component={'div'}>
-                            {t('profile.meta-title-description')}
+                            {t('profile.meta-description-description')}
                           </ZigTypography>
                         </ZigTypography>
                       </>
@@ -397,7 +399,7 @@ export default function ProfileConfig() {
             )}
           />
 
-          <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <Box sx={{ textAlign: 'right', mt: 10 }}>
             <ZigButton
               disabled={isLoading}
               size='large'

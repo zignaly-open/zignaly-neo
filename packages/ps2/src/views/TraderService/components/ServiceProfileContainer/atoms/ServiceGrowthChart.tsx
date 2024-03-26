@@ -12,6 +12,7 @@ import {
   CenteredLoader,
   ZigSelect,
   ZigTypography,
+  formatCompactNumber,
 } from '@zignaly-open/ui';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -26,10 +27,7 @@ import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
 import { numericFormatter } from 'react-number-format';
-import {
-  formatCompactNumber,
-  formatLocalizedDate,
-} from 'views/Dashboard/components/MyDashboard/util';
+import { formatLocalizedDate } from 'views/Dashboard/components/MyDashboard/util';
 import BigNumber from 'bignumber.js';
 import { lazily } from 'react-lazily';
 
@@ -193,12 +191,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             </Box>
 
             {typeof data?.percentDiff !== 'undefined' && (
-              <Box sx={{ mr: 2 }}>
-                <PercentChange
-                  id={'service-profile__percent-change'}
-                  value={data?.percentDiff}
-                />
-              </Box>
+              <PercentChange
+                sx={{ mr: 2, fontSize: '18px' }}
+                id={'service-profile__percent-change'}
+                value={data?.percentDiff}
+                shorten
+              />
             )}
           </>
         )}

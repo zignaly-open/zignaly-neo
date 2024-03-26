@@ -6,6 +6,11 @@ export function getPrecisionForCoin(coin: string, value?: string | number): numb
   return coinPrecision || 8;
 }
 
+/**
+ * @deprecated
+ * We should use formatCompactNumber which is a wrapper for Intl.NumberFormat
+ * This method for example shortens 70440.19 to 70.44019K...
+ */
 export function shortenNumber(value: number): {
   value: number;
   precision: number;

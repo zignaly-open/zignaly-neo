@@ -4,7 +4,6 @@ import PercentChange from './PercentChange';
 import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { SxProps } from '@mui/system';
-import { ZigTrophyIcon } from '@zignaly-open/ui/icons';
 
 const ServicePercentageInfo: React.FC<{
   title: string;
@@ -12,18 +11,39 @@ const ServicePercentageInfo: React.FC<{
   percent: string;
   ssc: string;
   canShow?: boolean;
+  sx?: SxProps;
   priceLabelSx?: SxProps;
+  percentSx?: SxProps;
   id?: string;
-}> = ({ title, value, ssc, percent, canShow, id, priceLabelSx }) => {
+}> = ({
+  title,
+  value,
+  ssc,
+  percent,
+  canShow,
+  id,
+  priceLabelSx,
+  percentSx,
+  sx,
+}) => {
   const { t } = useTranslation('service');
+  const priceSx = {
+    fontSize: '13px',
+    color: 'neutral400',
+    fontWeight: 400,
+    ...priceLabelSx,
+  };
 
   return (
     <>
       <ZigTypography
         textTransform='capitalize'
-        color={'neutral300'}
-        lineHeight={'23px'}
-        sx={{ mb: '10px' }}
+        sx={{
+          color: 'neutral300',
+          lineHeight: '23px',
+          mb: '10px',
+          ...sx,
+        }}
         id={id && `${id}-label`}
       >
         {title}
@@ -31,29 +51,26 @@ const ServicePercentageInfo: React.FC<{
 
       {canShow ? (
         <>
-          <Box
-            display={'flex'}
-            gap={1}
-            justifyContent={'center'}
-            alignItems={'center'}
-          >
-            <PercentChange
-              value={percent}
-              id={id && `${id}-pct`}
-              sx={{ fontSize: '18px' }}
-              showDoc
-            />
-            {+percent >= 100 && <ZigTrophyIcon />}
-          </Box>
+          <PercentChange
+            value={percent}
+            id={id && `${id}-pct`}
+            sx={{
+              fontSize: '18px',
+              lineHeight: '28px',
+              mb: '4px',
+              ...percentSx,
+            }}
+            showSignDoc={+percent * +value < 0}
+            showTrophy={+percent >= 100}
+          />
           <ZigPriceLabel
             id={id}
             component='div'
             shorten
             value={+value}
             coin={ssc}
-            color='neutral300'
-            coinProps={{ color: 'neutral300' }}
-            sx={priceLabelSx}
+            coinProps={priceSx}
+            sx={priceSx}
           />
         </>
       ) : (

@@ -27,8 +27,11 @@
   },
   "ZigRisk": {
     "very-low-risk": "Very low risk",
+    "very-low": "Very low",
     "low-risk": "Low risk",
+    "low": "Low",
     "average-risk": "Average risk",
+    "average": "Average",
     "risky": "Risky",
     "very-risky": "Very risky"
   },

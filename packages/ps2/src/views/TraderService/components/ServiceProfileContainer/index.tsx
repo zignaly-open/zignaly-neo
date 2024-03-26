@@ -10,7 +10,7 @@ import ServiceManagerDescription from './atoms/ServiceManagerDescription';
 import ServiceSummary from './atoms/ServiceSummary';
 import AssetsInPool from '../../../../components/AssetsInPool';
 import { ServiceInfoWrapper } from './styles';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, ZigRisk } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { subMonths } from 'date-fns';
 import ServicePercentageInfo from './atoms/ServicePercentageInfo';
@@ -38,8 +38,6 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   return (
     <Box
       sx={{
-        p: 2,
-        pt: 0,
         mt: { xs: '-15px', lg: '-45px' },
       }}
     >
@@ -52,13 +50,40 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         </Grid>
         {!sm && (
           <Grid item xs={12} md={7} pb={3}>
-            <Box display={'flex'} justifyContent={'center'} gap={'35px'}>
+            <Box display={'flex'} justifyContent={'space-around'} gap={'5px'}>
+              <ServiceInfoWrapper>
+                <ServicePercentageInfo
+                  id={'service-profile__pnl30t'}
+                  title={t('marketplace:table.n-months-pnl-mobile', {
+                    count: 1,
+                  })}
+                  value={service.pnlSsc30t}
+                  percent={service.pnlPercent30t}
+                  ssc={service.ssc}
+                  canShow={
+                    +new Date(service.createdAt) < +subMonths(new Date(), 1)
+                  }
+                  sx={{
+                    color: 'neutral200',
+                    fontSize: '14px',
+                    lineHeight: '24px',
+                  }}
+                  percentSx={{
+                    mb: '1px',
+                  }}
+                  priceLabelSx={{
+                    fontSize: '11px',
+                    color: 'neutral300',
+                  }}
+                />
+              </ServiceInfoWrapper>
               <ServiceInfoWrapper>
                 <ZigTypography
-                  color={'neutral300'}
+                  color={'neutral200'}
                   id={'service-profile__assets-in-pool-label'}
+                  fontSize={'14px'}
                 >
-                  {t('assets-in-pool')}
+                  {t('marketplace:table.assets-mobile')}
                 </ZigTypography>
                 <AssetsInPool
                   serviceId={service.id}
@@ -66,19 +91,26 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
                   assetsValue={service.investedUSDT}
                   convertedValue={+service.invested}
                   convertedValueCoin={service.ssc}
+                  shorten
+                  priceLabelSx={{
+                    fontSize: '11px',
+                    color: 'neutral300',
+                    mt: '1px',
+                  }}
                 />
               </ServiceInfoWrapper>
               <ServiceInfoWrapper>
-                <ServicePercentageInfo
-                  id={'service-profile__pnl30t'}
-                  // priceLabelSx={{ fontSize: '18px', lineHeight: '28px' }}
-                  title={t('marketplace:table.n-months', { count: 1 })}
-                  value={service.pnlSsc30t}
-                  percent={service.pnlPercent30t}
-                  ssc={service.ssc}
-                  canShow={
-                    +new Date(service.createdAt) < +subMonths(new Date(), 1)
-                  }
+                <ZigTypography
+                  color={'neutral200'}
+                  id={'service-profile__risk-label'}
+                  fontSize={'14px'}
+                >
+                  {t('risk')}
+                </ZigTypography>
+                <ZigRisk
+                  short={true}
+                  value={service.zrisk}
+                  id={'service-profile__risk'}
                 />
               </ServiceInfoWrapper>
             </Box>

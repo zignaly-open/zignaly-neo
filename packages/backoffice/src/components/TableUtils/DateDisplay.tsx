@@ -3,14 +3,16 @@ import React, { useMemo } from 'react';
 import { format } from 'date-fns';
 
 const DateDisplay: React.FC<{ date: string }> = ({ date }) => {
-  const dateObject = useMemo(() => new Date(date), [date]);
+  const dateObject = useMemo(() => (date ? new Date(date) : ''), [date]);
 
-  return (
+  return dateObject ? (
     <ZigTypography>
       {format(dateObject, 'PP')}
       <br />
       {format(dateObject, 'p')}
     </ZigTypography>
+  ) : (
+    <></>
   );
 };
 

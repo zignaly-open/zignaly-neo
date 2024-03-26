@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, PriceBoxOverride } from './styles';
+import { PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
 import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { ZigWhaleIcon } from '@zignaly-open/ui/icons';
@@ -16,10 +16,17 @@ const AssetsInPool = ({
   convertedValueCoin,
   createdAt,
   shorten = false,
+  priceLabelSx,
 }: AssetsInPoolProps) => {
   const { t } = useTranslation('marketplace');
+  const priceSx = {
+    color: 'neutral400',
+    fontSize: '13px',
+    fontWeight: 400,
+    ...priceLabelSx,
+  };
   return (
-    <Box justifyContent='center' sx={{ gap: 2 }}>
+    <Box>
       <PriceBoxOverride
         id={prefixId && `${prefixId}__invested-${serviceId}`}
         sx={{
@@ -27,6 +34,7 @@ const AssetsInPool = ({
           justifyContent: 'center',
           flexDirection: 'row',
           alignItems: 'center',
+          gap: 1,
         }}
       >
         <ZigPriceLabel
@@ -38,9 +46,10 @@ const AssetsInPool = ({
           shorten={shorten}
         />
         {+assetsValue >= 200000 && (
-          <Icon>
-            <ZigWhaleIcon />
-          </Icon>
+          <ZigWhaleIcon
+            style={{ fontSize: '15px', marginTop: '-5px' }}
+            id={prefixId && `${prefixId}__whale-${serviceId}`}
+          />
         )}
       </PriceBoxOverride>
 
@@ -71,14 +80,16 @@ const AssetsInPool = ({
       {typeof convertedValue === 'number' && (
         <Box
           justifyContent='center'
-          alignItems='start'
+          alignItems='center'
+          display={'flex'}
           id={prefixId && `${prefixId}__converted-${serviceId}`}
         >
           <ZigPriceLabel
             value={convertedValue}
             coin={convertedValueCoin}
-            color='neutral300'
-            coinProps={{ color: 'neutral300' }}
+            shorten={shorten}
+            coinProps={priceSx}
+            sx={{ mt: '4px', ...priceSx }}
           />
         </Box>
       )}

@@ -20,7 +20,7 @@ import {
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box } from '@mui/material';
-import { useServiceDetails, useTraderServices } from 'apis/service/use';
+import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { Add } from '@mui/icons-material';
 import { useOpenDepositModal } from '../../DepositModal';
@@ -37,10 +37,6 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   const service = useSelectedInvestment();
   const { isLoading, invest } = useInvestInService(service.serviceId);
   const { data: serviceDetails } = useServiceDetails(service.serviceId);
-  const { data: myServicesList } = useTraderServices();
-  const isOwner = myServicesList?.some(
-    (s) => s.serviceId === service.serviceId,
-  );
   const toast = useToast();
   const trackEvent = useTrackEvent();
   const openDepositModal = useOpenDepositModal();
@@ -176,7 +172,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
                   display='block'
                   textAlign='center'
                 >
-                  {t(`form.profits.title${isOwner ? '-owner' : ''}`)}
+                  {t('form.profits.title')}
                 </ZigTypography>
               ),
               start: t('form.profits.left'),

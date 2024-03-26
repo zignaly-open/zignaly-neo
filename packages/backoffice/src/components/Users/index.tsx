@@ -218,7 +218,7 @@ export default function Users() {
           display: 'flex',
           flexDirection: 'row',
           gap: 2,
-          mb: 4,
+          mb: 3,
           width: 1000,
           '& > *': {
             flex: 1,
@@ -226,6 +226,7 @@ export default function Users() {
         }}
       >
         <ZigInput
+          size={'small'}
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.id}
@@ -234,6 +235,7 @@ export default function Users() {
           }
         />
         <ZigInput
+          size={'small'}
           label={t('table.email')}
           placeholder={t('table.email')}
           value={filters.email}
@@ -242,6 +244,7 @@ export default function Users() {
           }
         />
         <ZigSelect
+          medium
           label={t('table.accessLevel')}
           value={filters.access}
           onChange={(access) =>
@@ -250,6 +253,7 @@ export default function Users() {
           options={accessLevelOptions}
         />
         <ZigInput
+          size={'small'}
           label={t('table.subscriptionCode')}
           placeholder={t('table.subscriptionCode')}
           value={filters.code}

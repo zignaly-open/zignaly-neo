@@ -190,7 +190,7 @@ export default function Withdrawals() {
           display: 'flex',
           flexDirection: 'row',
           gap: 2,
-          mb: 4,
+          mb: 3,
           width: 1000,
           '& > *': {
             flex: 1,
@@ -198,6 +198,7 @@ export default function Withdrawals() {
         }}
       >
         <ZigInput
+          size={'small'}
           label={t('table.userId')}
           placeholder={t('table.userId')}
           value={filters.userId}
@@ -205,17 +206,20 @@ export default function Withdrawals() {
             setFilters((old) => ({ ...old, userId: e.target.value }))
           }
         />
-        <Box>
-          <ZigTypography>{t('table.amount')}</ZigTypography>
+        <Box mt={'-2px'}>
+          <ZigTypography fontSize={'13px'} lineHeight={'20px'}>
+            {t('table.amount')}
+          </ZigTypography>
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              mt: '10px',
+              mt: '5px',
               gap: '10px',
             }}
           >
             <ZigSelect
+              medium
               width={100}
               value={filters.operator}
               onChange={(operator) =>
@@ -224,6 +228,7 @@ export default function Withdrawals() {
               options={operators}
             />
             <ZigInput
+              size={'small'}
               placeholder={t('table.amount')}
               value={filters.amount}
               onChange={(e) =>
@@ -239,6 +244,7 @@ export default function Withdrawals() {
           </Box>
         </Box>
         <ZigSelect
+          medium
           label={t('table.status')}
           value={filters.status}
           onChange={(status) => setFilters((old) => ({ ...old, status }))}

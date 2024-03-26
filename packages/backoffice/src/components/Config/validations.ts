@@ -1,4 +1,6 @@
 import * as yup from 'yup';
+import { Features } from '@zignaly-open/ps2-definitions';
+import { checkDecimals } from '@zignaly-open/ui';
 
 export const CommunicationConfigValidation = yup
   .object({
@@ -15,29 +17,77 @@ export const CommunicationConfigValidation = yup
   })
   .required();
 
+function checkMinInvestmentIfEnabled(val: number) {
+  const isMinInvestmentOn =
+    this.from[1]?.value?.settings?.[Features.MinInvestment];
+  return !isMinInvestmentOn || val > 0;
+}
+
+function checkMinScoreIfEnabled(val: number) {
+  const isScoreOn = this.parent?.settings?.[Features.ZScore];
+  return !isScoreOn || (val > 0 && val <= 100);
+}
+
 export const SettingsConfigValidation = yup
   .object({
     marketplaceMinScore: yup
       .number()
       .typeError('config:settings.validation-number')
-      .test('range', 'config:settings.validation-number-0-100', (v) => v > 0),
+      .test(
+        'range',
+        'config:settings.validation-number-0-100',
+        checkMinScoreIfEnabled,
+      ),
     minInvestment: yup.object({
       BTC: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        )
+        // have you heard about the horseshoe theory?
+        // Yes we could do it with 1 validation message but calling translate here is problematic
+        // passing 6 or 8 when rendering the translation error seems like a hassle
+        // so we better just have 2 messages lol
+        // and no I am not retarded
+        .test('int', 'config:settings.max-decimals-8', (val) =>
+          checkDecimals(val, 8),
+        ),
       ETH: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        )
+        .test('int', 'config:settings.max-decimals-8', (val) =>
+          checkDecimals(val, 8),
+        ),
       USDT: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        )
+        .test('int', 'config:settings.max-decimals-6', (val) =>
+          checkDecimals(val, 6),
+        ),
       BNB: yup
         .number()
         .typeError('config:settings.validation-number')
-        .test('range', 'config:settings.validation-number-gt-0', (v) => v > 0),
+        .test(
+          'range',
+          'config:settings.validation-number-gt-0',
+          checkMinInvestmentIfEnabled,
+        )
+        .test('int', 'config:settings.max-decimals-8', (val) =>
+          checkDecimals(val, 8),
+        ),
     }),
   })
   .required();

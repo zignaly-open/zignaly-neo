@@ -1,5 +1,9 @@
 import React, { useMemo } from "react";
-import { StyledSelectWrapper, ZigSelectGlobalStyle } from "./styles";
+import {
+  StyledSelectWrapper,
+  ZigMediumSelectGlobalStyle,
+  ZigNormalSelectGlobalStyle,
+} from "./styles";
 import { ZigSelectOption, ZigSelectProps } from "./types";
 import Select, { StylesConfig } from "react-select";
 import { useTheme } from "styled-components";
@@ -7,7 +11,12 @@ import ZigTypography from "../../display/ZigTypography";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import { Box, Theme } from "@mui/material";
 
-const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
+const customStyles = (
+  small: boolean,
+  medium: boolean,
+  theme: Theme,
+  userStyles: StylesConfig,
+): StylesConfig => ({
   ...userStyles,
   menuPortal: (base) => ({
     ...base,
@@ -63,11 +72,15 @@ function ZigSelect<T>({
   showBorder = true,
   hoverBackground = true,
   sx,
+  medium = false,
   styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
   const theme = useTheme() as Theme;
-  const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
+  const styles = useMemo(
+    () => customStyles(small, medium, theme, userStyles),
+    [small, theme, userStyles],
+  );
 
   return (
     // @ts-ignore
@@ -75,17 +88,22 @@ function ZigSelect<T>({
       error={error}
       width={width}
       small={small}
+      medium={medium}
       outlined={outlined}
       showBorder={showBorder}
       hoverBackground={hoverBackground}
     >
       {label && (
-        <ZigTypography color={"neutral200"} id={id && `${id}-label`}>
+        <ZigTypography
+          sx={medium ? { fontSize: "13px", lineHeight: "20px" } : {}}
+          color={"neutral200"}
+          id={id && `${id}-label`}
+        >
           {label}
         </ZigTypography>
       )}
       <Box sx={sx}>
-        {ZigSelectGlobalStyle}
+        {medium ? ZigMediumSelectGlobalStyle : ZigNormalSelectGlobalStyle}
         <Select
           id={id}
           styles={styles}

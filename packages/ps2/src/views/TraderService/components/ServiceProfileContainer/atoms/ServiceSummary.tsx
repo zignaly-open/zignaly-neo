@@ -1,7 +1,12 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { trimZeros, ZigRisk, ZigTypography } from '@zignaly-open/ui';
+import {
+  trimZeros,
+  ZigRisk,
+  ZigTypography,
+  formatCompactNumber,
+} from '@zignaly-open/ui';
 import { ZigUserIcon } from '@zignaly-open/ui/icons';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GridCell, GridWithBottomBorder } from '../styles';
@@ -44,6 +49,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
                 assetsValue={service.investedUSDT}
                 convertedValue={+service.invested}
                 convertedValueCoin={service.ssc}
+                shorten
               />
             </GridCell>
             <GridCell item xs={4}>
@@ -175,14 +181,9 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               whiteSpace={'nowrap'}
             >
               {Number(service?.fundsAllocated) < 10
-                ? `${trimZeros(
-                    numericFormatter(
-                      (+service?.invested + service?.pending).toString(),
-                      {
-                        thousandSeparator: true,
-                        decimalScale: 2,
-                      },
-                    ),
+                ? `${formatCompactNumber(
+                    +service?.invested + service?.pending,
+                    2,
                   )} ${service?.ssc || 'USDT'}`
                 : t('common:percent', {
                     value: trimZeros(

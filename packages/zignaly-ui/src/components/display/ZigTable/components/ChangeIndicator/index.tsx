@@ -7,6 +7,7 @@ import { ChangeIndicatorProps } from "./types";
 import { Box, Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 import { isNil } from "lodash-es";
+import { formatCompactNumber } from "utils/numbers";
 
 // Fix for react-number-format not showing .0 decimal
 // https://github.com/s-yadav/react-number-format/issues/820
@@ -42,6 +43,7 @@ const ChangeIndicator = ({
   decimalScale = stableCoinOperative ? 2 : 8,
   smallPct = true,
   indicatorPostion = "left",
+  shorten = false,
 }: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -57,6 +59,21 @@ const ChangeIndicator = ({
       ? theme.palette.greenGraph
       : theme.palette.redGraphOrError;
 
+    const hideNegativeSign = type === "graph" && indicatorPostion === "left";
+
+    let adjustedValue = shorten
+      ? formatCompactNumber(hideNegativeSign ? Math.abs(+value) : value, 2)
+      : adjustNumber(bigNumberValue, decimalScale, hideNegativeSign).toFixed();
+
+    let suffix = type === "only_number" || smallPct ? "" : "%";
+    if (shorten) {
+      const lastChar = adjustedValue.slice(-1);
+      if (isNaN(Number(lastChar))) {
+        suffix = lastChar + suffix;
+        adjustedValue = adjustedValue.slice(0, -1);
+      }
+    }
+
     return (
       <Box display="flex" justifyContent={"center"} alignItems={"center"}>
         <ValueIndicator
@@ -71,13 +88,9 @@ const ChangeIndicator = ({
           )}
           {isFinite ? (
             <NumericFormat
-              value={adjustNumber(
-                bigNumberValue,
-                decimalScale,
-                type === "graph" && indicatorPostion === "left",
-              ).toFixed()}
+              value={adjustedValue}
               displayType={"text"}
-              suffix={type === "only_number" || smallPct ? "" : "%"}
+              suffix={suffix}
               thousandSeparator={","}
               decimalScale={adjustDecimals(bigNumberValue, decimalScale)}
               fixedDecimalScale={stableCoinOperative}

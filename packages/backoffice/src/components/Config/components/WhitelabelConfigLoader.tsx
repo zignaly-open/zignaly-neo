@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useWlConfigQuery } from '../../../apis/config/api';
+import { LoaderContainer } from '../../ZModal/styles';
 
 function WhitelabelConfigLoader({ children }: { children: JSX.Element }) {
   const { isLoading: isLoadingUserData, data } = useUserInfoQuery();
@@ -21,7 +22,13 @@ function WhitelabelConfigLoader({ children }: { children: JSX.Element }) {
     );
   }
 
-  return isLoading || isLoadingUserData ? <Loader /> : <>{children}</>;
+  return isLoading || isLoadingUserData ? (
+    <LoaderContainer>
+      <Loader />
+    </LoaderContainer>
+  ) : (
+    <>{children}</>
+  );
 }
 
 export default WhitelabelConfigLoader;

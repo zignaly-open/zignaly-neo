@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   CoinLabel,
   ZigButton,
@@ -27,6 +27,16 @@ const grayscaleIconStyle = {
   opacity: 0.5,
 };
 
+const zigInputAmountLike = {
+  '.MuiInputBase-root': {
+    paddingTop: '0 !important',
+    paddingBottom: '0 !important',
+  },
+  '.MuiInputBase-input': {
+    fontSize: '20px !important',
+  },
+};
+
 export default function SettingsConfig() {
   const { t } = useTranslation('config');
   const { wl } = useParams();
@@ -53,6 +63,7 @@ export default function SettingsConfig() {
     control,
     handleSubmit,
     reset,
+    trigger,
     formState: { errors },
   } = formMethods;
 
@@ -61,10 +72,21 @@ export default function SettingsConfig() {
     return v;
   });
 
+  // field revalidation
+  useEffect(() => {
+    trigger('marketplaceMinScore');
+  }, [watch(`settings.${Features.ZScore}`)]);
+
+  useEffect(() => {
+    currenciesConfiguredForMin.every((coin) =>
+      trigger(`minInvestment.${coin}` as keyof WhitelabelBackendConfig),
+    );
+  }, [watch(`settings.${Features.MinInvestment}`)]);
+
   return (
     <ConfigWrapper>
       <ZigTypography sx={{ mb: 2 }} variant={'h1'}>
-        {t('navigation.communication-config')}
+        {t('navigation.settings-config')}
       </ZigTypography>
       <form onSubmit={handleSubmit(submit)}>
         <FormProvider {...formMethods}>
@@ -100,6 +122,7 @@ export default function SettingsConfig() {
                   placeholder={t('placeholder')}
                   label={t('settings.min-zscore') + ':'}
                   type={'number'}
+                  sx={zigInputAmountLike}
                   error={t(errors.marketplaceMinScore?.message)}
                   InputProps={{
                     endAdornment: (
@@ -124,7 +147,7 @@ export default function SettingsConfig() {
             id={'settings-min-investment-toggle'}
           />
 
-          <Grid container spacing={4} sx={{ mt: -2, mb: 3 }}>
+          <Grid container spacing={2.5} sx={{ mt: -1.5, mb: 3 }}>
             {currenciesConfiguredForMin.map((coin) => (
               <Grid item xs={12} sm={6} md={6} lg={3} key={`${coin}-min`}>
                 <Controller
@@ -134,6 +157,7 @@ export default function SettingsConfig() {
                   control={control}
                   render={({ field }) => (
                     <ZigInput
+                      sx={zigInputAmountLike}
                       error={t(errors.minInvestment?.[coin]?.message)}
                       id={'settings-min-investment-' + coin}
                       label={
@@ -142,7 +166,10 @@ export default function SettingsConfig() {
                       disabled={isLoading || !watch('settings.minInvestment')}
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position='end'>
+                          <InputAdornment
+                            position='end'
+                            sx={{ color: (theme) => theme.palette.neutral100 }}
+                          >
                             <Box
                               sx={
                                 watch('settings.minInvestment')
@@ -150,7 +177,7 @@ export default function SettingsConfig() {
                                   : grayscaleIconStyle
                               }
                             >
-                              <CoinLabel coin={coin} name={''} />
+                              <CoinLabel coin={coin} name={''} size={24} />
                             </Box>
                           </InputAdornment>
                         ),
@@ -163,7 +190,7 @@ export default function SettingsConfig() {
             ))}
           </Grid>
 
-          <Box sx={{ textAlign: 'right', mt: 4 }}>
+          <Box sx={{ textAlign: 'right', mt: 10 }}>
             <ZigButton
               disabled={isLoading}
               size='large'

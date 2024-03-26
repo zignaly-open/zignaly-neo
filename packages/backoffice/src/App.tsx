@@ -10,7 +10,6 @@ import {
 } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
-import { AvenirNext } from '@zignaly-open/ui/fonts';
 import { BrowserRouter } from 'react-router-dom';
 import { persistor, store } from './apis/store';
 import { Provider } from 'react-redux';
@@ -24,7 +23,6 @@ export const App: React.FC = () => (
       <ThemeInheritorMui theme={themeMui}>
         <ThemeProviderMui theme={themeMui}>
           <GlobalAppStyle />
-          <AvenirNext />
           <ToastContainer
             position='top-right'
             autoClose={5000}

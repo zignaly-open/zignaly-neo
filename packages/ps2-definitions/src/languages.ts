@@ -56,4 +56,11 @@ export const LocalizationLanguages = {
   },
 };
 
-export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
+export const supportedLanguages = [
+  'en',
+  'es',
+  'pt',
+  'tr',
+  // 'ru',
+  // 'vi'
+];
