@@ -1,0 +1,16 @@
+name: PS2 Prod Backoffice deploy
+on:
+  push:
+    tags:
+      - 'release-ps2-*'
+    branches:
+      - feat/split-job-deploy
+      - master
+
+jobs:
+  deploy:
+    name: PS2 Prod Backoffice deploy
+    uses: ./.github/workflows/ps2-deploy-backoffice.yml
+    secrets: inherit
+    with:
+      deploy-env: bo-prod

@@ -2,8 +2,9 @@ name: PS2 Staging Backoffice deploy
 on:
   push:
     branches:
-      - feat/wl-theme-wysiwyg
-      - master
+       - backoffice222222
+#      - feat/wl-theme-wysiwyg
+#      - master
 
 jobs:
   deploy:
