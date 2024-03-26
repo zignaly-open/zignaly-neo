@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - 'release-ps2-*'
-    branches:
-      - feat/split-job-deploy
 
 jobs:
   deploy:
@@ -12,4 +10,4 @@ jobs:
     uses: ./.github/workflows/ps2-deploy-backoffice.yml
     secrets: inherit
     with:
-      deploy-env: bo-staging
+      deploy-env: bo-prod
