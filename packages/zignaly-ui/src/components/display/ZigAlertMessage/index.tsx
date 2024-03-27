@@ -15,7 +15,7 @@ function ZigAlertMessage({
   warning,
   id,
   variant = "body2",
-  size = "normal",
+  size = "medium",
 }: ZigAlertMessageProps) {
   const { palette } = useTheme();
   return (
@@ -45,6 +45,6 @@ export default ZigAlertMessage;
 // added for backwards compatibility
 export const ErrorMessage: React.FC<
   Pick<ZigAlertMessageProps, "text" | "id" | "variant" | "size">
-> = ({ text, id, variant = "body2", size = "normal" }) => (
+> = ({ text, id, variant = "body2", size = "medium" }) => (
   <ZigAlertMessage size={size} text={text} error id={id} variant={variant} />
 );

@@ -40,7 +40,10 @@ const initialFilter: UserFilterType = {
 export default function Users() {
   const { t } = useTranslation(['users', 'common']);
   const [filters, setFilters] = useState<UserFilterType>(initialFilter);
+
   const [errorInputId, setErrorInputId] = useState<string>('');
+  const [errorInputCode, setErrorInputCode] = useState<string>('');
+
   const [filtersSubmitted, setFiltersSubmitted] =
     useState<UserFilterType>(filters);
 
@@ -260,14 +263,26 @@ export default function Users() {
           label={t('table.subscriptionCode')}
           placeholder={t('table.subscriptionCode')}
           value={filters.code}
-          onChange={(e) =>
-            setFilters((old) => ({ ...old, code: e.target.value }))
-          }
+          error={errorInputCode}
+          onChange={(e) => {
+            setErrorInputCode('');
+            setFilters((old) => ({ ...old, code: e.target.value }));
+          }}
         />
         <FilterButtons
           onClick={() => {
             if (!filters.id.match(/^[0-9a-fA-F]{24}$/) && filters.id !== '') {
               setErrorInputId(t('error.invalid-value'));
+              return;
+            }
+
+            if (
+              !filters.code.match(
+                /^[A-Za-z]{2}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/,
+              ) &&
+              filters.code !== ''
+            ) {
+              setErrorInputCode(t('error.invalid-value'));
               return;
             }
             if (_isEqual(filters, filtersSubmitted)) ref.current?.refetch();
