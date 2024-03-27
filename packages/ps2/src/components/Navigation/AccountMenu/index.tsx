@@ -126,7 +126,7 @@ function AccountMenu(): React.ReactElement | null {
             </AccountDropdown>
           ),
           id: 'account-menu-dropdown__account-switcher',
-          customStyle: `background: ${theme.palette.neutral750}; margin-top: -11px;`,
+          sx: `background: ${theme.palette.neutral750}; margin-top: -11px;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
               onClick: () => selectExchange(exchange.internalId),
@@ -211,7 +211,7 @@ function AccountMenu(): React.ReactElement | null {
         { separator: true },
         isFeatureOn(Features.Rewards) &&
           voucher && {
-            customStyle: `margin-top: 4px;`,
+            sx: `margin-top: 4px;`,
             label: (
               <>
                 <GiftIcon

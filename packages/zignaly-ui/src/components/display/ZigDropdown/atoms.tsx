@@ -24,7 +24,7 @@ export const MenuOption = ({
 }: {
   option: ZigDropdownOption;
 }) => {
-  const { id, onClick } = option;
+  const { id } = option;
   const renderComponent = () => {
     if (option.element)
       return (
@@ -126,11 +126,6 @@ export const MenuContent = ({
       id="composition-menu"
       aria-labelledby="composition-button"
       // onKeyDown={handleListKeyDown}
-      sx={{
-        ".MuiMenuItem-root": {
-          whiteSpace: matchAnchorWidth ? "normal" : "nowrap",
-        },
-      }}
     >
       {options.map((option, i) => {
         if (subDropdown && options.indexOf(subDropdown) < i) return null;

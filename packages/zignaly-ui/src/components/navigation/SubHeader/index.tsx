@@ -49,7 +49,7 @@ function SubHeader({
                   }}
                 >
                   <ZigDropdown
-                    position={i > routes.length / 2 ? "right" : "left"}
+                    placement={i > routes.length / 2 ? "top-end" : "top-start"}
                     matchAnchorWidth={true}
                     component={({ open }) => <SubHeaderMenuButton route={r} open={open} />}
                     id={r.id}

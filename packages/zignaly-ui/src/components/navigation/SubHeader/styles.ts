@@ -87,17 +87,19 @@ export const HeadOption = styled("span")<OptionType & { isSubOption?: boolean }>
       `}
 `;
 export const ZigMenuItemSubHeader = styled(ZigMenuItem)<{ isSubOption: boolean; dense?: boolean }>`
+  color: ${({ active, theme }) => (active ? theme.palette.highlighted : theme.palette.neutral300)};
+
   ${({ isSubOption, theme }) =>
     !isSubOption &&
     css`
-      display: flex;
-      justify-content: center;
-
+      /* display: flex; */
+      /* justify-content: center; */
+      /* 
       span {
         overflow-x: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
+      } */
 
       border-right: 1px dotted ${theme.palette.neutral600};
     `}/* ${({ dense }) =>

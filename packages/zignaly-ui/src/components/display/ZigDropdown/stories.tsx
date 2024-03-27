@@ -6,9 +6,6 @@ import ZigButton from "../../inputs/ZigButton";
 import { Box } from "@mui/system";
 import ZigDropdown, { ZigDropdownHandleType } from "./index";
 
-// without this, storybook freezes
-// at this point I am too tired to debug why
-// if you find out the root cause I'll buy you a cookie
 const DropdownStorybookCrutch: React.FC = () => {
   const ref = useRef<ZigDropdownHandleType>(null);
   return (

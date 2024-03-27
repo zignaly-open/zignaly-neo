@@ -16,17 +16,17 @@ export const ZigDropdownContainer = styled("div")`
 `;
 
 export const Component = styled("div")`
-  background: none;
+  /* background: none;
   color: inherit;
   border: none;
   padding: 0;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
+  outline: inherit; */
 `;
 
 export const ZigMenuItem = styled(MenuItem)<{ active?: boolean; preserveStyles?: boolean }>`
-  color: ${({ active, theme }) => (active ? theme.palette.highlighted : theme.palette.neutral200)};
+  color: ${({ theme }) => theme.palette.neutral200};
   font-weight: 400;
   font-size: 14px;
   line-height: 28px;
