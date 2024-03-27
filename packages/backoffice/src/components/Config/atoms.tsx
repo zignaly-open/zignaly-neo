@@ -72,14 +72,15 @@ export const SettingEnableSection: React.FC<{
   description: string;
   id: string;
   name: string;
-}> = ({ title, description, name, id }) => {
+  sx?: SxProps;
+}> = ({ title, description, name, id, sx }) => {
   const { control } = useFormContext();
   return (
     <>
       <SectionHeader
         title={title}
         description={description}
-        sx={{ mb: 0.5, mt: 6 }}
+        sx={{ mb: 0.5, mt: 6, ...(sx || {}) }}
       />
       <Box sx={{ ml: -1 }}>
         <Controller

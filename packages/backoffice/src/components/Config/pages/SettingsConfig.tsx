@@ -94,6 +94,7 @@ export default function SettingsConfig() {
       <form onSubmit={handleSubmit(submit)}>
         <FormProvider {...formMethods}>
           <SettingEnableSection
+            sx={{ mt: '19px' }}
             title={t('settings.referrals')}
             description={t('settings.referrals-description')}
             name={'settings.' + Features.Referrals}

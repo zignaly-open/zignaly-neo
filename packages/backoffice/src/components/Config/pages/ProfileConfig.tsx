@@ -94,7 +94,7 @@ export default function ProfileConfig() {
       </ZigTypography>
       <form onSubmit={handleSubmit(submit)}>
         <FormProvider {...formMethods}>
-          <ZigTypography variant={'h2'} sx={{ mb: 2 }}>
+          <ZigTypography variant={'h2'} sx={{ mb: 2, mt: '19px' }}>
             {t('profile.profile')}
           </ZigTypography>
           <Grid container spacing={7.5}>

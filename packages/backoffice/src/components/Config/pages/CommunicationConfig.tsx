@@ -95,6 +95,7 @@ export default function CommunicationConfig() {
       <form onSubmit={handleSubmit(submit)}>
         <FormProvider {...formMethods}>
           <SectionHeader
+            sx={{ mt: '19px' }}
             title={t('socials.social')}
             description={t('socials.social-description')}
           />
