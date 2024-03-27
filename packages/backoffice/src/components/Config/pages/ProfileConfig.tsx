@@ -15,7 +15,7 @@ import { WhitelabelBackendConfig } from '../../../apis/config/types';
 import { Box } from '@mui/system';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { ProfileConfigValidation } from '../validations';
-import { useSaveConfig } from '../use';
+import { useRegenerateImages, useSaveConfig } from '../use';
 import {
   LocalizationLanguages,
   supportedLanguages,
@@ -76,11 +76,13 @@ export default function ProfileConfig() {
     formState: { errors },
   } = formMethods;
 
-  const { submit, isLoading } = useSaveConfig(wl, (payload) => {
+  const regenerateImages = useRegenerateImages();
+  const { submit, isLoading } = useSaveConfig(wl, async (payload) => {
     // since we're making the languagesMap as a separate type
     const { languagesMap, ...v } = payload as unknown as FormType;
     return {
       ...v,
+      ...(await regenerateImages()),
       languages: Object.entries(languagesMap)
         .filter((e) => e[1])
         .map(([x]) => x),
