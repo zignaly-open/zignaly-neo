@@ -59,7 +59,9 @@ export default function Deposits() {
     return [
       columnHelper.accessor('id', {
         header: t('table.id'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <ZigTypography variant={'body2'}>{getValue()}</ZigTypography>
+        ),
       }),
       columnHelper.accessor('createdAt', {
         header: t('table.date'),

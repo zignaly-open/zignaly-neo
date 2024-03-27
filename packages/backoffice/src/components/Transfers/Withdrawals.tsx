@@ -62,7 +62,7 @@ export default function Withdrawals() {
         header: t('table.id'),
         cell: ({ getValue }) => (
           <Shorten
-            typographyProps={{ sx: { minWidth: 150 } }}
+            typographyProps={{ sx: { minWidth: 150 }, variant: 'body2' }}
             text={getValue()}
             width={200}
           />
