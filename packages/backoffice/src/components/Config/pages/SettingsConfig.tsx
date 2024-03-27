@@ -34,6 +34,9 @@ const zigInputAmountLike = {
   },
   '.MuiInputBase-input': {
     fontSize: '20px !important',
+    '&::placeholder': {
+      fontSize: '16px !important',
+    },
   },
 };
 
@@ -91,6 +94,7 @@ export default function SettingsConfig() {
       <form onSubmit={handleSubmit(submit)}>
         <FormProvider {...formMethods}>
           <SettingEnableSection
+            sx={{ mt: '19px' }}
             title={t('settings.referrals')}
             description={t('settings.referrals-description')}
             name={'settings.' + Features.Referrals}
@@ -111,34 +115,38 @@ export default function SettingsConfig() {
             id={'settings-zscore-toggle'}
           />
 
-          <Box sx={{ mt: 1 }}>
-            <Controller
-              name={'marketplaceMinScore'}
-              control={control}
-              render={({ field }) => (
-                <ZigInput
-                  disabled={!watch('settings.zscore')}
-                  id={'settings-min-zscore'}
-                  placeholder={t('placeholder')}
-                  label={t('settings.min-zscore') + ':'}
-                  type={'number'}
-                  sx={zigInputAmountLike}
-                  error={t(errors.marketplaceMinScore?.message)}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment
-                        position='end'
-                        sx={watch('settings.zscore') ? {} : grayscaleIconStyle}
-                      >
-                        <ZScoreIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...field}
-                />
-              )}
-            />
-          </Box>
+          <Grid container spacing={2.5} sx={{ mt: -1.5, mb: 3 }}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <Controller
+                name={'marketplaceMinScore'}
+                control={control}
+                render={({ field }) => (
+                  <ZigInput
+                    disabled={!watch('settings.zscore')}
+                    id={'settings-min-zscore'}
+                    placeholder={t('settings.zscore-placeholder')}
+                    label={t('settings.min-zscore') + ':'}
+                    type={'number'}
+                    sx={zigInputAmountLike}
+                    error={t(errors.marketplaceMinScore?.message)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position='end'
+                          sx={
+                            watch('settings.zscore') ? {} : grayscaleIconStyle
+                          }
+                        >
+                          <ZScoreIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
 
           <SettingEnableSection
             title={t('settings.min-investment')}
@@ -183,6 +191,9 @@ export default function SettingsConfig() {
                         ),
                       }}
                       {...field}
+                      onBlur={(e) => {
+                        if (e.target.value === '') field.onChange(0);
+                      }}
                     />
                   )}
                 />

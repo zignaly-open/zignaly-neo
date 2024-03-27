@@ -20,7 +20,7 @@ export const CommunicationConfigValidation = yup
 function checkMinInvestmentIfEnabled(val: number) {
   const isMinInvestmentOn =
     this.from[1]?.value?.settings?.[Features.MinInvestment];
-  return !isMinInvestmentOn || val > 0;
+  return !isMinInvestmentOn || val >= 0;
 }
 
 function checkMinScoreIfEnabled(val: number) {
@@ -44,7 +44,7 @@ export const SettingsConfigValidation = yup
         .typeError('config:settings.validation-number')
         .test(
           'range',
-          'config:settings.validation-number-gt-0',
+          'config:settings.validation-number-gte-0',
           checkMinInvestmentIfEnabled,
         )
         // have you heard about the horseshoe theory?
@@ -60,7 +60,7 @@ export const SettingsConfigValidation = yup
         .typeError('config:settings.validation-number')
         .test(
           'range',
-          'config:settings.validation-number-gt-0',
+          'config:settings.validation-number-gte-0',
           checkMinInvestmentIfEnabled,
         )
         .test('int', 'config:settings.max-decimals-8', (val) =>
@@ -71,7 +71,7 @@ export const SettingsConfigValidation = yup
         .typeError('config:settings.validation-number')
         .test(
           'range',
-          'config:settings.validation-number-gt-0',
+          'config:settings.validation-number-gte-0',
           checkMinInvestmentIfEnabled,
         )
         .test('int', 'config:settings.max-decimals-6', (val) =>
@@ -82,7 +82,7 @@ export const SettingsConfigValidation = yup
         .typeError('config:settings.validation-number')
         .test(
           'range',
-          'config:settings.validation-number-gt-0',
+          'config:settings.validation-number-gte-0',
           checkMinInvestmentIfEnabled,
         )
         .test('int', 'config:settings.max-decimals-8', (val) =>
