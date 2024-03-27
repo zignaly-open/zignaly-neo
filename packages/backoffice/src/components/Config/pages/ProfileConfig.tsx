@@ -291,7 +291,7 @@ export default function ProfileConfig() {
                     rows={3}
                     id={'profile_wl-title'}
                     wide
-                    placeholder={t('profile.meta-title')}
+                    placeholder={t('profile.meta-description')}
                     label={
                       <>
                         <ZigTypography>

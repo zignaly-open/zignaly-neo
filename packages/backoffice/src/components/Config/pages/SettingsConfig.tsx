@@ -34,6 +34,9 @@ const zigInputAmountLike = {
   },
   '.MuiInputBase-input': {
     fontSize: '20px !important',
+    '&::placeholder': {
+      fontSize: '16px !important',
+    },
   },
 };
 
@@ -119,7 +122,7 @@ export default function SettingsConfig() {
                 <ZigInput
                   disabled={!watch('settings.zscore')}
                   id={'settings-min-zscore'}
-                  placeholder={t('placeholder')}
+                  placeholder={t('settings.zscore-placeholder')}
                   label={t('settings.min-zscore') + ':'}
                   type={'number'}
                   sx={zigInputAmountLike}
@@ -183,6 +186,9 @@ export default function SettingsConfig() {
                         ),
                       }}
                       {...field}
+                      onBlur={(e) => {
+                        if (e.target.value === '') field.onChange(0);
+                      }}
                     />
                   )}
                 />
