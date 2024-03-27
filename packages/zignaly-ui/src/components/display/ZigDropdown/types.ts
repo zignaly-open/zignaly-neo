@@ -1,4 +1,4 @@
-import { PopoverOrigin, PopoverPosition } from "@mui/material/Popover/Popover";
+import { PopperPlacementType, SxProps } from "@mui/material";
 
 type Option = {
   id?: string;
@@ -11,7 +11,7 @@ type Option = {
 
 type ZigDropdownOptionCommon = {
   id?: string;
-  customStyle?: string; // why yes of course this is a crutch
+  sx?: SxProps;
 };
 
 export type ZigDropdownOption = Option & {
@@ -25,12 +25,10 @@ export type ZigDropdownProps = {
   id?: string;
   options: (ZigDropdownOption | ZigDropdownOptionSeparator)[];
   component: ({ open }: { open: boolean }) => JSX.Element;
-  anchorOrigin?: PopoverOrigin;
-  anchorPosition?: PopoverPosition;
-  transformOrigin?: PopoverOrigin;
   disabled?: boolean;
-  position?: "left" | "right";
   menuSx?: SxProps;
+  placement?: PopperPlacementType;
+  matchAnchorWidth?: boolean;
 };
 
 export type ZigDropdownHandle = {

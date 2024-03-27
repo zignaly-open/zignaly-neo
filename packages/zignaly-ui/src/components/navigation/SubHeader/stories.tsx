@@ -1,38 +1,31 @@
 import React, { useMemo, useState } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import TransgenderIcon from "@mui/icons-material/Transgender";
 import SubHeader from "./";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
-  title: "Navigation/SubHeader",
-  component: SubHeader,
-} as ComponentMeta<typeof SubHeader>;
-
-const Template: ComponentStory<typeof SubHeader> = (args) => <SubHeader {...args} />;
-
-export const Main = () => {
+const SubHeaderWrapper = () => {
   const [activeRoute, setActiveRoute] = useState("sub-menu__user");
   const options = useMemo(
     () => [
       {
-        name: "User",
+        label: "User",
         onClick: () => setActiveRoute("sub-menu__user"),
         id: "sub-menu__user",
         active: activeRoute === "sub-menu__user",
       },
       {
-        name: "Robot",
+        label: "Robot",
         routes: [
           {
-            name: "Robot A",
+            label: "Robot A",
             onClick: () => setActiveRoute("sub-menu__robot-1"),
             id: "sub-menu__robot-1",
             active: activeRoute === "sub-menu__robot-1",
           },
           {
-            name: "Robot B",
+            label: "Robot B",
             onClick: () => setActiveRoute("sub-menu__robot-2"),
             id: "sub-menu__robot-2",
             active: activeRoute === "sub-menu__robot-2",
@@ -41,21 +34,21 @@ export const Main = () => {
         id: "sub-menu__robot",
       },
       {
-        name: "Catgirl",
+        label: "Catgirl",
         onClick: () => setActiveRoute("sub-menu__catgirl"),
         id: "sub-menu__catgirl",
         sideElement: <FemaleIcon />,
         active: activeRoute === "sub-menu__catgirl",
       },
       {
-        name: "Catboy",
+        label: "Catboy",
         onClick: () => setActiveRoute("sub-menu__catboy"),
         id: "sub-menu__catboy",
         sideElement: <MaleIcon />,
         active: activeRoute === "sub-menu__catboy",
       },
       {
-        name: "Какая в жопу разница",
+        label: "Какая в жопу разница",
         onClick: () => setActiveRoute("sub-menu__catxxx"),
         id: "sub-menu__catxxx",
         sideElement: <TransgenderIcon />,
@@ -65,5 +58,16 @@ export const Main = () => {
     [activeRoute],
   );
 
-  return <Template routes={options} />;
+  return <SubHeader routes={options} />;
 };
+
+const meta = {
+  title: "Navigation/SubHeader",
+  component: SubHeader,
+  render: (props) => <SubHeaderWrapper {...props} />,
+} as Meta;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};

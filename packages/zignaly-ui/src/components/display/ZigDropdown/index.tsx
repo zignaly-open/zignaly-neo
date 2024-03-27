@@ -1,4 +1,3 @@
-import Popover from "@mui/material/Popover";
 import React, { MouseEvent, useEffect, useImperativeHandle } from "react";
 import { ZigDropdownProps, ZigDropdownHandle, ZigDropdownOption } from "./types";
 import {
@@ -13,41 +12,25 @@ import {
   ComponentSeparator,
   SubNavList,
 } from "./styles";
-import {
-  Theme,
-  Popper,
-  ClickAwayListener,
-  Grow,
-  Paper,
-  Button,
-  MenuItem,
-  MenuList,
-  Box,
-} from "@mui/material";
+import { Theme, Popper, ClickAwayListener, Grow, Box, PopperPlacementType } from "@mui/material";
 import { DropdownContent, MenuContent } from "./atoms";
 
-const getPlacementStyles = (placement) => {
+const getPlacementStyles = (placement: PopperPlacementType, matchAnchorWidth: boolean) => {
   switch (placement) {
     case "bottom-start":
       return {
         transformOrigin: "left top",
-        borderRadius: "10px 10px 0 10px",
+        borderRadius: `0 ${matchAnchorWidth ? 0 : 10}px 4px 4px`,
       };
     case "bottom-end":
       return {
         transformOrigin: "right top",
-        borderRadius: "10px 10px 0 10px",
+        borderRadius: `${matchAnchorWidth ? 0 : 10}px 0 4px 4px`,
       };
-    case "top-start":
-      return {
-        transformOrigin: "right bottom",
-        borderRadius: "10px 0 10px 10px",
-      };
-    case "top-end":
     default:
       return {
-        transformOrigin: "left bottom",
-        borderRadius: "10px 10px 10px 0",
+        transformOrigin: "auto",
+        borderRadius: "4px",
       };
   }
 };
@@ -60,17 +43,7 @@ const ZigDropdown: (
     id = "",
     component,
     options,
-    position = "right",
-    placement = "top-end",
-    anchorOrigin = {
-      vertical: "bottom",
-      horizontal: position,
-    },
-    anchorPosition,
-    transformOrigin = {
-      vertical: "top",
-      horizontal: position,
-    },
+    placement = "bottom-end",
     disabled,
     matchAnchorWidth = false,
     menuSx,
@@ -103,8 +76,8 @@ const ZigDropdown: (
     setOpen(false);
   };
 
-  const placementStyles = getPlacementStyles(placement);
-  console.log(placementStyles);
+  const placementStyles = getPlacementStyles(placement, matchAnchorWidth);
+  // console.log(placementStyles);
 
   // function handleListKeyDown(event: React.KeyboardEvent) {
   //   if (event.key === "Tab") {
@@ -125,16 +98,16 @@ const ZigDropdown: (
   //   prevOpen.current = open;
   // }, [open]);
 
-  // useImperativeHandle(
-  //   innerRef,
-  //   () => ({
-  //     closeDropDown: () => {
-  //       handleClose();
-  //     },
-  //     open,
-  //   }),
-  //   [anchorEl, open],
-  // );
+  useImperativeHandle(
+    innerRef,
+    () => ({
+      closeDropDown: () => {
+        handleClose();
+      },
+      open,
+    }),
+    [anchorRef.current, open],
+  );
   const onClick = (f: () => void) => (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     handleClose();
@@ -149,55 +122,20 @@ const ZigDropdown: (
     });
   };
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleClose);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleClose);
-  //   };
-  // }, []);
   return (
     <>
-      {/* <Button
-        ref={anchorRef}
-        id="composition-button"
+      <Box
         aria-controls={open ? "composition-menu" : undefined}
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
+        ref={anchorRef}
+        role="button"
         onClick={handleToggle}
+        id={id && `${id}-container`}
       >
-        Dashboard
-      </Button> */}
-      <Box ref={anchorRef} role="button" onClick={handleToggle} id={id && `${id}-container`}>
         {component({ open })}
       </Box>
       {options && (
-        // <Popover
-        //   id="popover-menu"
-        //   anchorEl={anchorEl}
-        //   open={open}
-        //   disableScrollLock={true}
-        //   slotProps={{
-        //     paper: {
-        //       sx: {
-        //         width: matchAnchorWidth ? anchorEl?.offsetWidth : "auto",
-        //         minWidth: "220px",
-        //         backgroundColor: "neutral800",
-        //         color: "#fff",
-        //         boxShadow: "0 4px 6px -2px #00000061",
-        //         borderRadius: `${position === "right" ? 4 : 0}px ${
-        //           position === "right" ? 0 : 4
-        //         } 4px 4px`,
-        //         border: "none",
-        //         ...menuSx,
-        //       },
-        //     },
-        //   }}
-        //   onClose={handleClose}
-        //   anchorPosition={anchorPosition}
-        //   transformOrigin={transformOrigin}
-        //   anchorOrigin={anchorOrigin}
-        // >
-
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -207,7 +145,7 @@ const ZigDropdown: (
           transition
           // disablePortal
           sx={{
-            minWidth: matchAnchorWidth ? anchorRef.current?.offsetWidth : "220px",
+            minWidth: matchAnchorWidth ? anchorRef.current?.offsetWidth : "245px",
             zIndex: 1300,
             // color: "#fff",
             " > div": {
@@ -221,7 +159,7 @@ const ZigDropdown: (
             ...menuSx,
           }}
         >
-          {({ TransitionProps, placement }) => (
+          {({ TransitionProps }) => (
             <Grow
               {...TransitionProps}
               style={{

@@ -1,12 +1,14 @@
-import React, { useRef } from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React, { useRef, useState } from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import ZigDropdown, { ZigDropdownHandleType } from "./index";
+import { Box } from "@mui/material";
+import ZigButton from "../../inputs/ZigButton";
 import EditIcon from "@mui/icons-material/Edit";
 
-import ZigButton from "../../inputs/ZigButton";
-import { Box } from "@mui/system";
-import ZigDropdown, { ZigDropdownHandleType } from "./index";
-
-const DropdownStorybookCrutch: React.FC = () => {
+// type ZigDropdownProps = Partial<React.ComponentProps<typeof ZigDropdown>>;
+type ZigDropdownProps = React.ComponentProps<typeof ZigDropdown>;
+const ZigDropdownWrapper = (props: ZigDropdownProps) => {
+  console.log(props);
   const ref = useRef<ZigDropdownHandleType>(null);
   return (
     <ZigDropdown
@@ -17,11 +19,6 @@ const DropdownStorybookCrutch: React.FC = () => {
         </ZigButton>
       )}
       options={[
-        {
-          element: (
-            <Box sx={{ background: "#f00" }}>It is shifted becasue of storybook shenannigans</Box>
-          ),
-        },
         {
           label: "Important link 1",
           id: "dropwown-one",
@@ -57,13 +54,16 @@ const DropdownStorybookCrutch: React.FC = () => {
           element: <Box sx={{ background: "#f00" }}>Element</Box>,
         },
       ]}
+      {...props}
     />
   );
 };
 
-export default {
+// type Story = StoryObj<ZigDropdownProps>;
+const meta = {
   title: "Display/ZigDropdown",
-  component: DropdownStorybookCrutch,
+  component: ZigDropdown,
+  render: (props) => <ZigDropdownWrapper {...props} />,
   argTypes: {
     component: {
       description: "(open: boolean) => JSX.Element",
@@ -71,12 +71,64 @@ export default {
     options: {
       description: "ZigDropdownOption[]",
     },
+    placement: {
+      control: "select",
+      options: [
+        ...["top", "bottom", "right", "left", "start", "end", "auto"],
+        ...[
+          "top-start",
+          "top-end",
+          "bottom-start",
+          "bottom-end",
+          "right-start",
+          "right-end",
+          "left-start",
+          "left-end",
+        ],
+        ...["auto", "auto-start", "auto-end"],
+      ],
+      description: "Menu popper placement",
+    },
+    matchAnchorWidth: {
+      control: "boolean",
+      description: "Match anchor width",
+    },
   },
-} as ComponentMeta<typeof DropdownStorybookCrutch>;
+  args: {
+    placement: "bottom-start",
+  },
+} as Meta<ZigDropdownProps>;
+export default meta;
+// type ZigDropdownProps = React.ComponentProps<typeof ZigDropdown>;
+type Story = StoryObj<ZigDropdownProps>;
 
-const Template: ComponentStory<typeof DropdownStorybookCrutch> = (args) => {
-  return <DropdownStorybookCrutch {...args} />;
-};
+export const Default: Story = {};
 
-export const Basic = Template.bind({});
-Basic.args = {};
+// export const Default: Story;
+
+// const DropdownStorybookCrutch: React.FC = () => {
+//   const ref = useRef<ZigDropdownHandleType>(null);
+//   return (
+
+//   );
+// };
+
+// export default {
+//   title: "Display/ZigDropdown",
+//   component: DropdownStorybookCrutch,
+//   argTypes: {
+//     component: {
+//       description: "(open: boolean) => JSX.Element",
+//     },
+//     options: {
+//       description: "ZigDropdownOption[]",
+//     },
+//   },
+// } as ComponentMeta<typeof DropdownStorybookCrutch>;
+
+// const Template: ComponentStory<typeof DropdownStorybookCrutch> = (args) => {
+//   return <DropdownStorybookCrutch {...args} />;
+// };
+
+// export const Basic = Template.bind({});
+// Basic.args = {};
