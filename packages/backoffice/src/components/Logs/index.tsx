@@ -8,7 +8,6 @@ import {
   ZigTableQueryRef,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { ValueOrDash } from '../TableUtils/ValueOrDash';
 import { Box } from '@mui/material';
@@ -18,6 +17,7 @@ import { isEqual as _isEqual } from 'lodash-es';
 import { useLogsQuery } from '../../apis/logs/api';
 import FilterButtons from '../TableUtils/FilterButtons';
 import TableWrap from '../TableUtils/TableWrap';
+import DateDisplay from '../TableUtils/DateDisplay';
 
 const initialFilter: LogFilterType = {
   userId: '',
@@ -62,7 +62,9 @@ export default function Logs() {
       columnHelper.accessor('createdAt', {
         header: t('table.date'),
         cell: ({ getValue }) => (
-          <ZigTypography>{format(new Date(getValue()), 'PP p')}</ZigTypography>
+          <Box mr={'25px'}>
+            <DateDisplay date={getValue()} />
+          </Box>
         ),
       }),
     ];
