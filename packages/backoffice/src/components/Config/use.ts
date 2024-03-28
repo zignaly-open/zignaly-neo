@@ -1,7 +1,6 @@
 import { useToast } from '@zignaly-open/ui';
 import { WhitelabelBackendConfig } from '../../apis/config/types';
 import { useTranslation } from 'react-i18next';
-import { useCallback } from 'react';
 import {
   useSaveWlConfigMutation,
   useWlConfigQuery,
@@ -52,26 +51,45 @@ export function useSaveConfig(
   };
 }
 
-export function useUploadFile(): (file: File) => Promise<string> {
-  return async () => {
+export function useUploadFile(): (file: File | null) => Promise<string> {
+  return async (file) => {
+    if (!file) return null;
     await new Promise((r) => setTimeout(r, 1000));
     return 'https://res.cloudinary.com/zignaly/image/upload/v1694687051/trjohquby4cn4ak3lb59.png';
   };
 }
 
-export function useRegenerateImages(): () => Promise<{
-  splashscreen: string;
-  logoWithBackground: string;
-}> {
+export function useRegenerateImages(): (
+  logo: string,
+  bgColor: string,
+) => Promise<
+  Partial<{
+    splashscreen: string;
+    logoWithBackground: string;
+  }>
+> {
   const upload = useUploadFile();
-  return async () => {
+  return async (logo, bgColor) => {
     const [splashscreen, logoWithBackground] = await Promise.all([
-      upload(generateSplashscreen()),
-      upload(generateLogoWithBackground()),
+      upload(await generateSplashscreen(logo + '/public', bgColor)),
+      upload(await generateLogoWithBackground(logo + '/public', bgColor)),
     ]);
     return {
-      splashscreen,
-      logoWithBackground,
+      ...(splashscreen ? { splashscreen } : {}),
+      ...(logoWithBackground ? { logoWithBackground } : {}),
     };
   };
+}
+
+export function downloadFile(file) {
+  const link = document.createElement('a');
+  link.style.display = 'none';
+  link.href = URL.createObjectURL(file);
+  link.download = file.name;
+  document.body.appendChild(link);
+  link.click();
+  setTimeout(() => {
+    URL.revokeObjectURL(link.href);
+    link.parentNode.removeChild(link);
+  }, 0);
 }

@@ -82,7 +82,7 @@ export default function ProfileConfig() {
     const { languagesMap, ...v } = payload as unknown as FormType;
     return {
       ...v,
-      ...(await regenerateImages()),
+      ...(await regenerateImages(data.logo, '#f0f')),
       languages: Object.entries(languagesMap)
         .filter((e) => e[1])
         .map(([x]) => x),
