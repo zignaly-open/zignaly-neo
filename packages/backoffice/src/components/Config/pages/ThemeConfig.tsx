@@ -11,7 +11,7 @@ import { WhitelabelBackendConfig } from '@zignaly-open/ps2-definitions';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { ProfileConfigValidation } from '../validations';
-import { useSaveConfig } from '../use';
+import { useRegenerateImages, useSaveConfig } from '../use';
 import { useParams } from 'react-router-dom';
 import { useWlConfigQuery } from '../../../apis/config/api';
 import ZigColorInput from '../components/ZigColorInput';
@@ -71,7 +71,16 @@ export default function ThemeConfig() {
 
   const { control, handleSubmit } = formMethods;
 
-  const { submit } = useSaveConfig(wl);
+  const regenerateImages = useRegenerateImages(data);
+  const { submit, isLoading } = useSaveConfig(wl, async (payload) => {
+    return {
+      ...payload,
+      ...(await regenerateImages(
+        undefined,
+        payload.themeOverride?.themeOverrides?.palette?.neutral800,
+      )),
+    };
+  });
 
   return (
     <ConfigWrapper>
@@ -126,7 +135,7 @@ export default function ThemeConfig() {
                 '*',
               );
             }}
-            disabled={!iframe.current}
+            disabled={!iframe.current || isLoading}
           >
             {t('apply')}
           </ZigButton>

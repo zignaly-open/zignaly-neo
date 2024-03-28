@@ -3,6 +3,8 @@ import { ThemeExport, ThemeStyledComponentsOverrides } from "./types";
 import dark from "./themes/dark";
 import { getMuiAndStyledThemes } from "./muiTheme";
 
+export const zignalyBaseThemeConfig = dark;
+
 export const getZignalyThemeExport = (
   themeName?: "dark",
   overrides?: ThemeStyledComponentsOverrides | ThemeStyledComponentsOverrides[],

@@ -1,4 +1,4 @@
-import { useToast } from '@zignaly-open/ui';
+import { useToast, zignalyBaseThemeConfig } from '@zignaly-open/ui';
 import { WhitelabelBackendConfig } from '../../apis/config/types';
 import { useTranslation } from 'react-i18next';
 import {
@@ -33,6 +33,8 @@ export function useSaveConfig(
         }).unwrap();
         toast.success(t('saved'));
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
         toast.error(
           t('failed') +
             ' ' +
@@ -55,13 +57,14 @@ export function useUploadFile(): (file: File | null) => Promise<string> {
   return async (file) => {
     if (!file) return null;
     await new Promise((r) => setTimeout(r, 1000));
+    downloadFile(file);
     return 'https://res.cloudinary.com/zignaly/image/upload/v1694687051/trjohquby4cn4ak3lb59.png';
   };
 }
 
-export function useRegenerateImages(): (
-  logo: string,
-  bgColor: string,
+export function useRegenerateImages(wlConfig: WhitelabelBackendConfig): (
+  logo?: string,
+  bgColor?: string,
 ) => Promise<
   Partial<{
     splashscreen: string;
@@ -70,18 +73,25 @@ export function useRegenerateImages(): (
 > {
   const upload = useUploadFile();
   return async (logo, bgColor) => {
+    const [oldLogo, oldColor] = [
+      wlConfig.logo,
+      wlConfig.themeOverride?.themeOverrides?.palette?.neutral800 ||
+        zignalyBaseThemeConfig.palette.neutral800,
+    ];
+    const [newLogo, newColor] = [logo || oldLogo, bgColor || oldColor];
+    if (newLogo === oldLogo && newColor === oldColor) return {};
     const [splashscreen, logoWithBackground] = await Promise.all([
-      upload(await generateSplashscreen(logo + '/public', bgColor)),
-      upload(await generateLogoWithBackground(logo + '/public', bgColor)),
+      upload(await generateSplashscreen(newLogo + '/public', newColor)),
+      upload(await generateLogoWithBackground(newLogo + '/public', newColor)),
     ]);
     return {
-      ...(splashscreen ? { splashscreen } : {}),
-      ...(logoWithBackground ? { logoWithBackground } : {}),
+      splashscreen,
+      logoWithBackground,
     };
   };
 }
 
-export function downloadFile(file) {
+export function downloadFile(file: File) {
   const link = document.createElement('a');
   link.style.display = 'none';
   link.href = URL.createObjectURL(file);
